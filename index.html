@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -27,8 +27,7 @@
       min-height: 100vh;
     }
     .header {
-      padding: 1.5rem 1rem;
-      border-bottom: 1px solid var(--border);
+      padding: 1.5rem 1rem 1rem;
       text-align: center;
     }
     .header h1 {
@@ -43,12 +42,43 @@
       font-size: 0.85rem;
       margin-top: 0.25rem;
     }
+
+    .toolbar {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      padding: 0.5rem 1rem 0.75rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .lang-toggle {
+      display: flex;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      overflow: hidden;
+    }
+    .lang-toggle button {
+      background: none;
+      border: none;
+      color: var(--text-dim);
+      padding: 0.3rem 0.6rem;
+      font-size: 0.8rem;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .lang-toggle button.active {
+      background: var(--accent);
+      color: var(--bg);
+      font-weight: 600;
+    }
+
     .date-nav {
       display: flex;
       align-items: center;
       justify-content: center;
       gap: 0.75rem;
-      padding: 1rem;
+      padding: 0.75rem 1rem;
       border-bottom: 1px solid var(--border);
       position: sticky;
       top: 0;
@@ -59,7 +89,7 @@
       background: var(--surface);
       border: 1px solid var(--border);
       color: var(--text);
-      padding: 0.4rem 0.75rem;
+      padding: 0.35rem 0.65rem;
       border-radius: 6px;
       cursor: pointer;
       font-size: 0.85rem;
@@ -70,25 +100,23 @@
     .date-nav .current-date {
       font-size: 1rem;
       font-weight: 600;
-      min-width: 140px;
+      min-width: 130px;
       text-align: center;
     }
+
     .container { max-width: 800px; margin: 0 auto; padding: 0 1rem 3rem; }
 
-    .section {
-      margin-top: 1.5rem;
-    }
+    .section { margin-top: 1.5rem; }
     .section-header {
       display: flex;
       align-items: center;
       gap: 0.5rem;
-      padding: 0.75rem 0;
-      font-size: 1.1rem;
+      padding: 0.6rem 0;
+      font-size: 1.05rem;
       font-weight: 600;
       border-bottom: 1px solid var(--border);
-      margin-bottom: 0.75rem;
+      margin-bottom: 0.6rem;
     }
-    .section-header .icon { font-size: 1.2rem; }
     .section-header .count {
       font-size: 0.75rem;
       color: var(--text-dim);
@@ -99,60 +127,85 @@
       background: var(--surface);
       border: 1px solid var(--border);
       border-radius: 8px;
-      padding: 1rem;
-      margin-bottom: 0.75rem;
+      padding: 0.85rem 1rem;
+      margin-bottom: 0.6rem;
       transition: border-color 0.2s;
     }
     .card:hover { border-color: var(--accent); }
     .card-title {
       font-size: 0.95rem;
       font-weight: 600;
-      margin-bottom: 0.35rem;
+      margin-bottom: 0.3rem;
     }
-    .card-title a {
-      color: var(--accent);
-      text-decoration: none;
-    }
+    .card-title a { color: var(--accent); text-decoration: none; }
     .card-title a:hover { text-decoration: underline; }
     .card-meta {
-      font-size: 0.8rem;
+      font-size: 0.78rem;
       color: var(--text-dim);
-      margin-bottom: 0.35rem;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.75rem;
+      margin-bottom: 0.3rem;
+    }
+    .card-tldr {
+      font-size: 0.88rem;
+      color: var(--accent2);
+      font-weight: 500;
+      margin-bottom: 0.25rem;
+      line-height: 1.5;
+    }
+    .card-tldr::before {
+      content: "TLDR: ";
+      font-weight: 700;
+      color: var(--accent4);
     }
     .card-summary {
-      font-size: 0.85rem;
+      font-size: 0.82rem;
       color: var(--text);
-      opacity: 0.9;
+      opacity: 0.75;
+      display: none;
     }
+    .card.expanded .card-summary { display: block; margin-top: 0.3rem; }
     .card-tags {
       display: flex;
       flex-wrap: wrap;
-      gap: 0.35rem;
-      margin-top: 0.5rem;
+      gap: 0.3rem;
+      margin-top: 0.4rem;
     }
     .tag {
-      font-size: 0.7rem;
+      font-size: 0.68rem;
       background: var(--tag-bg);
       color: var(--accent3);
-      padding: 0.15rem 0.5rem;
+      padding: 0.12rem 0.45rem;
       border-radius: 10px;
     }
-    .stats { display: flex; gap: 1rem; align-items: center; }
-    .stat {
-      font-size: 0.8rem;
+    .expand-btn {
+      font-size: 0.75rem;
       color: var(--text-dim);
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0.2rem 0;
+      margin-top: 0.2rem;
     }
-    .stat .num { color: var(--accent4); font-weight: 600; }
+    .expand-btn:hover { color: var(--accent); }
 
-    .loading {
+    .briefing {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1rem 1.1rem;
+      line-height: 1.75;
+      font-size: 0.88rem;
+    }
+    .briefing p {
+      margin-bottom: 0.75rem;
+    }
+    .briefing p:last-child { margin-bottom: 0; }
+
+    .loading, .empty {
       text-align: center;
       padding: 3rem 1rem;
       color: var(--text-dim);
     }
-    .loading .spinner {
+    .spinner {
       display: inline-block;
       width: 24px; height: 24px;
       border: 2px solid var(--border);
@@ -162,13 +215,6 @@
       margin-bottom: 0.5rem;
     }
     @keyframes spin { to { transform: rotate(360deg); } }
-
-    .empty {
-      text-align: center;
-      padding: 3rem 1rem;
-      color: var(--text-dim);
-    }
-    .empty .icon { font-size: 2rem; margin-bottom: 0.5rem; }
 
     .footer {
       text-align: center;
@@ -180,87 +226,82 @@
     }
     .footer a { color: var(--accent); text-decoration: none; }
 
-    /* topic filter pills */
-    .topic-filter {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.5rem;
-      padding: 0.75rem 0;
-      justify-content: center;
-    }
-    .topic-pill {
-      font-size: 0.8rem;
-      padding: 0.3rem 0.75rem;
-      border-radius: 14px;
-      border: 1px solid var(--border);
-      background: var(--surface);
-      color: var(--text-dim);
-      cursor: pointer;
-      transition: all 0.2s;
-    }
-    .topic-pill:hover { border-color: var(--accent); color: var(--text); }
-    .topic-pill.active {
-      background: var(--accent);
-      color: var(--bg);
-      border-color: var(--accent);
-      font-weight: 600;
-    }
-
     @media (max-width: 600px) {
       .header h1 { font-size: 1.25rem; }
-      .card { padding: 0.75rem; }
-      .card-meta { gap: 0.5rem; }
+      .card { padding: 0.7rem 0.8rem; }
     }
   </style>
 </head>
 <body>
   <div class="header">
     <h1>🔭 Research Radar</h1>
-    <p>Daily AI research digest — papers, repos & discussions</p>
+    <p id="subtitle">每日 AI 研究速递 — 论文 · 开源 · 讨论</p>
   </div>
 
-  <div class="date-nav">
-    <button id="prev-btn" onclick="navigate(-1)">← Prev</button>
-    <span class="current-date" id="current-date">Loading...</span>
-    <button id="next-btn" onclick="navigate(1)">Next →</button>
-  </div>
-
-  <div class="container" id="content">
-    <div class="loading">
-      <div class="spinner"></div>
-      <div>Loading digest...</div>
+  <div class="toolbar">
+    <div class="lang-toggle">
+      <button class="active" onclick="setLang('zh')">中文</button>
+      <button onclick="setLang('en')">EN</button>
     </div>
   </div>
 
+  <div class="date-nav">
+    <button id="prev-btn" onclick="navigate(-1)">←</button>
+    <span class="current-date" id="current-date">Loading...</span>
+    <button id="next-btn" onclick="navigate(1)">→</button>
+  </div>
+
+  <div class="container" id="content">
+    <div class="loading"><div class="spinner"></div><div>加载中...</div></div>
+  </div>
+
   <div class="footer">
-    Auto-updated daily · Powered by <a href="https://github.com/hqhq1025/research-radar">research-radar</a>
+    每日自动更新 · <a href="https://github.com/hqhq1025/research-radar">GitHub</a>
   </div>
 
   <script>
-    const BASE_URL = '.'; // relative path — works on GitHub Pages
     let availableDates = [];
     let currentIdx = 0;
+    let currentData = null;
+    let lang = 'zh';
+
+    const SUBTITLES = {
+      zh: '每日 AI 研究速递 — 论文 · 开源 · 讨论',
+      en: 'Daily AI Research Digest — Papers · Repos · Discussions'
+    };
+    const SECTION_TITLES = {
+      huggingface: { zh: 'HuggingFace 每日论文', en: 'HuggingFace Daily Papers' },
+      alphaxiv:    { zh: 'alphaxiv 热门论文', en: 'alphaxiv Trending' },
+      github:      { zh: 'GitHub 热门仓库', en: 'GitHub Trending Repos' },
+      hackernews:  { zh: 'Hacker News 热议', en: 'Hacker News Discussions' }
+    };
+    const LOADING_TEXT = { zh: '加载中...', en: 'Loading...' };
+    const FOOTER_TEXT = { zh: '每日自动更新', en: 'Auto-updated daily' };
+
+    function setLang(l) {
+      lang = l;
+      document.querySelectorAll('.lang-toggle button').forEach(b => {
+        b.classList.toggle('active', b.textContent.trim() === (l === 'zh' ? '中文' : 'EN'));
+      });
+      document.getElementById('subtitle').textContent = SUBTITLES[l];
+      if (currentData) renderDigest(currentData);
+    }
 
     async function init() {
       try {
-        const resp = await fetch(`${BASE_URL}/data/index.json?t=${Date.now()}`);
+        const resp = await fetch(`./data/index.json?t=${Date.now()}`);
         availableDates = await resp.json();
-        if (availableDates.length === 0) {
-          showEmpty('No digests yet — check back tomorrow!');
-          return;
-        }
-        currentIdx = 0; // latest first
-        loadDate(availableDates[currentIdx]);
-      } catch (e) {
-        showEmpty('Failed to load data. Please try again later.');
-      }
+        if (availableDates.length === 0) { showEmpty(); return; }
+        currentIdx = 0;
+        loadDate(availableDates[0]);
+      } catch (e) { showEmpty(); }
     }
 
     function navigate(dir) {
-      const newIdx = currentIdx + dir;
-      if (newIdx < 0 || newIdx >= availableDates.length) return;
-      currentIdx = newIdx;
-      loadDate(availableDates[currentIdx]);
+      const n = currentIdx + dir;
+      if (n < 0 || n >= availableDates.length) return;
+      currentIdx = n;
+      loadDate(availableDates[n]);
     }
 
     function updateNav() {
@@ -271,108 +312,101 @@
 
     async function loadDate(date) {
       updateNav();
-      document.getElementById('content').innerHTML = '<div class="loading"><div class="spinner"></div><div>Loading...</div></div>';
+      document.getElementById('content').innerHTML =
+        `<div class="loading"><div class="spinner"></div><div>${LOADING_TEXT[lang]}</div></div>`;
       try {
-        const resp = await fetch(`${BASE_URL}/data/${date}.json?t=${Date.now()}`);
-        const data = await resp.json();
-        renderDigest(data);
-      } catch (e) {
-        showEmpty('Could not load this day\'s digest.');
-      }
+        const resp = await fetch(`./data/${date}.json?t=${Date.now()}`);
+        currentData = await resp.json();
+        renderDigest(currentData);
+      } catch (e) { showEmpty(); }
     }
 
-    function showEmpty(msg) {
-      document.getElementById('content').innerHTML = `<div class="empty"><div class="icon">📡</div><div>${msg}</div></div>`;
+    function showEmpty() {
+      document.getElementById('content').innerHTML =
+        '<div class="empty"><div style="font-size:2rem">📡</div><div>暂无数据</div></div>';
     }
 
     function renderDigest(data) {
       let html = '';
 
+      // Briefing
+      const briefing = lang === 'zh' ? data.briefing_zh : data.briefing_en;
+      if (briefing) {
+        const paragraphs = briefing.split('\n\n').filter(Boolean);
+        html += `<div class="section">
+          <div class="section-header"><span>📋</span> ${lang === 'zh' ? '今日简报' : 'Daily Briefing'}</div>
+          <div class="briefing">${paragraphs.map(p => `<p>${esc(p)}</p>`).join('')}</div>
+        </div>`;
+      }
+
       // HuggingFace papers
-      const hfPapers = data.huggingface_papers || [];
-      if (hfPapers.length > 0) {
-        html += renderSection('🤗', 'HuggingFace Daily Papers', hfPapers.length, hfPapers.map(p => {
-          const url = p.url || (p.arxiv_id ? `https://arxiv.org/abs/${p.arxiv_id}` : '#');
-          const meta = [];
-          if (p.upvotes) meta.push(`👍 ${p.upvotes}`);
-          if (p.authors) meta.push(truncate(p.authors, 60));
-          return cardHTML(p.title, url, meta.join(' · '), p.ai_summary || p.summary || '', p.ai_keywords || []);
+      const hf = data.huggingface_papers || [];
+      if (hf.length) {
+        html += section('🤗', 'huggingface', hf.length, hf.map(p => {
+          const title = lang === 'zh' ? (p.title_zh || p.title) : p.title;
+          const tldr = lang === 'zh' ? (p.tldr_zh || p.tldr || '') : (p.tldr || '');
+          const meta = [p.upvotes ? `👍 ${p.upvotes}` : '', p.authors || ''].filter(Boolean).join(' · ');
+          return card(title, p.url, meta, tldr, p.summary, p.ai_keywords || []);
         }).join(''));
       }
 
-      // alphaxiv trending papers
-      const axPapers = data.alphaxiv_papers || [];
-      if (axPapers.length > 0) {
-        html += renderSection('🔬', 'alphaxiv Trending', axPapers.length, axPapers.map(p => {
-          const url = p.alphaxiv_url || p.url || '#';
-          const meta = [];
-          if (p.arxiv_id) meta.push(p.arxiv_id);
-          return cardHTML(p.title, url, meta.join(' · '), p.summary || '', []);
+      // alphaxiv
+      const ax = data.alphaxiv_papers || [];
+      if (ax.length) {
+        html += section('🔬', 'alphaxiv', ax.length, ax.map(p => {
+          const title = lang === 'zh' ? (p.title_zh || p.title) : p.title;
+          const tldr = lang === 'zh' ? (p.tldr_zh || p.tldr || '') : (p.tldr || '');
+          const meta = p.arxiv_id || '';
+          return card(title, p.alphaxiv_url || p.url, meta, tldr, p.summary, []);
         }).join(''));
       }
 
-      // GitHub repos
-      const repos = data.github_repos || [];
-      if (repos.length > 0) {
-        html += renderSection('⭐', 'GitHub Repos', repos.length, repos.map(r => {
-          const meta = [];
-          if (r.language) meta.push(r.language);
-          if (r.stars !== undefined) meta.push(`⭐ ${r.stars}`);
-          if (r.forks !== undefined) meta.push(`🔱 ${r.forks}`);
-          return cardHTML(r.name || r.full_name, r.url || r.html_url || '#', meta.join(' · '), r.description || '', r.topics || []);
+      // GitHub
+      const gh = data.github_repos || [];
+      if (gh.length) {
+        html += section('⭐', 'github', gh.length, gh.map(r => {
+          const desc = lang === 'zh' ? (r.description_zh || r.description) : r.description;
+          const tldr = lang === 'zh' ? (r.tldr_zh || r.tldr || desc || '') : (r.tldr || r.description || '');
+          const meta = [r.language, r.stars !== undefined ? `⭐ ${r.stars}` : ''].filter(Boolean).join(' · ');
+          return card(r.name, r.url, meta, tldr, '', r.topics || []);
         }).join(''));
       }
 
-      // HN discussions
+      // HN
       const hn = data.hackernews || [];
-      if (hn.length > 0) {
-        html += renderSection('🔥', 'Hacker News', hn.length, hn.map(h => {
-          const meta = [];
-          if (h.points) meta.push(`${h.points} points`);
-          if (h.num_comments !== undefined) meta.push(`💬 ${h.num_comments}`);
-          if (h.author) meta.push(h.author);
-          return cardHTML(h.title, h.url || '#', meta.join(' · '), '', []);
+      if (hn.length) {
+        html += section('🔥', 'hackernews', hn.length, hn.map(h => {
+          const title = lang === 'zh' ? (h.title_zh || h.title) : h.title;
+          const tldr = lang === 'zh' ? (h.tldr_zh || h.tldr || '') : (h.tldr || '');
+          const meta = [h.points ? `${h.points} pts` : '', h.num_comments !== undefined ? `💬 ${h.num_comments}` : ''].filter(Boolean).join(' · ');
+          return card(title, h.url, meta, tldr, '', []);
         }).join(''));
       }
 
-      if (!html) {
-        showEmpty('No items for this day.');
-        return;
-      }
-      document.getElementById('content').innerHTML = html;
+      document.getElementById('content').innerHTML = html || '<div class="empty">暂无数据</div>';
     }
 
-    function renderSection(icon, title, count, cardsHTML) {
+    function section(icon, key, count, cardsHTML) {
+      const title = SECTION_TITLES[key]?.[lang] || key;
       return `<div class="section">
-        <div class="section-header">
-          <span class="icon">${icon}</span>
-          ${title}
-          <span class="count">(${count})</span>
-        </div>
+        <div class="section-header"><span>${icon}</span> ${esc(title)} <span class="count">(${count})</span></div>
         ${cardsHTML}
       </div>`;
     }
 
-    function cardHTML(title, url, meta, summary, tags) {
-      let html = `<div class="card">
-        <div class="card-title"><a href="${escapeHtml(url)}" target="_blank" rel="noopener">${escapeHtml(title)}</a></div>`;
-      if (meta) html += `<div class="card-meta">${escapeHtml(meta)}</div>`;
-      if (summary) html += `<div class="card-summary">${escapeHtml(truncate(summary, 200))}</div>`;
-      if (tags && tags.length > 0) {
-        html += `<div class="card-tags">${tags.slice(0, 5).map(t => `<span class="tag">${escapeHtml(t)}</span>`).join('')}</div>`;
-      }
-      html += '</div>';
-      return html;
+    function card(title, url, meta, tldr, summary, tags) {
+      let h = `<div class="card">
+        <div class="card-title"><a href="${esc(url)}" target="_blank" rel="noopener">${esc(title)}</a></div>`;
+      if (meta) h += `<div class="card-meta">${esc(meta)}</div>`;
+      if (tldr) h += `<div class="card-tldr">${esc(tldr)}</div>`;
+      if (summary) h += `<div class="card-summary">${esc(trunc(summary, 300))}</div>`;
+      if (tags.length) h += `<div class="card-tags">${tags.slice(0, 5).map(t => `<span class="tag">${esc(t)}</span>`).join('')}</div>`;
+      h += '</div>';
+      return h;
     }
 
-    function escapeHtml(s) {
-      if (!s) return '';
-      return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
-    }
-    function truncate(s, n) {
-      if (!s) return '';
-      return s.length > n ? s.substring(0, n) + '...' : s;
-    }
+    function esc(s) { return (s || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+    function trunc(s, n) { return s && s.length > n ? s.substring(0, n) + '...' : (s || ''); }
 
     init();
   </script>
