@@ -161,6 +161,10 @@
     }
     .briefing p { margin-bottom: 0.8rem; }
     .briefing p:last-child { margin-bottom: 0; }
+    .briefing strong, .analysis-body strong {
+      color: var(--text);
+      font-weight: 600;
+    }
 
     /* Analysis card (爆款拆解) */
     .analysis-card {
@@ -381,7 +385,7 @@
         const ps = brief.split('\n\n').filter(Boolean);
         h += `<div class="section">
           <div class="section-header">📋 ${lang === 'zh' ? '今日简报' : 'Daily Briefing'}</div>
-          <div class="briefing">${ps.map(p => `<p>${esc(p)}</p>`).join('')}</div>
+          <div class="briefing">${ps.map(p => `<p>${md(p)}</p>`).join('')}</div>
         </div>`;
       }
 
@@ -394,7 +398,7 @@
           const ps = item.content.split('\n\n').filter(Boolean);
           h += `<div class="analysis-card">
             <div class="analysis-title">${esc(item.title)}</div>
-            <div class="analysis-body">${ps.map(p => `<p>${esc(p)}</p>`).join('')}</div>
+            <div class="analysis-body">${ps.map(p => `<p>${md(p)}</p>`).join('')}</div>
           </div>`;
         }
         h += '</div>';
@@ -455,6 +459,7 @@
     }
 
     function esc(s) { return (s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+    function md(s) { return esc(s).replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>'); }
 
     init();
   </script>
