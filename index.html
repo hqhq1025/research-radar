@@ -449,12 +449,12 @@
       // Sections
       const hf = d.huggingface_papers || [];
       if (hf.length) h += sec('🤗', 'huggingface', hf.length, hf.map(p =>
-        card(t(p,'title'), p.url, join([p.upvotes ? `👍 ${p.upvotes}` : '', p.authors]),
+        card(p.title, p.url, join([p.upvotes ? `👍 ${p.upvotes}` : '', p.authors]),
              t(p,'tldr'), p.ai_keywords || [], p.interest_tag)));
 
       const ax = d.alphaxiv_papers || [];
       if (ax.length) h += sec('🔬', 'alphaxiv', ax.length, ax.map(p =>
-        card(t(p,'title'), p.alphaxiv_url || p.url, p.arxiv_id || '',
+        card(p.title, p.alphaxiv_url || p.url, p.arxiv_id || '',
              t(p,'tldr'), [], p.interest_tag)));
 
       const gh = d.github_repos || [];
@@ -464,7 +464,7 @@
 
       const hn = d.hackernews || [];
       if (hn.length) h += sec('🔥', 'hackernews', hn.length, hn.map(x =>
-        card(t(x,'title'), x.url, join([x.points ? `${x.points} pts` : '', x.num_comments ? `💬 ${x.num_comments}` : '']),
+        card(x.title, x.url, join([x.points ? `${x.points} pts` : '', x.num_comments ? `💬 ${x.num_comments}` : '']),
              t(x,'tldr'), [], null)));
 
       document.getElementById('content').innerHTML = h || '<div class="empty">暂无数据</div>';
