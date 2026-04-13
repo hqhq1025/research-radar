@@ -1,0 +1,486 @@
+{
+  "date": "2026-04-13",
+  "generated_at": "2026-04-13T11:37:04.821198",
+  "huggingface_papers": [
+    {
+      "title": "WildDet3D: Scaling Promptable 3D Detection in the Wild",
+      "arxiv_id": "2604.08626",
+      "url": "https://arxiv.org/abs/2604.08626",
+      "summary": "Understanding objects in 3D from a single image is a cornerstone of spatial intelligence. A key step toward this goal is monocular 3D object detection--recovering the extent, location, and orientation of objects from an input RGB image. To be practical in the open world, such a detector must general",
+      "ai_summary": "",
+      "ai_keywords": [],
+      "upvotes": 0,
+      "authors": "Weikai Huang, Jieyu Zhang, Sijun Li",
+      "source": "huggingface"
+    },
+    {
+      "title": "FORGE:Fine-grained Multimodal Evaluation for Manufacturing Scenarios",
+      "arxiv_id": "2604.07413",
+      "url": "https://arxiv.org/abs/2604.07413",
+      "summary": "The manufacturing sector is increasingly adopting Multimodal Large Language Models (MLLMs) to transition from simple perception to autonomous execution, yet current evaluations fail to reflect the rigorous demands of real-world manufacturing environments. Progress is hindered by data scarcity and a ",
+      "ai_summary": "",
+      "ai_keywords": [],
+      "upvotes": 0,
+      "authors": "Xiangru Jian, Hao Xu, Wei Pang",
+      "source": "huggingface"
+    },
+    {
+      "title": "RefineAnything: Multimodal Region-Specific Refinement for Perfect Local Details",
+      "arxiv_id": "2604.06870",
+      "url": "https://arxiv.org/abs/2604.06870",
+      "summary": "We introduce region-specific image refinement as a dedicated problem setting: given an input image and a user-specified region (e.g., a scribble mask or a bounding box), the goal is to restore fine-grained details while keeping all non-edited pixels strictly unchanged. Despite rapid progress in imag",
+      "ai_summary": "",
+      "ai_keywords": [],
+      "upvotes": 0,
+      "authors": "Dewei Zhou, You Li, Zongxin Yang",
+      "source": "huggingface"
+    },
+    {
+      "title": "EXAONE 4.5 Technical Report",
+      "arxiv_id": "2604.08644",
+      "url": "https://arxiv.org/abs/2604.08644",
+      "summary": "This technical report introduces EXAONE 4.5, the first open-weight vision language model released by LG AI Research. EXAONE 4.5 is architected by integrating a dedicated visual encoder into the existing EXAONE 4.0 framework, enabling native multimodal pretraining over both visual and textual modalit",
+      "ai_summary": "",
+      "ai_keywords": [],
+      "upvotes": 0,
+      "authors": "Eunbi Choi, Kibong Choi, Sehyun Chun",
+      "source": "huggingface"
+    },
+    {
+      "title": "Matrix-Game 3.0: Real-Time and Streaming Interactive World Model with Long-Horizon Memory",
+      "arxiv_id": "2604.08995",
+      "url": "https://arxiv.org/abs/2604.08995",
+      "summary": "With the advancement of interactive video generation, diffusion models have increasingly demonstrated their potential as world models. However, existing approaches still struggle to simultaneously achieve memory-enabled long-term temporal consistency and high-resolution real-time generation, limitin",
+      "ai_summary": "",
+      "ai_keywords": [],
+      "upvotes": 0,
+      "authors": "Zile Wang, Zexiang Liu, Jaixing Li",
+      "source": "huggingface"
+    },
+    {
+      "title": "ECHO: Efficient Chest X-ray Report Generation with One-step Block Diffusion",
+      "arxiv_id": "2604.09450",
+      "url": "https://arxiv.org/abs/2604.09450",
+      "summary": "Chest X-ray report generation (CXR-RG) has the potential to substantially alleviate radiologists' workload. However, conventional autoregressive vision--language models (VLMs) suffer from high inference latency due to sequential token decoding. Diffusion-based models offer a promising alternative th",
+      "ai_summary": "",
+      "ai_keywords": [],
+      "upvotes": 0,
+      "authors": "Lifeng Chen, Tianqi You, Hao Liu",
+      "source": "huggingface"
+    },
+    {
+      "title": "ELT: Elastic Looped Transformers for Visual Generation",
+      "arxiv_id": "2604.09168",
+      "url": "https://arxiv.org/abs/2604.09168",
+      "summary": "We introduce Elastic Looped Transformers (ELT), a highly parameter-efficient class of visual generative models based on a recurrent transformer architecture. While conventional generative models rely on deep stacks of unique transformer layers, our approach employs iterative, weight-shared transform",
+      "ai_summary": "",
+      "ai_keywords": [],
+      "upvotes": 0,
+      "authors": "Sahil Goyal, Swayam Agrawal, Gautham Govind Anil",
+      "source": "huggingface"
+    },
+    {
+      "title": "VisionFoundry: Teaching VLMs Visual Perception with Synthetic Images",
+      "arxiv_id": "2604.09531",
+      "url": "https://arxiv.org/abs/2604.09531",
+      "summary": "Vision-language models (VLMs) still struggle with visual perception tasks such as spatial understanding and viewpoint recognition. One plausible contributing factor is that natural image datasets provide limited supervision for low-level visual skills. This motivates a practical question: can target",
+      "ai_summary": "",
+      "ai_keywords": [],
+      "upvotes": 0,
+      "authors": "Guanyu Zhou, Yida Yin, Wenhao Chai",
+      "source": "huggingface"
+    },
+    {
+      "title": "Structured Causal Video Reasoning via Multi-Objective Alignment",
+      "arxiv_id": "2604.04415",
+      "url": "https://arxiv.org/abs/2604.04415",
+      "summary": "Human understanding of video dynamics is typically grounded in a structured mental representation of entities, actions, and temporal relations, rather than relying solely on immediate deductive reasoning. In contrast, existing Video-LLMs largely depend on unstructured video reasoning, where critical",
+      "ai_summary": "",
+      "ai_keywords": [],
+      "upvotes": 0,
+      "authors": "Zinuo Li, Yongxin Guo, Jun Liu",
+      "source": "huggingface"
+    },
+    {
+      "title": "AgentSwing: Adaptive Parallel Context Management Routing for Long-Horizon Web Agents",
+      "arxiv_id": "2603.27490",
+      "url": "https://arxiv.org/abs/2603.27490",
+      "summary": "As large language models (LLMs) evolve into autonomous agents for long-horizon information-seeking, managing finite context capacity has become a critical bottleneck. Existing context management methods typically commit to a single fixed strategy throughout the entire trajectory. Such static designs",
+      "ai_summary": "",
+      "ai_keywords": [],
+      "upvotes": 0,
+      "authors": "Zhaopeng Feng, Liangcai Su, Zhen Zhang",
+      "source": "huggingface"
+    },
+    {
+      "title": "Large Language Models Generate Harmful Content Using a Distinct, Unified Mechanism",
+      "arxiv_id": "2604.09544",
+      "url": "https://arxiv.org/abs/2604.09544",
+      "summary": "Large language models (LLMs) undergo alignment training to avoid harmful behaviors, yet the resulting safeguards remain brittle: jailbreaks routinely bypass them, and fine-tuning on narrow domains can induce ``emergent misalignment'' that generalizes broadly. Whether this brittleness reflects a fund",
+      "ai_summary": "",
+      "ai_keywords": [],
+      "upvotes": 0,
+      "authors": "Hadas Orgad, Boyi Wei, Kaden Zheng",
+      "source": "huggingface"
+    },
+    {
+      "title": "Cross-Modal Emotion Transfer for Emotion Editing in Talking Face Video",
+      "arxiv_id": "2604.07786",
+      "url": "https://arxiv.org/abs/2604.07786",
+      "summary": "Talking face generation has gained significant attention as a core application of generative models. To enhance the expressiveness and realism of synthesized videos, emotion editing in talking face video plays a crucial role. However, existing approaches often limit expressive flexibility and strugg",
+      "ai_summary": "",
+      "ai_keywords": [],
+      "upvotes": 0,
+      "authors": "Chanhyuk Choi, Taesoo Kim, Donggyu Lee",
+      "source": "huggingface"
+    },
+    {
+      "title": "ScheMatiQ: From Research Question to Structured Data through Interactive Schema Discovery",
+      "arxiv_id": "2604.09237",
+      "url": "https://arxiv.org/abs/2604.09237",
+      "summary": "Many disciplines pose natural-language research questions over large document collections whose answers typically require structured evidence, traditionally obtained by manually designing an annotation schema and exhaustively labeling the corpus, a slow and error-prone process. We introduce ScheMati",
+      "ai_summary": "",
+      "ai_keywords": [],
+      "upvotes": 0,
+      "authors": "Shahar Levy, Eliya Habba, Reshef Mintz",
+      "source": "huggingface"
+    },
+    {
+      "title": "On Semiotic-Grounded Interpretive Evaluation of Generative Art",
+      "arxiv_id": "2604.08641",
+      "url": "https://arxiv.org/abs/2604.08641",
+      "summary": "Interpretation is essential to deciphering the language of art: audiences communicate with artists by recovering meaning from visual artifacts. However, current Generative Art (GenArt) evaluators remain fixated on surface-level image quality or literal prompt adherence, failing to assess the deeper ",
+      "ai_summary": "",
+      "ai_keywords": [],
+      "upvotes": 0,
+      "authors": "Ruixiang Jiang, Changwen Chen",
+      "source": "huggingface"
+    },
+    {
+      "title": "Initialisation Determines the Basin: Efficient Codebook Optimisation for Extreme LLM Quantization",
+      "arxiv_id": "2604.08118",
+      "url": "https://arxiv.org/abs/2604.08118",
+      "summary": "Additive quantization enables extreme LLM compression with O(1) lookup-table dequantization, making it attractive for edge deployment. Yet at 2-bit precision, it often fails catastrophically, even with extensive search and finetuning. We show that the dominant bottleneck is codebook initialisation. ",
+      "ai_summary": "",
+      "ai_keywords": [],
+      "upvotes": 0,
+      "authors": "Ian W. Kennedy, Nafise Sadat Moosavi",
+      "source": "huggingface"
+    }
+  ],
+  "alphaxiv_papers": [
+    {
+      "title": "SkillClaw (DreamX Team)",
+      "arxiv_id": "2604.08377",
+      "url": "https://arxiv.org/abs/2604.08377",
+      "summary": "Framework enabling LLM agent skills to continuously evolve via collective cross-user interactions",
+      "alphaxiv_url": "https://www.alphaxiv.org/overview/2604.08377",
+      "source": "alphaxiv"
+    },
+    {
+      "title": "Externalization Framework",
+      "arxiv_id": "2604.08224",
+      "url": "https://arxiv.org/abs/2604.08224",
+      "summary": "Proposes externalization as unifying principle for LLM agent reliability",
+      "alphaxiv_url": "https://www.alphaxiv.org/overview/2604.08224",
+      "source": "alphaxiv"
+    },
+    {
+      "title": "LLM API Router Security",
+      "arxiv_id": "2604.08407",
+      "url": "https://arxiv.org/abs/2604.08407",
+      "summary": "Reveals widespread malicious code injection & secret exfiltration in real-world LLM API routers",
+      "alphaxiv_url": "https://www.alphaxiv.org/overview/2604.08407",
+      "source": "alphaxiv"
+    },
+    {
+      "title": "ClawBench",
+      "arxiv_id": "2604.08523",
+      "url": "https://arxiv.org/abs/2604.08523",
+      "summary": "153 write-heavy tasks across 144 live production websites, frontier AI models achieve only 0.7-33.3% success rates",
+      "alphaxiv_url": "https://www.alphaxiv.org/overview/2604.08523",
+      "source": "alphaxiv"
+    },
+    {
+      "title": "OmniBehavior",
+      "arxiv_id": "2604.08362",
+      "url": "https://arxiv.org/abs/2604.08362",
+      "summary": "Benchmark using real-world industrial data for long-horizon, cross-scenario human behavior simulation",
+      "alphaxiv_url": "https://www.alphaxiv.org/overview/2604.08362",
+      "source": "alphaxiv"
+    },
+    {
+      "title": "In-Place Test-Time Training",
+      "arxiv_id": "2604.06169",
+      "url": "https://arxiv.org/abs/2604.06169",
+      "summary": "Repurposes existing MLP blocks for efficient chunk-wise updates, improvements on RULER long-context benchmarks",
+      "alphaxiv_url": "https://www.alphaxiv.org/overview/2604.06169",
+      "source": "alphaxiv"
+    },
+    {
+      "title": "LLM Training as Lossy Compression",
+      "arxiv_id": "2604.07569",
+      "url": "https://arxiv.org/abs/2604.07569",
+      "summary": "Models follow two-phase Information Bottleneck trajectory",
+      "alphaxiv_url": "https://www.alphaxiv.org/overview/2604.07569",
+      "source": "alphaxiv"
+    },
+    {
+      "title": "Implicit Curriculum Hypothesis",
+      "arxiv_id": "2604.08510",
+      "url": "https://arxiv.org/abs/2604.08510",
+      "summary": "LLM pretraining skills emerge in stable, compositionally dependent order",
+      "alphaxiv_url": "https://www.alphaxiv.org/overview/2604.08510",
+      "source": "alphaxiv"
+    },
+    {
+      "title": "Dataset Policy Gradient (DPG)",
+      "arxiv_id": "2604.08423",
+      "url": "https://arxiv.org/abs/2604.08423",
+      "summary": "RL framework using metagradients to derive per-example rewards for synthetic data control",
+      "alphaxiv_url": "https://www.alphaxiv.org/overview/2604.08423",
+      "source": "alphaxiv"
+    },
+    {
+      "title": "DMax",
+      "arxiv_id": "2604.08302",
+      "url": "https://arxiv.org/abs/2604.08302",
+      "summary": "Enables aggressive parallel decoding via On-Policy Uniform Training + Soft Parallel Decoding, avg TPF 6.2",
+      "alphaxiv_url": "https://www.alphaxiv.org/overview/2604.08302",
+      "source": "alphaxiv"
+    },
+    {
+      "title": "Neural Computers",
+      "arxiv_id": "2604.06425",
+      "url": "https://arxiv.org/abs/2604.06425",
+      "summary": "New paradigm: neural model internalizes computation, memory, and I/O in learned runtime state",
+      "alphaxiv_url": "https://www.alphaxiv.org/overview/2604.06425",
+      "source": "alphaxiv"
+    },
+    {
+      "title": "PaperOrchestra",
+      "arxiv_id": "2604.05018",
+      "url": "https://arxiv.org/abs/2604.05018",
+      "summary": "Multi-agent AI framework converting pre-writing materials to submission-ready research papers, 84% CVPR acceptance",
+      "alphaxiv_url": "https://www.alphaxiv.org/overview/2604.05018",
+      "source": "alphaxiv"
+    },
+    {
+      "title": "Scal3R",
+      "arxiv_id": "2604.08542",
+      "url": "https://arxiv.org/abs/2604.08542",
+      "summary": "Kilometer-scale 3D scene reconstruction from long RGB video",
+      "alphaxiv_url": "https://www.alphaxiv.org/overview/2604.08542",
+      "source": "alphaxiv"
+    }
+  ],
+  "github_repos": [
+    {
+      "name": "alchaincyf/hermes-agent-orange-book",
+      "url": "https://github.com/alchaincyf/hermes-agent-orange-book",
+      "description": "Hermes Agent 从入门到精通 · 橙皮书系列 · Nous Research 开源 AI Agent 框架实战指南",
+      "stars": 2224,
+      "forks": 241,
+      "language": null,
+      "topics": [],
+      "source": "github"
+    },
+    {
+      "name": "yizhiyanhua-ai/fireworks-tech-graph",
+      "url": "https://github.com/yizhiyanhua-ai/fireworks-tech-graph",
+      "description": "Claude Code skill for generating production-quality SVG+PNG technical diagrams. Supports 8 diagram types, 5 visual styles, and deep AI/Agent domain knowledge.",
+      "stars": 1837,
+      "forks": 138,
+      "language": "Python",
+      "topics": [],
+      "source": "github"
+    },
+    {
+      "name": "joeynyc/hermes-hudui",
+      "url": "https://github.com/joeynyc/hermes-hudui",
+      "description": "Web UI consciousness monitor for Hermes — the AI agent with persistent memory",
+      "stars": 779,
+      "forks": 80,
+      "language": "Python",
+      "topics": [],
+      "source": "github"
+    },
+    {
+      "name": "Xiangyue-Zhang/auto-deep-researcher-24x7",
+      "url": "https://github.com/Xiangyue-Zhang/auto-deep-researcher-24x7",
+      "description": "🔥 An autonomous AI agent that runs your deep learning experiments 24/7 while you sleep. Zero-cost monitoring, Leader-Worker architecture, constant-size memory.",
+      "stars": 349,
+      "forks": 25,
+      "language": "Python",
+      "topics": [
+        "ai-agent",
+        "autonomous-agent",
+        "claude-code",
+        "deep-learning",
+        "experiment-automation"
+      ],
+      "source": "github"
+    },
+    {
+      "name": "joyehuang/Learn-Open-Harness",
+      "url": "https://github.com/joyehuang/Learn-Open-Harness",
+      "description": "🤖 Official Interactive Tutorial for OpenHarness – Zero to Hero in 12 Chapters | Learn OpenHarness like Claude Code: Agent Loop, Tools, Memory, Multi-Agent | 面向零基础的 AI Agent 交互式教程",
+      "stars": 235,
+      "forks": 48,
+      "language": "TypeScript",
+      "topics": [
+        "agent-harness",
+        "agent-loop",
+        "ai-agent",
+        "ai-agent-tutorial",
+        "ai-harness"
+      ],
+      "source": "github"
+    },
+    {
+      "name": "millionco/debug-agent",
+      "url": "https://github.com/millionco/debug-agent",
+      "description": "Debugging skill for AI agents",
+      "stars": 202,
+      "forks": 9,
+      "language": "TypeScript",
+      "topics": [
+        "agent",
+        "debug",
+        "skill"
+      ],
+      "source": "github"
+    },
+    {
+      "name": "yzddmr6/repo-analyzer",
+      "url": "https://github.com/yzddmr6/repo-analyzer",
+      "description": "AI coding agent skill for deep architectural analysis of open-source projects | 开源项目深度架构分析，一句话生成专业级分析报告",
+      "stars": 162,
+      "forks": 28,
+      "language": null,
+      "topics": [],
+      "source": "github"
+    },
+    {
+      "name": "KeploreAI-Lab/MindAct",
+      "url": "https://github.com/KeploreAI-Lab/MindAct",
+      "description": "AI Agent + Specific Knowledge = A true Autonomous AI ",
+      "stars": 148,
+      "forks": 2,
+      "language": "TypeScript",
+      "topics": [],
+      "source": "github"
+    },
+    {
+      "name": "liyupi/yupi-skill",
+      "url": "https://github.com/liyupi/yupi-skill",
+      "description": "🐟 程序员鱼皮 Agent Skill｜把自己蒸馏成 AI 技能包，用我的思维方式和表达风格回答编程学习、求职面试、AI 编程、简历优化、技术选型、创业经验等问题。支持 Claude Code / Cursor / OpenClaw",
+      "stars": 139,
+      "forks": 16,
+      "language": null,
+      "topics": [
+        "agent",
+        "agent-skills",
+        "ai",
+        "ai-coding",
+        "career"
+      ],
+      "source": "github"
+    },
+    {
+      "name": "xaspx/hermes-control-interface",
+      "url": "https://github.com/xaspx/hermes-control-interface",
+      "description": "A self-hosted web dashboard for the Hermes AI agent stack. Provides a browser-based terminal, file explorer, session overview, cron management, system metrics, and an agent status panel — all behind a",
+      "stars": 134,
+      "forks": 16,
+      "language": "JavaScript",
+      "topics": [
+        "ai-agents",
+        "hermes-agent"
+      ],
+      "source": "github"
+    }
+  ],
+  "hackernews": [
+    {
+      "title": "An AI agent published a hit piece on me",
+      "url": "https://theshamblog.com/an-ai-agent-published-a-hit-piece-on-me/",
+      "points": 2346,
+      "num_comments": 951,
+      "author": "scottshambaugh",
+      "source": "hackernews"
+    },
+    {
+      "title": "OpenCode – Open source AI coding agent",
+      "url": "https://opencode.ai/",
+      "points": 1274,
+      "num_comments": 619,
+      "author": "rbanffy",
+      "source": "hackernews"
+    },
+    {
+      "title": "AI agent opens a PR write a blogpost to shames the maintainer who closes it",
+      "url": "https://github.com/matplotlib/matplotlib/pull/31132",
+      "points": 953,
+      "num_comments": 750,
+      "author": "wrxd",
+      "source": "hackernews"
+    },
+    {
+      "title": "Opus 4.5 is not the normal AI agent experience that I have had thus far",
+      "url": "https://burkeholland.github.io/posts/opus-4-5-change-everything/",
+      "points": 879,
+      "num_comments": 1353,
+      "author": "tbassetto",
+      "source": "hackernews"
+    },
+    {
+      "title": "An AI agent published a hit piece on me – more things have happened",
+      "url": "https://theshamblog.com/an-ai-agent-published-a-hit-piece-on-me-part-2/",
+      "points": 768,
+      "num_comments": 624,
+      "author": "scottshambaugh",
+      "source": "hackernews"
+    },
+    {
+      "title": "Windows 11 adds AI agent that runs in background with access to personal folders",
+      "url": "https://www.windowslatest.com/2025/11/18/windows-11-to-add-an-ai-agent-that-runs-in-background-with-access-to-personal-folders-warns-of-security-risk/",
+      "points": 703,
+      "num_comments": 638,
+      "author": "jinxmeta",
+      "source": "hackernews"
+    },
+    {
+      "title": "Ex-GitHub CEO launches a new developer platform for AI agents",
+      "url": "https://entire.io/blog/hello-entire-world/",
+      "points": 611,
+      "num_comments": 577,
+      "author": "meetpateltech",
+      "source": "hackernews"
+    },
+    {
+      "title": "A generalist AI agent for 3D virtual environments",
+      "url": "https://deepmind.google/discover/blog/sima-generalist-ai-agent-for-3d-virtual-environments/",
+      "points": 559,
+      "num_comments": 310,
+      "author": "nuz",
+      "source": "hackernews"
+    },
+    {
+      "title": "Frontier AI agents violate ethical constraints 30–50% of time, pressured by KPIs",
+      "url": "https://arxiv.org/abs/2512.20798",
+      "points": 544,
+      "num_comments": 366,
+      "author": "tiny-automates",
+      "source": "hackernews"
+    },
+    {
+      "title": "Building Effective AI Agents",
+      "url": "https://www.anthropic.com/engineering/building-effective-agents",
+      "points": 543,
+      "num_comments": 88,
+      "author": "Anon84",
+      "source": "hackernews"
+    }
+  ]
+}
