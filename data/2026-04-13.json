@@ -13,11 +13,7 @@
       "tldr_zh": "Web agent 做长任务时最大的瓶颈是上下文窗口不够用，现有方法要么一直压缩要么一直保留，各有缺陷。AgentSwing 的核心创新是让 agent 根据当前任务阶段动态切换上下文管理策略——信息收集阶段保留更多细节，执行阶段激进压缩。这对 CUA 方向的实用部署直接相关。",
       "upvotes": 0,
       "authors": "",
-      "ai_keywords": [
-        "CUA",
-        "web agent",
-        "context management"
-      ],
+      "ai_keywords": [],
       "interest_tag": "CUA"
     },
     {
@@ -29,11 +25,7 @@
       "tldr_zh": "Skywork AI 做的交互式世界模型，核心突破是同时实现了两个之前互相矛盾的目标：实时 720p 高分辨率生成 + 分钟级长时间一致性。关键技术是错误感知建模（防止误差累积导致画面崩坏）和相机感知长时记忆（记住空间结构）。模型规模 28B，流式输出。",
       "upvotes": 0,
       "authors": "Skywork AI",
-      "ai_keywords": [
-        "world model",
-        "memory",
-        "video generation"
-      ],
+      "ai_keywords": [],
       "interest_tag": "Memory"
     },
     {
@@ -45,11 +37,7 @@
       "tldr_zh": "这篇论文发现了一个重要结论：LLM 生成所有类型的有害内容（暴力、色情、仇恨等）共享同一个底层机制，而不是每种有害行为有独立的回路。这解释了两个长期困扰安全研究的现象——为什么越狱攻击能跨类别泛化，以及为什么在特定领域的 fine-tuning 会导致广泛的安全退化。",
       "upvotes": 0,
       "authors": "",
-      "ai_keywords": [
-        "safety",
-        "alignment",
-        "jailbreak"
-      ]
+      "ai_keywords": []
     },
     {
       "title": "EXAONE 4.5 Technical Report",
@@ -60,11 +48,7 @@
       "tldr_zh": "LG AI Research 发布的开源视觉语言模型，在 EXAONE 4.0 纯文本模型基础上接入视觉编码器，做了原生多模态预训练（不是后接的）。在视觉语言基准上和同级别闭源模型竞争，对开源 VLM 生态是一个补充。",
       "upvotes": 0,
       "authors": "LG AI Research",
-      "ai_keywords": [
-        "VLM",
-        "open-weight",
-        "multimodal"
-      ]
+      "ai_keywords": []
     },
     {
       "title": "ELT: Elastic Looped Transformers for Visual Generation",
@@ -75,11 +59,7 @@
       "tldr_zh": "Google 提出的弹性循环 Transformer，核心思路是用权重共享的循环层替代传统的深层堆叠——同一组参数迭代多次。加上自蒸馏训练，参数量最多减少 4 倍但生成质量不降。更重要的是支持 any-time inference：推理时可以动态决定循环多少次，计算预算灵活可调。",
       "upvotes": 0,
       "authors": "Google",
-      "ai_keywords": [
-        "efficient",
-        "visual generation",
-        "looped transformer"
-      ]
+      "ai_keywords": []
     }
   ],
   "alphaxiv_papers": [

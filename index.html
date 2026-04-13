@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh">
+<html lang="zh" data-theme="dark">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,15 +8,16 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Serif+SC:wght@600;700&display=swap" rel="stylesheet">
   <style>
-    :root {
+    /* ====== Theme Variables ====== */
+    [data-theme="dark"] {
       --bg: #101218;
       --surface: #181c25;
       --surface2: #1e2330;
       --border: #2a2f3d;
       --border-hover: #3d4455;
       --text: #e2e6ef;
-      --text-dim: #7d849a;
       --text-mid: #a8afc2;
+      --text-dim: #7d849a;
       --gold: #e8b86d;
       --gold-dim: #c9943f;
       --blue: #6ea8d7;
@@ -26,7 +27,35 @@
       --red: #d97070;
       --tag-bg: rgba(184,156,224,0.12);
       --tag-text: #c4a8e8;
+      --interest-bg: rgba(232,184,109,0.15);
+      --tldr-bg: rgba(110,168,215,0.06);
+      --tldr-border: var(--blue);
+      --nav-bg: rgba(16,18,24,0.92);
     }
+    [data-theme="light"] {
+      --bg: #f5f5f7;
+      --surface: #ffffff;
+      --surface2: #f0f0f3;
+      --border: #e0e0e6;
+      --border-hover: #c8c8d0;
+      --text: #1d1d1f;
+      --text-mid: #4a4a52;
+      --text-dim: #8e8e93;
+      --gold: #b8860b;
+      --gold-dim: #996b08;
+      --blue: #2563eb;
+      --green: #16a34a;
+      --purple: #7c3aed;
+      --orange: #c2742f;
+      --red: #dc2626;
+      --tag-bg: rgba(124,58,237,0.08);
+      --tag-text: #6d28d9;
+      --interest-bg: rgba(184,134,11,0.1);
+      --tldr-bg: rgba(37,99,235,0.04);
+      --tldr-border: var(--blue);
+      --nav-bg: rgba(245,245,247,0.92);
+    }
+
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
       font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
@@ -35,13 +64,12 @@
       line-height: 1.7;
       min-height: 100vh;
       -webkit-font-smoothing: antialiased;
+      transition: background 0.3s, color 0.3s;
     }
 
-    /* Header */
     .header {
-      padding: 2.5rem 1.5rem 1.5rem;
+      padding: 2.5rem 1.5rem 1rem;
       text-align: center;
-      border-bottom: 1px solid var(--border);
     }
     .header h1 {
       font-family: 'Noto Serif SC', serif;
@@ -57,51 +85,53 @@
       letter-spacing: 0.03em;
     }
 
-    /* Toolbar */
     .toolbar {
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 1rem;
-      padding: 0.8rem 1rem;
+      gap: 0.75rem;
+      padding: 0.6rem 1rem;
+      border-bottom: 1px solid var(--border);
     }
-    .lang-toggle {
+    .toggle-group {
       display: flex;
       background: var(--surface);
       border: 1px solid var(--border);
       border-radius: 8px;
       overflow: hidden;
     }
-    .lang-toggle button {
+    .toggle-group button {
       background: none;
       border: none;
       color: var(--text-dim);
-      padding: 0.35rem 0.7rem;
+      padding: 0.35rem 0.65rem;
       font-size: 0.78rem;
       cursor: pointer;
       transition: all 0.2s;
       font-family: inherit;
     }
-    .lang-toggle button.active {
+    .toggle-group button.active {
       background: var(--gold);
-      color: var(--bg);
+      color: #fff;
       font-weight: 600;
     }
+    [data-theme="light"] .toggle-group button.active {
+      color: #fff;
+    }
 
-    /* Date Navigation */
     .date-nav {
       display: flex;
       align-items: center;
       justify-content: center;
       gap: 1rem;
       padding: 0.7rem 1rem;
-      border-bottom: 1px solid var(--border);
       position: sticky;
       top: 0;
-      background: rgba(16,18,24,0.92);
+      background: var(--nav-bg);
       backdrop-filter: blur(12px);
       -webkit-backdrop-filter: blur(12px);
       z-index: 10;
+      border-bottom: 1px solid var(--border);
     }
     .date-nav button {
       background: var(--surface);
@@ -125,10 +155,8 @@
       letter-spacing: 0.04em;
     }
 
-    /* Container */
     .container { max-width: 720px; margin: 0 auto; padding: 0 1.25rem 4rem; }
 
-    /* Section */
     .section { margin-top: 2rem; }
     .section-header {
       display: flex;
@@ -140,16 +168,13 @@
       font-size: 0.92rem;
       font-weight: 600;
       color: var(--text);
-      letter-spacing: 0.01em;
     }
     .section-header .count {
       font-size: 0.72rem;
       color: var(--text-dim);
       font-weight: 400;
-      margin-left: 0.25rem;
     }
 
-    /* Briefing */
     .briefing {
       background: var(--surface);
       border: 1px solid var(--border);
@@ -166,7 +191,6 @@
       font-weight: 600;
     }
 
-    /* Analysis card (爆款拆解) */
     .analysis-card {
       background: var(--surface);
       border: 1px solid var(--border);
@@ -189,7 +213,6 @@
     .analysis-body p { margin-bottom: 0.4rem; }
     .analysis-body p:last-child { margin-bottom: 0; }
 
-    /* Item card */
     .card {
       background: var(--surface);
       border: 1px solid var(--border);
@@ -202,11 +225,18 @@
       border-color: var(--border-hover);
       background: var(--surface2);
     }
+    .card-head {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 0.5rem;
+      margin-bottom: 0.3rem;
+    }
     .card-title {
       font-size: 0.9rem;
       font-weight: 600;
-      margin-bottom: 0.3rem;
       line-height: 1.45;
+      flex: 1;
     }
     .card-title a {
       color: var(--blue);
@@ -214,23 +244,30 @@
       transition: color 0.2s;
     }
     .card-title a:hover { color: var(--gold); }
+    .interest-tag {
+      font-size: 0.65rem;
+      background: var(--interest-bg);
+      color: var(--gold);
+      padding: 0.15rem 0.5rem;
+      border-radius: 4px;
+      font-weight: 600;
+      white-space: nowrap;
+      flex-shrink: 0;
+      margin-top: 0.15rem;
+    }
     .card-meta {
       font-size: 0.76rem;
       color: var(--text-dim);
-      margin-bottom: 0.4rem;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.6rem;
-      align-items: center;
+      margin-bottom: 0.5rem;
     }
     .card-tldr {
       font-size: 0.84rem;
       color: var(--text-mid);
       line-height: 1.7;
-      padding: 0.5rem 0.7rem;
-      background: rgba(110,168,215,0.06);
+      padding: 0.5rem 0.75rem;
+      background: var(--tldr-bg);
       border-radius: 6px;
-      border-left: 2px solid var(--blue);
+      border-left: 2px solid var(--tldr-border);
     }
     .card-tags {
       display: flex;
@@ -244,19 +281,8 @@
       color: var(--tag-text);
       padding: 0.15rem 0.5rem;
       border-radius: 4px;
-      letter-spacing: 0.02em;
-    }
-    .interest-tag {
-      font-size: 0.65rem;
-      background: rgba(232,184,109,0.15);
-      color: var(--gold);
-      padding: 0.12rem 0.45rem;
-      border-radius: 4px;
-      font-weight: 600;
-      letter-spacing: 0.03em;
     }
 
-    /* Loading / Empty */
     .loading, .empty {
       text-align: center;
       padding: 4rem 1rem;
@@ -273,7 +299,6 @@
     }
     @keyframes spin { to { transform: rotate(360deg); } }
 
-    /* Footer */
     .footer {
       text-align: center;
       padding: 2rem 1rem;
@@ -281,14 +306,12 @@
       font-size: 0.72rem;
       border-top: 1px solid var(--border);
       margin-top: 2rem;
-      letter-spacing: 0.02em;
     }
     .footer a { color: var(--gold-dim); text-decoration: none; }
     .footer a:hover { color: var(--gold); }
 
-    /* Responsive */
     @media (max-width: 600px) {
-      .header { padding: 2rem 1rem 1.2rem; }
+      .header { padding: 2rem 1rem 0.8rem; }
       .header h1 { font-size: 1.35rem; }
       .container { padding: 0 1rem 3rem; }
       .card { padding: 0.85rem 1rem; }
@@ -303,9 +326,13 @@
   </div>
 
   <div class="toolbar">
-    <div class="lang-toggle">
+    <div class="toggle-group" id="lang-toggle">
       <button class="active" onclick="setLang('zh')">中文</button>
       <button onclick="setLang('en')">EN</button>
+    </div>
+    <div class="toggle-group" id="theme-toggle">
+      <button class="active" onclick="setTheme('dark')">🌙</button>
+      <button onclick="setTheme('light')">☀️</button>
     </div>
   </div>
 
@@ -334,13 +361,28 @@
       hackernews:  { zh: 'Hacker News 热议', en: 'Hacker News Hot' }
     };
 
+    function setTheme(t) {
+      document.documentElement.setAttribute('data-theme', t);
+      document.querySelectorAll('#theme-toggle button').forEach(b => {
+        b.classList.toggle('active', b.textContent.trim() === (t === 'dark' ? '🌙' : '☀️'));
+      });
+      localStorage.setItem('radar-theme', t);
+    }
+
     function setLang(l) {
       lang = l;
-      document.querySelectorAll('.lang-toggle button').forEach(b =>
+      document.querySelectorAll('#lang-toggle button').forEach(b =>
         b.classList.toggle('active', b.textContent.trim() === (l === 'zh' ? '中文' : 'EN')));
       document.getElementById('subtitle').textContent = SUB[l];
       if (currentData) render(currentData);
+      localStorage.setItem('radar-lang', l);
     }
+
+    // Restore preferences
+    const savedTheme = localStorage.getItem('radar-theme');
+    if (savedTheme) setTheme(savedTheme);
+    const savedLang = localStorage.getItem('radar-lang');
+    if (savedLang) setLang(savedLang);
 
     async function init() {
       try {
@@ -380,7 +422,7 @@
       let h = '';
 
       // Briefing
-      const brief = lang === 'zh' ? d.briefing_zh : d.briefing_en;
+      const brief = t(d, 'briefing');
       if (brief) {
         const ps = brief.split('\n\n').filter(Boolean);
         h += `<div class="section">
@@ -404,29 +446,26 @@
         h += '</div>';
       }
 
-      // HuggingFace
+      // Sections
       const hf = d.huggingface_papers || [];
-      if (hf.length) h += section('🤗', 'huggingface', hf.length, hf.map(p =>
-        card(t(p,'title'), p.url, meta([p.upvotes ? `👍 ${p.upvotes}` : '', p.authors]),
-             t(p,'tldr'), '', p.ai_keywords || [], p.interest_tag)));
+      if (hf.length) h += sec('🤗', 'huggingface', hf.length, hf.map(p =>
+        card(t(p,'title'), p.url, join([p.upvotes ? `👍 ${p.upvotes}` : '', p.authors]),
+             t(p,'tldr'), p.ai_keywords || [], p.interest_tag)));
 
-      // alphaxiv
       const ax = d.alphaxiv_papers || [];
-      if (ax.length) h += section('🔬', 'alphaxiv', ax.length, ax.map(p =>
-        card(t(p,'title'), p.alphaxiv_url || p.url, meta([p.arxiv_id]),
-             t(p,'tldr'), '', [], p.interest_tag)));
+      if (ax.length) h += sec('🔬', 'alphaxiv', ax.length, ax.map(p =>
+        card(t(p,'title'), p.alphaxiv_url || p.url, p.arxiv_id || '',
+             t(p,'tldr'), [], p.interest_tag)));
 
-      // GitHub
       const gh = d.github_repos || [];
-      if (gh.length) h += section('⭐', 'github', gh.length, gh.map(r =>
-        card(r.name, r.url, meta([r.language, r.stars != null ? `★ ${r.stars}` : '']),
-             t(r,'tldr') || t(r,'description'), '', r.topics || [], r.interest_tag)));
+      if (gh.length) h += sec('⭐', 'github', gh.length, gh.map(r =>
+        card(r.name, r.url, join([r.language, r.stars != null ? `★ ${r.stars}` : '']),
+             t(r,'tldr') || t(r,'description'), r.topics || [], r.interest_tag)));
 
-      // HN
       const hn = d.hackernews || [];
-      if (hn.length) h += section('🔥', 'hackernews', hn.length, hn.map(x =>
-        card(t(x,'title'), x.url, meta([x.points ? `${x.points} pts` : '', x.num_comments != null ? `💬 ${x.num_comments}` : '']),
-             t(x,'tldr'), '', [], null)));
+      if (hn.length) h += sec('🔥', 'hackernews', hn.length, hn.map(x =>
+        card(t(x,'title'), x.url, join([x.points ? `${x.points} pts` : '', x.num_comments ? `💬 ${x.num_comments}` : '']),
+             t(x,'tldr'), [], null)));
 
       document.getElementById('content').innerHTML = h || '<div class="empty">暂无数据</div>';
     }
@@ -436,24 +475,23 @@
       return obj[key] || '';
     }
 
-    function meta(parts) { return parts.filter(Boolean).join(' · '); }
+    function join(parts) { return parts.filter(Boolean).join(' · '); }
 
-    function section(icon, key, count, cards) {
-      const title = TITLES[key]?.[lang] || key;
+    function sec(icon, key, count, cards) {
       return `<div class="section">
-        <div class="section-header">${icon} ${esc(title)} <span class="count">${count}</span></div>
+        <div class="section-header">${icon} ${esc(TITLES[key]?.[lang] || key)} <span class="count">${count}</span></div>
         ${cards.join('')}
       </div>`;
     }
 
-    function card(title, url, metaStr, tldr, summary, tags, interestTag) {
-      let h = `<div class="card">
+    function card(title, url, metaStr, tldr, tags, interestTag) {
+      let h = `<div class="card"><div class="card-head">
         <div class="card-title"><a href="${esc(url)}" target="_blank" rel="noopener">${esc(title)}</a></div>`;
-      if (metaStr) h += `<div class="card-meta">${esc(metaStr)}`;
-      if (interestTag) h += ` <span class="interest-tag">${esc(interestTag)}</span>`;
-      if (metaStr || interestTag) h += `</div>`;
+      if (interestTag) h += `<span class="interest-tag">${esc(interestTag)}</span>`;
+      h += '</div>';
+      if (metaStr) h += `<div class="card-meta">${esc(metaStr)}</div>`;
       if (tldr) h += `<div class="card-tldr">${esc(tldr)}</div>`;
-      if (tags.length) h += `<div class="card-tags">${tags.slice(0,5).map(x => `<span class="tag">${esc(x)}</span>`).join('')}</div>`;
+      if (tags && tags.length) h += `<div class="card-tags">${tags.slice(0,4).map(x => `<span class="tag">${esc(x)}</span>`).join('')}</div>`;
       h += '</div>';
       return h;
     }
