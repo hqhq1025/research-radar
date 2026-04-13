@@ -4,259 +4,298 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Research Radar</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Serif+SC:wght@600;700&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg: #0d1117;
-      --surface: #161b22;
-      --surface2: #1c2128;
-      --border: #30363d;
-      --text: #e6edf3;
-      --text-dim: #8b949e;
-      --accent: #58a6ff;
-      --accent2: #3fb950;
-      --accent3: #d2a8ff;
-      --accent4: #f0883e;
-      --tag-bg: #1f2937;
+      --bg: #101218;
+      --surface: #181c25;
+      --surface2: #1e2330;
+      --border: #2a2f3d;
+      --border-hover: #3d4455;
+      --text: #e2e6ef;
+      --text-dim: #7d849a;
+      --text-mid: #a8afc2;
+      --gold: #e8b86d;
+      --gold-dim: #c9943f;
+      --blue: #6ea8d7;
+      --green: #6ec990;
+      --purple: #b89ce0;
+      --orange: #e09860;
+      --red: #d97070;
+      --tag-bg: rgba(184,156,224,0.12);
+      --tag-text: #c4a8e8;
     }
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
       background: var(--bg);
       color: var(--text);
-      line-height: 1.6;
+      line-height: 1.7;
       min-height: 100vh;
-    }
-    .header {
-      padding: 1.5rem 1rem 1rem;
-      text-align: center;
-    }
-    .header h1 {
-      font-size: 1.5rem;
-      font-weight: 700;
-      background: linear-gradient(135deg, var(--accent), var(--accent3));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-    .header p {
-      color: var(--text-dim);
-      font-size: 0.85rem;
-      margin-top: 0.25rem;
+      -webkit-font-smoothing: antialiased;
     }
 
+    /* Header */
+    .header {
+      padding: 2.5rem 1.5rem 1.5rem;
+      text-align: center;
+      border-bottom: 1px solid var(--border);
+    }
+    .header h1 {
+      font-family: 'Noto Serif SC', serif;
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: var(--gold);
+      letter-spacing: 0.02em;
+    }
+    .header .subtitle {
+      color: var(--text-dim);
+      font-size: 0.82rem;
+      margin-top: 0.4rem;
+      letter-spacing: 0.03em;
+    }
+
+    /* Toolbar */
     .toolbar {
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 0.5rem;
-      padding: 0.5rem 1rem 0.75rem;
-      border-bottom: 1px solid var(--border);
+      gap: 1rem;
+      padding: 0.8rem 1rem;
     }
     .lang-toggle {
       display: flex;
       background: var(--surface);
       border: 1px solid var(--border);
-      border-radius: 6px;
+      border-radius: 8px;
       overflow: hidden;
     }
     .lang-toggle button {
       background: none;
       border: none;
       color: var(--text-dim);
-      padding: 0.3rem 0.6rem;
-      font-size: 0.8rem;
+      padding: 0.35rem 0.7rem;
+      font-size: 0.78rem;
       cursor: pointer;
       transition: all 0.2s;
+      font-family: inherit;
     }
     .lang-toggle button.active {
-      background: var(--accent);
+      background: var(--gold);
       color: var(--bg);
       font-weight: 600;
     }
 
+    /* Date Navigation */
     .date-nav {
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 0.75rem;
-      padding: 0.75rem 1rem;
+      gap: 1rem;
+      padding: 0.7rem 1rem;
       border-bottom: 1px solid var(--border);
       position: sticky;
       top: 0;
-      background: var(--bg);
+      background: rgba(16,18,24,0.92);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
       z-index: 10;
     }
     .date-nav button {
       background: var(--surface);
       border: 1px solid var(--border);
-      color: var(--text);
-      padding: 0.35rem 0.65rem;
-      border-radius: 6px;
+      color: var(--text-mid);
+      width: 32px; height: 32px;
+      border-radius: 50%;
       cursor: pointer;
       font-size: 0.85rem;
-      transition: background 0.2s;
+      display: flex; align-items: center; justify-content: center;
+      transition: all 0.2s;
     }
-    .date-nav button:hover { background: var(--surface2); }
-    .date-nav button:disabled { opacity: 0.3; cursor: default; }
+    .date-nav button:hover { border-color: var(--gold); color: var(--gold); }
+    .date-nav button:disabled { opacity: 0.25; cursor: default; }
     .date-nav .current-date {
-      font-size: 1rem;
+      font-size: 0.95rem;
       font-weight: 600;
-      min-width: 130px;
+      color: var(--text);
+      min-width: 120px;
       text-align: center;
+      letter-spacing: 0.04em;
     }
 
-    .container { max-width: 800px; margin: 0 auto; padding: 0 1rem 3rem; }
+    /* Container */
+    .container { max-width: 720px; margin: 0 auto; padding: 0 1.25rem 4rem; }
 
-    .section { margin-top: 1.5rem; }
+    /* Section */
+    .section { margin-top: 2rem; }
     .section-header {
       display: flex;
       align-items: center;
       gap: 0.5rem;
-      padding: 0.6rem 0;
-      font-size: 1.05rem;
-      font-weight: 600;
+      padding-bottom: 0.6rem;
+      margin-bottom: 1rem;
       border-bottom: 1px solid var(--border);
-      margin-bottom: 0.6rem;
+      font-size: 0.92rem;
+      font-weight: 600;
+      color: var(--text);
+      letter-spacing: 0.01em;
     }
     .section-header .count {
-      font-size: 0.75rem;
+      font-size: 0.72rem;
       color: var(--text-dim);
       font-weight: 400;
+      margin-left: 0.25rem;
     }
 
+    /* Briefing */
+    .briefing {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1.25rem 1.4rem;
+      line-height: 1.85;
+      font-size: 0.86rem;
+      color: var(--text-mid);
+    }
+    .briefing p { margin-bottom: 0.8rem; }
+    .briefing p:last-child { margin-bottom: 0; }
+
+    /* Analysis card (爆款拆解) */
+    .analysis-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--orange);
+      border-radius: 10px;
+      padding: 1rem 1.2rem;
+      margin-bottom: 0.6rem;
+    }
+    .analysis-title {
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: var(--orange);
+      margin-bottom: 0.4rem;
+    }
+    .analysis-body {
+      font-size: 0.83rem;
+      line-height: 1.75;
+      color: var(--text-mid);
+    }
+    .analysis-body p { margin-bottom: 0.4rem; }
+    .analysis-body p:last-child { margin-bottom: 0; }
+
+    /* Item card */
     .card {
       background: var(--surface);
       border: 1px solid var(--border);
-      border-radius: 8px;
-      padding: 0.85rem 1rem;
+      border-radius: 10px;
+      padding: 1rem 1.15rem;
       margin-bottom: 0.6rem;
-      transition: border-color 0.2s;
+      transition: border-color 0.25s, background 0.25s;
     }
-    .card:hover { border-color: var(--accent); }
+    .card:hover {
+      border-color: var(--border-hover);
+      background: var(--surface2);
+    }
     .card-title {
-      font-size: 0.95rem;
+      font-size: 0.9rem;
       font-weight: 600;
       margin-bottom: 0.3rem;
+      line-height: 1.45;
     }
-    .card-title a { color: var(--accent); text-decoration: none; }
-    .card-title a:hover { text-decoration: underline; }
+    .card-title a {
+      color: var(--blue);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .card-title a:hover { color: var(--gold); }
     .card-meta {
-      font-size: 0.78rem;
+      font-size: 0.76rem;
       color: var(--text-dim);
-      margin-bottom: 0.3rem;
+      margin-bottom: 0.4rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+      align-items: center;
     }
     .card-tldr {
-      font-size: 0.88rem;
-      color: var(--accent2);
-      font-weight: 500;
-      margin-bottom: 0.25rem;
-      line-height: 1.5;
+      font-size: 0.84rem;
+      color: var(--text-mid);
+      line-height: 1.7;
+      padding: 0.5rem 0.7rem;
+      background: rgba(110,168,215,0.06);
+      border-radius: 6px;
+      border-left: 2px solid var(--blue);
     }
-    .card-tldr::before {
-      content: "TLDR: ";
-      font-weight: 700;
-      color: var(--accent4);
-    }
-    .card-summary {
-      font-size: 0.82rem;
-      color: var(--text);
-      opacity: 0.75;
-      display: none;
-    }
-    .card.expanded .card-summary { display: block; margin-top: 0.3rem; }
     .card-tags {
       display: flex;
       flex-wrap: wrap;
       gap: 0.3rem;
-      margin-top: 0.4rem;
+      margin-top: 0.5rem;
     }
     .tag {
       font-size: 0.68rem;
       background: var(--tag-bg);
-      color: var(--accent3);
+      color: var(--tag-text);
+      padding: 0.15rem 0.5rem;
+      border-radius: 4px;
+      letter-spacing: 0.02em;
+    }
+    .interest-tag {
+      font-size: 0.65rem;
+      background: rgba(232,184,109,0.15);
+      color: var(--gold);
       padding: 0.12rem 0.45rem;
-      border-radius: 10px;
+      border-radius: 4px;
+      font-weight: 600;
+      letter-spacing: 0.03em;
     }
-    .expand-btn {
-      font-size: 0.75rem;
-      color: var(--text-dim);
-      background: none;
-      border: none;
-      cursor: pointer;
-      padding: 0.2rem 0;
-      margin-top: 0.2rem;
-    }
-    .expand-btn:hover { color: var(--accent); }
 
-    .briefing {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      padding: 1rem 1.1rem;
-      line-height: 1.75;
-      font-size: 0.88rem;
-    }
-    .briefing p {
-      margin-bottom: 0.75rem;
-    }
-    .briefing p:last-child { margin-bottom: 0; }
-
-    .analysis-card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-left: 3px solid var(--accent4);
-      border-radius: 8px;
-      padding: 1rem 1.1rem;
-      margin-bottom: 0.75rem;
-    }
-    .analysis-title {
-      font-size: 0.95rem;
-      font-weight: 700;
-      color: var(--accent4);
-      margin-bottom: 0.6rem;
-    }
-    .analysis-body {
-      font-size: 0.85rem;
-      line-height: 1.75;
-    }
-    .analysis-body p { margin-bottom: 0.6rem; }
-    .analysis-body p:last-child { margin-bottom: 0; }
-
+    /* Loading / Empty */
     .loading, .empty {
       text-align: center;
-      padding: 3rem 1rem;
+      padding: 4rem 1rem;
       color: var(--text-dim);
     }
     .spinner {
       display: inline-block;
-      width: 24px; height: 24px;
+      width: 20px; height: 20px;
       border: 2px solid var(--border);
-      border-top-color: var(--accent);
+      border-top-color: var(--gold);
       border-radius: 50%;
       animation: spin 0.8s linear infinite;
-      margin-bottom: 0.5rem;
+      margin-bottom: 0.75rem;
     }
     @keyframes spin { to { transform: rotate(360deg); } }
 
+    /* Footer */
     .footer {
       text-align: center;
       padding: 2rem 1rem;
       color: var(--text-dim);
-      font-size: 0.75rem;
+      font-size: 0.72rem;
       border-top: 1px solid var(--border);
       margin-top: 2rem;
+      letter-spacing: 0.02em;
     }
-    .footer a { color: var(--accent); text-decoration: none; }
+    .footer a { color: var(--gold-dim); text-decoration: none; }
+    .footer a:hover { color: var(--gold); }
 
+    /* Responsive */
     @media (max-width: 600px) {
-      .header h1 { font-size: 1.25rem; }
-      .card { padding: 0.7rem 0.8rem; }
+      .header { padding: 2rem 1rem 1.2rem; }
+      .header h1 { font-size: 1.35rem; }
+      .container { padding: 0 1rem 3rem; }
+      .card { padding: 0.85rem 1rem; }
+      .briefing { padding: 1rem 1.1rem; }
     }
   </style>
 </head>
 <body>
   <div class="header">
-    <h1>🔭 Research Radar</h1>
-    <p id="subtitle">每日 AI 研究速递 — 论文 · 开源 · 讨论</p>
+    <h1>Research Radar</h1>
+    <div class="subtitle" id="subtitle">每日 AI 研究速递</div>
   </div>
 
   <div class="toolbar">
@@ -268,7 +307,7 @@
 
   <div class="date-nav">
     <button id="prev-btn" onclick="navigate(-1)">←</button>
-    <span class="current-date" id="current-date">Loading...</span>
+    <span class="current-date" id="current-date">—</span>
     <button id="next-btn" onclick="navigate(1)">→</button>
   </div>
 
@@ -281,48 +320,37 @@
   </div>
 
   <script>
-    let availableDates = [];
-    let currentIdx = 0;
-    let currentData = null;
-    let lang = 'zh';
+    let availableDates = [], currentIdx = 0, currentData = null, lang = 'zh';
 
-    const SUBTITLES = {
-      zh: '每日 AI 研究速递 — 论文 · 开源 · 讨论',
-      en: 'Daily AI Research Digest — Papers · Repos · Discussions'
-    };
-    const SECTION_TITLES = {
+    const SUB = { zh: '每日 AI 研究速递', en: 'Daily AI Research Digest' };
+    const TITLES = {
       huggingface: { zh: 'HuggingFace 每日论文', en: 'HuggingFace Daily Papers' },
-      alphaxiv:    { zh: 'alphaxiv 热门论文', en: 'alphaxiv Trending' },
-      github:      { zh: 'GitHub 热门仓库', en: 'GitHub Trending Repos' },
-      hackernews:  { zh: 'Hacker News 热议', en: 'Hacker News Discussions' }
+      alphaxiv:    { zh: 'alphaxiv 热门', en: 'alphaxiv Trending' },
+      github:      { zh: 'GitHub 新星', en: 'GitHub Rising' },
+      hackernews:  { zh: 'Hacker News 热议', en: 'Hacker News Hot' }
     };
-    const LOADING_TEXT = { zh: '加载中...', en: 'Loading...' };
-    const FOOTER_TEXT = { zh: '每日自动更新', en: 'Auto-updated daily' };
 
     function setLang(l) {
       lang = l;
-      document.querySelectorAll('.lang-toggle button').forEach(b => {
-        b.classList.toggle('active', b.textContent.trim() === (l === 'zh' ? '中文' : 'EN'));
-      });
-      document.getElementById('subtitle').textContent = SUBTITLES[l];
-      if (currentData) renderDigest(currentData);
+      document.querySelectorAll('.lang-toggle button').forEach(b =>
+        b.classList.toggle('active', b.textContent.trim() === (l === 'zh' ? '中文' : 'EN')));
+      document.getElementById('subtitle').textContent = SUB[l];
+      if (currentData) render(currentData);
     }
 
     async function init() {
       try {
-        const resp = await fetch(`./data/index.json?t=${Date.now()}`);
-        availableDates = await resp.json();
-        if (availableDates.length === 0) { showEmpty(); return; }
-        currentIdx = 0;
-        loadDate(availableDates[0]);
-      } catch (e) { showEmpty(); }
+        const r = await fetch(`./data/index.json?t=${Date.now()}`);
+        availableDates = await r.json();
+        if (!availableDates.length) { empty(); return; }
+        load(availableDates[0]);
+      } catch { empty(); }
     }
 
-    function navigate(dir) {
-      const n = currentIdx + dir;
+    function navigate(d) {
+      const n = currentIdx + d;
       if (n < 0 || n >= availableDates.length) return;
-      currentIdx = n;
-      loadDate(availableDates[n]);
+      currentIdx = n; load(availableDates[n]);
     }
 
     function updateNav() {
@@ -331,118 +359,102 @@
       document.getElementById('current-date').textContent = availableDates[currentIdx];
     }
 
-    async function loadDate(date) {
+    async function load(date) {
       updateNav();
-      document.getElementById('content').innerHTML =
-        `<div class="loading"><div class="spinner"></div><div>${LOADING_TEXT[lang]}</div></div>`;
+      document.getElementById('content').innerHTML = '<div class="loading"><div class="spinner"></div></div>';
       try {
-        const resp = await fetch(`./data/${date}.json?t=${Date.now()}`);
-        currentData = await resp.json();
-        renderDigest(currentData);
-      } catch (e) { showEmpty(); }
+        const r = await fetch(`./data/${date}.json?t=${Date.now()}`);
+        currentData = await r.json(); render(currentData);
+      } catch { empty(); }
     }
 
-    function showEmpty() {
-      document.getElementById('content').innerHTML =
-        '<div class="empty"><div style="font-size:2rem">📡</div><div>暂无数据</div></div>';
+    function empty() {
+      document.getElementById('content').innerHTML = '<div class="empty">暂无数据</div>';
     }
 
-    function renderDigest(data) {
-      let html = '';
+    function render(d) {
+      let h = '';
 
       // Briefing
-      const briefing = lang === 'zh' ? data.briefing_zh : data.briefing_en;
-      if (briefing) {
-        const paragraphs = briefing.split('\n\n').filter(Boolean);
-        html += `<div class="section">
-          <div class="section-header"><span>📋</span> ${lang === 'zh' ? '今日简报' : 'Daily Briefing'}</div>
-          <div class="briefing">${paragraphs.map(p => `<p>${esc(p)}</p>`).join('')}</div>
+      const brief = lang === 'zh' ? d.briefing_zh : d.briefing_en;
+      if (brief) {
+        const ps = brief.split('\n\n').filter(Boolean);
+        h += `<div class="section">
+          <div class="section-header">📋 ${lang === 'zh' ? '今日简报' : 'Daily Briefing'}</div>
+          <div class="briefing">${ps.map(p => `<p>${esc(p)}</p>`).join('')}</div>
         </div>`;
       }
 
       // Hot Analysis
-      const hotItems = lang === 'zh' ? (data.hot_analysis_zh || []) : (data.hot_analysis_en || []);
-      if (hotItems.length > 0) {
-        html += `<div class="section">
-          <div class="section-header"><span>🔍</span> ${lang === 'zh' ? '爆款拆解' : 'Why It Went Viral'}</div>`;
-        for (const item of hotItems) {
-          const paragraphs = item.content.split('\n\n').filter(Boolean);
-          html += `<div class="analysis-card">
+      const hot = lang === 'zh' ? (d.hot_analysis_zh || []) : (d.hot_analysis_en || []);
+      if (hot.length) {
+        h += `<div class="section">
+          <div class="section-header">🔍 ${lang === 'zh' ? '爆款拆解' : 'Why It Went Viral'}</div>`;
+        for (const item of hot) {
+          const ps = item.content.split('\n\n').filter(Boolean);
+          h += `<div class="analysis-card">
             <div class="analysis-title">${esc(item.title)}</div>
-            <div class="analysis-body">${paragraphs.map(p => `<p>${esc(p)}</p>`).join('')}</div>
+            <div class="analysis-body">${ps.map(p => `<p>${esc(p)}</p>`).join('')}</div>
           </div>`;
         }
-        html += '</div>';
+        h += '</div>';
       }
 
-      // HuggingFace papers
-      const hf = data.huggingface_papers || [];
-      if (hf.length) {
-        html += section('🤗', 'huggingface', hf.length, hf.map(p => {
-          const title = lang === 'zh' ? (p.title_zh || p.title) : p.title;
-          const tldr = lang === 'zh' ? (p.tldr_zh || p.tldr || '') : (p.tldr || '');
-          const meta = [p.upvotes ? `👍 ${p.upvotes}` : '', p.authors || ''].filter(Boolean).join(' · ');
-          return card(title, p.url, meta, tldr, p.summary, p.ai_keywords || []);
-        }).join(''));
-      }
+      // HuggingFace
+      const hf = d.huggingface_papers || [];
+      if (hf.length) h += section('🤗', 'huggingface', hf.length, hf.map(p =>
+        card(t(p,'title'), p.url, meta([p.upvotes ? `👍 ${p.upvotes}` : '', p.authors]),
+             t(p,'tldr'), '', p.ai_keywords || [], p.interest_tag)));
 
       // alphaxiv
-      const ax = data.alphaxiv_papers || [];
-      if (ax.length) {
-        html += section('🔬', 'alphaxiv', ax.length, ax.map(p => {
-          const title = lang === 'zh' ? (p.title_zh || p.title) : p.title;
-          const tldr = lang === 'zh' ? (p.tldr_zh || p.tldr || '') : (p.tldr || '');
-          const meta = p.arxiv_id || '';
-          return card(title, p.alphaxiv_url || p.url, meta, tldr, p.summary, []);
-        }).join(''));
-      }
+      const ax = d.alphaxiv_papers || [];
+      if (ax.length) h += section('🔬', 'alphaxiv', ax.length, ax.map(p =>
+        card(t(p,'title'), p.alphaxiv_url || p.url, meta([p.arxiv_id]),
+             t(p,'tldr'), '', [], p.interest_tag)));
 
       // GitHub
-      const gh = data.github_repos || [];
-      if (gh.length) {
-        html += section('⭐', 'github', gh.length, gh.map(r => {
-          const desc = lang === 'zh' ? (r.description_zh || r.description) : r.description;
-          const tldr = lang === 'zh' ? (r.tldr_zh || r.tldr || desc || '') : (r.tldr || r.description || '');
-          const meta = [r.language, r.stars !== undefined ? `⭐ ${r.stars}` : ''].filter(Boolean).join(' · ');
-          return card(r.name, r.url, meta, tldr, '', r.topics || []);
-        }).join(''));
-      }
+      const gh = d.github_repos || [];
+      if (gh.length) h += section('⭐', 'github', gh.length, gh.map(r =>
+        card(r.name, r.url, meta([r.language, r.stars != null ? `★ ${r.stars}` : '']),
+             t(r,'tldr') || t(r,'description'), '', r.topics || [], r.interest_tag)));
 
       // HN
-      const hn = data.hackernews || [];
-      if (hn.length) {
-        html += section('🔥', 'hackernews', hn.length, hn.map(h => {
-          const title = lang === 'zh' ? (h.title_zh || h.title) : h.title;
-          const tldr = lang === 'zh' ? (h.tldr_zh || h.tldr || '') : (h.tldr || '');
-          const meta = [h.points ? `${h.points} pts` : '', h.num_comments !== undefined ? `💬 ${h.num_comments}` : ''].filter(Boolean).join(' · ');
-          return card(title, h.url, meta, tldr, '', []);
-        }).join(''));
-      }
+      const hn = d.hackernews || [];
+      if (hn.length) h += section('🔥', 'hackernews', hn.length, hn.map(x =>
+        card(t(x,'title'), x.url, meta([x.points ? `${x.points} pts` : '', x.num_comments != null ? `💬 ${x.num_comments}` : '']),
+             t(x,'tldr'), '', [], null)));
 
-      document.getElementById('content').innerHTML = html || '<div class="empty">暂无数据</div>';
+      document.getElementById('content').innerHTML = h || '<div class="empty">暂无数据</div>';
     }
 
-    function section(icon, key, count, cardsHTML) {
-      const title = SECTION_TITLES[key]?.[lang] || key;
+    function t(obj, key) {
+      if (lang === 'zh') return obj[key + '_zh'] || obj[key] || '';
+      return obj[key] || '';
+    }
+
+    function meta(parts) { return parts.filter(Boolean).join(' · '); }
+
+    function section(icon, key, count, cards) {
+      const title = TITLES[key]?.[lang] || key;
       return `<div class="section">
-        <div class="section-header"><span>${icon}</span> ${esc(title)} <span class="count">(${count})</span></div>
-        ${cardsHTML}
+        <div class="section-header">${icon} ${esc(title)} <span class="count">${count}</span></div>
+        ${cards.join('')}
       </div>`;
     }
 
-    function card(title, url, meta, tldr, summary, tags) {
+    function card(title, url, metaStr, tldr, summary, tags, interestTag) {
       let h = `<div class="card">
         <div class="card-title"><a href="${esc(url)}" target="_blank" rel="noopener">${esc(title)}</a></div>`;
-      if (meta) h += `<div class="card-meta">${esc(meta)}</div>`;
+      if (metaStr) h += `<div class="card-meta">${esc(metaStr)}`;
+      if (interestTag) h += ` <span class="interest-tag">${esc(interestTag)}</span>`;
+      if (metaStr || interestTag) h += `</div>`;
       if (tldr) h += `<div class="card-tldr">${esc(tldr)}</div>`;
-      if (summary) h += `<div class="card-summary">${esc(trunc(summary, 300))}</div>`;
-      if (tags.length) h += `<div class="card-tags">${tags.slice(0, 5).map(t => `<span class="tag">${esc(t)}</span>`).join('')}</div>`;
+      if (tags.length) h += `<div class="card-tags">${tags.slice(0,5).map(x => `<span class="tag">${esc(x)}</span>`).join('')}</div>`;
       h += '</div>';
       return h;
     }
 
-    function esc(s) { return (s || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
-    function trunc(s, n) { return s && s.length > n ? s.substring(0, n) + '...' : (s || ''); }
+    function esc(s) { return (s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
 
     init();
   </script>
