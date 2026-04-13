@@ -200,6 +200,27 @@
     }
     .briefing p:last-child { margin-bottom: 0; }
 
+    .analysis-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--accent4);
+      border-radius: 8px;
+      padding: 1rem 1.1rem;
+      margin-bottom: 0.75rem;
+    }
+    .analysis-title {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--accent4);
+      margin-bottom: 0.6rem;
+    }
+    .analysis-body {
+      font-size: 0.85rem;
+      line-height: 1.75;
+    }
+    .analysis-body p { margin-bottom: 0.6rem; }
+    .analysis-body p:last-child { margin-bottom: 0; }
+
     .loading, .empty {
       text-align: center;
       padding: 3rem 1rem;
@@ -337,6 +358,21 @@
           <div class="section-header"><span>📋</span> ${lang === 'zh' ? '今日简报' : 'Daily Briefing'}</div>
           <div class="briefing">${paragraphs.map(p => `<p>${esc(p)}</p>`).join('')}</div>
         </div>`;
+      }
+
+      // Hot Analysis
+      const hotItems = lang === 'zh' ? (data.hot_analysis_zh || []) : (data.hot_analysis_en || []);
+      if (hotItems.length > 0) {
+        html += `<div class="section">
+          <div class="section-header"><span>🔍</span> ${lang === 'zh' ? '爆款拆解' : 'Why It Went Viral'}</div>`;
+        for (const item of hotItems) {
+          const paragraphs = item.content.split('\n\n').filter(Boolean);
+          html += `<div class="analysis-card">
+            <div class="analysis-title">${esc(item.title)}</div>
+            <div class="analysis-body">${paragraphs.map(p => `<p>${esc(p)}</p>`).join('')}</div>
+          </div>`;
+        }
+        html += '</div>';
       }
 
       // HuggingFace papers
