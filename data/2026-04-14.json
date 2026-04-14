@@ -1,0 +1,226 @@
+{
+  "date": "2026-04-14",
+  "generated_at": "2026-04-14T01:05:58.452965+00:00",
+  "briefing_zh": "今天 AI 研究领域的主题围绕 **Agent 系统的工程化与可靠性** 展开。HuggingFace 上 **AgentSwing** 提出了自适应并行上下文管理路由方案，直击长时序 Web Agent 的上下文窗口瓶颈——这是当前所有 Agent 框架面临的核心挑战之一。与之呼应的是 alphaxiv 上 **Externalization in LLM Agents** 论文，提出将认知负担外化到持久化外部结构（记忆、技能、协议）中，构建 \"harness engineering\" 范式，这与当前 Hermes Agent 等框架的 skill 机制不谋而合。\n\n开源社区方面，**Hermes Agent 生态** 持续爆发。GitHub 上 **hermes-agent-orange-book**（橙皮书）一周内狂揽 2285 星，成为 Hermes 入门首选；**fireworks-tech-graph** 以 2025 星紧随其后，展示了 Claude Code skill 生成 SVG/PNG 技术图表的能力。**hermes-hudui** 提供了 Web UI 意识监控面板，**hermes-control-interface** 则是自托管的 Agent 管理仪表盘——这些工具共同构成了一个日趋成熟的 Agent 基础设施生态。\n\nBenchmark 领域值得关注的是 **ClawBench**（153 个写入密集型任务覆盖 144 个生产网站）揭示了前沿 AI 模型仅 0.7%-33.3% 的成功率，与 Berkeley 团队在 Hacker News 上引发 574 分热议的 \"Exploiting the most prominent AI agent benchmarks\" 文章形成有趣对照——当前 Agent 基准测试正面临信任危机。同时 **Neural Computers**（Meta AI + KAUST）以 3454 浏览量登顶 alphaxiv，提出将计算、内存和 I/O 全部内化到神经模型运行时状态中的新范式，预示着 AI 系统架构的根本性变革。",
+  "briefing_en": "Today's AI research landscape centers on **Agent system engineering and reliability**. On HuggingFace, **AgentSwing** proposes adaptive parallel context management routing for long-horizon web agents, directly addressing the context window bottleneck that plagues all current agent frameworks. This resonates with **Externalization in LLM Agents** on alphaxiv, which advocates relocating cognitive burdens to persistent external structures (memory, skills, protocols) through \"harness engineering\" — a paradigm strikingly aligned with skill-based frameworks like Hermes Agent.\n\nThe open-source community sees a **Hermes Agent ecosystem explosion**. On GitHub, **hermes-agent-orange-book** amassed 2,285 stars in one week as the go-to Hermes tutorial; **fireworks-tech-graph** follows with 2,025 stars showcasing Claude Code skills for SVG/PNG diagram generation. **hermes-hudui** offers a web UI consciousness monitor, while **hermes-control-interface** provides a self-hosted agent management dashboard — together forming a maturing agent infrastructure ecosystem.\n\nIn benchmarks, **ClawBench** (153 write-heavy tasks across 144 production websites) reveals frontier AI models achieving only 0.7%–33.3% success rates, creating an interesting contrast with Berkeley's \"Exploiting the most prominent AI agent benchmarks\" post that sparked 574-point discussion on HN — agent benchmarks are facing a trust crisis. Meanwhile, **Neural Computers** (Meta AI + KAUST) tops alphaxiv with 3,454 views, proposing a paradigm where computation, memory, and I/O are fully internalized within neural model runtime state, signaling fundamental shifts in AI system architecture.",
+  "viral_analysis_zh": "今天最可能火的是 **hermes-agent-orange-book**（2285⭐），它精准切中了 \"新框架学习门槛高\" 的痛点，以 \"橙皮书\" 这个亲切的中文标题降低了认知门槛，中英双语覆盖也扩大了受众。Berkeley 的 Agent benchmark 批判文章（574 分）则利用了 \"打假\" 叙事——揭露大家在用的基准测试都有漏洞，天然具有传播性。这两个案例说明：降低入门门槛的教程型内容和挑战权威的批判型内容，是当前 AI 社区最容易引发共鸣的两类内容形式。",
+  "viral_analysis_en": "The most viral item today is **hermes-agent-orange-book** (2,285⭐), which nails the pain point of \"high learning curves for new frameworks\" with an approachable Chinese title (\"Orange Book\") that lowers cognitive barriers, plus bilingual coverage for broader reach. Berkeley's agent benchmark critique (574 pts on HN) leverages the \"debunking\" narrative — exposing flaws in benchmarks everyone uses is inherently shareable. These two cases demonstrate that tutorial content lowering entry barriers and critical content challenging authority are the two content types that resonate most in the current AI community.",
+  "huggingface_papers": [
+    {
+      "title": "AgentSwing: Adaptive Parallel Context Management Routing for Long-Horizon Web Agents",
+      "url": "https://arxiv.org/abs/2603.27490",
+      "tldr": "AgentSwing introduces an adaptive parallel context management routing mechanism for long-horizon web agents. It dynamically allocates context budget across multiple parallel branches, enabling agents to maintain relevant information over extended interaction sequences. The approach significantly outperforms static context management baselines on complex web navigation tasks.",
+      "tldr_zh": "AgentSwing 提出了面向长时序 Web Agent 的自适应并行上下文管理路由机制。它在多个并行分支间动态分配上下文预算，使 Agent 能在长交互序列中保持相关信息。该方法在复杂 Web 导航任务上显著超越静态上下文管理基线。",
+      "upvotes": 0,
+      "authors": "Zhaopeng Feng, Liangcai Su, Zhen Zhang et al.",
+      "ai_keywords": [
+        "context management",
+        "web agent",
+        "long-horizon",
+        "parallel routing"
+      ],
+      "interest_tag": "CUA"
+    },
+    {
+      "title": "Multi-User Large Language Model Agents",
+      "url": "https://arxiv.org/abs/2604.08567",
+      "tldr": "This paper addresses a critical gap in LLM agent design: handling multiple users with potentially conflicting goals. It formalizes multi-user agent scenarios, proposes preference aggregation mechanisms inspired by social choice theory, and demonstrates that naive single-user optimization leads to significant fairness failures in multi-stakeholder settings.",
+      "tldr_zh": "本文解决了 LLM Agent 设计中的一个关键空白：如何处理多个目标可能冲突的用户。论文形式化了多用户 Agent 场景，提出了受社会选择理论启发的偏好聚合机制，并证明了朴素的单用户优化在多利益相关方环境中会导致严重的公平性失败。",
+      "upvotes": 0,
+      "authors": "Shu Yang, Shenzhe Zhu, Hao Zhu et al.",
+      "ai_keywords": [
+        "multi-user",
+        "LLM agents",
+        "social choice",
+        "preference aggregation"
+      ],
+      "interest_tag": "Agent Swarm"
+    },
+    {
+      "title": "Matrix-Game 3.0: Real-Time and Streaming Interactive World Model with Long-Horizon Memory",
+      "url": "https://arxiv.org/abs/2604.08995",
+      "tldr": "Matrix-Game 3.0 achieves real-time 720p interactive video generation with minute-long spatiotemporal consistency. It introduces camera-aware long-horizon memory and error-aware modeling to maintain coherence over extended sequences, scaling to 28B parameters while enabling streaming inference for world simulation.",
+      "tldr_zh": "Matrix-Game 3.0 实现了实时 720p 交互式视频生成，具备分钟级时空一致性。它引入了相机感知的长时记忆和错误感知建模来维持长序列的连贯性，扩展到 280 亿参数，同时支持流式推理用于世界模拟。",
+      "upvotes": 0,
+      "authors": "Zile Wang, Zexiang Liu, Jaixing Li et al.",
+      "ai_keywords": [
+        "world model",
+        "video generation",
+        "real-time",
+        "long-horizon memory"
+      ],
+      "interest_tag": "Memory"
+    },
+    {
+      "title": "Robust Reasoning Benchmark",
+      "url": "https://arxiv.org/abs/2604.08571",
+      "tldr": "This benchmark exposes how LLM reasoning is heavily overfit to standard text formatting. By introducing surface-level perturbations (notation changes, layout shifts) to math problems, it reveals dramatic performance drops in frontier models, demonstrating that high benchmark scores don't necessarily reflect genuine reasoning capability.",
+      "tldr_zh": "该基准揭示了 LLM 推理对标准文本格式的严重过拟合。通过对数学题引入表面级扰动（符号变化、布局调整），发现前沿模型性能大幅下降，表明高基准分数并不一定反映真正的推理能力。",
+      "upvotes": 0,
+      "authors": "Pavel Golikov, Evgenii Opryshko, Gennady Pekhimenko et al.",
+      "ai_keywords": [
+        "benchmark",
+        "reasoning",
+        "robustness",
+        "LLM evaluation"
+      ],
+      "interest_tag": "Benchmark"
+    },
+    {
+      "title": "p1: Better Prompt Optimization with Fewer Prompts",
+      "url": "https://arxiv.org/abs/2604.08801",
+      "tldr": "p1 studies what makes prompt optimization effective and finds that task-specific properties determine amenability to prompt tuning. It proposes a principled framework for efficient prompt search that achieves comparable or better results with significantly fewer candidate evaluations, making prompt optimization more practical for real-world deployment.",
+      "tldr_zh": "p1 研究了什么因素使提示词优化有效，发现任务特定属性决定了提示调优的适用性。它提出了一个原则性的高效提示搜索框架，用显著更少的候选评估达到了相当或更好的结果，使提示优化在实际部署中更加实用。",
+      "upvotes": 0,
+      "authors": "Zhaolin Gao, Yu, Wang et al.",
+      "ai_keywords": [
+        "prompt optimization",
+        "efficiency",
+        "system prompt",
+        "LLM"
+      ],
+      "interest_tag": ""
+    }
+  ],
+  "alphaxiv_papers": [
+    {
+      "title": "Neural Computers",
+      "arxiv_id": "2604.06425",
+      "url": "https://arxiv.org/abs/2604.06425",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2604.06425",
+      "tldr": "Neural Computers propose a new computing paradigm where the neural model internalizes computation, memory, and I/O within a learned runtime state. Prototype NCs can generate high-fidelity terminal screens and control GUI interactions from user I/O traces, suggesting a path toward fully neural operating systems. Most-viewed paper on alphaxiv with 3,454 views.",
+      "tldr_zh": "Neural Computers 提出了一种新计算范式，神经模型将计算、内存和 I/O 全部内化到学习到的运行时状态中。原型 NC 可以从用户 I/O 轨迹生成高保真终端屏幕并控制 GUI 交互，暗示了通向全神经操作系统的路径。该论文以 3454 浏览量登顶 alphaxiv。",
+      "interest_tag": "CUA"
+    },
+    {
+      "title": "Externalization in LLM Agents",
+      "arxiv_id": "2604.08224",
+      "url": "https://arxiv.org/abs/2604.08224",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2604.08224",
+      "tldr": "Proposes 'externalization' as a unifying principle for LLM agent reliability — relocating cognitive burdens to persistent external structures (memory, skills, protocols). The 'harness engineering' framework transforms complex tasks into tractable problems by offloading state management, a paradigm already proven in production agent systems.",
+      "tldr_zh": "提出「外化」作为 LLM Agent 可靠性的统一原则——将认知负担转移到持久化外部结构（记忆、技能、协议）中。「harness engineering」框架通过卸载状态管理将复杂任务转化为可处理问题，这一范式已在生产 Agent 系统中得到验证。",
+      "interest_tag": "Memory"
+    },
+    {
+      "title": "ClawBench",
+      "arxiv_id": "2604.08523",
+      "url": "https://arxiv.org/abs/2604.08523",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2604.08523",
+      "tldr": "ClawBench introduces 153 write-heavy tasks across 144 live production websites with safe interception mechanisms and five-layer recording infrastructure. Frontier AI models achieve only 0.7%–33.3% success rates, exposing a massive gap between current agent capabilities and real-world web interaction demands.",
+      "tldr_zh": "ClawBench 在 144 个生产网站上设计了 153 个写入密集型任务，配备安全拦截机制和五层录制基础设施。前沿 AI 模型仅达到 0.7%-33.3% 的成功率，暴露了当前 Agent 能力与实际 Web 交互需求之间的巨大差距。",
+      "interest_tag": "Benchmark"
+    },
+    {
+      "title": "SkillClaw",
+      "arxiv_id": "2604.08377",
+      "url": "https://arxiv.org/abs/2604.08377",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2604.08377",
+      "tldr": "SkillClaw enables LLM agent skills to continuously evolve through collective cross-user interaction. An autonomous 'agentic evolver' refines, creates, and updates skills automatically, achieving +42.1% average improvement in validation experiments. This represents a shift from static skill libraries to living, self-improving knowledge systems.",
+      "tldr_zh": "SkillClaw 使 LLM Agent 技能能够通过跨用户集体交互持续进化。自主「智能进化器」自动精炼、创建和更新技能，在验证实验中平均提升 42.1%。这代表了从静态技能库向活的、自我改进知识系统的转变。",
+      "interest_tag": "Agent Swarm"
+    },
+    {
+      "title": "PaperOrchestra",
+      "arxiv_id": "2604.05018",
+      "url": "https://arxiv.org/abs/2604.05018",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2604.05018",
+      "tldr": "Google's PaperOrchestra is a multi-agent framework that converts unstructured pre-writing materials into submission-ready AI research papers with deep literature reviews and diverse visuals. Achieves simulated acceptance rates of 84% (CVPR) and 81% (ICLR), significantly outperforming existing automated paper writing baselines.",
+      "tldr_zh": "Google 的 PaperOrchestra 是一个多 Agent 框架，将非结构化预写材料转化为可投稿的 AI 研究论文，包含深度文献综述和多样化视觉内容。模拟录用率达 CVPR 84%、ICLR 81%，显著超越现有自动化论文写作基线。",
+      "interest_tag": "Agent Swarm"
+    }
+  ],
+  "github_repos": [
+    {
+      "name": "alchaincyf/hermes-agent-orange-book",
+      "url": "https://github.com/alchaincyf/hermes-agent-orange-book",
+      "tldr": "Comprehensive Chinese tutorial series ('Orange Book') for Hermes Agent by Nous Research. Covers everything from setup to advanced skill development, making it the go-to resource for Chinese-speaking developers entering the Hermes ecosystem. Hit 2,285 stars in just one week.",
+      "tldr_zh": "Hermes Agent 中文实战教程系列（橙皮书），覆盖从入门到高级技能开发的全流程，已成为中文开发者进入 Hermes 生态的首选资源。一周内获得 2285 星。",
+      "stars": 2285,
+      "language": "Markdown",
+      "interest_tag": ""
+    },
+    {
+      "name": "yizhiyanhua-ai/fireworks-tech-graph",
+      "url": "https://github.com/yizhiyanhua-ai/fireworks-tech-graph",
+      "tldr": "Claude Code skill for generating production-quality SVG+PNG technical diagrams. Supports 8 diagram types (flowcharts, architecture, sequence, etc.) and 5 visual styles with deep AI/Agent domain knowledge. Demonstrates the growing 'skill economy' around coding agents.",
+      "tldr_zh": "Claude Code 技能包，用于生成生产级 SVG+PNG 技术图表。支持 8 种图表类型（流程图、架构图、时序图等）和 5 种视觉风格，内置深度 AI/Agent 领域知识。展示了编码 Agent 周围日益增长的「技能经济」。",
+      "stars": 2025,
+      "language": "Python",
+      "interest_tag": ""
+    },
+    {
+      "name": "Xiangyue-Zhang/auto-deep-researcher-24x7",
+      "url": "https://github.com/Xiangyue-Zhang/auto-deep-researcher-24x7",
+      "tldr": "Autonomous AI agent that runs deep learning experiments 24/7 unattended. Uses a Leader-Worker architecture with constant-size memory and zero-cost monitoring. Automates hyperparameter tuning, experiment tracking, and GPU management — designed for researchers who want to maximize GPU utilization while sleeping.",
+      "tldr_zh": "自主 AI Agent，可 24/7 无人值守运行深度学习实验。采用 Leader-Worker 架构，具有恒定大小内存和零成本监控。自动化超参数调优、实验追踪和 GPU 管理——为想在睡觉时最大化 GPU 利用率的研究者设计。",
+      "stars": 387,
+      "language": "Python",
+      "interest_tag": "Agent Swarm"
+    },
+    {
+      "name": "h4ckf0r0day/obscura",
+      "url": "https://github.com/h4ckf0r0day/obscura",
+      "tldr": "Headless browser built specifically for AI agents and web scraping, written in Rust. Designed for stealth and performance in automated web interaction scenarios. Created just yesterday and already at 105 stars, indicating strong demand for agent-native browser infrastructure.",
+      "tldr_zh": "专为 AI Agent 和网页抓取构建的无头浏览器，使用 Rust 编写。针对自动化 Web 交互场景优化隐蔽性和性能。昨天刚创建已达 105 星，表明 Agent 原生浏览器基础设施需求旺盛。",
+      "stars": 105,
+      "language": "Rust",
+      "interest_tag": "CUA"
+    },
+    {
+      "name": "joeynyc/hermes-hudui",
+      "url": "https://github.com/joeynyc/hermes-hudui",
+      "tldr": "Web UI consciousness monitor for Hermes Agent. Provides a visual dashboard to observe agent state, memory, active sessions, and decision-making processes in real-time. Part of the growing Hermes ecosystem tooling that makes agent operation more transparent and debuggable.",
+      "tldr_zh": "Hermes Agent 的 Web UI 意识监控面板。提供可视化仪表盘，实时观察 Agent 状态、记忆、活跃会话和决策过程。属于不断增长的 Hermes 生态工具链的一部分，使 Agent 运行更透明、更可调试。",
+      "stars": 830,
+      "language": "Python",
+      "interest_tag": ""
+    }
+  ],
+  "hackernews": [
+    {
+      "title": "Exploiting the most prominent AI agent benchmarks",
+      "url": "https://rdi.berkeley.edu/blog/trustworthy-benchmarks-cont/",
+      "tldr": "Berkeley researchers systematically exploit major AI agent benchmarks, demonstrating that current evaluation frameworks have critical vulnerabilities. The post reveals specific attack vectors and manipulation techniques, arguing that the field's reliance on flawed benchmarks is creating a false sense of progress in agent capabilities.",
+      "tldr_zh": "Berkeley 研究人员系统性地攻破了主要 AI Agent 基准测试，证明当前评估框架存在关键漏洞。文章揭示了具体的攻击向量和操纵技术，认为该领域对有缺陷基准的依赖正在制造 Agent 能力进步的虚假感。",
+      "points": 574,
+      "num_comments": 137,
+      "interest_tag": "Benchmark"
+    },
+    {
+      "title": "Show HN: CSS Studio. Design by hand, code by agent",
+      "url": "https://cssstudio.ai",
+      "tldr": "CSS Studio combines manual visual design with AI agent-powered code generation. Users design interfaces visually while an AI agent translates designs into clean CSS code in real-time. Represents the 'human-in-the-loop + agent' workflow pattern gaining traction in creative tools.",
+      "tldr_zh": "CSS Studio 将手动视觉设计与 AI Agent 驱动的代码生成相结合。用户进行可视化界面设计，AI Agent 实时将设计转化为干净的 CSS 代码。代表了在创意工具中日益流行的「人在环 + Agent」工作流模式。",
+      "points": 172,
+      "num_comments": 107,
+      "interest_tag": ""
+    },
+    {
+      "title": "(AMD) Build AI Agents That Run Locally",
+      "url": "https://amd-gaia.ai/docs",
+      "tldr": "AMD launches Gaia, a framework for building AI agents that run entirely on local AMD hardware. Positioned as a privacy-first, zero-cloud alternative for agent deployment. Signals AMD's strategic push into the AI agent infrastructure layer, competing with NVIDIA's agent ecosystem.",
+      "tldr_zh": "AMD 推出 Gaia，一个在本地 AMD 硬件上完全运行 AI Agent 的框架。定位为隐私优先、零云端的 Agent 部署替代方案。标志着 AMD 向 AI Agent 基础设施层的战略推进，与 NVIDIA 的 Agent 生态竞争。",
+      "points": 92,
+      "num_comments": 20,
+      "interest_tag": ""
+    },
+    {
+      "title": "Launch HN: Twill.ai (YC S25) – Delegate to cloud agents, get back PRs",
+      "url": "https://twill.ai",
+      "tldr": "YC S25 startup Twill.ai lets developers delegate coding tasks to cloud-hosted AI agents that return pull requests. Agents work in isolated cloud environments, handle full development workflows, and submit code changes for human review — a 'delegation-first' model for AI-assisted development.",
+      "tldr_zh": "YC S25 创业公司 Twill.ai 让开发者将编码任务委托给云端 AI Agent，Agent 返回 Pull Request。Agent 在隔离的云环境中工作，处理完整开发工作流，并提交代码变更供人工审查——一种「委托优先」的 AI 辅助开发模式。",
+      "points": 77,
+      "num_comments": 94,
+      "interest_tag": ""
+    },
+    {
+      "title": "Show HN: TUI-use: Let AI agents control interactive terminal programs",
+      "url": "https://github.com/onesuper/tui-use",
+      "tldr": "TUI-use enables AI agents to control interactive terminal programs (vim, top, htop, etc.) by providing a bridge between agent APIs and TUI applications. Fills a critical gap in agent tooling where most terminal integrations only support non-interactive commands.",
+      "tldr_zh": "TUI-use 让 AI Agent 能够控制交互式终端程序（vim、top、htop 等），在 Agent API 和 TUI 应用之间搭建桥梁。填补了 Agent 工具链中的关键空白——大多数终端集成仅支持非交互式命令。",
+      "points": 52,
+      "num_comments": 37,
+      "interest_tag": "CUA"
+    }
+  ]
+}
