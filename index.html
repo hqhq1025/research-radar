@@ -431,15 +431,23 @@
         </div>`;
       }
 
-      // Hot Analysis
-      const hot = lang === 'zh' ? (d.hot_analysis_zh || []) : (d.hot_analysis_en || []);
-      if (hot.length) {
+      // Hot Analysis — supports both string (viral_analysis_*) and array (hot_analysis_*) formats
+      const hotArr = lang === 'zh' ? (d.hot_analysis_zh || []) : (d.hot_analysis_en || []);
+      const hotStr = t(d, 'viral_analysis');
+      if (hotArr.length || hotStr) {
         h += `<div class="section">
           <div class="section-header">🔍 ${lang === 'zh' ? '爆款拆解' : 'Why It Went Viral'}</div>`;
-        for (const item of hot) {
-          const ps = item.content.split('\n\n').filter(Boolean);
+        if (hotArr.length) {
+          for (const item of hotArr) {
+            const ps = item.content.split('\n\n').filter(Boolean);
+            h += `<div class="analysis-card">
+              <div class="analysis-title">${esc(item.title)}</div>
+              <div class="analysis-body">${ps.map(p => `<p>${md(p)}</p>`).join('')}</div>
+            </div>`;
+          }
+        } else if (hotStr) {
+          const ps = hotStr.split('\n\n').filter(Boolean);
           h += `<div class="analysis-card">
-            <div class="analysis-title">${esc(item.title)}</div>
             <div class="analysis-body">${ps.map(p => `<p>${md(p)}</p>`).join('')}</div>
           </div>`;
         }

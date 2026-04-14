@@ -24,7 +24,7 @@
       "upvotes": 68,
       "authors": "",
       "ai_keywords": [],
-      "interest_tag": "Benchmark"
+      "interest_tag": ""
     },
     {
       "title": "RefineAnything: Multimodal Region-Specific Refinement for Perfect Local Details",
@@ -54,7 +54,7 @@
       "upvotes": 23,
       "authors": "Skywork AI",
       "ai_keywords": [],
-      "interest_tag": "Memory"
+      "interest_tag": ""
     }
   ],
   "alphaxiv_papers": [

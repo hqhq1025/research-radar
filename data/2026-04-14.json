@@ -49,7 +49,7 @@
         "real-time",
         "long-horizon memory"
       ],
-      "interest_tag": "Memory"
+      "interest_tag": ""
     },
     {
       "title": "Robust Reasoning Benchmark",
@@ -64,7 +64,7 @@
         "robustness",
         "LLM evaluation"
       ],
-      "interest_tag": "Benchmark"
+      "interest_tag": ""
     },
     {
       "title": "p1: Better Prompt Optimization with Fewer Prompts",
