@@ -1,0 +1,221 @@
+{
+  "date": "2026-04-15",
+  "generated_at": "2026-04-15T01:06:42.472214+00:00",
+  "briefing_zh": "今天的 AI 研究聚焦在 Agent 能力评测和训练方法的突破上。**CocoaBench** 提出了一个面向「统一数字 Agent」的长程任务评测基准，首次要求 Agent 在真实环境中同时组合软件工程、深度研究和 GUI 操作等多种能力，而非孤立测试——这标志着 Agent 评测进入了新阶段。与此同时，HN 热榜上 Berkeley 的研究团队发表了一篇关于「**利用主流 AI Agent 基准测试漏洞**」的重磅分析，揭示当前 benchmark 的系统性缺陷，引发社区热议（581 分）。\n\n在 Agent 训练和推理扩展方面，**Agentic Aggregation** 提出了一种面向长程 Agent 任务的并行推理扩展方法，通过聚合多个 rollout 的轨迹信息来提升深度研究和搜索等任务的表现。**TRACE** 则提出「能力靶向」的 Agent 训练方法，精准定位模型在目标环境中的能力短板进行定向强化，而非盲目训练。**From Reasoning to Agentic** 对 RL 中的信用分配问题做了系统综述，从单轮推理到多轮 Agent 交互，梳理了信用分配的关键挑战。\n\nGitHub 方面，**fireworks-tech-graph** 以 2400+ stars 领跑本周新项目，这是一个面向技术图表生成的 Claude Code skill；**hermes-hudui** 为 Hermes Agent 构建了 Web 意识监控界面（881 stars）。值得关注的是，Agent 工具生态持续活跃：从面向金融的 **LangAlpha** 到记忆数据库 **yantrikdb**，再到 Agent 凭证管理 **Kontext CLI**，开发者正在解决 Agent 落地的各种基础设施问题。",
+  "briefing_en": "Today's AI research landscape centers on **agent evaluation methodology** and **training breakthroughs**. **CocoaBench** introduces a benchmark for unified digital agents, requiring them to combine software engineering, deep research, and GUI automation capabilities in long-horizon real-world tasks — marking a new phase in agent evaluation that moves beyond isolated capability testing. Meanwhile, Berkeley's explosive blog post on **exploiting prominent AI agent benchmarks** (581 points on HN) exposes systematic vulnerabilities in current benchmarks, triggering intense community debate about evaluation integrity.\n\nOn the training and inference scaling front, **Agentic Aggregation** from Princeton proposes parallel test-time scaling for long-horizon agentic tasks like deep research, intelligently aggregating trajectory information from multiple rollouts rather than just final answers. **TRACE** introduces capability-targeted agentic training that identifies and addresses specific capability deficits in target environments. **From Reasoning to Agentic** provides a comprehensive survey of credit assignment in RL for LLMs, bridging the gap between single-turn reasoning and multi-turn agent interaction.\n\nOn GitHub, **fireworks-tech-graph** leads the week with 2,400+ stars as a Claude Code skill for SVG/PNG diagram generation. The agent tooling ecosystem continues to mature: **LangAlpha** brings Claude Code-style interfaces to Wall Street, **yantrikdb** tackles memory management with forgetting and consolidation, and **Kontext CLI** solves the credential brokering problem for AI coding agents.",
+  "viral_analysis_zh": "今天最具传播力的是 Berkeley 发布的「利用主流 AI Agent 基准测试漏洞」博文（HN 581 分），因为它击中了社区的核心焦虑——我们用来衡量 Agent 进步的标尺本身可能有问题。标题直接用了 \"Exploiting\" 这个刺激性动词，配合顶级学术机构背书，完美制造了「权威打脸」的传播势能。**fireworks-tech-graph**（2428 stars）的爆火则展示了 Agent Skill 生态的红利窗口——把专业能力封装成可复用 skill 包，降低使用门槛，这一模式可能催生大量类似项目。",
+  "viral_analysis_en": "The most viral item today is Berkeley's blog post on exploiting AI agent benchmarks (581 HN points), hitting a nerve in the community's core anxiety — the very yardsticks measuring agent progress may be flawed. The provocative \"Exploiting\" in the title, backed by a top institution, creates perfect \"authority debunking\" virality. **fireworks-tech-graph** (2,428 stars) demonstrates the early-mover advantage in the agent skill ecosystem — packaging professional capabilities into reusable skills that lower adoption barriers, a pattern likely to spawn many imitators.",
+  "huggingface_papers": [
+    {
+      "title": "CocoaBench: Evaluating Unified Digital Agents in the Wild",
+      "url": "https://arxiv.org/abs/2604.11201",
+      "tldr": "CocoaBench is a new benchmark for unified digital agents that tests long-horizon tasks requiring combined capabilities (SWE, research, GUI automation) in real-world settings. Unlike isolated benchmarks, it evaluates whether agents can orchestrate multiple skills to complete complex, human-designed tasks — exposing the gap between strong single-capability performance and actual integrated agent competence.",
+      "tldr_zh": "CocoaBench 是一个面向「统一数字 Agent」的全新评测基准，测试需要组合多种能力（软件工程、深度研究、GUI 自动化）的长程真实任务。不同于孤立测试单一能力的传统 benchmark，它评估 Agent 能否协调多种技能完成复杂任务——暴露了单项能力强但综合能力不足的差距。",
+      "upvotes": 0,
+      "authors": "CocoaBench Team, Shibo Hao, Zhining Zhang",
+      "ai_keywords": [
+        "agent-benchmark",
+        "unified-agent",
+        "long-horizon"
+      ],
+      "interest_tag": "Benchmark"
+    },
+    {
+      "title": "Agentic Aggregation for Parallel Scaling of Long-Horizon Agentic Tasks",
+      "url": "https://arxiv.org/abs/2604.11753",
+      "tldr": "This paper tackles parallel test-time scaling for long-horizon agentic tasks (deep research, agentic search). Instead of just aggregating final answers from multiple rollouts, it proposes methods to leverage the rich trajectory information from multi-turn, tool-augmented interactions. This enables effective scaling of compute for open-ended agent tasks where simple majority voting fails.",
+      "tldr_zh": "本文解决长程 Agent 任务（深度研究、Agent 搜索）的并行推理扩展问题。不同于简单聚合多个 rollout 的最终答案，提出了利用多轮工具交互中丰富轨迹信息的方法，使开放式 Agent 任务能有效利用更多计算资源——在简单多数投票失效的场景下实现了推理时的有效扩展。",
+      "upvotes": 0,
+      "authors": "Yoonsang Lee, Howard Yen, Xi Ye, Danqi Chen",
+      "ai_keywords": [
+        "parallel-scaling",
+        "test-time-compute",
+        "agentic-tasks"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "Mobile GUI Agent Privacy Personalization with Trajectory Induced Preference Optimization",
+      "url": "https://arxiv.org/abs/2604.11259",
+      "tldr": "First work addressing privacy personalization in mobile GUI agents. The paper observes that user privacy preferences create systematic structural differences in execution trajectories — privacy-first users prefer protective actions. It proposes trajectory-induced preference optimization (TIPO) to train agents that respect individual privacy preferences while maintaining task completion.",
+      "tldr_zh": "首个研究移动 GUI Agent 隐私个性化的工作。论文发现用户隐私偏好会导致执行轨迹的系统性结构差异——注重隐私的用户倾向保护性操作。提出了基于轨迹的偏好优化方法（TIPO），训练出既能尊重用户隐私偏好又能完成任务的 Agent。",
+      "upvotes": 0,
+      "authors": "Zhixin Lin, Jungang Li, Dongliang Xu, Shidong Pan, Yibo Shi",
+      "ai_keywords": [
+        "gui-agent",
+        "privacy",
+        "preference-optimization"
+      ],
+      "interest_tag": "CUA"
+    },
+    {
+      "title": "Time is Not a Label: Continuous Phase Rotation for Temporal Knowledge Graphs and Agentic Memory",
+      "url": "https://arxiv.org/abs/2604.11544",
+      "tldr": "Introduces RoMem, a drop-in temporal knowledge graph module for agent memory that uses continuous phase rotation instead of discrete timestamps. Unlike existing approaches that sort by recency (burying old-but-permanent knowledge) or require expensive LLM calls for every ingestion, RoMem distinguishes persistent facts from evolving ones automatically — a key capability for long-lived autonomous agents.",
+      "tldr_zh": "提出 RoMem，一种面向 Agent 记忆的即插即用时序知识图谱模块，使用连续相位旋转替代离散时间戳。不同于现有方法按时间排序（会埋没旧但永久的知识）或每次写入都调用 LLM，RoMem 能自动区分持久事实和演变中的信息——这是长期运行的自主 Agent 的关键能力。",
+      "upvotes": 0,
+      "authors": "Weixian Waylon Li, Jiaxin Zhang, Xianan Jim Yang, Tiejun Ma, Yiwen Guo",
+      "ai_keywords": [
+        "knowledge-graph",
+        "temporal-reasoning",
+        "agent-memory"
+      ],
+      "interest_tag": "Memory"
+    },
+    {
+      "title": "From Reasoning to Agentic: Credit Assignment in Reinforcement Learning for Large Language Models",
+      "url": "https://arxiv.org/abs/2604.09459",
+      "tldr": "Comprehensive survey bridging credit assignment in reasoning RL (distributing credit across tokens in a single chain-of-thought) and agentic RL (multi-turn environment interaction with stochastic transitions). Identifies key challenges unique to agent RL: partial observability, delayed rewards across tool calls, and the compounding effect of early errors in long trajectories.",
+      "tldr_zh": "系统综述，连接推理 RL（在单次思维链中跨 token 分配信用）和 Agent RL（多轮环境交互中的随机转换）的信用分配问题。识别了 Agent RL 特有的关键挑战：部分可观测性、跨工具调用的延迟奖励、以及长轨迹中早期错误的累积效应。",
+      "upvotes": 0,
+      "authors": "Chenchen Zhang",
+      "ai_keywords": [
+        "credit-assignment",
+        "reinforcement-learning",
+        "agentic-rl"
+      ],
+      "interest_tag": ""
+    }
+  ],
+  "alphaxiv_papers": [
+    {
+      "title": "ClawBench: AI Agents on Real Web Tasks",
+      "arxiv_id": "2604.08523",
+      "url": "https://arxiv.org/abs/2604.08523",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2604.08523",
+      "tldr": "ClawBench evaluates AI agents on 153 write-heavy tasks across 144 live production websites with a safe interception mechanism. Frontier models achieve only 0.7%–33.3% success rates, dramatically lower than scores on traditional benchmarks — revealing that current agents still struggle with real-world web interactions that require writing, form submission, and complex multi-step operations.",
+      "tldr_zh": "ClawBench 在 144 个生产环境网站上用 153 个「写操作为主」的任务评测 AI Agent，配有安全拦截机制。前沿模型成功率仅 0.7%–33.3%，远低于传统 benchmark 得分——揭示当前 Agent 在需要写入、表单提交和复杂多步操作的真实网页交互中仍然力不从心。",
+      "interest_tag": "CUA"
+    },
+    {
+      "title": "SkillClaw: Evolving LLM Agent Skills Collectively",
+      "arxiv_id": "2604.08377",
+      "url": "https://arxiv.org/abs/2604.08377",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2604.08377",
+      "tldr": "SkillClaw is an autonomous 'agentic evolver' that refines, creates, and updates agent skills from cross-user interactions. Unlike static skill libraries, it continuously improves through collective usage patterns, achieving +42.1% average improvement in validation experiments. This represents a step toward self-improving agent ecosystems.",
+      "tldr_zh": "SkillClaw 是一个自主「Agent 进化器」，通过跨用户交互来精炼、创建和更新 Agent 技能。不同于静态技能库，它通过集体使用模式持续改进，在验证实验中取得了平均 +42.1% 的提升。这代表了向自我改进 Agent 生态系统迈出的一步。",
+      "interest_tag": ""
+    },
+    {
+      "title": "Neural Computers: New Computing Paradigm",
+      "arxiv_id": "2604.06425",
+      "url": "https://arxiv.org/abs/2604.06425",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2604.06425",
+      "tldr": "Meta AI and KAUST propose Neural Computers — a paradigm where neural models internalize computation, memory, and I/O within a learned runtime state. The system learns to generate high-fidelity terminal screens and control GUI interactions, effectively creating a 'neural operating system'. With 3,454 views and 2,529 GitHub stars, it's one of the most-watched papers this week.",
+      "tldr_zh": "Meta AI 和 KAUST 提出 Neural Computers——一种神经模型将计算、内存和 I/O 内化到学习运行时状态的范式。系统学会生成高保真终端屏幕并控制 GUI 交互，实际上创造了一个「神经操作系统」。以 3,454 次浏览和 2,529 GitHub stars 成为本周最受关注的论文之一。",
+      "interest_tag": "CUA"
+    },
+    {
+      "title": "Externalization in LLM Agents: Unified Review",
+      "arxiv_id": "2604.08224",
+      "url": "https://arxiv.org/abs/2604.08224",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2604.08224",
+      "tldr": "Proposes 'externalization' as a unifying principle for understanding LLM agent reliability. The review covers persistent memory, reusable skills, communication protocols, and harness engineering under one theoretical framework, offering a systematic lens for designing robust agent systems rather than ad-hoc feature accumulation.",
+      "tldr_zh": "提出「外化」作为理解 LLM Agent 可靠性的统一原则。综述将持久记忆、可复用技能、通信协议和脚手架工程纳入同一理论框架，为设计稳健 Agent 系统提供系统性视角，而非临时性功能堆砌。",
+      "interest_tag": ""
+    },
+    {
+      "title": "PaperOrchestra: Automated Research Paper Writing",
+      "arxiv_id": "2604.05018",
+      "url": "https://arxiv.org/abs/2604.05018",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2604.05018",
+      "tldr": "Google's multi-agent framework converts unstructured pre-writing materials into submission-ready papers, achieving simulated acceptance rates of 84% at CVPR and 81% at ICLR. The system handles deep literature reviews, figure generation, and formatting — sparking both excitement and controversy about AI-authored academic papers.",
+      "tldr_zh": "Google 的多 Agent 框架将无结构的预写材料转化为可提交的论文，在 CVPR 和 ICLR 的模拟评审中分别达到 84% 和 81% 的接收率。系统处理深度文献综述、图表生成和排版——在学术界引发了关于 AI 写论文的兴奋和争议。",
+      "interest_tag": "Agent Swarm"
+    }
+  ],
+  "github_repos": [
+    {
+      "name": "yizhiyanhua-ai/fireworks-tech-graph",
+      "url": "https://github.com/yizhiyanhua-ai/fireworks-tech-graph",
+      "tldr": "A Claude Code skill for generating production-quality SVG+PNG technical diagrams. Supports 8 diagram types and 5 visual styles with deep AI/Agent domain knowledge. Exemplifies the emerging 'skill economy' where specialized capabilities are packaged as reusable agent skills.",
+      "tldr_zh": "面向 Claude Code 的技术图表生成 skill，可生成生产级 SVG+PNG 图表。支持 8 种图表类型和 5 种视觉风格，具备深度 AI/Agent 领域知识。代表了新兴的「技能经济」模式——将专业能力封装为可复用的 Agent 技能包。",
+      "stars": 2428,
+      "language": "Python",
+      "interest_tag": ""
+    },
+    {
+      "name": "joeynyc/hermes-hudui",
+      "url": "https://github.com/joeynyc/hermes-hudui",
+      "tldr": "Web UI consciousness monitor for Hermes — the AI agent with persistent memory. Provides real-time visibility into agent state, memory operations, and decision-making processes. A novel take on agent observability that treats the agent as a system to be monitored, not just used.",
+      "tldr_zh": "面向 Hermes Agent 的 Web 意识监控界面，提供对 Agent 状态、记忆操作和决策过程的实时可视化。一种新颖的 Agent 可观测性方案——将 Agent 视为需要监控的系统，而不仅仅是使用的工具。",
+      "stars": 881,
+      "language": "TypeScript",
+      "interest_tag": ""
+    },
+    {
+      "name": "h4ckf0r0day/obscura",
+      "url": "https://github.com/h4ckf0r0day/obscura",
+      "tldr": "Headless browser built specifically for AI agents and web scraping in Rust. Addresses the growing need for reliable browser automation in agent workflows — faster and more lightweight than Playwright/Puppeteer alternatives, designed from the ground up for agent use cases.",
+      "tldr_zh": "用 Rust 构建的专为 AI Agent 和网页抓取设计的无头浏览器。解决 Agent 工作流中对可靠浏览器自动化日益增长的需求——比 Playwright/Puppeteer 更快更轻量，从头为 Agent 使用场景设计。",
+      "stars": 134,
+      "language": "Rust",
+      "interest_tag": ""
+    },
+    {
+      "name": "run-llama/ParseBench",
+      "url": "https://github.com/run-llama/ParseBench",
+      "tldr": "A document parsing benchmark specifically designed for AI agents, from LlamaIndex team. Evaluates how well different parsing approaches work in agentic RAG pipelines — addressing a critical bottleneck where agents fail not because of reasoning but because of poor document understanding.",
+      "tldr_zh": "LlamaIndex 团队推出的面向 AI Agent 的文档解析基准测试。评估不同解析方法在 Agent RAG 流程中的表现——解决一个关键瓶颈：Agent 失败往往不是因为推理能力不足，而是文档理解能力差。",
+      "stars": 121,
+      "language": "Python",
+      "interest_tag": ""
+    },
+    {
+      "name": "seojoonkim/memkraft",
+      "url": "https://github.com/seojoonkim/memkraft",
+      "tldr": "Zero-dependency compound knowledge system for AI agents. Auto-extracts, classifies, searches, and maintains memory in plain Markdown files. A practical approach to agent memory that prioritizes simplicity and portability over complex vector databases.",
+      "tldr_zh": "零依赖的 AI Agent 复合知识系统，自动提取、分类、搜索和维护 Markdown 格式的记忆。以简洁和可移植性为优先的 Agent 记忆实践方案，而非复杂的向量数据库。",
+      "stars": 55,
+      "language": "Python",
+      "interest_tag": "Memory"
+    }
+  ],
+  "hackernews": [
+    {
+      "title": "Exploiting the most prominent AI agent benchmarks",
+      "url": "https://rdi.berkeley.edu/blog/trustworthy-benchmarks-cont/",
+      "tldr": "Berkeley RDI exposes systematic vulnerabilities in major AI agent benchmarks, showing how benchmark scores can be inflated through exploitation of evaluation gaps. Raises fundamental questions about whether current benchmarks actually measure real-world agent capability or just benchmark-specific skills.",
+      "tldr_zh": "Berkeley RDI 揭露主流 AI Agent 基准测试的系统性漏洞，展示如何通过利用评测缺陷来虚增分数。引发根本性问题：当前 benchmark 到底在衡量 Agent 的真实能力，还是仅仅衡量「刷 benchmark 的能力」？",
+      "points": 581,
+      "num_comments": 140,
+      "interest_tag": "Benchmark"
+    },
+    {
+      "title": "GAIA – Open-source framework for building AI agents that run on local hardware",
+      "url": "https://amd-gaia.ai/docs",
+      "tldr": "AMD-backed open-source framework for running AI agents entirely on local hardware. Targets the growing demand for private, offline-capable agent systems — significant because most agent frameworks assume cloud APIs and high-bandwidth connections.",
+      "tldr_zh": "AMD 支持的开源框架，用于在本地硬件上完整运行 AI Agent。针对私有化、离线 Agent 系统的增长需求——多数 Agent 框架假设云 API 和高带宽连接，这个项目填补了本地化部署的空白。",
+      "points": 145,
+      "num_comments": 33,
+      "interest_tag": ""
+    },
+    {
+      "title": "Show HN: LangAlpha – what if Claude Code was built for Wall Street?",
+      "url": "https://github.com/ginlix-ai/langalpha",
+      "tldr": "Financial-domain coding agent inspired by Claude Code, targeting quantitative research and trading workflows. Demonstrates vertical specialization of the coding agent paradigm — adapting the general-purpose CLI agent model to domain-specific needs with specialized tools and knowledge.",
+      "tldr_zh": "受 Claude Code 启发的金融领域编程 Agent，面向量化研究和交易工作流。展示了编程 Agent 的垂直化专业化趋势——将通用 CLI Agent 模式适配到特定领域需求，配备专用工具和知识。",
+      "points": 103,
+      "num_comments": 35,
+      "interest_tag": ""
+    },
+    {
+      "title": "Show HN: A memory database that forgets, consolidates, and detects contradiction",
+      "url": "https://github.com/yantrikos/yantrikdb-server",
+      "tldr": "YantrikDB implements biologically-inspired memory management: forgetting unimportant information, consolidating related memories, and detecting contradictions. A novel approach to the agent memory problem that goes beyond simple append-only storage or vector similarity search.",
+      "tldr_zh": "YantrikDB 实现了生物启发的记忆管理：遗忘不重要信息、整合相关记忆、检测矛盾。一种超越简单追加存储或向量相似度搜索的 Agent 记忆新方案。",
+      "points": 45,
+      "num_comments": 31,
+      "interest_tag": "Memory"
+    },
+    {
+      "title": "Show HN: Kontext CLI – Credential broker for AI coding agents in Go",
+      "url": "https://github.com/kontext-dev/kontext-cli",
+      "tldr": "Solves the credential management problem for AI coding agents — securely brokers API keys, SSH keys, and secrets without exposing them directly to the agent. Written in Go for minimal footprint. Addresses a critical security gap as agents gain more system access.",
+      "tldr_zh": "解决 AI 编程 Agent 的凭证管理问题——安全地代理 API 密钥、SSH 密钥和秘钥，无需直接暴露给 Agent。用 Go 编写，占用极小。随着 Agent 获得更多系统访问权限，这个安全缺口亟需填补。",
+      "points": 69,
+      "num_comments": 27,
+      "interest_tag": ""
+    }
+  ]
+}
