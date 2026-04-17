@@ -1,0 +1,221 @@
+{
+  "date": "2026-04-17",
+  "generated_at": "2026-04-17T09:03:48.687610+08:00",
+  "briefing_zh": "今天 AI 领域最引人注目的动态来自开源模型和 Agent 基础设施两个方向。**Qwen3.6-35B-A3B** 以仅 3B 激活参数实现了与更大模型相当的 agentic coding 能力，在 Hacker News 上获得近 900 点赞，标志着 MoE 架构在实用编程 agent 中的成熟。与此同时，**Cloudflare** 发布了专为 AI agent 设计的推理层平台，将 agent 的部署和调用从应用层下沉到基础设施层，这可能改变 agent 服务的分发模式。\n\n在研究侧，**Seedance 2.0** 推动视频生成迈向世界复杂性建模，不再满足于单一场景的视觉保真度，而是关注多实体交互、物理一致性等更深层的挑战。**OccuBench** 和 **GameWorld** 两个 benchmark 从不同角度评估 AI agent 在真实职业任务和多模态游戏环境中的表现，揭示了当前 agent 系统在复杂环境中的能力边界。\n\n开源工具方面，**Obscura** 作为面向 AI agent 的无头浏览器迅速获得关注，**claude-code-java** 将 Claude Code 的 agent 引擎嵌入 Java 生态，**Libretto** 试图让浏览器自动化变得确定性可控。这些项目反映了社区正在为 agent 构建更可靠的执行环境和工具链。",
+  "briefing_en": "Today's AI landscape centers on two themes: open-weight model breakthroughs and agent infrastructure maturation. **Qwen3.6-35B-A3B** dominated Hacker News with nearly 900 upvotes, demonstrating that a MoE model with only 3B active parameters can match much larger models on agentic coding tasks — a milestone for efficient agent deployment. Meanwhile, **Cloudflare** launched an inference platform specifically designed for AI agents, pushing agent orchestration down to the infrastructure layer.\n\nOn the research front, **Seedance 2.0** advances video generation toward modeling world complexity with multi-entity interactions and physical consistency. Two new benchmarks — **OccuBench** (professional tasks via language workflows) and **GameWorld** (multimodal game agents) — expose the capability gaps of current agent systems in realistic environments.\n\nThe open-source ecosystem is rapidly building agent tooling: **Obscura** provides a headless browser for AI agents, **claude-code-java** embeds agentic capabilities into Java applications, and **Libretto** tackles the determinism problem in browser automations. The trend is clear: the community is moving from \"agents that demo well\" to \"agents that run reliably.\"",
+  "viral_analysis_zh": "**Qwen3.6-35B-A3B** 是今天最具传播力的项目。887 点 HN 热度源于精准击中开发者痛点：开源、小激活量、强 coding 能力三者兼得。标题中「now open to all」的措辞制造了普惠感和紧迫感。**Cloudflare 的 AI 推理层**则抓住了「agent 需要基础设施而非 wrapper」的叙事转变，229 点反映了工程社区对 agent 生产化的强烈需求。",
+  "viral_analysis_en": "**Qwen3.6-35B-A3B** is today's most viral item at 887 HN points. It hits the trifecta developers crave: open-weight, tiny active parameters (3B), and strong agentic coding — the title's \"now open to all\" creates urgency and inclusivity. **Cloudflare's AI inference layer** rides the narrative shift from \"agent wrappers\" to \"agent infrastructure,\" with 229 points reflecting engineering demand for production-grade agent deployment.",
+  "huggingface_papers": [
+    {
+      "title": "Seedance 2.0: Advancing Video Generation for World Complexity",
+      "url": "https://arxiv.org/abs/2604.09789",
+      "tldr": "Seedance 2.0 pushes video generation beyond visual fidelity toward modeling world complexity — multi-entity interactions, physical consistency, and compositional scene dynamics. It represents a paradigm shift from 'pretty videos' to 'world-aware generation.'",
+      "tldr_zh": "Seedance 2.0 将视频生成从视觉保真度推向世界复杂性建模——多实体交互、物理一致性和组合场景动态。标志着从「生成好看的视频」到「理解世界规律的生成」的范式转变。",
+      "upvotes": 0,
+      "authors": "ByteDance Seed Team",
+      "ai_keywords": [
+        "video generation",
+        "world model",
+        "physical consistency"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "OccuBench: Evaluating AI Agents on Real-World Professional Tasks via Language Workflows",
+      "url": "https://arxiv.org/abs/2604.09588",
+      "tldr": "OccuBench benchmarks AI agents on realistic professional tasks (not toy examples) by decomposing occupations into language-based workflows. It provides a standardized way to measure how well agents handle real job functions across multiple domains.",
+      "tldr_zh": "OccuBench 通过将职业任务分解为语言工作流，在真实专业场景（非玩具示例）中评估 AI agent。提供了衡量 agent 处理多领域实际工作能力的标准化方法。",
+      "upvotes": 0,
+      "authors": "Unknown",
+      "ai_keywords": [
+        "benchmark",
+        "AI agents",
+        "professional tasks"
+      ],
+      "interest_tag": "Benchmark"
+    },
+    {
+      "title": "Memory Transfer Learning: How Memories are Transferred Across Domains in Coding Agents",
+      "url": "https://arxiv.org/abs/2604.09456",
+      "tldr": "Studies how coding agents transfer learned memories across different programming domains. Reveals mechanisms of cross-domain memory transfer and proposes methods to improve agent performance by leveraging experiences from related tasks.",
+      "tldr_zh": "研究编程 agent 如何跨不同编程领域迁移学到的记忆。揭示了跨域记忆迁移机制，并提出利用相关任务经验提升 agent 性能的方法。",
+      "upvotes": 0,
+      "authors": "Unknown",
+      "ai_keywords": [
+        "memory",
+        "transfer learning",
+        "coding agents"
+      ],
+      "interest_tag": "Memory"
+    },
+    {
+      "title": "GameWorld: Towards Standardized and Verifiable Evaluation of Multimodal Game Agents",
+      "url": "https://arxiv.org/abs/2604.09512",
+      "tldr": "GameWorld provides a standardized evaluation framework for multimodal game agents with verifiable metrics. Games serve as complex, multi-modal environments that stress-test agent planning, perception, and action capabilities simultaneously.",
+      "tldr_zh": "GameWorld 为多模态游戏 agent 提供标准化且可验证的评估框架。游戏作为复杂多模态环境，同时压力测试 agent 的规划、感知和行动能力。",
+      "upvotes": 0,
+      "authors": "Unknown",
+      "ai_keywords": [
+        "game agents",
+        "benchmark",
+        "multimodal"
+      ],
+      "interest_tag": "Benchmark"
+    },
+    {
+      "title": "Exploration and Exploitation Errors Are Measurable for Language Model Agents",
+      "url": "https://arxiv.org/abs/2604.09312",
+      "tldr": "Proposes a framework to quantify exploration vs exploitation errors in LM agents, borrowing from reinforcement learning theory. This diagnostic tool helps identify whether agents fail because they don't explore enough or don't exploit what they know.",
+      "tldr_zh": "提出量化语言模型 agent 探索与利用错误的框架，借鉴强化学习理论。这个诊断工具帮助识别 agent 失败是因为探索不足还是未能利用已知信息。",
+      "upvotes": 0,
+      "authors": "Unknown",
+      "ai_keywords": [
+        "exploration",
+        "exploitation",
+        "LM agents"
+      ],
+      "interest_tag": ""
+    }
+  ],
+  "alphaxiv_papers": [
+    {
+      "title": "ClawBench: 153 Write-Heavy Tasks on 144 Live Websites",
+      "arxiv_id": "2604.08523",
+      "url": "https://arxiv.org/abs/2604.08523",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2604.08523",
+      "tldr": "ClawBench evaluates AI agents on 153 write-heavy tasks across 144 live websites. Frontier models achieve only 0.7%–33.3% success, revealing a massive gap between current agent capabilities and real-world web interaction demands.",
+      "tldr_zh": "ClawBench 在 144 个真实网站上用 153 个写操作密集型任务评估 AI agent。前沿模型成功率仅 0.7%–33.3%，暴露了当前 agent 能力与真实 web 交互需求之间的巨大差距。",
+      "interest_tag": "CUA"
+    },
+    {
+      "title": "SkillClaw: LLM Agent Skills Evolve via Collective Cross-User Experiences",
+      "arxiv_id": "2604.08377",
+      "url": "https://arxiv.org/abs/2604.08377",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2604.08377",
+      "tldr": "SkillClaw enables LLM agent skills to evolve through collective cross-user experiences, achieving +42.1% average improvement. Skills are shared and refined across users, creating a collaborative learning loop for web agents.",
+      "tldr_zh": "SkillClaw 让 LLM agent 技能通过跨用户集体经验进化，平均提升 42.1%。技能在用户间共享和优化，为 web agent 创建了协作学习闭环。",
+      "interest_tag": "CUA"
+    },
+    {
+      "title": "Neural Computers: New Paradigm for Internalized Computation and Memory",
+      "arxiv_id": "2604.06425",
+      "url": "https://arxiv.org/abs/2604.06425",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2604.06425",
+      "tldr": "Meta AI proposes Neural Computers — models that internalize computation, memory, and I/O into learned runtime state. This moves beyond transformers-as-pattern-matchers toward models that truly compute and store information dynamically.",
+      "tldr_zh": "Meta AI 提出 Neural Computers——将计算、记忆和 I/O 内化到学习的运行时状态中。超越了 transformer 作为模式匹配器的范式，迈向真正动态计算和存储信息的模型。",
+      "interest_tag": ""
+    },
+    {
+      "title": "PaperOrchestra: Multi-Agent AI Writes Submission-Ready Papers",
+      "arxiv_id": "2604.05018",
+      "url": "https://arxiv.org/abs/2604.05018",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2604.05018",
+      "tldr": "Google's PaperOrchestra uses multi-agent collaboration to write submission-ready academic papers, achieving 84% simulated CVPR and 81% ICLR acceptance rates. A provocative demonstration of AI automating the research writing pipeline.",
+      "tldr_zh": "Google 的 PaperOrchestra 用多 agent 协作撰写可提交的学术论文，模拟 CVPR 接受率 84%、ICLR 81%。一个 AI 自动化研究写作流程的挑衅性示范。",
+      "interest_tag": "Agent Swarm"
+    },
+    {
+      "title": "LLM Supply Chain Attack: API Routers Exploited for Code Injection",
+      "arxiv_id": "2604.08407",
+      "url": "https://arxiv.org/abs/2604.08407",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2604.08407",
+      "tldr": "Demonstrates that LLM API routing infrastructure can be exploited for malicious code injection and secret exfiltration. Exposes a fundamental lack of end-to-end integrity verification in current agent frameworks — a critical security gap.",
+      "tldr_zh": "展示 LLM API 路由基础设施可被利用进行恶意代码注入和密钥窃取。揭露了当前 agent 框架缺乏端到端完整性验证的根本安全漏洞。",
+      "interest_tag": ""
+    }
+  ],
+  "github_repos": [
+    {
+      "name": "EKKOLearnAI/hermes-web-ui",
+      "url": "https://github.com/EKKOLearnAI/hermes-web-ui",
+      "tldr": "Web dashboard for Hermes Agent providing multi-platform AI chat, session management, and tool visualization. A polished frontend for the Hermes agent ecosystem with 480 stars in its first week.",
+      "tldr_zh": "Hermes Agent 的 Web 控制台，提供多平台 AI 对话、会话管理和工具可视化。Hermes agent 生态的精美前端，首周获得 480 星。",
+      "stars": 480,
+      "language": "TypeScript",
+      "interest_tag": ""
+    },
+    {
+      "name": "h4ckf0r0day/obscura",
+      "url": "https://github.com/h4ckf0r0day/obscura",
+      "tldr": "Headless browser purpose-built for AI agents and web scraping. Unlike Playwright/Puppeteer, it's designed from the ground up for agent-driven browsing with anti-detection and stealth features.",
+      "tldr_zh": "专为 AI agent 和网络爬取设计的无头浏览器。与 Playwright/Puppeteer 不同，它从底层为 agent 驱动的浏览设计，内置反检测和隐身功能。",
+      "stars": 213,
+      "language": "Go",
+      "interest_tag": "CUA"
+    },
+    {
+      "name": "ChatPRD/tradclaw",
+      "url": "https://github.com/ChatPRD/tradclaw",
+      "tldr": "AI-powered 'household manager' agent for parenting and home tasks. An agentic approach to family logistics — scheduling, meal planning, task delegation — positioning AI as a domestic coordinator.",
+      "tldr_zh": "AI 驱动的「家庭管家」agent，负责育儿和家务任务。用 agent 方式处理家庭后勤——日程、餐饮规划、任务分配——将 AI 定位为家庭协调者。",
+      "stars": 203,
+      "language": "Python",
+      "interest_tag": ""
+    },
+    {
+      "name": "poseljacob/agentic-video-editor",
+      "url": "https://github.com/poseljacob/agentic-video-editor",
+      "tldr": "AI agent that transforms raw footage into edited videos from a creative brief. Takes unstructured video + text instructions and autonomously handles cuts, transitions, and assembly — agent-as-editor.",
+      "tldr_zh": "AI agent 根据创意简报将原始素材剪辑成成片。接收非结构化视频和文字指令，自主处理剪切、转场和组装——agent 即剪辑师。",
+      "stars": 196,
+      "language": "Python",
+      "interest_tag": ""
+    },
+    {
+      "name": "fluentlc/claude-code-java",
+      "url": "https://github.com/fluentlc/claude-code-java",
+      "tldr": "Embeddable AI agent engine for Java applications, porting Claude Code's agentic capabilities to the JVM ecosystem. Enables any Java app to gain autonomous coding and task execution abilities.",
+      "tldr_zh": "可嵌入 Java 应用的 AI Agent 引擎，将 Claude Code 的 agent 能力移植到 JVM 生态。让任何 Java 应用获得自主编程和任务执行能力。",
+      "stars": 114,
+      "language": "Java",
+      "interest_tag": ""
+    }
+  ],
+  "hackernews": [
+    {
+      "title": "Qwen3.6-35B-A3B: Agentic coding power, now open to all",
+      "url": "https://qwen.ai/blog?id=qwen3.6-35b-a3b",
+      "tldr": "Qwen releases a 35B MoE model with only 3B active parameters that matches larger models on agentic coding benchmarks. Open-weight, efficient, and specifically optimized for tool-use and code generation — a landmark for accessible agent deployment.",
+      "tldr_zh": "Qwen 发布 35B MoE 模型，仅 3B 激活参数即匹配更大模型的 agentic coding 性能。开源、高效、专为工具调用和代码生成优化——可访问 agent 部署的里程碑。",
+      "points": 887,
+      "num_comments": 411,
+      "interest_tag": ""
+    },
+    {
+      "title": "Cloudflare's AI Platform: an inference layer designed for agents",
+      "url": "https://blog.cloudflare.com/ai-platform/",
+      "tldr": "Cloudflare launches an inference platform purpose-built for AI agents — not just model serving, but agent-aware routing, state management, and tool orchestration at the infrastructure level. Signals that agent deployment is becoming a first-class infrastructure concern.",
+      "tldr_zh": "Cloudflare 推出专为 AI agent 构建的推理平台——不仅是模型服务，而是基础设施层面的 agent 感知路由、状态管理和工具编排。标志着 agent 部署正在成为一级基础设施关切。",
+      "points": 229,
+      "num_comments": 58,
+      "interest_tag": ""
+    },
+    {
+      "title": "Show HN: LangAlpha – what if Claude Code was built for Wall Street?",
+      "url": "https://github.com/ginlix-ai/langalpha",
+      "tldr": "LangAlpha adapts Claude Code's agentic coding paradigm for financial analysis — an AI agent that writes, executes, and iterates on quantitative trading code. Shows the pattern of domain-specific agent specialization gaining traction.",
+      "tldr_zh": "LangAlpha 将 Claude Code 的 agentic coding 范式适配金融分析——一个编写、执行和迭代量化交易代码的 AI agent。展示了领域专用 agent 特化正在获得市场认可。",
+      "points": 144,
+      "num_comments": 54,
+      "interest_tag": ""
+    },
+    {
+      "title": "Show HN: Libretto – Making AI browser automations deterministic",
+      "url": "https://github.com/saffron-health/libretto",
+      "tldr": "Libretto tackles the reliability problem in AI browser automation by making agent actions deterministic and reproducible. Addresses the #1 complaint about CUA agents: they work sometimes but fail unpredictably.",
+      "tldr_zh": "Libretto 通过使 agent 操作确定性和可复现来解决 AI 浏览器自动化的可靠性问题。直击 CUA agent 的头号投诉：时好时坏，失败不可预测。",
+      "points": 123,
+      "num_comments": 52,
+      "interest_tag": "CUA"
+    },
+    {
+      "title": "Launch HN: Kampala (YC W26) – Reverse-Engineer Apps into APIs",
+      "url": "https://www.zatanna.ai/kampala",
+      "tldr": "YC W26 startup that reverse-engineers any app into a programmatic API, enabling agents to interact with software that lacks official APIs. A crucial infrastructure piece for agents that need to operate in the real software ecosystem.",
+      "tldr_zh": "YC W26 创业公司，将任何应用逆向工程为可编程 API，让 agent 能与缺乏官方 API 的软件交互。agent 在真实软件生态中运作的关键基础设施。",
+      "points": 69,
+      "num_comments": 62,
+      "interest_tag": ""
+    }
+  ]
+}
