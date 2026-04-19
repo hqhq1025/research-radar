@@ -1,0 +1,201 @@
+{
+  "date": "2026-04-19",
+  "generated_at": "2026-04-19T01:03:21.491429Z",
+  "briefing_zh": "本周末的 AI 研究围绕三大主题展开：**Agent 能力边界的真实评估**、**新计算范式的探索**、以及**开源模型的民主化**。\n\n**ClawBench** 和 **OmniBehavior** 两篇 benchmark 论文同时揭示了一个残酷现实：当 AI Agent 面对真实网站的写操作任务时，即使最强的前沿模型成功率也仅 0.7%–33.3%；而在模拟复杂人类行为方面，LLM 的最高得分仅 44.55。这些结果表明，尽管 demo 效果炫目，Agent 在生产环境中的可靠性仍有巨大差距。与此同时，**SkillClaw** 提出了一种让 Agent 技能通过跨用户经验持续进化的方案，平均提升 42.1%，为缩小这一差距提供了新思路。\n\nMeta AI 的 **Neural Computers** 论文提出了一种全新的计算范式——将计算、内存和 I/O 完全内化到神经网络的学习运行时状态中。这是一个大胆的愿景：不再需要传统操作系统，神经网络本身就是计算机。虽然目前仅是原型阶段，但其在终端屏幕生成和 GUI 控制上的初步结果令人瞩目。\n\n开源生态方面，**Qwen3.6-35B-A3B** 在 Hacker News 上引爆热议（1253 分），这是一个仅用 3B 活跃参数就实现强大编程 Agent 能力的 MoE 模型。GitHub 上 **obscura**（无头浏览器）等新项目也在快速崛起，反映出社区对 Agent 基础设施的旺盛需求。Cloudflare 推出专为 Agent 设计的推理层，标志着大厂正在为「Agent 时代」的基础设施做布局。",
+  "briefing_en": "This weekend's AI research converges on three themes: **real-world evaluation of agent capabilities**, **new computing paradigms**, and **open-source democratization**.\n\n**ClawBench** and **OmniBehavior** — two benchmark papers released simultaneously — paint a sobering picture: frontier AI agents achieve only 0.7%–33.3% success on real-world web write tasks, and LLMs max out at 44.55 when simulating complex human behavior. Despite impressive demos, production-grade reliability remains far off. Meanwhile, **SkillClaw** proposes a framework for continuous skill evolution through collective cross-user experience, achieving +42.1% average improvement — a promising path to close this gap.\n\nMeta AI's **Neural Computers** introduces a bold new computing paradigm that internalizes computation, memory, and I/O entirely within a neural model's learned runtime state. The vision: the neural network IS the computer, no traditional OS needed. While still a prototype, initial results on terminal screen generation and GUI control are striking.\n\nOn the open-source front, **Qwen3.6-35B-A3B** exploded on Hacker News (1253 points) — a MoE model delivering strong agentic coding with just 3B active parameters. GitHub projects like **obscura** (headless browser for agents) are gaining rapid traction, reflecting growing demand for agent infrastructure. Cloudflare's launch of an agent-specific inference layer signals that major platforms are gearing up for the \"age of agents\".",
+  "viral_analysis_zh": "**Qwen3.6-35B-A3B** 是今天最可能出圈的项目——「35B 参数但只需 3B 活跃」的 MoE 架构精准击中了开源社区对高性能低成本 Agent 模型的渴望，HN 1253 分证明了这一点。标题中的「agentic coding power, now open to all」完美利用了开源民主化叙事。**Neural Computers** 则凭借「神经网络就是计算机」的激进概念和 Meta AI 的背书，在学术社区持续发酵。",
+  "viral_analysis_en": "**Qwen3.6-35B-A3B** is today's most viral candidate — the '35B params, 3B active' MoE architecture precisely hits the open-source community's desire for high-performance, low-cost agent models, as evidenced by 1253 HN points. The framing 'agentic coding power, now open to all' perfectly leverages the open-source democratization narrative. **Neural Computers** keeps gaining traction in academic circles with its radical 'the neural network IS the computer' concept and Meta AI backing.",
+  "huggingface_papers": [
+    {
+      "title": "HY-World 2.0: A Multi-Modal World Model for Reconstructing, Generating, and Simulating 3D Worlds",
+      "url": "https://arxiv.org/abs/2604.14268",
+      "tldr": "HY-World 2.0 is a multi-modal world model that unifies 3D reconstruction, generation, and simulation. It handles diverse inputs (text, images, video) to create and simulate 3D worlds, advancing embodied AI and virtual environment creation.",
+      "tldr_zh": "HY-World 2.0 是一个多模态世界模型，统一了 3D 重建、生成和仿真。支持文本、图像、视频等多种输入来创建和模拟 3D 世界，推动具身 AI 和虚拟环境构建。",
+      "upvotes": 80,
+      "authors": "Team HY-World, Chenjie Cao, Xuhui Zuo et al.",
+      "ai_keywords": [],
+      "interest_tag": ""
+    },
+    {
+      "title": "DR^{3}-Eval: Towards Realistic and Reproducible Deep Research Evaluation",
+      "url": "https://arxiv.org/abs/2604.14683",
+      "tldr": "DR³-Eval proposes a realistic and reproducible evaluation framework for deep research systems. It addresses the lack of standardized benchmarks by creating controlled test scenarios that measure research depth, accuracy, and reasoning quality.",
+      "tldr_zh": "DR³-Eval 提出了一个真实可复现的深度研究系统评估框架。通过创建受控测试场景来衡量研究深度、准确性和推理质量，填补了标准化评测的空白。",
+      "upvotes": 26,
+      "authors": "Qianqian Xie, Qingheng Xiong, He Zhu et al.",
+      "ai_keywords": [],
+      "interest_tag": ""
+    },
+    {
+      "title": "RAD-2: Scaling Reinforcement Learning in a Generator-Discriminator Framework",
+      "url": "https://arxiv.org/abs/2604.15308",
+      "tldr": "RAD-2 scales reinforcement learning within a generator-discriminator framework, improving both generation quality and alignment. The approach shows strong results on reasoning and creative tasks by combining RL with adversarial training dynamics.",
+      "tldr_zh": "RAD-2 在生成器-判别器框架中扩展强化学习，提升生成质量和对齐效果。通过结合 RL 与对抗训练动态，在推理和创作任务上取得显著提升。",
+      "upvotes": 25,
+      "authors": "Hao Gao, Shaoyu Chen, Yifan Zhu et al.",
+      "ai_keywords": [],
+      "interest_tag": ""
+    },
+    {
+      "title": "How to Fine-Tune a Reasoning Model? A Teacher-Student Cooperation Framework to Synthesize Student-Consistent SFT Data",
+      "url": "https://arxiv.org/abs/2604.14164",
+      "tldr": "A teacher-student cooperation framework for fine-tuning reasoning models. The teacher model guides the student through structured reasoning steps, achieving better performance than standard fine-tuning while requiring less data.",
+      "tldr_zh": "提出一种教师-学生协作框架来微调推理模型。教师模型通过结构化推理步骤引导学生模型，以更少数据实现比标准微调更好的效果。",
+      "upvotes": 23,
+      "authors": "Zixian Huang, Kaichen Yang, Xu Huang et al.",
+      "ai_keywords": [],
+      "interest_tag": ""
+    },
+    {
+      "title": "GlobalSplat: Efficient Feed-Forward 3D Gaussian Splatting via Global Scene Tokens",
+      "url": "https://arxiv.org/abs/2604.15284",
+      "tldr": "GlobalSplat enables efficient feed-forward 3D Gaussian Splatting via global scene priors. It achieves fast 3D reconstruction from sparse views by leveraging learned global representations, improving both speed and quality over per-scene optimization.",
+      "tldr_zh": "GlobalSplat 通过全局场景先验实现高效的前馈式 3D 高斯溅射。利用学习到的全局表示从稀疏视角快速重建 3D，在速度和质量上优于逐场景优化。",
+      "upvotes": 18,
+      "authors": "Roni Itkin, Noam Issachar, Yehonatan Keypur et al.",
+      "ai_keywords": [],
+      "interest_tag": ""
+    }
+  ],
+  "alphaxiv_papers": [
+    {
+      "title": "SkillClaw: Let Skills Evolve Collectively with Agentic Evolver",
+      "arxiv_id": "2604.08377",
+      "url": "https://arxiv.org/abs/2604.08377",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2604.08377",
+      "tldr": "SkillClaw enables LLM agent skills to continuously evolve through collective cross-user experiences. An autonomous 'agentic evolver' refines, creates, and updates skills automatically, achieving +42.1% average improvement across diverse real-world tasks.",
+      "tldr_zh": "SkillClaw 让 LLM agent 技能通过跨用户的集体经验持续进化。自主的「智能进化器」自动改进、创建和更新技能，在多种真实任务上平均提升 42.1%。",
+      "interest_tag": ""
+    },
+    {
+      "title": "Neural Computers",
+      "arxiv_id": "2604.06425",
+      "url": "https://arxiv.org/abs/2604.06425",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2604.06425",
+      "tldr": "Meta AI introduces Neural Computers (NCs), a new paradigm where neural models internalize computation, memory, and I/O within a learned runtime state. Prototype NCs generate high-fidelity terminal screens and control GUI interactions from user I/O traces.",
+      "tldr_zh": "Meta AI 提出神经计算机（Neural Computers），一种将计算、内存和 I/O 内化到学习运行时状态中的新范式。原型可以生成高保真终端屏幕并直接从用户交互轨迹控制 GUI。",
+      "interest_tag": "CUA"
+    },
+    {
+      "title": "Externalization in LLM Agents: A Unified Review of Memory, Skills, Protocols and Harness Engineering",
+      "arxiv_id": "2604.08224",
+      "url": "https://arxiv.org/abs/2604.08224",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2604.08224",
+      "tldr": "Proposes 'externalization' as a unifying principle for LLM agent design — relocating cognitive burdens to persistent external structures (memory, skills, protocols). Provides a comprehensive framework for understanding and building robust agent systems.",
+      "tldr_zh": "提出「外化」作为 LLM Agent 设计的统一原则——将认知负担转移到持久外部结构（记忆、技能、协议）。为构建可靠 Agent 系统提供了全面的理论框架。",
+      "interest_tag": "Memory"
+    },
+    {
+      "title": "ClawBench: Can AI Agents Complete Everyday Online Tasks?",
+      "arxiv_id": "2604.08523",
+      "url": "https://arxiv.org/abs/2604.08523",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2604.08523",
+      "tldr": "A benchmark evaluating AI agents on 153 write-heavy tasks across 144 live production websites with safe interception. Even frontier models only achieve 0.7%–33.3% success rates, revealing a huge gap between current benchmarks and real-world web task difficulty.",
+      "tldr_zh": "在 144 个真实网站上评测 AI Agent 完成 153 个「写操作」任务的能力。即使最强模型成功率也仅 0.7%–33.3%，揭示了现有 benchmark 与真实 web 任务难度之间的巨大差距。",
+      "interest_tag": "Benchmark"
+    },
+    {
+      "title": "Towards Real-world Human Behavior Simulation: Benchmarking Large Language Models on Long-horizon, Cross-scenario, Heterogeneous Behavior Traces",
+      "arxiv_id": "2604.08362",
+      "url": "https://arxiv.org/abs/2604.08362",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2604.08362",
+      "tldr": "OmniBehavior benchmark uses real-world industrial data to test LLMs on simulating complex human behavior across scenarios. Current LLMs max out at 44.55 overall score, showing a 'positivity-and-average' bias in behavior simulation.",
+      "tldr_zh": "OmniBehavior 基准使用真实工业数据测试 LLM 模拟跨场景复杂人类行为的能力。当前 LLM 最高总分仅 44.55，呈现出「积极化和平均化」的模拟偏差。",
+      "interest_tag": ""
+    }
+  ],
+  "github_repos": [
+    {
+      "name": "h4ckf0r0day/obscura",
+      "url": "https://github.com/h4ckf0r0day/obscura",
+      "tldr": "A headless browser built specifically for AI agents and web scraping. Designed to handle dynamic websites, CAPTCHAs, and anti-bot measures, providing reliable browser automation for agent workflows.",
+      "tldr_zh": "专为 AI Agent 和网页抓取设计的无头浏览器。能处理动态网页、验证码和反爬机制，为 Agent 工作流提供可靠的浏览器自动化。",
+      "stars": 316,
+      "language": "Rust",
+      "interest_tag": "CUA"
+    },
+    {
+      "name": "poseljacob/agentic-video-editor",
+      "url": "https://github.com/poseljacob/agentic-video-editor",
+      "tldr": "AI-powered video editor that transforms raw footage into polished content using natural language instructions. Agents handle cutting, transitions, effects, and color grading autonomously.",
+      "tldr_zh": "AI 驱动的视频编辑器，通过自然语言指令将原始素材转化为精美内容。Agent 自主处理剪辑、转场、特效和调色。",
+      "stars": 264,
+      "language": "Python",
+      "interest_tag": ""
+    },
+    {
+      "name": "ChatPRD/tradclaw",
+      "url": "https://github.com/ChatPRD/tradclaw",
+      "tldr": "AI-powered household manager for 'agentic parenting' — helps manage family schedules, meal planning, homework tracking, and household tasks through conversational AI agents.",
+      "tldr_zh": "AI 驱动的家庭管理助手，实现「智能育儿」——通过对话式 AI Agent 管理家庭日程、餐饮规划、作业跟踪和家务。",
+      "stars": 239,
+      "language": null,
+      "interest_tag": ""
+    },
+    {
+      "name": "fluentlc/claude-code-java",
+      "url": "https://github.com/fluentlc/claude-code-java",
+      "tldr": "claude-code-java 是一个可嵌入任何 Java 应用的 AI Agent 引擎。claude-code-java is an embeddable AI Agent engine for Java applications.",
+      "tldr_zh": "claude-code-java 是一个可嵌入任何 Java 应用的 AI Agent 引擎。claude-code-java is an embeddable AI Agent engine for Java applications.",
+      "stars": 125,
+      "language": "Java",
+      "interest_tag": ""
+    },
+    {
+      "name": "AIScientists-Dev/WorldSeed",
+      "url": "https://github.com/AIScientists-Dev/WorldSeed",
+      "tldr": "A world engine where AI agents live autonomously — physical rules, information asymmetry, any agent can plug in. Define scenarios in YAML, watch stories emerge.",
+      "tldr_zh": "A world engine where AI agents live autonomously — physical rules, information asymmetry, any agent can plug in. Define scenarios in YAML, watch stories emerge.",
+      "stars": 111,
+      "language": "Python",
+      "interest_tag": ""
+    }
+  ],
+  "hackernews": [
+    {
+      "title": "Qwen3.6-35B-A3B: Agentic coding power, now open to all",
+      "url": "https://qwen.ai/blog?id=qwen3.6-35b-a3b",
+      "tldr": "Qwen3.6-35B-A3B is a new open-source MoE model delivering strong agentic coding performance with only 3B active parameters. It democratizes AI agent capabilities previously limited to proprietary models, running efficiently on consumer hardware.",
+      "tldr_zh": "Qwen3.6-35B-A3B 是新的开源 MoE 模型，仅用 3B 活跃参数即可实现强大的智能编程能力。将原本只有闭源模型才有的 Agent 能力带给消费级硬件。",
+      "points": 1253,
+      "num_comments": 528,
+      "interest_tag": ""
+    },
+    {
+      "title": "Cloudflare's AI Platform: an inference layer designed for agents",
+      "url": "https://blog.cloudflare.com/ai-platform/",
+      "tldr": "Cloudflare launches an inference layer designed specifically for AI agents — providing routing, caching, and orchestration primitives that handle the unique patterns of agent-to-model communication at scale.",
+      "tldr_zh": "Cloudflare 推出专为 AI Agent 设计的推理层——提供路由、缓存和编排原语，大规模处理 Agent 与模型之间的独特通信模式。",
+      "points": 306,
+      "num_comments": 94,
+      "interest_tag": ""
+    },
+    {
+      "title": "Are the costs of AI agents also rising exponentially? (2025)",
+      "url": "https://www.tobyord.com/writing/hourly-costs-for-ai-agents",
+      "tldr": "Analysis of whether AI agent costs are scaling exponentially alongside capabilities. Examines compute, API, and infrastructure costs as agents become more autonomous and handle longer task chains.",
+      "tldr_zh": "分析 AI Agent 成本是否随能力指数级增长。探讨随着 Agent 变得更自主、处理更长任务链，计算、API 和基础设施成本的变化趋势。",
+      "points": 294,
+      "num_comments": 116,
+      "interest_tag": ""
+    },
+    {
+      "title": "Show HN: LangAlpha – what if Claude Code was built for Wall Street?",
+      "url": "https://github.com/ginlix-ai/langalpha",
+      "tldr": "Show HN: LangAlpha – what if Claude Code was built for Wall Street?",
+      "tldr_zh": "Show HN: LangAlpha – what if Claude Code was built for Wall Street?",
+      "points": 145,
+      "num_comments": 54,
+      "interest_tag": ""
+    },
+    {
+      "title": "Show HN: Libretto – Making AI browser automations deterministic",
+      "url": "https://github.com/saffron-health/libretto",
+      "tldr": "Show HN: Libretto – Making AI browser automations deterministic",
+      "tldr_zh": "Show HN: Libretto – Making AI browser automations deterministic",
+      "points": 130,
+      "num_comments": 57,
+      "interest_tag": ""
+    }
+  ]
+}
