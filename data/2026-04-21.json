@@ -1,0 +1,206 @@
+{
+  "date": "2026-04-21",
+  "generated_at": "2026-04-21T01:03:00Z",
+  "briefing_zh": "今天 AI 领域最受关注的动态是 **Qwen3.6-35B-A3B** 的发布——这是通义千问系列的最新 MoE 模型，以仅 3B 激活参数实现了堪比 35B 的 agentic coding 能力，在 Hacker News 上获得超过 1200 点赞，标志着高效稀疏模型正在成为开源社区的主流选择。与此同时，**Qwen3.5-Omni** 技术报告展示了统一架构处理文本、图像、音频、视频的全模态能力，其 Audio-Visual Vibe Coding 功能暗示着多模态 agent 的新交互范式。\n\n在 agent 架构研究方面，**Dive into Claude Code** 一文通过源码级分析揭示了 Anthropic 生产级 AI agent 的设计哲学——优先构建稳健的运行框架而非追求原始 AI 决策逻辑。这与 Uncle Bob 发布的 **swarm-forge**（多 agent 协调工具）形成呼应，说明业界正从单 agent 向多 agent 编排演进。**Cloudflare** 也推出了面向 agent 的推理层基础设施，进一步印证了 AI agent 生态正在走向工程化。\n\n推理效率方面，**Cut Your Losses** 提出了并行推理路径剪枝方法，解决了大推理模型中无效路径带来的高昂成本问题。**Prefill-as-a-Service** 则从系统架构层面突破了跨数据中心的 KVCache 传输瓶颈，实现了 54% 的吞吐提升。此外，**Libretto** 项目试图让 AI 浏览器自动化变得确定性可控，**PersonaVLM** 探索了多模态 LLM 的长期个性化能力——这些工作共同描绘了 AI agent 从「能用」到「好用」的关键进化路径。",
+  "briefing_en": "The biggest story today is the release of **Qwen3.6-35B-A3B**, a Mixture-of-Experts model from Alibaba's Qwen team that achieves agentic coding performance comparable to 35B-parameter dense models while activating only 3B parameters. With over 1,200 upvotes on Hacker News, it signals that efficient sparse models are becoming the open-source community's weapon of choice. Meanwhile, the **Qwen3.5-Omni** technical report demonstrates a unified architecture processing text, images, audio, and video, with an emergent Audio-Visual Vibe Coding capability hinting at new interaction paradigms for multimodal agents.\n\nOn the agent architecture front, **Dive into Claude Code** provides a source-level dissection of Anthropic's production AI agent, revealing a design philosophy that prioritizes a robust operational harness over raw AI decision logic. This pairs well with Uncle Bob's **swarm-forge** for multi-agent coordination, and **Cloudflare's new AI inference layer** purpose-built for agents — collectively signaling the maturation of the agent ecosystem from research prototypes to production infrastructure.\n\nIn reasoning efficiency, **Cut Your Losses** introduces path pruning for parallel reasoning to reduce wasted compute in large reasoning models, while **Prefill-as-a-Service** from Moonshot AI breaks through cross-datacenter KVCache bottlenecks with 54% throughput gains. **Libretto** aims to make AI browser automations deterministic, and **PersonaVLM** explores long-term personalization for multimodal LLMs — together painting the path from AI agents that work to AI agents that work well.",
+  "viral_analysis_zh": "**Qwen3.6-35B-A3B** 毫无疑问是今天的爆款（HN 1269 点）——\"agentic coding power, now open to all\" 这个标题精准击中了开发者对高性能开源模型的渴求，3B 激活参数的效率故事更是传播利器。**Dive into Claude Code** 则凭借对明星产品的深度拆解获得高关注，证明「逆向工程知名产品」始终是学术论文获取关注的有效策略。",
+  "viral_analysis_en": "**Qwen3.6-35B-A3B** is today's clear viral winner (HN 1269 points) — the title \"agentic coding power, now open to all\" perfectly targets developers' hunger for performant open-source models, and the 3B-activation efficiency narrative is inherently shareable. **Dive into Claude Code** gained traction through deep reverse-engineering of a star product, proving that dissecting famous products remains an effective attention strategy for academic papers.",
+  "huggingface_papers": [
+    {
+      "title": "Qwen3.5-Omni Technical Report",
+      "arxiv_id": "2604.15804",
+      "url": "https://arxiv.org/abs/2604.15804",
+      "tldr": "Qwen3.5-Omni scales to hundreds of billions of parameters with 256k context, processing text/image/audio/video in a unified architecture. It achieves real-time streaming speech synthesis and introduces Audio-Visual Vibe Coding — generating code from audio-visual instructions. Strong performance across omnimodal benchmarks.",
+      "tldr_zh": "Qwen3.5-Omni 扩展至千亿参数规模，支持 256k 上下文，在统一架构中处理文本/图像/音频/视频。实现实时流式语音合成，并引入「音视频 Vibe Coding」——从音视频指令直接生成代码。在全模态基准测试中表现强劲。",
+      "upvotes": 0,
+      "authors": "Qwen Team",
+      "ai_keywords": ["omnimodal", "multimodal-llm", "speech-synthesis", "vibe-coding"],
+      "interest_tag": ""
+    },
+    {
+      "title": "PersonaVLM: Long-Term Personalized Multimodal LLMs",
+      "arxiv_id": "2604.13074",
+      "url": "https://arxiv.org/abs/2604.13074",
+      "tldr": "PersonaVLM enables multimodal LLMs to maintain long-term user personalization across multi-turn interactions, moving beyond static single-turn customization. It introduces a framework for dynamically learning and adapting to individual user preferences over time.",
+      "tldr_zh": "PersonaVLM 让多模态大模型能够在多轮交互中维持长期用户个性化，突破了静态单轮定制的局限。提出了一个动态学习和适应个体用户偏好的框架。",
+      "upvotes": 0,
+      "authors": "Chang Nie, Chaoyou Fu, Yifan Zhang",
+      "ai_keywords": ["personalization", "multimodal", "long-term"],
+      "interest_tag": ""
+    },
+    {
+      "title": "Cut Your Losses! Learning to Prune Paths Early for Efficient Parallel Reasoning",
+      "arxiv_id": "2604.16029",
+      "url": "https://arxiv.org/abs/2604.16029",
+      "tldr": "Proposes a systematic framework for early path pruning in parallel reasoning with Large Reasoning Models. Addresses the prohibitive cost of futile reasoning paths caused by early errors, providing a unified benchmark and effective pruning strategies for inference-time scaling.",
+      "tldr_zh": "提出大推理模型并行推理中的早期路径剪枝系统框架。解决因早期错误导致的无效推理路径高成本问题，提供统一基准和有效剪枝策略，优化推理时的计算扩展效率。",
+      "upvotes": 0,
+      "authors": "Jiaxi Bi, Tongxu Luo, Wenyu Du",
+      "ai_keywords": ["reasoning", "inference-scaling", "path-pruning"],
+      "interest_tag": ""
+    },
+    {
+      "title": "Web Retrieval-Aware Chunking (W-RAC) for Efficient and Cost-Effective Retrieval-Augmented Generation",
+      "arxiv_id": "2604.04936",
+      "url": "https://arxiv.org/abs/2604.04936",
+      "tldr": "W-RAC introduces a web retrieval-aware chunking strategy for RAG systems that balances retrieval quality, latency, and operational cost. Improves over fixed-size and rule-based chunking by incorporating web structure signals into the chunking process.",
+      "tldr_zh": "W-RAC 引入面向网页检索的分块策略，在 RAG 系统中平衡检索质量、延迟和运营成本。通过将网页结构信号纳入分块过程，优于固定大小和基于规则的分块方法。",
+      "upvotes": 0,
+      "authors": "Uday Allu, Sonu Kedia, Tanmay Odapally",
+      "ai_keywords": ["RAG", "chunking", "retrieval"],
+      "interest_tag": ""
+    },
+    {
+      "title": "Where does output diversity collapse in post-training?",
+      "arxiv_id": "2604.16027",
+      "url": "https://arxiv.org/abs/2604.16027",
+      "tldr": "Investigates why post-trained language models produce less varied outputs than base models. This output diversity collapse undermines inference-time scaling methods and risks homogenizing creative outputs. Identifies specific post-training stages responsible for the collapse.",
+      "tldr_zh": "研究后训练语言模型为何输出多样性低于基座模型。这种「输出多样性坍缩」削弱了推理时扩展方法的效果，并导致创意输出同质化。定位了造成坍缩的具体后训练阶段。",
+      "upvotes": 0,
+      "authors": "Constantinos Karouzos, Xingwei Tan, Nikolaos Aletras",
+      "ai_keywords": ["post-training", "diversity", "inference-scaling"],
+      "interest_tag": ""
+    }
+  ],
+  "alphaxiv_papers": [
+    {
+      "title": "Dive into Claude Code: The Design Space of Today's and Future AI Agent Systems",
+      "arxiv_id": "2604.14228",
+      "url": "https://arxiv.org/abs/2604.14228",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2604.14228",
+      "tldr": "A source-level architectural analysis of Anthropic's Claude Code revealing that production AI agents prioritize a robust operational harness over raw AI decision logic. Contrasts with OpenClaw to show how deployment contexts shape architectural choices. Identifies key future challenges for agent systems.",
+      "tldr_zh": "通过源码级分析 Anthropic 的 Claude Code 架构，揭示生产级 AI agent 优先构建稳健的运行框架而非追求原始 AI 决策逻辑。与 OpenClaw 对比展示部署场景如何影响架构选择，并指出 agent 系统的未来挑战。",
+      "interest_tag": ""
+    },
+    {
+      "title": "(1D) Ordered Tokens Enable Efficient Test-Time Search",
+      "arxiv_id": "2604.15453",
+      "url": "https://arxiv.org/abs/2604.15453",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2604.15453",
+      "tldr": "Discovers that 1D ordered tokenization (coarse-to-fine semantic processing) intrinsically improves test-time search efficiency in autoregressive image generation. Enables zero-shot multimodal control and training-free generation, outperforming traditional 2D grid tokenization.",
+      "tldr_zh": "发现一维有序 token 化（从粗到细语义处理）本质上提升了自回归图像生成中测试时搜索的效率。支持零样本多模态控制和免训练生成，优于传统二维网格 token 化。",
+      "interest_tag": ""
+    },
+    {
+      "title": "Prefill-as-a-Service: KVCache of Next-Generation Models Could Go Cross-Datacenter",
+      "arxiv_id": "2604.15039",
+      "url": "https://arxiv.org/abs/2604.15039",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2604.15039",
+      "tldr": "Moonshot AI and Tsinghua propose PrfaaS for cross-datacenter prefill-decode disaggregation in hybrid-attention LLMs. Achieves 54% higher throughput and 50% TTFT reduction over homogeneous baselines using only 13% of inter-cluster bandwidth.",
+      "tldr_zh": "月之暗面和清华提出 PrfaaS 架构，实现混合注意力大模型的跨数据中心 prefill-decode 解耦。在仅使用 13% 跨集群带宽的情况下，吞吐提升 54%，首 token 延迟降低 50%。",
+      "interest_tag": ""
+    },
+    {
+      "title": "Seedance 2.0: Advancing Video Generation for World Complexity",
+      "arxiv_id": "2604.14148",
+      "url": "https://arxiv.org/abs/2604.14148",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2604.14148",
+      "tldr": "Seedance 2.0 advances video generation to handle complex real-world scenarios with higher fidelity and consistency. Represents a significant step toward modeling world complexity in generated video content.",
+      "tldr_zh": "Seedance 2.0 推进视频生成技术，能够处理复杂的真实世界场景，具有更高的保真度和一致性，是生成视频建模世界复杂性的重要进展。",
+      "interest_tag": ""
+    },
+    {
+      "title": "Towards Ultra-High-Rate Quantum Error Correction with Reconfigurable Atom Arrays",
+      "arxiv_id": "2604.16209",
+      "url": "https://arxiv.org/abs/2604.16209",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2604.16209",
+      "tldr": "Co-designs ultra-high-rate quantum LDPC codes with reconfigurable neutral atom arrays, achieving logical error rates as low as 1.3e-13 per qubit per round at 0.1% physical error rate. Demonstrates practical viability of fault-tolerant quantum computing.",
+      "tldr_zh": "将超高码率量子 LDPC 码与可重构中性原子阵列协同设计，在 0.1% 物理错误率下实现每量子比特每轮 1.3e-13 的逻辑错误率，证明容错量子计算的实际可行性。",
+      "interest_tag": ""
+    }
+  ],
+  "github_repos": [
+    {
+      "name": "ZeroZ-lab/cc-design",
+      "url": "https://github.com/ZeroZ-lab/cc-design",
+      "tldr": "A high-fidelity HTML design and prototype guidance skill for AI agents. Provides structured design system knowledge so coding agents can produce production-quality UI without designer intervention.",
+      "tldr_zh": "面向 AI agent 的高保真 HTML 设计和原型指导技能包。为编码 agent 提供结构化设计系统知识，使其无需设计师即可产出生产级 UI。",
+      "stars": 469,
+      "language": "JavaScript",
+      "interest_tag": ""
+    },
+    {
+      "name": "AIScientists-Dev/WorldSeed",
+      "url": "https://github.com/AIScientists-Dev/WorldSeed",
+      "tldr": "A world engine where AI agents live autonomously with physical rules, information asymmetry, and plug-in agent support. Define scenarios in YAML and watch emergent stories unfold through agent interactions.",
+      "tldr_zh": "一个 AI agent 自主生存的世界引擎，包含物理规则、信息不对称和可插拔 agent 支持。用 YAML 定义场景，观察 agent 交互中涌现的故事。",
+      "stars": 156,
+      "language": "Python",
+      "interest_tag": "Agent Swarm"
+    },
+    {
+      "name": "yzhao062/agent-style",
+      "url": "https://github.com/yzhao062/agent-style",
+      "tldr": "21 writing rules for AI coding/writing agents, designed as drop-in configs for Claude Code, Codex, Copilot, Cursor, and Aider. Makes agent output read like professional technical writing.",
+      "tldr_zh": "面向 AI 编码/写作 agent 的 21 条写作规则，可直接作为 Claude Code、Codex、Copilot、Cursor、Aider 的配置文件使用，让 agent 输出像专业技术写作。",
+      "stars": 143,
+      "language": "Python",
+      "interest_tag": ""
+    },
+    {
+      "name": "unclebob/swarm-forge",
+      "url": "https://github.com/unclebob/swarm-forge",
+      "tldr": "A simple tool by Uncle Bob (Robert C. Martin) for coordinating multiple AI agents. Lightweight multi-agent orchestration focusing on simplicity and clean architecture principles.",
+      "tldr_zh": "Uncle Bob（Robert C. Martin）开发的多 AI agent 协调工具。轻量级多 agent 编排，贯彻简洁和清晰架构原则。",
+      "stars": 90,
+      "language": "Shell",
+      "interest_tag": "Agent Swarm"
+    },
+    {
+      "name": "matlab/simulink-agentic-toolkit",
+      "url": "https://github.com/matlab/simulink-agentic-toolkit",
+      "tldr": "Official MathWorks toolkit giving AI agents tools and expertise to work with Simulink and Model-Based Design. Bridges the gap between LLM-based agents and engineering simulation workflows.",
+      "tldr_zh": "MathWorks 官方工具包，赋予 AI agent 操作 Simulink 和基于模型设计的工具和专业知识。弥合 LLM agent 与工程仿真工作流之间的鸿沟。",
+      "stars": 70,
+      "language": "HTML",
+      "interest_tag": ""
+    }
+  ],
+  "hackernews": [
+    {
+      "title": "Qwen3.6-35B-A3B: Agentic coding power, now open to all",
+      "url": "https://qwen.ai/blog?id=qwen3.6-35b-a3b",
+      "tldr": "Alibaba's Qwen team releases Qwen3.6-35B-A3B, a Mixture-of-Experts model activating only 3B parameters while matching 35B-level agentic coding performance. Open-weight release democratizes access to high-performance coding agents.",
+      "tldr_zh": "阿里通义千问团队发布 Qwen3.6-35B-A3B，MoE 模型仅激活 3B 参数即达到 35B 级别的 agentic coding 性能。开源权重让高性能编码 agent 人人可用。",
+      "points": 1269,
+      "num_comments": 531,
+      "interest_tag": ""
+    },
+    {
+      "title": "Cloudflare's AI Platform: an inference layer designed for agents",
+      "url": "https://blog.cloudflare.com/ai-platform/",
+      "tldr": "Cloudflare launches an AI inference platform purpose-built for agent workloads — optimized for the bursty, multi-step patterns of autonomous agents rather than simple request-response LLM calls.",
+      "tldr_zh": "Cloudflare 推出专为 agent 工作负载设计的 AI 推理平台，针对自主 agent 的突发性多步骤模式而非简单的请求-响应式 LLM 调用进行优化。",
+      "points": 306,
+      "num_comments": 95,
+      "interest_tag": ""
+    },
+    {
+      "title": "Are the costs of AI agents also rising exponentially? (2025)",
+      "url": "https://www.tobyord.com/writing/hourly-costs-for-ai-agents",
+      "tldr": "Toby Ord analyzes whether AI agent operational costs are scaling exponentially alongside capability gains. Examines hourly cost trends across agent systems, raising important questions about the economic sustainability of increasingly capable agents.",
+      "tldr_zh": "Toby Ord 分析 AI agent 运营成本是否随能力提升呈指数增长。考察各 agent 系统的每小时成本趋势，对日益强大的 agent 的经济可持续性提出重要质疑。",
+      "points": 305,
+      "num_comments": 130,
+      "interest_tag": ""
+    },
+    {
+      "title": "Show HN: Libretto – Making AI browser automations deterministic",
+      "url": "https://github.com/saffron-health/libretto",
+      "tldr": "Libretto tackles the reliability problem of AI browser automation by making actions deterministic. Instead of letting LLMs freely navigate, it constrains browser interactions to produce repeatable, verifiable automation workflows.",
+      "tldr_zh": "Libretto 解决 AI 浏览器自动化的可靠性问题，使操作具有确定性。不让 LLM 自由导航，而是约束浏览器交互以产生可重复、可验证的自动化工作流。",
+      "points": 133,
+      "num_comments": 57,
+      "interest_tag": "CUA"
+    },
+    {
+      "title": "Scan your website to see how ready it is for AI agents",
+      "url": "https://isitagentready.com",
+      "tldr": "A tool that scans websites to evaluate their readiness for AI agent interaction — checking structured data, API endpoints, and machine-readable content that agents need to effectively navigate and use web services.",
+      "tldr_zh": "一个扫描网站以评估其对 AI agent 交互就绪程度的工具——检查结构化数据、API 端点和 agent 有效导航和使用网络服务所需的机器可读内容。",
+      "points": 112,
+      "num_comments": 178,
+      "interest_tag": ""
+    }
+  ]
+}
