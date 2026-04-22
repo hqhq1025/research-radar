@@ -1,0 +1,206 @@
+{
+  "date": "2026-04-22",
+  "generated_at": "2026-04-22T01:01:00Z",
+  "briefing_zh": "今天 AI 研究的核心主题是 **Agent 能力的可靠性与进化**。HuggingFace 上最引人注目的工作是 **Agent-World**（人大+字节），提出通过可扩展的真实世界环境合成来训练通用 Agent，在 23 个 benchmark 上取得了一致提升——这标志着 Agent 训练正从手工环境走向自动化生成。与此呼应，**On the Reliability of Computer Use Agents** 揭示了一个关键问题：即使任务和模型不变，Computer Use Agent 的成功率在重复执行时也不稳定，这对实际部署构成了严峻挑战。\n\n开源社区方面，**Qwen3.6-35B-A3B** 在 Hacker News 上引爆讨论（1270 points），阿里以仅 3B 激活参数的 MoE 架构实现了接近 35B 的 agentic coding 能力，让开源模型在 Agent 场景中的性价比再次飙升。**Cloudflare** 也发布了面向 Agent 的推理基础设施层，说明大厂正在为 Agent 时代铺设底层管道。\n\nGitHub 上，**swarm-forge**（Uncle Bob 出品）以极简的 Shell 脚本实现多 Agent 协调引发关注，**cavemem** 则瞄准跨 Agent 持久化记忆这一痛点。研究侧，**GenericAgent** 通过上下文信息密度最大化来解决长程 Agent 的 token 效率问题，**WebCompass** 为 Web coding agent 提供了首个多模态评测框架。整体来看，今天的趋势是：Agent 正在从"能不能用"走向"用得稳不稳"和"用得省不省"。",
+  "briefing_en": "Today's AI research centers on **Agent reliability and evolution**. The standout work on HuggingFace is **Agent-World** (Renmin University + ByteDance), which proposes scalable real-world environment synthesis for training general-purpose agents, achieving consistent improvements across 23 benchmarks — signaling a shift from hand-crafted to auto-generated training environments. Complementing this, **On the Reliability of Computer Use Agents** exposes a critical issue: CUA success rates are unstable across repeated executions even with identical tasks and models, posing serious deployment challenges.\n\nOn the open-source front, **Qwen3.6-35B-A3B** exploded on Hacker News (1270 points) — Alibaba's MoE architecture achieves near-35B agentic coding capability with only 3B active parameters, dramatically improving cost-efficiency for agent workloads. **Cloudflare** also launched an inference platform designed specifically for agents, indicating major infrastructure players are building the plumbing for the agent era.\n\nOn GitHub, **swarm-forge** (by Uncle Bob) coordinates multiple AI agents via minimalist shell scripts, while **cavemem** tackles cross-agent persistent memory. In research, **GenericAgent** maximizes contextual information density to solve token efficiency for long-horizon agents, and **WebCompass** provides the first multimodal evaluation framework for web coding agents. The overarching trend: agents are moving from 'can they work' to 'can they work reliably and efficiently'.",
+  "viral_analysis_zh": "**Qwen3.6-35B-A3B** 无疑是今天的爆款——1270 points 的 HN 讨论量说明一切。3B 激活参数达到 35B 效果的叙事完美击中了开源社区对"小模型大能力"的渴望，加上 agentic coding 这个最热场景，传播力极强。**swarm-forge** 能火则是因为 Uncle Bob 的个人品牌效应加上"用 Shell 脚本编排多 Agent"这种反直觉的极简主义，在过度工程化的 Agent 框架海洋中显得清新脱俗。",
+  "viral_analysis_en": "**Qwen3.6-35B-A3B** is today's undisputed viral hit — 1270 HN points speaks volumes. The narrative of 3B active parameters achieving 35B-level performance perfectly captures the open-source community's hunger for 'small model, big capability,' especially in the hottest use case of agentic coding. **swarm-forge** went viral thanks to Uncle Bob's personal brand plus the counterintuitive minimalism of orchestrating multi-agent systems with shell scripts — a refreshing contrast to the over-engineered agent framework landscape.",
+  "huggingface_papers": [
+    {
+      "title": "Agent-World: Scaling Real-World Environment Synthesis for Evolving General Agent Intelligence",
+      "arxiv_id": "2604.18292",
+      "url": "https://arxiv.org/abs/2604.18292",
+      "tldr": "Introduces a framework for automatically synthesizing diverse real-world environments to train general-purpose agents. Uses MCP-compatible tool ecosystems and a self-evolving training loop, achieving consistent gains across 23 agent benchmarks. Key insight: scaling environment diversity matters more than scaling model size for agent capability.",
+      "tldr_zh": "提出自动合成多样化真实世界环境来训练通用 Agent 的框架。基于 MCP 兼容的工具生态和自进化训练循环，在 23 个 Agent benchmark 上取得一致提升。核心洞察：对 Agent 能力而言，扩展环境多样性比扩展模型规模更重要。",
+      "upvotes": 0,
+      "authors": "Guanting Dong, Junting Lu, Junjie Huang",
+      "ai_keywords": ["agent training", "environment synthesis", "MCP", "self-evolving"],
+      "interest_tag": "Benchmark"
+    },
+    {
+      "title": "On the Reliability of Computer Use Agents",
+      "arxiv_id": "2604.17849",
+      "url": "https://arxiv.org/abs/2604.17849",
+      "tldr": "Systematically studies the reliability of computer-use agents across repeated executions. Finds that even with identical tasks and models, success rates vary significantly between runs, revealing fundamental instability in CUA systems. Proposes reliability metrics beyond single-pass accuracy.",
+      "tldr_zh": "系统研究了 Computer Use Agent 在重复执行中的可靠性。发现即使任务和模型完全相同，不同运行的成功率也差异显著，揭示了 CUA 系统的根本性不稳定。提出了超越单次准确率的可靠性评估指标。",
+      "upvotes": 0,
+      "authors": "Gonzalo Gonzalez-Pumariega, Saaket Agashe, Jiachen Yang",
+      "ai_keywords": ["computer use agent", "reliability", "evaluation"],
+      "interest_tag": "CUA"
+    },
+    {
+      "title": "GenericAgent: A Token-Efficient Self-Evolving LLM Agent via Contextual Information Density Maximization (V1.0)",
+      "arxiv_id": "2604.17091",
+      "url": "https://arxiv.org/abs/2604.17091",
+      "tldr": "Addresses the critical token bloat problem in long-horizon LLM agents by maximizing contextual information density. Compresses tool descriptions, memories, and environmental feedback while retaining decision-critical information, enabling agents to operate effectively within limited context windows.",
+      "tldr_zh": "解决长程 LLM Agent 中关键的 token 膨胀问题，通过最大化上下文信息密度来压缩工具描述、记忆和环境反馈，同时保留决策关键信息，使 Agent 在有限上下文窗口内高效运行。",
+      "upvotes": 0,
+      "authors": "Jiaqing Liang, Jinyi Han, Weijia Li",
+      "ai_keywords": ["token efficiency", "context management", "agent"],
+      "interest_tag": ""
+    },
+    {
+      "title": "OpenGame: Open Agentic Coding for Games",
+      "arxiv_id": "2604.18394",
+      "url": "https://arxiv.org/abs/2604.18394",
+      "tldr": "Tackles the challenge of using LLM code agents for game development, which requires orchestrating game engines, real-time loops, and tightly coupled state across files. Provides an open framework and benchmark for evaluating agentic coding in complex game dev scenarios.",
+      "tldr_zh": "解决使用 LLM 代码 Agent 进行游戏开发的挑战——需要协调游戏引擎、实时循环和跨文件的紧耦合状态。提供了一个用于评估复杂游戏开发场景中 Agent 编码能力的开放框架和 benchmark。",
+      "upvotes": 0,
+      "authors": "Yilei Jiang, Jinyuan Hu, Qianyin Xiao",
+      "ai_keywords": ["game development", "agentic coding", "benchmark"],
+      "interest_tag": ""
+    },
+    {
+      "title": "WebCompass: Towards Multimodal Web Coding Evaluation for Code Language Models",
+      "arxiv_id": "2604.18224",
+      "url": "https://arxiv.org/abs/2604.18224",
+      "tldr": "First multimodal benchmark for evaluating web coding agents end-to-end, going beyond text-conditioned generation with static metrics. Tests agents on realistic web development tasks requiring visual understanding, interactive debugging, and cross-file coordination.",
+      "tldr_zh": "首个用于端到端评估 Web 编码 Agent 的多模态 benchmark，超越了基于文本条件的静态指标评估。在需要视觉理解、交互式调试和跨文件协调的真实 Web 开发任务上测试 Agent。",
+      "upvotes": 0,
+      "authors": "",
+      "ai_keywords": ["web coding", "multimodal", "benchmark", "evaluation"],
+      "interest_tag": ""
+    }
+  ],
+  "alphaxiv_papers": [
+    {
+      "title": "Qwen3.5-Omni Technical Report",
+      "arxiv_id": "2604.15804",
+      "url": "https://arxiv.org/abs/2604.15804",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2604.15804",
+      "tldr": "Alibaba's Qwen Team presents Qwen3.5-Omni, scaling to hundreds of billions of parameters with unified processing across text, images, audio, and video. Features real-time streaming speech synthesis and emergent 'Audio-Visual Vibe Coding' — generating code from audio-visual inputs.",
+      "tldr_zh": "阿里 Qwen 团队发布 Qwen3.5-Omni，参数量达数千亿，统一处理文本、图像、音频和视频。支持实时流式语音合成，涌现出"音视频 Vibe Coding"能力——从音视频输入直接生成代码。",
+      "interest_tag": ""
+    },
+    {
+      "title": "Agent-World: Scaling Real-World Environment Synthesis for Evolving General Agent Intelligence",
+      "arxiv_id": "2604.18292",
+      "url": "https://arxiv.org/abs/2604.18292",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2604.18292",
+      "tldr": "Renmin University and ByteDance propose Agent-World for scalable real-world environment synthesis with self-evolving agent training. Outperforms prior methods across 23 agent benchmarks by autonomously discovering and constructing diverse tool ecosystems.",
+      "tldr_zh": "人大和字节跳动提出 Agent-World，通过可扩展的真实世界环境合成和自进化训练机制，在 23 个 Agent benchmark 上超越已有方法。Agent 可自主发现和构建多样化工具生态。",
+      "interest_tag": "Benchmark"
+    },
+    {
+      "title": "(1D) Ordered Tokens Enable Efficient Test-Time Search",
+      "arxiv_id": "2604.15453",
+      "url": "https://arxiv.org/abs/2604.15453",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2604.15453",
+      "tldr": "Reveals that 1D ordered tokenization (coarse-to-fine semantic detail) intrinsically improves test-time search efficiency in autoregressive image generation. Enables zero-shot multimodal control and even training-free generation, outperforming 2D grid tokenization.",
+      "tldr_zh": "发现 1D 有序 token 化（从粗到细的语义细节）天然提升自回归图像生成中的测试时搜索效率。实现零样本多模态控制甚至无需训练的生成，优于传统 2D 网格 token 化。",
+      "interest_tag": ""
+    },
+    {
+      "title": "Learning Whole-Body Humanoid Locomotion via Motion Generation and Motion Tracking",
+      "arxiv_id": "2604.17335",
+      "url": "https://arxiv.org/abs/2604.17335",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2604.17335",
+      "tldr": "Combines a diffusion-based motion generator with an RL-based motion tracker for whole-body humanoid locomotion. Enables Unitree G1 robot to adaptively navigate diverse terrains in real-time with perception-aware reference motions.",
+      "tldr_zh": "将基于扩散模型的动作生成器与基于强化学习的动作跟踪器结合，实现全身人形机器人运动控制。使 Unitree G1 机器人能实时自适应地在多样化地形中行走。",
+      "interest_tag": ""
+    },
+    {
+      "title": "Do Vision-Language Models Truly Perform Vision Reasoning? A Rigorous Study of the Modality Gap",
+      "arxiv_id": "2604.16256",
+      "url": "https://arxiv.org/abs/2604.16256",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2604.16256",
+      "tldr": "Rigorously examines whether VLMs actually perform vision reasoning or rely on language shortcuts. Quantifies the modality gap and reveals that many apparent visual reasoning successes are driven by textual priors rather than genuine visual understanding.",
+      "tldr_zh": "严格检验 VLM 是否真正进行视觉推理还是依赖语言捷径。量化了模态差距，揭示许多表面上的视觉推理成功实际上由文本先验驱动，而非真正的视觉理解。",
+      "interest_tag": ""
+    }
+  ],
+  "github_repos": [
+    {
+      "name": "ZeroZ-lab/cc-design",
+      "url": "https://github.com/ZeroZ-lab/cc-design",
+      "tldr": "High-fidelity HTML design and prototype guidance skill for AI agents. Enables agents to generate production-quality web designs with pixel-perfect accuracy, bridging the gap between design tools and code agents.",
+      "tldr_zh": "面向 AI Agent 的高保真 HTML 设计和原型指导技能。使 Agent 能生成像素级精确的生产质量 Web 设计，弥合设计工具与代码 Agent 之间的差距。",
+      "stars": 563,
+      "language": "JavaScript",
+      "interest_tag": ""
+    },
+    {
+      "name": "cosmicstack-labs/mercury-agent",
+      "url": "https://github.com/cosmicstack-labs/mercury-agent",
+      "tldr": "Soul-driven AI agent with permission-hardened tools and token budgets. Focuses on safe, controlled agent execution with fine-grained permission management and resource constraints for production deployments.",
+      "tldr_zh": "具有权限强化工具和 token 预算的 AI Agent。专注于安全可控的 Agent 执行，提供细粒度权限管理和资源约束，适用于生产部署。",
+      "stars": 333,
+      "language": "TypeScript",
+      "interest_tag": ""
+    },
+    {
+      "name": "unclebob/swarm-forge",
+      "url": "https://github.com/unclebob/swarm-forge",
+      "tldr": "Uncle Bob's minimalist tool for coordinating multiple AI agents using simple shell scripts. A refreshingly simple approach to multi-agent orchestration that avoids framework complexity, letting agents collaborate through basic Unix primitives.",
+      "tldr_zh": "Uncle Bob 出品的极简多 Agent 协调工具，用简单的 Shell 脚本实现。以清新脱俗的简约方式解决多 Agent 编排问题，避免框架复杂性，通过基本 Unix 原语让 Agent 协作。",
+      "stars": 238,
+      "language": "Shell",
+      "interest_tag": "Agent Swarm"
+    },
+    {
+      "name": "yzhao062/agent-style",
+      "url": "https://github.com/yzhao062/agent-style",
+      "tldr": "21 curated writing rules for AI coding and writing agents. A drop-in style guide for Claude Code, Cursor, and similar tools that improves agent output quality through carefully designed prompting conventions.",
+      "tldr_zh": "为 AI 编码和写作 Agent 精选的 21 条写作规则。可直接用于 Claude Code、Cursor 等工具的风格指南，通过精心设计的提示规范提升 Agent 输出质量。",
+      "stars": 204,
+      "language": "Python",
+      "interest_tag": ""
+    },
+    {
+      "name": "JuliusBrussee/cavemem",
+      "url": "https://github.com/JuliusBrussee/cavemem",
+      "tldr": "Cross-agent persistent memory for coding assistants. Stores compressed context that persists across different agent sessions and tools, solving the 'amnesia problem' where each agent invocation starts from scratch.",
+      "tldr_zh": "面向编码助手的跨 Agent 持久化记忆。存储可在不同 Agent 会话和工具之间持久化的压缩上下文，解决每次 Agent 调用都从零开始的"失忆问题"。",
+      "stars": 77,
+      "language": "TypeScript",
+      "interest_tag": "Memory"
+    }
+  ],
+  "hackernews": [
+    {
+      "title": "Qwen3.6-35B-A3B: Agentic coding power, now open to all",
+      "url": "https://qwen.ai/blog?id=qwen3.6-35b-a3b",
+      "tldr": "Alibaba releases Qwen3.6-35B-A3B, a MoE model with only 3B active parameters that achieves near-35B performance on agentic coding tasks. Open-weights release dramatically lowers the cost of running capable coding agents locally.",
+      "tldr_zh": "阿里发布 Qwen3.6-35B-A3B，一个仅有 3B 激活参数的 MoE 模型，在 Agent 编码任务上达到接近 35B 的性能。开源权重大幅降低了本地运行高能力编码 Agent 的成本。",
+      "points": 1270,
+      "num_comments": 532,
+      "interest_tag": ""
+    },
+    {
+      "title": "Cloudflare's AI Platform: an inference layer designed for agents",
+      "url": "https://blog.cloudflare.com/ai-platform/",
+      "tldr": "Cloudflare launches an inference infrastructure layer purpose-built for AI agents, with features like persistent connections, stateful sessions, and edge-native deployment. Signals that major infrastructure companies are building dedicated agent plumbing.",
+      "tldr_zh": "Cloudflare 发布专为 AI Agent 构建的推理基础设施层，支持持久连接、有状态会话和边缘原生部署。标志着大型基础设施公司正在为 Agent 构建专用管道。",
+      "points": 306,
+      "num_comments": 97,
+      "interest_tag": ""
+    },
+    {
+      "title": "Less human AI agents, please",
+      "url": "https://nial.se/blog/less-human-ai-agents-please/",
+      "tldr": "A thought-provoking essay arguing that AI agents should stop mimicking human behavior patterns and instead leverage their unique computational strengths. Makes the case for agent UX designed around machine capabilities rather than human metaphors.",
+      "tldr_zh": "一篇发人深省的文章，认为 AI Agent 应停止模仿人类行为模式，转而发挥其独特的计算优势。主张 Agent UX 应基于机器能力而非人类隐喻来设计。",
+      "points": 130,
+      "num_comments": 142,
+      "interest_tag": ""
+    },
+    {
+      "title": "Scan your website to see how ready it is for AI agents",
+      "url": "https://isitagentready.com",
+      "tldr": "A tool that scans websites for AI agent compatibility — checking for structured data, API discoverability, and machine-readable content. Reflects the growing expectation that websites need to be 'agent-ready' as AI agents become primary web consumers.",
+      "tldr_zh": "一个扫描网站 AI Agent 兼容性的工具——检查结构化数据、API 可发现性和机器可读内容。反映了随着 AI Agent 成为主要 Web 消费者，网站需要"Agent 就绪"的趋势。",
+      "points": 112,
+      "num_comments": 178,
+      "interest_tag": ""
+    },
+    {
+      "title": "Launch HN: Kampala (YC W26) – Reverse-Engineer Apps into APIs",
+      "url": "https://www.zatanna.ai/kampala",
+      "tldr": "YC W26 startup that automatically reverse-engineers mobile and web apps into usable APIs. Enables AI agents to interact with any application programmatically, even those without official APIs — a key enabler for CUA-style automation.",
+      "tldr_zh": "YC W26 创业公司，自动将移动和 Web 应用逆向工程为可用 API。使 AI Agent 能以编程方式与任何应用交互（即使没有官方 API），是 CUA 式自动化的关键赋能者。",
+      "points": 100,
+      "num_comments": 84,
+      "interest_tag": ""
+    }
+  ]
+}
