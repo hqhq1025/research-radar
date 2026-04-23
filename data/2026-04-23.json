@@ -1,0 +1,206 @@
+{
+  "date": "2026-04-23",
+  "generated_at": "2026-04-23T01:15:00Z",
+  "briefing_zh": "今天 AI 领域最引人注目的趋势是**智能体基础设施**的全面升级。Google 发布了第八代 TPU，明确定位为「智能体时代的芯片」，强调对长上下文推理和多步决策的硬件级优化，这标志着芯片厂商正在将 agent workload 作为核心设计目标。与此同时，**Agent-World**（人大 & 字节跳动）提出了一种可扩展的真实世界环境合成框架，让智能体通过自主发现和构建工具生态来持续进化，在 23 个 agent benchmark 上取得一致提升——这是从「给 agent 造工具」到「让 agent 自己造工具」的范式转变。\n\n在模型层面，**Qwen3.5-Omni** 作为全模态大模型刷新了 215 项音频和视听基准，展现出「Audio-Visual Vibe Coding」等涌现能力，预示着多模态 agent 即将进入实用阶段。**AgentSPEX** 则从另一个角度切入——提出了一种 agent 规范与执行语言，试图用结构化的控制流替代当前主流的「一句话 prompt 驱动」模式，这对提升 agent 可靠性意义重大。\n\n开源社区方面，本周最火的项目集中在 **AI agent 的工程化落地**：cc-design（593 星）为 AI agent 提供高保真 HTML 设计技能，mercury-agent（479 星）构建了带权限管控和 token 预算的 24/7 运行框架，Uncle Bob 的 swarm-forge（284 星）则提供了一种简洁的多 agent 协调工具。这些项目共同指向一个趋势：社区正在从「能不能做」转向「怎么做好」，agent 工程化正在快速成熟。",
+  "briefing_en": "Today's most striking trend is the **full-stack upgrade of agent infrastructure**. Google released its eighth-generation TPUs, explicitly positioned for the \"agentic era\" with hardware-level optimizations for long-context reasoning and multi-step decision-making — a signal that chipmakers now treat agent workloads as a first-class design target. Meanwhile, **Agent-World** (Renmin University & ByteDance Seed) proposes a scalable real-world environment synthesis framework where agents autonomously discover and construct tool ecosystems, achieving consistent improvements across 23 agent benchmarks — a paradigm shift from \"building tools for agents\" to \"letting agents build their own tools.\"\n\nOn the model front, **Qwen3.5-Omni** sets new state-of-the-art across 215 audio and audio-visual benchmarks as a fully omnimodal LLM, with emergent capabilities like \"Audio-Visual Vibe Coding\" hinting at practical multimodal agents. **AgentSPEX** tackles reliability from a different angle — proposing a formal agent specification and execution language to replace the dominant \"single-prompt-drives-everything\" paradigm, which could be transformative for production agent systems.\n\nIn open source, this week's hottest projects center on **agent engineering at scale**: cc-design (593 stars) gives AI agents high-fidelity HTML design skills, mercury-agent (479 stars) builds a permission-hardened 24/7 runtime with token budgets, and Uncle Bob's swarm-forge (284 stars) offers a simple multi-agent coordination tool. The community is clearly shifting from \"can agents do it\" to \"how to do it well\" — agent engineering is maturing rapidly.",
+  "viral_analysis_zh": "今天最可能火的是 Google 第八代 TPU 的发布——「agentic era」的定位精准击中了当前行业焦点，393 个 HN 点赞和 187 条评论说明硬件+agent 的叙事极具传播力。Uncle Bob（Robert C. Martin）的 swarm-forge 虽然只是简单的多 agent 协调脚本，但凭借「Uncle Bob 做 AI」的名人效应和极简设计理念在一周内获得 284 星，证明了大佬背书+反复杂化叙事在 AI 工具推广中的强大号召力。",
+  "viral_analysis_en": "The most viral item today is Google's eighth-gen TPU announcement — the \"agentic era\" framing perfectly captures the current industry zeitgeist, driving 393 HN points and 187 comments. Uncle Bob's swarm-forge, despite being a simple multi-agent coordination script, gained 284 stars in a week purely on celebrity endorsement and minimalist design philosophy, proving that \"famous person does AI\" plus anti-complexity narrative is a powerful promotion formula in the AI tooling space.",
+  "huggingface_papers": [
+    {
+      "title": "Tstars-Tryon 1.0: Robust and Realistic Virtual Try-On for Diverse Fashion Items",
+      "arxiv_id": "2604.19748",
+      "url": "https://arxiv.org/abs/2604.19748",
+      "tldr": "A new virtual try-on system that handles diverse fashion items (tops, bottoms, dresses, accessories) with high fidelity in complex real-world scenarios. Unlike previous methods limited to upper-body garments, Tstars-Tryon 1.0 uses a spatially-structured diffusion approach to preserve garment details while maintaining realistic body-garment interaction across diverse poses and body types.",
+      "tldr_zh": "一个能处理多种时尚单品（上衣、下装、连衣裙、配饰）的虚拟试穿系统，在复杂真实场景中保持高保真度。与以往仅限上半身的方法不同，Tstars-Tryon 1.0 使用空间结构化扩散方法，在保留服装细节的同时实现不同姿态和体型下的逼真穿着效果。",
+      "upvotes": 80,
+      "authors": "Mengting Chen, Zhengrui Chen, Yongchao Du",
+      "ai_keywords": ["virtual-try-on", "diffusion-model", "fashion-AI"],
+      "interest_tag": ""
+    },
+    {
+      "title": "CoInteract: Physically-Consistent Human-Object Interaction Video Synthesis via Spatially-Structured Conditions",
+      "arxiv_id": "2604.19636",
+      "url": "https://arxiv.org/abs/2604.19636",
+      "tldr": "A method for synthesizing physically-consistent human-object interaction videos for e-commerce and virtual marketing. CoInteract uses spatially-structured conditions to ensure realistic physics when humans interact with objects, solving the persistent problem of diffusion models generating physically implausible contact and manipulation sequences.",
+      "tldr_zh": "一种用于电商和虚拟营销的物理一致人物交互视频合成方法。CoInteract 使用空间结构化条件确保人与物体交互时的物理真实性，解决了扩散模型生成物理上不合理的接触和操作序列的长期问题。",
+      "upvotes": 59,
+      "authors": "Mengting Luo, Xiaozhe Xin, Tao Feng",
+      "ai_keywords": ["video-synthesis", "human-object-interaction", "diffusion-model"],
+      "interest_tag": ""
+    },
+    {
+      "title": "AgentSPEX: An Agent SPecification and EXecution Language",
+      "arxiv_id": "2604.13346",
+      "url": "https://arxiv.org/abs/2604.13346",
+      "tldr": "Proposes a formal specification and execution language for LLM agents to replace reactive single-prompt paradigms. AgentSPEX introduces structured control flow for agent reasoning and tool-use sequences, enabling more reliable and predictable agent behavior in production systems. This addresses a critical gap — most agent frameworks rely on open-ended prompting with no formal execution semantics.",
+      "tldr_zh": "提出了一种 LLM agent 的形式化规范与执行语言，用以替代当前的反应式单 prompt 范式。AgentSPEX 为 agent 的推理和工具使用引入了结构化控制流，使生产系统中的 agent 行为更可靠、可预测。这填补了一个关键空白——大多数 agent 框架依赖开放式 prompting，缺乏形式化的执行语义。",
+      "upvotes": 51,
+      "authors": "Jerry Wang, Jerry Huang, Jiarui Yao",
+      "ai_keywords": ["agent-framework", "specification-language", "control-flow"],
+      "interest_tag": ""
+    },
+    {
+      "title": "TEMPO: Scaling Test-time Training for Large Reasoning Models",
+      "arxiv_id": "2604.19295",
+      "url": "https://arxiv.org/abs/2604.19295",
+      "tldr": "Scales test-time training (TTT) for large reasoning models, adapting parameters on unlabeled test instances during inference. TEMPO extends model capabilities beyond offline training limits, showing that continued adaptation at test time can unlock reasoning improvements that pre-training alone cannot achieve. A significant step toward self-improving inference systems.",
+      "tldr_zh": "将测试时训练（TTT）扩展到大型推理模型，在推理阶段对未标注测试样本进行参数适配。TEMPO 突破了离线训练的能力上限，证明推理时的持续适配能解锁预训练无法达到的推理提升，是迈向自我改进推理系统的重要一步。",
+      "upvotes": 25,
+      "authors": "Xinke Zhang, Haitao Kong, Wu",
+      "ai_keywords": ["test-time-training", "reasoning", "self-improving"],
+      "interest_tag": ""
+    },
+    {
+      "title": "PlayCoder: Making LLM-Generated GUI Code Playable",
+      "arxiv_id": "2604.19742",
+      "url": "https://arxiv.org/abs/2604.19742",
+      "tldr": "Introduces a benchmark and method for making LLM-generated GUI applications (especially games) actually playable and interactive. PlayCoder addresses the gap between code generation and functional GUI output — LLMs can write code that compiles but often produces non-functional or non-interactive interfaces. The work provides systematic evaluation of GUI code quality beyond syntax correctness.",
+      "tldr_zh": "提出了一个让 LLM 生成的 GUI 应用（尤其是游戏）真正可玩可交互的基准和方法。PlayCoder 填补了代码生成与功能性 GUI 输出之间的鸿沟——LLM 能写出可编译的代码，但往往产出不可用或无法交互的界面。该工作提供了超越语法正确性的 GUI 代码质量系统评估。",
+      "upvotes": 20,
+      "authors": "Wei Peng, Xin Tao, Yin",
+      "ai_keywords": ["code-generation", "GUI", "benchmark"],
+      "interest_tag": ""
+    }
+  ],
+  "alphaxiv_papers": [
+    {
+      "title": "Agent-World: Scaling Real-World Environment Synthesis for Evolving General Agent Intelligence",
+      "arxiv_id": "2604.18292",
+      "url": "https://arxiv.org/abs/2604.18292",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2604.18292",
+      "tldr": "A framework from Renmin University and ByteDance Seed for advancing general agent intelligence through scalable real-world environment synthesis. Agents autonomously discover and construct diverse stateful tool ecosystems, achieving consistent improvements across 23 agent benchmarks via a continuous self-evolving training mechanism.",
+      "tldr_zh": "人大和字节跳动 Seed 提出的通用 agent 智能框架，通过可扩展的真实世界环境合成推进 agent 能力。Agent 自主发现和构建多样化的有状态工具生态，通过持续自我进化训练机制在 23 个 agent 基准上取得一致提升。",
+      "interest_tag": "Benchmark"
+    },
+    {
+      "title": "Qwen3.5-Omni Technical Report",
+      "arxiv_id": "2604.15804",
+      "url": "https://arxiv.org/abs/2604.15804",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2604.15804",
+      "tldr": "Qwen Team's fully omnimodal LLM that understands and generates text, images, audio, and video. Achieves SOTA across 215 audio/audio-visual benchmarks with low-latency real-time interaction and emergent capabilities like 'Audio-Visual Vibe Coding' — pointing toward practical multimodal agent applications.",
+      "tldr_zh": "Qwen 团队的全模态大模型，支持文本、图像、音频、视频的理解与生成。在 215 项音频/视听基准上达到 SOTA，具备低延迟实时交互和「Audio-Visual Vibe Coding」等涌现能力，预示多模态 agent 应用即将进入实用阶段。",
+      "interest_tag": ""
+    },
+    {
+      "title": "OneVL: One-Step Latent Reasoning and Planning with Vision-Language Explanation",
+      "arxiv_id": "2604.18486",
+      "url": "https://arxiv.org/abs/2604.18486",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2604.18486",
+      "tldr": "Xiaomi's framework integrating VLA models with world model auxiliary for autonomous driving. First latent CoT method to surpass explicit autoregressive CoT in trajectory prediction while maintaining answer-only inference latency. Achieves 88.84 PDM-score on NAVSIM, outperforming prior 8B models.",
+      "tldr_zh": "小米具身智能团队的框架，将视觉语言动作模型与世界模型辅助结合用于自动驾驶。首个在轨迹预测上超越显式自回归 CoT 的潜在 CoT 方法，同时保持仅回答推理延迟。在 NAVSIM 上达到 88.84 PDM 分数。",
+      "interest_tag": ""
+    },
+    {
+      "title": "Neural Garbage Collection: Learning to Forget while Learning to Reason",
+      "arxiv_id": "2604.18002",
+      "url": "https://arxiv.org/abs/2604.18002",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2604.18002",
+      "tldr": "Stanford's RL framework for LLMs to jointly learn chain-of-thought reasoning and KV cache memory management. Reduces peak KV cache size by 2.4-5x while outperforming heuristic eviction strategies — a practical approach to making long reasoning chains memory-efficient without sacrificing quality.",
+      "tldr_zh": "斯坦福的 RL 框架，让 LLM 同时学习思维链推理和 KV 缓存内存管理。将峰值 KV 缓存缩小 2.4-5 倍，同时优于启发式驱逐策略——一种在不牺牲质量的前提下让长推理链内存高效的实用方法。",
+      "interest_tag": "Memory"
+    },
+    {
+      "title": "MultiWorld: Scalable Multi-Agent Multi-View Video World Models",
+      "arxiv_id": "2604.18564",
+      "url": "https://arxiv.org/abs/2604.18564",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2604.18564",
+      "tldr": "A framework for scalable multi-agent, multi-view video world modeling with Multi-Agent Condition Module and Global State Encoder. Demonstrates improved action controllability and multi-view consistency across varying agent counts and camera views, tested on multi-player games and multi-robot manipulation.",
+      "tldr_zh": "可扩展的多智能体多视角视频世界建模框架，包含多智能体条件模块和全局状态编码器。在不同智能体数量和相机视角下展现了更好的动作可控性和多视角一致性，在多人游戏和多机器人操作任务上验证。",
+      "interest_tag": "Agent Swarm"
+    }
+  ],
+  "github_repos": [
+    {
+      "name": "ZeroZ-lab/cc-design",
+      "url": "https://github.com/ZeroZ-lab/cc-design",
+      "tldr": "A high-fidelity HTML design and prototype guidance skill for AI agents. Provides structured design system knowledge that lets coding agents (Claude Code, Cursor, etc.) generate production-quality web UIs instead of generic Bootstrap layouts. Essentially a 'design taste' plugin for AI coders.",
+      "tldr_zh": "面向 AI agent 的高保真 HTML 设计与原型指导技能。提供结构化的设计系统知识，让编码 agent（Claude Code、Cursor 等）生成生产级 Web UI，而非千篇一律的 Bootstrap 布局。本质上是 AI 编码器的「设计品味」插件。",
+      "stars": 593,
+      "language": "JavaScript",
+      "interest_tag": ""
+    },
+    {
+      "name": "cosmicstack-labs/mercury-agent",
+      "url": "https://github.com/cosmicstack-labs/mercury-agent",
+      "tldr": "A 'soul-driven' AI agent with permission-hardened tools, token budgets, and multi-channel access (CLI + Telegram). Designed for 24/7 autonomous operation with safety guardrails — addresses the growing need for always-on agents that won't accidentally burn through API credits or perform unauthorized actions.",
+      "tldr_zh": "一个「灵魂驱动」的 AI agent，具备权限加固的工具、token 预算和多渠道访问（CLI + Telegram）。为 24/7 自主运行设计并带有安全护栏——解决了始终在线 agent 不会意外耗尽 API 额度或执行未授权操作的需求。",
+      "stars": 479,
+      "language": "TypeScript",
+      "interest_tag": ""
+    },
+    {
+      "name": "unclebob/swarm-forge",
+      "url": "https://github.com/unclebob/swarm-forge",
+      "tldr": "Robert C. Martin's (Uncle Bob) simple tool for coordinating multiple AI agents. A minimalist shell-based approach to multi-agent orchestration, emphasizing clean architecture principles. Notable for bringing software craftsmanship philosophy to the AI agent coordination space.",
+      "tldr_zh": "Robert C. Martin（Uncle Bob）的简单多 AI agent 协调工具。基于 shell 的极简多 agent 编排方案，强调整洁架构原则。将软件工匠精神带入 AI agent 协调领域，引人注目。",
+      "stars": 284,
+      "language": "Shell",
+      "interest_tag": "Agent Swarm"
+    },
+    {
+      "name": "ConardLi/web-design-skill",
+      "url": "https://github.com/ConardLi/web-design-skill",
+      "tldr": "An AI agent skill that transforms AI-generated web pages from 'functional' to 'stunning', inspired by Claude's design capabilities. Drop-in skill file that upgrades any coding agent's web design output quality — part of the emerging 'agent skills' ecosystem.",
+      "tldr_zh": "一个将 AI 生成网页从「能用」提升到「惊艳」的 AI agent 技能，灵感来自 Claude 的设计能力。即插即用的技能文件，可升级任何编码 agent 的网页设计产出质量——新兴「agent 技能」生态的一部分。",
+      "stars": 270,
+      "language": "CSS",
+      "interest_tag": ""
+    },
+    {
+      "name": "yzhao062/agent-style",
+      "url": "https://github.com/yzhao062/agent-style",
+      "tldr": "21 writing rules for AI coding and writing agents to make their output read like a tech professional. Drop-in config for Claude Code, Codex, Copilot, Cursor, and Aider. Addresses the common complaint that AI-generated text sounds robotic and generic.",
+      "tldr_zh": "21 条面向 AI 编码和写作 agent 的写作规则，让其输出像技术专业人士所写。可直接用于 Claude Code、Codex、Copilot、Cursor 和 Aider。解决了 AI 生成文本听起来机械和千篇一律的常见问题。",
+      "stars": 255,
+      "language": "Python",
+      "interest_tag": ""
+    }
+  ],
+  "hackernews": [
+    {
+      "title": "Our eighth generation TPUs: two chips for the agentic era",
+      "url": "https://blog.google/innovation-and-ai/infrastructure-and-cloud/google-cloud/eighth-generation-tpu-agentic-era/",
+      "tldr": "Google unveils its 8th-gen TPUs explicitly designed for the 'agentic era' — optimized for long-context reasoning, multi-step planning, and the sustained compute patterns of autonomous AI agents. Signals that hardware vendors now see agent workloads as a distinct and primary design target, not just LLM training/inference.",
+      "tldr_zh": "Google 发布第八代 TPU，明确为「智能体时代」设计——针对长上下文推理、多步规划和自主 AI agent 的持续计算模式进行优化。标志着硬件厂商已将 agent 工作负载视为独立且首要的设计目标，而非仅仅是 LLM 训练/推理。",
+      "points": 393,
+      "num_comments": 187,
+      "interest_tag": ""
+    },
+    {
+      "title": "OpenClaw isn't fooling me. I remember MS-DOS",
+      "url": "https://www.flyingpenguin.com/build-an-openclaw-free-secure-always-on-local-ai-agent/",
+      "tldr": "A skeptical take on OpenClaw (a local AI agent platform), comparing it to MS-DOS era computing. The author builds a free, secure, always-on local AI agent setup while questioning the hype. The 307 points and 330 comments show strong community engagement around local-first AI agent infrastructure.",
+      "tldr_zh": "对 OpenClaw（本地 AI agent 平台）的怀疑视角，将其与 MS-DOS 时代的计算进行类比。作者在质疑炒作的同时构建了免费、安全、始终在线的本地 AI agent 环境。307 点赞和 330 条评论显示社区对本地优先 AI agent 基础设施的高度关注。",
+      "points": 307,
+      "num_comments": 330,
+      "interest_tag": ""
+    },
+    {
+      "title": "Less human AI agents, please",
+      "url": "https://nial.se/blog/less-human-ai-agents-please/",
+      "tldr": "An essay arguing AI agents should stop mimicking human interaction patterns and instead optimize for machine-native interfaces. Resonates with growing frustration over anthropomorphized AI tools that prioritize 'personality' over utility — 155 points suggest this is a widely shared sentiment.",
+      "tldr_zh": "一篇文章主张 AI agent 应停止模仿人类交互模式，转而优化机器原生接口。呼应了对拟人化 AI 工具重「个性」轻实用的日益不满——155 点赞表明这是广泛共识。",
+      "points": 155,
+      "num_comments": 166,
+      "interest_tag": ""
+    },
+    {
+      "title": "Show HN: Mediator.ai – Using Nash bargaining and LLMs to systematize fairness",
+      "url": "https://mediator.ai/",
+      "tldr": "A novel application combining game theory (Nash bargaining solution) with LLMs to create an AI mediator for disputes and negotiations. Attempts to make fairness computable and systematic — an interesting intersection of economic theory and AI agents for real-world decision-making.",
+      "tldr_zh": "将博弈论（Nash 谈判解）与 LLM 结合创建 AI 调解员的新颖应用，用于争议和谈判。尝试让公平性变得可计算和系统化——经济理论与 AI agent 在真实决策中的有趣交叉。",
+      "points": 155,
+      "num_comments": 74,
+      "interest_tag": ""
+    },
+    {
+      "title": "Show HN: Stage – Putting humans back in control of code review",
+      "url": "https://stagereview.app/",
+      "tldr": "A code review tool designed to keep humans in the loop as AI coding agents generate more code. Addresses the emerging problem that AI-generated PRs are overwhelming human reviewers — the tool helps maintain code quality when agents do most of the writing.",
+      "tldr_zh": "一个让人类在代码审查中保持主导权的工具，应对 AI 编码 agent 生成越来越多代码的趋势。解决了 AI 生成的 PR 让人类审查者应接不暇的新兴问题——在 agent 完成大部分编写时帮助维持代码质量。",
+      "points": 130,
+      "num_comments": 110,
+      "interest_tag": ""
+    }
+  ]
+}
