@@ -1,0 +1,223 @@
+{
+  "date": "2026-04-24",
+  "generated_at": "2026-04-24T01:03:00Z",
+  "briefing_zh": "今天 AI 领域最引人注目的趋势是**扩散模型向通用多模态方向的突破**。**LLaDA2.0-Uni** 以 208 票高居 HuggingFace 日报榜首，展示了离散扩散大语言模型在统一多模态理解与生成方面的潜力，而 alphaxiv 上 **Qwen3.5-Omni** 以 3760 次浏览量和 133 赞成为讨论热点，其全模态能力覆盖文本、图像、音频和视频，并在 215 个音频基准上刷新记录。Google 的 **Vision Banana** 则从另一个角度证明：经过指令微调的图像生成器也能成为顶级视觉理解模型。\n\nAgent 生态持续升温。**Agent-World**（人大 & 字节跳动）提出可扩展的真实世界环境合成框架，在 23 个 agent 基准上取得一致提升；**OpenMobile** 聚焦移动端 GUI agent，通过任务与轨迹合成实现约 70% 的成功率；**DR-Venus** 则探索仅用 1 万条开放数据训练边缘级深度研究 agent。GitHub 上 **mercury-agent** 获 602 星，提供带权限管控和 token 预算的 24/7 运行 agent。\n\nHacker News 上 Google 发布的**第八代 TPU** 文章以 443 分领跑，明确将芯片设计与 agentic 时代挂钩。社区对 agent 的反思同样活跃：一篇「Less human AI agents, please」引发 168 条讨论，而 **Daemons** 项目直接从构建 agent 转向清理 agent 的烂摊子。**auto-memory** 和 **cavemem** 等项目也表明，agent 记忆管理正成为开发者痛点。",
+  "briefing_en": "Today's most striking trend is the **convergence of diffusion models toward general-purpose multimodal AI**. **LLaDA2.0-Uni** tops the HuggingFace daily chart with 208 upvotes, demonstrating discrete diffusion LLMs can unify multimodal understanding and generation. On alphaxiv, **Qwen3.5-Omni** dominates with 3,760 views and 133 likes, showcasing a fully omnimodal LLM that achieves SOTA across 215 audio and audio-visual benchmarks. Google's **Vision Banana** offers yet another perspective: instruction-tuned image generators can rival specialized vision models.\n\nThe agent ecosystem continues to heat up. **Agent-World** (Renmin U & ByteDance) proposes scalable real-world environment synthesis for agent training, showing consistent gains across 23 benchmarks. **OpenMobile** targets mobile GUI agents with task-trajectory synthesis reaching ~70% success rate, while **DR-Venus** explores training edge-scale deep research agents with only 10K open data points. On GitHub, **mercury-agent** earned 602 stars for its permission-hardened, token-budgeted 24/7 agent framework.\n\nOn Hacker News, Google's **eighth-generation TPU** announcement leads at 443 points, explicitly framing chip design for the agentic era. Community reflection on agents is equally vibrant: 'Less human AI agents, please' sparked 168 comments, while **Daemons** pivoted from building agents to cleaning up after them. Projects like **auto-memory** and **cavemem** on GitHub signal that agent memory management is becoming a core developer pain point.",
+  "viral_analysis_zh": "今天最可能火的是 **LLaDA2.0-Uni**——扩散模型+多模态统一的叙事切中了社区对「下一代架构」的渴望，208 票遥遥领先。Google 的第八代 TPU 文章则凭借「为 agentic 时代设计的芯片」这一精准定位，在 HN 拿下 443 分，证明硬件与 agent 叙事的绑定极具传播力。GitHub 上 web-design-skill 和 cc-design 分别拿到 734 和 615 星，说明「让 AI 写的网页变好看」这个痛点非常真实，工具化的解决方案比抽象框架更容易获星。",
+  "viral_analysis_en": "**LLaDA2.0-Uni** is today's most likely breakout — the 'diffusion + unified multimodal' narrative taps directly into community hunger for next-gen architectures, leading HF with 208 upvotes. Google's eighth-gen TPU post scored 443 points on HN by precisely framing chips 'for the agentic era,' proving hardware-agent narrative coupling drives engagement. On GitHub, web-design-skill (734⭐) and cc-design (615⭐) show that 'make AI-generated web pages beautiful' is a real pain point — practical, tool-shaped solutions win stars over abstract frameworks.",
+  "huggingface_papers": [
+    {
+      "title": "LLaDA2.0-Uni: Unifying Multimodal Understanding and Generation with Diffusion Large Language Model",
+      "arxiv_id": "2604.20796",
+      "url": "https://arxiv.org/abs/2604.20796",
+      "tldr": "LLaDA2.0-Uni presents a unified discrete diffusion large language model that handles both multimodal understanding and generation within a single architecture. By extending the LLaDA diffusion framework to visual, textual, and other modalities, it demonstrates that discrete diffusion can serve as a viable alternative to autoregressive approaches for multimodal AI. The model achieves competitive performance on both comprehension and generation benchmarks without requiring separate encoder-decoder pipelines.",
+      "tldr_zh": "LLaDA2.0-Uni 提出了一种统一的离散扩散大语言模型，在单一架构内同时处理多模态理解与生成任务。通过将 LLaDA 扩散框架扩展到视觉、文本等多种模态，证明离散扩散可以作为自回归方法的可行替代方案。该模型在理解和生成基准上均取得了有竞争力的表现，且无需独立的编码器-解码器管线。",
+      "upvotes": 208,
+      "authors": "Inclusion AI, Tiwei Bie, Haoxing Chen",
+      "ai_keywords": ["discrete-diffusion", "multimodal-LLM", "unified-generation"],
+      "interest_tag": ""
+    },
+    {
+      "title": "Near-Future Policy Optimization",
+      "arxiv_id": "2604.20733",
+      "url": "https://arxiv.org/abs/2604.20733",
+      "tldr": "Near-Future Policy Optimization (NFPO) introduces a method for incorporating suitable off-policy trajectories into on-policy reinforcement learning from verifiable rewards (RLVR). By selecting trajectories from the near future of the policy's evolution, NFPO bridges the gap between sample-efficient off-policy methods and the stability of on-policy training. The approach improves training efficiency and final performance on reasoning and instruction-following tasks.",
+      "tldr_zh": "近未来策略优化（NFPO）提出了一种将合适的离策略轨迹引入在策略可验证奖励强化学习（RLVR）的方法。通过选择策略演化近未来的轨迹，NFPO 在样本高效的离策略方法与在策略训练的稳定性之间架起桥梁，提升了推理和指令遵循任务的训练效率和最终性能。",
+      "upvotes": 45,
+      "authors": "Chuanyu Qin, Chenxu Yang, Qingyi Si",
+      "ai_keywords": ["RLVR", "off-policy", "policy-optimization"],
+      "interest_tag": ""
+    },
+    {
+      "title": "DR-Venus: Towards Frontier Edge-Scale Deep Research Agents with Only 10K Open Data",
+      "arxiv_id": "2604.19859",
+      "url": "https://arxiv.org/abs/2604.19859",
+      "tldr": "DR-Venus explores building deep research agents that run at edge scale using small language models trained on only 10K open data points. The work demonstrates that carefully curated, high-quality open data can enable surprisingly capable research agents on resource-constrained devices. This challenges the assumption that deep research capabilities require massive models and proprietary datasets.",
+      "tldr_zh": "DR-Venus 探索使用仅 1 万条开放数据训练的小型语言模型构建边缘级深度研究 agent。该工作表明，精心筛选的高质量开放数据可以在资源受限设备上实现出人意料的研究能力，挑战了深度研究能力需要大模型和私有数据集的假设。",
+      "upvotes": 38,
+      "authors": "Venus Team, Sunhao Dai",
+      "ai_keywords": ["edge-AI", "deep-research", "small-LM"],
+      "interest_tag": ""
+    },
+    {
+      "title": "OpenMobile: Building Open Mobile Agents with Task and Trajectory Synthesis",
+      "arxiv_id": "2604.15093",
+      "url": "https://arxiv.org/abs/2604.15093",
+      "tldr": "OpenMobile presents an open framework for building mobile GUI agents powered by vision-language models, using task and trajectory synthesis to generate training data at scale. The system achieves approximately 70% success rate on mobile interaction tasks without requiring human demonstrations. By synthesizing diverse task-trajectory pairs, OpenMobile addresses the critical data bottleneck in mobile agent development.",
+      "tldr_zh": "OpenMobile 提出了一个基于视觉语言模型的开放移动 GUI agent 框架，通过任务与轨迹合成大规模生成训练数据。该系统在移动交互任务上达到约 70% 的成功率，无需人工演示。通过合成多样化的任务-轨迹对，OpenMobile 解决了移动 agent 开发中的关键数据瓶颈。",
+      "upvotes": 22,
+      "authors": "Kanzhi Cheng, Zehao Li",
+      "ai_keywords": ["mobile-agent", "GUI-automation", "VLM"],
+      "interest_tag": "CUA"
+    },
+    {
+      "title": "A Self-Evolving Framework for Efficient Terminal Agents via Observational Context Compression",
+      "arxiv_id": "2604.19572",
+      "url": "https://arxiv.org/abs/2604.19572",
+      "tldr": "This paper introduces a self-evolving framework for terminal agents that uses observational context compression to handle long-horizon tasks efficiently. The agent learns to compress verbose terminal outputs into compact representations, enabling it to maintain context over extended interaction sequences. The self-evolving mechanism allows the agent to progressively improve its compression and task-completion strategies through experience.",
+      "tldr_zh": "本文提出了一种通过观察上下文压缩实现高效终端 agent 的自进化框架。该 agent 学习将冗长的终端输出压缩为紧凑表示，使其能在长时间交互中保持上下文。自进化机制允许 agent 通过经验逐步改进其压缩和任务完成策略。",
+      "upvotes": 15,
+      "authors": "Jincheng Ren, Siwei Wu",
+      "ai_keywords": ["terminal-agent", "context-compression", "self-evolving"],
+      "interest_tag": ""
+    }
+  ],
+  "alphaxiv_papers": [
+    {
+      "title": "Qwen3.5-Omni Technical Report",
+      "arxiv_id": "2604.15804",
+      "url": "https://arxiv.org/abs/2604.15804",
+      "tldr": "Qwen3.5-Omni is a fully omnimodal large language model processing text, images, audio, and video inputs while generating text and audio outputs. It achieves state-of-the-art results across 215 audio and audio-visual benchmarks, demonstrating emergent capabilities in cross-modal reasoning. The technical report details the architecture, training pipeline, and comprehensive evaluation across modalities.",
+      "tldr_zh": "Qwen3.5-Omni 是一个全模态大语言模型，可处理文本、图像、音频和视频输入并生成文本和音频输出。在 215 个音频和视听基准上达到最优，展现了跨模态推理的涌现能力。技术报告详述了架构、训练流程和跨模态综合评估。",
+      "likes": 133,
+      "views": 3760,
+      "authors": "Qwen Team",
+      "ai_keywords": ["omnimodal-LLM", "audio-visual", "SOTA"],
+      "interest_tag": ""
+    },
+    {
+      "title": "Agent-World: Scaling Real-World Environment Synthesis for Evolving General Agent Intelligence",
+      "arxiv_id": "2604.18292",
+      "url": "https://arxiv.org/abs/2604.18292",
+      "tldr": "Agent-World proposes a scalable framework for synthesizing real-world environments to train and evaluate general-purpose agents. Developed by Renmin University and ByteDance, the system enables agents to evolve through interaction with diverse, automatically generated environments. It demonstrates consistent improvements across 23 agent benchmarks, establishing a new paradigm for agent training at scale.",
+      "tldr_zh": "Agent-World 提出了一种可扩展的真实世界环境合成框架，用于训练和评估通用 agent。由人大和字节跳动开发，该系统让 agent 通过与多样化自动生成环境的交互来进化，在 23 个 agent 基准上取得一致提升，建立了大规模 agent 训练的新范式。",
+      "likes": 115,
+      "views": 2086,
+      "authors": "Renmin University, ByteDance",
+      "ai_keywords": ["environment-synthesis", "agent-training", "benchmark"],
+      "interest_tag": "Benchmark"
+    },
+    {
+      "title": "OneVL: One-Step Latent Reasoning and Planning with Vision-Language Explanation",
+      "arxiv_id": "2604.18486",
+      "url": "https://arxiv.org/abs/2604.18486",
+      "tldr": "OneVL introduces a one-step latent chain-of-thought reasoning approach for autonomous driving with vision-language explanation. Developed by Xiaomi, it performs reasoning and planning in a single forward pass through latent space rather than explicit token generation, achieving faster inference while maintaining interpretability through vision-language explanations.",
+      "tldr_zh": "OneVL 提出了一种面向自动驾驶的单步潜在思维链推理方法，配合视觉-语言解释。由小米开发，它在潜在空间中通过单次前向传播完成推理和规划，而非显式 token 生成，在保持视觉-语言解释可解释性的同时实现更快推理。",
+      "likes": 45,
+      "views": null,
+      "authors": "Xiaomi",
+      "ai_keywords": ["autonomous-driving", "latent-CoT", "vision-language"],
+      "interest_tag": ""
+    },
+    {
+      "title": "Image Generators are Generalist Vision Learners",
+      "arxiv_id": "2604.20329",
+      "url": "https://arxiv.org/abs/2604.20329",
+      "tldr": "Google Vision Banana demonstrates that image generation models, when instruction-tuned, can serve as powerful generalist vision understanding systems. The work challenges the traditional separation between generation and understanding by showing that the rich visual representations learned during generation training transfer effectively to comprehension tasks. This unification suggests that next-gen vision systems may not need separate architectures for generation and understanding.",
+      "tldr_zh": "Google Vision Banana 证明，经过指令微调的图像生成模型可以作为强大的通用视觉理解系统。该工作打破了生成与理解的传统分界，表明生成训练中学到的丰富视觉表示可有效迁移到理解任务，暗示下一代视觉系统可能无需为生成和理解分别设计架构。",
+      "likes": 44,
+      "views": null,
+      "authors": "Google Vision Banana",
+      "ai_keywords": ["image-generation", "vision-understanding", "unified-model"],
+      "interest_tag": ""
+    },
+    {
+      "title": "Neural Garbage Collection: Learning to Forget while Learning to Reason",
+      "arxiv_id": "2604.18002",
+      "url": "https://arxiv.org/abs/2604.18002",
+      "tldr": "Stanford proposes Neural Garbage Collection, an RL-based approach that jointly optimizes chain-of-thought reasoning and KV cache management. The system learns when to forget irrelevant cached key-value pairs during reasoning, achieving 2.4-5x reduction in KV cache size while maintaining reasoning quality. This addresses a critical efficiency bottleneck for long-context reasoning in production LLM systems.",
+      "tldr_zh": "斯坦福提出神经垃圾回收，一种基于 RL 的方法，联合优化思维链推理和 KV 缓存管理。系统学习在推理过程中何时遗忘无关的缓存键值对，在保持推理质量的同时实现 2.4-5 倍的 KV 缓存缩减，解决了生产级 LLM 系统长上下文推理的关键效率瓶颈。",
+      "likes": 43,
+      "views": null,
+      "authors": "Stanford",
+      "ai_keywords": ["KV-cache", "RL", "reasoning-efficiency"],
+      "interest_tag": ""
+    }
+  ],
+  "github_trending": [
+    {
+      "repo": "ConardLi/web-design-skill",
+      "url": "https://github.com/ConardLi/web-design-skill",
+      "stars": 734,
+      "language": "CSS",
+      "tldr": "An AI agent skill that transforms AI-generated web pages from merely functional to visually stunning. It provides design guidelines and CSS patterns that AI coding agents can apply to dramatically improve the aesthetic quality of generated HTML/CSS output. Addresses the widespread pain point that AI-generated web pages are technically correct but visually bland.",
+      "tldr_zh": "一个 AI agent 技能，将 AI 生成的网页从仅可用提升到视觉惊艳。它提供设计指南和 CSS 模式，让 AI 编码 agent 可以大幅改善生成的 HTML/CSS 输出的美观度，解决了 AI 生成网页技术上正确但视觉平淡的普遍痛点。",
+      "interest_tag": ""
+    },
+    {
+      "repo": "ZeroZ-lab/cc-design",
+      "url": "https://github.com/ZeroZ-lab/cc-design",
+      "stars": 615,
+      "language": "JavaScript",
+      "tldr": "A high-fidelity HTML design and prototype guidance skill for AI agents. cc-design enables AI coding assistants to produce polished, production-quality web designs and prototypes by providing structured design knowledge and component patterns. It complements code generation with professional-grade visual design sensibility.",
+      "tldr_zh": "面向 AI agent 的高保真 HTML 设计和原型指导技能。cc-design 通过提供结构化的设计知识和组件模式，使 AI 编码助手能够生产出精致的、生产级质量的网页设计和原型。",
+      "interest_tag": ""
+    },
+    {
+      "repo": "cosmicstack-labs/mercury-agent",
+      "url": "https://github.com/cosmicstack-labs/mercury-agent",
+      "stars": 602,
+      "language": "TypeScript",
+      "tldr": "A soul-driven AI agent framework with permission-hardened tools, token budgets, and multi-channel support designed to run 24/7. Mercury-agent provides enterprise-grade guardrails including fine-grained permission controls, cost management through token budgets, and reliable multi-channel communication. Built for production deployments where agent reliability and safety are paramount.",
+      "tldr_zh": "一个灵魂驱动的 AI agent 框架，配备权限加固工具、token 预算和多通道支持，设计为 24/7 全天候运行。Mercury-agent 提供企业级防护措施，包括细粒度权限控制、token 预算成本管理和可靠的多通道通信。",
+      "interest_tag": ""
+    },
+    {
+      "repo": "yzhao062/agent-style",
+      "url": "https://github.com/yzhao062/agent-style",
+      "stars": 287,
+      "language": "Python",
+      "tldr": "A collection of 21 writing rules specifically designed for AI coding agents, available as a drop-in configuration for Claude Code, Codex, Cursor, and other AI coding tools. The rules improve code quality, consistency, and readability of AI-generated code by providing structured style guidelines that agents follow during generation.",
+      "tldr_zh": "为 AI 编码 agent 专门设计的 21 条写作规则集合，可作为 Claude Code、Codex、Cursor 等 AI 编码工具的即插即用配置。这些规则通过提供结构化的风格指南改善 AI 生成代码的质量、一致性和可读性。",
+      "interest_tag": ""
+    },
+    {
+      "repo": "dezgit2025/auto-memory",
+      "url": "https://github.com/dezgit2025/auto-memory",
+      "stars": 160,
+      "language": "Python",
+      "tldr": "A progressive session recall CLI tool that ensures AI coding agents never forget context between sessions. auto-memory provides persistent memory management so that agents maintain awareness of project state, past decisions, and ongoing tasks across multiple coding sessions. Addresses the critical limitation of context loss in session-based AI assistants.",
+      "tldr_zh": "一个渐进式会话回忆 CLI 工具，确保 AI 编码 agent 在会话间不丢失上下文。auto-memory 提供持久化记忆管理，使 agent 在多次编码会话中保持对项目状态、过去决策和进行中任务的感知。",
+      "interest_tag": "Memory"
+    }
+  ],
+  "hackernews": [
+    {
+      "title": "Our eighth generation TPUs: two chips for the agentic era",
+      "url": "https://blog.google/innovation-and-ai/infrastructure-and-cloud/google-cloud/eighth-generation-tpu/",
+      "points": 443,
+      "comments": 222,
+      "tldr": "Google unveils its eighth-generation TPU chips explicitly designed for the agentic era, optimized for long-context reasoning and multi-step agent workloads. The announcement positions these chips as purpose-built infrastructure for the emerging wave of AI agents that require sustained, multi-turn computation.",
+      "tldr_zh": "Google 发布第八代 TPU 芯片，明确为 agentic 时代设计，针对长上下文推理和多步 agent 工作负载优化。该公告将这些芯片定位为新兴 AI agent 浪潮的专用基础设施。"
+    },
+    {
+      "title": "OpenClaw isn't fooling me. I remember MS-DOS",
+      "url": "https://www.flyingpenguin.com/build-an-openclaw-free-secure-always-on-local-ai-assistant",
+      "points": 307,
+      "comments": 331,
+      "tldr": "A skeptical take on OpenClaw that draws parallels to the MS-DOS era, while providing a guide to building a free, secure, always-on local AI assistant. The post resonated with the HN community's preference for self-hosted, privacy-respecting alternatives to cloud-based AI services.",
+      "tldr_zh": "一篇对 OpenClaw 的怀疑评论，将其与 MS-DOS 时代类比，同时提供了构建免费、安全、常驻本地 AI 助手的指南。该文与 HN 社区偏好自托管、尊重隐私的替代方案的倾向产生共鸣。"
+    },
+    {
+      "title": "Show HN: Mediator.ai – Using Nash bargaining and LLMs to systematize fairness",
+      "url": "https://mediator.ai/",
+      "points": 159,
+      "comments": 74,
+      "tldr": "Mediator.ai combines Nash bargaining theory with LLMs to create a systematic approach to fairness in negotiations and disputes. The Show HN demonstrates how game-theoretic principles can be operationalized through AI to produce fair outcomes in real-world conflict resolution scenarios.",
+      "tldr_zh": "Mediator.ai 将纳什谈判理论与 LLM 结合，为谈判和争端中的公平性创建系统化方法。该 Show HN 展示了如何通过 AI 将博弈论原理应用于现实世界的冲突解决场景。"
+    },
+    {
+      "title": "Less human AI agents, please",
+      "url": "https://nial.se/blog/less-human-ai-agents-please/",
+      "points": 158,
+      "comments": 168,
+      "tldr": "An opinion piece arguing that AI agents should be designed to be clearly non-human rather than mimicking human behavior. The post sparked extensive discussion about anthropomorphization in agent design, with 168 comments debating the appropriate level of human-likeness in AI assistants and autonomous agents.",
+      "tldr_zh": "一篇观点文章主张 AI agent 应被设计为明显非人类，而不是模仿人类行为。该文引发了关于 agent 设计中拟人化问题的广泛讨论，168 条评论辩论了 AI 助手和自主 agent 中人类化程度的适当水平。"
+    },
+    {
+      "title": "Show HN: Daemons – we pivoted from building agents to cleaning up after them",
+      "url": "https://charlielabs.ai/",
+      "points": 66,
+      "comments": 32,
+      "tldr": "Charlie Labs presents Daemons, a product born from pivoting away from building AI agents to instead cleaning up the problems they create. The candid pivot narrative resonated with developers experiencing agent reliability issues, positioning infrastructure cleanup as the next wave of agent ecosystem tooling.",
+      "tldr_zh": "Charlie Labs 推出 Daemons，一个从构建 AI agent 转向清理 agent 问题的产品。坦诚的转型叙事引起了经历 agent 可靠性问题的开发者共鸣，将基础设施清理定位为 agent 生态工具的下一波浪潮。"
+    }
+  ],
+  "metadata": {
+    "hf_date_used": "2026-04-23",
+    "hf_source": "API",
+    "alphaxiv_source": "API",
+    "github_source": "trending",
+    "hn_source": "front_page"
+  }
+}
