@@ -1,0 +1,201 @@
+{
+  "date": "2026-04-25",
+  "generated_at": "2026-04-25T01:00:00Z",
+  "briefing_zh": "**DeepSeek-V4** 无疑是本周最大的新闻——这款支持百万 token 上下文的开源模型通过混合注意力架构将推理 FLOPs 降低 73%、KV cache 减少 90%，直接挑战了闭源模型在长上下文任务上的垄断地位。与此同时，Google 的 **Vision Banana** 模型证明了图像生成器经过指令微调后可以成为通用视觉理解工具，在语义分割和深度估计等任务上超越了专用模型，模糊了生成与理解的边界。\n\n在 Agent 领域，字节跳动和人大联合推出的 **Agent-World** 提出了一种可扩展的真实环境合成框架，使 agent 能够自主发现和构建工具生态，在 23 个 benchmark 上持续提升性能。开源社区方面，**GammaLab/harmonist** 以零依赖、186 个 agent 编排的设计引人注目，而 **Agent Vault** 则解决了 agent 安全凭证管理的痛点。\n\nGoogle 发布了第八代 TPU，明确面向 agentic 时代设计，这反映了基础设施层面对 AI Agent 大规模部署的预期。Stanford 的 **Self-Guided Self-Play** 则展示了小模型通过自博弈可以在定理证明上超越百倍参数量的大模型，为高效训练提供了新思路。**LLaDA2.0-Uni** 用离散扩散 LLM 统一了多模态理解与生成，代表了扩散模型在语言建模领域的新尝试。",
+  "briefing_en": "**DeepSeek-V4** dominates this week's landscape — the open-source model processes up to one million tokens through a hybrid attention architecture, cutting inference FLOPs by 73% and KV cache by 90% compared to V3. This directly challenges closed-source models' monopoly on long-context tasks. Meanwhile, Google's **Vision Banana** model proves that instruction-tuned image generators can serve as generalist vision learners, surpassing specialized models on semantic segmentation and depth estimation.\n\nIn the agent space, ByteDance and Renmin University's **Agent-World** introduces scalable real-world environment synthesis for training general-purpose agents, achieving improvements across 23 benchmarks. The open-source community responds with **GammaLab/harmonist** (186 agents, zero dependencies) and **Agent Vault** for secure credential management — both addressing practical deployment pain points.\n\nGoogle's eighth-generation TPUs are explicitly designed for the \"agentic era,\" signaling infrastructure-level commitment to large-scale agent deployment. Stanford's **Self-Guided Self-Play** shows a 7B model can outperform a 671B model at theorem proving through synthetic problem generation. **LLaDA2.0-Uni** unifies multimodal understanding and generation via discrete diffusion LLMs with MoE backbone, pushing the boundaries of diffusion-based language modeling.",
+  "viral_analysis_zh": "**Google 第八代 TPU** 以 451 分登顶 HN，\"agentic era\" 的命名精准击中了行业叙事——基础设施厂商为 agent 时代站台，比任何论文都更能引发讨论。**Agent-World** 在 alphaxiv 上获得 2575 次浏览和 147 赞，\"真实环境合成\" 的概念让人联想到 agent 训练的 ImageNet 时刻。**web-design-skill** 一周获得 1005 星，说明 AI agent 的 \"技能包\" 生态正在爆发，开发者对即插即用的 agent 能力模块需求强烈。",
+  "viral_analysis_en": "**Google's 8th-gen TPU** topped HN at 451 points — naming it for the \"agentic era\" perfectly captures industry narrative, generating more discussion than any paper could. **Agent-World** hit 2,575 views and 147 likes on alphaxiv; the concept of \"real-world environment synthesis\" evokes an ImageNet moment for agent training. **web-design-skill** gained 1,005 stars in a week, showing explosive demand for plug-and-play agent skill modules — the agent \"skill pack\" ecosystem is taking off.",
+  "huggingface_papers": [
+    {
+      "title": "Co-Evolving LLM Decision and Skill Bank Agents for Long-Horizon Tasks",
+      "url": "https://arxiv.org/abs/2604.20987",
+      "tldr": "Proposes a co-evolution framework where a decision-making LLM agent and a skill bank agent mutually improve through interaction in long-horizon environments. The skill bank accumulates reusable capabilities while the decision agent learns to chain them effectively, showing strong results on multi-step reasoning tasks.",
+      "tldr_zh": "提出决策 LLM agent 和技能库 agent 共同进化的框架，在长时间跨度环境中相互提升。技能库积累可复用能力，决策 agent 学会有效串联技能，在多步推理任务上表现突出。",
+      "upvotes": 0,
+      "authors": "Xiyang Wu, Zongxia Li, Guangyao Shi",
+      "ai_keywords": ["agent", "skill-learning", "long-horizon"],
+      "interest_tag": ""
+    },
+    {
+      "title": "WorldMark: A Unified Benchmark Suite for Interactive Video World Models",
+      "url": "https://arxiv.org/abs/2604.21686",
+      "tldr": "Introduces WorldMark, a unified benchmark for evaluating interactive video world models like Genie and YUME. Standardizes evaluation across visual quality, controllability, and physics plausibility, addressing the fragmentation of current benchmarks where each model uses private scenes.",
+      "tldr_zh": "推出 WorldMark 统一基准套件，用于评估 Genie、YUME 等交互式视频世界模型。统一了视觉质量、可控性和物理合理性的评估标准，解决了当前各模型使用私有场景导致的碎片化问题。",
+      "upvotes": 0,
+      "authors": "Xiaojie Xu, Zhengyuan Lin, Kang He",
+      "ai_keywords": ["world-model", "benchmark", "video-generation"],
+      "interest_tag": ""
+    },
+    {
+      "title": "UniT: Toward a Unified Physical Language for Human-to-Humanoid Policy Learning and World Modeling",
+      "url": "https://arxiv.org/abs/2604.19734",
+      "tldr": "Addresses the data scarcity bottleneck in humanoid robot learning by creating a unified physical language that bridges human egocentric video data and humanoid robot control. Enables scaling humanoid foundation models using massive human motion data rather than scarce robot demonstrations.",
+      "tldr_zh": "通过创建统一物理语言来解决人形机器人学习的数据稀缺瓶颈，桥接人类第一人称视频数据和人形机器人控制。使人形基础模型能利用海量人类运动数据而非稀缺的机器人演示进行扩展。",
+      "upvotes": 0,
+      "authors": "Boyu Chen, Yi Chen, Lu Qiu",
+      "ai_keywords": ["humanoid", "embodied-AI", "policy-learning"],
+      "interest_tag": ""
+    },
+    {
+      "title": "LLaTiSA: Towards Difficulty-Stratified Time Series Reasoning from Visual Perception to Semantics",
+      "url": "https://arxiv.org/abs/2604.17295",
+      "tldr": "Proposes difficulty-stratified evaluation for LLM time series reasoning, spanning from visual pattern recognition to semantic understanding. Reveals that current LLMs struggle with basic visual perception of time series, establishing a structured progression for benchmarking temporal reasoning capabilities.",
+      "tldr_zh": "提出 LLM 时间序列推理的难度分层评估体系，从视觉模式识别到语义理解。揭示当前 LLM 在时间序列的基础视觉感知上就存在困难，为时间推理能力建立了结构化的评测进阶。",
+      "upvotes": 0,
+      "authors": "Yueyang Ding, HaoPeng Zhang, Rui Dai",
+      "ai_keywords": ["time-series", "reasoning", "benchmark"],
+      "interest_tag": ""
+    },
+    {
+      "title": "StyleID: A Perception-Aware Dataset and Metric for Stylization-Agnostic Facial Identity Recognition",
+      "url": "https://arxiv.org/abs/2604.21689",
+      "tldr": "Creates a perception-aware benchmark for facial identity recognition across diverse artistic styles (cartoons, sketches, paintings). Current identity encoders trained on photographs fail dramatically on stylized faces; StyleID provides the dataset and metrics to bridge this gap.",
+      "tldr_zh": "为跨艺术风格（卡通、素描、绘画）的人脸身份识别创建了感知感知基准。当前基于照片训练的身份编码器在风格化人脸上严重失效，StyleID 提供了弥合这一差距的数据集和指标。",
+      "upvotes": 0,
+      "authors": "Kwan Yun, Changmin Lee, Ayeong Jeong",
+      "ai_keywords": ["face-recognition", "stylization", "dataset"],
+      "interest_tag": ""
+    }
+  ],
+  "alphaxiv_papers": [
+    {
+      "title": "Agent-World: Scaling Real-World Environment Synthesis for Evolving General Agent Intelligence",
+      "arxiv_id": "2604.18292",
+      "url": "https://arxiv.org/abs/2604.18292",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2604.18292",
+      "tldr": "Introduces a scalable framework for synthesizing real-world environments to train general-purpose agents. Agents autonomously discover and construct diverse tools and environments, achieving consistent improvements across 23 agent benchmarks through a self-evolving training mechanism.",
+      "tldr_zh": "提出可扩展的真实环境合成框架来训练通用 agent。Agent 自主发现和构建多样化的工具与环境，通过自进化训练机制在 23 个 agent benchmark 上持续提升性能。",
+      "interest_tag": ""
+    },
+    {
+      "title": "DeepSeek-V4: Towards Highly Efficient Million-Token Context Intelligence",
+      "arxiv_id": "deepseek-v4",
+      "url": "https://arxiv.org/abs/deepseek-v4",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/deepseek-v4",
+      "tldr": "Open-source model supporting 1M token context via hybrid attention architecture. Reduces inference FLOPs by 73% and KV cache by 90% compared to V3, while maintaining competitive performance on reasoning, coding, and long-context tasks.",
+      "tldr_zh": "通过混合注意力架构支持百万 token 上下文的开源模型。相比 V3 将推理 FLOPs 降低 73%、KV cache 减少 90%，同时在推理、编码和长上下文任务上保持竞争力。",
+      "interest_tag": ""
+    },
+    {
+      "title": "Image Generators are Generalist Vision Learners",
+      "arxiv_id": "2604.20329",
+      "url": "https://arxiv.org/abs/2604.20329",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2604.20329",
+      "tldr": "Google's Vision Banana model shows that instruction-tuning a pretrained image generator creates a generalist vision system that surpasses specialized models on segmentation, depth estimation, and other understanding tasks while retaining generation capabilities.",
+      "tldr_zh": "Google 的 Vision Banana 模型表明，对预训练图像生成器进行指令微调可以创建通用视觉系统，在分割、深度估计等理解任务上超越专用模型，同时保留生成能力。",
+      "interest_tag": ""
+    },
+    {
+      "title": "Scaling Self-Play with Self-Guidance",
+      "arxiv_id": "2604.20209",
+      "url": "https://arxiv.org/abs/2604.20209",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2604.20209",
+      "tldr": "Stanford's Self-Guided Self-Play (SGS) integrates a Guide LM to generate high-quality synthetic problems for self-play training. A 7B model outperforms a 671B model's pass@4 on formal theorem proving, with 7% higher asymptotic solve rate than baseline RL.",
+      "tldr_zh": "Stanford 的 Self-Guided Self-Play（SGS）集成了一个 Guide 语言模型来生成高质量的合成问题。7B 模型在形式定理证明上超越了 671B 模型的 pass@4 表现，比基线 RL 方法的渐近求解率高 7%。",
+      "interest_tag": ""
+    },
+    {
+      "title": "LLaDA2.0-Uni: Unifying Multimodal Understanding and Generation with Diffusion Large Language Model",
+      "arxiv_id": "2604.20796",
+      "url": "https://arxiv.org/abs/2604.20796",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2604.20796",
+      "tldr": "Unified discrete diffusion LLM framework with semantic visual tokenizer and MoE backbone that integrates multimodal understanding and generation. Achieves competitive performance across benchmarks in image generation fidelity, reasoning, and inference efficiency.",
+      "tldr_zh": "采用语义视觉分词器和 MoE 骨干的统一离散扩散 LLM 框架，整合了多模态理解与生成。在图像生成保真度、推理能力和推理效率等基准上表现出色。",
+      "interest_tag": ""
+    }
+  ],
+  "github_repos": [
+    {
+      "name": "ConardLi/web-design-skill",
+      "url": "https://github.com/ConardLi/web-design-skill",
+      "tldr": "An AI agent skill that transforms AI-generated web pages from functional to stunning, inspired by Claude's design capabilities. Drop-in skill module that enhances any AI coding agent's web design output quality.",
+      "tldr_zh": "一个 AI agent 技能包，能将 AI 生成的网页从「能用」变为「惊艳」，灵感来自 Claude 的设计能力。即插即用的技能模块，可提升任何 AI 编码 agent 的网页设计质量。",
+      "stars": 1005,
+      "language": "CSS",
+      "interest_tag": ""
+    },
+    {
+      "name": "cosmicstack-labs/mercury-agent",
+      "url": "https://github.com/cosmicstack-labs/mercury-agent",
+      "tldr": "Soul-driven AI agent with permission-hardened tools, token budgets, and multi-channel access (CLI + Telegram). Runs 24/7 with built-in security constraints and resource management for production deployment.",
+      "tldr_zh": "带有权限加固工具、token 预算和多渠道访问（CLI + Telegram）的 AI agent。7×24 运行，内置安全约束和资源管理，面向生产部署。",
+      "stars": 713,
+      "language": "TypeScript",
+      "interest_tag": ""
+    },
+    {
+      "name": "ZeroZ-lab/cc-design",
+      "url": "https://github.com/ZeroZ-lab/cc-design",
+      "tldr": "High-fidelity HTML design and prototype guidance skill for AI agents. Provides structured design rules that help coding agents produce professional-quality web interfaces and prototypes.",
+      "tldr_zh": "面向 AI agent 的高保真 HTML 设计和原型指导技能包。提供结构化设计规则，帮助编码 agent 生成专业级别的 Web 界面和原型。",
+      "stars": 628,
+      "language": "JavaScript",
+      "interest_tag": ""
+    },
+    {
+      "name": "GammaLabTechnologies/harmonist",
+      "url": "https://github.com/GammaLabTechnologies/harmonist",
+      "tldr": "Portable AI agent orchestration with mechanical protocol enforcement. Manages 186 agents with zero runtime dependencies, focusing on deterministic coordination patterns rather than probabilistic agent behavior.",
+      "tldr_zh": "便携式 AI agent 编排框架，采用机械协议执行。零运行时依赖管理 186 个 agent，专注于确定性协调模式而非概率性 agent 行为。",
+      "stars": 322,
+      "language": "Python",
+      "interest_tag": "Agent Swarm"
+    },
+    {
+      "name": "yzhao062/agent-style",
+      "url": "https://github.com/yzhao062/agent-style",
+      "tldr": "21 writing rules for AI coding and writing agents, compatible with Claude Code, Codex, Copilot, Cursor, and Aider. Drop-in style guide that makes agent output read like a tech professional's writing.",
+      "tldr_zh": "面向 AI 编码和写作 agent 的 21 条写作规则，兼容 Claude Code、Codex、Copilot、Cursor 和 Aider。即插即用的风格指南，让 agent 输出像技术专家的写作。",
+      "stars": 314,
+      "language": "Python",
+      "interest_tag": ""
+    }
+  ],
+  "hackernews": [
+    {
+      "title": "Our eighth generation TPUs: two chips for the agentic era",
+      "url": "https://blog.google/innovation-and-ai/infrastructure-and-cloud/google-cloud/eighth-generation-tpu-agentic-era/",
+      "tldr": "Google announces 8th-gen TPUs explicitly designed for the agentic era, featuring two chip variants optimized for different agent workloads. Signals major infrastructure investment in large-scale AI agent deployment.",
+      "tldr_zh": "Google 发布第八代 TPU，明确面向 agentic 时代设计，包含两款针对不同 agent 工作负载优化的芯片。标志着基础设施层面对大规模 AI agent 部署的重大投入。",
+      "points": 451,
+      "num_comments": 225,
+      "interest_tag": ""
+    },
+    {
+      "title": "Less human AI agents, please",
+      "url": "https://nial.se/blog/less-human-ai-agents-please/",
+      "tldr": "An essay arguing AI agents should stop mimicking human interaction patterns and instead develop their own efficient communication protocols. Critiques the trend of anthropomorphizing agents when machine-optimized interfaces would be more effective.",
+      "tldr_zh": "一篇评论文章，主张 AI agent 应停止模仿人类交互模式，转而发展自己的高效通信协议。批评了将 agent 拟人化的趋势，认为机器优化的接口会更有效。",
+      "points": 160,
+      "num_comments": 168,
+      "interest_tag": ""
+    },
+    {
+      "title": "Show HN: Agent Vault – Open-source credential proxy and vault for agents",
+      "url": "https://github.com/Infisical/agent-vault",
+      "tldr": "Open-source credential management system specifically designed for AI agents. Provides secure credential proxying and vaulting so agents can access APIs and services without exposing raw secrets in prompts or tool calls.",
+      "tldr_zh": "专为 AI agent 设计的开源凭证管理系统。提供安全的凭证代理和保管，使 agent 无需在提示词或工具调用中暴露原始密钥即可访问 API 和服务。",
+      "points": 135,
+      "num_comments": 52,
+      "interest_tag": ""
+    },
+    {
+      "title": "Show HN: Daemons – we pivoted from building agents to cleaning up after them",
+      "url": "https://charlielabs.ai/",
+      "tldr": "A startup that pivoted from building AI agents to building cleanup/monitoring tools for agent messes. Addresses the growing pain point that agents create side effects, orphaned resources, and inconsistent states that need automated remediation.",
+      "tldr_zh": "一家从构建 AI agent 转型为构建 agent 善后/监控工具的初创公司。解决了 agent 产生副作用、孤立资源和不一致状态需要自动修复的日益增长的痛点。",
+      "points": 70,
+      "num_comments": 33,
+      "interest_tag": ""
+    },
+    {
+      "title": "Show HN: Run coding agents in microVM sandboxes instead of your host machine",
+      "url": "https://github.com/superhq-ai/superhq",
+      "tldr": "Enables running AI coding agents in lightweight microVM sandboxes for security isolation. Prevents agents from accessing or modifying the host filesystem, addressing a critical security concern as coding agents gain broader adoption.",
+      "tldr_zh": "支持在轻量级 microVM 沙箱中运行 AI 编码 agent 以实现安全隔离。防止 agent 访问或修改宿主文件系统，解决了编码 agent 广泛应用中的关键安全问题。",
+      "points": 59,
+      "num_comments": 1,
+      "interest_tag": ""
+    }
+  ]
+}
