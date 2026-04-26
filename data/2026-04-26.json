@@ -1,0 +1,206 @@
+{
+  "date": "2026-04-26",
+  "generated_at": "2026-04-26T01:00:00Z",
+  "briefing_zh": "今天 AI 领域最大的看点是**记忆与 Agent 基础设施**的集中爆发。GitHub 上 **mercury-agent**（1100+ stars）和 **harmonist**（600+ stars）两个 Agent 框架在一周内迅速走红，前者主打权限硬化工具和 token 预算管理，后者以零运行时依赖编排 186 个 agent 为卖点，反映出社区对生产级 agent 部署的强烈需求。与此同时，**stash** 和 **auto-memory** 两个记忆层项目同时登上 GitHub trending 和 Hacker News 热榜，说明 agent 持久记忆正从'nice-to-have'变成刚需。\n\n研究侧，alphaxiv 上 **DeepSeek-V4** 以百万 token 上下文、73% FLOPs 削减和 90% KV cache 压缩刷新开源效率标杆，**Hyperloop Transformers**（MIT）则用 50% 更少参数实现更低困惑度，两者共同指向一个方向：高效推理架构正在快速迭代。Google 的 **Vision Banana** 模型证明图像生成器经过指令微调后可以成为通用视觉理解器，模糊了生成与理解的边界。\n\nHuggingFace 今日论文中，**VLAA-GUI** 提出模块化 GUI 自动化框架解决 agent 过早停止和重复循环问题，**WorldMark** 为交互式视频世界模型建立统一基准。Google 发布第八代 TPU，明确定位为 agentic 时代的芯片，硬件层面也在为 agent 计算范式做准备。",
+  "briefing_en": "Today's AI landscape is dominated by a **memory and agent infrastructure** surge. On GitHub, **mercury-agent** (1,100+ stars) and **harmonist** (600+ stars) emerged as trending agent frameworks within a week — the former featuring permission-hardened tools with token budgets, the latter orchestrating 186 agents with zero runtime dependencies. This reflects intense community demand for production-grade agent deployment. Meanwhile, **stash** and **auto-memory** both hit GitHub trending and Hacker News simultaneously, signaling that persistent agent memory has shifted from nice-to-have to essential.\n\nOn the research front, **DeepSeek-V4** on alphaxiv pushes million-token context with 73% FLOPs reduction and 90% KV cache compression, while MIT's **Hyperloop Transformers** achieves lower perplexity with 50% fewer parameters — both pointing toward rapid iteration in efficient inference architectures. Google's **Vision Banana** model demonstrates that instruction-tuned image generators can serve as generalist vision learners, blurring the line between generation and understanding.\n\nAmong HuggingFace papers, **VLAA-GUI** proposes a modular GUI automation framework addressing premature stopping and repetitive loops in agents, while **WorldMark** establishes a unified benchmark for interactive video world models. Google's eighth-generation TPU launch, explicitly positioned for the agentic era, shows hardware is also preparing for agent-centric compute paradigms.",
+  "viral_analysis_zh": "**stash**（AI agent 持久记忆层）同时登上 GitHub trending 和 HN 热榜，标题精准击中痛点——\"让任何 AI agent 都能像 Claude.ai 和 ChatGPT 一样记住上下文\"，把复杂的 RAG 架构包装成开箱即用的 Postgres 方案，降低了认知门槛。**mercury-agent** 一周破千星，\"soul-driven\" 的叙事配合 24/7 运行的实用定位，在开发者社区形成了情感共鸣+实用价值的双重传播动力。",
+  "viral_analysis_en": "**stash** (persistent memory layer for AI agents) hit both GitHub trending and HN front page simultaneously. Its title — \"so any AI agent can do what Claude.ai and ChatGPT do\" — precisely targets the pain point of context persistence, packaging complex RAG into a plug-and-play Postgres solution that lowers the cognitive barrier. **mercury-agent** broke 1,000 stars in a week; its \"soul-driven\" narrative combined with practical 24/7 operation positioning creates dual virality through emotional resonance and utility.",
+  "huggingface_papers": [
+    {
+      "title": "VLAA-GUI: Knowing When to Stop, Recover, and Search, A Modular Framework for GUI Automation",
+      "arxiv_id": "2604.21375",
+      "url": "https://arxiv.org/abs/2604.21375",
+      "tldr": "A modular GUI automation framework that addresses two fundamental agent failures: premature stopping (declaring success without evidence) and repetitive loops. Introduces verification, recovery, and search modules that can be plugged into existing GUI agents to improve task completion rates.",
+      "tldr_zh": "模块化 GUI 自动化框架，解决 agent 两大核心问题：过早宣布成功（无验证证据）和重复循环。引入验证、恢复和搜索模块，可插入现有 GUI agent 提升任务完成率。",
+      "upvotes": 0,
+      "authors": "Qijun Han, Haoqin Tu, Zijun Wang",
+      "ai_keywords": ["GUI automation", "agent", "modular framework"],
+      "interest_tag": "CUA"
+    },
+    {
+      "title": "Co-Evolving LLM Decision and Skill Bank Agents for Long-Horizon Tasks",
+      "arxiv_id": "2604.20987",
+      "url": "https://arxiv.org/abs/2604.20987",
+      "tldr": "Proposes a co-evolution framework where a decision-making LLM agent and a skill bank agent jointly improve through interaction in long-horizon environments. The skill bank accumulates reusable procedural knowledge while the decision agent learns when and how to invoke skills.",
+      "tldr_zh": "提出决策 LLM agent 与技能库 agent 协同进化框架，在长周期环境中通过交互共同提升。技能库积累可复用的过程性知识，决策 agent 学习何时调用何种技能。",
+      "upvotes": 0,
+      "authors": "Xiyang Wu, Zongxia Li, Guangyao Shi",
+      "ai_keywords": ["multi-agent", "skill learning", "long-horizon"],
+      "interest_tag": "Agent Swarm"
+    },
+    {
+      "title": "WorldMark: A Unified Benchmark Suite for Interactive Video World Models",
+      "arxiv_id": "2604.21686",
+      "url": "https://arxiv.org/abs/2604.21686",
+      "tldr": "First unified benchmark for interactive video generation models (Genie, YUME, HY-World, Matrix-Game). Standardizes evaluation across generation quality, controllability, and physical consistency, addressing the fragmented evaluation landscape where every model uses its own metrics.",
+      "tldr_zh": "首个交互式视频生成模型统一基准（覆盖 Genie、YUME 等），标准化评估生成质量、可控性和物理一致性，解决各模型各用各的评测标准的碎片化问题。",
+      "upvotes": 0,
+      "authors": "Xiaojie Xu, Zhengyuan Lin, Kang He",
+      "ai_keywords": ["world models", "video generation", "benchmark"],
+      "interest_tag": ""
+    },
+    {
+      "title": "UniT: Toward a Unified Physical Language for Human-to-Humanoid Policy Learning and World Modeling",
+      "arxiv_id": "2604.19734",
+      "url": "https://arxiv.org/abs/2604.19734",
+      "tldr": "Addresses the humanoid data scarcity bottleneck by creating a unified physical language that bridges human egocentric video data and humanoid robot control. Enables scaling humanoid foundation models using massive human video datasets instead of scarce robot demonstrations.",
+      "tldr_zh": "通过创建统一物理语言桥接人类第一人称视频与人形机器人控制，解决人形机器人数据稀缺瓶颈。使得人形基础模型可以利用海量人类视频数据而非稀缺的机器人演示进行扩展。",
+      "upvotes": 0,
+      "authors": "Boyu Chen, Yi Chen, Lu Qiu",
+      "ai_keywords": ["humanoid", "embodied AI", "policy learning"],
+      "interest_tag": ""
+    },
+    {
+      "title": "Seeing Fast and Slow: Learning the Flow of Time in Videos",
+      "arxiv_id": "2604.21931",
+      "url": "https://arxiv.org/abs/2604.21931",
+      "tldr": "Tackles the under-explored problem of temporal speed perception in videos — detecting whether a video has been sped up or slowed down, and generating videos at different speeds. Introduces a learning framework that captures temporal flow patterns beyond standard motion understanding.",
+      "tldr_zh": "研究视频时间速度感知这一未被充分探索的问题——检测视频是否被加速或减速，以及生成不同速度的视频。引入捕捉时间流模式的学习框架，超越标准运动理解。",
+      "upvotes": 0,
+      "authors": "Yen-Siang Wu, Rundong Luo, Jingsen Zhu",
+      "ai_keywords": ["video understanding", "temporal perception"],
+      "interest_tag": ""
+    }
+  ],
+  "alphaxiv_papers": [
+    {
+      "title": "Image Generators are Generalist Vision Learners",
+      "arxiv_id": "2604.20329",
+      "url": "https://arxiv.org/abs/2604.20329",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2604.20329",
+      "tldr": "Google's Vision Banana model shows that instruction-tuning a pretrained image generator creates a generalist vision system achieving SOTA on semantic segmentation, metric depth estimation, and image generation simultaneously. Challenges the assumption that generation and understanding require separate architectures.",
+      "tldr_zh": "Google 的 Vision Banana 模型证明，对预训练图像生成器进行指令微调可以创建通用视觉系统，同时在语义分割、度量深度估计和图像生成上达到 SOTA。挑战了生成与理解需要独立架构的假设。",
+      "interest_tag": ""
+    },
+    {
+      "title": "DeepSeek-V4: Towards Highly Efficient Million-Token Context Intelligence",
+      "arxiv_id": "deepseek-v4",
+      "url": "https://arxiv.org/abs/deepseek-v4",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/deepseek-v4",
+      "tldr": "DeepSeek-V4 processes up to 1M token contexts via hybrid attention architecture, cutting single-token inference FLOPs by 73% and KV cache by 90% vs V3. Achieves competitive performance on reasoning, coding, and long-context tasks while setting new open-source efficiency benchmarks.",
+      "tldr_zh": "DeepSeek-V4 通过混合注意力架构处理百万 token 上下文，单 token 推理 FLOPs 降低 73%，KV cache 减少 90%。在推理、编码和长上下文任务上保持竞争力，刷新开源效率标杆。",
+      "interest_tag": ""
+    },
+    {
+      "title": "Scaling Self-Play with Self-Guidance",
+      "arxiv_id": "2604.20209",
+      "url": "https://arxiv.org/abs/2604.20209",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2604.20209",
+      "tldr": "Stanford's Self-Guided Self-Play (SGS) integrates a Guide LM to generate high-quality synthetic problems for a Solver model. A 7B model surpasses a 671B model's pass@4 in formal theorem proving and achieves 7% higher asymptotic solve rate vs baseline RL.",
+      "tldr_zh": "Stanford 的 SGS 算法集成 Guide 语言模型为 Solver 生成高质量合成问题。7B 模型在形式化定理证明中超越 671B 模型的 pass@4，比基线 RL 高 7% 渐近求解率。",
+      "interest_tag": ""
+    },
+    {
+      "title": "There Will Be a Scientific Theory of Deep Learning",
+      "arxiv_id": "2604.21691",
+      "url": "https://arxiv.org/abs/2604.21691",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2604.21691",
+      "tldr": "Makes a synthetic argument for 'learning mechanics' — a scientific theory of deep learning based on mathematical first-principles. Consolidates evidence across scaling laws, training dynamics, and universal representations toward a unified theoretical framework.",
+      "tldr_zh": "为"学习力学"——基于数学第一性原理的深度学习科学理论——提出系统性论证。整合 scaling laws、训练动态和通用表征等方面的证据，迈向统一理论框架。",
+      "interest_tag": ""
+    },
+    {
+      "title": "Hyperloop Transformers",
+      "arxiv_id": "2604.21254",
+      "url": "https://arxiv.org/abs/2604.21254",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2604.21254",
+      "tldr": "MIT's architecture achieves lower perplexity than depth-matched standard Transformers with ~50% fewer parameters. Advantages persist after INT4 quantization, making it practical for deploying LLMs on memory-constrained devices.",
+      "tldr_zh": "MIT 架构以约 50% 更少参数实现比同深度标准 Transformer 更低的困惑度，INT4 量化后仍保持优势，适合在内存受限设备上部署 LLM。",
+      "interest_tag": ""
+    }
+  ],
+  "github_repos": [
+    {
+      "name": "cosmicstack-labs/mercury-agent",
+      "url": "https://github.com/cosmicstack-labs/mercury-agent",
+      "tldr": "Soul-driven AI agent with permission-hardened tools, token budgets, and multi-channel access (CLI, Telegram). Designed for 24/7 autonomous operation with built-in safety constraints and resource management.",
+      "tldr_zh": "带权限硬化工具、token 预算和多渠道接入（CLI、Telegram）的 AI agent。为 24/7 自主运行设计，内置安全约束和资源管理。",
+      "stars": 1103,
+      "language": "TypeScript",
+      "interest_tag": ""
+    },
+    {
+      "name": "GammaLabTechnologies/harmonist",
+      "url": "https://github.com/GammaLabTechnologies/harmonist",
+      "tldr": "Portable multi-agent orchestration framework with mechanical protocol enforcement. Coordinates 186 agents with zero runtime dependencies, focusing on deterministic agent communication patterns.",
+      "tldr_zh": "便携式多 agent 编排框架，机械化协议执行。零运行时依赖协调 186 个 agent，专注确定性 agent 通信模式。",
+      "stars": 603,
+      "language": "Python",
+      "interest_tag": "Agent Swarm"
+    },
+    {
+      "name": "future-agi/future-agi",
+      "url": "https://github.com/future-agi/future-agi",
+      "tldr": "Open-source end-to-end platform for evaluating, observing, and improving LLM and AI agent applications. Provides tracing, evaluations, and monitoring in a unified interface.",
+      "tldr_zh": "开源端到端平台，用于评估、观测和改进 LLM 及 AI agent 应用。统一界面提供追踪、评测和监控功能。",
+      "stars": 408,
+      "language": "Python",
+      "interest_tag": ""
+    },
+    {
+      "name": "alash3al/stash",
+      "url": "https://github.com/alash3al/stash",
+      "tldr": "Persistent memory layer for AI agents storing episodes, facts, and working context in Postgres. Includes MCP server integration, enabling any agent to maintain long-term memory like Claude.ai or ChatGPT.",
+      "tldr_zh": "AI agent 持久记忆层，在 Postgres 中存储事件、事实和工作上下文。包含 MCP 服务器集成，让任何 agent 都能像 Claude.ai 或 ChatGPT 一样拥有长期记忆。",
+      "stars": 221,
+      "language": "Go",
+      "interest_tag": "Memory"
+    },
+    {
+      "name": "dezgit2025/auto-memory",
+      "url": "https://github.com/dezgit2025/auto-memory",
+      "tldr": "Progressive session recall CLI for AI coding agents — ensures your agent never forgets context across sessions. Lightweight memory management focused on developer workflow continuity.",
+      "tldr_zh": "AI 编码 agent 的渐进式会话召回 CLI——确保 agent 跨会话不丢失上下文。轻量级记忆管理，专注开发者工作流连续性。",
+      "stars": 218,
+      "language": "Python",
+      "interest_tag": "Memory"
+    }
+  ],
+  "hackernews": [
+    {
+      "title": "Our eighth generation TPUs: two chips for the agentic era",
+      "url": "https://blog.google/innovation-and-ai/infrastructure-and-cloud/google-cloud/eighth-generation-tpu-agentic-era/",
+      "tldr": "Google announces 8th-gen TPUs explicitly designed for the agentic era, with two chip variants optimized for different agent workload patterns. Signals that hardware vendors are now designing silicon specifically for agent-centric compute paradigms.",
+      "tldr_zh": "Google 发布第八代 TPU，明确定位 agentic 时代，两款芯片变体针对不同 agent 工作负载模式优化。标志硬件厂商已开始专门为 agent 计算范式设计芯片。",
+      "points": 451,
+      "num_comments": 225,
+      "interest_tag": ""
+    },
+    {
+      "title": "Show HN: A Karpathy-style LLM wiki your agents maintain (Markdown and Git)",
+      "url": "https://github.com/nex-crm/wuphf",
+      "tldr": "A living knowledge base that AI agents autonomously maintain using Markdown files and Git version control. Inspired by Karpathy's LLM knowledge management ideas, agents can read, update, and cross-reference wiki entries.",
+      "tldr_zh": "AI agent 自主维护的活知识库，使用 Markdown 和 Git 版本控制。受 Karpathy LLM 知识管理思路启发，agent 可读取、更新和交叉引用 wiki 条目。",
+      "points": 222,
+      "num_comments": 103,
+      "interest_tag": "Memory"
+    },
+    {
+      "title": "Open source memory layer so any AI agent can do what Claude.ai and ChatGPT do",
+      "url": "https://alash3al.github.io/stash?_v01",
+      "tldr": "Landing page for stash — an open-source persistent memory layer backed by Postgres that gives any AI agent Claude/ChatGPT-level context persistence. Stores episodes, facts, and working context with MCP integration.",
+      "tldr_zh": "stash 的宣传页——基于 Postgres 的开源持久记忆层，让任何 AI agent 拥有 Claude/ChatGPT 级别的上下文持久性。通过 MCP 集成存储事件、事实和工作上下文。",
+      "points": 160,
+      "num_comments": 70,
+      "interest_tag": "Memory"
+    },
+    {
+      "title": "Show HN: Agent Vault – Open-source credential proxy and vault for agents",
+      "url": "https://github.com/Infisical/agent-vault",
+      "tldr": "Open-source credential management specifically designed for AI agents — secure storage, rotation, and access control for API keys and secrets that agents need. From Infisical, the secrets management company.",
+      "tldr_zh": "专为 AI agent 设计的开源凭证管理——安全存储、轮换和访问控制 agent 所需的 API 密钥和秘密。由秘密管理公司 Infisical 出品。",
+      "points": 150,
+      "num_comments": 55,
+      "interest_tag": ""
+    },
+    {
+      "title": "Show HN: Atomic – Local-first, AI-augmented personal knowledge base",
+      "url": "https://atomicapp.ai/",
+      "tldr": "Local-first personal knowledge base with AI augmentation — keeps your data on-device while using AI to organize, connect, and surface relevant notes. Privacy-focused alternative to cloud-based AI note tools.",
+      "tldr_zh": "本地优先的 AI 增强个人知识库——数据保留在设备上，AI 负责组织、连接和浮现相关笔记。云端 AI 笔记工具的隐私优先替代方案。",
+      "points": 61,
+      "num_comments": 41,
+      "interest_tag": ""
+    }
+  ]
+}
