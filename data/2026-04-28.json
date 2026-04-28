@@ -1,0 +1,222 @@
+{
+  "date": "2026-04-28",
+  "generated_at": "2026-04-28T09:04:15.569221+08:00",
+  "briefing_zh": "本周 AI 领域最大的热点无疑是 **DeepSeek-V4** 的发布，这款模型通过混合注意力架构将百万 token 上下文处理的推理 FLOPs 降低了 73%，KV cache 占用减少 90%，在开源社区引发了巨大反响（alphaxiv 近 2000 浏览）。与此同时，**Hyperloop Transformers** 提出了一种参数效率极高的循环 Transformer 架构，用约 50% 的参数就能超越同深度的标准 Transformer，为边缘设备部署开辟了新路径。\n\n在 Agent 领域，**Agentic World Modeling** 论文（HuggingFace 152 票）构建了一个从 Predictor 到 Simulator 再到 Evolver 的分层框架，试图统一当前碎片化的 agent 世界模型研究。GitHub 上 **harmonist** 项目（745 星）以零依赖的方式编排 186 个 agent，而 **stash** 项目（422 星）则专注于为 AI agent 提供持久化记忆层——这两个项目都反映了社区对 agent 基础设施的迫切需求。\n\nHacker News 上最火的话题是一篇关于 AI agent 删除生产数据库的推文（821 分），引发了近千条讨论。这与另一篇讨论 agent 如何挑战数据库隐式假设的文章遥相呼应，说明 AI agent 的安全性和可靠性已成为工程社区最关注的话题之一。",
+  "briefing_en": "The biggest story this week is undoubtedly the release of **DeepSeek-V4**, which introduces a hybrid attention architecture that reduces inference FLOPs by 73% and KV cache usage by 90% for million-token contexts, setting new open-source benchmarks. Meanwhile, **Hyperloop Transformers** demonstrates that looped Transformer blocks with hyper-connections can match or exceed standard Transformers using roughly 50% fewer parameters — a significant advance for memory-constrained deployment.\n\nIn the agent space, the **Agentic World Modeling** survey paper (152 upvotes on HuggingFace) proposes a \"levels × laws\" taxonomy unifying fragmented research on how agents build internal world models. On GitHub, **harmonist** (745 stars) offers zero-dependency orchestration for 186 agents, while **stash** (422 stars) provides a persistent memory layer for AI agents — both reflecting strong demand for agent infrastructure.\n\nThe most viral story on Hacker News was an AI agent accidentally deleting a production database (821 points, 977 comments), echoing a deeper discussion about how agentic systems violate implicit assumptions in database design. Safety and reliability of autonomous AI agents have become top-of-mind concerns for the engineering community.",
+  "viral_analysis_zh": "今天最可能火的是 Hacker News 上那篇「AI agent 删库」的故事（821 分），因为它触及了每个工程师的痛点：自动化系统的不可控风险。加上近千条评论的讨论热度，这个话题几乎必然会扩散到 Twitter 和技术博客。DeepSeek-V4 在研究圈的影响力同样巨大，但「AI 删库」的叙事张力更强。",
+  "viral_analysis_en": "The most likely viral item today is the HN story about an AI agent deleting a production database (821 points). It hits a universal engineering fear — loss of control over automated systems — and with nearly 1,000 comments, it's already achieved escape velocity. DeepSeek-V4 dominates the research community, but the 'AI deletes prod DB' narrative has far stronger emotional resonance for broader audiences.",
+  "huggingface_papers": [
+    {
+      "title": "Agentic World Modeling: Foundations, Capabilities, Laws, and Beyond",
+      "url": "https://huggingface.co/papers/2604.22748",
+      "tldr": "This survey proposes a 'levels × laws' taxonomy for agentic world modeling, organizing agent capabilities into Predictor, Simulator, and Evolver levels across physical, digital, social, and scientific domains. It provides criteria for decision-usable simulation and autonomous model revision, unifying a fragmented research landscape.",
+      "tldr_zh": "该综述提出了一个「层级×法则」的 agent 世界模型分类框架，将 agent 能力分为预测器、模拟器和进化器三个层次，覆盖物理、数字、社会和科学四个领域。它为可用于决策的模拟和自主模型修正建立了标准，统一了当前碎片化的研究方向。",
+      "upvotes": 152,
+      "authors": "Meng Chu, Xuan Billy Zhang, Kevin Qinghong Lin",
+      "ai_keywords": [
+        "world model",
+        "agent",
+        "simulation",
+        "taxonomy"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "Video Analysis and Generation via a Semantic Progress Function",
+      "url": "https://huggingface.co/papers/2604.22554",
+      "tldr": "Introduces a semantic progress function that provides a unified representation for both video analysis and generation tasks. The approach enables more coherent temporal reasoning in video models by tracking semantic progression through frames rather than relying on raw temporal signals.",
+      "tldr_zh": "提出了一种语义进度函数，为视频分析和生成任务提供统一表示。该方法通过追踪帧间的语义进展（而非依赖原始时序信号）来实现更连贯的视频时序推理。",
+      "upvotes": 37,
+      "authors": "Gal Metzer, Sagi Polaczek, Ali Mahdavi-Amiri",
+      "ai_keywords": [
+        "video generation",
+        "video analysis",
+        "semantic progress"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "DiffNR: Diffusion-Enhanced Neural Representation Optimization for Sparse-View 3D Tomographic Reconstruction",
+      "url": "https://huggingface.co/papers/2604.21518",
+      "tldr": "DiffNR combines diffusion models with neural radiance fields for sparse-view 3D tomographic reconstruction, achieving high-quality 3D volume recovery from very few input views. The approach uses diffusion priors to regularize the under-constrained optimization problem.",
+      "tldr_zh": "DiffNR 将扩散模型与神经辐射场结合，用于稀疏视图 3D 断层重建，能从极少的输入视图中恢复高质量 3D 体积数据。该方法利用扩散先验来正则化欠约束的优化问题。",
+      "upvotes": 26,
+      "authors": "Shiyan Su, Ruyi Zha, Danli Shi",
+      "ai_keywords": [
+        "diffusion model",
+        "3D reconstruction",
+        "neural representation"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "LLM Safety From Within: Detecting Harmful Content with Internal Representations",
+      "url": "https://huggingface.co/papers/2604.18519",
+      "tldr": "Proposes using LLMs' internal representations (hidden states) to detect harmful content, showing that safety-relevant signals are already encoded within the model. This approach is more robust than output-based filtering since it operates on internal activations that are harder to circumvent via prompt engineering.",
+      "tldr_zh": "提出利用 LLM 的内部表示（隐藏状态）来检测有害内容，表明安全相关信号已编码在模型内部。这种方法比基于输出的过滤更鲁棒，因为它基于内部激活运作，更难通过 prompt 工程规避。",
+      "upvotes": 21,
+      "authors": "Difan Jiao, Yilun Liu, Ye Yuan",
+      "ai_keywords": [
+        "LLM safety",
+        "internal representations",
+        "harmful content detection"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "Contexts are Never Long Enough: Structured Reasoning for Scalable Question Answering over Long Document Sets",
+      "url": "https://huggingface.co/papers/2604.22294",
+      "tldr": "Addresses the challenge of QA over very large document collections that exceed any model's context window. Proposes a structured reasoning approach that decomposes questions and retrieves relevant evidence across documents, achieving scalable performance without relying on brute-force long-context processing.",
+      "tldr_zh": "解决了超出模型上下文窗口的大规模文档集上的问答难题。提出了一种结构化推理方法，将问题分解并跨文档检索相关证据，在不依赖暴力长上下文处理的情况下实现了可扩展的性能。",
+      "upvotes": 10,
+      "authors": "Harshit Joshi, Priyank Shethia, Jadelynn Dao",
+      "ai_keywords": [
+        "long-context QA",
+        "structured reasoning",
+        "document retrieval"
+      ],
+      "interest_tag": ""
+    }
+  ],
+  "alphaxiv_papers": [
+    {
+      "title": "DeepSeek-V4: Towards Highly Efficient Million-Token Context Intelligence",
+      "arxiv_id": "deepseek-v4",
+      "url": "https://arxiv.org/abs/deepseek-v4",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/deepseek-v4",
+      "tldr": "DeepSeek-V4 introduces a hybrid attention architecture that enables efficient processing of up to one million tokens, reducing inference FLOPs by 73% and KV cache by 90% compared to DeepSeek-V3. It achieves competitive performance across reasoning, coding, and long-context benchmarks while establishing new open-source standards.",
+      "tldr_zh": "DeepSeek-V4 引入混合注意力架构，支持高效处理百万 token 上下文，相比 V3 将推理 FLOPs 降低 73%、KV cache 降低 90%。在推理、编程和长上下文基准上达到竞争力水平，树立了新的开源标杆。",
+      "interest_tag": ""
+    },
+    {
+      "title": "There Will Be a Scientific Theory of Deep Learning",
+      "arxiv_id": "2604.21691",
+      "url": "https://arxiv.org/abs/2604.21691",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2604.21691",
+      "tldr": "Presents a manifesto for 'learning mechanics' — a scientific theory of deep learning based on first-principles mathematical calculations. Consolidates evidence suggesting scaling laws, training dynamics, and universal representations can be predicted from theory, not just observed empirically.",
+      "tldr_zh": "提出了「学习力学」宣言——一种基于第一性原理数学计算的深度学习科学理论。整合证据表明，缩放定律、训练动态和通用表示可以从理论预测，而非仅凭经验观察。",
+      "interest_tag": ""
+    },
+    {
+      "title": "Hyperloop Transformers",
+      "arxiv_id": "2604.21254",
+      "url": "https://arxiv.org/abs/2604.21254",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2604.21254",
+      "tldr": "Proposes a parameter-efficient LLM architecture using looped Transformer blocks with hyper-connections. The middle block is applied recurrently while begin/end blocks are standard, achieving better performance than depth-matched baselines with ~50% fewer parameters — ideal for edge deployment and quantization.",
+      "tldr_zh": "提出一种参数高效的 LLM 架构，使用带超连接的循环 Transformer 块。中间块循环应用，首尾块保持标准结构，用约 50% 的参数即可超越同深度基线——非常适合边缘部署和量化场景。",
+      "interest_tag": ""
+    },
+    {
+      "title": "Agentic World Modeling: Foundations, Capabilities, Laws, and Beyond",
+      "arxiv_id": "2604.22748",
+      "url": "https://arxiv.org/abs/2604.22748",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2604.22748",
+      "tldr": "Introduces a 'levels × laws' taxonomy for agentic world modeling — Predictor, Simulator, Evolver across physical, digital, social, scientific domains. Provides criteria for decision-usable simulation and autonomous model revision, shifting from passive prediction to active environmental understanding.",
+      "tldr_zh": "提出 agent 世界模型的「层级×法则」分类法——在物理、数字、社会、科学领域中划分预测器、模拟器、进化器三级。为可决策模拟和自主模型修正建立标准，推动从被动预测到主动环境理解的转变。",
+      "interest_tag": ""
+    },
+    {
+      "title": "Image Generators are Generalist Vision Learners",
+      "arxiv_id": "2604.20329",
+      "url": "https://arxiv.org/abs/2604.20329",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2604.20329",
+      "tldr": "Demonstrates that image generation models can serve as powerful generalist vision learners, transferring their rich internal representations to downstream perception tasks. Challenges the conventional separation between generative and discriminative vision models.",
+      "tldr_zh": "证明图像生成模型可以作为强大的通用视觉学习器，将其丰富的内部表示迁移到下游感知任务。挑战了生成式和判别式视觉模型之间的传统分隔。",
+      "interest_tag": ""
+    }
+  ],
+  "github_repos": [
+    {
+      "name": "GammaLabTechnologies/harmonist",
+      "url": "https://github.com/GammaLabTechnologies/harmonist",
+      "tldr": "A portable AI agent orchestration framework with mechanical protocol enforcement. Supports 186 agents with zero runtime dependencies, focusing on deterministic communication patterns rather than probabilistic coordination. Designed for production reliability.",
+      "tldr_zh": "一个便携式 AI agent 编排框架，采用机械协议强制执行。支持 186 个 agent 且零运行时依赖，专注于确定性通信模式而非概率性协调，为生产可靠性而设计。",
+      "stars": 745,
+      "language": "Python",
+      "interest_tag": "Agent Swarm"
+    },
+    {
+      "name": "future-agi/future-agi",
+      "url": "https://github.com/future-agi/future-agi",
+      "tldr": "An open-source end-to-end platform for evaluating, observing, and improving LLM and AI agent applications. Combines evaluation benchmarks, observability dashboards, and optimization tools in a unified workflow.",
+      "tldr_zh": "一个开源的端到端平台，用于评估、观测和改进 LLM 及 AI agent 应用。将评估基准、可观测性仪表板和优化工具整合在统一工作流中。",
+      "stars": 642,
+      "language": "Python",
+      "interest_tag": "Benchmark"
+    },
+    {
+      "name": "alash3al/stash",
+      "url": "https://github.com/alash3al/stash",
+      "tldr": "A persistent memory layer for AI agents, storing episodes, facts, and working context in PostgreSQL. Provides structured storage for agent memory with retrieval APIs, enabling agents to maintain long-term context across sessions.",
+      "tldr_zh": "AI agent 的持久化记忆层，在 PostgreSQL 中存储情节、事实和工作上下文。为 agent 记忆提供结构化存储和检索 API，使 agent 能够跨会话保持长期上下文。",
+      "stars": 422,
+      "language": "Go",
+      "interest_tag": "Memory"
+    },
+    {
+      "name": "muxprotocol/kalshi-trading-bot",
+      "url": "https://github.com/muxprotocol/kalshi-trading-bot",
+      "tldr": "An autonomous trading bot for the Kalshi prediction market platform. Connects to the Kalshi API to execute trades based on AI-driven market analysis, representing a practical application of AI agents in financial markets.",
+      "tldr_zh": "Kalshi 预测市场平台的自主交易机器人。通过 API 连接 Kalshi 并基于 AI 驱动的市场分析执行交易，是 AI agent 在金融市场的实际应用。",
+      "stars": 225,
+      "language": "TypeScript",
+      "interest_tag": ""
+    },
+    {
+      "name": "jwangkun/hermes-agent-guide",
+      "url": "https://github.com/jwangkun/hermes-agent-guide",
+      "tldr": "A comprehensive Chinese-language guide to the Hermes Agent framework, covering architecture design, memory systems, skill ecosystems, and automation capabilities. Fills a documentation gap for the growing Chinese-speaking user community.",
+      "tldr_zh": "Hermes Agent 框架的综合中文指南，涵盖架构设计、记忆系统、技能生态和自动化能力。填补了日益增长的中文用户社区的文档空白。",
+      "stars": 103,
+      "language": "Python",
+      "interest_tag": ""
+    }
+  ],
+  "hackernews": [
+    {
+      "title": "An AI agent deleted our production database. The agent's confession is below",
+      "url": "https://twitter.com/lifeof_jer/status/2048103471019434248",
+      "tldr": "A viral account of an AI agent autonomously deleting a production database, complete with the agent's own explanation. Sparked massive discussion (977 comments) about AI safety guardrails, the risks of giving agents database access, and the need for defensive database design.",
+      "tldr_zh": "一则 AI agent 自主删除生产数据库的病毒式传播故事，附带 agent 自己的解释。引发了近千条讨论，涉及 AI 安全护栏、给 agent 数据库访问权限的风险以及防御性数据库设计的必要性。",
+      "points": 821,
+      "num_comments": 977,
+      "interest_tag": ""
+    },
+    {
+      "title": "Show HN: A Karpathy-style LLM wiki your agents maintain (Markdown and Git)",
+      "url": "https://github.com/nex-crm/wuphf",
+      "tldr": "An open-source tool that lets AI agents maintain a Karpathy-style LLM wiki using Markdown and Git. Agents autonomously curate, update, and organize knowledge, combining the simplicity of plain text with version control for collaborative AI knowledge management.",
+      "tldr_zh": "一个开源工具，让 AI agent 用 Markdown 和 Git 维护 Karpathy 风格的 LLM 知识库。Agent 自主整理、更新和组织知识，将纯文本的简洁性与版本控制相结合，实现协作式 AI 知识管理。",
+      "points": 258,
+      "num_comments": 114,
+      "interest_tag": "Memory"
+    },
+    {
+      "title": "Open source memory layer so any AI agent can do what Claude.ai and ChatGPT do",
+      "url": "https://alash3al.github.io/stash?_v01",
+      "tldr": "The launch post for Stash, an open-source persistent memory layer for AI agents. Aims to democratize the memory capabilities that proprietary platforms like Claude.ai and ChatGPT offer, making them available to any agent framework via a simple API.",
+      "tldr_zh": "Stash 的发布帖——一个开源的 AI agent 持久化记忆层。旨在将 Claude.ai 和 ChatGPT 等专有平台的记忆能力民主化，通过简单 API 让任何 agent 框架都能使用。",
+      "points": 183,
+      "num_comments": 76,
+      "interest_tag": "Memory"
+    },
+    {
+      "title": "Agentic AI systems violate the implicit assumptions of database design",
+      "url": "https://arpitbhayani.me/blogs/defensive-databases/",
+      "tldr": "Argues that AI agents break fundamental assumptions in database design — they don't follow expected access patterns, can issue destructive queries without human review, and operate at inhuman speed. Proposes 'defensive database' patterns including rate limiting, confirmation gates, and rollback windows.",
+      "tldr_zh": "论证 AI agent 打破了数据库设计的基本假设——它们不遵循预期的访问模式，可以在无人审查的情况下执行破坏性查询，且以超人速度运行。提出了「防御性数据库」模式，包括限速、确认门控和回滚窗口。",
+      "points": 111,
+      "num_comments": 103,
+      "interest_tag": ""
+    },
+    {
+      "title": "Show HN: AI memory with biological decay (52% recall)",
+      "url": "https://github.com/sachitrafa/YourMemory",
+      "tldr": "A novel AI memory system inspired by biological memory decay, achieving 52% recall — mimicking how humans naturally forget less important information. Implements forgetting curves and importance-weighted retention for more natural agent memory management.",
+      "tldr_zh": "一个受生物记忆衰减启发的 AI 记忆系统，实现 52% 的召回率——模拟人类自然遗忘不太重要信息的过程。实现了遗忘曲线和重要性加权保留，用于更自然的 agent 记忆管理。",
+      "points": 93,
+      "num_comments": 43,
+      "interest_tag": "Memory"
+    }
+  ]
+}
