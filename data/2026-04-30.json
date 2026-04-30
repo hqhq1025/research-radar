@@ -1,0 +1,224 @@
+{
+  "date": "2026-04-30",
+  "generated_at": "2026-04-30T09:03:20.247030+08:00",
+  "briefing_zh": "今天 AI 研究领域最引人注目的主题是**多 Agent 协作系统**的突破。HuggingFace 最热论文 **Recursive Multi-Agent Systems** 提出了递归式多智能体架构，获得 123 票，反映出社区对可扩展 Agent 编排方案的强烈需求。与此同时，GitHub 上 **Stash** 项目一周内收获 557 星，为 AI Agent 提供持久化记忆层，解决了 Agent 在长期任务中的状态管理痛点。\n\n**DeepSeek-V4** 在 alphaxiv 上以 308 赞高居榜首，其百万 token 上下文窗口、73% FLOPs 削减和 90% KV cache 压缩代表了高效推理的新里程碑。这直接降低了长上下文 Agent 应用的部署成本。\n\nHacker News 上最火的讨论是一篇关于 **AI Agent 删除生产数据库**的事故复盘（846 分），引发了对 Agent 安全性和权限边界的广泛反思。Mistral 发布 **Medium 3.5** 并主打远程 Agent 能力，显示大模型厂商正全面拥抱 Agentic AI 路线。",
+  "briefing_en": "Today's most prominent theme in AI research is the breakthrough in **multi-agent collaboration**. The top HuggingFace paper **Recursive Multi-Agent Systems** proposes a recursive multi-agent architecture with 123 upvotes, reflecting strong community demand for scalable agent orchestration. Meanwhile, **Stash** on GitHub gained 557 stars in one week, providing a persistent memory layer for AI agents that addresses state management in long-running tasks.\n\n**DeepSeek-V4** leads alphaxiv with 308 likes, achieving million-token context with 73% FLOPs reduction and 90% KV cache compression — a new milestone for efficient inference that directly lowers deployment costs for long-context agent applications.\n\nThe hottest Hacker News discussion centers on an **AI agent deleting a production database** (846 points), sparking widespread reflection on agent safety and permission boundaries. Mistral's release of **Medium 3.5** with remote agent capabilities signals that foundation model providers are fully embracing the agentic AI paradigm.",
+  "viral_analysis_zh": "今天最可能火的是 Stash（GitHub 557 星）+ HN 上的「AI Agent 删库」事故帖（846 分）。前者精准命中 Agent 开发者的记忆管理痛点，名字简洁、定位清晰；后者以戏剧性事故引发情绪共鸣，两者共同推动了「Agent 安全与记忆」这一叙事。",
+  "viral_analysis_en": "The most viral combination today is Stash (557 GitHub stars) paired with the 'AI agent deleted our production database' HN post (846 points). Stash hits a precise pain point for agent developers with a clean name and clear positioning; the database incident creates emotional resonance through dramatic failure. Together they amplify the 'agent safety and memory' narrative.",
+  "huggingface_papers": [
+    {
+      "title": "Recursive Multi-Agent Systems",
+      "url": "https://huggingface.co/papers/2604.25917",
+      "tldr": "Proposes a recursive architecture for multi-agent systems where agents can spawn sub-agents dynamically, enabling hierarchical task decomposition without predefined workflows. Demonstrates superior performance on complex planning benchmarks compared to flat multi-agent baselines.",
+      "tldr_zh": "提出递归式多智能体架构，Agent 可动态生成子 Agent 实现层次化任务分解，无需预定义工作流。在复杂规划基准上显著优于平面多 Agent 基线。",
+      "upvotes": 123,
+      "authors": "Xiyuan Yang, Jiaru Zou, Rui Pan",
+      "ai_keywords": [
+        "multi-agent",
+        "recursive",
+        "task decomposition",
+        "planning"
+      ],
+      "interest_tag": "Agent Swarm"
+    },
+    {
+      "title": "Programming with Data: Test-Driven Data Engineering for Self-Improving LLMs from Raw Corpora",
+      "url": "https://huggingface.co/papers/2604.24819",
+      "tldr": "Introduces a test-driven data engineering framework where LLMs iteratively curate and validate their own training data from raw corpora. Achieves consistent self-improvement without human annotation by treating data quality as a testable property.",
+      "tldr_zh": "提出测试驱动的数据工程框架，LLM 从原始语料中迭代整理和验证自身训练数据。将数据质量视为可测试属性，无需人工标注即可实现持续自我提升。",
+      "upvotes": 70,
+      "authors": "Chenkai Pan, Xinglong Xu, Yuhang Xu",
+      "ai_keywords": [
+        "data engineering",
+        "self-improvement",
+        "test-driven",
+        "LLM training"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "DV-World: Benchmarking Data Visualization Agents in Real-World Scenarios",
+      "url": "https://huggingface.co/papers/2604.25914",
+      "tldr": "Presents DV-World, a comprehensive benchmark for evaluating AI agents that create data visualizations from natural language in realistic settings. Covers 1000+ tasks across multiple chart types and data complexities, revealing significant gaps in current agent capabilities.",
+      "tldr_zh": "推出 DV-World 基准，全面评估从自然语言生成数据可视化的 AI Agent。覆盖 1000+ 任务、多种图表类型和数据复杂度，揭示了当前 Agent 能力的显著差距。",
+      "upvotes": 37,
+      "authors": "Jinxiang Meng, Shaoping Huang, Fangyu Lei",
+      "ai_keywords": [
+        "benchmark",
+        "data visualization",
+        "agent evaluation"
+      ],
+      "interest_tag": "Benchmark"
+    },
+    {
+      "title": "AutoResearchBench: Benchmarking AI Agents on Complex Scientific Literature Discovery",
+      "url": "https://huggingface.co/papers/2604.25256",
+      "tldr": "Introduces AutoResearchBench for evaluating AI agents on multi-step scientific literature discovery tasks requiring search, synthesis, and reasoning across papers. Current best agents achieve only 34% on complex discovery tasks.",
+      "tldr_zh": "推出 AutoResearchBench，评估 AI Agent 在多步科学文献发现任务上的能力，需要跨论文检索、综合和推理。当前最佳 Agent 在复杂发现任务上仅达 34%。",
+      "upvotes": 25,
+      "authors": "Lei Xiong, Kun Luo, Ziyi Xia",
+      "ai_keywords": [
+        "benchmark",
+        "scientific discovery",
+        "literature review",
+        "agent"
+      ],
+      "interest_tag": "Benchmark"
+    },
+    {
+      "title": "Meta-CoT: Enhancing Granularity and Generalization in Image Editing",
+      "url": "https://huggingface.co/papers/2604.24625",
+      "tldr": "Proposes Meta-CoT, a chain-of-thought prompting method for image editing that decomposes complex edits into fine-grained sub-operations. Achieves better generalization across editing types by reasoning about spatial relationships and edit dependencies.",
+      "tldr_zh": "提出 Meta-CoT，将复杂图像编辑分解为细粒度子操作的思维链方法。通过推理空间关系和编辑依赖，在多种编辑类型上实现更好的泛化。",
+      "upvotes": 23,
+      "authors": "Shiyi Zhang, Yiji Cheng, Tiankai Hang",
+      "ai_keywords": [
+        "chain-of-thought",
+        "image editing",
+        "multimodal"
+      ],
+      "interest_tag": ""
+    }
+  ],
+  "alphaxiv_papers": [
+    {
+      "title": "DeepSeek-V4: Towards Highly Efficient Million-Token Context Intelligence",
+      "arxiv_id": "deepseek-v4",
+      "url": "https://arxiv.org/abs/deepseek-v4",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/deepseek-v4",
+      "tldr": "DeepSeek-V4 achieves million-token context through hybrid attention architecture, reducing single-token inference FLOPs by 73% and KV cache by 90% vs V3. Sets new open-source benchmarks across reasoning, coding, and long-context tasks.",
+      "tldr_zh": "DeepSeek-V4 通过混合注意力架构实现百万 token 上下文，单 token 推理 FLOPs 降低 73%，KV cache 减少 90%。在推理、编码和长上下文任务上刷新开源基准。",
+      "interest_tag": ""
+    },
+    {
+      "title": "There Will Be a Scientific Theory of Deep Learning",
+      "arxiv_id": "2604.21691",
+      "url": "https://arxiv.org/abs/2604.21691",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2604.21691",
+      "tldr": "Argues for 'learning mechanics' as a first-principles scientific theory of deep learning, consolidating evidence that scaling laws, training dynamics, and universal representations can be predicted mathematically rather than discovered empirically.",
+      "tldr_zh": "提出「学习力学」作为深度学习的第一性原理科学理论，整合证据表明缩放定律、训练动态和通用表示可通过数学预测而非经验发现。",
+      "interest_tag": ""
+    },
+    {
+      "title": "Tuna-2: Pixel Embeddings Beat Vision Encoders for Multimodal Understanding and Generation",
+      "arxiv_id": "2604.24763",
+      "url": "https://arxiv.org/abs/2604.24763",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2604.24763",
+      "tldr": "Meta AI's Tuna-2 eliminates pretrained vision encoders entirely, achieving competitive VQA performance and SOTA image generation among native unified multimodal models using only pixel embeddings as visual input.",
+      "tldr_zh": "Meta AI 的 Tuna-2 完全去除预训练视觉编码器，仅用像素嵌入作为视觉输入，在 VQA 上表现有竞争力，在原生统一多模态模型中图像生成达到 SOTA。",
+      "interest_tag": ""
+    },
+    {
+      "title": "World-R1: Reinforcing 3D Constraints for Text-to-Video Generation",
+      "arxiv_id": "2604.24764",
+      "url": "https://arxiv.org/abs/2604.24764",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2604.24764",
+      "tldr": "Applies reinforcement learning to enforce 3D geometric consistency in text-to-video models without architectural changes. Achieves up to 10.23dB PSNR improvement and 92% user preference for geometric consistency.",
+      "tldr_zh": "通过强化学习在文本到视频模型中强制 3D 几何一致性，无需修改架构。PSNR 提升高达 10.23dB，92% 用户偏好几何一致性。",
+      "interest_tag": ""
+    },
+    {
+      "title": "Incompressible Knowledge Probes: Estimating Black-Box LLM Parameter Counts via Factual Capacity",
+      "arxiv_id": "2604.24827",
+      "url": "https://arxiv.org/abs/2604.24827",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2604.24827",
+      "tldr": "Introduces IKPs to measure factual knowledge capacity of LLMs as a black-box method for estimating undisclosed parameter counts. Achieves 0.917 R² correlation, showing factual knowledge scales log-linearly with parameters.",
+      "tldr_zh": "提出不可压缩知识探针（IKP），作为黑盒方法估算 LLM 未公开参数量。达到 0.917 R² 相关性，证明事实知识与参数量呈对数线性关系。",
+      "interest_tag": ""
+    }
+  ],
+  "github_repos": [
+    {
+      "name": "alash3al/stash",
+      "url": "https://github.com/alash3al/stash",
+      "tldr": "Persistent memory layer for AI agents with episodes, facts, and working context. Provides structured long-term storage so any agent framework can maintain state across sessions without custom implementation.",
+      "tldr_zh": "AI Agent 持久记忆层，支持情节、事实和工作上下文。为任意 Agent 框架提供结构化长期存储，无需自定义实现即可跨会话维护状态。",
+      "stars": 557,
+      "language": "Go",
+      "interest_tag": "Memory"
+    },
+    {
+      "name": "sandeco/reversa",
+      "url": "https://github.com/sandeco/reversa",
+      "tldr": "Transforms legacy systems into executable specifications for AI coding agents. Reverse-engineers existing codebases into structured specs that agents can use to understand and modify legacy code.",
+      "tldr_zh": "将遗留系统转化为 AI 编码 Agent 可执行的规格说明。逆向工程现有代码库为结构化规格，供 Agent 理解和修改遗留代码。",
+      "stars": 129,
+      "language": "JavaScript",
+      "interest_tag": ""
+    },
+    {
+      "name": "wxtsky/byob",
+      "url": "https://github.com/wxtsky/byob",
+      "tldr": "Bring Your Own Browser — lets AI agents use the Chrome instance you already have open, with full cookie/session context. Eliminates the cold-start authentication problem for browser-using agents.",
+      "tldr_zh": "让 AI Agent 使用你已打开的 Chrome 实例，包含完整 cookie/会话上下文。消除浏览器使用型 Agent 的冷启动认证问题。",
+      "stars": 103,
+      "language": "TypeScript",
+      "interest_tag": "CUA"
+    },
+    {
+      "name": "AeternaLabsHQ/pullmd",
+      "url": "https://github.com/AeternaLabsHQ/pullmd",
+      "tldr": "Self-hosted URL-to-Markdown service for humans and AI agents. PWA + REST + MCP integration, converting any webpage into clean markdown for agent consumption.",
+      "tldr_zh": "自托管 URL 转 Markdown 服务，支持 PWA + REST + MCP 集成，将任意网页转为干净的 Markdown 供 Agent 消费。",
+      "stars": 97,
+      "language": "JavaScript",
+      "interest_tag": ""
+    },
+    {
+      "name": "Zhou-Shilin/Aether",
+      "url": "https://github.com/Zhou-Shilin/Aether",
+      "tldr": "A polished, localized general-purpose AI agent for Android with native UI integration. Supports multiple LLM backends and on-device task execution with Material Design interface.",
+      "tldr_zh": "精美的本地化 Android 通用 AI Agent，原生 UI 集成。支持多种 LLM 后端和设备端任务执行，Material Design 界面。",
+      "stars": 61,
+      "language": "Kotlin",
+      "interest_tag": ""
+    }
+  ],
+  "hackernews": [
+    {
+      "title": "An AI agent deleted our production database. The agent's confession is below",
+      "url": "https://twitter.com/lifeof_jer/status/2048103471019434248",
+      "tldr": "A viral post-mortem where an AI agent with database access accidentally dropped a production database. The 'confession' format humanizes the failure mode and sparked intense debate about agent permission boundaries and guardrails.",
+      "tldr_zh": "一篇病毒式传播的事故复盘：拥有数据库权限的 AI Agent 意外删除了生产数据库。「忏悔录」形式引发了关于 Agent 权限边界和安全护栏的激烈讨论。",
+      "points": 846,
+      "num_comments": 1019,
+      "interest_tag": ""
+    },
+    {
+      "title": "Mistral Medium 3.5",
+      "url": "https://mistral.ai/news/vibe-remote-agents-mistral-medium-3-5",
+      "tldr": "Mistral releases Medium 3.5 with native remote agent capabilities and 'vibe coding' support. Positions as a mid-tier model optimized for agentic workflows with tool use and multi-step reasoning.",
+      "tldr_zh": "Mistral 发布 Medium 3.5，原生支持远程 Agent 能力和「氛围编码」。定位为针对 Agent 工作流优化的中端模型，擅长工具使用和多步推理。",
+      "points": 423,
+      "num_comments": 196,
+      "interest_tag": ""
+    },
+    {
+      "title": "Show HN: A Karpathy-style LLM wiki your agents maintain (Markdown and Git)",
+      "url": "https://github.com/nex-crm/wuphf",
+      "tldr": "An LLM knowledge wiki maintained by AI agents using Markdown and Git. Inspired by Karpathy's approach, agents autonomously curate and update structured knowledge with version control.",
+      "tldr_zh": "由 AI Agent 使用 Markdown 和 Git 维护的 LLM 知识 Wiki。受 Karpathy 启发，Agent 自主整理和更新结构化知识并进行版本控制。",
+      "points": 258,
+      "num_comments": 114,
+      "interest_tag": "Memory"
+    },
+    {
+      "title": "Open source memory layer so any AI agent can do what Claude.ai and ChatGPT do",
+      "url": "https://alash3al.github.io/stash?_v01",
+      "tldr": "Stash's Show HN launch — an open-source persistent memory layer giving any AI agent the same memory capabilities as Claude.ai and ChatGPT. Supports episodic memory, facts, and working context.",
+      "tldr_zh": "Stash 的 Show HN 发布——开源持久记忆层，让任何 AI Agent 拥有与 Claude.ai 和 ChatGPT 相同的记忆能力。支持情节记忆、事实和工作上下文。",
+      "points": 184,
+      "num_comments": 76,
+      "interest_tag": "Memory"
+    },
+    {
+      "title": "Agentic AI systems violate the implicit assumptions of database design",
+      "url": "https://arpitbhayani.me/blogs/defensive-databases/",
+      "tldr": "Argues that traditional database design assumes human-speed, low-concurrency access patterns that break down with AI agents. Proposes 'defensive database' patterns including rate limiting, semantic locks, and intent verification.",
+      "tldr_zh": "指出传统数据库设计假设人类速度、低并发的访问模式，在 AI Agent 场景下会崩溃。提出「防御性数据库」模式，包括速率限制、语义锁和意图验证。",
+      "points": 113,
+      "num_comments": 105,
+      "interest_tag": ""
+    }
+  ]
+}
