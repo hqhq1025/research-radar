@@ -1,0 +1,201 @@
+{
+  "date": "2026-05-01",
+  "generated_at": "2026-05-01T01:00:00+08:00",
+  "briefing_zh": "今天 AI 研究领域最大亮点是 **GLM-5V-Turbo** 的发布——智谱团队推出了面向多模态 Agent 的原生基础模型，标志着大模型从通用对话向自主操控界面的方向演进加速。与此同时，**Recursive Multi-Agent Systems (RecursiveMAS)** 在 alphaxiv 上引发热议，该框架通过递归式潜空间推理大幅提升多智能体协作效率，准确率提升可达 20.2%，推理速度提升 2.4 倍。\n\n在开源社区，**reversa**（将遗留系统转化为可执行规格以供 AI 编码代理使用）一周内获 317 星，反映出企业 AI 落地中\"棕地改造\"的强烈需求。**Incompressible Knowledge Probes** 提出了一种黑盒方法估计 LLM 参数量，为闭源模型的能力审计开辟了新路径。\n\nHacker News 方面，**Pu.sh**（400 行 shell 实现完整编码代理框架）和 **Kanwas**（开源共享上下文白板）代表了两个趋势：极简 Agent 工具链和多人/多 Agent 协作基础设施。",
+  "briefing_en": "Today's top story is **GLM-5V-Turbo** from Zhipu AI — a native foundation model designed specifically for multimodal agents, signaling that leading labs are now building models with agent use-cases as first-class citizens rather than afterthoughts. Meanwhile, **Recursive Multi-Agent Systems (RecursiveMAS)** gained significant traction on alphaxiv, demonstrating that latent-space recursive reasoning can boost multi-agent accuracy by up to 20.2% while cutting inference cost by 2.4x.\n\nIn open source, **reversa** (317 stars in a week) addresses a critical enterprise pain point: converting legacy codebases into executable specs that AI coding agents can work with. **Incompressible Knowledge Probes** offers a clever black-box method to estimate LLM parameter counts via factual capacity measurement — a potential game-changer for model auditing.\n\nOn Hacker News, **Pu.sh** (a full coding-agent harness in 400 lines of shell) and **Kanwas** (open-source shared context board) reflect the community's appetite for minimalist agent tooling and collaborative AI infrastructure.",
+  "viral_analysis_zh": "今天最可能火的是 **RecursiveMAS**——它同时击中了\"多 Agent 协作\"和\"推理效率\"两个热点话题，GitHub 已有 5000+ star，且论文提出的递归潜空间交互范式足够新颖，容易被科技媒体和推特 KOL 传播。",
+  "viral_analysis_en": "**RecursiveMAS** has the highest viral potential today — it combines the hot topics of multi-agent collaboration and inference efficiency, already has 5,000+ GitHub stars, and its novel recursive latent-space interaction paradigm is easily digestible for tech media and Twitter KOLs.",
+  "huggingface_papers": [
+    {
+      "title": "GLM-5V-Turbo: Toward a Native Foundation Model for Multimodal Agents",
+      "url": "https://huggingface.co/papers/2604.26752",
+      "tldr": "Zhipu AI's V Team introduces GLM-5V-Turbo, a multimodal foundation model natively designed for agent tasks including GUI navigation, tool use, and visual grounding. Trained from scratch with agent interaction patterns, achieving strong performance on agent benchmarks while maintaining general VLM capabilities.",
+      "tldr_zh": "智谱 AI 推出 GLM-5V-Turbo，一个为 Agent 任务原生设计的多模态基础模型，支持 GUI 导航、工具调用和视觉定位。从头开始在 Agent 交互模式上训练，在 Agent 基准测试上表现出色，同时保持通用 VLM 能力。",
+      "upvotes": 71,
+      "authors": "V Team, Wenyi Hong, Xiaotao Gu",
+      "ai_keywords": ["multimodal", "agent", "GUI", "foundation-model"],
+      "interest_tag": "CUA"
+    },
+    {
+      "title": "Large Language Models Explore by Latent Distilling",
+      "url": "https://huggingface.co/papers/2604.24927",
+      "tldr": "Proposes a latent distillation method that enables LLMs to explore more effectively during reasoning by distilling exploration strategies into a compact latent space, improving performance on math and coding tasks without explicit chain-of-thought enumeration.",
+      "tldr_zh": "提出潜在蒸馏方法，将探索策略蒸馏到紧凑的潜在空间中，使 LLM 能更高效地进行推理探索，在数学和编码任务上提升性能。",
+      "upvotes": 53,
+      "authors": "Yuanhao Zeng, Ao Lu, Lufei Li",
+      "ai_keywords": ["reasoning", "distillation", "exploration"],
+      "interest_tag": ""
+    },
+    {
+      "title": "RADIO-ViPE: Online Tightly Coupled Multi-Modal Fusion for Open-Vocabulary Semantic SLAM in Dynamic Environments",
+      "url": "https://huggingface.co/papers/2604.26067",
+      "tldr": "A real-time multi-modal SLAM system fusing LiDAR and camera data for open-vocabulary semantic mapping in dynamic environments, enabling robots to navigate using natural language queries without pre-defined object categories.",
+      "tldr_zh": "实时多模态 SLAM 系统，融合 LiDAR 和相机数据实现动态环境中的开放词汇语义建图，使机器人能用自然语言查询导航空间。",
+      "upvotes": 49,
+      "authors": "Zaid Nasser, Mikhail Iumanov, Tianhao Li",
+      "ai_keywords": ["SLAM", "multimodal", "robotics"],
+      "interest_tag": ""
+    },
+    {
+      "title": "ClawGym: A Scalable Framework for Building Effective Claw Agents",
+      "url": "https://huggingface.co/papers/2604.26904",
+      "tldr": "Scalable simulation framework for training claw machine agents with physics-accurate grasping dynamics. Enables RL-based agents to learn robust manipulation strategies that transfer to real hardware.",
+      "tldr_zh": "ClawGym 提供可扩展的抓娃娃机模拟框架，使基于 RL 的 Agent 能学习可迁移到真实硬件的操控策略。",
+      "upvotes": 37,
+      "authors": "Fei Bai, Huatong Song, Shuang Sun",
+      "ai_keywords": ["robotics", "reinforcement-learning", "simulation"],
+      "interest_tag": ""
+    },
+    {
+      "title": "Turning the TIDE: Cross-Architecture Distillation for Diffusion Large Language Models",
+      "url": "https://huggingface.co/papers/2604.26951",
+      "tldr": "TIDE enables cross-architecture knowledge distillation from autoregressive LLMs to diffusion-based language models, bridging two paradigms and significantly improving diffusion LLM quality.",
+      "tldr_zh": "TIDE 实现从自回归 LLM 到扩散式语言模型的跨架构知识蒸馏，桥接两种范式，显著提升扩散 LLM 质量。",
+      "upvotes": 36,
+      "authors": "Gongbo Zhang, Wen Wang, Ye Tian",
+      "ai_keywords": ["diffusion", "distillation", "language-model"],
+      "interest_tag": ""
+    }
+  ],
+  "alphaxiv_papers": [
+    {
+      "title": "Incompressible Knowledge Probes: Estimating Black-Box LLM Parameter Counts via Factual Capacity",
+      "arxiv_id": "2604.24827",
+      "url": "https://arxiv.org/abs/2604.24827",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2604.24827",
+      "tldr": "Introduces IKPs to measure factual knowledge capacity of LLMs as a black-box method for estimating undisclosed parameter counts. Achieves 0.917 R² on open-weight models, showing factual knowledge scales log-linearly with parameters.",
+      "tldr_zh": "提出不可压缩知识探针，通过测量 LLM 事实知识容量来黑盒估算参数量。在开源模型上达到 0.917 R²。",
+      "interest_tag": ""
+    },
+    {
+      "title": "Tuna-2: Pixel Embeddings Beat Vision Encoders for Multimodal Understanding and Generation",
+      "arxiv_id": "2604.24763",
+      "url": "https://arxiv.org/abs/2604.24763",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2604.24763",
+      "tldr": "Meta AI's encoder-free architecture performs visual understanding and generation directly from pixel embeddings, achieving competitive VQA and SOTA image generation among native unified multimodal models.",
+      "tldr_zh": "Meta AI 的无编码器架构直接从像素嵌入进行视觉理解和生成，在原生统一多模态模型中达到 SOTA。",
+      "interest_tag": ""
+    },
+    {
+      "title": "Recursive Multi-Agent Systems",
+      "arxiv_id": "2604.25917",
+      "url": "https://arxiv.org/abs/2604.25917",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2604.25917",
+      "tldr": "RecursiveMAS integrates recursive computation into multi-agent systems via latent-space interactions, achieving up to 20.2% accuracy improvement and 2.4x inference speedup over text-based approaches.",
+      "tldr_zh": "RecursiveMAS 通过潜空间迭代交互优化多智能体协作推理，准确率提升 20.2%，推理速度提升 2.4 倍。",
+      "interest_tag": "Agent Swarm"
+    },
+    {
+      "title": "Agentic Harness Engineering: Observability-Driven Automatic Evolution of Coding-Agent Harnesses",
+      "arxiv_id": "2604.25850",
+      "url": "https://arxiv.org/abs/2604.25850",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2604.25850",
+      "tldr": "Closed-loop framework automating coding agent harness evolution through observability. Boosted Terminal-Bench 2 from 69.7% to 77.0% pass@1.",
+      "tldr_zh": "AHE 通过可观测性自动化编码 Agent 工具链演进，Terminal-Bench 2 性能从 69.7% 提升到 77.0%。",
+      "interest_tag": ""
+    },
+    {
+      "title": "World-R1: Reinforcing 3D Constraints for Text-to-Video Generation",
+      "arxiv_id": "2604.24764",
+      "url": "https://arxiv.org/abs/2604.24764",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2604.24764",
+      "tldr": "Uses RL to add 3D geometric consistency to text-to-video models without architecture changes. PSNR improvement up to 10.23dB, 92% user preference.",
+      "tldr_zh": "World-R1 用 RL 赋予视频生成模型 3D 几何一致性，PSNR 提升 10.23dB。",
+      "interest_tag": ""
+    }
+  ],
+  "github_repos": [
+    {
+      "name": "sandeco/reversa",
+      "url": "https://github.com/sandeco/reversa",
+      "tldr": "Transforms legacy systems into executable specifications for AI coding agents, bridging brownfield codebases and modern AI-assisted development.",
+      "tldr_zh": "将遗留系统转化为 AI 编码代理可使用的可执行规格。",
+      "stars": 317,
+      "language": "Python",
+      "interest_tag": ""
+    },
+    {
+      "name": "Julpygo/Claude-Code-AI-Design",
+      "url": "https://github.com/Julpygo/Claude-Code-AI-Design",
+      "tldr": "Figma-to-code tool using Claude AI agent capabilities for the design-to-implementation pipeline.",
+      "tldr_zh": "利用 Claude AI Agent 将 Figma 设计转换为代码。",
+      "stars": 150,
+      "language": "TypeScript",
+      "interest_tag": ""
+    },
+    {
+      "name": "wxtsky/byob",
+      "url": "https://github.com/wxtsky/byob",
+      "tldr": "Bring Your Own Browser — lets AI agents use your existing Chrome session, avoiding detection and CAPTCHAs.",
+      "tldr_zh": "让 AI Agent 使用你已打开的 Chrome 浏览器，避免检测和验证码。",
+      "stars": 106,
+      "language": "Python",
+      "interest_tag": "CUA"
+    },
+    {
+      "name": "AeternaLabsHQ/pullmd",
+      "url": "https://github.com/AeternaLabsHQ/pullmd",
+      "tldr": "Self-hosted URL-to-Markdown service with PWA, REST API, and MCP integration for AI agent workflows.",
+      "tldr_zh": "自托管 URL 转 Markdown 服务，支持 MCP 集成。",
+      "stars": 99,
+      "language": "TypeScript",
+      "interest_tag": ""
+    },
+    {
+      "name": "Zhou-Shilin/Aether",
+      "url": "https://github.com/Zhou-Shilin/Aether",
+      "tldr": "Localized general-purpose AI agent for Android with natural language device automation.",
+      "tldr_zh": "本地化 Android 通用 AI Agent，自然语言控制设备。",
+      "stars": 64,
+      "language": "Kotlin",
+      "interest_tag": "CUA"
+    }
+  ],
+  "hackernews": [
+    {
+      "title": "Show HN: Pu.sh – a full coding-agent harness in 400 lines of shell",
+      "url": "https://pu.dev/",
+      "tldr": "Complete coding agent harness in 400 lines of shell, emphasizing Unix philosophy over monolithic agent platforms.",
+      "tldr_zh": "400 行 shell 实现完整编码代理框架，强调 Unix 哲学。",
+      "points": 64,
+      "num_comments": 0,
+      "interest_tag": ""
+    },
+    {
+      "title": "Show HN: Kanwas, open-source shared context board for teams and agents",
+      "url": "https://github.com/kanwas-ai/kanwas",
+      "tldr": "Open-source shared context board for human-AI collaboration with persistent shared state.",
+      "tldr_zh": "开源共享上下文白板，解决人机协作中的上下文共享问题。",
+      "points": 56,
+      "num_comments": 0,
+      "interest_tag": ""
+    },
+    {
+      "title": "Show HN: Spec27 – Spec-driven validation for AI agents",
+      "url": "https://www.spec27.ai/launch",
+      "tldr": "Specification-driven validation for AI agent behavior — define expected behaviors as specs and auto-verify compliance.",
+      "tldr_zh": "规格驱动的 AI Agent 行为验证，自动检查合规性。",
+      "points": 13,
+      "num_comments": 0,
+      "interest_tag": ""
+    },
+    {
+      "title": "Show HN: Agent that refuses to run commands without human approval",
+      "url": "https://github.com/few-sh/fewshell",
+      "tldr": "Terminal agent requiring explicit human approval before every command execution for safety.",
+      "tldr_zh": "每条命令都需人类批准的终端 Agent，解决安全问题。",
+      "points": 10,
+      "num_comments": 0,
+      "interest_tag": ""
+    },
+    {
+      "title": "Scaling Pain of Coding Agent Serving: Lessons from Debugging GLM-5 at Scale",
+      "url": "https://z.ai/blog/scaling-pain",
+      "tldr": "Post-mortem on serving GLM-5 coding agents at scale: resource management, context windows, and concurrent session challenges.",
+      "tldr_zh": "GLM-5 编码 Agent 大规模部署事后分析。",
+      "points": 10,
+      "num_comments": 0,
+      "interest_tag": ""
+    }
+  ]
+}

@@ -1,6 +1,6 @@
 {
   "date": "2026-04-13",
-  "generated_at": "2026-04-13T12:24:41.781453",
+  "generated_at": "2026-05-01T01:03:39.797529",
   "briefing_zh": "今天最值得关注的是 Berkeley RDI 发布的 AI agent benchmark 漏洞分析——**537 分 HN 热帖**揭示了当前最主流的 agent 评测基准存在严重可利用漏洞，agent 可以通过非预期路径刷高分数，引发社区对评测可靠性的深度反思。这与 **ClawBench** 的发现遥相呼应：在 153 个真实网站上的写操作任务中，前沿模型成功率仅 **0.7%-33.3%**，说明现有 benchmark 可能严重高估了 agent 的真实能力。\n\n论文方面，**SkillClaw** 提出让 agent 技能通过跨用户交互持续进化，自主 evolver 实现了 +42.1% 的平均提升。**Neural Computers** 来自 Meta AI 和 KAUST，提出了全新计算范式——将计算、内存和 I/O 全部内化到学习的运行时状态中，3400+ 浏览量领跑 alphaxiv。**Externalization Framework** 则从反方向切入，把认知负担外化到持久化结构中提升 agent 可靠性。\n\n开源生态方面，Hermes Agent 相关项目本周集中爆发：**橙皮书教程**（2200+ star）、**意识监控面板**（783 star）、**fireworks-tech-graph** 技术图表生成技能（1862 star）。**auto-deep-researcher** 提供了 24/7 自动跑深度学习实验的方案。**Marimo pair** 把响应式 Python notebook 变成 agent 的运行环境，140 分 HN 热帖。",
   "briefing_en": "The biggest story today is Berkeley RDI's analysis of exploitable vulnerabilities in major AI agent benchmarks — a **537-point HN post** revealing that current evaluation frameworks can be gamed through unintended pathways. This resonates with **ClawBench**'s findings: frontier models achieve only **0.7%-33.3% success rates** on 153 real-world write-heavy tasks across production websites, suggesting benchmarks may severely overestimate actual agent capabilities.\n\nIn research, **SkillClaw** introduces continuous skill evolution through collective cross-user interactions, with an autonomous evolver achieving **+42.1% average improvement**. **Neural Computers** from Meta AI + KAUST proposes a new computing paradigm where computation, memory, and I/O are internalized within a learned runtime state — leading alphaxiv with 3,400+ views. The **Externalization Framework** takes the opposite approach, offloading cognitive burdens to persistent external structures for agent reliability.\n\nThe open-source ecosystem is flourishing: Hermes Agent projects surged this week — **Orange Book tutorial** (2,200+ stars), **consciousness monitor UI** (783 stars), **fireworks-tech-graph** diagram skill (1,862 stars). **auto-deep-researcher** enables 24/7 autonomous DL experiment running. **Marimo pair** turns reactive Python notebooks into agent environments — 140-point HN hit.",
   "viral_analysis_zh": "Berkeley 的 benchmark 漏洞分析能拿 537 分，核心原因是戳中了行业痛点：大家都在用 benchmark 证明 agent 有多强，但评测本身可能是假的。这种「皇帝新衣」叙事天然高传播。ClawBench 的 0.7% 成功率数字同样震撼——具体数字比模糊结论更容易引爆讨论。",
@@ -24,7 +24,7 @@
       "upvotes": 68,
       "authors": "",
       "ai_keywords": [],
-      "interest_tag": ""
+      "interest_tag": "Benchmark"
     },
     {
       "title": "RefineAnything: Multimodal Region-Specific Refinement for Perfect Local Details",
@@ -54,7 +54,7 @@
       "upvotes": 23,
       "authors": "Skywork AI",
       "ai_keywords": [],
-      "interest_tag": ""
+      "interest_tag": "Memory"
     }
   ],
   "alphaxiv_papers": [
