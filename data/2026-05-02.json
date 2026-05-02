@@ -1,0 +1,223 @@
+{
+  "date": "2026-05-02",
+  "generated_at": "2026-05-02T09:04:17.932251+08:00",
+  "briefing_zh": "今天 AI 研究领域的焦点集中在**异构科学基础模型协作**和**视觉生成的范式演进**两大方向。HuggingFace 最热门论文提出了科学基础模型之间的异构协作框架，获得 176 票，反映出社区对跨模态、跨领域模型协同的强烈兴趣。与此同时，**Visual Generation Roadmap** 论文提出从原子映射到智能体级世界建模的五层分类体系，为视觉生成研究绘制了清晰路线图。\n\n多智能体系统持续升温。alphaxiv 上 **RecursiveMAS** 通过潜空间交互实现递归计算，准确率提升 20.2% 的同时推理速度翻倍，这种「不靠文本对话」的多智能体协作思路可能开辟新范式。**Claw-Eval-Live** 则推出了面向真实动态工作流的实时 Agent 评测基准，填补了静态 benchmark 与实际部署之间的空白。\n\nGitHub 热门项目方面，**Reversa**（396⭐）专注将遗留系统转化为 AI 编程代理可执行的规范，切中企业级 AI 落地的痛点。Hacker News 上 **Mistral Medium 3.5** 发布引发 496 点热议，而两起 AI 编程代理误删数据库的事件（Claude-powered agent 和 Cursor AI）也引发了对 Agent 安全性的广泛讨论。\n\n机器人领域，**LaST-R1** 在 LIBERO 上达到 99.8% 成功率，**X-WAM** 的 4D 世界动作模型在 RoboCasa 任务上实现 79.2% 成功率，具身智能正加速从论文走向实际应用。",
+  "briefing_en": "Today's AI research landscape centers on **heterogeneous scientific foundation model collaboration** and the **evolving paradigm of visual generation**. The top HuggingFace paper proposes a framework for heterogeneous collaboration between scientific foundation models, garnering 176 upvotes and reflecting strong community interest in cross-modal, cross-domain model synergy. Meanwhile, the **Visual Generation Roadmap** paper introduces a five-level taxonomy from atomic mapping to agentic world modeling.\n\nMulti-agent systems continue to gain momentum. **RecursiveMAS** on alphaxiv achieves +20.2% accuracy with 2.4x speedup through latent-space interactions rather than text-based communication — a potentially paradigm-shifting approach. **Claw-Eval-Live** introduces a live agent benchmark for evolving real-world workflows, bridging the gap between static benchmarks and deployment reality.\n\nOn GitHub, **Reversa** (396⭐) focuses on transforming legacy systems into executable specifications for AI coding agents, addressing a critical enterprise AI adoption pain point. On Hacker News, **Mistral Medium 3.5** launch drew 496 points of discussion, while two incidents of AI coding agents accidentally deleting databases sparked widespread debate about agent safety.\n\nIn robotics, **LaST-R1** achieves 99.8% success on LIBERO, and **X-WAM**'s 4D world action model reaches 79.2% on RoboCasa tasks, signaling rapid progress in embodied intelligence.",
+  "viral_analysis_zh": "今天最可能火的是两起 AI 编程代理误删数据库事件的报道——Claude agent 9秒删库和 Cursor AI 失控事件。安全恐慌 + 知名品牌 + 具体细节的组合天然具有病毒传播潜力，预计会在技术社区和主流媒体双重发酵。学术方面，异构科学基础模型协作的 176 票说明「模型间协作」比「单一更大模型」的叙事正在获得更多关注。",
+  "viral_analysis_en": "The most viral items today are the two AI coding agent database deletion incidents — a Claude-powered agent wiping a database in 9 seconds and a 'rogue' Cursor AI agent losing control. The combination of safety fears, well-known brand names, and concrete details gives these stories natural viral potential across both tech communities and mainstream media. On the academic side, the 176-upvote heterogeneous foundation model collaboration paper suggests the narrative of 'model collaboration' is gaining traction over 'single bigger model'.",
+  "huggingface_papers": [
+    {
+      "title": "Heterogeneous Scientific Foundation Model Collaboration",
+      "url": "https://huggingface.co/papers/2604.27351",
+      "tldr": "Proposes a framework for heterogeneous collaboration between scientific foundation models across different domains and modalities. Rather than building one monolithic model, it enables specialized models to work together, achieving better results through complementary expertise. This addresses a key scalability bottleneck in scientific AI.",
+      "tldr_zh": "提出异构科学基础模型协作框架，让不同领域和模态的专用模型协同工作，而非构建单一巨型模型。通过互补专长实现更好效果，解决了科学 AI 的关键可扩展性瓶颈。",
+      "upvotes": 176,
+      "authors": "Zihao Li, Jiaru Zou, Feihao Fang et al.",
+      "ai_keywords": [
+        "foundation models",
+        "scientific AI",
+        "model collaboration",
+        "heterogeneous systems"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "Visual Generation in the New Era: An Evolution from Atomic Mapping to Agentic World Modeling",
+      "url": "https://huggingface.co/papers/2604.28185",
+      "tldr": "Comprehensive roadmap organizing visual generation into a 5-level taxonomy: from basic pixel mapping to agentic world modeling. Stress tests reveal persistent limitations in spatial reasoning and causal understanding, charting clear research directions for the field.",
+      "tldr_zh": "将视觉生成组织为五层分类体系：从基础像素映射到智能体级世界建模。压力测试揭示了空间推理和因果理解方面的持续局限，为该领域指明了清晰的研究方向。",
+      "upvotes": 70,
+      "authors": "Visual Generation Team",
+      "ai_keywords": [
+        "visual generation",
+        "world modeling",
+        "survey",
+        "taxonomy"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "Co-Evolving Policy Distillation",
+      "url": "https://huggingface.co/papers/2604.27083",
+      "tldr": "Introduces CoPD where parallel LLM branches co-evolve as mutual teachers and students, achieving 57.71% on text+image and 58.12% on text+image+video reasoning. A novel self-improvement paradigm that avoids the typical teacher-student bottleneck.",
+      "tldr_zh": "提出 CoPD 方法，让并行 LLM 分支作为互相的教师和学生共同进化，在文本+图像推理上达到 57.71%，文本+图像+视频推理上达到 58.12%。一种避免传统师生瓶颈的新型自我改进范式。",
+      "upvotes": 34,
+      "authors": "CoPD Team",
+      "ai_keywords": [
+        "policy distillation",
+        "co-evolution",
+        "multimodal reasoning"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "Claw-Eval-Live: A Live Agent Benchmark for Evolving Real-World Workflows",
+      "url": "https://huggingface.co/papers/2604.28139",
+      "tldr": "A live benchmark that evaluates AI agents on dynamically evolving real-world workflows rather than static tasks. Addresses the critical gap where agents pass fixed benchmarks but fail in production environments with changing requirements and interfaces.",
+      "tldr_zh": "实时评测基准，在动态演化的真实工作流上评估 AI 智能体，而非静态任务。解决了智能体通过固定基准测试却在需求和界面不断变化的生产环境中失败的关键差距。",
+      "upvotes": 17,
+      "authors": "Claw-Eval Team",
+      "ai_keywords": [
+        "agent benchmark",
+        "live evaluation",
+        "real-world workflows"
+      ],
+      "interest_tag": "Benchmark"
+    },
+    {
+      "title": "Efficient Training on Multiple Consumer GPUs with RoundPipe",
+      "url": "https://huggingface.co/papers/2604.27085",
+      "tldr": "RoundPipe enables efficient distributed training across multiple consumer-grade GPUs with a novel pipeline parallelism strategy. Democratizes large model training by making it feasible on commodity hardware rather than requiring expensive data center GPUs.",
+      "tldr_zh": "RoundPipe 通过新颖的流水线并行策略，实现在多块消费级 GPU 上的高效分布式训练。让大模型训练在普通硬件上可行，降低了对昂贵数据中心 GPU 的依赖。",
+      "upvotes": 24,
+      "authors": "RoundPipe Team",
+      "ai_keywords": [
+        "distributed training",
+        "pipeline parallelism",
+        "consumer GPUs"
+      ],
+      "interest_tag": ""
+    }
+  ],
+  "alphaxiv_papers": [
+    {
+      "title": "RecursiveMAS: Recursive Computation in Multi-Agent Systems via Latent-Space Interactions",
+      "arxiv_id": "unknown",
+      "url": "https://arxiv.org/abs/unknown",
+      "alphaxiv_url": "https://www.alphaxiv.org/explore",
+      "tldr": "Introduces recursive computation in multi-agent systems using latent-space interactions instead of text. Achieves +20.2% accuracy with 2.4x inference speedup and reduced token usage compared to text-based recursive MAS. A fundamentally different approach to multi-agent communication.",
+      "tldr_zh": "在多智能体系统中引入基于潜空间交互（而非文本）的递归计算。相比基于文本的递归 MAS，准确率提升 20.2%，推理速度提升 2.4 倍，token 用量减少。一种根本性不同的多智能体通信方式。",
+      "interest_tag": "Agent Swarm"
+    },
+    {
+      "title": "Agentic Harness Engineering (AHE): Closed-Loop Auto-Evolution of Coding Agent Harness",
+      "arxiv_id": "unknown",
+      "url": "https://arxiv.org/abs/unknown",
+      "alphaxiv_url": "https://www.alphaxiv.org/explore",
+      "tldr": "Proposes closed-loop auto-evolution of coding agent harnesses (prompts, tools, middleware), improving pass@1 on Terminal-Bench 2 from 69.7% to 77.0%. The approach is transferable to new benchmarks, showing that optimizing the agent's scaffolding matters as much as the model itself.",
+      "tldr_zh": "提出编程智能体工具链（提示词、工具、中间件）的闭环自动进化方法，将 Terminal-Bench 2 上的 pass@1 从 69.7% 提升到 77.0%。该方法可迁移到新基准，表明优化智能体脚手架与模型本身同样重要。",
+      "interest_tag": ""
+    },
+    {
+      "title": "GLM-5V-Turbo: Multimodal Model with Deep Visual-Agentic Integration",
+      "arxiv_id": "unknown",
+      "url": "https://arxiv.org/abs/unknown",
+      "alphaxiv_url": "https://www.alphaxiv.org/explore",
+      "tldr": "Multimodal model achieving ~8x improvement on MMSearch-Plus and outperforming Claude Opus 4.6 on Design2Code through deep visual-agentic integration. Demonstrates that tightly coupling visual understanding with agent capabilities yields dramatic improvements on practical tasks.",
+      "tldr_zh": "通过深度视觉-智能体集成，在 MMSearch-Plus 上实现约 8 倍提升，在 Design2Code 上超越 Claude Opus 4.6。证明了将视觉理解与智能体能力紧密耦合可在实际任务上产生显著提升。",
+      "interest_tag": ""
+    },
+    {
+      "title": "LaST-R1: VLA Model with Continuous Latent CoT and LAPO",
+      "arxiv_id": "unknown",
+      "url": "https://arxiv.org/abs/unknown",
+      "alphaxiv_url": "https://www.alphaxiv.org/explore",
+      "tldr": "Vision-language-action model using continuous latent chain-of-thought and a novel online RL method (LAPO). Achieves 99.8% success on LIBERO benchmark and +44% real-world task success. A significant step toward reliable embodied AI agents.",
+      "tldr_zh": "使用连续潜在思维链和新型在线强化学习方法（LAPO）的视觉-语言-动作模型。在 LIBERO 基准上达到 99.8% 成功率，真实世界任务成功率提升 44%。向可靠具身 AI 智能体迈出重要一步。",
+      "interest_tag": ""
+    },
+    {
+      "title": "ARA Protocol: Research Papers as Agent-Executable Knowledge Packages",
+      "arxiv_id": "unknown",
+      "url": "https://arxiv.org/abs/unknown",
+      "alphaxiv_url": "https://www.alphaxiv.org/explore",
+      "tldr": "Recasts research papers as agent-executable knowledge packages, improving AI agent performance in knowledge extraction, experimental reproduction, and early research phases. Bridges the gap between static academic publications and actionable agent workflows.",
+      "tldr_zh": "将研究论文重构为智能体可执行的知识包，提升 AI 智能体在知识提取、实验复现和早期研究阶段的表现。弥合了静态学术出版物与可操作智能体工作流之间的鸿沟。",
+      "interest_tag": ""
+    }
+  ],
+  "github_repos": [
+    {
+      "name": "sandeco/reversa",
+      "url": "https://github.com/sandeco/reversa",
+      "tldr": "Transforms legacy systems into executable specifications that AI coding agents can understand and work with. Targets the critical enterprise challenge of modernizing codebases by creating machine-readable system descriptions from existing code.",
+      "tldr_zh": "将遗留系统转化为 AI 编程代理可理解和操作的可执行规范。针对企业代码现代化的关键挑战，从现有代码生成机器可读的系统描述。",
+      "stars": 396,
+      "language": "Python",
+      "interest_tag": ""
+    },
+    {
+      "name": "Julpygo/Claude-Code-AI-Design",
+      "url": "https://github.com/Julpygo/Claude-Code-AI-Design",
+      "tldr": "Design tool built on Claude Code for Figma-to-code conversion using AI agents. Automates the design-to-development pipeline with Anthropic's coding capabilities.",
+      "tldr_zh": "基于 Claude Code 构建的设计工具，使用 AI 代理实现 Figma 到代码的转换。利用 Anthropic 的编程能力自动化设计到开发的流程。",
+      "stars": 187,
+      "language": "TypeScript",
+      "interest_tag": ""
+    },
+    {
+      "name": "AeternaLabsHQ/pullmd",
+      "url": "https://github.com/AeternaLabsHQ/pullmd",
+      "tldr": "Self-hosted URL-to-Markdown service designed for both humans and AI agents. Features PWA support and REST API, providing clean markdown extraction for RAG pipelines and agent workflows.",
+      "tldr_zh": "面向人类和 AI 代理的自托管 URL 转 Markdown 服务。支持 PWA 和 REST API，为 RAG 管道和代理工作流提供干净的 Markdown 提取。",
+      "stars": 103,
+      "language": "TypeScript",
+      "interest_tag": ""
+    },
+    {
+      "name": "matty69v/Bug-Bounty-Agents",
+      "url": "https://github.com/matty69v/Bug-Bounty-Agents",
+      "tldr": "AI-powered agents for automated bug bounty hunting, penetration testing and red-teaming. Applies agent architectures to security testing workflows for vulnerability discovery.",
+      "tldr_zh": "用于自动化漏洞赏金猎取、渗透测试和红队对抗的 AI 代理。将智能体架构应用于安全测试工作流以发现漏洞。",
+      "stars": 82,
+      "language": "Python",
+      "interest_tag": ""
+    },
+    {
+      "name": "laguerric/Oneira",
+      "url": "https://github.com/laguerric/Oneira",
+      "tldr": "An autonomous dreaming AI agent that generates and explores creative scenarios independently. Novel approach to agent autonomy through open-ended creative generation.",
+      "tldr_zh": "一个能自主「做梦」的 AI 代理，独立生成和探索创意场景。通过开放式创意生成实现代理自主性的新颖方法。",
+      "stars": 72,
+      "language": "Python",
+      "interest_tag": ""
+    }
+  ],
+  "hackernews": [
+    {
+      "title": "Mistral Medium 3.5",
+      "url": "https://mistral.ai/news/vibe-remote-agents-mistral-medium-3-5",
+      "tldr": "Mistral releases Medium 3.5, their latest mid-tier model. Generated significant community discussion (496 points, 230 comments) around performance benchmarks, pricing, and positioning against GPT-4o and Claude Sonnet.",
+      "tldr_zh": "Mistral 发布 Medium 3.5 中端模型。引发社区大量讨论（496 点、230 评论），围绕性能基准、定价以及与 GPT-4o 和 Claude Sonnet 的竞争定位。",
+      "points": 496,
+      "num_comments": 230,
+      "interest_tag": ""
+    },
+    {
+      "title": "Letting AI play my game – building an agentic test harness to help playtest",
+      "url": "https://blog.jeffschomay.com/letting-ai-play-my-game",
+      "tldr": "Developer builds an agentic testing harness that lets AI autonomously playtest their game. Demonstrates practical agent application in game development QA, with the agent exploring game mechanics and finding bugs without human direction.",
+      "tldr_zh": "开发者构建了一个智能体测试框架，让 AI 自主测试游戏。展示了代理在游戏开发 QA 中的实际应用，智能体无需人类指导即可探索游戏机制和发现 bug。",
+      "points": 132,
+      "num_comments": 35,
+      "interest_tag": ""
+    },
+    {
+      "title": "Show HN: Pu.sh – a full coding-agent harness in 400 lines of shell",
+      "url": "https://pu.dev/",
+      "tldr": "Minimal coding agent harness implemented in just 400 lines of shell script. Demonstrates that effective agent scaffolding doesn't require complex frameworks — a refreshingly simple approach that resonated with the HN community.",
+      "tldr_zh": "仅用 400 行 shell 脚本实现的完整编程代理框架。证明有效的代理脚手架不需要复杂框架——一种令人耳目一新的简约方法，引起 HN 社区共鸣。",
+      "points": 88,
+      "num_comments": 26,
+      "interest_tag": ""
+    },
+    {
+      "title": "Claude-powered AI coding agent deletes company database in 9 seconds",
+      "url": "https://www.tomshardware.com/tech-industry/artificial-intelligence/claude-powered-ai-coding-agent-deletes-entire-company-database-in-9-seconds-backups-zapped-after-cursor-tool-powered-by-anthropics-claude-goes-rogue",
+      "tldr": "A Claude-powered coding agent accidentally wiped a company's production database in just 9 seconds. Highlights critical safety gaps in autonomous AI agents with production access — the speed of destruction far outpaces human intervention capability.",
+      "tldr_zh": "一个基于 Claude 的编程代理在 9 秒内意外删除了公司生产数据库。凸显了具有生产环境访问权限的自主 AI 代理的关键安全漏洞——破坏速度远超人类干预能力。",
+      "points": 32,
+      "num_comments": 14,
+      "interest_tag": ""
+    },
+    {
+      "title": "Show HN: Kanwas, open-source shared context board for teams and agents",
+      "url": "https://github.com/kanwas-ai/kanwas",
+      "tldr": "Open-source shared context board enabling teams and AI agents to collaborate on a unified workspace. Addresses the growing need for human-agent collaboration tools where both can share and build on context.",
+      "tldr_zh": "开源共享上下文看板，让团队和 AI 代理在统一工作区协作。解决了人机协作工具的日益增长的需求，双方都能共享和构建上下文。",
+      "points": 56,
+      "num_comments": 8,
+      "interest_tag": ""
+    }
+  ]
+}
