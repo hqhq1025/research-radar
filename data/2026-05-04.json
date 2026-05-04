@@ -1,0 +1,221 @@
+{
+  "date": "2026-05-04",
+  "generated_at": "2026-05-04T01:03:45.198902Z",
+  "briefing_zh": "本周 AI 领域呈现三大趋势：**异构科学基础模型协作（Eywa）** 代表了多模型联合推理的新范式，让 LLM 与领域专用模型深度协作而非简单调用工具，在科学任务中同时提升效果并降低 token 消耗。**Latent-GRPO** 和 **RecursiveMAS** 分别从单模型和多 agent 角度探索隐空间推理，用更短的推理链实现更优的结果，这对降低推理成本有深远意义。\n\n在工程侧，**Agent-desktop** 和 **Claw-Eval-Live** 的出现说明社区对 GUI Agent 的落地兴趣正在从\"能不能做\"转向\"怎么评测和标准化\"。Mistral Medium 3.5 的发布则将远程 agent 能力内置到模型服务中，降低了 agentic 应用的开发门槛。\n\n值得关注的是 **LLM Agent Memory Gap** 这项工作，它揭示当前 agent 记忆本质上是样本检索而非真正学习，这对所有依赖长期记忆的 agent 架构都是一记警钟。",
+  "briefing_en": "This week's AI landscape reveals three key trends: **Heterogeneous Scientific Foundation Model Collaboration (Eywa)** establishes a new paradigm where LLMs collaborate deeply with domain-specific scientific models rather than merely calling tools, achieving +6.6% utility with 30% fewer tokens. **Latent-GRPO** and **RecursiveMAS** both explore latent-space reasoning—one at the single-model level, the other multi-agent—producing better results with 3-4x shorter reasoning chains, a breakthrough for inference cost reduction.\n\nOn the engineering side, **Agent-desktop** and **Claw-Eval-Live** signal the community's shift from \"can agents do desktop tasks\" to \"how do we benchmark and standardize them.\" Mistral Medium 3.5's launch bundles remote agent capabilities directly into model serving, lowering the barrier for agentic applications.\n\nNotably, **LLM Agent Memory Gap** exposes that current agent memory is fundamentally exemplar retrieval rather than genuine learning—a wake-up call for all long-term memory architectures.",
+  "viral_analysis_zh": "**Agent-desktop** 最可能火——它是原生桌面自动化 CLI，定位精准（给 AI agent 用的 native desktop automation），开源、轻量、即插即用，恰好填补了 Computer Use Agent 从 demo 到生产的工具空白。96 个 HN 点赞和活跃讨论验证了需求。",
+  "viral_analysis_en": "**Agent-desktop** has the highest viral potential—it's a native desktop automation CLI purpose-built for AI agents, open-source, lightweight, and plug-and-play, filling the exact tooling gap between Computer Use demos and production deployments. 96 HN points with active discussion validates the demand.",
+  "huggingface_papers": [
+    {
+      "title": "Heterogeneous Scientific Foundation Model Collaboration",
+      "url": "https://arxiv.org/abs/2604.27351",
+      "tldr": "Introduces Eywa, a framework where LLMs collaborate with modality-native scientific models (protein folders, molecular simulators) rather than using them as black-box tools. Achieves +6.6% utility, -30% tokens, -10% execution time across scientific tasks by enabling deep bidirectional communication between heterogeneous models.",
+      "tldr_zh": "提出 Eywa 框架，让 LLM 与领域原生科学模型（蛋白质折叠、分子模拟器等）深度双向协作，而非简单当工具调用。在科学任务中实现 +6.6% 效用、-30% token 消耗、-10% 执行时间。",
+      "upvotes": 193,
+      "authors": "UIUC",
+      "ai_keywords": [
+        "multi-model collaboration",
+        "scientific AI",
+        "heterogeneous models"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "Visual Generation in the New Era: An Evolution from Atomic Mapping to Agentic World Modeling",
+      "url": "https://arxiv.org/abs/2604.28185",
+      "tldr": "Comprehensive roadmap survey proposing a 5-level taxonomy of visual generation: from atomic pixel mapping to agentic world modeling. Reveals fundamental limitations in spatial reasoning and causal understanding of current models, and charts the path toward autonomous visual agents.",
+      "tldr_zh": "系统性视觉生成路线图综述，提出从原子像素映射到 agentic world modeling 的 5 级分类法。揭示当前模型在空间推理和因果理解上的根本局限，勾画通往自主视觉 agent 的路径。",
+      "upvotes": 82,
+      "authors": "Multiple institutions",
+      "ai_keywords": [
+        "visual generation",
+        "world models",
+        "survey"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "Co-Evolving Policy Distillation",
+      "url": "https://arxiv.org/abs/2604.27083",
+      "tldr": "CoPD enables multimodal reasoning (text+image+video) by co-evolving policy distillation across modalities. Achieves 57.71% on text+image and 58.12% on text+image+video reasoning, outperforming mixed-data training approaches without requiring expensive joint optimization.",
+      "tldr_zh": "通过跨模态协同演化策略蒸馏实现多模态推理（文本+图像+视频），在文本+图像推理达 57.71%、文本+图像+视频达 58.12%，超越混合数据训练方法且不需要昂贵的联合优化。",
+      "upvotes": 46,
+      "authors": "DeepSeek-AI",
+      "ai_keywords": [
+        "multimodal",
+        "policy distillation",
+        "reasoning"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "Claw-Eval-Live: A Live Agent Benchmark for Evolving Real-World Workflows",
+      "url": "https://arxiv.org/abs/2604.28139",
+      "tldr": "A live benchmark that continuously evaluates AI agents on real-world evolving workflows rather than static tasks. Addresses the critical problem of benchmark saturation by updating tasks as real applications change, providing a more realistic assessment of agent capabilities.",
+      "tldr_zh": "持续评估 AI agent 在真实世界动态工作流上表现的活体基准测试。解决静态 benchmark 饱和问题，随真实应用变化更新任务，提供更真实的 agent 能力评估。",
+      "upvotes": 31,
+      "authors": "Multiple institutions",
+      "ai_keywords": [
+        "benchmark",
+        "agent evaluation",
+        "real-world"
+      ],
+      "interest_tag": "Benchmark"
+    },
+    {
+      "title": "Efficient Training on Multiple Consumer GPUs with RoundPipe",
+      "url": "https://arxiv.org/abs/2604.27085",
+      "tldr": "RoundPipe enables efficient LLM training across multiple consumer-grade GPUs through a novel pipeline parallelism strategy. Reduces memory requirements and communication overhead, making large model training accessible without expensive datacenter hardware.",
+      "tldr_zh": "通过新型流水线并行策略在多块消费级 GPU 上高效训练 LLM。降低显存需求和通信开销，让大模型训练无需昂贵数据中心硬件即可实现。",
+      "upvotes": 34,
+      "authors": "Multiple institutions",
+      "ai_keywords": [
+        "distributed training",
+        "pipeline parallelism",
+        "consumer GPU"
+      ],
+      "interest_tag": ""
+    }
+  ],
+  "alphaxiv_papers": [
+    {
+      "title": "Latent-GRPO: Reinforcement Learning for Latent Reasoning",
+      "arxiv_id": "2505.xxxxx",
+      "url": "https://arxiv.org/abs/2505.xxxxx",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2505.xxxxx",
+      "tldr": "Applies RL (GRPO) to latent reasoning space, achieving +7.86pp on easy and +14.77pp on hard tasks over Latent-SFT, while producing 3-4x shorter reasoning chains than explicit GRPO. Shows latent reasoning can be effectively optimized with RL.",
+      "tldr_zh": "将强化学习（GRPO）应用于隐空间推理，在简单任务上比 Latent-SFT 高 7.86pp、困难任务高 14.77pp，同时推理链比显式 GRPO 短 3-4 倍。证明隐空间推理可被 RL 有效优化。",
+      "interest_tag": ""
+    },
+    {
+      "title": "RecursiveMAS: Iterative Latent-Space Multi-Agent Reasoning",
+      "arxiv_id": "2505.xxxxx",
+      "url": "https://arxiv.org/abs/2505.xxxxx",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2505.xxxxx",
+      "tldr": "Multi-agent system that reasons in latent space iteratively, achieving +20.2% accuracy and 2.4x inference speedup with fewer tokens than text-based multi-agent systems. Demonstrates that agent communication can be more efficient in learned representations than natural language.",
+      "tldr_zh": "在隐空间中迭代推理的多 agent 系统，比文本多 agent 系统准确率 +20.2%、推理加速 2.4 倍、token 更少。证明 agent 间通信用学习到的表示比自然语言更高效。",
+      "interest_tag": "Agent Swarm"
+    },
+    {
+      "title": "LLM Agent Memory Gap",
+      "arxiv_id": "2505.xxxxx",
+      "url": "https://arxiv.org/abs/2505.xxxxx",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2505.xxxxx",
+      "tldr": "Reveals that current LLM agent memory is essentially exemplar lookup rather than true weight-based learning. Exhibits a 'Generalization Gap' on novel compositional tasks and is vulnerable to persistent security attacks. Calls for fundamentally new memory architectures.",
+      "tldr_zh": "揭示当前 LLM agent 记忆本质是样本检索而非真正的权重学习。在新型组合任务上表现出\"泛化鸿沟\"，且易受持久性安全攻击。呼吁从根本上设计新的记忆架构。",
+      "interest_tag": "Memory"
+    },
+    {
+      "title": "Agentic Harness Engineering (AHE)",
+      "arxiv_id": "2505.xxxxx",
+      "url": "https://arxiv.org/abs/2505.xxxxx",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2505.xxxxx",
+      "tldr": "Auto-evolves agent components (prompts, tools, middleware) through a self-improving loop. Raises Terminal-Bench 2 pass@1 from 69.7% to 77.0% and transfers improvements to new benchmarks without human intervention.",
+      "tldr_zh": "通过自进化循环自动优化 agent 组件（提示词、工具、中间件）。将 Terminal-Bench 2 pass@1 从 69.7% 提升至 77.0%，且改进可迁移到新 benchmark。",
+      "interest_tag": ""
+    },
+    {
+      "title": "Synthetic Computers at Scale: Artifact-Rich Environments for Agent Training",
+      "arxiv_id": "2505.xxxxx",
+      "url": "https://arxiv.org/abs/2505.xxxxx",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2505.xxxxx",
+      "tldr": "Creates large-scale synthetic computer environments with rich artifacts (files, apps, web content) for training agents. Achieves +7.0pp in-domain improvement with positive out-of-domain transfer, addressing the data scarcity problem for computer-use agent training.",
+      "tldr_zh": "创建大规模合成计算机环境（含丰富文件、应用、网页内容）用于训练 agent。域内提升 +7.0pp 且域外正迁移，解决计算机使用 agent 训练的数据稀缺问题。",
+      "interest_tag": "CUA"
+    }
+  ],
+  "github_repos": [
+    {
+      "name": "lahfir/agent-desktop",
+      "url": "https://github.com/lahfir/agent-desktop",
+      "tldr": "Native desktop automation CLI designed specifically for AI agents. Provides programmatic control over mouse, keyboard, screen capture, and window management without browser dependency. Lightweight alternative to full browser-based computer use approaches.",
+      "tldr_zh": "专为 AI agent 设计的原生桌面自动化 CLI。提供鼠标、键盘、截屏、窗口管理的程序化控制，无需浏览器依赖。是完整浏览器方案的轻量替代。",
+      "stars": 96,
+      "language": "TypeScript",
+      "interest_tag": "CUA"
+    },
+    {
+      "name": "bruin-data/dac",
+      "url": "https://github.com/bruin-data/dac",
+      "tldr": "Open-source dashboard-as-code tool for both agents and humans. Define dashboards declaratively in code, enabling AI agents to create and modify data visualizations programmatically while maintaining human readability and version control.",
+      "tldr_zh": "开源 dashboard-as-code 工具，面向 agent 和人类双重用户。用代码声明式定义仪表盘，让 AI agent 可程序化创建和修改数据可视化，同时保持人类可读和版本控制。",
+      "stars": 109,
+      "language": "Go",
+      "interest_tag": ""
+    },
+    {
+      "name": "StartupHakk/OpenMonoAgent.ai",
+      "url": "https://github.com/StartupHakk/OpenMonoAgent.ai",
+      "tldr": "Unlimited-token local AI agent platform with no metering. Runs entirely on user's machine with no API costs, positioning as the 'home' for personal AI agents that can operate continuously without usage limits.",
+      "tldr_zh": "无限 token 本地 AI agent 平台，无计量。完全在用户机器上运行无 API 费用，定位为可持续运行无用量限制的个人 AI agent 之家。",
+      "stars": 129,
+      "language": "Python",
+      "interest_tag": ""
+    },
+    {
+      "name": "warpdot-dev/craft-agents-oss",
+      "url": "https://github.com/warpdot-dev/craft-agents-oss",
+      "tldr": "Open-source multi-agent framework built on Electron with Claude Agent SDK, MCP, and WebSocket thin-client architecture. Enables orchestrating multiple specialized agents with shared context through a desktop application.",
+      "tldr_zh": "基于 Electron + Claude Agent SDK + MCP + WebSocket 的开源多 agent 框架。通过桌面应用编排多个专用 agent 并共享上下文。",
+      "stars": 127,
+      "language": "TypeScript",
+      "interest_tag": "Agent Swarm"
+    },
+    {
+      "name": "matty69v/Bug-Bounty-Agents",
+      "url": "https://github.com/matty69v/Bug-Bounty-Agents",
+      "tldr": "AI-powered agents for automated bug bounty hunting, penetration testing, and red-teaming. Combines multiple specialized agents for reconnaissance, vulnerability scanning, and exploit development in a coordinated pipeline.",
+      "tldr_zh": "用于自动化 Bug Bounty 狩猎、渗透测试和红队的 AI agent。组合多个专用 agent 进行侦察、漏洞扫描和漏洞利用开发。",
+      "stars": 105,
+      "language": "Python",
+      "interest_tag": ""
+    }
+  ],
+  "hackernews": [
+    {
+      "title": "Mistral Medium 3.5",
+      "url": "https://mistral.ai/news/vibe-remote-agents-mistral",
+      "tldr": "Mistral launches Medium 3.5 with built-in remote agent capabilities and 'vibe coding' features. Integrates agent execution directly into the model serving layer, reducing the need for external orchestration frameworks.",
+      "tldr_zh": "Mistral 发布 Medium 3.5，内置远程 agent 能力和 vibe coding 功能。将 agent 执行直接集成到模型服务层，减少对外部编排框架的依赖。",
+      "points": 497,
+      "num_comments": 230,
+      "interest_tag": ""
+    },
+    {
+      "title": "Letting AI play my game – building an agentic test harness to help playtest",
+      "url": "https://blog.jeffschomay.com/letting-ai-play-my-game",
+      "tldr": "Developer builds an agentic test harness that lets AI autonomously playtest their game, discovering bugs and balance issues humans miss. Demonstrates practical agent application in game development QA with real production results.",
+      "tldr_zh": "开发者构建 agentic 测试框架让 AI 自主测试游戏，发现人类遗漏的 bug 和平衡问题。展示了 agent 在游戏开发 QA 中的实际生产应用。",
+      "points": 135,
+      "num_comments": 36,
+      "interest_tag": ""
+    },
+    {
+      "title": "Show HN: Agent-desktop – Native desktop automation CLI for AI agents",
+      "url": "https://github.com/lahfir/agent-desktop",
+      "tldr": "Native desktop automation CLI providing mouse, keyboard, and screen control for AI agents. No browser needed—works directly with the OS window manager for faster, more reliable desktop automation.",
+      "tldr_zh": "为 AI agent 提供鼠标、键盘、屏幕控制的原生桌面自动化 CLI。无需浏览器，直接与 OS 窗口管理器交互，更快更可靠。",
+      "points": 96,
+      "num_comments": 35,
+      "interest_tag": "CUA"
+    },
+    {
+      "title": "Show HN: DAC – open-source dashboard as code tool for agents and humans",
+      "url": "https://github.com/bruin-data/dac",
+      "tldr": "Declarative dashboard-as-code framework that both AI agents and humans can author. Bridges the gap between programmatic data visualization and human oversight through version-controlled, readable dashboard definitions.",
+      "tldr_zh": "AI agent 和人类都可编写的声明式 dashboard-as-code 框架。通过版本控制、可读的仪表盘定义，连接程序化数据可视化与人类监督。",
+      "points": 109,
+      "num_comments": 35,
+      "interest_tag": ""
+    },
+    {
+      "title": "Show HN: Pu.sh – a full coding-agent harness in 400 lines of shell",
+      "url": "https://pu.dev/",
+      "tldr": "Minimalist coding agent harness implemented in just 400 lines of shell script. Proves that agent orchestration doesn't require heavy frameworks—a thin shell wrapper around LLM APIs can be surprisingly effective for code generation tasks.",
+      "tldr_zh": "仅 400 行 shell 脚本实现的极简编码 agent 框架。证明 agent 编排不需要重型框架——围绕 LLM API 的薄 shell 封装在代码生成任务中出奇有效。",
+      "points": 90,
+      "num_comments": 27,
+      "interest_tag": ""
+    }
+  ]
+}
