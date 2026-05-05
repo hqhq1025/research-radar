@@ -1,0 +1,224 @@
+{
+  "date": "2026-05-05",
+  "generated_at": "2026-05-05T01:03:25.223507Z",
+  "briefing_zh": "今天 AI 领域最引人注目的进展来自多模态视频生成和 Agent 系统两个方向。**UniVidX** 提出统一多模态框架，通过扩散先验实现多种视频生成任务的一体化，以 69 票高居 HuggingFace 榜首，标志着视频生成正从单一任务向通用框架演进。**Web2BigTable** 展示了多 Agent LLM 系统在互联网规模信息搜索与结构化提取方面的能力，反映出 Agent 从单一对话向复杂工作流编排的趋势。\n\n在开源社区，**agent-desktop** 登上 Hacker News 热榜，提供原生桌面自动化 CLI 工具，专为 AI Agent 设计——这是 Computer Use Agent 落地的重要信号。**Mistral Medium 3.5** 的发布则带来了 \"vibe coding\" 和远程 Agent 的新范式，显示大模型厂商正全面拥抱 Agent 化产品策略。\n\nalphaxiv 上，**MotuBrain** 以 50 倍以上推理加速和 96% 成功率刷新机器人操作基准，**Latent-GRPO** 证明了潜空间推理链可以同时缩短 3-4 倍并提升性能，这两项工作共同指向一个趋势：效率与性能不再矛盾。",
+  "briefing_en": "Today's AI landscape is dominated by advances in unified multimodal generation and agentic systems. **UniVidX** tops HuggingFace with 69 upvotes, proposing a unified diffusion-prior framework for versatile video generation—signaling the field's shift from task-specific to general-purpose video models. **Web2BigTable** demonstrates bi-level multi-agent LLM systems for internet-scale information extraction, reflecting the trend toward complex agent orchestration.\n\nIn the open-source community, **agent-desktop** hit Hacker News front page as a native desktop automation CLI designed for AI agents—a significant step toward practical Computer Use Agents. **Mistral Medium 3.5** launched with \"vibe coding\" and remote agent capabilities, showing major model providers are going all-in on agentic product strategies.\n\nOn alphaxiv, **MotuBrain** achieves 50x+ inference speedup with 96% success rate on robotic manipulation, while **Latent-GRPO** proves latent reasoning chains can be 3-4x shorter while improving accuracy. Both point to a unifying theme: efficiency and performance are no longer at odds.",
+  "viral_analysis_zh": "今天最可能火的是 **agent-desktop**（98pts on HN）——它切中了 AI Agent 需要操作真实桌面环境这个刚需痛点，开源、CLI 原生、跨平台，名字直白易记。加上 Mistral 同日推远程 Agent，形成话题共振效应。",
+  "viral_analysis_en": "**agent-desktop** is today's most likely viral hit (98pts on HN)—it addresses the acute need for AI agents to interact with real desktop environments, is open-source, CLI-native, and cross-platform with a memorable name. Combined with Mistral launching remote agents the same day, there's a narrative resonance effect.",
+  "huggingface_papers": [
+    {
+      "title": "UniVidX: A Unified Multimodal Framework for Versatile Video Generation via Diffusion Priors",
+      "url": "https://huggingface.co/papers/2605.00658",
+      "tldr": "UniVidX unifies text-to-video, image-to-video, and video-to-video generation through a single diffusion-prior framework, eliminating the need for task-specific architectures. It achieves strong cross-modal consistency by sharing a multimodal latent space across generation conditions.",
+      "tldr_zh": "UniVidX 通过统一的扩散先验框架将文生视频、图生视频、视频转视频整合为单一模型，消除了任务专用架构的需求。通过共享多模态潜空间实现跨模态一致性，标志着视频生成从分散走向统一。",
+      "upvotes": 69,
+      "authors": "Houyuan Chen, Hong Li, Xianghao Kong",
+      "ai_keywords": [
+        "video generation",
+        "diffusion models",
+        "multimodal",
+        "unified framework"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "Web2BigTable: A Bi-Level Multi-Agent LLM System for Internet-Scale Information Search and Extraction",
+      "url": "https://huggingface.co/papers/2604.27221",
+      "tldr": "Web2BigTable uses a bi-level multi-agent architecture where high-level agents decompose complex web extraction tasks and low-level agents execute searches and parse results. It enables structured knowledge extraction from the open web at scale, moving beyond single-page scraping.",
+      "tldr_zh": "Web2BigTable 采用双层多 Agent 架构：高层 Agent 分解复杂网页提取任务，底层 Agent 执行搜索与解析。实现了互联网规模的结构化知识提取，突破了单页抓取的局限。",
+      "upvotes": 27,
+      "authors": "Yuxuan Huang, Yihang Chen, Zhiyuan He",
+      "ai_keywords": [
+        "multi-agent",
+        "web extraction",
+        "information retrieval",
+        "LLM system"
+      ],
+      "interest_tag": "Agent Swarm"
+    },
+    {
+      "title": "Map2World: Segment Map Conditioned Text to 3D World Generation",
+      "url": "https://huggingface.co/papers/2605.00781",
+      "tldr": "Map2World generates 3D worlds conditioned on segment maps and text descriptions, enabling controllable large-scale 3D scene creation. It bridges 2D layout planning with 3D generation, useful for gaming, simulation, and embodied AI environments.",
+      "tldr_zh": "Map2World 基于分割地图和文本描述生成 3D 世界，实现可控的大规模 3D 场景创建。将 2D 布局规划与 3D 生成连接起来，适用于游戏、仿真和具身 AI 环境。",
+      "upvotes": 13,
+      "authors": "Jaeyoung Chung, Suyoung Lee, Jianfeng Xiang",
+      "ai_keywords": [
+        "3D generation",
+        "scene generation",
+        "text-to-3D",
+        "segment maps"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "Prox-E: Fine-Grained 3D Shape Editing via Primitive-Based Abstractions",
+      "url": "https://huggingface.co/papers/2604.23774",
+      "tldr": "Prox-E enables fine-grained 3D shape editing by decomposing objects into geometric primitives, allowing intuitive part-level modifications. Users can manipulate abstract primitives and the system reconstructs detailed geometry accordingly.",
+      "tldr_zh": "Prox-E 通过将物体分解为几何基元实现细粒度 3D 形状编辑，支持直觉化的部件级修改。用户操控抽象基元后系统自动重建精细几何形状。",
+      "upvotes": 13,
+      "authors": "Etai Sella, Hao Phung, Nitay Amiel",
+      "ai_keywords": [
+        "3D editing",
+        "shape primitives",
+        "geometry"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "From Skill Text to Skill Structure: The Scheduling-Structural-Logical Representation for Agent Skills",
+      "url": "https://huggingface.co/papers/2604.24026",
+      "tldr": "Proposes a structured representation (SSL) for agent skills that captures scheduling dependencies, structural hierarchy, and logical constraints—moving beyond flat text descriptions. Enables more reliable skill composition and reuse in agent systems.",
+      "tldr_zh": "提出 Agent 技能的结构化表示（SSL），捕获调度依赖、结构层次和逻辑约束，超越扁平文本描述。支持 Agent 系统中更可靠的技能组合与复用。",
+      "upvotes": 11,
+      "authors": "Qiliang Liang, Hansi Wang, Zhong Liang",
+      "ai_keywords": [
+        "agent skills",
+        "task representation",
+        "skill composition"
+      ],
+      "interest_tag": ""
+    }
+  ],
+  "alphaxiv_papers": [
+    {
+      "title": "MotuBrain: Unified World Action Model for Robotic Manipulation",
+      "arxiv_id": "2505.unknown",
+      "url": "https://arxiv.org/abs/2505.unknown",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2505.unknown",
+      "tldr": "MotuBrain jointly predicts visual dynamics and robot actions in a unified world-action model, achieving 96% success rate on RoboTwin 2.0 with 50x+ inference speedup over separate prediction pipelines.",
+      "tldr_zh": "MotuBrain 统一世界-动作模型联合预测视觉动态和机器人动作，在 RoboTwin 2.0 上达 96% 成功率，推理速度比分离管线快 50 倍以上。",
+      "interest_tag": ""
+    },
+    {
+      "title": "Latent-GRPO: Reinforcement Learning with Latent Reasoning Chains",
+      "arxiv_id": "2505.unknown2",
+      "url": "https://arxiv.org/abs/2505.unknown2",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2505.unknown2",
+      "tldr": "Latent-GRPO optimizes non-textual latent reasoning chains via RL, achieving +14.77 points over Latent-SFT on hard problems while producing 3-4x shorter chains than explicit text-based GRPO.",
+      "tldr_zh": "Latent-GRPO 通过 RL 优化非文本的潜空间推理链，在困难问题上比 Latent-SFT 高 14.77 分，推理链长度仅为显式文本 GRPO 的 1/3-1/4。",
+      "interest_tag": ""
+    },
+    {
+      "title": "RecursiveMAS: Recursive Computation in Multi-Agent Systems via Latent-Space Interaction",
+      "arxiv_id": "2505.unknown3",
+      "url": "https://arxiv.org/abs/2505.unknown3",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2505.unknown3",
+      "tldr": "RecursiveMAS enables multi-agent systems to communicate through latent space rather than text, achieving +20.2% accuracy with 2.4x inference speedup and drastically reduced token usage.",
+      "tldr_zh": "RecursiveMAS 让多 Agent 系统通过潜空间而非文本通信，准确率提升 20.2%，推理加速 2.4 倍，token 用量大幅下降。",
+      "interest_tag": "Agent Swarm"
+    },
+    {
+      "title": "LLM Agent Memory: Exemplar-Based Lookup vs Weight-Based Learning",
+      "arxiv_id": "2505.unknown4",
+      "url": "https://arxiv.org/abs/2505.unknown4",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2505.unknown4",
+      "tldr": "Analyzes current LLM agent memory systems, finding they rely on exemplar-based lookup rather than true weight-based learning. Identifies a 'Generalization Gap' for novel compositional tasks and security vulnerabilities in memory mechanisms.",
+      "tldr_zh": "分析当前 LLM Agent 记忆系统，发现它们依赖示例检索而非真正的权重学习。指出对新组合任务存在「泛化鸿沟」，并揭示记忆机制的安全漏洞。",
+      "interest_tag": "Memory"
+    },
+    {
+      "title": "Agentic Harness Engineering: Closed-Loop Auto-Evolution of Coding Agent Externals",
+      "arxiv_id": "2505.unknown5",
+      "url": "https://arxiv.org/abs/2505.unknown5",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2505.unknown5",
+      "tldr": "AHE automatically evolves coding agent prompts, tools, and middleware in a closed loop, improving pass@1 from 69.7% to 77.0% on Terminal-Bench 2 and transferring gains to new benchmarks/models.",
+      "tldr_zh": "AHE 自动闭环进化编程 Agent 的提示词、工具和中间件，Terminal-Bench 2 上 pass@1 从 69.7% 提升至 77.0%，且增益可迁移到新基准和模型。",
+      "interest_tag": ""
+    }
+  ],
+  "github_repos": [
+    {
+      "name": "Julpygo/Claude-Code-AI-Design",
+      "url": "https://github.com/Julpygo/Claude-Code-AI-Design",
+      "tldr": "A design-focused integration toolkit for Claude Code, bridging Figma-to-code workflows with AI agent capabilities. Targets the growing demand for AI-assisted UI/UX development.",
+      "tldr_zh": "面向 Claude Code 的设计集成工具包，连接 Figma 到代码的工作流与 AI Agent 能力，瞄准 AI 辅助 UI/UX 开发需求。",
+      "stars": 230,
+      "language": "TypeScript",
+      "interest_tag": ""
+    },
+    {
+      "name": "StartupHakk/OpenMonoAgent.ai",
+      "url": "https://github.com/StartupHakk/OpenMonoAgent.ai",
+      "tldr": "Open-source unlimited-token AI agent that runs entirely on local hardware. Positions itself against metered API pricing with a 'forever free' local-first philosophy.",
+      "tldr_zh": "开源无限 token AI Agent，完全运行在本地硬件上。以「永久免费」的本地优先理念对抗按量计费的 API 定价模式。",
+      "stars": 219,
+      "language": "Python",
+      "interest_tag": ""
+    },
+    {
+      "name": "warpdot-dev/composio",
+      "url": "https://github.com/warpdot-dev/composio",
+      "tldr": "TypeScript/Python SDK for connecting AI agents to external tools and APIs via OpenAPI specs. Supports LangChain, OpenAI Agents, and Anthropic integrations out of the box.",
+      "tldr_zh": "TypeScript/Python SDK，通过 OpenAPI 规范将 AI Agent 连接到外部工具和 API。开箱支持 LangChain、OpenAI Agents 和 Anthropic 集成。",
+      "stars": 218,
+      "language": "TypeScript",
+      "interest_tag": ""
+    },
+    {
+      "name": "endless-sky-team/ai-trading-agent",
+      "url": "https://github.com/endless-sky-team/ai-trading-agent",
+      "tldr": "LLM-powered crypto trading bot that uses AI agents for market analysis and perpetual futures trading across Bitcoin and Ethereum. Integrates with OpenRouter for model flexibility.",
+      "tldr_zh": "基于 LLM 的加密货币交易机器人，使用 AI Agent 进行市场分析和 BTC/ETH 永续合约交易，集成 OpenRouter 实现模型灵活切换。",
+      "stars": 213,
+      "language": "Python",
+      "interest_tag": ""
+    },
+    {
+      "name": "lahfir/agent-desktop",
+      "url": "https://github.com/lahfir/agent-desktop",
+      "tldr": "Native desktop automation CLI purpose-built for AI agents—provides programmatic control over mouse, keyboard, windows, and screen capture. Cross-platform, no browser dependency.",
+      "tldr_zh": "专为 AI Agent 设计的原生桌面自动化 CLI，提供鼠标、键盘、窗口和屏幕截图的程序化控制。跨平台，无需浏览器依赖。",
+      "stars": 198,
+      "language": "Rust",
+      "interest_tag": "CUA"
+    }
+  ],
+  "hackernews": [
+    {
+      "title": "Mistral Medium 3.5",
+      "url": "https://mistral.ai/news/vibe-remote-agents-mistral-medium-3-5",
+      "tldr": "Mistral launches Medium 3.5 with 'vibe coding' and remote agent capabilities, positioning the model for autonomous coding and long-running agentic workflows. Signals Mistral's strategic pivot toward agent-native model design.",
+      "tldr_zh": "Mistral 发布 Medium 3.5，带来「氛围编程」和远程 Agent 能力，定位自主编程和长时 Agent 工作流。标志 Mistral 向 Agent 原生模型设计的战略转型。",
+      "points": 498,
+      "num_comments": 230,
+      "interest_tag": ""
+    },
+    {
+      "title": "For thirty years I programmed with Phish on, every day",
+      "url": "https://christophermeiklejohn.com/ai/personal/phish/flow/agents/2026/05/03/rift.html",
+      "tldr": "A programmer reflects on 30 years of coding with Phish music for flow state, connecting it to how AI agents now handle the mechanical parts of programming—freeing humans for creative and architectural thinking.",
+      "tldr_zh": "一位程序员回顾 30 年伴随 Phish 音乐编程的心流体验，将其与 AI Agent 如今承担编程机械部分相联系——让人类专注创造性和架构性思考。",
+      "points": 227,
+      "num_comments": 177,
+      "interest_tag": ""
+    },
+    {
+      "title": "Show HN: DAC – open-source dashboard as code tool for agents and humans",
+      "url": "https://github.com/bruin-data/dac",
+      "tldr": "DAC (Dashboard as Code) lets both humans and AI agents define dashboards programmatically. Open-source alternative to GUI-heavy BI tools, designed for version control and automated pipeline integration.",
+      "tldr_zh": "DAC（Dashboard as Code）让人类和 AI Agent 都能以代码方式定义仪表盘。GUI 重型 BI 工具的开源替代，支持版本控制和自动化管线集成。",
+      "points": 113,
+      "num_comments": 35,
+      "interest_tag": ""
+    },
+    {
+      "title": "Show HN: Agent-desktop – Native desktop automation CLI for AI agents",
+      "url": "https://github.com/lahfir/agent-desktop",
+      "tldr": "A Rust-based CLI tool providing native desktop automation primitives (click, type, screenshot, window management) specifically designed as building blocks for AI agents to control computers.",
+      "tldr_zh": "基于 Rust 的 CLI 工具，提供原生桌面自动化原语（点击、输入、截图、窗口管理），专为 AI Agent 控制计算机而设计。",
+      "points": 98,
+      "num_comments": 35,
+      "interest_tag": "CUA"
+    },
+    {
+      "title": "XGrammar-2: 80x Faster Structured Generation for Agent Tool Calling",
+      "url": "",
+      "tldr": "XGrammar-2 achieves 80x speedup for structured output generation in agent tool calling scenarios, making grammar-constrained decoding practical for real-time agentic applications.",
+      "tldr_zh": "XGrammar-2 在 Agent 工具调用场景中实现结构化输出生成 80 倍加速，使语法约束解码在实时 Agent 应用中变得实用。",
+      "points": 6,
+      "num_comments": 0,
+      "interest_tag": ""
+    }
+  ]
+}
