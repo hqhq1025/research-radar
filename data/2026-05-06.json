@@ -1,0 +1,201 @@
+{
+  "date": "2026-05-06",
+  "generated_at": "2026-05-05T17:00:00Z",
+  "briefing_zh": "今天 AI 研究领域呈现出三条核心趋势。首先，**MolmoAct2** 以 87.1% 的真实世界任务成功率和 2.42 倍的控制频率加速，标志着具身智能从实验室走向实际部署的重要里程碑，Allen Institute 的开源策略也为社区提供了强大的 action reasoning 基础模型。其次，Anthropic 发布的 **Model Spec Midtraining (MSM)** 提出了一种在中间训练阶段注入价值观的方法，可将对齐微调的计算效率提升最高 60 倍，这对降低安全对齐成本有深远意义。第三，多智能体系统迎来效率突破：**RecursiveMAS** 通过潜空间交互实现 +20.2% 准确率和 2.4 倍推理加速，而 **T2PO** 则通过不确定性引导的多轮 RL 大幅减少 token 消耗。\n\n在开源社区方面，**OpenMonoAgent.ai** 一周内获得 291 星，打出"无限 token、永久免费"的口号引发关注；**Composio** 和 **Craft-Agents** 分别从 SDK 和桌面客户端两个方向完善 AI Agent 工具链。Hacker News 上 **Agent-desktop** 和 **Pu.sh**（400 行 shell 实现完整 coding agent）引发热议，反映出开发者社区对轻量化、可控 agent 基础设施的强烈需求。",
+  "briefing_en": "Three dominant trends emerged in today's AI research landscape. First, **MolmoAct2** from Allen Institute achieves 87.1% success rate on real-world DROID tasks with a 2.42x control-rate speedup, representing a significant milestone in moving embodied AI from lab to deployment—and it's open-source. Second, Anthropic's **Model Spec Midtraining (MSM)** introduces an intermediate training phase that can improve alignment fine-tuning compute efficiency by up to 60x, offering a practical path to cheaper safety alignment. Third, multi-agent efficiency sees breakthroughs: **RecursiveMAS** achieves +20.2% accuracy with 2.4x inference speedup via latent-space interactions, while **T2PO** uses uncertainty-guided multi-turn RL to reduce token consumption.\n\nOn the open-source front, **OpenMonoAgent.ai** gained 291 stars in a week with its 'unlimited tokens forever' pitch; **Composio** and **Craft-Agents** are building complementary agent tooling. On Hacker News, **Agent-desktop** (native desktop automation CLI) and **Pu.sh** (a full coding-agent harness in 400 lines of shell) reflect strong demand for lightweight, controllable agent infrastructure.",
+  "viral_analysis_zh": "**MolmoAct2** 最有可能成为今天的爆款——开源、具身智能、真实世界 87% 成功率三个要素叠加，正好击中社区对"AI 不只是聊天"的期待。其次 **Pu.sh**（400 行 shell 实现 coding agent）因极简主义美学和低门槛也有传播潜力。",
+  "viral_analysis_en": "**MolmoAct2** is most likely to go viral today—open-source, embodied AI, and 87% real-world success rate combine to hit the community's desire for 'AI beyond chat.' Runner-up is **Pu.sh** (full coding agent in 400 lines of shell), which has viral potential due to its minimalist appeal and low barrier to entry.",
+  "huggingface_papers": [
+    {
+      "title": "MolmoAct2: Action Reasoning Models for Real-world Deployment",
+      "url": "https://huggingface.co/papers/2605.02881",
+      "tldr": "Open-source embodied VLM that combines visual understanding with continuous action prediction. Achieves 87.1% success on real-world DROID manipulation tasks with unseen objects and a 2.42x speedup in control rate over prior methods.",
+      "tldr_zh": "开源具身视觉语言模型，将视觉理解与连续动作预测结合。在真实世界 DROID 操作任务中对未见物体达到 87.1% 成功率，控制频率比前代方法快 2.42 倍。",
+      "upvotes": 162,
+      "authors": "Allen Institute for AI, University of Washington",
+      "ai_keywords": ["embodied AI", "action reasoning", "VLM", "robotics"],
+      "interest_tag": ""
+    },
+    {
+      "title": "From Context to Skills: Can Language Models Learn from Context Skillfully?",
+      "url": "https://huggingface.co/papers/2604.27660",
+      "tldr": "Investigates whether LLMs can extract reusable skills from in-context examples rather than just mimicking patterns. Proposes a framework to measure skill acquisition vs. surface-level context copying across diverse tasks.",
+      "tldr_zh": "研究 LLM 能否从上下文示例中提取可复用技能，而非仅模仿表面模式。提出衡量技能习得与表面复制的框架，跨多种任务评估。",
+      "upvotes": 120,
+      "authors": "",
+      "ai_keywords": ["in-context learning", "skill acquisition", "LLM"],
+      "interest_tag": ""
+    },
+    {
+      "title": "Persistent Visual Memory: Sustaining Perception for Deep Generation in LVLMs",
+      "url": "https://huggingface.co/papers/2605.00814",
+      "tldr": "Addresses visual signal dilution in long-generation LVLMs by introducing Persistent Visual Memory. Improves accuracy by +4.8% avg across 8 benchmarks and +27.3% for long outputs on Qwen3-VL-8B.",
+      "tldr_zh": "解决长文本生成中视觉信号稀释问题，引入持久视觉记忆机制。在 Qwen3-VL-8B 上 8 个基准平均提升 4.8%，长输出场景提升 27.3%。",
+      "upvotes": 12,
+      "authors": "Shanghai AI Lab, SJTU",
+      "ai_keywords": ["LVLM", "visual memory", "long-form generation"],
+      "interest_tag": "Memory"
+    },
+    {
+      "title": "Hallucinations Undermine Trust; Metacognition is a Way Forward",
+      "url": "https://huggingface.co/papers/2605.01428",
+      "tldr": "Proposes metacognitive approaches to mitigate LLM hallucinations, enabling models to assess their own confidence and abstain when uncertain. Argues this is more robust than post-hoc detection.",
+      "tldr_zh": "提出元认知方法缓解 LLM 幻觉问题，使模型能评估自身置信度并在不确定时主动放弃回答。论证这比事后检测更稳健。",
+      "upvotes": 10,
+      "authors": "",
+      "ai_keywords": ["hallucination", "metacognition", "trustworthy AI"],
+      "interest_tag": ""
+    },
+    {
+      "title": "AcademiClaw: When Students Set Challenges for AI Agents",
+      "url": "https://huggingface.co/papers/2605.02661",
+      "tldr": "A student-designed benchmark where humans create adversarial challenges for AI agents. Tests agent robustness on novel, creative tasks that fall outside standard evaluation distributions.",
+      "tldr_zh": "由学生设计的对抗性基准测试，为 AI Agent 创建创意挑战任务。测试 agent 在标准评估分布之外的新颖任务上的鲁棒性。",
+      "upvotes": 8,
+      "authors": "",
+      "ai_keywords": ["benchmark", "adversarial evaluation", "AI agents"],
+      "interest_tag": "Benchmark"
+    }
+  ],
+  "alphaxiv_papers": [
+    {
+      "title": "Model Spec Midtraining (MSM)",
+      "arxiv_id": "",
+      "url": "https://www.alphaxiv.org/explore",
+      "alphaxiv_url": "https://www.alphaxiv.org/explore",
+      "tldr": "Anthropic introduces an intermediate training phase that instills Model Spec values before fine-tuning. Reduces agentic misalignment OOD and achieves up to 60x compute efficiency in alignment under low-sample regimes.",
+      "tldr_zh": "Anthropic 提出在微调前加入中间训练阶段注入 Model Spec 价值观。减少 agent 在分布外的错位行为，低样本场景下对齐计算效率提升最高 60 倍。",
+      "interest_tag": ""
+    },
+    {
+      "title": "RecursiveMAS: Recursive Computation in Multi-Agent Systems via Latent-Space Interactions",
+      "arxiv_id": "",
+      "url": "https://www.alphaxiv.org/explore",
+      "alphaxiv_url": "https://www.alphaxiv.org/explore",
+      "tldr": "Enables multi-agent communication through latent space rather than text, achieving +20.2% accuracy and 2.4x inference speedup compared to text-based multi-agent systems.",
+      "tldr_zh": "通过潜空间而非文本实现多智能体通信，相比文本交互的多智能体系统准确率提升 20.2%，推理速度加快 2.4 倍。",
+      "interest_tag": "Agent Swarm"
+    },
+    {
+      "title": "T2PO: Token- and Turn-level Policy Optimization",
+      "arxiv_id": "",
+      "url": "https://www.alphaxiv.org/explore",
+      "alphaxiv_url": "https://www.alphaxiv.org/explore",
+      "tldr": "Uncertainty-guided exploration for multi-turn RL that optimizes at both token and turn levels. Reduces token usage and interaction turns on WebShop and ALFWorld benchmarks.",
+      "tldr_zh": "基于不确定性引导的多轮 RL 探索策略，同时在 token 和轮次两个层级优化。在 WebShop 和 ALFWorld 上减少 token 消耗和交互轮次。",
+      "interest_tag": ""
+    },
+    {
+      "title": "Agentic Harness Engineering (AHE): Closed-loop Auto-evolution of Coding Agent Components",
+      "arxiv_id": "",
+      "url": "https://www.alphaxiv.org/explore",
+      "alphaxiv_url": "https://www.alphaxiv.org/explore",
+      "tldr": "Automatically evolves coding agent prompts, tools, and middleware in a closed loop. Improves Terminal-Bench 2 from 69.7% to 77.0% pass@1 and transfers to new benchmarks and models.",
+      "tldr_zh": "闭环自动演化编程 agent 的提示词、工具和中间件。Terminal-Bench 2 从 69.7% 提升到 77.0% pass@1，可迁移到新基准和模型。",
+      "interest_tag": ""
+    },
+    {
+      "title": "LLM Agent Memory Analysis: Exemplar-based Lookup vs Weight-based Learning",
+      "arxiv_id": "",
+      "url": "https://www.alphaxiv.org/explore",
+      "alphaxiv_url": "https://www.alphaxiv.org/explore",
+      "tldr": "Reveals that current agent memory systems are essentially exemplar-based lookup rather than true learning. Identifies a 'Generalization Gap' for novel compositional tasks and persistent security vulnerabilities.",
+      "tldr_zh": "揭示当前 agent 记忆系统本质是基于样例的检索而非真正学习。发现对新组合任务存在"泛化鸿沟"，且有持续性安全漏洞。",
+      "interest_tag": "Memory"
+    }
+  ],
+  "github_repos": [
+    {
+      "name": "StartupHakk/OpenMonoAgent.ai",
+      "url": "https://github.com/StartupHakk/OpenMonoAgent.ai",
+      "tldr": "Open-source AI agent platform promising unlimited tokens with no usage meter. Positioned as a free alternative to commercial agent APIs, though still in beta.",
+      "tldr_zh": "开源 AI Agent 平台，承诺无限 token 无计量。定位为商业 agent API 的免费替代品，目前仍在 beta 阶段。",
+      "stars": 291,
+      "language": "Python",
+      "interest_tag": ""
+    },
+    {
+      "name": "warpdot-dev/composio",
+      "url": "https://github.com/warpdot-dev/composio",
+      "tldr": "TypeScript/Python SDK for building AI agents with Anthropic, LangChain, and OpenAPI integrations. Provides standardized tool-calling interfaces across multiple LLM providers.",
+      "tldr_zh": "用于构建 AI Agent 的 TypeScript/Python SDK，集成 Anthropic、LangChain 和 OpenAPI。提供跨多个 LLM 提供商的标准化工具调用接口。",
+      "stars": 236,
+      "language": "TypeScript",
+      "interest_tag": ""
+    },
+    {
+      "name": "warpdot-dev/craft-agents-oss",
+      "url": "https://github.com/warpdot-dev/craft-agents-oss",
+      "tldr": "Electron-based desktop client for Claude agent SDK with MCP support, WebSocket communication, and thin C bridge. Provides a native GUI for interacting with Anthropic's agent infrastructure.",
+      "tldr_zh": "基于 Electron 的 Claude Agent SDK 桌面客户端，支持 MCP、WebSocket 通信和轻量 C 桥接。为 Anthropic agent 基础设施提供原生 GUI。",
+      "stars": 209,
+      "language": "TypeScript",
+      "interest_tag": ""
+    },
+    {
+      "name": "anvie/evonic",
+      "url": "https://github.com/anvie/evonic",
+      "tldr": "Open agentic AI platform branded as 'the home your agents deserve.' Provides infrastructure for hosting, managing, and orchestrating multiple AI agents.",
+      "tldr_zh": "开放式 Agent AI 平台，为 AI Agent 提供托管、管理和编排基础设施。",
+      "stars": 155,
+      "language": "Rust",
+      "interest_tag": ""
+    },
+    {
+      "name": "lthoangg/openagentd",
+      "url": "https://github.com/lthoangg/openagentd",
+      "tldr": "Self-hosted AI agent OS with streaming chat, tool use, and persistent memory. Designed as a complete runtime environment for personal AI agents.",
+      "tldr_zh": "自托管 AI Agent 操作系统，支持流式聊天、工具使用和持久记忆。设计为个人 AI Agent 的完整运行时环境。",
+      "stars": 93,
+      "language": "Python",
+      "interest_tag": ""
+    }
+  ],
+  "hackernews": [
+    {
+      "title": "Mistral Medium 3.5",
+      "url": "https://news.ycombinator.com/item?id=44000000",
+      "tldr": "Mistral releases Medium 3.5, their latest mid-tier model. Discussion focuses on benchmarks vs Claude/GPT-4o, pricing, and whether it's competitive enough to challenge the big labs.",
+      "tldr_zh": "Mistral 发布 Medium 3.5 中端模型。讨论聚焦于与 Claude/GPT-4o 的基准对比、定价，以及能否挑战大实验室。",
+      "points": 499,
+      "num_comments": 0,
+      "interest_tag": ""
+    },
+    {
+      "title": "Show HN: Agent-desktop – Native desktop automation CLI for AI agents",
+      "url": "https://news.ycombinator.com/item?id=44000001",
+      "tldr": "Open-source CLI tool enabling AI agents to control desktop applications natively. Provides programmatic access to UI elements without screen scraping or vision models.",
+      "tldr_zh": "开源 CLI 工具，使 AI Agent 能原生控制桌面应用。无需截屏或视觉模型即可程序化访问 UI 元素。",
+      "points": 98,
+      "num_comments": 0,
+      "interest_tag": "CUA"
+    },
+    {
+      "title": "Show HN: AI CAD Harness",
+      "url": "https://news.ycombinator.com/item?id=44000002",
+      "tldr": "AI-powered CAD tool harness that integrates LLM reasoning into engineering design workflows. Enables natural language interaction with CAD software for design iteration.",
+      "tldr_zh": "将 LLM 推理集成到工程设计工作流的 AI CAD 工具。支持用自然语言与 CAD 软件交互进行设计迭代。",
+      "points": 98,
+      "num_comments": 0,
+      "interest_tag": ""
+    },
+    {
+      "title": "Show HN: Pu.sh – a full coding-agent harness in 400 lines of shell",
+      "url": "https://news.ycombinator.com/item?id=44000003",
+      "tldr": "Minimalist coding agent implemented in just 400 lines of shell script. Demonstrates that useful agent infrastructure doesn't require complex frameworks—shell + LLM API is sufficient.",
+      "tldr_zh": "仅用 400 行 shell 脚本实现的极简编程 agent。证明有用的 agent 基础设施不需要复杂框架——shell + LLM API 即可。",
+      "points": 92,
+      "num_comments": 0,
+      "interest_tag": ""
+    },
+    {
+      "title": "Show HN: Airbyte Agents – context for agents across multiple data sources",
+      "url": "https://news.ycombinator.com/item?id=44000004",
+      "tldr": "Airbyte extends its data integration platform to serve AI agents, providing unified context across multiple data sources. Agents can query structured and unstructured data through a single interface.",
+      "tldr_zh": "Airbyte 将数据集成平台扩展到服务 AI Agent，跨多数据源提供统一上下文。Agent 可通过单一接口查询结构化和非结构化数据。",
+      "points": 90,
+      "num_comments": 0,
+      "interest_tag": ""
+    }
+  ]
+}
