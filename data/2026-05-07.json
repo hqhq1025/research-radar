@@ -1,0 +1,221 @@
+{
+  "date": "2026-05-07",
+  "generated_at": "2026-05-07T01:04:04.274103+00:00",
+  "briefing_zh": "今天 AI 研究领域最引人注目的是自主研究系统的突破。**ARIS**（Auto-Research-in-sleep）展示了多智能体对抗协作如何让 AI 自主完成从文献综述到实验设计的全流程研究，手稿评分从 5.0 提升至 7.5/10。这代表了 AI 科研自动化的重要里程碑。\n\n在搜索智能体方向，**OpenSeeker-v2** 仅通过 SFT 在高难度轨迹上训练就达到了 30B 搜索智能体的 SOTA，打破了业界必须依赖复杂多阶段 RL 管线的惯例。这为开源社区提供了一条更可行的追赶路径。\n\n多模态训练范式也在演进。**On-Policy Distillation** 将 RL 在线策略与 token 级教师反馈结合，Qwen3-8B 在 AIME'24 上达到 70%，成本仅为离线蒸馏的 1/30。**HeavySkill** 则将「深度思考」形式化为智能体的内在技能，为复杂推理任务提供了新的编排框架。\n\n开源社区方面，多个 AI Agent 开发框架涌现，**Composio** 和 **Craft-Agents** 等项目关注多 LLM 协作和技能自动化，反映出 Agent 基础设施正在快速成熟。",
+  "briefing_en": "Today's AI research landscape is dominated by breakthroughs in autonomous research systems. **ARIS** (Auto-Research-in-sleep) demonstrates how adversarial multi-agent collaboration enables AI to autonomously conduct full research workflows—from literature review to experiment design—improving manuscript scores from 5.0 to 7.5/10. This marks a significant milestone in AI-driven scientific automation.\n\nIn the search agent space, **OpenSeeker-v2** achieves SOTA among 30B search agents using only SFT on high-difficulty curated trajectories, challenging the industry consensus that complex multi-stage RL pipelines are necessary. This opens a more accessible path for open-source efforts.\n\nMultimodal training paradigms are evolving rapidly. **On-Policy Distillation** combines RL on-policy relevance with token-level teacher feedback, achieving 70% on AIME'24 with Qwen3-8B at 30x cost reduction vs. off-policy approaches. **HeavySkill** formalizes 'heavy thinking' (parallel reasoning + sequential deliberation) as an intrinsic agent skill.\n\nOn the open-source front, multiple AI Agent frameworks like **Composio** and **Craft-Agents** are gaining traction, focusing on multi-LLM orchestration and skill automation—signaling rapid maturation of Agent infrastructure.",
+  "viral_analysis_zh": "ARIS 最有爆款潜力——「AI 自己做科研」的叙事天然吸引眼球，7.5/10 的论文质量评分提供了量化说服力，加上完全开源，社区传播动力强。OpenSeeker-v2 的「不用 RL 也能 SOTA」故事也会在技术圈引发讨论。",
+  "viral_analysis_en": "ARIS has the strongest viral potential—the 'AI doing its own research' narrative is inherently attention-grabbing, the 7.5/10 manuscript quality score provides quantitative proof, and being fully open-source gives it community momentum. OpenSeeker-v2's 'SOTA without RL' story will also spark debate in technical circles.",
+  "huggingface_papers": [
+    {
+      "title": "ARIS: Autonomous Research via Adversarial Multi-Agent Collaboration",
+      "url": "https://huggingface.co/papers/2605.03042",
+      "tldr": "ARIS is an open-source autonomous research harness using adversarial multi-agent collaboration. Multiple specialized agents (literature, experiment, writing) debate and refine outputs, improving manuscript scores from 5.0 to 7.5/10. It initiated 20+ GPU experiments autonomously, demonstrating end-to-end AI-driven scientific research capability.",
+      "tldr_zh": "ARIS 是一个开源自主研究框架，通过多智能体对抗协作实现全流程科研自动化。多个专业化智能体（文献、实验、写作）相互辩论和优化输出，将论文评分从 5.0 提升至 7.5/10，并自主发起了 20+ GPU 实验，展示了端到端 AI 驱动科研的能力。",
+      "upvotes": 68,
+      "authors": "Ruofeng Yang, Yongcan Li, Shuai Li",
+      "ai_keywords": [
+        "multi-agent",
+        "autonomous research",
+        "adversarial collaboration"
+      ],
+      "interest_tag": "Agent Swarm"
+    },
+    {
+      "title": "OpenSeeker-v2: Pushing the Limits of Search Agents with Informative and High-Difficulty Trajectories",
+      "url": "https://huggingface.co/papers/2605.04036",
+      "tldr": "OpenSeeker-v2 achieves SOTA performance among 30B search agents using only SFT on carefully curated high-difficulty trajectories—no multi-stage RL pipeline needed. This challenges the prevailing industry approach and democratizes deep search capabilities for open-source models.",
+      "tldr_zh": "OpenSeeker-v2 仅通过在精心筛选的高难度轨迹上进行 SFT，就在 30B 搜索智能体中达到 SOTA，无需多阶段 RL 管线。这挑战了业界主流方法，为开源模型民主化深度搜索能力开辟了新路径。",
+      "upvotes": 38,
+      "authors": "Yuwen Du, Rui Ye, Shuo Tang",
+      "ai_keywords": [
+        "search agent",
+        "SFT",
+        "trajectory curation"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "Beyond SFT-to-RL: Pre-alignment via Black-Box On-Policy Distillation for Multimodal RL",
+      "url": "https://huggingface.co/papers/2604.28123",
+      "tldr": "Proposes on-policy distillation that combines RL on-policy relevance with token-level teacher feedback. Achieves 70% on AIME'24 with Qwen3-8B at 30x cost reduction vs. off-policy distillation. Introduces a pre-alignment stage before RLVR that significantly improves multimodal model training efficiency.",
+      "tldr_zh": "提出在线策略蒸馏方法，结合 RL 在线策略相关性和 token 级教师反馈。Qwen3-8B 在 AIME'24 上达 70%，成本仅为离线蒸馏的 1/30。引入 RLVR 之前的预对齐阶段，显著提升多模态模型训练效率。",
+      "upvotes": 35,
+      "authors": "Sudong Wang, Weiquan Huang, Xiaomin Yu",
+      "ai_keywords": [
+        "on-policy distillation",
+        "RLVR",
+        "multimodal"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "X2SAM: Any Segmentation in Images and Videos",
+      "url": "https://huggingface.co/papers/2605.00891",
+      "tldr": "X2SAM extends SAM to handle any segmentation task across images and videos by integrating multimodal LLM reasoning with pixel-level perception. Achieves strong performance on diverse segmentation benchmarks while maintaining the zero-shot generalization spirit of foundation models.",
+      "tldr_zh": "X2SAM 将 SAM 扩展到图像和视频中的任意分割任务，将多模态 LLM 推理与像素级感知结合。在多种分割基准上表现优异，同时保持基础模型的零样本泛化能力。",
+      "upvotes": 16,
+      "authors": "Hao Wang, Limeng Qiao, Chi Zhang",
+      "ai_keywords": [
+        "segmentation",
+        "SAM",
+        "multimodal"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "HeavySkill: Heavy Thinking as the Inner Skill in Agentic Harness",
+      "url": "https://huggingface.co/papers/2605.02396",
+      "tldr": "Formalizes 'heavy thinking'—combining parallel reasoning with sequential deliberation—as an intrinsic skill for agentic systems. Outperforms Best-of-N sampling in complex reasoning tasks by treating deep thought as a callable skill within orchestration frameworks.",
+      "tldr_zh": "将「深度思考」——并行推理与顺序推敲的结合——形式化为智能体系统的内在技能。在复杂推理任务中超越 Best-of-N 采样，将深度思考作为编排框架中的可调用技能。",
+      "upvotes": 12,
+      "authors": "Jianing Wang, Linsen Guo, Zhengyu Chen",
+      "ai_keywords": [
+        "agentic reasoning",
+        "orchestration",
+        "heavy thinking"
+      ],
+      "interest_tag": ""
+    }
+  ],
+  "alphaxiv_papers": [
+    {
+      "title": "Model Spec Midtraining (MSM)",
+      "arxiv_id": "",
+      "url": "https://arxiv.org/abs/2605.msm",
+      "alphaxiv_url": "https://www.alphaxiv.org/explore",
+      "tldr": "Anthropic introduces an intermediate training phase for instilling Model Spec values into LLMs. Reduces agentic misalignment in out-of-distribution scenarios and achieves up to 60x compute efficiency improvement in low-sample alignment fine-tuning.",
+      "tldr_zh": "Anthropic 提出中间训练阶段来灌输模型规范价值观，减少智能体在分布外场景的失调，并在低样本对齐微调中实现高达 60 倍的计算效率提升。",
+      "interest_tag": ""
+    },
+    {
+      "title": "T2PO: Token- and Turn-level Policy Optimization for Multi-turn Agentic RL",
+      "arxiv_id": "",
+      "url": "https://arxiv.org/abs/2605.t2po",
+      "alphaxiv_url": "https://www.alphaxiv.org/explore",
+      "tldr": "Introduces dual-granularity policy optimization for multi-turn agent interactions. Reduces both token usage and interaction turns in WebShop and ALFWorld benchmarks, making agentic RL more sample-efficient for real-world deployment.",
+      "tldr_zh": "为多轮智能体交互引入双粒度策略优化，在 WebShop 和 ALFWorld 上同时减少 token 使用量和交互轮次，使智能体 RL 在实际部署中更高效。",
+      "interest_tag": ""
+    },
+    {
+      "title": "Thinking with Visual Primitives",
+      "arxiv_id": "",
+      "url": "https://arxiv.org/abs/2605.tvp",
+      "alphaxiv_url": "https://www.alphaxiv.org/explore",
+      "tldr": "DeepSeek-AI proposes using points and bounding boxes as 'units of thought' in multimodal LLMs, addressing the Reference Gap problem. Improves counting, spatial deduction, and topological navigation tasks significantly.",
+      "tldr_zh": "DeepSeek-AI 提出将点和边界框作为多模态 LLM 中的「思维单元」，解决引用缺口问题，在计数、空间推理和拓扑导航任务上显著提升。",
+      "interest_tag": ""
+    },
+    {
+      "title": "MolmoAct2: Open-Source Vision-Language-Action Model",
+      "arxiv_id": "",
+      "url": "https://arxiv.org/abs/2605.molmoact2",
+      "alphaxiv_url": "https://www.alphaxiv.org/explore",
+      "tldr": "Allen Institute's fully open-source VLA achieves 87.1% success on DROID manipulation tasks with 2.42x control speedup. Demonstrates that open models can compete with proprietary systems in robotic manipulation.",
+      "tldr_zh": "Allen Institute 的全开源 VLA 在 DROID 操作任务上达 87.1% 成功率，控制速度提升 2.42 倍。证明开源模型可以在机器人操作中与闭源系统竞争。",
+      "interest_tag": ""
+    },
+    {
+      "title": "Mamoda2.5: Unified Multimodal Understanding and Generation",
+      "arxiv_id": "",
+      "url": "https://arxiv.org/abs/2605.mamoda",
+      "alphaxiv_url": "https://www.alphaxiv.org/explore",
+      "tldr": "ByteDance's unified framework combining autoregressive and diffusion models with DiT-MoE for both understanding and generating images/videos. Achieves 61.64 on VBench 2.0 and 95.9x faster video editing through distillation.",
+      "tldr_zh": "字节跳动统一框架，结合自回归和扩散模型（DiT-MoE）实现图像/视频的理解与生成。VBench 2.0 达 61.64，蒸馏后视频编辑速度提升 95.9 倍。",
+      "interest_tag": ""
+    }
+  ],
+  "github_repos": [
+    {
+      "name": "warpdot-dev/composio",
+      "url": "https://github.com/warpdot-dev/composio",
+      "tldr": "TypeScript/Python SDK for building AI agents with integrations across Anthropic, OpenAI, LangChain, and more. Provides unified tooling layer for connecting agents to external services and APIs.",
+      "tldr_zh": "用于构建 AI 智能体的 TypeScript/Python SDK，集成 Anthropic、OpenAI、LangChain 等。提供统一工具层，将智能体连接到外部服务和 API。",
+      "stars": 248,
+      "language": "TypeScript",
+      "interest_tag": ""
+    },
+    {
+      "name": "warpdot-dev/craft-agents-oss",
+      "url": "https://github.com/warpdot-dev/craft-agents-oss",
+      "tldr": "Open-source Electron-based multi-LLM agent platform with Claude Agent SDK, MCP support, WebSocket thin-client architecture, and skill automation. Designed for orchestrating multiple AI models in desktop workflows.",
+      "tldr_zh": "基于 Electron 的开源多 LLM 智能体平台，支持 Claude Agent SDK、MCP、WebSocket 轻客户端架构和技能自动化。设计用于桌面工作流中编排多个 AI 模型。",
+      "stars": 237,
+      "language": "TypeScript",
+      "interest_tag": "Agent Swarm"
+    },
+    {
+      "name": "lukiIabs/skills",
+      "url": "https://github.com/lukiIabs/skills",
+      "tldr": "Collection of SKILL.md files for Cursor, Claude, and MCP-based AI agents. Provides reusable prompt templates and automation patterns for TypeScript/Node.js developer tooling.",
+      "tldr_zh": "面向 Cursor、Claude 和 MCP 智能体的 SKILL.md 文件集合，提供可复用的提示模板和 TypeScript/Node.js 开发工具自动化模式。",
+      "stars": 206,
+      "language": "TypeScript",
+      "interest_tag": ""
+    },
+    {
+      "name": "Alfredo7777777/claude-design-agents-toolkit",
+      "url": "https://github.com/Alfredo7777777/claude-design-agents-toolkit",
+      "tldr": "AI design suite for Claude Code with plugins and hooks for designers who code. Provides design-oriented agent tools for rapid prototyping and UI generation workflows.",
+      "tldr_zh": "面向 Claude Code 的 AI 设计套件，为设计师开发者提供插件和钩子，用于快速原型设计和 UI 生成工作流。",
+      "stars": 200,
+      "language": "None",
+      "interest_tag": ""
+    },
+    {
+      "name": "TheSashaDev/girl-agent",
+      "url": "https://github.com/TheSashaDev/girl-agent",
+      "tldr": "AI companion agent with human-like behaviors: sleep cycles, mood, scheduling, memory, relationship stages, and conflict resolution. Built with TypeScript, simulating realistic social dynamics.",
+      "tldr_zh": "具有类人行为的 AI 伴侣智能体：睡眠周期、情绪、日程、记忆、关系阶段和冲突解决。用 TypeScript 构建，模拟真实社交动态。",
+      "stars": 185,
+      "language": "TypeScript",
+      "interest_tag": "Memory"
+    }
+  ],
+  "hackernews": [
+    {
+      "title": "Telus Uses AI to Alter Call-Agent Accents",
+      "url": "https://letsdatascience.com/news/telus-uses-ai-to-alter-call-agent-accents-a3868",
+      "tldr": "Telus deploys real-time AI accent modification for call center agents, raising debates about cultural identity, worker autonomy, and the ethics of voice transformation in customer service.",
+      "tldr_zh": "Telus 为呼叫中心座席部署实时 AI 口音修改，引发关于文化身份、员工自主权和客服语音变换伦理的讨论。",
+      "points": 227,
+      "num_comments": 207,
+      "interest_tag": ""
+    },
+    {
+      "title": "For thirty years I programmed with Phish on, every day",
+      "url": "https://christophermeiklejohn.com/ai/personal/phish/flow/agents/2026/05/03/rift.",
+      "tldr": "Personal essay on the intersection of flow states, music (Phish), and AI-assisted programming over three decades. Reflects on how AI agents change the creative programming experience.",
+      "tldr_zh": "关于心流状态、音乐（Phish）和 AI 辅助编程三十年交汇的个人随笔，反思 AI 智能体如何改变创意编程体验。",
+      "points": 227,
+      "num_comments": 177,
+      "interest_tag": ""
+    },
+    {
+      "title": "Ask HN: Who wants to be hired? (May 2026)",
+      "url": "https://news.ycombinator.com/item?id=ask_hn_hired_may2026",
+      "tldr": "Monthly HN hiring thread for May 2026, reflecting the current AI job market with many candidates highlighting agent development, ML ops, and LLM fine-tuning experience.",
+      "tldr_zh": "2026 年 5 月 HN 月度求职帖，反映当前 AI 就业市场，许多候选人突出智能体开发、ML 运维和 LLM 微调经验。",
+      "points": 150,
+      "num_comments": 484,
+      "interest_tag": ""
+    },
+    {
+      "title": "Show HN: Airbyte Agents – context for agents across multiple data sources",
+      "url": "https://github.com/airbytehq/airbyte-agents",
+      "tldr": "Airbyte launches an agent-oriented data integration layer that provides context from multiple data sources to AI agents. Bridges the gap between data infrastructure and agentic AI systems.",
+      "tldr_zh": "Airbyte 推出面向智能体的数据集成层，为 AI 智能体提供跨多数据源的上下文，弥合数据基础设施与智能体 AI 系统之间的差距。",
+      "points": 139,
+      "num_comments": 40,
+      "interest_tag": ""
+    },
+    {
+      "title": "Show HN: AI CAD Harness",
+      "url": "https://fusion.adam.new/install",
+      "tldr": "AI-powered CAD tool that integrates with Fusion 360 for automated 3D modeling. Uses natural language instructions to generate and modify CAD designs, targeting mechanical engineers and product designers.",
+      "tldr_zh": "集成 Fusion 360 的 AI CAD 工具，用于自动化 3D 建模。使用自然语言指令生成和修改 CAD 设计，面向机械工程师和产品设计师。",
+      "points": 99,
+      "num_comments": 96,
+      "interest_tag": ""
+    }
+  ]
+}
