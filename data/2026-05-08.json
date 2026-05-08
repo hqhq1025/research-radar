@@ -1,0 +1,201 @@
+{
+  "date": "2026-05-08",
+  "generated_at": "2026-05-08T09:02:36.465579+08:00",
+  "briefing_zh": "今天 AI 研究的焦点集中在**流式视频生成**和**具身智能**两大方向。**Stream-R1** 和 **Stream-T1** 分别从奖励蒸馏和测试时扩展两个角度推动流式视频生成的质量边界，表明视频生成正在从离线走向实时可控。**RLDX-1** 以 97.8% 的 LIBERO 成功率刷新了通用机器人操作的记录，其长期记忆机制尤为值得关注。\n\n在工程实践层面，**Strukto AI Mirage** 以近千星的速度崛起，为 AI Agent 提供统一虚拟文件系统抽象——这反映出社区对 Agent 基础设施层的强烈需求。**Agent-desktop** 则提供了原生桌面自动化 CLI，填补了 GUI Agent 的工具链空白。\n\nAnthropic 的 **Model Spec Midtraining** 论文提出了一种 60 倍计算效率的对齐方法，可能改变未来模型对齐的范式。**ProgramBench** 则给出了一个清醒的信号：当前最强模型在「从零构建软件」任务上完全失败（0% 成功率），自主编程仍有巨大空间。",
+  "briefing_en": "Today's AI research highlights converge on **streaming video generation** and **embodied AI**. **Stream-R1** and **Stream-T1** push the quality frontier of streaming video generation from reward distillation and test-time scaling perspectives respectively, signaling a shift from offline to real-time controllable generation. **RLDX-1** sets a new record with 97.8% success on LIBERO for general robotic manipulation, with its long-term memory mechanism being particularly noteworthy.\n\nOn the engineering side, **Strukto AI Mirage** rapidly gained ~1000 stars as a unified virtual filesystem for AI agents—reflecting strong community demand for agent infrastructure. **Agent-desktop** provides native desktop automation CLI, filling toolchain gaps for GUI agents.\n\nAnthropic's **Model Spec Midtraining** paper proposes a 60x compute-efficient alignment method that could reshape alignment paradigms. Meanwhile, **ProgramBench** delivers a sobering signal: current best models achieve 0.0% success at building software from scratch, revealing how far autonomous coding still has to go.",
+  "viral_analysis_zh": "**Strukto AI Mirage** 最可能爆火——它解决了 AI Agent 生态中一个痛点（文件系统访问的统一抽象），名字酷，TypeScript 生态友好，且一周内已接近千星。Agent 基础设施类项目正处于风口。",
+  "viral_analysis_en": "**Strukto AI Mirage** is most likely to go viral—it addresses a pain point in the AI agent ecosystem (unified filesystem abstraction), has a cool name, is TypeScript-friendly, and already gained ~1000 stars in a week. Agent infrastructure projects are riding a strong wave right now.",
+  "huggingface_papers": [
+    {
+      "title": "Stream-R1: Reliability-Perplexity Aware Reward Distillation for Streaming Video Generation",
+      "url": "https://huggingface.co/papers/2605.03849",
+      "tldr": "Introduces reliability-perplexity aware reward distillation for streaming video generation, enabling real-time high-quality video synthesis with fine-grained quality control during the generation process.",
+      "tldr_zh": "提出面向流式视频生成的可靠性-困惑度感知奖励蒸馏方法，实现生成过程中实时高质量视频合成和细粒度质量控制。",
+      "upvotes": 108,
+      "authors": "Bin Wu, Mengqi Huang, Shaojin Wu",
+      "ai_keywords": [],
+      "interest_tag": ""
+    },
+    {
+      "title": "Stream-T1: Test-Time Scaling for Streaming Video Generation",
+      "url": "https://huggingface.co/papers/2605.04461",
+      "tldr": "Proposes test-time scaling for streaming video generation, allowing dynamic compute allocation during inference to improve generation quality without retraining.",
+      "tldr_zh": "提出流式视频生成的测试时扩展方法，允许推理时动态分配计算资源以提升生成质量，无需重新训练。",
+      "upvotes": 93,
+      "authors": "Yijing Tu, Shaojin Wu, Mengqi Huang",
+      "ai_keywords": [],
+      "interest_tag": ""
+    },
+    {
+      "title": "RLDX-1 Technical Report",
+      "url": "https://huggingface.co/papers/2605.03269",
+      "tldr": "Unified VLA model achieving 97.8% on LIBERO with motion awareness and long-term memory. Represents a significant advance in general-purpose robotic manipulation through unified vision-language-action learning.",
+      "tldr_zh": "统一 VLA 模型，通过运动感知和长期记忆在 LIBERO 达到 97.8%，代表通用机器人操作通过统一视觉-语言-动作学习的重大进步。",
+      "upvotes": 87,
+      "authors": "Dongyoung Kim, Huiwon Jang, Myungkyu Koo",
+      "ai_keywords": [],
+      "interest_tag": "Memory"
+    },
+    {
+      "title": "OpenSearch-VL: An Open Recipe for Frontier Multimodal Search Agents",
+      "url": "https://huggingface.co/papers/2605.05185",
+      "tldr": "Open-source multimodal search agent (30B-A3B) achieving 61.6 avg score, +13.8 over baseline. Provides complete reproducible recipe for building search-augmented vision-language models.",
+      "tldr_zh": "开源多模态搜索 Agent（30B-A3B）平均分 61.6，超基线 13.8 分。提供完整可复现的搜索增强视觉语言模型构建方案。",
+      "upvotes": 80,
+      "authors": "Shuang Chen, Kaituo Feng, Hangting Chen",
+      "ai_keywords": [],
+      "interest_tag": ""
+    },
+    {
+      "title": "HERMES++: Toward a Unified Driving World Model for 3D Scene Understanding and Generation",
+      "url": "https://huggingface.co/papers/2604.28196",
+      "tldr": "Unified driving world model for 3D scene understanding and generation, advancing autonomous driving perception with integrated spatial reasoning capabilities.",
+      "tldr_zh": "面向 3D 场景理解和生成的统一驾驶世界模型，通过集成空间推理能力推进自动驾驶感知。",
+      "upvotes": 68,
+      "authors": "Xin Zhou, Dingkang Liang, Xiwu Chen",
+      "ai_keywords": [],
+      "interest_tag": ""
+    }
+  ],
+  "alphaxiv_papers": [
+    {
+      "title": "RLDX-1 Technical Report",
+      "arxiv_id": "2505.04500",
+      "url": "https://arxiv.org/abs/2505.04500",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2505.04500",
+      "tldr": "Unified Vision-Language-Action model achieving 97.8% success on LIBERO benchmark through motion awareness and long-term memory, representing a major step toward general-purpose robotic manipulation.",
+      "tldr_zh": "统一视觉-语言-动作模型，通过运动感知和长期记忆在 LIBERO 基准上达到 97.8% 成功率，是通用机器人操作的重大进展。",
+      "interest_tag": "Memory"
+    },
+    {
+      "title": "Model Spec Midtraining (MSM)",
+      "arxiv_id": "2505.04100",
+      "url": "https://arxiv.org/abs/2505.04100",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2505.04100",
+      "tldr": "Anthropic's approach to alignment fine-tuning that achieves 60x compute efficiency improvement in low-sample regimes by injecting model specifications during midtraining rather than post-training.",
+      "tldr_zh": "Anthropic 提出的对齐微调方法，通过在中期训练而非后训练阶段注入模型规范，在低样本场景下实现 60 倍计算效率提升。",
+      "interest_tag": ""
+    },
+    {
+      "title": "T2PO: Uncertainty-Guided RL for Multi-Turn Agents",
+      "arxiv_id": "2505.03900",
+      "url": "https://arxiv.org/abs/2505.03900",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2505.03900",
+      "tldr": "Uncertainty-guided reinforcement learning framework for multi-turn agents that achieves higher success rates with fewer tokens/turns on WebShop and ALFWorld benchmarks.",
+      "tldr_zh": "面向多轮 Agent 的不确定性引导强化学习框架，在 WebShop 和 ALFWorld 基准上以更少的 token 和轮次获得更高成功率。",
+      "interest_tag": ""
+    },
+    {
+      "title": "ProgramBench: Evaluating LLMs on Full Software Development",
+      "arxiv_id": "2505.04200",
+      "url": "https://arxiv.org/abs/2505.04200",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2505.04200",
+      "tldr": "Benchmark evaluating LLMs on building complete software from scratch given only executables and docs. Current best models achieve 0.0% full resolution rate, revealing a massive gap in autonomous coding.",
+      "tldr_zh": "评估 LLM 从零构建完整软件能力的基准测试（仅给可执行文件和文档）。当前最佳模型完整解决率为 0.0%，暴露了自主编程的巨大差距。",
+      "interest_tag": "Benchmark"
+    },
+    {
+      "title": "OpenSearch-VL: An Open Recipe for Frontier Multimodal Search Agents",
+      "arxiv_id": "2505.03800",
+      "url": "https://arxiv.org/abs/2505.03800",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2505.03800",
+      "tldr": "Open-source multimodal deep search agent (30B-A3B) scoring 61.6 avg across benchmarks, +13.8 points over baseline. Provides a reproducible recipe for building search-augmented vision-language models.",
+      "tldr_zh": "开源多模态深度搜索 Agent（30B-A3B），基准平均分 61.6（比基线高 13.8 分），提供可复现的搜索增强视觉语言模型构建方案。",
+      "interest_tag": ""
+    }
+  ],
+  "github_repos": [
+    {
+      "name": "strukto-ai/mirage",
+      "url": "https://github.com/strukto-ai/mirage",
+      "tldr": "A Unified Virtual Filesystem For AI Agents. Gained 993 stars in its first week.",
+      "tldr_zh": "A Unified Virtual Filesystem For AI Agents。首周获得 993 星。",
+      "stars": 993,
+      "language": "TypeScript",
+      "interest_tag": ""
+    },
+    {
+      "name": "TQ-trade-agent/tq-trading-agent",
+      "url": "https://github.com/TQ-trade-agent/tq-trading-agent",
+      "tldr": "🌮 Traidng agent, AI-powered multi-agent stock research & trading strategy orchestration, trading agent - TypeScript, Lan. Gained 258 stars in its first week.",
+      "tldr_zh": "🌮 Traidng agent, AI-powered multi-agent stock research & trading strategy orches。首周获得 258 星。",
+      "stars": 258,
+      "language": "Vue",
+      "interest_tag": ""
+    },
+    {
+      "name": "Ajai53200/DeepSeek-V4-Pro-App",
+      "url": "https://github.com/Ajai53200/DeepSeek-V4-Pro-App",
+      "tldr": "DeepSeek V4 Pro download MoE architecture 1.6T parameters 1M context window reasoning modes Think Max sparse attention c. Gained 210 stars in its first week.",
+      "tldr_zh": "DeepSeek V4 Pro download MoE architecture 1.6T parameters 1M context window reas。首周获得 210 星。",
+      "stars": 210,
+      "language": "C++",
+      "interest_tag": ""
+    },
+    {
+      "name": "TheSashaDev/girl-agent",
+      "url": "https://github.com/TheSashaDev/girl-agent",
+      "tldr": "ИИ-девушка с человеческим поведением: сон, настроение, расписание, память, стадии отношений и конфликты. Userbot mode че. Gained 198 stars in its first week.",
+      "tldr_zh": "ИИ-девушка с человеческим поведением: сон, настроение, расписание, память, стади。首周获得 198 星。",
+      "stars": 198,
+      "language": "TypeScript",
+      "interest_tag": ""
+    },
+    {
+      "name": "darkrishabh/agent-skills-eval",
+      "url": "https://github.com/darkrishabh/agent-skills-eval",
+      "tldr": "A test runner for agentskills.io-style AI agent skills. Gained 192 stars in its first week.",
+      "tldr_zh": "A test runner for agentskills.io-style AI agent skills。首周获得 192 星。",
+      "stars": 192,
+      "language": "TypeScript",
+      "interest_tag": "Benchmark"
+    }
+  ],
+  "hackernews": [
+    {
+      "title": "Telus Uses AI to Alter Call-Agent Accents",
+      "url": "https://letsdatascience.com/news/telus-uses-ai-to-alter-call-agent-accents-a3868f63",
+      "tldr": "Discussion on 'Telus Uses AI to Alter Call-Agent Accents' with 234 points and 210 comments on Hacker News.",
+      "tldr_zh": "关于「Telus Uses AI to Alter Call-Agent Accent」的讨论，获得 234 点赞和 210 条评论。",
+      "points": 234,
+      "num_comments": 210,
+      "interest_tag": ""
+    },
+    {
+      "title": "For thirty years I programmed with Phish on, every day",
+      "url": "https://christophermeiklejohn.com/ai/personal/phish/flow/agents/2026/05/03/rift.html",
+      "tldr": "Discussion on 'For thirty years I programmed with Phish on, every day' with 227 points and 177 comments on Hacker News.",
+      "tldr_zh": "关于「For thirty years I programmed with Phish」的讨论，获得 227 点赞和 177 条评论。",
+      "points": 227,
+      "num_comments": 177,
+      "interest_tag": ""
+    },
+    {
+      "title": "Ask HN: Who wants to be hired? (May 2026)",
+      "url": "https://news.ycombinator.com/item?id=47975570",
+      "tldr": "Discussion on 'Ask HN: Who wants to be hired? (May 2026)' with 151 points and 504 comments on Hacker News.",
+      "tldr_zh": "关于「Ask HN: Who wants to be hired? (May 2026」的讨论，获得 151 点赞和 504 条评论。",
+      "points": 151,
+      "num_comments": 504,
+      "interest_tag": ""
+    },
+    {
+      "title": "Show HN: Airbyte Agents – context for agents across multiple data sources",
+      "url": "https://news.ycombinator.com/item?id=48023496",
+      "tldr": "Discussion on 'Show HN: Airbyte Agents – context for agents across multiple' with 144 points and 45 comments on Hacker News.",
+      "tldr_zh": "关于「Show HN: Airbyte Agents – context for ag」的讨论，获得 144 点赞和 45 条评论。",
+      "points": 144,
+      "num_comments": 45,
+      "interest_tag": ""
+    },
+    {
+      "title": "Show HN: AI CAD Harness",
+      "url": "https://fusion.adam.new/install",
+      "tldr": "Discussion on 'Show HN: AI CAD Harness' with 99 points and 96 comments on Hacker News.",
+      "tldr_zh": "关于「Show HN: AI CAD Harness」的讨论，获得 99 点赞和 96 条评论。",
+      "points": 99,
+      "num_comments": 96,
+      "interest_tag": ""
+    }
+  ]
+}
