@@ -1,0 +1,221 @@
+{
+  "date": "2026-05-09",
+  "generated_at": "2026-05-09T01:03:14.939841Z",
+  "briefing_zh": "今天 AI 研究的焦点集中在**流式视频生成**和**具身智能**两大方向。**Stream-R1** 和 **Stream-T1** 分别从奖励蒸馏和测试时缩放两个角度推进流式视频生成质量，显示视频生成正从离线走向实时流式范式。与此同时，**RLDX-1** 在灵巧操控上取得 97.8% 的 LIBERO 成功率，标志着通用型视觉-语言-动作模型在机器人领域的实用化突破。\n\n在搜索与多模态 Agent 方面，**OpenSearch-VL** 展示了仅用 SFT 训练的 30B 多模态搜索 Agent 即可达到前沿水平，呼应了 alphaxiv 上 OpenSeeker-v2 \"数据质量大于流程复杂度\" 的趋势。开源社区方面，**Mirage** 虚拟文件系统一周收获 1400+ stars，说明 AI Agent 基础设施层的需求正在爆发。\n\nHacker News 上最热话题是 **Telus 用 AI 改变客服口音**引发的伦理讨论（235 分），以及多个 Agent 桌面自动化和版本控制工具的 Show HN，反映开发者对 Agent 工具链的高度关注。",
+  "briefing_en": "Today's AI research spotlight falls on **streaming video generation** and **embodied intelligence**. **Stream-R1** and **Stream-T1** advance streaming video quality from reward distillation and test-time scaling perspectives respectively, signaling a shift from offline to real-time streaming paradigms. Meanwhile, **RLDX-1** achieves 97.8% success on LIBERO for dexterous manipulation, marking a practical breakthrough for unified vision-language-action models in robotics.\n\nIn search and multimodal agents, **OpenSearch-VL** demonstrates that a 30B multimodal search agent trained with SFT alone can reach frontier performance, echoing the \"data quality over pipeline complexity\" trend from OpenSeeker-v2 on alphaxiv. On the open-source front, **Mirage**'s unified virtual filesystem for AI agents gained 1,400+ stars in a week, indicating surging demand for agent infrastructure.\n\nOn Hacker News, the hottest discussion was **Telus using AI to alter call-agent accents** (235 points), alongside multiple Show HN posts for agent desktop automation and version control tools, reflecting strong developer interest in the agent toolchain ecosystem.",
+  "viral_analysis_zh": "**Stream-R1** 最有可能出圈——它同时触及了视频生成和强化学习两个热门话题，且有直观的视觉对比效果适合社交传播。RLDX-1 的机器人演示视频也有很强的传播潜力，但受众面相对窄。",
+  "viral_analysis_en": "**Stream-R1** is most likely to go viral — it sits at the intersection of video generation and RL, two hot topics, with visually compelling before/after comparisons ideal for social sharing. RLDX-1's robot demos also have strong viral potential but appeal to a narrower audience.",
+  "huggingface_papers": [
+    {
+      "title": "Stream-R1: Reliability-Perplexity Aware Reward Distillation for Streaming Video",
+      "url": "https://huggingface.co/papers/2605.03849",
+      "tldr": "Introduces a reward distillation framework for streaming video generation that balances reliability and perplexity. Achieves significant quality improvements over baselines by using a dual-objective reward signal, enabling real-time high-quality video streaming from diffusion models.",
+      "tldr_zh": "提出流式视频生成的奖励蒸馏框架，通过可靠性-困惑度双目标奖励信号实现质量显著提升，使扩散模型能够实时生成高质量流式视频。",
+      "upvotes": 116,
+      "authors": "Bin Wu, Mengqi Huang, Shaojin Wu",
+      "ai_keywords": [
+        "streaming video",
+        "reward distillation",
+        "diffusion models"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "Stream-T1: Test-Time Scaling for Streaming Video Generation",
+      "url": "https://huggingface.co/papers/2605.04461",
+      "tldr": "Applies test-time compute scaling to streaming video generation, allowing models to allocate more computation to difficult frames. Demonstrates that adaptive inference budgets at generation time substantially improve temporal coherence and visual quality in long video streams.",
+      "tldr_zh": "将测试时计算缩放应用于流式视频生成，让模型对困难帧分配更多计算量，证明自适应推理预算能显著提升长视频流的时序一致性和视觉质量。",
+      "upvotes": 97,
+      "authors": "Yijing Tu, Shaojin Wu, Mengqi Huang",
+      "ai_keywords": [
+        "test-time scaling",
+        "streaming video",
+        "adaptive inference"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "RLDX-1 Technical Report",
+      "url": "https://huggingface.co/papers/2605.03269",
+      "tldr": "A unified vision-language-action model for dexterous manipulation achieving 97.8% success on LIBERO benchmark. Handles both humanoid and contact-rich tasks through a single model, representing a major step toward general-purpose robotic manipulation.",
+      "tldr_zh": "统一的视觉-语言-动作模型，在 LIBERO 基准上达到 97.8% 成功率，单一模型即可处理人形和接触丰富的操控任务，是通用机器人操控的重要进展。",
+      "upvotes": 96,
+      "authors": "Dongyoung Kim, Huiwon Jang, Myungkyu Koo",
+      "ai_keywords": [
+        "VLA",
+        "dexterous manipulation",
+        "robotics"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "OpenSearch-VL: An Open Recipe for Frontier Multimodal Search Agents",
+      "url": "https://huggingface.co/papers/2605.05185",
+      "tldr": "Open-source recipe for building frontier multimodal search agents. A 30B-A3B model achieves 61.6 avg score (+13.8 over baselines) using SFT on curated trajectories, proving that data quality beats complex training pipelines for search agent capabilities.",
+      "tldr_zh": "开源的前沿多模态搜索 Agent 构建方案，30B-A3B 模型仅用 SFT 在精选轨迹上训练即达 61.6 分（超基线 13.8），证明数据质量优于复杂训练流程。",
+      "upvotes": 88,
+      "authors": "Shuang Chen, Kaituo Feng, Hangting Chen",
+      "ai_keywords": [
+        "multimodal search",
+        "SFT",
+        "search agent"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "HERMES++: Toward a Unified Driving World Model for 3D Scene Understanding and Generation",
+      "url": "https://huggingface.co/papers/2604.28196",
+      "tldr": "Unified driving world model that combines 3D scene understanding and generation in a single framework. Advances autonomous driving perception by jointly modeling scene geometry and future prediction, enabling more coherent planning-aware representations.",
+      "tldr_zh": "统一的驾驶世界模型，在单一框架中结合 3D 场景理解与生成，通过联合建模场景几何和未来预测，实现更连贯的规划感知表征。",
+      "upvotes": 69,
+      "authors": "Xin Zhou, Dingkang Liang, Xiwu Chen",
+      "ai_keywords": [
+        "world model",
+        "autonomous driving",
+        "3D scene"
+      ],
+      "interest_tag": ""
+    }
+  ],
+  "alphaxiv_papers": [
+    {
+      "title": "On-Policy Distillation: 70% on AIME'24 with Qwen3-8B at 30x Cost Reduction",
+      "arxiv_id": "",
+      "url": "https://arxiv.org/search/?query=on-policy+distillation+qwen3",
+      "alphaxiv_url": "https://www.alphaxiv.org/explore",
+      "tldr": "Achieves 70% on AIME'24 with Qwen3-8B using on-policy distillation, reducing costs by 30x compared to off-policy approaches. Demonstrates that on-policy data collection is far more efficient for knowledge distillation in mathematical reasoning.",
+      "tldr_zh": "使用在策略蒸馏让 Qwen3-8B 在 AIME'24 上达到 70%，成本仅为离策略方法的 1/30，证明在策略数据收集对数学推理知识蒸馏远更高效。",
+      "interest_tag": ""
+    },
+    {
+      "title": "Google DeepMind AI Co-Mathematician: 23/48 on FrontierMath Tier 4",
+      "arxiv_id": "",
+      "url": "https://arxiv.org/search/?query=deepmind+co-mathematician+frontiermath",
+      "alphaxiv_url": "https://www.alphaxiv.org/explore",
+      "tldr": "DeepMind's AI Co-Mathematician solves 23 out of 48 FrontierMath Tier 4 problems, setting a new SOTA. The system assists professional mathematicians on open problems, marking a milestone in AI-assisted mathematical research.",
+      "tldr_zh": "DeepMind 的 AI 协作数学家解决了 FrontierMath Tier 4 的 23/48 道题目（新 SOTA），能协助专业数学家攻克开放问题，标志 AI 辅助数学研究的里程碑。",
+      "interest_tag": ""
+    },
+    {
+      "title": "Model Spec Midtraining (MSM) — Anthropic",
+      "arxiv_id": "",
+      "url": "https://arxiv.org/search/?query=model+spec+midtraining+anthropic",
+      "alphaxiv_url": "https://www.alphaxiv.org/explore",
+      "tldr": "Anthropic's midtraining approach for model specification reduces agentic misalignment out-of-distribution with up to 60x compute efficiency in low-sample alignment scenarios. Provides a scalable path to safer agent behaviors.",
+      "tldr_zh": "Anthropic 的模型规范中训练方法在低样本对齐场景下实现最高 60 倍计算效率提升，减少 Agent 在分布外场景的失对齐，为更安全的 Agent 行为提供可扩展路径。",
+      "interest_tag": ""
+    },
+    {
+      "title": "ARIS: Autonomous ML Research Agent",
+      "arxiv_id": "",
+      "url": "https://arxiv.org/search/?query=ARIS+autonomous+ML+research",
+      "alphaxiv_url": "https://www.alphaxiv.org/explore",
+      "tldr": "An autonomous ML research agent that conducts full research cycles including running 20+ GPU experiments. Improves manuscript quality scores from 5.0 to 7.5/10, demonstrating viable AI-driven scientific research automation.",
+      "tldr_zh": "自主 ML 研究 Agent，能执行完整研究流程包括 20+ GPU 实验，将论文质量评分从 5.0 提升至 7.5/10，展示了 AI 驱动科研自动化的可行性。",
+      "interest_tag": ""
+    },
+    {
+      "title": "ProgramBench: Holistic Software Dev from Compiled Executables",
+      "arxiv_id": "",
+      "url": "https://arxiv.org/search/?query=ProgramBench+software+development+benchmark",
+      "alphaxiv_url": "https://www.alphaxiv.org/explore",
+      "tldr": "New benchmark requiring AI to reconstruct full software from compiled executables and documentation only. Current SOTA models achieve 0.0% full resolution rate, revealing a massive gap in program understanding capabilities.",
+      "tldr_zh": "新基准测试要求 AI 仅从编译后的可执行文件和文档重建完整软件，当前 SOTA 模型完整解决率为 0.0%，揭示程序理解能力的巨大差距。",
+      "interest_tag": "Benchmark"
+    }
+  ],
+  "github_repos": [
+    {
+      "name": "strukto-ai/mirage",
+      "url": "https://github.com/strukto-ai/mirage",
+      "tldr": "A unified virtual filesystem for AI agents that abstracts away storage backends. Provides a consistent file interface regardless of underlying storage, simplifying agent tool development and enabling portable agent workflows across environments.",
+      "tldr_zh": "面向 AI Agent 的统一虚拟文件系统，抽象底层存储后端，提供一致的文件接口，简化 Agent 工具开发并支持跨环境的可移植工作流。",
+      "stars": 1440,
+      "language": "TypeScript",
+      "interest_tag": ""
+    },
+    {
+      "name": "WenyuChiou/awesome-agentic-ai-zh",
+      "url": "https://github.com/WenyuChiou/awesome-agentic-ai-zh",
+      "tldr": "Structured Chinese-language learning roadmap for AI agents, from basics to advanced. Features required readings and exercises at each stage, with trilingual support (Traditional Chinese, Simplified Chinese, English).",
+      "tldr_zh": "AI Agent 中文结构化学习路径，从入门到进阶，每阶段配备必修阅读和练习，支持繁中/简中/英文三语对照。",
+      "stars": 410,
+      "language": "Python",
+      "interest_tag": ""
+    },
+    {
+      "name": "TQ-trade-agent/tq-trading-agent",
+      "url": "https://github.com/TQ-trade-agent/tq-trading-agent",
+      "tldr": "AI-powered multi-agent stock research and trading strategy orchestration platform. Multiple specialized agents collaborate on market analysis, strategy formulation, and trade execution.",
+      "tldr_zh": "AI 驱动的多 Agent 股票研究与交易策略编排平台，多个专业化 Agent 协作完成市场分析、策略制定和交易执行。",
+      "stars": 292,
+      "language": "Vue",
+      "interest_tag": "Agent Swarm"
+    },
+    {
+      "name": "darkrishabh/agent-skills-eval",
+      "url": "https://github.com/darkrishabh/agent-skills-eval",
+      "tldr": "Test runner for evaluating AI agent skills in the agentskills.io format. Provides structured assessment of agent capabilities across defined skill categories with automated scoring.",
+      "tldr_zh": "agentskills.io 格式的 AI Agent 技能评测运行器，提供跨技能类别的结构化评估和自动评分。",
+      "stars": 230,
+      "language": "TypeScript",
+      "interest_tag": "Benchmark"
+    },
+    {
+      "name": "lahfir/agent-desktop",
+      "url": "https://github.com/lahfir/agent-desktop",
+      "tldr": "Native desktop automation CLI for AI agents, enabling programmatic control of desktop applications. Provides mouse, keyboard, and screen reading primitives that agents can use to interact with any GUI application.",
+      "tldr_zh": "面向 AI Agent 的原生桌面自动化 CLI，提供鼠标、键盘和屏幕读取原语，让 Agent 能以编程方式控制任何桌面 GUI 应用。",
+      "stars": 98,
+      "language": "",
+      "interest_tag": "CUA"
+    }
+  ],
+  "hackernews": [
+    {
+      "title": "Telus Uses AI to Alter Call-Agent Accents",
+      "url": "https://letsdatascience.com/news/telus-uses-ai-to-alter-call-agent-accents",
+      "tldr": "Telus deploys AI to modify customer service agents' accents in real-time, raising significant ethical debates about identity, bias, and the implications of voice-altering technology in the workplace.",
+      "tldr_zh": "Telus 部署 AI 实时修改客服人员口音，引发关于身份认同、偏见和职场语音篡改技术伦理的激烈讨论。",
+      "points": 235,
+      "num_comments": 213,
+      "interest_tag": ""
+    },
+    {
+      "title": "For thirty years I programmed with Phish on, every day",
+      "url": "https://christophermeiklejohn.com/ai/personal/phish/flow/agent/2026/05/06/phish.html",
+      "tldr": "A programmer reflects on 30 years of coding with Phish music as a constant companion, exploring how AI agents are changing the flow state and creative process of software development.",
+      "tldr_zh": "一位程序员回顾 30 年伴随 Phish 音乐编程的经历，探讨 AI Agent 如何改变软件开发中的心流状态和创作过程。",
+      "points": 229,
+      "num_comments": 176,
+      "interest_tag": ""
+    },
+    {
+      "title": "Show HN: Airbyte Agents – context for agents across multiple data sources",
+      "url": "https://news.ycombinator.com",
+      "tldr": "Airbyte launches an agent-focused product providing unified context across multiple data sources. Enables AI agents to query and reason over data from various SaaS tools, databases, and APIs through a single interface.",
+      "tldr_zh": "Airbyte 推出面向 Agent 的产品，提供跨多数据源的统一上下文，让 AI Agent 通过单一接口查询和推理来自各种 SaaS、数据库和 API 的数据。",
+      "points": 148,
+      "num_comments": 46,
+      "interest_tag": ""
+    },
+    {
+      "title": "Show HN: Agent-desktop – Native desktop automation CLI for AI agents",
+      "url": "https://github.com/lahfir/agent-desktop",
+      "tldr": "Open-source CLI tool enabling AI agents to automate desktop interactions natively. Supports mouse control, keyboard input, and screen capture for building computer-use agents without browser limitations.",
+      "tldr_zh": "开源 CLI 工具，让 AI Agent 原生自动化桌面交互，支持鼠标控制、键盘输入和屏幕捕获，突破浏览器限制构建计算机使用 Agent。",
+      "points": 98,
+      "num_comments": 43,
+      "interest_tag": "CUA"
+    },
+    {
+      "title": "Show HN: Git for AI Agents",
+      "url": "https://github.com/regent-vcs/re_gent",
+      "tldr": "Version control system designed specifically for AI agents, handling the unique challenges of agent-generated code changes including branching strategies, conflict resolution, and provenance tracking.",
+      "tldr_zh": "专为 AI Agent 设计的版本控制系统，处理 Agent 生成代码的独特挑战，包括分支策略、冲突解决和溯源追踪。",
+      "points": 92,
+      "num_comments": 44,
+      "interest_tag": ""
+    }
+  ]
+}
