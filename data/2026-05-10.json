@@ -1,0 +1,222 @@
+{
+  "date": "2026-05-10",
+  "generated_at": "2026-05-10T09:03:53.304688+08:00",
+  "briefing_zh": "本周 AI Agent 基础设施持续升温。**Skill1** 和 **SkillOS** 两篇论文不约而同地聚焦于 Agent 技能库的自动管理与复用，标志着 Agent 研究正从「一次性问题求解」向「持续学习与自我进化」范式转变。**Skill1** 通过统一的强化学习框架将技能选择、使用和蒸馏三个阶段整合，在 ALFWorld 和 WebShop 上取得了突破性表现；**SkillOS** 则侧重从经验中自动策展可复用技能，让 Agent 在处理流式任务时不断积累能力。\n\n在检索与搜索领域，**OpenSeeker-v2** 和 **OpenSearch-VL** 将搜索增强推向多模态，而 HuggingFace 热榜第一的论文则提出通过直接语料库交互来超越传统语义相似度检索，为 Agentic Search 开辟了新方向。开发者工具方面，GitHub 上 **strukto-ai/mirage** 提出统一虚拟文件系统概念，专为 AI Agent 设计，一周内获得 1600+ star。\n\nHacker News 社区的热点则更偏实用：**re_gent** 试图为 AI Agent 构建版本控制系统，**Airbyte Agents** 解决跨数据源上下文整合问题，**Telus 用 AI 修改客服口音**的新闻则引发了关于 AI 伦理边界的激烈讨论。Google DeepMind 的 **AI Co-Mathematician** 在 FrontierMath Tier 4 上解决了 23/48 的问题，刷新了 AI 数学推理的 SOTA。",
+  "briefing_en": "AI Agent infrastructure continues to heat up this week. **Skill1** and **SkillOS** independently converge on automated skill library management for agents, marking a paradigm shift from one-shot problem solving to continuous learning and self-evolution. **Skill1** unifies skill selection, utilization, and distillation via reinforcement learning, achieving breakthrough results on ALFWorld and WebShop; **SkillOS** focuses on experience-driven curation of reusable skills for streaming tasks.\n\nIn retrieval and search, **OpenSeeker-v2** and **OpenSearch-VL** push search augmentation into the multimodal domain, while the top-voted HuggingFace paper proposes direct corpus interaction to move beyond traditional semantic similarity retrieval, opening new directions for Agentic Search. On the developer tools front, **strukto-ai/mirage** introduces a unified virtual filesystem designed specifically for AI agents, gaining 1,600+ stars within a week on GitHub.\n\nHacker News highlights lean practical: **re_gent** attempts version control for AI agents, **Airbyte Agents** tackles cross-datasource context integration, and **Telus using AI to alter call-agent accents** sparked heated debate on AI ethics. Google DeepMind's **AI Co-Mathematician** solved 23/48 FrontierMath Tier 4 problems, setting a new SOTA in AI mathematical reasoning.",
+  "viral_analysis_zh": "**strukto-ai/mirage**（统一虚拟文件系统）最有可能成为本周爆款——它精准切中了 AI Agent 开发者在文件系统交互上的痛点，名字好记、概念清晰、一句话就能说清楚价值主张。Agent 基础设施赛道正处于风口，类似 \"Git for AI Agents\" 的叙事框架已经被验证有效（re_gent 在 HN 获得 113 分）。",
+  "viral_analysis_en": "**strukto-ai/mirage** (unified virtual filesystem for AI agents) is most likely to go viral this week — it precisely addresses a pain point for AI agent developers around filesystem interaction, with a memorable name, clear concept, and one-sentence value proposition. The agent infrastructure track is at an inflection point, and the \"Git for AI Agents\" narrative frame has already been validated (re_gent scored 113 points on HN).",
+  "huggingface_papers": [
+    {
+      "title": "Beyond Semantic Similarity: Rethinking Retrieval for Agentic Search via Direct Corpus Interaction",
+      "url": "https://huggingface.co/papers/2605.05242",
+      "tldr": "Proposes replacing traditional top-k similarity retrieval with direct corpus interaction, allowing agents to navigate and reason over documents dynamically. Demonstrates significant improvements on complex multi-hop QA tasks where conventional retrieval fails to capture nuanced information needs.",
+      "tldr_zh": "提出用直接语料库交互取代传统 top-k 相似度检索，让 Agent 能动态导航和推理文档。在传统检索无法满足复杂信息需求的多跳问答任务上取得显著提升。",
+      "upvotes": 68,
+      "authors": "Zhuofeng Li, Haoxiang Zhang, Cong Wei",
+      "ai_keywords": [
+        "agentic search",
+        "retrieval",
+        "corpus interaction",
+        "RAG"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "Skill1: Unified Evolution of Skill-Augmented Agents via Reinforcement Learning",
+      "url": "https://huggingface.co/papers/2605.06130",
+      "tldr": "Introduces a unified RL framework that jointly optimizes skill selection, utilization, and distillation for LLM agents. Achieves superior performance on ALFWorld and WebShop by treating the entire skill lifecycle as a single optimization problem rather than separate stages.",
+      "tldr_zh": "提出统一的强化学习框架，联合优化 LLM Agent 的技能选择、使用和蒸馏。将整个技能生命周期视为单一优化问题，在 ALFWorld 和 WebShop 上取得优异表现。",
+      "upvotes": 60,
+      "authors": "Yaorui Shi, Yuxin Chen, Zhengxi Lu",
+      "ai_keywords": [
+        "skill learning",
+        "reinforcement learning",
+        "LLM agents"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "Continuous Latent Diffusion Language Model",
+      "url": "https://huggingface.co/papers/2605.06548",
+      "tldr": "Cola DLM introduces hierarchical latent-space diffusion for language modeling, separating global semantic planning from local text realization. Breaks from autoregressive paradigm while maintaining strong generation quality, with promising reasoning scaling properties.",
+      "tldr_zh": "Cola DLM 引入分层潜空间扩散语言模型，将全局语义规划与局部文本生成分离。突破自回归范式同时保持高质量生成，展现出良好的推理扩展特性。",
+      "upvotes": 54,
+      "authors": "Hongcan Guo, Qinyu Zhao, Yian Zhao",
+      "ai_keywords": [
+        "diffusion models",
+        "language model",
+        "latent space"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "SkillOS: Learning Skill Curation for Self-Evolving Agents",
+      "url": "https://huggingface.co/papers/2605.06614",
+      "tldr": "Proposes an experience-driven RL approach for LLM agents to automatically curate reusable skills from streaming tasks. Agents learn what to remember and how to organize skills, enabling continuous self-improvement without human intervention.",
+      "tldr_zh": "提出经验驱动的强化学习方法，让 LLM Agent 从流式任务中自动策展可复用技能。Agent 学习记住什么以及如何组织技能，实现无需人工干预的持续自我提升。",
+      "upvotes": 29,
+      "authors": "Siru Ouyang, Jun Yan, Yanfei Chen",
+      "ai_keywords": [
+        "skill curation",
+        "self-evolving agents",
+        "continual learning"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "When to Trust Imagination: Adaptive Action Execution for World Action Models",
+      "url": "https://huggingface.co/papers/2605.06222",
+      "tldr": "FFDC-WAM introduces adaptive verification for World Action Models in robotics, deciding when predicted future observations are trustworthy enough to skip real-time verification. Reduces compute for simple tasks while maintaining safety for complex ones.",
+      "tldr_zh": "FFDC-WAM 为机器人世界动作模型引入自适应验证机制，判断预测的未来观察是否可信以跳过实时验证。在简单任务上减少计算量，同时在复杂任务上保持安全性。",
+      "upvotes": 36,
+      "authors": "Rui Wang, Yue Zhang, Jiehong Lin",
+      "ai_keywords": [
+        "world models",
+        "robotics",
+        "adaptive execution"
+      ],
+      "interest_tag": ""
+    }
+  ],
+  "alphaxiv_papers": [
+    {
+      "title": "AI Co-Mathematician: Stateful Agent Workbench for Mathematical Research",
+      "arxiv_id": "",
+      "url": "https://arxiv.org/search/?query=AI+Co-Mathematician",
+      "alphaxiv_url": "https://www.alphaxiv.org/explore",
+      "tldr": "Google DeepMind's stateful agent workbench for collaborative math research solved 23/48 FrontierMath Tier 4 problems, setting a new SOTA. Combines persistent state with iterative reasoning to tackle problems that require sustained mathematical exploration.",
+      "tldr_zh": "Google DeepMind 的有状态 Agent 数学研究工作台解决了 FrontierMath Tier 4 中 23/48 的问题，刷新 SOTA。结合持久状态和迭代推理，攻克需要持续数学探索的难题。",
+      "interest_tag": ""
+    },
+    {
+      "title": "RecursiveMAS: Recursive Multi-Agent Systems with Inference Speedup",
+      "arxiv_id": "",
+      "url": "https://arxiv.org/search/?query=RecursiveMAS",
+      "alphaxiv_url": "https://www.alphaxiv.org/explore",
+      "tldr": "Achieves +20.2% accuracy with 2.4x inference speedup over text-based recursive multi-agent systems. Introduces a more efficient recursive communication protocol that preserves information density while reducing token overhead.",
+      "tldr_zh": "相比基于文本的递归多智能体系统，准确率提升 20.2%，推理速度加快 2.4 倍。引入更高效的递归通信协议，在减少 token 开销的同时保持信息密度。",
+      "interest_tag": "Agent Swarm"
+    },
+    {
+      "title": "ProgramBench: Holistic Software Development Benchmark",
+      "arxiv_id": "",
+      "url": "https://arxiv.org/search/?query=ProgramBench",
+      "alphaxiv_url": "https://www.alphaxiv.org/explore",
+      "tldr": "Current leading LLMs achieve 0.0% full resolution rate on holistic software development from scratch — building complete, working software systems end-to-end. A sobering benchmark that highlights the gap between coding assistance and autonomous software engineering.",
+      "tldr_zh": "当前顶尖 LLM 在从零开始的完整软件开发上全解决率为 0.0%——即端到端构建完整可用的软件系统。这个令人警醒的基准测试揭示了编码辅助与自主软件工程之间的巨大差距。",
+      "interest_tag": "Benchmark"
+    },
+    {
+      "title": "On-Policy Distillation: 30x Cost Reduction for Reasoning Models",
+      "arxiv_id": "",
+      "url": "https://arxiv.org/search/?query=on-policy+distillation+AIME",
+      "alphaxiv_url": "https://www.alphaxiv.org/explore",
+      "tldr": "Achieves 70% on AIME'24 with Qwen3-8B using on-policy distillation at 30x lower cost than off-policy approaches. Demonstrates that letting the student model generate its own training trajectories is dramatically more efficient for reasoning capability transfer.",
+      "tldr_zh": "使用 Qwen3-8B 通过在策略蒸馏在 AIME'24 上达到 70%，成本仅为离策略方法的 1/30。证明让学生模型生成自己的训练轨迹在推理能力迁移上效率显著更高。",
+      "interest_tag": ""
+    },
+    {
+      "title": "MolmoAct2: Open-Source Vision-Language-Action Model",
+      "arxiv_id": "",
+      "url": "https://arxiv.org/search/?query=MolmoAct2",
+      "alphaxiv_url": "https://www.alphaxiv.org/explore",
+      "tldr": "Allen AI and UW's fully open-source VLA achieves 87.1% success on real-world DROID manipulation tasks with 2.42x speedup. Demonstrates that open-source embodied AI can be competitive with closed approaches on challenging real-world robotics benchmarks.",
+      "tldr_zh": "Allen AI 与华盛顿大学的完全开源视觉-语言-动作模型在真实世界 DROID 操控任务上达到 87.1% 成功率，速度提升 2.42 倍。证明开源具身 AI 在挑战性真实机器人基准上可与闭源方案竞争。",
+      "interest_tag": ""
+    }
+  ],
+  "github_repos": [
+    {
+      "name": "strukto-ai/mirage",
+      "url": "https://github.com/strukto-ai/mirage",
+      "tldr": "A unified virtual filesystem designed specifically for AI agents, abstracting away the complexity of interacting with diverse file systems and data sources. Provides a consistent API layer that lets agents read, write, and navigate files regardless of the underlying storage.",
+      "tldr_zh": "专为 AI Agent 设计的统一虚拟文件系统，抽象掉与多样化文件系统和数据源交互的复杂性。提供一致的 API 层，让 Agent 无论底层存储如何都能读写和导航文件。",
+      "stars": 1630,
+      "language": "TypeScript",
+      "interest_tag": ""
+    },
+    {
+      "name": "WenyuChiou/awesome-agentic-ai-zh",
+      "url": "https://github.com/WenyuChiou/awesome-agentic-ai-zh",
+      "tldr": "Comprehensive trilingual (Traditional Chinese/Simplified Chinese/English) learning roadmap for AI agents, from fundamentals to advanced topics. Each stage includes required readings and hands-on exercises, making it one of the most structured Chinese-language agent learning resources.",
+      "tldr_zh": "全面的三语（繁中/简中/英文）AI Agent 学习路线图，从基础到进阶。每个阶段包含必修阅读和实操练习，是目前最结构化的中文 Agent 学习资源之一。",
+      "stars": 536,
+      "language": "Python",
+      "interest_tag": ""
+    },
+    {
+      "name": "TQ-trade-agent/tq-trading-agent",
+      "url": "https://github.com/TQ-trade-agent/tq-trading-agent",
+      "tldr": "AI-powered multi-agent stock research and trading strategy orchestration system. Uses LangChain for agent coordination, combining market analysis, risk assessment, and trade execution in an automated pipeline.",
+      "tldr_zh": "AI 驱动的多智能体股票研究与交易策略编排系统。使用 LangChain 进行 Agent 协调，将市场分析、风险评估和交易执行整合在自动化流水线中。",
+      "stars": 295,
+      "language": "Vue",
+      "interest_tag": "Agent Swarm"
+    },
+    {
+      "name": "alvinunreal/openpets",
+      "url": "https://github.com/alvinunreal/openpets",
+      "tldr": "Desktop pets for AI coding agents — install virtual pets that connect to Claude Code via MCP and display live coding status on your desktop. A creative approach to making AI agent activity visible and engaging during development sessions.",
+      "tldr_zh": "AI 编程 Agent 的桌面宠物——安装虚拟宠物，通过 MCP 连接 Claude Code，在桌面上显示实时编码状态。一种创造性的方式让 AI Agent 活动在开发过程中可见且有趣。",
+      "stars": 158,
+      "language": "TypeScript",
+      "interest_tag": ""
+    },
+    {
+      "name": "OpenSquilla/opensquilla",
+      "url": "https://github.com/OpenSquilla/opensquilla",
+      "tldr": "Token-efficient AI agent framework that achieves higher intelligence density with the same compute budget. Focuses on reducing token waste in agent reasoning chains while maintaining or improving task completion quality.",
+      "tldr_zh": "Token 高效的 AI Agent 框架，在相同计算预算下实现更高的智能密度。专注于减少 Agent 推理链中的 token 浪费，同时保持或提升任务完成质量。",
+      "stars": 157,
+      "language": "Python",
+      "interest_tag": ""
+    }
+  ],
+  "hackernews": [
+    {
+      "title": "Telus Uses AI to Alter Call-Agent Accents",
+      "url": "https://letsdatascience.com/news/telus-uses-ai-to-alter-call-agent-accents-a3868f63",
+      "tldr": "Canadian telecom Telus deploys real-time AI accent modification for call center agents, sparking major debate about AI ethics, cultural identity, and whether solving accent bias by erasing accents is the right approach. 200+ comments reflect deep societal tensions.",
+      "tldr_zh": "加拿大电信公司 Telus 为客服中心部署实时 AI 口音修改技术，引发关于 AI 伦理、文化认同的激烈讨论——通过消除口音来解决口音偏见是否正确？200+ 评论反映了深层社会矛盾。",
+      "points": 235,
+      "num_comments": 213,
+      "interest_tag": ""
+    },
+    {
+      "title": "Show HN: Airbyte Agents – context for agents across multiple data sources",
+      "url": "https://news.ycombinator.com/item?id=airbyte-agents",
+      "tldr": "Airbyte launches an agent-focused product that provides unified context across multiple data sources for AI agents. Addresses a key pain point in enterprise agent deployment: agents need access to scattered data across SaaS tools, databases, and APIs.",
+      "tldr_zh": "Airbyte 推出面向 Agent 的产品，为 AI Agent 提供跨多数据源的统一上下文。解决企业 Agent 部署的关键痛点：Agent 需要访问分散在 SaaS 工具、数据库和 API 中的数据。",
+      "points": 149,
+      "num_comments": 47,
+      "interest_tag": ""
+    },
+    {
+      "title": "Show HN: Git for AI Agents",
+      "url": "https://github.com/regent-vcs/re_gent",
+      "tldr": "re_gent proposes version control designed for AI agent workflows — tracking agent actions, branching decision paths, and enabling rollback of agent operations. Addresses the growing need for auditability and reproducibility in agent-driven development.",
+      "tldr_zh": "re_gent 提出为 AI Agent 工作流设计的版本控制——追踪 Agent 操作、分支决策路径、回滚 Agent 操作。解决 Agent 驱动开发中日益增长的可审计性和可复现性需求。",
+      "points": 113,
+      "num_comments": 64,
+      "interest_tag": ""
+    },
+    {
+      "title": "Show HN: Stage CLI – An easier way of reading your AI generated changes locally",
+      "url": "https://github.com/ReviewStage/stage-cli",
+      "tldr": "CLI tool for reviewing AI-generated code changes locally before committing. Provides a structured diff view optimized for understanding AI agent outputs, making it easier to verify and approve automated code modifications.",
+      "tldr_zh": "用于在提交前本地审查 AI 生成代码变更的 CLI 工具。提供针对 AI Agent 输出优化的结构化 diff 视图，更容易验证和批准自动化代码修改。",
+      "points": 44,
+      "num_comments": 31,
+      "interest_tag": ""
+    },
+    {
+      "title": "Show HN: Adam – An embeddable cross-platform AI agent library",
+      "url": "https://github.com/sqliteai/adam",
+      "tldr": "Embeddable, cross-platform AI agent library built on SQLite. Designed for developers who want to add agent capabilities to existing applications without heavyweight dependencies or cloud service requirements.",
+      "tldr_zh": "基于 SQLite 构建的可嵌入、跨平台 AI Agent 库。为希望在现有应用中添加 Agent 能力而无需重量级依赖或云服务的开发者设计。",
+      "points": 24,
+      "num_comments": 9,
+      "interest_tag": ""
+    }
+  ]
+}
