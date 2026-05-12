@@ -1,0 +1,211 @@
+{
+  "date": "2026-05-12",
+  "generated_at": "2026-05-12T01:03:32.394990Z",
+  "briefing_zh": "今天 AI 研究的焦点集中在**扩散模型训练优化**和**AI Agent 架构**两大方向。**Mean Mode Screaming** 提出均值-方差分裂残差方法，首次实现 1000 层扩散模型的稳定训练，获得 HuggingFace 社区最高关注（102 票），标志着超深扩散网络训练迈入新阶段。**Flow-OPD** 则在流匹配蒸馏上取得突破，展现出\"超越教师\"的涌现能力，4 步生成即达多任务 0.9044 分。\n\nAgent 生态持续升温。GitHub 上 **strukto-ai/mirage** 以近 2000 星的爆发式增长引领本周，其统一虚拟文件系统为 AI Agent 提供了标准化的数据访问层。alphaxiv 热榜上 **SkillOS** 和 **RAO（递归代理优化）** 分别从技能复用和递归委托两个角度推进 Agent 能力边界，后者在上下文受限任务上达到 95% 成功率。\n\nHacker News 上关于 AI 编程代理的讨论趋于务实——排名第一的文章强调 AI 代码代理需要降低维护成本而非单纯追求生成速度，反映出行业从\"AI 能写代码\"向\"AI 写的代码能维护\"的认知转变。多 Agent 代码审查工具 **adamsreview** 和 Agent 版本控制系统 **re_gent** 则代表了工具链层面的创新。",
+  "briefing_en": "Today's AI research landscape centers on **diffusion model training optimization** and **AI Agent architectures**. **Mean Mode Screaming** introduces mean-variance split residuals enabling stable training of 1000-layer diffusion models, earning the highest community attention on HuggingFace (102 upvotes) and marking a new era for ultra-deep diffusion networks. **Flow-OPD** achieves a breakthrough in flow matching distillation with emergent \"teacher-surpassing\" capability at just 4 generation steps.\n\nThe Agent ecosystem continues to heat up. On GitHub, **strukto-ai/mirage** leads the week with nearly 2,000 stars, offering a unified virtual filesystem as a standardized data access layer for AI agents. On alphaxiv, **SkillOS** and **RAO (Recursive Agent Optimization)** push agent capability boundaries from skill reuse and recursive delegation perspectives respectively, with RAO achieving 95% success on context-constrained tasks.\n\nHacker News discussions on AI coding agents are turning pragmatic — the top article emphasizes that AI code agents must reduce maintenance costs rather than just generation speed, reflecting an industry shift from \"AI can write code\" to \"AI-written code must be maintainable.\" Tools like **adamsreview** for multi-agent PR reviews and **re_gent** for agent version control represent toolchain-level innovation.",
+  "viral_analysis_zh": "**strukto-ai/mirage** 最有潜力成为爆款——\"AI Agent 的统一文件系统\"切中了当前 Agent 开发中数据访问碎片化的痛点，概念简洁易传播，一周近 2000 星的增速证明了市场需求。其次是 Mean Mode Screaming，\"1000 层扩散模型\"这个数字本身就具有传播力。",
+  "viral_analysis_en": "**strukto-ai/mirage** has the highest viral potential — \"unified filesystem for AI agents\" addresses the real pain point of fragmented data access in agent development, with a clean concept that's easy to spread. Nearly 2,000 stars in a week validates market demand. Runner-up is Mean Mode Screaming, where the \"1000-layer diffusion model\" number alone carries strong memetic value.",
+  "huggingface_papers": [
+    {
+      "title": "Mean Mode Screaming: Mean--Variance Split Residuals for 1000-Layer Diffusion Transformers",
+      "url": "https://huggingface.co/papers/2605.06169",
+      "tldr": "Introduces mean-variance split residuals that enable stable training of 1000-layer diffusion models. This architectural innovation eliminates gradient pathologies in ultra-deep networks, achieving state-of-the-art generation quality. The method requires no auxiliary losses or special initialization, making deep diffusion training practical for the first time.",
+      "tldr_zh": "提出均值-方差分裂残差方法，首次实现 1000 层扩散模型的稳定训练。该架构创新消除了超深网络中的梯度病理问题，无需辅助损失或特殊初始化即可达到 SOTA 生成质量，使深层扩散训练首次变得可行。",
+      "upvotes": 102,
+      "authors": "Pengqi Lu",
+      "ai_keywords": [
+        "diffusion"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "MACE-Dance: Motion-Appearance Cascaded Experts for Music-Driven Dance Video Generation",
+      "url": "https://huggingface.co/papers/2512.18181",
+      "tldr": "A cascaded expert framework for music-driven dance video generation, decoupling motion and appearance synthesis. Uses separate expert networks for temporal coherence and visual fidelity, achieving significantly better dance-music alignment than prior methods.",
+      "tldr_zh": "提出运动-外观级联专家框架用于音乐驱动的舞蹈视频生成，将运动合成和外观合成解耦。使用独立的专家网络分别保证时序一致性和视觉保真度，在舞蹈-音乐对齐上大幅超越先前方法。",
+      "upvotes": 80,
+      "authors": "Kaixing Yang, Jiashu Zhu, Xulong Tang",
+      "ai_keywords": [],
+      "interest_tag": ""
+    },
+    {
+      "title": "Flow-OPD: On-Policy Distillation for Flow Matching Models",
+      "url": "https://huggingface.co/papers/2605.08063",
+      "tldr": "On-policy distillation method for flow matching models that achieves multi-task score of 0.9044 with emergent teacher-surpassing capability. By training on the student's own generated trajectories rather than teacher's, it avoids distribution mismatch and enables 4-step high-fidelity generation.",
+      "tldr_zh": "流匹配模型的在策略蒸馏方法，多任务得分 0.9044，展现出超越教师模型的涌现能力。通过在学生自身生成的轨迹上训练而非教师轨迹，避免了分布失配，实现 4 步高保真生成。",
+      "upvotes": 76,
+      "authors": "Zhen Fang, Wenxuan Huang, Yu Zeng",
+      "ai_keywords": [
+        "flow-matching"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "HyperEyes: Dual-Grained Efficiency-Aware Reinforcement Learning for Parallel Multimodal Search Agents",
+      "url": "https://huggingface.co/papers/2605.07177",
+      "tldr": "A dual-grained efficiency-aware RL framework for parallel multi-model LLM inference. HyperEyes dynamically allocates compute across multiple models based on task difficulty, reducing total inference cost while maintaining quality through learned routing policies.",
+      "tldr_zh": "面向并行多模型 LLM 推理的双粒度效率感知强化学习框架。HyperEyes 根据任务难度动态分配多模型计算资源，通过学习的路由策略在保持质量的同时降低总推理成本。",
+      "upvotes": 57,
+      "authors": "Guankai Li, Jiabin Chen, Yi Xu",
+      "ai_keywords": [
+        "reinforcement-learning",
+        "agent"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "Listwise Policy Optimization: Group-based RLVR as Target-Projection on the LLM Response Simplex",
+      "url": "https://huggingface.co/papers/2605.06139",
+      "tldr": "Reframes group-based RLVR as target-projection optimization on the LLM response manifold. Listwise Policy Optimization treats candidate responses as a ranked list rather than pairwise comparisons, achieving better alignment with human preferences and more stable training dynamics.",
+      "tldr_zh": "将基于组的 RLVR 重新建模为 LLM 响应流形上的目标投影优化。列表式策略优化将候选响应视为排序列表而非成对比较，实现更好的人类偏好对齐和更稳定的训练动态。",
+      "upvotes": 57,
+      "authors": "Yun Qu, Qi Wang, Yixiu Mao",
+      "ai_keywords": [
+        "reinforcement-learning",
+        "LLM"
+      ],
+      "interest_tag": ""
+    }
+  ],
+  "alphaxiv_papers": [
+    {
+      "title": "SkillOS: Experience-Driven RL for LLM Agents with Auto-Curated Reusable Skills",
+      "arxiv_id": "",
+      "url": "",
+      "alphaxiv_url": "https://www.alphaxiv.org/explore",
+      "tldr": "An experience-driven RL framework that enables LLM agents to automatically curate and reuse skills for continuous self-evolution. Achieves state-of-the-art performance by building a growing library of transferable action sequences from past interactions.",
+      "tldr_zh": "一个经验驱动的强化学习框架，使 LLM 代理能够自动整理和复用技能以实现持续自我进化。通过从过去交互中构建可迁移的动作序列库，达到最先进性能。",
+      "interest_tag": ""
+    },
+    {
+      "title": "RAO: Recursive Agent Optimization for LLM Recursive Delegation",
+      "arxiv_id": "",
+      "url": "",
+      "alphaxiv_url": "https://www.alphaxiv.org/explore",
+      "tldr": "Trains LLMs for recursive task delegation, achieving 95% success on context-constrained tasks. RAO teaches models to break complex problems into subtasks and delegate to child agents, enabling effective multi-level agent hierarchies.",
+      "tldr_zh": "训练 LLM 进行递归任务委托，在上下文受限任务上达到 95% 成功率。RAO 教会模型将复杂问题分解为子任务并委托给子代理，实现有效的多层级代理体系。",
+      "interest_tag": "Agent Swarm"
+    },
+    {
+      "title": "THINC: Code as Primary Reasoning Engine for Competition Mathematics",
+      "arxiv_id": "",
+      "url": "",
+      "alphaxiv_url": "https://www.alphaxiv.org/explore",
+      "tldr": "A 4B parameter model that uses code as its primary reasoning engine, achieving 78.1% average accuracy on competition math and outperforming its 27B teacher by 13.4 percentage points. Demonstrates that code-based reasoning can dramatically amplify smaller models' capabilities.",
+      "tldr_zh": "一个 40 亿参数模型将代码作为主要推理引擎，在竞赛数学上达到 78.1% 平均准确率，超越 270 亿参数教师模型 13.4 个百分点。证明基于代码的推理能大幅增强小模型能力。",
+      "interest_tag": ""
+    },
+    {
+      "title": "AI Co-Mathematician: Agent-Based Mathematical Research Workbench",
+      "arxiv_id": "",
+      "url": "",
+      "alphaxiv_url": "https://www.alphaxiv.org/explore",
+      "tldr": "Google DeepMind's agent-based workbench for mathematical research that solved 23 out of 48 FrontierMath Tier 4 problems. Combines specialized mathematical tools with LLM reasoning in an interactive research environment.",
+      "tldr_zh": "Google DeepMind 的代理式数学研究工作台，解决了 FrontierMath Tier 4 中 48 道题的 23 道。将专业数学工具与 LLM 推理结合在交互式研究环境中。",
+      "interest_tag": ""
+    },
+    {
+      "title": "PAE: Prior-Aligned AutoEncoders with 13x Faster Convergence",
+      "arxiv_id": "",
+      "url": "",
+      "alphaxiv_url": "https://www.alphaxiv.org/explore",
+      "tldr": "Prior-Aligned AutoEncoders from SJTU and Alibaba achieve 13x faster convergence and gFID 1.03 on ImageNet 256×256. By aligning the latent space with diffusion priors during autoencoder training, it dramatically reduces downstream generation training cost.",
+      "tldr_zh": "上海交大与阿里巴巴提出先验对齐自编码器，收敛速度提升 13 倍，ImageNet 256×256 上 gFID 达 1.03。通过在自编码器训练中对齐潜空间与扩散先验，大幅降低下游生成训练成本。",
+      "interest_tag": ""
+    }
+  ],
+  "github_repos": [
+    {
+      "name": "strukto-ai/mirage",
+      "url": "https://github.com/strukto-ai/mirage",
+      "tldr": "A unified virtual filesystem abstraction layer for AI agents, providing standardized file operations across local, cloud, and API-based storage backends. Enables agents to seamlessly read/write data regardless of underlying storage, solving the fragmentation problem in agent data access.",
+      "tldr_zh": "面向 AI Agent 的统一虚拟文件系统抽象层，提供跨本地、云端和 API 存储后端的标准化文件操作。使代理无论底层存储如何都能无缝读写数据，解决了代理数据访问碎片化问题。",
+      "stars": 1939,
+      "language": "TypeScript",
+      "interest_tag": ""
+    },
+    {
+      "name": "darkrishabh/agent-skills-eval",
+      "url": "https://github.com/darkrishabh/agent-skills-eval",
+      "tldr": "A test runner and evaluation framework for AI agent skills, compatible with agentskills.io benchmarks. Provides structured assessment of agent capabilities across coding, reasoning, and tool-use dimensions with reproducible scoring.",
+      "tldr_zh": "AI 代理技能的测试运行器和评估框架，兼容 agentskills.io 基准。提供跨编码、推理和工具使用维度的结构化代理能力评估，支持可复现的评分。",
+      "stars": 425,
+      "language": "TypeScript",
+      "interest_tag": "Benchmark"
+    },
+    {
+      "name": "TQ-trade-agent/tq-trading-agent",
+      "url": "https://github.com/TQ-trade-agent/tq-trading-agent",
+      "tldr": "AI-powered multi-agent stock research and trading strategy orchestration system. Uses specialized agents for market analysis, risk assessment, and trade execution in a coordinated pipeline.",
+      "tldr_zh": "AI 驱动的多代理股票研究与交易策略编排系统。使用专门的代理进行市场分析、风险评估和交易执行的协调管线。",
+      "stars": 295,
+      "language": "Vue",
+      "interest_tag": "Agent Swarm"
+    },
+    {
+      "name": "ChristianJR19/GoblinOS",
+      "url": "https://github.com/ChristianJR19/GoblinOS",
+      "tldr": "A personality layer for Hermes Agent that replaces the default identity with a customizable character, demonstrating extensible agent persona design patterns for open-source AI assistants.",
+      "tldr_zh": "为 Hermes Agent 设计的个性层，用可定制角色替换默认身份，展示了开源 AI 助手的可扩展代理人格设计模式。",
+      "stars": 242,
+      "language": "Python",
+      "interest_tag": ""
+    },
+    {
+      "name": "opensquilla/opensquilla",
+      "url": "https://github.com/opensquilla/opensquilla",
+      "tldr": "Token-efficient AI agent architecture achieving higher intelligence density with the same compute budget. Uses novel context compression and selective attention to maximize reasoning capability per token.",
+      "tldr_zh": "Token 高效的 AI Agent 架构，在相同计算预算下实现更高智能密度。使用新颖的上下文压缩和选择性注意力最大化每 token 推理能力。",
+      "stars": 221,
+      "language": "Python",
+      "interest_tag": ""
+    }
+  ],
+  "hackernews": [
+    {
+      "title": "An AI coding agent, used to write code, needs to reduce your maintenance costs",
+      "url": "https://www.jamesshore.com/v2/blog/2026/you-need-ai-that-reduces-your-maintenance-costs",
+      "tldr": "Argues that AI coding agents must prioritize reducing long-term maintenance costs over raw code generation speed. Proposes evaluation criteria focused on code readability, test coverage, and architectural consistency rather than just functionality.",
+      "tldr_zh": "主张 AI 编码代理必须优先降低长期维护成本而非单纯追求代码生成速度。提出以代码可读性、测试覆盖率和架构一致性为核心的评估标准。",
+      "points": 347,
+      "num_comments": 101,
+      "interest_tag": ""
+    },
+    {
+      "title": "Telus Uses AI to Alter Call-Agent Accents",
+      "url": "https://letsdatascience.com/news/telus-uses-ai-to-alter-call-agent-accents-a3868f63",
+      "tldr": "Telus deploys AI-powered accent modification for call center agents, raising debates about cultural identity, worker autonomy, and the ethics of voice transformation technology in customer service.",
+      "tldr_zh": "Telus 为呼叫中心代理部署 AI 口音修改技术，引发关于文化认同、工作者自主权和客服语音转换技术伦理的讨论。",
+      "points": 235,
+      "num_comments": 213,
+      "interest_tag": ""
+    },
+    {
+      "title": "Show HN: Git for AI Agents",
+      "url": "https://github.com/regent-vcs/re_gent",
+      "tldr": "re_gent implements version control specifically designed for AI agent workflows — tracking agent decisions, rollbacks, and branching execution paths. Addresses the reproducibility challenge in autonomous agent systems.",
+      "tldr_zh": "re_gent 实现专为 AI Agent 工作流设计的版本控制——追踪代理决策、回滚和分支执行路径。解决自主代理系统中的可复现性挑战。",
+      "points": 121,
+      "num_comments": 67,
+      "interest_tag": ""
+    },
+    {
+      "title": "Show HN: adamsreview – better multi-agent PR reviews for Claude Code",
+      "url": "https://github.com/adamjgmiller/adamsreview",
+      "tldr": "Multi-agent PR review tool for Claude Code that coordinates multiple AI reviewers for more thorough code analysis. Each agent specializes in different aspects (security, performance, style) for comprehensive reviews.",
+      "tldr_zh": "面向 Claude Code 的多代理 PR 审查工具，协调多个 AI 审查者进行更全面的代码分析。每个代理专注于不同方面（安全、性能、风格）以实现综合审查。",
+      "points": 73,
+      "num_comments": 45,
+      "interest_tag": "Agent Swarm"
+    },
+    {
+      "title": "Show HN: Stage CLI – An easier way of reading your AI generated changes locally",
+      "url": "https://github.com/ReviewStage/stage-cli",
+      "tldr": "A CLI tool for reviewing AI-generated code changes locally before committing. Provides a structured diff view with inline annotations to help developers understand and validate agent-produced modifications.",
+      "tldr_zh": "用于在提交前本地审查 AI 生成代码变更的 CLI 工具。提供带内联注释的结构化差异视图，帮助开发者理解和验证代理产生的修改。",
+      "points": 46,
+      "num_comments": 32,
+      "interest_tag": ""
+    }
+  ]
+}
