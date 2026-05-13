@@ -1,0 +1,226 @@
+{
+  "date": "2026-05-13",
+  "generated_at": "2026-05-13T01:03:23.921124+00:00",
+  "briefing_zh": "今天 AI 研究的焦点集中在**多智能体协作**和**移动端智能体**两大方向。**TMAS** 提出通过多智能体协同来扩展测试时计算，用结构化的 agent 分工取代单模型的暴力推理，这是 test-time compute 领域从\"量变\"到\"质变\"的信号。与此同时，**X-OmniClaw** 发布了统一的 Android 移动端 agent 技术报告，将感知、记忆和动作整合到单一架构中，直接对标 OpenClaw 等竞品。\n\n在基础模型层面，**Qwen-Image-2.0** 发布了统一图像生成与编辑的基础模型技术报告，支持超长文本渲染、多语言排版和原生 2K+ 分辨率真实感生成，在 LMArena 上获得 1168 ELO。这是阿里在多模态生成领域的重要布局。\n\n安全与评测方面，**FORTIS** 首次系统性地评测了 agent 技能层的过度特权问题——当 agent 拥有的权限超过任务所需时会发生什么？这是一个被严重低估的研究方向。**NanoResearch** 则探索了个性化研究自动化，通过共同演化技能、记忆和策略来适应不同研究者的偏好和资源配置。",
+  "briefing_en": "Today's AI research spotlights **multi-agent collaboration** and **mobile agents**. **TMAS** proposes scaling test-time compute through multi-agent synergy rather than brute-force single-model reasoning, marking a shift from quantity to quality in inference-time scaling. Meanwhile, **X-OmniClaw** releases a unified Android mobile agent that integrates perception, memory, and action into a single architecture, directly competing with OpenClaw.\n\nOn the foundation model front, **Qwen-Image-2.0** drops a technical report for a unified image generation and editing model supporting ultra-long text rendering, multilingual typography, and native 2K+ photorealism, scoring 1168 ELO on LMArena. This is Alibaba's major play in multimodal generation.\n\nIn safety and evaluation, **FORTIS** is the first systematic benchmark for over-privilege in agent skills — what happens when agents have more permissions than needed? An underexplored but critical direction. **NanoResearch** explores personalized research automation by co-evolving skills, memory, and policy to adapt to individual researcher preferences.",
+  "viral_analysis_zh": "**Qwen-Image-2.0** 最可能出圈——大厂技术报告自带流量，且统一生成+编辑的框架解决了用户真实痛点（不想在多个工具间切换），2K+分辨率和文字渲染能力直接对标 Midjourney/DALL-E。**FORTIS** 的\"agent 过度特权\"概念新颖且易传播，安全叙事在当前环境下天然吸引眼球。",
+  "viral_analysis_en": "**Qwen-Image-2.0** is most likely to go viral — big-company technical reports have built-in traffic, and the unified generation+editing framework solves real user pain points. 2K+ resolution and text rendering directly compete with Midjourney/DALL-E. **FORTIS** has a novel, shareable concept — \"agent over-privilege\" — and security narratives naturally attract attention in the current climate.",
+  "huggingface_papers": [
+    {
+      "title": "TMAS: Scaling Test-Time Compute via Multi-Agent Synergy",
+      "arxiv_id": "2605.10344",
+      "url": "https://arxiv.org/abs/2605.10344",
+      "tldr": "TMAS replaces brute-force single-model test-time scaling with structured multi-agent collaboration. Multiple specialized agents handle different aspects of reasoning (generation, refinement, verification) in parallel, achieving better scaling curves than simply throwing more compute at one model.",
+      "tldr_zh": "TMAS 用结构化的多智能体协作取代单模型暴力推理的测试时扩展方式。多个专门化 agent 并行处理推理的不同阶段（生成、优化、验证），在 scaling curve 上优于单纯堆叠计算量的方法。",
+      "upvotes": 0,
+      "authors": "George Wu, Nan Jing, Qing Yi, Chuan Hao, Ming Yang",
+      "ai_keywords": [
+        "test-time compute",
+        "multi-agent",
+        "reasoning"
+      ],
+      "interest_tag": "Agent Swarm"
+    },
+    {
+      "title": "X-OmniClaw Technical Report: A Unified Mobile Agent for Multimodal Understanding and Interaction",
+      "arxiv_id": "2605.05765",
+      "url": "https://arxiv.org/abs/2605.05765",
+      "tldr": "X-OmniClaw is a unified Android mobile agent integrating perception, memory, and action in one architecture. It handles complex multimodal interactions on mobile devices, supporting GUI understanding and autonomous task completion in the Android ecosystem.",
+      "tldr_zh": "X-OmniClaw 是统一的 Android 移动端 agent，将感知、记忆和动作整合到单一架构中。支持复杂的多模态交互，具备 GUI 理解和自主任务完成能力，在 Android 生态中运行。",
+      "upvotes": 0,
+      "authors": "Xiaoming Ren, Ru Zhen, Chao Li, Yang Song, Qiuxia Hou",
+      "ai_keywords": [
+        "mobile agent",
+        "Android",
+        "multimodal"
+      ],
+      "interest_tag": "CUA"
+    },
+    {
+      "title": "Qwen-Image-2.0 Technical Report",
+      "arxiv_id": "2605.10730",
+      "url": "https://arxiv.org/abs/2605.10730",
+      "tldr": "Qwen-Image-2.0 unifies high-fidelity image generation and precise editing in a single framework. It achieves state-of-the-art in ultra-long text rendering, multilingual typography, and native 2K+ photorealism, scoring 1168 ELO on LMArena.",
+      "tldr_zh": "Qwen-Image-2.0 在单一框架中统一了高保真图像生成和精确编辑。在超长文本渲染、多语言排版和原生 2K+ 真实感方面达到 SOTA，LMArena ELO 1168 分。",
+      "upvotes": 0,
+      "authors": "Bing Zhao, Chenfei Wu, Deqing Li, Hao Meng, Jiahao Li",
+      "ai_keywords": [
+        "image generation",
+        "image editing",
+        "multimodal"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "FORTIS: Benchmarking Over-Privilege in Agent Skills",
+      "arxiv_id": "2605.09163",
+      "url": "https://arxiv.org/abs/2605.09163",
+      "tldr": "FORTIS is the first benchmark evaluating over-privilege in agent skill layers — whether agents request more permissions than tasks require. It treats the skill layer as a privilege boundary and systematically tests if models respect the principle of least privilege.",
+      "tldr_zh": "FORTIS 首次评测 agent 技能层的过度特权问题——agent 是否会请求超出任务所需的权限。将技能层视为权限边界，系统性测试模型是否遵循最小特权原则。",
+      "upvotes": 0,
+      "authors": "Shawn Li, Chenxiao Yu, Han Wang, Wei Yang, Ryan Rossi",
+      "ai_keywords": [
+        "agent security",
+        "benchmark",
+        "privilege"
+      ],
+      "interest_tag": "Benchmark"
+    },
+    {
+      "title": "NanoResearch: Co-Evolving Skills, Memory, and Policy for Personalized Research Automation",
+      "arxiv_id": "2605.10813",
+      "url": "https://arxiv.org/abs/2605.10813",
+      "tldr": "NanoResearch automates the full research pipeline while adapting to individual researchers' preferences, resources, and output formats. It co-evolves skills, memory, and policy rather than producing one-size-fits-all outputs, addressing the personalization gap in research agents.",
+      "tldr_zh": "NanoResearch 在自动化完整研究流程的同时适应个体研究者的偏好、资源和输出格式。通过共同演化技能、记忆和策略，解决了研究 agent 的个性化空白。",
+      "upvotes": 0,
+      "authors": "Jinhang Xu, Qiyuan Zhu, Yujun Wu, Zirui Wang, Dongxu Zhang",
+      "ai_keywords": [
+        "research automation",
+        "personalization",
+        "memory"
+      ],
+      "interest_tag": "Memory"
+    }
+  ],
+  "alphaxiv_papers": [
+    {
+      "title": "Continuous Latent Diffusion Language Model",
+      "arxiv_id": "2605.06548",
+      "url": "https://arxiv.org/abs/2605.06548",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2605.06548",
+      "tldr": "Cola DLM is a hierarchical latent-space diffusion model that separates global semantic planning from local text generation. It shows strong scaling on reasoning tasks and provides a framework for unified multimodal generation. 2595 views and 160 likes on alphaxiv.",
+      "tldr_zh": "Cola DLM 是层次化潜空间扩散模型，将全局语义规划与局部文本生成分离。在推理任务上展现强劲的 scaling 性能，为统一多模态生成提供框架。alphaxiv 上 2595 阅读、160 赞。",
+      "interest_tag": ""
+    },
+    {
+      "title": "ELF: Embedded Language Flows",
+      "arxiv_id": "2605.10938",
+      "url": "https://arxiv.org/abs/2605.10938",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2605.10938",
+      "tldr": "ELF establishes a continuous diffusion language model using Flow Matching, achieving competitive generative quality with ~10x fewer training tokens and fewer inference steps than existing baselines. A promising efficiency breakthrough for diffusion-based text generation.",
+      "tldr_zh": "ELF 使用 Flow Matching 建立连续扩散语言模型，以约 10 倍更少的训练 token 和更少的推理步骤达到竞争性生成质量。扩散文本生成的效率突破。",
+      "interest_tag": ""
+    },
+    {
+      "title": "Rubric-based On-policy Distillation",
+      "arxiv_id": "2605.07396",
+      "url": "https://arxiv.org/abs/2605.07396",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2605.07396",
+      "tldr": "ROPD distills from black-box LLMs using structured semantic rubrics instead of internal logits. Achieves 10x sample efficiency and robust cross-architecture generalization on complex reasoning tasks.",
+      "tldr_zh": "ROPD 使用结构化语义评分标准从黑盒 LLM 蒸馏，无需内部 logits。在复杂推理任务上实现 10 倍样本效率和跨架构泛化。",
+      "interest_tag": ""
+    },
+    {
+      "title": "Qwen-Image-2.0 Technical Report",
+      "arxiv_id": "2605.10730",
+      "url": "https://arxiv.org/abs/2605.10730",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2605.10730",
+      "tldr": "Alibaba's unified image generation and editing model with 2K+ photorealism, ultra-long text rendering, and multilingual typography. ELO 1168 on LMArena. A comprehensive foundation model for visual content creation.",
+      "tldr_zh": "阿里巴巴统一图像生成与编辑模型，2K+ 真实感、超长文本渲染、多语言排版。LMArena ELO 1168。视觉内容创建的全能基础模型。",
+      "interest_tag": ""
+    },
+    {
+      "title": "Flow-OPD: On-Policy Distillation for Flow Matching Models",
+      "arxiv_id": "2605.08063",
+      "url": "https://arxiv.org/abs/2605.08063",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2605.08063",
+      "tldr": "Flow-OPD introduces on-policy distillation specifically designed for flow matching models, addressing the distribution mismatch problem in standard distillation. Improves efficiency of flow-based generative models.",
+      "tldr_zh": "Flow-OPD 为 flow matching 模型专门设计在策略蒸馏方法，解决标准蒸馏中的分布不匹配问题，提升 flow 生成模型效率。",
+      "interest_tag": ""
+    }
+  ],
+  "github_repos": [
+    {
+      "name": "yaassin12/DeepSeek-V4-Pro-App",
+      "url": "https://github.com/yaassin12/DeepSeek-V4-Pro-App",
+      "tldr": "Desktop app wrapping DeepSeek V4 Pro with 1.6T MoE architecture, 1M token context window, and Engram memory. Features a pro coding agent and Think Mode for enhanced reasoning.",
+      "tldr_zh": "封装 DeepSeek V4 Pro 的桌面应用，1.6T MoE 架构、100 万 token 上下文窗口、Engram 记忆。包含专业编程 agent 和增强推理的 Think Mode。",
+      "stars": 198,
+      "language": "C++",
+      "interest_tag": ""
+    },
+    {
+      "name": "cosmicstack-labs/mercury-agent-skills",
+      "url": "https://github.com/cosmicstack-labs/mercury-agent-skills",
+      "tldr": "Curated registry of reusable agent skills for Mercury Agent, Open Claw, and Hermes Agent — designed for real developer workflows with persistent memory and token efficiency.",
+      "tldr_zh": "Mercury Agent、Open Claw 和 Hermes Agent 的可复用技能注册表，面向真实开发者工作流，支持持久记忆和 token 效率优化。",
+      "stars": 102,
+      "language": "Shell",
+      "interest_tag": ""
+    },
+    {
+      "name": "stormzhang/token-tracker",
+      "url": "https://github.com/stormzhang/token-tracker",
+      "tldr": "CLI dashboard tracking token usage across local AI agents (Claude Code, Codex) with cost analysis, rate limit monitoring, and session tracking. Solves the 'how much am I spending' problem for AI-native developers.",
+      "tldr_zh": "CLI 仪表盘追踪本地 AI agent（Claude Code、Codex）的 token 用量，包含成本分析、速率限制监控和会话追踪。解决 AI 原生开发者的'我花了多少钱'问题。",
+      "stars": 81,
+      "language": "Python",
+      "interest_tag": ""
+    },
+    {
+      "name": "TehreemArbab/JazzCashMCP",
+      "url": "https://github.com/TehreemArbab/JazzCashMCP",
+      "tldr": "Open-source MCP server for JazzCash (Pakistan's largest mobile-money platform). Enables AI agents to interact with payment APIs via the Model Context Protocol standard.",
+      "tldr_zh": "JazzCash（巴基斯坦最大移动支付平台）的开源 MCP 服务器。让 AI agent 通过 Model Context Protocol 标准与支付 API 交互。",
+      "stars": 53,
+      "language": "TypeScript",
+      "interest_tag": ""
+    },
+    {
+      "name": "secureagentics/Adrian",
+      "url": "https://github.com/secureagentics/Adrian",
+      "tldr": "Open-source runtime security monitoring and control for AI agents. Provides observability and guardrails for agent execution in production environments.",
+      "tldr_zh": "AI agent 的开源运行时安全监控与控制。为生产环境中的 agent 执行提供可观测性和防护栏。",
+      "stars": 35,
+      "language": "Python",
+      "interest_tag": ""
+    }
+  ],
+  "hackernews": [
+    {
+      "title": "An AI coding agent, used to write code, needs to reduce your maintenance costs",
+      "url": "https://www.jamesshore.com/v2/blog/2026/you-need-ai-that-reduces-your-maintenance-costs",
+      "tldr": "James Shore argues that AI coding agents should be evaluated on maintenance cost reduction, not just code generation speed. The real value is in producing code that's cheaper to maintain long-term, not in writing more code faster.",
+      "tldr_zh": "James Shore 认为 AI 编程 agent 应以降低维护成本而非代码生成速度来评估。真正的价值在于生成长期维护成本更低的代码，而非更快地写更多代码。",
+      "points": 366,
+      "num_comments": 106,
+      "interest_tag": ""
+    },
+    {
+      "title": "Show HN: Git for AI Agents",
+      "url": "https://github.com/regent-vcs/re_gent",
+      "tldr": "Re_gent is a version control system designed specifically for AI agents — tracking agent state, decisions, and artifacts rather than source code. A new infrastructure primitive for the agent era.",
+      "tldr_zh": "Re_gent 是专为 AI agent 设计的版本控制系统——追踪 agent 状态、决策和产物，而非源代码。agent 时代的新基础设施原语。",
+      "points": 123,
+      "num_comments": 67,
+      "interest_tag": ""
+    },
+    {
+      "title": "Show HN: adamsreview – better multi-agent PR reviews for Claude Code",
+      "url": "https://github.com/adamjgmiller/adamsreview",
+      "tldr": "Multi-agent PR review tool for Claude Code that uses multiple specialized agents for different review aspects (security, performance, style). Shows the emerging pattern of agent-orchestrated code review.",
+      "tldr_zh": "Claude Code 的多 agent PR 审查工具，用多个专门化 agent 分别审查不同方面（安全、性能、风格）。展示了 agent 编排代码审查的新兴模式。",
+      "points": 81,
+      "num_comments": 54,
+      "interest_tag": "Agent Swarm"
+    },
+    {
+      "title": "Show HN: Statewright – Visual state machines that make AI agents reliable",
+      "url": "https://github.com/statewright/statewright",
+      "tldr": "Statewright uses visual state machines to constrain AI agent behavior, making them more predictable and debuggable. Addresses the reliability problem by giving agents explicit state transition rules.",
+      "tldr_zh": "Statewright 使用可视化状态机约束 AI agent 行为，使其更可预测和可调试。通过给 agent 显式的状态转换规则解决可靠性问题。",
+      "points": 68,
+      "num_comments": 24,
+      "interest_tag": ""
+    },
+    {
+      "title": "Show HN: Agentic interface for mainframes and COBOL",
+      "url": "https://www.hypercubic.ai/hopper",
+      "tldr": "An AI agent interface for legacy mainframe systems and COBOL code. Bridges the gap between modern AI tools and decades-old enterprise infrastructure that still runs critical systems.",
+      "tldr_zh": "大型机和 COBOL 代码的 AI agent 接口。在现代 AI 工具和运行关键系统的几十年旧企业基础设施之间架起桥梁。",
+      "points": 52,
+      "num_comments": 30,
+      "interest_tag": ""
+    }
+  ]
+}
