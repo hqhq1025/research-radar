@@ -1,0 +1,227 @@
+{
+  "date": "2026-05-14",
+  "generated_at": "2026-05-14T01:16:22.445741+00:00",
+  "briefing_zh": "今天 AI 研究领域最引人注目的趋势是隐私保护与个性化记忆管理的交叉。**MemPrivacy** 以 125 票高居 HuggingFace 榜首，提出了边缘-云协同架构下的隐私保护个性化记忆方案，表明社区对 agent 记忆系统的关注正从\"能不能记住\"转向\"如何安全地记住\"。与此同时，**δ-mem** 提出了一种针对冻结 LLM 的高效在线记忆机制，通过低秩注意力修正实现即插即用的长期记忆扩展，在 Qwen3-4B 上提升了近 5 个百分点。\n\n多模态统一架构继续升温。**SenseNova-U1** 提出 NEO-unify 架构，直接处理像素与文字，在视觉文本生成上达到 0.940 的词准确率。**AlphaGRPO** 则将自反思能力引入多模态生成模型，通过分解式可验证奖励解锁自我改进能力。这两项工作共同推动了\"理解+生成\"统一模型的前沿。\n\n开源生态方面，GitHub 上 **token-tracker**（148 星）瞄准了 AI agent 时代的痛点：跨多个本地 agent 的 token 用量追踪与成本分析。Hacker News 上最热讨论聚焦于 AI 编程 agent 的实际价值：James Shore 的文章获得 372 分，引发了关于 AI 编码工具是否真正减少技术债的深度讨论。**Statewright** 用可视化状态机让 AI agent 更可靠，**adamsreview** 则为 Claude Code 带来多 agent PR 审查能力。",
+  "briefing_en": "Today's most striking trend is the intersection of **privacy-preserving personalization and memory management**. **MemPrivacy** topped HuggingFace with 125 upvotes, proposing an edge-cloud architecture for privacy-preserving personalized memory in agents, signaling the community's shift from 'can agents remember' to 'can they remember safely.' Meanwhile, **δ-mem** introduces efficient online memory for frozen LLMs via low-rank attention corrections, achieving +4.87pp improvement on Qwen3-4B.\n\nUnified multimodal architectures continue to heat up. **SenseNova-U1** proposes the NEO-unify architecture for direct pixel-and-word processing, hitting 0.940 word accuracy on visual text generation. **AlphaGRPO** unlocks self-reflective multimodal generation through decompositional verifiable rewards. Together, these push the frontier of unified understanding+generation models.\n\nIn the open-source ecosystem, **token-tracker** (148 stars on GitHub) addresses a growing pain point — tracking token usage across local AI agents like Claude Code and Codex. On Hacker News, the hottest discussion centers on James Shore's article arguing AI coding agents must reduce maintenance costs (372 points). **Statewright** brings visual state machines to make AI agents reliable, while **adamsreview** enables multi-agent PR reviews for Claude Code.",
+  "viral_analysis_zh": "**MemPrivacy** 最有潜力成为爆款——隐私问题是 AI agent 大规模落地的最大障碍之一，而这篇论文同时击中了\"agent 记忆\"和\"隐私保护\"两个热点。此外，James Shore 关于 AI 编码 agent 需要降低维护成本的文章已经在 HN 上爆发（372 分），因为它触及了每个使用 AI 编码工具的开发者的痛点。",
+  "viral_analysis_en": "**MemPrivacy** has the highest viral potential — privacy is one of the biggest barriers to AI agent adoption at scale, and this paper hits both the 'agent memory' and 'privacy-preserving' hot buttons simultaneously. James Shore's article on AI coding agents needing to reduce maintenance costs has already gone viral on HN (372 points) because it touches a nerve for every developer using AI coding tools.",
+  "huggingface_papers": [
+    {
+      "title": "MemPrivacy: Privacy-Preserving Personalized Memory Management for Edge-Cloud Agents",
+      "url": "https://huggingface.co/papers/2605.09530",
+      "tldr": "Proposes an edge-cloud collaborative architecture for privacy-preserving personalized memory in AI agents. Sensitive data stays on-device while cloud handles complex reasoning, achieving strong personalization without compromising user privacy. Introduces a novel memory partitioning protocol.",
+      "tldr_zh": "提出边缘-云协同架构，实现 AI agent 的隐私保护个性化记忆管理。敏感数据留在设备端，云端负责复杂推理，在不泄露用户隐私的前提下实现强个性化能力。引入新颖的记忆分区协议。",
+      "upvotes": 125,
+      "authors": "Yining Chen, Jihao Zhao, Bo Tang",
+      "ai_keywords": [
+        "privacy",
+        "memory management",
+        "edge-cloud",
+        "personalization",
+        "agent"
+      ],
+      "interest_tag": "Memory"
+    },
+    {
+      "title": "SenseNova-U1: Unifying Multimodal Understanding and Generation with NEO-unify Architecture",
+      "url": "https://huggingface.co/papers/2605.12500",
+      "tldr": "Introduces NEO-unify architecture that directly processes pixels and words in a single model, achieving 0.940 word accuracy on CVTG-2K. Unifies multimodal understanding and generation without separate encoders/decoders.",
+      "tldr_zh": "提出 NEO-unify 架构，在单一模型中直接处理像素和文字，在 CVTG-2K 基准上达到 0.940 词准确率。无需独立编码器/解码器即可统一多模态理解与生成。",
+      "upvotes": 110,
+      "authors": "Haiwen Diao, Penghao Wu, Hanming Deng",
+      "ai_keywords": [
+        "multimodal",
+        "unified model",
+        "vision-language",
+        "image generation"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "δ-mem: Efficient Online Memory for Large Language Models",
+      "url": "https://huggingface.co/papers/2605.12357",
+      "tldr": "Introduces an online memory module for frozen LLMs using low-rank attention corrections, enabling plug-and-play long-term memory without fine-tuning. Achieves +4.87pp on Qwen3-4B (51.66% avg on memory benchmarks).",
+      "tldr_zh": "为冻结的 LLM 引入在线记忆模块，通过低秩注意力修正实现即插即用的长期记忆扩展，无需微调。在 Qwen3-4B 上提升 4.87 个百分点。",
+      "upvotes": 87,
+      "authors": "Jingdi Lei, Di Zhang, Junxian Li",
+      "ai_keywords": [
+        "memory",
+        "LLM",
+        "low-rank",
+        "online learning"
+      ],
+      "interest_tag": "Memory"
+    },
+    {
+      "title": "RubricEM: Meta-RL with Rubric-guided Policy Decomposition beyond Verifiable Rewards",
+      "url": "https://huggingface.co/papers/2605.10899",
+      "tldr": "Introduces rubric-guided policy decomposition for meta-RL, enabling agents to learn from structured evaluation criteria rather than simple scalar rewards. Improves generalization on multi-step reasoning.",
+      "tldr_zh": "提出基于评分准则引导的策略分解元强化学习方法，使 agent 能从结构化评估标准而非简单标量奖励中学习，提升多步推理的泛化能力。",
+      "upvotes": 65,
+      "authors": "Gaotang Li, Bhavana Dalvi Mishra, Zifeng Wang",
+      "ai_keywords": [
+        "meta-RL",
+        "rubric",
+        "policy decomposition",
+        "reinforcement learning"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "World Action Models: The Next Frontier in Embodied AI",
+      "url": "https://huggingface.co/papers/2605.12090",
+      "tldr": "Comprehensive survey unifying predictive physical understanding with action generation in embodied AI. Provides a taxonomy of World Action Models (WAMs), analyzes the data ecosystem, and establishes evaluation protocols.",
+      "tldr_zh": "全面综述将具身 AI 中的物理预测理解与动作生成统一起来。提供世界动作模型的分类体系，分析数据生态，建立评估协议。",
+      "upvotes": 47,
+      "authors": "Siyin Wang, Junhao Shi, Zhaoyang Fu",
+      "ai_keywords": [
+        "world models",
+        "embodied AI",
+        "survey",
+        "action generation"
+      ],
+      "interest_tag": ""
+    }
+  ],
+  "alphaxiv_papers": [
+    {
+      "title": "ELF: Embedded Language Flows",
+      "arxiv_id": "2605.10938",
+      "url": "https://arxiv.org/abs/2605.10938",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2605.10938",
+      "tldr": "A continuous diffusion language model using Flow Matching that requires ~10x fewer training tokens than autoregressive baselines. Competitive on translation and summarization, representing a fundamentally different approach to language modeling.",
+      "tldr_zh": "基于 Flow Matching 的连续扩散语言模型，所需训练 token 量仅为自回归基线的约 1/10。在翻译和摘要任务上具有竞争力，代表了根本不同的语言建模方法。",
+      "interest_tag": ""
+    },
+    {
+      "title": "Qwen-Image-2.0 Technical Report",
+      "arxiv_id": "2605.10730",
+      "url": "https://arxiv.org/abs/2605.10730",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2605.10730",
+      "tldr": "Unified image generation and editing model achieving ELO 1168 on LMArena with native 2K+ resolution support. Features state-of-the-art VAE reconstruction.",
+      "tldr_zh": "统一图像生成与编辑模型，在 LMArena 上达到 ELO 1168，原生支持 2K+ 分辨率。具备最先进的 VAE 重建能力。",
+      "interest_tag": ""
+    },
+    {
+      "title": "SlimQwen: 4x MoE Compression via Pruning and Progressive Distillation",
+      "arxiv_id": "2605.08738",
+      "url": "https://arxiv.org/abs/2605.08738",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2605.08738",
+      "tldr": "Achieves 4x MoE model size reduction through structured pruning and progressive distillation, with 72% memory reduction and 48% throughput increase. From Alibaba/MBZUAI/KAUST.",
+      "tldr_zh": "通过结构化剪枝和渐进式蒸馏实现 MoE 模型 4 倍压缩，内存减少 72%，吞吐量提升 48%。来自阿里巴巴/MBZUAI/KAUST。",
+      "interest_tag": ""
+    },
+    {
+      "title": "Solve the Loop: Attractor Models for Latent Refinement",
+      "arxiv_id": "2605.12466",
+      "url": "https://arxiv.org/abs/2605.12466",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2605.12466",
+      "tldr": "Frames latent refinement as a fixed-point problem using attractor dynamics, outperforming Transformers and recurrent models. A new paradigm supporting variable-depth reasoning.",
+      "tldr_zh": "将潜在空间精炼建模为不动点问题，利用吸引子动力学，性能超越 Transformer 和循环模型。天然支持可变深度推理的新范式。",
+      "interest_tag": ""
+    },
+    {
+      "title": "EffOPD: Learning to Foresee for 3x On-Policy Distillation Speedup",
+      "arxiv_id": "2605.11739",
+      "url": "https://arxiv.org/abs/2605.11739",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2605.11739",
+      "tldr": "Discovers 2 'foresight' properties in on-policy distillation and exploits them for 3x training speedup with comparable performance. The most practical efficiency gain in this week's OPD research wave.",
+      "tldr_zh": "发现在线策略蒸馏中的 2 个\"前瞻\"特性，利用这些特性实现 3 倍训练加速且性能相当。本周 OPD 研究浪潮中最实用的效率提升。",
+      "interest_tag": ""
+    }
+  ],
+  "github_repos": [
+    {
+      "name": "stormzhang/token-tracker",
+      "url": "https://github.com/stormzhang/token-tracker",
+      "tldr": "CLI dashboard for tracking token usage across local AI agents (Claude Code, Codex) with cost analysis and rate monitoring. Addresses growing need for AI coding tool expense visibility.",
+      "tldr_zh": "跨本地 AI agent 的 token 用量追踪 CLI 面板，支持成本分析和速率监控。解决 AI 编码工具开销可视化的迫切需求。",
+      "stars": 148,
+      "language": "Python",
+      "interest_tag": ""
+    },
+    {
+      "name": "cosmicstack-labs/mercury-agent-skills",
+      "url": "https://github.com/cosmicstack-labs/mercury-agent-skills",
+      "tldr": "Curated registry of reusable skills for Mercury Agent, Open Claw, and Hermes Agent. Reflects the emerging ecosystem of composable agent capabilities.",
+      "tldr_zh": "为多种 AI agent 设计的可复用技能注册表，反映了可组合 agent 能力生态的兴起。",
+      "stars": 104,
+      "language": "JavaScript",
+      "interest_tag": ""
+    },
+    {
+      "name": "Isoform/yansu-skill",
+      "url": "https://github.com/Isoform/yansu-skill",
+      "tldr": "Observes how you work and crystallizes personalized context for your AI agent. A meta-tool that makes agents better by learning from user behavior.",
+      "tldr_zh": "观察你的工作方式，为 AI agent 结晶个性化上下文。通过学习用户行为来提升 agent 能力的元工具。",
+      "stars": 90,
+      "language": "None",
+      "interest_tag": ""
+    },
+    {
+      "name": "simonlin1212/TradingAgents-astock",
+      "url": "https://github.com/simonlin1212/TradingAgents-astock",
+      "tldr": "Multi-agent investment research framework for China's A-share market with 7 analyst agents debating based on A-share rules and specialized data sources.",
+      "tldr_zh": "适配 A 股市场的多 Agent 投研框架，7 位分析师 agent 基于 A 股规则辩论决策，整合龙虎榜等专业数据源。",
+      "stars": 69,
+      "language": "Python",
+      "interest_tag": "Agent Swarm"
+    },
+    {
+      "name": "adrienckr/notslop",
+      "url": "https://github.com/adrienckr/notslop",
+      "tldr": "Multi-source social digest CLI for AI agents, aggregating Reddit, HN, blogs, and X posts then reranking with ZeroEntropy.",
+      "tldr_zh": "面向 AI agent 的多源社交摘要 CLI，聚合多平台内容后用 ZeroEntropy 重排序。",
+      "stars": 53,
+      "language": "TypeScript",
+      "interest_tag": ""
+    }
+  ],
+  "hackernews": [
+    {
+      "title": "An AI coding agent, used to write code, needs to reduce your maintenance costs",
+      "url": "https://www.jamesshore.com/v2/blog/2026/you-need-ai-that-reduces-your-maintenance-costs",
+      "tldr": "James Shore argues AI coding agents are only valuable if they reduce long-term maintenance costs, not just speed up initial development. Challenges 'vibe coding' by emphasizing code quality and architectural coherence.",
+      "tldr_zh": "James Shore 认为 AI 编码 agent 只有在降低长期维护成本时才有价值，而非仅加速初始开发。挑战\"氛围编码\"趋势，强调代码质量和架构一致性。",
+      "points": 372,
+      "num_comments": 109,
+      "interest_tag": ""
+    },
+    {
+      "title": "Show HN: Statewright – Visual state machines that make AI agents reliable",
+      "url": "https://github.com/statewright/statewright",
+      "tldr": "Open-source framework using visual state machines to constrain AI agent behavior, making them more predictable and debuggable.",
+      "tldr_zh": "使用可视化状态机约束 AI agent 行为的开源框架，使其更可预测、更易调试。",
+      "points": 112,
+      "num_comments": 51,
+      "interest_tag": ""
+    },
+    {
+      "title": "Show HN: Agentic interface for mainframes and COBOL",
+      "url": "https://www.hypercubic.ai/hopper",
+      "tldr": "AI agent interface bridging modern LLMs with legacy mainframe systems and COBOL codebases. Enables natural-language interaction with enterprise legacy infrastructure.",
+      "tldr_zh": "将现代 LLM 与传统大型机系统和 COBOL 代码库连接的 AI agent 接口，实现与遗留基础设施的自然语言交互。",
+      "points": 89,
+      "num_comments": 45,
+      "interest_tag": ""
+    },
+    {
+      "title": "Show HN: adamsreview – better multi-agent PR reviews for Claude Code",
+      "url": "https://github.com/adamjgmiller/adamsreview",
+      "tldr": "Multi-agent PR review system for Claude Code using specialized reviewer agents (security, performance, style) for thorough code reviews.",
+      "tldr_zh": "为 Claude Code 设计的多 agent PR 审查系统，使用专门的审查 agent 提供全面代码审查。",
+      "points": 84,
+      "num_comments": 55,
+      "interest_tag": "Agent Swarm"
+    },
+    {
+      "title": "Launch HN: Voker (YC S24) – Analytics for AI Agents",
+      "url": "https://voker.ai",
+      "tldr": "YC-backed analytics platform for AI agents providing observability into agent behavior, performance metrics, and usage patterns.",
+      "tldr_zh": "YC 支持的 AI agent 专用分析平台，提供 agent 行为可观测性、性能指标和使用模式分析。",
+      "points": 55,
+      "num_comments": 22,
+      "interest_tag": ""
+    }
+  ]
+}
