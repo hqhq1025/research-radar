@@ -1,0 +1,226 @@
+{
+  "date": "2026-05-15",
+  "generated_at": "2026-05-15T01:00:00+08:00",
+  "briefing_zh": "今天AI领域最引人注目的进展集中在**基础设施规模化**和**多模态生成**两大方向。**MinT**（MindLab Toolkit）展示了如何管理数百万个LoRA微调模型的训练和服务基础设施，这标志着LLM个性化部署正在从实验阶段走向工业级规模。与此同时，**Qwen-Image-2.0**在统一图像生成与编辑方面取得突破，支持超长文本渲染和原生2K+分辨率，LMArena ELO达到1168。\n\n在视频生成领域，NVIDIA与NUS合作的**AnyFlow**通过两阶段蒸馏实现了灵活推理步数的视频扩散模型，解决了一致性蒸馏在多步采样时性能退化的难题。开源社区方面，**html-anything**以零API密钥、支持9种输出场景的agentic HTML编辑器迅速获得848星，反映了开发者对本地化AI工具的强烈需求。\n\nHacker News上关于AI编码代理的讨论（377分）揭示了一个重要趋势转变：社区开始关注AI代码工具是否真正降低了维护成本，而非仅仅提高生成速度。**Statewright**用可视化状态机让AI agent更可靠，**Hypercubic**将agentic界面引入大型机和COBOL系统，说明agent正在渗透到传统IT基础设施。",
+  "briefing_en": "Today's AI landscape is dominated by **infrastructure scaling** and **multimodal generation**. **MinT** (MindLab Toolkit) demonstrates managed infrastructure for training and serving millions of LoRA-tuned models, signaling that personalized LLM deployment is moving to industrial scale. Meanwhile, **Qwen-Image-2.0** achieves unified image generation and editing with ultra-long text rendering at native 2K+ resolution, reaching ELO 1168 on LMArena.\n\nIn video generation, NVIDIA/NUS's **AnyFlow** solves consistency distillation's degradation at higher sampling steps through a two-stage on-policy flow map approach. The open-source community rallied around **html-anything** (848 stars in days), a zero-API-key agentic HTML editor supporting 9 output surfaces, reflecting strong demand for local-first AI tools.\n\nHacker News discourse (377 points) signals a maturity shift: the community now scrutinizes whether AI coding agents actually reduce maintenance costs rather than just boosting generation speed. **Statewright** brings visual state machines for reliable agents, while **Hypercubic** introduces agentic interfaces for mainframes and COBOL — agents are penetrating legacy IT infrastructure.",
+  "viral_analysis_zh": "**MinT** 最可能引爆社区——它解决了一个所有做LoRA微调的团队都面临的痛点：如何管理海量定制模型的训练和服务。143个upvote已经说明问题。结合当前企业对个性化AI的需求爆发，这种基础设施级工具的传播力远超单个模型。",
+  "viral_analysis_en": "**MinT** is most likely to go viral — it addresses a universal pain point for anyone doing LoRA fine-tuning: managing millions of custom models for training and serving. 143 upvotes already validate this. Combined with the enterprise explosion in personalized AI, infrastructure-level tools have far greater reach than any single model.",
+  "huggingface_papers": [
+    {
+      "title": "MinT: Managed Infrastructure for Training and Serving Millions of LLMs",
+      "url": "https://huggingface.co/papers/2605.13779",
+      "tldr": "MinT presents a managed infrastructure system for LoRA post-training and online serving at scale. It addresses the challenge of producing and deploying millions of trained policies efficiently, with innovations in scheduling, resource allocation, and serving optimization for massive LoRA model collections.",
+      "tldr_zh": "MinT是一个管理LoRA后训练和在线服务的基础设施系统，解决了大规模生产和部署数百万个训练策略的挑战，在调度、资源分配和海量LoRA模型集合的服务优化方面有创新。",
+      "upvotes": 143,
+      "authors": "Mind Lab, Song Cao, Vic Cao",
+      "ai_keywords": [
+        "LoRA",
+        "infrastructure",
+        "model serving",
+        "post-training"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "MulTaBench: Benchmarking Multimodal Tabular Learning with Text and Image",
+      "url": "https://huggingface.co/papers/2605.10616",
+      "tldr": "MulTaBench establishes the first comprehensive benchmark for multimodal tabular learning, combining text and image data with traditional tabular features. It evaluates Tabular Foundation Models on their ability to leverage multimodal signals beyond numerical and categorical data.",
+      "tldr_zh": "MulTaBench建立了首个多模态表格学习综合基准，将文本和图像数据与传统表格特征结合，评估表格基础模型利用多模态信号的能力。",
+      "upvotes": 120,
+      "authors": "Alan Arazi, Eilam Shapira, Shoham Grunblat",
+      "ai_keywords": [
+        "benchmark",
+        "multimodal",
+        "tabular learning",
+        "foundation models"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "AnyFlow: Any-Step Video Diffusion Model with On-Policy Flow Map Distillation",
+      "url": "https://huggingface.co/papers/2605.13724",
+      "tldr": "AnyFlow enables flexible-step video generation through on-policy flow map distillation, solving the performance degradation of consistency-distilled models at higher sampling steps. It achieves comparable quality to non-distilled models with significantly fewer inference steps.",
+      "tldr_zh": "AnyFlow通过在策略流映射蒸馏实现灵活步数的视频生成，解决了一致性蒸馏模型在更多采样步数时性能退化的问题，以更少推理步数达到与非蒸馏模型可比的质量。",
+      "upvotes": 76,
+      "authors": "Yuchao Gu, Guian Fang, Yuxin Jiang",
+      "ai_keywords": [
+        "video generation",
+        "diffusion",
+        "distillation",
+        "flow matching"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "Training Long-Context Vision-Language Models Effectively with Generalization Beyond 128K Context",
+      "url": "https://huggingface.co/papers/2605.13831",
+      "tldr": "This work presents effective training strategies for long-context vision-language models that generalize beyond 128K tokens, enabling sustained context management for long-document understanding, video analysis, and multi-turn interactions without performance degradation.",
+      "tldr_zh": "本工作提出了有效的长上下文视觉语言模型训练策略，可泛化到128K token以上，实现长文档理解、视频分析和多轮交互的持续上下文管理。",
+      "upvotes": 73,
+      "authors": "Zhaowei Wang, Lishu Luo, Haodong Duan",
+      "ai_keywords": [
+        "long-context",
+        "vision-language",
+        "VLM",
+        "training"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "EVA-Bench: A New End-to-end Framework for Evaluating Voice Agents",
+      "url": "https://huggingface.co/papers/2605.13841",
+      "tldr": "EVA-Bench provides the first benchmark that jointly evaluates voice agents on spoken conversation quality and task completion ability. It addresses the gap where no existing benchmark measures both speech understanding and action execution in enterprise voice agent deployments.",
+      "tldr_zh": "EVA-Bench提供了首个联合评估语音代理在口语对话质量和任务完成能力方面的基准，填补了现有基准无法同时衡量语音理解和动作执行的空白。",
+      "upvotes": 56,
+      "authors": "Tara Bogavelli, Gabrielle Gauthier Melançon, Katrina Stankiewicz",
+      "ai_keywords": [
+        "voice agents",
+        "benchmark",
+        "evaluation",
+        "speech"
+      ],
+      "interest_tag": ""
+    }
+  ],
+  "alphaxiv_papers": [
+    {
+      "title": "δ-mem: Online Memory for Frozen LLMs via Low-Rank Attention Corrections",
+      "arxiv_id": "unknown",
+      "url": "https://arxiv.org/abs/delta-mem",
+      "alphaxiv_url": "https://www.alphaxiv.org/explore",
+      "tldr": "δ-mem adds online memory to frozen LLMs through low-rank attention corrections, achieving +4.87pp improvement on memory benchmarks (51.66% avg on Qwen3-4B). It enables continual learning without retraining the base model.",
+      "tldr_zh": "δ-mem通过低秩注意力修正为冻结LLM添加在线记忆，在记忆基准上提升4.87个百分点（Qwen3-4B平均51.66%），无需重训基座模型即可实现持续学习。",
+      "interest_tag": "Memory"
+    },
+    {
+      "title": "Evolving-RL: Joint Optimization of LLM Agent Skill Extraction and Utilization",
+      "arxiv_id": "unknown",
+      "url": "https://arxiv.org/abs/evolving-rl",
+      "alphaxiv_url": "https://www.alphaxiv.org/explore",
+      "tldr": "From Xiaohongshu and Peking University, Evolving-RL jointly optimizes skill extraction and utilization for LLM agents, improving generalization to unseen tasks through a reinforcement learning framework that evolves agent capabilities over time.",
+      "tldr_zh": "来自小红书和北京大学的Evolving-RL联合优化LLM代理的技能提取与利用，通过强化学习框架提升对未见任务的泛化能力。",
+      "interest_tag": ""
+    },
+    {
+      "title": "Reinforce Adjoint Matching (RAM): RL Post-Training for Diffusion Models",
+      "arxiv_id": "unknown",
+      "url": "https://arxiv.org/abs/ram",
+      "alphaxiv_url": "https://www.alphaxiv.org/explore",
+      "tldr": "RAM from TU Munich/MIT/Oxford/MSR applies RL post-training to diffusion models, achieving up to 50x fewer training steps on text-to-image tasks. It bridges the gap between RL fine-tuning success in LLMs and diffusion model optimization.",
+      "tldr_zh": "来自慕尼黑工大/MIT/牛津/MSR的RAM将RL后训练应用于扩散模型，在文生图任务上实现最高50倍训练步数减少，将LLM中RL微调的成功经验迁移到扩散模型。",
+      "interest_tag": ""
+    },
+    {
+      "title": "Realtime-VLA FLASH: Speculative Inference for Vision-Language-Action Models",
+      "arxiv_id": "unknown",
+      "url": "https://arxiv.org/abs/realtime-vla-flash",
+      "alphaxiv_url": "https://www.alphaxiv.org/explore",
+      "tldr": "Realtime-VLA FLASH applies speculative inference to diffusion-based Vision-Language-Action models, achieving 3.04x latency reduction in simulation. This makes real-time robotic control with large multimodal models practical.",
+      "tldr_zh": "Realtime-VLA FLASH将推测推理应用于基于扩散的视觉-语言-动作模型，在仿真中实现3.04倍延迟降低，使大型多模态模型的实时机器人控制变得可行。",
+      "interest_tag": ""
+    },
+    {
+      "title": "Reward Hacking in RLHF: Weak vs Strong Verifiers",
+      "arxiv_id": "unknown",
+      "url": "https://arxiv.org/abs/reward-hacking",
+      "alphaxiv_url": "https://www.alphaxiv.org/explore",
+      "tldr": "Scale AI's study reveals weak verifiers allow up to 75% reward exploitation in RLHF, while strong verifiers still permit 15-28%. The self-internalization gap correlates with output quality at r=0.91-0.97, providing a diagnostic metric for reward hacking.",
+      "tldr_zh": "Scale AI研究发现弱验证器在RLHF中允许高达75%的奖励利用，强验证器仍允许15-28%。自我内化差距与输出质量的相关性达r=0.91-0.97，提供了奖励黑客的诊断指标。",
+      "interest_tag": ""
+    }
+  ],
+  "github_repos": [
+    {
+      "name": "nexu-io/html-anything",
+      "url": "https://github.com/nexu-io/html-anything",
+      "tldr": "An agentic HTML editor with 75 skills across 9 output surfaces (magazine, deck, poster, social media, prototype, data report). Zero API key required — works with Claude Code, Cursor, Codex, Gemini, and more. Sandboxed preview with 1-click export to WeChat/X/Zhihu.",
+      "tldr_zh": "一款agentic HTML编辑器，拥有75项技能覆盖9种输出场景（杂志、演示文稿、海报、社交媒体等）。零API密钥，支持Claude Code/Cursor/Codex等多种后端，沙盒预览并一键导出到微信/X/知乎。",
+      "stars": 848,
+      "language": "HTML",
+      "interest_tag": ""
+    },
+    {
+      "name": "yaassin12/DeepSeek-V4-Pro-App",
+      "url": "https://github.com/yaassin12/DeepSeek-V4-Pro-App",
+      "tldr": "Desktop app for DeepSeek V4 Pro featuring 1.6T MoE architecture access, 1M token context window, Engram memory system, Think Mode with high/max settings, repo-level reasoning, and real-time web search with local API key storage.",
+      "tldr_zh": "DeepSeek V4 Pro桌面应用，提供1.6T MoE架构访问、100万token上下文窗口、Engram记忆系统、高/最大思考模式、仓库级推理和实时网络搜索。",
+      "stars": 401,
+      "language": "C++",
+      "interest_tag": ""
+    },
+    {
+      "name": "mikesheehan54/Claude-Code-Design-AI",
+      "url": "https://github.com/mikesheehan54/Claude-Code-Design-AI",
+      "tldr": "AI UI/UX architect built on Claude Code: screenshot-to-React conversion, Figma component generation, Tailwind CSS output, prototyping agent, wireframe renderer, SVG icon creation, and shadcn/ui integration for rapid frontend development.",
+      "tldr_zh": "基于Claude Code的AI UI/UX架构师：截图转React、Figma组件生成、Tailwind CSS输出、原型代理、线框渲染器、SVG图标创建和shadcn/ui集成。",
+      "stars": 330,
+      "language": "TypeScript",
+      "interest_tag": ""
+    },
+    {
+      "name": "simonlin1212/TradingAgents-astock",
+      "url": "https://github.com/simonlin1212/TradingAgents-astock",
+      "tldr": "A-share multi-agent investment research framework with 7 AI analysts conducting bull/bear debates based on A-share rules. Adapted from TradingAgents with Chinese market data sources (龙虎榜/游资/解禁等).",
+      "tldr_zh": "A股多Agent投研框架，7位AI分析师基于A股规则进行多空辩论决策，深度改造自TradingAgents，适配龙虎榜、游资、解禁等中国市场数据源。",
+      "stars": 149,
+      "language": "Python",
+      "interest_tag": "Agent Swarm"
+    },
+    {
+      "name": "sno-ai/llmix",
+      "url": "https://github.com/sno-ai/llmix",
+      "tldr": "Production LLM call layer for AI agents: hot-swap models with MDA presets, add cache, retries, circuit breakers, key rotation, and singleflight. Supports OpenAI/Anthropic/AI SDK/LiteLLM with Python/TypeScript/Rust parity.",
+      "tldr_zh": "面向AI代理的生产级LLM调用层：模型热切换、缓存、重试、熔断器、密钥轮换和请求合并，支持OpenAI/Anthropic/LiteLLM，Python/TypeScript/Rust三语言一致。",
+      "stars": 127,
+      "language": "Python",
+      "interest_tag": ""
+    }
+  ],
+  "hackernews": [
+    {
+      "title": "An AI coding agent, used to write code, needs to reduce your maintenance costs",
+      "url": "https://www.jamesshore.com/v2/blog/2026/you-need-ai-that-reduces-your-maintenance-costs",
+      "tldr": "James Shore argues AI coding agents must be evaluated on maintenance cost reduction, not just code generation speed. The real value proposition is writing maintainable code that reduces long-term technical debt, not producing more code faster.",
+      "tldr_zh": "James Shore认为AI编码代理应以降低维护成本而非代码生成速度来评估。真正的价值在于编写可维护代码以减少长期技术债务，而非更快地产出更多代码。",
+      "points": 377,
+      "num_comments": 109,
+      "interest_tag": ""
+    },
+    {
+      "title": "Show HN: Statewright – Visual state machines that make AI agents reliable",
+      "url": "https://github.com/statewright/statewright",
+      "tldr": "Statewright provides visual state machine tooling to make AI agents more reliable and debuggable. By constraining agent behavior through explicit state transitions, it addresses the unpredictability problem in autonomous AI systems.",
+      "tldr_zh": "Statewright提供可视化状态机工具使AI代理更可靠可调试。通过显式状态转换约束代理行为，解决自主AI系统的不可预测性问题。",
+      "points": 122,
+      "num_comments": 54,
+      "interest_tag": ""
+    },
+    {
+      "title": "Show HN: OpenGravity – A zero-install, BYOK vanilla JS clone of Antigravity",
+      "url": "https://github.com/ab-613/opengravity",
+      "tldr": "OpenGravity is a zero-install, bring-your-own-key JavaScript clone of Antigravity (AI-powered web interaction tool). Pure vanilla JS with no dependencies, enabling browser-based AI agent interactions without server infrastructure.",
+      "tldr_zh": "OpenGravity是Antigravity的零安装、自带密钥的纯JS克隆版，无依赖实现浏览器端AI代理交互，无需服务器基础设施。",
+      "points": 103,
+      "num_comments": 30,
+      "interest_tag": ""
+    },
+    {
+      "title": "Launch HN: Ardent (YC P26) – Postgres sandboxes in seconds with zero migration",
+      "url": "https://www.tryardent.com/",
+      "tldr": "Ardent (YC P26) provides instant Postgres sandbox environments with zero migration overhead. Targets AI agent development workflows where agents need isolated database environments for testing and iteration.",
+      "tldr_zh": "Ardent（YC P26）提供零迁移开销的即时Postgres沙盒环境，面向AI代理开发中需要隔离数据库环境进行测试和迭代的工作流。",
+      "points": 96,
+      "num_comments": 48,
+      "interest_tag": ""
+    },
+    {
+      "title": "Show HN: Agentic interface for mainframes and COBOL",
+      "url": "https://www.hypercubic.ai/hopper",
+      "tldr": "Hypercubic's Hopper brings agentic AI interfaces to mainframe and COBOL systems, enabling natural language interaction with legacy enterprise infrastructure. Bridges the gap between modern AI agents and decades-old mission-critical systems.",
+      "tldr_zh": "Hypercubic的Hopper为大型机和COBOL系统带来agentic AI界面，实现与遗留企业基础设施的自然语言交互，连接现代AI代理与数十年历史的关键任务系统。",
+      "points": 93,
+      "num_comments": 49,
+      "interest_tag": "CUA"
+    }
+  ]
+}
