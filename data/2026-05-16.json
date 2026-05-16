@@ -1,0 +1,227 @@
+{
+  "date": "2026-05-16",
+  "generated_at": "2026-05-16T09:04:51.330820+08:00",
+  "briefing_zh": "今天 AI 研究领域最引人注目的突破来自**数学奥赛推理**方向：一篇新论文通过简单统一的缩放策略，让模型达到了国际数学/物理奥赛金牌水平，获得 126 个 upvotes，表明社区对推理能力的极度关注。与此同时，**实时视频生成**取得重要进展——Causal Forcing++ 实现了低延迟流式交互视频生成的蒸馏方案，而 NVIDIA 的 **SANA-WM** 开源了一个 2.6B 参数的世界模型，能生成一分钟 720p 视频并支持 6DoF 相机控制。\n\n在 Agent 领域，**Self-Distilled Agentic RL (SDAR)** 提出了在策略自蒸馏+RL的组合方案，为多轮交互 agent 提供密集 token 级别监督信号，在 ALFWorld 上提升 9.4%。GitHub 上 **Statewright** 项目获得最高关注（HN 122分），用可视化状态机让 AI agent 行为更可靠——这反映了业界从\"让 agent 更强\"转向\"让 agent 更可控\"的趋势。\n\n多模态长期记忆评测 **MemLens** 的出现，表明社区开始系统性比较长上下文 vs 记忆增强两种路线的优劣。开源社区方面，A股多 Agent 投研框架和 Agent 全栈课程的涌现，显示 agent 技术正在加速落地到垂直场景。",
+  "briefing_en": "Today's most significant breakthrough in AI research comes from **mathematical olympiad reasoning**: a new paper achieves gold-medal-level performance on IMO and IPhO problems through simple, unified scaling strategies, garnering 126 upvotes and reflecting the community's intense focus on reasoning capabilities. Meanwhile, **real-time video generation** sees major advances—Causal Forcing++ enables low-latency streaming interactive video generation distillation, while NVIDIA's **SANA-WM** open-sources a 2.6B-parameter world model capable of generating minute-long 720p videos with 6-DoF camera control.\n\nIn the agent space, **Self-Distilled Agentic RL (SDAR)** proposes combining on-policy self-distillation with RL to provide dense token-level supervision for multi-turn LLM agents, achieving +9.4% on ALFWorld. On GitHub, **Statewright** receives the highest attention (122 HN points) for using visual state machines to make AI agents more reliable—reflecting an industry shift from \"making agents more powerful\" to \"making agents more controllable.\"\n\nThe emergence of **MemLens**, a multimodal long-term memory benchmark, signals the community's move toward systematically comparing long-context vs. memory-augmented approaches. In the open-source ecosystem, the appearance of A-share multi-agent trading frameworks and comprehensive agent curriculum courses shows agent technology is rapidly landing in vertical domains.",
+  "viral_analysis_zh": "**SANA-WM** 最可能成为爆款——开源世界模型、NVIDIA 背书、720p 一分钟视频生成这三个要素叠加极具传播力。视频 demo 天然适合社交媒体传播，而\"开源+可复现\"满足了开发者社区的核心诉求。",
+  "viral_analysis_en": "**SANA-WM** is most likely to go viral—the combination of open-source world model, NVIDIA backing, and 720p minute-long video generation creates a highly shareable package. Video demos naturally spread on social media, and the open-source reproducibility satisfies the developer community's core demand.",
+  "huggingface_papers": [
+    {
+      "title": "Achieving Gold-Medal-Level Olympiad Reasoning via Simple and Unified Scaling",
+      "url": "https://huggingface.co/papers/2605.13301",
+      "tldr": "Achieves gold-medal performance on IMO and IPhO problems through a unified scaling approach for reasoning models. Demonstrates that simple strategies—without task-specific tricks—can match specialized systems on mathematical and scientific olympiad problems, suggesting general reasoning capabilities are more scalable than previously thought.",
+      "tldr_zh": "通过统一的缩放策略让推理模型在 IMO 和 IPhO 上达到金牌水平。证明了无需任务特定技巧的简单方法即可匹敌专用系统，表明通用推理能力的可扩展性超出预期。",
+      "upvotes": 126,
+      "authors": "Yafu Li, Runzhe Zhan, Haoran Zhang",
+      "ai_keywords": [
+        "reasoning",
+        "olympiad",
+        "scaling",
+        "mathematics",
+        "physics"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "Causal Forcing++: Scalable Few-Step Autoregressive Diffusion Distillation for Real-Time Interactive Video Generation",
+      "url": "https://huggingface.co/papers/2605.15141",
+      "tldr": "Extends autoregressive diffusion distillation to achieve real-time interactive video generation with fewer inference steps. Moves beyond the 4-step chunk-wise regime to enable streaming, low-latency video rollout while maintaining quality from bidirectional base models.",
+      "tldr_zh": "将自回归扩散蒸馏扩展到实时交互视频生成领域，用更少推理步骤实现流式低延迟视频输出。突破了 4 步分块的限制，同时保持双向基础模型的生成质量。",
+      "upvotes": 75,
+      "authors": "Min Zhao, Hongzhou Zhu, Kaiwen Zheng",
+      "ai_keywords": [
+        "video generation",
+        "diffusion distillation",
+        "real-time",
+        "autoregressive"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "Self-Distilled Agentic Reinforcement Learning",
+      "url": "https://huggingface.co/papers/2605.15155",
+      "tldr": "Combines on-policy self-distillation with RL to provide dense token-level guidance for LLM agents in long-horizon tasks. Introduces token-level gating to selectively apply distillation, achieving +9.4% success rate on ALFWorld over RL-only baselines.",
+      "tldr_zh": "将在策略自蒸馏与 RL 结合，为长程任务中的 LLM agent 提供密集 token 级监督信号。引入 token 级门控机制选择性应用蒸馏，在 ALFWorld 上比纯 RL 基线提升 9.4%。",
+      "upvotes": 66,
+      "authors": "Zhengxi Lu, Zhiyuan Yao, Zhuowen Han",
+      "ai_keywords": [
+        "agentic RL",
+        "self-distillation",
+        "LLM agents",
+        "ALFWorld"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "MemLens: Benchmarking Multimodal Long-Term Memory in Large Vision-Language Models",
+      "url": "https://huggingface.co/papers/2605.14906",
+      "tldr": "First systematic benchmark comparing long-context LVLMs vs. memory-augmented agents on long-term multimodal memory tasks. Reveals the strengths and limitations of each paradigm, providing crucial guidance for building persistent-memory multimodal systems.",
+      "tldr_zh": "首个系统性对比长上下文视觉语言模型与记忆增强 agent 在多模态长期记忆任务上表现的基准。揭示两种范式的优劣，为构建持久记忆多模态系统提供关键指导。",
+      "upvotes": 62,
+      "authors": "Xiyu Ren, Zhaowei Wang, Yiming Du",
+      "ai_keywords": [
+        "memory",
+        "benchmark",
+        "multimodal",
+        "vision-language"
+      ],
+      "interest_tag": "Memory"
+    },
+    {
+      "title": "SANA-WM: Efficient Minute-Scale World Modeling with Hybrid Linear Diffusion Transformer",
+      "url": "https://huggingface.co/papers/2605.15178",
+      "tldr": "Open-source 2.6B-parameter world model generating 720p, minute-long videos with 6-DoF camera control. Uses hybrid linear diffusion transformer for efficiency, matching large industrial systems while being fully reproducible.",
+      "tldr_zh": "开源 2.6B 参数世界模型，生成 720p 一分钟视频并支持 6 自由度相机控制。采用混合线性扩散 Transformer 提升效率，匹配大规模工业系统的同时完全可复现。",
+      "upvotes": 51,
+      "authors": "Haoyi Zhu, Haozhe Liu, Yuyang Zhao",
+      "ai_keywords": [
+        "world model",
+        "video generation",
+        "diffusion transformer",
+        "open-source"
+      ],
+      "interest_tag": ""
+    }
+  ],
+  "alphaxiv_papers": [
+    {
+      "title": "δ-mem: Online Memory for Frozen LLM Backbones",
+      "arxiv_id": "2605.unknown1",
+      "url": "https://arxiv.org/abs/2605.unknown1",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2605.unknown1",
+      "tldr": "Introduces a fixed-size associative memory state with low-rank attention corrections that can be added to frozen LLM backbones. Achieves +4.87pp improvement on Qwen3-4B-Instruct, reaching 51.66% on memory-intensive benchmarks without retraining the base model.",
+      "tldr_zh": "为冻结的 LLM 主干引入固定大小关联记忆状态和低秩注意力修正。在不重训基础模型的情况下，Qwen3-4B-Instruct 在记忆密集基准上提升 4.87pp 至 51.66%。",
+      "interest_tag": "Memory"
+    },
+    {
+      "title": "Realtime-VLA FLASH: Speculative Inference for Diffusion-Based VLA Models",
+      "arxiv_id": "2605.unknown2",
+      "url": "https://arxiv.org/abs/2605.unknown2",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2605.unknown2",
+      "tldr": "Applies speculative inference to diffusion-based Vision-Language-Action models, achieving 3.04x latency reduction in simulation. Enables real-world high-speed robotic manipulation without sacrificing action quality.",
+      "tldr_zh": "将投机推理应用于基于扩散的视觉-语言-动作模型，在仿真中实现 3.04 倍延迟降低。使真实世界高速机器人操作成为可能，且不牺牲动作质量。",
+      "interest_tag": ""
+    },
+    {
+      "title": "FutureSim: Benchmark for AI Forecasting with Timestamped News Events",
+      "arxiv_id": "2605.unknown3",
+      "url": "https://arxiv.org/abs/2605.unknown3",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2605.unknown3",
+      "tldr": "Creates a benchmark that replays timestamped news events to evaluate AI forecasting ability. GPT-5.5 achieves only 25% top-1 accuracy, and many open-weight models show negative Brier skill scores, revealing significant room for improvement.",
+      "tldr_zh": "构建基于时间戳新闻事件回放的 AI 预测能力基准。GPT-5.5 仅达 25% top-1 准确率，多个开源模型出现负 Brier 技能分，揭示了巨大的改进空间。",
+      "interest_tag": ""
+    },
+    {
+      "title": "DeFakerOne: Unified Fake Image Detection and Localization",
+      "arxiv_id": "2605.unknown4",
+      "url": "https://arxiv.org/abs/2605.unknown4",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2605.unknown4",
+      "tldr": "Unifies fake image detection and localization across AIGC, DeepFake, and document forgery domains in a single model. Achieves 95.77% accuracy on GPT-Image-2-Bench and evaluated across 39 benchmarks, establishing a new standard for cross-domain forgery detection.",
+      "tldr_zh": "将 AIGC、DeepFake 和文档伪造三个领域的假图检测和定位统一到单一模型。在 GPT-Image-2-Bench 上达 95.77% 准确率，跨 39 个基准评测，建立跨域伪造检测新标准。",
+      "interest_tag": ""
+    },
+    {
+      "title": "VGGT-Ω: Scalable Feed-Forward 3D Reconstruction with Power-Law Scaling",
+      "arxiv_id": "2605.unknown5",
+      "url": "https://arxiv.org/abs/2605.unknown5",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2605.unknown5",
+      "tldr": "Demonstrates power-law performance scaling for feed-forward 3D reconstruction. Achieves 70% GPU memory reduction and 20-25% faster inference while maintaining quality, making large-scale 3D reconstruction practically deployable.",
+      "tldr_zh": "展示前馈式 3D 重建的幂律性能缩放规律。实现 70% GPU 内存降低和 20-25% 推理加速，同时保持质量，使大规模 3D 重建具备实际部署可行性。",
+      "interest_tag": ""
+    }
+  ],
+  "github_repos": [
+    {
+      "name": "nexu-io/html-anything",
+      "url": "https://github.com/nexu-io/html-anything",
+      "tldr": "Agentic HTML editor with 75 skills across 9 output surfaces (magazine, deck, poster, social posts, prototypes). Zero API key requirement—works with Claude Code, Cursor, Codex, and other coding agents. One-click export to WeChat, X, Zhihu.",
+      "tldr_zh": "Agent 化 HTML 编辑器，75 种技能覆盖 9 种输出表面（杂志、幻灯片、海报、社交帖等）。无需 API key，兼容 Claude Code、Cursor、Codex 等编码 agent。一键导出到微信/X/知乎。",
+      "stars": 1975,
+      "language": "HTML",
+      "interest_tag": ""
+    },
+    {
+      "name": "yaassin12/DeepSeek-V4-Pro-App",
+      "url": "https://github.com/yaassin12/DeepSeek-V4-Pro-App",
+      "tldr": "Desktop application for DeepSeek V4 Pro with 1.6T MoE architecture and 1M token context window. Features Engram memory system, repo-level reasoning, Think Mode with configurable depth, and real-time web search integration.",
+      "tldr_zh": "DeepSeek V4 Pro 桌面应用，1.6T MoE 架构和 100 万 token 上下文窗口。具备 Engram 记忆系统、仓库级推理、可配置深度的思考模式和实时网络搜索集成。",
+      "stars": 402,
+      "language": "C++",
+      "interest_tag": ""
+    },
+    {
+      "name": "mikesheehan54/Claude-Code-Design-AI",
+      "url": "https://github.com/mikesheehan54/Claude-Code-Design-AI",
+      "tldr": "AI-powered UI/UX design tool built on Claude Code. Converts screenshots to React components, generates Tailwind CSS, creates SVG icons, and integrates with shadcn/ui for production-ready front-end code export.",
+      "tldr_zh": "基于 Claude Code 的 AI UI/UX 设计工具。将截图转为 React 组件，生成 Tailwind CSS，创建 SVG 图标，集成 shadcn/ui 输出可直接使用的前端代码。",
+      "stars": 378,
+      "language": "TypeScript",
+      "interest_tag": ""
+    },
+    {
+      "name": "simonlin1212/TradingAgents-astock",
+      "url": "https://github.com/simonlin1212/TradingAgents-astock",
+      "tldr": "Multi-agent investment research framework adapted for China's A-share market. 7 AI analysts with bull/bear debate mechanism, integrated with A-share-specific data sources (dragon-tiger lists, hot money flows, lock-up expirations).",
+      "tldr_zh": "适配中国 A 股市场的多 Agent 投研框架。7 位 AI 分析师进行多空辩论，集成龙虎榜、游资动向、解禁等 A 股特色数据源。",
+      "stars": 195,
+      "language": "Python",
+      "interest_tag": "Agent Swarm"
+    },
+    {
+      "name": "Callous-0923/agent-study",
+      "url": "https://github.com/Callous-0923/agent-study",
+      "tldr": "28-chapter full-stack AI Agent course covering ReAct loops, Claude Code internals, MCP/A2A protocols, RAG, DSPy, and production observability. All content is runnable Python files, oriented toward interview preparation.",
+      "tldr_zh": "28 章 AI Agent 全栈课程：涵盖 ReAct 循环、Claude Code 逆向、MCP/A2A 协议、RAG、DSPy 和生产可观测性。全部为可运行 Python 文件，面向面试准备。",
+      "stars": 141,
+      "language": "HTML",
+      "interest_tag": ""
+    }
+  ],
+  "hackernews": [
+    {
+      "title": "Show HN: Statewright – Visual state machines that make AI agents reliable",
+      "url": "https://github.com/statewright/statewright",
+      "tldr": "Framework for defining AI agent behavior as visual state machines, making agent logic inspectable and debuggable. Addresses the core reliability problem of LLM agents by constraining behavior to well-defined state transitions.",
+      "tldr_zh": "将 AI agent 行为定义为可视化状态机的框架，使 agent 逻辑可检查、可调试。通过将行为约束为明确定义的状态转换，解决 LLM agent 的核心可靠性问题。",
+      "points": 122,
+      "num_comments": 54,
+      "interest_tag": ""
+    },
+    {
+      "title": "Show HN: OpenGravity – A zero-install, BYOK vanilla JS clone of Antigravity",
+      "url": "https://github.com/ab-613/opengravity",
+      "tldr": "Zero-dependency JavaScript clone of Antigravity (AI coding environment) that runs entirely in the browser. Bring-your-own-key model, no installation required—democratizes access to AI-assisted development tools.",
+      "tldr_zh": "Antigravity（AI 编码环境）的零依赖 JavaScript 克隆，完全在浏览器中运行。自带 API key 模式，无需安装——降低 AI 辅助开发工具的使用门槛。",
+      "points": 105,
+      "num_comments": 30,
+      "interest_tag": ""
+    },
+    {
+      "title": "Launch HN: Ardent (YC P26) – Postgres sandboxes in seconds with zero migration",
+      "url": "https://www.tryardent.com/",
+      "tldr": "YC-backed startup offering instant Postgres sandbox environments with zero migration overhead. Enables AI agents and developers to safely test database changes in isolated environments before applying to production.",
+      "tldr_zh": "YC 孵化的创业公司，提供零迁移开销的即时 Postgres 沙盒环境。让 AI agent 和开发者能在隔离环境中安全测试数据库变更后再应用到生产。",
+      "points": 96,
+      "num_comments": 50,
+      "interest_tag": ""
+    },
+    {
+      "title": "Show HN: Agentic interface for mainframes and COBOL",
+      "url": "https://www.hypercubic.ai/hopper",
+      "tldr": "AI agent interface for interacting with legacy mainframe systems and COBOL codebases. Bridges the gap between modern AI tooling and decades-old enterprise infrastructure, addressing the critical mainframe talent shortage.",
+      "tldr_zh": "用于与遗留大型机系统和 COBOL 代码库交互的 AI agent 界面。弥合现代 AI 工具与数十年企业基础设施之间的鸿沟，应对大型机人才严重短缺的问题。",
+      "points": 95,
+      "num_comments": 49,
+      "interest_tag": "CUA"
+    },
+    {
+      "title": "Show HN: adamsreview – better multi-agent PR reviews for Claude Code",
+      "url": "https://github.com/adamjgmiller/adamsreview",
+      "tldr": "Multi-agent code review system designed for Claude Code workflows. Multiple specialized agents review PRs from different angles (security, performance, style), providing more thorough automated review than single-agent approaches.",
+      "tldr_zh": "为 Claude Code 工作流设计的多 agent 代码审查系统。多个专业化 agent 从不同角度（安全、性能、风格）审查 PR，比单 agent 方案提供更全面的自动化审查。",
+      "points": 85,
+      "num_comments": 55,
+      "interest_tag": "Agent Swarm"
+    }
+  ]
+}
