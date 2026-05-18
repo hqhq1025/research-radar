@@ -1,0 +1,223 @@
+{
+  "date": "2026-05-18",
+  "generated_at": "2026-05-18T09:05:20.987338+08:00",
+  "briefing_zh": "本周 AI 研究的最大亮点是 **SU-01** 模型（上海 AI Lab），一个仅 30B（A3B 激活）的模型通过三阶段训练流水线，在 IPhO 2024/2025 和 IMO/USAMO 2025/2026 上超越金牌门槛，展示了小模型在科学推理上的惊人潜力。与此同时，视频生成领域迎来两项突破：NVIDIA 的 **SANA-WM** 用 2.6B 参数实现一分钟 720p 6-DoF 视频生成，**Causal Forcing++** 则将交互式视频推向实时，首帧延迟降低 50%。\n\nAgent 研究持续升温。**SDAR**（浙大/美团/清华）提出自蒸馏式 Agentic RL，在 ALFWorld 上成功率提升 9.4%。**LIFE Framework** 首次统一了个体能力、多 Agent 协作、失败归因和自进化四个维度。GitHub 上 **harmonist-orchestral** 多 Agent 编排引擎一周获 421 星，**TradingAgents-astock** 将多 Agent 辩论机制引入 A 股投研。\n\n记忆与评测成为新焦点。**δ-mem** 为冻结 LLM 添加在线记忆层，**MemLens** 和 **MemEye** 分别从多模态和视觉中心角度构建 Agent 长期记忆基准测试，填补了该领域评测空白。HN 上 **Statewright** 用可视化状态机提升 Agent 可靠性，获 126 points，反映业界对 Agent 可控性的强烈需求。",
+  "briefing_en": "The week's headline is **SU-01** (Shanghai AI Lab), a 30B (A3B active) model that clears gold-medal thresholds on IPhO 2024/2025 and IMO/USAMO 2025/2026 through a simple three-stage training pipeline—showing that olympiad-level scientific reasoning no longer requires frontier-scale models. In video generation, NVIDIA's **SANA-WM** delivers 1-minute 720p video with 6-DoF camera control from just 2.6B parameters, while **Causal Forcing++** halves first-frame latency for real-time interactive video.\n\nAgent research is intensifying. **SDAR** (Zhejiang/Meituan/Tsinghua) introduces self-distilled agentic RL with a +9.4% success rate gain on ALFWorld. The **LIFE Framework** unifies individual capability, multi-agent collaboration, failure attribution, and self-evolution. On GitHub, **harmonist-orchestral** (421 stars in a week) and **TradingAgents-astock** (A-share multi-agent debate framework, 314 stars) reflect surging demand for agent orchestration.\n\nMemory and evaluation are emerging as critical sub-fields. **δ-mem** adds online memory to frozen LLM backbones (+4.87pp). **MemLens** and **MemEye** each tackle multimodal agent long-term memory benchmarking from different angles. On HN, **Statewright** (126 points) uses visual state machines to make agents reliable—signaling the industry's hunger for controllable agent behavior.",
+  "viral_analysis_zh": "**SU-01** 最可能出圈——「30B 小模型拿奥赛金牌」的叙事极具传播力，直接挑战「大力出奇迹」的范式。其次是 **SANA-WM**，NVIDIA 出品 + 一分钟 720p 视频 + 低成本的组合适合 demo 驱动传播。Agent 记忆赛道的 MemLens/MemEye 双 benchmark 同期发布也值得关注，可能引发记忆方向的集中讨论。",
+  "viral_analysis_en": "**SU-01** has the strongest viral potential—'30B model wins olympiad gold medals' is a compelling narrative that directly challenges the scaling-is-everything paradigm. Runner-up is **SANA-WM**: NVIDIA brand + 1-minute 720p video + low cost is perfect for demo-driven sharing. The simultaneous release of MemLens and MemEye as dual memory benchmarks could also spark concentrated discussion around agent memory.",
+  "huggingface_papers": [
+    {
+      "title": "Achieving Gold-Medal-Level Olympiad Reasoning via Simple and Unified Scaling",
+      "url": "https://huggingface.co/papers/2605.13301",
+      "tldr": "SU-01 (30B, A3B active) achieves gold-medal scores on IPhO 2024/2025 and IMO/USAMO 2025/2026 via a three-stage pipeline: supervised pre-training on curated STEM data, reinforcement learning with verifiable rewards, and test-time compute scaling. Demonstrates that olympiad-level reasoning doesn't require frontier-scale models.",
+      "tldr_zh": "SU-01（30B，A3B 激活）通过三阶段流水线在 IPhO 和 IMO/USAMO 上达到金牌水平，证明奥赛级推理不需要前沿规模模型。",
+      "upvotes": 140,
+      "authors": ", , ",
+      "ai_keywords": [
+        "scientific-reasoning",
+        "reinforcement-learning",
+        "test-time-compute"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "Causal Forcing++: Scalable Few-Step Autoregressive Diffusion Distillation for Real-Time Interactive Video Generation",
+      "url": "https://huggingface.co/papers/2605.15141",
+      "tldr": "Extends Causal Forcing to real-time interactive video with 1-2 sampling steps, achieving 50% lower first-frame latency and ~1.4x throughput. Enables responsive streaming video generation where user input affects output in real time.",
+      "tldr_zh": "将 Causal Forcing 扩展到实时交互式视频生成，仅需 1-2 步采样，首帧延迟降低 50%，吞吐提升约 1.4 倍。",
+      "upvotes": 84,
+      "authors": ", , ",
+      "ai_keywords": [
+        "video-generation",
+        "diffusion",
+        "real-time",
+        "distillation"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "Self-Distilled Agentic Reinforcement Learning",
+      "url": "https://huggingface.co/papers/2605.15155",
+      "tldr": "SDAR combines on-policy self-distillation with token-level gating for agentic RL, achieving +9.4% success rate on ALFWorld. The self-distillation mechanism stabilizes training by using the agent's own improving policy as teacher.",
+      "tldr_zh": "SDAR 将 on-policy 自蒸馏与 token 级门控结合用于 Agentic RL，在 ALFWorld 上成功率提升 9.4%。",
+      "upvotes": 84,
+      "authors": ", , ",
+      "ai_keywords": [
+        "agent",
+        "reinforcement-learning",
+        "self-distillation"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "MemLens: Benchmarking Multimodal Long-Term Memory in Large Vision-Language Models",
+      "url": "https://huggingface.co/papers/2605.14906",
+      "tldr": "First comprehensive benchmark for evaluating multimodal long-term memory in vision-language models. Tests retention, retrieval, and reasoning over extended interactions, revealing significant gaps in current models' memory capabilities.",
+      "tldr_zh": "首个全面评估视觉语言模型多模态长期记忆的基准测试，揭示当前模型记忆能力的显著不足。",
+      "upvotes": 68,
+      "authors": ", , ",
+      "ai_keywords": [
+        "memory",
+        "benchmark",
+        "multimodal",
+        "VLM"
+      ],
+      "interest_tag": "Memory"
+    },
+    {
+      "title": "SANA-WM: Efficient Minute-Scale World Modeling with Hybrid Linear Diffusion Transformer",
+      "url": "https://huggingface.co/papers/2605.15178",
+      "tldr": "NVIDIA's 2.6B-parameter world model generates 1-minute 720p video with 6-DoF camera control using hybrid linear diffusion transformers. Matches larger industrial baselines at significantly lower compute cost.",
+      "tldr_zh": "NVIDIA 的 2.6B 参数世界模型生成一分钟 720p 视频，支持 6-DoF 摄像机控制，以更低成本匹配大型工业模型质量。",
+      "upvotes": 68,
+      "authors": ", , ",
+      "ai_keywords": [
+        "video-generation",
+        "world-model",
+        "diffusion-transformer"
+      ],
+      "interest_tag": ""
+    }
+  ],
+  "alphaxiv_papers": [
+    {
+      "title": "δ-mem: Online Memory for Frozen LLM Backbones",
+      "arxiv_id": "",
+      "url": "https://www.alphaxiv.org/explore",
+      "alphaxiv_url": "https://www.alphaxiv.org/explore",
+      "tldr": "Adds fixed-size associative memory with low-rank attention corrections to frozen LLMs, enabling online memory without retraining. +4.87pp on Qwen3-4B-Instruct memory benchmarks.",
+      "tldr_zh": "为冻结 LLM 添加固定大小关联记忆和低秩注意力修正，无需重训即可实现在线记忆，在 Qwen3-4B-Instruct 记忆基准上提升 4.87pp。",
+      "interest_tag": "Memory"
+    },
+    {
+      "title": "LIFE Framework: Unifying Collaboration, Failure Attribution, and Self-Evolution in LLM-based MAS",
+      "arxiv_id": "",
+      "url": "https://www.alphaxiv.org/explore",
+      "alphaxiv_url": "https://www.alphaxiv.org/explore",
+      "tldr": "First unified framework covering four pillars of multi-agent systems: individual capability, collaboration, failure attribution, and self-evolution. Provides systematic taxonomy for robust LLM-based MAS.",
+      "tldr_zh": "首个统一覆盖多 Agent 系统四大支柱的框架：个体能力、协作、失败归因和自进化。",
+      "interest_tag": "Agent Swarm"
+    },
+    {
+      "title": "VGGT-Ω: Feed-Forward 3D Reconstruction with Power-Law Scaling",
+      "arxiv_id": "",
+      "url": "https://www.alphaxiv.org/explore",
+      "alphaxiv_url": "https://www.alphaxiv.org/explore",
+      "tldr": "Scales feed-forward 3D reconstruction with 70% GPU memory reduction and 20-25% faster inference, handling both static and dynamic scenes.",
+      "tldr_zh": "以幂律扩展前馈 3D 重建，GPU 显存减少 70%，推理加速 20-25%，支持静态和动态场景。",
+      "interest_tag": ""
+    },
+    {
+      "title": "SANA-WM: Efficient Minute-Scale World Modeling (NVIDIA)",
+      "arxiv_id": "",
+      "url": "https://www.alphaxiv.org/explore",
+      "alphaxiv_url": "https://www.alphaxiv.org/explore",
+      "tldr": "2.6B-param world model generating 1-minute 720p video with 6-DoF camera control at lower cost than industrial baselines.",
+      "tldr_zh": "2.6B 参数世界模型，生成一分钟 720p 视频，支持 6-DoF 摄像机控制，成本低于工业基线。",
+      "interest_tag": ""
+    },
+    {
+      "title": "SU-01: Gold-Medal Olympiad Reasoning (Shanghai AI Lab)",
+      "arxiv_id": "",
+      "url": "https://www.alphaxiv.org/explore",
+      "alphaxiv_url": "https://www.alphaxiv.org/explore",
+      "tldr": "30B-A3B model exceeds gold medal thresholds on IPhO 2024/2025 and IMO/USAMO 2025/2026 through a three-stage training pipeline.",
+      "tldr_zh": "30B-A3B 模型通过三阶段训练在 IPhO 和 IMO/USAMO 上超越金牌门槛。",
+      "interest_tag": ""
+    }
+  ],
+  "github_repos": [
+    {
+      "name": "2508965-ship-it/harmonist-orchestral",
+      "url": "https://github.com/2508965-ship-it/harmonist-orchestral",
+      "tldr": "Multi-agent orchestration engine for building and deploying AI agent swarms with workflow definitions and inter-agent communication.",
+      "tldr_zh": "多 Agent 编排引擎，支持工作流定义和 Agent 间通信，首周 421 星。",
+      "stars": 421,
+      "language": null,
+      "interest_tag": "Agent Swarm"
+    },
+    {
+      "name": "simonlin1212/TradingAgents-astock",
+      "url": "https://github.com/simonlin1212/TradingAgents-astock",
+      "tldr": "A-share multi-agent research framework with 7 analyst agents debating on dragon-tiger lists, hot money flows, and lockup data.",
+      "tldr_zh": "A 股多 Agent 投研框架，7 位分析师基于龙虎榜、游资、解禁数据辩论决策。",
+      "stars": 314,
+      "language": "Python",
+      "interest_tag": "Agent Swarm"
+    },
+    {
+      "name": "agentic-in/elephant-agent",
+      "url": "https://github.com/agentic-in/elephant-agent",
+      "tldr": "Personal-model-first self-evolving AI agent emphasizing local adaptation and user data sovereignty over cloud dependence.",
+      "tldr_zh": "个人模型优先的自进化 AI Agent，强调本地适配和数据主权。",
+      "stars": 282,
+      "language": "Python",
+      "interest_tag": ""
+    },
+    {
+      "name": "Callous-0923/agent-study",
+      "url": "https://github.com/Callous-0923/agent-study",
+      "tldr": "36-chapter AI Agent full-stack course: ReAct, Claude Code internals, MCP/A2A, RAG, DSPy, production deployment.",
+      "tldr_zh": "36 章 AI Agent 全栈课程：ReAct、Claude Code 逆向、MCP/A2A、RAG、DSPy、生产部署。",
+      "stars": 212,
+      "language": "HTML",
+      "interest_tag": ""
+    },
+    {
+      "name": "yaassin12/DeepSeek-V4-Pro-App",
+      "url": "https://github.com/yaassin12/DeepSeek-V4-Pro-App",
+      "tldr": "Desktop app for DeepSeek V4 Pro (1.6T MoE). Native UI for local model interaction, 604 stars in a week.",
+      "tldr_zh": "DeepSeek V4 Pro 桌面应用（1.6T MoE），提供本地模型原生交互界面，首周 604 星。",
+      "stars": 604,
+      "language": "C++",
+      "interest_tag": ""
+    }
+  ],
+  "hackernews": [
+    {
+      "title": "Show HN: Statewright – Visual state machines that make AI agents reliable",
+      "url": "https://github.com/statewright/statewright",
+      "tldr": "Uses visual state machines to constrain AI agent behavior through explicit state graphs, making agents deterministic and debuggable.",
+      "tldr_zh": "用可视化状态机通过显式状态图约束 AI Agent 行为，使 Agent 确定性和可调试。",
+      "points": 126,
+      "num_comments": 55,
+      "interest_tag": ""
+    },
+    {
+      "title": "Show HN: Agentic interface for mainframes and COBOL",
+      "url": "https://www.hypercubic.ai/hopper",
+      "tldr": "AI agent interface for legacy mainframe and COBOL systems, enabling natural language interaction with decades-old enterprise infrastructure.",
+      "tldr_zh": "面向传统大型机和 COBOL 系统的 AI Agent 接口，实现与数十年历史企业基础设施的自然语言交互。",
+      "points": 97,
+      "num_comments": 50,
+      "interest_tag": "CUA"
+    },
+    {
+      "title": "Launch HN: Ardent (YC P26) – Postgres sandboxes in seconds with zero migration",
+      "url": "https://www.tryardent.com/",
+      "tldr": "Instant Postgres sandbox environments with zero migration. Useful for AI agent testing requiring database state isolation.",
+      "tldr_zh": "零迁移即时 Postgres 沙箱环境，对需要数据库状态隔离的 AI Agent 测试尤为实用。",
+      "points": 96,
+      "num_comments": 51,
+      "interest_tag": ""
+    },
+    {
+      "title": "Launch HN: Voker (YC S24) – Analytics for AI Agents",
+      "url": "https://voker.ai",
+      "tldr": "YC-backed observability platform for AI agents with behavior analytics, performance metrics, and debugging tools.",
+      "tldr_zh": "YC 投资的 AI Agent 可观测性平台，提供行为分析、性能指标和调试工具。",
+      "points": 59,
+      "num_comments": 22,
+      "interest_tag": ""
+    },
+    {
+      "title": "Show HN: E2a – Open-source email gateway for AI agents",
+      "url": "https://github.com/Mnexa-AI/e2a",
+      "tldr": "Open-source email gateway enabling AI agents to send/receive emails programmatically, filling a practical integration gap.",
+      "tldr_zh": "开源邮件网关，让 AI Agent 程序化收发邮件，填补实际集成空白。",
+      "points": 48,
+      "num_comments": 3,
+      "interest_tag": ""
+    }
+  ]
+}
