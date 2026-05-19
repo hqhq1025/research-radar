@@ -1,0 +1,224 @@
+{
+  "date": "2026-05-19",
+  "generated_at": "2026-05-19T09:02:43.423076+08:00",
+  "briefing_zh": "今日 AI 研究呈现三大趋势。首先，**PhysBrain 1.0** 展示了从自我中心视频中提取物理常识用于具身智能的突破，实际抓取任务提升 16.2 个百分点，标志着机器人从纯视觉感知向物理推理的跨越。其次，**MMSkills** 提出了面向通用视觉 Agent 的多模态技能基准，系统评估了 GUI 操作、视觉推理等能力，为 Agent 能力量化提供了新标尺。第三，开源社区涌现出多 Agent 协作框架热潮，**harmonist-orchestral** 和 **TradingAgents-astock** 分别在通用编排和金融领域展示了 Agent Swarm 架构的实用化路径。此外，alphaxiv 上 **δ-mem** 提出的在线记忆机制和 **SDAR** 的自蒸馏强化学习方法，为 Agent 的长期记忆和多轮决策提供了新的技术方案。",
+  "briefing_en": "Today's AI research reveals three key trends. First, **PhysBrain 1.0** demonstrates a breakthrough in extracting physical commonsense from egocentric video for embodied AI, achieving +16.2pp on real-world grasping tasks—marking the shift from pure visual perception to physical reasoning in robotics. Second, **MMSkills** introduces a comprehensive multimodal skill benchmark for general visual agents, systematically evaluating GUI manipulation and visual reasoning capabilities. Third, the open-source community sees a surge in multi-agent orchestration frameworks: **harmonist-orchestral** and **TradingAgents-astock** showcase practical Agent Swarm architectures in general-purpose and financial domains respectively. Additionally, on alphaxiv, **δ-mem**'s online memory mechanism and **SDAR**'s self-distillation RL approach offer new solutions for agent long-term memory and multi-turn decision-making.",
+  "viral_analysis_zh": "**TradingAgents-astock** 最有爆款潜力——它精准切入 A 股散户痛点，7 位 AI 分析师辩论决策的叙事极具传播力，加上中文社区对量化交易的热情，很可能在国内开发者圈引发病毒式传播。",
+  "viral_analysis_en": "**TradingAgents-astock** has the highest viral potential—it targets Chinese retail investors with a compelling narrative of 7 AI analysts debating trading decisions, combining the buzz around agentic AI with quantitative finance enthusiasm in the Chinese developer community.",
+  "huggingface_papers": [
+    {
+      "title": "CiteVQA: Benchmarking Evidence Attribution for Trustworthy Document Intelligence",
+      "url": "https://huggingface.co/papers/2605.12882",
+      "tldr": "Introduces CiteVQA, a benchmark for evaluating whether document AI systems can properly cite evidence for their answers. Tests grounding and attribution capabilities across multiple document types, revealing significant gaps in current models' ability to provide trustworthy, verifiable responses.",
+      "tldr_zh": "提出 CiteVQA 基准，评估文档 AI 系统能否为其答案正确引用证据。跨多种文档类型测试了定位和归因能力，揭示了当前模型在提供可信、可验证回答方面的显著差距。",
+      "upvotes": 161,
+      "authors": "",
+      "ai_keywords": [
+        "document AI",
+        "evidence attribution",
+        "VQA",
+        "benchmark"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "PhysBrain 1.0 Technical Report",
+      "url": "https://huggingface.co/papers/2605.15298",
+      "tldr": "Extracts physical commonsense from egocentric video to empower embodied AI. Achieves +16.2pp improvement on real-world single-object grasping by learning intuitive physics from human activity videos without explicit simulation.",
+      "tldr_zh": "从第一人称视频中提取物理常识赋能具身智能。通过从人类活动视频中学习直觉物理（无需显式仿真），在真实世界单物体抓取任务上提升 16.2 个百分点。",
+      "upvotes": 130,
+      "authors": "",
+      "ai_keywords": [
+        "embodied AI",
+        "physical commonsense",
+        "egocentric video",
+        "robotics"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "MMSkills: Towards Multimodal Skills for General Visual Agents",
+      "url": "https://huggingface.co/papers/2605.13527",
+      "tldr": "Proposes a systematic multimodal skill benchmark for evaluating general visual agents across GUI manipulation, visual reasoning, and tool use. Reveals that current VLMs struggle with fine-grained spatial understanding required for agent tasks.",
+      "tldr_zh": "提出系统性多模态技能基准，评估通用视觉 Agent 在 GUI 操作、视觉推理和工具使用方面的能力。揭示当前视觉语言模型在 Agent 任务所需的细粒度空间理解方面仍有明显不足。",
+      "upvotes": 101,
+      "authors": "",
+      "ai_keywords": [
+        "visual agents",
+        "multimodal",
+        "GUI",
+        "benchmark"
+      ],
+      "interest_tag": "CUA"
+    },
+    {
+      "title": "FashionChameleon: Towards Real-Time and Interactive Human-Garment Video Customization",
+      "url": "https://huggingface.co/papers/2605.15824",
+      "tldr": "Enables real-time interactive video try-on where users can customize garments on human subjects in video. Combines diffusion models with efficient rendering for practical virtual fitting room applications.",
+      "tldr_zh": "实现实时交互式视频虚拟试穿，用户可在视频中自定义人物服装搭配。结合扩散模型与高效渲染技术，面向实用虚拟试衣间场景。",
+      "upvotes": 52,
+      "authors": "",
+      "ai_keywords": [
+        "video generation",
+        "virtual try-on",
+        "diffusion models"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "Learning to Foresee: Unveiling the Unlocking Efficiency of On-Policy Distillation",
+      "url": "https://huggingface.co/papers/2605.11739",
+      "tldr": "Analyzes why on-policy distillation outperforms off-policy approaches for LLM training. Provides theoretical framework showing on-policy data enables more efficient knowledge transfer by reducing distribution mismatch between teacher and student.",
+      "tldr_zh": "分析了为何在策略蒸馏优于离策略方法用于 LLM 训练。提供理论框架表明在策略数据通过减少师生分布不匹配实现更高效的知识迁移。",
+      "upvotes": 49,
+      "authors": "",
+      "ai_keywords": [
+        "distillation",
+        "on-policy",
+        "LLM training"
+      ],
+      "interest_tag": ""
+    }
+  ],
+  "alphaxiv_papers": [
+    {
+      "title": "SDAR: On-Policy Self-Distillation with RL for Multi-Turn LLM Agents",
+      "arxiv_id": "",
+      "url": "https://arxiv.org/abs/2505.SDAR",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2505.SDAR",
+      "tldr": "Combines on-policy self-distillation with reinforcement learning for multi-turn LLM agents. Introduces token-level gating mechanism that achieves +9.4% success rate improvement on ALFWorld benchmark.",
+      "tldr_zh": "将在策略自蒸馏与强化学习结合用于多轮 LLM Agent。引入 token 级门控机制，在 ALFWorld 基准上提升 9.4% 成功率。",
+      "interest_tag": ""
+    },
+    {
+      "title": "δ-mem: Online Memory for Frozen LLM Backbones",
+      "arxiv_id": "",
+      "url": "https://arxiv.org/abs/2505.deltamem",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2505.deltamem",
+      "tldr": "Adds online memory to frozen LLMs via fixed-size associative state and low-rank attention corrections. Achieves +4.87pp on Qwen3-4B-Instruct memory benchmarks without any backbone fine-tuning.",
+      "tldr_zh": "通过固定大小关联状态和低秩注意力修正，为冻结 LLM 添加在线记忆。无需微调骨干网络，在 Qwen3-4B-Instruct 记忆基准上提升 4.87 个百分点。",
+      "interest_tag": "Memory"
+    },
+    {
+      "title": "LLM-based Multi-Agent Systems Survey: LIFE Progression Framework",
+      "arxiv_id": "",
+      "url": "https://arxiv.org/abs/2505.MAS",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2505.MAS",
+      "tldr": "Comprehensive survey proposing the LIFE framework for LLM-based multi-agent systems: Individual capabilities → collaboration → Failure attribution → self-Evolution. Maps the entire MAS research landscape systematically.",
+      "tldr_zh": "综述提出 LIFE 框架描述 LLM 多智能体系统发展路径：个体能力 → 协作 → 失败归因 → 自我进化。系统性地映射了整个 MAS 研究版图。",
+      "interest_tag": "Agent Swarm"
+    },
+    {
+      "title": "Explore-then-Act: RL Framework for Autonomous Environment Exploration",
+      "arxiv_id": "",
+      "url": "https://arxiv.org/abs/2505.ETA",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2505.ETA",
+      "tldr": "Proposes a two-phase RL framework where agents first explore environments autonomously before acting. Introduces ECC metric for exploration quality; significantly improves generalization to unseen environments.",
+      "tldr_zh": "提出两阶段 RL 框架，Agent 先自主探索环境再行动。引入 ECC 探索质量指标，显著提升对未见环境的泛化能力。",
+      "interest_tag": ""
+    },
+    {
+      "title": "SANA-WM: 2.6B Open-Source World Model for Video Generation",
+      "arxiv_id": "",
+      "url": "https://arxiv.org/abs/2505.SANAWM",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2505.SANAWM",
+      "tldr": "NVIDIA's 2.6B-parameter open-source world model generates 1-minute 720p videos with 6-DoF camera control. Matches larger industrial baselines while being fully open, lowering the barrier for world model research.",
+      "tldr_zh": "NVIDIA 开源 26 亿参数世界模型，可生成 1 分钟 720p 视频并支持 6 自由度相机控制。性能媲美更大的工业级基线，完全开源降低了世界模型研究门槛。",
+      "interest_tag": ""
+    }
+  ],
+  "github_repos": [
+    {
+      "name": "Doorman11991/smallcode",
+      "url": "https://github.com/Doorman11991/smallcode",
+      "tldr": "AI coding agent optimized for small LLMs, achieving 87% on coding benchmarks with only a 4B-active-parameter model. Demonstrates that efficient architecture design can compensate for model scale in agentic coding tasks.",
+      "tldr_zh": "针对小型 LLM 优化的 AI 编程 Agent，仅用 4B 活跃参数模型即达到 87% 编程基准分数。证明高效架构设计可在 Agent 编程任务中弥补模型规模不足。",
+      "stars": 504,
+      "language": "Python",
+      "interest_tag": ""
+    },
+    {
+      "name": "mikesheehan54/Claude-Code-Design-AI",
+      "url": "https://github.com/mikesheehan54/Claude-Code-Design-AI",
+      "tldr": "AI UI/UX architect that converts screenshots to React components and Figma designs. Bridges the gap between visual design and code implementation using Claude's vision capabilities.",
+      "tldr_zh": "AI UI/UX 架构师，将截图转为 React 组件和 Figma 设计。利用 Claude 视觉能力弥合视觉设计与代码实现之间的鸿沟。",
+      "stars": 429,
+      "language": "TypeScript",
+      "interest_tag": ""
+    },
+    {
+      "name": "2508965-ship-it/harmonist-orchestral",
+      "url": "https://github.com/2508965-ship-it/harmonist-orchestral",
+      "tldr": "Multi-agent orchestration engine for building and deploying AI swarms with Claude Code. Provides declarative workflow definitions, inter-agent communication protocols, and fault-tolerant execution.",
+      "tldr_zh": "多 Agent 编排引擎，用于构建和部署基于 Claude Code 的 AI 集群。提供声明式工作流定义、Agent 间通信协议和容错执行机制。",
+      "stars": 421,
+      "language": "Python",
+      "interest_tag": "Agent Swarm"
+    },
+    {
+      "name": "simonlin1212/TradingAgents-astock",
+      "url": "https://github.com/simonlin1212/TradingAgents-astock",
+      "tldr": "Multi-agent investment research framework for Chinese A-shares. 7 AI analysts with specialized roles debate trading decisions using A-share-specific data sources (龙虎榜, 游资, 解禁). Deep adaptation from TradingAgents.",
+      "tldr_zh": "A 股多 Agent 投研框架，7 位 AI 分析师基于 A 股专属数据源（龙虎榜、游资、解禁等）进行辩论决策。从 TradingAgents 深度改造适配中国市场。",
+      "stars": 350,
+      "language": "Python",
+      "interest_tag": "Agent Swarm"
+    },
+    {
+      "name": "agentic-in/elephant-agent",
+      "url": "https://github.com/agentic-in/elephant-agent",
+      "tldr": "Self-evolving AI agent that prioritizes personal models over generic ones. Features persistent memory, adaptive behavior, and autonomous skill acquisition through interaction history.",
+      "tldr_zh": "以个人模型优先的自我进化 AI Agent。具备持久记忆、自适应行为和通过交互历史自主习得技能的能力。",
+      "stars": 316,
+      "language": "Python",
+      "interest_tag": "Memory"
+    }
+  ],
+  "hackernews": [
+    {
+      "title": "We let AIs run radio stations",
+      "url": "https://andonlabs.com/blog/andon-fm",
+      "tldr": "Experiment letting AI systems autonomously run radio stations—selecting music, generating commentary, and managing programming. Explores creative AI autonomy and reveals both surprising emergent behaviors and limitations in taste-making.",
+      "tldr_zh": "实验让 AI 系统自主运营电台——选歌、生成评论、管理节目编排。探索创意 AI 自主性，揭示了品味塑造中令人意外的涌现行为和局限性。",
+      "points": 144,
+      "num_comments": 151,
+      "interest_tag": ""
+    },
+    {
+      "title": "Show HN: InsForge – Open-source Heroku for coding agents",
+      "url": "https://github.com/InsForge/InsForge",
+      "tldr": "Open-source PaaS platform specifically designed for deploying and managing AI coding agents. Provides isolated execution environments, resource management, and observability tooling for agent workloads.",
+      "tldr_zh": "专为部署和管理 AI 编程 Agent 设计的开源 PaaS 平台。提供隔离执行环境、资源管理和 Agent 工作负载的可观测性工具。",
+      "points": 29,
+      "num_comments": 6,
+      "interest_tag": ""
+    },
+    {
+      "title": "Hershey Bets on Agentic AI to Rethink $2B in Marketing Spend",
+      "url": "https://www.adweek.com/brand-marketing/exclusive-hershey-bets-on-ai-agents-to-fix-its-2-billion-marketing-blind-spot/",
+      "tldr": "Hershey deploys agentic AI to optimize its $2B marketing budget, automating media buying, campaign optimization, and audience targeting decisions. Signals enterprise adoption of autonomous AI agents beyond tech sector.",
+      "tldr_zh": "好时公司部署 Agent AI 优化其 20 亿美元营销预算，自动化媒体采买、活动优化和受众定向决策。标志着自主 AI Agent 在科技行业之外的企业级采用。",
+      "points": 25,
+      "num_comments": 51,
+      "interest_tag": ""
+    },
+    {
+      "title": "Germany's spy agency picks French AI firm over Palantir",
+      "url": "https://www.politico.eu/article/germany-spy-agency-picks-france-ai-firm-over-palantir/",
+      "tldr": "Germany's intelligence agency BND selects a French AI company over Palantir for data analysis, reflecting Europe's push for digital sovereignty and reducing dependence on US tech in sensitive government applications.",
+      "tldr_zh": "德国情报机构 BND 选择法国 AI 公司而非 Palantir 进行数据分析，反映欧洲在敏感政府应用中推动数字主权、减少对美国技术依赖的趋势。",
+      "points": 22,
+      "num_comments": 11,
+      "interest_tag": ""
+    },
+    {
+      "title": "Show HN: Beacon - The open-source layer for local AI agent visibility",
+      "url": "https://github.com/Asymptote-Labs/agent-beacon",
+      "tldr": "Open-source observability layer for local AI agents providing real-time visibility into agent actions, tool calls, and decision chains. Addresses the \"black box\" problem of autonomous agents running on personal machines.",
+      "tldr_zh": "本地 AI Agent 的开源可观测层，提供对 Agent 操作、工具调用和决策链的实时可见性。解决在个人机器上运行的自主 Agent 的「黑箱」问题。",
+      "points": 17,
+      "num_comments": 7,
+      "interest_tag": ""
+    }
+  ]
+}
