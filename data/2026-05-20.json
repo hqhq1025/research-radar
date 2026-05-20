@@ -1,0 +1,225 @@
+{
+  "date": "2026-05-20",
+  "generated_at": "2026-05-20T01:02:54.227715Z",
+  "briefing_zh": "今天 AI 研究领域最引人注目的趋势是**代码作为 Agent 基础设施**的范式持续升温。HuggingFace 热榜第一的 **Code as Agent Harness** 提出将代码本身作为 agent 运行的统一载体，而非传统的 prompt 编排，这与 GitHub 上 **smallcode** 项目（用 4B 参数模型达到 87% benchmark）的思路一脉相承——小模型 + 好框架胜过大模型盲跑。\n\n第二个趋势是 **Agent 技能生命周期管理**进入系统化阶段。**SkillsVote** 提出从技能收集、推荐到演化的全流程治理框架，这意味着社区开始认真思考 agent 不只是\"能做事\"，还要\"持续进化\"。与此呼应的是 alphaxiv 上 **SDAR**（Self-Distilled Agentic RL）通过 token 级门控实现自蒸馏强化学习，在 ALFWorld 上提升 9.4%。\n\n第三个趋势是**长视频生成**和**世界模型**的工程化突破。NVIDIA 的 **SANA-WM** 用 2.6B 参数生成 1 分钟 720p 视频，**LongLive-2.0** 则提供了 NVFP4 并行基础设施支持长视频生成。Hacker News 上最火的帖子是让 AI 运营广播电台（355 points），展示了 agent 从工具走向内容创作者的趋势。",
+  "briefing_en": "Today's most striking trend in AI research is the rise of **code as agent infrastructure**. The top HuggingFace paper **Code as Agent Harness** proposes using code itself as the unified substrate for agent execution, moving beyond traditional prompt orchestration. This aligns with GitHub's trending **smallcode** project achieving 87% benchmark scores with just a 4B-active model—proving that small models + good frameworks beat large models running blind.\n\nThe second trend is **agent skill lifecycle management** becoming systematized. **SkillsVote** proposes end-to-end governance from skill collection to recommendation to evolution, signaling the community's shift from 'can agents do things' to 'can agents continuously improve.' On alphaxiv, **SDAR** (Self-Distilled Agentic RL) achieves +9.4% on ALFWorld through token-level gated self-distillation.\n\nThird, **long video generation** and **world models** hit engineering milestones. NVIDIA's **SANA-WM** generates 1-minute 720p video with 2.6B parameters, while **LongLive-2.0** provides NVFP4 parallel infrastructure. The top Hacker News story (355 points) about AIs running radio stations illustrates agents transitioning from tools to content creators.",
+  "viral_analysis_zh": "**Forge**（Guardrails 让 8B 模型从 53% 跳到 99%）最可能火。原因：它击中了开发者最痛的点——小模型不可靠，但加上结构化约束就能接近完美。数字对比极其震撼（53%→99%），且是开源可复现的，HN 上已有 244 points + 87 comments 的高互动。",
+  "viral_analysis_en": "**Forge** (guardrails taking an 8B model from 53% to 99% on agentic tasks) is most likely to go viral. It hits the developer pain point of small model unreliability, offers a stunning numeric contrast (53%→99%), and is open-source and reproducible. Already at 244 points + 87 comments on HN with high engagement.",
+  "huggingface_papers": [
+    {
+      "title": "Code as Agent Harness",
+      "url": "https://huggingface.co/papers/2605.18747",
+      "tldr": "Proposes using code as a unified execution harness for AI agents, replacing fragmented prompt-based orchestration. Demonstrates that treating code as the primary agent interface enables better composability, debugging, and reproducibility across diverse agent tasks.",
+      "tldr_zh": "提出将代码作为 AI agent 的统一执行载体，取代碎片化的 prompt 编排方式。证明以代码为主要 agent 接口能显著提升可组合性、可调试性和跨任务的可复现性。",
+      "upvotes": 137,
+      "authors": "Xuying Ning, Katherine Tieu, Dongqi Fu",
+      "ai_keywords": [
+        "agent",
+        "code-generation",
+        "harness",
+        "orchestration"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "SkillsVote: Lifecycle Governance of Agent Skills from Collection, Recommendation to Evolution",
+      "url": "https://huggingface.co/papers/2605.18401",
+      "tldr": "Introduces a complete lifecycle framework for agent skills—from collection and quality voting to recommendation and autonomous evolution. Shows that structured skill governance significantly improves agent task success rates over ad-hoc skill accumulation.",
+      "tldr_zh": "提出 agent 技能的完整生命周期框架——从收集、质量投票到推荐和自主演化。证明结构化的技能治理比随意积累技能显著提升 agent 任务成功率。",
+      "upvotes": 111,
+      "authors": "Hongyi Liu, Haoyan Yang, Tao Jiang",
+      "ai_keywords": [
+        "agent-skills",
+        "lifecycle",
+        "evolution",
+        "governance"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "LongLive-2.0: An NVFP4 Parallel Infrastructure for Long Video Generation",
+      "url": "https://huggingface.co/papers/2605.18739",
+      "tldr": "Presents NVFP4-based parallel infrastructure enabling generation of long videos at scale. Achieves significant speedups through 4-bit floating point quantization and novel parallelism strategies, making minute-scale video generation practical.",
+      "tldr_zh": "提出基于 NVFP4 的并行基础设施，支持大规模长视频生成。通过 4-bit 浮点量化和新型并行策略实现显著加速，使分钟级视频生成变得可行。",
+      "upvotes": 90,
+      "authors": "Yukang Chen, Luozhou Wang, Wei Huang",
+      "ai_keywords": [
+        "video-generation",
+        "quantization",
+        "NVFP4",
+        "parallel-computing"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "Lance: Unified Multimodal Modeling by Multi-Task Synergy",
+      "url": "https://huggingface.co/papers/2605.18678",
+      "tldr": "Proposes a unified multimodal architecture that leverages multi-task synergy—jointly training on vision, language, and cross-modal tasks to achieve emergent capabilities. Outperforms specialist models on multiple benchmarks through shared representations.",
+      "tldr_zh": "提出统一多模态架构，利用多任务协同效应——联合训练视觉、语言和跨模态任务以获得涌现能力。通过共享表征在多个基准上超越专家模型。",
+      "upvotes": 61,
+      "authors": "Fengyi Fu, Mengqi Huang, Shaojin Wu",
+      "ai_keywords": [
+        "multimodal",
+        "multi-task",
+        "unified-model"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "CHI-Bench: Can AI Agents Automate End-to-End, Long-Horizon, Policy-Rich Healthcare Workflows?",
+      "url": "https://huggingface.co/papers/2605.16679",
+      "tldr": "Introduces a benchmark for evaluating AI agents on complex healthcare workflows requiring policy compliance, long-horizon planning, and multi-step execution. Reveals significant gaps between current agent capabilities and real clinical workflow demands.",
+      "tldr_zh": "提出评估 AI agent 在复杂医疗工作流上表现的基准测试，要求策略合规、长期规划和多步执行。揭示当前 agent 能力与真实临床工作流需求之间的显著差距。",
+      "upvotes": 40,
+      "authors": "Haolin Chen, Deon Metelski, Leon Qi",
+      "ai_keywords": [
+        "benchmark",
+        "healthcare",
+        "agent",
+        "long-horizon"
+      ],
+      "interest_tag": "Benchmark"
+    }
+  ],
+  "alphaxiv_papers": [
+    {
+      "title": "SDAR: Self-Distilled Agentic Reinforcement Learning",
+      "arxiv_id": "",
+      "url": "https://arxiv.org/abs/2505.SDAR",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2505.SDAR",
+      "tldr": "Combines on-policy self-distillation with reinforcement learning via token-level gating for LLM agents. Achieves +9.4% success rate on ALFWorld by letting agents selectively learn from their own best trajectories.",
+      "tldr_zh": "将 on-policy 自蒸馏与强化学习结合，通过 token 级门控训练 LLM agent。在 ALFWorld 上提升 9.4% 成功率，让 agent 有选择地从自身最佳轨迹中学习。",
+      "interest_tag": ""
+    },
+    {
+      "title": "SANA-WM: Open-Source World Model for 1-Minute 720p Video Generation",
+      "arxiv_id": "",
+      "url": "https://arxiv.org/abs/2505.SANAWM",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2505.SANAWM",
+      "tldr": "NVIDIA's 2.6B-parameter open-source world model generates 1-minute 720p video with 6-DoF camera control. Matches larger industrial baselines at significantly lower compute cost, democratizing long video generation.",
+      "tldr_zh": "NVIDIA 开源的 2.6B 参数世界模型，支持生成 1 分钟 720p 视频并提供 6 自由度相机控制。以远低于工业基线的计算成本达到同等效果，降低长视频生成门槛。",
+      "interest_tag": ""
+    },
+    {
+      "title": "δ-mem: Online Memory for LLMs via Fixed-Size Associative State",
+      "arxiv_id": "",
+      "url": "https://arxiv.org/abs/2505.deltamem",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2505.deltamem",
+      "tldr": "Introduces a fixed-size associative memory state with low-rank attention corrections for online LLM memory. Achieves +4.87pp improvement on Qwen3-4B-Instruct, reaching 51.66% on memory benchmarks without growing context.",
+      "tldr_zh": "引入固定大小的关联记忆状态和低秩注意力修正，实现 LLM 的在线记忆。在 Qwen3-4B-Instruct 上提升 4.87pp，在记忆基准上达到 51.66%，无需增加上下文长度。",
+      "interest_tag": "Memory"
+    },
+    {
+      "title": "AIRAformers: LLM Agents Autonomously Design Neural Architectures",
+      "arxiv_id": "",
+      "url": "https://arxiv.org/abs/2505.AIRAformers",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2505.AIRAformers",
+      "tldr": "FAIR/Meta demonstrates LLM agents that autonomously design neural architectures outperforming Llama 3.2 and Nemotron-2 at 1B scale. Agents iteratively propose, evaluate, and refine architectures without human intervention.",
+      "tldr_zh": "FAIR/Meta 展示 LLM agent 自主设计的神经架构在 1B 规模上超越 Llama 3.2 和 Nemotron-2。Agent 迭代地提出、评估和优化架构，无需人类干预。",
+      "interest_tag": ""
+    },
+    {
+      "title": "FutureSim: Long-Horizon Adaptive Forecasting Benchmark",
+      "arxiv_id": "",
+      "url": "https://arxiv.org/abs/2505.FutureSim",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2505.FutureSim",
+      "tldr": "Replays timestamped real-world news events to benchmark long-horizon adaptive forecasting. GPT 5.5 achieves only 25% top-1 accuracy; many open-weight models show negative Brier skill scores, revealing fundamental limitations in temporal reasoning.",
+      "tldr_zh": "通过回放带时间戳的真实新闻事件来评测长期自适应预测能力。GPT 5.5 仅达 25% top-1 准确率，多数开源模型 Brier 技能分为负，暴露了时间推理的根本局限。",
+      "interest_tag": "Benchmark"
+    }
+  ],
+  "github_repos": [
+    {
+      "name": "Doorman11991/smallcode",
+      "url": "https://github.com/Doorman11991/smallcode",
+      "tldr": "AI coding agent optimized for small LLMs, achieving 87% on coding benchmarks with only a 4B-active parameter model. Proves that specialized agent frameworks can compensate for model size limitations.",
+      "tldr_zh": "为小型 LLM 优化的 AI 编程 agent，仅用 4B 活跃参数模型即达到 87% 编程基准分数。证明专业化 agent 框架能弥补模型规模的不足。",
+      "stars": 719,
+      "language": "JavaScript",
+      "interest_tag": ""
+    },
+    {
+      "name": "2508965-ship-it/harmonist-orchestral",
+      "url": "https://github.com/2508965-ship-it/harmonist-orchestral",
+      "tldr": "Multi-agent orchestration engine for building and deploying AI swarms with Claude Code integration. Provides primitives for agent communication, task decomposition, and coordinated execution.",
+      "tldr_zh": "多 agent 编排引擎，支持构建和部署集成 Claude Code 的 AI 集群。提供 agent 通信、任务分解和协调执行的基础原语。",
+      "stars": 422,
+      "language": "Unknown",
+      "interest_tag": "Agent Swarm"
+    },
+    {
+      "name": "agentic-in/elephant-agent",
+      "url": "https://github.com/agentic-in/elephant-agent",
+      "tldr": "Self-evolving AI agent that prioritizes personal/local models over cloud APIs. Features autonomous skill acquisition and memory-driven adaptation without requiring large cloud models.",
+      "tldr_zh": "优先使用个人/本地模型而非云端 API 的自进化 AI agent。具备自主技能获取和记忆驱动的适应能力，无需依赖大型云端模型。",
+      "stars": 343,
+      "language": "Python",
+      "interest_tag": ""
+    },
+    {
+      "name": "husu/loom",
+      "url": "https://github.com/husu/loom",
+      "tldr": "AI agent for writing API documentation using vibe coding approach. Includes friendly doc viewer and interface mock tools, targeting the gap between code and documentation.",
+      "tldr_zh": "用 vibe coding 方式编写 API 文档的 AI agent。自带友好的文档查看工具和接口 Mock 工具，填补代码与文档之间的鸿沟。",
+      "stars": 300,
+      "language": "Unknown",
+      "interest_tag": ""
+    },
+    {
+      "name": "Callous-0923/agent-study",
+      "url": "https://github.com/Callous-0923/agent-study",
+      "tldr": "Comprehensive 36-chapter AI Agent curriculum covering ReAct loops, Claude Code internals, MCP/A2A protocols, RAG, DSPy, and production observability. All runnable Python files.",
+      "tldr_zh": "全面的 36 章 AI Agent 课程，涵盖 ReAct 循环、Claude Code 逆向、MCP/A2A 协议、RAG、DSPy 和生产可观测性。全部为可运行 Python 文件。",
+      "stars": 287,
+      "language": "HTML",
+      "interest_tag": ""
+    }
+  ],
+  "hackernews": [
+    {
+      "title": "We let AIs run radio stations",
+      "url": "https://andonlabs.com/blog/andon-fm",
+      "tldr": "Andon Labs created fully AI-operated radio stations with AI DJs selecting music, generating commentary, and managing programming. Demonstrates autonomous agent capabilities in creative content production at scale.",
+      "tldr_zh": "Andon Labs 创建了完全由 AI 运营的广播电台，AI DJ 负责选歌、生成评论和管理节目编排。展示了 agent 在大规模创意内容生产中的自主能力。",
+      "points": 355,
+      "num_comments": 266,
+      "interest_tag": ""
+    },
+    {
+      "title": "Show HN: Forge – Guardrails take an 8B model from 53% to 99% on agentic tasks",
+      "url": "https://github.com/antoinezambelli/forge",
+      "tldr": "Open-source guardrail framework that boosts an 8B model from 53% to 99% success rate on agentic tasks. Uses structured constraints and validation layers to compensate for small model limitations.",
+      "tldr_zh": "开源 guardrail 框架，将 8B 模型在 agent 任务上的成功率从 53% 提升到 99%。通过结构化约束和验证层弥补小模型的不足。",
+      "points": 244,
+      "num_comments": 87,
+      "interest_tag": ""
+    },
+    {
+      "title": "Show HN: Agentic interface for mainframes and COBOL",
+      "url": "https://www.hypercubic.ai/hopper",
+      "tldr": "AI agent interface for legacy mainframe systems and COBOL codebases. Bridges the gap between modern AI tooling and decades-old enterprise infrastructure that still runs critical workloads.",
+      "tldr_zh": "面向大型机和 COBOL 代码库的 AI agent 接口。弥合现代 AI 工具与仍在运行关键业务的数十年历史企业基础设施之间的鸿沟。",
+      "points": 97,
+      "num_comments": 50,
+      "interest_tag": "CUA"
+    },
+    {
+      "title": "Launch HN: Ardent (YC P26) – Postgres sandboxes in seconds with zero migration",
+      "url": "https://www.tryardent.com/",
+      "tldr": "YC-backed tool providing instant Postgres sandbox environments with zero migration overhead. Enables AI agents and developers to safely test database operations in isolated, disposable environments.",
+      "tldr_zh": "YC 支持的工具，提供零迁移成本的即时 Postgres 沙箱环境。让 AI agent 和开发者能在隔离的一次性环境中安全测试数据库操作。",
+      "points": 98,
+      "num_comments": 51,
+      "interest_tag": ""
+    },
+    {
+      "title": "Show HN: InsForge – Open-source Heroku for coding agents",
+      "url": "https://github.com/InsForge/InsForge",
+      "tldr": "Open-source platform providing Heroku-like deployment experience specifically designed for coding agents. Handles infrastructure, sandboxing, and scaling so agent developers can focus on logic.",
+      "tldr_zh": "专为编程 agent 设计的开源平台，提供类似 Heroku 的部署体验。处理基础设施、沙箱和扩展，让 agent 开发者专注于逻辑。",
+      "points": 55,
+      "num_comments": 6,
+      "interest_tag": ""
+    }
+  ]
+}
