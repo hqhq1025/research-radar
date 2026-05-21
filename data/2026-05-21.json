@@ -1,0 +1,226 @@
+{
+  "date": "2026-05-21",
+  "generated_at": "2026-05-21T01:03:06.234637Z",
+  "briefing_zh": "今天 AI 研究最大亮点是 **OpenComputer** 框架——为 Computer-Use Agent 提供可验证的软件世界环境，这对 GUI Agent 评测意义重大。同时 **Forge** 项目在 Hacker News 爆火（646 points），展示了 guardrails 如何将 8B 小模型在 agentic 任务上从 53% 提升到 99%，暗示小模型+约束工程可能是 agent 落地的务实路线。\n\n在推理 RL 方向，**Anti-Self-Distillation** 提出用 PMI 避免自蒸馏中的模式坍塌，而 **GoLongRL** 给出了首个完全开源的长上下文 RL 训练方案。这两项工作都在推动 reasoning model 的后训练范式进化。\n\n**Qwen3.7-Max** 发布引发社区热议（602 points），定位 Agent Frontier，表明中国大模型在 agent 能力上与前沿正面竞争。视频理解领域，When Vision Speaks for Sound 揭示了多模态模型'听觉幻觉'问题，值得警惕。",
+  "briefing_en": "Today's biggest highlight is **OpenComputer**, a verifier-grounded framework for constructing verifiable software worlds for computer-use agents — a significant step for GUI agent evaluation. Meanwhile, **Forge** exploded on Hacker News (646 points), demonstrating how guardrails can boost an 8B model from 53% to 99% on agentic tasks, suggesting small models + constraint engineering as a pragmatic path to agent deployment.\n\nIn reasoning RL, **Anti-Self-Distillation** uses PMI to prevent mode collapse in self-distillation, while **GoLongRL** delivers the first fully open-source long-context RL training recipe. Both push the post-training paradigm for reasoning models forward.\n\n**Qwen3.7-Max** launched with an 'Agent Frontier' positioning (602 HN points), signaling Chinese LLMs competing head-on in agent capabilities. In multimodal understanding, 'When Vision Speaks for Sound' reveals that video MLLMs hallucinate audio from visual cues — a cautionary finding for multimodal evaluation.",
+  "viral_analysis_zh": "**Forge** 最可能火——它用极简的 guardrails 方法把小模型 agent 准确率从 53% 拉到 99%，完美击中社区对'不需要 GPT-4 也能做 agent'的渴望。标题数字对比感强，开源可复现，符合 HN 爆款三要素：反直觉结果 + 实用 + 可验证。",
+  "viral_analysis_en": "**Forge** is most likely to go viral — it uses minimal guardrails to boost a small 8B model from 53% to 99% on agentic tasks, perfectly hitting the community's desire for 'agents without GPT-4'. The title has strong numerical contrast, it's open-source and reproducible, checking all HN viral boxes: counterintuitive result + practical + verifiable.",
+  "huggingface_papers": [
+    {
+      "title": "When Vision Speaks for Sound",
+      "url": "https://huggingface.co/papers/2605.16403",
+      "tldr": "Reveals that video MLLMs often hallucinate audio understanding from visual cues rather than genuinely processing acoustic information. Proposes diagnostic benchmarks separating visual-inferable vs. vision-independent audio tasks, finding significant performance gaps.",
+      "tldr_zh": "揭示视频多模态大模型的'听觉理解'实际上是从视觉线索推断/幻觉出来的，而非真正处理声学信息。提出诊断基准将视觉可推断与视觉无关的音频任务分离，发现显著性能差距。",
+      "upvotes": 86,
+      "authors": "Xiaofei Wen, Wenjie Jacky Mo, Xingyu Fu",
+      "ai_keywords": [
+        "multimodal",
+        "audio understanding",
+        "hallucination",
+        "video LLM"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "Active Learners as Efficient PRP Rerankers",
+      "url": "https://huggingface.co/papers/2605.14236",
+      "tldr": "Applies active learning strategies to Pairwise Ranking Prompting, drastically reducing the number of LLM comparisons needed for high-quality reranking. Achieves near-optimal ranking with far fewer queries than classical sorting-based aggregation.",
+      "tldr_zh": "将主动学习策略应用于 Pairwise Ranking Prompting，大幅减少高质量重排所需的 LLM 比较次数。用远少于经典排序聚合的查询次数达到接近最优排序。",
+      "upvotes": 83,
+      "authors": "Jeremías Figueiredo Paschmann, Juan Kaplan, Francisco Nattero",
+      "ai_keywords": [
+        "reranking",
+        "active learning",
+        "information retrieval",
+        "LLM"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "Anti-Self-Distillation for Reasoning RL via Pointwise Mutual Information",
+      "url": "https://huggingface.co/papers/2605.11609",
+      "tldr": "Identifies that on-policy self-distillation causes mode collapse in reasoning RL. Proposes PMI-based anti-self-distillation that rewards novel reasoning paths while penalizing repetitive patterns, improving diversity and accuracy on math/code benchmarks.",
+      "tldr_zh": "发现 on-policy 自蒸馏会导致推理 RL 中的模式坍塌。提出基于 PMI 的反自蒸馏方法，奖励新颖推理路径同时惩罚重复模式，在数学/代码基准上提升多样性和准确率。",
+      "upvotes": 61,
+      "authors": "Guobin Shen, Xiang Cheng, Chenxiao Zhao",
+      "ai_keywords": [
+        "reasoning",
+        "reinforcement learning",
+        "self-distillation",
+        "PMI"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "GoLongRL: Capability-Oriented Long Context Reinforcement Learning with Multitask Alignment",
+      "url": "https://huggingface.co/papers/2605.19577",
+      "tldr": "First fully open-source long-context RL recipe using verifiable rewards. Decomposes long-context capability into sub-tasks (retrieval, reasoning, summarization) and trains with multitask RLVR, achieving strong gains on RULER and LongBench.",
+      "tldr_zh": "首个完全开源的长上下文 RL 训练方案，使用可验证奖励。将长上下文能力分解为子任务（检索、推理、摘要），用多任务 RLVR 训练，在 RULER 和 LongBench 上取得显著提升。",
+      "upvotes": 51,
+      "authors": "Minxuan Lv, Tiehua Mei, Tanlong Du",
+      "ai_keywords": [
+        "long context",
+        "reinforcement learning",
+        "RLVR",
+        "multitask"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "OpenComputer: Verifiable Software Worlds for Computer-Use Agents",
+      "url": "https://huggingface.co/papers/2605.19769",
+      "tldr": "Presents a verifier-grounded framework for building reproducible software environments to train and evaluate computer-use agents. Integrates app-specific state verifiers enabling precise success measurement beyond screenshot matching.",
+      "tldr_zh": "提出验证器驱动的框架，用于构建可复现的软件环境来训练和评估 Computer-Use Agent。集成应用级状态验证器，实现超越截图匹配的精确成功度量。",
+      "upvotes": 50,
+      "authors": "Jinbiao Wei, Qianran Ma, Yilun Zhao",
+      "ai_keywords": [
+        "computer use agent",
+        "GUI agent",
+        "verification",
+        "benchmark"
+      ],
+      "interest_tag": "CUA"
+    }
+  ],
+  "alphaxiv_papers": [
+    {
+      "title": "SDAR: Self-Distilled Agentic Reinforcement Learning",
+      "arxiv_id": "2505.14000",
+      "url": "https://arxiv.org/abs/2505.14000",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2505.14000",
+      "tldr": "Combines on-policy self-distillation with token-level gating for agentic RL. Achieves +9.4% success rate on ALFWorld by letting the agent selectively distill knowledge from its own successful trajectories.",
+      "tldr_zh": "结合 on-policy 自蒸馏与 token 级门控用于 agentic RL。通过让 agent 选择性地从自身成功轨迹中蒸馏知识，在 ALFWorld 上提升 9.4% 成功率。",
+      "interest_tag": ""
+    },
+    {
+      "title": "MEMO: Memory-Augmented LLM via External Knowledge Model",
+      "arxiv_id": "2505.13500",
+      "url": "https://arxiv.org/abs/2505.13500",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2505.13500",
+      "tldr": "Introduces a dedicated MEMORY model trained on synthesized reflections that augments a frozen executive LLM. Outperforms RAG baselines by providing structured, distilled knowledge without modifying the main model's parameters.",
+      "tldr_zh": "引入专门的 MEMORY 模型（在合成反思数据上训练）来增强冻结的执行 LLM。通过提供结构化蒸馏知识（无需修改主模型参数），超越 RAG 基线。",
+      "interest_tag": "Memory"
+    },
+    {
+      "title": "LLM Agents Autonomously Design AIRAformers Outperforming Llama 3.2",
+      "arxiv_id": "2505.12800",
+      "url": "https://arxiv.org/abs/2505.12800",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2505.12800",
+      "tldr": "Meta FAIR demonstrates LLM agents that autonomously design novel architectures (AIRAformers/AIRAhybrids) outperforming Llama 3.2 and Nemotron-2 at 1B scale. A step toward AI-driven neural architecture search.",
+      "tldr_zh": "Meta FAIR 展示 LLM agent 自主设计新架构（AIRAformers/AIRAhybrids），在 1B 规模超越 Llama 3.2 和 Nemotron-2。迈向 AI 驱动的神经架构搜索。",
+      "interest_tag": ""
+    },
+    {
+      "title": "FutureSim: Replaying Timestamped News for Long-Horizon AI Forecasting",
+      "arxiv_id": "2505.13200",
+      "url": "https://arxiv.org/abs/2505.13200",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2505.13200",
+      "tldr": "A benchmark that replays timestamped news events to test AI forecasting ability. GPT 5.5 achieves only 25% top-1 accuracy; many open-weight models show negative Brier skill scores, revealing significant gaps in temporal reasoning.",
+      "tldr_zh": "通过回放时间戳新闻事件来测试 AI 预测能力的基准。GPT 5.5 仅达 25% top-1 准确率；多数开源模型 Brier 技能分为负，揭示时间推理的重大缺陷。",
+      "interest_tag": "Benchmark"
+    },
+    {
+      "title": "Valkyrie: Cloud-Native Microservice AI Evaluation Framework",
+      "arxiv_id": "2505.14200",
+      "url": "https://arxiv.org/abs/2505.14200",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2505.14200",
+      "tldr": "A microservice-based evaluation framework for AI agents that achieves consistency with SWE-bench and Terminal-Bench 2.0 leaderboards. Designed for reproducible, scalable evaluation of coding and terminal agents.",
+      "tldr_zh": "基于微服务的 AI agent 评测框架，与 SWE-bench 和 Terminal-Bench 2.0 排行榜结果一致。专为代码和终端 agent 的可复现、可扩展评测设计。",
+      "interest_tag": "Benchmark"
+    }
+  ],
+  "github_repos": [
+    {
+      "name": "Doorman11991/smallcode",
+      "url": "https://github.com/Doorman11991/smallcode",
+      "tldr": "AI coding agent optimized for small LLMs, achieving 87% on coding benchmarks with only a 4B-active-parameter model. Demonstrates that specialized agent architectures can compensate for model size.",
+      "tldr_zh": "为小型 LLM 优化的 AI 编码 agent，仅用 4B 活跃参数模型在编码基准上达到 87%。证明专用 agent 架构可以弥补模型规模的不足。",
+      "stars": 841,
+      "language": "JavaScript",
+      "interest_tag": ""
+    },
+    {
+      "name": "agentic-in/elephant-agent",
+      "url": "https://github.com/agentic-in/elephant-agent",
+      "tldr": "A self-evolving AI agent that puts your personal model first — adapts and improves based on your usage patterns. Emphasizes local-first, privacy-preserving agent behavior.",
+      "tldr_zh": "个人模型优先的自进化 AI Agent——根据用户使用模式自适应改进。强调本地优先、隐私保护的 agent 行为。",
+      "stars": 364,
+      "language": "Python",
+      "interest_tag": ""
+    },
+    {
+      "name": "husu/loom",
+      "url": "https://github.com/husu/loom",
+      "tldr": "An AI agent for writing API documentation via vibe coding. Includes a friendly doc viewer and API mock tool, streamlining the API design workflow.",
+      "tldr_zh": "用 Vibe Coding 方式编写接口文档的 AI Agent，自带友好文档查看工具与接口 Mock 工具，简化 API 设计流程。",
+      "stars": 329,
+      "language": "N/A",
+      "interest_tag": ""
+    },
+    {
+      "name": "datawhalechina/Agent-Learning-Hub",
+      "url": "https://github.com/datawhalechina/Agent-Learning-Hub",
+      "tldr": "Curated learning path and resource collection for AI agents, organized by Datawhale community. Covers fundamentals to advanced agent design patterns.",
+      "tldr_zh": "Datawhale 社区整理的 AI Agent 学习路线与资料库，从基础到高级 agent 设计模式全覆盖。",
+      "stars": 147,
+      "language": "N/A",
+      "interest_tag": ""
+    },
+    {
+      "name": "shenli/distributed-system-testing",
+      "url": "https://github.com/shenli/distributed-system-testing",
+      "tldr": "AI agent skills specialized for distributed systems testing — automating chaos engineering, fault injection, and correctness verification in distributed architectures.",
+      "tldr_zh": "专用于分布式系统测试的 AI agent 技能——自动化混沌工程、故障注入和分布式架构正确性验证。",
+      "stars": 116,
+      "language": "N/A",
+      "interest_tag": ""
+    }
+  ],
+  "hackernews": [
+    {
+      "title": "Show HN: Forge – Guardrails take an 8B model from 53% to 99% on agentic tasks",
+      "url": "https://github.com/antoinezambelli/forge",
+      "tldr": "Demonstrates that adding structured guardrails (output validation, retry logic, constrained generation) to a small 8B model can boost agentic task performance from 53% to 99%, rivaling much larger models.",
+      "tldr_zh": "展示结构化 guardrails（输出验证、重试逻辑、受约束生成）如何将 8B 小模型的 agentic 任务表现从 53% 提升到 99%，媲美大模型。",
+      "points": 646,
+      "num_comments": 234,
+      "interest_tag": ""
+    },
+    {
+      "title": "Qwen3.7-Max: The Agent Frontier",
+      "url": "https://qwen.ai/blog?id=qwen3.7",
+      "tldr": "Alibaba releases Qwen3.7-Max positioned as an 'Agent Frontier' model with enhanced tool-use, planning, and multi-step reasoning. Benchmarks show competitive performance against GPT-4o and Claude on agent tasks.",
+      "tldr_zh": "阿里发布 Qwen3.7-Max，定位'Agent Frontier'模型，增强工具调用、规划和多步推理能力。基准测试显示在 agent 任务上与 GPT-4o、Claude 竞争。",
+      "points": 602,
+      "num_comments": 241,
+      "interest_tag": ""
+    },
+    {
+      "title": "We let AIs run radio stations",
+      "url": "https://andonlabs.com/blog/andon-fm",
+      "tldr": "Andon Labs experiment letting AI agents fully operate radio stations — selecting music, generating commentary, managing transitions. Explores emergent behaviors when agents have continuous creative autonomy.",
+      "tldr_zh": "Andon Labs 实验让 AI agent 完全运营电台——选曲、生成评论、管理过渡。探索 agent 拥有持续创意自主权时的涌现行为。",
+      "points": 365,
+      "num_comments": 271,
+      "interest_tag": ""
+    },
+    {
+      "title": "Formal Verification Gates for AI Coding Loops",
+      "url": "https://reubenbrooks.dev/blog/structural-backpressure-beats-smarter-agents/",
+      "tldr": "Argues that structural backpressure (formal verification gates) in AI coding loops outperforms simply making agents smarter. Proposes verification checkpoints that force agents to prove correctness before proceeding.",
+      "tldr_zh": "论证 AI 编码循环中的结构性背压（形式验证门控）比单纯让 agent 更聪明更有效。提出验证检查点强制 agent 在继续前证明正确性。",
+      "points": 105,
+      "num_comments": 24,
+      "interest_tag": ""
+    },
+    {
+      "title": "Testing distributed systems with AI agents",
+      "url": "https://github.com/shenli/distributed-system-testing",
+      "tldr": "Framework for using AI agents to test distributed systems — automating fault injection scenarios, checking invariants, and generating test plans that would take humans days to write manually.",
+      "tldr_zh": "用 AI agent 测试分布式系统的框架——自动化故障注入场景、检查不变量、生成人类需要数天手写的测试计划。",
+      "points": 76,
+      "num_comments": 12,
+      "interest_tag": ""
+    }
+  ]
+}
