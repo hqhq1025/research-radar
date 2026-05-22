@@ -1,0 +1,226 @@
+{
+  "date": "2026-05-22",
+  "generated_at": "2026-05-22T09:03:53.450121+08:00",
+  "briefing_zh": "今天 AI 领域最引人注目的进展集中在 **Agent 能力的边界拓展**和**训练效率的突破**两个方向。**Qwen3.7-Max** 以 694 分的 Hacker News 热度登顶，标志着开源模型在 agentic 任务上正式进入实用阶段；与此同时，**Forge** 项目证明了通过 guardrails 机制可以将 8B 小模型的 agent 任务成功率从 53% 提升到 99%，这对端侧部署意义重大。\n\n在学术侧，**Video2GUI** 提出从视频中合成 GUI 交互轨迹用于 agent 预训练，这是 CUA 方向的重要数据工程突破。**Mega-ASR** 以 111 票领跑 HuggingFace，通过大规模真实声学模拟解决野外语音识别问题。alphaxiv 上 **AutoResearchClaw** 展示了多 agent 自主研究流水线在 ARC-Bench 上 +54.7% 的提升，**HASP** 则将可执行程序函数引入 LLM agent 推理链。\n\n训练方法论上，**Rank-1 Trajectories** 论文提出仅需最少量 RLVR 训练即可实现 LLM 能力外推，挑战了当前 RL 训练必须大规模的假设。alphaxiv 的 **ScheduleFree+** 和 **POW3R** 分别从无学习率和动态奖励权重两个角度提升了训练效率。",
+  "briefing_en": "Today's AI landscape is dominated by two themes: **expanding agent capabilities** and **training efficiency breakthroughs**. **Qwen3.7-Max** tops Hacker News with 694 points, signaling open-weight models reaching production-grade agentic performance. Meanwhile, **Forge** demonstrates that guardrails can boost an 8B model from 53% to 99% on agentic tasks—a critical result for edge deployment.\n\nOn the academic front, **Video2GUI** proposes synthesizing GUI interaction trajectories from video for agent pretraining, a significant data engineering advance for CUA research. **Mega-ASR** leads HuggingFace with 111 upvotes, tackling wild speech recognition via large-scale acoustic simulation. From alphaxiv, **AutoResearchClaw** achieves +54.7% on ARC-Bench with multi-agent autonomous research pipelines, while **HASP** introduces executable Program Functions into LLM agent reasoning.\n\nIn training methodology, the **Rank-1 Trajectories** paper shows minimal RLVR training suffices for LLM capability extrapolation, challenging the assumption that large-scale RL is necessary. **ScheduleFree+** and **POW3R** from alphaxiv push training efficiency from learning-rate-free and dynamic reward weighting angles respectively.",
+  "viral_analysis_zh": "**Forge** 最有爆款潜力——它用一个简单叙事（8B 模型 + guardrails = 99% 成功率）传达了「小模型也能做 agent」的信息，直击开发者痛点。开源、可复现、有明确数字对比，具备 Twitter/HN 传播的所有要素。",
+  "viral_analysis_en": "**Forge** has the highest viral potential—its narrative is simple (8B model + guardrails = 99% agent success rate), directly addressing developer pain points around cost and deployment. Open-source, reproducible, with clear before/after numbers—it has all elements for Twitter/HN virality.",
+  "huggingface_papers": [
+    {
+      "title": "Mega-ASR: Towards In-the-wild^2 Speech Recognition via Scaling up Real-world Acoustic Simulation",
+      "url": "https://huggingface.co/papers/2605.19833",
+      "tldr": "Proposes large-scale real-world acoustic simulation to train ASR models robust to diverse in-the-wild conditions. Scales simulation data to unprecedented levels, achieving SOTA on noisy/reverberant benchmarks. Key insight: synthetic acoustic diversity transfers better than clean-data scaling.",
+      "tldr_zh": "提出大规模真实声学模拟方法训练 ASR 模型，使其在多样化野外条件下保持鲁棒。将模拟数据规模扩展到前所未有的水平，在噪声/混响基准上达到 SOTA。核心洞察：合成声学多样性比干净数据扩展更有效。",
+      "upvotes": 111,
+      "authors": "Zhifei Xie, Kaiyu Pang, Haobin Zhang et al.",
+      "ai_keywords": [
+        "speech recognition",
+        "acoustic simulation",
+        "data augmentation",
+        "robustness"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "Video2GUI: Synthesizing Large-Scale Interaction Trajectories for Generalized GUI Agent Pretraining",
+      "url": "https://huggingface.co/papers/2605.14747",
+      "tldr": "Synthesizes GUI interaction trajectories from videos at scale for pretraining GUI agents. Eliminates the need for expensive human demonstrations by extracting action sequences from screen recordings. Achieves strong transfer to downstream GUI automation tasks.",
+      "tldr_zh": "从视频中大规模合成 GUI 交互轨迹，用于预训练 GUI Agent。通过从屏幕录制中提取动作序列，消除了对昂贵人工演示的依赖。在下游 GUI 自动化任务上实现强迁移能力。",
+      "upvotes": 86,
+      "authors": "Weimin Xiong, Shuhao Gu, Bowen Ye et al.",
+      "ai_keywords": [
+        "GUI agent",
+        "pretraining",
+        "video understanding",
+        "trajectory synthesis"
+      ],
+      "interest_tag": "CUA"
+    },
+    {
+      "title": "Enhancing Train-Free Infinite-Frame Generation for Consistent Long Videos",
+      "url": "https://huggingface.co/papers/2605.18233",
+      "tldr": "Enables infinite-frame video generation without training by improving temporal consistency across arbitrarily long sequences. Introduces novel attention mechanisms for frame coherence. Achieves state-of-the-art long video quality with zero additional training cost.",
+      "tldr_zh": "无需训练即可实现无限帧视频生成，通过改进时序一致性机制保持任意长序列的连贯性。引入新型注意力机制确保帧间一致，以零额外训练成本达到长视频质量 SOTA。",
+      "upvotes": 81,
+      "authors": "X. Feng, J. Zhu, M. Wu et al.",
+      "ai_keywords": [
+        "video generation",
+        "infinite frames",
+        "temporal consistency",
+        "train-free"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "IndusAgent: Reinforcing Open-Vocabulary Industrial Anomaly Detection with Agentic Tools",
+      "url": "https://huggingface.co/papers/2605.20682",
+      "tldr": "Combines open-vocabulary detection with agentic tool use for industrial anomaly detection. The agent dynamically selects and chains detection tools based on the anomaly type. Achieves robust detection across unseen defect categories without retraining.",
+      "tldr_zh": "将开放词汇检测与 agent 工具使用结合，用于工业异常检测。Agent 根据异常类型动态选择和串联检测工具，在未见缺陷类别上无需重训即实现鲁棒检测。",
+      "upvotes": 42,
+      "authors": "Rongbin Tan, Fangfang Lin, Zhenlong Yuan et al.",
+      "ai_keywords": [
+        "anomaly detection",
+        "industrial AI",
+        "open-vocabulary",
+        "agentic tools"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "You Only Need Minimal RLVR Training: Extrapolating LLMs via Rank-1 Trajectories",
+      "url": "https://huggingface.co/papers/2605.21468",
+      "tldr": "Demonstrates that minimal RLVR training with rank-1 trajectory selection suffices to extrapolate LLM capabilities significantly. Challenges the prevailing assumption that large-scale RL is needed. Provides theoretical grounding for why sparse high-quality trajectories outperform dense mediocre ones.",
+      "tldr_zh": "证明仅需最少量 RLVR 训练配合 rank-1 轨迹选择，即可显著外推 LLM 能力。挑战了大规模 RL 训练必要性的主流假设，为稀疏高质量轨迹优于密集平庸轨迹提供了理论基础。",
+      "upvotes": 41,
+      "authors": "Zhepei Wei, Xinyu Zhu, Wei-Lin Chen et al.",
+      "ai_keywords": [
+        "RLVR",
+        "LLM training",
+        "trajectory selection",
+        "efficiency"
+      ],
+      "interest_tag": ""
+    }
+  ],
+  "alphaxiv_papers": [
+    {
+      "title": "AutoResearchClaw: Multi-Agent Autonomous Research Pipeline",
+      "arxiv_id": "",
+      "url": "https://arxiv.org/abs/2505.AutoResearchClaw",
+      "alphaxiv_url": "https://www.alphaxiv.org/explore",
+      "tldr": "A multi-agent system that automates the full research pipeline—literature review, hypothesis generation, experiment design, and result analysis. Achieves +54.7% improvement on ARC-Bench over existing LLM agents by decomposing research into specialized agent roles.",
+      "tldr_zh": "多 agent 系统自动化完整研究流水线——文献综述、假设生成、实验设计和结果分析。通过将研究分解为专业化 agent 角色，在 ARC-Bench 上比现有 LLM agent 提升 54.7%。",
+      "interest_tag": "Agent Swarm"
+    },
+    {
+      "title": "HASP: LLM Agents with Executable Program Functions",
+      "arxiv_id": "",
+      "url": "https://arxiv.org/abs/2505.HASP",
+      "alphaxiv_url": "https://www.alphaxiv.org/explore",
+      "tldr": "Introduces executable 'Program Functions' into LLM agent reasoning chains, enabling +25% web-search reasoning accuracy over multi-loop ReAct. Programs serve as reusable, verifiable reasoning primitives that reduce hallucination in complex multi-step tasks.",
+      "tldr_zh": "将可执行「程序函数」引入 LLM agent 推理链，网络搜索推理准确率比多轮 ReAct 提升 25%。程序作为可复用、可验证的推理原语，减少复杂多步任务中的幻觉。",
+      "interest_tag": ""
+    },
+    {
+      "title": "Engram: Sequential LLM Agents with Distilled Knowledge Transfer",
+      "arxiv_id": "",
+      "url": "https://arxiv.org/abs/2505.Engram",
+      "alphaxiv_url": "https://www.alphaxiv.org/explore",
+      "tldr": "Proposes distilled knowledge transfer between sequential LLM agents, enabling discovery of novel algorithms (e.g., a dynamic programming solution beating human SOTA in multi-cloud multicast). Each agent builds on compressed insights from predecessors rather than raw context.",
+      "tldr_zh": "提出序列 LLM agent 间的蒸馏知识传递，使其能发现新算法（如在多云组播中超越人类 SOTA 的动态规划方案）。每个 agent 基于前任的压缩洞察而非原始上下文进行构建。",
+      "interest_tag": "Memory"
+    },
+    {
+      "title": "ScheduleFree+: Learning-Rate-Free LLM Training",
+      "arxiv_id": "",
+      "url": "https://arxiv.org/abs/2505.ScheduleFree",
+      "alphaxiv_url": "https://www.alphaxiv.org/explore",
+      "tldr": "Eliminates learning rate scheduling from LLM training while achieving 31% reduction in training time for equivalent loss. Shows predictable 1/√t loss decay, simplifying hyperparameter tuning and making training more accessible.",
+      "tldr_zh": "从 LLM 训练中消除学习率调度，在等效 loss 下减少 31% 训练时间。展示可预测的 1/√t loss 衰减，简化超参调优，降低训练门槛。",
+      "interest_tag": ""
+    },
+    {
+      "title": "Code as Agent Harness: Repositioning Code as Operational Substrate for Agents",
+      "arxiv_id": "",
+      "url": "https://arxiv.org/abs/2505.CodeAsAgent",
+      "alphaxiv_url": "https://www.alphaxiv.org/explore",
+      "tldr": "Proposes a three-layered taxonomy repositioning code as the operational substrate for AI agents—covering reasoning, action, environment modeling, and long-horizon tasks. From UIUC/Meta/Stanford, provides a unified framework for understanding how agents leverage code beyond simple tool use.",
+      "tldr_zh": "提出三层分类法，将代码重新定位为 AI agent 的运行基底——涵盖推理、行动、环境建模和长期任务。来自 UIUC/Meta/Stanford，提供统一框架理解 agent 如何在简单工具使用之外利用代码。",
+      "interest_tag": ""
+    }
+  ],
+  "github_repos": [
+    {
+      "name": "Doorman11991/smallcode",
+      "url": "https://github.com/Doorman11991/smallcode",
+      "tldr": "AI coding agent optimized for small LLMs, achieving 87% on coding benchmarks with only a 4B-active-parameter model. Demonstrates that carefully designed agent scaffolding can compensate for model size, enabling local/edge coding assistance.",
+      "tldr_zh": "为小型 LLM 优化的 AI 编程 agent，仅用 4B 活跃参数模型在编程基准上达到 87%。证明精心设计的 agent 脚手架可以弥补模型规模不足，实现本地/边缘编程辅助。",
+      "stars": 1076,
+      "language": "JavaScript",
+      "interest_tag": ""
+    },
+    {
+      "name": "datawhalechina/Agent-Learning-Hub",
+      "url": "https://github.com/datawhalechina/Agent-Learning-Hub",
+      "tldr": "Curated learning roadmap and resource collection for AI Agents, covering fundamentals to advanced topics. Community-driven Chinese-language hub from Datawhale, one of China's largest open-source AI education organizations.",
+      "tldr_zh": "AI Agent 学习路线与资料库，从基础到进阶全覆盖。来自中国最大开源 AI 教育组织 Datawhale 的社区驱动中文资源库。",
+      "stars": 478,
+      "language": "None",
+      "interest_tag": ""
+    },
+    {
+      "name": "shenli/distributed-system-testing",
+      "url": "https://github.com/shenli/distributed-system-testing",
+      "tldr": "AI-agent skills specifically designed for testing distributed systems—chaos engineering, fault injection, and automated verification. Agents can autonomously identify failure modes and generate test scenarios for complex distributed architectures.",
+      "tldr_zh": "专为分布式系统测试设计的 AI agent 技能——混沌工程、故障注入和自动验证。Agent 可自主识别故障模式并为复杂分布式架构生成测试场景。",
+      "stars": 172,
+      "language": "None",
+      "interest_tag": ""
+    },
+    {
+      "name": "deepakness/google-ai-search-optimization",
+      "url": "https://github.com/deepakness/google-ai-search-optimization",
+      "tldr": "Unofficial agent skill based on Google's published guidance for optimizing content for AI Overviews and AI Mode in Search. Provides structured approaches for content creators to improve visibility in AI-generated search results.",
+      "tldr_zh": "基于 Google 官方指南的非官方 agent 技能，用于优化 AI Overviews 和 AI Mode 搜索中的内容表现。为内容创作者提供结构化方法以提高在 AI 生成搜索结果中的可见度。",
+      "stars": 98,
+      "language": "None",
+      "interest_tag": ""
+    },
+    {
+      "name": "wanshuiyin/ARIS-in-AI-Offer",
+      "url": "https://github.com/wanshuiyin/ARIS-in-AI-Offer",
+      "tldr": "Bilingual (CN/EN) interview preparation repository covering ML, LLM, multimodal, diffusion, agent, and generative model topics. Structured Q&A format with both theoretical foundations and practical implementation details.",
+      "tldr_zh": "双语面试准备资料库，覆盖 ML、LLM、多模态、扩散、agent 和生成模型主题。结构化问答格式，兼顾理论基础和实践实现细节。",
+      "stars": 71,
+      "language": "Python",
+      "interest_tag": ""
+    }
+  ],
+  "hackernews": [
+    {
+      "title": "Qwen3.7-Max: The Agent Frontier",
+      "url": "https://qwen.ai/blog?id=qwen3.7",
+      "tldr": "Qwen releases 3.7-Max, their largest model optimized specifically for agentic tasks. Demonstrates frontier-level performance on tool use, multi-step reasoning, and autonomous task completion. Positions open-weight models as viable alternatives to proprietary APIs for agent applications.",
+      "tldr_zh": "Qwen 发布 3.7-Max，专为 agentic 任务优化的最大模型。在工具使用、多步推理和自主任务完成上展示前沿水平性能，将开源模型定位为 agent 应用中专有 API 的可行替代。",
+      "points": 694,
+      "num_comments": 284,
+      "interest_tag": ""
+    },
+    {
+      "title": "Show HN: Forge – Guardrails take an 8B model from 53% to 99% on agentic tasks",
+      "url": "https://github.com/antoinezambelli/forge",
+      "tldr": "Open-source guardrails framework that boosts small (8B) model performance from 53% to 99% on agentic tasks. Implements structured output validation, retry logic, and constraint enforcement. Proves that infrastructure around small models can match large model raw capability.",
+      "tldr_zh": "开源 guardrails 框架将 8B 小模型在 agentic 任务上的表现从 53% 提升到 99%。实现结构化输出验证、重试逻辑和约束执行。证明小模型周围的基础设施可以匹配大模型的原始能力。",
+      "points": 669,
+      "num_comments": 242,
+      "interest_tag": ""
+    },
+    {
+      "title": "We let AIs run radio stations",
+      "url": "https://andonlabs.com/blog/andon-fm",
+      "tldr": "Andon Labs experiment letting AI agents autonomously program and run radio stations—selecting music, generating DJ commentary, and managing schedules. Explores creative AI autonomy in media production with real listener feedback loops.",
+      "tldr_zh": "Andon Labs 实验让 AI agent 自主编排和运营电台——选择音乐、生成 DJ 评论和管理时间表。在媒体制作中探索 AI 创意自主性，并有真实听众反馈闭环。",
+      "points": 371,
+      "num_comments": 271,
+      "interest_tag": ""
+    },
+    {
+      "title": "Formal Verification Gates for AI Coding Loops",
+      "url": "https://reubenbrooks.dev/blog/structural-backpressure-beats-smarter-agents/",
+      "tldr": "Argues that structural backpressure (formal verification gates) is more effective than making agents smarter for reliable AI coding loops. Introduces verification checkpoints that reject invalid code before it propagates, reducing cascading errors in agentic coding workflows.",
+      "tldr_zh": "论证结构性反压（形式验证门控）比让 agent 更聪明更有效，用于可靠的 AI 编程循环。引入验证检查点在无效代码传播前拒绝它，减少 agentic 编程工作流中的级联错误。",
+      "points": 137,
+      "num_comments": 31,
+      "interest_tag": ""
+    },
+    {
+      "title": "Testing distributed systems with AI agents",
+      "url": "https://github.com/shenli/distributed-system-testing",
+      "tldr": "Framework for using AI agents to autonomously test distributed systems—generating failure scenarios, performing chaos engineering, and verifying system behavior under stress. Bridges the gap between AI agent capabilities and systems reliability engineering.",
+      "tldr_zh": "使用 AI agent 自主测试分布式系统的框架——生成故障场景、执行混沌工程、验证系统在压力下的行为。弥合 AI agent 能力与系统可靠性工程之间的差距。",
+      "points": 93,
+      "num_comments": 18,
+      "interest_tag": ""
+    }
+  ]
+}
