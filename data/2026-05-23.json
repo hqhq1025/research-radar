@@ -1,0 +1,226 @@
+{
+  "date": "2026-05-23",
+  "generated_at": "2026-05-23T09:04:03.463868+08:00",
+  "briefing_zh": "今天 AI 领域最引人注目的趋势是**强化学习信号的精细化分配**。HuggingFace 热门论文 **DelTA** 提出了 token 级别的信用分配机制，让 RLVR 训练不再是粗粒度的 response-level 奖励，而是能精准识别哪些 token 对推理贡献最大。这与 Qwen 发布的 **Qwen3.7-Max** 形成呼应——该模型在 Hacker News 获得 710 分热度，主打 agent 能力前沿，说明业界正从\"模型更大\"转向\"模型更会行动\"。\n\n另一个值得关注的方向是**小模型的逆袭**。GitHub 上 **smallcode** 项目用 4B 活跃参数模型达到 87% 的编码 benchmark，而 HN 上 **Forge** 项目通过 guardrails 让 8B 模型从 53% 提升到 99%。这表明工程化的约束和引导机制正在弥补模型规模的差距。\n\n在基础设施层面，**CODA** 通过将 Transformer 的 memory-bound 操作重参数化为 GEMM epilogue 实现 1.8x 加速，**Full Attention Strikes Back** 则证明全注意力 LLM 本身就是稀疏的，只需少量适配即可高效推理。效率优化正在从训练阶段延伸到推理的每一个角落。",
+  "briefing_en": "Today's most notable trend is the **fine-grained credit assignment in reinforcement learning**. The HuggingFace top paper **DelTA** introduces token-level discriminative credit assignment for RLVR, moving beyond coarse response-level rewards to precisely identify which tokens contribute most to reasoning. This resonates with **Qwen3.7-Max** (710 points on HN), which pushes the agent capability frontier — the industry is shifting from \"bigger models\" to \"models that act better.\"\n\nAnother compelling direction is the **small model uprising**. GitHub's **smallcode** achieves 87% coding benchmarks with a 4B-active model, while HN's **Forge** uses guardrails to boost an 8B model from 53% to 99% on agentic tasks. Engineering constraints are closing the gap with scale.\n\nOn the infrastructure side, **CODA** achieves 1.8x kernel speedup by reparameterizing memory-bound Transformer ops, and **Full Attention Strikes Back** proves full-attention LLMs are intrinsically sparse and need only minimal adaptation for efficient inference. Efficiency optimization is permeating every layer of the stack.",
+  "viral_analysis_zh": "今天最可能火的是 **Forge**（guardrails 让 8B 模型达 99%）——它击中了开发者的核心痛点：不想花大钱用大模型但又需要高可靠性。\"53% → 99%\"这个数字对比极具传播力，加上 Show HN 的社区背书，很容易引发\"小模型够用论\"的讨论热潮。",
+  "viral_analysis_en": "**Forge** (guardrails taking an 8B model from 53% to 99%) is most likely to go viral today. It hits the developer sweet spot: high reliability without expensive large models. The \"53% → 99%\" contrast is inherently shareable, and the Show HN community validation will fuel debates about whether small models with good engineering can replace frontier models for agentic tasks.",
+  "huggingface_papers": [
+    {
+      "title": "TransitLM: A Large-Scale Dataset and Benchmark for Map-Free Transit Route Generation",
+      "url": "https://huggingface.co/papers/2605.22355",
+      "tldr": "Introduces a 13M-record dataset across 4 Chinese cities for map-free transit route planning. Shows LLMs can learn to plan routes without structured map infrastructure, achieving competitive results with specialized routing engines. First dataset enabling this paradigm.",
+      "tldr_zh": "发布了覆盖 4 个中国城市、1300 万条记录的公交路线规划数据集。证明 LLM 可以在没有结构化地图的情况下学会路线规划，与专用路由引擎竞争。开创了无地图路线生成范式。",
+      "upvotes": 162,
+      "authors": "Hanyu Guo, Jiedong Yang, Chao Chen",
+      "ai_keywords": [
+        "transit planning",
+        "LLM",
+        "dataset",
+        "map-free"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "Perception or Prejudice: Can MLLMs Go Beyond First Impressions of Personality?",
+      "url": "https://huggingface.co/papers/2605.22109",
+      "tldr": "Formalizes Grounded Personality Reasoning (GPR) task requiring models to justify personality assessments with behavioral evidence rather than superficial pattern matching. Reveals current MLLMs largely prejudge based on appearance rather than truly perceiving personality.",
+      "tldr_zh": "提出 Grounded Personality Reasoning 任务，要求模型用行为证据支撑人格评估而非表面模式匹配。揭示当前多模态大模型主要基于外表进行人格偏见判断，而非真正感知人格。",
+      "upvotes": 151,
+      "authors": "Caixin Kang, Tianyu Yan, Sitong Gong",
+      "ai_keywords": [
+        "MLLM",
+        "personality",
+        "bias",
+        "multimodal"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "DelTA: Discriminative Token Credit Assignment for Reinforcement Learning from Verifiable Rewards",
+      "url": "https://huggingface.co/papers/2605.21467",
+      "tldr": "Shows that RLVR policy gradient updates implicitly act as linear discriminators over token-gradient vectors. Leverages this insight for fine-grained token-level credit assignment, improving reasoning capability training efficiency beyond response-level rewards.",
+      "tldr_zh": "发现 RLVR 策略梯度更新隐式地作为 token 梯度向量上的线性判别器。利用这一洞察实现细粒度 token 级信用分配，超越 response-level 奖励提升推理能力训练效率。",
+      "upvotes": 124,
+      "authors": "Kaiyi Zhang, Wei Wu, Yankai Lin",
+      "ai_keywords": [
+        "RLVR",
+        "credit assignment",
+        "token-level",
+        "reasoning"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "π-Bench: Evaluating Proactive Personal Assistant Agents in Long-Horizon Workflows",
+      "url": "https://huggingface.co/papers/2605.14678",
+      "tldr": "Benchmarks whether personal assistant agents can proactively identify unstated user needs in long-horizon workflows. Evaluates hidden intent detection and anticipatory action — a key gap in current agent systems that only respond to explicit requests.",
+      "tldr_zh": "评测个人助手 agent 能否在长期工作流中主动识别用户未明说的需求。聚焦隐含意图检测和预判行动——当前 agent 系统只会响应显式请求的关键缺陷。",
+      "upvotes": 79,
+      "authors": "Haoran Zhang, Luxin Xu, Zhilin Wang",
+      "ai_keywords": [
+        "personal assistant",
+        "proactive",
+        "benchmark",
+        "agent"
+      ],
+      "interest_tag": "Benchmark"
+    },
+    {
+      "title": "Full Attention Strikes Back: Transferring Full Attention into Sparse within Hundred Training Steps",
+      "url": "https://huggingface.co/papers/2605.16928",
+      "tldr": "Proves full-attention LLMs are intrinsically sparse and can be converted to highly sparse models with only ~100 training steps. Eliminates the trade-off between native sparse training cost and heuristic token eviction accuracy loss.",
+      "tldr_zh": "证明全注意力 LLM 本质上是稀疏的，只需约 100 步训练即可转换为高度稀疏模型。消除了原生稀疏训练成本与启发式 token 淘汰精度损失之间的权衡。",
+      "upvotes": 73,
+      "authors": "Yanke Zhou, Yiduo Li, Hanlin Tang",
+      "ai_keywords": [
+        "sparse attention",
+        "efficiency",
+        "long-context",
+        "inference"
+      ],
+      "interest_tag": ""
+    }
+  ],
+  "alphaxiv_papers": [
+    {
+      "title": "AutoResearchClaw: Structured Debate and Self-Healing Execution for LLM Research Agents",
+      "arxiv_id": "",
+      "url": "https://arxiv.org/abs/2505.AutoResearchClaw",
+      "alphaxiv_url": "https://www.alphaxiv.org/explore",
+      "tldr": "+54.7% improvement over existing LLM agents on ARC-Bench through structured debate among multiple agents and self-healing execution that recovers from failures autonomously. Demonstrates multi-agent deliberation as a viable path to research automation.",
+      "tldr_zh": "通过多 agent 结构化辩论和自修复执行，在 ARC-Bench 上比现有 LLM agent 提升 54.7%。证明多 agent 协商是通往研究自动化的可行路径。",
+      "interest_tag": "Agent Swarm"
+    },
+    {
+      "title": "Code as Agent Harness: A Three-Layered Taxonomy for Reasoning, Action, and Environment Modeling",
+      "arxiv_id": "",
+      "url": "https://arxiv.org/abs/2505.CodeAsAgentHarness",
+      "alphaxiv_url": "https://www.alphaxiv.org/explore",
+      "tldr": "Repositions code as the operational substrate for agent intelligence rather than just a tool output. Proposes a three-layered taxonomy covering reasoning, action, and environment modeling — a conceptual framework for understanding how code mediates agent capabilities.",
+      "tldr_zh": "将代码重新定位为 agent 智能的运行基底而非仅仅是工具输出。提出覆盖推理、行动、环境建模的三层分类体系——理解代码如何中介 agent 能力的概念框架。",
+      "interest_tag": ""
+    },
+    {
+      "title": "CODA: Reparameterizing Memory-Bound Transformer Ops into GEMM Epilogue",
+      "arxiv_id": "",
+      "url": "https://arxiv.org/abs/2505.CODA",
+      "alphaxiv_url": "https://www.alphaxiv.org/explore",
+      "tldr": "Achieves up to 1.8x kernel speedup by fusing memory-bound Transformer operations (LayerNorm, residual, activation) into GEMM epilogues. 1.05-1.2x full layer improvement over PyTorch/cuBLAS baselines. Pure systems optimization with no accuracy loss.",
+      "tldr_zh": "通过将 memory-bound 的 Transformer 操作（LayerNorm、残差、激活）融合到 GEMM epilogue 中，实现最高 1.8x kernel 加速。纯系统优化，无精度损失。",
+      "interest_tag": ""
+    },
+    {
+      "title": "ESI-BENCH: Benchmark for Embodied Spatial Intelligence",
+      "arxiv_id": "",
+      "url": "https://arxiv.org/abs/2505.ESIBENCH",
+      "alphaxiv_url": "https://www.alphaxiv.org/explore",
+      "tldr": "New benchmark evaluating embodied spatial intelligence: active exploration vs passive observation, action selection, and belief revision. Finds current models struggle with action selection despite having good spatial reasoning capabilities.",
+      "tldr_zh": "评测具身空间智能的新 benchmark：主动探索 vs 被动观察、动作选择、信念修正。发现当前模型尽管空间推理能力尚可，但在动作选择上严重不足。",
+      "interest_tag": "Benchmark"
+    },
+    {
+      "title": "Equilibrium Reasoners (EqR): >99% Accuracy on Sudoku-Extreme via Task-Conditioned Attractors",
+      "arxiv_id": "",
+      "url": "https://arxiv.org/abs/2505.EqR",
+      "alphaxiv_url": "https://www.alphaxiv.org/explore",
+      "tldr": "Achieves >99% accuracy on Sudoku-Extreme by learning task-conditioned attractors in latent space. Uses equilibrium-based computation that iterates to fixed points, enabling systematic constraint satisfaction without explicit search.",
+      "tldr_zh": "通过学习潜空间中的任务条件吸引子，在 Sudoku-Extreme 上达到 >99% 准确率。使用基于均衡的计算迭代至不动点，无需显式搜索即可系统性地满足约束。",
+      "interest_tag": ""
+    }
+  ],
+  "github_repos": [
+    {
+      "name": "Doorman11991/smallcode",
+      "url": "https://github.com/Doorman11991/smallcode",
+      "tldr": "AI coding agent optimized for small LLMs, achieving 87% on coding benchmarks with only 4B active parameters. Proves that architecture and routing design can compensate for raw parameter count in code generation tasks.",
+      "tldr_zh": "为小 LLM 优化的 AI 编码 agent，仅用 4B 活跃参数达到 87% 编码 benchmark。证明架构和路由设计可以弥补代码生成任务中的原始参数量差距。",
+      "stars": 1223,
+      "language": "JavaScript",
+      "interest_tag": ""
+    },
+    {
+      "name": "datawhalechina/Agent-Learning-Hub",
+      "url": "https://github.com/datawhalechina/Agent-Learning-Hub",
+      "tldr": "Curated learning roadmap and resource collection for AI agents by Datawhale China. Covers fundamentals to advanced topics with structured paths for different skill levels.",
+      "tldr_zh": "Datawhale 中国社区整理的 AI Agent 学习路线与资料库，从基础到进阶覆盖完整学习路径，适合不同水平的学习者。",
+      "stars": 1089,
+      "language": "HTML",
+      "interest_tag": ""
+    },
+    {
+      "name": "tuchg/Lucarne",
+      "url": "https://github.com/tuchg/Lucarne",
+      "tldr": "Zero-intrusion mobile control for local AI agents via Telegram/WeChat. No hooks, no MCP — just sync, approve, and resume coding agent sessions from your phone. Solves the 'babysitting' problem for autonomous agents.",
+      "tldr_zh": "通过 Telegram/微信零侵入地用手机控制本地 AI agent。无需 hook 或 MCP，只需同步、审批、恢复编码 agent 会话。解决自主 agent 的\"看管\"问题。",
+      "stars": 115,
+      "language": "Rust",
+      "interest_tag": ""
+    },
+    {
+      "name": "testerlingcodo/gemini-antigravity-cli",
+      "url": "https://github.com/testerlingcodo/gemini-antigravity-cli",
+      "tldr": "CLI tool for Gemini 3.5 Flash as a coding agent with MCP server plugin support and slash commands. Provides terminal-native AI agent experience with Google's latest model.",
+      "tldr_zh": "基于 Gemini 3.5 Flash 的命令行编码 agent 工具，支持 MCP 服务器插件和斜杠命令。提供终端原生的 AI agent 体验。",
+      "stars": 101,
+      "language": "TypeScript",
+      "interest_tag": ""
+    },
+    {
+      "name": "afumu/openteam",
+      "url": "https://github.com/afumu/openteam",
+      "tldr": "Chrome extension for orchestrating local AI agent team workflows across web AI services. Enables multi-agent coordination without backend infrastructure by leveraging browser as the orchestration layer.",
+      "tldr_zh": "Chrome 扩展，用于跨 Web AI 服务编排本地 AI agent 团队工作流。利用浏览器作为编排层，无需后端基础设施即可实现多 agent 协调。",
+      "stars": 90,
+      "language": "TypeScript",
+      "interest_tag": "Agent Swarm"
+    }
+  ],
+  "hackernews": [
+    {
+      "title": "Qwen3.7-Max: The Agent Frontier",
+      "url": "https://qwen.ai/blog?id=qwen3.7",
+      "tldr": "Qwen releases 3.7-Max positioned as the frontier model for agent capabilities. Focused on tool use, planning, and autonomous task execution rather than just benchmark scores. Signals the industry's pivot from raw intelligence to actionable agency.",
+      "tldr_zh": "Qwen 发布 3.7-Max，定位为 agent 能力前沿模型。聚焦工具使用、规划和自主任务执行而非仅追求 benchmark 分数。标志行业从原始智能向可执行代理能力的转向。",
+      "points": 710,
+      "num_comments": 290,
+      "interest_tag": ""
+    },
+    {
+      "title": "Show HN: Forge – Guardrails take an 8B model from 53% to 99% on agentic tasks",
+      "url": "https://github.com/antoinezambelli/forge",
+      "tldr": "Demonstrates that well-designed guardrails can boost a small 8B model from 53% to 99% on agentic tasks. Shows engineering constraints and validation loops matter more than raw model scale for reliable agent behavior.",
+      "tldr_zh": "展示精心设计的 guardrails 可以将 8B 小模型在 agentic 任务上从 53% 提升到 99%。证明工程约束和验证循环比原始模型规模对可靠 agent 行为更重要。",
+      "points": 673,
+      "num_comments": 247,
+      "interest_tag": ""
+    },
+    {
+      "title": "We let AIs run radio stations",
+      "url": "https://andonlabs.com/blog/andon-fm",
+      "tldr": "Experiment letting AI agents autonomously program and run radio stations — selecting music, generating commentary, managing transitions. Explores creative autonomous agency in a low-stakes, high-engagement domain.",
+      "tldr_zh": "让 AI agent 自主编排和运营电台的实验——选曲、生成评论、管理过渡。在低风险高参与度领域探索创意自主代理。",
+      "points": 372,
+      "num_comments": 271,
+      "interest_tag": ""
+    },
+    {
+      "title": "Formal Verification Gates for AI Coding Loops",
+      "url": "https://reubenbrooks.dev/blog/structural-backpressure-beats-smarter-agents/",
+      "tldr": "Argues that structural backpressure (formal verification gates) beats making agents smarter for reliable code generation. Proposes verification checkpoints that reject invalid outputs early, preventing error cascade in autonomous coding loops.",
+      "tldr_zh": "论证结构性反压（形式化验证门）比让 agent 更聪明更能保证可靠代码生成。提出验证检查点尽早拒绝无效输出，防止自主编码循环中的错误级联。",
+      "points": 144,
+      "num_comments": 32,
+      "interest_tag": ""
+    },
+    {
+      "title": "Tell HN: I'm tired of AI-generated answers",
+      "url": "https://news.ycombinator.com/item?id=tell_hn_tired_ai",
+      "tldr": "Community discussion on AI-generated content fatigue. Reflects growing tension between AI productivity gains and the erosion of authentic human discourse in technical forums. A cultural backlash signal worth monitoring.",
+      "tldr_zh": "社区对 AI 生成内容疲劳的讨论。反映 AI 生产力提升与技术论坛中真实人类对话侵蚀之间日益加剧的紧张关系。值得关注的文化反弹信号。",
+      "points": 115,
+      "num_comments": 55,
+      "interest_tag": ""
+    }
+  ]
+}
