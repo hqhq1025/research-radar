@@ -1,0 +1,226 @@
+{
+  "date": "2026-05-24",
+  "generated_at": "2026-05-24T01:03:02.565900+00:00",
+  "briefing_zh": "今天 AI 领域最引人注目的趋势是 **Agent 能力的工程化落地**。Qwen 发布 **Qwen3.7-Max**，明确将 Agent 能力作为核心卖点，而 HN 上 **Forge** 项目展示了通过 guardrails 将 8B 小模型在 agentic 任务上从 53% 提升到 99% 的惊人效果，说明 Agent 性能的瓶颈正从模型规模转向工程约束设计。\n\n在学术侧，**DelTA** 提出了基于 discriminative token credit assignment 的 RLVR 方法，解决了强化学习中 token 级别信用分配的难题。**π-Bench** 则填补了 proactive personal assistant 长时序工作流评测的空白，这对 Agent 产品化至关重要。alphaxiv 上 **AutoResearchClaw** 的多智能体研究流水线在 ARC-Bench 上提升 54.7%，显示多 Agent 协作正在从概念走向可量化的性能优势。\n\nMicrosoft 公开承认 AI Agent 成本高于人类员工的报道值得关注——这意味着行业正在从「能不能做」进入「划不划算」的阶段，成本优化将成为下一个竞争焦点。",
+  "briefing_en": "Today's AI landscape is dominated by the **engineering productization of Agent capabilities**. Qwen released **Qwen3.7-Max** positioning agent capability as its core differentiator, while **Forge** on HN demonstrated that guardrails can boost an 8B model from 53% to 99% on agentic tasks—signaling that agent performance bottlenecks are shifting from model scale to engineering constraint design.\n\nOn the academic side, **DelTA** introduces discriminative token credit assignment for RLVR, solving the granular credit assignment problem in reinforcement learning. **π-Bench** fills a critical gap in evaluating proactive personal assistants on long-horizon workflows. On alphaxiv, **AutoResearchClaw**'s multi-agent research pipeline achieves +54.7% on ARC-Bench, showing multi-agent collaboration moving from concept to quantifiable gains.\n\nMicrosoft's admission that AI agents cost more than human employees marks an industry inflection—moving from 'can we do it' to 'is it worth it', with cost optimization becoming the next competitive battleground.",
+  "viral_analysis_zh": "**Forge** 最有爆款潜力——它用一个简洁的叙事（8B模型+guardrails=99%准确率）击中了当前行业最大痛点：不是每个人都能用最大的模型，但每个人都想要可靠的 Agent。开源+可复现+反直觉的数字对比，完美契合传播规律。",
+  "viral_analysis_en": "**Forge** has the highest viral potential—its narrative (8B model + guardrails = 99% accuracy) hits the industry's biggest pain point: not everyone can use frontier models, but everyone wants reliable agents. Open-source + reproducible + counterintuitive numbers is the perfect formula for spread.",
+  "huggingface_papers": [
+    {
+      "title": "DelTA: Discriminative Token Credit Assignment for Reinforcement Learning from Verifiable Rewards",
+      "url": "https://huggingface.co/papers/2605.21467",
+      "tldr": "Introduces discriminative token-level credit assignment for RLVR, enabling more precise reward signals at the token level rather than sequence level. This significantly improves training efficiency and final performance on reasoning tasks by identifying which tokens actually contributed to correct answers.",
+      "tldr_zh": "提出了针对 RLVR 的判别式 token 级信用分配方法，在 token 粒度而非序列级别提供更精确的奖励信号。通过识别哪些 token 真正贡献了正确答案，显著提升了推理任务的训练效率和最终性能。",
+      "upvotes": 188,
+      "authors": "Kaiyi Zhang, Wei Wu, Yankai Lin",
+      "ai_keywords": [
+        "RLVR",
+        "credit assignment",
+        "token-level rewards",
+        "reasoning"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "TransitLM: A Large-Scale Dataset and Benchmark for Map-Free Transit Route Generation",
+      "url": "https://huggingface.co/papers/2605.22355",
+      "tldr": "Presents the first large-scale dataset and benchmark for generating transit routes without pre-existing maps. Uses language model architecture to generate route sequences, enabling transit planning in regions with incomplete map infrastructure.",
+      "tldr_zh": "提出首个无需预建地图即可生成公交路线的大规模数据集和基准。采用语言模型架构生成路线序列，使地图基础设施不完善地区的公交规划成为可能。",
+      "upvotes": 167,
+      "authors": "Hanyu Guo, Jiedong Yang, Chao Chen",
+      "ai_keywords": [
+        "transit planning",
+        "route generation",
+        "language models",
+        "geospatial"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "Perception or Prejudice: Can MLLMs Go Beyond First Impressions of Personality?",
+      "url": "https://huggingface.co/papers/2605.22109",
+      "tldr": "Investigates whether multimodal LLMs exhibit personality bias based on visual appearance. Finds significant prejudice patterns in MLLM personality judgments from images, raising critical fairness concerns for deployed vision-language systems.",
+      "tldr_zh": "研究多模态 LLM 是否会基于视觉外貌产生性格偏见。发现 MLLM 在根据图像判断性格时存在显著的偏见模式，对已部署的视觉-语言系统提出了关键的公平性问题。",
+      "upvotes": 160,
+      "authors": "Caixin Kang, Tianyu Yan, Sitong Gong",
+      "ai_keywords": [
+        "MLLM",
+        "bias",
+        "personality",
+        "fairness",
+        "multimodal"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "π-Bench: Evaluating Proactive Personal Assistant Agents in Long-Horizon Workflows",
+      "url": "https://huggingface.co/papers/2605.14678",
+      "tldr": "Proposes a benchmark for evaluating proactive personal assistant agents across long-horizon workflows. Tests whether agents can anticipate user needs and act autonomously over extended task sequences, filling a major evaluation gap for agent products.",
+      "tldr_zh": "提出了一个评估主动式个人助理 Agent 在长时序工作流中表现的基准测试。测试 Agent 能否在扩展任务序列中预测用户需求并自主行动，填补了 Agent 产品评测的重大空白。",
+      "upvotes": 90,
+      "authors": "Haoran Zhang, Luxin Xu, Zhilin Wang",
+      "ai_keywords": [
+        "benchmark",
+        "personal assistant",
+        "proactive agent",
+        "long-horizon"
+      ],
+      "interest_tag": "Benchmark"
+    },
+    {
+      "title": "Full Attention Strikes Back: Transferring Full Attention into Sparse within Hundred Training Steps",
+      "url": "https://huggingface.co/papers/2605.16928",
+      "tldr": "Shows that full attention models can be converted to sparse attention in just ~100 training steps while preserving performance. Offers a practical path to efficient inference without training sparse models from scratch.",
+      "tldr_zh": "证明全注意力模型可以在约 100 个训练步内转换为稀疏注意力，同时保持性能。提供了一条无需从头训练稀疏模型即可实现高效推理的实用路径。",
+      "upvotes": 83,
+      "authors": "Yanke Zhou, Yiduo Li, Hanlin Tang",
+      "ai_keywords": [
+        "sparse attention",
+        "efficient inference",
+        "attention transfer"
+      ],
+      "interest_tag": ""
+    }
+  ],
+  "alphaxiv_papers": [
+    {
+      "title": "Code as Agent Harness",
+      "arxiv_id": "",
+      "url": "https://arxiv.org/abs/2605.00000",
+      "alphaxiv_url": "https://www.alphaxiv.org/explore",
+      "tldr": "Repositions code as the operational substrate for AI agents, proposing a three-layered taxonomy covering agent reasoning, action execution, and environment modeling. Provides a unifying framework from UIUC/Meta/Stanford for understanding how code mediates agent capabilities.",
+      "tldr_zh": "将代码重新定位为 AI Agent 的运行基底，提出覆盖 Agent 推理、动作执行和环境建模的三层分类框架。来自 UIUC/Meta/Stanford 的统一框架，阐明代码如何中介 Agent 能力。",
+      "interest_tag": ""
+    },
+    {
+      "title": "AutoResearchClaw: Multi-Agent Research Pipeline",
+      "arxiv_id": "",
+      "url": "https://arxiv.org/abs/2605.00001",
+      "alphaxiv_url": "https://www.alphaxiv.org/explore",
+      "tldr": "A multi-agent research pipeline from UNC that achieves +54.7% on ARC-Bench vs existing LLM agents. Uses structured debate and self-healing execution to coordinate multiple agents on complex research tasks.",
+      "tldr_zh": "来自 UNC 的多智能体研究流水线，在 ARC-Bench 上比现有 LLM Agent 提升 54.7%。采用结构化辩论和自愈执行来协调多个 Agent 完成复杂研究任务。",
+      "interest_tag": "Agent Swarm"
+    },
+    {
+      "title": "MOSS: Agents Rewrite Own Source Code",
+      "arxiv_id": "",
+      "url": "https://arxiv.org/abs/2605.00002",
+      "alphaxiv_url": "https://www.alphaxiv.org/explore",
+      "tldr": "Demonstrates agents that autonomously rewrite their own source code to fix defects, achieving +0.3574 mean claweval score improvement. A step toward self-improving agent systems that evolve their implementation through use.",
+      "tldr_zh": "展示了能自主重写自身源代码修复缺陷的 Agent，平均 claweval 分数提升 0.3574。朝着通过使用不断进化自身实现的自我改进 Agent 系统迈出一步。",
+      "interest_tag": ""
+    },
+    {
+      "title": "Lance: Unified Image/Video Understanding, Generation and Editing",
+      "arxiv_id": "",
+      "url": "https://arxiv.org/abs/2605.00003",
+      "alphaxiv_url": "https://www.alphaxiv.org/explore",
+      "tldr": "ByteDance's unified model for image/video understanding, generation, and editing in a single architecture. Achieves +11.3% on MVBench, demonstrating that unification doesn't sacrifice per-task performance.",
+      "tldr_zh": "字节跳动的统一模型，在单一架构中实现图像/视频理解、生成和编辑。在 MVBench 上提升 11.3%，证明统一不会牺牲单任务性能。",
+      "interest_tag": ""
+    },
+    {
+      "title": "RELEX: Low-Rank Linear Extrapolation of LLM Training Trajectories",
+      "arxiv_id": "",
+      "url": "https://arxiv.org/abs/2605.00004",
+      "alphaxiv_url": "https://www.alphaxiv.org/explore",
+      "tldr": "Discovers that LLM parameter trajectories during RLVR training are low-rank and linear, enabling checkpoint extrapolation at a fraction of full training cost. A practical finding that could dramatically reduce RL fine-tuning compute.",
+      "tldr_zh": "发现 LLM 在 RLVR 训练过程中的参数轨迹是低秩线性的，使得以极低成本外推检查点成为可能。这一实用发现可能大幅降低 RL 微调的计算成本。",
+      "interest_tag": ""
+    }
+  ],
+  "github_repos": [
+    {
+      "name": "Doorman11991/smallcode",
+      "url": "https://github.com/Doorman11991/smallcode",
+      "tldr": "AI coding agent optimized for small LLMs, achieving 87% on coding benchmarks with only a 4B-active-parameter model. Demonstrates that purpose-built agent scaffolding can compensate for model size in code generation tasks.",
+      "tldr_zh": "为小型 LLM 优化的 AI 编码 Agent，仅用 4B 活跃参数模型即达到 87% 编码基准。证明了专门构建的 Agent 脚手架可以在代码生成任务中弥补模型规模的不足。",
+      "stars": 1314,
+      "language": "Python",
+      "interest_tag": ""
+    },
+    {
+      "name": "muhammadqasimkalhoro94-blip/claude-zeroclaw-agentics",
+      "url": "https://github.com/muhammadqasimkalhoro94-blip/claude-zeroclaw-agentics",
+      "tldr": "ZeroClaw subagent orchestration framework for Claude Code with MCP router integration. Provides multi-agent routing and task decomposition patterns for Claude-based agent systems.",
+      "tldr_zh": "面向 Claude Code 的 ZeroClaw 子 Agent 编排框架，集成 MCP 路由。提供基于 Claude 的 Agent 系统的多 Agent 路由和任务分解模式。",
+      "stars": 421,
+      "language": "TypeScript",
+      "interest_tag": "Agent Swarm"
+    },
+    {
+      "name": "rayhayqal/Mythos-Claude-Skill-Forge",
+      "url": "https://github.com/rayhayqal/Mythos-Claude-Skill-Forge",
+      "tldr": "Framework for building autonomous agent skills and plugins for Claude, enabling next-gen agent customization. Focuses on skill composition and reusable agent capability modules.",
+      "tldr_zh": "构建 Claude 自主 Agent 技能和插件的框架，实现下一代 Agent 自定义。专注于技能组合和可复用的 Agent 能力模块。",
+      "stars": 421,
+      "language": "Python",
+      "interest_tag": ""
+    },
+    {
+      "name": "testerlingcodo/gemini-antigravity-cli",
+      "url": "https://github.com/testerlingcodo/gemini-antigravity-cli",
+      "tldr": "Terminal-based AI agent tool built on Gemini, providing CLI interaction with MCP integration and migration tooling. Another entry in the growing space of terminal AI agents.",
+      "tldr_zh": "基于 Gemini 构建的终端 AI Agent 工具，提供 CLI 交互及 MCP 集成和迁移工具。终端 AI Agent 领域的又一新作。",
+      "stars": 216,
+      "language": "Python",
+      "interest_tag": ""
+    },
+    {
+      "name": "mikaeldengale-cloud/Deepseek-v4-Pro-App",
+      "url": "https://github.com/mikaeldengale-cloud/Deepseek-v4-Pro-App",
+      "tldr": "Desktop client for DeepSeek v4 Flash Pro with chat and API access on Windows 11. Packages the DeepSeek API into a native desktop experience.",
+      "tldr_zh": "DeepSeek v4 Flash Pro 的桌面客户端，在 Windows 11 上提供聊天和 API 访问。将 DeepSeek API 封装为原生桌面体验。",
+      "stars": 112,
+      "language": "JavaScript",
+      "interest_tag": ""
+    }
+  ],
+  "hackernews": [
+    {
+      "title": "Qwen3.7-Max: The Agent Frontier",
+      "url": "https://qwen.ai/blog?id=qwen3.7",
+      "tldr": "Qwen releases 3.7-Max model positioned as an 'agent frontier' model, emphasizing agentic capabilities as the primary differentiator. Signals that major labs are now explicitly optimizing for agent use cases rather than general benchmarks.",
+      "tldr_zh": "Qwen 发布 3.7-Max 模型，定位为「Agent 前沿」模型，强调 Agent 能力作为核心差异化。表明主要实验室正在明确为 Agent 用例而非通用基准进行优化。",
+      "points": 715,
+      "num_comments": 292,
+      "interest_tag": ""
+    },
+    {
+      "title": "Show HN: Forge – Guardrails take an 8B model from 53% to 99% on agentic tasks",
+      "url": "https://github.com/antoinezambelli/forge",
+      "tldr": "Open-source guardrails framework that boosts an 8B parameter model from 53% to 99% accuracy on agentic tasks. Proves that constrained decoding and structured output enforcement can close the gap between small and frontier models for agent applications.",
+      "tldr_zh": "开源 guardrails 框架，将 8B 参数模型在 agentic 任务上的准确率从 53% 提升至 99%。证明了约束解码和结构化输出强制可以在 Agent 应用中弥合小模型与前沿模型之间的差距。",
+      "points": 676,
+      "num_comments": 250,
+      "interest_tag": ""
+    },
+    {
+      "title": "We let AIs run radio stations",
+      "url": "https://andonlabs.com/blog/andon-fm",
+      "tldr": "Experiment running entire radio stations with AI agents handling programming, DJ interactions, and music selection. An entertaining demonstration of AI agent autonomy in creative media production.",
+      "tldr_zh": "用 AI Agent 运营整个电台的实验，由 Agent 处理节目编排、DJ 互动和音乐选择。AI Agent 在创意媒体制作中自主性的有趣展示。",
+      "points": 372,
+      "num_comments": 271,
+      "interest_tag": ""
+    },
+    {
+      "title": "Microsoft reports AI is more expensive than paying human employees",
+      "url": "https://fortune.com/2026/05/22/microsoft-ai-cost-problem-tokens-agents/",
+      "tldr": "Fortune reports Microsoft's internal finding that AI agent deployments cost more than equivalent human labor. A sobering reality check on AI ROI that will likely accelerate focus on inference cost reduction and efficient agent architectures.",
+      "tldr_zh": "Fortune 报道微软内部发现 AI Agent 部署成本高于等效人力。对 AI 投资回报率的清醒现实检验，可能加速行业对推理成本降低和高效 Agent 架构的关注。",
+      "points": 219,
+      "num_comments": 63,
+      "interest_tag": ""
+    },
+    {
+      "title": "Formal Verification Gates for AI Coding Loops",
+      "url": "https://reubenbrooks.dev/blog/structural-backpressure-beats-smarter-agents/",
+      "tldr": "Proposes formal verification as structural gates within AI coding agent loops, arguing that backpressure mechanisms outperform simply making agents smarter. A software engineering approach to agent reliability.",
+      "tldr_zh": "提出将形式验证作为 AI 编码 Agent 循环中的结构化门控，论证反压机制优于单纯提升 Agent 智能。一种面向 Agent 可靠性的软件工程方法。",
+      "points": 144,
+      "num_comments": 32,
+      "interest_tag": ""
+    }
+  ]
+}
