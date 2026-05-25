@@ -1,0 +1,222 @@
+{
+  "date": "2026-05-25",
+  "generated_at": "2026-05-25T09:03:48.489683+08:00",
+  "briefing_zh": "本周 AI Agent 领域迎来密集更新。**Qwen3.7-Max** 发布，阿里巴巴将其定位为'Agent 前沿'，在多个 agentic 任务基准上刷新纪录，标志着国产大模型在 agent 能力上的重大突破。与此同时，**Forge** 项目展示了一种务实路线：通过精心设计的 guardrails 将 8B 小模型在 agentic 任务上的准确率从 53% 提升到 99%，暗示未来 agent 系统的核心竞争力可能不在模型规模，而在工程约束设计。\n\n在学术端，**DelTA** 提出基于可验证奖励的判别式 token 信用分配方法，为 RLVR 训练提供了更精细的优化信号。**π-Bench** 则聚焦于主动式个人助理 agent 的长期工作流评估，填补了 proactive agent 评测的空白。**Memory-R2** 和 **ai-memory** 分别从训练框架和工程工具两个维度推进 agent 长期记忆问题。\n\nDeepSeek 将 V4 Pro 的降价永久化，进一步压低推理成本，而微软内部报告显示 AI agent 成本仍高于人工——这一矛盾将在未来一年内成为行业关键议题。",
+  "briefing_en": "The AI agent ecosystem saw significant momentum this week. **Qwen3.7-Max** launched as Alibaba's 'Agent Frontier' model, achieving new benchmarks across agentic tasks and signaling China's competitive push in agent-capable LLMs. Meanwhile, **Forge** demonstrated that carefully designed guardrails can boost a small 8B model from 53% to 99% accuracy on agentic tasks — suggesting that engineering constraints may matter more than raw model scale for production agent systems.\n\nOn the research side, **DelTA** introduced discriminative token credit assignment for reinforcement learning from verifiable rewards, offering finer-grained optimization signals for RLVR training. **π-Bench** fills an evaluation gap for proactive personal assistant agents in long-horizon workflows. **Memory-R2** and the open-source **ai-memory** project both advance long-term agent memory from complementary angles — training frameworks and developer tooling.\n\nDeepSeek made its V4 Pro price cut permanent, further compressing inference costs, while Microsoft's internal report revealing AI agents cost more than human employees highlights the cost-efficiency challenge that will define the next year of deployment.",
+  "viral_analysis_zh": "**Forge** 最有爆款潜力——'8B 模型从 53% 到 99%' 这个数字对比极具冲击力，且开源可复现，切中了开发者对小模型+工程优化路线的期待。Qwen3.7-Max 虽然讨论度最高，但作为闭源模型其传播受限于 API 用户圈层。",
+  "viral_analysis_en": "**Forge** has the highest viral potential — the '8B model from 53% to 99%' metric contrast is attention-grabbing, it's open-source and reproducible, and it taps into developer enthusiasm for small-model + engineering optimization approaches. Qwen3.7-Max dominates discussion volume but its reach is limited to API users as a closed model.",
+  "huggingface_papers": [
+    {
+      "title": "DelTA: Discriminative Token Credit Assignment for Reinforcement Learning from Verifiable Rewards",
+      "url": "https://huggingface.co/papers/2605.21467",
+      "tldr": "Proposes a discriminative token-level credit assignment method for RLVR that identifies which tokens actually contribute to correct answers. Achieves better sample efficiency and final performance than uniform token-level rewards by focusing optimization on discriminative tokens.",
+      "tldr_zh": "提出一种判别式 token 级信用分配方法，用于可验证奖励的强化学习。通过识别哪些 token 真正贡献了正确答案，将优化信号集中在关键 token 上，相比均匀 token 奖励获得更好的样本效率和最终性能。",
+      "upvotes": 192,
+      "authors": "Kaiyi Zhang, Wei Wu, Yankai Lin",
+      "ai_keywords": [
+        "RLVR",
+        "token credit assignment",
+        "reinforcement learning"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "TransitLM: A Large-Scale Dataset and Benchmark for Map-Free Transit Route Generation",
+      "url": "https://huggingface.co/papers/2605.22355",
+      "tldr": "Introduces a large-scale dataset and benchmark for generating transit routes without map data. Uses language models to generate route sequences from contextual features, demonstrating LLMs can handle structured geospatial planning tasks.",
+      "tldr_zh": "提出大规模无地图公交路线生成数据集和基准。利用语言模型从上下文特征生成路线序列，证明 LLM 可以处理结构化地理空间规划任务。",
+      "upvotes": 167,
+      "authors": "Hanyu Guo, Jiedong Yang, Chao Chen",
+      "ai_keywords": [
+        "transit planning",
+        "geospatial",
+        "language model"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "Perception or Prejudice: Can MLLMs Go Beyond First Impressions of Personality?",
+      "url": "https://huggingface.co/papers/2605.22109",
+      "tldr": "Investigates whether multimodal LLMs exhibit appearance-based personality biases similar to humans. Finds MLLMs show systematic prejudice based on visual cues, raising concerns about fairness in multimodal AI systems used for personality assessment.",
+      "tldr_zh": "研究多模态 LLM 是否像人类一样基于外貌产生性格偏见。发现 MLLM 确实基于视觉线索表现出系统性偏见，对用于性格评估的多模态 AI 系统的公平性提出警示。",
+      "upvotes": 162,
+      "authors": "Caixin Kang, Tianyu Yan, Sitong Gong",
+      "ai_keywords": [
+        "MLLM",
+        "bias",
+        "personality",
+        "fairness"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "π-Bench: Evaluating Proactive Personal Assistant Agents in Long-Horizon Workflows",
+      "url": "https://huggingface.co/papers/2605.14678",
+      "tldr": "First benchmark specifically designed to evaluate proactive personal assistant agents across long-horizon workflows. Tests whether agents can anticipate user needs and take initiative without explicit instructions, revealing significant gaps in current models.",
+      "tldr_zh": "首个专门评估主动式个人助理 agent 长期工作流能力的基准。测试 agent 能否预判用户需求并主动行动，揭示了当前模型在 proactive 能力上的显著差距。",
+      "upvotes": 91,
+      "authors": "Haoran Zhang, Luxin Xu, Zhilin Wang",
+      "ai_keywords": [
+        "proactive agent",
+        "personal assistant",
+        "benchmark"
+      ],
+      "interest_tag": "Benchmark"
+    },
+    {
+      "title": "Full Attention Strikes Back: Transferring Full Attention into Sparse within Hundred Training Steps",
+      "url": "https://huggingface.co/papers/2605.16928",
+      "tldr": "Shows that full attention can be efficiently transferred into sparse attention patterns with only ~100 training steps, maintaining performance while dramatically reducing inference compute. Provides a practical path to efficient long-context models.",
+      "tldr_zh": "证明只需约 100 步训练即可将全注意力高效转化为稀疏注意力模式，在大幅降低推理计算量的同时保持性能。为高效长上下文模型提供了实用路径。",
+      "upvotes": 85,
+      "authors": "Yanke Zhou, Yiduo Li, Hanlin Tang",
+      "ai_keywords": [
+        "sparse attention",
+        "efficiency",
+        "long-context"
+      ],
+      "interest_tag": ""
+    }
+  ],
+  "alphaxiv_papers": [
+    {
+      "title": "Memory-R2: Training Framework for Long-Horizon Memory-Augmented LLM Agents",
+      "arxiv_id": "",
+      "url": "https://arxiv.org/search/?query=Memory-R2",
+      "alphaxiv_url": "https://www.alphaxiv.org/explore",
+      "tldr": "A training framework specifically designed for memory-augmented LLM agents operating over long horizons. Achieves F1 50.60 and BLEU-1 44.01 on LoCoMo benchmark, demonstrating effective memory retrieval and utilization during extended interactions.",
+      "tldr_zh": "专为长期记忆增强 LLM agent 设计的训练框架。在 LoCoMo 基准上达到 F1 50.60、BLEU-1 44.01，展示了在长期交互中有效的记忆检索和利用能力。",
+      "interest_tag": "Memory"
+    },
+    {
+      "title": "LIFE-HARNESS: Adapting Frozen LLM Agent Runtime Interface",
+      "arxiv_id": "",
+      "url": "https://arxiv.org/search/?query=LIFE-HARNESS",
+      "alphaxiv_url": "https://www.alphaxiv.org/explore",
+      "tldr": "Adapts the runtime interface of frozen LLM agents without modifying weights, achieving 88.5% average relative improvement across 18 LLM backbones and 7 agent environments. A training-free approach to boosting agent performance.",
+      "tldr_zh": "在不修改权重的情况下适配冻结 LLM agent 的运行时接口，在 18 个 LLM 和 7 个 agent 环境中实现 88.5% 的平均相对提升。一种无需训练即可增强 agent 性能的方法。",
+      "interest_tag": ""
+    },
+    {
+      "title": "AlphaProof Nexus: Integrating LLMs with Lean Proof Assistant",
+      "arxiv_id": "",
+      "url": "https://arxiv.org/search/?query=AlphaProof+Nexus",
+      "alphaxiv_url": "https://www.alphaxiv.org/explore",
+      "tldr": "Google DeepMind's system integrating LLMs with the Lean proof assistant to autonomously solve open research-level mathematics problems with mechanically verifiable proofs. Represents a milestone in AI-driven formal mathematics.",
+      "tldr_zh": "Google DeepMind 将 LLM 与 Lean 证明助手整合，自主解决开放研究级数学问题并提供机器可验证证明。代表 AI 驱动形式化数学的里程碑。",
+      "interest_tag": ""
+    },
+    {
+      "title": "AutoResearchClaw: Multi-Agent Autonomous Research Pipeline",
+      "arxiv_id": "",
+      "url": "https://arxiv.org/search/?query=AutoResearchClaw",
+      "alphaxiv_url": "https://www.alphaxiv.org/explore",
+      "tldr": "A multi-agent autonomous research pipeline using structured debate and self-healing execution. Achieves 54.7% improvement on ARC-Bench versus existing LLM agents, demonstrating effective multi-agent collaboration for research tasks.",
+      "tldr_zh": "多 agent 自主研究流水线，使用结构化辩论和自修复执行。在 ARC-Bench 上比现有 LLM agent 提升 54.7%，展示了多 agent 协作在研究任务中的有效性。",
+      "interest_tag": "Agent Swarm"
+    },
+    {
+      "title": "CUSP Benchmark: Evaluating AI Forecasting of Scientific Progress",
+      "arxiv_id": "",
+      "url": "https://arxiv.org/search/?query=CUSP+benchmark+scientific",
+      "alphaxiv_url": "https://www.alphaxiv.org/explore",
+      "tldr": "Evaluates AI systems' ability to forecast scientific progress under temporal constraints. Frontier models perform near chance on feasibility prediction, revealing a fundamental limitation in current AI's ability to anticipate research breakthroughs.",
+      "tldr_zh": "评估 AI 在时间约束下预测科学进展的能力。前沿模型在可行性预测上表现接近随机，揭示了当前 AI 在预判研究突破方面的根本局限。",
+      "interest_tag": ""
+    }
+  ],
+  "github_repos": [
+    {
+      "name": "VILA-Lab/FigMirror",
+      "url": "https://github.com/VILA-Lab/FigMirror",
+      "tldr": "An automated AI agent tool that replicates any paper's figure style for your own data. Analyzes the visual style of published figures and generates matching plots, streamlining scientific visualization workflows.",
+      "tldr_zh": "自动化 AI agent 工具，能复制任何论文的图表风格来绘制你的数据。分析已发表图表的视觉风格并生成匹配的图，简化科研可视化流程。",
+      "stars": 237,
+      "language": "Python",
+      "interest_tag": ""
+    },
+    {
+      "name": "XingYu-Zhong/DeepSeek-GUI",
+      "url": "https://github.com/XingYu-Zhong/DeepSeek-GUI",
+      "tldr": "AI agent workspace for DeepSeek models with Code and Claw modes built in. Provides a desktop GUI for interacting with DeepSeek's agent capabilities including code generation and computer use.",
+      "tldr_zh": "DeepSeek 模型的 AI agent 工作空间，内置 Code 和 Claw 模式。提供桌面 GUI 用于与 DeepSeek 的 agent 能力交互，包括代码生成和计算机使用。",
+      "stars": 201,
+      "language": "TypeScript",
+      "interest_tag": "CUA"
+    },
+    {
+      "name": "akitaonrails/ai-memory",
+      "url": "https://github.com/akitaonrails/ai-memory",
+      "tldr": "A Rust-based solution for long-term memory in agent coding CLIs, facilitating handoff between different AI coding agents. Provides persistent memory layer that works across Claude Code, Codex, and other agent tools.",
+      "tldr_zh": "基于 Rust 的 agent 编码 CLI 长期记忆解决方案，方便不同 AI 编码 agent 之间的交接。提供跨 Claude Code、Codex 等 agent 工具的持久化记忆层。",
+      "stars": 156,
+      "language": "Rust",
+      "interest_tag": "Memory"
+    },
+    {
+      "name": "afumu/openteam",
+      "url": "https://github.com/afumu/openteam",
+      "tldr": "Chrome extension for orchestrating local AI agent team workflows across web AI services. Enables multiple agents to collaborate on tasks through a browser-based interface, coordinating between different AI platforms.",
+      "tldr_zh": "Chrome 扩展，用于跨 Web AI 服务编排本地 AI agent 团队工作流。通过浏览器界面让多个 agent 协作完成任务，协调不同 AI 平台。",
+      "stars": 103,
+      "language": "TypeScript",
+      "interest_tag": "Agent Swarm"
+    },
+    {
+      "name": "bryanyzhu/agentic-ai-system-course",
+      "url": "https://github.com/bryanyzhu/agentic-ai-system-course",
+      "tldr": "A skeleton course on designing, building, and operating production AI agent systems. Uses an agent to teach about agents — meta-learning approach with hands-on exercises covering the full agent lifecycle.",
+      "tldr_zh": "关于设计、构建和运维生产级 AI agent 系统的框架课程。用 agent 来教 agent——元学习方式，配合覆盖 agent 全生命周期的实践练习。",
+      "stars": 114,
+      "language": "Shell",
+      "interest_tag": ""
+    }
+  ],
+  "hackernews": [
+    {
+      "title": "Qwen3.7-Max: The Agent Frontier",
+      "url": "https://qwen.ai/blog?id=qwen3.7",
+      "tldr": "Alibaba releases Qwen3.7-Max positioned as the 'Agent Frontier' model, achieving state-of-the-art results on agentic benchmarks. Represents a major push by Chinese AI labs into agent-capable foundation models.",
+      "tldr_zh": "阿里巴巴发布 Qwen3.7-Max，定位为'Agent 前沿'模型，在 agentic 基准上达到最先进水平。代表中国 AI 实验室在 agent 能力基础模型方向的重大推进。",
+      "points": 718,
+      "num_comments": 292,
+      "interest_tag": ""
+    },
+    {
+      "title": "Show HN: Forge – Guardrails take an 8B model from 53% to 99% on agentic tasks",
+      "url": "https://github.com/antoinezambelli/forge",
+      "tldr": "Open-source framework demonstrating that well-designed guardrails can boost a small 8B parameter model from 53% to 99% accuracy on agentic tasks. Challenges the assumption that agent capability requires large frontier models.",
+      "tldr_zh": "开源框架，展示精心设计的 guardrails 可将 8B 小模型在 agentic 任务上的准确率从 53% 提升至 99%。挑战了 agent 能力需要大型前沿模型的假设。",
+      "points": 680,
+      "num_comments": 251,
+      "interest_tag": ""
+    },
+    {
+      "title": "DeepSeek makes the V4 Pro price discount permanent",
+      "url": "https://api-docs.deepseek.com/quick_start/pricing",
+      "tldr": "DeepSeek permanently reduces V4 Pro API pricing, intensifying the inference cost war. Signals confidence in their efficiency advantages and puts pressure on competitors to match pricing or differentiate on capabilities.",
+      "tldr_zh": "DeepSeek 永久降低 V4 Pro API 价格，加剧推理成本战。表明对自身效率优势的信心，迫使竞争对手匹配价格或在能力上差异化。",
+      "points": 528,
+      "num_comments": 479,
+      "interest_tag": ""
+    },
+    {
+      "title": "Microsoft reports AI is more expensive than paying human employees",
+      "url": "https://fortune.com/2026/05/22/microsoft-ai-cost-problem-tokens-agents/",
+      "tldr": "Internal Microsoft analysis reveals AI agent deployments currently cost more than equivalent human workers in many scenarios. Highlights the gap between AI capability demos and production cost-effectiveness, especially for token-heavy agentic workflows.",
+      "tldr_zh": "微软内部分析显示，在许多场景下 AI agent 部署成本目前高于等效人工。凸显了 AI 能力演示与生产级成本效益之间的差距，尤其是 token 密集的 agentic 工作流。",
+      "points": 228,
+      "num_comments": 67,
+      "interest_tag": ""
+    },
+    {
+      "title": "Formal Verification Gates for AI Coding Loops",
+      "url": "https://reubenbrooks.dev/blog/structural-backpressure-beats-smarter-agents/",
+      "tldr": "Proposes using formal verification as gates in AI coding agent loops, arguing that 'structural backpressure beats smarter agents.' A practical architecture pattern where verified constraints prevent cascading errors in autonomous code generation.",
+      "tldr_zh": "提出在 AI 编码 agent 循环中使用形式化验证作为门控，论证'结构性背压优于更智能的 agent'。一种实用架构模式，通过验证约束防止自主代码生成中的级联错误。",
+      "points": 144,
+      "num_comments": 33,
+      "interest_tag": ""
+    }
+  ]
+}
