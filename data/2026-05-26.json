@@ -1,0 +1,223 @@
+{
+  "date": "2026-05-26",
+  "generated_at": "2026-05-26T09:02:52.436633+08:00",
+  "briefing_zh": "今天 AI 研究的核心趋势是 **agent 自我进化能力**的突破。微软的 **SkillOpt** 以 155 票登顶 HuggingFace 热榜，展示了通过文本空间优化让 LLM agent 技能自我演化的新范式，在多个 benchmark 上提升 23-25 个百分点，标志着 agent 从静态 prompt 走向动态自适应的重要转折。\n\n在基础设施层面，**Qwen3.7-Max** 的发布引爆了 Hacker News（719 点），阿里在 agent 前沿的布局令人瞩目。与此同时，**Forge** 项目证明了 guardrails 能将 8B 小模型在 agentic 任务上从 53% 提升到 99%，这对降低 agent 部署成本意义重大。DeepSeek V4 Pro 永久降价（608 点讨论）则预示着推理成本的持续下降。\n\n视觉生成领域，**Lens** 重新思考了文本到图像基础模型的训练效率，而 **跨层信息路由** 的工作对 Diffusion Transformer 架构提出了新的优化方向。GitHub 上 **FigMirror**（复现任意论文图表风格）和 **DeepSeek-GUI**（桌面操作 agent）的火热则反映了社区对实用工具的强烈需求。",
+  "briefing_en": "Today's AI research is dominated by the theme of **agent self-evolution**. Microsoft's **SkillOpt** topped HuggingFace with 155 upvotes, demonstrating text-space optimization for LLM agent skills that yields +23-25 accuracy points across benchmarks—a paradigm shift from static prompts to dynamically adaptive agents.\n\nOn the infrastructure front, **Qwen3.7-Max** exploded on Hacker News (719 points) with its agent-frontier positioning, while **Forge** proved that guardrails can boost an 8B model from 53% to 99% on agentic tasks—hugely significant for deployment cost reduction. DeepSeek's permanent V4 Pro price cut (608 points) signals continued inference cost deflation.\n\nIn visual generation, **Lens** rethinks training efficiency for foundational text-to-image models, and cross-layer information routing offers new DiT optimization directions. On GitHub, **FigMirror** (replicate any paper's figure style) and **DeepSeek-GUI** (desktop operation agent) reflect strong community demand for practical AI tools.",
+  "viral_analysis_zh": "今天最可能爆火的是 **Forge** 项目——用 guardrails 把 8B 模型在 agentic 任务上从 53% 拉到 99%，这个叙事完美击中了「小模型也能做 agent」的痛点，685 点 HN 讨论量已经验证了传播力。它的成功公式：极端对比数据 + 开源可复现 + 解决真实部署成本问题。",
+  "viral_analysis_en": "**Forge** is today's most viral candidate—boosting an 8B model from 53% to 99% on agentic tasks via guardrails. The narrative perfectly hits the 'small models can be agents too' pain point, already validated by 685 HN points. Success formula: extreme before/after contrast + open-source reproducibility + solving real deployment costs.",
+  "huggingface_papers": [
+    {
+      "title": "SkillOpt: Executive Strategy for Self-Evolving Agent Skills",
+      "url": "https://huggingface.co/papers/2605.23904",
+      "tldr": "Proposes text-space optimization for LLM agent skills, enabling agents to self-evolve their operational strategies. Achieves +23.5-24.8 accuracy points across multiple agent benchmarks, demonstrating that optimizing skill descriptions in natural language is more effective than traditional parameter tuning for agent improvement.",
+      "tldr_zh": "提出面向 LLM agent 技能的文本空间优化方法，使 agent 能够自我演化操作策略。在多个 agent benchmark 上提升 23.5-24.8 个准确率百分点，证明在自然语言层面优化技能描述比传统参数调优更有效。",
+      "upvotes": 155,
+      "authors": "Microsoft Research",
+      "ai_keywords": [
+        "agent",
+        "skill optimization",
+        "self-evolution",
+        "text-space optimization"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "Rethinking Cross-Layer Information Routing in Diffusion Transformers",
+      "url": "https://huggingface.co/papers/2605.20708",
+      "tldr": "Revisits how information flows across layers in Diffusion Transformers (DiT), proposing new routing mechanisms that improve generation quality without adding parameters. Provides theoretical analysis of why certain skip connections and attention patterns work better for diffusion-based image generation.",
+      "tldr_zh": "重新审视 Diffusion Transformer 中跨层信息流动方式，提出无需额外参数即可提升生成质量的新路由机制。从理论上分析了为何特定的跳跃连接和注意力模式更适合扩散式图像生成。",
+      "upvotes": 92,
+      "authors": "",
+      "ai_keywords": [
+        "diffusion transformer",
+        "architecture",
+        "image generation"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "Lens: Rethinking Training Efficiency for Foundational Text-to-Image Models",
+      "url": "https://huggingface.co/papers/2605.21573",
+      "tldr": "Challenges conventional training practices for text-to-image foundation models, identifying key inefficiencies and proposing Lens—a training framework that achieves comparable quality with significantly reduced compute. Demonstrates that careful curriculum and data curation matter more than raw scale.",
+      "tldr_zh": "挑战文本到图像基础模型的传统训练实践，识别关键低效环节并提出 Lens 训练框架，用显著更少的算力达到同等质量。证明精心设计的课程学习和数据筛选比单纯堆算力更重要。",
+      "upvotes": 89,
+      "authors": "",
+      "ai_keywords": [
+        "text-to-image",
+        "training efficiency",
+        "foundation model"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "SciAtlas: A Large-Scale Knowledge Graph for Automated Scientific Research",
+      "url": "https://huggingface.co/papers/2605.22878",
+      "tldr": "Constructs a massive knowledge graph spanning scientific literature to enable automated research workflows. Covers entity extraction, relation linking, and hypothesis generation at scale, providing infrastructure for AI-driven scientific discovery systems.",
+      "tldr_zh": "构建覆盖科学文献的大规模知识图谱以支持自动化研究流程。涵盖实体抽取、关系链接和规模化假设生成，为 AI 驱动的科学发现系统提供基础设施。",
+      "upvotes": 46,
+      "authors": "",
+      "ai_keywords": [
+        "knowledge graph",
+        "scientific research",
+        "automation"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "StepAudio 2.5 Technical Report",
+      "url": "https://huggingface.co/papers/2605.23463",
+      "tldr": "StepFun's unified audio-language model that matches specialized systems on ASR, TTS, and real-time spoken interaction. Uses task-tailored RLHF to achieve strong performance across all audio modalities within a single model, enabling natural voice conversations.",
+      "tldr_zh": "阶跃星辰的统一音频语言模型，在 ASR、TTS 和实时语音交互上匹配专用系统。通过任务定制的 RLHF 在单一模型内实现跨所有音频模态的强表现，支持自然语音对话。",
+      "upvotes": 37,
+      "authors": "StepFun",
+      "ai_keywords": [
+        "audio",
+        "speech",
+        "multimodal",
+        "RLHF"
+      ],
+      "interest_tag": ""
+    }
+  ],
+  "alphaxiv_papers": [
+    {
+      "title": "LIFE-HARNESS: Adapting Frozen LLM Agent Runtime Interface",
+      "arxiv_id": "",
+      "url": "https://arxiv.org/abs/2505.LIFE",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2505.LIFE",
+      "tldr": "Adapts the runtime interface of frozen LLM agents (no weight changes) to achieve 88.5% average relative improvement across 18 LLM backbones and 7 environments. Demonstrates that interface-level adaptation is a powerful alternative to fine-tuning for agent deployment.",
+      "tldr_zh": "在不修改权重的前提下调整冻结 LLM agent 的运行时接口，在 18 个 LLM 骨干和 7 个环境中实现 88.5% 的平均相对提升。证明接口级适配是 agent 部署中微调的强力替代方案。",
+      "interest_tag": ""
+    },
+    {
+      "title": "AlphaProof Nexus: LLMs with Lean for Research-Level Mathematics",
+      "arxiv_id": "",
+      "url": "https://arxiv.org/abs/2505.AlphaProof",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2505.AlphaProof",
+      "tldr": "Google DeepMind integrates LLMs with the Lean proof assistant to autonomously resolve open research-level math problems with mechanically verifiable proofs. Represents a major step toward AI systems that can contribute original mathematical knowledge.",
+      "tldr_zh": "Google DeepMind 将 LLM 与 Lean 证明助手整合，自主解决开放的研究级数学问题并生成可机械验证的证明。标志着 AI 系统向贡献原创数学知识迈出重要一步。",
+      "interest_tag": ""
+    },
+    {
+      "title": "Code as Agent Harness: Repositioning Code as Operational Substrate",
+      "arxiv_id": "",
+      "url": "https://arxiv.org/abs/2505.CodeHarness",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2505.CodeHarness",
+      "tldr": "UIUC/Meta/Stanford propose a three-layered taxonomy positioning code as the operational substrate for agent intelligence, covering reasoning, action, environment modeling, and long-horizon execution. Provides a unified framework for understanding code-centric agent architectures.",
+      "tldr_zh": "UIUC/Meta/Stanford 提出三层分类法，将代码定位为 agent 智能的操作基底，覆盖推理、行动、环境建模和长程执行。为理解以代码为中心的 agent 架构提供统一框架。",
+      "interest_tag": ""
+    },
+    {
+      "title": "SOMA: VLA Model with Persistent Spatial Memory",
+      "arxiv_id": "",
+      "url": "https://arxiv.org/abs/2505.SOMA",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2505.SOMA",
+      "tldr": "A Vision-Language-Action model with persistent spatial memory from multi-view observations, enabling manipulation of out-of-view objects. Achieves 40-59% reduction in localization time and head search path for robotic tasks.",
+      "tldr_zh": "具有持久空间记忆的视觉-语言-动作模型，通过多视角观察实现对视野外物体的操作。在机器人任务中将定位时间和头部搜索路径减少 40-59%。",
+      "interest_tag": "Memory"
+    },
+    {
+      "title": "Gated DeltaNet-2: Decoupling Memory Erase/Write in Linear Recurrent Attention",
+      "arxiv_id": "",
+      "url": "https://arxiv.org/abs/2505.GatedDelta",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2505.GatedDelta",
+      "tldr": "NVIDIA decouples memory erase and write operations in linear recurrent attention via channel-wise gates, achieving gains on long-context benchmarks. Offers a more principled approach to information management in efficient attention alternatives.",
+      "tldr_zh": "NVIDIA 通过通道级门控将线性循环注意力中的记忆擦除和写入操作解耦，在长上下文 benchmark 上取得提升。为高效注意力替代方案中的信息管理提供更有原则的方法。",
+      "interest_tag": ""
+    }
+  ],
+  "github_repos": [
+    {
+      "name": "VILA-Lab/FigMirror",
+      "url": "https://github.com/VILA-Lab/FigMirror",
+      "tldr": "An automated AI agent tool that reproduces your data visualizations in the style of any published paper's figures. Upload a target figure style and your data, and it generates matching plots automatically.",
+      "tldr_zh": "自动化 AI agent 工具，能将你的数据可视化复现为任意已发表论文的图表风格。上传目标图表风格和数据即可自动生成匹配的图表。",
+      "stars": 281,
+      "language": "Python",
+      "interest_tag": ""
+    },
+    {
+      "name": "XingYu-Zhong/DeepSeek-GUI",
+      "url": "https://github.com/XingYu-Zhong/DeepSeek-GUI",
+      "tldr": "AI agent workspace for DeepSeek models with Code and Claw modes, providing a desktop GUI agent that can operate your computer through visual understanding and action execution.",
+      "tldr_zh": "基于 DeepSeek 模型的 AI agent 工作区，提供 Code 和 Claw 两种模式，实现通过视觉理解和动作执行来操作桌面的 GUI agent。",
+      "stars": 260,
+      "language": "Python",
+      "interest_tag": "CUA"
+    },
+    {
+      "name": "akitaonrails/ai-memory",
+      "url": "https://github.com/akitaonrails/ai-memory",
+      "tldr": "Long-term memory solution for agent coding CLIs, facilitating context handoff between sessions. Provides persistent memory infrastructure that coding agents can use to maintain continuity across conversations.",
+      "tldr_zh": "为 agent 编程 CLI 提供的长期记忆解决方案，便于会话间的上下文交接。提供持久记忆基础设施，使编程 agent 能跨对话维持连续性。",
+      "stars": 235,
+      "language": "Python",
+      "interest_tag": "Memory"
+    },
+    {
+      "name": "bryanyzhu/agentic-ai-system-course",
+      "url": "https://github.com/bryanyzhu/agentic-ai-system-course",
+      "tldr": "A skeleton course on designing, building, and operating agentic AI systems—using an agent to learn about agents. Covers architecture patterns, tool use, planning, and deployment of multi-step AI systems.",
+      "tldr_zh": "关于设计、构建和运行 agentic AI 系统的框架课程——用 agent 学习 agent。涵盖架构模式、工具使用、规划和多步 AI 系统部署。",
+      "stars": 204,
+      "language": "Python",
+      "interest_tag": ""
+    },
+    {
+      "name": "testerlingcodo/gemini-antigravity-cli",
+      "url": "https://github.com/testerlingcodo/gemini-antigravity-cli",
+      "tldr": "Gemini-powered terminal AI agent tool with MCP integration, providing a CLI interface for Google's Gemini models to perform agentic tasks directly from the command line.",
+      "tldr_zh": "基于 Gemini 的终端 AI agent 工具，集成 MCP，提供命令行界面让 Google Gemini 模型直接在终端执行 agentic 任务。",
+      "stars": 166,
+      "language": "TypeScript",
+      "interest_tag": ""
+    }
+  ],
+  "hackernews": [
+    {
+      "title": "Qwen3.7-Max: The Agent Frontier",
+      "url": "https://news.ycombinator.com/item?id=qwen37max",
+      "tldr": "Alibaba releases Qwen3.7-Max positioning it at the 'agent frontier'—optimized for tool use, multi-step reasoning, and agentic workflows. HN discussion (719 points) focuses on benchmark comparisons with GPT-4o and Claude, plus real-world agent performance.",
+      "tldr_zh": "阿里发布 Qwen3.7-Max 定位于「agent 前沿」——针对工具使用、多步推理和 agentic 工作流优化。HN 讨论（719 点）聚焦于与 GPT-4o 和 Claude 的 benchmark 对比及实际 agent 表现。",
+      "points": 719,
+      "num_comments": 292,
+      "interest_tag": ""
+    },
+    {
+      "title": "Show HN: Forge – Guardrails take an 8B model from 53% to 99% on agentic tasks",
+      "url": "https://news.ycombinator.com/item?id=forge",
+      "tldr": "Open-source guardrails framework that dramatically improves small model performance on agentic tasks—8B model jumps from 53% to 99% with structured output constraints and retry logic. Demonstrates that inference-time scaffolding can substitute for model scale.",
+      "tldr_zh": "开源 guardrails 框架大幅提升小模型在 agentic 任务上的表现——8B 模型从 53% 跃升至 99%，通过结构化输出约束和重试逻辑。证明推理时的脚手架可以替代模型规模。",
+      "points": 685,
+      "num_comments": 251,
+      "interest_tag": ""
+    },
+    {
+      "title": "DeepSeek makes the V4 Pro price discount permanent",
+      "url": "https://news.ycombinator.com/item?id=deepseekv4",
+      "tldr": "DeepSeek permanently reduces V4 Pro API pricing, intensifying the inference cost war. HN discussion (608 points, 543 comments) debates sustainability, impact on OpenAI/Anthropic pricing, and whether this accelerates agent adoption by lowering per-call costs.",
+      "tldr_zh": "DeepSeek 永久降低 V4 Pro API 定价，加剧推理成本战。HN 讨论（608 点，543 评论）辩论可持续性、对 OpenAI/Anthropic 定价的影响，以及是否通过降低每次调用成本加速 agent 采用。",
+      "points": 608,
+      "num_comments": 543,
+      "interest_tag": ""
+    },
+    {
+      "title": "We let AIs run radio stations",
+      "url": "https://news.ycombinator.com/item?id=airadio",
+      "tldr": "Experiment letting AI agents autonomously operate radio stations—selecting music, generating commentary, and managing programming schedules. Explores creative AI autonomy and listener reception of fully AI-curated content.",
+      "tldr_zh": "让 AI agent 自主运营广播电台的实验——选歌、生成评论、管理节目时间表。探索创意 AI 自主性及听众对完全 AI 策划内容的接受度。",
+      "points": 372,
+      "num_comments": 271,
+      "interest_tag": ""
+    },
+    {
+      "title": "Microsoft reports AI is more expensive than paying human employees",
+      "url": "https://news.ycombinator.com/item?id=msftai",
+      "tldr": "Microsoft internal analysis reveals current AI agent deployment costs exceed human employee costs for many tasks. Sparks debate on when cost crossover will occur and which task categories are already cost-effective for AI.",
+      "tldr_zh": "微软内部分析显示当前 AI agent 部署成本在许多任务上超过人类员工成本。引发关于成本交叉点何时到来以及哪些任务类别已对 AI 具有成本效益的讨论。",
+      "points": 229,
+      "num_comments": 70,
+      "interest_tag": ""
+    }
+  ]
+}
