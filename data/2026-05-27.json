@@ -1,0 +1,221 @@
+{
+  "date": "2026-05-27",
+  "generated_at": "2026-05-27T09:03:02.083936+08:00",
+  "briefing_zh": "今天 AI 研究领域的焦点集中在**多奖励强化学习**和**交互式 Agent**两大方向。**DVAO**（动态方差自适应优化）在数学推理任务上同时实现 42.19% 准确率和 99.91% 长度合规，展示了多目标 RL 的工程化突破。**Foundation Protocol** 提出了 agentic society 的协调层协议，试图为多 agent 系统定义通信标准，这是基础设施层面的重要探索。\n\n视觉与 3D 方向，**TriSplat** 实现了从稀疏无位姿图像直接前馈重建三角网格场景，速度比现有方法快数个量级。**Macaron-A2UI** 则探索了个人 Agent 的生成式 UI，让 agent 能动态生成适配任务的界面。\n\n开源社区方面，**FigMirror** 和 **DeepSeek-GUI** 本周快速积累星标，前者让 AI 自动复现论文图表风格，后者为 DeepSeek 模型提供桌面 agent 工作空间。**ai-memory** 项目直击 coding agent 的长期记忆痛点，提供跨 agent 的记忆共享方案。",
+  "briefing_en": "Today's AI research landscape centers on **multi-reward reinforcement learning** and **interactive agents**. **DVAO** (Dynamic Variance-Adaptive Optimization) achieves 42.19% accuracy with 99.91% length compliance on math reasoning, demonstrating engineering breakthroughs in multi-objective RL. **Foundation Protocol** proposes a coordination layer for agentic society, attempting to define communication standards for multi-agent systems — a critical infrastructure exploration.\n\nIn vision and 3D, **TriSplat** enables feed-forward 3D scene reconstruction from sparse unposed images into triangle meshes, orders of magnitude faster than prior methods. **Macaron-A2UI** explores generative UI for personal agents, dynamically creating task-appropriate interfaces.\n\nIn open source, **FigMirror** and **DeepSeek-GUI** rapidly gained stars this week — the former automates paper figure style replication, the latter provides a desktop agent workspace for DeepSeek models. **ai-memory** addresses the long-term memory pain point for coding agents with cross-agent memory sharing.",
+  "viral_analysis_zh": "**FigMirror** 最可能成为爆款——它解决了研究者画图时「想要某篇论文的风格但不会配色」的普遍痛点，使用门槛极低（上传数据+选风格），视觉效果对比强烈适合社交媒体传播。类似 tools-for-researchers 的定位历来容易出圈。",
+  "viral_analysis_en": "**FigMirror** is most likely to go viral — it solves the universal pain point of researchers wanting a specific paper's figure style but lacking design skills. Low barrier to use (upload data + pick style) and strong visual before/after comparisons make it perfect for social media. Research-tooling projects in this niche consistently break out.",
+  "huggingface_papers": [
+    {
+      "title": "DVAO: Dynamic Variance-adaptive Advantage Optimization for Multi-reward Reinforcement Learning",
+      "url": "https://huggingface.co/papers/2605.25604",
+      "tldr": "DVAO introduces dynamic variance-adaptive advantage weighting for multi-reward RL, achieving 42.19% math accuracy and 99.91% length compliance with Qwen3-4B-Base. It decouples conflicting reward signals without manual tuning.",
+      "tldr_zh": "DVAO 提出动态方差自适应优势加权用于多奖励 RL，在 Qwen3-4B-Base 上实现 42.19% 数学准确率和 99.91% 长度合规。无需手动调参即可解耦冲突的奖励信号。",
+      "upvotes": 116,
+      "authors": "Guochao Jiang, Jingyi Song, Guofeng Quan",
+      "ai_keywords": [
+        "reinforcement-learning",
+        "multi-objective",
+        "math-reasoning"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "WBench: A Comprehensive Multi-turn Benchmark for Interactive Video World Model Evaluation",
+      "url": "https://huggingface.co/papers/2605.25874",
+      "tldr": "WBench is a multi-turn benchmark for interactive video world models, evaluating 20 models across quality, interaction adherence, and physical plausibility. Finds multi-turn navigation degradation as the key bottleneck.",
+      "tldr_zh": "WBench 是交互式视频世界模型的多轮评测基准，从质量、交互遵循和物理合理性 5 个维度评估 20 个模型，发现多轮导航退化是关键瓶颈。",
+      "upvotes": 88,
+      "authors": "Kaining Ying, Hengrui Hu, Siyu Ren",
+      "ai_keywords": [
+        "benchmark",
+        "world-model",
+        "video"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "Macaron-A2UI: A Model for Generative UI in Personal Agents",
+      "url": "https://huggingface.co/papers/2605.24830",
+      "tldr": "Macaron-A2UI enables personal agents to generate custom UIs on-the-fly for each task, rather than relying on fixed app interfaces. Combines LLM planning with UI generation for seamless human-agent interaction.",
+      "tldr_zh": "Macaron-A2UI 让个人 Agent 能为每个任务动态生成自定义 UI，而非依赖固定应用界面。结合 LLM 规划与 UI 生成实现无缝人机交互。",
+      "upvotes": 67,
+      "authors": "Fancy Kong, Congjie Zheng, Murphy Zhuang",
+      "ai_keywords": [
+        "agent",
+        "UI-generation",
+        "personal-assistant"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "Foundation Protocol: A Coordination Layer for Agentic Society",
+      "url": "https://huggingface.co/papers/2605.23218",
+      "tldr": "Foundation Protocol defines a coordination layer for multi-agent societies — addressing identity, communication, and trust between autonomous agents. Aims to become a standard for agent interoperability.",
+      "tldr_zh": "Foundation Protocol 为多 agent 社会定义协调层，解决自主 agent 间的身份、通信和信任问题，目标成为 agent 互操作的标准协议。",
+      "upvotes": 59,
+      "authors": "Bang Liu, Yongfeng Gu, Jiayi Zhang",
+      "ai_keywords": [
+        "multi-agent",
+        "protocol",
+        "coordination"
+      ],
+      "interest_tag": "Agent Swarm"
+    },
+    {
+      "title": "TriSplat: Simulation-Ready Feed-Forward 3D Scene Reconstruction",
+      "url": "https://huggingface.co/papers/2605.26115",
+      "tldr": "TriSplat reconstructs simulation-ready 3D scenes from sparse unposed images in a single feed-forward pass, producing oriented triangle meshes orders of magnitude faster than optimization-based methods.",
+      "tldr_zh": "TriSplat 从稀疏无位姿图像单次前馈重建可仿真 3D 场景，生成有向三角网格，速度比优化方法快数个量级。",
+      "upvotes": 34,
+      "authors": "Weijie Wang, Zimu Li, Jinchuan Shi",
+      "ai_keywords": [
+        "3D-reconstruction",
+        "feed-forward",
+        "simulation"
+      ],
+      "interest_tag": ""
+    }
+  ],
+  "alphaxiv_papers": [
+    {
+      "title": "CUA-GYM: An RLVR Training Data Pipeline for Computer-Use Agents",
+      "arxiv_id": "2505.xxxxx",
+      "url": "https://arxiv.org/abs/2505.xxxxx",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2505.xxxxx",
+      "tldr": "CUA-GYM provides 32,112 RLVR training tasks across 110 environments for computer-use agents, improving OSWorld and WebArena scores through scalable reward-verified data generation.",
+      "tldr_zh": "CUA-GYM 为计算机使用 Agent 提供跨 110 个环境的 32,112 个 RLVR 训练任务，通过可扩展的奖励验证数据生成提升 OSWorld 和 WebArena 分数。",
+      "interest_tag": "CUA"
+    },
+    {
+      "title": "AlphaProof Nexus: LLM + Lean for Research-Level Mathematics",
+      "arxiv_id": "2505.xxxxx",
+      "url": "https://arxiv.org/abs/2505.xxxxx",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2505.xxxxx",
+      "tldr": "Google DeepMind's AlphaProof Nexus combines LLMs with the Lean proof assistant to autonomously resolve open research-level math conjectures with mechanically verifiable proofs.",
+      "tldr_zh": "Google DeepMind 的 AlphaProof Nexus 将 LLM 与 Lean 证明助手结合，自主解决开放研究级数学猜想并给出机械可验证证明。",
+      "interest_tag": ""
+    },
+    {
+      "title": "LLM Sleep: Offline Memory Consolidation via Iterative Fast-Weight Updates",
+      "arxiv_id": "2505.xxxxx",
+      "url": "https://arxiv.org/abs/2505.xxxxx",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2505.xxxxx",
+      "tldr": "LLM Sleep introduces offline memory consolidation inspired by biological sleep, using iterative fast-weight updates for deeper reasoning over long contexts with low wake-time latency.",
+      "tldr_zh": "LLM Sleep 借鉴生物睡眠机制引入离线记忆巩固，通过迭代快速权重更新实现长上下文深度推理，保持低唤醒延迟。",
+      "interest_tag": "Memory"
+    },
+    {
+      "title": "Shannon Scaling Law: Modeling LLM Training as Noisy-Channel Transmission",
+      "arxiv_id": "2505.xxxxx",
+      "url": "https://arxiv.org/abs/2505.xxxxx",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2505.xxxxx",
+      "tldr": "ByteDance/UVA/Berkeley model LLM training as noisy-channel information transmission, achieving R²=0.9824 and predicting U-shaped loss curves across noise, SFT, and quantization scenarios.",
+      "tldr_zh": "ByteDance/UVA/Berkeley 将 LLM 训练建模为噪声信道传输，R²=0.9824，可预测噪声、SFT 和量化场景下的 U 型损失曲线。",
+      "interest_tag": ""
+    },
+    {
+      "title": "MOBILEGYM: Browser-Hosted Mobile GUI Agent Simulation",
+      "arxiv_id": "2505.xxxxx",
+      "url": "https://arxiv.org/abs/2505.xxxxx",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2505.xxxxx",
+      "tldr": "MOBILEGYM provides browser-hosted mobile GUI simulation with JSON state for scalable online RL training of mobile agents, achieving 95.1% retained gain on real device transfer.",
+      "tldr_zh": "MOBILEGYM 提供基于浏览器的手机 GUI 仿真环境，支持可扩展在线 RL 训练，在真实设备迁移上保持 95.1% 的性能增益。",
+      "interest_tag": "CUA"
+    }
+  ],
+  "github_repos": [
+    {
+      "name": "VILA-Lab/FigMirror",
+      "url": "https://github.com/VILA-Lab/FigMirror",
+      "tldr": "AI agent that automatically replicates any paper's figure style for your own data — upload CSV/plot + reference figure, get publication-ready charts matching the visual language.",
+      "tldr_zh": "AI agent 自动复现任意论文的图表风格——上传数据和参考图，生成匹配视觉语言的出版级图表。",
+      "stars": 311,
+      "language": "Python",
+      "interest_tag": ""
+    },
+    {
+      "name": "XingYu-Zhong/DeepSeek-GUI",
+      "url": "https://github.com/XingYu-Zhong/DeepSeek-GUI",
+      "tldr": "Desktop AI agent workspace for DeepSeek models with Code mode (autonomous coding) and Claw mode (interactive tool use) built into a native app.",
+      "tldr_zh": "DeepSeek 模型的桌面 AI agent 工作空间，内置 Code 模式（自主编码）和 Claw 模式（交互式工具使用）。",
+      "stars": 311,
+      "language": "TypeScript",
+      "interest_tag": ""
+    },
+    {
+      "name": "study8677/awesome-architecture",
+      "url": "https://github.com/study8677/awesome-architecture",
+      "tldr": "Curated architecture maps covering 21 system design patterns including AI gateway, RAG pipelines, and agent orchestration — visual learning for software architects.",
+      "tldr_zh": "精选 21 张系统设计架构图，涵盖 AI 网关、RAG 管道和 agent 编排——面向软件架构师的可视化学习资源。",
+      "stars": 303,
+      "language": "Vue",
+      "interest_tag": ""
+    },
+    {
+      "name": "akitaonrails/ai-memory",
+      "url": "https://github.com/akitaonrails/ai-memory",
+      "tldr": "Rust-based long-term memory solution for coding agent CLIs, enabling memory persistence and handoff between different agent tools (Cursor, Claude Code, etc.).",
+      "tldr_zh": "基于 Rust 的 coding agent 长期记忆方案，支持跨不同 agent 工具（Cursor、Claude Code 等）的记忆持久化和交接。",
+      "stars": 287,
+      "language": "Rust",
+      "interest_tag": "Memory"
+    },
+    {
+      "name": "bryanyzhu/agentic-ai-system-course",
+      "url": "https://github.com/bryanyzhu/agentic-ai-system-course",
+      "tldr": "Skeleton course on designing, building, and operating production AI agent systems — uses agents to teach agent development, with hands-on projects.",
+      "tldr_zh": "设计、构建和运维生产级 AI agent 系统的骨架课程——用 agent 教 agent 开发，包含实战项目。",
+      "stars": 244,
+      "language": "Shell",
+      "interest_tag": ""
+    }
+  ],
+  "hackernews": [
+    {
+      "title": "DeepSWE: A contamination-free benchmark for long-horizon coding agents",
+      "url": "https://deepswe.datacurve.ai/blog",
+      "tldr": "DeepSWE is a contamination-free benchmark for evaluating coding agents on long-horizon tasks, ensuring no test leakage from training data.",
+      "tldr_zh": "DeepSWE 是评估 coding agent 长周期任务的无污染基准，确保训练数据无测试泄漏。",
+      "points": 27,
+      "num_comments": 8,
+      "interest_tag": "Benchmark"
+    },
+    {
+      "title": "Show HN: MCPs aren't enough, give Codex/Claude accurate memory of everything",
+      "url": "https://timeglass.ai",
+      "tldr": "Timeglass gives Codex/Claude accurate persistent memory of everything in your codebase — goes beyond MCPs by maintaining full project context across sessions.",
+      "tldr_zh": "Timeglass 为 Codex/Claude 提供代码库全量精确持久记忆，超越 MCP 实现跨会话完整项目上下文。",
+      "points": 16,
+      "num_comments": 2,
+      "interest_tag": "Memory"
+    },
+    {
+      "title": "AI Gurus Are Charging Wall Street Banks $25,000 a Day",
+      "url": "https://www.bloomberg.com/news/features/2026-05-25/the-ai-trainers-charging-25-000-a-day-to-push-wall-street-s-agentic-shift",
+      "tldr": "Bloomberg reports AI consultants charging Wall Street banks $25K/day to guide their agentic AI transformation — signals massive enterprise demand for agent expertise.",
+      "tldr_zh": "Bloomberg 报道 AI 顾问向华尔街银行收取每天 2.5 万美元指导 agentic AI 转型——反映企业对 agent 专业知识的巨大需求。",
+      "points": 6,
+      "num_comments": 3,
+      "interest_tag": ""
+    },
+    {
+      "title": "Agentic Patterns",
+      "url": "https://veso.ai/research/agentic-patterns/",
+      "tldr": "Comprehensive analysis of agentic design patterns — planning, reflection, tool use, and multi-agent collaboration — with implementation guidance.",
+      "tldr_zh": "Agentic 设计模式全面分析——规划、反思、工具使用和多 agent 协作——附实现指南。",
+      "points": 23,
+      "num_comments": 12,
+      "interest_tag": ""
+    },
+    {
+      "title": "Show HN: I built a RAG and knowledge graph agent that runs locally",
+      "url": "https://news.ycombinator.com/item?id=48248801",
+      "tldr": "Show HN: Local RAG + knowledge graph agent combining retrieval-augmented generation with graph-based reasoning for private document Q&A.",
+      "tldr_zh": "Show HN：本地 RAG + 知识图谱 agent，结合检索增强生成与图推理实现私有文档问答。",
+      "points": 7,
+      "num_comments": 7,
+      "interest_tag": ""
+    }
+  ]
+}
