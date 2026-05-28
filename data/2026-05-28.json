@@ -1,0 +1,226 @@
+{
+  "date": "2026-05-28",
+  "generated_at": "2026-05-28T09:03:22.099350+08:00",
+  "briefing_zh": "今天 AI 研究领域最引人注目的趋势是**模型记忆与睡眠机制**的突破。Sangyun Lee 等人提出的 \"LLM Sleep\" 借鉴生物睡眠的记忆巩固机制，让大语言模型在离线阶段通过迭代更新 fast weights 实现更深层推理，这为长上下文理解开辟了全新范式。与此同时，**SkillOpt** 框架展示了如何在冻结模型参数的前提下，通过文本空间优化让 agent 自主进化技能，在程序性任务上提升高达 39 分。\n\n在工程落地方面，**MobileGym** 为移动端 GUI Agent 研究提供了可验证的高并行仿真平台，而 **LocateAnything** 通过并行框解码大幅提升了视觉定位的速度和质量。产业侧，**Qwen3.7-Max** 登顶 HN 热榜，标志着国产模型在 agent 能力上的新高度；**DeepSeek V4 Pro** 永久降价则进一步加速了 AI agent 的普及。\n\n开源社区方面，**ADHD**（tree-of-thought + pruning for coding agents）和 **FigMirror**（自动复刻论文图表风格）展示了 agent 工具链日趋成熟的趋势。",
+  "briefing_en": "Today's most striking trend in AI research is the breakthrough in **model memory and sleep mechanisms**. \"LLM Sleep\" by Sangyun Lee et al. introduces an offline memory consolidation mechanism inspired by biological sleep, enabling LLMs to perform deeper reasoning over long contexts through iteratively updating fixed-size fast weights. Meanwhile, **SkillOpt** demonstrates how to evolve agent skills through text-space optimization on frozen models, achieving up to +39 points on procedural tasks.\n\nOn the engineering front, **MobileGym** provides a verifiable, highly parallel simulation platform for mobile GUI agent research, while **LocateAnything** dramatically improves vision-language grounding speed via parallel box decoding. On the industry side, **Qwen3.7-Max** topped Hacker News as an agent frontier model, and **DeepSeek V4 Pro**'s permanent price cut accelerates AI agent adoption.\n\nIn the open-source community, **ADHD** (tree-of-thought with pruning for coding agents) and **FigMirror** (auto-replicate paper figure styles) showcase the maturing agent toolchain ecosystem.",
+  "viral_analysis_zh": "今天最可能火的是 \"Language Models Need Sleep\" —— 它用生物学隐喻（睡眠/记忆巩固）包装了一个技术创新（fast weights 离线更新），这种叙事天然具有传播力。加上 alphaxiv 上 1577 次浏览和 58 likes 的数据验证，以及 Goldstein 实验室的品牌效应，预计会成为本周最热论文之一。",
+  "viral_analysis_en": "The most likely viral hit today is \"Language Models Need Sleep\" — it wraps a technical innovation (offline fast-weight updates) in a biological metaphor (sleep/memory consolidation) that's inherently shareable. With 1,577 views and 58 likes on alphaxiv plus the Tom Goldstein lab brand, it's poised to become one of the week's hottest papers.",
+  "huggingface_papers": [
+    {
+      "title": "LocateAnything: Fast and High-Quality Vision-Language Grounding with Parallel Box Decoding",
+      "url": "https://huggingface.co/papers/2605.27365",
+      "tldr": "Proposes parallel box decoding for vision-language grounding, replacing slow autoregressive coordinate generation. Achieves both speed and quality improvements on visual grounding and detection tasks by decoding all box coordinates simultaneously.",
+      "tldr_zh": "提出并行框解码方法替代缓慢的自回归坐标生成，在视觉定位和检测任务上同时提升速度和质量，通过同时解码所有框坐标实现高效推理。",
+      "upvotes": 92,
+      "authors": "Shihao Wang, Shilong Liu, Yuanguo Kuang",
+      "ai_keywords": [
+        "visual grounding",
+        "parallel decoding",
+        "VLM",
+        "object detection"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "EvalVerse: Pipeline-Aware and Expert-Calibrated Benchmarking for Professional Cinematic Video Generation",
+      "url": "https://huggingface.co/papers/2605.23271",
+      "tldr": "Introduces a comprehensive benchmark for professional cinematic video generation that evaluates the full production pipeline with expert-calibrated metrics, addressing the gap between academic benchmarks and real film production standards.",
+      "tldr_zh": "为专业电影级视频生成构建了全流程评测基准，采用专家校准的指标体系，填补了学术评测与实际影视制作标准之间的鸿沟。",
+      "upvotes": 72,
+      "authors": "Songlin Yang, Haobin Zhong, Ruilin Zhang",
+      "ai_keywords": [
+        "video generation",
+        "benchmark",
+        "cinematic",
+        "evaluation"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "SpatialBench: Is Your Spatial Foundation Model an All-Round Player?",
+      "url": "https://huggingface.co/papers/2605.27367",
+      "tldr": "Comprehensive benchmark testing whether spatial foundation models are truly versatile across diverse spatial understanding tasks. Reveals significant gaps between performance on standard datasets and broader spatial reasoning capabilities.",
+      "tldr_zh": "全面测试空间基础模型是否真正具备全方位空间理解能力，揭示了模型在标准数据集上的表现与更广泛空间推理能力之间的显著差距。",
+      "upvotes": 57,
+      "authors": "Haosong Peng, Hao Li, Jiaqi Chen",
+      "ai_keywords": [
+        "spatial understanding",
+        "foundation model",
+        "benchmark",
+        "3D"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "MobileGym: A Verifiable and Highly Parallel Simulation Platform for Mobile GUI Agent Research",
+      "url": "https://huggingface.co/papers/2605.26114",
+      "tldr": "Browser-hosted lightweight simulation environment for mobile GUI agents with full controllability and high parallelism. Enables reproducible research on mobile interaction without requiring real devices or heavy emulators.",
+      "tldr_zh": "基于浏览器的轻量级移动端 GUI Agent 仿真环境，具备完全可控性和高并行度，无需真实设备或重型模拟器即可进行可复现的移动交互研究。",
+      "upvotes": 48,
+      "authors": "Dingbang Wu, Rui Hao, Haiyang Wang",
+      "ai_keywords": [
+        "GUI agent",
+        "mobile",
+        "simulation",
+        "benchmark"
+      ],
+      "interest_tag": "CUA"
+    },
+    {
+      "title": "Geometry-Aware Representation Denoising for Robust Multi-view 3D Reconstruction",
+      "url": "https://huggingface.co/papers/2605.26230",
+      "tldr": "Addresses robustness issues in feed-forward 3D reconstruction by introducing geometry-aware denoising of intermediate representations, significantly improving reconstruction quality under challenging real-world conditions.",
+      "tldr_zh": "通过引入几何感知的中间表示去噪方法，解决前馈式 3D 重建的鲁棒性问题，在复杂真实场景下显著提升重建质量。",
+      "upvotes": 34,
+      "authors": "Jin Hyeon Kim, Jaeeun Lee, Claire Kim",
+      "ai_keywords": [
+        "3D reconstruction",
+        "multi-view",
+        "denoising",
+        "robustness"
+      ],
+      "interest_tag": ""
+    }
+  ],
+  "alphaxiv_papers": [
+    {
+      "title": "Language Models Need Sleep",
+      "arxiv_id": "2605.26099",
+      "url": "https://arxiv.org/abs/2605.26099",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2605.26099",
+      "tldr": "Introduces 'LLM Sleep,' an offline memory consolidation mechanism where models iteratively update fixed-size fast weights during a sleep phase, enabling deeper reasoning over long contexts while maintaining low wake-time latency.",
+      "tldr_zh": "提出「LLM 睡眠」机制，模型在离线睡眠阶段通过迭代更新固定大小的 fast weights 实现记忆巩固，在保持低推理延迟的同时大幅提升长上下文深度推理能力。",
+      "interest_tag": "Memory"
+    },
+    {
+      "title": "The MiniMax-M2 Series: Mini Activations Unleashing Max Real-World Intelligence",
+      "arxiv_id": "2605.26494",
+      "url": "https://arxiv.org/abs/2605.26494",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2605.26494",
+      "tldr": "MoE model family with ~10B activated parameters designed for agentic tasks. Integrates agent-driven data pipelines, scalable RL system 'Forge,' and self-evolution capabilities to match frontier model performance at lower compute.",
+      "tldr_zh": "面向 agent 任务的 MoE 模型系列，仅激活约 100 亿参数，集成 agent 驱动的数据管线、可扩展 RL 系统 Forge 和自进化能力，以更低算力匹敌前沿模型。",
+      "interest_tag": ""
+    },
+    {
+      "title": "SkillOpt: Executive Strategy for Self-Evolving Agent Skills",
+      "arxiv_id": "2605.23904",
+      "url": "https://arxiv.org/abs/2605.23904",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2605.23904",
+      "tldr": "Text-space optimization framework that refines natural-language agent skills without updating model weights. Frozen LLMs acquire procedural knowledge through skill artifacts, achieving +39 points on specific tasks with transferable outputs.",
+      "tldr_zh": "文本空间优化框架，无需更新模型权重即可优化自然语言 agent 技能。冻结的 LLM 通过技能工件获取程序性知识，特定任务提升 39 分，且技能可跨模型迁移。",
+      "interest_tag": ""
+    },
+    {
+      "title": "TriSplat: Simulation-Ready Feed-Forward 3D Scene Reconstruction",
+      "arxiv_id": "2605.26115",
+      "url": "https://arxiv.org/abs/2605.26115",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2605.26115",
+      "tldr": "Feed-forward network that reconstructs 3D scenes from sparse unposed images directly into oriented triangle meshes usable in physics simulation, achieving superior geometry/rendering quality orders of magnitude faster than existing methods.",
+      "tldr_zh": "前馈网络从稀疏无位姿图像直接重建可用于物理仿真的三角网格 3D 场景，几何和渲染质量超越现有方法，速度快数个数量级。",
+      "interest_tag": ""
+    },
+    {
+      "title": "When Does LeJEPA Learn a World Model?",
+      "arxiv_id": "2605.26379",
+      "url": "https://arxiv.org/abs/2605.26379",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2605.26379",
+      "tldr": "Formally proves conditions under which JEPA recovers true latent variables (achieving linear identifiability iff latents are isotropic Gaussian), enabling optimal latent-space planning. A theoretical foundation for LeCun's world model vision.",
+      "tldr_zh": "严格证明 JEPA 在何种条件下能恢复真实潜变量（当且仅当潜变量服从各向同性高斯分布时达到线性可辨识性），为 LeCun 的世界模型愿景提供理论基础。",
+      "interest_tag": ""
+    }
+  ],
+  "github_repos": [
+    {
+      "name": "study8677/awesome-architecture",
+      "url": "https://github.com/study8677/awesome-architecture",
+      "tldr": "Curated collection of 21 software architecture maps covering AI gateway, RAG pipelines, and modern system design patterns. Aims to shift developer mindset from coding to architectural thinking.",
+      "tldr_zh": "精选 21 张软件架构图谱，涵盖 AI 网关、RAG 管线和现代系统设计模式，旨在帮助开发者从编码思维转向架构思维。",
+      "stars": 566,
+      "language": "Vue",
+      "interest_tag": ""
+    },
+    {
+      "name": "UditAkhourii/adhd",
+      "url": "https://github.com/UditAkhourii/adhd",
+      "tldr": "A skill module for coding agents implementing tree-of-thought with pruning, built on Claude Agent SDK. Enables structured reasoning with fan-out exploration and dead-branch elimination for complex coding tasks.",
+      "tldr_zh": "基于 Claude Agent SDK 的编码 agent 技能模块，实现带剪枝的思维树（tree-of-thought），通过扇出探索和死枝消除处理复杂编码任务。",
+      "stars": 351,
+      "language": "TypeScript",
+      "interest_tag": ""
+    },
+    {
+      "name": "VILA-Lab/FigMirror",
+      "url": "https://github.com/VILA-Lab/FigMirror",
+      "tldr": "Automated AI agent tool that replicates any paper's figure style for your own data. Upload a target figure and your dataset, get publication-ready plots matching the visual style automatically.",
+      "tldr_zh": "自动化 AI Agent 工具，可复刻任意论文的图表风格。上传目标图表和数据集，自动生成匹配视觉风格的出版级图表。",
+      "stars": 330,
+      "language": "Python",
+      "interest_tag": ""
+    },
+    {
+      "name": "bryanyzhu/agentic-ai-system-course",
+      "url": "https://github.com/bryanyzhu/agentic-ai-system-course",
+      "tldr": "Interactive course on designing production AI agent systems, using an agent to teach about agents. Covers architecture, orchestration, tool use, memory, and deployment patterns for real-world agentic applications.",
+      "tldr_zh": "用 agent 教 agent 的交互式课程，涵盖生产级 AI agent 系统的架构设计、编排、工具使用、记忆和部署模式。",
+      "stars": 267,
+      "language": "JavaScript",
+      "interest_tag": ""
+    },
+    {
+      "name": "mikaeldengale-cloud/Deepseek-v4-Pro-App",
+      "url": "https://github.com/mikaeldengale-cloud/Deepseek-v4-Pro-App",
+      "tldr": "Open-source Windows desktop client for DeepSeek V4 Flash Pro, providing chat and API access with a native application experience for the latest DeepSeek model.",
+      "tldr_zh": "DeepSeek V4 Flash Pro 的开源 Windows 桌面客户端，提供聊天和 API 访问的原生应用体验。",
+      "stars": 234,
+      "language": "TypeScript",
+      "interest_tag": ""
+    }
+  ],
+  "hackernews": [
+    {
+      "title": "Qwen3.7-Max: The Agent Frontier",
+      "url": "https://qwen.ai/blog?id=qwen3.7",
+      "tldr": "Qwen releases 3.7-Max positioning it as an agent-first frontier model. Demonstrates state-of-the-art performance on agentic benchmarks with improved tool use, planning, and multi-step reasoning capabilities.",
+      "tldr_zh": "Qwen 发布 3.7-Max，定位为 agent 优先的前沿模型，在 agent 基准测试上展示最先进性能，提升了工具使用、规划和多步推理能力。",
+      "points": 720,
+      "num_comments": 290,
+      "interest_tag": ""
+    },
+    {
+      "title": "DeepSeek makes the V4 Pro price discount permanent",
+      "url": "https://api-docs.deepseek.com/quick_start/pricing",
+      "tldr": "DeepSeek permanently reduces V4 Pro API pricing, making high-capability AI agent inference significantly more affordable for developers and startups building agent applications at scale.",
+      "tldr_zh": "DeepSeek 永久下调 V4 Pro API 价格，大幅降低开发者和初创公司大规模构建 agent 应用的推理成本。",
+      "points": 616,
+      "num_comments": 546,
+      "interest_tag": ""
+    },
+    {
+      "title": "Microsoft reports AI is more expensive than paying human employees",
+      "url": "https://fortune.com/2026/05/22/microsoft-ai-cost-problem-tokens-agents/",
+      "tldr": "Fortune reports Microsoft's internal analysis showing AI agent deployment costs exceeding human employee costs for many tasks, raising questions about the economic viability of current AI agent architectures at enterprise scale.",
+      "tldr_zh": "Fortune 报道微软内部分析显示 AI agent 部署成本在许多任务上超过人工成本，引发对当前 AI agent 架构在企业规模下经济可行性的质疑。",
+      "points": 229,
+      "num_comments": 71,
+      "interest_tag": ""
+    },
+    {
+      "title": "Formal Verification Gates for AI Coding Loops",
+      "url": "https://reubenbrooks.dev/blog/structural-backpressure-beats-smarter-agents/",
+      "tldr": "Proposes structural backpressure via formal verification gates to constrain AI coding loops, arguing that architectural guardrails outperform simply making agents smarter for reliable code generation.",
+      "tldr_zh": "提出通过形式验证门控对 AI 编码循环施加结构性反压，论证架构护栏在可靠代码生成上优于单纯提升 agent 智能。",
+      "points": 144,
+      "num_comments": 34,
+      "interest_tag": ""
+    },
+    {
+      "title": "Tell HN: I'm tired of AI-generated answers",
+      "url": "",
+      "tldr": "Community discussion on fatigue with AI-generated content flooding technical forums and Q&A sites, reflecting growing sentiment about signal-to-noise ratio degradation in developer communities.",
+      "tldr_zh": "社区讨论 AI 生成内容泛滥导致的技术论坛信噪比下降问题，反映开发者社区对 AI 内容疲劳的日益增长的情绪。",
+      "points": 120,
+      "num_comments": 56,
+      "interest_tag": ""
+    }
+  ]
+}
