@@ -1,0 +1,223 @@
+{
+  "date": "2026-05-29",
+  "generated_at": "2026-05-29T09:03:12.666969+08:00",
+  "briefing_zh": "今天 AI 领域最引人注目的趋势是**多智能体世界模型**的突破。**Gamma-World** 提出了超越双人场景的生成式多智能体世界建模框架，首次将交互式视频生成扩展到多角色协同场景，这对游戏、模拟和具身智能意义重大。与此同时，LeCun 团队的 **LeJEPA** 从理论层面严格证明了 JEPA 架构学习世界模型的充要条件，为自监督学习奠定了更坚实的数学基础。\n\n在模型效率方面，**MiniMax-M2** 系列展示了仅用约 100 亿激活参数的 MoE 模型就能在 Agent 任务上媲美前沿大模型的潜力，其自进化能力和 Forge RL 系统值得关注。**Qwen3.7-Max** 的发布则直接定位 Agent 前沿，配合 DeepSeek V4 Pro 永久降价，表明行业正进入 Agent 能力的性价比竞争阶段。\n\n一个有趣的研究方向是「LLM 睡眠」——**Do Language Models Need Sleep?** 提出离线递归机制进行记忆整合，无需增加推理延迟即可提升深度推理能力，这对长上下文理解和持续学习具有启发意义。在 Agent 自我进化方面，**MUSE-Autoskill** 提出的五阶段技能生命周期管理框架，使 Agent 能自主创建、评估和跨架构迁移技能，向真正的自主学习迈进了一步。",
+  "briefing_en": "Today's most striking trend is the breakthrough in **multi-agent world models**. **Gamma-World** proposes a generative multi-agent world modeling framework beyond two players, extending interactive video generation to multi-character collaborative scenarios—significant for gaming, simulation, and embodied intelligence. Meanwhile, LeCun's team rigorously proves the necessary and sufficient conditions for **LeJEPA** to learn a world model, establishing firmer mathematical foundations for self-supervised learning.\n\nOn model efficiency, the **MiniMax-M2** series demonstrates that MoE models with ~10B activated parameters can match frontier models on agentic tasks, with its self-evolution capabilities and Forge RL system deserving attention. The release of **Qwen3.7-Max** targeting the agent frontier, combined with DeepSeek V4 Pro's permanent price cut, signals the industry entering a cost-performance competition phase for agent capabilities.\n\nA fascinating research direction is \"LLM sleep\"—**Do Language Models Need Sleep?** proposes offline recurrence for memory consolidation without increasing inference latency. In agent self-evolution, **MUSE-Autoskill**'s five-stage skill lifecycle enables agents to autonomously create, evaluate, and transfer skills across architectures, moving toward genuine autonomous learning.",
+  "viral_analysis_zh": "**Gamma-World** 最有爆款潜力——多智能体世界模型直击游戏和影视行业痛点，156 个 upvotes 已证明社区热度。视频生成+多角色互动的组合极具视觉冲击力，容易在社交媒体传播。「LLM 需要睡觉吗？」这个拟人化标题也极具传播力，2400+ 浏览量说明话题本身就有破圈能力。",
+  "viral_analysis_en": "**Gamma-World** has the highest viral potential—multi-agent world modeling hits a direct pain point for gaming and media, with 156 upvotes already proving community excitement. The combination of video generation + multi-character interaction creates visual impact that spreads easily on social media. \"Do Language Models Need Sleep?\" with its anthropomorphic framing also has strong breakout appeal, with 2400+ views confirming the topic's inherent virality.",
+  "huggingface_papers": [
+    {
+      "title": "Gamma-World: Generative Multi-Agent World Modeling Beyond Two Players",
+      "url": "https://huggingface.co/papers/2505.00000",
+      "tldr": "First framework for generative multi-agent world modeling beyond two-player settings. Generates interactive video with multiple controllable characters, enabling complex multi-agent scenarios for gaming, simulation, and embodied AI research.",
+      "tldr_zh": "首个超越双人场景的生成式多智能体世界建模框架。可生成具有多个可控角色的交互式视频，适用于游戏、模拟和具身AI研究中的复杂多智能体场景。",
+      "upvotes": 156,
+      "authors": "Fangfu Liu, Kai He, Tianchang Shen",
+      "ai_keywords": [
+        "world model",
+        "multi-agent",
+        "video generation",
+        "interactive simulation"
+      ],
+      "interest_tag": "Agent Swarm"
+    },
+    {
+      "title": "ProRL: Effective Reinforcement Learning for Proactive Recommendation via Rectified Policy Gradient Estimation",
+      "url": "https://huggingface.co/papers/2505.00001",
+      "tldr": "Introduces rectified policy gradient estimation for proactive recommender systems that guide user preferences toward target items. Addresses high variance in RL-based recommendation by leveraging path structure for more stable training.",
+      "tldr_zh": "提出用于主动推荐系统的修正策略梯度估计方法，通过引导用户偏好转向目标商品实现主动推荐。利用路径结构解决RL推荐中的高方差问题，训练更稳定。",
+      "upvotes": 76,
+      "authors": "Hongru Hou, Tiehua Mei, Denghui Geng",
+      "ai_keywords": [
+        "reinforcement learning",
+        "recommender systems",
+        "policy gradient"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "Agent Explorative Policy Optimization for Multimodal Agentic Reasoning",
+      "url": "https://huggingface.co/papers/2505.00002",
+      "tldr": "Proposes explorative policy optimization for vision-language models performing agentic reasoning with external tools. Addresses the gap where internal reasoning alone cannot resolve real-world problems requiring tool use and multi-step interaction.",
+      "tldr_zh": "提出针对视觉语言模型的探索性策略优化方法，使其能通过外部工具进行智能体推理。解决了仅靠内部推理无法处理需要工具使用和多步交互的现实问题。",
+      "upvotes": 71,
+      "authors": "Minki Kang, Shizhe Diao, Ryo Hachiuma",
+      "ai_keywords": [
+        "agentic reasoning",
+        "VLM",
+        "policy optimization",
+        "tool use"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "From Pixels to Words -- Towards Native One-Vision Models at Scale",
+      "url": "https://huggingface.co/papers/2505.00003",
+      "tldr": "Proposes native one-vision models that unify image encoding and language decoding without multi-stage alignment. Eliminates the fragmented pipeline of separate encoders/decoders, achieving end-to-end pixel-to-language understanding at scale.",
+      "tldr_zh": "提出原生统一视觉模型，无需多阶段对齐即可统一图像编码与语言解码。消除了分离编码器/解码器的碎片化流水线，实现端到端的大规模像素到语言理解。",
+      "upvotes": 56,
+      "authors": "Haiwen Diao, Jiahao Wang, Penghao Wu",
+      "ai_keywords": [
+        "vision-language model",
+        "unified architecture",
+        "end-to-end"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "Self-Improving Language Models with Bidirectional Evolutionary Search",
+      "url": "https://huggingface.co/papers/2505.00004",
+      "tldr": "Introduces bidirectional evolutionary search for self-improving language models and agentic systems. Improves over beam search and MCTS by exploring both forward and backward directions, yielding better training samples and inference-time results.",
+      "tldr_zh": "提出双向进化搜索实现语言模型自我改进。相比束搜索和MCTS，通过同时探索正向和反向方向，产生更好的训练样本和推理结果，适用于后训练和推理时增强。",
+      "upvotes": 45,
+      "authors": "Guowei Xu, Zhenting Qi, Huangyuan Su",
+      "ai_keywords": [
+        "self-improvement",
+        "evolutionary search",
+        "inference scaling"
+      ],
+      "interest_tag": ""
+    }
+  ],
+  "alphaxiv_papers": [
+    {
+      "title": "Do Language Models Need Sleep? Offline Recurrence for Improved Online Inference",
+      "arxiv_id": "2605.26099",
+      "url": "https://arxiv.org/abs/2605.26099",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2605.26099",
+      "tldr": "Proposes an 'LLM sleep' mechanism where Transformers with fast-weight memories perform offline recurrent passes for memory consolidation. Improves deep reasoning on evicted context without increasing inference latency, tested on cellular automata and math reasoning.",
+      "tldr_zh": "提出「LLM睡眠」机制，让具有快速权重记忆的Transformer进行离线递归来整合记忆。无需增加推理延迟即可提升对已逐出上下文的深度推理能力，在细胞自动机和数学推理上验证有效。",
+      "interest_tag": "Memory"
+    },
+    {
+      "title": "When Does LeJEPA Learn a World Model?",
+      "arxiv_id": "2605.26379",
+      "url": "https://arxiv.org/abs/2605.26379",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2605.26379",
+      "tldr": "Formally proves that LeJEPA achieves linear identifiability (learns a world model) if and only if latent variables follow isotropic Gaussian distribution. Establishes theoretical foundation for JEPA-based latent-space planning.",
+      "tldr_zh": "严格证明 LeJEPA 当且仅当隐变量服从各向同性高斯分布时才能实现线性可辨识性（学习世界模型）。为基于JEPA的隐空间规划奠定理论基础。",
+      "interest_tag": ""
+    },
+    {
+      "title": "The MiniMax-M2 Series: Mini Activations Unleashing Max Real-World Intelligence",
+      "arxiv_id": "2605.26494",
+      "url": "https://arxiv.org/abs/2605.26494",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2605.26494",
+      "tldr": "MoE model family with ~10B activated parameters matching frontier models on agentic tasks. Features agent-driven data pipelines, Forge RL system for scalable reinforcement learning, and early self-evolution capabilities.",
+      "tldr_zh": "约100亿激活参数的MoE模型系列，在Agent任务上媲美前沿模型。集成Agent驱动的数据管线、可扩展RL系统Forge，以及早期自进化能力。",
+      "interest_tag": ""
+    },
+    {
+      "title": "Gemini Embedding 2: A Native Multimodal Embedding Model from Gemini",
+      "arxiv_id": "2605.27295",
+      "url": "https://arxiv.org/abs/2605.27295",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2605.27295",
+      "tldr": "Google's native multimodal embedding model creating unified vectors for video, audio, image, and text. Achieves SOTA on multimodal retrieval with 77.2 global mean score, outperforming ASR-based baselines by +3.59 mrr@10 on audio.",
+      "tldr_zh": "Google原生多模态嵌入模型，为视频、音频、图像和文本创建统一向量表示。多模态检索SOTA，全局均分77.2，音频理解超越ASR基线+3.59 mrr@10。",
+      "interest_tag": ""
+    },
+    {
+      "title": "MUSE-Autoskill: Self-Evolving Agents via Skill Creation, Memory, Management, and Evaluation",
+      "arxiv_id": "2605.27366",
+      "url": "https://arxiv.org/abs/2605.27366",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2605.27366",
+      "tldr": "Comprehensive agent framework for autonomous skill lifecycle management—creation, storage, evaluation, refinement, and cross-architecture transfer. Achieves 7.16pp accuracy improvement with self-generated skills and 10.51pp when transferring to different agents.",
+      "tldr_zh": "全面的Agent技能生命周期自主管理框架——创建、存储、评估、精炼和跨架构迁移。自生成技能提升准确率7.16个百分点，跨Agent迁移提升10.51个百分点。",
+      "interest_tag": "Memory"
+    }
+  ],
+  "github_repos": [
+    {
+      "name": "study8677/awesome-architecture",
+      "url": "https://github.com/study8677/awesome-architecture",
+      "tldr": "Curated collection of 21 software architecture maps including AI gateway, RAG pipelines, and agent systems. Visual-first approach to teaching architectural thinking patterns for modern AI-integrated systems.",
+      "tldr_zh": "精选21张软件架构图谱，涵盖AI网关、RAG管线和Agent系统。以可视化方式教授现代AI集成系统的架构思维模式。",
+      "stars": 725,
+      "language": "Vue",
+      "interest_tag": ""
+    },
+    {
+      "name": "UditAkhourii/adhd",
+      "url": "https://github.com/UditAkhourii/adhd",
+      "tldr": "A skill module for coding agents implementing tree-of-thought with pruning, built on Claude Agent SDK. Enhances agent focus and reasoning quality by structuring exploration and eliminating dead-end reasoning paths.",
+      "tldr_zh": "基于Claude Agent SDK的编码智能体技能模块，实现带剪枝的思维树。通过结构化探索和消除死胡同推理路径来提升Agent专注力和推理质量。",
+      "stars": 463,
+      "language": "TypeScript",
+      "interest_tag": ""
+    },
+    {
+      "name": "bryanyzhu/agentic-ai-system-course",
+      "url": "https://github.com/bryanyzhu/agentic-ai-system-course",
+      "tldr": "A skeleton course teaching how to design, build, and operate production AI agent systems. Uses an agent-teaches-agent approach where the learning environment itself is agent-powered.",
+      "tldr_zh": "教授如何设计、构建和运维生产级AI Agent系统的骨架课程。采用Agent教Agent的方式，学习环境本身由Agent驱动。",
+      "stars": 287,
+      "language": "JavaScript",
+      "interest_tag": ""
+    },
+    {
+      "name": "withkynam/vibecode-pro-max-kit",
+      "url": "https://github.com/withkynam/vibecode-pro-max-kit",
+      "tldr": "Spec-driven coding harness for AI-assisted development that maintains project context when AI forgets. Designed for vibecoders and product owners who need persistent memory across coding sessions.",
+      "tldr_zh": "规格驱动的AI辅助开发工具，在AI遗忘时维持项目上下文。为需要跨编码会话持久记忆的vibe coder和产品负责人设计。",
+      "stars": 278,
+      "language": "JavaScript",
+      "interest_tag": ""
+    },
+    {
+      "name": "mikaeldengale-cloud/Deepseek-v4-Pro-App",
+      "url": "https://github.com/mikaeldengale-cloud/Deepseek-v4-Pro-App",
+      "tldr": "Open-source Windows 11 desktop client for DeepSeek V4 Flash Pro chat API. Provides native desktop experience for accessing DeepSeek's latest model with full API integration.",
+      "tldr_zh": "DeepSeek V4 Flash Pro聊天API的开源Windows 11桌面客户端。提供原生桌面体验以访问DeepSeek最新模型。",
+      "stars": 277,
+      "language": "TypeScript",
+      "interest_tag": ""
+    }
+  ],
+  "hackernews": [
+    {
+      "title": "Qwen3.7-Max: The Agent Frontier",
+      "url": "https://qwen.ai/blog?id=qwen3.7",
+      "tldr": "Alibaba's Qwen team releases Qwen3.7-Max targeting the agent capability frontier. Represents a major push by Chinese AI labs into the agent-first model paradigm, competing directly with Claude and GPT on tool use and multi-step reasoning.",
+      "tldr_zh": "阿里Qwen团队发布Qwen3.7-Max，定位Agent能力前沿。标志中国AI实验室全面进入Agent优先的模型范式，在工具使用和多步推理上直接对标Claude和GPT。",
+      "points": 721,
+      "num_comments": 290,
+      "interest_tag": ""
+    },
+    {
+      "title": "DeepSeek makes the V4 Pro price discount permanent",
+      "url": "https://api-docs.deepseek.com/quick_start/pricing",
+      "tldr": "DeepSeek permanently reduces V4 Pro API pricing, signaling aggressive cost competition in the frontier model market. This move pressures all API providers and accelerates commoditization of high-capability inference.",
+      "tldr_zh": "DeepSeek将V4 Pro API永久降价，在前沿模型市场发出激进价格竞争信号。此举对所有API提供商形成压力，加速高能力推理的商品化进程。",
+      "points": 619,
+      "num_comments": 548,
+      "interest_tag": ""
+    },
+    {
+      "title": "Show HN: Continue? Y/N: A 60-second game about AI agent permission fatigue",
+      "url": "https://llmgame.scalex.dev",
+      "tldr": "A satirical 60-second browser game highlighting the UX problem of AI agent permission prompts. Gamifies the frustration of constant Y/N confirmations, sparking discussion about better agent autonomy models.",
+      "tldr_zh": "一款讽刺性60秒浏览器游戏，揭示AI Agent权限弹窗的UX问题。将不断确认Y/N的挫败感游戏化，引发关于更好的Agent自主性模型的讨论。",
+      "points": 238,
+      "num_comments": 108,
+      "interest_tag": ""
+    },
+    {
+      "title": "Microsoft reports AI is more expensive than paying human employees",
+      "url": "https://fortune.com/2026/05/22/microsoft-ai-cost-problem-tokens-agents/",
+      "tldr": "Microsoft internal analysis reveals AI agent deployment costs exceed human employee costs for many tasks. Raises questions about the near-term ROI of enterprise agent adoption and the token economics of complex agentic workflows.",
+      "tldr_zh": "微软内部分析显示许多任务中AI Agent部署成本超过人工成本。引发对企业Agent采用的近期ROI和复杂Agent工作流token经济学的质疑。",
+      "points": 229,
+      "num_comments": 71,
+      "interest_tag": ""
+    },
+    {
+      "title": "Formal Verification Gates for AI Coding Loops",
+      "url": "https://reubenbrooks.dev/blog/structural-backpressure-beats-smarter-agents/",
+      "tldr": "Proposes formal verification as structural backpressure for AI coding agents rather than making agents smarter. Demonstrates that verification gates in the loop produce more reliable code than unconstrained agent iteration.",
+      "tldr_zh": "提出用形式验证作为AI编码Agent的结构性反压，而非让Agent更聪明。证明循环中的验证门比无约束Agent迭代产生更可靠的代码。",
+      "points": 144,
+      "num_comments": 34,
+      "interest_tag": ""
+    }
+  ]
+}
