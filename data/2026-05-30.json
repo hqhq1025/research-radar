@@ -1,0 +1,223 @@
+{
+  "date": "2026-05-30",
+  "generated_at": "2026-05-30T01:03:25.270327Z",
+  "briefing_zh": "今天 AI 领域最引人注目的趋势是**具身智能**和**Agent 自主进化**的加速融合。**Qwen-VLA** 将视觉-语言-动作建模统一到单一框架中，在真实机器人操控任务上达到 83.6% 成功率，标志着通用具身模型正在从概念走向实用。与此同时，**MUSE-Autoskill** 提出了 Agent 自主创建、管理和评估技能的完整生命周期框架，使 Agent 能力的积累不再依赖人工设计。\n\n在基础研究方面，**\"Do Language Models Need Sleep?\"** 提出了一种离线记忆整合机制，让 LLM 通过\"睡眠\"式的循环处理来巩固已被逐出注意力窗口的信息，这为长上下文推理提供了全新思路。**AgentDoG 1.5** 则聚焦 AI Agent 安全对齐，提出轻量级可扩展的对齐框架。\n\n开源社区方面，**ADHD**（coding agent 的 tree-of-thought 技能插件）和 **vibecode-pro-max-kit**（规格驱动的编码工具）在一周内分别获得 500+ stars，反映出开发者对 AI 辅助编程工具链的旺盛需求。Hacker News 上 DeepSeek V4 Pro 永久降价引发热议，而 Robinhood 开放 AI Agent 交易接口则预示着 Agent 正在进入金融实操领域。",
+  "briefing_en": "Today's AI landscape is defined by the convergence of **embodied intelligence** and **autonomous agent evolution**. **Qwen-VLA** unifies vision-language-action modeling into a single framework achieving 83.6% success on real-world robot manipulation, signaling that generalist embodied models are becoming practical. Meanwhile, **MUSE-Autoskill** introduces a complete lifecycle for agents to autonomously create, manage, and evaluate their own skills, removing the need for human-designed capability accumulation.\n\nIn foundational research, **\"Do Language Models Need Sleep?\"** proposes an offline memory consolidation mechanism—an \"LLM sleep\" cycle that lets models iteratively process information evicted from the attention window, offering a novel approach to long-context reasoning. **AgentDoG 1.5** addresses AI agent safety alignment with a lightweight, scalable framework.\n\nIn the open-source community, **ADHD** (a tree-of-thought skill for coding agents) and **vibecode-pro-max-kit** (spec-driven coding harness) each gained 500+ stars in one week, reflecting strong developer demand for AI-assisted coding toolchains. On Hacker News, DeepSeek's permanent V4 Pro price cut generated intense discussion, while Robinhood opening AI agent trading APIs signals agents entering real financial operations.",
+  "viral_analysis_zh": "**\"Do Language Models Need Sleep?\"** 最可能成为爆款——标题极具传播力，将 LLM 拟人化为需要\"睡眠\"的存在，alphaxiv 上已获 142 赞和 3528 次浏览。它触及了「AI 是否需要类人认知机制」这一大众感兴趣的哲学话题，同时提供了扎实的技术贡献。",
+  "viral_analysis_en": "**\"Do Language Models Need Sleep?\"** is most likely to go viral—the title is exceptionally shareable, anthropomorphizing LLMs as beings that need \"sleep.\" It already has 142 likes and 3,528 views on alphaxiv. It taps into the philosophically engaging question of whether AI needs human-like cognitive mechanisms while delivering solid technical contributions.",
+  "huggingface_papers": [
+    {
+      "title": "AgentDoG 1.5: A Lightweight and Scalable Alignment Framework for AI Agent Safety",
+      "url": "https://huggingface.co/papers/2605.29801",
+      "tldr": "Proposes a lightweight alignment framework specifically designed for AI agent safety. Unlike generic RLHF approaches, it targets the unique risks of autonomous agents (tool misuse, goal drift) with a scalable method that doesn't sacrifice capability for safety.",
+      "tldr_zh": "提出专为 AI Agent 安全设计的轻量级对齐框架。不同于通用 RLHF 方法，它针对自主 Agent 的独特风险（工具误用、目标偏移）提供可扩展的安全保障，同时不牺牲能力。",
+      "upvotes": 81,
+      "authors": "Dongrui Liu, Yu Li, Zhonghao Yang",
+      "ai_keywords": [
+        "agent safety",
+        "alignment",
+        "scalable"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "Qwen-VLA: Unifying Vision-Language-Action Modeling across Tasks, Environments, and Robot Embodiments",
+      "url": "https://huggingface.co/papers/2605.30280",
+      "tldr": "Qwen Team's unified vision-language-action model handles robot manipulation, navigation, and diverse embodiments in one architecture. Achieves 83.6% success rate on real-world ALOHA tasks and outperforms specialist models on dynamic manipulation benchmarks.",
+      "tldr_zh": "Qwen 团队的统一视觉-语言-动作模型，用单一架构处理机器人操控、导航和多种具身场景。在真实世界 ALOHA 任务上达到 83.6% 成功率，在动态操控基准上超越专用模型。",
+      "upvotes": 73,
+      "authors": "Qiuyue Wang, Mingsheng Li, Jian Guan",
+      "ai_keywords": [
+        "VLA",
+        "robotics",
+        "embodied AI",
+        "Qwen"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "OmniRetrieval: Unified Retrieval across Heterogeneous Knowledge Sources",
+      "url": "https://huggingface.co/papers/2605.29250",
+      "tldr": "A unified retrieval system that works across heterogeneous knowledge sources (documents, tables, knowledge graphs) without source-specific tuning. Demonstrates that a single retriever can handle diverse formats, simplifying RAG pipelines significantly.",
+      "tldr_zh": "跨异构知识源（文档、表格、知识图谱）的统一检索系统，无需针对特定源调优。证明单个检索器能处理多种格式，大幅简化 RAG 流水线。",
+      "upvotes": 54,
+      "authors": "Jinheon Baek, Soyeong Jeong, Sangwoo Park",
+      "ai_keywords": [
+        "retrieval",
+        "RAG",
+        "heterogeneous"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "CollectionLoRA: Collecting 50 Effects in 1 LoRA via Multi-Teacher On-Policy Distillation",
+      "url": "https://huggingface.co/papers/2605.25378",
+      "tldr": "Packs 50 distinct visual effects into a single LoRA adapter through multi-teacher on-policy distillation. Eliminates the need to swap between dozens of LoRAs, making multi-style image generation practical with minimal storage overhead.",
+      "tldr_zh": "通过多教师在线策略蒸馏，将 50 种视觉效果压缩进单个 LoRA 适配器。消除了在数十个 LoRA 之间切换的需求，以极低存储开销实现多风格图像生成。",
+      "upvotes": 49,
+      "authors": "Fangtai Wu, Hailong Guo, Shijie Huang",
+      "ai_keywords": [
+        "LoRA",
+        "distillation",
+        "image generation"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "minWM: A Full-Stack Open-Source Framework for Real-Time Interactive Video World Models",
+      "url": "https://huggingface.co/papers/2605.30263",
+      "tldr": "An open-source full-stack framework for building real-time interactive video world models. Provides the complete pipeline from training to real-time inference, enabling researchers to build game-like interactive environments driven by generative models.",
+      "tldr_zh": "用于构建实时交互式视频世界模型的开源全栈框架。提供从训练到实时推理的完整流水线，使研究者能够构建由生成模型驱动的类游戏交互环境。",
+      "upvotes": 40,
+      "authors": "Min Zhao, Hongzhou Zhu, Bokai Yan",
+      "ai_keywords": [
+        "world model",
+        "video generation",
+        "real-time",
+        "open-source"
+      ],
+      "interest_tag": ""
+    }
+  ],
+  "alphaxiv_papers": [
+    {
+      "title": "Do Language Models Need Sleep? Offline Recurrence for Improved Online Inference",
+      "arxiv_id": "2605.26099",
+      "url": "https://arxiv.org/abs/2605.26099",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2605.26099",
+      "tldr": "Introduces an 'LLM sleep' mechanism where Transformer models with fast-weight memories perform offline recurrent passes for memory consolidation. Improves deep reasoning on information evicted from the attention window without increasing real-time inference latency.",
+      "tldr_zh": "提出「LLM 睡眠」机制，让带有快速权重记忆的 Transformer 模型通过离线循环处理进行记忆整合。在不增加实时推理延迟的情况下，提升对已逐出注意力窗口信息的深度推理能力。",
+      "interest_tag": "Memory"
+    },
+    {
+      "title": "When Does LeJEPA Learn a World Model?",
+      "arxiv_id": "2605.26379",
+      "url": "https://arxiv.org/abs/2605.26379",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2605.26379",
+      "tldr": "Formally proves the conditions under which JEPA architectures (LeJEPA) learn true world models by recovering latent variables. Shows linear identifiability holds iff latents follow isotropic Gaussian distribution, enabling optimal latent-space planning.",
+      "tldr_zh": "形式化证明了 JEPA 架构（LeJEPA）学习真实世界模型的条件——通过恢复潜变量实现。证明线性可辨识性当且仅当潜变量服从各向同性高斯分布时成立，从而实现最优潜空间规划。",
+      "interest_tag": ""
+    },
+    {
+      "title": "Gemini Embedding 2: A Native Multimodal Embedding Model from Gemini",
+      "arxiv_id": "2605.27295",
+      "url": "https://arxiv.org/abs/2605.27295",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2605.27295",
+      "tldr": "Google's native multimodal embedding model creates unified vectors for video, audio, image, and text including interleaved combinations. Achieves SOTA on multimodal retrieval benchmarks (77.2 global mean) and outperforms ASR-based baselines by +3.59 mrr@10 on audio.",
+      "tldr_zh": "Google 的原生多模态嵌入模型为视频、音频、图像和文本（包括交错组合）创建统一向量表示。在多模态检索基准上达到 SOTA（全局均值 77.2），音频理解上超越 ASR 基线 +3.59 mrr@10。",
+      "interest_tag": ""
+    },
+    {
+      "title": "MUSE-Autoskill: Self-Evolving Agents via Skill Creation, Memory, Management, and Evaluation",
+      "arxiv_id": "2605.27366",
+      "url": "https://arxiv.org/abs/2605.27366",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2605.27366",
+      "tldr": "A comprehensive framework enabling LLM agents to autonomously create, manage, evaluate, and refine reusable skills through a five-stage lifecycle and multi-level memory. Improves task accuracy by 7.16pp and transfers skills across agent architectures (+10.51pp).",
+      "tldr_zh": "使 LLM Agent 能够通过五阶段生命周期和多层记忆系统自主创建、管理、评估和改进可复用技能的综合框架。任务准确率提升 7.16pp，技能可跨 Agent 架构迁移（+10.51pp）。",
+      "interest_tag": "Memory"
+    },
+    {
+      "title": "Qwen-VLA: Unifying Vision-Language-Action Modeling across Tasks, Environments, and Robot Embodiments",
+      "arxiv_id": "2605.30280",
+      "url": "https://arxiv.org/abs/2605.30280",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2605.30280",
+      "tldr": "Qwen Team's unified VLA model handles robot manipulation, navigation, and diverse embodiments. 83.6% success rate on real-world ALOHA tasks, strong cross-embodiment generalization.",
+      "tldr_zh": "Qwen 团队统一 VLA 模型处理机器人操控、导航和多具身场景。真实世界 ALOHA 任务 83.6% 成功率，跨具身泛化能力强。",
+      "interest_tag": ""
+    }
+  ],
+  "github_repos": [
+    {
+      "name": "UditAkhourii/adhd",
+      "url": "https://github.com/UditAkhourii/adhd",
+      "tldr": "A tree-of-thought skill plugin for coding agents built on Claude Code. Implements structured reasoning with pruning to help AI coding assistants tackle complex multi-step programming tasks more reliably.",
+      "tldr_zh": "基于 Claude Code 构建的 coding agent tree-of-thought 技能插件。通过带剪枝的结构化推理，帮助 AI 编程助手更可靠地处理复杂多步编程任务。",
+      "stars": 516,
+      "language": "TypeScript",
+      "interest_tag": ""
+    },
+    {
+      "name": "withkynam/vibecode-pro-max-kit",
+      "url": "https://github.com/withkynam/vibecode-pro-max-kit",
+      "tldr": "A spec-driven coding harness for 'vibecoders' that maintains persistent project context so AI doesn't forget requirements between sessions. Bridges the gap between disposable AI conversations and production-grade development workflows.",
+      "tldr_zh": "为「vibecoder」设计的规格驱动编码工具，维护持久项目上下文使 AI 不会在会话间遗忘需求。弥合一次性 AI 对话与生产级开发工作流之间的鸿沟。",
+      "stars": 506,
+      "language": "JavaScript",
+      "interest_tag": ""
+    },
+    {
+      "name": "quarqlabs/agent-oss",
+      "url": "https://github.com/quarqlabs/agent-oss",
+      "tldr": "A recursive evidence-gated cognitive runtime for memory-native AI agents. Combines evidence-based reasoning gates with persistent memory to create agents that accumulate and verify knowledge across interactions.",
+      "tldr_zh": "为记忆原生 AI Agent 设计的递归证据门控认知运行时。将基于证据的推理门控与持久记忆结合，创建能跨交互积累和验证知识的 Agent。",
+      "stars": 180,
+      "language": "Python",
+      "interest_tag": "Memory"
+    },
+    {
+      "name": "JasonLam08/cursor_agent_status_light",
+      "url": "https://github.com/JasonLam08/cursor_agent_status_light",
+      "tldr": "A BLE-powered physical status light for Cursor Agent using ESP32-C3. Visualizes AI coding agent state (thinking, writing, idle) as colored light, bringing digital agent status into the physical world.",
+      "tldr_zh": "使用 ESP32-C3 的 BLE 物理状态灯，为 Cursor Agent 可视化工作状态（思考、编写、空闲）。将数字 Agent 状态带入物理世界。",
+      "stars": 167,
+      "language": "C++",
+      "interest_tag": ""
+    },
+    {
+      "name": "nekocode/filetree-skill",
+      "url": "https://github.com/nekocode/filetree-skill",
+      "tldr": "A Claude Code plugin that automatically maintains a FILETREE.md file, giving the AI persistent awareness of project structure. Simple but effective approach to improving AI coding agent's spatial understanding of codebases.",
+      "tldr_zh": "自动维护 FILETREE.md 的 Claude Code 插件，让 AI 持久感知项目结构。简单有效地提升 AI 编程 Agent 对代码库的空间理解。",
+      "stars": 117,
+      "language": "Python",
+      "interest_tag": ""
+    }
+  ],
+  "hackernews": [
+    {
+      "title": "DeepSeek makes the V4 Pro price discount permanent",
+      "url": "https://api-docs.deepseek.com/quick_start/pricing",
+      "tldr": "DeepSeek permanently reduced V4 Pro pricing, making their most capable model significantly more affordable. This aggressive pricing strategy puts pressure on competitors and could accelerate adoption of open-weight model APIs.",
+      "tldr_zh": "DeepSeek 永久降低 V4 Pro 定价，使其最强模型大幅降价。这一激进定价策略给竞争对手施压，可能加速开放权重模型 API 的采用。",
+      "points": 620,
+      "num_comments": 549,
+      "interest_tag": ""
+    },
+    {
+      "title": "Show HN: Continue? Y/N: A 60-second game about AI agent permission fatigue",
+      "url": "https://llmgame.scalex.dev",
+      "tldr": "A satirical browser game highlighting the UX problem of AI agent permission fatigue—users mindlessly clicking 'Yes' to agent action requests. Clever commentary on the tension between agent autonomy and human oversight.",
+      "tldr_zh": "一款讽刺性浏览器游戏，突出 AI Agent 权限疲劳的 UX 问题——用户机械地对 Agent 操作请求点击「是」。巧妙评论了 Agent 自主性与人类监督之间的张力。",
+      "points": 372,
+      "num_comments": 149,
+      "interest_tag": ""
+    },
+    {
+      "title": "Microsoft reports AI is more expensive than paying human employees",
+      "url": "https://fortune.com/2026/05/22/microsoft-ai-cost-problem-tokens-agents/",
+      "tldr": "Microsoft internal data shows AI agent deployments currently cost more than equivalent human labor for many tasks. Raises questions about the near-term ROI of agentic AI in enterprise settings despite capability improvements.",
+      "tldr_zh": "微软内部数据显示，AI Agent 部署在许多任务上目前成本高于等量人力。尽管能力在提升，但对企业场景中 Agentic AI 的近期 ROI 提出质疑。",
+      "points": 229,
+      "num_comments": 71,
+      "interest_tag": ""
+    },
+    {
+      "title": "Tell HN: I'm tired of AI-generated answers",
+      "url": "",
+      "tldr": "A community discussion about fatigue with AI-generated content flooding technical forums and Q&A sites. Reflects growing concern about information quality degradation as AI-generated text becomes ubiquitous.",
+      "tldr_zh": "社区讨论对 AI 生成内容充斥技术论坛和问答网站的疲劳感。反映出随着 AI 生成文本变得无处不在，人们对信息质量下降的日益担忧。",
+      "points": 120,
+      "num_comments": 56,
+      "interest_tag": ""
+    },
+    {
+      "title": "Robinhood now lets your AI agents trade stocks",
+      "url": "https://techcrunch.com/2026/05/27/robinhood-now-lets-your-ai-agents-trade-stocks",
+      "tldr": "Robinhood launched API access for AI agents to execute stock trades autonomously. A significant milestone in agent-finance integration, though raises regulatory and risk management concerns about autonomous financial decision-making.",
+      "tldr_zh": "Robinhood 推出允许 AI Agent 自主执行股票交易的 API 接口。Agent-金融整合的重要里程碑，但引发关于自主金融决策的监管和风险管理担忧。",
+      "points": 87,
+      "num_comments": 160,
+      "interest_tag": ""
+    }
+  ]
+}
