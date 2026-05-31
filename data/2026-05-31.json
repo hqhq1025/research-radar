@@ -1,0 +1,222 @@
+{
+  "date": "2026-05-31",
+  "generated_at": "2026-05-31T09:02:35.085058+08:00",
+  "briefing_zh": "今天 AI 领域最受关注的方向是**具身智能统一建模**和**LLM 推理效率优化**。**Qwen-VLA** 将视觉-语言-动作任务统一到单一模型中，在真实机械臂操控任务上达到 83.6% 成功率，标志着通用机器人基础模型的重要进展。与此同时，**AgentDoG 1.5** 提出了轻量级 AI Agent 安全对齐框架，反映出业界对 agent 安全性的关注正在升温。\n\n在基础研究方面，\"Do Language Models Need Sleep?\" 提出了 LLM \"睡眠\"机制，通过离线循环处理实现记忆巩固，无需增加实时推理延迟即可提升深度推理能力。**Gemini Embedding 2** 则展示了原生多模态嵌入的新范式，统一处理视频、音频、图像和文本。\n\n开源社区方面，**DeepSeek V4 Pro 永久降价**引发广泛讨论（HN 620 分），而 Microsoft 承认 AI agent 成本高于人工的报道也引人深思。GitHub 上 **ADHD**（coding agent 的思维树技能）和 **vibecode-pro-max-kit**（spec-driven coding harness）本周快速蹿升，反映出开发者对 AI 编程工具链的强烈需求。",
+  "briefing_en": "Today's AI landscape is dominated by **unified embodied intelligence** and **LLM inference efficiency**. **Qwen-VLA** unifies vision-language-action tasks into a single model achieving 83.6% success on real-world ALOHA manipulation, marking a milestone for generalist robot foundation models. Meanwhile, **AgentDoG 1.5** introduces a lightweight alignment framework for AI agent safety, reflecting growing industry focus on agent security.\n\nIn foundational research, \"Do Language Models Need Sleep?\" proposes an offline recurrence mechanism for memory consolidation that improves deep reasoning without increasing real-time latency. **Gemini Embedding 2** demonstrates native multimodal embeddings unifying video, audio, image, and text retrieval.\n\nIn the open-source community, **DeepSeek's permanent V4 Pro price cut** generated massive discussion (620 points on HN), while Microsoft admitting AI agents cost more than human employees sparked debate. On GitHub, **ADHD** (tree-of-thought skill for coding agents) and **vibecode-pro-max-kit** (spec-driven coding harness) surged this week, reflecting strong demand for AI coding toolchains.",
+  "viral_analysis_zh": "今天最可能火的是 \"Do Language Models Need Sleep?\" 这篇论文——它用一个极具传播力的类比（LLM 也需要睡觉）包装了一个严肃的技术贡献（离线记忆巩固），alphaxiv 上已有 3832 次浏览和 167 个赞，远超其他论文。这种「反直觉标题 + 扎实内容」的组合是学术传播的黄金公式。",
+  "viral_analysis_en": "The most viral candidate today is \"Do Language Models Need Sleep?\" — it packages a serious technical contribution (offline memory consolidation) with an irresistibly catchy analogy. With 3,832 views and 167 likes on alphaxiv, it's already outperforming peers by 2-3x. The \"counterintuitive title + solid substance\" formula is academic virality gold.",
+  "huggingface_papers": [
+    {
+      "title": "AgentDoG 1.5: A Lightweight and Scalable Alignment Framework for AI Agent Safety and Security",
+      "url": "https://huggingface.co/papers/2605.29801",
+      "tldr": "Proposes a lightweight alignment framework specifically for AI agents that scales across different agent architectures. Unlike general LLM alignment, it targets agent-specific risks like tool misuse and multi-step plan failures, offering modular safety guardrails without heavy computational overhead.",
+      "tldr_zh": "提出一个专为 AI Agent 设计的轻量级安全对齐框架，可跨不同 agent 架构扩展。不同于通用 LLM 对齐，它针对 agent 特有风险（如工具误用、多步计划失败），提供模块化安全护栏且计算开销小。",
+      "upvotes": 108,
+      "authors": "Dongrui Liu, Yu Li, Zhonghao Yang",
+      "ai_keywords": [
+        "agent safety",
+        "alignment",
+        "guardrails"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "Qwen-VLA: Unifying Vision-Language-Action Modeling across Tasks, Environments, and Robot Embodiments",
+      "url": "https://huggingface.co/papers/2605.30280",
+      "tldr": "Qwen Team's unified VLA model handles robot manipulation, navigation, and vision-language tasks in one architecture. Achieves 83.6% success on real ALOHA tasks and outperforms specialist models on dynamic manipulation benchmarks, demonstrating strong cross-embodiment generalization.",
+      "tldr_zh": "Qwen 团队的统一 VLA 模型用单一架构处理机器人操控、导航和视觉语言任务。在真实 ALOHA 任务上达到 83.6% 成功率，在动态操控基准上超越专家模型，展现强跨具身泛化能力。",
+      "upvotes": 92,
+      "authors": "Qiuyue Wang, Mingsheng Li, Jian Guan",
+      "ai_keywords": [
+        "VLA",
+        "robotics",
+        "embodied AI",
+        "manipulation"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "OmniRetrieval: Unified Retrieval across Heterogeneous Knowledge Sources",
+      "url": "https://huggingface.co/papers/2605.29250",
+      "tldr": "A unified retrieval system that searches across heterogeneous knowledge sources (documents, tables, knowledge graphs, code) in a single query. Eliminates the need for separate retrieval pipelines per data type, improving RAG system practicality.",
+      "tldr_zh": "统一检索系统，一次查询即可跨异构知识源（文档、表格、知识图谱、代码）检索。消除了每种数据类型需要单独检索管线的问题，提升 RAG 系统的实用性。",
+      "upvotes": 62,
+      "authors": "Jinheon Baek, Soyeong Jeong, Sangwoo Park",
+      "ai_keywords": [
+        "retrieval",
+        "RAG",
+        "heterogeneous search"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "CollectionLoRA: Collecting 50 Effects in 1 LoRA via Multi-Teacher On-Policy Distillation",
+      "url": "https://huggingface.co/papers/2605.25378",
+      "tldr": "Packs 50 different visual effects into a single LoRA adapter through multi-teacher on-policy distillation. Drastically reduces storage and switching costs for style transfer applications while maintaining quality comparable to individual specialized LoRAs.",
+      "tldr_zh": "通过多教师在线策略蒸馏将 50 种不同视觉效果压缩到单个 LoRA 适配器中。大幅降低风格迁移应用的存储和切换成本，同时保持与单独专用 LoRA 相当的质量。",
+      "upvotes": 51,
+      "authors": "Fangtai Wu, Hailong Guo, Shijie Huang",
+      "ai_keywords": [
+        "LoRA",
+        "distillation",
+        "style transfer"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "minWM: A Full-Stack Open-Source Framework for Real-Time Interactive Video World Models",
+      "url": "https://huggingface.co/papers/2605.30263",
+      "tldr": "Full-stack open-source framework for building real-time interactive video world models. Provides end-to-end tooling from data collection to training to deployment, enabling researchers to build game-like interactive environments powered by neural world models.",
+      "tldr_zh": "用于构建实时交互式视频世界模型的全栈开源框架。提供从数据收集到训练到部署的端到端工具链，使研究者能够构建由神经世界模型驱动的类游戏交互环境。",
+      "upvotes": 46,
+      "authors": "Min Zhao, Hongzhou Zhu, Bokai Yan",
+      "ai_keywords": [
+        "world model",
+        "video generation",
+        "interactive"
+      ],
+      "interest_tag": ""
+    }
+  ],
+  "alphaxiv_papers": [
+    {
+      "title": "Do Language Models Need Sleep? Offline Recurrence for Improved Online Inference",
+      "arxiv_id": "2605.26099",
+      "url": "https://arxiv.org/abs/2605.26099",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2605.26099",
+      "tldr": "Introduces an 'LLM sleep' mechanism where Transformer models with fast-weight memories perform offline recurrent passes for memory consolidation. Consistently improves reasoning on cellular automata and math benchmarks without increasing real-time inference latency.",
+      "tldr_zh": "提出 LLM「睡眠」机制，让带快速权重记忆的 Transformer 模型执行离线循环处理实现记忆巩固。在元胞自动机和数学推理基准上持续提升性能，且不增加实时推理延迟。",
+      "interest_tag": "Memory"
+    },
+    {
+      "title": "When Does LeJEPA Learn a World Model?",
+      "arxiv_id": "2605.26379",
+      "url": "https://arxiv.org/abs/2605.26379",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2605.26379",
+      "tldr": "Formally proves conditions under which JEPA architectures recover true latent variables to learn a 'World Model'. Shows LeJEPA achieves linear identifiability iff latent variables follow isotropic Gaussian, enabling optimal latent-space planning.",
+      "tldr_zh": "形式化证明了 JEPA 架构在什么条件下能恢复真实隐变量以学习「世界模型」。证明 LeJEPA 当且仅当隐变量服从各向同性高斯分布时实现线性可辨识性，从而支持最优隐空间规划。",
+      "interest_tag": ""
+    },
+    {
+      "title": "Gemini Embedding 2: A Native Multimodal Embedding Model from Gemini",
+      "arxiv_id": "2605.27295",
+      "url": "https://arxiv.org/abs/2605.27295",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2605.27295",
+      "tldr": "Google's native multimodal embedding model creates unified vector representations for video, audio, image, and text including interleaved combinations. Achieves SOTA with 77.2 global mean on multimodal retrieval benchmarks and +3.59 mrr@10 over ASR baselines on audio.",
+      "tldr_zh": "Google 的原生多模态嵌入模型为视频、音频、图像和文本（含交错组合）创建统一向量表示。在多模态检索基准上以 77.2 全局均分达到 SOTA，音频理解超越 ASR 基线 +3.59 mrr@10。",
+      "interest_tag": ""
+    },
+    {
+      "title": "Self-Improving Language Models with Bidirectional Evolutionary Search",
+      "arxiv_id": "2605.28814",
+      "url": "https://arxiv.org/abs/2605.28814",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2605.28814",
+      "tldr": "Integrates evolutionary operators with backward search for goal decomposition, enabling LLMs to self-improve solution quality. Shows up to 3.8% gain on multi-hop reasoning for Llama-3.1-8B and outperforms baselines on open problems like Circle Packing.",
+      "tldr_zh": "将进化算子与反向搜索结合用于目标分解，使 LLM 能自我提升解决方案质量。Llama-3.1-8B 在多跳推理上提升 3.8%，在圆填充等开放问题上超越基线。",
+      "interest_tag": ""
+    },
+    {
+      "title": "Qwen-VLA: Unifying Vision-Language-Action Modeling across Tasks, Environments, and Robot Embodiments",
+      "arxiv_id": "2605.30280",
+      "url": "https://arxiv.org/abs/2605.30280",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2605.30280",
+      "tldr": "Unified VLA model from Qwen Team handling manipulation, navigation, and VL tasks. 83.6% real-world success rate on ALOHA, strong cross-embodiment transfer, outperforms specialist models on dynamic manipulation.",
+      "tldr_zh": "Qwen 团队统一 VLA 模型处理操控、导航和视觉语言任务。ALOHA 真实环境 83.6% 成功率，强跨具身迁移，动态操控超越专家模型。",
+      "interest_tag": ""
+    }
+  ],
+  "github_repos": [
+    {
+      "name": "UditAkhourii/adhd",
+      "url": "https://github.com/UditAkhourii/adhd",
+      "tldr": "A 'skill' plugin for coding agents (Claude, Codex) that implements tree-of-thought with pruning. Helps agents maintain focus on complex multi-step coding tasks by structuring exploration and eliminating dead-end paths systematically.",
+      "tldr_zh": "为编程 agent（Claude、Codex）设计的「技能」插件，实现带剪枝的思维树。通过结构化探索和系统性消除死胡同路径，帮助 agent 在复杂多步编程任务中保持专注。",
+      "stars": 601,
+      "language": "TypeScript",
+      "interest_tag": ""
+    },
+    {
+      "name": "withkynam/vibecode-pro-max-kit",
+      "url": "https://github.com/withkynam/vibecode-pro-max-kit",
+      "tldr": "Spec-driven coding harness that maintains project memory when AI forgets context. Designed for vibecoders and product owners who work with AI coding tools but need persistent project specifications and constraints across sessions.",
+      "tldr_zh": "基于规格驱动的编码框架，在 AI 丢失上下文时维护项目记忆。为使用 AI 编程工具但需要跨会话保持项目规格和约束的 vibecoder 和产品负责人设计。",
+      "stars": 593,
+      "language": "JavaScript",
+      "interest_tag": ""
+    },
+    {
+      "name": "JasonLam08/cursor_agent_status_light",
+      "url": "https://github.com/JasonLam08/cursor_agent_status_light",
+      "tldr": "BLE-powered physical status light using ESP32-C3 that visualizes Cursor AI coding agent states (thinking, writing, idle). A fun hardware-meets-AI project that gives tangible feedback on what your coding agent is doing.",
+      "tldr_zh": "使用 ESP32-C3 的 BLE 物理状态灯，可视化 Cursor AI 编程 agent 状态（思考、编写、空闲）。一个有趣的硬件+AI 项目，为编程 agent 的工作状态提供实体反馈。",
+      "stars": 176,
+      "language": "C++",
+      "interest_tag": ""
+    },
+    {
+      "name": "modelstudioai/cli",
+      "url": "https://github.com/modelstudioai/cli",
+      "tldr": "Official CLI for Alibaba Cloud's Model Studio (百炼), built for AI agent frameworks. Exposes models, search, and multimodal capabilities via terminal, enabling programmatic access to Alibaba's AI infrastructure.",
+      "tldr_zh": "阿里云百炼官方 CLI，为 AI Agent 框架构建。通过终端暴露模型、搜索和多模态能力，实现对阿里 AI 基础设施的编程访问。",
+      "stars": 136,
+      "language": "TypeScript",
+      "interest_tag": ""
+    },
+    {
+      "name": "K-Dense-AI/science-superpowers",
+      "url": "https://github.com/K-Dense-AI/science-superpowers",
+      "tldr": "Composable computational-science methodology skills for AI research agents. Emphasizes pre-registration over post-hoc analysis, bringing rigorous scientific methodology to AI-assisted research workflows.",
+      "tldr_zh": "为 AI 研究 agent 设计的可组合计算科学方法论技能包。强调预注册而非事后分析，将严格科学方法论引入 AI 辅助研究工作流。",
+      "stars": 135,
+      "language": "Shell",
+      "interest_tag": ""
+    }
+  ],
+  "hackernews": [
+    {
+      "title": "DeepSeek makes the V4 Pro price discount permanent",
+      "url": "https://api-docs.deepseek.com/quick_start/pricing",
+      "tldr": "DeepSeek permanently reduced V4 Pro pricing, making their frontier model significantly more accessible. With 620 points and 549 comments, this signals a major pricing war in the LLM API market and validates the race-to-bottom cost dynamics.",
+      "tldr_zh": "DeepSeek 永久降低 V4 Pro 定价，使其前沿模型大幅降低门槛。620 分 549 评论，标志着 LLM API 市场重大价格战，验证了成本竞逐底部的动态趋势。",
+      "points": 620,
+      "num_comments": 549,
+      "interest_tag": ""
+    },
+    {
+      "title": "Show HN: Continue? Y/N: A 60-second game about AI agent permission fatigue",
+      "url": "https://llmgame.scalex.dev",
+      "tldr": "A clever browser game satirizing the constant permission prompts from AI agents. Hit 379 points by perfectly capturing a universal developer frustration — the tension between agent autonomy and human oversight.",
+      "tldr_zh": "一个巧妙的浏览器游戏，讽刺 AI agent 不断弹出的权限确认提示。379 分精准捕捉了开发者的普遍痛点——agent 自主性与人类监督之间的张力。",
+      "points": 379,
+      "num_comments": 156,
+      "interest_tag": ""
+    },
+    {
+      "title": "Microsoft reports AI is more expensive than paying human employees",
+      "url": "https://fortune.com/2026/05/22/microsoft-ai-cost-problem-tokens-agents/",
+      "tldr": "Microsoft internal data shows AI agent token costs exceed human labor costs for equivalent tasks. A sobering reality check on AI ROI claims, with 229 points driving intense debate about when AI agents actually become cost-effective.",
+      "tldr_zh": "微软内部数据显示 AI agent token 成本超过等效任务的人工成本。对 AI ROI 宣传的严肃现实检验，229 分引发关于 AI agent 何时真正具有成本效益的激烈讨论。",
+      "points": 229,
+      "num_comments": 71,
+      "interest_tag": ""
+    },
+    {
+      "title": "Robinhood now lets your AI agents trade stocks",
+      "url": "https://techcrunch.com/2026/05/27/robinhood-now-lets-your-ai-agents-trade-stocks/",
+      "tldr": "Robinhood opens API access for AI agents to execute stock trades autonomously. A landmark moment for agent-finance integration, raising questions about market stability, regulation, and the democratization of algorithmic trading.",
+      "tldr_zh": "Robinhood 开放 API 允许 AI agent 自主执行股票交易。agent-金融融合的里程碑时刻，引发关于市场稳定性、监管和算法交易民主化的讨论。",
+      "points": 108,
+      "num_comments": 179,
+      "interest_tag": ""
+    },
+    {
+      "title": "CAPTCHAs can still detect AI agents",
+      "url": "https://research.roundtable.ai/captchas-detect-ai/",
+      "tldr": "Research showing modern CAPTCHAs remain effective at distinguishing AI agents from humans, despite rapid agent capability improvements. Relevant to the ongoing arms race between web automation and bot detection.",
+      "tldr_zh": "研究表明现代 CAPTCHA 仍能有效区分 AI agent 和人类，尽管 agent 能力快速提升。与 Web 自动化和机器人检测之间持续军备竞赛相关。",
+      "points": 81,
+      "num_comments": 63,
+      "interest_tag": "CUA"
+    }
+  ]
+}
