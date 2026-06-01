@@ -1,0 +1,201 @@
+{
+  "date": "2026-06-01",
+  "generated_at": "2026-06-01T01:01:00+08:00",
+  "briefing_zh": "本周 AI 研究的焦点集中在**具身智能统一建模**和**自我改进机制**两大方向。**Qwen-VLA** 是最引人注目的工作，它将机器人操控、视觉语言导航等异构任务统一到单一 VLA 模型中，在真实 ALOHA 操控任务上达到 83.6% 的成功率，代表了从「专用模型」到「通用具身智能」的范式转变。\n\n安全对齐方面，**AgentDoG 1.5** 针对开放世界 Agent 的安全风险提出了轻量级对齐框架，获得了社区最高关注度（127 upvotes），反映出随着 Agent 能力增强，安全问题已成为社区共识性关切。\n\n架构创新层面，**Parallax** 提出参数化局部线性注意力机制，与 Muon 优化器产生正向交互效应；**LeJEPA** 则从理论上证明了 JEPA 何时能学到真正的世界模型，为 LeCun 的自监督学习路线提供了形式化基础。工业界方面，Robinhood 开放 AI Agent 股票交易接口引发热议，AI Agent 的权限边界问题再次成为焦点。",
+  "briefing_en": "This week's AI research centers on **unified embodied modeling** and **self-improvement mechanisms**. **Qwen-VLA** stands out by unifying robot manipulation, vision-language navigation, and other heterogeneous embodied tasks into a single VLA model, achieving 83.6% success on real-world ALOHA tasks — representing a paradigm shift from specialist to generalist embodied intelligence.\n\nOn the safety front, **AgentDoG 1.5** proposes a lightweight alignment framework for open-world agents, earning the highest community attention (127 upvotes), reflecting consensus that agent safety is now a first-order concern as capabilities scale.\n\nIn architecture innovation, **Parallax** introduces parameterized local linear attention with strong synergy with the Muon optimizer, while **LeJEPA** formally proves conditions under which JEPA learns a true world model, providing theoretical grounding for LeCun's self-supervised learning agenda. On the industry side, Robinhood opening AI agent stock trading APIs sparked intense debate about agent permission boundaries.",
+  "viral_analysis_zh": "**Qwen-VLA** 最可能出圈：它同时满足「大厂出品」「开源」「统一框架」「真机验证」四个传播要素，且 GitHub 已有 197 stars。AgentDoG 1.5 凭借安全叙事在 Agent 开发者群体中有强共鸣，但受众面较窄。",
+  "viral_analysis_en": "**Qwen-VLA** has the highest viral potential: it checks all four virality factors — big-lab pedigree, open-source, unified framework, and real-robot validation — with 197 GitHub stars already. AgentDoG 1.5 resonates strongly with agent developers via its safety narrative but has a narrower audience.",
+  "huggingface_papers": [
+    {
+      "title": "AgentDoG 1.5: A Lightweight and Scalable Alignment Framework for AI Agent Safety and Security",
+      "url": "https://huggingface.co/papers/2605.29801",
+      "tldr": "Proposes a lightweight alignment framework addressing safety risks in open-world agents like OpenClaw. Introduces scalable guardrails that work across heterogeneous environments without heavy computational overhead, filling the gap left by inadequate current frameworks as frontier models lower attack barriers.",
+      "tldr_zh": "针对 OpenClaw 等开放世界 Agent 的安全风险，提出轻量级可扩展对齐框架。在不增加大量计算开销的前提下，为跨环境 Agent 提供安全护栏，弥补了当前框架在前沿模型降低攻击门槛后的不足。",
+      "upvotes": 127,
+      "authors": "Dongrui Liu, Yu Li, Zhonghao Yang",
+      "ai_keywords": ["agent safety", "alignment", "guardrails", "open-world agents"],
+      "interest_tag": ""
+    },
+    {
+      "title": "Qwen-VLA: Unifying Vision-Language-Action Modeling across Tasks, Environments, and Robot Embodiments",
+      "url": "https://huggingface.co/papers/2605.30280",
+      "tldr": "Unifies robot manipulation, vision-language navigation, and other embodied tasks into a single VLA model. Achieves 83.6% average success on real-world ALOHA manipulation and outperforms specialist models on dynamic manipulation benchmarks, demonstrating strong cross-task generalization.",
+      "tldr_zh": "将机器人操控、视觉语言导航等异构具身任务统一为单一 VLA 模型。在真实 ALOHA 操控任务上达到 83.6% 平均成功率，在动态操控基准上超越专用模型，展现出强跨任务泛化能力。",
+      "upvotes": 107,
+      "authors": "Qiuyue Wang, Mingsheng Li, Jian Guan",
+      "ai_keywords": ["VLA", "embodied AI", "robot manipulation", "unified model"],
+      "interest_tag": ""
+    },
+    {
+      "title": "OmniRetrieval: Unified Retrieval across Heterogeneous Knowledge Sources",
+      "url": "https://huggingface.co/papers/2605.29250",
+      "tldr": "Introduces a unified retrieval system that operates across unstructured text, relational tables, knowledge graphs, and property graphs simultaneously. Eliminates the need for source-specific query languages, enabling seamless cross-source information access for real-world applications.",
+      "tldr_zh": "提出统一检索系统，能同时在非结构化文本、关系表、知识图谱和属性图上检索。无需针对每种数据源编写特定查询语言，实现跨源无缝信息获取。",
+      "upvotes": 66,
+      "authors": "Jinheon Baek, Soyeong Jeong, Sangwoo Park",
+      "ai_keywords": ["retrieval", "knowledge graphs", "unified search", "RAG"],
+      "interest_tag": ""
+    },
+    {
+      "title": "CollectionLoRA: Collecting 50 Effects in 1 LoRA via Multi-Teacher On-Policy Distillation",
+      "url": "https://huggingface.co/papers/2605.25378",
+      "tldr": "Compresses 50 distinct visual effect LoRAs into a single adapter via multi-teacher on-policy distillation. Dramatically reduces storage and deployment overhead while maintaining effect quality, solving the scalability problem of managing numerous specialized LoRAs.",
+      "tldr_zh": "通过多教师在线策略蒸馏，将 50 个不同视觉效果的 LoRA 压缩为单一适配器。大幅减少存储和部署开销的同时保持效果质量，解决了大量专用 LoRA 的可扩展性问题。",
+      "upvotes": 53,
+      "authors": "Fangtai Wu, Hailong Guo, Shijie Huang",
+      "ai_keywords": ["LoRA", "distillation", "image editing", "diffusion models"],
+      "interest_tag": ""
+    },
+    {
+      "title": "minWM: A Full-Stack Open-Source Framework for Real-Time Interactive Video World Models",
+      "url": "https://huggingface.co/papers/2605.30263",
+      "tldr": "Provides the first full-stack open-source framework for building real-time interactive video world models. Addresses the gap between high-quality video generation and interactive controllable rollout by solving causality, controllability, and latency challenges in a unified system.",
+      "tldr_zh": "首个全栈开源实时交互式视频世界模型框架。解决了高质量视频生成与交互式可控推演之间的鸿沟，统一处理因果性、可控性和低延迟三大挑战。",
+      "upvotes": 49,
+      "authors": "Min Zhao, Hongzhou Zhu, Bokai Yan",
+      "ai_keywords": ["world models", "video generation", "interactive", "real-time"],
+      "interest_tag": ""
+    }
+  ],
+  "alphaxiv_papers": [
+    {
+      "title": "When Does LeJEPA Learn a World Model?",
+      "arxiv_id": "2605.26379",
+      "url": "https://arxiv.org/abs/2605.26379",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2605.26379",
+      "tldr": "Formally proves that JEPA (LeJEPA) learns a world model — recovering true latent variables — if and only if latents follow an isotropic Gaussian distribution. This enables optimal latent-space planning and provides the first theoretical guarantee for LeCun's self-supervised learning paradigm.",
+      "tldr_zh": "形式化证明 JEPA（LeJEPA）在潜变量服从各向同性高斯分布时能恢复真实潜变量（即学到世界模型），并实现最优潜空间规划。为 LeCun 自监督学习范式提供了首个理论保证。",
+      "interest_tag": ""
+    },
+    {
+      "title": "Qwen-VLA: Unifying Vision-Language-Action Modeling across Tasks, Environments, and Robot Embodiments",
+      "arxiv_id": "2605.30280",
+      "url": "https://arxiv.org/abs/2605.30280",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2605.30280",
+      "tldr": "Unifies diverse embodied decision-making into one VLA model covering manipulation, navigation, and more. Achieves 83.6% real-world success rate and strong cross-embodiment generalization.",
+      "tldr_zh": "将操控、导航等多种具身决策任务统一到单一 VLA 模型，真实世界成功率 83.6%，跨形态泛化能力突出。",
+      "interest_tag": ""
+    },
+    {
+      "title": "Self-Improving Language Models with Bidirectional Evolutionary Search",
+      "arxiv_id": "2605.28814",
+      "url": "https://arxiv.org/abs/2605.28814",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2605.28814",
+      "tldr": "Integrates evolutionary operators with backward goal-decomposition search to help LLMs discover better solutions. Achieves up to 3.8% improvement on multi-hop reasoning for Llama-3.1-8B and consistently outperforms baselines on open optimization problems.",
+      "tldr_zh": "将进化算子与反向目标分解搜索结合，帮助 LLM 发现更优解。在 Llama-3.1-8B 多跳推理上提升 3.8%，在开放优化问题上持续优于基线。",
+      "interest_tag": ""
+    },
+    {
+      "title": "Parallax: Parameterized Local Linear Attention for Language Modeling",
+      "arxiv_id": "2605.29157",
+      "url": "https://arxiv.org/abs/2605.29157",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2605.29157",
+      "tldr": "Scales Local Linear Attention for LLM pretraining by reformulating it for computational efficiency. Demonstrates consistent perplexity reduction and a strong positive interaction with the Muon optimizer.",
+      "tldr_zh": "通过重新公式化将局部线性注意力扩展到 LLM 预训练规模，实现一致的困惑度降低，并与 Muon 优化器产生强正向交互。",
+      "interest_tag": ""
+    },
+    {
+      "title": "Learn from your own latents and not from tokens: A sample-complexity theory",
+      "arxiv_id": "2605.27734",
+      "url": "https://arxiv.org/abs/2605.27734",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2605.27734",
+      "tldr": "Proves that learning from a model's own latent representations achieves sample complexity proportional to vocabulary size and branching factor but constant in hierarchy depth — exponentially better than token-level prediction for deep hierarchical structures.",
+      "tldr_zh": "证明从模型自身潜表示学习的样本复杂度与词表大小和分支因子成正比、与层级深度无关——对深层级结构比 token 级预测呈指数级优势。",
+      "interest_tag": ""
+    }
+  ],
+  "github_repos": [
+    {
+      "name": "withkynam/vibecode-pro-max-kit",
+      "url": "https://github.com/withkynam/vibecode-pro-max-kit",
+      "tldr": "A spec-driven coding harness for AI-assisted development featuring self-improving context memory, 12 agents, and 32 skills. Designed to combat context rot in long coding sessions by maintaining persistent specifications that AI follows.",
+      "tldr_zh": "面向 AI 辅助开发的规格驱动编码框架，具备自改进上下文记忆、12 个 Agent 和 32 项技能。通过持久化规格对抗长会话中的上下文衰减问题。",
+      "stars": 667,
+      "language": "JavaScript",
+      "interest_tag": "Memory"
+    },
+    {
+      "name": "DannyMac180/skills",
+      "url": "https://github.com/DannyMac180/skills",
+      "tldr": "A curated collection of AI agent skills — reusable capability modules that can be plugged into various agent frameworks. Demonstrates the emerging pattern of skill-as-a-package for agent ecosystems.",
+      "tldr_zh": "精选 AI Agent 技能集合——可插入各种 Agent 框架的可复用能力模块。展示了 Agent 生态中「技能即包」的新兴模式。",
+      "stars": 219,
+      "language": "Python",
+      "interest_tag": ""
+    },
+    {
+      "name": "yb2460/harness-anything",
+      "url": "https://github.com/yb2460/harness-anything",
+      "tldr": "CLI harness enabling AI agents to control WPS Office (Writer, Calc, Impress) via COM automation. Bridges the gap between AI agents and desktop productivity software through programmatic control interfaces.",
+      "tldr_zh": "CLI 工具让 AI Agent 通过 COM 自动化控制 WPS Office（文字、表格、演示）。通过编程接口弥合 AI Agent 与桌面办公软件之间的鸿沟。",
+      "stars": 209,
+      "language": "Python",
+      "interest_tag": "CUA"
+    },
+    {
+      "name": "veryyoldman/metamask-openclaw",
+      "url": "https://github.com/veryyoldman/metamask-openclaw",
+      "tldr": "Safety-first MetaMask SDK toolkit for AI agents — enables wallet connection, balance reading, message signing, and transactions across Ethereum and EVM chains with built-in guardrails for agent use.",
+      "tldr_zh": "面向 AI Agent 的安全优先 MetaMask SDK 工具包——支持跨以太坊及 EVM 链的钱包连接、余额读取、消息签名和交易，内置 Agent 使用安全护栏。",
+      "stars": 197,
+      "language": "TypeScript",
+      "interest_tag": ""
+    },
+    {
+      "name": "K-Dense-AI/science-superpowers",
+      "url": "https://github.com/K-Dense-AI/science-superpowers",
+      "tldr": "Composable computational-science methodology skills for AI research agents, emphasizing pre-registration over TDD. A science-domain reimplementation of the Superpowers agent skill framework.",
+      "tldr_zh": "面向 AI 科研 Agent 的可组合计算科学方法论技能，强调预注册优于 TDD。Superpowers Agent 技能框架在科研领域的重新实现。",
+      "stars": 152,
+      "language": "Shell",
+      "interest_tag": ""
+    }
+  ],
+  "hackernews": [
+    {
+      "title": "Show HN: Continue? Y/N: A 60-second game about AI agent permission fatigue",
+      "url": "https://news.ycombinator.com/item?id=48308376",
+      "tldr": "A browser game satirizing the constant permission prompts in AI agent workflows. Players must rapidly approve/deny agent actions in 60 seconds, highlighting the UX problem of human-in-the-loop oversight when agents need frequent authorization.",
+      "tldr_zh": "讽刺 AI Agent 工作流中频繁权限弹窗的浏览器游戏。玩家需在 60 秒内快速审批/拒绝 Agent 操作，揭示了人类在环监督中的 UX 痛点。",
+      "points": 382,
+      "num_comments": 159,
+      "interest_tag": ""
+    },
+    {
+      "title": "Robinhood now lets your AI agents trade stocks",
+      "url": "https://techcrunch.com/2026/05/27/robinhood-now-lets-your-ai-agents-trade-stocks/",
+      "tldr": "Robinhood launches API access for AI agents to execute stock trades autonomously. Raises significant questions about liability, market manipulation risks, and the regulatory framework for delegating financial decisions to AI systems.",
+      "tldr_zh": "Robinhood 开放 API 允许 AI Agent 自主执行股票交易。引发关于责任归属、市场操纵风险以及 AI 代理金融决策的监管框架等重大问题。",
+      "points": 109,
+      "num_comments": 180,
+      "interest_tag": ""
+    },
+    {
+      "title": "CAPTCHAs can still detect AI agents",
+      "url": "https://research.roundtable.ai/captchas-detect-ai/",
+      "tldr": "Research showing that modern CAPTCHAs remain effective at distinguishing AI agents from humans, contrary to popular belief. Analyzes behavioral signals beyond visual puzzle-solving that agents still struggle to replicate.",
+      "tldr_zh": "研究表明现代 CAPTCHA 仍能有效区分 AI Agent 和人类，与普遍看法相反。分析了 Agent 仍难以复现的视觉谜题之外的行为信号。",
+      "points": 83,
+      "num_comments": 68,
+      "interest_tag": "CUA"
+    },
+    {
+      "title": "Show HN: AISlop, a CLI for catching AI generated code smells",
+      "url": "https://github.com/scanaislop/aislop",
+      "tldr": "CLI tool that detects patterns typical of AI-generated code — overly verbose comments, unnecessary abstractions, placeholder logic, and other 'AI slop' indicators. Helps teams maintain code quality as AI coding assistants become prevalent.",
+      "tldr_zh": "检测 AI 生成代码典型模式的 CLI 工具——过度冗余注释、不必要抽象、占位逻辑等「AI 水货」指标。帮助团队在 AI 编码助手普及时维持代码质量。",
+      "points": 72,
+      "num_comments": 63,
+      "interest_tag": ""
+    },
+    {
+      "title": "DeepSWE: A contamination-free benchmark for long-horizon coding agents",
+      "url": "https://deepswe.datacurve.ai/blog",
+      "tldr": "Introduces a benchmark for evaluating coding agents on long-horizon tasks with guaranteed no data contamination. Addresses the critical problem that existing benchmarks may be memorized by LLMs trained on public code repositories.",
+      "tldr_zh": "提出无数据污染的长程编码 Agent 评测基准。解决了现有基准可能被在公开代码仓库上训练的 LLM 记忆的关键问题。",
+      "points": 65,
+      "num_comments": 20,
+      "interest_tag": "Benchmark"
+    }
+  ]
+}
