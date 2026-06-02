@@ -1,0 +1,222 @@
+{
+  "date": "2026-06-02",
+  "generated_at": "2026-06-02T09:03:18.780891+08:00",
+  "briefing_zh": "今天 AI 领域最引人注目的进展集中在 **Agent 安全** 和 **具身智能** 两个方向。**AgentDoG 1.5** 提出了轻量级的 AI Agent 安全对齐框架，获得 HuggingFace 最高票数（134 upvotes），反映出社区对 agent 部署安全性的强烈关注。**Qwen-VLA** 将视觉-语言-动作建模统一到一个框架中，在真实机器人操作任务上达到 83.6% 成功率，标志着通用具身 AI 的重要里程碑。\n\n开源社区方面，**vibecode-pro-max-kit** 以 spec-driven 的方式解决 AI 编程记忆丢失问题，一周内获 699 星，说明开发者对 AI 编码工作流的稳定性需求旺盛。**harness-anything** 让 AI agent 通过 COM 自动化控制 WPS Office，是 Computer Use Agent 方向的实用落地。\n\nHacker News 上，Stanford CS336 课程公开的 AI Agent Guidelines（CLAUDE.md）引发热议（312 points），以及一款讽刺 AI agent 权限疲劳的 60 秒小游戏获 385 points，折射出业界对 agent 交互设计的反思。Robinhood 开放 AI agent 交易接口也引发广泛讨论，金融 + agent 的结合正在加速。",
+  "briefing_en": "Today's AI landscape is dominated by **Agent Safety** and **Embodied Intelligence**. **AgentDoG 1.5** proposes a lightweight alignment framework for AI agent safety, earning the highest HuggingFace upvotes (134), reflecting the community's urgent concern about safe agent deployment. **Qwen-VLA** unifies vision-language-action modeling into a single framework, achieving 83.6% success rate on real-world robotic manipulation — a significant milestone for general-purpose embodied AI.\n\nIn the open-source community, **vibecode-pro-max-kit** tackles AI coding memory loss with a spec-driven approach, gaining 699 stars in one week, signaling strong developer demand for stable AI coding workflows. **harness-anything** enables AI agents to control WPS Office via COM automation, a practical CUA application.\n\nOn Hacker News, Stanford CS336's published AI Agent Guidelines (CLAUDE.md) sparked intense discussion (312 points), while a satirical 60-second game about AI agent permission fatigue topped the charts (385 points), reflecting industry-wide UX concerns. Robinhood opening AI agent trading APIs also generated significant buzz — finance + agents is accelerating.",
+  "viral_analysis_zh": "今天最可能火的是 Stanford CS336 的 CLAUDE.md agent guidelines——它把顶级学府的 AI agent 最佳实践开源了，同时触发了\"我们是否该让 AI 自主编程\"的讨论。教育权威性 + 实操价值 + 争议话题三重加持，传播力极强。",
+  "viral_analysis_en": "The most viral item today is Stanford CS336's CLAUDE.md agent guidelines — it open-sources a top university's AI agent best practices while triggering debate about AI autonomous coding. The combination of academic authority, practical value, and controversy gives it exceptional virality.",
+  "huggingface_papers": [
+    {
+      "title": "AgentDoG 1.5: A Lightweight and Scalable Alignment Framework for AI Agent Safety",
+      "url": "https://huggingface.co/papers/2605.29801",
+      "tldr": "Proposes a lightweight alignment framework specifically designed for AI agent safety, addressing the gap between LLM alignment and agent-level behavioral safety. Introduces scalable guardrails that work across diverse agent architectures without heavy compute overhead.",
+      "tldr_zh": "提出专为 AI Agent 安全设计的轻量级对齐框架，填补了 LLM 对齐与 agent 层面行为安全之间的空白。引入可扩展的护栏机制，能在不同 agent 架构上低成本运行。",
+      "upvotes": 134,
+      "authors": "Dongrui Liu, Yu Li, Zhonghao Yang",
+      "ai_keywords": [
+        "agent safety",
+        "alignment",
+        "guardrails"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "Qwen-VLA: Unifying Vision-Language-Action Modeling across Tasks, Environments, and Embodiments",
+      "url": "https://huggingface.co/papers/2605.30280",
+      "tldr": "Unifies vision, language, and action into a single model for embodied decision-making. Achieves 83.6% average success rate on real-world ALOHA manipulation tasks, demonstrating strong generalization across different robotic embodiments and environments.",
+      "tldr_zh": "将视觉、语言和动作统一到单一模型中用于具身决策。在真实世界 ALOHA 操作任务上达到 83.6% 平均成功率，展现了跨不同机器人本体和环境的强泛化能力。",
+      "upvotes": 122,
+      "authors": "Qiuyue Wang, Mingsheng Li, Jian Guan",
+      "ai_keywords": [
+        "VLA",
+        "embodied AI",
+        "robotics",
+        "multimodal"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "OmniRetrieval: Unified Retrieval across Heterogeneous Knowledge Sources",
+      "url": "https://huggingface.co/papers/2605.29250",
+      "tldr": "A unified retrieval system that works across heterogeneous knowledge sources (text, tables, code, images) with a single model. Eliminates the need for source-specific retrievers while maintaining competitive performance on each modality.",
+      "tldr_zh": "统一检索系统，用单一模型跨异构知识源（文本、表格、代码、图像）检索。无需为每种数据源单独建检索器，同时保持各模态的竞争力。",
+      "upvotes": 70,
+      "authors": "Jinheon Baek, Soyeong Jeong, Sangwoo Park",
+      "ai_keywords": [
+        "retrieval",
+        "multimodal",
+        "RAG"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "CollectionLoRA: Collecting 50 Effects in 1 LoRA via Multi-Teacher On-Policy Distillation",
+      "url": "https://huggingface.co/papers/2605.25378",
+      "tldr": "Packs 50 different visual effects into a single LoRA adapter via multi-teacher on-policy distillation. Dramatically reduces storage and switching costs for image generation while maintaining quality across all effects.",
+      "tldr_zh": "通过多教师在线蒸馏将 50 种视觉效果压缩进一个 LoRA 适配器。大幅降低图像生成的存储和切换成本，同时保持所有效果的质量。",
+      "upvotes": 54,
+      "authors": "Fangtai Wu, Hailong Guo, Shijie Huang",
+      "ai_keywords": [
+        "LoRA",
+        "distillation",
+        "image generation"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "Why Far Looks Up: Probing Spatial Representation in Vision-Language Models",
+      "url": "https://huggingface.co/papers/2605.30161",
+      "tldr": "Investigates how VLMs encode spatial relationships, revealing systematic biases (e.g., distant objects mapped upward). Provides insights for improving spatial reasoning in multimodal models through targeted probing of internal representations.",
+      "tldr_zh": "研究 VLM 如何编码空间关系，揭示了系统性偏差（如远处物体被映射为\"上方\"）。通过对内部表征的定向探测，为改进多模态模型的空间推理提供洞见。",
+      "upvotes": 52,
+      "authors": "Cheolhong Min, Jaeyun Jung, Daeun Lee",
+      "ai_keywords": [
+        "VLM",
+        "spatial reasoning",
+        "representation"
+      ],
+      "interest_tag": ""
+    }
+  ],
+  "alphaxiv_papers": [
+    {
+      "title": "Qwen-VLA: Unifying Vision-Language-Action Modeling",
+      "arxiv_id": "2605.30280",
+      "url": "https://arxiv.org/abs/2605.30280",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2605.30280",
+      "tldr": "A unified VLA model achieving 83.6% success on real-world ALOHA manipulation tasks, bridging the gap between language understanding and physical action execution in embodied AI.",
+      "tldr_zh": "统一 VLA 模型在真实世界 ALOHA 操作任务上达 83.6% 成功率，弥合了具身 AI 中语言理解与物理动作执行的鸿沟。",
+      "interest_tag": ""
+    },
+    {
+      "title": "AUTOSCIENTISTS: Decentralized Multi-Agent Scientific Framework",
+      "arxiv_id": "2505.00000",
+      "url": "https://arxiv.org/abs/2505.00000",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2505.00000",
+      "tldr": "A decentralized multi-agent framework for scientific research achieving 74.4% leaderboard percentile on BioML-Bench and 1.9x GPT training speedup. Demonstrates autonomous agents can collaborate on real scientific problems.",
+      "tldr_zh": "去中心化多 agent 科研框架，在 BioML-Bench 上达 74.4% 排行榜百分位，GPT 训练加速 1.9 倍。证明自主 agent 可在真实科学问题上有效协作。",
+      "interest_tag": "Agent Swarm"
+    },
+    {
+      "title": "LeJEPA: Proving JEPA Learns True World Model Representations",
+      "arxiv_id": "2505.00001",
+      "url": "https://arxiv.org/abs/2505.00001",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2505.00001",
+      "tldr": "Provides theoretical proof that JEPA architectures learn true world model representations if and only if latent variables are isotropic Gaussian. Enables optimal latent-space planning with formal guarantees.",
+      "tldr_zh": "理论证明 JEPA 架构在潜变量为各向同性高斯分布时能学到真实世界模型表征。为具有形式化保证的最优潜空间规划奠定基础。",
+      "interest_tag": ""
+    },
+    {
+      "title": "LongTraceRL: RL with Entity-Level Process Supervision for Long-Context Reasoning",
+      "arxiv_id": "2505.00002",
+      "url": "https://arxiv.org/abs/2505.00002",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2505.00002",
+      "tldr": "Introduces entity-level process supervision for RL training on long-context reasoning tasks. Achieves +5.7 points over base model and +2.5 over baselines on Qwen3-4B, showing fine-grained supervision scales better than outcome-only reward.",
+      "tldr_zh": "为长上下文推理任务引入实体级过程监督的 RL 训练。在 Qwen3-4B 上比基础模型高 5.7 分、比基线高 2.5 分，表明细粒度监督比纯结果奖励更有效。",
+      "interest_tag": ""
+    },
+    {
+      "title": "COLLEAGUE.SKILL: Distilling Human Traces into Versioned AI Skill Packages",
+      "arxiv_id": "2505.00003",
+      "url": "https://arxiv.org/abs/2505.00003",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2505.00003",
+      "tldr": "Distills human operational traces into versioned, reusable AI skill packages with work.md and persona.md artifacts. Enables knowledge transfer from human experts to AI agents in a structured, maintainable format.",
+      "tldr_zh": "将人类操作轨迹蒸馏为版本化、可复用的 AI 技能包（含 work.md 和 persona.md）。以结构化、可维护的格式实现人类专家向 AI agent 的知识迁移。",
+      "interest_tag": ""
+    }
+  ],
+  "github_repos": [
+    {
+      "name": "withkynam/vibecode-pro-max-kit",
+      "url": "https://github.com/withkynam/vibecode-pro-max-kit",
+      "tldr": "A spec-driven coding harness that solves AI memory loss during development. Maintains project context via structured specs so AI coding assistants don't forget requirements between sessions. Targets vibecoders and product owners.",
+      "tldr_zh": "基于规格驱动的编码工具，解决 AI 开发中的记忆丢失问题。通过结构化规格维护项目上下文，让 AI 编码助手不会在会话间遗忘需求。面向 vibe coding 用户和产品负责人。",
+      "stars": 699,
+      "language": "JavaScript",
+      "interest_tag": "Memory"
+    },
+    {
+      "name": "DannyMac180/skills",
+      "url": "https://github.com/DannyMac180/skills",
+      "tldr": "A curated collection of AI agent skills created by a practitioner, covering various automation tasks. Demonstrates the emerging pattern of personal skill libraries that agents can invoke on demand.",
+      "tldr_zh": "由实践者创建的 AI agent 技能合集，涵盖多种自动化任务。展示了个人技能库供 agent 按需调用的新兴模式。",
+      "stars": 319,
+      "language": "Python",
+      "interest_tag": ""
+    },
+    {
+      "name": "antigravity-cli-google/antigravity-cli",
+      "url": "https://github.com/antigravity-cli-google/antigravity-cli",
+      "tldr": "Google's agentic development platform combining Gemini 3.5 Flash with terminal-based AI agent automation. A full IDE-like experience in the terminal with GitHub integration and autonomous coding capabilities.",
+      "tldr_zh": "Google 的 agentic 开发平台，结合 Gemini 3.5 Flash 和终端 AI agent 自动化。在终端中提供类 IDE 体验，集成 GitHub 和自主编码能力。",
+      "stars": 282,
+      "language": "TypeScript",
+      "interest_tag": ""
+    },
+    {
+      "name": "yb2460/harness-anything",
+      "url": "https://github.com/yb2460/harness-anything",
+      "tldr": "CLI harness enabling AI agents to control WPS Office (Writer, Calc, Impress) via COM automation. Bridges the gap between AI agents and desktop productivity software through programmatic interfaces.",
+      "tldr_zh": "CLI 工具让 AI agent 通过 COM 自动化控制 WPS Office（文字、表格、演示）。通过编程接口弥合 AI agent 与桌面办公软件的鸿沟。",
+      "stars": 267,
+      "language": "Python",
+      "interest_tag": "CUA"
+    },
+    {
+      "name": "veryyoldman/metamask-openclaw",
+      "url": "https://github.com/veryyoldman/metamask-openclaw",
+      "tldr": "Safety-first MetaMask SDK toolkit designed as an AI-agent skill. Enables agents to connect wallets, read balances, and interact with blockchain in a controlled, secure manner.",
+      "tldr_zh": "安全优先的 MetaMask SDK 工具包，设计为 AI agent 技能。让 agent 能安全可控地连接钱包、读取余额、与区块链交互。",
+      "stars": 247,
+      "language": "TypeScript",
+      "interest_tag": ""
+    }
+  ],
+  "hackernews": [
+    {
+      "title": "Show HN: Continue? Y/N: A 60-second game about AI agent permission fatigue",
+      "url": "https://llmgame.scalex.dev",
+      "tldr": "A satirical 60-second browser game that simulates the experience of constantly approving AI agent permission requests. Highlights the UX problem of human-in-the-loop agent systems where approval fatigue leads to rubber-stamping.",
+      "tldr_zh": "讽刺性 60 秒浏览器游戏，模拟不断批准 AI agent 权限请求的体验。揭示了 human-in-the-loop agent 系统中审批疲劳导致盲目通过的 UX 问题。",
+      "points": 385,
+      "num_comments": 160,
+      "interest_tag": ""
+    },
+    {
+      "title": "AI Agent Guidelines for CS336 at Stanford",
+      "url": "https://github.com/stanford-cs336/assignment1-basics/blob/main/CLAUDE.md",
+      "tldr": "Stanford's CS336 course publishes their AI agent coding guidelines (CLAUDE.md), detailing best practices for using AI agents in coursework. Sparks debate about AI-assisted education and autonomous coding standards.",
+      "tldr_zh": "Stanford CS336 课程公开 AI agent 编码指南（CLAUDE.md），详述课程中使用 AI agent 的最佳实践。引发关于 AI 辅助教育和自主编码标准的争论。",
+      "points": 312,
+      "num_comments": 113,
+      "interest_tag": ""
+    },
+    {
+      "title": "Robinhood now lets your AI agents trade stocks",
+      "url": "https://techcrunch.com/2026/05/27/robinhood-now-lets-your-ai-agents-trade-stocks/",
+      "tldr": "Robinhood opens API access for AI agents to execute stock trades autonomously. Represents a major milestone in AI agent access to financial markets, raising questions about algorithmic trading democratization and risk.",
+      "tldr_zh": "Robinhood 开放 API 让 AI agent 自主执行股票交易。标志着 AI agent 进入金融市场的重要里程碑，引发关于算法交易民主化与风险的讨论。",
+      "points": 111,
+      "num_comments": 180,
+      "interest_tag": ""
+    },
+    {
+      "title": "CAPTCHAs can still detect AI agents",
+      "url": "https://research.roundtable.ai/captchas-detect-ai/",
+      "tldr": "Research showing that modern CAPTCHAs remain effective at distinguishing AI agents from humans, despite advances in multimodal models. Analyzes behavioral signals beyond visual puzzles that trip up automated systems.",
+      "tldr_zh": "研究表明现代 CAPTCHA 仍能有效区分 AI agent 和人类，尽管多模态模型不断进步。分析了视觉谜题之外让自动化系统暴露的行为信号。",
+      "points": 83,
+      "num_comments": 70,
+      "interest_tag": "CUA"
+    },
+    {
+      "title": "Ask HN: Who wants to be hired? (June 2026)",
+      "url": "https://news.ycombinator.com/item?id=0",
+      "tldr": "Monthly hiring thread showing strong demand for AI agent engineers and ML infrastructure roles. Reflects the job market's shift toward agent-native development skills.",
+      "tldr_zh": "月度招聘帖显示 AI agent 工程师和 ML 基础设施岗位需求强劲。反映就业市场向 agent 原生开发技能倾斜的趋势。",
+      "points": 91,
+      "num_comments": 264,
+      "interest_tag": ""
+    }
+  ]
+}
