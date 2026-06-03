@@ -1,0 +1,223 @@
+{
+  "date": "2026-06-03",
+  "generated_at": "2026-06-03T01:03:23.902418Z",
+  "briefing_zh": "今天 AI 研究领域最引人注目的趋势是 **Agent 基准测试**的密集涌现。**TASTE** 提出了系统性提升 agent benchmark 覆盖度和难度的方法论，**K-BrowseComp** 则将 web browsing agent 评测扩展到韩语语境，反映出社区对 agent 能力评估标准化的迫切需求。与此同时，**Harness-1** 展示了如何用强化学习训练搜索 agent，通过状态外化的 harness 架构实现更高效的探索策略。\n\n在基础设施层面，**PEFT Personalization** 提出了在万亿参数基础模型上部署百万级个性化适配器的方案，这对大规模 agent 部署有直接启示。**Crafter** 则展示了多 agent 协作在科学图表生成任务上的潜力，多个专业 agent 分工完成从论文到可编辑图表的全流程。\n\n开源社区方面，**Microsoft Scout**（基于 OpenClaw）作为自主 AI agent 正式发布，标志着大厂在 autonomous agent 产品化上的加速。GitHub 上 **vigils** 项目（AI agent 本地控制面板）获得关注，反映出开发者对 agent 可观测性和安全管控的需求日益增长。",
+  "briefing_en": "Today's AI research landscape is dominated by a surge in **Agent Benchmarking**. **TASTE** proposes systematic methodology to improve coverage and difficulty of agent benchmarks, while **K-BrowseComp** extends web browsing agent evaluation to Korean contexts, reflecting the community's urgent need for standardized agent capability assessment. Meanwhile, **Harness-1** demonstrates how RL can train search agents through a state-externalizing harness architecture for more efficient exploration.\n\nAt the infrastructure level, **PEFT Personalization** proposes deploying millions of personalized adapters on trillion-parameter foundation models, with direct implications for large-scale agent deployment. **Crafter** showcases multi-agent collaboration for scientific figure generation, with specialized agents handling the full pipeline from papers to editable figures.\n\nIn the open-source community, **Microsoft Scout** (built on OpenClaw) launched as an autonomous AI agent, signaling accelerated productization of autonomous agents by major tech companies. On GitHub, the **vigils** project (local control plane for AI agents) gained traction, reflecting growing developer demand for agent observability and safety controls.",
+  "viral_analysis_zh": "**Crafter**（107 upvotes）最可能火——它解决了科研工作者的真实痛点（从论文重制高质量图表），且多 agent 协作的演示效果直观。Stanford CS336 的 AI Agent Guidelines 在 HN 获得 490 points，说明「如何正确使用 AI agent 写代码」这个话题触达了最广泛的开发者群体。",
+  "viral_analysis_en": "**Crafter** (107 upvotes) is most likely to go viral — it solves a real pain point for researchers (recreating high-quality figures from papers), and the multi-agent collaboration demo is visually compelling. Stanford CS336's AI Agent Guidelines hit 490 points on HN, showing that 'how to properly use AI agents for coding' resonates with the broadest developer audience.",
+  "huggingface_papers": [
+    {
+      "title": "Crafter: A Multi-Agent Harness for Editable Scientific Figure Generation from Diverse Sources",
+      "url": "https://huggingface.co/papers/2605.30611",
+      "tldr": "A multi-agent system that takes scientific papers as input and generates editable, publication-quality figures. Each agent specializes in a subtask (data extraction, layout, rendering), producing figures that researchers can further customize rather than static images.",
+      "tldr_zh": "一个多 agent 系统，输入科学论文即可生成可编辑的出版级图表。每个 agent 专精一个子任务（数据提取、布局、渲染），产出可二次编辑的图表而非静态图片。",
+      "upvotes": 107,
+      "authors": "Haozhe Zhao, Shuzheng Si, Zhenhailong Wang",
+      "ai_keywords": [
+        "multi-agent",
+        "figure generation",
+        "scientific publishing"
+      ],
+      "interest_tag": "Agent Swarm"
+    },
+    {
+      "title": "On the Scaling of PEFT: Towards Million Personal Models of Trillion Parameters",
+      "url": "https://huggingface.co/papers/2606.02437",
+      "tldr": "Proposes a framework for deploying millions of personalized AI models as lightweight adapters on a single trillion-parameter foundation model. Introduces RL-native tiny adapter initialization and shows adapter diversity improves collective intelligence.",
+      "tldr_zh": "提出在单个万亿参数基础模型上以轻量适配器形式部署百万级个性化 AI 模型的框架。引入 RL 原生的微型适配器初始化方法，并证明适配器多样性可提升集体智能。",
+      "upvotes": 57,
+      "authors": "Mind Lab, Song Cao, Vic Cao",
+      "ai_keywords": [
+        "PEFT",
+        "personalization",
+        "scaling",
+        "adapters"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "A Matter of TASTE: Improving Coverage and Difficulty of Agent Benchmarks",
+      "url": "https://huggingface.co/papers/2605.28556",
+      "tldr": "Introduces TASTE, a systematic methodology to identify gaps in existing agent benchmarks and generate harder, more diverse test cases. Demonstrates that current benchmarks significantly underestimate failure modes of state-of-the-art agents.",
+      "tldr_zh": "提出 TASTE 方法论，系统性地发现现有 agent 基准测试的覆盖盲区并生成更难、更多样的测试用例。证明当前 benchmark 严重低估了 SOTA agent 的失败模式。",
+      "upvotes": 55,
+      "authors": "Tomer Keren, Nitay Calderon, Asaf Yehudai",
+      "ai_keywords": [
+        "agent benchmarks",
+        "evaluation",
+        "test generation"
+      ],
+      "interest_tag": "Benchmark"
+    },
+    {
+      "title": "K-BrowseComp: A Web Browsing Agent Benchmark Grounded in Korean Contexts",
+      "url": "https://huggingface.co/papers/2606.02404",
+      "tldr": "A benchmark for evaluating web browsing agents in Korean-language contexts, testing navigation, information extraction, and task completion on Korean websites. Reveals significant performance gaps in current agents on non-English web environments.",
+      "tldr_zh": "一个评估 web browsing agent 在韩语语境下表现的基准测试，考察在韩语网站上的导航、信息提取和任务完成能力。揭示了当前 agent 在非英语网页环境中的显著性能差距。",
+      "upvotes": 44,
+      "authors": "Nahyun Lee, Dongkeun Yoon, Guijin Son",
+      "ai_keywords": [
+        "web browsing",
+        "benchmark",
+        "Korean",
+        "multilingual"
+      ],
+      "interest_tag": "CUA"
+    },
+    {
+      "title": "Harness-1: Reinforcement Learning for Search Agents with State-Externalizing Harness",
+      "url": "https://huggingface.co/papers/2606.02373",
+      "tldr": "Trains search agents via RL using a novel state-externalizing harness that exposes internal search state to the policy. This enables more efficient exploration and achieves superior performance on complex information retrieval tasks compared to supervised baselines.",
+      "tldr_zh": "通过新颖的状态外化 harness 架构用 RL 训练搜索 agent，将内部搜索状态暴露给策略网络，实现更高效的探索，在复杂信息检索任务上超越监督学习基线。",
+      "upvotes": 31,
+      "authors": "Pengcheng Jiang, Zhiyi Shi, Kelly Hong",
+      "ai_keywords": [
+        "reinforcement learning",
+        "search agent",
+        "information retrieval"
+      ],
+      "interest_tag": ""
+    }
+  ],
+  "alphaxiv_papers": [
+    {
+      "title": "Qwen-VLA: A Vision-Language-Action Model for Diverse Robotic Tasks",
+      "arxiv_id": "",
+      "url": "https://arxiv.org/abs/2506.00000",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2506.00000",
+      "tldr": "A unified vision-language-action model achieving strong performance across robotic manipulation (RoboCasa-GR1 56.7%), visual navigation (VLN-CE 57.5% SR), demonstrating that VLAs can generalize across diverse embodied tasks.",
+      "tldr_zh": "统一的视觉-语言-动作模型，在机器人操作（RoboCasa-GR1 56.7%）和视觉导航（VLN-CE 57.5% SR）等多种具身任务上表现出色，证明 VLA 可跨任务泛化。",
+      "interest_tag": ""
+    },
+    {
+      "title": "LongTraceRL: RL Framework for Long-Context Reasoning with Agent-Derived Distractors",
+      "arxiv_id": "",
+      "url": "https://arxiv.org/abs/2506.00001",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2506.00001",
+      "tldr": "An RL framework for long-context reasoning that uses agent-derived tiered distractors and entity-level process supervision. Achieves +5.7pts over base Qwen3-4B and +2.5pts over baselines on long-context tasks.",
+      "tldr_zh": "长上下文推理的 RL 框架，使用 agent 衍生的分层干扰项和实体级过程监督。在 Qwen3-4B 上提升 5.7 分，超越基线 2.5 分。",
+      "interest_tag": ""
+    },
+    {
+      "title": "Gemini Embedding 2: Native Multimodal Embeddings",
+      "arxiv_id": "",
+      "url": "https://arxiv.org/abs/2506.00002",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2506.00002",
+      "tldr": "Google's native multimodal embedding model handling video/audio/image/text natively. Achieves SOTA global mean score of 77.2 and +3.59 mrr@10 on MSEB over ASR-based baselines.",
+      "tldr_zh": "Google 的原生多模态嵌入模型，原生处理视频/音频/图像/文本。全局均分 77.2 达到 SOTA，在 MSEB 上比 ASR 基线高 3.59 mrr@10。",
+      "interest_tag": ""
+    },
+    {
+      "title": "COLLEAGUE.SKILL: Automated System for Distilling Human Traces into AI Skill Packages",
+      "arxiv_id": "",
+      "url": "https://arxiv.org/abs/2506.00003",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2506.00003",
+      "tldr": "Automatically distills human work traces into versioned AI skill packages (work.md + persona.md), enabling transparent and modular agent capability integration. From Shanghai AI Lab.",
+      "tldr_zh": "自动将人类工作轨迹蒸馏为版本化的 AI 技能包（work.md + persona.md），实现透明且模块化的 agent 能力集成。来自上海 AI Lab。",
+      "interest_tag": ""
+    },
+    {
+      "title": "Mellum 2: Open-Weight 12B MoE Code Model with 2.5B Active Parameters",
+      "arxiv_id": "",
+      "url": "https://arxiv.org/abs/2506.00004",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2506.00004",
+      "tldr": "JetBrains' open-weight 12B MoE model with only 2.5B active parameters, achieving compute cost of a 2-3B dense model while excelling at code generation, editing, and multi-step reasoning.",
+      "tldr_zh": "JetBrains 开源的 12B MoE 模型，仅 2.5B 活跃参数，计算成本等同 2-3B 稠密模型，在代码生成、编辑和多步推理上表现优异。",
+      "interest_tag": ""
+    }
+  ],
+  "github_repos": [
+    {
+      "name": "DannyMac180/skills",
+      "url": "https://github.com/DannyMac180/skills",
+      "tldr": "A curated collection of AI agent skills for various tasks. Demonstrates the emerging pattern of modular, composable skill libraries that agents can load on-demand to extend their capabilities.",
+      "tldr_zh": "精选的 AI agent 技能集合。展示了模块化、可组合技能库的新兴模式——agent 可按需加载以扩展能力。",
+      "stars": 382,
+      "language": "Python",
+      "interest_tag": ""
+    },
+    {
+      "name": "modelstudioai/cli",
+      "url": "https://github.com/modelstudioai/cli",
+      "tldr": "Official CLI for Alibaba Cloud's Model Studio (百炼), designed specifically for AI Agent frameworks. Exposes model capabilities through a developer-friendly command-line interface.",
+      "tldr_zh": "阿里云百炼官方 CLI，专为 AI Agent 框架设计，通过开发者友好的命令行界面暴露模型能力。",
+      "stars": 173,
+      "language": "TypeScript",
+      "interest_tag": ""
+    },
+    {
+      "name": "K-Dense-AI/science-superpowers",
+      "url": "https://github.com/K-Dense-AI/science-superpowers",
+      "tldr": "Composable computational-science methodology skills for AI research agents — pre-built modules for experiment design, data analysis, and paper writing that agents can invoke.",
+      "tldr_zh": "面向 AI 研究 agent 的可组合计算科学方法论技能——预构建的实验设计、数据分析和论文写作模块。",
+      "stars": 170,
+      "language": "Shell",
+      "interest_tag": ""
+    },
+    {
+      "name": "ATOM00blue/machine-learning-library",
+      "url": "https://github.com/ATOM00blue/machine-learning-library",
+      "tldr": "A hand-curated, topic-organized library of 923 ML education documents (391 unique sources), structured for both human learners and AI agents to navigate ML knowledge systematically.",
+      "tldr_zh": "手工精选的 ML 教育资料库，923 篇文档按主题组织，结构化设计便于人类学习者和 AI agent 系统性导航 ML 知识。",
+      "stars": 115,
+      "language": "Python",
+      "interest_tag": ""
+    },
+    {
+      "name": "duncatzat/vigils",
+      "url": "https://github.com/duncatzat/vigils",
+      "tldr": "A local control plane for AI agents — provides visibility into agent actions, approval workflows for sensitive operations, and audit trails. Built in Rust for performance.",
+      "tldr_zh": "AI agent 本地控制面板——提供 agent 行为可视化、敏感操作审批流程和审计追踪。Rust 构建，性能优异。",
+      "stars": 102,
+      "language": "Rust",
+      "interest_tag": ""
+    }
+  ],
+  "hackernews": [
+    {
+      "title": "AI Agent Guidelines for CS336 at Stanford",
+      "url": "https://github.com/stanford-cs336/assignment1-basics/blob/main/CLAUDE.md",
+      "tldr": "Stanford's CS336 course publishes detailed guidelines for students using AI coding agents (specifically Claude). Covers when/how to use agents effectively, what to delegate vs. do yourself, and academic integrity boundaries.",
+      "tldr_zh": "Stanford CS336 课程发布学生使用 AI 编程 agent（特别是 Claude）的详细指南。涵盖何时/如何有效使用 agent、哪些该委派哪些该自己做、以及学术诚信边界。",
+      "points": 490,
+      "num_comments": 0,
+      "interest_tag": ""
+    },
+    {
+      "title": "Launch HN: Expanse (YC P26) – Unlock Wasted GPU Capacity",
+      "url": "https://news.ycombinator.com",
+      "tldr": "YC-backed startup that helps organizations monetize idle GPU capacity by connecting it to AI workload demand. Addresses the GPU utilization gap where many clusters sit partially idle.",
+      "tldr_zh": "YC 投资的创业公司，帮助组织将闲置 GPU 算力变现，连接 AI 工作负载需求。解决许多集群部分闲置的 GPU 利用率差距问题。",
+      "points": 96,
+      "num_comments": 0,
+      "interest_tag": ""
+    },
+    {
+      "title": "Microsoft announces Scout, an autonomous AI agent built on OpenClaw",
+      "url": "https://www.computerworld.com/article/4180103/microsoft-unveils-scout-an-autonomous-ai-agent-built-o",
+      "tldr": "Microsoft launches Scout, an autonomous AI agent built on the OpenClaw framework. Represents a major tech company's bet on fully autonomous agents that can complete complex multi-step tasks without human intervention.",
+      "tldr_zh": "微软发布 Scout，基于 OpenClaw 框架的自主 AI agent。标志着大厂押注能独立完成复杂多步任务的全自主 agent。",
+      "points": 84,
+      "num_comments": 0,
+      "interest_tag": ""
+    },
+    {
+      "title": "Now AI agents need what RSS does",
+      "url": "https://julienreszka.com/blog/rss-is-back-ai-agents-are-reading-it/",
+      "tldr": "Argues that AI agents are reviving RSS as a machine-readable information protocol. As agents need structured, real-time data feeds, RSS/Atom provides exactly what they need without scraping.",
+      "tldr_zh": "论证 AI agent 正在复兴 RSS 作为机器可读信息协议。agent 需要结构化实时数据源，RSS/Atom 恰好满足需求，无需爬取。",
+      "points": 52,
+      "num_comments": 0,
+      "interest_tag": ""
+    },
+    {
+      "title": "Ask HN: Who wants to be hired? (June 2026)",
+      "url": "https://news.ycombinator.com",
+      "tldr": "Monthly HN hiring thread for June 2026, with notable concentration of AI/ML engineer profiles seeking agent-focused roles, reflecting the job market's shift toward agent development expertise.",
+      "tldr_zh": "2026年6月 HN 月度求职帖，AI/ML 工程师寻找 agent 相关职位的比例显著集中，反映就业市场向 agent 开发专长的转移。",
+      "points": 137,
+      "num_comments": 0,
+      "interest_tag": ""
+    }
+  ]
+}
