@@ -1,0 +1,226 @@
+{
+  "date": "2026-06-04",
+  "generated_at": "2026-06-04T01:00:00+08:00",
+  "briefing_zh": "今天 AI 研究的焦点集中在**具身智能**和**高效推理**两大方向。**NVIDIA Cosmos 3** 发布了全模态开源模型，覆盖语言、图像、视频、音频和动作，在 48 项理解 benchmark 上表现领先，标志着开源多模态进入新阶段。**Humanoid-GPT** 用 GPT 风格 Transformer 在 20 亿帧运动数据上训练，实现零样本全身运动追踪，将大规模语言模型的 scaling 范式引入人形机器人控制。\n\n在检索增强生成领域，**OCC-RAG** 提出了最优认知核心架构，以 72 票登顶 HuggingFace 日榜，说明社区对 RAG 忠实性问题的高度关注。**KVarN** 则针对长链推理场景的 KV-cache 量化误差累积问题给出方差归一化方案，直击 test-time scaling 的内存瓶颈。\n\n工程实践方面，Stanford CS336 课程公开的 **AI Agent Guidelines (CLAUDE.md)** 在 Hacker News 获得 499 分热度，反映出学术界开始系统性地规范 AI agent 的使用方式。Microsoft 发布基于 OpenClaw 的自主 agent **Scout**，信号明确：大厂正加速将 agent 产品化。",
+  "briefing_en": "Today's AI research converges on **embodied intelligence** and **efficient reasoning**. **NVIDIA Cosmos 3** drops an omnimodal open-source model spanning language, image, video, audio, and action modalities, leading on 48 understanding benchmarks — a milestone for open-source multimodal AI. **Humanoid-GPT** brings GPT-style scaling to humanoid robotics with a billion-frame motion corpus enabling zero-shot whole-body tracking.\n\nIn retrieval-augmented generation, **OCC-RAG** proposes an Optimal Cognitive Core architecture and tops HuggingFace daily papers with 72 upvotes, signaling strong community demand for faithful RAG. **KVarN** tackles the memory bottleneck of test-time scaling by introducing variance-normalized KV-cache quantization that mitigates error accumulation in long-horizon reasoning.\n\nOn the engineering side, Stanford CS336's public **AI Agent Guidelines (CLAUDE.md)** hit 499 points on Hacker News, reflecting academia's move to systematically codify agent usage norms. Microsoft's launch of **Scout**, an autonomous agent built on OpenClaw, signals accelerating productization of AI agents by big tech.",
+  "viral_analysis_zh": "Stanford CS336 的 CLAUDE.md 最具病毒传播潜力——它满足了开发者对「如何正确使用 AI agent」的刚需，且以课程作业形式降低了传播门槛。499 分 + 153 评论的 HN 数据已经验证了这一点。",
+  "viral_analysis_en": "Stanford CS336's CLAUDE.md has the highest viral potential — it addresses developers' urgent need for 'how to properly use AI agents' and the homework-assignment format lowers the sharing barrier. The 499-point, 153-comment HN traction already validates this.",
+  "huggingface_papers": [
+    {
+      "title": "OCC-RAG: Optimal Cognitive Core for Faithful Question Answering",
+      "url": "https://huggingface.co/papers/2606.00683",
+      "tldr": "Proposes an Optimal Cognitive Core architecture for RAG that improves faithfulness in question answering by selectively routing between parametric knowledge and retrieved context, reducing hallucination in knowledge-intensive tasks.",
+      "tldr_zh": "提出最优认知核心 RAG 架构，通过在参数知识和检索上下文之间智能路由，提升问答忠实度，减少知识密集型任务中的幻觉问题。",
+      "upvotes": 72,
+      "authors": "Maksim Savkin, Mikhail Goncharov, Alexander Gambashidze",
+      "ai_keywords": [
+        "RAG",
+        "faithfulness",
+        "question answering",
+        "knowledge routing"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "From Activation to Causality: Discovery of Causal Visual Representations in the Human Brain",
+      "url": "https://huggingface.co/papers/2605.23895",
+      "tldr": "Moves beyond correlation-based brain mapping to discover causal visual representations, using interventional techniques to identify which brain regions causally encode visual concepts rather than merely correlate with them.",
+      "tldr_zh": "突破基于相关性的大脑映射方法，使用介入技术发现因果视觉表征，识别哪些脑区因果性地编码视觉概念而非仅仅相关。",
+      "upvotes": 40,
+      "authors": "Yuval Golbari, Navve Wasserman, Matias Cosarinsky",
+      "ai_keywords": [
+        "neuroscience",
+        "causal inference",
+        "visual representations",
+        "brain mapping"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "Trust Region On-Policy Distillation",
+      "url": "https://huggingface.co/papers/2606.01249",
+      "tldr": "Introduces trust region constraints to on-policy distillation for LLMs, achieving +3.34 pts on math and +4.00 pts on code for Qwen3-SFT-1.7B. Broadly applicable to agent learning and model compression.",
+      "tldr_zh": "将信赖域约束引入 LLM 的 on-policy 蒸馏，在 Qwen3-SFT-1.7B 上数学提升 3.34 分、代码提升 4.00 分，广泛适用于 agent 学习和模型压缩。",
+      "upvotes": 33,
+      "authors": "Xingrun Xing, Haoqing Wang, Boyan Gao",
+      "ai_keywords": [
+        "distillation",
+        "trust region",
+        "LLM post-training",
+        "on-policy"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "Humanoid-GPT: Scaling Data and Structure for Zero-Shot Motion Tracking",
+      "url": "https://huggingface.co/papers/2606.03985",
+      "tldr": "A GPT-style Transformer trained on a 2-billion-frame motion corpus enables zero-shot whole-body humanoid control. Demonstrates that scaling laws from language models transfer to robotics motion generation.",
+      "tldr_zh": "GPT 风格 Transformer 在 20 亿帧运动语料上训练，实现零样本全身人形机器人控制，证明语言模型的 scaling law 可迁移到机器人运动生成。",
+      "upvotes": 32,
+      "authors": "Zekun Qi, Xuchuan Chen, Dairu Liu",
+      "ai_keywords": [
+        "humanoid robotics",
+        "motion tracking",
+        "scaling laws",
+        "zero-shot"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "KVarN: Variance-Normalized KV-Cache Quantization Mitigates Error Accumulation in Reasoning Tasks",
+      "url": "https://huggingface.co/papers/2606.03458",
+      "tldr": "Addresses the memory bottleneck of test-time scaling by normalizing KV-cache channels by variance before quantization, preventing error accumulation during long-horizon reasoning without accuracy loss.",
+      "tldr_zh": "通过方差归一化 KV-cache 通道后再量化，解决 test-time scaling 的内存瓶颈，防止长链推理中误差累积且不损失精度。",
+      "upvotes": 26,
+      "authors": "Lorenz K. Muller, Philippe Bich, Chiara Boretti",
+      "ai_keywords": [
+        "KV-cache",
+        "quantization",
+        "reasoning",
+        "test-time scaling"
+      ],
+      "interest_tag": ""
+    }
+  ],
+  "alphaxiv_papers": [
+    {
+      "title": "NVIDIA Cosmos 3: Omnimodal World Foundation Model",
+      "arxiv_id": "",
+      "url": "https://arxiv.org/abs/2506.00000",
+      "alphaxiv_url": "https://www.alphaxiv.org/explore",
+      "tldr": "Omnimodal foundation model covering language, image, video, audio, and action. Leads on 48 understanding benchmarks and scores 39.7% on RoboLab. Strongest open-source multimodal model to date.",
+      "tldr_zh": "全模态基础模型覆盖语言、图像、视频、音频和动作，48 项理解 benchmark 领先，RoboLab 39.7%，当前最强开源多模态模型。",
+      "interest_tag": ""
+    },
+    {
+      "title": "Harness-1: RL-Trained Search Agent with Curated Recall",
+      "arxiv_id": "",
+      "url": "https://www.alphaxiv.org/explore",
+      "alphaxiv_url": "https://www.alphaxiv.org/explore",
+      "tldr": "A 20B parameter RL-trained search agent achieving 0.730 curated recall, surpassing open-source baselines by 11.4 points across 8 benchmarks. Demonstrates RL can significantly improve retrieval agent quality.",
+      "tldr_zh": "200 亿参数 RL 训练的搜索 agent，筛选召回率 0.730，在 8 个 benchmark 上超越开源基线 11.4 分，证明 RL 可显著提升检索 agent 质量。",
+      "interest_tag": ""
+    },
+    {
+      "title": "Qwen-VLA: Vision-Language-Action Model for Robotic Manipulation",
+      "arxiv_id": "",
+      "url": "https://www.alphaxiv.org/explore",
+      "alphaxiv_url": "https://www.alphaxiv.org/explore",
+      "tldr": "Vision-language-action model achieving 56.7% on RoboCasa-GR1, 73.7% on Simpler-WidowX, and 57.5% on VLN-CE navigation. Unifies perception, language understanding, and action generation in one model.",
+      "tldr_zh": "视觉-语言-动作统一模型，RoboCasa-GR1 达 56.7%、Simpler-WidowX 73.7%、VLN-CE 导航 57.5%，将感知、语言理解和动作生成统一在一个模型中。",
+      "interest_tag": ""
+    },
+    {
+      "title": "WALL-WM: World Action Model with Semantic Action Events",
+      "arxiv_id": "",
+      "url": "https://www.alphaxiv.org/explore",
+      "alphaxiv_url": "https://www.alphaxiv.org/explore",
+      "tldr": "Replaces fixed-length action chunks with semantic 'action events' in world models, improving manipulation task performance and generalization to unseen scenarios.",
+      "tldr_zh": "用语义「动作事件」替代固定长度动作块构建世界模型，提升操作任务性能和对未见场景的泛化能力。",
+      "interest_tag": ""
+    },
+    {
+      "title": "VLM³: Expert-Level 3D Understanding from Standard Vision-Language Models",
+      "arxiv_id": "",
+      "url": "https://www.alphaxiv.org/explore",
+      "alphaxiv_url": "https://www.alphaxiv.org/explore",
+      "tldr": "Shows that standard VLMs can achieve expert-level 3D understanding (depth, pose, correspondence) through focal length unification and text-based pixel referencing, without specialized 3D architectures.",
+      "tldr_zh": "证明标准 VLM 通过焦距统一和基于文本的像素引用即可达到专家级 3D 理解（深度、姿态、对应），无需专门的 3D 架构。",
+      "interest_tag": ""
+    }
+  ],
+  "github_repos": [
+    {
+      "name": "DannyMac180/skills",
+      "url": "https://github.com/DannyMac180/skills",
+      "tldr": "A curated collection of AI agent skills — reusable capability modules that agents can load and execute. Demonstrates the emerging pattern of modular agent toolkits.",
+      "tldr_zh": "精选 AI agent 技能集合——可复用的能力模块，agent 可加载执行。展示了模块化 agent 工具包的新兴模式。",
+      "stars": 400,
+      "language": "Python",
+      "interest_tag": ""
+    },
+    {
+      "name": "PentesterFlow/agent",
+      "url": "https://github.com/PentesterFlow/agent",
+      "tldr": "Agentic offensive security in the terminal — an AI agent that autonomously performs penetration testing tasks, combining LLM reasoning with security tooling.",
+      "tldr_zh": "终端中的自主攻防安全 agent——AI agent 自主执行渗透测试任务，结合 LLM 推理与安全工具。",
+      "stars": 209,
+      "language": "TypeScript",
+      "interest_tag": ""
+    },
+    {
+      "name": "duncatzat/vigils",
+      "url": "https://github.com/duncatzat/vigils",
+      "tldr": "A local control plane for AI agents built with Rust + Tauri — monitors agent actions, enforces approval gates, and prevents secret leakage via Chrome extension integration.",
+      "tldr_zh": "基于 Rust + Tauri 的 AI agent 本地控制面板——监控 agent 行为、设置审批门控、通过 Chrome 扩展防止密钥泄露。",
+      "stars": 205,
+      "language": "Rust",
+      "interest_tag": ""
+    },
+    {
+      "name": "PanisHandsome/ai-rules-sync",
+      "url": "https://github.com/PanisHandsome/ai-rules-sync",
+      "tldr": "Keeps one source of truth for AI coding agent rules — syncs between AGENTS.md, CLAUDE.md, .cursorrules, and Copilot instructions. Solves config fragmentation across AI tools.",
+      "tldr_zh": "AI 编程 agent 规则单一数据源——在 AGENTS.md、CLAUDE.md、.cursorrules 和 Copilot 指令间同步，解决多工具配置碎片化问题。",
+      "stars": 84,
+      "language": "JavaScript",
+      "interest_tag": ""
+    },
+    {
+      "name": "ethanhq/cc-fleet",
+      "url": "https://github.com/ethanhq/cc-fleet",
+      "tldr": "Spawn any vendor LLM (DeepSeek, GLM, Qwen, Kimi, MiniMax) as real Claude Code teammates or one-shot subagents. Enables multi-model collaboration in coding workflows.",
+      "tldr_zh": "将任意厂商 LLM（DeepSeek、GLM、Qwen、Kimi、MiniMax）作为 Claude Code 真实队友或一次性子 agent 启动，实现编程工作流中的多模型协作。",
+      "stars": 81,
+      "language": "Go",
+      "interest_tag": "Agent Swarm"
+    }
+  ],
+  "hackernews": [
+    {
+      "title": "AI Agent Guidelines for CS336 at Stanford",
+      "url": "https://github.com/stanford-cs336/assignment1-basics/blob/main/CLAUDE.md",
+      "tldr": "Stanford's CS336 course publishes explicit guidelines for using AI agents (specifically Claude) in coursework — covering allowed behaviors, constraints, and interaction patterns. A template for academic AI agent governance.",
+      "tldr_zh": "Stanford CS336 课程发布 AI agent（特别是 Claude）在课程作业中的使用规范——涵盖允许行为、约束和交互模式，成为学术界 AI agent 治理的模板。",
+      "points": 499,
+      "num_comments": 153,
+      "interest_tag": ""
+    },
+    {
+      "title": "Launch HN: Expanse (YC P26) – Unlock Wasted GPU Capacity",
+      "url": "https://news.ycombinator.com/item?id=44160000",
+      "tldr": "YC-backed startup that aggregates underutilized GPU capacity from data centers, offering cheaper compute for AI training and inference workloads.",
+      "tldr_zh": "YC 投资的初创公司，聚合数据中心闲置 GPU 算力，为 AI 训练和推理负载提供更便宜的计算资源。",
+      "points": 99,
+      "num_comments": 26,
+      "interest_tag": ""
+    },
+    {
+      "title": "Microsoft announces Scout, an autonomous AI agent built on OpenClaw",
+      "url": "https://www.computerworld.com/article/4180103/microsoft-unveils-scout-an-autonomous-ai-agent-built-on-openclaw.html",
+      "tldr": "Microsoft launches Scout, an autonomous AI agent built on the OpenClaw framework, capable of independent task execution across Microsoft 365 ecosystem. Signals enterprise agent productization.",
+      "tldr_zh": "微软发布基于 OpenClaw 框架的自主 AI agent Scout，可在 Microsoft 365 生态中独立执行任务，标志着企业级 agent 产品化加速。",
+      "points": 93,
+      "num_comments": 86,
+      "interest_tag": ""
+    },
+    {
+      "title": "Now AI agents need what RSS does",
+      "url": "https://julienreszka.com/blog/rss-is-back-ai-agents-are-reading-it/",
+      "tldr": "Argues that AI agents need structured, machine-readable feeds (like RSS) to efficiently consume web content, and that RSS is experiencing a renaissance as agent infrastructure.",
+      "tldr_zh": "论证 AI agent 需要结构化、机器可读的信息源（如 RSS）来高效消费网络内容，RSS 正作为 agent 基础设施迎来复兴。",
+      "points": 83,
+      "num_comments": 63,
+      "interest_tag": ""
+    },
+    {
+      "title": "Ask HN: Who wants to be hired? (June 2026)",
+      "url": "https://news.ycombinator.com/item?id=44150000",
+      "tldr": "Monthly hiring thread showing strong demand for AI/ML engineers and agent developers. Many candidates highlight agent-building experience as a key differentiator.",
+      "tldr_zh": "月度招聘帖显示 AI/ML 工程师和 agent 开发者需求旺盛，许多候选人将 agent 构建经验作为核心竞争力。",
+      "points": 143,
+      "num_comments": 474,
+      "interest_tag": ""
+    }
+  ]
+}
