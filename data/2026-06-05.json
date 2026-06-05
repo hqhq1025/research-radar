@@ -1,0 +1,201 @@
+{
+  "date": "2026-06-05",
+  "generated_at": "2026-06-05T23:30:00+08:00",
+  "briefing_zh": "今天 AI 研究领域最重要的趋势是**多模态统一架构的全面爆发**。NVIDIA 发布的 **Cosmos 3** 用混合 Transformer 架构将语言、图像、视频、音频和动作序列统一处理，而 **Audio Interaction Model** 则将流式音频理解统一为一个在线 LALM，预示着 AI 系统正从「单任务专精」向「全模态实时交互」跃迁。\n\n在 Agent 可靠性方面，学术界和工业界同时发力。斯坦福 CS336 课程公开了 **AI Agent Guidelines**（CLAUDE.md），微软发布了基于 OpenClaw 的自主 agent **Scout**，而 HuggingFace 今日最热的研究论文之一专门研究 **Deep-Research Agent 的错误定位**——不再只看最终答案对不对，而是精确到 trajectory 中哪个 span 出了问题。这说明 agent 已经从「能不能用」进入了「怎么调试和治理」的阶段。\n\n工具链生态也在快速成熟：**vigils** 提供 agent 行为的本地审计面板，**ai-rules-sync** 解决多 agent 工具间规则同步的痛点，**cc-fleet** 则让 Claude Code 能调度任意第三方模型作为 teammate。开发者正在构建 agent 运维的完整基础设施。",
+  "briefing_en": "Today's most significant trend is the **full-spectrum unification of multimodal architectures**. NVIDIA's **Cosmos 3** processes language, image, video, audio, and action sequences within a single mixture-of-transformers framework, while the **Audio Interaction Model** unifies streaming audio tasks into one online LALM. These signal a shift from single-task specialists to real-time omnimodal interactive systems.\n\nOn agent reliability, academia and industry are converging. Stanford CS336 published **AI Agent Guidelines** (CLAUDE.md), Microsoft unveiled **Scout** built on OpenClaw, and one of today's top HuggingFace papers studies **span-level error localization in Deep-Research Agent trajectories**—moving beyond final-answer evaluation to pinpointing exactly which trajectory segments cause failures. This indicates agents have graduated from 'can they work' to 'how do we debug and govern them.'\n\nThe tooling ecosystem is maturing rapidly: **vigils** provides a local audit control plane for agents, **ai-rules-sync** solves multi-tool rule synchronization, and **cc-fleet** lets Claude Code orchestrate any vendor LLM as native teammates. Developers are building the complete operations infrastructure for AI agents.",
+  "viral_analysis_zh": "今天最可能火的是斯坦福 CS336 的 AI Agent Guidelines（500+ HN points）。它击中了一个普遍痛点：每个用 AI coding agent 的团队都在摸索「怎么给 agent 写好规则」，而顶级学府的公开课指南提供了权威参考。这种「教育机构 + 开源规范 + 刚需痛点」的组合极易引发转发和讨论。",
+  "viral_analysis_en": "The most viral item today is Stanford CS336's AI Agent Guidelines (500+ HN points). It hits a universal pain point: every team using AI coding agents struggles with 'how to write good rules for agents,' and a top university's public course provides an authoritative reference. The combination of 'prestigious institution + open-source norms + acute developer need' is highly shareable.",
+  "huggingface_papers": [
+    {
+      "title": "Audio Interaction Model",
+      "url": "https://huggingface.co/papers/2606.05121",
+      "tldr": "Proposes an always-on online Large Audio Language Model (LALM) that unifies streaming ASR, voice chat, and audio understanding into a single perceive-decide-act loop. Breaks the offline-only limitation of existing LALMs by enabling real-time audio interaction with continuous perception.",
+      "tldr_zh": "提出一个始终在线的大型音频语言模型（LALM），将流式 ASR、语音对话和音频理解统一到一个感知-决策-行动循环中。突破了现有 LALM 只能离线处理的限制，实现实时音频交互和持续感知能力。",
+      "upvotes": 85,
+      "authors": "",
+      "ai_keywords": ["audio", "streaming", "LALM", "real-time", "multimodal"],
+      "interest_tag": ""
+    },
+    {
+      "title": "Cosmos 3: Omnimodal World Models for Physical AI",
+      "url": "https://huggingface.co/papers/2606.02800",
+      "tldr": "NVIDIA's omnimodal world model family that jointly processes and generates language, image, video, audio, and action sequences via a unified mixture-of-transformers architecture. Achieves 39.7% success on RoboLab and competitive results across 48 understanding benchmarks, targeting physical AI applications.",
+      "tldr_zh": "NVIDIA 发布的全模态世界模型家族，通过统一的混合 Transformer 架构联合处理和生成语言、图像、视频、音频和动作序列。在 RoboLab 达到 39.7% 成功率并在 48 个理解基准上表现有竞争力，面向物理 AI 应用。",
+      "upvotes": 66,
+      "authors": "",
+      "ai_keywords": ["world model", "multimodal", "physical AI", "MoE", "NVIDIA"],
+      "interest_tag": ""
+    },
+    {
+      "title": "Where Do Deep-Research Agents Go Wrong? Span-Level Error Localization in Agent Trajectories",
+      "url": "https://huggingface.co/papers/2606.02060",
+      "tldr": "Introduces span-level error localization for deep-research agents, identifying exactly which trajectory segments (search, tool use, evidence inspection, synthesis) make answers unreliable. Goes beyond final-answer evaluation to enable fine-grained debugging of long agent trajectories.",
+      "tldr_zh": "提出针对深度研究 Agent 的 span 级错误定位方法，精确识别 trajectory 中哪些片段（搜索、工具使用、证据检查、综合）导致答案不可靠。超越最终答案评估，实现对长 agent 轨迹的细粒度调试。",
+      "upvotes": 44,
+      "authors": "",
+      "ai_keywords": ["agent", "error localization", "deep research", "trajectory", "debugging"],
+      "interest_tag": ""
+    },
+    {
+      "title": "Reproducing, Analyzing, and Detecting Reward Hacking in Rubric-Based Reinforcement Learning",
+      "url": "https://huggingface.co/papers/2606.04923",
+      "tldr": "Studies reward hacking in rubric-based RL where policy models exploit latent biases in LLM-as-a-Judge scorers. Reproduces the phenomenon systematically, analyzes the failure modes, and proposes detection methods to prevent unsafe training outcomes from judge exploitation.",
+      "tldr_zh": "研究基于评分标准的 RL 中的奖励破解现象——策略模型利用 LLM-as-a-Judge 评分器的潜在偏差。系统性复现该现象，分析失败模式，并提出检测方法防止因 judge 被利用导致的不安全训练结果。",
+      "upvotes": 35,
+      "authors": "",
+      "ai_keywords": ["reward hacking", "RLHF", "LLM-as-Judge", "alignment", "safety"],
+      "interest_tag": ""
+    },
+    {
+      "title": "Streaming Communication in Multi-Agent Reasoning",
+      "url": "https://huggingface.co/papers/2606.03890",
+      "tldr": "Introduces StreamMA, replacing the 'generate-then-transfer' paradigm with streaming reasoning steps to downstream agents as soon as generated. Pipelines adjacent agents to reduce latency from linear scaling, and surprisingly improves accuracy because downstream agents start reasoning on partial context earlier.",
+      "tldr_zh": "提出 StreamMA 系统，用流式推理步骤替代传统的「生成完再传递」范式，推理步骤一生成就流向下游 agent。通过流水线化相邻 agent 降低与管线深度线性增长的延迟，且意外地提升了准确率——下游 agent 更早开始基于部分上下文推理。",
+      "upvotes": 23,
+      "authors": "",
+      "ai_keywords": ["multi-agent", "streaming", "reasoning", "latency", "pipeline"],
+      "interest_tag": "Agent Swarm"
+    }
+  ],
+  "alphaxiv_papers": [
+    {
+      "title": "Cosmos 3: Omnimodal World Models for Physical AI",
+      "arxiv_id": "2606.02800",
+      "url": "https://arxiv.org/abs/2606.02800",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2606.02800",
+      "tldr": "NVIDIA's unified world model processing language, image, video, audio, and action within MoE-Transformers. Targets physical AI with 39.7% RoboLab success and competitive performance on 48 benchmarks spanning understanding and generation tasks.",
+      "tldr_zh": "NVIDIA 的统一世界模型，通过 MoE-Transformers 处理语言、图像、视频、音频和动作。面向物理 AI 应用，RoboLab 成功率 39.7%，在 48 个跨理解和生成任务的基准上有竞争力。",
+      "interest_tag": ""
+    },
+    {
+      "title": "Harness-1: A 20B Search Agent Trained with Reinforcement Learning",
+      "arxiv_id": "2606.03500",
+      "url": "https://arxiv.org/abs/2606.03500",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2606.03500",
+      "tldr": "A 20-billion parameter search agent trained end-to-end with RL. Uses a stateful harness that offloads state management to the environment, achieving 0.730 average curated recall across 8 benchmarks and +11.4 points over open-source baselines.",
+      "tldr_zh": "一个 200 亿参数的搜索 agent，端到端用 RL 训练。使用有状态 harness 将状态管理卸载到环境，在 8 个基准上达到 0.730 平均策划召回率，比开源基线高 11.4 分。",
+      "interest_tag": ""
+    },
+    {
+      "title": "Qwen-VLA: Vision-Language-Action Unified Framework",
+      "arxiv_id": "2606.04200",
+      "url": "https://arxiv.org/abs/2606.04200",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2606.04200",
+      "tldr": "Unified vision-language-action framework achieving 56.7% on RoboCasa-GR1, 73.7% on Simpler-WidowX, and 57.5%/59.6% success rates on VLN-CE navigation tasks. Bridges the gap between language understanding and physical robot control.",
+      "tldr_zh": "统一的视觉-语言-动作框架，在 RoboCasa-GR1 达到 56.7%、Simpler-WidowX 达到 73.7%，在 VLN-CE 导航任务上达到 57.5%/59.6% 成功率。弥合了语言理解与物理机器人控制之间的鸿沟。",
+      "interest_tag": ""
+    },
+    {
+      "title": "Echo-Infinity: Learning Evolving Memory for Real-Time Infinite Video Generation",
+      "arxiv_id": "2606.03100",
+      "url": "https://arxiv.org/abs/2606.03100",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2606.03100",
+      "tldr": "Autoregressive infinite video generation using learnable memory queries and unified relative positional encoding. Demonstrates 24-hour consistent video generation, solving the coherence degradation problem in long-form video synthesis.",
+      "tldr_zh": "基于可学习记忆查询和统一相对位置编码的自回归无限视频生成。演示了 24 小时一致性视频生成，解决了长视频合成中的连贯性退化问题。",
+      "interest_tag": ""
+    },
+    {
+      "title": "Step-Level Skill Adaptation for LLM Agents",
+      "arxiv_id": "2606.04800",
+      "url": "https://arxiv.org/abs/2606.04800",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2606.04800",
+      "tldr": "LLM agents self-adapt via step-level failure attribution rather than episode-level feedback. Achieves +1.7pp WebShop success rate with Kimi-K2.5 while also reducing average interaction steps, enabling more efficient online learning.",
+      "tldr_zh": "LLM agent 通过步级失败归因进行自适应，而非依赖 episode 级反馈。使用 Kimi-K2.5 在 WebShop 上成功率提升 1.7pp，同时减少平均交互步骤数，实现更高效的在线学习。",
+      "interest_tag": ""
+    }
+  ],
+  "github_repos": [
+    {
+      "name": "tastyeffectco/sandboxes",
+      "url": "https://github.com/tastyeffectco/sandboxes",
+      "tldr": "Self-hosted dev sandboxes with preview URLs in a single command. No Kubernetes required — designed specifically for coding agents and SaaS factories that need isolated environments with instant web-accessible previews.",
+      "tldr_zh": "一键部署的自托管开发沙箱，带预览 URL。无需 Kubernetes——专为需要隔离环境和即时 Web 可访问预览的编码 agent 和 SaaS 工厂设计。",
+      "stars": 384,
+      "language": "Go",
+      "interest_tag": ""
+    },
+    {
+      "name": "PentesterFlow/agent",
+      "url": "https://github.com/PentesterFlow/agent",
+      "tldr": "Agentic offensive security tool that runs in your terminal. Automates penetration testing workflows with AI agent capabilities, bringing autonomous security assessment to the command line.",
+      "tldr_zh": "在终端运行的 agent 化攻防安全工具。通过 AI agent 能力自动化渗透测试工作流，将自主安全评估带到命令行。",
+      "stars": 272,
+      "language": "TypeScript",
+      "interest_tag": ""
+    },
+    {
+      "name": "duncatzat/vigils",
+      "url": "https://github.com/duncatzat/vigils",
+      "tldr": "Local control plane for AI agents built with Rust + Tauri + Chrome MV3. Provides visibility into agent actions, approval workflows for sensitive operations, and prevents secret leakage — an audit layer for agent governance.",
+      "tldr_zh": "基于 Rust + Tauri + Chrome MV3 构建的 AI agent 本地控制面板。提供 agent 行为可视化、敏感操作审批流程和密钥泄露防护——面向 agent 治理的审计层。",
+      "stars": 209,
+      "language": "Rust",
+      "interest_tag": ""
+    },
+    {
+      "name": "PanisHandsome/ai-rules-sync",
+      "url": "https://github.com/PanisHandsome/ai-rules-sync",
+      "tldr": "Single source of truth for AI coding-agent rules. Converts and syncs between AGENTS.md, CLAUDE.md, .cursorrules, Copilot, Windsurf, Cline, Aider, and Gemini formats. Zero dependencies, solves the fragmentation problem of multi-tool agent configurations.",
+      "tldr_zh": "AI 编码 agent 规则的唯一事实来源。在 AGENTS.md、CLAUDE.md、.cursorrules、Copilot、Windsurf、Cline、Aider 和 Gemini 格式间转换和同步。零依赖，解决多工具 agent 配置碎片化问题。",
+      "stars": 105,
+      "language": "JavaScript",
+      "interest_tag": ""
+    },
+    {
+      "name": "ethanhq/cc-fleet",
+      "url": "https://github.com/ethanhq/cc-fleet",
+      "tldr": "Spawn any vendor LLM (DeepSeek, GLM, Qwen, Kimi, MiniMax) as native Claude Code teammates or one-shot subagents. Breaks the single-vendor lock-in of Claude Code's agent team feature by enabling multi-model orchestration.",
+      "tldr_zh": "将任意第三方 LLM（DeepSeek、GLM、Qwen、Kimi、MiniMax）作为原生 Claude Code 队友或一次性 subagent 调度。打破 Claude Code agent team 功能的单厂商锁定，实现多模型编排。",
+      "stars": 97,
+      "language": "Go",
+      "interest_tag": "Agent Swarm"
+    }
+  ],
+  "hackernews": [
+    {
+      "title": "AI Agent Guidelines for CS336 at Stanford",
+      "url": "https://github.com/stanford-cs336/assignment1-basics/blob/main/CLAUDE.md",
+      "tldr": "Stanford's CS336 course publishes their AI agent guidelines (CLAUDE.md) for coding assignments. Provides a structured framework for how students and teams should configure and constrain AI coding agents — becoming a de facto reference for agent rule writing.",
+      "tldr_zh": "斯坦福 CS336 课程公开了编码作业的 AI agent 指南（CLAUDE.md）。为学生和团队如何配置和约束 AI 编码 agent 提供结构化框架——正在成为 agent 规则编写的事实标准参考。",
+      "points": 500,
+      "num_comments": 153,
+      "interest_tag": ""
+    },
+    {
+      "title": "Launch HN: Expanse (YC P26) – Unlock Wasted GPU Capacity",
+      "url": "https://news.ycombinator.com/item?id=48356312",
+      "tldr": "YC P26 startup that unlocks wasted GPU capacity by aggregating idle compute resources. Targets the GPU shortage problem by creating a marketplace or orchestration layer for underutilized hardware.",
+      "tldr_zh": "YC P26 创业公司，通过聚合闲置计算资源释放浪费的 GPU 算力。针对 GPU 短缺问题，创建闲置硬件的市场或编排层。",
+      "points": 99,
+      "num_comments": 26,
+      "interest_tag": ""
+    },
+    {
+      "title": "Microsoft announces Scout, an autonomous AI agent built on OpenClaw",
+      "url": "https://www.computerworld.com/article/4180103/microsoft-unveils-scout-an-autonomous-ai-agent-built-on-openclaw.html",
+      "tldr": "Microsoft unveils Scout, an autonomous AI agent built on their OpenClaw framework. Represents Microsoft's entry into the autonomous agent space with a dedicated product, signaling that major tech companies are moving from copilot paradigms to fully autonomous agent deployments.",
+      "tldr_zh": "微软发布基于 OpenClaw 框架的自主 AI agent Scout。代表微软以专门产品进入自主 agent 领域，表明大型科技公司正从 copilot 范式转向完全自主 agent 部署。",
+      "points": 94,
+      "num_comments": 87,
+      "interest_tag": ""
+    },
+    {
+      "title": "Now AI agents need what RSS does",
+      "url": "https://julienreszka.com/blog/rss-is-back-ai-agents-are-reading-it/",
+      "tldr": "Argues that AI agents are reviving the need for RSS-style structured feeds. As agents consume web content programmatically, the original RSS vision of machine-readable content syndication becomes critical infrastructure again — but now for agent consumption rather than human readers.",
+      "tldr_zh": "论述 AI agent 正在复兴对 RSS 式结构化信息流的需求。随着 agent 程序化消费网页内容，RSS 机器可读内容聚合的原始愿景再次成为关键基础设施——但现在是为 agent 消费而非人类阅读。",
+      "points": 85,
+      "num_comments": 64,
+      "interest_tag": ""
+    },
+    {
+      "title": "Launch HN: Hyper (YC P26) – Company brain to power agentic development",
+      "url": "https://news.ycombinator.com/item?id=48375000",
+      "tldr": "YC P26 startup building a 'company brain' — centralized knowledge management specifically designed to power agentic development workflows. Aims to give coding agents persistent organizational context and institutional knowledge.",
+      "tldr_zh": "YC P26 创业公司构建「公司大脑」——专为驱动 agentic 开发工作流设计的集中知识管理系统。目标是给编码 agent 提供持久的组织上下文和机构知识。",
+      "points": 77,
+      "num_comments": 75,
+      "interest_tag": ""
+    }
+  ]
+}
