@@ -1,0 +1,201 @@
+{
+  "date": "2026-06-08",
+  "generated_at": "2026-06-08T09:00:48+08:00",
+  "briefing_zh": "今天最强的信号是一场 agent 评测的「清算日」。UC Berkeley（Dawn Song 团队）联合 250+ 行业专家的 **Agents' Last Exam (ALE)** 是旗舰：1000+ 个经济价值高、可验证的专业任务，对齐美国联邦职业分类，而最强配置整体通过率只有 26.2%、最难档位不到 10%。HuggingFace 上高赞的 **AdaPlanBench** 从另一个角度补刀——检验 agent 在世界约束与用户约束逐步揭示时能否自适应重规划；**AutoLab** 则把战场搬到超长周期的自动科研与工程，17 个前沿模型里只有 Claude Opus 4.6 拉开身位。结论一致：一旦把任务做「真」，今天的 agent 还远没到能托付专业工作的程度。\n\n与「评测变难」并行的是「能力怎么补」。上海 AI Lab 牵头的 **SubtleMemory** 把 agent 记忆评测从「记没记得」推进到「能否分辨细微不同、甚至相互冲突的记忆」，直指长周期 agent 的关系型记忆短板。**MLEvolve** 则给出一条乐观路径：自演化的多 agent 框架用蒙特卡洛图搜索自动发现 ML 算法，在 MLE-Bench 上以一半的时间预算拿到 65.3% 夺牌率。HuggingFace 当日最高赞的 **Code2LoRA** 从工程侧提供另一种「补上下文」的思路——用超网络即时生成仓库专属 LoRA adapter，零推理 token 开销地把仓库知识注入代码大模型。\n\n世界模型与训练理论是另一条主线。英伟达的 **Cosmos 3** 是今天最重的开源动作：一个用单一 Mixture-of-Transformers 主干联合处理语言、图像、视频、音频和动作的全模态世界模型，把 VLM、视频生成、世界模拟、world-action 模型一并收编，并开放代码与权重，剑指具身 / Physical AI 的通用底座。训练侧，Yale/NUS 的 **Why Muon Outperforms Adam** 从曲率角度给这个当红优化器一个干净的机理解释：Muon 约 2 倍的效率优势来自更低的归一化方向锐度（NDS），而非更新尺度。\n\n开源与社区情绪同样务实。GitHub 这周的热度集中在「agent 基础设施」与「agent skills 生态」：**sandboxd** 用一条命令给编码 agent 提供带预览 URL 的隔离沙箱，**guard-skills** 则把「给 AI 生成代码把关」做成可组合的质量门禁——共同信号是瓶颈正从「生成」转向「安全执行与验证」。HN 上，开发者在 Ask HN 里盘点真实的 AI 工作流，微软发布基于 OpenClaw 的自主 agent **Scout**，还有人主张「agent 让 RSS 重新有了意义」。把这些拼起来，今天的故事很清晰：评测在变残酷，能力在补短板，底座在开源化，社区正从兴奋转向务实。",
+  "briefing_en": "Today's strongest signal is a reckoning in agent evaluation. The flagship is **Agents' Last Exam (ALE)** from UC Berkeley (Dawn Song's group) with 250+ industry experts: 1,000+ economically valuable, verifiable professional tasks mapped to the U.S. federal occupational taxonomy — yet the best configuration passes just 26.2% overall and under 10% on the hardest tier. On HuggingFace, the heavily-upvoted **AdaPlanBench** attacks from another angle, testing whether agents can adaptively re-plan as world and user constraints are revealed progressively; **AutoLab** moves the battlefield to ultra-long-horizon auto research and engineering, where only Claude Opus 4.6 pulls clearly ahead of 17 frontier models. The consensus: once tasks are made realistic, today's agents are nowhere near trustworthy for professional work.\n\nRunning parallel to harder evals is the question of how to close the gap. Shanghai AI Lab's **SubtleMemory** pushes agent memory evaluation past 'did you remember it' toward 'can you tell subtly different — even conflicting — memories apart,' targeting the relational-memory weakness of long-horizon agents. **MLEvolve** offers an optimistic path: a self-evolving multi-agent framework that uses Monte Carlo Graph Search to autonomously discover ML algorithms, hitting a 65.3% medal rate on MLE-Bench at half the usual time budget. The day's top HuggingFace paper, **Code2LoRA**, gives an engineering answer to context injection — a hypernetwork that generates repository-specific LoRA adapters, injecting repo knowledge into code LLMs with zero inference-time token overhead.\n\nWorld models and training theory form a second thread. NVIDIA's **Cosmos 3** is the day's heaviest open-source move: an omnimodal world model that jointly processes language, image, video, audio, and action in a single Mixture-of-Transformers backbone, subsuming VLMs, video generators, world simulators, and world-action models, with code and checkpoints released — a serious open backbone for embodied / Physical AI. On the training side, Yale/NUS's **Why Muon Outperforms Adam** gives this now-popular optimizer a clean mechanistic explanation from curvature: Muon's ~2x efficiency edge comes from lower Normalized Directional Sharpness (NDS), not update scale.\n\nOpen source and community mood are equally pragmatic. GitHub's heat clusters around agent infrastructure and the agent-skills ecosystem: **sandboxd** gives coding agents isolated, preview-URL sandboxes in one command, while **guard-skills** turns 'gate the AI-generated code' into composable quality checks — a shared signal that the bottleneck is shifting from generation to safe execution and verification. On HN, developers compare real AI workflows in an Ask HN, Microsoft ships **Scout** (an autonomous agent on OpenClaw), and one post argues 'AI agents make RSS matter again.' Put together, the story is clear: evals are getting brutal, capabilities are patching their weak spots, backbones are going open, and the community is shifting from excitement to pragmatism.",
+  "viral_analysis_zh": "今天最可能火的是 **Agents' Last Exam (ALE)**：「最后的考试」这个挑衅性框架、Dawn Song + UC Berkeley + 250 位行业专家的背书，再加上「最强 agent 在真实专业任务上整体只过 26.2%、最难档不到 10%」这种既能喂给唱多派也能喂给唱衰派的数字，天然适合在 X 上引爆两边对线。次热的是那条「Opus 4.8 一次性完成形式化验证多边形相交」的 Show HN——具体、可复现、带「前沿模型跨过门槛」的爽点，是开发者圈最爱转发的硬核炫技。微软 **Scout** 靠大厂光环保证基础曝光，但评论区的「发布疲劳」说明纯公告越来越难破圈。",
+  "viral_analysis_en": "The most likely to go viral today is **Agents' Last Exam (ALE)**: the provocative 'Last Exam' framing, the Dawn Song + UC Berkeley + 250-expert pedigree, and a number ('the best agent passes only 26.2% overall and <10% on the hardest tier') that feeds both hype and skeptic camps make it tailor-made to ignite both sides on X. Second is the Show HN where 'Opus 4.8 one-shots a formally verified polygon intersection' — concrete, reproducible, and carrying that 'frontier model crossed a threshold' payoff that developers love to reshare. Microsoft's **Scout** gets baseline reach from brand gravity, but the 'launch fatigue' in the comments shows pure announcements struggle to break out.",
+  "huggingface_papers": [
+    {
+      "title": "Code2LoRA: Hypernetwork-Generated Adapters for Code Language Models under Software Evolution",
+      "url": "https://arxiv.org/abs/2606.06492",
+      "tldr": "Code2LoRA is a hypernetwork that generates repository-specific LoRA adapters on the fly, injecting repo-level context (imports, APIs, project conventions) into code LLMs with zero inference-time token overhead. Unlike RAG (long inputs) or per-repository fine-tuning (costly and brittle to code changes), it amortizes repo knowledge into a generated adapter, with a static snapshot mode plus support for evolving codebases. A practical answer to the repo-context problem that doesn't blow up the context window.",
+      "tldr_zh": "Code2LoRA 用一个超网络（hypernetwork）即时生成仓库专属的 LoRA adapter，把仓库级上下文（import、API、项目约定）注入代码大模型，且推理时零额外 token 开销。相比 RAG（长输入）或逐仓库微调（成本高、代码一变就失效），它把仓库知识摊销进生成的 adapter 里，提供静态快照模式，也能应对持续演进的代码库。是对「仓库上下文」难题一个不撑爆上下文窗口的实用解法。",
+      "upvotes": 72,
+      "authors": "Liliana Hotsko, Yinxi Li, Yuntian Deng, et al.",
+      "ai_keywords": [],
+      "interest_tag": ""
+    },
+    {
+      "title": "ArcANE: Do Role-Playing Language Agents Stay in Character at the Right Time?",
+      "url": "https://arxiv.org/abs/2606.05553",
+      "tldr": "ArcANE benchmarks whether role-playing language agents track a character's evolving psychology rather than holding a fixed persona. Spanning 17 novels and 80 principal characters, it segments each narrative into 'Character Arc' phases along a psychological axis and poses the same scenario at different points to test temporal consistency. It targets a gap existing benchmarks miss: factual recall vs. arc-aware behavioral alignment, including in scenarios the source text never explores.",
+      "tldr_zh": "ArcANE 评测角色扮演语言 agent 是否能跟随角色心理的演变，而不是死守一个固定人设。覆盖 17 部小说、80 个主要角色，沿心理轴把叙事切成不同的「角色弧」阶段，在同一情景下于不同时间点反复提问，检验时序一致性。它瞄准现有 benchmark 忽略的缺口：事实记忆 vs. 弧线感知的行为对齐，甚至包括原文从未涉及的情景。",
+      "upvotes": 45,
+      "authors": "Woojung Song, Nalim Kim, Sangjun Song, et al.",
+      "ai_keywords": [],
+      "interest_tag": ""
+    },
+    {
+      "title": "TIDE: Proactive Multi-Problem Discovery via Template-Guided Iteration",
+      "url": "https://arxiv.org/abs/2606.04743",
+      "tldr": "TIDE reframes agents from reactive responders into proactive problem-finders: instead of acting only on explicit requests, it discovers multiple hidden problems latent in the user's broader context, grounds each in supporting evidence, and pairs it with a concrete action. A template-guided iterative framework surfaces coexisting issues whose total count is unknown upfront. A step toward agents that catch what users didn't think to ask about.",
+      "tldr_zh": "TIDE 把 agent 从被动应答者重塑为主动的问题发现者：不只响应明确请求，而是从用户更广的上下文里挖出多个隐藏问题，为每个问题找到支撑证据并配上具体行动。它用模板引导的迭代框架来揭示那些数量未知、共存的问题。朝着「能发现用户没想到要问的事」的 agent 迈进了一步。",
+      "upvotes": 38,
+      "authors": "Soyeong Jeong, Jinheon Baek, Minki Kang, et al.",
+      "ai_keywords": [],
+      "interest_tag": ""
+    },
+    {
+      "title": "AdaPlanBench: Evaluating Adaptive Planning in Large Language Model Agents under World and User Constraints",
+      "url": "https://arxiv.org/abs/2606.05622",
+      "tldr": "AdaPlanBench tests whether LLM agents can adaptively (re)plan when world and user constraints aren't fully specified upfront but are revealed progressively through interaction. Built on 307 household tasks with a scalable generation pipeline, it probes the realistic case where requirements surface mid-task — a blind spot in static planning benchmarks — and isolates re-planning under dual, progressively-disclosed constraints.",
+      "tldr_zh": "AdaPlanBench 检验 LLM agent 能否在世界约束和用户约束都没一次性给全、而是随交互逐步揭示时，自适应地（重新）规划。基于 307 个家庭任务和可扩展的生成流程，它聚焦于「需求在任务中途才浮现」这个现实场景——这正是静态规划 benchmark 的盲区——并专门隔离了双重、渐进式约束下的重规划能力。",
+      "upvotes": 37,
+      "authors": "Jiayu Liu, Cheng Qian, Zhenhailong Wang, et al.",
+      "ai_keywords": [],
+      "interest_tag": "Benchmark"
+    },
+    {
+      "title": "VideoKR: Towards Knowledge- and Reasoning-Intensive Video Understanding",
+      "url": "https://arxiv.org/abs/2606.05259",
+      "tldr": "VideoKR is the first large-scale corpus built specifically to strengthen knowledge- and reasoning-intensive video understanding: 315K reasoning examples over 145K newly collected, CC-licensed expert-domain videos. A human-in-the-loop, skill-oriented pipeline targets progressively deeper reasoning while controlling difficulty, diversity, and CoT-rationale reliability. It ships VideoKR-Eval, an expert-annotated benchmark whose questions require genuine video reasoning rather than shortcut answers.",
+      "tldr_zh": "VideoKR 是首个专门为强化「知识密集 + 推理密集」视频理解而构建的大规模语料：在 145K 个新采集的 CC 授权专家领域视频上，提供 315K 条视频推理样本。一条人在回路、技能导向的流程逐步逼近更深的推理，同时控制难度、多样性和 CoT 推理链的可靠性。配套发布 VideoKR-Eval 专家标注 benchmark，问题需要真正的视频推理而非走捷径。",
+      "upvotes": 34,
+      "authors": "Lin Fu, Zheyuan Yang, Yang Wang, et al.",
+      "ai_keywords": [],
+      "interest_tag": ""
+    }
+  ],
+  "alphaxiv_papers": [
+    {
+      "title": "Agents' Last Exam",
+      "arxiv_id": "2606.05405",
+      "url": "https://arxiv.org/abs/2606.05405",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2606.05405",
+      "tldr": "A living benchmark of 1,000+ economically valuable, long-horizon professional tasks with verifiable outputs, built by UC Berkeley (Dawn Song) with 250+ industry experts and mapped to the U.S. federal occupational taxonomy. The top configuration passes just 26.2% overall and under 10% on the hardest tier (~2.6% full-pass average), exposing a wide gap between current agents and real professional work. It aims to cover 90%+ of non-physical industries — the broadest agent-capability exam to date.",
+      "tldr_zh": "一个「活」的 benchmark，包含 1000+ 个经济价值高、长周期、产出可验证的专业任务，由 UC Berkeley（Dawn Song 团队）联合 250+ 行业专家构建，并对齐美国联邦职业分类。最强配置整体通过率仅 26.2%，最难档位不到 10%（完整通过率均值约 2.6%），暴露出当前 agent 与真实专业工作之间的巨大差距。目标覆盖 90%+ 的非体力行业，是迄今覆盖面最广的 agent 能力大考。",
+      "interest_tag": "Benchmark"
+    },
+    {
+      "title": "Cosmos 3: Omnimodal World Models for Physical AI",
+      "arxiv_id": "2606.02800",
+      "url": "https://arxiv.org/abs/2606.02800",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2606.02800",
+      "tldr": "NVIDIA's Cosmos 3 is a family of omnimodal world models that jointly process and generate language, image, video, audio, and action in one Mixture-of-Transformers backbone, effectively subsuming VLMs, video generators, world simulators, and world-action models. It claims state-of-the-art across a broad suite of understanding and generation tasks and leads open-source on robot policy generation (39.7% RoboLab success). Code, checkpoints, and synthetic data are released under an open license — a serious open backbone for embodied / Physical AI agents.",
+      "tldr_zh": "英伟达的 Cosmos 3 是一族全模态世界模型，用单一的 Mixture-of-Transformers 主干联合处理与生成语言、图像、视频、音频和动作，等于把 VLM、视频生成器、世界模拟器和 world-action 模型收编进一个框架。它宣称在大量理解与生成任务上达到 SOTA，并在机器人策略生成上领跑开源（RoboLab 成功率 39.7%）。代码、权重和合成数据以开放许可发布——是面向具身 / Physical AI agent 的一个分量十足的开源底座。",
+      "interest_tag": ""
+    },
+    {
+      "title": "Why Muon Outperforms Adam: A Curvature Perspective",
+      "arxiv_id": "2606.04662",
+      "url": "https://arxiv.org/abs/2606.04662",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2606.04662",
+      "tldr": "This Yale/NUS paper explains Muon's ~2x training-efficiency edge over Adam through loss-landscape curvature. Via a second-order Taylor analysis, Muon achieves a larger one-step loss decrease at matched validation loss: both optimizers have comparable first-order gains and update norms, but Muon incurs a smaller second-order curvature penalty, driven by lower Normalized Directional Sharpness (NDS) — not update scale. The advantage comes from balancing update energy across curvature groups, especially within-layer in mid/late training. A clean mechanistic 'why' behind a now-popular optimizer.",
+      "tldr_zh": "这篇 Yale / 新加坡国立的论文从损失曲面曲率的角度解释 Muon 相对 Adam 约 2 倍的训练效率优势。通过二阶泰勒分析，Muon 在验证损失相同的情况下取得更大的单步损失下降：两者一阶增益和更新范数相当，但 Muon 的二阶曲率惩罚更小，根源在更低的归一化方向锐度（NDS），而非更新尺度。其优势来自在不同曲率组间平衡更新能量，尤其在训练中后期的层内曲率上。为这个当红优化器给出了干净的机理性「为什么」。",
+      "interest_tag": ""
+    },
+    {
+      "title": "SubtleMemory: A Benchmark for Fine-Grained Relational Memory Discrimination in Long-Horizon AI Agents",
+      "arxiv_id": "2606.05761",
+      "url": "https://arxiv.org/abs/2606.05761",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2606.05761",
+      "tldr": "SubtleMemory targets a hard, under-tested agent skill: relational memory reasoning over long horizons — aggregating compatible evidence, distinguishing near-identical contexts, and reconciling conflicting memory records. Built via a five-stage pipeline from semantic-fact seeds (user preferences/habits and world facts) and their variants, it stresses fine-grained discrimination rather than coarse recall. From a Shanghai AI Lab-led team, it pushes agent memory evaluation past 'did you remember it' toward 'can you tell subtly different memories apart.'",
+      "tldr_zh": "SubtleMemory 瞄准一个困难且少有测试的 agent 能力：长周期下的关系型记忆推理——聚合相容证据、区分高度相似的上下文、调和相互冲突的记忆记录。它通过五阶段流程，从语义事实种子（用户偏好 / 习惯与世界知识）及其变体构建，强调细粒度辨别而非粗粒度回忆。出自上海 AI Lab 牵头的团队，把 agent 记忆评测从「你记没记得」推进到「你能否分辨细微不同的记忆」。",
+      "interest_tag": "Memory"
+    },
+    {
+      "title": "MLEvolve: A Self-Evolving Framework for Automated Machine Learning Algorithm Discovery",
+      "arxiv_id": "2606.06473",
+      "url": "https://arxiv.org/abs/2606.06473",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2606.06473",
+      "tldr": "MLEvolve is a self-evolving multi-agent framework that autonomously searches, designs, and optimizes end-to-end ML pipelines (preprocessing -> feature engineering -> training -> prediction) using a Progressive Monte Carlo Graph Search over candidate pipelines. On MLE-Bench (75 Kaggle tasks) it hits a 65.3% average medal rate and 34.7% gold rate under a 12-hour budget — half the runtime of many baselines — and generalizes to AlphaEvolve math-optimization tasks. Strong evidence that agentic, search-driven AutoML is closing in on expert Kaggle performance.",
+      "tldr_zh": "MLEvolve 是一个自演化的多 agent 框架，用渐进式蒙特卡洛图搜索（MCGS）在候选流程上自主搜索、设计并优化端到端 ML 管线（预处理→特征工程→训练→预测）。在 MLE-Bench（75 个 Kaggle 任务）上，它在 12 小时预算内取得 65.3% 的平均夺牌率和 34.7% 的金牌率——只用了许多基线一半的运行时间——并能泛化到 AlphaEvolve 数学优化任务。这是「agentic、搜索驱动的 AutoML 正在逼近专家级 Kaggle 表现」的有力证据。",
+      "interest_tag": ""
+    }
+  ],
+  "github_repos": [
+    {
+      "name": "tastyeffectco/sandboxd",
+      "url": "https://github.com/tastyeffectco/sandboxd",
+      "tldr": "Self-hosted dev sandboxes with instant preview URLs in one command — no Kubernetes. Pitched explicitly for coding agents and 'SaaS factories' that need isolated, disposable environments to run generated code safely, using Docker-based isolation with Pinokio integration. Rides the agent-infra wave where the bottleneck is safe execution, not generation.",
+      "tldr_zh": "自托管的开发沙箱，一条命令即可生成带即时预览 URL 的隔离环境，无需 Kubernetes。明确面向需要安全运行生成代码的「编码 agent」和「SaaS 工厂」，基于 Docker 隔离并集成 Pinokio。踩在 agent 基础设施的风口上——瓶颈已经不是生成，而是安全执行。",
+      "stars": 495,
+      "language": "Go",
+      "interest_tag": ""
+    },
+    {
+      "name": "amElnagdy/guard-skills",
+      "url": "https://github.com/amElnagdy/guard-skills",
+      "tldr": "A collection of 'guard skills' for coding agents — quality gates that catch the characteristic failure modes of AI-generated code, tests, and docs before they ship. Packaged as composable agent skills (Claude Code, Codex, etc.), with WordPress/WooCommerce coverage included. Reflects a maturing ecosystem norm: don't just generate code, gate it.",
+      "tldr_zh": "一套面向编码 agent 的「守卫技能」（guard skills）——在 AI 生成的代码、测试和文档上线前，拦住它们典型失败模式的质量门禁。以可组合的 agent skill 形式打包（Claude Code、Codex 等），还覆盖 WordPress/WooCommerce。反映了生态走向成熟的一条规范：别只管生成代码，还要给它把关。",
+      "stars": 320,
+      "language": "Markdown",
+      "interest_tag": ""
+    },
+    {
+      "name": "JimLiu/baoyu-design",
+      "url": "https://github.com/JimLiu/baoyu-design",
+      "tldr": "Runs 'Claude Design' locally as an agent skill so Cursor, Claude Code, and others can produce polished UI mockups, prototypes, decks, and wireframes as self-contained HTML — without needing claude.ai/design. Best with Opus-class models. Part of the booming 'agent skills' trend that turns a hosted capability into a portable local workflow.",
+      "tldr_zh": "把「Claude Design」作为 agent skill 在本地运行，让 Cursor、Claude Code 等能直接产出精致的 UI 原型、样机、演示稿和线框图（自包含 HTML），无需依赖 claude.ai/design。配 Opus 级模型效果最佳。属于火热的「agent skills」潮流——把托管能力变成可移植的本地工作流。",
+      "stars": 264,
+      "language": "JavaScript",
+      "interest_tag": ""
+    },
+    {
+      "name": "FerroxLabs/wayland",
+      "url": "https://github.com/FerroxLabs/wayland",
+      "tldr": "An ambitiously-scoped open-source AI agent framework branded around a perceive -> reason -> act -> evolve loop. The marketing leans on slogans, but a healthy 40-fork count suggests real hands-on interest. Worth watching as another entrant in the crowded general-purpose agent-framework field — verify substance against the buzzwords before adopting.",
+      "tldr_zh": "一个野心不小的开源 AI agent 框架，主打「感知→推理→行动→进化」的循环。宣传上口号较多，但相对健康的 fork 数（40）说明确有人上手在用。可作为通用 agent 框架这条拥挤赛道上的又一个选手观察——采用前先用实际内容核对一下这些 buzzword。",
+      "stars": 204,
+      "language": "TypeScript",
+      "interest_tag": ""
+    },
+    {
+      "name": "Forlives/21-day-self-interview",
+      "url": "https://github.com/Forlives/21-day-self-interview",
+      "tldr": "A Hermes Agent skill that acts as an AI existential-psychology counselor: every night for 21 days it asks you 3 meaningful questions, remembers your answers, and reflects your own words back to you. Bilingual zh/en, cron-driven journaling. Its standout 52-fork / 149-star ratio signals genuine personal adoption — a nice example of agents used for reflection, not just productivity.",
+      "tldr_zh": "一个 Hermes Agent skill，扮演 AI 存在主义心理咨询师：连续 21 天，每晚问你 3 个有分量的问题，记住你的回答，并把你自己的话反射回来给你。中英双语、由 cron 驱动的日记机制。其亮眼的 52 fork / 149 star 比例说明确有真实的个人使用——是「agent 用于自我反思而非只是生产力」的一个好例子。",
+      "stars": 149,
+      "language": "Python",
+      "interest_tag": ""
+    }
+  ],
+  "hackernews": [
+    {
+      "title": "Ask HN: What is your (AI) dev tech stack / workflow?",
+      "url": "https://news.ycombinator.com/item?id=48413629",
+      "tldr": "A high-engagement Ask HN where developers compare their day-to-day AI-assisted stacks and workflows — which models, agents, editors, and glue they actually rely on in 2026. The 130-comment thread is a useful pulse-check on how practitioners are really wiring coding agents into their work, beyond vendor marketing.",
+      "tldr_zh": "一个高热度的 Ask HN，开发者们在此比较各自日常的 AI 辅助技术栈和工作流——2026 年他们真正依赖的是哪些模型、agent、编辑器和粘合工具。130 条评论是一份有用的「实践者脉搏检测」，能看出大家在营销话术之外究竟如何把编码 agent 接入工作。",
+      "points": 158,
+      "num_comments": 130,
+      "interest_tag": ""
+    },
+    {
+      "title": "Microsoft announces Scout, an autonomous AI agent built on OpenClaw",
+      "url": "https://www.computerworld.com/article/4180103/microsoft-unveils-scout-an-autonomous-ai-agent-built-on-openclaw.html",
+      "tldr": "Microsoft unveiled Scout, an autonomous AI agent built on the OpenClaw harness, signaling continued big-vendor investment in agents that act independently across software. The 87-comment HN thread splits between genuine interest and fatigue with corporate agent launches — a recurring 2026 dynamic. Notably, OpenClaw is the same GUI-agent harness featured in benchmark work like Agents' Last Exam.",
+      "tldr_zh": "微软发布了 Scout——一个基于 OpenClaw harness 构建的自主 AI agent，表明大厂仍在持续押注能跨软件独立行动的 agent。87 条 HN 评论在「真有兴趣」和「对大厂 agent 发布疲劳」之间分裂——这是 2026 年反复出现的氛围。值得注意的是，OpenClaw 正是 Agents' Last Exam 等 benchmark 工作中所用的同一个 GUI-agent harness。",
+      "points": 94,
+      "num_comments": 87,
+      "interest_tag": ""
+    },
+    {
+      "title": "Show HN: Formally verified polygon intersection – Opus 4.8 oneshots, prev failed",
+      "url": "https://github.com/schildep/verified-polygon-intersection",
+      "tldr": "A Show HN where the author reports Claude Opus 4.8 one-shotting a formally verified polygon-intersection implementation that previous models failed on. It lands as a concrete 'frontier models crossed a capability threshold' anecdote for hard, verification-grade code — the kind of specific, reproducible flex that draws developer attention amid benchmark skepticism.",
+      "tldr_zh": "一个 Show HN，作者称 Claude Opus 4.8 一次性（oneshot）完成了此前模型都失败的、形式化验证的多边形相交实现。它成了一个具体的「前沿模型跨过某个能力门槛」的轶事，针对的是验证级的高难度代码——正是这种具体、可复现的「秀肌肉」，在 benchmark 怀疑论盛行时最能抓住开发者注意力。",
+      "points": 89,
+      "num_comments": 21,
+      "interest_tag": ""
+    },
+    {
+      "title": "Now AI agents need what RSS does",
+      "url": "https://julienreszka.com/blog/rss-is-back-ai-agents-are-reading-it/",
+      "tldr": "An argument that AI agents revive the case for RSS: structured, pollable, machine-readable feeds are exactly what autonomous agents need to monitor the web without scraping fragile HTML. The thread debates whether agents will resurrect RSS or just reinvent it under a new name — a recurring 'old protocols meet new agents' theme.",
+      "tldr_zh": "一篇文章主张 AI agent 让 RSS 重新变得有意义：结构化、可轮询、机器可读的 feed，正是自主 agent 监控网络、又不必去爬脆弱 HTML 所需要的。评论区在争论 agent 会让 RSS 复活，还是只会换个名字把它重新发明一遍——这是反复出现的「老协议遇上新 agent」主题。",
+      "points": 85,
+      "num_comments": 65,
+      "interest_tag": ""
+    },
+    {
+      "title": "Launch HN: Hyper (YC P26) – Company brain to power agentic development",
+      "url": "https://news.ycombinator.com/item?id=48387095",
+      "tldr": "Launch HN for Hyper (YC P26), a 'company brain' that centralizes organizational knowledge to power agentic development — the premise being that coding agents are only as good as the company context they can draw on. The 76-comment thread probes the category's perennial questions: data moats, retrieval quality, and whether 'company brain' is a product or a feature.",
+      "tldr_zh": "Hyper（YC P26）的 Launch HN，一个集中组织知识、为 agentic 开发提供动力的「公司大脑」——其逻辑是：编码 agent 的上限，取决于它能调用的公司上下文。76 条评论拷问着这一品类的老问题：数据护城河、检索质量，以及「公司大脑」到底是个产品还是个功能。",
+      "points": 78,
+      "num_comments": 76,
+      "interest_tag": ""
+    }
+  ]
+}
