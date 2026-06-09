@@ -1,0 +1,206 @@
+{
+  "date": "2026-06-09",
+  "generated_at": "2026-06-09T09:02:00+08:00",
+  "briefing_zh": "今天 AI 研究的主旋律是一场针对 agent 的\"现实检验\"。来自 UC Berkeley 的 **Agents' Last Exam (ALE)** 用 1000+ 个有经济价值、映射到美国联邦职业分类的长时程专业任务，把最强配置打到了 26.2% 的总通过率，最难一档仅约 2.6%。与之呼应，HuggingFace 上的 **ToolMaze**（When Tools Fail）证明：一旦给工具注入真实的失败扰动，agent 表现就急剧崩塌，暴露出脆弱的重规划与恢复能力；alphaxiv 上的 **AutoLab** 则进一步追问前沿模型能否独立完成需要数天的研究与工程任务。三者共同传递一个信号——在受控 demo 里光鲜的 agent，遇到真实长时程工作仍然力不从心。\n\n第二条主线是\"自进化与记忆\"，试图回答前一条主线提出的问题。**OpenSkill** 让 agent 在没有人工技能、成功轨迹或验证信号的开放世界里从零自建技能与验证；**MLEvolve** 更进一步，用算法去进化算法、自主发现 ML 方法。而在记忆维度上，**SubtleMemory** 指出真正的难点不是孤立回忆，而是辨别相互强化、分化甚至冲突的记忆之间的关系——这是长期记忆 agent 走向部署绕不开的一关。\n\n基础模型与物理 AI 同样热闹。**NVIDIA Cosmos 3** 以统一的 Mixture-of-Transformers 架构联合处理语言、图像、视频、音频和动作，在 48 个理解基准上达到或接近 SOTA，并领跑开源的机器人策略生成；微软的 **MAI-Thinking-1**（35B 激活/1T 总参 MoE，纯人类数据训练）则在不依赖合成数据的路线上叫板前沿模型。一篇题为 **Robots Need More than VLA and World Models** 的立场论文为这股热潮泼了冷水，指出真正的瓶颈是如何把海量非结构化行为数据转化为有依据的机器人监督信号。\n\n训练与表征层面也有亮点：**Why Muon Outperforms Adam** 从曲率角度解释了 Muon 为何持续胜过 Adam，为优化器选择提供了理论依据；而当日 HF 最高票的 **UnEmbedding Matrix is a Feature Lens** 揭示 LLM 嵌入会偏向高频无信息 token，并用一个轻量线性变换 EmbedFilter 把零样本 MTEB 提升最高 14.1%。开源侧，agent 技能打包持续升温——从 **baoyu-design** 到捕捉失败模式的 **guard-skills**，开发者正把评审纪律和设计品味固化成可复用、可自动化的技能。",
+  "briefing_en": "The dominant theme in today's AI research is a \"reality check\" on agents. UC Berkeley's **Agents' Last Exam (ALE)** — 1,000+ economically valuable, long-horizon professional tasks mapped to the U.S. federal occupational taxonomy — caps the best configuration at a 26.2% overall pass rate, with the hardest tier near 2.6%. Echoing it, **ToolMaze** (When Tools Fail) on HuggingFace shows that once you inject realistic tool failures, agent performance collapses, exposing brittle replanning and recovery; alphaxiv's **AutoLab** pushes further, asking whether frontier models can independently complete research and engineering tasks that take humans days. Together they send one signal: agents that shine in controlled demos still buckle on real long-horizon work.\n\nThe second thread — \"self-evolution and memory\" — tries to answer the problem the first one poses. **OpenSkill** lets agents bootstrap both skills and their own verification signals from scratch in open worlds with no curated skills, successful trajectories, or verifiers; **MLEvolve** goes further, evolving algorithms with algorithms to autonomously discover ML methods. On the memory axis, **SubtleMemory** argues the real difficulty isn't isolated recall but discriminating the relations among memories that reinforce, diverge, or conflict — an unavoidable hurdle as long-term-memory agents head toward deployment.\n\nFoundation models and Physical AI are equally busy. **NVIDIA Cosmos 3** jointly processes language, image, video, audio, and action under one Mixture-of-Transformers architecture, matching or setting state-of-the-art across 48 understanding benchmarks and leading open models in robot-policy generation; Microsoft's **MAI-Thinking-1** (35B active / 1T total MoE, trained purely on human data) challenges frontier models without leaning on synthetic data. A position paper, **Robots Need More than VLA and World Models**, pours cold water on the hype, arguing the real bottleneck is converting abundant unstructured behavioral data into grounded robot supervision.\n\nTraining and representation also delivered. **Why Muon Outperforms Adam** offers a curvature-based explanation for Muon's persistent edge, giving optimizer choice a principled basis; and the day's top HF paper, **UnEmbedding Matrix is a Feature Lens**, shows LLM embeddings drift toward high-frequency uninformative tokens and fixes it with a lightweight linear transform, EmbedFilter, lifting zero-shot MTEB by up to 14.1%. On the open-source side, agent-skill packaging keeps heating up — from **baoyu-design** to failure-catching **guard-skills**, developers are hardening review discipline and design taste into reusable, automatable skills.",
+  "viral_analysis_zh": "今天最可能火的是 HN 上的 **\"Formally verified polygon intersection – Opus 4.8 oneshots, prev failed\"**：它把一个\"旧模型失败、新模型一次成功\"的清晰前后对比，叠加形式化验证的可信度，正好踩中\"新模型到底有没有变强\"这一全网最热的争论点，是那种在工程师圈层极易转发的硬核小故事。紧随其后的是 **Agents' Last Exam (ALE)**——\"最难一档仅 2.6% 通过率\"这种触目惊心的数字，配上致敬 Humanity's Last Exam 的命名和 250+ 行业专家背书，注定会成为各路 KOL 反复引用、用来唱衰或辩护\"agent 取代知识工作\"的标杆数据。",
+  "viral_analysis_en": "The likeliest breakout today is HN's **\"Formally verified polygon intersection – Opus 4.8 oneshots, prev failed\"**: it pairs a crisp before/after (old models failed, the new one nailed it in one shot) with the credibility of formal verification, landing squarely on the hottest debate online — whether the new models are actually smarter — making it exactly the kind of hardcore mini-story engineers love to share. Close behind is **Agents' Last Exam (ALE)**: a shocking headline number (about 2.6% pass on the hardest tier), a name that nods to Humanity's Last Exam, and 250+ industry-expert backing all but guarantee it becomes the benchmark stat that KOLs cite endlessly to either bury or defend the \"agents replacing knowledge work\" narrative.",
+  "huggingface_papers": [
+    {
+      "title": "Your UnEmbedding Matrix is Secretly a Feature Lens for Text Embeddings",
+      "arxiv_id": "2606.07502",
+      "url": "https://arxiv.org/abs/2606.07502",
+      "tldr": "LLMs make poor off-the-shelf text embedders because their embeddings drift toward frequent, uninformative tokens when projected onto the vocabulary space. The authors trace this to the unembedding matrix acting as a \"feature lens\" and propose EmbedFilter, a lightweight linear transformation that corrects the bias. It lifts zero-shot MTEB performance by up to 14.1% and enables 8x dimensionality reduction. A cheap, drop-in fix that makes any LLM a stronger embedding model without retraining.",
+      "tldr_zh": "LLM 直接当文本嵌入模型效果差，因为嵌入向量投影到词表空间时会偏向高频但无信息的 token。作者发现根源是 unembedding 矩阵充当了\"特征透镜\"，并提出 EmbedFilter——一个轻量线性变换来纠偏。零样本 MTEB 性能最高提升 14.1%，还能把维度压缩到 1/8。无需重训练即可让任意 LLM 变成更强嵌入模型的即插即用方案。",
+      "upvotes": 69,
+      "authors": "Songhao Wu, Zhongxin Chen, Yuxuan Liu",
+      "ai_keywords": [],
+      "interest_tag": ""
+    },
+    {
+      "title": "SoCRATES: Towards Reliable Automated Evaluation of Proactive LLM Mediation across Domains and Socio-cognitive Variations",
+      "arxiv_id": "2606.05563",
+      "url": "https://arxiv.org/abs/2606.05563",
+      "tldr": "Evaluating LLM \"mediators\" that defuse conflicts is hard because mediation is a real-time trajectory shaped by shifting emotions and context, not a single turn. SoCRATES builds realistic multi-domain dispute scenarios from real conflicts via an agentic pipeline across eight domains, scoring proactive mediation reliably. It isolates on-topic signal from the off-topic noise that plagues prior testbeds. A step toward trustworthy evaluation of socially-skilled, proactive LLM agents.",
+      "tldr_zh": "评估化解冲突的 LLM\"调解者\"很难，因为调解是由情绪和语境实时演变的轨迹，而非单轮对话。SoCRATES 通过 agentic 流水线从真实冲突构建跨八个领域的多域纠纷场景，可靠地评估主动调解能力，并把在题信号从困扰以往测试集的离题噪声中分离出来。这是朝着可信评估具备社交技巧、主动型 LLM agent 迈出的一步。",
+      "upvotes": 43,
+      "authors": "Taewon Yun, Hyeonseong Park, Jeonghwan Choi",
+      "ai_keywords": [],
+      "interest_tag": ""
+    },
+    {
+      "title": "MMAE: A Massive Multitask Audio Editing Benchmark",
+      "arxiv_id": "2606.07229",
+      "url": "https://arxiv.org/abs/2606.07229",
+      "tldr": "Instruction-based editing has swept image and video, but audio editing evaluation remains fragmented and shallow. MMAE is the first massive multitask benchmark for general-purpose, instruction-guided audio editing, spanning diverse operations and modalities with rubric-based scoring. Leading models score below 5% exact-match, exposing how far instruction-following lags audio consistency. It gives the audio-editing field the kind of unified yardstick that drove progress in image generation.",
+      "tldr_zh": "指令式编辑已席卷图像和视频，但音频编辑评估仍碎片化且浅薄。MMAE 是首个面向通用、指令引导音频编辑的大规模多任务基准，覆盖多样操作与模态并采用 rubric 评分。领先模型的精确匹配率不足 5%，暴露出指令遵循远落后于音频一致性。它为音频编辑领域提供了曾推动图像生成进步的那种统一标尺。",
+      "upvotes": 39,
+      "authors": "Ziyang Ma, Ruiqi Yan, Ruiyang Xu",
+      "ai_keywords": [],
+      "interest_tag": ""
+    },
+    {
+      "title": "When Tools Fail: Benchmarking Dynamic Replanning and Anomaly Recovery in LLM Agents",
+      "arxiv_id": "2606.05806",
+      "url": "https://arxiv.org/abs/2606.05806",
+      "tldr": "Most tool-use benchmarks test agents on idealized \"happy paths,\" ignoring how real tools fail. ToolMaze injects a 2x2 taxonomy of tool perturbations (explicit/implicit, transient/permanent) over DAG-structured tasks to separate genuine replanning from blind trial-and-error. Evaluations show perturbations sharply degrade agent performance, revealing brittle recovery skills. A sharper lens on the dynamic replanning and anomaly recovery that real-world agents actually need.",
+      "tldr_zh": "多数工具使用基准只在理想化的\"顺利路径\"上测试 agent，忽视真实工具会出错。ToolMaze 在 DAG 结构任务上注入 2×2 工具扰动分类（显式/隐式、瞬时/永久），把真正的重规划与盲目试错区分开。评估显示扰动会大幅拉低 agent 表现，暴露其脆弱的恢复能力。它为真实世界 agent 真正需要的动态重规划与异常恢复提供了更锐利的检验。",
+      "upvotes": 18,
+      "authors": "Dongsheng Zhu, Xuchen Ma, Yucheng Shen",
+      "ai_keywords": [],
+      "interest_tag": "Benchmark"
+    },
+    {
+      "title": "SubtleMemory: A Benchmark for Fine-Grained Relational Memory Discrimination in Long-Horizon AI Agents",
+      "arxiv_id": "2606.05761",
+      "url": "https://arxiv.org/abs/2606.05761",
+      "tldr": "Persistent assistants accumulate masses of related memories that reinforce, diverge, or directly conflict over time, so correct help depends on memory relations, not isolated recall. SubtleMemory is a benchmark probing fine-grained relational memory discrimination in long-horizon agents, a dimension existing memory benchmarks rarely test. It measures whether agents preserve and use these relations during downstream tasks. Essential infrastructure as long-term-memory agents move from demos to deployment.",
+      "tldr_zh": "持久化助手会随时间积累大量相互关联的记忆，它们彼此强化、分化或直接冲突，因此正确协助取决于记忆间的关系而非孤立回忆。SubtleMemory 是评估长时程 agent 细粒度关系记忆辨别能力的基准，这一维度是现有记忆基准很少触及的。它衡量 agent 能否在下游任务中保留并利用这些关系。在长期记忆 agent 从 demo 走向部署之际，这是不可或缺的基础设施。",
+      "upvotes": 17,
+      "authors": "Wenxuan Wang, Haoyu Sun, Fukuan Hou",
+      "ai_keywords": [],
+      "interest_tag": "Memory"
+    }
+  ],
+  "alphaxiv_papers": [
+    {
+      "title": "Agents' Last Exam",
+      "arxiv_id": "2606.05405",
+      "url": "https://arxiv.org/abs/2606.05405",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2606.05405",
+      "tldr": "A living benchmark of 1,000+ economically valuable, long-horizon professional tasks built with 250+ industry experts and mapped to the U.S. federal occupational taxonomy. The best configuration passes just 26.2% overall, and the hardest tier sits near 2.6% full-pass — a brutal reality check on \"agents replacing knowledge work.\" The real-software, expert-graded design makes it far harder to game than synthetic benchmarks. Likely to become the headline number the field argues over.",
+      "tldr_zh": "一个由 250+ 行业专家构建、映射到美国联邦职业分类的活体基准，包含 1000+ 个有经济价值的长时程专业任务。最优配置总通过率仅 26.2%，最难一档的完整通过率约 2.6%——对\"agent 取代知识工作\"的残酷现实检验。真实软件、专家评分的设计使其远比合成基准更难刷分，很可能成为全行业争论的标杆数字。",
+      "interest_tag": "Benchmark"
+    },
+    {
+      "title": "Cosmos 3: Omnimodal World Models for Physical AI",
+      "arxiv_id": "2606.02800",
+      "url": "https://arxiv.org/abs/2606.02800",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2606.02800",
+      "tldr": "NVIDIA's frontier \"Physical AI\" family of omnimodal world models that jointly process language, image, video, audio, and action under one Mixture-of-Transformers architecture. It's competitive or state-of-the-art across 48 understanding benchmarks and leads open models in image, video, and robot-policy generation, hitting 39.7% on RoboLab. A vendor-backed, open release that consolidates the world-model plus action-generation stack. Expect heavy adoption in robotics labs.",
+      "tldr_zh": "NVIDIA 面向\"物理 AI\"的前沿全模态世界模型家族，用统一的 Mixture-of-Transformers 架构联合处理语言、图像、视频、音频和动作。在 48 个理解基准上达到或接近 SOTA，在图像、视频和机器人策略生成上领先开源模型，RoboLab 得分 39.7%。这是一次厂商背书的开源发布，整合了世界模型+动作生成栈，预计将被机器人实验室大量采用。",
+      "interest_tag": ""
+    },
+    {
+      "title": "Why Muon Outperforms Adam: A Curvature Perspective",
+      "arxiv_id": "2606.04662",
+      "url": "https://arxiv.org/abs/2606.04662",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2606.04662",
+      "tldr": "Muon has been beating Adam in practice, but why has stayed murky. This paper offers a curvature-based explanation: Muon's updates better align with the loss landscape's geometry, making its advantage principled rather than incidental. The analysis gives practitioners a theoretical basis for picking optimizers instead of folklore. A timely contribution as Muon adoption spreads across large-scale training.",
+      "tldr_zh": "Muon 在实践中持续胜过 Adam，但原因一直模糊。本文从曲率角度给出解释：Muon 的更新更好地契合损失曲面的几何结构，使其优势是有原理依据而非偶然。该分析为从业者选择优化器提供了理论基础，而非凭经验口口相传。在 Muon 于大规模训练中加速普及之际，这是一项及时的贡献。",
+      "interest_tag": ""
+    },
+    {
+      "title": "AutoLab: Can Frontier Models Solve Long-Horizon Auto Research and Engineering Tasks?",
+      "arxiv_id": "2606.05080",
+      "url": "https://arxiv.org/abs/2606.05080",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2606.05080",
+      "tldr": "AutoLab asks whether frontier models can solve long-horizon automated research and engineering tasks — the kind that take human teams days. Framed as an agentic-frameworks benchmark, it stresses sustained planning, tool orchestration, and recovery over extended horizons. Together with ALE and ToolMaze, it's part of today's wave showing agents still buckle on real long-horizon work. A useful proving ground for the next generation of research agents.",
+      "tldr_zh": "AutoLab 考察前沿模型能否解决长时程的自动化研究与工程任务——那种人类团队需要数天完成的工作。作为 agentic 框架基准，它考验长时间跨度下的持续规划、工具编排与恢复能力。与 ALE、ToolMaze 一道，它是今天这波\"agent 在真实长时程工作上仍会崩\"浪潮的一部分，是下一代研究型 agent 的有用试金石。",
+      "interest_tag": "Benchmark"
+    },
+    {
+      "title": "MLEvolve: A Self-Evolving Framework for Automated Machine Learning Algorithm Discovery",
+      "arxiv_id": "2606.06473",
+      "url": "https://arxiv.org/abs/2606.06473",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2606.06473",
+      "tldr": "MLEvolve is a self-evolving framework that autonomously discovers machine-learning algorithms, iterating on its own designs without human-curated search spaces. It sits in the agentic-frameworks lineage alongside today's OpenSkill, pushing agents from executing fixed recipes toward inventing new ones. The self-improvement loop is the headline: algorithms that evolve algorithms. A glimpse of automated ML research moving from search to genuine discovery.",
+      "tldr_zh": "MLEvolve 是一个自进化框架，能自主发现机器学习算法，在无需人工设定搜索空间的情况下迭代自己的设计。它与今天的 OpenSkill 同属 agentic 框架谱系，推动 agent 从执行固定配方走向发明新配方。自我改进循环是亮点：用算法进化算法。这是自动化 ML 研究从\"搜索\"迈向真正\"发现\"的一瞥。",
+      "interest_tag": ""
+    }
+  ],
+  "github_repos": [
+    {
+      "name": "JimLiu/baoyu-design",
+      "url": "https://github.com/JimLiu/baoyu-design",
+      "tldr": "Runs \"Claude Design\" locally as an Agent Skill across Cursor, Claude Code, and more, turning a coding agent into a UI-mockup and prototype generator. From well-known dev Baoyu (JimLiu), it packages design taste into a reusable skill rather than one-off prompts. The healthy fork count signals real hands-on adoption. Part of the fast-growing \"agent skills\" packaging trend.",
+      "tldr_zh": "把\"Claude Design\"作为 Agent Skill 在本地运行，支持 Cursor、Claude Code 等，让编码 agent 变成 UI 草图和原型生成器。出自知名开发者宝玉（JimLiu），它把设计品味打包成可复用技能而非一次性提示词。健康的 fork 数表明有真实上手采用。是快速增长的\"agent 技能\"打包潮流的一部分。",
+      "stars": 520,
+      "language": "JavaScript",
+      "interest_tag": ""
+    },
+    {
+      "name": "tastyeffectco/sandboxd",
+      "url": "https://github.com/tastyeffectco/sandboxd",
+      "tldr": "Self-hosted dev sandboxes with instant preview URLs in one command — no Kubernetes — explicitly built for coding agents and SaaS factories. It targets the real bottleneck of giving agents safe, disposable execution environments. The lightweight Go, single-command pitch lowers the ops barrier sharply. Infrastructure that becomes more valuable as autonomous coding agents proliferate.",
+      "tldr_zh": "自托管开发沙箱，一条命令即可获得即时预览 URL，无需 Kubernetes，专为编码 agent 和 SaaS 工厂打造。它瞄准了给 agent 提供安全、可丢弃执行环境这一真实瓶颈。轻量 Go、单命令的卖点大幅降低了运维门槛。随着自主编码 agent 激增，这类基础设施会越来越有价值。",
+      "stars": 514,
+      "language": "Go",
+      "interest_tag": ""
+    },
+    {
+      "name": "amElnagdy/guard-skills",
+      "url": "https://github.com/amElnagdy/guard-skills",
+      "tldr": "A set of \"guard skills\" for coding agents — quality gates that catch the failure modes AI-generated code, tests, and docs are prone to. With the strongest fork-to-star ratio in today's top tier, it reflects genuine adoption by teams burned by agent output. It encodes review discipline as reusable, automatable checks. A pragmatic answer to \"how do we trust what the agent wrote.\"",
+      "tldr_zh": "一套面向编码 agent 的\"守护技能\"——专门捕捉 AI 生成代码、测试和文档常见失败模式的质量门禁。它拥有今天头部项目中最高的 fork/star 比，反映出被 agent 产出坑过的团队的真实采用。它把代码评审纪律编码为可复用、可自动化的检查。是对\"如何信任 agent 写的东西\"的务实回答。",
+      "stars": 469,
+      "language": "",
+      "interest_tag": ""
+    },
+    {
+      "name": "Forlives/21-day-self-interview",
+      "url": "https://github.com/Forlives/21-day-self-interview",
+      "tldr": "An AI \"existential-psychology counselor\" that asks you three meaningful questions each night for 21 days and remembers your answers to build continuity. Its 35% fork-to-star ratio is unusually high, hinting at strong personal resonance and remixing. The framing — a structured, memory-backed self-reflection ritual — is exactly the kind of emotionally sticky concept that spreads. A reminder that consumer-facing agent apps can go viral on feeling, not benchmarks.",
+      "tldr_zh": "一个 AI\"存在主义心理咨询师\"，连续 21 天每晚问你三个有意义的问题，并记住你的回答以建立连续性。它 35% 的 fork/star 比异常之高，暗示强烈的个人共鸣与二次创作。其设定——一个有记忆支撑、结构化的自我反思仪式——正是那种情感黏性强、易于传播的概念。它提醒我们：面向消费者的 agent 应用可以靠\"感受\"而非 benchmark 走红。",
+      "stars": 148,
+      "language": "Python",
+      "interest_tag": ""
+    },
+    {
+      "name": "Forsy-AI/forsy-trace-skill",
+      "url": "https://github.com/Forsy-AI/forsy-trace-skill",
+      "tldr": "An open skill for capturing AI agent work as structured, inspectable traces — turning opaque agent runs into reviewable records. As agents take on more autonomous work, observability becomes the bottleneck, and this targets it directly. Packaging it as a portable skill fits the broader agent-skills ecosystem. Useful glue for debugging, auditing, and trusting agent behavior.",
+      "tldr_zh": "一个开源技能，把 AI agent 的工作捕获为结构化、可检查的 trace，将不透明的 agent 运行变成可审查的记录。随着 agent 承担更多自主工作，可观测性成为瓶颈，而它正面瞄准这一点。把它打包成可移植技能契合更广的 agent 技能生态。是调试、审计和信任 agent 行为的有用粘合剂。",
+      "stars": 102,
+      "language": "Python",
+      "interest_tag": ""
+    }
+  ],
+  "hackernews": [
+    {
+      "title": "Ask HN: What is your (AI) dev tech stack / workflow?",
+      "url": "https://news.ycombinator.com/item?id=48413629",
+      "tldr": "A community thread where developers share their real AI-assisted coding stacks and workflows — which models, agents, and tools they actually use day to day. The high comment count makes it a valuable, unfiltered snapshot of practitioner consensus in late 2026. Threads like this surface what's genuinely sticking versus hype. Worth scanning for the tools that keep getting mentioned.",
+      "tldr_zh": "一个社区讨论帖，开发者们分享自己真实的 AI 辅助编码栈与工作流——日常实际在用哪些模型、agent 和工具。高评论数使它成为 2026 年末从业者共识的宝贵、未经过滤的快照。这类帖子能揭示出什么真正留存、什么只是炒作。值得扫一遍那些被反复提及的工具。",
+      "points": 162,
+      "num_comments": 133,
+      "interest_tag": ""
+    },
+    {
+      "title": "Launch HN: Intuned (YC S22) – Build and run reliable browser automations",
+      "url": "https://intunedhq.com",
+      "tldr": "Intuned launches a platform to build and run reliable browser automations as a service, aimed at giving AI agents a dependable way to act on the web. It tackles the flakiness that makes DIY browser automation hard to trust in production. As agentic web tasks grow, robust automation infrastructure is increasingly the missing layer. A YC-backed bet that \"reliable\" is the key word for agent tooling.",
+      "tldr_zh": "Intuned 推出一个平台，把可靠的浏览器自动化作为服务来构建和运行，旨在给 AI agent 提供一种可依赖的网页操作方式。它解决了自建浏览器自动化在生产环境难以信任的脆弱性问题。随着 agentic 网页任务增长，稳健的自动化基础设施日益成为缺失的一层。这是 YC 背书的一个押注：对 agent 工具而言\"可靠\"才是关键词。",
+      "points": 101,
+      "num_comments": 44,
+      "interest_tag": ""
+    },
+    {
+      "title": "Show HN: Formally verified polygon intersection – Opus 4.8 oneshots, prev failed",
+      "url": "https://github.com/schildep/verified-polygon-intersection",
+      "tldr": "A developer shares a formally verified polygon-intersection implementation that Opus 4.8 produced in a single shot — a task previous models reportedly failed. The hook lands on two fronts: a measurable model-capability jump and the credibility of formal verification. It's a concrete, checkable data point in the \"are the new models actually smarter\" debate. The kind of crisp before/after story that travels fast on HN.",
+      "tldr_zh": "一位开发者分享了一个经形式化验证的多边形相交实现，由 Opus 4.8 一次性生成——而此前的模型据称失败了。它的钩子在两点上奏效：可量化的模型能力跃升，以及形式化验证带来的可信度。这是\"新模型是否真的更聪明\"之争中一个具体、可检验的数据点。正是那种在 HN 上传播很快的清晰\"前后对比\"故事。",
+      "points": 92,
+      "num_comments": 21,
+      "interest_tag": ""
+    },
+    {
+      "title": "Launch HN: Hyper (YC P26) – Company brain to power agentic development",
+      "url": "https://news.ycombinator.com/item?id=48387095",
+      "tldr": "Hyper pitches a \"company brain\" that powers agentic development by centralizing an organization's context — code, docs, decisions — for AI agents to draw on. The 76 comments signal strong interest in (and skepticism about) org-wide agent memory. It bets the bottleneck for enterprise agents is shared, persistent context, not raw model capability. A test of whether \"company brain\" framing resonates beyond individual-developer tools.",
+      "tldr_zh": "Hyper 主打一个\"公司大脑\"，通过集中组织的上下文——代码、文档、决策——供 AI agent 调用，从而驱动 agentic 开发。76 条评论显示出对组织级 agent 记忆的强烈兴趣（与质疑）。它押注企业 agent 的瓶颈是共享、持久的上下文，而非原始模型能力。这是对\"公司大脑\"这一框架能否超越个人开发者工具引起共鸣的一次检验。",
+      "points": 78,
+      "num_comments": 76,
+      "interest_tag": ""
+    },
+    {
+      "title": "Show HN: Nightwatch, The open-source, read-only AI SRE",
+      "url": "https://github.com/ninoxAI/nightwatch",
+      "tldr": "Nightwatch is an open-source, read-only AI site-reliability engineer that observes and diagnoses infrastructure without the power to make changes. The read-only constraint is the smart design choice: useful diagnosis with a hard safety ceiling. It reflects a maturing pattern of deploying agents in observe-first, act-never modes for high-stakes systems. A pragmatic template for trustworthy ops agents.",
+      "tldr_zh": "Nightwatch 是一个开源、只读的 AI 站点可靠性工程师（SRE），它观察和诊断基础设施，但无权做出更改。只读约束是聪明的设计选择：提供有用的诊断，同时有一个硬性安全上限。它反映出一种成熟模式：在高风险系统中以\"先观察、绝不动手\"的方式部署 agent。是可信运维 agent 的务实模板。",
+      "points": 29,
+      "num_comments": 9,
+      "interest_tag": ""
+    }
+  ]
+}
