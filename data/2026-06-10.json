@@ -1,0 +1,206 @@
+{
+  "date": "2026-06-10",
+  "generated_at": "2026-06-10T09:00:21+08:00",
+  "briefing_zh": "今天 AI 研究的主线是一场**agent 评测的集体清算**。HuggingFace 热度第一的 **SWE-Explore** 把编码 agent 拆开评测，发现它们能找到相关文件、却始终无法精确定位到出问题的代码行；而 UC Berkeley 的 **Agents' Last Exam (ALE)** 更狠：在有经济价值的真实长任务上，最强配置总体通过率仅 26.2%，最难一档低于 10%。两篇都在说同一件事——基准分的繁荣没有兑现成真实部署能力，差距本身就是个评测问题。配合 **SpatialWorld**（顶级 MLLM 在交互空间任务上仅 17.4% 成功率）和 **OmniGameArena**，「现有 agent 远未胜任真实工作」成了今天最强的共识信号。\n\n与坏消息对应的是一条乐观的修复路线——别只训练更大的模型，去优化 **harness**（模型与环境之间那层运行时脚手架）。上海 AI Lab 的 **Self-Harness** 让 agent 自己挖掘失败模式、提出最小化的 harness 修改、回归测试通过才采纳，在 Terminal-Bench-2.0 上把多个模型显著拉高（如 40.5%→61.9%）。它只是一个正在爆发的研究群的代表，近期还有 HarnessFix、Meta-Harness、Harness-1 等一串工作，共同主张「agent = 模型 + harness 的整个反馈回路」。技能侧也在同步进化：**LatentSkill** 把文本技能编译成即插即用的 LoRA 适配器、从上下文搬进权重，**OpenSkill** 则让 agent 只用开放世界资源从零自建技能和验证信号。\n\n「记忆」是今天的第二条暗线，但要分清层次。**Latent Spatial Memory** 和 **Echo-Memory** 把记忆当作视频世界模型的核心瓶颈（而非图像合成）；腾讯的 **FlashMemory-DeepSeek-V4** 用前瞻稀疏注意力把 KV 缓存显存平均砍掉 86.5%；**ConMem** 则把记忆做成多 agent 团队的「集体记忆卡片图」，免训练拿到 10%+ 的提升。方法论层面，HKUST 的 **On the Geometry of On-Policy Distillation** 给 OPD 这一蒸馏范式画出了参数空间的几何，UPenn/UCSD/Meta 的 **NF-CoT** 用归一化流让连续潜在推理保留 LLM 原生的自回归接口。\n\n开源侧最热的是 **baoyu-design**，几天冲到 600+ star——把 Claude 的 Design 能力打包成本地 Agent Skill，无需 claude.ai。紧随其后的 **guard-skills**（给编码 agent 加质量门禁）和 HN 上的 **Command Center**，与今天的基准论文形成闭环：当评测证明 agent 会「悄悄出错」，社区的回应就是给它套上护栏。值得一提的是 **21-day-self-interview**（一个 Hermes Agent 的存在主义日记技能，fork/star 比极高）和 HN 上的 **Hermes Agent** 本身——持久记忆 + 定时 + 技能的组合，正在把「个人 agent」从分钟尺度推向数周尺度。",
+  "briefing_en": "The through-line of today's research is a **collective reckoning over agent evaluation**. HuggingFace's most-upvoted paper, **SWE-Explore**, breaks coding agents into sub-skills and finds they can locate relevant files but consistently fail to pinpoint the exact broken lines; UC Berkeley's **Agents' Last Exam (ALE)** goes harder, showing the best configuration scores just 26.2% overall on economically valuable long-horizon tasks — under 10% on the hardest tier. Both argue the same thing: benchmark wins haven't translated into real deployment, and that gap is itself an evaluation problem. Paired with **SpatialWorld** (top MLLMs hit only 17.4% on interactive spatial tasks) and **OmniGameArena**, \"today's agents are nowhere near real professional work\" became the day's strongest consensus signal.\n\nThe optimistic counterpart is a fix that isn't about bigger models: optimize the **harness** — the runtime scaffolding between model and environment. Shanghai AI Lab's **Self-Harness** has the agent mine its own failure patterns, propose minimal harness edits, and accept them only after regression testing, lifting multiple models substantially on Terminal-Bench-2.0 (e.g., 40.5%→61.9%). It's one entry in a fast-growing cluster — HarnessFix, Meta-Harness, Harness-1 — all arguing that \"the agent\" is the whole model-plus-harness feedback loop, not just the weights. Skill acquisition is evolving in parallel: **LatentSkill** compiles textual skills into plug-and-play LoRA adapters, moving them from context into weight space, while **OpenSkill** has agents build skills and their own verification signals from open-world resources with zero target-task supervision.\n\n\"Memory\" is the day's second undercurrent — but the levels matter. **Latent Spatial Memory** and **Echo-Memory** treat memory, not image synthesis, as the core bottleneck in video world models; Tencent's **FlashMemory-DeepSeek-V4** cuts KV-cache GPU memory by 86.5% on average with lookahead sparse attention; **ConMem** turns memory into a graph of \"collective memory cards\" for multi-agent teams, gaining 10%+ training-free. On the methods side, HKUST's **On the Geometry of On-Policy Distillation** maps the parameter-space geometry of OPD, and **NF-CoT** (UPenn/UCSD/Meta) uses normalizing flows to give continuous latent reasoning the native autoregressive interface of an LLM.\n\nIn open source, the breakout is **baoyu-design**, past 600 stars in days — it packages Claude's Design capability as a local Agent Skill, no claude.ai required. Close behind, **guard-skills** (quality gates for coding agents) and HN's **Command Center** close the loop with today's benchmark papers: once evaluation proves agents fail quietly, the community's answer is to bolt on guardrails. Notable too are **21-day-self-interview** (an existential-journaling Hermes Agent skill with an unusually high fork/star ratio) and **Hermes Agent** itself on HN — the persistent-memory + cron + skills combo is pushing \"personal agents\" from a minutes timescale to a weeks timescale.",
+  "viral_analysis_zh": "今天最可能火的是 **Agents' Last Exam**：它把「人类最后的考试」的命名势能平移到 agent 上，再配一个扎心到可以直接当标题的数字（最强也只有 26.2%，最难档 <10%），既有权威机构背书又精准踩中「agent 到底行不行」的全网情绪，天然适合截图传播。开源侧 **baoyu-design** 是另一个范本——它把一个大家想要却被锁在 claude.ai 里的功能「解锁」成本地技能，「白嫖闭源能力」的叙事让它几天破 600 star。",
+  "viral_analysis_en": "The likeliest breakout is **Agents' Last Exam** — it borrows the naming gravity of \"Humanity's Last Exam,\" pairs it with a number brutal enough to be its own headline (26.2% at best, under 10% on the hardest tier), carries an institutional badge, and lands squarely on the internet's \"are agents actually any good?\" mood, making it built for screenshots. On the open-source side, **baoyu-design** is the other template: it \"unlocks\" a feature people wanted but that was trapped inside claude.ai, and the \"get a proprietary capability as a free local skill\" narrative drove it past 600 stars in days.",
+  "huggingface_papers": [
+    {
+      "title": "SWE-Explore: Benchmarking How Coding Agents Explore Repositories",
+      "arxiv_id": "2606.07297",
+      "url": "https://arxiv.org/abs/2606.07297",
+      "tldr": "SWE-bench scores coding agents on a binary resolved/unresolved outcome, hiding the sub-skills that actually drive success. SWE-Explore isolates repository exploration — understanding code, retrieving context, localizing the right files and lines, and diagnosing bugs. It finds agents are decent at finding relevant files but consistently fail to pinpoint the exact lines, and that exploration quality strongly predicts downstream fix rates. This reframes coding-agent progress around navigation, not just patch generation.",
+      "tldr_zh": "SWE-bench 用「解决/未解决」的二元结果给编码 agent 打分，掩盖了真正决定成败的子能力。SWE-Explore 单独评测仓库探索能力——理解代码、检索上下文、定位文件与具体行、诊断 bug。结果显示 agent 能找到相关文件，却始终无法精确定位到出问题的代码行，而探索质量与最终修复成功率高度相关。它把编码 agent 的进步重新锚定在「导航」而非单纯的补丁生成上。",
+      "upvotes": 98,
+      "authors": "Shaoqiu Zhang, Yuhang Wang, Jialiang Liang",
+      "ai_keywords": [],
+      "interest_tag": "Benchmark"
+    },
+    {
+      "title": "Agents' Last Exam",
+      "arxiv_id": "2606.05405",
+      "url": "https://arxiv.org/abs/2606.05405",
+      "tldr": "ALE argues the gap between benchmark wins and real-world deployment is an evaluation problem: existing tests don't measure sustained performance on economically valuable workflows. It builds tasks from real software with verifiable outcomes, and the best configuration manages only 26.2% overall — under 10% on the hardest tier. The framing, a deliberate echo of \"Humanity's Last Exam,\" makes the headline brutal: today's agents are nowhere near doing real professional work end to end.",
+      "tldr_zh": "ALE 主张：基准测试得分高却无法落地，本质是评测问题——现有测试没有衡量在「有经济价值的真实工作流」上的持续表现。它用真实软件构建可验证的任务，最强配置总体也只有 26.2% 通过率，最难那档低于 10%。名字刻意呼应「人类最后的考试」，结论很扎心：今天的 agent 离端到端完成真实专业工作还差得远。",
+      "upvotes": 69,
+      "authors": "Yiyou Sun, Xinyang Han, Weichen Zhang",
+      "ai_keywords": [],
+      "interest_tag": "Benchmark"
+    },
+    {
+      "title": "On the Geometry of On-Policy Distillation",
+      "arxiv_id": "2606.07082",
+      "url": "https://arxiv.org/abs/2606.07082",
+      "tldr": "On-policy distillation (OPD) is increasingly used to boost LLM reasoning, but why it works was unclear. This paper maps OPD's trajectory in parameter space against SFT and RLVR, placing it in a \"relaxed off-principal regime\": it touches fewer weights and avoids principal directions more than SFT, while behaving more like RL. The geometric lens explains OPD's stability and offers diagnostics for when distillation will generalize versus overfit.",
+      "tldr_zh": "on-policy 蒸馏（OPD）越来越多被用来提升 LLM 推理能力，但其奏效原因一直不清楚。本文在参数空间中刻画 OPD 的更新轨迹，并与 SFT、RLVR 对比，将其定位在「放松的非主方向区间」：相比 SFT 它改动的权重更少、更回避主方向，行为又更接近 RL。这个几何视角解释了 OPD 为何稳定，也给出了判断蒸馏何时能泛化、何时会过拟合的诊断工具。",
+      "upvotes": 58,
+      "authors": "Zhennan Shen, Yanshu Li, Qingyu Yin",
+      "ai_keywords": [],
+      "interest_tag": ""
+    },
+    {
+      "title": "LatentSkill: From In-Context Textual Skills to In-Weight Latent Skills for LLM Agents",
+      "arxiv_id": "2606.06087",
+      "url": "https://arxiv.org/abs/2606.06087",
+      "tldr": "Agent \"skills\" are usually injected as text into every prompt — costly in tokens and exposing the skill content in plaintext. LatentSkill uses a pretrained hypernetwork to convert each textual skill into a plug-and-play LoRA adapter, moving skill knowledge from context space into weight space. It keeps modular loading and composition while removing per-step skill tokens. As the agent-skills ecosystem explodes, this points at a leaner, more private way to ship reusable capabilities.",
+      "tldr_zh": "agent 的「技能」通常作为文本注入每一步 prompt，既费 token 又把技能内容明文暴露。LatentSkill 用预训练的超网络把每个文本技能转成即插即用的 LoRA 适配器，把技能知识从上下文空间搬进权重空间，保留模块化加载与组合的同时去掉了每步的技能 token。在 agent 技能生态爆发的当下，它指向一种更省、更私密的可复用能力分发方式。",
+      "upvotes": 50,
+      "authors": "Aofan Yu, Chenyu Zhou, Tianyi Xu",
+      "ai_keywords": [],
+      "interest_tag": ""
+    },
+    {
+      "title": "Latent Spatial Memory for Video World Models",
+      "arxiv_id": "2606.09828",
+      "url": "https://arxiv.org/abs/2606.09828",
+      "tldr": "3D-consistent video world models usually keep an explicit point-cloud memory in RGB space — expensive to render and lossy because of the round trip through pixels. This work stores a persistent 3D scene cache directly in the diffusion model's latent space, preserving rich learned features. The result is sharper geometric consistency at a fraction of the compute and memory of RGB-space memory. It's part of a wave of papers treating memory, not image synthesis, as the central bottleneck in world models.",
+      "tldr_zh": "保持 3D 一致性的视频世界模型通常在 RGB 空间维护显式点云记忆——渲染昂贵，且像素往返会丢失信息。本文把持久的 3D 场景缓存直接存进扩散模型的潜在空间，保留了丰富的学习特征。结果是在远低于 RGB 记忆的算力和显存下获得更强的几何一致性。它是「把记忆而非图像合成视为世界模型核心瓶颈」这波研究中的一员。",
+      "upvotes": 47,
+      "authors": "Weijie Wang, Haoyu Zhao, Yifan Yang",
+      "ai_keywords": [],
+      "interest_tag": ""
+    }
+  ],
+  "alphaxiv_papers": [
+    {
+      "title": "OpenSkill: Open-World Self-Evolution for LLM Agents",
+      "arxiv_id": "2606.06741",
+      "url": "https://arxiv.org/abs/2606.06741",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2606.06741",
+      "tldr": "OpenSkill lets an agent build both its skills and its own verification signals from scratch, using only open-world resources (docs, repos, the web) with no target-task supervision. It acquires \"verification anchors,\" drafts skills, and refines them against self-built virtual tasks rather than answer keys — then deploys zero-shot. It hits a 43.6% automated pass rate on SkillsBench with Opus 4.6 and beats prior baselines by up to 8.9 points, with skills transferring across models.",
+      "tldr_zh": "OpenSkill 让 agent 从零自建技能和自己的验证信号，只用开放世界资源（文档、仓库、网络），不依赖目标任务的监督。它先获取「验证锚点」，起草技能，再用自建的虚拟任务（而非标准答案）来打磨，最后零样本部署。在 SkillsBench 上用 Opus 4.6 达到 43.6% 自动通过率，比此前基线高出最多 8.9 个点，且技能可跨模型迁移。",
+      "interest_tag": ""
+    },
+    {
+      "title": "Self-Harness: Harnesses That Improve Themselves",
+      "arxiv_id": "2606.09498",
+      "url": "https://arxiv.org/abs/2606.09498",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2606.09498",
+      "tldr": "The performance of an LLM agent is set by the model and the harness that mediates its environment. Self-Harness has the agent improve its own harness with no human engineers: it mines model-specific failure patterns from execution traces, proposes minimal harness edits, and accepts them only after regression testing. On Terminal-Bench-2.0 it lifts three different models substantially (e.g., 40.5%→61.9%, 42.9%→57.1%). It's the clearest entry yet in a fast-growing \"optimize the harness, not just the weights\" research cluster.",
+      "tldr_zh": "LLM agent 的表现由模型和中介其环境的 harness 共同决定。Self-Harness 让 agent 在无人工工程师参与下改进自己的 harness：从执行轨迹中挖掘模型特有的失败模式，提出最小化的 harness 修改，并只在通过回归测试后才接受。在 Terminal-Bench-2.0 上让三个不同模型显著提升（如 40.5%→61.9%、42.9%→57.1%）。在快速壮大的「优化 harness 而非只优化权重」研究群里，它是迄今最清晰的一篇。",
+      "interest_tag": ""
+    },
+    {
+      "title": "Latent Reasoning with Normalizing Flows",
+      "arxiv_id": "2606.06447",
+      "url": "https://arxiv.org/abs/2606.06447",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2606.06447",
+      "tldr": "NF-CoT replaces verbose chain-of-thought with compact continuous \"thought vectors,\" but unlike diffusion-based latent reasoning it keeps the native autoregressive interface of an LLM. It embeds a TARFlow-style normalizing flow inside the backbone, giving exact likelihoods for latent thoughts, left-to-right decoding with the original KV cache, and direct policy-gradient training in latent space. On code generation it improves pass@1 (+13% over Qwen3-8B-Base) while running about 1.92x faster than diffusion latent-reasoning. From UPenn, UCSD, and Meta.",
+      "tldr_zh": "NF-CoT 用紧凑的连续「思维向量」替代冗长的思维链，但不同于基于扩散的潜在推理，它保留了 LLM 原生的自回归接口。它在主干内嵌入 TARFlow 式的归一化流，为潜在思维提供精确似然、可用原始 KV 缓存做从左到右解码、并能在潜在空间直接做策略梯度训练。在代码生成上把 pass@1 提升约 13%（相对 Qwen3-8B-Base），比扩散式潜在推理快约 1.92 倍。来自 UPenn、UCSD 和 Meta。",
+      "interest_tag": ""
+    },
+    {
+      "title": "ConMem: Structured Memory-Guided Adaptation in Training-Free Multi-Agent Systems",
+      "arxiv_id": "2606.08702",
+      "url": "https://arxiv.org/abs/2606.08702",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2606.08702",
+      "tldr": "ConMem helps multi-agent systems adapt without any training: it distills past interaction trajectories into structured \"memory cards\" capturing reusable strategies, then organizes them into a relation-aware graph. At runtime it retrieves and coordinates cards to resolve strategy conflicts and recover dependencies between them. It reports +10.9% to +12.9% absolute gains across diverse benchmarks — a prompt-side, training-free recipe for collective memory in agent teams.",
+      "tldr_zh": "ConMem 让多 agent 系统无需训练即可适应：把过去的交互轨迹蒸馏成捕捉可复用策略的结构化「记忆卡片」，再组织进一个关系感知的图。运行时它检索并协调这些卡片，化解策略冲突、恢复卡片间的依赖。在多个基准上报告 +10.9% 到 +12.9% 的绝对提升——一套面向 prompt 侧、免训练的 agent 团队「集体记忆」方案。",
+      "interest_tag": "Agent Swarm"
+    },
+    {
+      "title": "FlashMemory-DeepSeek-V4: Lightning Index Ultra-Long Context via Lookahead Sparse Attention",
+      "arxiv_id": "2606.09079",
+      "url": "https://arxiv.org/abs/2606.09079",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2606.09079",
+      "tldr": "Serving ultra-long context is bottlenecked by keeping the full KV cache in GPU memory. Lookahead Sparse Attention (LSA) adds a Neural Memory Indexer on top of DeepSeek-V4 that proactively predicts which KV chunks future tokens will need and keeps only those resident. It cuts KV-cache GPU memory by 86.5% on average (up to 90% at 500K context) while slightly improving accuracy (+0.6%). A Tencent report that makes million-token serving dramatically cheaper.",
+      "tldr_zh": "服务超长上下文的瓶颈在于要把完整 KV 缓存常驻 GPU 显存。Lookahead Sparse Attention（LSA）在 DeepSeek-V4 之上加了一个神经记忆索引器，主动预测未来 token 会用到哪些 KV 块、只保留这些块常驻。它把 KV 缓存显存平均降低 86.5%（500K 上下文下最高 90%），同时精度还略升（+0.6%）。腾讯的这份报告让百万 token 级服务的成本大幅下降。",
+      "interest_tag": ""
+    }
+  ],
+  "github_repos": [
+    {
+      "name": "JimLiu/baoyu-design",
+      "url": "https://github.com/JimLiu/baoyu-design",
+      "tldr": "Runs Claude's \"Design\" capability locally as an Agent Skill for Cursor, Claude Code, and other coding agents — producing polished UI mockups, prototypes, decks, and wireframes as self-contained HTML, no claude.ai/design needed. Tuned to work best with Opus 4.8. It rocketed to 600+ stars in days, riding the wave of packaging proprietary product features as portable, local agent skills.",
+      "tldr_zh": "把 Claude 的「Design」能力作为 Agent Skill 在本地跑起来，支持 Cursor、Claude Code 等编码 agent——直接产出自包含 HTML 的精美 UI 稿、原型、PPT 和线框图，不需要 claude.ai/design。针对 Opus 4.8 调优。几天冲到 600+ star，踩中了「把闭源产品功能打包成可移植本地 agent 技能」的风口。",
+      "stars": 637,
+      "language": "JavaScript",
+      "interest_tag": ""
+    },
+    {
+      "name": "amElnagdy/guard-skills",
+      "url": "https://github.com/amElnagdy/guard-skills",
+      "tldr": "A set of \"guard\" skills for coding agents — quality gates that catch AI-generated failure modes in code, tests, and docs before they ship. It targets the exact pain point behind the day's benchmark papers: agents produce plausible output that quietly breaks. Pitched for Claude Code and Codex, with 500+ stars and a healthy fork ratio signaling real adoption.",
+      "tldr_zh": "一套面向编码 agent 的「守卫」技能——在代码、测试和文档发布前拦截 AI 生成的典型失败模式。它正好戳中当天那些基准论文背后的痛点：agent 产出看似合理、实则悄悄出错的结果。面向 Claude Code 和 Codex，500+ star，fork 比例健康，说明有真实采用。",
+      "stars": 515,
+      "language": "-",
+      "interest_tag": ""
+    },
+    {
+      "name": "FerroxLabs/wayland",
+      "url": "https://github.com/FerroxLabs/wayland",
+      "tldr": "A TypeScript AI agent pitched around a perceive-reason-act-evolve loop. The marketing is thin on specifics, but a 50-fork-to-331-star ratio plus active commits suggest genuine hands-on use rather than star inflation. Worth watching as another entrant in the autonomous general-agent runtime space.",
+      "tldr_zh": "一个 TypeScript AI agent，主打「感知-推理-行动-进化」的循环。文案上具体细节不多，但 50 fork 对 331 star 的比例加上活跃提交，说明是真实使用而非刷星。作为自主通用 agent 运行时赛道的又一选手，值得观察。",
+      "stars": 331,
+      "language": "TypeScript",
+      "interest_tag": ""
+    },
+    {
+      "name": "Forlives/21-day-self-interview",
+      "url": "https://github.com/Forlives/21-day-self-interview",
+      "tldr": "A Hermes Agent skill that plays an existential-psychology counselor: every night for 21 days it asks you three meaningful questions, remembers your answers, and reflects your own words back to you. Bilingual zh/en, cron-driven. With 52 forks against 153 stars it has one of the healthiest engagement ratios in the day's results — a reminder that persistent-memory + scheduled agents resonate well beyond pure dev tooling.",
+      "tldr_zh": "一个 Hermes Agent 技能，扮演存在主义心理咨询师：连续 21 天每晚问你三个有分量的问题，记住你的回答，再把你自己的话反射回来。中英双语，cron 驱动。153 star 对 52 fork，是当天结果里参与度最健康的项目之一——提醒我们「持久记忆 + 定时 agent」的共鸣远不止于纯开发工具。",
+      "stars": 153,
+      "language": "Python",
+      "interest_tag": ""
+    },
+    {
+      "name": "Zafer-Liu/Agent_Manager",
+      "url": "https://github.com/Zafer-Liu/Agent_Manager",
+      "tldr": "A cross-platform desktop app for managing AI agents and MCP servers in one place — a GUI control panel for the increasingly messy local-agent stack. Bilingual zh/en, 38 forks against 136 stars. As people run more agents and MCP servers side by side, \"mission control\" tooling like this fills a real operational gap.",
+      "tldr_zh": "一个跨平台桌面应用，在一个地方统一管理 AI agent 和 MCP 服务器——给越来越杂乱的本地 agent 技术栈做 GUI 控制台。中英双语，136 star 对 38 fork。当人们同时运行越来越多的 agent 和 MCP 服务器时，这类「任务控制中心」工具填补了真实的运维空白。",
+      "stars": 136,
+      "language": "TypeScript",
+      "interest_tag": ""
+    }
+  ],
+  "hackernews": [
+    {
+      "title": "Ask HN: What is your (AI) dev tech stack / workflow?",
+      "url": "https://news.ycombinator.com/item?id=48413629",
+      "tldr": "A high-engagement community thread where developers compare their real AI-assisted dev stacks — which models, agents, IDE integrations, and workflows they actually use day to day. The 134 comments make it a useful, unvarnished snapshot of how practitioners are wiring up Claude Code, Codex, Cursor, and friends right now.",
+      "tldr_zh": "一个高参与度的社区讨论帖，开发者们交流自己真实的 AI 辅助开发栈——日常实际在用哪些模型、agent、IDE 集成和工作流。134 条评论让它成为一份没有滤镜的快照，反映从业者当下是怎么把 Claude Code、Codex、Cursor 等串起来用的。",
+      "points": 165,
+      "num_comments": 134,
+      "interest_tag": ""
+    },
+    {
+      "title": "Launch HN: Intuned (YC S22) – Build and run reliable browser automations as code",
+      "url": "https://intunedhq.com",
+      "tldr": "A YC-backed platform for building and running browser automations as code, pitched on reliability — the hard part of keeping automations alive as sites change. It lands amid surging interest in browser/computer-use agents, positioning itself as the durable execution layer beneath them rather than another flaky scraper.",
+      "tldr_zh": "一个 YC 投资的平台，把浏览器自动化当作代码来构建和运行，卖点是「可靠」——也就是网站变动时让自动化不挂掉这个最难的部分。它出现在浏览器/电脑操作 agent 热度飙升之际，把自己定位成它们下方那层耐用的执行层，而不是又一个易碎的爬虫。",
+      "points": 113,
+      "num_comments": 53,
+      "interest_tag": ""
+    },
+    {
+      "title": "Show HN: Formally verified polygon intersection – Opus 4.8 oneshots, prev failed",
+      "url": "https://github.com/schildep/verified-polygon-intersection",
+      "tldr": "A formally verified polygon-intersection implementation that the author reports Opus 4.8 produced in a single shot — where previous models had failed. It's a concrete, checkable data point in the \"did the new frontier model actually get better at hard, rigorous tasks\" debate, and the formal-verification angle makes the claim unusually falsifiable.",
+      "tldr_zh": "一个经过形式化验证的多边形相交实现，作者称 Opus 4.8 一次性（oneshot）就写出来了——而之前的模型都失败了。在「新一代前沿模型是否真的在困难、严谨的任务上变强了」这个争论里，它是一个具体、可检验的数据点，而形式化验证这个角度让这个说法格外可证伪。",
+      "points": 93,
+      "num_comments": 21,
+      "interest_tag": ""
+    },
+    {
+      "title": "Show HN: Command Center, the AI coding env for people who care about quality",
+      "url": "https://www.cc.dev/",
+      "tldr": "An AI coding environment explicitly positioned for developers who prioritize code quality over raw generation speed — adding review, verification, and guardrails around agent output. It rhymes with the day's other quality-control threads (guard-skills, the benchmark papers): the frontier is shifting from \"can the agent write code\" to \"can you trust what it writes.\"",
+      "tldr_zh": "一个 AI 编码环境，明确面向「看重代码质量而非单纯生成速度」的开发者——在 agent 产出周围加上审查、验证和护栏。它和当天其他质量控制话题（guard-skills、那些基准论文）相互呼应：前沿正从「agent 能不能写代码」转向「你能不能信任它写的东西」。",
+      "points": 59,
+      "num_comments": 29,
+      "interest_tag": ""
+    },
+    {
+      "title": "Hermes Agent – Open-source AI agent with persistent memory",
+      "url": "https://hermes-agent.org/",
+      "tldr": "An open-source AI agent built around persistent cross-session memory, surfacing on HN with a healthy comment-to-point ratio. Persistent memory and skill systems are exactly the substrate behind several of today's items (LatentSkill, OpenSkill, the 21-day journaling skill), and the discussion digs into how durable memory changes what a personal agent can do over weeks, not minutes.",
+      "tldr_zh": "一个围绕跨会话持久记忆构建的开源 AI agent，在 HN 上以健康的「评论/点数」比浮现。持久记忆和技能系统正是当天多个条目（LatentSkill、OpenSkill、那个 21 天日记技能）背后的底座，讨论深入到「持久记忆如何改变一个个人 agent 在数周而非数分钟尺度上能做的事」。",
+      "points": 51,
+      "num_comments": 42,
+      "interest_tag": ""
+    }
+  ]
+}
