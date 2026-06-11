@@ -1,0 +1,206 @@
+{
+  "date": "2026-06-11",
+  "generated_at": "2026-06-11T09:12:00+08:00",
+  "briefing_zh": "今天的研究热度被**世界模型与生成式 3D**主导。HuggingFace 当日榜首 **ABot-Earth 0.5**（194 赞）直接以 3D Gaussian Splatting 表示、仅凭卫星影像就能每平方公里 10 分钟内生成大规模 3D 环境，把随处可得的卫星数据变成弥合 sim-to-real 鸿沟的具身 AI 仿真沙盒。alphaxiv 上 **Mirage** 把“空间记忆”搬进扩散潜空间，端到端生成快 10.57×、显存低 55×；**Dream-Tac** 则把触觉纳入世界动作模型，在接触密集型操作上比纯视觉基线提升 31.7%。从地理尺度到指尖触觉，世界模型正沿着“更省、更快、更一致”的方向快速落地。\n\n一个值得注意的收敛趋势是**智能体自我改进其 harness**——同一天出现两篇思路高度一致的工作。**RHO**（Retrospective Harness Optimization）仅用历史轨迹、无需任何 ground-truth 验证集，单轮优化就把 SWE-Bench Pro 通过率从 59% 拉到 78%；上海 AI Lab 的 **Self-Harness** 则让智能体通过“挖掘弱点—提出最小修改—回归验证”的闭环自主改写运行 harness，在 Terminal-Bench-2.0 上对 MiniMax M2.5、Qwen3.5、GLM-5 三个模型族普遍提升 15–21 个百分点。当模型权重短期难以再训练时，优化“模型外围的脚手架”正成为提升 agent 能力最具性价比的杠杆。\n\n智能体的**委派与协作**也在成熟。**SearchSwarm** 把“委派智能”（何时、把什么子任务交给子智能体并整合结果）通过 harness 引导的轨迹蒸馏进 30B 模型权重，在 BrowseComp 拿到同规模最佳的 68.1；**ConMem** 则用免训练的“记忆卡片+关系图”为多智能体系统构建可复用的集体记忆，带来 10.9–12.9% 的绝对提升。开源侧，快手 **Kwai Keye-VL-2.0** 首次把 DeepSeek Sparse Attention 适配到 GQA 多模态架构，实现无损 256K 上下文的小时级长视频理解，是当前最强的长视频智能体开源模型之一。\n\n落到工程与现实，Hacker News 给出了一记冷静的提醒：一篇关于 **bunq** 金融 AI 助手的安全分析显示，一笔带恶意备注的 **€0.01 转账**就能通过提示注入攻陷智能体（162 分、150 评论），把“来自不可信方的输入必须视为敌意”从口号变成血淋淋的案例。与此同时 **Apache Burr** 以状态机方式构建“可靠优先”的 agent 获 170 分，GitHub 上 **baoyu-design** 与 **guard-skills** 双双在数日内突破 500–600 星——前者把 Claude Design 打包成可移植 Agent Skill，后者为编码智能体提供拦截 AI 生成失败模式的质量门禁。一边是能力狂奔，一边是护栏补课，正是当下 agent 生态的真实写照。",
+  "briefing_en": "Today's research energy is dominated by **world models and generative 3D**. HuggingFace's top paper, **ABot-Earth 0.5** (194 upvotes), generates vast 3D environments directly in the 3D Gaussian Splatting representation from satellite imagery alone — under 10 minutes per square kilometer — turning ubiquitous satellite data into a sim-to-real simulation sandbox for embodied AI. On alphaxiv, **Mirage** moves \"spatial memory\" into diffusion latent space for 10.57x faster generation and 55x lower memory, while **Dream-Tac** folds touch into a world-action model, beating vision-only baselines by 31.7% on contact-rich manipulation. From planetary scale to fingertip touch, world models are landing fast along a \"cheaper, faster, more consistent\" trajectory.\n\nA striking convergent theme is **agents improving their own harness** — two closely aligned papers landed the same day. **RHO** (Retrospective Harness Optimization) uses only past trajectories with no ground-truth validation set, lifting SWE-Bench Pro pass rate from 59% to 78% in a single round; Shanghai AI Lab's **Self-Harness** lets an agent autonomously rewrite its operating harness through a mine-weaknesses then propose-minimal-edits then regression-validate loop, gaining 15–21 points across MiniMax M2.5, Qwen3.5, and GLM-5 on Terminal-Bench-2.0. When retraining weights is impractical short-term, optimizing the scaffolding *around* the model is becoming the most cost-effective lever for agent capability.\n\nAgentic **delegation and collaboration** are maturing too. **SearchSwarm** distills \"delegation intelligence\" — when and what to hand to subagents and how to integrate results — into 30B weights via harness-guided trajectories, scoring a best-in-class 68.1 on BrowseComp; **ConMem** builds reusable collective memory for multi-agent systems with training-free \"memory cards + relation graph,\" yielding 10.9–12.9% absolute gains. On the open-source side, Kuaishou's **Kwai Keye-VL-2.0** is the first to adapt DeepSeek Sparse Attention to GQA multimodal architectures, enabling lossless 256K-context hour-level video understanding — one of the strongest open long-video agent models yet.\n\nGrounding all this in engineering reality, Hacker News delivered a sobering reminder: a security analysis of **bunq**'s financial AI assistant showed a single **€0.01 transfer** with a malicious memo could prompt-inject and compromise the agent (162 points, 150 comments), turning \"untrusted inputs must be treated as hostile\" from a slogan into a concrete cautionary tale. Meanwhile **Apache Burr** drew 170 points for building \"reliability-first\" agents as state machines, and on GitHub both **baoyu-design** and **guard-skills** crossed 500–600 stars within days — the former packaging Claude Design as a portable Agent Skill, the latter providing quality gates that catch AI-generated failure modes for coding agents. Capability racing ahead on one side, guardrails catching up on the other — that's today's agent ecosystem in a nutshell.",
+  "viral_analysis_zh": "今天最可能火的是 HN 上那篇 **bunq 金融 AI 助手**安全分析——一笔 **€0.01 转账**＋恶意备注就能提示注入攻陷智能体。它把抽象的“提示注入”威胁压缩成一个荒谬到难忘的具体数字，又叠加了金钱、银行、AI 三重恐惧点，150 条评论的讨论度印证了这类“小成本撬动大灾难”的安全叙事天然具备传播力。另一条暗线是 GitHub 上的 **Agent Skills 淘金热**：baoyu-design 与 guard-skills 数日内破 500–600 星，说明把一段工作流打包成可移植 skill、卡住一个真实痛点（设计产出 / 代码护栏），就是当下最快的涨星公式。",
+  "viral_analysis_en": "Today's most likely viral hit is the HN security write-up on **bunq's financial AI assistant** — a **€0.01 transfer** with a malicious memo is enough to prompt-inject and compromise the agent. It compresses the abstract \"prompt injection\" threat into an absurd, unforgettable number, stacks money + banking + AI fear triggers, and its 150-comment thread confirms that \"tiny cost, catastrophic outcome\" security narratives travel naturally. The quieter undercurrent is the **Agent Skills gold rush** on GitHub: baoyu-design and guard-skills crossed 500–600 stars in days, proving that packaging one workflow into a portable skill that nails a real pain point (design output / code guardrails) is today's fastest formula for star growth.",
+  "huggingface_papers": [
+    {
+      "title": "ABot-Earth 0.5: Generative 3D Earth Model",
+      "arxiv_id": "2606.09967",
+      "url": "https://arxiv.org/abs/2606.09967",
+      "tldr": "ABot-Earth 0.5 is a generative 3D framework that synthesizes vast, seamless 3D environments directly in the 3D Gaussian Splatting representation, conditioned only on satellite imagery — under 10 minutes per square kilometer. With built-in level-of-detail for real-time web visualization, it turns ubiquitous satellite data into an ultra-low-cost simulation sandbox that closes the sim-to-real gap for embodied AI like closed-loop UAV navigation. At 194 upvotes it is the day's top paper, signaling how fast generative 3D is becoming infrastructure for embodied AI.",
+      "tldr_zh": "ABot-Earth 0.5 是一个生成式 3D 框架，直接以 3D Gaussian Splatting 表示合成大规模无缝 3D 环境，仅以卫星影像为条件，每平方公里耗时不到 10 分钟。内置层次化 LOD 支持网页端实时可视化，把随处可得的卫星数据变成超低成本的仿真沙盒，弥合具身 AI（如闭环无人机导航）的 sim-to-real 鸿沟。194 赞登顶当日榜首，标志着生成式 3D 正快速成为具身 AI 的基础设施。",
+      "upvotes": 194,
+      "authors": "Ming Qian, Tianjian Ouyang, Mingchao Sun et al.",
+      "ai_keywords": [],
+      "interest_tag": ""
+    },
+    {
+      "title": "Kwai Keye-VL-2.0 Technical Report",
+      "arxiv_id": "2606.10651",
+      "url": "https://arxiv.org/abs/2606.10651",
+      "tldr": "Kuaishou open-sources Keye-VL-2.0-30B-A3B, a Mixture-of-Experts multimodal model built for hour-level video understanding and agentic intelligence. It is the first to adapt DeepSeek Sparse Attention to GQA multimodal architectures, enabling lossless 256K-context processing that captures critical frames and long-range temporal dependencies without the prohibitive cost of dense attention. With 167 upvotes, it is one of the strongest open releases for long-video agents to date.",
+      "tldr_zh": "快手开源 Keye-VL-2.0-30B-A3B，面向小时级长视频理解与智能体能力的 MoE 多模态模型。它首次将 DeepSeek Sparse Attention 适配到 GQA 多模态架构，实现无损 256K 上下文处理，在不付出稠密注意力高昂代价的前提下捕捉关键帧与长程时序依赖。167 赞，是迄今最强的长视频智能体开源模型之一。",
+      "upvotes": 167,
+      "authors": "Kwai Keye Team, Bin Wen, Changyi Liu et al.",
+      "ai_keywords": [],
+      "interest_tag": ""
+    },
+    {
+      "title": "Role-Agent: Bootstrapping LLM Agents via Dual-Role Evolution",
+      "arxiv_id": "2606.10917",
+      "url": "https://arxiv.org/abs/2606.10917",
+      "tldr": "Role-Agent lets a single LLM play both the agent and the environment for bootstrapped co-evolution. In World-In-Agent the model predicts future states and uses prediction-reality alignment as a process reward; in Agent-In-World it mines failure modes and retrieves similar-failure tasks to reshape training data toward targeted practice. The self-contained loop yields over 4% average gains across benchmarks without external environments — a cheap path to agent self-improvement.",
+      "tldr_zh": "Role-Agent 让单个 LLM 同时扮演智能体与环境，实现自举式协同进化。World-In-Agent 中模型预测未来状态，用预测与真实的对齐作为过程奖励；Agent-In-World 中模型挖掘失败模式、检索相似失败任务来重塑训练数据以针对性练习。这一自洽闭环无需外部环境即在多个基准上平均提升 4%+，是智能体自我提升的低成本路径。",
+      "upvotes": 73,
+      "authors": "Xucong Wang, Ziyu Ma, Shidong Yang et al.",
+      "ai_keywords": [],
+      "interest_tag": ""
+    },
+    {
+      "title": "Retrospective Harness Optimization: Improving LLM Agents via Self-Preference over Trajectory Rollouts",
+      "arxiv_id": "2606.05922",
+      "url": "https://arxiv.org/abs/2606.05922",
+      "tldr": "RHO improves an agent's harness — its skills, tools, and workflows — using only past trajectories, with no ground-truth validation set. It selects a coreset of hard tasks, re-solves them in parallel, and picks harness updates via the agent's own self-consistency and pairwise self-preference. One optimization round lifts SWE-Bench Pro pass rate from 59% to 78% without any external grading, directly targeting prior failure modes and sustaining accuracy over long-horizon sessions.",
+      "tldr_zh": "RHO 仅用历史轨迹优化智能体的“harness”（技能、工具、工作流），无需任何 ground-truth 验证集。它从过往轨迹中选取一批高难度任务并行重解，再凭智能体自身的 self-consistency 与成对自我偏好挑选最优 harness 更新。单轮优化即把 SWE-Bench Pro 通过率从 59% 提升到 78%，无需任何外部评分，精准针对此前的失败模式并在长程会话中维持高准确率。",
+      "upvotes": 48,
+      "authors": "Wenbo Pan, Shujie Liu, Chin-Yew Lin et al.",
+      "ai_keywords": [],
+      "interest_tag": ""
+    },
+    {
+      "title": "SearchSwarm: Towards Delegation Intelligence in Agentic LLMs for Long-Horizon Deep Research",
+      "arxiv_id": "2606.09730",
+      "url": "https://arxiv.org/abs/2606.09730",
+      "tldr": "SearchSwarm tackles delegation intelligence — the ability of a main agent to decompose long-horizon tasks, decide when and what to delegate to subagents, and integrate their summarized results under a finite context window. The team designs a harness that guides high-quality decomposition and constrains subagent returns, then distills those trajectories into model weights via SFT. The resulting SearchSwarm-30B-A3B hits 68.1 on BrowseComp and 73.3 on BrowseComp-ZH, best among comparable-scale models; harness, weights, and data will be released.",
+      "tldr_zh": "SearchSwarm 攻克“委派智能”——主智能体分解长程任务、判断何时委派何任务给子智能体、并在有限上下文窗口内整合子智能体摘要结果的能力。团队设计 harness 引导高质量任务分解并约束子智能体的结果返回，再通过 SFT 把这些轨迹蒸馏进模型权重。所得 SearchSwarm-30B-A3B 在 BrowseComp 达 68.1、BrowseComp-ZH 达 73.3，为同规模最佳；harness、权重与数据将开源。",
+      "upvotes": 45,
+      "authors": "Pu Ning, Quan Chen, Kun Tao et al.",
+      "ai_keywords": [],
+      "interest_tag": "Agent Swarm"
+    }
+  ],
+  "alphaxiv_papers": [
+    {
+      "title": "ConMem: Structured Memory-Guided Adaptation in Training-Free Multi-Agent Systems",
+      "arxiv_id": "2606.08702",
+      "url": "https://arxiv.org/abs/2606.08702",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2606.08702",
+      "tldr": "ConMem is a training-free framework for continual adaptation in multi-agent systems. It distills historical interaction trajectories into structured \"memory cards\" capturing reusable strategies, organizes them into a relation-aware memory graph, then at runtime retrieves and coordinates cards to resolve strategy conflicts and recover dependencies — no extra training or high-quality supervision required. It delivers +10.9% to +12.9% absolute gains across diverse benchmarks, a lightweight route to collective memory for agent teams.",
+      "tldr_zh": "ConMem 是面向多智能体系统持续适应的免训练框架。它把历史交互轨迹蒸馏成捕捉可复用策略的结构化“记忆卡片”，组织成关系感知的记忆图，运行时检索并协调卡片以化解策略冲突、恢复依赖关系——无需额外训练或高质量监督。在多个基准上带来 +10.9% 至 +12.9% 的绝对提升，是为智能体团队构建集体记忆的轻量路径。",
+      "interest_tag": "Agent Swarm"
+    },
+    {
+      "title": "Self-Harness: Harnesses That Improve Themselves",
+      "arxiv_id": "2606.09498",
+      "url": "https://arxiv.org/abs/2606.09498",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2606.09498",
+      "tldr": "Self-Harness is a paradigm where an LLM agent improves its own operating harness without human engineers or stronger external agents. It loops through Weakness Mining (find model-specific failure patterns from traces), Harness Proposal (generate minimal targeted edits), and Proposal Validation (accept only after regression testing). On Terminal-Bench-2.0 it lifts held-out pass rates across three model families — MiniMax M2.5 (40.5 to 61.9%), Qwen3.5-35B-A3B (23.8 to 38.1%), GLM-5 (42.9 to 57.1%). From Shanghai AI Lab.",
+      "tldr_zh": "Self-Harness 提出一种范式：LLM 智能体在没有人类工程师或更强外部智能体的情况下改进自己的运行 harness。它循环执行 Weakness Mining（从轨迹中找出模型特有的失败模式）、Harness Proposal（生成最小化的针对性修改）、Proposal Validation（仅在回归测试通过后采纳）。在 Terminal-Bench-2.0 上对三个模型族的留出通过率均有提升——MiniMax M2.5（40.5→61.9%）、Qwen3.5-35B-A3B（23.8→38.1%）、GLM-5（42.9→57.1%）。来自上海人工智能实验室。",
+      "interest_tag": ""
+    },
+    {
+      "title": "Latent Reasoning with Normalizing Flows (NF-CoT)",
+      "arxiv_id": "2606.06447",
+      "url": "https://arxiv.org/abs/2606.06447",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2606.06447",
+      "tldr": "NF-CoT moves chain-of-thought into a continuous latent space using normalizing flows, replacing verbose text reasoning with compact \"thought vectors.\" By embedding a TARFlow-style flow inside the LLM backbone, it keeps the native autoregressive interface — exact likelihoods, left-to-right decoding with the original KV cache, and direct policy-gradient (GRPO-style) optimization. It improves pass@1 by +13% on Python codegen over Qwen3-8B-Base and runs 1.92x faster than diffusion-based latent reasoning. From UPenn, UCSD, and Meta.",
+      "tldr_zh": "NF-CoT 用归一化流把思维链搬进连续潜空间，以紧凑的“思维向量”替代冗长的文本推理。通过在 LLM 主干中嵌入 TARFlow 式的流模型，它保留了原生自回归接口——精确似然、可复用原 KV 缓存的从左到右解码、以及可直接做策略梯度（GRPO 式）优化。在 Python 代码生成上 pass@1 比 Qwen3-8B-Base 高 +13%，比基于扩散的潜空间推理快 1.92×。来自 UPenn、UCSD 与 Meta。",
+      "interest_tag": ""
+    },
+    {
+      "title": "Latent Spatial Memory for Video World Models (Mirage)",
+      "arxiv_id": "2606.09828",
+      "url": "https://arxiv.org/abs/2606.09828",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2606.09828",
+      "tldr": "Mirage introduces latent spatial memory for video world models — a persistent 3D cache that stores scene geometry directly in diffusion latent space, avoiding the costly RGB render-and-re-encode loop of point-cloud memory. It lifts latent tokens into 3D via depth-guided back-projection and answers queries by warping in latent space. The result: up to 10.57x faster end-to-end generation and 55x lower GPU memory than RGB-cache baselines, with stronger geometric coherence and 3D consistency. From Monash and Zhejiang.",
+      "tldr_zh": "Mirage 为视频世界模型引入潜空间的空间记忆——一个把场景几何直接存储在扩散潜空间的持久 3D 缓存，避免了点云记忆昂贵的 RGB 渲染—再编码循环。它通过深度引导反投影把潜空间 token 提升到 3D，并以潜空间 warp 回答查询。结果是端到端生成最高快 10.57×、GPU 显存比 RGB 缓存基线低 55×，同时几何一致性与 3D 连贯性更强。来自 Monash 与浙江大学。",
+      "interest_tag": ""
+    },
+    {
+      "title": "Dream-Tac: A Unified Tactile World Action Model for Contact-Rich Robot Manipulation",
+      "arxiv_id": "2606.08737",
+      "url": "https://arxiv.org/abs/2606.08737",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2606.08737",
+      "tldr": "Dream-Tac is a unified tactile world action model for contact-rich robot manipulation that jointly predicts actions, future visual observations, and tactile dynamics in one generative framework. A dual-level acceleration strategy preserves the fused attention path during training and adds cache-based diffusion acceleration at inference, yielding 2.9x faster training and 1.8x faster inference. Across six contact-rich tasks it improves action accuracy by 31.7% on average over vision-only baselines. From Peking University.",
+      "tldr_zh": "Dream-Tac 是面向接触密集型机器人操作的统一触觉世界动作模型，在单一生成框架中联合预测动作、未来视觉观测与触觉动态。双层加速策略在训练时保留融合注意力路径、在推理时加入基于缓存的扩散加速，实现训练快 2.9×、推理快 1.8×。在六项接触密集任务上动作准确率平均比纯视觉基线高 31.7%。来自北京大学。",
+      "interest_tag": ""
+    }
+  ],
+  "github_repos": [
+    {
+      "name": "JimLiu/baoyu-design",
+      "url": "https://github.com/JimLiu/baoyu-design",
+      "tldr": "Run Claude Design locally as an Agent Skill across Cursor, Claude Code, and more — producing polished UI mockups, prototypes, decks, and wireframes as self-contained HTML without claude.ai/design. It packages a design workflow into a portable skill (best with Opus 4.8), and racked up 687 stars in four days. A textbook example of the \"Agent Skills\" distribution model going viral.",
+      "tldr_zh": "把 Claude Design 作为 Agent Skill 在本地运行，兼容 Cursor、Claude Code 等——无需 claude.ai/design 即可产出自包含 HTML 形式的精致 UI 原型、演示稿和线框图。它把设计工作流打包成可移植的 skill（搭配 Opus 4.8 最佳），4 天斩获 687 星。是“Agent Skills”分发模式爆红的教科书案例。",
+      "stars": 687,
+      "language": "JavaScript",
+      "interest_tag": ""
+    },
+    {
+      "name": "amElnagdy/guard-skills",
+      "url": "https://github.com/amElnagdy/guard-skills",
+      "tldr": "A collection of \"guard\" skills for coding agents — quality gates that catch AI-generated failure modes in code, tests, and docs before they ship. As coding agents write more unreviewed code, these guardrails address the trust gap directly, which is why the repo gathered 551 stars within days of launch.",
+      "tldr_zh": "一套面向编码智能体的“guard”技能——在代码、测试和文档发布前拦截 AI 生成失败模式的质量门禁。随着编码智能体写出越来越多未经审查的代码，这些护栏直接回应了信任缺口，因此该仓库上线数日即收获 551 星。",
+      "stars": 551,
+      "language": "Markdown",
+      "interest_tag": ""
+    },
+    {
+      "name": "FerroxLabs/wayland",
+      "url": "https://github.com/FerroxLabs/wayland",
+      "tldr": "Wayland bills itself as an AI agent that \"perceives, reasons, acts, and evolves\" — a general-purpose autonomous agent framework in TypeScript. With 367 stars and 56 forks in under a week it has clear traction, though the marketing-forward framing means the substance is worth verifying against the codebase before adoption.",
+      "tldr_zh": "Wayland 自我定位为一个“感知、推理、行动、进化”的 AI 智能体——一个 TypeScript 编写的通用自主智能体框架。不到一周收获 367 星、56 fork，热度确实存在，但偏营销的表述意味着采用前值得对照代码核实其实质内容。",
+      "stars": 367,
+      "language": "TypeScript",
+      "interest_tag": ""
+    },
+    {
+      "name": "ziqihe10-droid/xuefeng-agent",
+      "url": "https://github.com/ziqihe10-droid/xuefeng-agent",
+      "tldr": "Xuefeng-agent is a Chinese college-admission advisor agent that proactively asks follow-up questions, analyzes options, and \"dares to tell the truth.\" A vertical consumer agent landing right at China's gaokao application season, it shows how domain-specific advisory agents can find product-market fit fast — 266 stars and 33 forks in days.",
+      "tldr_zh": "xuefeng-agent 是一个中文高考志愿顾问智能体——会追问、会分析、敢说真话。这是一个正好踩在中国高考志愿填报季的垂类消费级智能体，展示了领域专用顾问型智能体能多快找到 PMF——数日 266 星、33 fork。",
+      "stars": 266,
+      "language": "Python",
+      "interest_tag": ""
+    },
+    {
+      "name": "YMX899/MemoryCloud",
+      "url": "https://github.com/YMX899/MemoryCloud",
+      "tldr": "MemoryCloud proposes managing AI agent memory like a GitHub repo — switch devices, agents, or sessions and the AI still remembers who you are, what it learned, the rules you taught it, and where the project left off. It targets the persistent cross-session memory gap that most agent stacks still handle ad hoc, a small but on-trend entry in the agent-memory space.",
+      "tldr_zh": "MemoryCloud 提出像管理 GitHub 仓库一样管理 AI 智能体记忆——切换设备、智能体或会话后，AI 仍记得你是谁、学到了什么、你教它的规则、以及项目进展到哪。它瞄准的是大多数智能体栈仍在临时处理的跨会话持久记忆缺口，是智能体记忆方向上小而切题的一个项目。",
+      "stars": 40,
+      "language": "Python",
+      "interest_tag": "Memory"
+    }
+  ],
+  "hackernews": [
+    {
+      "title": "Apache Burr: Build reliable AI agents and applications",
+      "url": "https://burr.apache.org/",
+      "tldr": "Apache Burr is a framework for building reliable AI agents and applications as state machines, giving developers explicit control over agent flow, persistence, and observability. Its move under the Apache umbrella signals maturing governance for agent infrastructure, and the 170 points / 89 comments reflect strong developer appetite for reliability-first agent tooling over magic-black-box frameworks.",
+      "tldr_zh": "Apache Burr 是一个把 AI 智能体与应用构建为状态机的框架，让开发者对智能体的流程、持久化和可观测性有显式控制。它纳入 Apache 旗下标志着智能体基础设施治理走向成熟，170 分 / 89 评论反映出开发者对“可靠性优先”的智能体工具（而非魔法黑盒框架）有强烈需求。",
+      "points": 170,
+      "num_comments": 89,
+      "interest_tag": ""
+    },
+    {
+      "title": "A €0.01 bank transfer could compromise a banking AI agent",
+      "url": "https://blue41.com/blog/how-we-helped-bunq-secure-their-financial-ai-assistant/",
+      "tldr": "A security write-up showing how a €0.01 bank transfer — with an attacker-controlled memo — could prompt-inject and compromise bunq's financial AI assistant, turning a trivial transaction into an attack vector. With 150 comments it struck a nerve: it concretizes the prompt-injection threat that every team shipping AI agents over real money quietly fears, and argues agent inputs from untrusted parties must be treated as hostile.",
+      "tldr_zh": "一篇安全分析展示了如何用一笔带有攻击者可控备注的 €0.01 银行转账，对 bunq 的金融 AI 助手进行提示注入并攻陷它，把一笔微不足道的交易变成攻击向量。150 条评论说明它戳中了痛点：它把每个让 AI 智能体经手真实资金的团队都暗自担忧的提示注入威胁具体化了，并主张来自不可信方的智能体输入必须被视为敌意输入。",
+      "points": 162,
+      "num_comments": 150,
+      "interest_tag": ""
+    },
+    {
+      "title": "Show HN: Extend UI – open-source UI kit for modern document apps",
+      "url": "https://www.extend.ai/ui",
+      "tldr": "Extend UI is an open-source UI kit for modern document apps — components for building rich, editor-style interfaces. Landing on the Show HN front page with 143 points, it rides the wave of AI-native document tooling where polished, composable UI primitives are in short supply.",
+      "tldr_zh": "Extend UI 是一个面向现代文档应用的开源 UI 套件——用于构建富文本、编辑器风格界面的组件。以 143 分登上 Show HN 首页，它踩中了 AI 原生文档工具的浪潮——在这个领域，精致、可组合的 UI 基础组件仍然稀缺。",
+      "points": 143,
+      "num_comments": 36,
+      "interest_tag": ""
+    },
+    {
+      "title": "Launch HN: Intuned (YC S22) – Build and run reliable browser automations as code",
+      "url": "https://intunedhq.com",
+      "tldr": "Intuned lets teams build and run reliable browser automations as code — a developer-first alternative to brittle no-code RPA, with an emphasis on reliability at scale. As AI agents increasingly need to operate web UIs, code-defined, testable browser automation is becoming foundational plumbing, which is why this YC Launch drew 116 points.",
+      "tldr_zh": "Intuned 让团队以代码方式构建和运行可靠的浏览器自动化——一个面向开发者、对抗脆弱 no-code RPA 的替代方案，强调规模化下的可靠性。随着 AI 智能体越来越需要操作网页界面，以代码定义、可测试的浏览器自动化正成为基础管道，这也是这次 YC Launch 拿下 116 分的原因。",
+      "points": 116,
+      "num_comments": 54,
+      "interest_tag": ""
+    },
+    {
+      "title": "Show HN: HelixDB – A graph database built on object storage",
+      "url": "https://github.com/HelixDB/helix-db/tree/main",
+      "tldr": "HelixDB is a graph database built on object storage, decoupling compute from storage to make graph workloads cheaper and more elastic. Object-storage-native graph DBs are emerging as a backbone for knowledge graphs and agent memory/RAG systems, and the 87-point Show HN reflects interest in infrastructure that scales graph queries without dedicated storage clusters.",
+      "tldr_zh": "HelixDB 是一个构建在对象存储之上的图数据库，把计算与存储解耦，让图工作负载更便宜、更弹性。对象存储原生的图数据库正成为知识图谱与智能体记忆/RAG 系统的骨干，87 分的 Show HN 反映出大家对“无需专用存储集群即可扩展图查询”的基础设施的兴趣。",
+      "points": 87,
+      "num_comments": 30,
+      "interest_tag": ""
+    }
+  ]
+}
