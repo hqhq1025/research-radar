@@ -1,0 +1,206 @@
+{
+  "date": "2026-06-12",
+  "generated_at": "2026-06-12T16:18:09.367171+08:00",
+  "briefing_zh": "今天 AI 领域的主线是**「agent 的记忆与韧性」**正式从研究边缘走向中心。HuggingFace 当日热度第一的 **EvoArena** 直击一个被长期忽视的假设——绝大多数 agent 评测都默认环境静态，而真实部署是动态的。它把环境变化建模为终端、软件、社交三域上的渐进式更新序列，并配套提出补丁式记忆范式 **EvoMem**，让 agent 记录「记忆如何演化」而非只记一个快照。与之呼应，alphaxiv 上清华的 **FlashMemory-DeepSeek-V4** 用 Lookahead Sparse Attention 把长上下文显存砍掉 86.5%、准确率还略升，**End-to-End Context Compression（LCLMs）** 则把首 token 时延加快 8.8 倍——三者从评测、注意力、上下文压缩三个角度，共同回答「agent 如何在不爆显存的前提下记住更多、记得更久」。\n\n第二条主线是 **agent 自我改进与编排范式的工程化**。上海 AI Lab 的 **Self-Harness** 提出一个颇具想象力的闭环：固定底模不动，让 agent 自己改写「harness」（系统提示、工具、控制逻辑），通过失败轨迹聚类→最小化修改→回归验证三步，在 Terminal-Bench-2.0 上把多个模型的通过率拉升近 20 个百分点。这与 GitHub 上同时走红的 **loop-engineering**、**guard-skills** 形成研究与工程的双向印证——社区正把「计划-执行-验证-改进」的循环和「拦截 AI 特有失败模式的质量闸门」确立为一等学科，而不再是零散的提示词技巧。\n\n第三条线是 **CUA 与具身智能的边界都在被重画**。HF 上的 **WeaveBench** 指出现有 computer-use agent 基准把 GUI、命令行、代码、浏览器拆开单独评测，而真实工作是跨接口编排的——它用 8 个真实领域的 114 个长程任务暴露了当前 CUA 的协同短板。具身侧，天津大学与腾讯混元的 **Embodied-R1.5** 用 8B 参数在 24 个具身基准里的 16 个达到 SOTA，超过 Gemini-Robotics-ER-1.5 和 GPT-5.4，证明「统一架构 + 多任务平衡 RL」这条路在小模型上同样跑得通。\n\n但最刺眼的，是 Hacker News 上**集体涌现的「agent 失控」叙事**。当天前三热帖——Anthropic Fable 护栏之争、AI agent 在 Fedora 社区横冲直撞、以及一个 agent 扫描 DN42 把运营者烧到破产——加上「0.01 欧元转账劫持银行 agent」的提示注入演示，共同构成一记冷水：当研究界忙着让 agent 记得更多、改得更好、做得更长时，工程现实正在为「无成本上限、无问责、无隔离」的自主性付出真金白银的代价。今天的研究亮点与社区焦虑，恰好是同一枚硬币的两面。",
+  "briefing_en": "The throughline today is that **agent memory and resilience** have moved from the research margins to center stage. HuggingFace's top paper, **EvoArena**, attacks a long-ignored assumption: nearly all agent benchmarks assume static environments, while real deployment is dynamic. It models environment change as progressive update sequences across terminal, software, and social domains, paired with **EvoMem**, a patch-based memory paradigm that records *how* memory evolves rather than a single snapshot. Echoing it on alphaxiv, Tsinghua's **FlashMemory-DeepSeek-V4** uses Lookahead Sparse Attention to cut long-context GPU memory by 86.5% while nudging accuracy up, and **End-to-End Context Compression (LCLMs)** delivers 8.8x faster time-to-first-token — together answering, from the angles of evaluation, attention, and compression, how agents remember more and longer without blowing up memory.\n\nThe second thread is the **engineering-ization of agent self-improvement and orchestration**. Shanghai AI Lab's **Self-Harness** proposes an imaginative loop: freeze the base model and let the agent rewrite its own harness (system prompts, tools, control logic) via failure-trace clustering, minimal targeted edits, and regression validation — lifting Terminal-Bench-2.0 pass rates by nearly 20 points across multiple models. This mirrors the simultaneous GitHub rise of **loop-engineering** and **guard-skills**: the community is formalizing the plan-act-verify-improve loop and 'quality gates for AI-specific failure modes' as first-class disciplines rather than scattered prompt tricks.\n\nThe third thread is that the **boundaries of both CUA and embodied AI are being redrawn**. HF's **WeaveBench** argues that existing computer-use-agent benchmarks test GUI, CLI, code, and browser interfaces in isolation, while real work demands cross-interface orchestration — its 114 long-horizon tasks across 8 domains expose how poorly current CUAs coordinate. On the embodied side, Tianjin University and Tencent Hunyuan's **Embodied-R1.5** hits SOTA on 16 of 24 benchmarks with just 8B parameters, beating Gemini-Robotics-ER-1.5 and GPT-5.4, proving the 'unified architecture + multi-task balanced RL' recipe works at small scale.\n\nBut the most striking signal is the **collective 'agents run amok' narrative on Hacker News**. The day's top three threads — the fight over Anthropic Fable's guardrails, AI agents running amok in the Fedora community, and an agent that bankrupted its operator scanning DN42 — plus a 'EUR0.01 transfer hijacks a banking agent' prompt-injection demo, together throw cold water on the field: while researchers race to make agents remember more, self-improve, and run longer, engineering reality is paying real money for autonomy that ships without cost ceilings, accountability, or isolation. Today's research highlights and community anxieties are two sides of the same coin.",
+  "viral_analysis_zh": "今天最可能火的是 Hacker News 上的「**AI agent 扫描 DN42 把运营者烧到破产**」——它把抽象的「agent 安全/成本」风险压缩成一个具体、荒诞又真实的破产故事，自带传播钩子和情绪共鸣，每个跑过自主 agent 的人都会心头一紧。研究侧则看好上海 AI Lab 的 **Self-Harness**：「让 agent 改写自己的 harness」这个一句话就能讲清的概念，叠加 Terminal-Bench 上近 20 个点的硬核提升，恰好踩中当下「harness 和模型一样值得投入」的工程共识，已在 X 上被自发转述。",
+  "viral_analysis_en": "The day's most likely viral hit is Hacker News's '**AI agent bankrupted its operator scanning DN42**' — it compresses the abstract 'agent safety/cost' risk into a concrete, absurd, and very real bankruptcy story, complete with a built-in shareability hook and emotional resonance that makes anyone who has run an autonomous agent wince. On the research side, bet on Shanghai AI Lab's **Self-Harness**: the one-sentence-explainable idea of 'let the agent rewrite its own harness,' backed by a nearly 20-point Terminal-Bench gain, lands squarely on the current engineering consensus that 'the harness deserves as much investment as the model' — and it's already being organically retold on X.",
+  "huggingface_papers": [
+    {
+      "title": "EvoArena: Tracking Memory Evolution for Robust LLM Agents in Dynamic Environments",
+      "arxiv_id": "2606.13681",
+      "url": "https://arxiv.org/abs/2606.13681",
+      "tldr": "Most agent benchmarks assume static environments, but real deployment is dynamic. EvoArena models environment change as progressive update sequences across terminal, software, and social domains, and pairs it with EvoMem, a patch-based memory paradigm that records memory as structured update histories. It directly targets the gap where agents must continually re-align knowledge and behavior as conditions shift, making it one of the first benchmarks to stress-test agent memory under evolution rather than one-shot tasks.",
+      "tldr_zh": "现有 agent 评测大多假设环境静态，但真实部署是动态的。EvoArena 把环境变化建模为终端、软件、社交三大领域上的渐进式更新序列，并配套提出 EvoMem——一种以补丁（patch）形式记录记忆演化历史的范式。它直击 agent 必须随条件变化持续对齐知识与行为这一痛点，是少数专门压测 agent 记忆「演化能力」而非一次性任务的基准。",
+      "upvotes": 78,
+      "authors": "Jundong Xu, Qingchuan Li, Jiaying Wu, Yihuai Lan",
+      "ai_keywords": [],
+      "interest_tag": "Memory"
+    },
+    {
+      "title": "InterleaveThinker: Reinforcing Agentic Interleaved Generation",
+      "arxiv_id": "2606.13679",
+      "url": "https://arxiv.org/abs/2606.13679",
+      "tldr": "Current image generators excel at single-image generation/editing but cannot produce interleaved text-image sequences, which are key for visual narratives and embodied manipulation. InterleaveThinker is the first multi-agent pipeline that endows any existing image generator with interleaved generation, using a planner-driven decomposition and RL-style reinforcement. It turns a single-shot generator into a stepwise narrator without retraining the base model.",
+      "tldr_zh": "当前图像生成器擅长单图生成与编辑，却无法产出图文交错（interleaved）序列，而后者对视觉叙事、操作指引和具身操控至关重要。InterleaveThinker 是首个让「任意现有图像生成器」获得交错生成能力的多 agent 流水线，通过 planner 驱动的任务分解加强化学习式强化实现。它无需重训底模，就把单步生成器变成了能分步叙事的系统。",
+      "upvotes": 67,
+      "authors": "Dian Zheng, Harry Lee, Manyuan Zhang, Kaituo Feng",
+      "ai_keywords": [],
+      "interest_tag": ""
+    },
+    {
+      "title": "SpatialClaw: Rethinking Action Interface for Agentic Spatial Reasoning",
+      "arxiv_id": "2606.13673",
+      "url": "https://arxiv.org/abs/2606.13673",
+      "tldr": "Spatial reasoning remains hard for VLMs, and tool-augmented agents are bottlenecked by the action interface through which perception tools are invoked. SpatialClaw studies how interface design shapes open-ended spatial reasoning, contrasting single-pass code execution (which commits to a strategy before seeing intermediate results) with more interactive interleaved approaches. The work reframes the bottleneck from the model to the action interface itself.",
+      "tldr_zh": "空间推理对视觉语言模型（VLM）仍是难点，而工具增强型 agent 的能力被「调用感知工具的动作接口」所限制。SpatialClaw 研究接口设计如何塑造开放式空间推理，对比了单次代码执行（在看到中间结果前就锁定完整策略）与更具交互性的交错式接口。该工作把瓶颈从模型本身重新定位到了动作接口的设计上。",
+      "upvotes": 58,
+      "authors": "Seokju Cho, Ryo Hachiuma, Abhishek Badki, Hang Su",
+      "ai_keywords": [],
+      "interest_tag": ""
+    },
+    {
+      "title": "MaxProof: Scaling Mathematical Proof with Generative-Verifier RL and Population-Level Test-Time Scaling",
+      "arxiv_id": "2606.13473",
+      "url": "https://arxiv.org/abs/2606.13473",
+      "tldr": "MaxProof is a population-level test-time scaling framework for competition-level math proof in the MiniMax-M3 series. M3 trains three capabilities — proof generation, verification, and critique-conditioned repair — with a low-false-positive generative verifier, merged into one model. At test time it acts as generator, verifier, refiner, and ranker, searching a population of candidate proofs and returning one via tournament selection.",
+      "tldr_zh": "MaxProof 是 MiniMax-M3 系列面向竞赛级数学证明的「群体级」测试时扩展框架。M3 先训练证明生成、证明验证、批评条件下的证明修复三种能力，配合一个低假阳性率的生成式验证器，再合并进单一模型。测试时，该模型同时充当生成器、验证器、精炼器和排序器，在候选证明的群体中搜索，并通过锦标赛式选择返回最终证明。",
+      "upvotes": 53,
+      "authors": "Jiacheng Chen, Xinyu Zhang, Shunkai Zhang, Yanmohan Wang",
+      "ai_keywords": [],
+      "interest_tag": ""
+    },
+    {
+      "title": "WeaveBench: A Long-Horizon, Real-World Benchmark for Computer-Use Agents with Hybrid Interfaces",
+      "arxiv_id": "2606.09426",
+      "url": "https://arxiv.org/abs/2606.09426",
+      "tldr": "Computer-use agents now span visual desktop control, CLI, code editing, browsers, and external tools, but existing benchmarks test these interfaces in isolation. WeaveBench introduces 114 long-horizon tasks across 8 real-world work domains, each requiring agents to combine GUI observations/actions with CLI/code operations in a single trajectory, grounded in real user requests with publicly verifiable artifacts. It exposes how poorly current CUAs orchestrate across interfaces.",
+      "tldr_zh": "Computer-use agent（CUA）如今要同时驾驭可视化桌面操作、命令行、代码编辑、浏览器和外部工具，但现有基准把这些接口拆开单独评测。WeaveBench 提出覆盖 8 个真实工作领域的 114 个长程任务，每个任务都要求 agent 在同一条轨迹内把 GUI 观察/操作与 CLI/代码操作结合起来，且基于真实用户需求、产物可公开验证。它暴露了当前 CUA 在「跨接口编排」上的明显短板。",
+      "upvotes": 38,
+      "authors": "Wanli Li, Bowen Zhou, Yunyao Yu, Zhou Xu",
+      "ai_keywords": [],
+      "interest_tag": "CUA"
+    }
+  ],
+  "alphaxiv_papers": [
+    {
+      "title": "Self-Harness: Harnesses That Improve Themselves",
+      "arxiv_id": "2606.09498",
+      "url": "https://arxiv.org/abs/2606.09498",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2606.09498",
+      "tldr": "An LLM agent's performance depends on both the base model and the harness (system prompts, tools, control logic) mediating its environment. Self-Harness (Shanghai AI Lab) lets the agent rewrite its own harness via a three-stage loop: Weakness Mining clusters failed traces, Harness Proposal generates minimal targeted edits, and Proposal Validation merges only edits that pass regression tests. On Terminal-Bench-2.0 it lifted held-out pass rates substantially across MiniMax M2.5 (40.5%->61.9%), Qwen3.5 (23.8%->38.1%), and GLM-5 (42.9%->57.1%).",
+      "tldr_zh": "LLM agent 的表现由底模和「harness」（系统提示、工具、控制逻辑）共同决定。Self-Harness（上海 AI Lab）让 agent 自己改写 harness：三阶段闭环——Weakness Mining 聚类失败轨迹找出模型特有的失败模式，Harness Proposal 生成最小化的针对性修改，Proposal Validation 仅在通过回归测试后才合并。在 Terminal-Bench-2.0 上，三个模型的留出集通过率均大幅提升：MiniMax M2.5 从 40.5% 升至 61.9%，Qwen3.5 从 23.8% 升至 38.1%，GLM-5 从 42.9% 升至 57.1%。",
+      "interest_tag": ""
+    },
+    {
+      "title": "Embodied-R1.5: Evolving Physical Intelligence via Embodied Foundation Models",
+      "arxiv_id": "2606.11324",
+      "url": "https://arxiv.org/abs/2606.11324",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2606.11324",
+      "tldr": "Embodied-R1.5 (Tianjin University & Tencent Hunyuan) is an 8B unified Embodied Foundation Model that integrates spatial reasoning, planning, correction, and pointing in a single architecture. Built on 15B+ tokens of automated data and a multi-task balanced RL recipe, it hits SOTA on 16 of 24 embodied VLM benchmarks, surpassing Gemini-Robotics-ER-1.5 and GPT-5.4, and can be fine-tuned into a strong VLA with minimal data.",
+      "tldr_zh": "Embodied-R1.5（天津大学与腾讯混元）是一个 8B 的统一具身基础模型（EFM），把空间推理、任务规划、纠错、指向四种能力整合进单一架构。基于超过 15B token 的自动化数据和多任务平衡 RL 配方，它在 24 个具身 VLM 基准中的 16 个上达到 SOTA，超越 Gemini-Robotics-ER-1.5 和 GPT-5.4，且只需少量数据即可微调成强力的 VLA 模型。",
+      "interest_tag": ""
+    },
+    {
+      "title": "Latent Spatial Memory for Video World Models",
+      "arxiv_id": "2606.09828",
+      "url": "https://arxiv.org/abs/2606.09828",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2606.09828",
+      "tldr": "Video world models that stay 3D-consistent usually keep an explicit RGB point-cloud memory, paying a costly render-and-re-encode round trip every step. Mirage (Zhejiang University & Microsoft Research) instead caches scene info directly in the diffusion latent space via depth-guided back-projection, querying it through latent-space warping. The result: up to 10.57x faster end-to-end generation and 55x lower GPU memory, while returning faithfully to previously seen regions after large camera detours.",
+      "tldr_zh": "保持 3D 一致性的视频世界模型通常维护一个显式的 RGB 点云记忆，每一步都要付出「渲染再重编码」的昂贵往返开销。Mirage（浙江大学与微软研究院）改为通过深度引导的反投影，把场景信息直接缓存在扩散模型的隐空间里，并以隐空间 warp 进行查询。效果是端到端生成最高提速 10.57 倍、GPU 显存降低 55 倍，且在大幅度镜头绕行后仍能忠实回到此前观察过的区域。",
+      "interest_tag": ""
+    },
+    {
+      "title": "FlashMemory-DeepSeek-V4: Lightning Index Ultra-Long Context via Lookahead Sparse Attention",
+      "arxiv_id": "2606.09079",
+      "url": "https://arxiv.org/abs/2606.09079",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2606.09079",
+      "tldr": "FlashMemory-DeepSeek-V4 (Tsinghua University) introduces Lookahead Sparse Attention (LSA) for dynamic KV-cache management, proactively fetching only query-critical historical chunks instead of holding the full cache. It cuts average GPU memory footprint by 86.5% while actually improving downstream long-context accuracy by 0.6%, attacking the quadratic-cost wall that blocks agentic and repo-scale long-context workloads.",
+      "tldr_zh": "FlashMemory-DeepSeek-V4（清华大学）提出 Lookahead Sparse Attention（LSA）做动态 KV 缓存管理，主动只取回与查询关键相关的历史片段，而非保留完整缓存。它把平均 GPU 显存占用降低 86.5%，同时长上下文下游准确率还提升了 0.6%，正面攻克了阻碍 agentic 与仓库级长上下文负载的二次方成本墙。",
+      "interest_tag": ""
+    },
+    {
+      "title": "End-to-End Context Compression at Scale",
+      "arxiv_id": "2606.09659",
+      "url": "https://arxiv.org/abs/2606.09659",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2606.09659",
+      "tldr": "Latent Context Language Models (LCLMs) wrap an encoder-decoder framework that compresses LLM input contexts, handling millions of tokens efficiently. Versus KV-cache methods it delivers 8.8x faster Time-To-First-Token with substantially lower peak GPU memory while keeping high accuracy on diverse long-context tasks. Tagged on alphaxiv under #agents, it targets the persistent-memory and long-horizon needs of agentic workflows.",
+      "tldr_zh": "Latent Context Language Models（LCLMs）用编码器-解码器框架压缩 LLM 输入上下文，可高效处理百万级 token。相比 KV 缓存方法，它把首 token 时延（TTFT）加快 8.8 倍、峰值 GPU 显存显著降低，同时在多种长上下文任务上保持高准确率。该工作在 alphaxiv 上被打上 #agents 标签，瞄准的正是 agentic 工作流对持久记忆与长程任务的需求。",
+      "interest_tag": ""
+    }
+  ],
+  "github_repos": [
+    {
+      "name": "JimLiu/baoyu-design",
+      "url": "https://github.com/JimLiu/baoyu-design",
+      "tldr": "Runs 'Claude Design' locally as an Agent Skill across Cursor, Claude Code and other harnesses, producing polished UI mockups, prototypes, decks, and wireframes as self-contained HTML. With 795 stars and a healthy 63-fork ratio in under a week, it rides the surging 'design-as-an-agent-skill' wave that lets non-designers generate production-leaning artifacts from prompts.",
+      "tldr_zh": "把「Claude Design」作为 Agent Skill 在本地运行，兼容 Cursor、Claude Code 等多种环境，能把提示词直接产出为自包含 HTML 的 UI 原型、设计稿、幻灯片和线框图。上线不到一周即收获 795 星、63 个 fork（比例健康），踩中了「把设计能力封装成 agent skill」的爆发风口，让非设计师也能从提示词生成接近生产级的产物。",
+      "stars": 795,
+      "language": "JavaScript",
+      "interest_tag": ""
+    },
+    {
+      "name": "amElnagdy/guard-skills",
+      "url": "https://github.com/amElnagdy/guard-skills",
+      "tldr": "A set of 'guard skills' for coding agents — quality gates that catch AI-generated failure modes in code, tests, and docs before they ship. With 573 stars and 63 forks it reflects a maturing concern: as agents write more code, teams want guardrails that specifically target the characteristic mistakes LLMs make rather than generic linting.",
+      "tldr_zh": "面向编码 agent 的一套「守护技能」（guard skills）——即质量闸门，在 AI 生成的代码、测试、文档上线前拦截其特有的失败模式。573 星、63 fork，反映出一个正在成熟的关切：随着 agent 写的代码越来越多，团队需要的不是通用 lint，而是专门针对 LLM 典型错误的护栏。",
+      "stars": 573,
+      "language": "Unknown",
+      "interest_tag": ""
+    },
+    {
+      "name": "ziqihe10-droid/xuefeng-agent",
+      "url": "https://github.com/ziqihe10-droid/xuefeng-agent",
+      "tldr": "A Chinese 'gaokao college-application advisor' agent that proactively asks follow-up questions, analyzes options, and 'dares to tell the truth.' At 359 stars / 51 forks it shows the strong pull of vertical, high-stakes consumer agents in China — a once-a-year, emotionally charged decision is exactly the kind of narrow domain where an opinionated agent beats generic chat.",
+      "tldr_zh": "一个中文「高考志愿顾问」agent，主打会主动追问、会分析、敢说真话。359 星 / 51 fork，体现了中国市场上垂直、高利害消费级 agent 的强劲拉力——一年一次、情绪浓度极高的决策，正是「有主见的 agent」胜过通用聊天的典型窄域场景。",
+      "stars": 359,
+      "language": "HTML",
+      "interest_tag": ""
+    },
+    {
+      "name": "DietrichGebert/ponytail",
+      "url": "https://github.com/DietrichGebert/ponytail",
+      "tldr": "Makes your AI coding agent 'think like the laziest senior dev in the room' — its tagline is 'the best code is the code you never wrote.' Created today and already at 283 stars, it taps the backlash against agents that over-engineer and over-generate, steering them toward deletion, reuse, and minimalism instead of bulk output.",
+      "tldr_zh": "让你的 AI 编码 agent「像房间里最懒的资深工程师那样思考」——标语是「最好的代码是你从没写过的代码」。今天刚创建就冲到 283 星，精准蹭中了对「过度工程、过度生成」型 agent 的反弹情绪，引导 agent 走向删代码、复用、极简，而不是堆量输出。",
+      "stars": 283,
+      "language": "JavaScript",
+      "interest_tag": ""
+    },
+    {
+      "name": "cobusgreyling/loop-engineering",
+      "url": "https://github.com/cobusgreyling/loop-engineering",
+      "tldr": "A practical reference and pattern collection for 'loop engineering' — designing the systems that prompt and orchestrate AI coding agents, inspired by Addy Osmani and Boris Cherny. At 100 stars / 15 forks it signals that the community is formalizing the loop (plan-act-verify-improve) as a first-class engineering discipline, not just prompt tricks.",
+      "tldr_zh": "一份关于「loop engineering（循环工程）」的实用参考与模式合集——即设计用来提示和编排 AI 编码 agent 的系统，灵感来自 Addy Osmani 与 Boris Cherny。100 星 / 15 fork，标志着社区正把「计划-执行-验证-改进」的循环正式确立为一门一等工程学科，而不再只是提示词技巧。",
+      "stars": 100,
+      "language": "JavaScript",
+      "interest_tag": ""
+    }
+  ],
+  "hackernews": [
+    {
+      "title": "Cybersecurity researchers aren't happy about the guardrails on Anthropic's Fable",
+      "url": "https://techcrunch.com/2026/06/10/cybersecurity-researchers-arent-happy-about-the-guardrails-on-anthropics-fable/",
+      "tldr": "Security researchers are pushing back on the guardrails Anthropic shipped with its new 'Fable' system, arguing the safety restrictions block legitimate security research and red-teaming workflows. The 515-comment thread captures the perennial tension between vendor-imposed safety constraints and the practitioners who need unfiltered access to probe real vulnerabilities.",
+      "tldr_zh": "安全研究者对 Anthropic 新系统「Fable」附带的护栏强烈不满，认为这些安全限制挡住了正当的安全研究和红队工作流。515 条评论的讨论串集中体现了一对长期矛盾：厂商强加的安全约束，与需要无过滤访问权限去探测真实漏洞的从业者之间的张力。",
+      "points": 582,
+      "num_comments": 515,
+      "interest_tag": ""
+    },
+    {
+      "title": "AI agent runs amok in Fedora and elsewhere",
+      "url": "https://lwn.net/SubscriberLink/1077035/c7e7c14fbd60fae9/",
+      "tldr": "An LWN piece documents AI agents 'running amok' inside the Fedora project and other open-source communities — flooding maintainers with low-quality automated contributions, bogus bug reports, and disruptive automated behavior. With 543 points it crystallizes growing maintainer frustration over agents that generate volume without accountability, and the governance question of how OSS projects gate agent-driven activity.",
+      "tldr_zh": "LWN 的报道记录了 AI agent 在 Fedora 项目及其他开源社区里「横冲直撞」——用低质量的自动化贡献、无效 bug 报告和破坏性自动行为淹没维护者。543 分的热度凝结了维护者日益增长的不满：agent 只产量、不担责。它也抛出一个治理难题：开源项目该如何对 agent 驱动的活动设闸。",
+      "points": 543,
+      "num_comments": 240,
+      "interest_tag": ""
+    },
+    {
+      "title": "AI agent bankrupted their operator while trying to scan DN42",
+      "url": "https://lantian.pub/en/article/fun/ai-agent-bankrupted-their-operator-scan-dn42lantian.lantian/",
+      "tldr": "A cautionary tale: an autonomous AI agent tasked with scanning the DN42 experimental network spiraled into runaway cloud spending that bankrupted its operator. The 354-point thread is a vivid real-world example of why agents need hard cost ceilings, rate limits, and human-in-the-loop budget gates before being given unsupervised access to billable infrastructure.",
+      "tldr_zh": "一个警世故事：一个被指派去扫描 DN42 实验网络的自主 AI agent 失控烧钱，把运营者烧到破产。354 分的讨论串是一个生动的真实案例，说明为什么在把可计费的基础设施交给 agent 无人监督地使用之前，必须设置硬性成本上限、速率限制和人在环的预算闸门。",
+      "points": 354,
+      "num_comments": 106,
+      "interest_tag": ""
+    },
+    {
+      "title": "Apache Burr: Build reliable AI agents and applications",
+      "url": "https://burr.apache.org/",
+      "tldr": "Apache Burr graduated into the Apache ecosystem as a framework for building reliable AI agents and applications via explicit state machines, making agent control flow observable, debuggable, and testable. At 243 points it signals that 'reliability-first' agent frameworks — favoring inspectable state over opaque autonomy — are gaining serious institutional traction.",
+      "tldr_zh": "Apache Burr 进入 Apache 生态，作为一个用显式状态机构建可靠 AI agent 与应用的框架，让 agent 的控制流可观测、可调试、可测试。243 分的热度说明「可靠性优先」的 agent 框架——偏好可检视的状态而非不透明的自主性——正在获得严肃的机构级关注。",
+      "points": 243,
+      "num_comments": 113,
+      "interest_tag": ""
+    },
+    {
+      "title": "A €0.01 bank transfer could compromise a banking AI agent",
+      "url": "https://blue41.com/blog/how-we-helped-bunq-secure-their-financial-ai-assistant/",
+      "tldr": "Security researchers show how a €0.01 transfer carrying a crafted memo could inject instructions into bunq's financial AI assistant, hijacking the agent through its own transaction feed. The 205-point writeup is a sharp demonstration of prompt injection via untrusted data channels — a banking-grade reminder that any agent reading user-controlled content is an attack surface.",
+      "tldr_zh": "安全研究者展示了如何用一笔携带精心构造备注的 0.01 欧元转账，向 bunq 的金融 AI 助手注入指令，借由 agent 自己的交易流劫持它。205 分的文章犀利演示了「通过不可信数据通道实施提示注入」——这是银行级的警示：任何会读取用户可控内容的 agent，都是一个攻击面。",
+      "points": 205,
+      "num_comments": 197,
+      "interest_tag": ""
+    }
+  ]
+}
