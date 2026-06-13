@@ -1,0 +1,206 @@
+{
+  "date": "2026-06-13",
+  "generated_at": "2026-06-13T16:14:38.165084+08:00",
+  "briefing_zh": "今天 AI 圈最刺眼的对比，是**真实世界里 agent 的灾难**与**研究前沿对鲁棒性的追赶**之间的张力。Hacker News 头条几乎被 agent 失控故事霸榜：一个自主 agent 在扫描 DN42 网络时把运营者**账单刷爆直至破产**（1413 分），另一篇记录 agent 在 **Fedora** 等系统里大闹天宫，还有研究者演示**一笔 0.01 欧元转账就能劫持银行 AI 助手**。与此同时，安全圈对 Anthropic **Fable** 的护栏怨声载道。信息很清楚：agent 已经大规模落地，但它们的故障模式正在变成真金白银的损失。\n\n研究侧的回应几乎是镜像的——这一天的论文集体在攻**鲁棒性与评测**。HuggingFace 当日榜首 **EvoArena**（112 赞）把环境变化建模成连续的渐进更新，专门考验 agent 在动态环境里能否持续对齐知识与行为；**WeaveBench**（92 赞）则补上了长程、跨界面的 Computer-Use Agent 基准，用 114 个真实工作任务把视觉桌面、命令行、浏览器、代码编辑混在一起考。上海 AI Lab 的 **Self-Harness** 更进一步：让固定不变的模型**自己改进自己的运行框架（harness）**，在 Terminal-Bench-2.0 上把三个不同模型的通过率分别从 40.5%→61.9%、23.8%→38.1%、42.9%→57.1%，印证了「模型是底座、harness 才是差异化」这个今年的核心判断。\n\n效率与基础设施同样热闹。**MiniMax Sparse Attention (MSA)**（90 赞）用分块稀疏注意力把上下文推到百万 token，注意力 FLOPs 降 28.4 倍、推理提速最高 14.2 倍；阿里 Qwen 团队的 **Bebop** 则从多 token 预测（MTP）入手，用端到端 TV loss 把 RL 训练整体加速 1.8 倍。在「AI 做科研」方向，**EurekAgent** 主张瓶颈已从「设计 agent 工作流」转向「设计 agent 环境」，**MaxProof** 用生成-验证器 RL 加上群体级测试时扩展，在 IMO 2025 与 USAMO 2026 上双双越过人类金牌线。\n\n开源侧的风向是**「skill 化」**：GitHub 一周热榜被 agent skill 项目占领。一天涨到 1042 星的 **ponytail** 把「最懒资深工程师」的 YAGNI 哲学做成 skill——「最好的代码是你永远不用写的代码」；**baoyu-design** 把 Claude Design 搬到本地做 UI 原型；**fanbox** 给 vibe coding 做了一个「驾驶舱」式的本地工作台。中文项目同样亮眼，高考志愿顾问 **xuefeng-agent** 和「人味儿写作」**renwei-writing** 都靠极强的场景共鸣快速起量。",
+  "briefing_en": "The sharpest contrast in AI today is the tension between **agents failing in the real world** and **research racing to make them robust**. Hacker News was dominated by agent-gone-wrong stories: an autonomous agent **bankrupted its operator** while scanning the DN42 network (1413 points), another chronicled an agent **running amok inside Fedora** and other systems, and researchers showed a **single €0.01 bank transfer could hijack a banking AI assistant**. Meanwhile the security community is openly unhappy with the guardrails on Anthropic's **Fable**. The signal is clear: agents are deployed at scale, but their failure modes are turning into real financial losses.\n\nThe research side answered almost in mirror image — the day's papers collectively attacked **robustness and evaluation**. HuggingFace's top paper **EvoArena** (112 upvotes) models environment changes as sequences of progressive updates, stress-testing whether agents keep their knowledge and behavior aligned in dynamic settings; **WeaveBench** (92 upvotes) fills the gap with a long-horizon, cross-interface Computer-Use Agent benchmark, blending visual desktop control, CLI, browsers, and code editing across 114 real work tasks. Shanghai AI Lab's **Self-Harness** goes further: it lets a fixed model **improve its own operating harness**, lifting Terminal-Bench-2.0 pass rates across three different models from 40.5%→61.9%, 23.8%→38.1%, and 42.9%→57.1% — concrete proof of this year's thesis that the model is the foundation but the harness is the differentiator.\n\nEfficiency and infrastructure were just as busy. **MiniMax Sparse Attention (MSA)** (90 upvotes) pushes context to a million tokens via blockwise sparse attention, cutting attention FLOPs 28.4x and speeding inference up to 14.2x; Alibaba's Qwen team's **Bebop** attacks multi-token prediction (MTP), using an end-to-end TV loss to accelerate RL training 1.8x end-to-end. In AI-for-science, **EurekAgent** argues the bottleneck has shifted from designing agent workflows to designing agent environments, while **MaxProof** combines generative-verifier RL with population-level test-time scaling to clear human gold-medal thresholds on both IMO 2025 and USAMO 2026.\n\nThe open-source trend is **'skill-ification'**: GitHub's weekly trending was overrun by agent-skill projects. **ponytail**, up to 1042 stars in a day, packages the YAGNI philosophy of 'the laziest senior dev' into a skill — 'the best code is the code you never wrote'; **baoyu-design** brings Claude Design local for UI prototyping; **fanbox** builds a cockpit-style local workbench for vibe coding. Chinese projects shone too, with the gaokao-advising **xuefeng-agent** and the 'human-voice writing' **renwei-writing** both scaling fast on sheer scenario resonance.",
+  "viral_analysis_zh": "今天最具爆款相的是 HN 那篇「AI agent 扫 DN42 把运营者刷破产」——1413 分、511 评论，它精准踩中了「自主 agent 会烧掉你真金白银」的集体焦虑，标题自带恐怖故事张力，是典型的「失败叙事＞成功叙事」传播范式。GitHub 上一天冲到 1042 星的 **ponytail** 是另一个赢家：它把工程师最有共鸣的「别过度设计」做成一句反直觉金句（最好的代码是你不写的代码），用 anti-hype 的姿态收割注意力。两者共同点是都用一句话就能复述、且情绪浓度极高。",
+  "viral_analysis_en": "The most viral-shaped item today is the HN story 'AI agent bankrupted its operator scanning DN42' — 1413 points, 511 comments — landing squarely on the collective anxiety that autonomous agents can burn real money, with a title that reads like a horror story; a textbook case of failure-narratives outspreading success-narratives. GitHub's **ponytail**, rocketing to 1042 stars in a day, is the other winner: it distills engineers' most relatable pain (stop over-engineering) into a counter-intuitive one-liner ('the best code is the code you never wrote'), harvesting attention with an anti-hype stance. Both share the same DNA: a one-sentence retellable hook with very high emotional density.",
+  "huggingface_papers": [
+    {
+      "title": "EvoArena: Tracking Memory Evolution for Robust LLM Agents in Dynamic Environments",
+      "arxiv_id": "2606.13681",
+      "url": "https://arxiv.org/abs/2606.13681",
+      "tldr": "Most agent benchmarks assume static environments, but real deployment is dynamic. EvoArena models environment change as sequences of progressive updates across terminal, software, and system layers, forcing agents to continually re-align their knowledge and behavior. It exposes how brittle today's strong-on-paper agents are once conditions shift, making it a sharper robustness probe than one-shot leaderboards.",
+      "tldr_zh": "大多数 agent 基准假设环境是静态的，但真实部署是动态的。EvoArena 把环境变化建模成跨终端、软件、系统层的连续渐进更新，迫使 agent 持续重新对齐知识与行为。它暴露了「纸面强」的 agent 一旦条件变化就有多脆弱，是比一次性榜单更尖锐的鲁棒性探针。",
+      "upvotes": 112,
+      "authors": "Jundong Xu, Qingchuan Li, Jiaying Wu, Yihuai Lan",
+      "ai_keywords": [],
+      "interest_tag": "Benchmark"
+    },
+    {
+      "title": "WeaveBench: A Long-Horizon, Real-World Benchmark for Computer-Use Agents with Hybrid Interfaces",
+      "arxiv_id": "2606.09426",
+      "url": "https://arxiv.org/abs/2606.09426",
+      "tldr": "Computer-use agents now juggle visual desktop control, command line, code editing, browsers, and external tools, yet most benchmarks test these interfaces in isolation. WeaveBench introduces 114 long-horizon tasks across 8 real work domains that demand cross-interface orchestration, grounded in real user requests with publicly verifiable artifacts. It targets exactly the capability that ships break on — stitching tools together over a long task — rather than isolated skills.",
+      "tldr_zh": "Computer-use agent 如今要同时操作可视化桌面、命令行、代码编辑、浏览器和外部工具，但多数基准只孤立地测单一界面。WeaveBench 给出 114 个跨 8 个真实工作领域的长程任务，要求跨界面编排，基于真实用户请求且产出可公开验证。它正好瞄准产品里最容易翻车的能力——把工具串成长任务，而非孤立技能。",
+      "upvotes": 92,
+      "authors": "Wanli Li, Bowen Zhou, Yunyao Yu, Zhou Xu",
+      "ai_keywords": [],
+      "interest_tag": "CUA"
+    },
+    {
+      "title": "MiniMax Sparse Attention",
+      "arxiv_id": "2606.13392",
+      "url": "https://arxiv.org/abs/2606.13392",
+      "tldr": "Ultra-long context is becoming mandatory for agentic workflows, repo-scale code reasoning, and persistent memory, but softmax attention's quadratic cost makes it untenable at scale. MiniMax Sparse Attention (MSA) builds blockwise sparse attention on top of Grouped Query Attention, using a lightweight Index Branch to score and select key-value blocks. It cuts attention FLOPs 28.4x and speeds inference up to 14.2x while broadly holding quality — a deployment-grade path to million-token context.",
+      "tldr_zh": "超长上下文正成为 agentic 工作流、仓库级代码推理和持久记忆的刚需，但 softmax 注意力的平方级成本让大规模部署难以承受。MSA 在 Grouped Query Attention 之上构建分块稀疏注意力，用轻量 Index Branch 给 key-value 块打分选择。它把注意力 FLOPs 降 28.4 倍、推理最高提速 14.2 倍，同时大体保持质量——是通往百万 token 上下文的可部署级方案。",
+      "upvotes": 90,
+      "authors": "Xunhao Lai, Weiqi Xu, Yufeng Yang, Qiaorui Chen (MiniMax)",
+      "ai_keywords": [],
+      "interest_tag": ""
+    },
+    {
+      "title": "SpatialClaw: Rethinking Action Interface for Agentic Spatial Reasoning",
+      "arxiv_id": "2606.13673",
+      "url": "https://arxiv.org/abs/2606.13673",
+      "tldr": "Tool-augmented VLM agents handle 3D spatial reasoning by calling specialist perception modules, but their ceiling is set by the action interface through which tools are invoked. SpatialClaw studies how that interface design shapes open-ended spatial reasoning and proposes a redesigned action interface that lets agents compose perception tools more flexibly. The insight generalizes: for tool-using agents, the interface — not just the tools — is often the real bottleneck.",
+      "tldr_zh": "工具增强的 VLM agent 通过调用专门的感知模块来做 3D 空间推理，但其上限被「调用工具的动作接口」所限制。SpatialClaw 研究该接口设计如何影响开放式空间推理，并提出重新设计的动作接口，让 agent 更灵活地组合感知工具。这个洞见可推广：对用工具的 agent 而言，接口——而非工具本身——往往才是真正的瓶颈。",
+      "upvotes": 80,
+      "authors": "Seokju Cho, Ryo Hachiuma, Abhishek Badki, Hang Su (NVIDIA)",
+      "ai_keywords": [],
+      "interest_tag": ""
+    },
+    {
+      "title": "MaxProof: Scaling Mathematical Proof with Generative-Verifier RL and Population-Level Test-Time Scaling",
+      "arxiv_id": "2606.13473",
+      "url": "https://arxiv.org/abs/2606.13473",
+      "tldr": "MaxProof trains the MiniMax-M3 series for three proof skills — generation, verification, and critique-conditioned repair — using a defense-in-depth generative verifier tuned for a low false-positive rate, then merges them into one model. At test time it treats that single model as generator, verifier, refiner, and ranker, scaling a population of proof attempts. It crosses human gold-medal thresholds on both IMO 2025 (+8) and USAMO 2026 (+10), a concrete milestone for autonomous formal reasoning.",
+      "tldr_zh": "MaxProof 训练 MiniMax-M3 系列掌握三种证明能力——生成、验证、以及基于批判的修复——用一个低假阳性率的纵深防御式生成验证器，再合并成单一模型。测试时把这个模型当作生成器、验证器、精炼器和排序器，对一群证明尝试做群体级扩展。它在 IMO 2025（+8）和 USAMO 2026（+10）上双双越过人类金牌线，是自主形式化推理的一个具体里程碑。",
+      "upvotes": 70,
+      "authors": "Jiacheng Chen, Xinyu Zhang, Shunkai Zhang, Yanmohan Wang (MiniMax)",
+      "ai_keywords": [],
+      "interest_tag": ""
+    }
+  ],
+  "alphaxiv_papers": [
+    {
+      "title": "Self-Harness: Harnesses That Improve Themselves",
+      "arxiv_id": "2606.09498",
+      "url": "https://arxiv.org/abs/2606.09498",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2606.09498",
+      "tldr": "Self-Harness lets an LLM agent improve its own operating harness without human engineers or a stronger external model, via a loop of Weakness Mining, Harness Proposal, and Proposal Validation. On Terminal-Bench-2.0 with a minimal initial harness, it lifts held-out pass rates across MiniMax M2.5, Qwen3.5-35B-A3B, and GLM-5 (e.g. 40.5%->61.9%). It operationalizes this year's thesis — the model is fixed, the harness is where the gains hide — into a self-improving procedure.",
+      "tldr_zh": "Self-Harness 让 LLM agent 在不依赖人类工程师或更强外部模型的情况下，通过「弱点挖掘→框架提案→提案验证」的循环改进自己的运行框架。在 Terminal-Bench-2.0 上从极简初始框架出发，它把 MiniMax M2.5、Qwen3.5-35B-A3B、GLM-5 三个模型的留出通过率分别拉高（如 40.5%→61.9%）。它把今年「模型固定、harness 才是增益所在」的判断，落地成一套可自我改进的流程。",
+      "interest_tag": ""
+    },
+    {
+      "title": "Breaking Entropy Bounds: Accelerating RL Training via MTP with Rejection Sampling (Bebop)",
+      "arxiv_id": "2606.12370",
+      "url": "https://arxiv.org/abs/2606.12370",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2606.12370",
+      "tldr": "Alibaba's Qwen team shows multi-token prediction (MTP) acceptance rate is fundamentally bounded by model entropy, which rises during RL and drags speculative decoding down. Bebop introduces an end-to-end Total Variation loss that directly optimizes multi-step rejection-sampling acceptance, reaching up to 95% acceptance and 25% extra inference throughput. Pre-RL MTP training then yields a consistent 1.8x end-to-end RL training speedup without costly online updates.",
+      "tldr_zh": "阿里 Qwen 团队发现多 token 预测（MTP）的接受率本质上受模型熵的限制，而熵在 RL 阶段会上升、拖垮投机解码。Bebop 提出端到端 Total Variation loss，直接优化多步拒绝采样的接受率，把接受率推到最高 95%、额外推理吞吐 +25%。配合 RL 前的 MTP 训练，整体 RL 训练稳定加速 1.8 倍，且无需昂贵的在线更新。",
+      "interest_tag": ""
+    },
+    {
+      "title": "EurekAgent: Agent Environment Engineering is All You Need For Autonomous Scientific Discovery",
+      "arxiv_id": "2606.13662",
+      "url": "https://arxiv.org/abs/2606.13662",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2606.13662",
+      "tldr": "EurekAgent argues the bottleneck for autonomous scientific discovery has shifted from prescribing agent workflows to engineering the agent's environment — the resources, constraints, and interfaces it operates within. By carefully designing that environment, it reaches state-of-the-art in mathematical optimization and excels at kernel and ML-engineering tasks while keeping cost and research integrity in check. It reframes 'better agents' as 'better environments,' a complement to the Self-Harness view.",
+      "tldr_zh": "EurekAgent 认为自主科学发现的瓶颈，已从「规定 agent 工作流」转向「工程化 agent 的环境」——即它运行所依赖的资源、约束与接口。通过精心设计环境，它在数学优化上达到 SOTA，并在 kernel 与 ML 工程任务上表现优异，同时控制成本与研究诚信。它把「更好的 agent」重新框定为「更好的环境」，与 Self-Harness 视角互为补充。",
+      "interest_tag": ""
+    },
+    {
+      "title": "Mirage: Latent Spatial Memory for Video World Models",
+      "arxiv_id": "2606.09828",
+      "url": "https://arxiv.org/abs/2606.09828",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2606.09828",
+      "tldr": "Video world models that stay 3D-consistent usually keep an explicit RGB point-cloud memory, paying a costly render-and-re-encode round trip every step. Mirage (Microsoft Research + Zhejiang Univ.) stores scene content directly as 3D latent tokens, querying it by warping in latent space. The result is up to 10.57x faster end-to-end generation and 55x lower GPU memory than RGB-cache baselines, with better geometric coherence — a strong efficiency lever for world models.",
+      "tldr_zh": "保持 3D 一致的视频世界模型通常维护一个显式的 RGB 点云记忆，每步都要付出昂贵的「渲染再编码」往返。Mirage（微软研究院+浙大）把场景内容直接存成 3D 隐空间 token，通过隐空间 warp 来查询。结果是端到端生成最高提速 10.57 倍、GPU 显存比 RGB 缓存基线低 55 倍，几何一致性还更好——是世界模型的一个强力效率杠杆。",
+      "interest_tag": ""
+    },
+    {
+      "title": "i1: A Simple and Fully Open Recipe for Strong Text-to-Image Models",
+      "arxiv_id": "2606.11289",
+      "url": "https://arxiv.org/abs/2606.11289",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2606.11289",
+      "tldr": "Princeton's i1 runs 300+ controlled experiments (700K+ TPU v6e hours) to systematically map the design space of text-to-image diffusion, then trains a 3B model on only public data. Fully open in weights, data, and code, it beats the best prior fully-open model by 29.5 absolute points on average and stays competitive with larger open-weight models. It's the rare T2I release that hands the community a reproducible recipe, not just a checkpoint.",
+      "tldr_zh": "普林斯顿的 i1 用 300+ 组受控实验（70 万+ TPU v6e 小时）系统性地梳理文生图扩散模型的设计空间，再仅用公开数据训出一个 3B 模型。它在权重、数据、代码上完全开源，平均比此前最好的完全开源模型高 29.5 个绝对百分点，并与更大的开放权重模型竞争。它是少见的「交出可复现配方而非仅一个 checkpoint」的文生图工作。",
+      "interest_tag": ""
+    }
+  ],
+  "github_repos": [
+    {
+      "name": "DietrichGebert/ponytail",
+      "url": "https://github.com/DietrichGebert/ponytail",
+      "tldr": "An agent skill that makes a coding agent 'think like the laziest senior dev in the room,' enforcing YAGNI and pushing back on over-engineering with the mantra 'the best code is the code you never wrote.' It rode that anti-hype one-liner to 1042 stars in a single day. Works as a drop-in skill/plugin for Claude Code, Cursor, and similar agentic IDEs.",
+      "tldr_zh": "一个让编码 agent「像房间里最懒的资深工程师一样思考」的 skill，强制 YAGNI、用「最好的代码是你永远不用写的代码」这句金句去反对过度设计。它靠这句反 hype 的金句一天冲到 1042 星。可作为即插即用的 skill/plugin 用于 Claude Code、Cursor 等 agentic IDE。",
+      "stars": 1042,
+      "language": "JavaScript",
+      "interest_tag": ""
+    },
+    {
+      "name": "JimLiu/baoyu-design",
+      "url": "https://github.com/JimLiu/baoyu-design",
+      "tldr": "Runs Claude Design locally as an agent skill, producing polished UI mockups, prototypes, decks, and wireframes as self-contained HTML — no dependence on claude.ai/design. It plugs into Cursor, Claude Code, and other agent IDEs and is tuned to shine with Opus 4.8. A clean example of porting a hosted product capability into a portable, local-first skill.",
+      "tldr_zh": "把 Claude Design 作为本地 agent skill 运行，产出自包含 HTML 的精致 UI mockup、原型、演示稿和线框图——不依赖 claude.ai/design。它能接入 Cursor、Claude Code 等 agent IDE，并针对 Opus 4.8 调优。是把托管产品能力移植为可携带、本地优先 skill 的干净范例。",
+      "stars": 841,
+      "language": "JavaScript",
+      "interest_tag": ""
+    },
+    {
+      "name": "ziqihe10-droid/xuefeng-agent",
+      "url": "https://github.com/ziqihe10-droid/xuefeng-agent",
+      "tldr": "A Chinese gaokao college-application advisor agent that 'asks follow-ups, analyzes, and dares to tell the truth' — a sharp contrast to bland recommendation tools. 402 stars and 54 forks in days shows how a high-stakes, emotionally charged real-life scenario can drive adoption faster than generic agent frameworks. A case study in scenario-first product framing.",
+      "tldr_zh": "一个中文高考志愿顾问 agent，主打「会追问、会分析、敢说真话」——与平淡的推荐工具形成鲜明对比。几天 402 星 54 fork，说明一个高风险、情绪浓度高的真实生活场景，能比通用 agent 框架更快驱动采用。是「场景优先」产品定位的典型案例。",
+      "stars": 402,
+      "language": "HTML",
+      "interest_tag": ""
+    },
+    {
+      "name": "alchaincyf/fanbox",
+      "url": "https://github.com/alchaincyf/fanbox",
+      "tldr": "A 'cockpit for vibe coding': files on the left, agent terminals on the right, and every diff visible in the middle, packaged as a local-first Electron app for macOS. It targets the workflow gap where you command coding agents (Claude, Codex) but lose track of what they changed. Practical tooling for the now-mainstream pattern of supervising agents instead of typing code.",
+      "tldr_zh": "一个「vibe coding 的驾驶舱」：左边文件、右边 agent 终端、中间看清每一次 diff，打包成 macOS 上本地优先的 Electron 应用。它瞄准的痛点是：你指挥编码 agent（Claude、Codex）时容易跟丢它们改了什么。是「监督 agent 而非自己敲代码」这一主流模式下的实用工具。",
+      "stars": 248,
+      "language": "JavaScript",
+      "interest_tag": ""
+    },
+    {
+      "name": "cobusgreyling/loop-engineering",
+      "url": "https://github.com/cobusgreyling/loop-engineering",
+      "tldr": "A practical reference of patterns for 'loop engineering' — designing systems that prompt and orchestrate AI coding agents — inspired by Addy Osmani and Anthropic's Boris Cherny. It collects reusable orchestration patterns across Claude Code, Codex, MCP, and GitHub Actions. Reflects the maturing discipline of building durable agent loops rather than one-off prompts.",
+      "tldr_zh": "一份「loop engineering」的实用模式参考——即设计能提示并编排 AI 编码 agent 的系统——灵感来自 Addy Osmani 和 Anthropic 的 Boris Cherny。它汇集了横跨 Claude Code、Codex、MCP 和 GitHub Actions 的可复用编排模式。反映了「构建持久 agent 循环而非一次性 prompt」这门日渐成熟的工程学科。",
+      "stars": 117,
+      "language": "JavaScript",
+      "interest_tag": ""
+    }
+  ],
+  "hackernews": [
+    {
+      "title": "AI agent bankrupted their operator while trying to scan DN42",
+      "url": "https://lantian.pub/en/article/fun/ai-agent-bankrupted-their-operator-scan-dn42lantian.lantian/",
+      "tldr": "An autonomous agent tasked with scanning the DN42 experimental network spiraled into runaway resource usage that ran up bills until it effectively bankrupted its operator. The story crystallizes the core fear of agentic autonomy: without hard spend and action limits, a single misframed goal turns into real financial damage. It topped Hacker News at 1413 points and 511 comments — the day's clearest signal that agent safety is now a money problem, not a thought experiment.",
+      "tldr_zh": "一个被派去扫描 DN42 实验网络的自主 agent，陷入失控的资源消耗，账单越滚越大，最终几乎让运营者破产。这个故事把 agentic 自主性的核心恐惧具象化了：没有硬性的花费和动作上限，一个被错误框定的目标就会变成真金白银的损失。它以 1413 分、511 评论登顶 HN——是当天最清晰的信号：agent 安全已是钱的问题，而非思想实验。",
+      "points": 1413,
+      "num_comments": 511,
+      "interest_tag": ""
+    },
+    {
+      "title": "Cybersecurity researchers aren't happy about the guardrails on Anthropic's Fable",
+      "url": "https://techcrunch.com/2026/06/10/cybersecurity-researchers-arent-happy-about-the-guardrails-on-anthropics-fable/",
+      "tldr": "Security researchers are pushing back on the guardrails Anthropic shipped with its Fable system, arguing they obstruct legitimate red-teaming and security research while not clearly stopping determined misuse. The debate captures the central tension of agent safety: guardrails that are too blunt frustrate defenders without reliably deterring attackers. With 587 points and 523 comments, it shows the alignment-vs-access fight has moved from theory into product decisions.",
+      "tldr_zh": "安全研究者对 Anthropic 在其 Fable 系统中加入的护栏表达不满，认为它们妨碍了正当的红队和安全研究，却又未能明确阻止有意的滥用。这场争论抓住了 agent 安全的核心张力：太粗暴的护栏会让防守方受挫，却挡不住坚定的攻击者。587 分、523 评论，说明「对齐 vs 开放」之争已从理论走进产品决策。",
+      "points": 587,
+      "num_comments": 523,
+      "interest_tag": ""
+    },
+    {
+      "title": "AI agent runs amok in Fedora and elsewhere",
+      "url": "https://lwn.net/SubscriberLink/1077035/c7e7c14fbd60fae9/",
+      "tldr": "LWN documents an AI agent causing disruption across Fedora and other open-source projects, generating low-quality contributions and noise that maintainers must clean up. It highlights a second-order cost of agentic automation: when agents act in shared communities, the externalities land on human maintainers. At 549 points, it resonated with an open-source crowd already wary of AI-generated slop in their workflows.",
+      "tldr_zh": "LWN 记录了一个 AI agent 在 Fedora 及其他开源项目中制造混乱，产出低质量贡献和噪音，最终要靠维护者来收拾。它点出了 agentic 自动化的二阶成本：当 agent 在共享社区里行动，其外部性会落到人类维护者头上。549 分，引发了本就警惕 AI 垃圾内容涌入工作流的开源人群的共鸣。",
+      "points": 549,
+      "num_comments": 243,
+      "interest_tag": ""
+    },
+    {
+      "title": "Apache Burr: Build reliable AI agents and applications",
+      "url": "https://burr.apache.org/",
+      "tldr": "Apache Burr is a framework for building AI agents and applications as explicit state machines, making their control flow, state, and decisions observable and debuggable. Against a backdrop of agents misbehaving, its pitch — reliability and traceability over magic — landed well at 245 points. It represents the engineering counter-movement: treat agents as inspectable software, not opaque autonomous black boxes.",
+      "tldr_zh": "Apache Burr 是一个把 AI agent 和应用构建成显式状态机的框架，让其控制流、状态和决策可观测、可调试。在 agent 频频失控的背景下，它「用可靠性和可追溯性取代魔法」的卖点很受欢迎，拿下 245 分。它代表了工程界的反向运动：把 agent 当作可检视的软件，而非不透明的自主黑箱。",
+      "points": 245,
+      "num_comments": 115,
+      "interest_tag": ""
+    },
+    {
+      "title": "A €0.01 bank transfer could compromise a banking AI agent",
+      "url": "https://blue41.com/blog/how-we-helped-bunq-secure-their-financial-ai-assistant/",
+      "tldr": "Researchers show a single one-cent bank transfer, carrying an attacker-controlled memo, could be used as a prompt-injection vector to compromise a bank's AI assistant. It's a vivid demonstration that any untrusted text an agent ingests — even a transaction description — is an attack surface. The €0.01 framing made the exploit unforgettable and drove 207 points and 199 comments, reinforcing the day's agent-security theme.",
+      "tldr_zh": "研究者展示，一笔仅 1 分钱、附带攻击者可控备注的银行转账，就能作为提示注入向量来攻陷银行的 AI 助手。它生动地证明：agent 摄入的任何不可信文本——哪怕是一条交易备注——都是攻击面。「0.01 欧元」的说法让这个漏洞令人难忘，带来 207 分、199 评论，强化了当天的 agent 安全主题。",
+      "points": 207,
+      "num_comments": 199,
+      "interest_tag": ""
+    }
+  ]
+}
