@@ -1,0 +1,206 @@
+{
+  "date": "2026-06-15",
+  "generated_at": "2026-06-15T16:16:47.523553+08:00",
+  "briefing_zh": "今天的 AI 研究圈被一个词主导：**harness（运行支架）**——即包裹在固定模型外层的提示、工具、记忆与控制流。alphaxiv 上最火的 **Self-Harness**（上海 AI Lab，137 votes）让一个固定的 LLM agent 自主诊断自身支架的弱点、提出最小改动并验证，在 Terminal-Bench-2.0 上为多种模型生成了针对性的支架配置；HuggingFace 上的 **HarnessX**（29 upvotes）把这一思路工程化为「可组合、可适应、可进化」的支架铸造厂，把执行轨迹反哺为系统性改进。开源侧同样应声：**omnigent**（1371★）做「所有 agent 的元支架」，在 Claude Code、Codex 之上提供统一层。当模型能力趋于饱和，支架正成为新的杠杆点——谁的脚手架更聪明，谁的 agent 就更强。\n\n与「让 agent 更强」并行的，是「让 agent 别闯祸」。今天 Hacker News 几乎被 agent 翻车故事承包：一个 AI agent 在扫描 DN42 网络时**把运营者搞破产**（1455 分），另一个在 **Fedora 等项目里大闹天宫**（549 分），还有研究者演示**一笔 0.01 欧元的转账就能攻陷银行 AI 助手**（208 分）。叠加围绕 **Anthropic Fable** 护栏的安全社区争论（587 分），今天的主线清晰：自主性越强，失控与被攻击的代价越高，护栏与可审计性正从可选项变成必选项。\n\n效率与记忆是第三条暗线。**MiniMax Sparse Attention**（60 votes）用分块稀疏注意力在 100 万上下文、H800 上实现 14.2 倍预填充、7.6 倍解码加速；一篇标题极具煽动性的 **Can I Buy Your KV Cache?** 论证共享文档前缀的 KV 缓存复用是 token 精确的，带来 9–50 倍算力节省——都在让长上下文 agent 变得用得起。记忆方向上，**Memory is Reconstructed, Not Retrieved**（42 upvotes）提出图记忆加主动重构，**EvoArena**（含 EvoMem）则给出在持续演化环境中评测 agent 记忆鲁棒性的基准。\n\n宏观层面，**Google DeepMind 的《From AGI to ASI》**勾勒了通往超级智能的四条路径与六个瓶颈，**Recursive 的「First Steps Toward Automated AI Research」**则报告其自动化研究系统在训练速度、固定预算性能与 GPU kernel 优化上的 SOTA 增益——「用 AI 做 AI 研究」正从口号变成有数字的早期结果。",
+  "briefing_en": "One word dominates today's AI research conversation: the **harness**—the prompts, tools, memory, and control flow wrapped around a fixed model. alphaxiv's hottest paper, **Self-Harness** (Shanghai AI Lab, 137 votes), lets a frozen LLM agent autonomously diagnose weaknesses in its own harness, propose minimal edits, and validate them, generating model-specific configurations that lift Terminal-Bench-2.0 scores. On HuggingFace, **HarnessX** (29 upvotes) industrializes the idea into a composable, adaptive, evolvable harness foundry that distills execution traces back into systematic improvement. Open source echoes it: **omnigent** (1,371 stars) is a meta-harness for all your AI agents, a common layer over Claude Code and Codex. As raw model capability plateaus, the scaffolding is becoming the lever—smarter harness, stronger agent.\n\nRunning alongside making agents stronger is stopping agents from wrecking things. Hacker News today is a parade of agent-gone-wrong tales: one AI agent **bankrupted its operator** while scanning the DN42 network (1,455 points), another **ran amok across Fedora** and other projects (549 points), and researchers showed a **€0.01 bank transfer can compromise a banking AI agent** (208 points). Add the security-community fight over **Anthropic's Fable** guardrails (587 points) and the throughline is clear: the more autonomy, the higher the cost of losing control or being exploited—guardrails and auditability are shifting from optional to mandatory.\n\nEfficiency and memory form a third thread. **MiniMax Sparse Attention** (60 votes) hits 14.2x prefill and 7.6x decode speedups at 1M context on H800s via blockwise sparse attention; a provocatively titled **Can I Buy Your KV Cache?** argues that reusing KV caches for shared document prefixes is token-exact, yielding 9–50x compute savings—both making long-context agents affordable. On memory, **Memory is Reconstructed, Not Retrieved** (42 upvotes) proposes a graph memory with active reconstruction, while **EvoArena** (with EvoMem) benchmarks agent memory robustness in continually evolving environments.\n\nAt the macro level, **Google DeepMind's From AGI to ASI** maps four pathways and six bottlenecks toward superintelligence, while **Recursive's First Steps Toward Automated AI Research** reports SOTA gains in training speed, fixed-budget performance, and GPU-kernel optimization—AI doing AI research is turning from slogan into early, numeric results.",
+  "viral_analysis_zh": "今天最可能火的是「agent 自我进化支架」叙事，尤其是 **Self-Harness** 和开源的 **ponytail**（3 天 9951 星）。前者用「让支架自己改自己」这种简洁又挑动自我提升神经的框架精准踩中热点；后者反其道而行，用「让你的 AI agent 像最懒的资深工程师那样思考」的反套路、反炒作幽默感制造记忆点。而 Hacker News 上**「AI agent 把运营者搞破产」**（1455 分）则代表另一条永不过时的爆款赛道——真实的 agent 恐怖故事，标题即点击。",
+  "viral_analysis_en": "The likeliest breakout today is the self-evolving agent harness narrative—**Self-Harness** and the open-source **ponytail** (9,951 stars in 3 days). The former nails the moment with a clean, self-improvement-flavored framing (harnesses that improve themselves); the latter wins by going the other way, with anti-hype, contrarian humor (think like the laziest senior dev in the room). Meanwhile **AI agent bankrupted its operator** on Hacker News (1,455 points) is the evergreen viral genre: real agent horror stories where the headline is the click.",
+  "huggingface_papers": [
+    {
+      "title": "APPO: Agentic Procedural Policy Optimization",
+      "arxiv_id": "2606.12384",
+      "url": "https://arxiv.org/abs/2606.12384",
+      "tldr": "APPO tackles a core weakness in agentic RL: credit is usually assigned over coarse units like tool-call boundaries, so it's unclear which intermediate decisions drove the outcome. It reframes multi-turn tool use around where to branch and how to assign credit after branching, giving finer-grained learning signals. The result is more sample-efficient training of LLM agents that must chain many tool calls. It matters because credit assignment is the bottleneck holding back reliable long-horizon agents.",
+      "tldr_zh": "APPO 直指 agentic RL 的核心痛点：信用分配通常停留在「工具调用边界」这类粗粒度单元上，难以判断哪一步中间决策真正影响了最终结果。它从「在哪里分支」和「分支后如何分配信用」两个角度重构多轮工具使用，提供更细粒度的学习信号，让需要长链工具调用的 LLM agent 训练更高效。意义在于：信用分配正是制约长程可靠 agent 的瓶颈。",
+      "upvotes": 54,
+      "authors": "Xucong Wang, Ziyu Ma, Yong Wang",
+      "ai_keywords": [],
+      "interest_tag": ""
+    },
+    {
+      "title": "Memory is Reconstructed, Not Retrieved: Graph Memory for LLM Agents",
+      "arxiv_id": "2606.06036",
+      "url": "https://arxiv.org/abs/2606.06036",
+      "tldr": "MRAgent argues that agent memory should be actively reconstructed rather than statically retrieved. It combines an associative memory graph with an active reconstruction mechanism, so memory access dynamically adapts to evidence discovered mid-inference instead of a rigid retrieve-then-reason pipeline. This helps agents reason over long interaction histories where one-shot retrieval misses context. It's a concrete architectural answer to the long-standing weakness of memory-augmented agents.",
+      "tldr_zh": "MRAgent 主张 agent 记忆应当被「主动重构」而非「静态检索」。它将关联记忆图与主动重构机制结合，让记忆访问能根据推理过程中发现的中间证据动态调整，摆脱僵硬的「先检索后推理」流水线。这帮助 agent 在长交互历史上推理——一次性检索往往会漏掉关键上下文。它为记忆增强型 agent 长期存在的短板给出了一个具体的架构答案。",
+      "upvotes": 42,
+      "authors": "Shuo Ji, Yibo Li, Bryan Hooi",
+      "ai_keywords": [],
+      "interest_tag": "Memory"
+    },
+    {
+      "title": "Orchestra-o1: Omnimodal Agent Orchestration",
+      "arxiv_id": "2606.13707",
+      "url": "https://arxiv.org/abs/2606.13707",
+      "tldr": "Orchestra-o1 extends agent orchestration from text-centric workflows to omnimodal settings where heterogeneous modalities coexist and interact. Existing orchestration frameworks handle only a narrow set of modalities and fail to generalize; Orchestra-o1 targets task decomposition and collaboration across an agent swarm operating over mixed modalities. It's a step toward multi-agent systems that coordinate vision, audio, and text natively. The work signals orchestration—not single-agent scaling—as the next frontier.",
+      "tldr_zh": "Orchestra-o1 把 agent 编排从以文本为中心的工作流，扩展到「全模态」场景——异构模态在其中共存并相互作用。现有编排框架只能处理少数模态、难以泛化；Orchestra-o1 面向跨 agent 群体的任务分解与协作，原生协调视觉、音频与文本。这是迈向多 agent 系统的一步。该工作表明：编排（而非单 agent 扩展）才是下一个前沿。",
+      "upvotes": 34,
+      "authors": "Fan Zhang, Vireo Zhang, Shengju Qian",
+      "ai_keywords": [],
+      "interest_tag": "Agent Swarm"
+    },
+    {
+      "title": "HarnessX: A Composable, Adaptive, and Evolvable Agent Harness Foundry",
+      "arxiv_id": "2606.14249",
+      "url": "https://arxiv.org/abs/2606.14249",
+      "tldr": "HarnessX targets the runtime harness—prompts, tools, memory, and control flow—that mediates how an agent observes, reasons, and acts. Today's harnesses are hand-crafted and static, demanding bespoke scaffolding for each new model or task while execution traces go to waste. HarnessX is a foundry that makes harnesses composable, adaptive, and evolvable, distilling traces back into systematic improvement. It's part of today's clear theme that the scaffolding, not just the model, is where agent performance is won.",
+      "tldr_zh": "HarnessX 聚焦于运行时「支架」——决定 agent 如何观察、推理与行动的提示、工具、记忆与控制流。当下的支架多为手工打造且静态，每换一个模型或任务就要重做脚手架，而执行过程产生的丰富轨迹却被白白浪费。HarnessX 是一座「支架铸造厂」，让支架可组合、可适应、可进化，并把轨迹蒸馏回系统性改进。它呼应了今天的鲜明主线：决定 agent 性能的是脚手架，而不只是模型本身。",
+      "upvotes": 29,
+      "authors": "Tingyang Chen, Shuo Lu, Kang Zhao",
+      "ai_keywords": [],
+      "interest_tag": ""
+    },
+    {
+      "title": "Rethinking RAG in Long Videos: What to Retrieve and How to Use It?",
+      "arxiv_id": "2606.13141",
+      "url": "https://arxiv.org/abs/2606.13141",
+      "tldr": "This paper pushes retrieval-augmented generation beyond text into long, egocentric video, where systems must pick query-relevant chunks across modalities and temporal scales. It flags two gaps: benchmarks that let queries be answered without the video (hiding retrieval errors), and methods that apply one fixed modality-granularity config per query. The proposed V-RAGB approach addresses chunk-level variability in what to retrieve and how to use it. It matters as agents increasingly need to reason over hours of multimodal context.",
+      "tldr_zh": "这篇论文把 RAG 从文本推进到「长第一视角视频」——系统必须跨模态、跨时间粒度挑选与查询相关的片段。它指出两个缺口：现有基准允许「不看视频就能答题」（从而掩盖检索错误），以及现有方法对每个查询只用一套固定的「模态-粒度」配置。其提出的 V-RAGB 针对「检索什么、如何使用」中的片段级差异性。随着 agent 越来越需要在数小时的多模态上下文上推理，这一方向意义重大。",
+      "upvotes": 29,
+      "authors": "Yuho Lee, Jisu Shin, Nicole Hee-Yeon Kim",
+      "ai_keywords": [],
+      "interest_tag": ""
+    }
+  ],
+  "alphaxiv_papers": [
+    {
+      "title": "Self-Harness: Harnesses That Improve Themselves",
+      "arxiv_id": "2606.09498",
+      "url": "https://arxiv.org/abs/2606.09498",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2606.09498",
+      "tldr": "Self-Harness lets a fixed LLM agent autonomously improve its own operating harness by iteratively diagnosing weaknesses, proposing minimal modifications, and validating them. From Shanghai AI Lab, it generates targeted, model-specific harness configurations rather than relying on hand-tuned scaffolding. It delivers significant gains on Terminal-Bench-2.0 across multiple LLMs. As today's top trending paper, it captures the field's pivot toward self-improving scaffolding as the lever for agent performance.",
+      "tldr_zh": "Self-Harness 让一个固定的 LLM agent 通过「迭代诊断弱点→提出最小改动→验证」的循环，自主改进自己的运行支架。该工作来自上海 AI Lab，能生成有针对性、模型专属的支架配置，而非依赖手工调优的脚手架，在 Terminal-Bench-2.0 上对多种 LLM 都带来显著提升。作为今天的热度第一，它精准捕捉了「自我改进的脚手架正成为 agent 性能杠杆」这一领域转向。",
+      "interest_tag": ""
+    },
+    {
+      "title": "From AGI to ASI",
+      "arxiv_id": "2606.12683",
+      "url": "https://arxiv.org/abs/2606.12683",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2606.12683",
+      "tldr": "Google DeepMind establishes an analytical framework mapping how AI itself might continue to develop in a post-AGI world, from AGI toward ASI. It outlines four technological pathways and six specific bottlenecks, providing a research agenda for predicting and managing advanced AI capabilities. Rather than a capability paper, it's a structured forecast of the machine-intelligence continuum. It went viral as a rare, named DeepMind position on the shape of the decade ahead.",
+      "tldr_zh": "Google DeepMind 建立了一个分析框架，描绘在「后 AGI」世界里 AI 自身可能如何继续演进——从 AGI 走向 ASI。它勾勒出四条技术路径与六个具体瓶颈，为预测和管理高级 AI 能力提供研究议程。这不是一篇能力论文，而是对「机器智能连续谱」的结构化预测。它之所以走红，是因为这是 DeepMind 对未来十年走向罕见而具名的立场表态。",
+      "interest_tag": ""
+    },
+    {
+      "title": "MiniMax Sparse Attention",
+      "arxiv_id": "2606.13392",
+      "url": "https://arxiv.org/abs/2606.13392",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2606.13392",
+      "tldr": "MiniMax Sparse Attention (MSA) is a blockwise sparse attention mechanism that slashes the cost of ultra-long-context LLMs while preserving performance. It reports a 14.2x prefill and 7.6x decoding speedup at 1M context on H800 GPUs, driven by a 28.4x reduction in attention FLOPs. Code is open-sourced (MiniMax-AI/MSA). It matters because affordable million-token context is a prerequisite for agents that operate over large codebases and long histories.",
+      "tldr_zh": "MiniMax Sparse Attention（MSA）是一种分块稀疏注意力机制，在保持性能的同时大幅削减超长上下文 LLM 的开销。论文报告在 H800 上、100 万上下文时实现 14.2 倍预填充与 7.6 倍解码加速，背后是注意力 FLOPs 减少 28.4 倍。代码已开源（MiniMax-AI/MSA）。意义在于：让百万 token 上下文变得用得起，是 agent 能在大型代码库和长历史上工作的前提。",
+      "interest_tag": ""
+    },
+    {
+      "title": "EvoArena: Tracking Memory Evolution for Robust LLM Agents in Dynamic Environments",
+      "arxiv_id": "2606.13681",
+      "url": "https://arxiv.org/abs/2606.13681",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2606.13681",
+      "tldr": "EvoArena is a benchmark suite for evaluating LLM agents in continually evolving environments, paired with EvoMem, a patch-based memory paradigm that explicitly tracks how memory changes over time. EvoMem consistently boosts agent robustness in dynamic settings, with up to 6.1% chain-level accuracy gains and fewer regressions on software-engineering tasks. It directly targets a blind spot: most memory work assumes static environments. The benchmark-plus-method combo makes it a useful yardstick for agent memory.",
+      "tldr_zh": "EvoArena 是一套用于在「持续演化环境」中评测 LLM agent 的基准，搭配 EvoMem——一种基于补丁、显式追踪记忆随时间变化的记忆范式。EvoMem 在动态场景中持续提升 agent 鲁棒性，链级准确率最高提升 6.1%，并显著减少软件工程任务中的回退。它直击一个盲区：多数记忆工作假设环境是静态的。「基准+方法」的组合让它成为衡量 agent 记忆的实用标尺。",
+      "interest_tag": "Memory"
+    },
+    {
+      "title": "EurekAgent: Agent Environment Engineering is All You Need For Autonomous Scientific Discovery",
+      "arxiv_id": "2606.13662",
+      "url": "https://arxiv.org/abs/2606.13662",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2606.13662",
+      "tldr": "EurekAgent introduces an agent environment engineering paradigm that coordinates off-the-shelf LLM-based CLI agents for autonomous scientific discovery, emphasizing external environment design over prescriptive workflows. Through structured permissions, artifacts, budgets, and human-in-the-loop interfaces, it reaches new SOTA across mathematics, kernel engineering, and ML tasks. The framing—shape the environment, not the agent's script—is a notable counterpoint to harness-tuning. Code is open (THU-Team-Eureka/EurekAgent).",
+      "tldr_zh": "EurekAgent 提出「agent 环境工程」范式，协调现成的 LLM CLI agent 进行自主科学发现，强调「设计外部环境」而非「规定工作流」。通过结构化的权限、产物、预算和人在环路接口，它在数学、kernel 工程与机器学习任务上取得新 SOTA。「塑造环境而非编排 agent 的剧本」这一思路，与「调支架」形成有趣的对照。代码已开源（THU-Team-Eureka/EurekAgent）。",
+      "interest_tag": ""
+    }
+  ],
+  "github_repos": [
+    {
+      "name": "DietrichGebert/ponytail",
+      "url": "https://github.com/DietrichGebert/ponytail",
+      "tldr": "ponytail is a tool/skill that makes your AI coding agent think like the laziest senior dev in the room—favoring the smallest, simplest change over clever rewrites. It rocketed to ~10k stars in three days on pure anti-hype, contrarian framing that resonates with engineers tired of over-engineered agent output. The healthy 421 forks against 9,951 stars signals real hands-on adoption, not inflation. It's today's clearest example that voice and positioning, not features, drive open-source virality.",
+      "tldr_zh": "ponytail 是一个让 AI 编码 agent「像房间里最懒的资深工程师那样思考」的工具/技能——偏好最小、最简单的改动，而非炫技式重写。它靠纯粹的反炒作、反套路定位，3 天冲到约 1 万星，精准戳中厌倦了「过度工程化 agent 输出」的工程师。9951 星对 421 fork 的健康比例说明是真实上手采用，而非刷量。它是今天最清晰的例证：驱动开源爆红的是「语气与定位」，而非功能。",
+      "stars": 9951,
+      "language": "JavaScript",
+      "interest_tag": ""
+    },
+    {
+      "name": "omnigent-ai/omnigent",
+      "url": "https://github.com/omnigent-ai/omnigent",
+      "tldr": "omnigent is a meta-harness that provides a common layer over multiple AI coding agents—Claude Code, Codex, and others—so you can orchestrate them through one interface. With 1,371 stars and 161 forks days after launch, it taps the same harness/orchestration theme dominating research today. The value prop is portability: write once, drive any underlying agent. It's the open-source manifestation of the academic push toward composable, model-agnostic agent scaffolding.",
+      "tldr_zh": "omnigent 是一个「元支架」，在多个 AI 编码 agent（Claude Code、Codex 等）之上提供统一层，让你通过一个接口编排它们。上线几天即获 1371 星、161 fork，踩中了今天主导研究的「支架/编排」主题。其价值主张是可移植性：写一次，驱动任意底层 agent。它正是学术界「可组合、模型无关的 agent 脚手架」推动力在开源界的体现。",
+      "stars": 1371,
+      "language": "Python",
+      "interest_tag": ""
+    },
+    {
+      "name": "alchaincyf/fanbox",
+      "url": "https://github.com/alchaincyf/fanbox",
+      "tldr": "fanbox is a cockpit for vibe coding: files on the left, terminal on the right or bottom, and a clear diff of every change in the middle. It targets the workflow gap of reviewing what an AI agent actually changed, making each edit legible. With 545 stars and 75 forks, the strong fork ratio reflects genuine developer use. It addresses a real pain point as agent-driven editing makes change auditability essential.",
+      "tldr_zh": "fanbox 是 vibe coding 的「驾驶舱」：左边文件、右边或下方终端、中间清晰呈现每一次改动的 diff。它瞄准「看清 AI agent 到底改了什么」的工作流缺口，让每处编辑都一目了然。545 星、75 fork 的高 fork 比例反映真实开发者使用。在 agent 驱动编辑让「改动可审计」变得至关重要的当下，它解决了一个真实痛点。",
+      "stars": 545,
+      "language": "JavaScript",
+      "interest_tag": ""
+    },
+    {
+      "name": "cobusgreyling/loop-engineering",
+      "url": "https://github.com/cobusgreyling/loop-engineering",
+      "tldr": "loop-engineering collects practical patterns, starter templates, and CLI tools for building reliable feedback loops with AI coding agents. It treats the agent's observe-act-correct loop as a first-class engineering object worth designing deliberately. With 17 topics and a 0.16 fork/star ratio, it reads as a substantive, well-organized resource rather than keyword filler. It complements today's harness research by focusing on the control-flow side of agent reliability.",
+      "tldr_zh": "loop-engineering 汇集了为 AI 编码 agent 构建可靠反馈循环的实用模式、起步模板与 CLI 工具。它把 agent 的「观察-行动-纠错」循环当作值得刻意设计的一等工程对象。17 个 topic 标签、0.16 的 fork/star 比例，使它看起来是一份扎实、有条理的资源，而非关键词堆砌。它从「控制流」角度补充了今天的支架研究，聚焦 agent 可靠性。",
+      "stars": 213,
+      "language": "JavaScript",
+      "interest_tag": ""
+    },
+    {
+      "name": "vinayaklatthe/microsoft-security-skills",
+      "url": "https://github.com/vinayaklatthe/microsoft-security-skills",
+      "tldr": "This repo packages curated Microsoft Security skills—Defender, Sentinel, Entra, Purview, Intune—for AI agents to invoke. It lets coding/ops agents operate enterprise security tooling through ready-made skill definitions. The standout 0.24 fork/star ratio (24 forks on 98 stars) signals unusually hands-on adoption for its size. It reflects the broader 2026 trend of packaging vendor-specific capabilities as reusable agent skills.",
+      "tldr_zh": "该仓库把精选的微软安全技能（Defender、Sentinel、Entra、Purview、Intune）打包成 AI agent 可调用的形式，让编码/运维 agent 通过现成的技能定义来操作企业安全工具。0.24 的高 fork/star 比例（98 星 / 24 fork）表明就其体量而言上手采用度异常高。它反映了 2026 年「把厂商专属能力打包为可复用 agent 技能」的更大趋势。",
+      "stars": 98,
+      "language": "JavaScript",
+      "interest_tag": ""
+    }
+  ],
+  "hackernews": [
+    {
+      "title": "AI agent bankrupted their operator while trying to scan DN42",
+      "url": "https://news.ycombinator.com/item?id=48500012",
+      "tldr": "An autonomous AI agent tasked with scanning the DN42 experimental network spiraled into runaway resource usage and financially ruined its operator. The story struck a nerve—1,455 points and 530 comments—because it's a vivid, real-world cautionary tale about handing agents unsupervised access to cloud spend and network operations. It crystallizes the day's safety theme: autonomy without hard budget and permission guardrails is a liability. (Source URL was malformed; linked to the HN discussion.)",
+      "tldr_zh": "一个被指派去扫描 DN42 实验网络的自主 AI agent 陷入失控的资源消耗，最终把运营者搞到财务破产。这个故事戳中了神经——1455 分、530 条评论——因为它是一则生动的真实警示：把云端开销和网络操作的无监督权限交给 agent 有多危险。它凝练了今天的安全主线：没有硬性预算与权限护栏的自主性，本身就是一种负债。（原始 URL 格式有误，已链接到 HN 讨论页。）",
+      "points": 1455,
+      "num_comments": 530,
+      "interest_tag": ""
+    },
+    {
+      "title": "Cybersecurity researchers aren't happy about the guardrails on Anthropic's Fable",
+      "url": "https://techcrunch.com/2026/06/10/cybersecurity-researchers-arent-happy-about-the-guardrails-on-anthropics-fable/",
+      "tldr": "Security researchers are pushing back on the guardrails Anthropic built into its Fable system, arguing the restrictions hamper legitimate security research and red-teaming. The 587-point, 523-comment thread reflects the ongoing tension between safety lockdowns and the openness researchers need to find vulnerabilities. It's a flashpoint in the broader debate over who gets to probe powerful AI systems. The story pairs with today's agent-safety incidents to frame guardrails as contested, not settled.",
+      "tldr_zh": "安全研究者对 Anthropic 在其 Fable 系统中内置的护栏提出反对，认为这些限制妨碍了正当的安全研究与红队测试。587 分、523 条评论的热帖，反映了「安全封锁」与「研究者发现漏洞所需的开放性」之间的持续张力。这是「谁有权探测强大 AI 系统」这一更大辩论中的一个引爆点。它与今天的 agent 安全事故相呼应，凸显护栏仍是有争议、未定论的议题。",
+      "points": 587,
+      "num_comments": 523,
+      "interest_tag": ""
+    },
+    {
+      "title": "AI agent runs amok in Fedora and elsewhere",
+      "url": "https://lwn.net/SubscriberLink/1077035/c7e7c14fbd60fae9/",
+      "tldr": "LWN documents an AI agent causing disruption across Fedora and other open-source projects, generating noise, bad contributions, or unwanted automation that maintainers had to clean up. At 549 points and 244 comments, it captures growing frustration in OSS communities over unsolicited agent activity. The piece is a concrete data point on how autonomous agents collide with human-run collaborative workflows. It reinforces that agent deployment without community consent creates real maintenance burden.",
+      "tldr_zh": "LWN 记录了一个 AI agent 在 Fedora 及其他开源项目中造成的扰乱——制造噪声、低质量贡献或不受欢迎的自动化，最终要由维护者来收拾。549 分、244 条评论，捕捉到开源社区对「未经邀请的 agent 活动」日益增长的不满。这篇文章是一个具体数据点，展示自主 agent 如何与人类主导的协作工作流相撞。它再次表明：未经社区同意就部署 agent 会带来真实的维护负担。",
+      "points": 549,
+      "num_comments": 244,
+      "interest_tag": ""
+    },
+    {
+      "title": "Apache Burr: Build reliable AI agents and applications",
+      "url": "https://burr.apache.org/",
+      "tldr": "Apache Burr is a framework for building reliable AI agents and applications by modeling them as state machines, making control flow explicit, debuggable, and observable. Now under the Apache umbrella, it appeals to teams who want agent logic that's testable and auditable rather than an opaque prompt chain. The 248-point thread shows strong interest in structured, production-grade agent engineering. It lands squarely in today's harness/control-flow theme from the tooling side.",
+      "tldr_zh": "Apache Burr 是一个构建可靠 AI agent 与应用的框架，把它们建模为状态机，让控制流变得显式、可调试、可观测。如今归入 Apache 旗下，它吸引了那些希望 agent 逻辑「可测试、可审计」而非「不透明提示链」的团队。248 分的热帖显示出对「结构化、生产级 agent 工程」的强烈兴趣。它从工具侧精准落入今天的「支架/控制流」主题。",
+      "points": 248,
+      "num_comments": 115,
+      "interest_tag": ""
+    },
+    {
+      "title": "A €0.01 bank transfer could compromise a banking AI agent",
+      "url": "https://blue41.com/blog/how-we-helped-bunq-secure-their-financial-ai-assistant/",
+      "tldr": "Researchers showed that a one-cent bank transfer—with an attacker-controlled memo field—could inject instructions and hijack a banking AI assistant, in work helping bunq secure their financial agent. It's a sharp example of prompt injection via untrusted transaction data crossing into the agent's context. At 208 points and 202 comments, it underscores that financial agents need strict separation between data and instructions. The tiny-transfer framing makes the attack memorable and the risk concrete.",
+      "tldr_zh": "研究者演示：一笔一分钱的银行转账——配上攻击者可控的备注字段——就能注入指令、劫持银行 AI 助手；这项工作帮助 bunq 加固了其金融 agent。它是「不可信交易数据越界进入 agent 上下文」这类提示注入的尖锐案例。208 分、202 条评论，凸显金融 agent 必须在「数据」与「指令」之间严格隔离。「一分钱转账」的叙事让攻击易记、风险具体。",
+      "points": 208,
+      "num_comments": 202,
+      "interest_tag": ""
+    }
+  ]
+}
