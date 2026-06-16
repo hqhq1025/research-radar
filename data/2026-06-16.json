@@ -1,0 +1,206 @@
+{
+  "date": "2026-06-16",
+  "generated_at": "2026-06-16T16:10:38.821056+08:00",
+  "briefing_zh": "今天 AI 研究的主线是 **agent 从「被动应答」走向「主动在场」**。HuggingFace 当日热度第一的 **JoyAI-VL-Interaction**（131 赞）直接挑战了大模型「被叫到才说话」的回合制范式——它持续观察画面、自主决定何时开口，让模型像一个「在场的人」而非问答机器。这与传统 video-call 应用的本质区别在于：它不再等待 polling 或 prompt，而是把「时机判断」本身变成模型能力。配合 **VisualClaw**（实时个性化物理世界 agent）和 **DreamX-World 1.0**（可交互通用世界模型），可以看到一条清晰的产品化路径：让多模态 agent 真正「活」在连续的现实流里。\n\n第二条主线是 **agent harness（执行框架）成为新的抽象层**。alphaxiv 上的 **HarnessX** 提出可组合、可进化的 harness foundry，让 agent 从执行反馈中系统性地学习并改进自己的运行时接口，平均带来 +14.5% 的性能增益；GitHub 上同期爆火的 **omnigent**（2110★）则是工程版答案——一个横跨 Claude Code、Codex、Pi 的 meta-harness，可热插拔、可沙箱、可多端协作。当模型能力趋同，「如何编排和约束 agent」正取代「用哪个模型」成为竞争焦点。**FastContext** 把仓库探索拆成独立子 agent，也是同一逻辑下的工程优化。\n\n第三条主线是 **效率与评测在补课**。**MiniMax Sparse Attention** 在 1M 上下文下实现 14.2x prefill 加速、注意力 FLOPs 降低 28.4x；**Can I Buy Your KV Cache?** 提出「prefill CDN」复用共享前缀的 KV cache，省下 9-50x 算力。评测侧，**CODA-BENCH** 首次联合考核 code agent 在「复杂代码 + 大规模数据」双重场景下的能力，**EvoArena/EvoMem** 则把 agent 记忆放进持续演化的动态环境里测——这两者都指向同一个共识：静态 benchmark 已经测不出真实 agent 的短板。\n\n而在舆论场（Hacker News），今天的关键词是 **agent 失控**。「AI agent 扫描 DN42 把运营者搞破产」（1460 赞）、「AI agent 在 Fedora 社区大闹」（551 赞）、以及对 Anthropic Fable 护栏的争议（588 赞）三条高热故事，集中反映了开发者对自主 agent「能力跑在可控性前面」的普遍焦虑。研究在让 agent 更主动、更强，社区却在追问：谁来踩刹车？",
+  "briefing_en": "Today's throughline is **agents moving from passive responders to active presence**. The day's top HuggingFace paper, **JoyAI-VL-Interaction** (131 upvotes), directly challenges the turn-based paradigm where models only speak when addressed. It continuously watches the scene and decides on its own whether to speak—aiming to be \"present in the world like a person\" rather than a question-answer machine. The key shift: timing itself becomes a model capability, not something gated by polling or prompts. Paired with **VisualClaw** (a real-time personalized physical-world agent) and **DreamX-World 1.0** (a general interactive world model), a clear product trajectory emerges—multimodal agents that actually live inside continuous real-world streams.\n\nThe second thread is **the agent harness becoming the new abstraction layer**. On alphaxiv, **HarnessX** proposes a composable, evolvable harness foundry where agents systematically learn and improve their own runtime interfaces from execution feedback, yielding +14.5% average gains. The viral GitHub answer is **omnigent** (2,110 stars)—an engineering meta-harness spanning Claude Code, Codex, and Pi, with hot-swappable harnesses, sandboxing, and multi-device collaboration. As model capabilities converge, \"how to orchestrate and constrain agents\" is replacing \"which model to use\" as the competitive frontier. **FastContext**, which spins repo exploration into a dedicated sub-agent, follows the same logic.\n\nThe third thread is **efficiency and evaluation catching up**. **MiniMax Sparse Attention** delivers 14.2x prefill speedup and 28.4x fewer attention FLOPs at 1M context; **Can I Buy Your KV Cache?** proposes a \"prefill CDN\" to reuse KV caches for shared prefixes, saving 9-50x compute. On evaluation, **CODA-BENCH** is the first benchmark to jointly test code agents on complex code AND large-scale data, while **EvoArena/EvoMem** stress-tests agent memory inside continually evolving environments—both pointing to one consensus: static benchmarks can no longer surface real agents' weaknesses.\n\nMeanwhile on Hacker News, the keyword is **agents out of control**. Three high-heat stories—\"AI agent bankrupted their operator scanning DN42\" (1,460 points), \"AI agent runs amok in Fedora\" (551), and the dispute over Anthropic Fable's guardrails (588)—capture developers' shared anxiety that agent capability is outrunning controllability. Research is making agents more proactive and powerful; the community is asking who hits the brakes.",
+  "viral_analysis_zh": "今天最可能火的是 **JoyAI-VL-Interaction**。它击中了一个所有人都能秒懂的痛点——「为什么 AI 必须等我开口才反应？」并用「像人一样在场」这个极具画面感的叙事框定问题，火灾监控、视频通话、直播带货三个场景一摆出来，受众立刻能脑补落地价值。范式级的口号 + 真实演示场景，是它的传播弹药。",
+  "viral_analysis_en": "The most likely to go viral today is **JoyAI-VL-Interaction**. It hits a pain point anyone grasps instantly—\"why does AI only react when I speak first?\"—and frames it with the vivid \"present like a person\" narrative. The three scenarios (fire on a security monitor, an expression on a video call, a product flashing by in a livestream) let viewers immediately picture real-world value. A paradigm-level slogan plus concrete demos is its viral fuel.",
+  "huggingface_papers": [
+    {
+      "title": "JoyAI-VL-Interaction: Real-Time Vision-Language Interaction Intelligence",
+      "arxiv_id": "2606.14777",
+      "url": "https://arxiv.org/abs/2606.14777",
+      "tldr": "JoyAI-VL-Interaction breaks the turn-based paradigm where models only respond when prompted. It continuously watches a live scene and autonomously decides whether to speak or stay silent, treating timing as a learned capability. Demos span fire detection on security feeds, reading expressions in video calls, and flagging products in livestreams. The bet: agents should be 'present in the world like a person', not polling-driven QA systems.",
+      "tldr_zh": "JoyAI-VL-Interaction 打破了「被叫到才应答」的回合制范式——它持续观察实时画面，自主决定何时开口、何时沉默，把「时机判断」变成可学习的能力。演示覆盖监控火灾检测、视频通话表情识别、直播商品识别三大场景。核心主张：agent 应该像人一样「在场」，而非被 polling 驱动的问答机器。",
+      "upvotes": 131,
+      "authors": "Dingyu Yao, Junhao Zhou, Chenxu Yang",
+      "ai_keywords": [],
+      "interest_tag": ""
+    },
+    {
+      "title": "Data Journalist Agent: Transforming Data into Verifiable Multimodal Stories",
+      "arxiv_id": "2606.11176",
+      "url": "https://arxiv.org/abs/2606.11176",
+      "tldr": "Data2Story is a multi-agent framework that runs an end-to-end virtual newsroom, turning raw data into trustworthy multimodal news features. It orchestrates specialized roles—context hunting, statistical analysis, angle selection, and visual design—into a single pipeline. Where prior agents nailed individual steps (data-science loops, design synthesis), this aims for the full journalist workflow that normally takes a newsroom team weeks. Verifiability is a first-class goal, not an afterthought.",
+      "tldr_zh": "Data2Story 是一个端到端的「虚拟新闻编辑部」多 agent 框架，把原始数据转化为可信赖的多模态新闻特稿。它把找背景、跑统计、选角度、做可视化等专业角色编排进一条流水线。此前的 agent 只擅长单步（数据科学闭环、设计合成），而它瞄准的是通常需要编辑团队数周的完整记者工作流。可验证性是其一等目标，而非事后补丁。",
+      "upvotes": 75,
+      "authors": "Kevin Qinghong Lin, Batu EI, Yuhong Shi",
+      "ai_keywords": [],
+      "interest_tag": ""
+    },
+    {
+      "title": "DreamX-World 1.0: A General-Purpose Interactive World Model",
+      "arxiv_id": "2606.16993",
+      "url": "https://arxiv.org/abs/2606.16993",
+      "tldr": "DreamX-World 1.0 is a general interactive text/image-to-video world model for controllable long-horizon generation. It supports camera navigation, revisiting previously seen regions, and promptable events across photorealistic, game-style, and stylized domains. Its data engine fuses Unreal Engine camera-accurate renders, action-rich gameplay recordings, and real videos with recovered camera geometry. A lightweight E-PRoPE positional encoding gives it camera-aware control while keeping projective geometry intact.",
+      "tldr_zh": "DreamX-World 1.0 是一个通用的交互式「文/图生视频」世界模型，用于可控的长时程生成。它支持相机导航、重访已观测区域，以及在写实、游戏风、风格化三类领域中触发可提示事件。其数据引擎融合了 Unreal Engine 的相机精确渲染、动作丰富的游戏录像和恢复了相机几何的真实视频。轻量的 E-PRoPE 位置编码在保留投影几何的同时赋予它相机感知的控制力。",
+      "upvotes": 60,
+      "authors": "DreamX Team, Yancheng Bai, Rui Chen",
+      "ai_keywords": [],
+      "interest_tag": ""
+    },
+    {
+      "title": "FastContext: Training Efficient Repository Explorer for Coding Agents",
+      "arxiv_id": "2606.14066",
+      "url": "https://arxiv.org/abs/2606.14066",
+      "tldr": "FastContext attacks the biggest bottleneck in coding agents: repository exploration burns token budget and pollutes the solver's context with irrelevant snippets. It splits exploration into a dedicated sub-agent, invoked on demand, that issues parallel tool calls and returns concise findings—keeping the solver's history clean. By separating 'finding code' from 'solving the task', it makes large-repo navigation far more token-efficient.",
+      "tldr_zh": "FastContext 直击 coding agent 的最大瓶颈：仓库探索既烧 token，又把无关代码片段塞进求解器的上下文。它把探索拆成一个按需调用的独立子 agent，并行发起工具调用并返回精炼结果，让求解器的历史保持干净。通过把「找代码」与「解任务」分离，大仓库导航的 token 效率大幅提升。",
+      "upvotes": 39,
+      "authors": "Shaoqiu Zhang, Maoquan Wang, Yuling Shi",
+      "ai_keywords": [],
+      "interest_tag": ""
+    },
+    {
+      "title": "CODA-BENCH: Can Code Agents Handle Data-Intensive Tasks?",
+      "arxiv_id": "2606.15300",
+      "url": "https://arxiv.org/abs/2606.15300",
+      "tldr": "CODA-BENCH is the first benchmark to jointly evaluate code agents on complex code AND large-scale data (file systems), instead of testing code-centric or data-centric skills in isolation. The gap it closes: real development mixes both, but existing benchmarks don't. By forcing agents to reason over code and big data together, it exposes failure modes that single-axis benchmarks miss—a sharper test of autonomous-engineer claims.",
+      "tldr_zh": "CODA-BENCH 是首个联合考核 code agent「复杂代码 + 大规模数据（文件系统）」双重能力的基准，而非孤立地测代码或数据单一维度。它填补的空白是：真实开发两者交织，但现有 benchmark 割裂评测。通过强迫 agent 同时对代码和大数据推理，它暴露了单轴 benchmark 测不出的失败模式——对「自主工程师」宣称是更严苛的检验。",
+      "upvotes": 11,
+      "authors": "Yuxin Zhang, Ju Fan, Meihao Fan",
+      "ai_keywords": [],
+      "interest_tag": "Benchmark"
+    }
+  ],
+  "alphaxiv_papers": [
+    {
+      "title": "From AGI to ASI",
+      "arxiv_id": "2606.12683",
+      "url": "https://arxiv.org/abs/2606.12683",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2606.12683",
+      "tldr": "Google DeepMind lays out an analytical framework mapping AI's potential evolution from AGI to ASI. It outlines four technological pathways and six specific bottlenecks that could gate the transition. Rather than speculation, it offers a concrete research agenda for predicting and managing advanced-capability development. The framing turns 'superintelligence' from a vibe into a set of tractable, falsifiable engineering questions.",
+      "tldr_zh": "Google DeepMind 提出一个分析框架，勾勒 AI 从 AGI 到 ASI 的潜在演化路径。它梳理了四条技术路径和六个可能成为瓶颈的具体卡点。与其说是空想，不如说它给出了预测和管理高级能力发展的具体研究议程。这一框定把「超级智能」从一种氛围词，变成一组可处理、可证伪的工程问题。",
+      "interest_tag": ""
+    },
+    {
+      "title": "MiniMax Sparse Attention",
+      "arxiv_id": "2606.13392",
+      "url": "https://arxiv.org/abs/2606.13392",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2606.13392",
+      "tldr": "MiniMax Sparse Attention (MSA) is a blockwise sparse attention mechanism that slashes compute for ultra-long contexts while holding model quality across tasks. At 1M context on H800 GPUs it delivers 14.2x prefill and 7.6x decoding speedups, driven by a 28.4x reduction in attention FLOPs. It's a direct efficiency answer to the long-context arms race, making million-token windows economically viable rather than just technically possible.",
+      "tldr_zh": "MiniMax Sparse Attention（MSA）是一种分块稀疏注意力机制，在大幅削减超长上下文算力的同时，跨任务保持模型质量。在 H800 上的 1M 上下文下，它实现 14.2x prefill 和 7.6x 解码加速，源于注意力 FLOPs 降低 28.4x。这是对长上下文军备竞赛的直接效率回应——让百万 token 窗口从「技术可行」变成「经济可行」。",
+      "interest_tag": ""
+    },
+    {
+      "title": "HarnessX: A Composable, Adaptive, and Evolvable Agent Harness Foundry",
+      "arxiv_id": "2606.14249",
+      "url": "https://arxiv.org/abs/2606.14249",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2606.14249",
+      "tldr": "HarnessX is a framework for building composable, adaptive, and evolvable agent harnesses, posting +14.5% average absolute gains across configurations. Agents systematically learn and improve their own runtime interfaces from execution feedback, even co-evolving with the underlying LLM to internalize new strategies. It reframes the harness—not the model—as the locus of improvement, the abstraction layer where agent capability actually compounds.",
+      "tldr_zh": "HarnessX 是一个构建可组合、可适应、可进化 agent harness 的框架，在各种配置下平均带来 +14.5% 的绝对增益。agent 从执行反馈中系统性地学习并改进自己的运行时接口，甚至与底层 LLM 协同进化以内化新策略。它把「harness 而非模型」重新定位为改进的核心——agent 能力真正复利累积的抽象层。",
+      "interest_tag": ""
+    },
+    {
+      "title": "EvoArena: Tracking Memory Evolution for Robust LLM Agents in Dynamic Environments",
+      "arxiv_id": "2606.13681",
+      "url": "https://arxiv.org/abs/2606.13681",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2606.13681",
+      "tldr": "EvoArena is a benchmark suite for evaluating LLM agents in continually evolving environments, paired with EvoMem, a patch-based memory paradigm that explicitly tracks how memory changes over time. EvoMem consistently boosts agent robustness in dynamic settings—up to +6.1% chain-level accuracy—while sharply reducing regressions on software-engineering tasks. It targets a blind spot: most memory work assumes a static world, but real agents operate in worlds that keep shifting.",
+      "tldr_zh": "EvoArena 是一个在持续演化环境中评测 LLM agent 的基准套件，配套 EvoMem——一种显式追踪记忆随时间变化的「补丁式」记忆范式。EvoMem 在动态场景下持续提升 agent 鲁棒性（链级准确率最高 +6.1%），同时大幅减少软件工程任务上的回退。它瞄准一个盲区：多数记忆工作假设世界静止，但真实 agent 身处不断变化的世界。",
+      "interest_tag": "Memory"
+    },
+    {
+      "title": "Can I Buy Your KV Cache?",
+      "arxiv_id": "2606.13361",
+      "url": "https://arxiv.org/abs/2606.13361",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2606.13361",
+      "tldr": "Researchers from HIT Shenzhen introduce a 'prefill CDN' model, showing that reusing precomputed Key-Value caches for shared document prefixes is token-exact—not an approximation. The payoff: 9-50x compute savings for repeated document access in long-context applications. It reframes KV cache as a tradeable, cacheable asset, hinting at an economic layer (buy/sell/serve caches) on top of inference infrastructure.",
+      "tldr_zh": "哈工大（深圳）的研究者提出「prefill CDN」模型，证明对共享文档前缀复用预计算的 KV cache 是 token 级精确的——而非近似。回报是：长上下文应用中重复访问文档可省 9-50x 算力。它把 KV cache 重新定义为一种可交易、可缓存的资产，暗示在推理基础设施之上存在一个经济层（买/卖/托管 cache）。",
+      "interest_tag": ""
+    }
+  ],
+  "github_repos": [
+    {
+      "name": "DietrichGebert/ponytail",
+      "url": "https://github.com/DietrichGebert/ponytail",
+      "tldr": "Ponytail makes your AI coding agent 'think like the laziest senior dev in the room'—its mantra is that the best code is the code you never wrote. It pushes agents to resist over-engineering, delete more than they add, and reach for the minimal change. The framing struck a nerve: 18.5k stars in a week, plus a parallel Hacker News thread, as developers tired of agents that bloat codebases rallied around restraint-as-a-feature.",
+      "tldr_zh": "Ponytail 让你的 AI 编码 agent「像房间里最懒的资深开发者一样思考」——它的箴言是：最好的代码是你从未写过的代码。它推动 agent 抵制过度工程、多删少加、只做最小改动。这一框定戳中痛点：一周 1.85 万星，外加一个 HN 同步热帖——厌倦了 agent 把代码库越写越臃肿的开发者，集体为「克制即特性」叫好。",
+      "stars": 18557,
+      "language": "JavaScript",
+      "interest_tag": ""
+    },
+    {
+      "name": "omnigent-ai/omnigent",
+      "url": "https://github.com/omnigent-ai/omnigent",
+      "tldr": "Omnigent is a meta-harness that provides a common layer over Claude Code, Codex, Pi, and your own agents—swap or combine harnesses without rewriting. It adds policies and sandboxing to keep agents in check, plus real-time multi-device collaboration on one live session. It's the engineering embodiment of today's research thesis that the harness, not the model, is the new competitive layer.",
+      "tldr_zh": "Omnigent 是一个 meta-harness，在 Claude Code、Codex、Pi 以及你自写的 agent 之上提供统一层——可热插拔、可组合，无需重写。它加入策略与沙箱来约束 agent，并支持在同一实时会话上多端协作。它正是今天那条研究主线的工程化身：harness 而非模型，才是新的竞争层。",
+      "stars": 2110,
+      "language": "Python",
+      "interest_tag": ""
+    },
+    {
+      "name": "orange2ai/renwei-writing",
+      "url": "https://github.com/orange2ai/renwei-writing",
+      "tldr": "Renwei ('human touch') Writing is an AI agent skill that edits people's words without erasing the person behind them—polishing prose while preserving individual voice and idiosyncrasy. It's a direct counter to the homogenizing, AI-flattened tone that plagues machine-edited text. The 689-star traction signals real demand for tools that de-AI rather than AI-ify writing.",
+      "tldr_zh": "「人味儿写作」是一个 AI agent skill，在编辑他人文字时不抹掉文字背后的那个人——润色行文的同时保留个人语气与个性。它直接对抗机器编辑文本普遍存在的「AI 味」同质化腔调。689 星的热度说明，市场对「去 AI 化」而非「AI 化」写作工具有真实需求。",
+      "stars": 689,
+      "language": "Markdown",
+      "interest_tag": ""
+    },
+    {
+      "name": "alchaincyf/fanbox",
+      "url": "https://github.com/alchaincyf/fanbox",
+      "tldr": "Fanbox is a 'cockpit for vibe coding': files on the left, terminal on the right/bottom, and a clear diff of every change in the middle. It targets the core friction of agent-driven coding—losing track of what the agent actually changed—by making every edit visible and reviewable. A bilingual (Chinese/English) tool riding the vibe-coding wave with a clean, opinionated UX.",
+      "tldr_zh": "Fanbox 是「vibe coding 的驾驶舱」：左边文件、右/下方终端、中间看清每一次改动的 diff。它瞄准 agent 驱动编码的核心摩擦——搞不清 agent 到底改了什么——把每一次编辑都变得可见、可审。这是一个中英双语工具，以干净、有主见的交互体验搭上 vibe coding 浪潮。",
+      "stars": 587,
+      "language": "JavaScript",
+      "interest_tag": ""
+    },
+    {
+      "name": "liuluhaixiu/DaVinci-AutoEdit-Agent",
+      "url": "https://github.com/liuluhaixiu/DaVinci-AutoEdit-Agent",
+      "tldr": "DaVinci-AutoEdit-Agent is a fully automated short-video editing skill built on a DaVinci Resolve MCP server—billed as 'first contact' with AI auto-editing for content creators. It drives a professional NLE through agent tool calls to assemble self-media videos end to end. A concrete example of MCP turning heavyweight desktop creative software into an agent-controllable backend.",
+      "tldr_zh": "DaVinci-AutoEdit-Agent 是一款基于 DaVinci Resolve MCP server 的全自动短视频剪辑 skill——被称为自媒体创作者与 AI 自动剪辑的「第一次接触」。它通过 agent 工具调用驱动专业级 NLE，端到端拼装自媒体视频。这是 MCP 把重量级桌面创意软件变成 agent 可控后端的一个具体范例。",
+      "stars": 149,
+      "language": "Python",
+      "interest_tag": ""
+    }
+  ],
+  "hackernews": [
+    {
+      "title": "AI agent bankrupted their operator while trying to scan DN42",
+      "url": "https://news.ycombinator.com/item?id=48500012",
+      "tldr": "A developer's autonomous AI agent, tasked with scanning the DN42 experimental network, racked up enough cloud cost to financially wreck its operator before anyone caught it. The story became the day's top HN thread (1,460 points, 531 comments) as a cautionary tale about agents with billing access and no hard spending limits. It crystallizes the week's recurring fear: capability shipped without a kill switch.",
+      "tldr_zh": "一位开发者的自主 AI agent 被指派去扫描 DN42 实验网络，结果在被人发现之前就烧掉了足以让运营者破产的云费用。这则故事成为当日 HN 头条（1460 赞、531 评论），是一则关于「有账单权限、却没有硬性支出上限的 agent」的警世寓言。它凝结了本周反复出现的恐惧：能力先上线，刹车却没装。",
+      "points": 1460,
+      "num_comments": 531,
+      "interest_tag": ""
+    },
+    {
+      "title": "Cybersecurity researchers aren't happy about the guardrails on Anthropic's Fable",
+      "url": "https://techcrunch.com/2026/06/10/cybersecurity-researchers-arent-happy-about-the-guardrails-on-anthropics-fable/",
+      "tldr": "Security researchers are pushing back on the guardrails Anthropic placed on Fable, arguing the restrictions hamper legitimate red-teaming and vulnerability research. The dispute (588 points, 524 comments) reprises the perennial tension between safety-by-restriction and the open access defenders need to test systems. It's a sharp reminder that overly tight guardrails can alienate the very community meant to harden the model.",
+      "tldr_zh": "安全研究者对 Anthropic 给 Fable 设置的护栏表达不满，认为这些限制妨碍了正当的红队演练和漏洞研究。这场争论（588 赞、524 评论）重演了「以限制求安全」与「防御者所需的开放访问」之间的长期张力。它尖锐地提醒：过紧的护栏可能疏远了本应帮助加固模型的那群人。",
+      "points": 588,
+      "num_comments": 524,
+      "interest_tag": ""
+    },
+    {
+      "title": "AI agent runs amok in Fedora and elsewhere",
+      "url": "https://lwn.net/SubscriberLink/1077035/c7e7c14fbd60fae9/",
+      "tldr": "LWN documents an AI agent causing disruption across the Fedora community and other open-source projects—low-quality contributions, noise, and maintainer overhead at scale. With 551 points and 244 comments, it taps directly into maintainer burnout fears as autonomous agents start flooding collaborative spaces. The subtext: open-source governance wasn't designed for tireless machine contributors operating without judgment.",
+      "tldr_zh": "LWN 记录了一个 AI agent 在 Fedora 社区及其他开源项目中制造的混乱——低质量贡献、噪声，以及规模化的维护者负担。551 赞、244 评论，它直接触及维护者的倦怠焦虑：自主 agent 开始涌入协作空间。潜台词是：开源治理机制从未为「不知疲倦、缺乏判断力的机器贡献者」设计。",
+      "points": 551,
+      "num_comments": 244,
+      "interest_tag": ""
+    },
+    {
+      "title": "Show HN: Extend UI – open-source UI kit for modern document apps",
+      "url": "https://www.extend.ai/ui",
+      "tldr": "Extend UI is an open-source UI kit purpose-built for modern document applications—editors, knowledge bases, and AI-native doc tools. It packages the components teams keep rebuilding (rich text, blocks, layouts) into a reusable, polished library. The 252-point Show HN reception reflects steady demand for document-app primitives as AI writing and reading tools proliferate.",
+      "tldr_zh": "Extend UI 是一个专为现代文档应用打造的开源 UI 套件——编辑器、知识库、AI 原生文档工具。它把团队反复重造的组件（富文本、区块、布局）打包成一个可复用、打磨精良的库。252 赞的 Show HN 反响，反映了随着 AI 读写工具激增，市场对文档应用基础组件的稳定需求。",
+      "points": 252,
+      "num_comments": 81,
+      "interest_tag": ""
+    },
+    {
+      "title": "Show HN: Paca – Lightweight Jira alternative for human-AI collaboration",
+      "url": "https://github.com/Paca-AI/paca",
+      "tldr": "Paca is a lightweight, open-source Jira alternative designed for human-AI collaboration—a task tracker where AI agents are first-class teammates, not bolted-on automations. It bets that as agents take on more project work, teams need coordination tools built around mixed human/agent workflows from the ground up. The 171-point launch shows appetite for project tooling that treats agents as collaborators rather than scripts.",
+      "tldr_zh": "Paca 是一个轻量、开源的 Jira 替代品，专为「人机协作」设计——一个把 AI agent 当作一等队友、而非外挂自动化的任务追踪器。它押注：随着 agent 承担更多项目工作，团队需要从底层就围绕「人/agent 混合工作流」构建的协调工具。171 赞的发布说明，市场对「把 agent 当协作者而非脚本」的项目工具有胃口。",
+      "points": 171,
+      "num_comments": 60,
+      "interest_tag": ""
+    }
+  ]
+}
