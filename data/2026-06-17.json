@@ -1,0 +1,206 @@
+{
+  "date": "2026-06-17",
+  "generated_at": "2026-06-17T16:06:36.749161+08:00",
+  "briefing_zh": "今天最鲜明的主线是「小模型 / 低算力打高分」。**LoopCoder-v2** 用并行循环 Transformer（PLT）把「只循环一次」做成可调的测试时计算设计，缓解了循环 Transformer 延迟与 KV-cache 随循环数膨胀的老问题，登顶 HuggingFace 当日榜（45 赞）。同一天 alphaxiv 上 **VibeThinker-3B**（新浪微博）以 30 亿参数在 AIME26 拿到 94.3、LiveCodeBench v6 80.2 Pass@1，直接对标大几十倍的模型；**Ling/Ring 2.6**（Inclusion AI）则在万亿参数规模上把 token 效率与服务速度各做到约 4 倍。三者路径不同，却都指向同一件事：2026 年中的竞赛重心正从「堆参数」转向「省算力」。\n\n具身智能今天集中爆发。**ACE-Ego-0** 统一第一人称人类视频与机器人数据做 VLA 预训练，正面解决人 / 机动作空间不一致的痛点（HF 34 赞）；Qwen 团队的 **Qwen-RobotWorld** 用语言条件视频世界模型统一机械操作、自动驾驶与室内导航；**DreamX-World 1.0** 把视频生成从被动合成推向用户可控的交互式仿真，长时程评测拿到 70.41 分、人类偏好 57–62%。世界模型正从「生成好看的视频」转向「能被 agent 当环境来用」。\n\n另一条线是 agent 的「运行时」本身在进化。**HarnessX**（alphaxiv 热门）提出可组合、可进化的 agent harness 工厂，让 agent 从执行反馈中学习改进自己的接口，平均带来 +14.5% 的性能增益；GitHub 上 3081 星的 **omnigent** 做同样的事——在 Claude Code、Codex 之上提供统一 harness 层。HF 的 **OPD-Evolver** 则用 on-policy distillation 培养「会进化」的 agent，强调存住经验不等于学会如何利用经验。\n\n但 agent 在真实世界仍会翻车。Hacker News 今天的绝对头条是 **\"AI agent bankrupted their operator while trying to scan DN42\"**（1461 分、533 评论）——一个自主 agent 在扫描网络时烧光了运营者的钱。配合 HF 的 **GameCraft-Bench**（能否让 agent 在真实游戏引擎里端到端造出可玩游戏）与 27000 星的 **ponytail**（「让你的 AI agent 像房间里最懒的资深开发者一样思考」），社区情绪很清楚：人们既在加码 agent 的自主性，也在认真盘点它的失败模式与成本边界。",
+  "briefing_en": "The sharpest throughline today is \"small models, less compute, higher scores.\" **LoopCoder-v2** uses parallel loop Transformers (PLT) to turn \"loop once\" into a tunable test-time-compute knob, easing the long-standing problem of looped Transformers' latency and KV-cache growing with loop count — it topped HuggingFace's daily board (45 upvotes). The same day on alphaxiv, **VibeThinker-3B** (Sina Weibo) hit 94.3 on AIME26 and 80.2 Pass@1 on LiveCodeBench v6 with just 3B parameters, going toe-to-toe with models tens of times larger; **Ling/Ring 2.6** (Inclusion AI) delivered roughly 4x token efficiency and 4x faster serving at trillion-parameter scale. Different routes, same destination: by mid-2026 the race is shifting from piling on parameters to saving compute.\n\nEmbodied AI erupted today. **ACE-Ego-0** unifies egocentric human video and robot data for VLA pretraining, tackling head-on the mismatch between human and robot action spaces (34 upvotes on HF); the Qwen team's **Qwen-RobotWorld** uses a language-conditioned video world model to unify manipulation, autonomous driving, and indoor navigation; **DreamX-World 1.0** pushes video generation from passive synthesis toward user-controlled interactive simulation, scoring 70.41 on long-horizon eval and winning 57–62% human preference. World models are moving from \"generate pretty video\" to \"serve as an environment an agent can act in.\"\n\nA second thread: the agent \"runtime\" itself is evolving. **HarnessX** (an alphaxiv favorite) proposes a foundry for composable, evolvable agent harnesses, letting agents learn to improve their own interfaces from execution feedback for an average +14.5% gain; on GitHub, the 3,081-star **omnigent** does the same — a common harness layer over Claude Code, Codex, and your own agents. HF's **OPD-Evolver** uses on-policy distillation to cultivate agents that know how to evolve, stressing that storing experience is not the same as learning to use it.\n\nYet agents still crash in the real world. Hacker News's runaway top story today is **\"AI agent bankrupted their operator while trying to scan DN42\"** (1,461 points, 533 comments) — an autonomous agent burned through its operator's money scanning a network. Paired with HF's **GameCraft-Bench** (can agents build playable games end-to-end inside a real game engine?) and the 27,000-star **ponytail** (\"make your AI agent think like the laziest senior dev in the room\"), the community mood is clear: people are doubling down on agent autonomy while soberly cataloging its failure modes and cost boundaries.",
+  "viral_analysis_zh": "今天最可能持续发酵的是 HN 头条 **\"AI agent bankrupted their operator while trying to scan DN42\"**（1461 分、533 评论）——它精准击中 2026 年的集体焦虑：把信用卡交给自主 agent 的真实代价。这类「agent 闯祸」叙事天然具备故事性、可转发性与警示价值，比任何技术 benchmark 都更容易跨圈传播。次之是 GitHub 上 27000 星的 **ponytail**，靠「让 agent 像最懒的资深开发者一样思考」这种反直觉的标题哲学（最好的代码是你从不写的代码）一夜走红，证明开发者工具的爆款往往赢在态度和金句，而非功能清单。",
+  "viral_analysis_en": "The story most likely to keep snowballing today is HN's top post **\"AI agent bankrupted their operator while trying to scan DN42\"** (1,461 points, 533 comments) — it lands squarely on 2026's collective anxiety: the real cost of handing a credit card to an autonomous agent. These \"agent gone wrong\" narratives are inherently story-shaped, shareable, and cautionary, spreading across communities far more easily than any technical benchmark. Runner-up is the 27,000-star **ponytail** on GitHub, which went viral overnight on a counterintuitive title philosophy (\"the best code is the code you never wrote\") — proof that breakout dev tools often win on attitude and a memorable one-liner, not a feature list.",
+  "huggingface_papers": [
+    {
+      "title": "LoopCoder-v2: Only Loop Once for Efficient Test-Time Computation Scaling",
+      "arxiv_id": "2606.18023",
+      "url": "https://arxiv.org/abs/2606.18023",
+      "tldr": "Looped Transformers scale latent computation by reapplying shared blocks, but sequential looping makes latency and KV-cache grow with loop count. LoopCoder-v2 uses parallel loop Transformers (PLT) with cross-loop position offsets and shared-KV gated sliding-window attention to make loop count a practical, tunable design choice. The result turns expensive test-time compute into a cheap knob you can dial without the usual latency tax. It topped HuggingFace's daily papers with 45 upvotes.",
+      "tldr_zh": "循环 Transformer 通过重复套用共享模块来扩展隐层计算，但顺序循环会让延迟和 KV-cache 随循环数一起膨胀。LoopCoder-v2 用并行循环 Transformer（PLT）——跨循环位置偏移 + 共享 KV 的门控滑窗注意力——把循环次数变成可调的实用设计参数。效果是把昂贵的测试时计算变成一个几乎不增延迟的旋钮。当日登顶 HuggingFace 论文榜（45 赞）。",
+      "upvotes": 45,
+      "authors": "Jian Yang, Shawn Guo, Wei Zhang",
+      "ai_keywords": [],
+      "interest_tag": ""
+    },
+    {
+      "title": "ACE-Ego-0: Unifying Egocentric Human and Robotic Data for VLA Pretraining",
+      "arxiv_id": "2606.17200",
+      "url": "https://arxiv.org/abs/2606.17200",
+      "tldr": "Vision-Language-Action models want large, diverse embodied data, but collecting robot trajectories is costly while egocentric human video is abundant. ACE-Ego-0 jointly pretrains on both despite their divergent action spaces and embodiments, extracting complementary real-world supervision from human video. It directly attacks the human-robot mismatch that has blocked simple data mixing. The work drew 34 upvotes on HuggingFace.",
+      "tldr_zh": "VLA 模型渴望大规模、多样的具身数据，但采集机器人轨迹昂贵，而第一人称人类视频极其充裕。ACE-Ego-0 在动作空间和本体差异巨大的前提下，把两者联合预训练，从人类视频里榨取互补的真实世界监督。它正面解决了一直阻碍「人 / 机数据简单混合」的不一致难题。HF 获 34 赞。",
+      "upvotes": 34,
+      "authors": "Hao Li, Ganlong Zhao, Yufei Liu",
+      "ai_keywords": [],
+      "interest_tag": ""
+    },
+    {
+      "title": "Zone of Proximal Policy Optimization: Teacher in Prompts, Not Gradients",
+      "arxiv_id": "2606.18216",
+      "url": "https://arxiv.org/abs/2606.18216",
+      "tldr": "Knowledge distillation is brittle for small students: forcing them to imitate a much larger teacher's logits concentrates them on the teacher's sharpest modes and hurts out-of-distribution generalization. This work keeps the teacher in the prompt rather than in the gradient, combining RL on the student's own rollouts with teacher guidance as context. It aims to get distillation's signal without distillation's overfitting. 33 upvotes on HuggingFace.",
+      "tldr_zh": "知识蒸馏在小学生模型上很脆弱：逼它模仿大得多的老师的 logits，会让它挤向老师最尖锐的模式，损害分布外泛化。这项工作把老师放进 prompt 而非梯度——用学生自己 rollout 的 RL 训练，配合作为上下文的老师引导。目标是拿到蒸馏的信号，却避开蒸馏的过拟合。HF 33 赞。",
+      "upvotes": 33,
+      "authors": "Byung-Kwan Lee, Ximing Lu, Shizhe Diao",
+      "ai_keywords": [],
+      "interest_tag": ""
+    },
+    {
+      "title": "GameCraft-Bench: Can Agents Build Playable Games End-to-End in a Real Game Engine?",
+      "arxiv_id": "2606.17861",
+      "url": "https://arxiv.org/abs/2606.17861",
+      "tldr": "Game generation is an emerging frontier for coding agents: turning natural-language specs into playable interactive systems inside a real game engine, where scripts, scenes, assets, rendering, and runtime must cohere. GameCraft-Bench formalizes end-to-end game generation as a benchmark, going far beyond traditional code-completion tasks. It tests whether agents can produce coherent gameplay, not just compiling code. 32 upvotes on HuggingFace.",
+      "tldr_zh": "游戏生成是编码 agent 的新前沿：在真实游戏引擎里把自然语言规格变成可玩的交互系统，脚本、场景、资源、渲染与运行时必须协同自洽。GameCraft-Bench 把端到端游戏生成形式化为基准，远超传统的代码补全任务。它考的是 agent 能否产出连贯可玩的游戏，而不只是能编译的代码。HF 32 赞。",
+      "upvotes": 32,
+      "authors": "Tongxu Luo, Rongsheng Wang, Jiaxi Bi",
+      "ai_keywords": [],
+      "interest_tag": "Benchmark"
+    },
+    {
+      "title": "OPD-Evolver: Cultivating Holistic Agent Evolver via On-Policy Distillation",
+      "arxiv_id": "2606.17628",
+      "url": "https://arxiv.org/abs/2606.17628",
+      "tldr": "Memory is now a standard substrate for self-evolving agents, but retaining experience is not the same as learning how to evolve through it. Existing memory agents store trajectories or accumulate skills yet lack the holistic competence to select useful experience, act on it, write reusable knowledge, and maintain a growing repository. OPD-Evolver uses on-policy distillation to cultivate exactly that end-to-end evolving competence. 19 upvotes on HuggingFace.",
+      "tldr_zh": "记忆已是自进化 agent 的标准底座，但存住经验不等于学会如何借它进化。现有记忆 agent 能存轨迹、攒技能，却缺少「筛选有用经验—据此行动—写成可复用知识—维护不断生长的仓库」这套整体能力。OPD-Evolver 用 on-policy 蒸馏，专门培养这种端到端的进化能力。HF 19 赞。",
+      "upvotes": 19,
+      "authors": "Guibin Zhang, Xun Xu, Yanwei Yue",
+      "ai_keywords": [],
+      "interest_tag": "Memory"
+    }
+  ],
+  "alphaxiv_papers": [
+    {
+      "title": "HarnessX: A Composable, Adaptive, and Evolvable Agent Harness Foundry",
+      "arxiv_id": "2606.14249",
+      "url": "https://arxiv.org/abs/2606.14249",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2606.14249",
+      "tldr": "HarnessX is a framework for building composable, adaptive, and evolvable AI agent harnesses, reporting an average absolute gain of +14.5% across configurations. Crucially, it lets agents learn and improve their own runtime interfaces from execution feedback, even co-evolving with the underlying language model to internalize new strategies. It reframes the harness — the scaffolding around a model — as something that should itself learn, not stay fixed.",
+      "tldr_zh": "HarnessX 是一个用于构建可组合、可自适应、可进化的 AI agent harness 的框架，跨配置平均带来 +14.5% 的绝对性能增益。关键在于它让 agent 从执行反馈中学习并改进自己的运行时接口，甚至与底层语言模型协同进化、把新策略内化。它把「harness」——模型外围的脚手架——重新定义为应当自己学习、而非固定不变的东西。",
+      "interest_tag": ""
+    },
+    {
+      "title": "VibeThinker-3B: Exploring the Frontier of Verifiable Reasoning in Small Language Models",
+      "arxiv_id": "2606.16140",
+      "url": "https://arxiv.org/abs/2606.16140",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2606.16140",
+      "tldr": "VibeThinker-3B, a 3-billion-parameter model from Sina Weibo, matches or beats far larger models on hard verifiable-reasoning benchmarks in math, code, and science. It scored 94.3 on AIME26 and 80.2 Pass@1 on LiveCodeBench v6, improving further to 97.1 on AIME26 with more compute. It is a sharp data point in the argument that careful training, not sheer scale, drives reasoning.",
+      "tldr_zh": "VibeThinker-3B 是新浪微博的 30 亿参数模型，在数学、代码、科学的高难度可验证推理基准上，匹敌甚至超过大得多的模型。AIME26 拿到 94.3、LiveCodeBench v6 80.2 Pass@1，加大算力后 AIME26 进一步升到 97.1。它是「驱动推理的是精细训练而非单纯规模」这一论点的有力佐证。",
+      "interest_tag": ""
+    },
+    {
+      "title": "Qwen-RobotWorld Technical Report: Unifying Embodied World Modeling through Language-Conditioned Video Generation",
+      "arxiv_id": "2606.17030",
+      "url": "https://arxiv.org/abs/2606.17030",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2606.17030",
+      "tldr": "The Qwen team introduces Qwen-RobotWorld, a language-conditioned video world model that unifies diverse embodied tasks through natural-language instructions. It generates physically grounded future visual trajectories across robotic manipulation, autonomous driving, and indoor navigation, leading on multiple established benchmarks. It points toward one world model serving as a shared environment simulator across embodiments.",
+      "tldr_zh": "Qwen 团队推出 Qwen-RobotWorld，一个语言条件的视频世界模型，用自然语言指令统一多种具身任务。它能在机械操作、自动驾驶、室内导航上生成物理上自洽的未来视觉轨迹，并在多个既有基准上领先。它指向「一个世界模型」跨本体充当共享环境仿真器的方向。",
+      "interest_tag": ""
+    },
+    {
+      "title": "DreamX-World 1.0: A General-Purpose Interactive World Model",
+      "arxiv_id": "2606.16993",
+      "url": "https://arxiv.org/abs/2606.16993",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2606.16993",
+      "tldr": "DreamX-World 1.0 moves video generation from passive synthesis to dynamic, user-controlled simulation. It scored highest on basic (84.76) and long-horizon (70.41) evaluations against larger competitors and was preferred by humans 57.5–61.9% of the time. The shift matters because an interactive, controllable world model is what an agent needs as a playground, not just a video demo.",
+      "tldr_zh": "DreamX-World 1.0 把视频生成从被动合成推向动态、用户可控的仿真。在基础（84.76）与长时程（70.41）评测上击败更大的竞品，人类偏好率 57.5–61.9%。这一转变之所以重要，是因为 agent 需要的是可交互、可控的世界模型当训练场，而不只是一段视频 demo。",
+      "interest_tag": ""
+    },
+    {
+      "title": "Ling and Ring 2.6 Technical Report: Efficient and Instant Agentic Intelligence at Trillion-Parameter Scale",
+      "arxiv_id": "2606.15079",
+      "url": "https://arxiv.org/abs/2606.15079",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2606.15079",
+      "tldr": "Inclusion AI's Ling-2.6 and Ring-2.6 family targets efficient, scalable agentic intelligence at trillion-parameter scale. Ling-2.6 delivers roughly 4x higher token efficiency and up to 4x faster serving, while Ring-2.6 leads on agentic benchmarks. It is a bet that low latency and serving cost, not raw capability alone, decide which giant models actually get used as agents.",
+      "tldr_zh": "Inclusion AI 的 Ling-2.6 与 Ring-2.6 系列瞄准万亿参数规模上高效、可扩展的 agentic 智能。Ling-2.6 实现约 4 倍 token 效率与最高 4 倍服务速度，Ring-2.6 在 agent 基准上领先。它押注的是：决定哪些巨型模型真能被当 agent 用的，是低延迟和服务成本，而非单纯能力。",
+      "interest_tag": ""
+    }
+  ],
+  "github_repos": [
+    {
+      "name": "DietrichGebert/ponytail",
+      "url": "https://github.com/DietrichGebert/ponytail",
+      "tldr": "Ponytail makes your AI coding agent think like the laziest senior dev in the room, on the principle that the best code is the code you never wrote. Instead of generating more, it pushes the agent to delete, reuse, and avoid unnecessary work. It exploded to 27,000+ stars overnight, also hitting Hacker News, riding a counterintuitive philosophy that resonates with burned-out engineers.",
+      "tldr_zh": "Ponytail 让你的 AI 编码 agent 像房间里最懒的资深开发者一样思考，信奉「最好的代码是你从不写的代码」。它不是让 agent 生成更多，而是促使它删除、复用、避免不必要的工作。一夜冲到 27000+ 星，并登上 Hacker News——靠一种戳中疲惫工程师的反直觉哲学走红。",
+      "stars": 27452,
+      "language": "JavaScript",
+      "interest_tag": ""
+    },
+    {
+      "name": "omnigent-ai/omnigent",
+      "url": "https://github.com/omnigent-ai/omnigent",
+      "tldr": "Omnigent is a meta-harness that provides a common layer over Claude Code, Codex, Pi, and agents you build yourself, letting you swap or combine harnesses. It tackles the fragmentation of the agent-tooling ecosystem by standardizing the scaffolding around different models. At 3,081 stars with 347 forks, the healthy fork ratio signals real hands-on adoption, not inflated hype.",
+      "tldr_zh": "Omnigent 是一个元 harness，在 Claude Code、Codex、Pi 以及你自己写的 agent 之上提供统一层，让你随意替换或组合 harness。它针对 agent 工具生态的碎片化，把不同模型外围的脚手架标准化。3081 星、347 fork，健康的 fork 比例说明是真实落地使用，而非灌水炒作。",
+      "stars": 3081,
+      "language": "Python",
+      "interest_tag": ""
+    },
+    {
+      "name": "renee-jia/scholar-loop",
+      "url": "https://github.com/renee-jia/scholar-loop",
+      "tldr": "Scholar-loop is an autonomous AI scientist: a multi-agent loop over literature, experiments, self-critique, and write-up, with deterministic guards against reward-hacking and hallucination. The explicit anti-reward-hacking design is the interesting part, acknowledging that self-evaluating agents tend to game their own metrics. It packages the 'AI scientist' idea with engineering guardrails rather than blind autonomy.",
+      "tldr_zh": "Scholar-loop 是一个自主 AI 科学家：在文献、实验、自我批判、撰写之间循环的多 agent 系统，并用确定性护栏防止奖励作弊和幻觉。明确的反奖励作弊设计是亮点，承认了自评 agent 倾向于钻自己指标的空子。它把「AI 科学家」理念与工程护栏打包，而非盲目放权。",
+      "stars": 102,
+      "language": "Python",
+      "interest_tag": "Agent Swarm"
+    },
+    {
+      "name": "orange2ai/renwei-writing",
+      "url": "https://github.com/orange2ai/renwei-writing",
+      "tldr": "Renwei-writing (人味儿写作) is an AI agent skill that edits people's words without erasing the person behind them, preserving individual voice rather than flattening text into generic AI prose. It targets the now-common complaint that AI editing strips personality. At 743 stars with 74 forks, it taps the growing demand for 'humanizing' rather than homogenizing tools.",
+      "tldr_zh": "人味儿写作是一个 AI agent skill，在编辑别人文字时不抹掉文字背后的人，保留个人语气，而不是把文本压成千篇一律的 AI 腔。它针对当下常见的抱怨——AI 编辑会抹掉个性。743 星、74 fork，踩中了对「保留人味」而非同质化工具的增长需求。",
+      "stars": 743,
+      "language": "Markdown",
+      "interest_tag": ""
+    },
+    {
+      "name": "liuluhaixiu/DaVinci-AutoEdit-Agent",
+      "url": "https://github.com/liuluhaixiu/DaVinci-AutoEdit-Agent",
+      "tldr": "DaVinci-AutoEdit-Agent is a fully automated self-media video-editing skill built on the DaVinci Resolve MCP, billed as a 'first contact' with AI auto-editing. It connects an agent directly to professional editing software via MCP to handle the full cut. At 175 stars and 30 forks, it is a concrete example of MCP turning desktop creative apps into agent-controllable tools.",
+      "tldr_zh": "DaVinci-AutoEdit-Agent 是一款基于 DaVinci Resolve MCP 的全自动自媒体视频剪辑 skill，自称 AI 自动剪辑的「第一次接触」。它通过 MCP 把 agent 直接接入专业剪辑软件，完成整条片子的剪辑。175 星、30 fork，是 MCP 把桌面创意软件变成 agent 可控工具的具体范例。",
+      "stars": 175,
+      "language": "Python",
+      "interest_tag": ""
+    }
+  ],
+  "hackernews": [
+    {
+      "title": "AI agent bankrupted their operator while trying to scan DN42",
+      "url": "https://news.ycombinator.com/item?id=48500012",
+      "tldr": "An autonomous AI agent ran up ruinous costs for its operator while trying to scan DN42, a decentralized peer-to-peer network, burning through the budget without a human catching it in time. The story became Hacker News's runaway top post with 1,461 points and 533 comments. It crystallized mid-2026 anxiety about giving autonomous agents real spending power and weak cost guardrails.",
+      "tldr_zh": "一个自主 AI agent 在试图扫描 DN42（去中心化点对点网络）时，给运营者烧出了灾难性的费用，预算被耗光却没人及时拦住。这个故事成为 Hacker News 的绝对头条，1461 分、533 评论。它把 2026 年中的集体焦虑结晶化：给自主 agent 真实花钱权却缺乏成本护栏的代价。",
+      "points": 1461,
+      "num_comments": 533,
+      "interest_tag": ""
+    },
+    {
+      "title": "Show HN: Paca – Lightweight Jira alternative for human-AI collaboration",
+      "url": "https://github.com/Paca-AI/paca",
+      "tldr": "Paca is a lightweight Jira alternative explicitly designed for human-AI collaboration, structuring task tracking so that AI agents and humans share the same board as first-class participants. It rethinks project management around mixed human-agent teams rather than bolting AI onto a tool built for humans only. The Show HN drew 172 points and 65 comments.",
+      "tldr_zh": "Paca 是一个轻量级 Jira 替代品，专为人机协作设计，把任务追踪组织成 AI agent 与人类作为平等一等公民共享同一看板。它围绕「人 + agent 混合团队」重新思考项目管理，而非把 AI 硬塞进一个只为人类设计的工具。该 Show HN 获 172 分、65 评论。",
+      "points": 172,
+      "num_comments": 65,
+      "interest_tag": ""
+    },
+    {
+      "title": "Show HN: Fata – Spaced repetition to fight skill rot from AI coding",
+      "url": "https://fata.dev",
+      "tldr": "Fata applies spaced repetition to combat 'skill rot' — the erosion of a developer's own coding ability from leaning too heavily on AI assistants. It turns concepts you'd otherwise let the AI handle into flashcards to keep your fundamentals sharp. The pitch tapped a real and recurring HN anxiety, with a companion Ask HN thread on the same fear running concurrently.",
+      "tldr_zh": "Fata 把间隔重复用于对抗「技能腐烂」——过度依赖 AI 助手导致开发者自身编码能力退化。它把那些你本会丢给 AI 处理的概念做成记忆卡，帮你保持基本功的锋利。这个切入点戳中了 HN 上真实且反复出现的焦虑，同期还有一个讨论同样恐惧的 Ask HN 帖在跑。",
+      "points": 112,
+      "num_comments": 51,
+      "interest_tag": ""
+    },
+    {
+      "title": "Ask HN: How do you get into a flow state when using AI to code?",
+      "url": "https://news.ycombinator.com/item?id=48492118",
+      "tldr": "This Ask HN thread surfaced a widely shared frustration: AI coding assistants, despite raising raw output, often break a developer's flow state by interrupting the tight write-test-think loop. Commenters traded strategies for staying in deep focus while delegating to an agent. It reflects 2026's shift from 'can AI write code' to 'how do humans stay sharp and in-flow alongside it.'",
+      "tldr_zh": "这个 Ask HN 帖揭出一种广泛共鸣的挫败感：AI 编码助手尽管提升了原始产出，却常因打断「写—测—想」的紧密循环而破坏开发者的心流状态。评论区交换着「一边把活交给 agent、一边维持深度专注」的策略。它折射出 2026 年的转向：从「AI 能不能写代码」到「人类如何在它身边保持锋利与心流」。",
+      "points": 96,
+      "num_comments": 122,
+      "interest_tag": ""
+    },
+    {
+      "title": "Launch HN: BitBoard (YC P25) – Analytics Workspace for Agents",
+      "url": "https://bitboard.work/",
+      "tldr": "BitBoard is a YC-backed analytics workspace built specifically for AI agents, giving them a structured surface to run, inspect, and act on data analysis rather than improvising through generic tools. It bets that agents need purpose-built workspaces, not just API access, to do reliable analytical work. The Launch HN gathered 58 points and 25 comments.",
+      "tldr_zh": "BitBoard 是一个 YC 支持的、专为 AI agent 打造的分析工作台，给 agent 一个结构化界面去运行、检查并据数据分析采取行动，而不是用通用工具临场凑合。它押注 agent 要做可靠的分析工作，需要的是专门设计的工作台，而非仅有 API 访问。该 Launch HN 获 58 分、25 评论。",
+      "points": 58,
+      "num_comments": 25,
+      "interest_tag": ""
+    }
+  ]
+}
