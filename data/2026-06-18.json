@@ -1,0 +1,206 @@
+{
+  "date": "2026-06-18",
+  "generated_at": "2026-06-18T16:13:03.250196+08:00",
+  "briefing_zh": "今天的主线是**世界模型（World Model）正在成为 Physical AI 的操作系统**。Qwen 一口气放出 **Qwen-RobotWorld**、**Qwen-RobotManip**、**Qwen-RobotNav** 三件套，用自然语言作为统一动作接口，把世界建模、操作与导航打通；与之呼应的是 **Kairos**（面向 Physical AI 的原生世界模型栈）、**DreamX-World 1.0**（通用交互式世界模型）和 **Looped World Models**（用循环结构在长程模拟中平衡算力与误差累积）。世界模型正从「被动的视频生成器」转向「主动的、可长期维持状态的基础设施」，这是今天 alphaxiv 与 HuggingFace 榜单最密集的信号。\n\n效率层面，**长上下文 + 稀疏注意力**的军备竞赛白热化。alphaxiv 热度第一的 **GLM-5.2** 主打 1M token 上下文与 IndexShare 稀疏注意力（每 token FLOPs 降 2.9×），明确瞄准长程 agentic coding；紧随其后的 **MiniMax Sparse Attention (MSA)** 在 GQA 之上做块级稀疏选择，直击 agent 工作流、仓库级代码推理和持久记忆共同需要的「百万 token 联合注意力」成本问题。两家前沿实验室同日上榜，说明「让 agent 跑得起超长上下文」已是确定性方向。\n\nAgent 的评测与「骨架（harness）」成为第二条暗线。**Guava** 系统性研究什么样的 harness 能解锁具身操作能力；**CEO-Bench** 把长程、噪声信息获取、动态适应、多线程编排揉进一个「能不能玩长期游戏」的 agent 基准；**RNG-Bench** 则专门隔离模型在非马尔可夫游戏中重建历史观测的能力。GitHub 上 **ruvnet/agent-harness-generator** 这类「给 agent 搭专属骨架」的元工具也在涨星——框架化、可评测正在取代 end-to-end 黑箱。\n\n开源侧最炸的是 **agent skills 生态**：**ponytail** 五天冲到 3.3 万星，用一句「让 AI agent 像房间里最懒的资深工程师那样思考（YAGNI，最好的代码是你没写的代码）」戳中所有人，同时登上 HN 前排；**compass-skills**（个人对齐 Skills OS）、**renwei-writing**（人味儿写作）、**scholar-loop**（多 agent 自主科学家）紧随其后。HN 这边则是 agent 产品化的集中爆发——OpenRouter 的「机器人到底该跑 Claude 还是 Grok」擂台、开源 AI CAD **Adam**、人机协作的轻量 Jira 替代 **Paca**，以及一条「用 coding agent 会不会让技能退化」的高赞反思帖。",
+  "briefing_en": "Today's throughline is **world models becoming the operating system for Physical AI**. Qwen shipped a full suite at once — **Qwen-RobotWorld**, **Qwen-RobotManip**, and **Qwen-RobotNav** — using natural language as a unified action interface to connect world modeling, manipulation, and navigation. They're echoed by **Kairos** (a native world-model stack for Physical AI), **DreamX-World 1.0** (a general-purpose interactive world model), and **Looped World Models** (recurrence to balance compute against error accumulation in long-horizon rollouts). World models are shifting from \"passive video generators\" to active infrastructure that maintains persistent state — the densest signal on today's alphaxiv and HuggingFace boards.\n\nOn efficiency, the **long-context + sparse-attention** arms race is white-hot. alphaxiv's #1, **GLM-5.2**, leads with a 1M-token context and IndexShare sparse attention (2.9x lower per-token FLOPs), explicitly targeting long-horizon agentic coding; right behind it, **MiniMax Sparse Attention (MSA)** does blockwise sparse selection on top of GQA, attacking the million-token joint-attention cost that agentic workflows, repo-scale code reasoning, and persistent memory all demand. Two frontier labs on the board the same day make \"letting agents afford ultra-long context\" a settled direction.\n\nAgent evaluation and the \"harness\" abstraction form the second undercurrent. **Guava** systematically studies what makes an effective harness for embodied manipulation; **CEO-Bench** folds long horizons, noisy information-gathering, adaptation, and multi-thread orchestration into one \"can agents play the long game\" benchmark; **RNG-Bench** isolates a model's ability to reconstruct past observations in non-Markov games. On GitHub, meta-tools like **ruvnet/agent-harness-generator** are climbing too — framework-ized and measurable is replacing end-to-end black boxes.\n\nThe loudest open-source story is the **agent-skills ecosystem**: **ponytail** rocketed to 33k stars in five days with one line — \"make your AI agent think like the laziest senior dev in the room\" (YAGNI; the best code is the code you never wrote) — and hit the HN front page simultaneously. **compass-skills** (a personal-alignment Skills OS), **renwei-writing**, and **scholar-loop** (a multi-agent autonomous scientist) follow. HN itself is a burst of agent productization — OpenRouter's \"Claude or Grok for your robot\" royale, open-source AI CAD **Adam**, the human-AI Jira alternative **Paca**, plus a heavily-upvoted reflection on whether coding agents cause skill atrophy.",
+  "viral_analysis_zh": "今天最可能继续火的是 **ponytail**——五天 3.3 万星、同步登上 HN，靠的是一句极度反 over-engineering 的暴论「让 AI 像最懒的资深工程师那样思考」。它精准踩中两个红利：一是开发者对 AI 滥写代码的普遍厌倦（YAGNI 情绪），二是正在井喷的 Claude/Codex「agent skills」格式分发渠道——一个 skill 文件就能病毒式传播，零安装门槛。",
+  "viral_analysis_en": "The likeliest to keep going viral is **ponytail** — 33k stars in five days plus a simultaneous HN front-page hit — riding one deliberately provocative line: \"make your AI think like the laziest senior dev in the room.\" It nails two tailwinds: developers' broad fatigue with AI over-writing code (the YAGNI mood), and the exploding Claude/Codex \"agent skills\" distribution channel where a single skill file spreads with zero install friction.",
+  "huggingface_papers": [
+    {
+      "title": "Beyond the Current Observation: Evaluating Multimodal Large Language Models in Controllable Non-Markov Games",
+      "arxiv_id": "2606.19338",
+      "url": "https://arxiv.org/abs/2606.19338",
+      "tldr": "Introduces RNG-Bench (Reconstructive Non-Markov Games), a benchmark that isolates whether a multimodal LLM acting as a closed-loop policy can reconstruct past, no-longer-visible observations and act on them during multi-step play. Existing benchmarks either expose full state, conflate hidden-state recall with other skills, or test memory only after an episode ends. By controllably hiding state mid-episode, RNG-Bench cleanly measures the working-memory gap that breaks agents in partially observable settings. It's today's top HF paper because partial observability is the failure mode most real-world agents hit.",
+      "tldr_zh": "提出 RNG-Bench（可重建非马尔可夫游戏基准），专门隔离「多模态大模型作为闭环策略时，能否重建已不可见的历史观测并据此行动」这一能力。现有基准要么暴露全部状态、要么把隐状态重建和其他能力混在一起、要么只在回合结束后测回忆。RNG-Bench 通过在回合中途可控地隐藏状态，干净地量化了导致 agent 在部分可观测环境中崩溃的工作记忆缺口。今天 HF 榜首，因为部分可观测正是真实 agent 最常见的失效模式。",
+      "upvotes": 28,
+      "authors": "Shengyuan Ding, Xilin Wei, Xinyu Fang, Haodong Duan",
+      "ai_keywords": [],
+      "interest_tag": "Benchmark"
+    },
+    {
+      "title": "Guava: An Effective and Universal Harness for Embodied Manipulation",
+      "arxiv_id": "2606.18363",
+      "url": "https://arxiv.org/abs/2606.18363",
+      "tldr": "Asks what actually makes an effective 'harness' that lets a reasoning model drive embodied manipulation through external perception, planning, and control modules — rather than an end-to-end vision-language-action model. Guava is a universal harness design that combines high-level model reasoning with modular tool use, and the paper systematically dissects which harness components unlock manipulation across diverse reasoning models. Significant because it pushes embodied AI toward composable, swappable tool stacks instead of monolithic VLA training.",
+      "tldr_zh": "追问到底什么样的「骨架（harness）」才能让一个推理模型通过外部感知、规划、控制模块来驱动具身操作，而不是走端到端的视觉-语言-动作（VLA）大模型。Guava 是一套通用 harness 设计，把高层模型推理与模块化工具调用结合，并系统性地拆解哪些 harness 组件能在不同推理模型上解锁操作能力。重要在于它推动具身 AI 走向可组合、可替换的工具栈，而非单体式 VLA 训练。",
+      "upvotes": 20,
+      "authors": "Haowen Liu, Xirui Li, Shaoxiong Yao, Peng Shi",
+      "ai_keywords": [],
+      "interest_tag": ""
+    },
+    {
+      "title": "Kairos: A Native World Model Stack for Physical AI",
+      "arxiv_id": "2606.16533",
+      "url": "https://arxiv.org/abs/2606.16533",
+      "tldr": "Proposes Kairos, a full world-model stack built for Physical AI that natively acquires world knowledge from heterogeneous experience, maintains persistent state over long horizons, and runs within real deployment constraints. Its core is a Native Pre-training Paradigm governed by a Cross-Embodiment Data Curriculum, treating the world model as operational infrastructure rather than a passive video generator. Matters because it reframes world models as the always-on substrate a physical agent reasons and acts on, aligning with today's broad world-model push.",
+      "tldr_zh": "提出 Kairos——面向 Physical AI 的完整世界模型栈，能从异构经验中原生获取世界知识、在长时间跨度内维持持久状态，并在真实部署约束下高效运行。其核心是由「跨形态数据课程」统御的「原生预训练范式」，把世界模型当作可运营的基础设施而非被动的视频生成器。意义在于它把世界模型重新定义为物理 agent 持续依赖、推理与行动的底座，与今天密集出现的世界模型浪潮一致。",
+      "upvotes": 18,
+      "authors": "Kairos Team, Fei Wang, Shan You, Qiming Zhang",
+      "ai_keywords": [],
+      "interest_tag": ""
+    },
+    {
+      "title": "Trust the Right Teacher: Quality-Aware Self-Distillation for GUI Grounding",
+      "arxiv_id": "2606.18101",
+      "url": "https://arxiv.org/abs/2606.18101",
+      "tldr": "Tackles GUI grounding — getting a vision-language model to locate tiny target elements in high-resolution screenshots and emit precise click coordinates — via a quality-aware variant of on-policy self-distillation (OPSD). Naive OPSD fails here because it evaluates the teacher on student-generated prefixes whose coordinate quality is unreliable; the paper makes distillation trust only high-quality teacher signals. Directly relevant to computer-use / GUI agents, where pixel-accurate grounding is the bottleneck for reliable screen automation.",
+      "tldr_zh": "针对 GUI grounding（让视觉-语言模型在高分辨率截图中定位极小目标元素并输出精确点击坐标），提出一种「质量感知」的在策略自蒸馏（OPSD）变体。朴素 OPSD 在此失效，因为它在学生生成的前缀上评估教师，而这些前缀的坐标质量并不可靠；本文让蒸馏只信任高质量的教师信号。直接关系到 computer-use / GUI agent——像素级精准定位正是可靠屏幕自动化的瓶颈。",
+      "upvotes": 11,
+      "authors": "Jingyuan Huang, Zuming Huang, Yucheng Shi, Tianze Yang",
+      "ai_keywords": [],
+      "interest_tag": "CUA"
+    },
+    {
+      "title": "CEO-Bench: Can Agents Play the Long Game?",
+      "arxiv_id": "2606.18543",
+      "url": "https://arxiv.org/abs/2606.18543",
+      "tldr": "Argues that LM agents are now decent at isolated short-horizon tasks (coding, customer service) but untested on the bundle of skills real work needs: navigating long horizons under uncertainty, acquiring information in noisy environments, adapting to a changing world, and orchestrating many moving parts toward one goal. CEO-Bench evaluates all four jointly by simulating sustained, executive-style decision-making. A direct agent-capability benchmark probing exactly the long-horizon competence that short-task leaderboards miss.",
+      "tldr_zh": "指出语言模型 agent 如今在孤立的短程任务（写代码、客服）上已经不错，但真实工作所需的能力组合仍未被检验：在不确定中驾驭长程、在噪声环境中获取信息、适应不断变化的世界、把多个并行模块编排向同一目标。CEO-Bench 通过模拟持续的、CEO 式的决策把这四种能力放在一起评测。这是一个直击长程能力的 AI agent 基准——正是短任务排行榜测不到的部分。",
+      "upvotes": 1,
+      "authors": "Haozhe Chen, Karthik Narasimhan, Zhuang Liu",
+      "ai_keywords": [],
+      "interest_tag": "Benchmark"
+    }
+  ],
+  "alphaxiv_papers": [
+    {
+      "title": "GLM-5.2: Built for Long-Horizon Tasks",
+      "arxiv_id": "",
+      "url": "https://www.alphaxiv.org/abs/2026.glm-5-2",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2026.glm-5-2",
+      "tldr": "Z.ai's flagship coding model, explicitly engineered for long-horizon agentic coding. It pairs a 1M-token context with IndexShare sparse attention (2.9x lower per-token FLOPs), MTP-based speculative decoding with +20% acceptance length, and effort-level controls that let the agent trade compute for thoroughness. alphaxiv's #1 by a wide margin today, signaling that frontier coding models are now designed around sustained, multi-step agent workflows rather than single-shot completions.",
+      "tldr_zh": "Z.ai 的旗舰编码模型，明确为长程 agentic coding 而生。它把 1M token 上下文与 IndexShare 稀疏注意力（每 token FLOPs 降 2.9×）、基于 MTP 的投机解码（接受长度 +20%），以及让 agent 用算力换彻底度的「努力等级」控制结合在一起。今天 alphaxiv 热度第一且大幅领先，标志着前沿编码模型正围绕持续的多步 agent 工作流来设计，而非一次性补全。",
+      "interest_tag": ""
+    },
+    {
+      "title": "MiniMax Sparse Attention",
+      "arxiv_id": "2606.13392",
+      "url": "https://arxiv.org/abs/2606.13392",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2606.13392",
+      "tldr": "Introduces MiniMax Sparse Attention (MSA), a blockwise sparse attention built on Grouped Query Attention where a lightweight Index Branch scores key-value blocks and selects a sparse subset to attend to. The target is ultra-long context (hundreds of thousands to millions of tokens) for agentic workflows, repo-scale code reasoning, and persistent memory, where softmax attention's quadratic cost is untenable at deployment scale. Important as a second frontier-lab bet (alongside GLM-5.2) that sparse attention, not brute force, is how agents will afford million-token reasoning.",
+      "tldr_zh": "提出 MiniMax Sparse Attention（MSA）——一种构建在分组查询注意力（GQA）之上的块级稀疏注意力：用一个轻量 Index Branch 给 KV 块打分，只选出稀疏子集进行注意。目标是为 agent 工作流、仓库级代码推理和持久记忆所需的超长上下文（数十万到百万 token）服务，而 softmax 注意力的二次方成本在部署规模下不可承受。意义在于这是继 GLM-5.2 之后第二家前沿实验室押注：让 agent 跑得起百万 token 推理靠的是稀疏注意力，而非蛮力。",
+      "interest_tag": ""
+    },
+    {
+      "title": "Qwen-RobotWorld Technical Report: Unifying Embodied World Modeling through Language-Conditioned Video Generation",
+      "arxiv_id": "2606.17030",
+      "url": "https://arxiv.org/abs/2606.17030",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2606.17030",
+      "tldr": "Qwen-RobotWorld is a language-conditioned video world model that uses natural language as a unified action interface, predicting physically grounded future visual trajectories across manipulation, autonomous driving, indoor navigation, and human-to-robot transfer. The single formulation enables synthetic data generation for policy training, scalable virtual environments for policy evaluation, and cross-domain transfer. It anchors Qwen's same-day robotics trio (with RobotManip and RobotNav), marking a serious bid to make one world model the backbone of embodied intelligence.",
+      "tldr_zh": "Qwen-RobotWorld 是一个语言条件化的视频世界模型，以自然语言作为统一动作接口，跨机器人操作、自动驾驶、室内导航和人到机器人迁移，预测物理可信的未来视觉轨迹。这一统一表述同时支撑策略训练的合成数据生成、策略评估的可扩展虚拟环境，以及跨域迁移。它是 Qwen 同日机器人三件套（与 RobotManip、RobotNav）的核心，标志着用单一世界模型做具身智能骨干的认真尝试。",
+      "interest_tag": ""
+    },
+    {
+      "title": "VibeThinker-3B: Exploring the Frontier of Verifiable Reasoning in Small Language Models",
+      "arxiv_id": "2606.16140",
+      "url": "https://arxiv.org/abs/2606.16140",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2606.16140",
+      "tldr": "A 3B dense model probing how far verifiable reasoning can be pushed in a strictly small-model regime. Built on a Spectrum-to-Signal post-training paradigm, it stacks curriculum-based SFT, multi-domain RL, and offline self-distillation to reach frontier-level reasoning at tiny scale. With 676 GitHub stars already, it's the strongest small-model story today — evidence that careful post-training, not just parameter count, drives reasoning, which matters for on-device and cost-sensitive agent deployment.",
+      "tldr_zh": "一个 3B 稠密模型，探究在严格的小模型规模下可验证推理能到多远。它基于「Spectrum-to-Signal」后训练范式，叠加课程式 SFT、多领域强化学习和离线自蒸馏，在极小规模上达到前沿级推理。已收获 676 GitHub 星，是今天最强的小模型故事——证明驱动推理的是精心的后训练而非单纯堆参数，这对端侧和成本敏感的 agent 部署意义重大。",
+      "interest_tag": ""
+    },
+    {
+      "title": "DreamX-World 1.0: A General-Purpose Interactive World Model",
+      "arxiv_id": "2606.16993",
+      "url": "https://arxiv.org/abs/2606.16993",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2606.16993",
+      "tldr": "DreamX-World 1.0 is a general-purpose interactive text/image-to-video world model for controllable long-horizon generation, supporting camera navigation and revisits to previously observed regions with spatial consistency. It pushes interactive world models toward the persistence and controllability needed to serve as simulators for agents. Together with Kairos and Looped World Models on the same board, it underscores that 'long-horizon, state-persistent world model' is the most crowded research lane today.",
+      "tldr_zh": "DreamX-World 1.0 是一个通用的交互式 文本/图像到视频 世界模型，面向可控的长程生成，支持相机导航和对此前观测区域的重访并保持空间一致性。它把交互式世界模型推向作为 agent 模拟器所需的持久性与可控性。与同榜的 Kairos、Looped World Models 一起，凸显出「长程、状态持久的世界模型」是今天最拥挤的研究赛道。",
+      "interest_tag": ""
+    }
+  ],
+  "github_repos": [
+    {
+      "name": "DietrichGebert/ponytail",
+      "url": "https://github.com/DietrichGebert/ponytail",
+      "tldr": "An agent skill that makes your AI coding agent 'think like the laziest senior dev in the room' — aggressively applying YAGNI so the agent stops over-engineering and writes the minimum code that solves the problem. It exploded to 33k stars in five days and hit the HN front page, distributed as a drop-in skill compatible with Claude Code, Cursor, and Codex. The viral hook is pure developer catharsis against AI over-generation, and the zero-install skill format made it spread frictionlessly.",
+      "tldr_zh": "一个让 AI 编码 agent「像房间里最懒的资深工程师那样思考」的 agent skill——激进贯彻 YAGNI，让 agent 别再过度设计、只写解决问题所需的最少代码。五天冲到 3.3 万星并登上 HN 前排，以即插即用的 skill 形式分发，兼容 Claude Code、Cursor、Codex。病毒点是开发者对 AI 滥写代码的集体宣泄，加上零安装的 skill 格式让它无摩擦传播。",
+      "stars": 33395,
+      "language": "JavaScript",
+      "interest_tag": ""
+    },
+    {
+      "name": "orange2ai/renwei-writing",
+      "url": "https://github.com/orange2ai/renwei-writing",
+      "tldr": "A Chinese-first writing skill ('人味儿写作', literally 'human-flavored writing') that edits people's words without erasing the person behind them — preserving individual voice instead of homogenizing text into generic AI prose. At 792 stars with a healthy fork ratio in days, it taps the growing backlash against flavorless LLM-generated writing. Part of the same agent-skills distribution wave as ponytail, showing the format works for prose craft, not just code.",
+      "tldr_zh": "一个中文优先的写作 skill（「人味儿写作」）——在编辑别人文字的同时不抹掉文字背后的那个人，保留个人语气，而不是把文本同质化成千篇一律的 AI 腔。几天内 792 星且 fork 比例健康，踩中了对「没有味道的 LLM 写作」日益增长的反感。与 ponytail 同属 agent-skills 分发浪潮，证明这一格式不只适用于代码，也适用于文字创作。",
+      "stars": 792,
+      "language": "Markdown",
+      "interest_tag": ""
+    },
+    {
+      "name": "dongshuyan/compass-skills",
+      "url": "https://github.com/dongshuyan/compass-skills",
+      "tldr": "司南 / COMPASS, a 'Personal Alignment Skills OS' for AI agents — a local-first system that orchestrates personalized task control across Claude Code, Codex, and Cursor through composable skill files. It frames the skills ecosystem as an operating layer rather than a pile of one-off prompts, with task management and workflow automation built in. Notable as the infrastructure-grade take on the agent-skills trend dominating GitHub this week.",
+      "tldr_zh": "司南 / COMPASS——面向 AI agent 的「个人对齐 Skills 操作系统」，一个本地优先的系统，通过可组合的 skill 文件在 Claude Code、Codex、Cursor 间编排个性化的任务总控。它把 skills 生态当作一个操作层来构建，而非一堆一次性 prompt，内置任务管理与工作流自动化。值得关注，因为它是本周霸榜 GitHub 的 agent-skills 趋势中「基础设施级」的那一派。",
+      "stars": 287,
+      "language": "Python",
+      "interest_tag": ""
+    },
+    {
+      "name": "ruvnet/agent-harness-generator",
+      "url": "https://github.com/ruvnet/agent-harness-generator",
+      "tldr": "A meta-harness that scaffolds your own focused, branded agent harness, each shipping its own npx CLI and MCP integration. Instead of one monolithic agent framework, it generates purpose-built harnesses so teams can wrap a reasoning model with exactly the tools, prompts, and guardrails a task needs. It rides the same 'harness over end-to-end' thesis showing up in today's research (Guava), making the agent's scaffold a first-class, generatable artifact.",
+      "tldr_zh": "一个元 harness——帮你脚手架出专属的、带品牌的 agent harness，每个都自带 npx CLI 和 MCP 集成。它不做单体式 agent 框架，而是按需生成针对性 harness，让团队用恰好需要的工具、prompt 和护栏把推理模型包起来。它呼应了今天研究中（Guava）出现的「harness 优于端到端」论点，把 agent 的骨架变成一等的、可生成的产物。",
+      "stars": 174,
+      "language": "TypeScript",
+      "interest_tag": ""
+    },
+    {
+      "name": "renee-jia/scholar-loop",
+      "url": "https://github.com/renee-jia/scholar-loop",
+      "tldr": "An autonomous AI scientist built as a multi-agent loop over literature review, experiments, self-critique, and write-up. Multiple specialized agents collaborate and critique each other across the research cycle, aiming to automate end-to-end scientific inquiry rather than a single step. It's a concrete, runnable instance of the multi-agent orchestration trend, and pairs naturally with today's CEO-Bench question of whether agent systems can sustain coherent long-horizon goals.",
+      "tldr_zh": "一个自主 AI 科学家，构建为一个跨文献综述、实验、自我批判和论文写作的多 agent 循环。多个专门化 agent 在整个研究周期中协作并相互批判，目标是自动化端到端的科学探究，而非单一步骤。它是多 agent 编排趋势的一个具体、可运行的实例，自然呼应今天 CEO-Bench 提出的问题——agent 系统能否维持连贯的长程目标。",
+      "stars": 125,
+      "language": "Python",
+      "interest_tag": "Agent Swarm"
+    }
+  ],
+  "hackernews": [
+    {
+      "title": "A robot is sprinting towards you. Do you want it running on Claude or Grok?",
+      "url": "https://openrouter.ai/blog/insights/royale-last-agent-standing/",
+      "tldr": "OpenRouter ran a 'last agent standing' royale pitting frontier models against each other in an embodied/adversarial setting, framed with a visceral hook: which model would you trust controlling a robot sprinting at you. Beyond the provocative framing, it's a head-to-head reliability comparison of Claude vs Grok (and others) under pressure, which is why it topped HN with 187 comments. It crystallizes the growing public stakes of which LLM sits behind autonomous physical agents.",
+      "tldr_zh": "OpenRouter 办了一场「最后的 agent 站立」擂台，让前沿模型在具身/对抗场景中相互厮杀，并用一个极具冲击力的钩子包装：你愿意让哪个模型控制一个正冲向你的机器人。除了挑衅式的framing，它本质是 Claude、Grok（及其他）在压力下的正面可靠性对比，因此以 187 条评论登顶 HN。它把「哪个 LLM 坐在自主物理 agent 背后」这一日益重大的公共议题具象化了。",
+      "points": 239,
+      "num_comments": 187,
+      "interest_tag": ""
+    },
+    {
+      "title": "Launch HN: Adam (YC W25) – Open-Source AI CAD",
+      "url": "https://github.com/Adam-CAD/CADAM",
+      "tldr": "Adam is an open-source AI CAD tool (YC W25) that generates and edits parametric CAD models from natural language, bringing agentic generation into mechanical design — a domain LLMs have barely touched. Open-sourcing the core rather than gating it behind a SaaS wall drove strong HN engagement (86 comments). It signals AI agents expanding from text and code into precise, constraint-heavy engineering artifacts where correctness is non-negotiable.",
+      "tldr_zh": "Adam 是一个开源 AI CAD 工具（YC W25），能从自然语言生成和编辑参数化 CAD 模型，把 agentic 生成带入机械设计这一 LLM 几乎未触及的领域。把核心开源、而非锁在 SaaS 墙后，带来了强烈的 HN 互动（86 条评论）。它标志着 AI agent 正从文本和代码扩展到精确、约束密集、且正确性不容妥协的工程产物。",
+      "points": 180,
+      "num_comments": 86,
+      "interest_tag": ""
+    },
+    {
+      "title": "Show HN: Paca – Lightweight Jira alternative for human-AI collaboration",
+      "url": "https://github.com/Paca-AI/paca",
+      "tldr": "Paca is a lightweight, open-source Jira alternative designed from the ground up for human-AI collaboration, treating AI agents as first-class participants in the task/issue workflow rather than bolted-on assistants. The pitch lands because heavyweight project trackers weren't built for agents that pick up, update, and close tickets autonomously. It reflects a wave of tooling being rebuilt around mixed human-agent teams as the default operating mode.",
+      "tldr_zh": "Paca 是一个轻量、开源的 Jira 替代品，从底层为人机协作而设计，把 AI agent 当作任务/工单工作流中的一等参与者，而非外挂助手。这个卖点之所以成立，是因为重型项目管理工具并非为「能自主领取、更新、关闭工单的 agent」而生。它折射出一波工具正在围绕「人机混合团队是默认工作模式」被重新打造。",
+      "points": 172,
+      "num_comments": 65,
+      "interest_tag": ""
+    },
+    {
+      "title": "Launch HN: BitBoard (YC P25) – Analytics Workspace for Agents",
+      "url": "https://bitboard.work/",
+      "tldr": "BitBoard (YC P25) is an analytics workspace built for agents — giving AI agents a structured environment to query, manipulate, and reason over data rather than improvising against raw warehouses. It targets the gap where agents are good at code but flounder on messy, real-world analytics workflows without a purpose-built surface. Another data point in the 'rebuild the tool around the agent' trend dominating HN launches this week.",
+      "tldr_zh": "BitBoard（YC P25）是一个为 agent 打造的分析工作台——给 AI agent 一个结构化环境去查询、操作、推理数据，而不是对着原始数仓临场发挥。它瞄准的痛点是：agent 擅长写代码，但在没有专门界面的情况下，面对杂乱的真实分析工作流会力不从心。这是本周霸占 HN 发布榜的「围绕 agent 重建工具」趋势的又一例证。",
+      "points": 58,
+      "num_comments": 25,
+      "interest_tag": ""
+    },
+    {
+      "title": "Ask HN: How do you handle skill atrophy from using coding agents?",
+      "url": "https://news.ycombinator.com/item?id=48554309",
+      "tldr": "A reflective Ask HN where developers debate whether heavy reliance on coding agents erodes their own engineering skills, and how to stay sharp — manual deep-dives, reading agent output critically, periodic agent-free work. With 42 comments on only 32 points, the comment-to-point ratio shows it struck a nerve. It's the human counterweight to today's agent-productivity hype: the more capable the agents, the more practitioners worry about their own atrophy.",
+      "tldr_zh": "一个反思性的 Ask HN：开发者讨论重度依赖编码 agent 是否会侵蚀自己的工程能力，以及如何保持手感——手动深挖、批判性阅读 agent 输出、定期脱离 agent 工作。只有 32 分却有 42 条评论，评论/分数比说明它戳中了痛点。它是今天 agent 生产力热潮的人性对照面：agent 越强，从业者越担心自身能力的退化。",
+      "points": 32,
+      "num_comments": 42,
+      "interest_tag": ""
+    }
+  ]
+}
