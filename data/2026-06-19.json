@@ -1,0 +1,206 @@
+{
+  "date": "2026-06-19",
+  "generated_at": "2026-06-19T16:11:32.727916+08:00",
+  "briefing_zh": "今天的主线是「小而强」。HuggingFace 当日热榜由 **Moebius** 领跑——它用 0.2B 参数实现了 10B 级工业模型的图像修复质量，靠重构扩散主干化解极致压缩的表示瓶颈；alphaxiv 上 **VibeThinker-3B** 用 3B 稠密模型把可验证推理推到极限；而 Z.ai 刚发布的旗舰编码模型 **GLM-5.2** 靠 IndexShare 稀疏注意力把每 token FLOPs 砍到原来的 1/2.9，专为百万 token 长程 agentic 编码设计。三者共同说明：在结构压缩、稀疏化与后训练范式上的工程精进，正让「参数量不再等于能力」成为常态。\n\n具身智能今天集中爆发。**Playful Agentic Robot Learning** 提出让编码 agent 在正式任务前用「自主玩耍」预先积累可复用技能；**S-Agent** 把空间推理重构为时空证据累积，用工具调用驱动连续多视角推理；Qwen 一口气放出 **Qwen-RobotWorld / RobotManip / RobotNav** 机器人三件套，用语言作为统一动作接口贯通世界建模、操作与导航。配合 alphaxiv 上多篇世界模型工作（**Looped World Models**、\"Current World Models Lack a Persistent State Core\"），「世界模型 + agentic 机器人」正在合流成下一个主战场。\n\n评测与落地两端同样热闹。**Beyond Static Leaderboards** 汇总了迄今针对单一 MCP 工业 agent 基准最大规模的协同深挖（14 项平行实现研究），呼吁用「预测效度」取代静态榜单——这是 agent 评测走向成熟的信号。产品侧，Hacker News 头条被 agent 创业占据：YC 项目 **Adam** 开源 AI CAD（208 分）、**TesterArmy** 用 agent 自动测试 Web/移动应用（116 分），而 OpenRouter 那篇《一个机器人冲向你，你希望它跑 Claude 还是 Grok？》以 267 分 209 评论领跑，把模型对决写成了生死抉择。\n\n开源侧，SKILL.md 生态继续狂飙：**compass-skills**（司南个性化任务总控）、**threejs-game-skills**（浏览器游戏开发）、**agent-harness-generator**（一键生成带 CLI/MCP/记忆的 agent harness）一周内集体破百星，本地 AI 编码工具 **junction** 两天冲到 510 星。值得警惕的是，GitHub 搜索里仍混入大量「2026 旗舰工具包」式 SEO 刷星仓库（0 fork、随机用户名），筛选时务必看 fork/star 比与 README 实质。",
+  "briefing_en": "Today's throughline is 'small but mighty.' HuggingFace's daily board is led by **Moebius**—a 0.2B-parameter image-inpainting framework matching the quality of 10B-level industrial models by reconstructing the diffusion backbone to beat the compression bottleneck. On alphaxiv, **VibeThinker-3B** pushes verifiable reasoning to its limit in a 3B dense model, while Z.ai's freshly released flagship coder **GLM-5.2** uses IndexShare sparse attention to cut per-token FLOPs by 2.9x, purpose-built for million-token long-horizon agentic coding. Together they make the case that engineering gains in compression, sparsity, and post-training are normalizing the idea that parameter count no longer equals capability.\n\nEmbodied AI erupted today. **Playful Agentic Robot Learning** lets a coding agent acquire reusable skills through self-directed 'play' before any task arrives; **S-Agent** reframes spatial reasoning as spatio-temporal evidence accumulation driven by tool use over continuous multi-view input; and Qwen dropped a robotics trilogy—**Qwen-RobotWorld / RobotManip / RobotNav**—using language as a unified action interface across world modeling, manipulation, and navigation. Paired with several world-model papers on alphaxiv (**Looped World Models**, 'Current World Models Lack a Persistent State Core'), 'world models + agentic robots' is converging into the next main battlefield.\n\nEvaluation and deployment are equally busy. **Beyond Static Leaderboards** aggregates the largest coordinated deep-dive on a single MCP-based industrial agent benchmark to date (fourteen parallel implementation studies), arguing for 'predictive validity' over static leaderboards—a sign agent evaluation is maturing. On the product side, Hacker News' front page belongs to agent startups: YC's **Adam** open-sourced AI CAD (208 pts) and **TesterArmy** ships agents that test web and mobile apps (116 pts), while OpenRouter's 'A robot is sprinting towards you—do you want it on Claude or Grok?' topped the board at 267 points and 209 comments, turning a model showdown into a life-or-death choice.\n\nIn open source, the SKILL.md ecosystem keeps surging: **compass-skills** (a personal task-control skills OS), **threejs-game-skills** (browser game building), and **agent-harness-generator** (one-click harnesses with CLI/MCP/memory) all crossed 100 stars within a week, and the local AI coding tool **junction** hit 510 stars in two days. Worth watching: GitHub search is still polluted with '2026 flagship toolkit'-style SEO star-farming repos (zero forks, random usernames)—always check the fork/star ratio and README substance when filtering.",
+  "viral_analysis_zh": "今天最可能火的是 OpenRouter 的《一个机器人冲向你，你希望它跑 Claude 还是 Grok？》——它把枯燥的模型评测包装成拟人化的「生死对决」，同时点燃 AI 安全焦虑与模型阵营的部落式忠诚，267 分、209 评论的高互动比印证了情绪化框架的威力。紧随其后的是 **GLM-5.2**：作为正面硬刚 Claude/GPT 的旗舰编码模型，「长程 agentic + 百万上下文」的卖点天然自带话题度。**Moebius** 的「0.2B 打 10B」标题则是教科书级的反差钩子，且技术上站得住脚。",
+  "viral_analysis_en": "The most likely viral hit today is OpenRouter's 'A robot is sprinting towards you—do you want it on Claude or Grok?' It dresses a dry model-comparison study as an anthropomorphized life-or-death duel, simultaneously igniting AI-safety anxiety and tribal model loyalty—267 points and 209 comments prove the power of an emotional frame. Close behind is **GLM-5.2**: a flagship coder going head-to-head with Claude/GPT, whose 'long-horizon agentic + million-token context' pitch carries built-in buzz. **Moebius**'s '0.2B beats 10B' headline is a textbook contrast hook that also happens to be technically real.",
+  "huggingface_papers": [
+    {
+      "title": "Moebius: 0.2B Lightweight Image Inpainting Framework with 10B-Level Performance",
+      "arxiv_id": "2606.19195",
+      "url": "https://arxiv.org/abs/2606.19195",
+      "tldr": "Moebius is a 0.2B-parameter image inpainting framework that matches the quality of 10B-level industrial foundation models at a fraction of the compute. It tackles the representation bottleneck from extreme compression by reconstructing the diffusion backbone with a Local-Lambda design. The result is deployable, specialist-grade inpainting without prohibitive cost. A strong data point that aggressive task-specific compression can close a roughly 50x parameter gap.",
+      "tldr_zh": "Moebius 用 0.2B 参数实现了 10B 级工业基础模型的图像修复质量，算力成本却低得多。它通过重构扩散主干（Local-Lambda 设计）化解了极致压缩带来的表示瓶颈，做出可实际部署的专家级修复模型。这是「激进的任务专用压缩能填平约 50 倍参数鸿沟」的有力证据。",
+      "upvotes": 34,
+      "authors": "Kangsheng Duan, Ziyang Xu, Wenyu Liu",
+      "ai_keywords": [],
+      "interest_tag": ""
+    },
+    {
+      "title": "Playful Agentic Robot Learning",
+      "arxiv_id": "2606.19419",
+      "url": "https://arxiv.org/abs/2606.19419",
+      "tldr": "This work introduces play-time skill acquisition for embodied coding agents: before any downstream task arrives, a Robotics Agent Team (RATs) engages in self-directed play to build a library of reusable skills. Unlike task-driven agentic robots that only learn after explicit instructions, RATs proactively proposes and masters novel behaviors. It reframes robot learning as continual, curiosity-driven skill accumulation, moving toward robots that arrive pre-equipped rather than learning each task from scratch.",
+      "tldr_zh": "这项工作为具身编码 agent 引入「玩耍期」技能习得：在正式任务到来前，机器人 agent 团队（RATs）通过自主玩耍预先构建可复用技能库。不同于只在明确指令后才学习的任务驱动机器人，RATs 会主动提出并掌握新行为，把机器人学习重构为持续的、好奇心驱动的技能积累，让机器人面对新任务时「自带技能」而非从零学起。",
+      "upvotes": 25,
+      "authors": "Junyi Zhang, Jiaxin Ge, Hanjun Yoo",
+      "ai_keywords": [],
+      "interest_tag": ""
+    },
+    {
+      "title": "S-Agent: Spatial Tool-Use Elicits Reasoning for Spatial Intelligence",
+      "arxiv_id": "2606.20515",
+      "url": "https://arxiv.org/abs/2606.20515",
+      "tldr": "S-Agent is a spatial tool-use agent that reasons over continuous, evolving 3D scenes from multi-view images and video, rather than the static single-frame inference most VLMs are stuck on. By framing spatial reasoning as spatio-temporal evidence accumulation and calling spatial tools, it elicits genuine reasoning for spatial intelligence. It targets a real gap: agents that understand a moving 3D world rather than isolated snapshots.",
+      "tldr_zh": "S-Agent 是一个空间工具调用 agent，能在连续演化的 3D 场景上对多视角图像和视频进行推理，而非多数 VLM 停留的静态单帧推断。它把空间推理重构为「时空证据累积」并调用空间工具，从而真正激发空间智能所需的推理能力。这瞄准了一个真实痛点：让 agent 理解运动中的 3D 世界，而非孤立快照。",
+      "upvotes": 20,
+      "authors": "Yalun Dai, Hao Li, Shulin Tian",
+      "ai_keywords": [],
+      "interest_tag": ""
+    },
+    {
+      "title": "Beyond Static Leaderboards: Predictive Validity for the Evaluation of LLM Agents",
+      "arxiv_id": "2606.19704",
+      "url": "https://arxiv.org/abs/2606.19704",
+      "tldr": "This paper aggregates the largest coordinated deep-dive on a single MCP-based industrial agent benchmark to date: fourteen parallel implementation studies spanning new asset classes, orchestrations, retrieval strategies, and reasoning modes. The core argument is that no single benchmark covers more than four or five of the dimensions real deployment exposes, so static leaderboards mislead. It calls for predictive validity as the standard for evaluating LLM agents, a clear maturity marker for the field.",
+      "tldr_zh": "本文汇总了迄今针对单一 MCP 工业 agent 基准最大规模的协同深挖——14 项平行实现研究，覆盖新资产类别、编排方式、检索策略与推理模式。核心论点是：没有任何单一基准能覆盖部署暴露出的 4-5 个以上维度，因此静态榜单具有误导性。论文呼吁用「预测效度」作为评估 LLM agent 的新标准，是 agent 评测走向成熟的明确标志。",
+      "upvotes": 17,
+      "authors": "Dhaval C. Patel, Kaoutar El Maghraoui, Shuxin Lin",
+      "ai_keywords": [],
+      "interest_tag": "Benchmark"
+    },
+    {
+      "title": "FreeStyle: Free Control of Style-Content Dual-Reference Generation from Community LoRA Mining",
+      "arxiv_id": "2606.20506",
+      "url": "https://arxiv.org/abs/2606.20506",
+      "tldr": "FreeStyle enables style-content dual-reference image generation (preserving a content reference's structure while adopting a separate reference's style) by mining triplet training data from the community LoRA ecosystem. This sidesteps the field's key bottleneck: the scarcity of clean content-style separated data with broad long-tail style coverage. It delivers fine-grained control without semantic leakage from the style image.",
+      "tldr_zh": "FreeStyle 实现风格-内容双参考图像生成——保留内容参考的结构、同时采用另一参考的风格——方法是从社区 LoRA 生态中挖掘三元组训练数据。这绕开了该领域的关键瓶颈：缺乏干净的内容-风格分离、且覆盖长尾风格的大规模数据。它能在不从风格图泄漏语义的前提下实现细粒度的控制。",
+      "upvotes": 14,
+      "authors": "Jinghong Lan, Wei Cheng, Yunuo Chen",
+      "ai_keywords": [],
+      "interest_tag": ""
+    }
+  ],
+  "alphaxiv_papers": [
+    {
+      "title": "GLM-5.2: Built for Long-Horizon Tasks",
+      "arxiv_id": "",
+      "url": "https://www.alphaxiv.org/abs/2026.glm-5-2",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2026.glm-5-2",
+      "tldr": "Z.ai's GLM-5.2 is a flagship coding model purpose-built for long-horizon agentic tasks. It ships a solid 1M-token context, IndexShare sparse attention that cuts per-token FLOPs by 2.9x, improved MTP-based speculative decoding (+20% acceptance length), and effort-level controls that let users trade compute for depth on long agentic coding runs. It positions GLM as a direct challenger to Claude and GPT on real-world coding agents rather than benchmark snapshots.",
+      "tldr_zh": "Z.ai 的 GLM-5.2 是专为长程 agentic 任务打造的旗舰编码模型。它配备扎实的 100 万 token 上下文、把每 token FLOPs 砍到 1/2.9 的 IndexShare 稀疏注意力、改进的 MTP 投机解码（接受长度 +20%），以及让用户在长程 agentic 编码中用算力换深度的 effort-level 控制。它把 GLM 定位为在真实编码 agent 场景上正面挑战 Claude 和 GPT，而非只刷基准快照。",
+      "interest_tag": ""
+    },
+    {
+      "title": "VibeThinker-3B: Exploring the Frontier of Verifiable Reasoning in Small Language Models",
+      "arxiv_id": "2606.16140",
+      "url": "https://arxiv.org/abs/2606.16140",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2606.16140",
+      "tldr": "VibeThinker-3B is a compact 3B dense model built to test how far verifiable reasoning can be pushed in a strictly small-model regime. Using a Spectrum-to-Signal post-training paradigm, it combines curriculum-based SFT, multi-domain RL, and optimization to extract strong reasoning from minimal parameters. It's a flagship example of the 'small but mighty' trend, arguing capability is increasingly a function of post-training, not raw scale.",
+      "tldr_zh": "VibeThinker-3B 是一个紧凑的 3B 稠密模型，用于探究在严格的小模型范式下可验证推理能到达的极限。它采用 Spectrum-to-Signal 后训练范式，结合课程式 SFT、多域强化学习与优化流程，从极少参数中榨取强推理能力。这是「小而强」趋势的旗舰案例，论证能力越来越取决于后训练而非单纯规模。",
+      "interest_tag": ""
+    },
+    {
+      "title": "Looped World Models",
+      "arxiv_id": "2606.18208",
+      "url": "https://arxiv.org/abs/2606.18208",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2606.18208",
+      "tldr": "Looped World Models (LoopWM) are the first looped architectures for world modeling, resolving the tension between faithful long-horizon simulation (which needs deep computation) and deployment cost (which deep models inflate). A parameter-shared transformer block iteratively refines latent environment states, giving depth-on-demand without compounding errors or extra parameters. It's a clean architectural answer to making world models both accurate and cheap to run.",
+      "tldr_zh": "Looped World Models（LoopWM）是首个用于世界建模的循环架构，化解了「忠实的长程模拟需要深层计算」与「深层模型部署昂贵」之间的张力。它用参数共享的 transformer block 迭代精炼潜在环境状态，在不增加参数、不累积误差的前提下实现「按需加深」。这是让世界模型既准确又廉价运行的一个干净的架构答案。",
+      "interest_tag": ""
+    },
+    {
+      "title": "Qwen-RobotWorld Technical Report: Unifying Embodied World Modeling through Language-Conditioned Video Generation",
+      "arxiv_id": "2606.17030",
+      "url": "https://arxiv.org/abs/2606.17030",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2606.17030",
+      "tldr": "Qwen-RobotWorld is a language-conditioned video world model for embodied intelligence that predicts physically grounded future visual trajectories from current observations, using natural language as a unified action interface. One model spans robotic manipulation, autonomous driving, indoor navigation, and human-to-robot transfer. Released alongside Qwen-RobotManip and Qwen-RobotNav, it signals a serious push to unify embodied world modeling under a single language-driven formulation.",
+      "tldr_zh": "Qwen-RobotWorld 是面向具身智能的语言条件视频世界模型，以自然语言作为统一动作接口，从当前观测预测物理可信的未来视觉轨迹。单个模型贯通机器人操作、自动驾驶、室内导航与人到机器人迁移。它与 Qwen-RobotManip、Qwen-RobotNav 同期发布，标志着在单一语言驱动框架下统一具身世界建模的认真尝试。",
+      "interest_tag": ""
+    },
+    {
+      "title": "You Don't Need Strong Assumptions: Visual Representation Learning via Temporal Differences",
+      "arxiv_id": "2606.15956",
+      "url": "https://arxiv.org/abs/2606.15956",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2606.15956",
+      "tldr": "This paper learns visual representations from temporal differences, advancing the long arc where weaker inductive biases win out as compute and data scale (supervised -> weakly supervised -> self-supervised). By leaning on temporal structure rather than strong hand-designed assumptions, it pushes representation learning further toward the 'assume less' end. A clean conceptual contribution reinforcing the bitter-lesson trajectory in vision.",
+      "tldr_zh": "本文通过时间差分学习视觉表征，延续了「随算力和数据增长、更弱归纳偏置更占优」的长期脉络（监督→弱监督→自监督）。它依赖时间结构而非人工设计的强假设，把表征学习进一步推向「更少假设」的一端。这是一个干净的概念贡献，强化了视觉领域的「苦涩教训」轨迹。",
+      "interest_tag": ""
+    }
+  ],
+  "github_repos": [
+    {
+      "name": "Plaer1/junction",
+      "url": "https://github.com/Plaer1/junction",
+      "tldr": "Junction is a VS Code chat sidebar for local AI coding agents, bringing a unified agent chat panel directly into the editor. It hit 510 stars within roughly two days of creation, reflecting strong demand for keeping local-model coding agents inside the IDE workflow. A lightweight, fast-moving entrant in the crowded AI-coding-tool space.",
+      "tldr_zh": "Junction 是面向本地 AI 编码 agent 的 VS Code 聊天侧边栏，把统一的 agent 聊天面板直接搬进编辑器。它在创建约两天内冲到 510 星，反映出把本地模型编码 agent 留在 IDE 工作流内的强烈需求。这是拥挤的 AI 编码工具赛道里一个轻量、快速起势的新选手。",
+      "stars": 510,
+      "language": "TypeScript",
+      "interest_tag": ""
+    },
+    {
+      "name": "dzcmemory-web/bazi-ziwei-skill",
+      "url": "https://github.com/dzcmemory-web/bazi-ziwei-skill",
+      "tldr": "A SKILL.md skill for Chinese Bazi (Four Pillars) and Zi Wei Dou Shu astrology that does precise chart calculation algorithmically rather than letting the LLM guess, then offers three analysis modes and one-click ink-wash-style HTML chart posters. Compatible with Claude, Codex, Cursor and other SKILL.md agents. At 403 stars with 49 forks, it shows the SKILL.md format spreading well beyond coding into culturally specific consumer use cases.",
+      "tldr_zh": "一个用于中国八字与紫微斗数的 SKILL.md 技能：算法精准排盘（不靠 LLM 猜），提供三种分析模式，一键生成水墨风 HTML 命盘海报，兼容 Claude / Codex / Cursor 等 SKILL.md agent。403 星、49 fork 的成绩说明 SKILL.md 格式正从编码扩散到文化特定的消费级场景。",
+      "stars": 403,
+      "language": "TypeScript",
+      "interest_tag": ""
+    },
+    {
+      "name": "dongshuyan/compass-skills",
+      "url": "https://github.com/dongshuyan/compass-skills",
+      "tldr": "COMPASS (Si Nan) is a personalized 'alignment skills OS' for AI agents: a master controller that coordinates personal tasks across skills so an agent acts in line with the user's own priorities and context. With 310 stars and 27 forks in days, it reflects growing interest in a top-level orchestration layer that keeps multi-skill agents personally aligned rather than ad hoc.",
+      "tldr_zh": "司南（COMPASS）是面向 AI agent 的个性化「对齐技能 OS」：一个总控层，跨技能协调个人任务，让 agent 按用户自身的优先级与上下文行动。几天内 310 星、27 fork，反映出对「让多技能 agent 保持个人对齐、而非临时拼凑」的顶层编排层日益增长的兴趣。",
+      "stars": 310,
+      "language": "Python",
+      "interest_tag": ""
+    },
+    {
+      "name": "majidmanzarpour/threejs-game-skills",
+      "url": "https://github.com/majidmanzarpour/threejs-game-skills",
+      "tldr": "A bundle of agent skills for building playable, polished Three.js browser games end to end: gameplay, AAA-style graphics, UI, QA, and optional AI-generated 3D, image, and audio assets. At 299 stars and 32 forks, it's a concrete example of SKILL.md packaging an entire vertical creative pipeline that coding agents can execute, not just a single helper.",
+      "tldr_zh": "一套用于端到端构建可玩、精致 Three.js 浏览器游戏的 agent 技能包：玩法、AAA 级画面、UI、QA，以及可选的 AI 生成 3D、图像与音频资产。299 星、32 fork，是 SKILL.md 把整条垂直创意流水线打包给编码 agent 执行的具体范例，而不仅是单个小助手。",
+      "stars": 299,
+      "language": "Python",
+      "interest_tag": ""
+    },
+    {
+      "name": "ruvnet/agent-harness-generator",
+      "url": "https://github.com/ruvnet/agent-harness-generator",
+      "tldr": "A meta-harness that scaffolds your own focused, branded AI-agent harness, each with its own npx CLI, MCP server, memory, learning loop, and witness-signed actions. Rather than another agent framework, it generates bespoke single-purpose agent runtimes. At 205 stars and 19 forks from an established author (ruvnet), it points to a 'harness factory' pattern for spinning up specialized agents fast.",
+      "tldr_zh": "一个元 harness，用于脚手架生成你自己专注、带品牌的 AI agent harness——每个都自带 npx CLI、MCP server、记忆、学习循环和见证签名动作。它不是又一个 agent 框架，而是生成定制的单一用途 agent 运行时。205 星、19 fork，来自资深作者 ruvnet，指向一种快速孵化专用 agent 的「harness 工厂」模式。",
+      "stars": 205,
+      "language": "TypeScript",
+      "interest_tag": ""
+    }
+  ],
+  "hackernews": [
+    {
+      "title": "A robot is sprinting towards you. Do you want it running on Claude or Grok?",
+      "url": "https://openrouter.ai/blog/insights/royale-last-agent-standing/",
+      "tldr": "OpenRouter staged a 'last agent standing' battle royale pitting different frontier models against each other in an embodied/agentic showdown, framed through the visceral question of which model you'd trust controlling a robot rushing at you. The provocative anthropomorphic framing turned a model-comparison study into a viral debate about AI safety and model trust, topping HN at 267 points and 209 comments. It captures how model-vs-model 'arena' content reliably drives engagement.",
+      "tldr_zh": "OpenRouter 搞了一场「最后一个 agent 站立」的大逃杀，让不同前沿模型在具身/agentic 对决中互搏，并用「一个机器人冲向你、你信任哪个模型控制它」这一直击本能的问题来包装。这种拟人化的挑衅框架把一项模型对比研究变成了关于 AI 安全与模型信任的病毒式辩论，以 267 分 209 评论登顶 HN，印证了模型对模型的「竞技场」内容能稳定拉动互动。",
+      "points": 267,
+      "num_comments": 209,
+      "interest_tag": ""
+    },
+    {
+      "title": "Launch HN: Adam (YC W25) – Open-Source AI CAD",
+      "url": "https://github.com/Adam-CAD/CADAM",
+      "tldr": "Adam (YC W25) launched an open-source AI CAD system that generates and edits mechanical CAD models from natural language. Open-sourcing a domain as technically deep and underserved by AI as parametric CAD struck a nerve, pulling 208 points and 97 comments. It signals agentic/LLM tooling pushing into hard engineering verticals beyond software coding.",
+      "tldr_zh": "Adam（YC W25）发布了开源 AI CAD 系统，能从自然语言生成和编辑机械 CAD 模型。把参数化 CAD 这种技术上很深、又长期缺乏 AI 工具的领域开源，戳中了痛点，拿下 208 分 97 评论。它标志着 agentic / LLM 工具正从软件编码推进到更硬核的工程垂直领域。",
+      "points": 208,
+      "num_comments": 97,
+      "interest_tag": ""
+    },
+    {
+      "title": "Launch HN: TesterArmy (YC P26) – Agents that test web and mobile apps",
+      "url": "https://tester.army",
+      "tldr": "TesterArmy (YC P26) deploys AI agents that autonomously test web and mobile applications, driving the UI to find bugs the way a human QA team would. By having agents operate real app interfaces end to end, it tackles the expensive, brittle world of GUI test automation. Its 116 points and 55 comments show strong appetite for agents that act on screens rather than just generate text.",
+      "tldr_zh": "TesterArmy（YC P26）部署能自主测试 Web 和移动应用的 AI agent，像人类 QA 团队一样驱动 UI 去发现 bug。通过让 agent 端到端操作真实应用界面，它瞄准了昂贵又脆弱的 GUI 测试自动化难题。116 分 55 评论显示出市场对「能在屏幕上操作而非只生成文本」的 agent 有强烈需求。",
+      "points": 116,
+      "num_comments": 55,
+      "interest_tag": "CUA"
+    },
+    {
+      "title": "America Is Headed Toward the Infinite Workweek",
+      "url": "https://www.theatlantic.com/technology/2026/06/ai-agents-jobs-exhaustion/687596/",
+      "tldr": "This Atlantic piece argues AI agents are not shortening work but stretching it into an 'infinite workweek,' as always-on agents raise the expected output baseline and erode boundaries between work and rest. It's the societal counterweight to today's product hype, and its 42 comments reflect a live debate about whether agent productivity actually frees humans or just ratchets up demands. A reminder that the agent boom has a labor-and-burnout dimension.",
+      "tldr_zh": "这篇《大西洋月刊》文章认为，AI agent 没有缩短工作，反而把它拉长成「无限工作周」——常开的 agent 抬高了产出基线，侵蚀了工作与休息的边界。它是当下产品热潮的社会面反作用力，42 条评论反映出一场活跃辩论：agent 带来的生产力究竟解放了人，还是只是加码了需求。它提醒人们，agent 热潮也有劳动与倦怠的一面。",
+      "points": 32,
+      "num_comments": 42,
+      "interest_tag": ""
+    },
+    {
+      "title": "Memanto; open-source memory agent that remembers, recalls and answers",
+      "url": "https://github.com/moorcheh-ai/memanto",
+      "tldr": "Memanto is an open-source memory agent that persistently remembers information, recalls it on demand, and answers questions grounded in that stored memory. It targets the persistent gap in agent systems: durable long-term memory across sessions rather than a fixed context window. As a self-hostable building block, it slots into the growing stack of dedicated agent-memory infrastructure.",
+      "tldr_zh": "Memanto 是一个开源记忆 agent，能持久记住信息、按需回忆，并基于存储的记忆回答问题。它瞄准 agent 系统长期存在的缺口：跨会话的持久长期记忆，而非固定的上下文窗口。作为可自托管的构件，它嵌入了日益壮大的「专用 agent 记忆基础设施」技术栈。",
+      "points": 14,
+      "num_comments": 11,
+      "interest_tag": "Memory"
+    }
+  ]
+}
