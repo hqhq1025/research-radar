@@ -1,0 +1,228 @@
+{
+  "date": "2026-06-21",
+  "generated_at": "2026-06-21T16:06:07.811524+08:00",
+  "briefing_zh": "今日 AI 研究领域呈现出「轻量化 vs. 大规模」的鲜明张力。**Moebius** 以 0.2B 参数实现与 10B 级工业模型相当的图像修复效果，通过结构化特征蒸馏突破了极端压缩的表示瓶颈，成为今日 HuggingFace 热度最高的论文（109 upvotes）。与此同时，**GLM-5.2** 从 Z.ai 发布，搭载 1M token 上下文窗口、IndexShare 稀疏注意力（降低 2.9× FLOPs）和 MTP 推测解码，剑指长 horizon 编码 agent 任务，标志着中国模型厂商在 agent 基础设施层的持续布局。\n\n机器人与具身智能方向同样爆发式涌现。**Playful Agentic Robot Learning** 提出「玩耍式技能获取」——在收到下游任务指令之前，agent 通过自主探索积累可复用技能库，打破了传统「指令-执行」的单向范式。**DragMesh-2** 则推动了灵巧手-关节物体交互的物理仿真精度，为家用和人形机器人的抓取研究提供了新基准。**MemoryWAM** 进一步解决了世界行为模型中持久记忆的缺失问题，用可扩展的外部记忆模块显著提升了真实场景下的操控性能。\n\nAgent 基础设施与评测成为本周 GitHub 和 HN 的双重焦点。**dongshuyan/compass-skills**（400★）构建了一套个性化 AI 任务 Skills 操作系统，让多个编码 agent 共享同一套技能层；**VisionForge-OU/foreman** 则以 Boris 风格的 TUI 编排多个无头 Claude Code agent，形成一套门控式软件交付流水线。在评测侧，**Beyond Static Leaderboards** 对 MCP-based 工业 agent 基准进行了 14 项并行深度研究，直指当前 leaderboard 无法覆盖部署维度的核心痛点。Hacker News 上，**OpenRouter「最后一个 agent 站立」竞技场**（271 pts）让 Claude 和 Grok 驱动的机器人真实对抗，引发关于 agent 评测标准化的广泛讨论；**Cloudflare 临时账号**（204 pts）为 agent 提供了一次性身份凭证机制，推动 agent 网络权限的安全管理走向产品化。",
+  "briefing_en": "Today's AI research landscape reveals a sharp tension between **lightweight efficiency and large-scale capability**. **Moebius** achieves 10B-class image inpainting performance with just 0.2B parameters via structured feature distillation — breaking the representation bottleneck of extreme compression and topping HuggingFace's chart with 109 upvotes. Meanwhile, **GLM-5.2** from Z.ai debuts with a 1M-token context window, IndexShare sparse attention (2.9× FLOPs reduction), and MTP-based speculative decoding, targeting long-horizon agentic coding tasks and signaling China's continued push at the agent infrastructure layer.\n\nRobotics and embodied intelligence are erupting simultaneously. **Playful Agentic Robot Learning** proposes 'playful skill acquisition' — an agent autonomously builds a reusable skill library through self-directed exploration *before* receiving downstream task instructions, breaking the traditional instruction-execution paradigm. **DragMesh-2** advances physical plausibility in dexterous hand-articulated object interaction, setting new benchmarks for household and humanoid robotics. **MemoryWAM** addresses the persistent-memory gap in world action models by introducing a scalable external memory module that substantially improves real-world manipulation performance.\n\nAgent infrastructure and evaluation dominate GitHub and HN this week. **dongshuyan/compass-skills** (400★) builds a personal AI task Skills OS — a shared skill layer across multiple coding agents. **VisionForge-OU/foreman** orchestrates headless Claude Code agents through a gated software-delivery TUI pipeline. On the evaluation front, **Beyond Static Leaderboards** presents 14 coordinated deep-dive studies on MCP-based industrial agent benchmarks, exposing the fundamental gap between static leaderboard scores and deployment-time behavior. On Hacker News, the **OpenRouter 'last agent standing' arena** (271 pts) pit Claude- and Grok-powered robots against each other, sparking a conversation about agent evaluation standards; **Cloudflare temporary accounts** (204 pts) enable disposable identity credentials for agents, productizing secure permission management for agent-driven web access.",
+  "viral_analysis_zh": "**OpenRouter「最后一个 agent 站立」竞技场**（HN 271 pts/210 评论）是本周最有病毒性的内容——把枯燥的 AI 能力评测包装成机器人格斗游戏，标题本身就是一个钩子（「你想让它跑 Claude 还是 Grok？」），完美利用了受众对不同模型「站队」的天然情绪。其次是 **Moebius 0.2B**：「用 0.2B 打败 10B」的对比框架极易传播，直接回应了所有人心中「大模型是否必要」的疑问——这类「以小胜大」的叙事几乎是 AI 研究推广的永动机。",
+  "viral_analysis_en": "The **OpenRouter 'last agent standing' arena** (HN 271 pts/210 comments) is this week's most viral piece — it packages a dry AI capability evaluation into a robot fighting game, with a headline that is itself a hook ('Do you want it running on Claude or Grok?'), perfectly exploiting the audience's tribal feelings about model allegiances. Close behind is **Moebius 0.2B**: the '0.2B beats 10B' framing is supremely shareable because it directly answers the question everyone is asking — 'is scale actually necessary?' — and the 'David vs. Goliath' efficiency narrative is nearly a perpetual-motion machine in AI research marketing.",
+  "huggingface_papers": [
+    {
+      "title": "Moebius: 0.2B Lightweight Image Inpainting Framework with 10B-Level Performance",
+      "arxiv_id": "2606.19195",
+      "url": "https://arxiv.org/abs/2606.19195",
+      "tldr": "Moebius is a 0.2B-parameter image inpainting model that matches the quality of 10B-scale industrial models. It overcomes the representation bottleneck of extreme compression through a Möbius strip-inspired dual-branch architecture that cycles high-frequency structural features back into the generation path, achieving state-of-the-art results at a fraction of the compute cost.",
+      "tldr_zh": "Moebius 是仅有 0.2B 参数的图像修复模型，却能媲美 10B 级工业大模型的效果。它通过莫比乌斯带式双分支架构，将高频结构特征循环注入生成路径，突破了极端压缩下的表示瓶颈，以极低算力实现了 SOTA 级别的修复质量。",
+      "upvotes": 109,
+      "authors": "Kangsheng Duan, Ziyang Xu, Wenyu Liu, Xiaohu Ruan",
+      "ai_keywords": [
+        "image inpainting",
+        "lightweight model",
+        "knowledge distillation"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "DragMesh-2: Physically Plausible Dexterous Hand-Object Interaction with Articulated Objects",
+      "arxiv_id": "2606.15133",
+      "url": "https://arxiv.org/abs/2606.15133",
+      "tldr": "DragMesh-2 addresses the hard problem of dexterous multi-finger hand interaction with articulated objects (doors, drawers, scissors) — where the target part can only be moved indirectly through physical contact. It uses a differentiable physics-aware contact model to generate stable, physically plausible grasp-and-manipulate sequences, advancing humanoid and household robot manipulation research.",
+      "tldr_zh": "DragMesh-2 解决了灵巧手与关节物体（门、抽屉、剪刀等）交互的难题——目标部件只能通过物理接触间接驱动。它通过可微物理接触模型生成稳定、物理合理的抓取-操作序列，推动了人形机器人和家用机器人操控研究的进展。",
+      "upvotes": 68,
+      "authors": "Tianshan Zhang, Yijia Duan, Yanjun Li, Zeyu Zhang",
+      "ai_keywords": [
+        "robotics",
+        "dexterous manipulation",
+        "physics simulation"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "Playful Agentic Robot Learning",
+      "arxiv_id": "2606.19419",
+      "url": "https://arxiv.org/abs/2606.19419",
+      "tldr": "This paper proposes Playful Agentic Robot Learning (PARL), where an embodied coding agent uses self-directed free play to build a reusable skill library before any downstream task is given. Unlike task-driven agents that only acquire skills reactively, playful exploration yields a richer skill repertoire, leading to faster adaptation and better generalization when real tasks arrive.",
+      "tldr_zh": "本文提出「玩耍式主体机器人学习」（PARL），让具身编码 agent 在接受任何下游任务之前，通过自主自由探索构建可复用技能库。不同于只在接到任务时才学习技能的被动范式，主动玩耍带来更丰富的技能储备，使 agent 在面对真实任务时具备更快的适应速度和更强的泛化能力。",
+      "upvotes": 43,
+      "authors": "Junyi Zhang, Jiaxin Ge, Hanjun Yoo, Letian Fu",
+      "ai_keywords": [
+        "robot learning",
+        "skill acquisition",
+        "agentic systems",
+        "embodied AI"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "Multi-LCB: Extending LiveCodeBench to Multiple Programming Languages",
+      "arxiv_id": "2606.20517",
+      "url": "https://arxiv.org/abs/2606.20517",
+      "tldr": "Multi-LCB extends the popular LiveCodeBench (LCB) code-evaluation benchmark from Python-only to 10+ programming languages including Java, C++, Go, and Rust. It maintains LCB's anti-contamination design (constant fresh problem ingestion by release date) while enabling cross-language comparison of LLM coding capabilities — revealing that current models have highly uneven proficiency across languages.",
+      "tldr_zh": "Multi-LCB 将广受欢迎的 LiveCodeBench 代码评测基准从仅支持 Python 扩展至 10+ 编程语言，包括 Java、C++、Go、Rust 等。它保留了 LCB 的抗污染设计（按发布日期持续注入新题），同时支持跨语言编程能力比较，揭示了当前模型在不同编程语言之间存在显著能力不均衡的问题。",
+      "upvotes": 40,
+      "authors": "Maria Ivanova, Pavel Zadorozhny, Rodion Levichev, Ivan Petrov",
+      "ai_keywords": [
+        "code benchmark",
+        "LLM evaluation",
+        "programming languages"
+      ],
+      "interest_tag": "Benchmark"
+    },
+    {
+      "title": "Beyond Static Leaderboards: Predictive Validity for the Evaluation of LLM Agents",
+      "arxiv_id": "2606.19704",
+      "url": "https://arxiv.org/abs/2606.19704",
+      "tldr": "This paper argues that today's agent benchmarks only cover 4–5 deployment dimensions while real usage exposes far more. Through 14 coordinated parallel studies on one MCP-based industrial agent benchmark, the authors measure 'predictive validity' — how well benchmark scores actually predict real deployment outcomes — finding major gaps, especially in multi-modal, retrieval-heavy, and multi-orchestration scenarios.",
+      "tldr_zh": "本文指出当前 agent 基准测试只覆盖了 4–5 个部署维度，而真实使用场景要复杂得多。通过对一个基于 MCP 的工业 agent 基准开展 14 项并行深度研究，作者衡量了「预测有效性」——基准分数对真实部署结果的预测能力——发现了重大差距，尤其在多模态、重检索和多编排场景中。",
+      "upvotes": 28,
+      "authors": "Dhaval C. Patel, Kaoutar El Maghraoui, Shuxin Lin, Yusheng Li",
+      "ai_keywords": [
+        "agent evaluation",
+        "benchmark validity",
+        "MCP",
+        "LLM agents"
+      ],
+      "interest_tag": "Benchmark"
+    }
+  ],
+  "alphaxiv_papers": [
+    {
+      "title": "Looped World Models",
+      "arxiv_id": "2606.18208",
+      "url": "https://arxiv.org/abs/2606.18208",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2606.18208",
+      "tldr": "Looped World Models (LoopWM) resolve the depth-vs-efficiency tradeoff in world modeling by iteratively refining latent environment states through a single parameter-shared transformer block. Rather than stacking more layers, the same block loops multiple times — achieving deep-model accuracy at shallow-model cost and dramatically reducing compounding errors in long-horizon simulation.",
+      "tldr_zh": "Looped World Models (LoopWM) 通过单一共享参数的 Transformer 块对潜在环境状态进行迭代精化，解决了世界模型中深度与效率的权衡矛盾。不需要叠加更多层，同一个块多次循环即可达到深层模型的精度，同时保持浅层模型的成本，显著降低长 horizon 模拟中的误差累积。",
+      "interest_tag": ""
+    },
+    {
+      "title": "GLM-5.2: Built for Long-Horizon Tasks",
+      "arxiv_id": "",
+      "url": "https://www.alphaxiv.org/abs/2026.glm-5-2",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2026.glm-5-2",
+      "tldr": "Z.ai's GLM-5.2 is a flagship coding model purpose-built for long-horizon agentic tasks, featuring a 1M-token context window, IndexShare sparse attention (2.9× lower per-token FLOPs), improved MTP-based speculative decoding (+20% acceptance rate), and effort-level controls. It directly competes with top coding models on agentic programming workflows.",
+      "tldr_zh": "Z.ai 的 GLM-5.2 是专为长 horizon 代理任务打造的旗舰编程模型，配备 1M token 上下文窗口、IndexShare 稀疏注意力（降低 2.9× FLOPs）、改进的 MTP 推测解码（接受率提升 20%）以及可调节的 effort 控制。它直接在 agentic 编程工作流上与顶级编程模型展开竞争。",
+      "interest_tag": ""
+    },
+    {
+      "title": "MemoryWAM: Efficient World Action Modeling with Persistent Memory",
+      "arxiv_id": "2606.20562",
+      "url": "https://arxiv.org/abs/2606.20562",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2606.20562",
+      "tldr": "MemoryWAM adds a persistent, scalable external memory module to World Action Models (WAMs) for robotic manipulation. Existing WAMs encode history in the latent state, causing information loss over long horizons. MemoryWAM uses a compressed key-value memory that selectively stores and retrieves past observations, significantly improving performance on complex real-world manipulation tasks without proportionally increasing compute.",
+      "tldr_zh": "MemoryWAM 为机器人操控的世界行为模型（WAM）引入了持久化、可扩展的外部记忆模块。现有 WAM 将历史编码进潜在状态，导致长 horizon 下信息丢失。MemoryWAM 使用压缩键值记忆选择性存取历史观测，在不成比例增加计算量的前提下，显著提升了复杂真实操控任务的性能。",
+      "interest_tag": "Memory"
+    },
+    {
+      "title": "AtomMem: Building Simple and Effective Memory System for LLM Agents via Atomic Facts",
+      "arxiv_id": "2606.19847",
+      "url": "https://arxiv.org/abs/2606.19847",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2606.19847",
+      "tldr": "AtomMem introduces a memory architecture for LLM agents that stores conversations as granular 'atomic facts' rather than raw text chunks. This atomic decomposition makes memories more stable, updateable, and precisely retrievable across multi-session interactions. Experiments show it outperforms both retrieval-based and full-context memory approaches on long-horizon multi-turn tasks.",
+      "tldr_zh": "AtomMem 为 LLM agent 提出了一种记忆架构，将对话内容分解为细粒度的「原子事实」而非原始文本块存储。原子化分解使记忆更稳定、可更新、检索更精准，适用于跨会话的多轮交互。实验表明它在长 horizon 多轮任务上优于基于检索和全上下文的两种记忆方案。",
+      "interest_tag": "Memory"
+    },
+    {
+      "title": "Deep Research in Physical Sciences: A Multi-Agent Framework and Comprehensive Benchmark",
+      "arxiv_id": "2606.18648",
+      "url": "https://arxiv.org/abs/2606.18648",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2606.18648",
+      "tldr": "This work introduces PhySciBench, a comprehensive benchmark for evaluating deep research agents on physical science tasks requiring autonomous multi-step reasoning. The accompanying multi-agent framework orchestrates specialized sub-agents for literature retrieval, experiment planning, cross-discipline synthesis, and peer-review critique, demonstrating how agent orchestration can meaningfully accelerate scientific discovery.",
+      "tldr_zh": "本工作提出 PhySciBench，一个评测深度研究 agent 在物理科学自主多步推理上能力的综合基准。配套的多 agent 框架协同文献检索、实验规划、跨学科综合和同行评审四类专门子 agent，展示了 agent 编排如何切实加速科学发现。",
+      "interest_tag": "Agent Swarm"
+    }
+  ],
+  "github_repos": [
+    {
+      "name": "Plaer1/junction",
+      "url": "https://github.com/Plaer1/junction",
+      "tldr": "Junction is a VS Code chat sidebar that connects directly to local AI coding agents (Claude Code, Codex, etc.), providing a persistent, project-aware conversation panel without leaving the editor. It standardizes the 'chat with your agent' UX across different backends, making agent-assisted coding feel native to the VS Code workflow.",
+      "tldr_zh": "Junction 是一个 VS Code 聊天侧边栏，可直接连接本地 AI 编程 agent（如 Claude Code、Codex 等），在不离开编辑器的情况下提供持久化、项目感知的对话面板。它统一了不同后端「与 agent 对话」的交互体验，让 agent 辅助编程在 VS Code 中如原生功能般流畅。",
+      "stars": 516,
+      "language": "TypeScript",
+      "interest_tag": ""
+    },
+    {
+      "name": "dongshuyan/compass-skills",
+      "url": "https://github.com/dongshuyan/compass-skills",
+      "tldr": "COMPASS is a personal AI Skills OS — a curated, shareable library of SKILL.md files that AI coding agents (Claude Code, Codex, Cursor) can load as executable procedures. It acts as a shared 'operating system layer' on top of any coding agent, letting users accumulate, version, and distribute domain-specific agent capabilities across projects and teams.",
+      "tldr_zh": "COMPASS 是一个个性化 AI Skills 操作系统，提供一套精心策划的可共享 SKILL.md 文件库，供 AI 编程 agent（Claude Code、Codex、Cursor）作为可执行程序调用。它充当任何编程 agent 之上的共享「操作系统层」，让用户跨项目和团队积累、版本化并分发领域专属的 agent 能力。",
+      "stars": 400,
+      "language": "Python",
+      "interest_tag": ""
+    },
+    {
+      "name": "renee-jia/scholar-loop",
+      "url": "https://github.com/renee-jia/scholar-loop",
+      "tldr": "Scholar-Loop is an autonomous AI scientist: a multi-agent loop that continuously cycles through literature review, experiment execution, self-critique, and paper writing. It includes deterministic guards against reward-hacking and hallucination — verifiable intermediate checkpoints that prevent agents from taking shortcuts instead of doing real research.",
+      "tldr_zh": "Scholar-Loop 是一个自主 AI 科学家：一个持续循环文献综述、实验执行、自我批评和论文写作的多 agent 循环系统。它包含对抗奖励黑客攻击和幻觉的确定性防护机制——可验证的中间检查点，防止 agent 用走捷径代替真正的研究工作。",
+      "stars": 132,
+      "language": "Python",
+      "interest_tag": "Agent Swarm"
+    },
+    {
+      "name": "agiwhitelist/tokdiet",
+      "url": "https://github.com/agiwhitelist/tokdiet",
+      "tldr": "TokDiet is a local streaming reverse proxy between AI coding agents and model APIs (Anthropic, OpenAI, Gemini, MiniMax). It meters every token and USD cost in real time, compacts bloated context to cut pay-per-token API spend, and runs shadow evaluation to verify that quality is preserved after compression — essentially a transparent cost-optimization layer for agent API calls.",
+      "tldr_zh": "TokDiet 是 AI 编程 agent 与模型 API（Anthropic、OpenAI、Gemini、MiniMax）之间的本地流式反向代理。它实时计量每个 token 和美元成本，压缩臃肿的上下文以降低按 token 计费的 API 支出，并运行影子评估验证压缩后质量是否保持——本质上是 agent API 调用的透明成本优化层。",
+      "stars": 69,
+      "language": "TypeScript",
+      "interest_tag": ""
+    },
+    {
+      "name": "VisionForge-OU/foreman",
+      "url": "https://github.com/VisionForge-OU/foreman",
+      "tldr": "Foreman is a Boris-style agentic orchestrator TUI that supervises multiple headless Claude Code agents through a gated software-delivery pipeline. It assigns tasks, monitors agent output, enforces quality gates (tests, linting, security scans), and gates merges — bringing structured project management discipline to autonomous multi-agent coding workflows.",
+      "tldr_zh": "Foreman 是一个 Boris 风格的 agent 编排 TUI，通过门控式软件交付流水线监督多个无头 Claude Code agent。它分配任务、监控 agent 输出、执行质量门控（测试、lint、安全扫描），并把控合并节点——将结构化的项目管理纪律引入自主多 agent 编程工作流。",
+      "stars": 68,
+      "language": "Python",
+      "interest_tag": "Agent Swarm"
+    }
+  ],
+  "hackernews": [
+    {
+      "title": "A robot is sprinting towards you. Do you want it running on Claude or Grok?",
+      "url": "https://openrouter.ai/blog/insights/royale-last-agent-standing/",
+      "tldr": "OpenRouter's 'Last Agent Standing' arena pits AI-controlled robots against each other in real combat simulations, comparing how different models (Claude, Grok, GPT-4o) perform as robot brains under adversarial pressure. The experiment reveals striking behavioral differences — Claude prioritizes evasion and coalition-building while Grok plays more aggressively — making it one of the most viscerally engaging AI capability comparisons to date.",
+      "tldr_zh": "OpenRouter 的「最后一个 agent 站立」竞技场让 AI 控制的机器人在真实战斗模拟中相互对决，比较不同模型（Claude、Grok、GPT-4o）作为机器人大脑在对抗压力下的表现。实验揭示了显著的行为差异——Claude 优先规避和建立联盟，而 Grok 策略更具攻击性——成为迄今最具感染力的 AI 能力对比之一。",
+      "points": 271,
+      "num_comments": 210,
+      "interest_tag": "Benchmark"
+    },
+    {
+      "title": "Launch HN: Adam (YC W25) – Open-Source AI CAD",
+      "url": "https://github.com/Adam-CAD/CADAM",
+      "tldr": "Adam (YC W25) is an open-source AI agent for mechanical CAD software — it understands CAD semantics (features, constraints, assembly hierarchies) and can execute complex design operations via natural language. Unlike generic coding agents applied to CAD, Adam is trained on domain-specific CAD workflows, enabling it to navigate and modify parametric models that would otherwise require expert knowledge.",
+      "tldr_zh": "Adam（YC W25）是一个专为机械 CAD 软件打造的开源 AI agent——它理解 CAD 语义（特征、约束、装配层级），可通过自然语言执行复杂设计操作。与将通用编程 agent 应用于 CAD 不同，Adam 在领域专属 CAD 工作流上进行了训练，能够导航和修改原本需要专家知识才能操作的参数化模型。",
+      "points": 212,
+      "num_comments": 97,
+      "interest_tag": ""
+    },
+    {
+      "title": "Temporary Cloudflare accounts for AI agents",
+      "url": "https://blog.cloudflare.com/temporary-accounts/",
+      "tldr": "Cloudflare now offers temporary, disposable account credentials that AI agents can use for one-off web operations — browsing, form submission, API calls — without exposing permanent user credentials. This solves a major security and privacy problem in agent-driven automation: agents no longer need long-lived tokens, reducing the blast radius of agent compromise or misbehavior.",
+      "tldr_zh": "Cloudflare 现在提供临时的一次性账号凭证，供 AI agent 用于临时性网络操作——浏览、表单提交、API 调用——而无需暴露用户的永久凭证。这解决了 agent 驱动自动化中的重大安全与隐私问题：agent 不再需要长期有效的 token，降低了 agent 被入侵或行为失控时的影响范围。",
+      "points": 204,
+      "num_comments": 107,
+      "interest_tag": ""
+    },
+    {
+      "title": "Launch HN: TesterArmy (YC P26) – Agents that test web and mobile apps",
+      "url": "https://tester.army",
+      "tldr": "TesterArmy (YC P26) deploys AI agents to autonomously test web and mobile applications — writing test cases, executing them across browsers/devices, identifying regressions, and generating human-readable reports. Unlike script-based testing tools, agents can handle dynamic UIs and edge cases without predefined selectors, dramatically reducing the manual effort of QA engineering.",
+      "tldr_zh": "TesterArmy（YC P26）部署 AI agent 自主测试 Web 和移动应用——编写测试用例、跨浏览器/设备执行、识别回归问题并生成可读报告。与基于脚本的测试工具不同，agent 无需预定义选择器即可处理动态 UI 和边缘情况，大幅减少 QA 工程的人工投入。",
+      "points": 126,
+      "num_comments": 68,
+      "interest_tag": "CUA"
+    },
+    {
+      "title": "Building reliable agentic AI systems",
+      "url": "https://martinfowler.com/articles/reliable-llm-bayer.html",
+      "tldr": "A Martin Fowler-published engineering article on the practical patterns for building production-grade agentic AI systems — covering structured output validation, tool call retry policies, circuit breakers for flaky tools, and observability design. It synthesizes lessons from deploying real agent systems at scale and is notable for focusing on engineering reliability rather than capability benchmarks.",
+      "tldr_zh": "一篇发表于 Martin Fowler 网站的工程文章，讲述构建生产级 agentic AI 系统的实践模式——涵盖结构化输出验证、工具调用重试策略、不稳定工具的断路器设计以及可观测性架构。它综合了在规模化部署真实 agent 系统中的实践经验，以关注工程可靠性而非能力基准著称。",
+      "points": 75,
+      "num_comments": 14,
+      "interest_tag": ""
+    }
+  ]
+}
