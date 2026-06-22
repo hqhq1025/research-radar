@@ -1,0 +1,231 @@
+{
+  "date": "2026-06-22",
+  "generated_at": "2026-06-22T16:09:47.648094+08:00",
+  "briefing_zh": "今天的 AI 研究圈有一条核心主线：**agent 的基础设施正在快速走向成熟**，从记忆治理、多 agent 协作，到部署层的无缝集成，整条链路都有新进展。**HuggingFace** 今日推送的论文中，排名第一的 **PerceptionDLM** 用并行解码打破了多模态感知的效率瓶颈，在多区域描述任务上实现了大幅提速；而排名紧随其后的三篇论文全部与 agent 记忆有关——**GateMem**、**WorldLines**、**MemSlides**——从多用户共享记忆的访问控制到长时程具身 agent 的状态追踪，说明研究界对 agent 如何记住世界的兴趣正在集中爆发。\n\n在开源社区方面，**alphaxiv** 热榜上最值得关注的两条线索是：**AtomMem** 用原子事实架构重新定义了 agent 长期记忆的存储效率；**Skill-MAS** 提出了第三条路——在不更新参数的前提下，通过进化元技能让 Multi-Agent System 积累经验。与此同时，**GLM-5.2** 以 1M token 上下文和更低的每 token 计算量进入长时程 agentic coding 赛道，和 **FAPO** 的多步骤 pipeline 自动优化一起，把 agent 的可用性推向了新的层次。\n\nGitHub 这周涌现出一批实用工具：**umacloud/umadev** 把 Claude Code / Codex 套上 9 阶段可治理的商业级交付流水线，**VisionForge-OU/foreman** 打造了监督无头 Claude Code agents 的 TUI 编排器，**Forsy-AI/agent-apprenticeship** 则尝试构建让 agent 从真实工作中持续学习的生态系统。这些项目都在解答同一个问题：如何把 coding agent 嵌入真实的软件交付流程。\n\nHacker News 上最热的两条讨论分别来自 **OpenRouter** 的 LLM 战斗模拟实验（Grok 4.1 Fast 以低 27 倍成本胜出）和 **Cloudflare** 推出的 AI agent 临时账号（让 agent 不需要人类介入就能直接部署 Workers）。这两篇文章共同指向一个趋势：以往对 LLM 的评估体系（合成 benchmark）正在被真实任务场景所取代，infrastructure 层也在主动为 agent 的自主行动移除障碍。",
+  "briefing_en": "Today's AI research landscape is converging on a single theme: **the infrastructure for AI agents is maturing rapidly**, with advances spanning memory governance, multi-agent orchestration, and frictionless deployment integration. On **HuggingFace**, the top paper **PerceptionDLM** breaks the efficiency barrier for multimodal perception using parallel decoding — enabling simultaneous multi-region captioning at dramatically higher speed. Strikingly, the next three papers all concern agent memory: **GateMem** benchmarks access control in multi-principal shared-memory systems, **WorldLines** evaluates long-horizon stateful embodied agents, and **MemSlides** architects hierarchical memory for personalized slide generation — signaling a concentrated research push into how agents remember the world.\n\nOn the **alphaxiv** trending feed, two research threads stand out. **AtomMem** redesigns agent long-term memory around atomic facts, achieving state-of-the-art on the LoCoMo benchmark with value-dense, stably-evolving storage. **Skill-MAS** proposes a third path for Multi-Agent Systems: evolving a meta-skill to accumulate experience without gradient updates, bridging the gap between inference-time search and training-time internalization. Meanwhile, **GLM-5.2** enters the long-horizon agentic coding arena with 1M token context and 2.9x lower per-token FLOPs, while **FAPO** autonomously optimizes multi-step LLM pipelines — together pushing agent usability to a new level.\n\nThis week's **GitHub** saw a cluster of practical tooling: **umacloud/umadev** wraps Claude Code/Codex in a 9-stage governable delivery pipeline, **VisionForge-OU/foreman** provides a TUI orchestrator for supervising headless Claude Code agents, and **Forsy-AI/agent-apprenticeship** attempts to build an ecosystem where agents learn continuously from real-world work. Each project is answering the same question: how to embed coding agents into real software delivery workflows.\n\nThe hottest **Hacker News** discussions came from two directions: **OpenRouter's** 30-game LLM battle royale (where Grok 4.1 Fast won at 27x lower cost-per-win than the next competitor) and **Cloudflare's** temporary accounts for AI agents (letting agents deploy Workers without any human OAuth flow). Together, these stories point to a broader trend: synthetic benchmarks for LLMs are being replaced by real-task evaluations, while infrastructure providers are actively removing friction for autonomous agent action.",
+  "viral_analysis_zh": "今天最可能出圈的是 **OpenRouter 的 LLM 战斗模拟**：把 11 个大模型丢进 2D 战斗游戏跑 30 局，用成本/胜率而非合成 benchmark 评估模型——这套方法论本身就是一个故事，加上「Grok 4.1 Fast 比 Claude 便宜 27 倍但赢得更多」的惊人结论，极具传播力。**Cloudflare 临时账号** 紧随其后：解决了 agent 自主部署最后一公里的痛点（OAuth 卡关问题），工程师一眼就能看到实用价值，产品叙事也极其清晰——运行 wrangler deploy --temporary，60 分钟内认领账号。",
+  "viral_analysis_en": "The most viral story today is **OpenRouter's LLM Battle Royale**: dropping 11 LLMs into a 2D game for 30 matches and measuring cost-per-win instead of synthetic benchmarks — the methodology itself is the story, amplified by the explosive finding that Grok 4.1 Fast beats Claude at 27x lower cost-per-win. **Cloudflare's Temporary Accounts** is a close second: it solves the last-mile problem for autonomous agent deployment (OAuth blocking headless agents), the engineering value is immediately obvious, and the product narrative is crystal clear — run wrangler deploy --temporary, claim within 60 minutes.",
+  "huggingface_papers": [
+    {
+      "title": "PerceptionDLM: Parallel Region Perception with Multimodal Diffusion Language Models",
+      "arxiv_id": "2606.19534",
+      "url": "https://arxiv.org/abs/2606.19534",
+      "tldr": "PerceptionDLM introduces a multimodal diffusion language model for efficient parallel region perception. By using structured attention masking and efficient prompting, it can caption multiple image regions simultaneously rather than sequentially, achieving state-of-the-art performance on region captioning benchmarks while dramatically improving inference speed. The authors also introduce ParaDLC-Bench to evaluate multi-region parallel perception.",
+      "tldr_zh": "PerceptionDLM 提出了基于扩散语言模型的并行多区域感知方案，通过结构化注意力掩码让模型同时处理多个图像区域，而非逐一生成描述。相比自回归方案在多区域任务上实现了大幅推理提速，同时维持了竞争力的描述质量。作者还构建了 ParaDLC-Bench 用于评估并行感知能力。",
+      "upvotes": 40,
+      "authors": "Yueyi Sun, Yuhao Wang, Jason Li, Ye Tian, Tao Zhang et al.",
+      "ai_keywords": [
+        "multimodal",
+        "diffusion",
+        "parallel decoding",
+        "visual perception"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "GateMem: Benchmarking Memory Governance in Multi-Principal Shared-Memory Agents",
+      "arxiv_id": "2606.18829",
+      "url": "https://arxiv.org/abs/2606.18829",
+      "tldr": "GateMem is the first benchmark for evaluating memory governance in multi-principal settings — hospitals, workplaces, households where multiple users share one agent's memory pool. It jointly evaluates utility for legitimate requests, access control across role-based authorization boundaries, and reliable forgetting after deletion. Key finding: no current method simultaneously achieves strong utility, robust access control, and reliable forgetting.",
+      "tldr_zh": "GateMem 是首个针对多用户共享记忆 agent 的治理基准，覆盖医疗、办公、教育、家庭场景。它同时评估三项能力：合法请求的效用、跨角色权限的访问控制、显式删除后的可靠遗忘。核心发现：当前没有任何方法能同时在三项上取得强表现，现有记忆系统远未达到机构级可靠部署的标准。",
+      "upvotes": 4,
+      "authors": "Zhe Ren, Yibo Yang, Yimeng Chen, Zijun Zhao, Benshuo Fu et al.",
+      "ai_keywords": [
+        "agent memory",
+        "benchmark",
+        "access control",
+        "multi-agent"
+      ],
+      "interest_tag": "Memory"
+    },
+    {
+      "title": "WorldLines: Benchmarking and Modeling Long-Horizon Stateful Embodied Agents",
+      "arxiv_id": "2606.18847",
+      "url": "https://arxiv.org/abs/2606.18847",
+      "tldr": "WorldLines is a project-driven benchmark for long-horizon embodied household assistance, requiring agents to track user routines, world states, and past interactions over extended periods. The paper also proposes ObsMem, an observer-grounded memory framework with visibility-aware memories and action-native state trails. Experiments reveal persistent challenges in partial observability, overwritten world states, and translating long-term memory into embodied plans.",
+      "tldr_zh": "WorldLines 提出了针对长时程家庭具身助手的基准任务，要求 agent 跨延伸时间段追踪用户习惯、世界状态和历史交互。同时提出 ObsMem 框架，引入可见性感知记忆和动作原生状态轨迹。实验揭示了部分可观测性、状态被覆写、以及将长期记忆转化为具身行动计划等持续性挑战。",
+      "upvotes": 2,
+      "authors": "Yehang Zhang, Jianchong Su, Haojian Huang, Yifan Chang, Tianhao Zhou et al.",
+      "ai_keywords": [
+        "embodied agents",
+        "long-horizon",
+        "memory",
+        "benchmark"
+      ],
+      "interest_tag": "Memory"
+    },
+    {
+      "title": "MemSlides: A Hierarchical Memory Driven Agent Framework for Personalized Slide Generation with Multi-turn Local Revision",
+      "arxiv_id": "2606.17162",
+      "url": "https://arxiv.org/abs/2606.17162",
+      "tldr": "MemSlides separates agent memory into three levels: long-term user profile memory (persistent preferences across tasks), working memory (active constraints in current session), and tool memory (reusable execution experience for local edits). This hierarchy enables personalized multi-turn slide generation where targeted updates act only on affected regions rather than regenerating the full deck.",
+      "tldr_zh": "MemSlides 将 agent 记忆分为三层：长期用户画像记忆（跨任务持久偏好）、工作记忆（当前会话活跃约束）、工具记忆（可复用的执行经验）。这一分层设计让个性化幻灯片生成支持多轮局部修订，每次更新只影响最小受影响区域，而非重新生成整套演示文稿。",
+      "upvotes": 1,
+      "authors": "Ye Jin, Yangyang Xu, Jun Zhu, Yibo Yang",
+      "ai_keywords": [
+        "agent memory",
+        "personalization",
+        "slide generation",
+        "multi-turn"
+      ],
+      "interest_tag": "Memory"
+    },
+    {
+      "title": "GeneralVLA-2: Geometry-Aware Reconstruction and Governed Memory for Robot Planning",
+      "arxiv_id": "2606.17480",
+      "url": "https://arxiv.org/abs/2606.17480",
+      "tldr": "GeneralVLA-2 addresses two bottlenecks in vision-language-action robot systems: limited 3D spatial understanding and lack of reusable manipulation experience. It introduces geometry-aware reconstruction from RGB-D inputs for object-centric 3D path planning, and a governed memory module that stores and retrieves past manipulation episodes for trajectory reuse. The system provides a hierarchical interface converting language and RGB-D observations into reliable end-effector paths.",
+      "tldr_zh": "GeneralVLA-2 解决了 VLA 机器人系统的两个瓶颈：有限的三维空间感知和缺乏可复用的操作经验。它引入从 RGB-D 输入进行几何感知重建以实现以物体为中心的三维路径规划，以及存储和检索过去操作片段的治理记忆模块。该系统提供了一个将语言和 RGB-D 观测转化为可靠末端执行器路径的层次化接口。",
+      "upvotes": 0,
+      "authors": "Haoyu Wang, Guoqing Ma, Zeyu Zhang et al.",
+      "ai_keywords": [
+        "VLA",
+        "robotics",
+        "3D reconstruction",
+        "memory"
+      ],
+      "interest_tag": ""
+    }
+  ],
+  "alphaxiv_papers": [
+    {
+      "title": "AtomMem: Building Simple and Effective Memory System for LLM Agents via Atomic Facts",
+      "arxiv_id": "2606.19847",
+      "url": "https://arxiv.org/abs/2606.19847",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2606.19847",
+      "tldr": "AtomMem builds long-term agent memory around atomic facts extracted from interactions. A Fact Executor selectively extracts high-value atomic units, which are organized into hierarchical event structures and temporal user profiles. During retrieval, an associative memory graph connects fragmented memories. Achieves SOTA on the LoCoMo benchmark while remaining scalable and economically viable for personalized agent deployment.",
+      "tldr_zh": "AtomMem 以从交互中提取的原子事实为核心构建 agent 长期记忆。事实执行器选择性提取高价值原子单元，组织为层次事件结构和时序用户画像；检索时激活关联记忆图连接碎片化记忆。在 LoCoMo 基准上达到 SOTA，同时保持可扩展性和经济可行性。",
+      "interest_tag": "Memory"
+    },
+    {
+      "title": "Skill-MAS: Evolving Meta-Skill for Automatic Multi-Agent Systems",
+      "arxiv_id": "2606.18837",
+      "url": "https://arxiv.org/abs/2606.18837",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2606.18837",
+      "tldr": "Skill-MAS introduces a third path for LLM-based Multi-Agent Systems: decoupling experience retention from parameter updates by evolving a Meta-Skill. Through Multi-Trajectory Rollout sampling and Selective Reflection, it distills systemic experience into generalizable strategy-level principles without gradient updates. Achieves strong performance across four complex benchmarks with favorable cost-performance trade-off and transferability to unseen tasks.",
+      "tldr_zh": "Skill-MAS 为 LLM 多智能体系统提出第三条路：将经验保留与参数更新解耦，通过进化元技能积累编排知识。利用多轨迹采样和选择性反思，在无梯度更新的前提下提炼出可泛化的策略级原则。在四个复杂基准上表现强劲，元技能可迁移至未见任务和不同 LLM。",
+      "interest_tag": "Agent Swarm"
+    },
+    {
+      "title": "FAPO: Fully Autonomous Prompt Optimization of Multi-Step LLM Pipelines",
+      "arxiv_id": "2606.19605",
+      "url": "https://arxiv.org/abs/2606.19605",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2606.19605",
+      "tldr": "FAPO lets Claude Code autonomously optimize multi-step LLM pipelines by evaluating intermediate steps, diagnosing failures, and proposing scoped changes — first trying prompt edits, then structural changes when needed. Beats baseline GEPA in 15 of 18 model-benchmark comparisons with a mean gain of +14.1pp, and +33.8pp when structural changes were applied. Also demonstrates security task improvements on CTIBench-RCM.",
+      "tldr_zh": "FAPO 让 Claude Code 自主优化多步骤 LLM pipeline：评估中间步骤、诊断失败原因、提出范围化修改——先尝试提示词编辑，必要时再调整 chain 结构。在 18 项模型-基准比较中 15 项超越基线 GEPA，平均提升 +14.1pp；启用结构修改的 6 项平均提升 +33.8pp。同时在安全任务 CTIBench-RCM 上也展示了改进效果。",
+      "interest_tag": ""
+    },
+    {
+      "title": "GLM-5.2: Built for Long-Horizon Tasks",
+      "arxiv_id": "",
+      "url": "https://www.alphaxiv.org/abs/2026.glm-5-2",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2026.glm-5-2",
+      "tldr": "Z.ai releases GLM-5.2, a flagship coding model targeting long-horizon agentic tasks. Key features: 1M-token context window, IndexShare sparse attention achieving 2.9x lower per-token FLOPs, improved MTP-based speculative decoding with 20% higher acceptance length, and effort-level controls for calibrating depth of reasoning on agentic coding tasks.",
+      "tldr_zh": "Z.ai 发布 GLM-5.2，专为长时程 agentic 任务设计的旗舰编程模型。核心特性：100 万 token 上下文窗口、IndexShare 稀疏注意力实现 2.9 倍的每 token 计算量降低、改进的 MTP 推测解码（接受率提升 20%），以及针对 agentic 编程任务的推理深度可调节控制。",
+      "interest_tag": ""
+    },
+    {
+      "title": "Large Language Models Do Not Always Need Readable Language",
+      "arxiv_id": "2606.19857",
+      "url": "https://arxiv.org/abs/2606.19857",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2606.19857",
+      "tldr": "This paper introduces BabelTele — compact, non-human-readable text representations that preserve semantic content for LLMs. The key finding: BabelTele can condense text to just 27.9% of original length while maintaining 99.5% semantic fidelity. This opens a path toward model-native representations that reduce context overhead in agent memory and multi-agent communication, partially decoupling human readability from model-side semantic recoverability.",
+      "tldr_zh": "本文提出 BabelTele——对 LLM 有意义但人类难以阅读的紧凑文本表示。核心发现：BabelTele 可将文本压缩至原长度的 27.9%，同时保持 99.5% 的语义保真度。这为 agent 记忆和多 agent 通信中减少上下文开销开辟了新路径，实现了人类可读性与模型语义恢复能力的部分解耦。",
+      "interest_tag": ""
+    }
+  ],
+  "github_repos": [
+    {
+      "name": "Forsy-AI/agent-apprenticeship",
+      "url": "https://github.com/Forsy-AI/agent-apprenticeship",
+      "tldr": "An ecosystem framework where AI coding agents learn from real-world work through iterative workflow loops, reusable experience modules, and collective training signal exchange. Agents accumulate experience as reusable skills, share training signals across the network, and improve through repeated real task execution rather than synthetic benchmarks.",
+      "tldr_zh": "一个让 AI 编程 agent 通过迭代工作流循环从真实工作中学习的生态系统框架。agent 将经验积累为可复用技能，在网络中共享训练信号，通过反复执行真实任务而非合成基准来持续改进——构建了一种 agent 学徒制的基础设施。",
+      "stars": 626,
+      "language": "TypeScript",
+      "interest_tag": ""
+    },
+    {
+      "name": "umacloud/umadev",
+      "url": "https://github.com/umacloud/umadev",
+      "tldr": "AI Coding Project Director Agent built in Rust that wraps Claude Code, Codex, or OpenCode in a 9-stage governable commercial delivery pipeline. The pipeline enforces structured phases (requirements, architecture, implementation, review, testing, deployment) so AI coding agents follow a disciplined software delivery process rather than ad-hoc generation.",
+      "tldr_zh": "用 Rust 构建的 AI 编码项目总监 Agent，为 Claude Code/Codex/OpenCode 套上 9 阶段可治理的商业级交付流水线。强制 AI 编码 agent 遵循结构化交付阶段（需求、架构、实现、审查、测试、部署），而非无序生成——是 coding agent 工程化落地的关键基础设施。",
+      "stars": 85,
+      "language": "Rust",
+      "interest_tag": "Agent Swarm"
+    },
+    {
+      "name": "VisionForge-OU/foreman",
+      "url": "https://github.com/VisionForge-OU/foreman",
+      "tldr": "A Boris-style agentic orchestrator TUI that supervises headless Claude Code agents through a gated software delivery pipeline, applicable to any repository. Provides a terminal UI for monitoring multiple autonomous coding agents, managing their task gates, and intervening when needed — acting as a human-in-the-loop layer over autonomous agent clusters.",
+      "tldr_zh": "一个 Boris 风格的 agentic 编排器 TUI，通过门控软件交付流水线监督无头 Claude Code agents，适用于任意代码库。提供终端 UI 用于监控多个自主编程 agent、管理任务门控，以及在必要时介入——充当自主 agent 集群之上的人在回路层。",
+      "stars": 77,
+      "language": "Python",
+      "interest_tag": "Agent Swarm"
+    },
+    {
+      "name": "Plaer1/junction",
+      "url": "https://github.com/Plaer1/junction",
+      "tldr": "A VS Code chat sidebar extension that integrates local AI coding agents directly into the editor as a chat interface. Enables developers to interact with locally-running AI agents without leaving VS Code, bridging the gap between local model inference and IDE-native coding assistance.",
+      "tldr_zh": "将本地 AI 编程 agent 集成到 VS Code 侧边栏的聊天面板扩展。开发者无需离开 VS Code 即可与本地运行的 AI agent 交互，弥合了本地模型推理与 IDE 原生编码辅助之间的鸿沟——专注于本地优先的隐私友好工作流。",
+      "stars": 518,
+      "language": "TypeScript",
+      "interest_tag": ""
+    },
+    {
+      "name": "nnecrkvenuOX/formcms",
+      "url": "https://github.com/nnecrkvenuOX/formcms",
+      "tldr": "Open-source headless CMS built with ASP.NET Core and React, featuring REST APIs, GraphQL, and a GrapesJS page designer, positioned as an AI Agent integration target. With 905 forks indicating real adoption, it provides a full-featured content management backend that AI agents can interact with programmatically.",
+      "tldr_zh": "基于 ASP.NET Core 和 React 构建的开源无头 CMS，提供 REST API、GraphQL 和 GrapesJS 页面设计器，定位为 AI Agent 集成目标。905 个 fork 表明有真实的社区采用，提供 AI agent 可编程交互的完整内容管理后端。",
+      "stars": 367,
+      "language": "C#",
+      "interest_tag": ""
+    }
+  ],
+  "hackernews": [
+    {
+      "title": "A robot is sprinting towards you. Do you want it running on Claude or Grok?",
+      "url": "https://openrouter.ai/blog/insights/royale-last-agent-standing/",
+      "tldr": "OpenRouter's dev rel lead ran a 30-game 2D battle royale with 11 LLMs as players. Key findings: Grok 4.1 Fast won 13/30 games at $0.97/win; Claude Sonnet 4.6 won 5 games at $26.78/win (27x more expensive per win); GPT 5.4 had the most kills but only 2 wins; 3 models spent $57 combined and never won. The experiment demonstrates that standard benchmarks fail to predict performance on real agentic tasks.",
+      "tldr_zh": "OpenRouter 研究员将 11 个 LLM 投入 2D 战斗游戏进行 30 局对决。关键发现：Grok 4.1 Fast 赢得 13/30 局，每次胜利成本 $0.97；Claude Sonnet 4.6 赢 5 局但每胜成本 $26.78（高出 27 倍）；GPT 5.4 击杀最多但只赢 2 局；3 个模型花了 $57 却从未赢过。实验表明标准 benchmark 无法预测真实 agentic 任务的表现。",
+      "points": 271,
+      "num_comments": 210,
+      "interest_tag": ""
+    },
+    {
+      "title": "Temporary Cloudflare accounts for AI agents",
+      "url": "https://blog.cloudflare.com/temporary-accounts/",
+      "tldr": "Cloudflare launches temporary accounts for AI agents, enabling headless agents to deploy Workers via 'wrangler deploy --temporary' without any human OAuth flow or account creation. The temporary deployment stays live for 60 minutes during which a human can claim it. Wrangler now prompts agents about the --temporary flag when no authentication exists, creating a self-discovering mechanism for background agents.",
+      "tldr_zh": "Cloudflare 推出 AI agent 临时账号，让无头 agent 可直接通过 'wrangler deploy --temporary' 部署 Workers，完全无需人类介入 OAuth 流程或创建账号。临时部署存活 60 分钟供人类认领。Wrangler 在无身份验证时会主动提示 agent 使用 --temporary 标志，形成后台 agent 的自发现机制。",
+      "points": 243,
+      "num_comments": 141,
+      "interest_tag": ""
+    },
+    {
+      "title": "Launch HN: Adam (YC W25) – Open-Source AI CAD",
+      "url": "https://github.com/Adam-CAD/CADAM",
+      "tldr": "Adam is an open-source AI agent platform for mechanical CAD software (YC W25). The agents interact with CAD systems to automate engineering design tasks — generating parametric models, modifying existing designs, and running simulations — bringing AI-native automation to a domain traditionally resistant to AI tooling.",
+      "tldr_zh": "Adam 是 YC W25 孵化的开源机械 CAD AI agent 平台。agent 与 CAD 软件直接交互，自动化工程设计任务——生成参数化模型、修改现有设计、运行仿真——将 AI 原生自动化带入了传统上对 AI 工具化最具抵抗力的机械工程领域。",
+      "points": 212,
+      "num_comments": 97,
+      "interest_tag": "CUA"
+    },
+    {
+      "title": "Building reliable agentic AI systems",
+      "url": "https://martinfowler.com/articles/reliable-llm-bayer.html",
+      "tldr": "A Martin Fowler blog post exploring practical patterns for building reliable agentic AI systems in production. Covers key reliability challenges: non-determinism, error cascades, observability, and graceful degradation in multi-step agent pipelines. Provides actionable architectural guidance from real-world deployment experience.",
+      "tldr_zh": "Martin Fowler 博客上关于生产环境中构建可靠 agentic AI 系统的实战文章。涵盖关键可靠性挑战：不确定性、错误级联、可观测性，以及多步骤 agent pipeline 的优雅降级。基于真实部署经验提供可操作的架构指导，是 agent 工程化落地的实用参考。",
+      "points": 189,
+      "num_comments": 47,
+      "interest_tag": ""
+    },
+    {
+      "title": "Launch HN: TesterArmy (YC P26) – Agents that test web and mobile apps",
+      "url": "https://tester.army",
+      "tldr": "TesterArmy (YC P26) is an agentic testing platform where AI agents autonomously test web and mobile applications. Agents explore the app, identify test scenarios, execute tests, and report failures — replacing manual QA testing workflows. The platform targets teams shipping rapidly with AI coding agents who need automated quality verification.",
+      "tldr_zh": "TesterArmy（YC P26）是一个 AI agent 自主测试 Web 和移动应用的平台。agent 主动探索应用、识别测试场景、执行测试并报告失败——替代人工 QA 测试工作流。该平台专为那些用 AI 编程 agent 快速交付、同时需要自动化质量验证的团队而设计。",
+      "points": 129,
+      "num_comments": 68,
+      "interest_tag": "CUA"
+    }
+  ]
+}
