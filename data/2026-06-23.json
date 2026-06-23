@@ -1,0 +1,231 @@
+{
+  "date": "2026-06-23",
+  "generated_at": "2026-06-23T16:06:25.478395+08:00",
+  "briefing_zh": "**Agent 评测基础设施**成为今天最集中的研究方向。HuggingFace 日报上，**PlanBench-XL** 和 **EnterpriseClawBench** 双双以高票登顶，前者用 1600+ 工具和 327 个零售任务考察大模型在工具可见性受限下的长程规划，后者直接从真实企业工作流构建 852 个可复现任务。这两篇论文的核心信息一致：现有 agent 在受约束的真实场景中依然脆弱，benchmark 建设才是推进能力上限的关键基础设施。\n\n**终端 agent 的训练配方**也迎来新进展。Allen AI 和华盛顿大学发布的 **Tmax** 以仅 9B 参数在 Terminal-Bench 2.0 上达到 27.2%，超越此前众多更大模型。同日 alphaxiv 热榜，**CLI-Universe** 构建了可验证的终端任务合成引擎，解决训练数据稀缺瓶颈。两者一研一工程，共同把「训练能在终端实际干活的 agent」推向更系统的方向。\n\n**记忆系统**是本周另一个活跃方向。HuggingFace 上 **EvoEmbedding** 提出动态进化的 embedding，alphaxiv 上 **AtomMem** 通过原子事实分层图结构将 token 消耗降低 61.4%。同期，alphaxiv 榜单还出现了一篇探索 LLM 间 BabelTele 通信的论文——模型之间可以用人类无法阅读的高密度表示对话，上下文压缩至原始的 27.9%，为多 agent 系统通信效率开辟了一个反直觉但务实的方向。\n\n开源工具层面，Cloudflare 推出 **agent 临时账户**成为今天 HN 最高票故事（245pts），允许 agent 无需注册直接部署 60 分钟临时 Worker；这种「agent-first infra」思路正在成为云基础设施演进的主旋律。同时 GitHub 上多个实战向项目上榜，包括 Rust 构建的 **umadev**（AI 编码项目总监）和 Python 构建的 **Foreman**（多 agent 编排 TUI），标志着 agent 工具链正快速走向生产级。",
+  "briefing_en": "**Agent evaluation infrastructure** dominated today's research landscape. On HuggingFace, **PlanBench-XL** and **EnterpriseClawBench** both topped the charts with high upvotes. The former tests LLMs on long-horizon planning across 1,600+ tools with limited tool visibility; the latter constructs 852 reproducible tasks directly from real enterprise workflows. The unified message: current agents remain fragile in constrained real-world conditions, and benchmark infrastructure is the critical bottleneck.\n\n**Terminal agent training recipes** saw fresh breakthroughs. Allen AI and UW's **Tmax** achieves 27.2% on Terminal-Bench 2.0 with just 9B parameters, outperforming much larger prior models. On the same day, **CLI-Universe** debuted on alphaxiv with a verifiable task synthesis engine for terminal training data. Together they push terminal agent training into more systematic territory.\n\n**Memory systems** remained an active thread this week. **EvoEmbedding** on HuggingFace proposes dynamically-evolving representations, while **AtomMem** on alphaxiv reduces token consumption by 61.4% through atomic-fact hierarchical graphs. A provocative companion paper on BabelTele shows LLMs can communicate in dense, human-unreadable representations at 27.9% of original context volume with near-perfect semantic fidelity, opening a counterintuitive but practical path for multi-agent communication efficiency.\n\nOn the infrastructure front, Cloudflare's **temporary accounts for AI agents** (245pts on HN) allows agents to deploy live Workers for 60 minutes without signup, embodying an emerging agent-first infrastructure mindset. On GitHub, production-ready tooling is maturing fast: Rust-based **umadev** wraps AI coding agents in 9-stage delivery pipelines, while Python's **Foreman** provides a multi-agent orchestration TUI for supervised Claude Code deployments.",
+  "viral_analysis_zh": "今天最有传播势能的是 Cloudflare 的「agent 临时账户」（245pts，146 评论）。它不是研究论文，而是一个直接解决痛点的产品动作：无人值守 AI session 卡在注册页面的问题太普遍，Cloudflare 用一个 CLI flag 解决了。标题简洁、场景具体、可以立刻上手测试，这是技术社区内容病毒传播的标准配方。紧随其后的是 Allen AI 的 **Tmax**，「9B 参数打赢更大模型」的结论是天然的对比标题，加上开源权重、可复现配方，适合研究者转发和引用。",
+  "viral_analysis_en": "Today's highest viral potential belongs to Cloudflare's temporary agent accounts (245pts, 146 comments). It's not a paper — it's a product action that solves a visceral pain point: AI agents getting stuck at signup pages during unattended sessions. Cloudflare fixed it with one CLI flag. Clear title, concrete use case, immediately testable — the standard recipe for tech community virality. Close behind is Allen AI's **Tmax**: the hook '9B parameters beats much larger models' is a natural comparison headline, and open weights plus a reproducible recipe make it highly shareable among researchers.",
+  "huggingface_papers": [
+    {
+      "title": "PlanBench-XL: Evaluating Long-Horizon Planning of LLM Tool-Use Agents in Large-Scale Tool Ecosystems",
+      "arxiv_id": "2606.22388",
+      "url": "https://arxiv.org/abs/2606.22388",
+      "tldr": "PlanBench-XL is a new benchmark with 327 retail tasks across 1,600+ tools, specifically designed to evaluate LLM agents' ability to plan over long horizons when tools are partially visible. It reveals that most current models fail to chain sub-goals under retrieval-limited conditions, exposing a critical gap between current agent capabilities and real enterprise deployments.",
+      "tldr_zh": "PlanBench-XL 是一个包含 327 个零售任务、覆盖 1600+ 工具的新基准，专门评估 LLM 智能体在工具可见性受限场景下的长程规划能力。测试结果显示当前主流模型在子目标链式推理上普遍失败，揭示了智能体与真实企业部署之间的显著能力差距。",
+      "upvotes": 47,
+      "authors": "Jiayu Liu, Qihan Lin, Cheng Qian et al.",
+      "ai_keywords": [
+        "benchmark",
+        "planning",
+        "tool-use",
+        "LLM agents"
+      ],
+      "interest_tag": "Benchmark"
+    },
+    {
+      "title": "EnterpriseClawBench: Benchmarking Agents from Real Workplace Sessions",
+      "arxiv_id": "2606.23654",
+      "url": "https://arxiv.org/abs/2606.23654",
+      "tldr": "EnterpriseClawBench constructs 852 reproducible tasks from real enterprise agent sessions, making it the first benchmark grounded in actual workplace workflows. Agents must read heterogeneous files, invoke tools, and produce business artifacts. Its real-session provenance means tasks reflect genuine enterprise complexity rather than hand-crafted proxies.",
+      "tldr_zh": "EnterpriseClawBench 从真实企业 agent 会话中构建了 852 个可复现任务，是首个基于真实工作流的企业 agent 基准。任务涵盖读取异构文件、调用工具、生成业务产物等真实场景，评估难度远超人工构造的代理任务。",
+      "upvotes": 44,
+      "authors": "Jincheng Zhong, Weizhi Wang, Che Jiang et al.",
+      "ai_keywords": [
+        "benchmark",
+        "enterprise",
+        "agents",
+        "workplace"
+      ],
+      "interest_tag": "Benchmark"
+    },
+    {
+      "title": "EvoEmbedding: Evolvable Representations for Long-Context Retrieval and Agentic Memory",
+      "arxiv_id": "2606.21649",
+      "url": "https://arxiv.org/abs/2606.21649",
+      "tldr": "EvoEmbedding introduces dynamic embedding representations that evolve with context over time, unlike static models that encode text in isolation. It tracks sequential information and temporal state, enabling significantly better retrieval in long-context agentic memory scenarios where information changes continuously.",
+      "tldr_zh": "EvoEmbedding 提出了随上下文动态演化的 embedding 表示，打破传统静态 embedding 孤立编码文本的局限。模型能追踪序列信息和时序状态，在信息持续变化的长上下文 agent 记忆检索场景下效果显著提升。",
+      "upvotes": 17,
+      "authors": "Chang Nie, Chaoyou Fu, Junlan Feng et al.",
+      "ai_keywords": [
+        "embedding",
+        "retrieval",
+        "agentic memory",
+        "long-context"
+      ],
+      "interest_tag": "Memory"
+    },
+    {
+      "title": "CLI-Universe: Towards Verifiable Task Synthesis Engine for Terminal Agents",
+      "arxiv_id": "2606.22883",
+      "url": "https://arxiv.org/abs/2606.22883",
+      "tldr": "CLI-Universe tackles the data scarcity problem for terminal agent training by building a verifiable task synthesis engine that generates diverse, difficulty-controlled CLI training environments. The compositional generation framework avoids the shallow execution paths of prior pipelines, producing harder tasks with stronger learning signals.",
+      "tldr_zh": "CLI-Universe 针对终端 agent 训练数据匮乏问题，构建了可验证的任务合成引擎，通过组合式生成框架产出多样、难度可控的命令行训练环境。相比以往方案，执行路径更深，学习信号更强。",
+      "upvotes": 19,
+      "authors": "Zhanbo Hua, Yifan Yao, Weihao Xie et al.",
+      "ai_keywords": [
+        "terminal agents",
+        "data synthesis",
+        "CLI",
+        "RL training"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "OpenRath: Session-Centered Runtime State for Agent Systems",
+      "arxiv_id": "2606.19409",
+      "url": "https://arxiv.org/abs/2606.19409",
+      "tldr": "OpenRath proposes a PyTorch-style programming model for multi-agent systems that unifies fragmented runtime state: transcripts, tool effects, memory events, workspace state, and replay evidence are all tracked as first-class session objects. This makes multi-agent workflows far easier to inspect, debug, and reproduce.",
+      "tldr_zh": "OpenRath 以 PyTorch 式编程模型统一 multi-agent 系统的运行时状态，将转录、工具效果、记忆事件、工作区和重放证据全部作为一等会话对象统一管理。这让多 agent 工作流的检查、调试和复现变得更加简单。",
+      "upvotes": 10,
+      "authors": "Fukang Wen, Zhijie Wang, Ruilin Xu",
+      "ai_keywords": [
+        "multi-agent",
+        "runtime",
+        "session management",
+        "reproducibility"
+      ],
+      "interest_tag": "Agent Swarm"
+    }
+  ],
+  "alphaxiv_papers": [
+    {
+      "title": "Tmax: A Simple Recipe for Terminal Agents",
+      "arxiv_id": "",
+      "url": "https://www.alphaxiv.org/abs/tmax",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/tmax",
+      "tldr": "TMAX from Allen AI + UW is the strongest open RL recipe for terminal agents, achieving 27.2% on Terminal-Bench 2.0 with only 9B parameters. The key contributions are TMAX-15K (14,600 diverse RL environments with difficulty control) and DPPO-based training. It outperforms much larger closed models from prior work.",
+      "tldr_zh": "来自 Allen AI 和华盛顿大学的 TMAX 是目前最强的终端 agent 开源 RL 训练方案，仅用 9B 参数就在 Terminal-Bench 2.0 上达到 27.2%。核心贡献是 TMAX-15K（14600 个难度可控的 RL 训练环境）和基于 DPPO 的训练流程，超越了此前工作中的更大规模模型。",
+      "interest_tag": ""
+    },
+    {
+      "title": "S-Agent: Spatial Tool-Use Elicits Reasoning for Spatial Intelligence",
+      "arxiv_id": "2606.20515",
+      "url": "https://arxiv.org/abs/2606.20515",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2606.20515",
+      "tldr": "S-AGENT enables Vision-Language Models to reason over continuous, evolving 3D environments by orchestrating hierarchical spatial tools with dual memory systems. The framework accumulates spatio-temporal evidence across frames, achieving strong performance on multi-image and video spatial reasoning benchmarks.",
+      "tldr_zh": "S-AGENT 通过组织层级化空间工具和双记忆系统，让视觉语言模型能够在连续演化的 3D 环境中推理。框架在多帧间积累时空证据，在多图像和视频空间推理基准上表现优异。",
+      "interest_tag": ""
+    },
+    {
+      "title": "AtomMem: Building Simple and Effective Memory System for LLM Agents via Atomic Facts",
+      "arxiv_id": "2606.19847",
+      "url": "https://arxiv.org/abs/2606.19847",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2606.19847",
+      "tldr": "AtomMem builds a long-term memory system for LLM agents by extracting atomic facts and organizing them hierarchically with graph-based associative recall. It achieves state-of-the-art performance on LoCoMo benchmark while reducing API token consumption by 61.4%, demonstrating that simpler structured memory beats complex approaches.",
+      "tldr_zh": "AtomMem 通过提取原子事实并用图结构分层组织、关联回忆，构建 LLM agent 长期记忆系统。在 LoCoMo 基准上达到 SOTA，同时将 API token 消耗减少 61.4%，证明结构化简单记忆优于复杂方案。",
+      "interest_tag": "Memory"
+    },
+    {
+      "title": "Large Language Models Do Not Always Need Readable Language",
+      "arxiv_id": "2606.19857",
+      "url": "https://arxiv.org/abs/2606.19857",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2606.19857",
+      "tldr": "This work shows LLMs can effectively communicate using dense model-readable representations called BabelTele that are incomprehensible to humans but semantically rich. This compresses context to 27.9% of original volume while preserving 99.5% semantic fidelity, with promising applications for reducing inference costs in multi-agent systems.",
+      "tldr_zh": "该研究表明 LLM 可以用人类无法直接理解但语义丰富的 BabelTele 表示进行通信，将上下文压缩至原始体积的 27.9%，同时保持 99.5% 语义保真度，对降低多 agent 系统推理成本有重要价值。",
+      "interest_tag": "Agent Swarm"
+    },
+    {
+      "title": "Skill-MAS: Evolving Meta-Skill for Automatic Multi-Agent Systems",
+      "arxiv_id": "2606.18837",
+      "url": "https://arxiv.org/abs/2606.18837",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2606.18837",
+      "tldr": "Skill-MAS lets frozen frontier LLMs automatically generate and refine Multi-Agent Systems by iteratively evolving a Meta-Skill document in natural language. Unlike methods requiring model fine-tuning, it achieves higher performance at moderate cost by progressively improving orchestration strategies through self-play and reflection.",
+      "tldr_zh": "Skill-MAS 让冻结的前沿 LLM 通过迭代进化自然语言 Meta-Skill 文档，自动生成和优化多 agent 系统的编排策略。无需微调模型，通过自博弈和反思逐步提升性能，以适中成本实现更高效果。",
+      "interest_tag": "Agent Swarm"
+    }
+  ],
+  "github_repos": [
+    {
+      "name": "umacloud/umadev",
+      "url": "https://github.com/umacloud/umadev",
+      "tldr": "umadev is a Rust-based AI Coding Project Director Agent that wraps Claude Code, Codex, and OpenCode in a 9-stage governed delivery pipeline. It transforms raw AI coding agents into enterprise-grade project managers with structured handoffs, approvals, and audit trails.",
+      "tldr_zh": "umadev 是用 Rust 实现的 AI 编码项目总监 Agent，将 Claude Code/Codex/OpenCode 包装进 9 阶段可治理的商业交付流水线，把原始 AI 编码 agent 升级为带结构化交接、审批和审计追踪的企业级项目管理工具。",
+      "stars": 93,
+      "language": "Rust",
+      "interest_tag": ""
+    },
+    {
+      "name": "VisionForge-OU/foreman",
+      "url": "https://github.com/VisionForge-OU/foreman",
+      "tldr": "Foreman is a Boris-style agentic orchestrator TUI that supervises multiple headless Claude Code agents through a gated software-delivery pipeline. It provides real-time visibility and control over parallel AI coding agents working on the same project.",
+      "tldr_zh": "Foreman 是 Boris 风格的 agent 编排 TUI，通过门控软件交付流水线监督多个无头 Claude Code agent 并行工作，为同一项目上协同运行的多 AI 编码 agent 提供实时可视化和控制能力。",
+      "stars": 87,
+      "language": "Python",
+      "interest_tag": "Agent Swarm"
+    },
+    {
+      "name": "Johell1NS/browser-search",
+      "url": "https://github.com/Johell1NS/browser-search",
+      "tldr": "browser-search is a self-hostable skill for AI agents that chains SearXNG web search with Camofox anti-detection browsing and CloakBrowser bypass, enabling agents to autonomously research and scrape the web without getting blocked by bot protections.",
+      "tldr_zh": "browser-search 是一个可自托管的 AI agent 技能，将 SearXNG 搜索、Camofox 反检测浏览和 CloakBrowser 绕过串联在一起，让 agent 可以在不被反爬机制拦截的情况下自主研究和抓取网页。",
+      "stars": 73,
+      "language": "JavaScript",
+      "interest_tag": ""
+    },
+    {
+      "name": "Karovia/fullstack-ai-agent-roadmap",
+      "url": "https://github.com/Karovia/fullstack-ai-agent-roadmap",
+      "tldr": "A comprehensive Chinese-language roadmap to becoming a full-stack AI Agent engineer, featuring 110 detailed tutorials, 580,000 words, and a curated selection of 400+ GitHub projects. Optimized for Obsidian knowledge management, this community-driven resource is filling a gap in Chinese AI engineering education.",
+      "tldr_zh": "面向中文开发者的全栈 AI Agent 工程师成长路线图，包含 110 个详细教程、58 万字内容和精选 400+ GitHub 项目。Obsidian 友好格式，填补了中文 AI 工程教育的空白。",
+      "stars": 82,
+      "language": "Markdown",
+      "interest_tag": ""
+    },
+    {
+      "name": "tianjiangqiji/nova-image-studio",
+      "url": "https://github.com/tianjiangqiji/nova-image-studio",
+      "tldr": "Nova Image Studio is a self-hosted AI image generation workbench supporting custom models, agent mode, infinite canvas, prompt reversal, and GIF generation. Built with TypeScript, it provides a lightweight backend with responsive UI across desktop, tablet, and mobile.",
+      "tldr_zh": "Nova Image Studio 是自托管 AI 图像生成工作台，支持自定义模型、Agent 模式、无限画布、反推提示词和 GIF 生成。TypeScript 构建，轻量后端，三端自适应 UI。",
+      "stars": 64,
+      "language": "TypeScript",
+      "interest_tag": ""
+    }
+  ],
+  "hackernews": [
+    {
+      "title": "Temporary Cloudflare accounts for AI agents",
+      "url": "https://blog.cloudflare.com/temporary-accounts/",
+      "tldr": "Cloudflare launches temporary accounts for AI agents, allowing any agent to run 'wrangler deploy --temporary' and spin up a live Worker deployment for 60 minutes without signing up. This removes the auth bottleneck that stalls background AI sessions, enabling tight code-deploy-verify loops at throwaway URLs.",
+      "tldr_zh": "Cloudflare 推出 AI agent 临时账户，任何 agent 可运行 wrangler deploy --temporary 在不注册账户的情况下部署一个存活 60 分钟的 Worker。这消除了无人值守 AI 会话中的认证瓶颈，实现了代码-部署-验证的快速闭环。",
+      "points": 245,
+      "num_comments": 146,
+      "interest_tag": ""
+    },
+    {
+      "title": "Building reliable agentic AI systems",
+      "url": "https://martinfowler.com/articles/reliable-llm-bayer.html",
+      "tldr": "Bayer AG and Thoughtworks share how they built PRINCE, a production agentic RAG system for pharmaceutical drug research that handles complex multi-agent pipelines with context engineering and harness engineering. The case study covers how they achieved reliability through transparency, human-in-the-loop integration, and specialized agent roles for intent clarification, research, and writing.",
+      "tldr_zh": "拜耳和 Thoughtworks 分享了 PRINCE 系统的构建实践 —— 一个用于制药研究的生产级 agentic RAG 系统，通过上下文工程和编排工程实现多 agent 可靠协作。案例详述了意图澄清、研究和写作专用 agent 的分工，以及透明度和人机协作如何保障可靠性。",
+      "points": 195,
+      "num_comments": 49,
+      "interest_tag": "Agent Swarm"
+    },
+    {
+      "title": "Show HN: We post-trained a model that pen tests instead of refusing",
+      "url": "https://www.argusred.com/cli",
+      "tldr": "ArgusRed releases a post-trained model specialized for penetration testing that actively assists with security research instead of refusing like general-purpose models. It represents a growing trend of purpose-built safety-unlocked models for specific professional domains.",
+      "tldr_zh": "ArgusRed 发布了一个专门用于渗透测试的后训练模型，主动协助安全研究而非像通用模型那样拒绝。这代表了特定专业领域专用安全解锁模型的新趋势。",
+      "points": 91,
+      "num_comments": 40,
+      "interest_tag": ""
+    },
+    {
+      "title": "America Is Headed Toward the Infinite Workweek",
+      "url": "https://www.theatlantic.com/technology/2026/06/ai-agents-jobs-exhaustion/687596/",
+      "tldr": "The Atlantic argues that AI agents, rather than reducing work, are amplifying output expectations to the point of an 'infinite workweek' — managers expect humans to review, direct, and verify an ever-growing volume of AI-generated work. The piece captures growing anxiety about how agentic AI changes labor dynamics.",
+      "tldr_zh": "大西洋月刊指出 AI agent 非但没有减少工作量，反而把产出预期放大到无限工作周——管理者要求人类审查、指挥和核验越来越多的 AI 产出。文章捕捉了 agentic AI 改变劳动格局引发的普遍焦虑。",
+      "points": 46,
+      "num_comments": 22,
+      "interest_tag": ""
+    },
+    {
+      "title": "Securing the Future of AI Agents",
+      "url": "https://deepmind.google/blog/securing-the-future-of-ai-agents/",
+      "tldr": "DeepMind publishes a framework for AI agent security covering prompt injection, tool misuse, and capability containment. The post argues that as agents gain real-world tool access, security must be a first-class concern in system design, not an afterthought.",
+      "tldr_zh": "DeepMind 发布 AI agent 安全框架，涵盖提示注入、工具滥用和能力边界控制。文章认为随着 agent 获得真实工具访问权限，安全必须成为系统设计的头等问题，而非事后补救。",
+      "points": 14,
+      "num_comments": 4,
+      "interest_tag": ""
+    }
+  ]
+}
