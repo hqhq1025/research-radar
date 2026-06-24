@@ -1,0 +1,228 @@
+{
+  "date": "2026-06-24",
+  "generated_at": "2026-06-24T16:08:38.043591+08:00",
+  "briefing_zh": "今日 AI 研究领域最引人注目的主题是**语言世界模型（Language World Models）**的突破。Qwen 团队发布了 **Qwen-AgentWorld**，通过训练能模拟多样化 agentic 环境的语言世界模型，让 agent 在仿真环境中规划后再执行，在 AgentWorldBench 上超越了前沿 LLM。AlphaXiv 上同期最热门的 **S-Agent** 也在探索类似方向——通过工具使用积累时空证据，让 VLM 具备持续演化的 3D 空间推理能力，两者共同指向「agent 需要内化世界状态」这一核心命题。\n\n在 GUI agent 方向，**MobileForge** 和 **MemGUI-Agent** 代表了移动端 GUI agent 的两条进化路径：前者通过分层反馈引导的策略优化，无需人工标注即可适配新 app；后者引入主动上下文管理，让 agent 在长任务中主动识别哪些事实需要保留，大幅降低 prompt explosion 问题。**AOHP** 则从更基础的层面出发，在操作系统层构建 agent 底座，通过 OS 原生支持解决现有 agent 适配碎片化的根本难题。三篇合看，标志着移动/桌面端 CUA 研究从「能不能做」走向「怎么做得好」。\n\n开源和工业界方面，Cloudflare 发布的 **Temporary Accounts for AI Agents**（HN 246pts）最为轰动——为 AI agent 提供临时身份和细粒度权限，彻底解决 agent 执行互联网任务时的身份与安全难题，是 agent 原生互联网基础设施的重要一环。Martin Fowler 博客上的 **Building Reliable Agentic AI Systems**（195pts）也引发大量讨论，标志着工业界对 agent 可靠性工程的系统性思考开始成熟。AlphaXiv 上 **Unlimited OCR Works**（GitHub 3086 Stars）因解决多页文档解析的 KV cache 爆炸问题而迅速走红，百度背书加上强烈的企业需求推动其成为本周现象级项目。",
+  "briefing_en": "Today's most prominent AI research theme centers on **Language World Models (LWMs)** as a foundational primitive for general agents. Qwen's **Qwen-AgentWorld** introduces a family of LWMs that simulate diverse agentic environments, allowing agents to plan inside the simulation before executing in the real world — surpassing frontier LLMs on AgentWorldBench. AlphaXiv's top story **S-Agent** explores a parallel direction: equipping VLMs with spatial tools to accumulate spatio-temporal evidence and reason over continuously evolving 3D environments, reinforcing the core thesis that agents need to internalize a model of the world.\n\nThe mobile GUI agent space is evolving rapidly across multiple fronts. **MobileForge** tackles annotation-free adaptation to new mobile apps via hierarchical feedback-guided policy optimization, removing the human-labeling bottleneck that has long plagued GUI agent deployment. **MemGUI-Agent** addresses the orthogonal problem of long-horizon task reliability, introducing proactive context management that explicitly tracks which facts to retain across app transitions — moving beyond naive ReAct-style accumulation that causes prompt explosion. **AOHP** takes an even more foundational approach, proposing an OS-level agent harness that provides native infrastructure support for agentic workflows rather than patching individual apps. Together, these three papers signal that mobile/desktop CUA research is maturing from feasibility to engineering excellence.\n\nOn the open-source and industry front, Cloudflare's **Temporary Accounts for AI Agents** (246pts on HN) is generating significant buzz — providing ephemeral identities with granular permissions that agents can use when executing web tasks, solving one of the thorniest security problems in agentic deployment. Martin Fowler's guest post **Building Reliable Agentic AI Systems** (195pts) draws attention as a practitioner's reference for engineering teams. Meanwhile, **Unlimited OCR Works** from Baidu is making waves on AlphaXiv with 3,086 GitHub stars — its Reference Sliding Window Attention (R-SWA) maintains constant KV cache regardless of document length, solving a real enterprise pain point in scalable document parsing.",
+  "viral_analysis_zh": "今天最有可能出圈的是 Cloudflare 的 **Temporary Accounts for AI Agents**——Cloudflare 不只在提供技术功能，而是在构建「agent 原生互联网基础设施」的话语权，标题精准切中了所有在生产中部署 agent 的工程师的痛点，246pts 的高分证明了共鸣之强。其次是 **Unlimited OCR Works**，GitHub 上线即获 3086 Stars 的核心原因是它解决了一个真实且普遍的工程痛点（长文档 OCR 的 KV cache 爆炸），加上百度背书和代码即时可用，形成了完整的「发现即使用」闭环。",
+  "viral_analysis_en": "The standout viral item today is Cloudflare's **Temporary Accounts for AI Agents** — Cloudflare isn't just shipping a feature, they're positioning themselves as the identity and permission layer for the agentic internet, and the 246-point HN score shows engineers who've struggled with agent auth immediately recognize the pain. A close second is **Unlimited OCR Works**, which exploded to 3,086 GitHub stars because it solves a concrete, universal engineering problem (KV cache explosion in long-document OCR) with immediately runnable Baidu-backed code — the perfect formula for rapid open-source adoption.",
+  "huggingface_papers": [
+    {
+      "title": "Qwen-AgentWorld: Language World Models for General Agents",
+      "arxiv_id": "2606.24597",
+      "url": "https://arxiv.org/abs/2606.24597",
+      "tldr": "Qwen-AgentWorld introduces a family of Language World Models (LWMs) that simulate diverse agentic environments. The flagship model Qwen-AgentWorld-35B-A3B outperforms frontier LLMs on AgentWorldBench by allowing agents to plan inside simulation before real-world execution. This marks a shift from reactive agent design to world-model-grounded planning.",
+      "tldr_zh": "Qwen-AgentWorld 推出语言世界模型（LWM）系列，能模拟多样化 agentic 环境。旗舰模型 Qwen-AgentWorld-35B-A3B 在 AgentWorldBench 上超越了前沿 LLM，允许 agent 先在仿真中规划再真实执行。这标志着 agent 设计从「被动响应」转向「世界模型驱动规划」。",
+      "upvotes": 53,
+      "authors": "Yuxin Zuo, Zikai Xiao, Li Sheng, Fei Huang, Jianhong Tu",
+      "ai_keywords": [
+        "world model",
+        "agent",
+        "simulation",
+        "planning"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "NatureBench: Can Coding Agents Match the Published SOTA of Nature-Family Papers?",
+      "arxiv_id": "2606.24530",
+      "url": "https://arxiv.org/abs/2606.24530",
+      "tldr": "NatureBench is a cross-discipline benchmark of 90 tasks distilled from peer-reviewed Nature-family publications, testing whether AI coding agents can move beyond reproducing results toward scientific discovery. Built on NatureGym, it provides containerized environments for each task. Current agents fall significantly short, revealing a gap between code reproduction and genuine research-level reasoning.",
+      "tldr_zh": "NatureBench 是从 Nature 系列期刊论文中提炼出 90 个跨学科任务的基准，测试 AI coding agent 能否从「复现结果」走向「科学发现」。基于 NatureGym 构建标准化容器化环境，现有 agent 的表现距离研究级别仍有显著差距，揭示了代码复现与真正科研推理之间的鸿沟。",
+      "upvotes": 32,
+      "authors": "Yuru Wang, Lejun Cheng, Yuxin Zuo, Sihang Zeng, Bingxiang He",
+      "ai_keywords": [
+        "benchmark",
+        "coding agent",
+        "scientific discovery"
+      ],
+      "interest_tag": "Benchmark"
+    },
+    {
+      "title": "MobileForge: Annotation-Free Adaptation for Mobile GUI Agents with Hierarchical Feedback-Guided Policy Optimization",
+      "arxiv_id": "2606.19930",
+      "url": "https://arxiv.org/abs/2606.19930",
+      "tldr": "MobileForge enables MLLM-based mobile GUI agents to adapt to new apps without any human annotation, using hierarchical feedback-guided policy optimization. It addresses the bottleneck that existing methods require costly human-written tasks or demonstrations. Evaluations show strong generalization to unseen apps while eliminating the labeling burden.",
+      "tldr_zh": "MobileForge 让基于 MLLM 的移动 GUI agent 无需任何人工标注即可适配新 app，采用分层反馈引导的策略优化。解决了现有方法依赖昂贵人工任务演示的瓶颈，在未见 app 上展现出强泛化能力。",
+      "upvotes": 23,
+      "authors": "Guangyi Liu, Pengxiang Zhao, Gao Wu, Yiwen Yin, Mading Li",
+      "ai_keywords": [
+        "GUI agent",
+        "mobile",
+        "policy optimization",
+        "annotation-free"
+      ],
+      "interest_tag": "CUA"
+    },
+    {
+      "title": "AOHP: An Open-Source OS-Level Agent Harness for Personalized, Efficient and Secure Interaction",
+      "arxiv_id": "2606.23449",
+      "url": "https://arxiv.org/abs/2606.23449",
+      "tldr": "AOHP proposes an open-source OS-level agent harness that provides native infrastructure for AI agents on end-user operating systems, moving beyond app-by-app patching. It addresses the fundamental mismatch between application-centric OS design and agent workflows. The system supports personalization, efficiency, and security without requiring app modifications.",
+      "tldr_zh": "AOHP 提出开源的 OS 级 agent 底座，在终端操作系统层为 AI agent 提供原生基础设施，摆脱逐 app 适配的困境。解决了应用中心型 OS 设计与 agent 工作流之间的根本性不匹配，在不修改应用的前提下支持个性化、高效与安全交互。",
+      "upvotes": 22,
+      "authors": "Shanhui Zhao, Jiacheng Liu, Guohong Liu, Jichao Yan, Jialei Ye",
+      "ai_keywords": [
+        "OS-level agent",
+        "personalization",
+        "security"
+      ],
+      "interest_tag": "CUA"
+    },
+    {
+      "title": "MemGUI-Agent: An End-to-End Long-Horizon Mobile GUI Agent with Proactive Context Management",
+      "arxiv_id": "2606.19926",
+      "url": "https://arxiv.org/abs/2606.19926",
+      "tldr": "MemGUI-Agent introduces proactive context management for long-horizon mobile GUI tasks, replacing passive ReAct-style prompt accumulation that causes prompt explosion and dilutes critical cross-app facts. The agent actively decides which facts to retain across steps and app transitions. Experiments show significantly better reliability on complex multi-app workflows.",
+      "tldr_zh": "MemGUI-Agent 为长周期移动 GUI 任务引入主动上下文管理，替代 ReAct 式被动积累造成的 prompt 爆炸和关键事实稀释问题。agent 主动决定哪些事实需要跨步骤和跨 app 保留。实验显示在复杂多 app 工作流上可靠性显著提升。",
+      "upvotes": 20,
+      "authors": "Guangyi Liu, Gao Wu, Congxiao Liu, Pengxiang Zhao, Liang Liu",
+      "ai_keywords": [
+        "GUI agent",
+        "memory management",
+        "long-horizon"
+      ],
+      "interest_tag": "CUA"
+    }
+  ],
+  "alphaxiv_papers": [
+    {
+      "title": "Unlimited OCR Works",
+      "arxiv_id": "2606.23050",
+      "url": "https://arxiv.org/abs/2606.23050",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2606.23050",
+      "tldr": "Unlimited OCR introduces a one-shot, long-horizon multi-page document parser using Reference Sliding Window Attention (R-SWA), which maintains a constant KV cache size regardless of document length. This solves the KV cache explosion that plagues existing LLM-decoder OCR systems. With 3,086 GitHub stars from Baidu, it addresses a critical enterprise pain point in scalable document processing.",
+      "tldr_zh": "Unlimited OCR 通过参考滑动窗口注意力（R-SWA）实现多页文档的一次性长程解析，KV cache 大小恒定不随文档长度增长。解决了 LLM 解码器 OCR 系统的 KV cache 爆炸问题，3086 个 GitHub Stars 证明了其对企业文档处理的强吸引力。",
+      "interest_tag": ""
+    },
+    {
+      "title": "Tmax: A Simple Recipe for Terminal Agents",
+      "arxiv_id": "2606.23321",
+      "url": "https://arxiv.org/abs/2606.23321",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/tmax",
+      "tldr": "TMAX from Allen Institute for AI is an RL recipe for training open-weight terminal agents, achieving state-of-the-art performance among open models. The work provides both a training dataset and a reproducible RL pipeline, democratizing the ability to train competitive terminal-using agents without proprietary data. Terminal agents are among the fastest-growing LLM application categories.",
+      "tldr_zh": "Allen AI 推出的 TMAX 是训练开源终端 agent 的 RL 配方，在开源模型中达到 SOTA。同时提供训练数据集和可复现的 RL 流程，让社区无需私有数据即可训练有竞争力的终端 agent。终端 agent 是当前增长最快的 LLM 应用类别之一。",
+      "interest_tag": ""
+    },
+    {
+      "title": "S-Agent: Spatial Tool-Use Elicits Reasoning for Spatial Intelligence",
+      "arxiv_id": "2606.20515",
+      "url": "https://arxiv.org/abs/2606.20515",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2606.20515",
+      "tldr": "S-Agent equips Vision-Language Models with spatial tools that accumulate spatio-temporal evidence across time, enabling reasoning over continuously evolving 3D environments rather than isolated static frames. The framework shows VLMs can develop genuine spatial reasoning when given the right tool scaffolding. Results demonstrate significant improvements over stateless VLM baselines on dynamic scene understanding.",
+      "tldr_zh": "S-Agent 为视觉语言模型配备空间工具，跨时间积累时空证据，使其能对持续演化的 3D 环境进行推理而非仅处理孤立静态帧。证明了给定正确工具支架，VLM 可以发展出真正的空间推理能力，在动态场景理解上显著超越无状态 VLM 基线。",
+      "interest_tag": ""
+    },
+    {
+      "title": "HoloAgent-0: A Unified Embodied Agent Framework with 3D Spatial Memory",
+      "arxiv_id": "2606.23565",
+      "url": "https://arxiv.org/abs/2606.23565",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2606.23565",
+      "tldr": "HoloAgent-0 from Horizon Robotics bridges LLM reasoning and physical robot execution through a 3D spatial memory system. It adapts the digital-world agent loop (reason-invoke-inspect-revise) to physical robots by grounding it in persistent 3D scene representation. This is among the first unified frameworks connecting frontier LLM capability directly to embodied robot control.",
+      "tldr_zh": "地平线机器人推出的 HoloAgent-0 通过 3D 空间记忆系统连接 LLM 推理与物理机器人执行。将数字世界 agent 循环（推理-调用-检查-修正）通过持久 3D 场景表示迁移到物理机器人，是首批将前沿 LLM 能力直接对接具身机器人控制的统一框架之一。",
+      "interest_tag": "Memory"
+    },
+    {
+      "title": "MAS-PromptBench: When Does Prompt Optimization Improve Multi-Agent LLM Systems?",
+      "arxiv_id": "2606.23664",
+      "url": "https://arxiv.org/abs/2606.23664",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2606.23664",
+      "tldr": "MAS-PromptBench systematically measures the effect of prompt optimization in multi-agent LLM systems, finding that while optimization can improve performance by up to 24%, gains are highly task- and architecture-dependent — sometimes degrading performance. This is the first benchmark specifically designed to answer when prompt optimization helps vs. hurts in multi-agent settings.",
+      "tldr_zh": "MAS-PromptBench 系统量化了提示词优化对多 agent LLM 系统的影响，发现虽然优化最多可提升 24% 性能，但收益高度依赖任务和架构，有时甚至会降低性能。这是首个专门研究多 agent 场景中提示优化何时有益、何时有害的基准。",
+      "interest_tag": "Agent Swarm"
+    }
+  ],
+  "github_repos": [
+    {
+      "name": "Karovia/fullstack-ai-agent-roadmap",
+      "url": "https://github.com/Karovia/fullstack-ai-agent-roadmap",
+      "tldr": "A comprehensive Chinese-language AI Agent full-stack engineer roadmap with 110 detailed tutorials, covering 580,000+ words and curating 400+ GitHub projects. Targets developers going from zero to production-ready AI agent systems, with Obsidian-based knowledge management. The sheer depth and bilingual accessibility explain its rapid traction.",
+      "tldr_zh": "中文 AI Agent 全栈工程师路线图，包含 110 个详细教程、58 万字内容和 400+ 精选 GitHub 项目，覆盖从零到生产级 AI agent 系统的完整路径，配套 Obsidian 知识管理。内容深度和中文可及性推动其快速获得关注。",
+      "stars": 157,
+      "language": "Unknown",
+      "interest_tag": ""
+    },
+    {
+      "name": "Johell1NS/browser-search",
+      "url": "https://github.com/Johell1NS/browser-search",
+      "tldr": "A browser search skill for AI agents combining SearXNG web search and Camofox anti-detection browsing. Designed as a modular capability that can be dropped into agent systems needing real-time web access. The integration of privacy-preserving search with agent-friendly interfaces fills a niche that many teams are building separately.",
+      "tldr_zh": "为 AI agent 提供的浏览器搜索 Skill，整合 SearXNG 网络搜索和 Camofox 反检测浏览能力。作为模块化能力可直接接入需要实时网络访问的 agent 系统，将隐私保护搜索与 agent 友好接口集成填补了许多团队各自重复构建的空白。",
+      "stars": 150,
+      "language": "JavaScript",
+      "interest_tag": ""
+    },
+    {
+      "name": "umacloud/umadev",
+      "url": "https://github.com/umacloud/umadev",
+      "tldr": "UmaDev is an AI coding project director agent written in Rust that orchestrates Claude Code, Codex, and OpenCode through a 9-stage governable commercial-grade workflow. It positions itself as a meta-layer above individual coding agents, adding business-grade governance and control. The Rust implementation suggests performance and reliability as first-class concerns.",
+      "tldr_zh": "UmaDev 是用 Rust 编写的 AI 编码项目总监 agent，驱动 Claude Code/Codex/OpenCode 并套上 9 阶段可治理的商业级工作流。定位为各编码 agent 之上的元层，添加企业级治理和控制。Rust 实现将性能和可靠性作为一等公民。",
+      "stars": 99,
+      "language": "Rust",
+      "interest_tag": "Agent Swarm"
+    },
+    {
+      "name": "ObsidianOwl123/AgentLens",
+      "url": "https://github.com/ObsidianOwl123/AgentLens",
+      "tldr": "AgentLens is a lightweight context compressor for LLM agents that reduces token consumption while preserving task-critical information across long sessions. The tool addresses prompt bloat — one of the top operational costs in production agent deployments. Its minimal footprint makes it easy to integrate into existing agent pipelines.",
+      "tldr_zh": "AgentLens 是面向 LLM agent 的轻量级上下文压缩器，在长会话中减少 token 消耗的同时保留任务关键信息。解决 prompt 膨胀这一生产级 agent 部署的主要运营成本之一，轻量设计便于集成进现有 agent 流水线。",
+      "stars": 80,
+      "language": "Python",
+      "interest_tag": "Memory"
+    },
+    {
+      "name": "norika1207-lab/Code-Duo",
+      "url": "https://github.com/norika1207-lab/Code-Duo",
+      "tldr": "Code-Duo pairs Claude and Codex as two AI coding agents working in the same window, streaming every step of their collaboration in real-time. It represents an early experiment in multi-agent pair programming, making the inter-agent decision process visible and debuggable. The transparent streaming output is what differentiates it from black-box multi-agent systems.",
+      "tldr_zh": "Code-Duo 将 Claude 和 Codex 配对为两个在同一窗口协作的 AI 编码 agent，实时流式展示每一步。这是多 agent 配对编程的早期实验，让 agent 间的决策过程可见可调试。透明的流式输出使其有别于黑盒多 agent 系统。",
+      "stars": 37,
+      "language": "Python",
+      "interest_tag": "Agent Swarm"
+    }
+  ],
+  "hackernews": [
+    {
+      "title": "Temporary Cloudflare accounts for AI agents",
+      "url": "https://blog.cloudflare.com/temporary-accounts/",
+      "tldr": "Cloudflare introduces ephemeral account identities for AI agents, granting granular, time-limited permissions for web tasks without exposing user credentials. This addresses one of the most painful unsolved problems in agentic deployment: how do agents authenticate with services safely. The post signals Cloudflare's bid to become the identity and permission layer of the agentic internet.",
+      "tldr_zh": "Cloudflare 为 AI agent 推出临时账户身份，赋予细粒度、时间限制的网络任务权限而无需暴露用户凭据。解决了 agent 部署中最痛的未解难题：agent 如何安全地向服务进行身份认证。预示着 Cloudflare 成为 agentic 互联网身份与权限层的野心。",
+      "points": 246,
+      "num_comments": 151,
+      "interest_tag": ""
+    },
+    {
+      "title": "Building reliable agentic AI systems",
+      "url": "https://martinfowler.com/articles/reliable-llm-bayer.html",
+      "tldr": "A practitioner's guide on Martin Fowler's blog covering engineering patterns for reliable agentic AI systems, written by Stefan Bayer. It covers observability, failure handling, and architectural patterns for production agent deployments. The post's high traction (195pts) reflects the growing maturity of industry thinking around agent reliability engineering.",
+      "tldr_zh": "Martin Fowler 博客上 Stefan Bayer 撰写的实践指南，覆盖可靠 agentic AI 系统的工程模式，涉及可观测性、故障处理和生产 agent 架构模式。195pts 的高热度反映了业界对 agent 可靠性工程系统性思考的日趋成熟。",
+      "points": 195,
+      "num_comments": 50,
+      "interest_tag": ""
+    },
+    {
+      "title": "Show HN: We post-trained a model that pen tests instead of refusing",
+      "url": "https://www.argusred.com/cli",
+      "tldr": "ArgusRed demonstrates a post-trained security-focused LLM that performs penetration testing tasks rather than refusing them with safety guardrails. The approach opens discussion on domain-specific safety calibration vs. blanket refusals. The project generated significant debate about where the line between helpful security tooling and dangerous capability lies.",
+      "tldr_zh": "ArgusRed 展示了一个经后训练的安全领域 LLM，直接执行渗透测试任务而非被安全护栏拒绝。引发了关于领域特定安全校准与全面拒绝之间取舍的讨论，以及有用安全工具与危险能力之间界限的辩论。",
+      "points": 92,
+      "num_comments": 40,
+      "interest_tag": ""
+    },
+    {
+      "title": "GLM-5.2 is the step change for open agents",
+      "url": "https://www.interconnects.ai/p/glm-52-is-the-step-change-for-open",
+      "tldr": "An analysis arguing that GLM-5.2 represents a step-change moment for open-source agent capabilities, comparing it favorably against proprietary models on agentic tasks. The post contextualizes GLM-5.2 within the broader competitive landscape between Chinese and US open-source model development. For practitioners, it highlights a credible open alternative for agent deployment.",
+      "tldr_zh": "文章分析认为 GLM-5.2 是开源 agent 能力的阶段性突破，在 agentic 任务上与闭源模型对比有利。将 GLM-5.2 置于中美开源模型竞争的宏观格局中，为从业者指出了一个可信的 agent 部署开源替代方案。",
+      "points": 24,
+      "num_comments": 4,
+      "interest_tag": ""
+    },
+    {
+      "title": "Hide Secrets from AI Agents and NPM install using Airgap",
+      "url": "https://sauleau.com/notes/airgap-security-for-the-modern-ai-age.html",
+      "tldr": "A security-focused writeup proposing Airgap patterns to prevent AI agents and npm installs from leaking secrets or exfiltrating sensitive data. As agent-assisted development becomes standard, supply chain and secret management become attack surfaces agents can accidentally exploit. The post offers practical mitigation patterns for teams using agents in sensitive codebases.",
+      "tldr_zh": "安全导向文章提出 Airgap 模式，防止 AI agent 和 npm install 泄露密钥或外传敏感数据。随着 agent 辅助开发成为标准，供应链和密钥管理成为 agent 可能无意中利用的攻击面。为在敏感代码库中使用 agent 的团队提供实用防护模式。",
+      "points": 19,
+      "num_comments": 2,
+      "interest_tag": ""
+    }
+  ]
+}
