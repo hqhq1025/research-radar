@@ -1,0 +1,226 @@
+{
+  "date": "2026-06-26",
+  "generated_at": "2026-06-26T16:05:37.927977+08:00",
+  "briefing_zh": "今天 AI 研究领域呈现出强烈的「Agent 基础设施」建设主题。在论文层面，**DanceOPD** 和 **OPID** 从两个维度攻克同一难题：如何通过 on-policy 蒸馏让 AI 在统一模型中协调多种能力，前者聚焦图像生成与编辑的能力对齐，后者则为语言 Agent 的稀疏奖励问题引入密集的技能级监督信号。**Qwen-Image-Agent** 将 Qwen 系列延伸到图像生成领域，用 Agent 框架弥合用户意图与生成模型之间的「上下文鸿沟」，这是把语言理解能力嫁接到视觉生成领域的典型尝试。\n\n在 Agent 记忆与训练数据领域，**Qwen-AgentWorld** 提出用语言世界模型（LWM）模拟 Agent 环境并为下游任务提供训练信号，正好呼应了 alphaxiv 热榜上「**Are We Ready For An Agent-Native Memory System?**」对现有记忆系统的系统性评估——前者在造轮子，后者在量化现有轮子的缺陷。**Tmax** 则提供了一个更务实的答案：用 15K 终端任务数据集加 RL 训练，9B 参数模型就能登顶 Terminal-Bench 2.0 开源榜首。\n\nGitHub 本周新兴项目清晰地折射出社区关注点的转移：**benchflow-ai/awesome-evals** 以 374 星领跑，显示「如何评估 Agent」已成为从业者的核心焦虑；**lemma-platform** 和 **FishCodeTech/muteki** 分别探索人机协作工作台与多模型 CTF 解题 Agent 群，代表了 Agent Swarm 走向垂直场景落地的两条路径。Hacker News 上 GLM-5.2 的热议（356 分）表明开源 Agent 基础模型的每一次质变都会引发广泛讨论，而 **Building reliable agentic AI systems**（195 分）这篇来自 Martin Fowler 网站的工程实践文章受到开发者热捧，说明「Agent 可靠性」正在从学术话题转变为工程实需求。",
+  "briefing_en": "Today's AI research is dominated by the theme of \"Agent Infrastructure\" construction. On the paper front, **DanceOPD** and **OPID** tackle the same challenge from two angles: how to coordinate diverse capabilities in a unified model through on-policy distillation. DanceOPD focuses on aligning image generation and editing capabilities, while OPID introduces dense skill-level supervision signals to address sparse reward problems in language agents. **Qwen-Image-Agent** extends the Qwen series to image generation, using an agent framework to bridge the \"context gap\" between user intent and generative models — a classic attempt to graft language understanding onto visual generation.\n\nIn the domain of agent memory and training data, **Qwen-AgentWorld** proposes using language world models (LWMs) to simulate agent environments and provide training signals for downstream tasks. This directly echoes the systematic evaluation in \"**Are We Ready For An Agent-Native Memory System?**\" appearing on alphaxiv's hot list — the former is building new wheels while the latter quantifies the flaws in existing ones. **Tmax** offers a more pragmatic answer: a 15K terminal task dataset with RL training enables a 9B parameter model to top the Terminal-Bench 2.0 open-source leaderboard.\n\nGitHub's trending new projects clearly reflect a shift in community focus: **benchflow-ai/awesome-evals** leads with 374 stars, showing that \"how to evaluate agents\" has become a core anxiety for practitioners. **lemma-platform** and **FishCodeTech/muteki** explore human-AI collaborative workspaces and multi-model CTF-solving agent swarms respectively, representing two paths for Agent Swarms toward vertical deployment scenarios. GLM-5.2's viral HN thread (356 points) shows that every step-change in open-source agent base models sparks widespread discussion, while **Building reliable agentic AI systems** (195 points) from Martin Fowler's site going viral among developers signals that \"agent reliability\" is transitioning from academic topic to genuine engineering demand.",
+  "viral_analysis_zh": "**GLM-5.2** 以 356 分成为今日 HN 最热话题，核心原因是它被定位为「开源 Agent 的代际跃升」而非普通模型更新——这种叙事框架击中了开发者对闭源模型依赖的焦虑，评论区的 210 条讨论证明了这种情绪动员的效力。**benchflow-ai/awesome-evals** 以「非废话」（non-BS）为卖点在短短两天内积累 374 星，这个定位策略极为聪明：在 awesome list 泛滥的时代，承诺「经过筛选、有实质内容」本身就是差异化，能精准俘获已经审美疲劳的从业者。**Are We Ready For An Agent-Native Memory System?** 的标题用反问句制造不确定感，暗示「现有方案都不够好」，这种认知挑战型标题在学术 Twitter 和 AI 社群中天然有传播优势。",
+  "viral_analysis_en": "**GLM-5.2** became today's top HN story with 356 points primarily because it was framed as a \"generational leap for open agents\" rather than a routine model update — this narrative framing directly addresses developers' anxiety about closed-source model dependency, and 210 comments prove the emotional mobilization worked. **benchflow-ai/awesome-evals** accumulated 374 stars in just two days by marketing itself as \"non-BS\" — an exceptionally clever positioning strategy: in an era of proliferating awesome lists, promising \"curated, substantive content\" is itself a differentiator that precisely captures practitioners already suffering from curation fatigue. **Are We Ready For An Agent-Native Memory System?** uses a rhetorical question to create uncertainty, implying \"existing solutions aren't good enough\" — this cognitive-challenge title format naturally spreads well in academic Twitter and AI communities.",
+  "huggingface_papers": [
+    {
+      "title": "DanceOPD: On-Policy Generative Field Distillation",
+      "arxiv_id": "2606.27377",
+      "url": "https://arxiv.org/abs/2606.27377",
+      "tldr": "DanceOPD unifies text-to-image generation and local/global editing in a single model using on-policy distillation, resolving the capability conflicts that arise when these tasks are naively combined. By distilling diverse teacher signals while preserving on-policy distribution alignment, it achieves state-of-the-art performance across all three tasks without mutual degradation.",
+      "tldr_zh": "DanceOPD 通过 on-policy 生成场蒸馏，在单一模型中统一了文本生成图像、局部编辑和全局编辑三大能力，解决了这些任务在传统多任务训练中相互干扰的难题。在保持 on-policy 分布对齐的前提下蒸馏多样化教师信号，三项任务均达到 SOTA 水准且无性能互损。",
+      "upvotes": 39,
+      "authors": "Wei Zhou, Xiongwei Zhu, Zelin Xu, Bo Dong",
+      "ai_keywords": [
+        "diffusion",
+        "image generation",
+        "distillation"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "ViQ: Text-Aligned Visual Quantized Representations at Any Resolution",
+      "arxiv_id": "2606.27313",
+      "url": "https://arxiv.org/abs/2606.27313",
+      "tldr": "ViQ proposes a text-aligned visual tokenizer that produces discrete image representations compatible with language model architectures, working at any resolution. Unlike prior approaches that sacrifice either low-level detail or high-level semantics, ViQ achieves both by aligning visual tokens with the semantic space of text tokens during quantization.",
+      "tldr_zh": "ViQ 提出一种文本对齐的视觉量化分词器，能将任意分辨率图像编码为与语言模型兼容的离散 token 序列。不同于以往方案在细节与语义之间取舍，ViQ 在量化过程中将视觉 token 对齐到文本 token 的语义空间，实现二者兼得。",
+      "upvotes": 33,
+      "authors": "Xumin Yu, Zuyan Liu, Zhenyu Yang, Yuhao Dong",
+      "ai_keywords": [
+        "tokenization",
+        "multimodal",
+        "visual representation"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "Qwen-Image-Agent: Bridging the Context Gap in Real-World Image Generation",
+      "arxiv_id": "2606.26907",
+      "url": "https://arxiv.org/abs/2606.26907",
+      "tldr": "Qwen-Image-Agent addresses the \"context gap\" — the mismatch between underspecified user requests and what text-to-image models actually need — by deploying a Qwen-based agent that clarifies intent, fetches up-to-date knowledge, and orchestrates generation. This moves image generation from a one-shot prompt task to an interactive, knowledge-augmented workflow.",
+      "tldr_zh": "Qwen-Image-Agent 针对「上下文鸿沟」问题——用户请求往往含糊不清而 T2I 模型需要精确描述——部署 Qwen 模型作为中间 Agent，自动澄清意图、获取最新知识并编排生成流程，将图像生成从单次 prompt 升级为交互式知识增强工作流。",
+      "upvotes": 24,
+      "authors": "Zekai Zhang, Jiahao Li, Jie Zhang, Kaiyuan Gao",
+      "ai_keywords": [
+        "image generation",
+        "agent",
+        "Qwen"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "OPID: On-Policy Skill Distillation for Agentic Reinforcement Learning",
+      "arxiv_id": "2606.26790",
+      "url": "https://arxiv.org/abs/2606.26790",
+      "tldr": "OPID tackles the sparse reward problem in language agent training by combining outcome-based RL with on-policy skill distillation that provides dense token-level supervision. Unlike prior skill-conditioned methods requiring external skill memories, OPID derives skills from the agent's own successful trajectories, making it self-contained and scalable.",
+      "tldr_zh": "OPID 结合结果驱动 RL 与 on-policy 技能蒸馏来解决语言 Agent 训练中稀疏奖励的难题，提供密集的 token 级监督。不同于依赖外部技能记忆库的先前方法，OPID 直接从 Agent 自身成功轨迹中提炼技能，无需外部依赖且易于扩展。",
+      "upvotes": 23,
+      "authors": "Shuo Yang, Jinyang Wu, Zhengxi Lu, Yuhao Shen",
+      "ai_keywords": [
+        "reinforcement learning",
+        "agent",
+        "distillation"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "GUI vs. CLI: Execution Bottlenecks in Screen-Only and Skill-Mediated Computer-Use Agents",
+      "arxiv_id": "2606.24551",
+      "url": "https://arxiv.org/abs/2606.24551",
+      "tldr": "This paper introduces a matched 440-task benchmark that fairly compares GUI-only versus CLI-mediated computer-use agents across 18 applications, isolating the execution modality from confounding variables. Results reveal distinct bottlenecks: GUI agents struggle with precise pixel manipulation while CLI agents hit tool-coverage limits, providing the first rigorous head-to-head comparison.",
+      "tldr_zh": "本文构建了包含 440 个桌面任务的匹配基准，跨 18 款应用公平比较纯 GUI 与 CLI 介入的 Computer-Use Agent，隔离了交互方式以外的干扰变量。结果揭示了两类 Agent 的不同瓶颈：GUI Agent 在精细像素操作上受限，CLI Agent 则受制于工具覆盖范围，提供了首个严格的正面比较。",
+      "upvotes": 5,
+      "authors": "Xiao Zhou, Siyue Zhang, Yilun Zhao, Jinbiao Wei",
+      "ai_keywords": [
+        "computer use agent",
+        "GUI",
+        "benchmark"
+      ],
+      "interest_tag": "CUA"
+    }
+  ],
+  "alphaxiv_papers": [
+    {
+      "title": "Qwen-AgentWorld: Language World Models for General Agents",
+      "arxiv_id": "2606.24597",
+      "url": "https://arxiv.org/abs/2606.24597",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2606.24597",
+      "tldr": "Qwen-AgentWorld introduces Language World Models (LWMs) that simulate diverse agentic environments, outperforming frontier LLMs on AgentWorldBench. By providing scalable, controllable simulation and integrating internal predictive reasoning, LWMs improve agent learning across downstream tasks — turning environment simulation itself into a trainable capability.",
+      "tldr_zh": "Qwen-AgentWorld 提出语言世界模型（LWM），能够模拟多样化 Agent 环境并在 AgentWorldBench 上超越前沿 LLM。通过可扩展的可控仿真与内部预测推理，LWM 为下游任务改善了 Agent 学习效果，将环境仿真本身变成一种可训练的能力。",
+      "interest_tag": ""
+    },
+    {
+      "title": "Autodata: An agentic data scientist to create high quality synthetic data",
+      "arxiv_id": "2606.25996",
+      "url": "https://arxiv.org/abs/2606.25996",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2606.25996",
+      "tldr": "Autodata is an agentic framework that autonomously generates and curates high-quality synthetic training data for LLMs through iterative feedback and meta-optimization. It achieves up to 13.2% improvement in CS research tasks and 17.0% in legal reasoning, demonstrating that AI agents can serve as their own data engineers.",
+      "tldr_zh": "Autodata 是一个通过迭代反馈和元优化自主生成、整理高质量合成训练数据的 Agent 框架。在 CS 研究任务上提升最高 13.2%，法律推理提升 17.0%，证明了 AI Agent 能够担任自身的数据工程师角色。",
+      "interest_tag": ""
+    },
+    {
+      "title": "Tmax: A simple recipe for terminal agents",
+      "arxiv_id": "2606.23321",
+      "url": "https://arxiv.org/abs/2606.23321",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2606.23321",
+      "tldr": "Researchers at AI2 and UW built TMAX-15K, a large dataset of complex terminal tasks, paired with a straightforward RL training recipe. The resulting TMAX-9B model achieves 27.2% on Terminal-Bench 2.0, topping all open-weight models under 10B parameters — showing that domain-specific data curation beats model scale for specialized agent tasks.",
+      "tldr_zh": "AI2 和华盛顿大学研究者构建了 15K 复杂终端任务数据集 TMAX-15K，配合简洁的 RL 训练方案，使 TMAX-9B 在 Terminal-Bench 2.0 上达到 27.2%，登顶所有 10B 以下开源模型——证明针对性数据胜过模型规模对于专项 Agent 任务的重要性。",
+      "interest_tag": ""
+    },
+    {
+      "title": "OpenThoughts-Agent: Data Recipes for Agentic Models",
+      "arxiv_id": "2606.24855",
+      "url": "https://arxiv.org/abs/2606.24855",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2606.24855",
+      "tldr": "This work systematically investigates open data curation pipelines for training broadly capable agentic LLMs, identifying effective SFT data strategies and showing that specific RL data sources induce exploratory agent behaviors. The resulting open dataset improves agentic model performance and provides the community with a reproducible recipe.",
+      "tldr_zh": "本研究系统调查了训练通用 Agent LLM 的开放数据整理流程，识别出有效的 SFT 数据策略，并发现特定 RL 数据源能诱导 Agent 产生探索行为。开放发布的数据集提升了 Agent 模型性能，为社区提供了可复现的训练方案。",
+      "interest_tag": ""
+    },
+    {
+      "title": "Are We Ready For An Agent-Native Memory System?",
+      "arxiv_id": "2606.24775",
+      "url": "https://arxiv.org/abs/2606.24775",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2606.24775",
+      "tldr": "This paper systematically evaluates 12 LLM agent memory architectures across 5 benchmark workloads using a four-module analytical framework. Key findings reveal significant architectural trade-offs in operational cost versus retrieval fidelity, and that most current systems are not ready for the demands of production agent-native deployments.",
+      "tldr_zh": "本文用四模块分析框架对 12 种 LLM Agent 记忆架构在 5 个基准工作负载上进行系统评估，揭示了运营成本与检索保真度之间的重大架构权衡，并发现现有大多数系统尚不具备生产级 Agent 原生部署所需的成熟度。",
+      "interest_tag": "Memory"
+    }
+  ],
+  "github_repos": [
+    {
+      "name": "benchflow-ai/awesome-evals",
+      "url": "https://github.com/benchflow-ai/awesome-evals",
+      "tldr": "A curated, no-filler collection of the best resources for building and evaluating AI agents — papers, tools, benchmarks, and RL environments. Positioned as a high-signal alternative to the proliferation of low-quality awesome lists in the AI space.",
+      "tldr_zh": "一个精心筛选、去除冗余的 AI Agent 构建与评估资源合集，涵盖论文、工具、基准和 RL 环境。定位为 AI 领域泛滥低质量 awesome list 的高信噪比替代品。",
+      "stars": 374,
+      "language": "N/A",
+      "interest_tag": "Benchmark"
+    },
+    {
+      "name": "iart-ai/motion-skills",
+      "url": "https://github.com/iart-ai/motion-skills",
+      "tldr": "A collection of 50 open-source skills that teach AI coding agents (Claude Code, etc.) to produce motion graphics, animation, and video using Remotion. Turns natural language prompts into production-ready motion design assets through structured agent skill composition.",
+      "tldr_zh": "50 个开源技能包，专门教 AI 编程 Agent（如 Claude Code）用 Remotion 生成动态图形、动画与视频。通过结构化 Agent 技能组合，将自然语言提示转化为可生产使用的动态设计资产。",
+      "stars": 209,
+      "language": "HTML",
+      "interest_tag": ""
+    },
+    {
+      "name": "per-simmons/unreal-agent-harness",
+      "url": "https://github.com/per-simmons/unreal-agent-harness",
+      "tldr": "An open-source harness for running AI agents inside Unreal Engine 5.8 via the Unreal MCP protocol, enabling agents to procedurally build cities using the free City Sample base with PCG and Nanite. Represents a new frontier of AI agents operating in 3D game engine environments.",
+      "tldr_zh": "通过 Unreal MCP 协议让 AI Agent 在 Unreal Engine 5.8 中运行的开源框架，借助免费 City Sample 基础资产与 PCG、Nanite，Agent 可程序化构建城市。代表 AI Agent 进入 3D 游戏引擎环境的新前沿。",
+      "stars": 122,
+      "language": "Python",
+      "interest_tag": ""
+    },
+    {
+      "name": "lemma-work/lemma-platform",
+      "url": "https://github.com/lemma-work/lemma-platform",
+      "tldr": "An open-source collaborative workspace designed for humans and AI agents to work as a unified team. Provides structured task orchestration, agent-human handoffs, and shared context management — positioning itself as the operating layer for human-AI hybrid teams.",
+      "tldr_zh": "一个开源协作工作台，为人类和 AI Agent 作为统一团队协作而设计，提供结构化任务编排、Agent-人类任务交接与共享上下文管理，定位为人机混合团队的操作层。",
+      "stars": 119,
+      "language": "Python",
+      "interest_tag": "Agent Swarm"
+    },
+    {
+      "name": "FishCodeTech/muteki",
+      "url": "https://github.com/FishCodeTech/muteki",
+      "tldr": "Project Muteki (無敵) is an autonomous multi-model AI agent swarm built to solve CTF (Capture The Flag) security challenges. It coordinates multiple specialized agents with different model backends, making it an interesting application of agent swarm architecture to adversarial problem-solving.",
+      "tldr_zh": "Project Muteki（无敌）是一个自主多模型 AI Agent 群，专门用于解决 CTF 安全挑战赛题目。通过协调多个使用不同模型后端的专项 Agent，是 Agent Swarm 架构用于对抗性问题求解的有趣应用案例。",
+      "stars": 101,
+      "language": "Python",
+      "interest_tag": "Agent Swarm"
+    }
+  ],
+  "hackernews": [
+    {
+      "title": "GLM-5.2 is a step change for open agents",
+      "url": "https://www.interconnects.ai/p/glm-52-is-the-step-change-for-open",
+      "tldr": "An in-depth analysis arguing that GLM-5.2 represents a qualitative leap for open-source agent models, not just an incremental improvement. The post examines GLM-5.2's agent-specific capabilities and positions it as the new benchmark for what open-weight models can do in agentic settings.",
+      "tldr_zh": "深度分析文章，论证 GLM-5.2 对开源 Agent 模型而言是质的飞跃而非渐进式改进。文章审视了 GLM-5.2 的 Agent 专项能力，并将其定位为开权重模型在 Agent 场景下新的能力标杆。",
+      "points": 356,
+      "num_comments": 210,
+      "interest_tag": ""
+    },
+    {
+      "title": "Show HN: OpenKnowledge – open source AI-first alternative to Obsidian/Notion",
+      "url": "https://github.com/inkeep/open-knowledge",
+      "tldr": "OpenKnowledge is an open-source, AI-first knowledge management tool positioned as an alternative to Obsidian and Notion. It integrates AI-native workflows including semantic search and agent-assisted organization from the ground up, rather than bolting AI onto an existing tool.",
+      "tldr_zh": "OpenKnowledge 是一个开源、AI 原生的知识管理工具，定位为 Obsidian 和 Notion 的替代品。从底层集成语义搜索和 Agent 辅助整理等 AI 原生工作流，而非在现有工具上加装 AI 功能。",
+      "points": 262,
+      "num_comments": 128,
+      "interest_tag": ""
+    },
+    {
+      "title": "Building reliable agentic AI systems",
+      "url": "https://martinfowler.com/articles/reliable-llm-bayer.html",
+      "tldr": "A practitioner article on Martin Fowler's site about engineering reliable agentic AI systems, covering failure modes, testing strategies, and architectural patterns for production agent deployments. Gaining traction because it addresses the gap between academic agent research and production engineering reality.",
+      "tldr_zh": "发布在 Martin Fowler 网站上的工程实践文章，讨论构建可靠 Agent AI 系统的方法，涵盖失败模式、测试策略和生产环境 Agent 的架构模式。受到关注因为填补了学术 Agent 研究与生产工程实践之间的鸿沟。",
+      "points": 195,
+      "num_comments": 50,
+      "interest_tag": ""
+    },
+    {
+      "title": "Haystack: Open-Source AI Framework for Production Ready Agents, RAG",
+      "url": "https://haystack.deepset.ai/",
+      "tldr": "Haystack is an established open-source framework by deepset for building production-grade AI agents and RAG pipelines. Its resurgence on HN reflects growing interest in battle-tested infrastructure over ad-hoc implementations as agent use cases mature into production requirements.",
+      "tldr_zh": "Haystack 是 deepset 出品的成熟开源框架，用于构建生产级 AI Agent 和 RAG 流水线。此次重新登上 HN 热榜，反映了随着 Agent 用例走向生产环境，从业者从临时实现转向经过实战检验的基础设施的趋势。",
+      "points": 89,
+      "num_comments": 22,
+      "interest_tag": ""
+    },
+    {
+      "title": "Show HN: peerd – AI agent harness that runs entirely in your browser",
+      "url": "https://github.com/NotASithLord/peerd",
+      "tldr": "peerd is the first AI agent harness implemented as a Chrome/Firefox browser extension using WebAssembly and WebRTC. By running the entire agent loop in the browser without a server, it enables privacy-first, zero-infrastructure agent workflows — a fundamentally different architecture from server-hosted agent systems.",
+      "tldr_zh": "peerd 是首个以 Chrome/Firefox 浏览器扩展实现的 AI Agent 框架，利用 WebAssembly 和 WebRTC 技术。通过在浏览器内运行完整 Agent 循环而无需服务器，实现隐私优先、零基础设施的 Agent 工作流——相比服务器端 Agent 系统的根本性架构创新。",
+      "points": 70,
+      "num_comments": 22,
+      "interest_tag": ""
+    }
+  ]
+}
