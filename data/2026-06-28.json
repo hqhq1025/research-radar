@@ -1,0 +1,228 @@
+{
+  "date": "2026-06-28",
+  "generated_at": "2026-06-28T16:06:20.244687+08:00",
+  "briefing_zh": "今日 AI 研究的核心主题是**世界模型**与**agentic 能力**的深度融合。多篇论文从不同角度探索「让 agent 理解并预测世界」这一目标：**Qwen-AgentWorld** 直接将语言模型构建为通用 agent 的环境动态预测引擎；**Fast LeWorldModel** 通过并行树状 rollout 大幅提速 JEPA 世界模型的规划效率；**In-Context World Modeling** 则让 VLA 机器人模型通过上下文推断执行环境的隐变量，无需重新训练即可泛化到新视角与新形态。世界模型已经从「辅助组件」演变为 agentic 系统的核心架构。\n\n在 agent 训练方法上，今天出现了两个互补的工作。**OPID** 提出在线技能蒸馏，让 agent 从自身轨迹中自蒸馏密集监督信号，绕过了稀疏奖励的瓶颈。**The Verification Horizon** 则揭示了一个更根本的挑战：随着 agent 生成复杂代码的能力增强，验证解答的难度已经超过生成本身——每个验证器都只是人类意图的代理，而非意图本身。这两个视角合在一起描绘了 agentic RL 当前最真实的困境。\n\n评测与基准方向同样热闹。**GUI vs. CLI** 首次在控制变量下对比了纯屏幕操作与命令行中介两种 Computer Use Agent 范式，揭示了各自独特的执行瓶颈。**NatureBench** 挑战编程 agent 在真实 Nature 级别科学任务上与已发表 SOTA 媲美。**Are We Ready For An Agent-Native Memory System?** 呼吁对 agent 记忆系统进行更系统的评测。三个工作共同指向一个信号：AI agent 能力已经发展到需要更精细、更专门化评测框架的阶段。\n\n开源生态方面，**GLM-5.2** 引发 HN 最高热度讨论（364点），被认为是开源 agent 模型的质变节点。**OpenKnowledge** 以「AI 优先的知识管理」概念斩获 372 点，击败了众多工具类项目。GitHub 新项目中，**Muteki** 多 agent CTF 解题集群和 **Lemma** 人机协作平台均展示了 multi-agent 编排从实验走向实用的趋势。",
+  "briefing_en": "Today's AI research is dominated by the deep fusion of **world models** and **agentic capabilities**. Multiple papers tackle the goal of 'giving agents the ability to understand and predict the world' from different angles: **Qwen-AgentWorld** directly builds language models as environment dynamics engines for general agents; **Fast LeWorldModel** dramatically accelerates planning in JEPA-style world models through parallel tree rollouts; **In-Context World Modeling** enables VLA robots to infer latent execution context from short in-context sequences, generalizing to new viewpoints and morphologies without retraining. World models have evolved from auxiliary components to core architecture in agentic systems.\n\nOn the training side, two complementary works emerged. **OPID** proposes on-policy skill distillation, letting agents self-distill dense token-level supervision from their own trajectories, bypassing the sparse reward bottleneck. **The Verification Horizon** reveals a more fundamental challenge: as agents become better at generating complex code, verifying those solutions has become harder than generating them — every verifier is only a proxy for human intent. Together, these two perspectives paint the most honest picture of the current agentic RL predicament.\n\nBenchmark and evaluation research is equally vibrant. **GUI vs. CLI** is the first controlled comparison of screen-only versus CLI-mediated Computer Use Agent paradigms, revealing distinct execution bottlenecks in each. **NatureBench** challenges coding agents to match published SOTA on real Nature-level scientific tasks. **Are We Ready For An Agent-Native Memory System?** calls for more systematic evaluation of agent memory. All three point to the same signal: AI agent capabilities have matured to a stage requiring finer, more specialized evaluation frameworks.\n\nIn the open-source ecosystem, **GLM-5.2** sparked the hottest HN discussion today (364 pts), hailed as a qualitative leap for open agent models. **OpenKnowledge** topped HN at 372 pts with its 'AI-first knowledge management' concept. On GitHub, **Muteki** (multi-agent CTF swarm) and **Lemma** (human-AI collaboration platform) both signal that multi-agent orchestration is moving from experiment to production.",
+  "viral_analysis_zh": "**OpenKnowledge** 以 372 点登顶 HN，击败了众多技术工具，原因在于它踩中了「反云端、本地优先」的时代情绪——Obsidian 社区对 AI 原生知识库的需求一直是悬而未决的痛点，开源 + 自托管组合对这个群体有极强吸引力。**GLM-5.2** 的讨论热度（364 点、221 条评论）反映了社区对「开源能否追上闭源 frontier」这一大问题的持续焦虑与期待——每次有明确的开源模型质变，都会触发高密度讨论。**peerd**（浏览器原生 agent 执行框架）同时出现在 HN 和 GitHub 热榜，「零服务器、纯浏览器插件跑 agent 循环」的极简部署概念高度可传播，戳中了开发者对部署复杂度的抵触。",
+  "viral_analysis_en": "**OpenKnowledge** topped HN at 372 pts by riding the 'anti-cloud, local-first' sentiment — the Obsidian community's demand for an AI-native knowledge base has been an unresolved pain point, and the open-source + self-hosted combination has irresistible pull for this crowd. **GLM-5.2**'s discussion heat (364 pts, 221 comments) reflects the community's ongoing anxiety and anticipation around the question 'can open-source catch up to closed frontier models?' — every clear qualitative leap in open models triggers a high-density discussion. **peerd** (browser-native agent harness) appeared simultaneously on HN and GitHub trending, with the framing of 'run a full agent loop as a browser extension, zero server' being highly shareable — it directly addresses developer frustration with deployment complexity.",
+  "huggingface_papers": [
+    {
+      "title": "DanceOPD: On-Policy Generative Field Distillation",
+      "arxiv_id": "2606.27377",
+      "url": "https://arxiv.org/abs/2606.27377",
+      "tldr": "DanceOPD proposes on-policy distillation to unify text-to-image, local editing, and global editing into a single model. It treats each capability as a generative field and uses on-policy sampling to distill them without conflicting gradients, achieving state-of-the-art across all three tasks with one model.",
+      "tldr_zh": "DanceOPD 提出在线蒸馏方法，将文本生成图像、局部编辑与全局编辑三种能力统一到单个模型。通过把每种能力建模为生成场并用在线采样进行蒸馏，避免了梯度冲突，在三个任务上均达到 SOTA。",
+      "upvotes": 65,
+      "authors": "Wei Zhou, Xiongwei Zhu, Zelin Xu, Bo Dong",
+      "ai_keywords": [
+        "image generation",
+        "distillation",
+        "editing"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "In-Context World Modeling for Robotic Control",
+      "arxiv_id": "2606.26025",
+      "url": "https://arxiv.org/abs/2606.26025",
+      "tldr": "This work proposes In-Context World Modeling to help VLA models generalize to novel camera viewpoints and robot morphologies without re-training. By conditioning on a latent representation of the execution context inferred from a short in-context sequence, the model adapts to unseen setups and substantially improves cross-environment generalization.",
+      "tldr_zh": "本文提出 In-Context World Modeling，让 VLA 机器人模型无需重新训练就能泛化到新视角和新机器人形态。通过从短上下文序列中推断执行上下文的隐变量表示，模型能自适应未见过的环境配置，显著提升跨场景泛化能力。",
+      "upvotes": 45,
+      "authors": "Siyin Wang, Junhao Shi, Senyu Fei, Zhaoyang Fu",
+      "ai_keywords": [
+        "robotics",
+        "VLA",
+        "world model",
+        "generalization"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "Qwen-Image-Agent: Bridging the Context Gap in Real-World Image Generation",
+      "arxiv_id": "2606.26907",
+      "url": "https://arxiv.org/abs/2606.26907",
+      "tldr": "Qwen-Image-Agent identifies the 'Context Gap' — underspecified or implicit real-world user requests that T2I models cannot handle alone — and proposes a unified agentic framework that actively clarifies intent, retrieves relevant knowledge, and orchestrates T2I generation, achieving more faithful and context-aware image synthesis.",
+      "tldr_zh": "Qwen-Image-Agent 定义了「上下文差距」问题：真实用户请求往往语义模糊或依赖隐性知识，直接送入 T2I 模型会失效。该框架通过主动澄清意图、检索相关知识并编排生成流程，实现更忠实、更情境感知的图像合成。",
+      "upvotes": 41,
+      "authors": "Zekai Zhang, Jiahao Li, Jie Zhang, Kaiyuan Gao",
+      "ai_keywords": [
+        "image generation",
+        "agent",
+        "context gap"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "OPID: On-Policy Skill Distillation for Agentic Reinforcement Learning",
+      "arxiv_id": "2606.26790",
+      "url": "https://arxiv.org/abs/2606.26790",
+      "tldr": "OPID addresses the sparse reward problem in agentic RL by introducing on-policy skill distillation: the agent self-distills dense token-level supervision from its own on-policy trajectories without relying on external skill memories or privileged context. This provides fine-grained credit assignment and improves both training stability and final performance on complex agentic tasks.",
+      "tldr_zh": "OPID 通过在线技能蒸馏解决 agentic RL 中奖励稀疏的问题：agent 从自身在线轨迹中自蒸馏出密集的 token 级监督信号，无需外部技能库或特权上下文。这提供了细粒度的信用分配，在复杂 agentic 任务上改善了训练稳定性和最终性能。",
+      "upvotes": 40,
+      "authors": "Shuo Yang, Jinyang Wu, Zhengxi Lu, Yuhao Shen",
+      "ai_keywords": [
+        "reinforcement learning",
+        "agent",
+        "skill distillation"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "GUI vs. CLI: Execution Bottlenecks in Screen-Only and Skill-Mediated Computer-Use Agents",
+      "arxiv_id": "2606.24551",
+      "url": "https://arxiv.org/abs/2606.24551",
+      "tldr": "This paper introduces a controlled benchmark of 440 desktop tasks to isolate the effect of interaction modality (GUI vs. CLI) from other confounds in evaluating computer-use agents. Results reveal distinct execution bottlenecks: screen-only GUI agents fail on precise targeting and state reading, while CLI-mediated agents hit limits in complex multi-step workflows. The benchmark provides actionable signal for improving both paradigms.",
+      "tldr_zh": "本文构建了含 440 个桌面任务的对照基准，将交互模态（GUI vs CLI）的影响从其他变量中剥离出来。结果揭示了两类瓶颈：纯屏幕 GUI agent 在精确定位和状态读取上失败，而 CLI 中介 agent 在复杂多步工作流上遇到极限，为改进两种范式提供了可操作的分析信号。",
+      "upvotes": 26,
+      "authors": "Xiao Zhou, Siyue Zhang, Yilun Zhao, Jinbiao Wei",
+      "ai_keywords": [
+        "computer use",
+        "GUI agent",
+        "benchmark",
+        "CLI"
+      ],
+      "interest_tag": "CUA"
+    }
+  ],
+  "alphaxiv_papers": [
+    {
+      "title": "Autodata: An agentic data scientist to create high quality synthetic data",
+      "arxiv_id": "2606.25996",
+      "url": "https://arxiv.org/abs/2606.25996",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2606.25996",
+      "tldr": "Autodata trains AI agents to act as data scientists that generate high-quality synthetic training and evaluation datasets. The meta-optimization approach, called Agentic Self-Instruct, teaches the agent to produce data that yields stronger downstream models, demonstrated on CS research, legal reasoning, and mathematical tasks.",
+      "tldr_zh": "Autodata 训练 AI agent 充当数据科学家，自动生成高质量合成训练和评测数据集。其元优化方法「Agentic Self-Instruct」让 agent 学会生成能训出更强下游模型的数据，在计算机科学研究、法律推理和数学任务上得到验证。",
+      "interest_tag": ""
+    },
+    {
+      "title": "The Hitchhiker's Guide to Agentic AI: From Foundations to Systems",
+      "arxiv_id": "2606.24937",
+      "url": "https://arxiv.org/abs/2606.24937",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2606.24937",
+      "tldr": "A comprehensive practitioner's reference book covering the full agentic AI stack from LLM substrate and reasoning to memory, tool use, multi-agent orchestration, and production deployment. Organized around the thesis that building great agentic systems requires understanding every layer of the pipeline, not just one.",
+      "tldr_zh": "一本面向从业者的完整 agentic AI 参考书，从 LLM 底层基础、推理机制到记忆、工具使用、多 agent 编排和生产部署全栈覆盖。核心论点：构建优秀 agentic 系统需要理解整个 pipeline 的每一层，而非只专注某一层。",
+      "interest_tag": ""
+    },
+    {
+      "title": "Qwen-AgentWorld: Language World Models for General Agents",
+      "arxiv_id": "2606.24597",
+      "url": "https://arxiv.org/abs/2606.24597",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2606.24597",
+      "tldr": "Qwen-AgentWorld investigates using language models as world models for general agents — predicting environment dynamics, reasoning about state transitions, and enabling planning. The system introduces foundation models for agentic environment simulation and demonstrates that language-based world modeling can substantially improve agent planning and generalization.",
+      "tldr_zh": "Qwen-AgentWorld 探索用语言模型作为通用 agent 的世界模型，预测环境动态、推理状态转换并支持规划。该系统构建了用于 agentic 环境模拟的基础模型，证明基于语言的世界建模能显著提升 agent 的规划能力和泛化能力。",
+      "interest_tag": ""
+    },
+    {
+      "title": "Are We Ready For An Agent-Native Memory System?",
+      "arxiv_id": "2606.24775",
+      "url": "https://arxiv.org/abs/2606.24775",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2606.24775",
+      "tldr": "This paper examines whether current agent memory systems are truly ready for production deployment, arguing that existing benchmarks evaluate memory mainly through end-to-end task success while missing critical dimensions: persistent storage, update mechanisms, consolidation, and lifecycle governance. It proposes a framework for evaluating agent-native memory systems more holistically.",
+      "tldr_zh": "本文审视当前 agent 记忆系统是否真正准备好实际部署，指出现有基准仅通过端到端任务成功率评测记忆，忽略了持久存储、更新机制、记忆整合和生命周期管理等关键维度，并提出更全面评测 agent 原生记忆系统的框架。",
+      "interest_tag": "Memory"
+    },
+    {
+      "title": "The Red Queen Gödel Machine: Co-Evolving Agents and Their Evaluators",
+      "arxiv_id": "2606.26294",
+      "url": "https://arxiv.org/abs/2606.26294",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2606.26294",
+      "tldr": "The Red Queen Gödel Machine challenges the assumption that self-improving agents can be evaluated against fixed benchmarks. As agents improve, their evaluators must also co-evolve — like the Red Queen running to stay in place. The paper proposes a framework where agents and their evaluation criteria co-evolve, preventing benchmark saturation and enabling open-ended self-improvement.",
+      "tldr_zh": "红皇后 Gödel 机器挑战了「自我改进 agent 可以用固定基准评测」的假设。随着 agent 进化，评测标准也必须共同进化——如同红皇后必须不断奔跑才能留在原地。本文提出 agent 与评测标准协同进化的框架，防止基准饱和并实现开放式自我改进。",
+      "interest_tag": "Benchmark"
+    }
+  ],
+  "github_repos": [
+    {
+      "name": "benchflow-ai/awesome-evals",
+      "url": "https://github.com/benchflow-ai/awesome-evals",
+      "tldr": "A curated, community-vetted library of the best resources for building and evaluating AI agents. Covers benchmarks, evaluation frameworks, trace analysis tools, and adversarial testing approaches — a practical one-stop reference for anyone building production AI agent systems.",
+      "tldr_zh": "社区精选的 AI agent 构建与评测资源库，涵盖基准测试、评测框架、trace 分析工具和对抗测试方法，是构建生产级 AI agent 系统的实用一站式参考。",
+      "stars": 539,
+      "language": "N/A",
+      "interest_tag": "Benchmark"
+    },
+    {
+      "name": "NotASithLord/peerd",
+      "url": "https://github.com/NotASithLord/peerd",
+      "tldr": "Peerd is the first AI agent harness built natively in the browser — a Chrome/Firefox extension that runs an agent loop entirely client-side. No server, no cloud dependency: agents can browse, interact with web pages, and execute multi-step tasks directly in the user's browser with full DOM access.",
+      "tldr_zh": "Peerd 是首个原生运行在浏览器中的 AI agent 执行框架——一个 Chrome/Firefox 扩展，完全在客户端运行 agent 循环。无需服务器或云端依赖，agent 可直接在用户浏览器中浏览网页、与页面交互并执行多步任务，拥有完整 DOM 访问权限。",
+      "stars": 200,
+      "language": "JavaScript",
+      "interest_tag": "CUA"
+    },
+    {
+      "name": "lemma-work/lemma-platform",
+      "url": "https://github.com/lemma-work/lemma-platform",
+      "tldr": "Lemma is an open-source workspace where humans and AI agents work as one team, with shared task boards, real-time collaboration, and agent-native APIs. It treats agents as first-class team members alongside humans, bridging the gap between project management tools and autonomous agent systems.",
+      "tldr_zh": "Lemma 是一个开源工作空间，让人类与 AI agent 协作为同一团队：共享任务板、实时协作、面向 agent 设计的 API。它将 agent 视为与人类平等的团队成员，弥合了项目管理工具与自主 agent 系统之间的鸿沟。",
+      "stars": 144,
+      "language": "Python",
+      "interest_tag": "Agent Swarm"
+    },
+    {
+      "name": "FishCodeTech/muteki",
+      "url": "https://github.com/FishCodeTech/muteki",
+      "tldr": "Project Muteki (無敵) is an autonomous multi-model AI agent swarm designed for solving CTF (Capture The Flag) cybersecurity challenges. Multiple specialized agents collaborate — one for reconnaissance, one for exploitation, one for flag extraction — demonstrating practical multi-agent coordination on adversarial tasks.",
+      "tldr_zh": "Project Muteki (無敵) 是一个专为解决 CTF（夺旗赛）网络安全挑战设计的自主多模型 AI agent 集群。多个专门化 agent 协作分工——侦察、漏洞利用、提取 flag——展示了多 agent 编排在对抗性任务上的实际应用。",
+      "stars": 123,
+      "language": "Python",
+      "interest_tag": "Agent Swarm"
+    },
+    {
+      "name": "per-simmons/unreal-agent-harness",
+      "url": "https://github.com/per-simmons/unreal-agent-harness",
+      "tldr": "A harness enabling AI agents to procedurally build cities inside Unreal Engine 5.8 via the Unreal MCP integration. Agents receive high-level directives and translate them into Unreal Editor API calls — placing assets, scripting behaviors, and iterating on city layouts — demonstrating agents as creative collaborators in 3D world-building.",
+      "tldr_zh": "该框架让 AI agent 通过 Unreal MCP 集成在 Unreal Engine 5.8 中程序化构建城市。Agent 接收高层指令并转化为 Unreal Editor API 调用——放置资产、编写行为脚本、迭代城市布局——展示 agent 作为 3D 世界构建创意协作者的潜力。",
+      "stars": 134,
+      "language": "Python",
+      "interest_tag": ""
+    }
+  ],
+  "hackernews": [
+    {
+      "title": "Show HN: OpenKnowledge - open source AI-first alternative to Obsidian/Notion",
+      "url": "https://github.com/inkeep/open-knowledge",
+      "tldr": "OpenKnowledge is an open-source, AI-first knowledge management system designed as an alternative to Obsidian and Notion. It embeds AI at every layer — intelligent linking, auto-organization, semantic search, and agent-powered Q&A over your notes — while keeping all data local and self-hostable.",
+      "tldr_zh": "OpenKnowledge 是一个开源、AI 优先的知识管理系统，定位为 Obsidian 和 Notion 的替代品。AI 深度嵌入每个层次——智能链接、自动组织、语义搜索以及基于 agent 的笔记问答——同时保持数据本地化和自托管。",
+      "points": 372,
+      "num_comments": 170,
+      "interest_tag": ""
+    },
+    {
+      "title": "GLM-5.2 is a step change for open agents",
+      "url": "https://www.interconnects.ai/p/glm-52-is-the-step-change-for-open",
+      "tldr": "An analysis of GLM-5.2, arguing it represents a qualitative leap for open-source agent-capable models. The piece examines why GLM-5.2 outperforms its predecessors on multi-step agentic tasks and what architectural and training choices drove the improvement, positioning it as a credible open alternative to frontier closed models for agent workloads.",
+      "tldr_zh": "一篇分析 GLM-5.2 的文章，认为它代表了开源 agent 能力模型的质变。文章剖析了 GLM-5.2 在多步 agentic 任务上超越前代的原因，以及推动这一进步的架构与训练选择，将其定位为 agent 工作负载中可信的开源前沿闭源替代方案。",
+      "points": 364,
+      "num_comments": 221,
+      "interest_tag": ""
+    },
+    {
+      "title": "Show HN: Smart model routing directly in Claude, Codex and Cursor",
+      "url": "https://github.com/workweave/router",
+      "tldr": "Workweave Router is an open-source proxy layer that routes LLM requests intelligently based on cost, latency, and capability requirements — directly integrated into Claude, Codex, and Cursor via a single config. It profiles each request at runtime and selects the optimal model, enabling significant cost reduction without sacrificing quality on complex tasks.",
+      "tldr_zh": "Workweave Router 是一个开源代理层，根据成本、延迟和能力需求智能路由 LLM 请求，通过单配置直接集成到 Claude、Codex 和 Cursor 中。它在运行时对每个请求做 profiling 并选择最优模型，在复杂任务上不降质量的前提下大幅削减成本。",
+      "points": 203,
+      "num_comments": 110,
+      "interest_tag": ""
+    },
+    {
+      "title": "Show HN: Adrafinil - keep a lid-closed Mac awake only while agents work",
+      "url": "https://github.com/kageroumado/adrafinil",
+      "tldr": "Adrafinil is a macOS utility that keeps a lid-closed MacBook awake precisely while AI agent processes are running, then lets it sleep when they stop. It monitors agent process signals to intelligently gate sleep prevention — solving the common pain point of agents failing overnight because the laptop slept mid-run.",
+      "tldr_zh": "Adrafinil 是一个 macOS 工具，只在 AI agent 进程运行期间阻止合上盖子的 MacBook 进入睡眠，agent 停止后自动允许休眠。通过监控 agent 进程信号智能控制阻睡开关，解决了 agent 因笔记本夜间睡眠而中断运行的常见痛点。",
+      "points": 108,
+      "num_comments": 71,
+      "interest_tag": ""
+    },
+    {
+      "title": "Haystack: Open-Source AI Framework for Production Ready Agents, RAG",
+      "url": "https://haystack.deepset.ai/",
+      "tldr": "Haystack is a battle-tested open-source framework from deepset for building production-ready AI agents and RAG pipelines. It features modular components, a pipeline-first design, and integrations with major LLM providers — making it a popular choice for teams that need reliability and flexibility in production agent deployments.",
+      "tldr_zh": "Haystack 是 deepset 开发的久经考验的开源框架，用于构建生产就绪的 AI agent 和 RAG 管道。它提供模块化组件、pipeline 优先设计以及与主流 LLM 提供商的集成，是需要生产级可靠性和灵活性的团队构建 agent 的热门选择。",
+      "points": 90,
+      "num_comments": 22,
+      "interest_tag": ""
+    }
+  ]
+}
