@@ -1,0 +1,231 @@
+{
+  "date": "2026-06-30",
+  "generated_at": "2026-06-30T16:08:02.351584+08:00",
+  "briefing_zh": "今天的 AI 研究围绕两条主线展开：**智能体能力边界**的扩展与**推理效率**的突破。在智能体方向，**Agents-A1** 提出了一个极具颠覆性的论点——不靠堆参数，靠扩展「智能体视野」（agent horizon）：一个仅 35B 的 MoE 模型，通过构建长达 45K token 的轨迹和异构能力组合，达到了 trillion 参数模型的性能水准。这从根本上质疑了 scaling law 的既有路径。与此同时，**TUA-Bench** 填补了 terminal-use agent 评测的空白——现有基准要么只测 GUI，要么只测编程；而 terminal 作为 AI agent 最核心的操作界面，长期缺乏系统性评估框架。\n\n在工具与记忆层面，alphaxiv 热榜出现了两篇值得关注的系统性研究。**「Are We Ready For An Agent-Native Memory System?」**从数据管理视角对 12 种架构进行横评，发现现有记忆系统在真实 agentic 场景下的表现远不如预期。**Autodata** 则展示了一个「智能体做数据科学家」的新范式——AI 自主生成和筛选高质量合成数据，反哺 LLM 训练，打通了数据飞轮的关键环节。\n\n开源社区今天的热点集中在两类工具上：轻量化 agent 基础设施（**sim-use** 给 AI agent 接入 iOS/Android 模拟器控制权，**Godcoder** 提供 Rust 构建的本地化编程 agent）和评测资源整合（**awesome-evals** 593 星，短期内成为 agent 评测资源的权威索引）。Hacker News 上，**GLM-5.2** 的分析文章达到 366 点，说明社区对开源 agent 基础模型的兴趣持续高涨，而 **OpenKnowledge** 这个「AI 原生 Obsidian 替代品」以 376 点夺得当日最热，反映了个人知识管理与 AI agent 融合的强烈需求。",
+  "briefing_en": "Today's AI research converges on two themes: expanding the **capability horizon of agents** and making **inference dramatically cheaper**. On the agent front, **Agents-A1** delivers a provocative argument — forget scaling parameters, scale the agent horizon instead. A 35B MoE model reaches trillion-parameter-level performance by building long-horizon trajectories averaging 45K tokens and composing heterogeneous agentic abilities. This fundamentally challenges prevailing wisdom about where scaling gains come from. Simultaneously, **TUA-Bench** fills a critical gap: existing benchmarks either evaluate GUI agents or narrow programming tasks, leaving terminal-use agents — arguably the most practically important interface for AI automation — without a proper evaluation framework.\n\nOn the tools and memory front, alphaxiv's hot list features two notable survey-style works. **\"Are We Ready For An Agent-Native Memory System?\"** conducts a rigorous cross-architecture study of 12 memory systems from a data management perspective, finding significant gaps between claimed and real-world performance. **Autodata** demonstrates a compelling new paradigm: an agentic data scientist that autonomously generates and curates high-quality synthetic training data through meta-optimization, potentially closing the loop on AI self-improvement pipelines.\n\nOpen source activity today clusters around two themes: lightweight agent infrastructure (**sim-use** giving AI agents control over iOS/Android simulators, **Godcoder** providing a local-first coding agent built in Rust) and evaluation resource consolidation (**awesome-evals** at 593 stars becoming the go-to index for agent benchmarks). On Hacker News, the **GLM-5.2** analysis piece hit 366 points, signaling sustained community appetite for open-source agent foundation models, while **OpenKnowledge** — an AI-native Obsidian alternative — topped the day at 376 points, reflecting deep demand at the intersection of personal knowledge management and AI agents.",
+  "viral_analysis_zh": "**OpenKnowledge** 以 376 点夺冠，根本原因不是技术——而是「替换焦虑」：Obsidian 用户群体庞大且忠诚，「AI 原生替代」这一定位直接命中了他们的升级冲动，开源加 GitHub 首发的组合在 Show HN 中本就自带流量。**GLM-5.2** 的爆火则来自叙事策略：interconnects.ai 的深度文章用「step change」这个词精准拉高了预期，把一个开源模型版本更新包装成了 agent 领域的分水岭事件，说明对开源模型的叙事框架和技术本身同样重要。**Agents-A1**「用 35B 打赢 trillion 参数」的标题写法也是典型爆款公式——用极致对比制造认知冲突，迫使读者点进来验证。",
+  "viral_analysis_en": "**OpenKnowledge** topped the day at 376 points not because of technical novelty but because of replacement anxiety — Obsidian's large, loyal user base is perpetually primed for an AI-native upgrade, and open-source plus GitHub-first is the exact formula that drives Show HN traction. **GLM-5.2**'s surge illustrates a different viral mechanic: a well-crafted long-form analysis using the phrase \"step change\" elevated a routine model release into a perceived watershed moment for open-source agents, proving the narrative frame matters as much as the model itself. **Agents-A1**'s framing — beating trillion-parameter models with 35B — is textbook viral headline writing: extreme contrast forces cognitive dissonance, compelling clicks to verify the claim.",
+  "huggingface_papers": [
+    {
+      "title": "LiveEdit: Towards Real-Time Diffusion-Based Streaming Video Editing",
+      "arxiv_id": "2606.26740",
+      "url": "https://arxiv.org/abs/2606.26740",
+      "tldr": "LiveEdit introduces a streaming video editing framework built on diffusion models that solves two core problems: maintaining stable backgrounds over time and achieving real-time latency. It uses temporal attention with cached key-value pairs and a region-aware editing module that separates edited foreground from preserved background, enabling interactive sub-second edits on live video streams.",
+      "tldr_zh": "LiveEdit 提出了基于扩散模型的流式视频编辑框架，解决了两大核心难题：跨帧背景稳定性和实时低延迟编辑。通过时序注意力机制缓存 KV 对，以及将编辑区域与保留区域分离的空间感知模块，实现了对直播视频流的交互式亚秒级编辑。",
+      "upvotes": 48,
+      "authors": "Xinyu Wang, Chongbo Zhao, Fangneng Zhan, Yue Ma",
+      "ai_keywords": [
+        "video editing",
+        "diffusion models",
+        "streaming",
+        "real-time"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "Scaling the Horizon, Not the Parameters: Reaching Trillion-Parameter Performance with a 35B Agent",
+      "arxiv_id": "2606.30616",
+      "url": "https://arxiv.org/abs/2606.30616",
+      "tldr": "Agents-A1 is a 35B MoE agentic model from Shanghai AI Lab that matches trillion-parameter models by scaling agent horizon rather than parameter count. It builds a long-horizon infrastructure generating trajectories averaging 45K tokens, scaling both trajectory length and heterogeneous agent abilities (search, coding, math), and achieves state-of-the-art on GPQA, AIME, and SWE-bench at 3-5x lower parameter cost.",
+      "tldr_zh": "Agents-A1 是上海人工智能实验室推出的 35B MoE 智能体模型，通过「扩展智能体视野」而非参数量，达到了 trillion 参数模型的性能。其核心是构建平均长达 45K token 的轨迹基础设施，同时扩展搜索、编码、数学等异构智能体能力，在 GPQA、AIME 和 SWE-bench 上以 3-5 倍更低的参数成本达到 SOTA。",
+      "upvotes": 45,
+      "authors": "Lei Bai, Zongsheng Cao, Yang Chen, Zhiyao Cui",
+      "ai_keywords": [
+        "agent",
+        "MoE",
+        "long-horizon",
+        "scaling"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "TUA-Bench: A Benchmark for General-Purpose Terminal-Use Agents",
+      "arxiv_id": "2606.28480",
+      "url": "https://arxiv.org/abs/2606.28480",
+      "tldr": "TUA-Bench is a benchmark specifically designed to evaluate AI agents operating in terminal environments on general-purpose computer tasks beyond coding — file management, system administration, web scraping, data processing. Existing benchmarks either focus on GUIs or only test programming tasks, leaving terminal-based automation largely unmeasured. Evaluation shows leading LLMs still complete fewer than 40% of tasks, revealing significant headroom.",
+      "tldr_zh": "TUA-Bench 专门评测在终端环境中执行通用计算机任务的 AI agent——涵盖文件管理、系统运维、数据处理等，而非仅限编程。现有基准要么聚焦 GUI 操作，要么只测编程能力，terminal-use agent 长期缺乏系统性评估。测评显示主流 LLM 任务完成率不足 40%，揭示出巨大的提升空间。",
+      "upvotes": 32,
+      "authors": "Shoufa Chen, Luyuan Wang, Xuan Yang, Zhiheng Liu",
+      "ai_keywords": [
+        "benchmark",
+        "terminal agent",
+        "computer-use",
+        "evaluation"
+      ],
+      "interest_tag": "Benchmark"
+    },
+    {
+      "title": "Trimming the Long-Tail of Visual World Modeling Evaluation",
+      "arxiv_id": "2606.24256",
+      "url": "https://arxiv.org/abs/2606.24256",
+      "tldr": "Current visual world model benchmarks are dominated by common physical interactions, masking failures on rare, long-tail scenarios. This paper introduces a framework that systematically trims redundant common-case test samples and enriches evaluation with rare physical interactions — like a ball bouncing off unusual surfaces — revealing that state-of-the-art generation models collapse on uncommon physics that falls outside training distribution.",
+      "tldr_zh": "现有视觉世界模型基准被普通物理交互场景主导，掩盖了模型在稀有场景下的失败。本文提出系统性地裁剪冗余的常见场景测试，同时增加稀有物理交互评估，发现 SOTA 生成模型在超出训练分布的非常见物理现象上表现显著退化，揭示了世界模型泛化能力的真实边界。",
+      "upvotes": 30,
+      "authors": "Bingxuan Li, Yining Hong, Cheng Qian, Hyeonjeong Ha",
+      "ai_keywords": [
+        "world model",
+        "evaluation",
+        "video generation",
+        "long-tail"
+      ],
+      "interest_tag": "Benchmark"
+    },
+    {
+      "title": "ReFreeKV: Towards Threshold-Free KV Cache Compression",
+      "arxiv_id": "2502.16886",
+      "url": "https://arxiv.org/abs/2502.16886",
+      "tldr": "ReFreeKV eliminates the need for domain-specific threshold tuning in KV cache compression — a key limitation of prior methods that required expensive per-dataset calibration. It dynamically infers the appropriate compression budget from attention patterns at runtime, achieving competitive memory reduction without any dataset-specific thresholds, making it practical for deployment across diverse open-domain workloads.",
+      "tldr_zh": "ReFreeKV 消除了 KV 缓存压缩中令人头疼的领域相关阈值调参问题——这是现有方法依赖昂贵的 per-dataset 校准的根本缺陷。通过在推理时动态从注意力模式推断压缩预算，无需任何数据集特定阈值即可实现有竞争力的内存压缩，对开放域部署场景尤为实用。",
+      "upvotes": 18,
+      "authors": "Xuanfan Ni, Liyan Xu, Chenyang Lyu, Longyue Wang",
+      "ai_keywords": [
+        "KV cache",
+        "compression",
+        "LLM inference",
+        "memory efficiency"
+      ],
+      "interest_tag": ""
+    }
+  ],
+  "alphaxiv_papers": [
+    {
+      "title": "Autodata: An agentic data scientist to create high quality synthetic data",
+      "arxiv_id": "2606.25996",
+      "url": "https://arxiv.org/abs/2606.25996",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2606.25996",
+      "tldr": "Autodata treats an LLM as an autonomous data scientist that iteratively generates, evaluates, and curates synthetic training data through meta-optimization. Unlike static synthetic data pipelines, it uses reward signals from downstream model performance to refine the generation strategy itself, achieving significant quality improvements over naive synthetic data and reducing the human bottleneck in data curation.",
+      "tldr_zh": "Autodata 将 LLM 作为自主数据科学家，通过元优化迭代生成、评估和筛选合成训练数据。与静态合成数据流水线不同，它利用下游模型性能作为奖励信号来精炼生成策略本身，相比朴素合成数据实现了显著质量提升，大幅减少了数据策展中对人工的依赖。",
+      "interest_tag": ""
+    },
+    {
+      "title": "Are We Ready For An Agent-Native Memory System?",
+      "arxiv_id": "2606.24775",
+      "url": "https://arxiv.org/abs/2606.24775",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2606.24775",
+      "tldr": "This paper benchmarks 12 existing LLM agent memory architectures across 5 real-world agentic tasks, introducing a four-module analytical framework (storage, retrieval, update, forgetting). The findings are sobering: most systems fail to generalize beyond their target benchmark scenarios, with retrieval quality degrading sharply as task complexity grows, highlighting that agent memory remains an unsolved infrastructure problem.",
+      "tldr_zh": "本文从数据管理视角对 12 种 LLM agent 记忆架构进行跨任务横评，引入存储、检索、更新、遗忘四模块分析框架，在 5 个真实 agent 任务上测试。结论令人警醒：大多数系统无法泛化到目标基准场景之外，随着任务复杂度提升检索质量急剧下降，揭示 agent 记忆仍是未解决的基础设施问题。",
+      "interest_tag": "Memory"
+    },
+    {
+      "title": "Towards Automating Scientific Review with Google's Paper Assistant Tool",
+      "arxiv_id": "2606.28277",
+      "url": "https://arxiv.org/abs/2606.28277",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2606.28277",
+      "tldr": "Google Research's Paper Assistant Tool (PAT) is an agentic AI system designed for deep scientific manuscript review, detecting methodological errors, statistical inconsistencies, and reproducibility issues. Evaluated on real peer-review scenarios, it achieved 89.7% error detection rate while generating structured reviewer-style feedback, suggesting near-term viability for automating first-pass review at scale.",
+      "tldr_zh": "谷歌研究院的 Paper Assistant Tool (PAT) 是专为深度科学论文审稿设计的 agent AI 系统，能检测方法论错误、统计不一致性和可复现性问题。在真实同行评审场景中评估显示其错误检测率达 89.7%，并能生成结构化的审稿人风格反馈，展示了近期大规模自动化初审的可行性。",
+      "interest_tag": ""
+    },
+    {
+      "title": "Qwen-Image-2.0-RL Technical Report",
+      "arxiv_id": "2606.27608",
+      "url": "https://arxiv.org/abs/2606.27608",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2606.27608",
+      "tldr": "Qwen-Image-2.0-RL applies reinforcement learning from human feedback combined with on-policy distillation to improve the Qwen-Image-2.0 diffusion model's visual quality and instruction-following. The post-training pipeline achieves +2.61 improvement on GenEval benchmark without modifying the base model architecture, demonstrating that RLHF techniques developed for LLMs transfer effectively to image generation models.",
+      "tldr_zh": "Qwen-Image-2.0-RL 将 RLHF 与 on-policy distillation 结合，提升 Qwen-Image-2.0 扩散模型的视觉质量和指令遵循能力。在不修改基础模型架构的情况下，后训练流水线在 GenEval 基准上取得 +2.61 的提升，证明了为 LLM 开发的 RLHF 技术可有效迁移至图像生成模型。",
+      "interest_tag": ""
+    },
+    {
+      "title": "Ask, Don't Judge: Binary Questions for Interpretable LLM Evaluation and Self-Improvement",
+      "arxiv_id": "2606.27226",
+      "url": "https://arxiv.org/abs/2606.27226",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2606.27226",
+      "tldr": "BINEVAL replaces monolithic LLM-as-judge scoring with a decomposed evaluation approach: it breaks quality assessment into atomic binary yes/no questions, providing fine-grained, interpretable feedback with natural-language explanations for each dimension. This approach improved agreement with human judgments compared to scalar scoring judges and enables targeted self-improvement by pinpointing exactly which aspects of a response fail.",
+      "tldr_zh": "BINEVAL 用原子化的二元是非问题取代整体式 LLM-as-judge 评分：将质量评估分解为多维度的细粒度问题，对每个维度提供自然语言解释。与标量评分评估相比，与人类判断的一致性显著更高，同时通过精确定位响应中的失败维度实现有针对性的自我改进。",
+      "interest_tag": ""
+    }
+  ],
+  "github_repos": [
+    {
+      "name": "benchflow-ai/awesome-evals",
+      "url": "https://github.com/benchflow-ai/awesome-evals",
+      "tldr": "A curated, community-maintained library of the best resources for building and evaluating AI agents — papers, blog posts, talks, tools, and benchmarks. Maintained by BenchFlow, it covers agent evaluation frameworks, RL environments, and LLM evaluation methodologies, quickly becoming the authoritative index for the agent evaluation space.",
+      "tldr_zh": "由 BenchFlow 维护的 AI agent 构建与评测资源精选库，涵盖论文、博客、讲座、工具和基准测试，快速成为 agent 评测领域的权威索引。分类清晰，去除了大量噪音，适合需要系统了解 agent 评估方法论的研究者和工程师。",
+      "stars": 593,
+      "language": null,
+      "interest_tag": "Benchmark"
+    },
+    {
+      "name": "lycorp-jp/sim-use",
+      "url": "https://github.com/lycorp-jp/sim-use",
+      "tldr": "sim-use (from LY Corp / LINE Yahoo Japan) gives AI agents programmatic eyes and hands on iOS Simulator and Android emulator/devices via an accessibility-layer API. Unlike screenshot-based approaches, it uses native simulator APIs for reliable UI element detection and interaction, enabling AI agents to automate mobile apps in a sandbox environment without physical devices.",
+      "tldr_zh": "sim-use 来自 LY Corp（LINE Yahoo Japan），通过 Accessibility API 让 AI agent 直接控制 iOS 模拟器和 Android 模拟器，实现程序化的移动端 UI 自动化。与截图方案不同，它使用原生模拟器 API 进行可靠的 UI 元素检测和交互，无需真实设备即可实现移动应用的 agent 自动化。",
+      "stars": 271,
+      "language": "Swift",
+      "interest_tag": "CUA"
+    },
+    {
+      "name": "eli-labz/Godcoder",
+      "url": "https://github.com/eli-labz/Godcoder",
+      "tldr": "Godcoder is a local-first, open-source coding agent desktop app built in Rust with Tauri, supporting bring-your-own-LLM-key. Code stays on your machine and only reaches the model provider. It builds its own test harness to verify generated code automatically, combining privacy-first architecture with agentic coding assistance, positioning itself as an offline alternative to cloud-based coding agents.",
+      "tldr_zh": "Godcoder 是用 Rust + Tauri 构建的本地优先开源编程 agent 桌面应用，支持自带 LLM API key。代码只离开本机到达模型提供商，不经过第三方服务器。它能自动构建测试套件来验证生成代码，将隐私优先架构与 agent 编程辅助结合，是云端编程 agent 的离线替代方案。",
+      "stars": 252,
+      "language": "Rust",
+      "interest_tag": ""
+    },
+    {
+      "name": "FishCodeTech/muteki",
+      "url": "https://github.com/FishCodeTech/muteki",
+      "tldr": "Project Muteki (無敵) is an autonomous multi-model CTF-solving AI agent swarm. It orchestrates specialized agents across different LLM models to collaboratively attack Capture-the-Flag security challenges — decomposing problems, assigning sub-tasks to domain-specific agents (crypto, web, binary), and synthesizing results. A practical real-world testbed for multi-agent coordination on adversarial tasks.",
+      "tldr_zh": "Project Muteki (無敵) 是一个自主的多模型 CTF 解题 agent swarm，编排多个专业化 agent 协作攻解 Capture-the-Flag 安全挑战。通过问题分解、将子任务分配给领域专家 agent（密码、Web、二进制），再合并结果，是多 agent 协作在对抗性任务上的实战测试床。",
+      "stars": 142,
+      "language": "Python",
+      "interest_tag": "Agent Swarm"
+    },
+    {
+      "name": "ardhaecosystem/synapse",
+      "url": "https://github.com/ardhaecosystem/synapse",
+      "tldr": "Synapse is a self-hosted temporal knowledge graph memory system for AI agents, built on FalkorDB and Graphiti with a hippocampus-inspired memory management layer. It stores agent memories as time-stamped graph nodes with relationship edges, enabling complex temporal queries (what did the agent know at time T?) that vector databases cannot efficiently answer, targeting production-grade agent memory infrastructure.",
+      "tldr_zh": "Synapse 是基于 FalkorDB + Graphiti 的自托管时序知识图谱 agent 记忆系统，加入海马体启发的记忆管理层。将 agent 记忆存储为带时间戳的图节点和关系边，支持向量数据库无法高效处理的时序复杂查询（如「agent 在时间 T 时知道什么？」），面向生产级 agent 记忆基础设施。",
+      "stars": 64,
+      "language": "Python",
+      "interest_tag": "Memory"
+    }
+  ],
+  "hackernews": [
+    {
+      "title": "Show HN: OpenKnowledge – open source AI-first alternative to Obsidian/Notion",
+      "url": "https://github.com/inkeep/open-knowledge",
+      "tldr": "OpenKnowledge is an open-source, AI-native personal knowledge management tool positioned as an alternative to Obsidian and Notion. Rather than bolting AI features onto a traditional note editor, it's designed from the ground up around AI-powered search, linking, and synthesis. The Show HN post topped the day, reflecting strong demand for AI-first PKM that respects user data and runs self-hosted.",
+      "tldr_zh": "OpenKnowledge 是开源的 AI 原生个人知识管理工具，定位为 Obsidian 和 Notion 的替代品。与在传统笔记编辑器上附加 AI 功能不同，它从底层围绕 AI 驱动的搜索、链接和合成重新设计。该 Show HN 贴当日登顶，反映出用户对数据自托管、AI 原生知识管理的强烈需求。",
+      "points": 376,
+      "num_comments": 173,
+      "interest_tag": ""
+    },
+    {
+      "title": "GLM-5.2 is a step change for open agents",
+      "url": "https://www.interconnects.ai/p/glm-52-is-the-step-change-for-open",
+      "tldr": "This interconnects.ai analysis argues that GLM-5.2 represents a qualitative leap for open-source agent foundation models, not just an incremental update. The piece analyzes GLM-5.2's agentic capabilities — tool use, long-context reasoning, multi-turn planning — and makes the case that it shifts the competitive landscape for open agent deployments, with 366 points of community agreement.",
+      "tldr_zh": "这篇 interconnects.ai 深度文章论证了 GLM-5.2 是开源 agent 基础模型的质变而非量变。分析了其 agent 能力——工具调用、长上下文推理、多轮规划——并主张它重塑了开源 agent 部署的竞争格局。366 点的社区反响证明了其叙事策略的成功：将版本更新包装为分水岭事件。",
+      "points": 366,
+      "num_comments": 223,
+      "interest_tag": ""
+    },
+    {
+      "title": "Show HN: Smart model routing directly in Claude, Codex and Cursor",
+      "url": "https://github.com/workweave/router",
+      "tldr": "Workweave Router enables intelligent model routing directly within Claude, Codex, and Cursor IDE workflows — automatically selecting the right model (e.g., switching to a cheaper/faster model for simple tasks) based on task complexity and cost. It operates as middleware that intercepts API calls, reducing inference costs while maintaining output quality, addressing a practical pain point for heavy AI tool users.",
+      "tldr_zh": "Workweave Router 在 Claude、Codex 和 Cursor 工作流中实现智能模型路由——根据任务复杂度和成本自动选择合适模型（如简单任务切换到更便宜快速的模型）。作为拦截 API 调用的中间件运行，在保持输出质量的同时降低推理成本，解决了重度 AI 工具用户的切实痛点。",
+      "points": 212,
+      "num_comments": 112,
+      "interest_tag": ""
+    },
+    {
+      "title": "Ornith-1.0: self-improving open-source models for agentic coding",
+      "url": "https://github.com/deepreinforce-ai/Ornith-1",
+      "tldr": "Ornith-1.0 from DeepReinforce AI is an open-source, self-improving model series specifically designed for agentic coding tasks. It uses reinforcement learning to iteratively improve on software engineering benchmarks by learning from its own coding trajectories, aiming to compete with proprietary coding agents through continuous self-improvement without human annotation.",
+      "tldr_zh": "DeepReinforce AI 的 Ornith-1.0 是专为 agent 编程任务设计的开源自我改进模型系列，通过强化学习从自身编程轨迹中迭代提升，在软件工程基准上持续进步。目标是通过无需人工标注的持续自我改进，与专有编程 agent 竞争。",
+      "points": 200,
+      "num_comments": 39,
+      "interest_tag": ""
+    },
+    {
+      "title": "Micro-Agent: Beat Frontier Models with Collaboration Inside Model API Calls",
+      "url": "https://vllm.ai/blog/2026-06-29-micro-agent-frontier-models",
+      "tldr": "vLLM's Micro-Agent technique enables multiple lightweight model instances to collaborate inside a single API call, achieving quality comparable to frontier models like GPT-4o at significantly lower cost. By decomposing a request into parallel sub-agent reasoning paths and aggregating results, it effectively implements agent swarm dynamics at the inference level, without requiring a separate orchestration layer.",
+      "tldr_zh": "vLLM 的 Micro-Agent 技术让多个轻量模型实例在单次 API 调用内协作，以显著更低的成本达到与 GPT-4o 等前沿模型相当的质量。通过将请求分解为并行子 agent 推理路径并聚合结果，在推理层实现了 agent swarm 的动态机制，无需额外的编排层。",
+      "points": 69,
+      "num_comments": 20,
+      "interest_tag": "Agent Swarm"
+    }
+  ]
+}
