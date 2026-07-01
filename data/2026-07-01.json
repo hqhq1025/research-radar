@@ -1,0 +1,230 @@
+{
+  "date": "2026-07-01",
+  "generated_at": "2026-07-01T16:06:25.525652+08:00",
+  "briefing_zh": "今日 AI 研究领域呈现出「世界模型」与「Agent 能力边界」两条交汇的主线。**Orca** 以 135 票高票领跑 HuggingFace 日报，它提出了一个通用世界基础模型，抛弃传统的单一 next-token/next-frame 预测范式，改用「Next-State-Prediction」统一建模感知、预测与行动——这一工作的雄心在于：让模型的「世界」不再是离散 token，而是连续的多模态 latent 空间。与此同时，**Agents-A1**（上海 AI Lab）展示了另一条路：用 35B MoE 模型，通过「扩展 Agent 视野」而非参数量，在长程任务上打平万亿参数级模型的表现，实证了「智能」可以来自更深的 horizon 而非更大的参数。\n\n在 Agent 能力的评测与基础设施层面，今天也有两个值得关注的进展。**OSWorld 2.0** 把电脑使用 Agent 的 benchmark 门槛大幅拉高：108 个跨应用长程真实工作流，前沿模型完成率仅 20.6%，击碎了「GUI Agent 已接近可用」的乐观预期。**Dockerless** 则从工程反面入手，为 coding agent 训练提供了一个无需 Docker 环境的代码验证器——降低 SFT 数据标注成本的同时，也让 RL reward 计算更轻量，直接影响代码 Agent 训练循环的效率。**SWE-Together** 则把 benchmark 维度从静态代码修复拓展到真实多轮交互，109 个从真实用户-Agent 对话中重建的任务表明：当前 coding agent 在交互质量上仍有较大提升空间。\n\n推理加速与训练效率层面，**BlockPilot** 和 **DOPD** 均聚焦在 LLM 训练/推理管道的关键环节。BlockPilot 为扩散式投机解码引入了自适应策略学习，在不损失精度的前提下提升 token 接受率；DOPD 解决了 on-policy 蒸馏中的「特权幻觉」问题，通过双教师/双学生架构实现更高质量的知识迁移。**Qwen-Image-2.0-RL** 则把 RLHF 成功移植到图像生成扩散模型，在 Qwen-Image-Bench 上提升 2.61 分，验证了 RL post-training 对生成质量的有效性。\n\n开源工具生态方面，**Godcoder**（Rust + Tauri）提供了一个本地优先的桌面 coding agent，**sim-use**（LY Corporation）让 AI Agent 拥有了真正的 iOS 和 Android 「手眼」——可直接操控模拟器完成端到端移动端任务，是近期最具实用价值的 CUA 工具之一。HN 社区今天的热点是 **OpenKnowledge**（380 票），一个 AI 原生的 Obsidian/Notion 替代品，以及 **Ornith-1.0** 开源自进化 coding model，均印证着「AI-native 工作流工具」正在迅速取代传统知识管理和开发辅助形态。",
+  "briefing_en": "Today's AI research landscape converges on two threads: **world modeling** and **agent capability frontiers**. **Orca** tops HuggingFace daily papers with 135 upvotes, proposing a general world foundation model that abandons siloed next-token/next-frame prediction in favor of unified \"Next-State-Prediction\" — modeling perception, prediction, and action in a shared multimodal latent space. Simultaneously, **Agents-A1** (Shanghai AI Lab) demonstrates an orthogonal approach: a 35B MoE model that reaches trillion-parameter-level performance by scaling agent horizon depth rather than parameter count, empirically validating that intelligence can emerge from deeper reasoning chains, not just larger models.\n\nOn the agent evaluation and infrastructure front, **OSWorld 2.0** dramatically raises the bar for computer-use benchmarks: 108 long-horizon real-world workflows spanning multiple applications, where frontier agents achieve only 20.6% completion — puncturing optimistic narratives about near-deployable GUI agents. **Dockerless** attacks the engineering problem: an environment-free code verifier for coding agent training that eliminates Docker setup overhead, directly improving the efficiency of SFT data collection and RL reward computation loops. **SWE-Together** extends benchmark scope from static bug fixes to real multi-turn interactive sessions, with 109 tasks reconstructed from genuine user-agent coding dialogues revealing significant gaps in interaction quality.\n\nOn inference and training efficiency, **BlockPilot** and **DOPD** both target critical bottlenecks in LLM pipelines. BlockPilot brings instance-adaptive policy learning to diffusion-based speculative decoding; DOPD resolves the \"privilege illusion\" failure mode in on-policy distillation via a dual-teacher/dual-student architecture. **Qwen-Image-2.0-RL** successfully ports RLHF post-training to a diffusion image generation model, gaining +2.61 on Qwen-Image-Bench and validating RL as a quality lever beyond LLMs.\n\nIn open-source tooling, **Godcoder** (Rust + Tauri) delivers a local-first desktop coding agent, while **sim-use** (LY Corporation) gives AI agents real eyes and hands on iOS Simulator and Android emulators — one of the most practically deployable CUA tools this week. HN community buzz centers on **OpenKnowledge** (380 pts), an AI-native Obsidian/Notion alternative, and **Ornith-1.0**, an open-source self-improving coding model — both signals that AI-native workflow tooling is rapidly displacing traditional knowledge management and developer tooling.",
+  "viral_analysis_zh": "**OpenKnowledge**（380票/173评）是今日最强爆款信号。它精准踩中了「个人知识库被 AI 颠覆」的焦虑点，打出「Obsidian/Notion 开源替代」旗号，既吃 PKM 社区流量又捕获 AI 工具党，Show HN 格式让工程师社区第一时间参与讨论，是教科书级的发布策略。\n\n**Ornith-1.0**（260票/50评）紧随其后。「自进化 coding 模型」的叙事节点踩得极准——在 Claude/GPT 称霸的市场里，开源的自我改进模型是稀缺品类，GitHub 链接直接引流，技术人群口碑传播快。\n\n**OSWorld 2.0** 的传播逻辑则走的是「打脸热点」路线：用严格的数字（20.6% 完成率）直接反驳「AI Agent 将替代所有电脑操作员」的过热叙事，这类 benchmark 论文在 AI 泡沫期天然自带争议流量。",
+  "viral_analysis_en": "**OpenKnowledge** (380 pts/173 comments) is today's clearest viral signal. It nails the exact anxiety of 'AI disrupting personal knowledge management' while positioning itself as an open-source alternative to both Obsidian and Notion — a dual-community play that captures PKM enthusiasts and AI tool adopters simultaneously. The Show HN format generated immediate expert engagement, a textbook launch strategy.\n\n**Ornith-1.0** (260 pts/50 comments) follows with a compelling 'self-improving open-source coding model' narrative — a scarce category in the Claude/GPT-dominated market. The GitHub direct link drives immediate adoption, and the technical community amplifies fast.\n\n**OSWorld 2.0** travels via the 'myth-busting' playbook: hard numbers (20.6% task completion by frontier agents) directly counter the overheated 'AI will replace all computer operators' narrative, and benchmark papers that deflate hype naturally attract debate-driven engagement.",
+  "huggingface_papers": [
+    {
+      "title": "Orca: The World is in Your Mind",
+      "arxiv_id": "2606.30534",
+      "url": "https://arxiv.org/abs/2606.30534",
+      "tldr": "Orca introduces a general world foundation model that unifies perception, prediction, and action through 'Next-State-Prediction' in a shared multimodal latent space. Rather than separate next-token or next-frame objectives, the model learns a world latent space from heterogeneous signals and exposes it through multimodal readout interfaces, positioning world modeling as the foundation for general AI.",
+      "tldr_zh": "Orca 提出通用世界基础模型，用「Next-State-Prediction」统一感知、预测与行动建模。抛弃传统的单一 next-token/next-frame 目标函数，在共享多模态 latent 空间中学习世界状态转换，将世界建模视为通用 AI 的核心基础。",
+      "upvotes": 135,
+      "authors": "Yihao Wang, Yuheng Ji, Mingyu Cao, Yanqing Shen",
+      "ai_keywords": [
+        "world model",
+        "multimodal",
+        "next-state prediction",
+        "foundation model"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "Dockerless: Environment-Free Program Verifier for Coding Agents",
+      "arxiv_id": "2606.28436",
+      "url": "https://arxiv.org/abs/2606.28436",
+      "tldr": "Dockerless eliminates the Docker environment overhead in coding agent training by providing a static code patch verifier that evaluates generated code without execution. This lowers the cost of SFT trajectory selection and RL reward computation by avoiding per-repository environment setup, directly improving the scalability of coding agent training pipelines.",
+      "tldr_zh": "Dockerless 为 coding agent 训练提供无需 Docker 的代码验证器，通过静态分析代替执行来评估生成的 code patch。显著降低 SFT 数据标注和 RL reward 计算的环境配置成本，提升 coding agent 训练管道的可扩展性。",
+      "upvotes": 62,
+      "authors": "Wenhao Zeng, Yuling Shi, Xiaodong Gu, Chao Hu",
+      "ai_keywords": [
+        "coding agent",
+        "program verification",
+        "reinforcement learning",
+        "SFT"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "BlockPilot: Instance-Adaptive Policy Learning for Diffusion-based Speculative Decoding",
+      "arxiv_id": "2606.31315",
+      "url": "https://arxiv.org/abs/2606.31315",
+      "tldr": "BlockPilot introduces instance-adaptive policy learning for diffusion-based speculative decoding, dynamically adjusting the inference block size per input rather than using a fixed strategy. This achieves state-of-the-art token acceptance rates and inference speedup by learning when to use larger vs. smaller blocks, improving both quality and latency without modifying the target model.",
+      "tldr_zh": "BlockPilot 为扩散式投机解码引入实例自适应策略学习，根据每个输入动态调整推理 block 大小，而非固定策略。在保持无损加速的同时实现最高 token 接受率，同时提升推理质量与速度，无需修改目标模型。",
+      "upvotes": 52,
+      "authors": "Hao Zhang, Yiming Hu, Yong Wang, Mingqiao Mo",
+      "ai_keywords": [
+        "speculative decoding",
+        "diffusion LM",
+        "inference acceleration"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "DOPD: Dual On-policy Distillation",
+      "arxiv_id": "2606.30626",
+      "url": "https://arxiv.org/abs/2606.30626",
+      "tldr": "DOPD addresses the 'privilege illusion' failure mode in on-policy LLM distillation, where privileged information given to teacher or student causes the student to learn non-transferable shortcuts. Using a dual-teacher/dual-student architecture with carefully separated information channels, DOPD achieves higher-quality knowledge transfer and consistently outperforms single on-policy distillation baselines.",
+      "tldr_zh": "DOPD 解决 on-policy 蒸馏中的「特权幻觉」问题——将特权信息注入教师或学生会导致学生学到不可迁移的捷径。通过双教师/双学生架构分离信息通道，实现更高质量的知识迁移，持续超越单一 on-policy 蒸馏基线。",
+      "upvotes": 51,
+      "authors": "Xinlei Yu, Gen Li, Qingyi Si, Guibin Zhang",
+      "ai_keywords": [
+        "knowledge distillation",
+        "on-policy",
+        "LLM training",
+        "RL"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "Xiaomi-GUI-0 Technical Report",
+      "arxiv_id": "2606.31410",
+      "url": "https://arxiv.org/abs/2606.31410",
+      "tldr": "Xiaomi-GUI-0 is a GUI agent built on VLMs for real mobile application tasks, trained and evaluated on real app interactions rather than offline benchmarks. The model addresses the distribution gap between standardized benchmarks and real-world interfaces with complex layouts and abnormal states, making it one of the first industry reports on GUI agents tested against production mobile app conditions.",
+      "tldr_zh": "Xiaomi-GUI-0 是基于 VLM 的 GUI agent，专为真实移动应用任务设计，用真实 App 交互而非离线 benchmark 进行训练和评估。针对标准 benchmark 与真实界面的分布差距问题，是最早报告在真实生产 App 环境下测试 GUI Agent 的工业报告之一。",
+      "upvotes": 4,
+      "authors": "Wanxia Cao, Chengzhen Duan, Pei Fu, Pengzhi Gao",
+      "ai_keywords": [
+        "GUI agent",
+        "VLM",
+        "mobile",
+        "computer use"
+      ],
+      "interest_tag": "CUA"
+    }
+  ],
+  "alphaxiv_papers": [
+    {
+      "title": "Scaling the Horizon, Not the Parameters: Reaching Trillion-Parameter Performance with a 35B Agent",
+      "arxiv_id": "2606.30616",
+      "url": "https://arxiv.org/abs/2606.30616",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2606.30616",
+      "tldr": "Agents-A1 is a 35B Mixture-of-Experts model from Shanghai AI Lab that achieves trillion-parameter-level performance by scaling the agent horizon rather than model size. It outperforms 1T-parameter models on long-horizon agentic tasks by building a knowledge-action infrastructure connecting external knowledge, heterogeneous tools, and long-horizon trajectory data.",
+      "tldr_zh": "Agents-A1 是上海 AI Lab 的 35B MoE 模型，通过扩展 Agent 视野而非参数量在长程任务上打平万亿参数模型表现。构建了连接外部知识、异构工具和长程轨迹数据的知识-行动基础设施，实证了智能可以来自更深的 horizon 而非更大参数。",
+      "interest_tag": ""
+    },
+    {
+      "title": "OSWorld2.0: Benchmarking Computer Use Agents on Long-Horizon Real-World Tasks",
+      "arxiv_id": "2606.29537",
+      "url": "https://arxiv.org/abs/2606.29537",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2606.29537",
+      "tldr": "OSWorld 2.0 introduces a benchmark of 108 long-horizon computer-use workflows spanning everyday and professional tasks across multiple real applications. Frontier agents achieve only 20.6% task completion, revealing critical gaps in sustained multi-app planning, state tracking, and error recovery that current benchmarks fail to expose.",
+      "tldr_zh": "OSWorld 2.0 提出 108 个跨应用长程真实工作流 benchmark，覆盖日常和专业任务。前沿模型完成率仅 20.6%，揭示了当前电脑操作 Agent 在长程规划、跨应用状态追踪和错误恢复上的严重短板，现有 benchmark 无法暴露这些问题。",
+      "interest_tag": "CUA"
+    },
+    {
+      "title": "Autodata: An agentic data scientist to create high quality synthetic data",
+      "arxiv_id": "2606.25996",
+      "url": "https://arxiv.org/abs/2606.25996",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2606.25996",
+      "tldr": "Autodata trains an agent to act as an autonomous data scientist, iteratively generating and meta-optimizing high-quality synthetic training and evaluation data. Through Agentic Self-Instruct, it learns to create data that maximally challenges target models, producing measurable improvements over standard synthetic data pipelines in computer science and math domains.",
+      "tldr_zh": "Autodata 训练 agent 作为自主数据科学家，通过 meta-optimization 迭代生成高质量合成训练和评测数据。Agentic Self-Instruct 让系统学会生成对目标模型挑战性最强的数据，在计算机科学和数学领域超越标准合成数据管线。",
+      "interest_tag": ""
+    },
+    {
+      "title": "SWE-Together: Evaluating Coding Agents in Interactive User Sessions",
+      "arxiv_id": "2606.29957",
+      "url": "https://arxiv.org/abs/2606.29957",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2606.29957",
+      "tldr": "SWE-Together introduces a multi-turn coding agent benchmark reconstructed from 109 real user-agent coding sessions, with an anchored LLM user simulator for reproducibility. It measures both final code correctness and interaction quality, revealing that current agents struggle significantly with real conversational coding dynamics beyond static task completion.",
+      "tldr_zh": "SWE-Together 从 109 个真实用户-Agent 编程对话中重建多轮交互 benchmark，并配备 LLM 用户模拟器保证可复现性。同时评估最终代码正确性和交互质量，揭示现有 coding agent 在真实对话动态上远不如静态任务完成率表现的那么好。",
+      "interest_tag": "Benchmark"
+    },
+    {
+      "title": "Qwen-Image-2.0-RL Technical Report",
+      "arxiv_id": "2606.27608",
+      "url": "https://arxiv.org/abs/2606.27608",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2606.27608",
+      "tldr": "Qwen-Image-2.0-RL applies RLHF and on-policy distillation post-training to the Qwen-Image-2.0 diffusion model for text-to-image generation. Using task-specific composite reward models fine-tuned from VLMs, it achieves +2.61 improvement on Qwen-Image-Bench, demonstrating that RL post-training techniques developed for LLMs transfer effectively to diffusion-based image generation.",
+      "tldr_zh": "Qwen-Image-2.0-RL 将 RLHF 和 on-policy 蒸馏后训练移植到文本生成图像扩散模型。通过 VLM 微调的任务特定复合奖励模型，在 Qwen-Image-Bench 上提升 2.61 分，验证了 LLM 领域的 RL 后训练技术对扩散式图像生成同样有效。",
+      "interest_tag": ""
+    }
+  ],
+  "github_repos": [
+    {
+      "name": "TianhangZhuzth/Fundamental-Ava",
+      "url": "https://github.com/TianhangZhuzth/Fundamental-Ava",
+      "tldr": "Fundamental-Ava is a framework for building digital human beings as autonomous, collaborative, and socially intelligent agents. It focuses on multi-agent social dynamics, enabling persistent digital identities that can interact, cooperate, and develop social intelligence over time.",
+      "tldr_zh": "Fundamental-Ava 是构建数字人作为自主、协作、社交智能 agent 的框架，聚焦多 agent 社交动态，支持具备持久身份、可交互协作、发展社交智能的数字人系统。",
+      "stars": 651,
+      "language": "Python",
+      "interest_tag": "Agent Swarm"
+    },
+    {
+      "name": "lycorp-jp/sim-use",
+      "url": "https://github.com/lycorp-jp/sim-use",
+      "tldr": "sim-use by LY Corporation gives AI agents eyes and hands on iOS Simulator and Android emulators/devices, enabling end-to-end mobile automation via accessibility APIs. It bridges the gap between AI agent planning and real mobile app execution, making it one of the most deployable CUA tools for mobile platforms.",
+      "tldr_zh": "LY Corporation 的 sim-use 让 AI agent 通过 accessibility API 操控 iOS 模拟器和 Android 设备，实现端到端移动端自动化。填补了 AI agent 规划到真实移动 App 执行的断层，是当前最具实用价值的移动端 CUA 工具之一。",
+      "stars": 367,
+      "language": "Swift",
+      "interest_tag": "CUA"
+    },
+    {
+      "name": "Kulaxyz/self-learning-skills",
+      "url": "https://github.com/Kulaxyz/self-learning-skills",
+      "tldr": "A meta-skill for AI coding agents (Claude Code, Cursor, AGENTS.md) that enables them to recognize hard-won problem-solving approaches within a session and automatically harvest those into reusable skills or rules for future runs. Targets the key limitation of stateless agents losing context between sessions.",
+      "tldr_zh": "用于 AI coding agent（Claude Code、Cursor、AGENTS.md）的元技能，让 agent 在会话中识别有价值的解题路径并自动提炼为可复用技能或规则。针对无状态 agent 跨会话丢失上下文这一核心限制。",
+      "stars": 308,
+      "language": "Markdown",
+      "interest_tag": "Memory"
+    },
+    {
+      "name": "eli-labz/Godcoder",
+      "url": "https://github.com/eli-labz/Godcoder",
+      "tldr": "Godcoder is a local-first, open-source desktop coding agent built with Rust and Tauri. Users bring their own LLM API key, and all code stays on their machine — only leaving to the model provider. It supports MCP integrations and positions itself as the privacy-preserving alternative to cloud-based coding agents.",
+      "tldr_zh": "Godcoder 是用 Rust 和 Tauri 构建的本地优先开源桌面 coding agent，用户自带 API Key，代码只离开设备到模型提供商。支持 MCP 集成，定位为云端 coding agent 的隐私保护替代品。",
+      "stars": 258,
+      "language": "Rust",
+      "interest_tag": ""
+    },
+    {
+      "name": "zunmax/ritual-agent-deployment",
+      "url": "https://github.com/zunmax/ritual-agent-deployment",
+      "tldr": "One-command deployment of a recurring, self-funding sovereign AI agent on Ritual testnet. Bridges AI agent execution with on-chain compute and funding mechanisms, enabling agents that can autonomously acquire resources to sustain their own operation on decentralized infrastructure.",
+      "tldr_zh": "一键在 Ritual 测试网部署自循环、自筹资金的主权 AI agent，将 AI agent 执行与链上计算和资金机制对接，实现能自主获取资源维持运行的去中心化 agent。",
+      "stars": 70,
+      "language": "PowerShell",
+      "interest_tag": ""
+    }
+  ],
+  "hackernews": [
+    {
+      "title": "Show HN: OpenKnowledge – open source AI-first alternative to Obsidian/Notion",
+      "url": "https://github.com/inkeep/open-knowledge",
+      "tldr": "OpenKnowledge is an open-source, AI-first alternative to knowledge management tools like Obsidian and Notion. It positions AI as the primary interface for organizing and querying personal knowledge, rather than as a bolt-on feature. The 380-point Show HN reception signals strong demand for privacy-preserving, AI-native PKM tools.",
+      "tldr_zh": "OpenKnowledge 是 Obsidian/Notion 的开源 AI 原生替代品，将 AI 作为知识管理的主要交互界面而非附加功能。380 票的 HN 热度验证了市场对隐私保护、AI 原生个人知识管理工具的强烈需求。",
+      "points": 380,
+      "num_comments": 173,
+      "interest_tag": ""
+    },
+    {
+      "title": "Ornith-1.0: self-improving open-source models for agentic coding",
+      "url": "https://github.com/deepreinforce-ai/Ornith-1",
+      "tldr": "Ornith-1.0 is an open-source self-improving model specifically designed for agentic coding tasks. It iteratively improves itself through agentic feedback loops, targeting the gap between static finetuned models and continuously improving proprietary systems like Claude or GPT for coding workflows.",
+      "tldr_zh": "Ornith-1.0 是专为 agentic coding 设计的开源自进化模型，通过 agent 反馈循环持续自我改进。填补了静态微调开源模型与 Claude/GPT 等持续改进闭源系统之间的差距。",
+      "points": 260,
+      "num_comments": 50,
+      "interest_tag": ""
+    },
+    {
+      "title": "Show HN: Smart model routing directly in Claude, Codex and Cursor",
+      "url": "https://github.com/workweave/router",
+      "tldr": "workweave/router provides smart LLM routing directly inside Claude, Codex, and Cursor workflows, automatically selecting the best model for each sub-task based on complexity and cost. This enables cost-optimized multi-model pipelines without changing developer workflow, addressing the growing overhead of managing multiple model subscriptions.",
+      "tldr_zh": "workweave/router 在 Claude、Codex、Cursor 工作流内实现智能 LLM 路由，根据任务复杂度和成本自动选择最优模型。无需改变开发者工作流即可实现多模型成本优化 pipeline，解决管理多个模型订阅的开销问题。",
+      "points": 212,
+      "num_comments": 112,
+      "interest_tag": ""
+    },
+    {
+      "title": "Micro-Agent: Beat Frontier Models with Collaboration Inside Model API",
+      "url": "https://vllm.ai/blog/2026-06-29-micro-agent-frontier-models",
+      "tldr": "vLLM's Micro-Agent demonstrates that multi-agent collaboration patterns implemented inside a single model API call can outperform frontier models on complex tasks at a fraction of the cost. By orchestrating small specialized agents within a unified serving stack, it challenges the assumption that capability requires larger single models.",
+      "tldr_zh": "vLLM 的 Micro-Agent 展示了在单次模型 API 调用内实现多 agent 协作模式，可在复杂任务上超越前沿大模型且成本更低。通过在统一 serving 栈内编排多个专用小 agent，挑战了「能力需要更大单一模型」的假设。",
+      "points": 78,
+      "num_comments": 21,
+      "interest_tag": "Agent Swarm"
+    },
+    {
+      "title": "Show HN: RLM-based local debugger for AI agent traces",
+      "url": "https://github.com/context-labs/halo",
+      "tldr": "Halo is an RLM-based local debugger for AI agent execution traces, providing structured visibility into agent reasoning chains, tool calls, and decision points. It addresses the growing need for observability and debugging tooling in complex multi-step agent workflows, analogous to what profilers do for code performance.",
+      "tldr_zh": "Halo 是基于 RLM 的 AI agent 执行轨迹本地调试器，提供对 agent 推理链、工具调用和决策节点的结构化可视化。解决了复杂多步 agent 工作流对可观测性和调试工具的迫切需求，类比代码性能的 profiler。",
+      "points": 27,
+      "num_comments": 10,
+      "interest_tag": ""
+    }
+  ]
+}
