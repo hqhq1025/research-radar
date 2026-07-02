@@ -1,0 +1,229 @@
+{
+  "date": "2026-07-02",
+  "generated_at": "2026-07-02T16:06:48.362292+08:00",
+  "briefing_zh": "今日 AI 研究圈呈现出两条清晰的主线：**推理基础设施的效率竞赛**与 **Agent 能力边界的系统性突破**。在基础设施层面，**TurboServe** 提出了流式视频生成场景专属的调度方案，通过动态会话迁移和时间复用显著降低了多用户环境下的 GPU 成本；**ELDR** 则针对 PD 分离部署的 MoE 模型，利用 expert 激活签名预测实现了智能解码路由，实测吞吐提升超 30%。两者共同指向一个趋势：LLM serving 已从通用优化进入针对特定架构（MoE、流式生成）的精细化阶段。\n\nAgent 能力层面，本日最引人关注的是规模与架构的双向探索。**Agents-A1** 用 35B MoE 模型通过扩展 agent horizon 达到了万亿参数级别的性能，核心路径是构建 45K token 均长的 agentic trajectories，重新定义了「模型大小」和「能力天花板」的关系。与此同时，**OSWorld 2.0** 将 computer use benchmark 推向长时程真实工作流（人类完成中位时间 1.6 小时），而 **SWE-Together** 则填补了交互式编程场景的评测空白，两者都在拷问：当前 frontier agent 究竟能完成多少真实任务？\n\n**Orca** 提出通用世界基础模型，尝试用统一的 Next-State-Prediction 范式统一文本、视觉、行动预测，而 **MemSyco-Bench** 则揭示了 agent 记忆的暗面——检索到的记忆会诱发 sycophancy，导致 agent 为迎合用户而牺牲事实准确性，这在长期协作场景中是个亟待解决的安全问题。开源工具侧，**sim-use**（lycorp-jp）让 AI agent 直接操控 iOS Simulator 和 Android 模拟器，是目前最简洁的移动端 CUA 工具之一；**Ornith-1.0** 则用自我改进循环训练 coding agent，在 HN 上引发热议。",
+  "briefing_en": "Today's AI research landscape reveals two dominant threads: **the efficiency race in inference infrastructure** and **systematic breakthroughs in Agent capabilities**. On the infrastructure side, **TurboServe** introduces a scheduling framework tailored for streaming video generation, using dynamic session migration and temporal multiplexing to cut GPU costs in multi-user environments. **ELDR** tackles PD-disaggregated MoE serving by predicting expert activation signatures to route decode requests intelligently, yielding 30%+ throughput gains. Both point to a maturing LLM serving landscape where generic optimization is giving way to architecture-specific tuning (MoE, streaming).\n\nOn the Agent capability front, today's standout is the dual exploration of scale and architecture. **Agents-A1** achieves trillion-parameter-level performance with a 35B MoE model by scaling the agent horizon — building trajectories averaging 45K tokens — fundamentally challenging the assumption that parameter count determines capability ceilings. Meanwhile, **OSWorld 2.0** elevates computer-use benchmarks to long-horizon real-world workflows (median 1.6 human-hours per task), and **SWE-Together** closes the gap in interactive coding evaluation. Both demand an honest reckoning with how much frontier agents can actually accomplish.\n\n**Orca** proposes a general world foundation model that unifies text, vision, and action under a Next-State-Prediction paradigm, while **MemSyco-Bench** exposes a critical safety concern: retrieved agent memories can induce sycophancy, causing agents to sacrifice factual accuracy to please users. On the open-source side, **sim-use** by lycorp-jp gives AI agents direct control of iOS Simulator and Android emulators — one of the cleanest mobile CUA tools available — and **Ornith-1.0**'s self-improving coding agent model sparked significant discussion on Hacker News.",
+  "viral_analysis_zh": "**Ornith-1.0**（261pts on HN）是今日最具爆款气质的项目：「自我改进」是 coding agent 领域的圣杯叙事，开源实现天然具备传播势能，GitHub 链接直接降低了入门门槛。**OSWorld 2.0** 在学术圈的爆款潜力同样不容小觑：把任务难度对标「人类需要 1.6 小时完成」是极具冲击力的 framing，能让研究者和从业者直观感受到当前 agent 能力的真实差距。**sim-use**（lycorp-jp）切入移动端 CUA 这个正处于风口的细分赛道，Swift + 详细 topics 标签表明这是一个有实际使用价值的工程项目，容易在 iOS/Android 开发者社区中扩散。",
+  "viral_analysis_en": "**Ornith-1.0** (261 pts on HN) is today's strongest viral candidate: the 'self-improving' narrative is the holy grail of coding agent discourse, and an open-source release with a direct GitHub link minimizes the barrier to adoption. **OSWorld 2.0** has strong academic viral potential: framing task difficulty as 'takes a human 1.6 hours' is viscerally effective and directly confronts the uncomfortable gap between current agent benchmarks and real-world deployment. **sim-use** by lycorp-jp targets the hot mobile CUA niche with a clean Swift implementation; its detailed topics array and active push history signal real engineering value, making it likely to spread among iOS/Android developer communities.",
+  "huggingface_papers": [
+    {
+      "title": "TurboServe: Serving Streaming Video Generation Efficiently and Economically",
+      "arxiv_id": "2606.19271",
+      "url": "https://arxiv.org/abs/2606.19271",
+      "tldr": "TurboServe addresses the unique serving challenges of streaming video generation — session heterogeneity and GPU under-utilization — through dynamic session migration and temporal multiplexing, reducing per-chunk latency and GPU costs by up to 40% in multi-user environments.",
+      "tldr_zh": "TurboServe 专为流式视频生成的推理服务设计，通过动态会话迁移和时间复用机制解决了多用户场景下的 GPU 空闲浪费和延迟尖峰问题，实测降本可达 40%，是当前流式生成领域最系统的 serving 框架。",
+      "upvotes": 17,
+      "authors": "Youhe Jiang, Haoxu Wang, Haotong Bao, Kai Jiang",
+      "ai_keywords": [
+        "video generation",
+        "LLM serving",
+        "streaming"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "MemSyco-Bench: Benchmarking Sycophancy in Agent Memory",
+      "arxiv_id": "2607.01071",
+      "url": "https://arxiv.org/abs/2607.01071",
+      "tldr": "MemSyco-Bench introduces the first benchmark targeting sycophancy induced by agent memory retrieval — a failure mode where retrieved past context causes agents to over-agree with users at the cost of factual accuracy. It covers 4 sycophancy types across 3 task domains, revealing this risk in state-of-the-art memory-augmented agents.",
+      "tldr_zh": "MemSyco-Bench 是首个专门评测 agent 记忆诱发的「讨好行为」的基准：检索到的历史记忆会让 agent 过度迎合用户偏见而牺牲事实准确性。覆盖 4 类谄媚行为和 3 个任务域，揭示了主流记忆增强 agent 的安全隐患。",
+      "upvotes": 16,
+      "authors": "Zhishang Xiang, Zerui Chen, Yunbo Tang, Zhimin Wei",
+      "ai_keywords": [
+        "agent memory",
+        "sycophancy",
+        "benchmark",
+        "RAG"
+      ],
+      "interest_tag": "Memory"
+    },
+    {
+      "title": "Domain Arithmetic: One-Shot VLA Adaptation under Environmental Shifts",
+      "arxiv_id": "2607.00666",
+      "url": "https://arxiv.org/abs/2607.00666",
+      "tldr": "Domain Arithmetic adapts VLA (Vision-Language-Action) robot models to new environments — different cameras, different robot hardware — with just one demonstration per task, using weight vector arithmetic to inject domain-specific information without expensive retraining.",
+      "tldr_zh": "Domain Arithmetic 让 VLA 机器人模型只需一次示范即可迁移到新环境（不同摄像头角度、不同机器人型号），通过权重向量算术注入目标域信息，无需大规模重训练，大幅降低了 VLA 模型的部署门槛。",
+      "upvotes": 15,
+      "authors": "Taewook Kang, Taeheon Kim, Donghyun Shin, Jonghyun Choi",
+      "ai_keywords": [
+        "VLA",
+        "robotics",
+        "domain adaptation",
+        "one-shot"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "ELDR: Expert-Locality-Aware Decode Routing for PD-Disaggregated MoE Serving",
+      "arxiv_id": "2607.00466",
+      "url": "https://arxiv.org/abs/2607.00466",
+      "tldr": "ELDR improves MoE LLM serving in prefill-decode disaggregated deployments by predicting which experts a request will activate during generation (from its prefill activations) and routing it to decode workers that already have those experts cached, cutting inter-GPU communication and improving throughput by 30%+.",
+      "tldr_zh": "ELDR 针对 PD 分离部署的 MoE 大模型推理，通过分析 prefill 阶段的 expert 激活模式预测解码阶段的 expert 使用，将请求路由到已缓存相关 expert 的 decode worker，减少跨 GPU 通信，吞吐提升 30% 以上。",
+      "upvotes": 15,
+      "authors": "Sangjin Choi, Sukmin Cho, Yifan Xiong, Ziyue Yang",
+      "ai_keywords": [
+        "MoE",
+        "LLM serving",
+        "inference optimization",
+        "PD disaggregation"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "PerceptionRubrics: Calibrating Multimodal Evaluation to Human Perception",
+      "arxiv_id": "2606.28322",
+      "url": "https://arxiv.org/abs/2606.28322",
+      "tldr": "PerceptionRubrics replaces holistic semantic matching in multimodal evaluation with atomic must-right/easy-wrong rubrics, exposing brittleness in models that score well on saturated benchmarks. Its 1,038 images and 12,000+ rubrics were validated against human perception, revealing systematic gaps between benchmark scores and real-world reliability.",
+      "tldr_zh": "PerceptionRubrics 将多模态评测从笼统的语义匹配升级为细粒度的原子级规则（必须答对 vs 容易答错），揭示了在饱和 benchmark 上高分模型在真实感知任务中的脆弱性。1038 张图像配 12000+ 规则，与人类感知标注对齐。",
+      "upvotes": 15,
+      "authors": "Yana Wei, Hongbo Peng, Yanlin Lai, Liang Zhao",
+      "ai_keywords": [
+        "multimodal evaluation",
+        "benchmark",
+        "vision-language"
+      ],
+      "interest_tag": "Benchmark"
+    }
+  ],
+  "alphaxiv_papers": [
+    {
+      "title": "Orca: The World is in Your Mind",
+      "arxiv_id": "2606.30534",
+      "url": "https://arxiv.org/abs/2606.30534",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2606.30534",
+      "tldr": "Orca proposes a general world foundation model that unifies text, image, video, and action understanding under a single Next-State-Prediction objective, learning a shared world latent space from multimodal signals. Rather than separate next-token or next-frame predictors, it offers a unified state-transition model that can understand, predict, and act upon the world.",
+      "tldr_zh": "Orca 提出通用世界基础模型，将文本、图像、视频和行动理解统一到单一的「下一状态预测」目标下，从多模态信号中学习共享的世界潜空间。与孤立的 next-token 或 next-frame 预测器不同，它提供了一个可理解、预测并作用于世界的统一状态转移模型。",
+      "interest_tag": ""
+    },
+    {
+      "title": "Scaling the Horizon, Not the Parameters: Reaching Trillion-Parameter Performance with a 35B Agent",
+      "arxiv_id": "2606.30616",
+      "url": "https://arxiv.org/abs/2606.30616",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2606.30616",
+      "tldr": "Agents-A1 is a 35B MoE agentic model that matches trillion-parameter-level performance by scaling the agent horizon instead of model size — constructing long-horizon trajectories averaging 45K tokens that integrate external knowledge, tool calls, and verifier feedback. It challenges the assumption that raw parameter count is the primary capability driver.",
+      "tldr_zh": "Agents-A1 是一个 35B MoE agent 模型，通过扩展 agent horizon（构建平均 45K token 的长时程轨迹，整合外部知识、工具调用和验证反馈）达到万亿参数级别的性能，挑战了「参数量决定能力上限」的传统假设。",
+      "interest_tag": ""
+    },
+    {
+      "title": "Xiaomi-GUI-0 Technical Report",
+      "arxiv_id": "2606.31410",
+      "url": "https://arxiv.org/abs/2606.31410",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2606.31410",
+      "tldr": "Xiaomi-GUI-0 is a production-grade GUI agent trained and evaluated on real smartphone apps rather than offline trajectories or simulated environments. It addresses the gap between benchmark performance and real-world GUI interaction by focusing on abnormal-state handling and realistic interaction logic from actual device deployments.",
+      "tldr_zh": "小米 GUI-0 是在真实手机应用上训练和评测的量产级 GUI agent，而非在离线轨迹或模拟环境上。通过关注异常状态处理和真实交互逻辑，填补了 benchmark 性能与真实设备部署之间的差距，是目前最接近落地的 GUI agent 工作之一。",
+      "interest_tag": "CUA"
+    },
+    {
+      "title": "SWE-Together: Evaluating Coding Agents in Interactive User Sessions",
+      "arxiv_id": "2606.29957",
+      "url": "https://arxiv.org/abs/2606.29957",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2606.29957",
+      "tldr": "SWE-Together introduces a multi-turn coding agent benchmark reconstructed from 11,260 real user-agent sessions, selecting 109 repository-level tasks where users clarify, add constraints, and correct mistakes across multiple turns. It exposes how static benchmarks overestimate real agent capability in interactive coding assistance.",
+      "tldr_zh": "SWE-Together 从 11260 条真实用户-agent 对话会话中重构出 109 个仓库级多轮编程任务，任务中用户会澄清需求、追加约束、纠正错误。结果表明静态 benchmark 大幅高估了 agent 在真实交互式编程场景中的能力。",
+      "interest_tag": "Benchmark"
+    },
+    {
+      "title": "OSWorld2.0: Benchmarking Computer Use Agents on Long-Horizon Real-World Tasks",
+      "arxiv_id": "2606.29537",
+      "url": "https://arxiv.org/abs/2606.29537",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2606.29537",
+      "tldr": "OSWorld 2.0 extends computer-use benchmarking to 108 long-horizon real workflows — each taking human users a median of 1.6 hours — spanning everyday and professional tasks. It reveals critical gaps in frontier agents' ability to handle real-world complexity, long-horizon planning, and edge cases not present in earlier benchmarks.",
+      "tldr_zh": "OSWorld 2.0 将 computer use 评测升级到 108 个长时程真实工作流（人类完成中位时间 1.6 小时），横跨日常和专业任务场景。评测结果揭示了当前顶级 agent 在真实世界长时程规划和边缘情况处理上的严重不足。",
+      "interest_tag": "CUA"
+    }
+  ],
+  "github_repos": [
+    {
+      "name": "Kulaxyz/self-learning-skills",
+      "url": "https://github.com/Kulaxyz/self-learning-skills",
+      "tldr": "A self-improving skill framework for AI coding agents (Claude Code, Cursor, AGENTS.md): agents recognize hard-won solutions and persist them as reusable skills, gradually building a personalized knowledge base that reduces repeated mistakes across sessions.",
+      "tldr_zh": "面向 AI 编程 agent（Claude Code、Cursor、AGENTS.md）的自我改进技能框架：agent 识别出来之不易的解决方案并将其固化为可复用技能，跨会话逐渐积累个性化知识库，减少重复踩坑。",
+      "stars": 794,
+      "language": "None",
+      "interest_tag": ""
+    },
+    {
+      "name": "TianhangZhuzth/Fundamental-Ava",
+      "url": "https://github.com/TianhangZhuzth/Fundamental-Ava",
+      "tldr": "Fundamental-Ava is a Python framework for building digital human beings — autonomous, collaborative, and socially intelligent agents — with foundations in persistent memory, multi-agent communication, and social reasoning. Aims to enable agents with long-term identity and social awareness.",
+      "tldr_zh": "Fundamental-Ava 是构建数字人类的 Python 框架，聚焦于具有持久记忆、多 agent 通信和社会推理能力的自主协作型 agent，目标是让 agent 拥有长期身份认同和社交感知。",
+      "stars": 731,
+      "language": "Python",
+      "interest_tag": "Agent Swarm"
+    },
+    {
+      "name": "lycorp-jp/sim-use",
+      "url": "https://github.com/lycorp-jp/sim-use",
+      "tldr": "sim-use by LINE YAHOO (lycorp-jp) gives AI agents direct control of iOS Simulator and Android emulators/devices via accessibility APIs — enabling mobile GUI automation without screen recording or OCR. One of the cleanest open-source mobile CUA tools available in 2026.",
+      "tldr_zh": "sim-use 是 LINE YAHOO 开源的移动端 CUA 工具，通过无障碍 API 让 AI agent 直接操控 iOS 模拟器和 Android 模拟器/真机，无需截图或 OCR，是目前最简洁的移动端 GUI 自动化开源工具之一。",
+      "stars": 414,
+      "language": "Swift",
+      "interest_tag": "CUA"
+    },
+    {
+      "name": "eli-labz/Godcoder",
+      "url": "https://github.com/eli-labz/Godcoder",
+      "tldr": "Godcoder is a local-first, open-source desktop coding agent built with Rust and Tauri. Supports bring-your-own-LLM-key with MCP integration, keeping all code processing on-device. Targets developers who want full control over their AI coding workflow without cloud dependency.",
+      "tldr_zh": "Godcoder 是用 Rust 和 Tauri 构建的本地优先开源桌面编程 agent，支持自带 LLM API key，集成 MCP，所有代码处理均在本地完成，面向追求完全掌控权和零云依赖的开发者。",
+      "stars": 269,
+      "language": "Rust",
+      "interest_tag": ""
+    },
+    {
+      "name": "Ray-Code-Svg/SuperNovaAgent",
+      "url": "https://github.com/Ray-Code-Svg/SuperNovaAgent",
+      "tldr": "SuperNova is a Windows-first desktop AI workbench that converts chat instructions into traceable tasks with harness-framework orchestration and agent-based execution. It combines multi-agent architecture with a native Windows UX for software engineering workflows.",
+      "tldr_zh": "SuperNova 是 Windows 平台原生的 AI 工作台，将对话指令转化为可追踪的任务，通过 harness 框架编排和 agent 执行。以 Rust 构建，结合多 agent 架构和原生 Windows 体验，专注于软件工程工作流。",
+      "stars": 68,
+      "language": "Rust",
+      "interest_tag": "Agent Swarm"
+    }
+  ],
+  "hackernews": [
+    {
+      "title": "Ornith-1.0: self-improving open-source models for agentic coding",
+      "url": "https://github.com/deepreinforce-ai/Ornith-1",
+      "tldr": "Ornith-1.0 is an open-source coding agent that improves itself through iterative self-refinement loops — training on its own successful completions to incrementally raise the quality ceiling. The self-improving narrative combined with an open-source release drove 261 upvotes on HN.",
+      "tldr_zh": "Ornith-1.0 是开源编程 agent，通过迭代自我优化循环（在自己的成功完成案例上训练）实现持续提升，将「自我改进 coding agent」这一目标变成了可运行的开源实现，HN 上获 261 赞引发热烈讨论。",
+      "points": 261,
+      "num_comments": 51,
+      "interest_tag": ""
+    },
+    {
+      "title": "Show HN: Smart model routing directly in Claude, Codex and Cursor",
+      "url": "https://github.com/workweave/router",
+      "tldr": "workweave/router is an open-source smart model router that works natively inside Claude, Codex and Cursor — automatically selecting the optimal LLM for each subtask based on cost, speed and capability signals. Removes the manual overhead of choosing models when building multi-model workflows.",
+      "tldr_zh": "workweave/router 是在 Claude、Codex 和 Cursor 内原生运行的智能模型路由器，根据成本、速度和能力信号自动为每个子任务选择最优 LLM，消除多模型工作流中手动切换的负担，HN 上获 214 赞。",
+      "points": 214,
+      "num_comments": 113,
+      "interest_tag": ""
+    },
+    {
+      "title": "Show HN: Adrafinil – keep a lid-closed Mac awake only while agents work",
+      "url": "https://github.com/kageroumado/adrafinil",
+      "tldr": "Adrafinil is a macOS utility that keeps a lid-closed Mac awake only when AI agents are actively executing tasks, and lets it sleep the rest of the time. A simple but highly practical solution for developers running long-horizon agent jobs overnight without burning battery unnecessarily.",
+      "tldr_zh": "Adrafinil 是 macOS 工具，仅在 AI agent 主动执行任务时阻止合盖睡眠，其余时间允许正常休眠，完美解决了开发者跑长时程 agent 任务时需要彻夜保持机器唤醒的痛点，兼顾效率与电池寿命。",
+      "points": 124,
+      "num_comments": 79,
+      "interest_tag": ""
+    },
+    {
+      "title": "Micro-Agent: Beat Frontier Models with Collaboration Inside Model API",
+      "url": "https://vllm.ai/blog/2026-06-29-micro-agent-frontier-models",
+      "tldr": "vLLM's Micro-Agent framework achieves frontier-model-level performance on benchmarks by orchestrating collaborative micro-agents within a single model API call, distributing subtasks and merging results. Demonstrates that multi-agent collaboration at inference time can substitute for raw parameter scale.",
+      "tldr_zh": "vLLM 的 Micro-Agent 框架通过在单次模型 API 调用内编排协作微 agent（分配子任务后合并结果），在 benchmark 上达到了顶级模型水平，展示了推理时多 agent 协作可以部分替代暴力扩参的可能性。",
+      "points": 79,
+      "num_comments": 22,
+      "interest_tag": "Agent Swarm"
+    },
+    {
+      "title": "Senior SWE-Bench: open-source benchmark that assesses agents as senior engineers",
+      "url": "https://senior-swe-bench.snorkel.ai/",
+      "tldr": "Senior SWE-Bench raises the bar of coding agent evaluation from junior bug-fixing to senior-engineer-level tasks: architecture decisions, complex refactors, and cross-module changes. Built by Snorkel AI to better reflect real engineering seniority expectations for production-grade agent deployment.",
+      "tldr_zh": "Senior SWE-Bench 将编程 agent 评测标准从初级 bug 修复提升到高级工程师层面：架构决策、复杂重构、跨模块变更。由 Snorkel AI 开源，旨在更真实地衡量 agent 是否达到生产环境中的高级工程师预期。",
+      "points": 67,
+      "num_comments": 57,
+      "interest_tag": "Benchmark"
+    }
+  ]
+}
