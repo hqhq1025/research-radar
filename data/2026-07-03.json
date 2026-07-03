@@ -1,0 +1,226 @@
+{
+  "date": "2026-07-03",
+  "generated_at": "2026-07-03T16:07:39.011799+08:00",
+  "briefing_zh": "今天的 AI 研究日报聚焦于 agent 系统的全面推进——从内存管理到 GUI 操作，从训练方法到基准测试，整个技术栈都在同步演进。\n\n核心趋势一：**Agent 的记忆与状态管理**正成为研究热点。**AgenticSTS** 提出了有界内存测试环境，直接挑战「把所有历史追加到 prompt 里」的常规做法，强调内存合同（memory contract）才是长流程 agent 的核心约束。**AutoMem** 则把文件系统操作提升为一等公民的记忆动作，让模型自己决定存什么、取什么，把认知科学的元记忆（metamemory）概念引入 LLM 领域。\n\n核心趋势二：**Agent 的自我进化能力**研究爆发。**EvoPolicyGym** 构建了首个专门评估 agent 通过反馈自主演化可执行策略的基准，填补了现有评测将「最终得分」与「演化过程」混为一谈的空白。**Agents-A1** 展示了 35B MoE 模型通过 horizon 扩展而非参数扩展达到万亿参数级性能，提出了一条比单纯堆参数更经济的扩展路径。**Xiaomi-GUI-0** 来自小米的 GUI agent 技术报告，表明大厂已开始在真实应用场景中大规模部署和验证 GUI agent 能力。\n\n在开源生态方面，**Ornith-1.0** 的 261 分 HN 热榜成绩令人印象深刻——作为自我改进 agentic 编程模型，它直接挑战闭源巨头，反映社区对开源 agent 基础模型的强烈需求。**Senior SWE-Bench** 也在社区引发热议，将 agent 的代码能力标准从「完成任务」提升到「高级工程师」水准，是对现有 SWE-bench 类测试的重要升维。**Program-as-Weights** 则提出了全新范式：用神经网络权重来编码模糊函数，取代传统 if/else 规则，为「规则难以编写」类任务提供新思路。",
+  "briefing_en": "Today's digest shows a broad push across the agent stack — from memory and state management to GUI automation, training methods, and evaluation. The field is moving in lockstep.\n\nThe headline trend is **agent memory and bounded-context research**. **AgenticSTS** introduces a bounded-memory testbed that explicitly challenges the naive \"append everything to context\" approach, framing memory as a contract governing what future decisions are allowed to see. **AutoMem** takes a complementary angle: it promotes file-system operations to first-class memory actions, letting models learn metamemory as a trainable skill — deciding what to encode, when to retrieve, and how to organize knowledge.\n\n**Agent self-evolution** is the second major theme. **EvoPolicyGym** provides the first dedicated benchmark for evaluating policy evolution through feedback, exposing a gap in existing evaluations that collapse the process into a single final score. **Agents-A1** (35B MoE) demonstrates that scaling the agent horizon — not just parameters — can reach trillion-parameter-level performance, a more economical path than brute-force model scaling. **Xiaomi-GUI-0** marks a significant milestone: a major manufacturer shipping a technical report on GUI agents operating in real production applications, validating commercial deployability of end-to-end GUI automation.\n\nIn the open-source community, **Ornith-1.0** lit up HN with 261 points as a self-improving open-source agentic coding model, reflecting genuine community appetite for open alternatives to frontier closed-source coding assistants. **Senior SWE-Bench** raised the bar for agent evaluation from \"complete the task\" to \"perform as a senior engineer,\" prompting significant HN discussion about what we're really measuring. **Program-as-Weights** introduces a novel programming paradigm: encoding fuzzy functions — log alerting, JSON repair, intent ranking — directly as neural network weights rather than brittle rule sets.",
+  "viral_analysis_zh": "**Ornith-1.0** 以 261 分登 HN 首页，是本周最具爆款潜力的项目。它击中了社区最敏感的神经：开源 vs 闭源之争叠加「模型自我改进」叙事，标题中的「self-improving」和「agentic coding」是当前最高密度的流量关键词组合，直接切中 AI 编程工具的痛点。**Senior SWE-Bench** 则以 171 分和 108 条评论证明「基准测试争议」永远能引发讨论——把 agent 定位为「高级工程师」而非「完成任务的机器人」重新定义了评估框架，激发了大量「我们是否高估/低估了 AI 编程能力」的讨论。",
+  "viral_analysis_en": "**Ornith-1.0** topped HN with 261 points — the perfect viral formula: \"open-source\" plus \"self-improving\" plus \"agentic coding\" in a single title, landing squarely at the intersection of the open/closed-source wars and the self-play training hype cycle, directly addressing the core pain point of expensive frontier coding assistants. **Senior SWE-Bench** pulled 171 points and 108 comments by reframing the coding agent debate: calling it a \"senior engineer\" benchmark rather than a task-completion metric provoked strong reactions about whether current benchmarks genuinely measure professional-grade engineering capability.",
+  "huggingface_papers": [
+    {
+      "title": "Program-as-Weights: A Programming Paradigm for Fuzzy Functions",
+      "arxiv_id": "2607.02512",
+      "url": "https://arxiv.org/abs/2607.02512",
+      "tldr": "Proposes encoding 'fuzzy functions' — tasks like log alerting, JSON repair, and intent ranking that resist clean rule-based implementation — directly as neural network weights (a trained model), instead of if/else code. The model IS the program; parameters ARE the logic. Demonstrates this approach on practical software engineering tasks where rule-based solutions fail or degrade over time.",
+      "tldr_zh": "提出「程序即权重」范式：对日志告警、JSON 修复、意图排序等难以用规则编写的「模糊函数」，直接将神经网络权重作为程序本体。这条路线下，模型的参数就是程序逻辑，绕开了规则维护的脆弱性，在实际软件工程场景中展示了比传统 if/else 更稳定的性能。",
+      "upvotes": 33,
+      "authors": "Wentao Zhang, Liliana Hotsko, Woojeong Kim",
+      "ai_keywords": [
+        "programming paradigm",
+        "fuzzy functions",
+        "neural weights"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "AgenticSTS: A Bounded-Memory Testbed for Long-Horizon LLM Agents",
+      "arxiv_id": "2607.02255",
+      "url": "https://arxiv.org/abs/2607.02255",
+      "tldr": "Introduces AgenticSTS, a testbed for evaluating long-horizon agents under strict bounded memory — where the agent cannot simply append all past observations and tool calls to the context. Frames memory as a contract specifying what future decisions are allowed to see, enabling systematic study of memory compression, summarization, and retrieval strategies in realistic long-horizon tasks.",
+      "tldr_zh": "提出 AgenticSTS 有界内存测试环境，专门评估 agent 在无法无限堆积历史的约束下的长流程性能。将内存定义为「合同」——明确规定哪些过去信息可见于未来决策，系统化研究内存压缩、摘要和检索策略在真实长流程任务中的影响。",
+      "upvotes": 27,
+      "authors": "Xiangchen Cheng, Yunwei Jiang, Jianwen Sun",
+      "ai_keywords": [
+        "bounded memory",
+        "long-horizon agent",
+        "memory contract"
+      ],
+      "interest_tag": "Memory"
+    },
+    {
+      "title": "EvoPolicyGym: Evaluating Autonomous Policy Evolution in Interactive Environments",
+      "arxiv_id": "2607.02440",
+      "url": "https://arxiv.org/abs/2607.02440",
+      "tldr": "Builds the first benchmark specifically for evaluating how well agents autonomously evolve their executable policies through environmental feedback, without conflating policy evolution with open-ended generation quality. Exposes a critical gap: existing benchmarks collapse the evolution process into a single final score, hiding whether the agent is actually learning to improve its policies or just getting lucky.",
+      "tldr_zh": "构建首个专门评估 agent 自主演化可执行策略的基准 EvoPolicyGym，不将「演化过程」与「开放式生成质量」混为一谈。揭示关键盲区：现有基准把策略演化过程压缩为最终得分，无法区分 agent 是真正在学习改进，还是碰巧命中。",
+      "upvotes": 26,
+      "authors": "Zhilin Wang, Han Song, Runzhe Zhan",
+      "ai_keywords": [
+        "policy evolution",
+        "agent evaluation",
+        "interactive benchmark"
+      ],
+      "interest_tag": "Benchmark"
+    },
+    {
+      "title": "AgenticDataBench: A Comprehensive Benchmark for Data Agents",
+      "arxiv_id": "2607.01647",
+      "url": "https://arxiv.org/abs/2607.01647",
+      "tldr": "Presents AgenticDataBench, a comprehensive benchmark for evaluating data science agents across the full pipeline: data cleaning, analysis, visualization, and insight generation from heterogeneous real-world datasets. Tests both task completion quality and the agent's ability to handle ambiguous specifications and noisy inputs, providing a more realistic view of deployable data agent capabilities.",
+      "tldr_zh": "发布 AgenticDataBench，全面评估数据科学 agent 在完整流程中的能力：从脏数据清洗、分析、可视化到洞察生成，跨越多种真实世界异构数据集。重点测试 agent 面对模糊规格和噪声输入的鲁棒性，提供比现有基准更贴近实际部署的评测视角。",
+      "upvotes": 17,
+      "authors": "Zhaoyan Sun, Shan Zhong, Daizhou Wen",
+      "ai_keywords": [
+        "data science agent",
+        "benchmark",
+        "heterogeneous data"
+      ],
+      "interest_tag": "Benchmark"
+    },
+    {
+      "title": "WorldDirector: Building Controllable World Simulators with Persistent Dynamic Memory",
+      "arxiv_id": "2607.02517",
+      "url": "https://arxiv.org/abs/2607.02517",
+      "tldr": "Introduces WorldDirector, a video world model framework with persistent dynamic object memory that enables unrestricted viewpoint exploration without recomputing the full scene. Decouples object memory from viewpoint rendering, allowing fine-grained control over individual scene elements and enabling editing-style manipulation of persistent world simulations for both gaming and robotics applications.",
+      "tldr_zh": "提出 WorldDirector 可控视频世界模型框架，配备持久动态对象记忆，支持不受限制的视角探索而无需重新渲染完整场景。将对象记忆与视角渲染解耦，实现对独立场景元素的精细控制，适用于游戏和机器人领域的持久世界仿真编辑。",
+      "upvotes": 11,
+      "authors": "Hanlin Wang, Hao Ouyang, Qiuyu Wang",
+      "ai_keywords": [
+        "world model",
+        "video generation",
+        "persistent memory"
+      ],
+      "interest_tag": ""
+    }
+  ],
+  "alphaxiv_papers": [
+    {
+      "title": "Orca: The World is in Your Mind",
+      "arxiv_id": "2606.30534",
+      "url": "https://arxiv.org/abs/2606.30534",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2606.30534",
+      "tldr": "Introduces Orca, a general world foundation model that learns a unified world latent space from multimodal signals (vision, language, action) and exposes it through multimodal readout interfaces. Replaces isolated next-token/next-frame/next-action prediction objectives with a unified Next-State-Prediction paradigm, enabling a single model to serve as a shared cognitive substrate across modalities and tasks.",
+      "tldr_zh": "发布 Orca，通用世界基础模型，从多模态信号（视觉、语言、动作）学习统一世界潜空间，通过多模态读出接口暴露能力。以统一的「下一状态预测」范式取代碎片化的下一 token/帧/动作预测目标，使单一模型成为跨模态任务的共享认知基础。",
+      "interest_tag": ""
+    },
+    {
+      "title": "Scaling the Horizon, Not the Parameters: Reaching Trillion-Parameter Performance with a 35B Agent",
+      "arxiv_id": "2606.30616",
+      "url": "https://arxiv.org/abs/2606.30616",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2606.30616",
+      "tldr": "Presents Agents-A1, a 35B MoE model that reaches trillion-parameter-level performance by scaling the agent horizon — extending the reach and diversity of long-horizon trajectories — rather than scaling raw parameter count. Introduces a long-horizon knowledge-action infrastructure connecting external knowledge, tools, and heterogeneous agent abilities, providing a more economical scaling path.",
+      "tldr_zh": "发布 Agents-A1，35B MoE 模型通过扩展 agent horizon（延伸长流程轨迹的范围和多样性）而非堆砌参数，实现万亿参数级性能。构建长流程知识-动作基础设施，连接外部知识、工具和异构 agent 能力，提供比单纯参数扩展更经济的路径。",
+      "interest_tag": ""
+    },
+    {
+      "title": "Xiaomi-GUI-0 Technical Report",
+      "arxiv_id": "2606.31410",
+      "url": "https://arxiv.org/abs/2606.31410",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2606.31410",
+      "tldr": "Xiaomi's technical report on GUI-0, their end-to-end GUI agent built on vision-language models for completing real user tasks in production mobile apps via tapping, swiping, text entry, and navigation. Highlights the significant gap between offline trajectory training and real-application deployment, and presents solutions for handling real-app diversity, dynamic UIs, and continuous user feedback at scale.",
+      "tldr_zh": "小米发布 GUI-0 GUI agent 技术报告，基于视觉语言模型在生产环境真实移动 App 中执行端到端任务（点击、滑动、文字输入、导航）。重点揭示离线轨迹训练与真实应用部署之间的巨大鸿沟，并提出应对真实 App 多样性、动态 UI 和持续用户反馈的解决方案。",
+      "interest_tag": "CUA"
+    },
+    {
+      "title": "TRIAGE: Role-Typed Credit Assignment for Agentic Reinforcement Learning",
+      "arxiv_id": "2606.32017",
+      "url": "https://arxiv.org/abs/2606.32017",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2606.32017",
+      "tldr": "TRIAGE addresses a core flaw in agentic RL training: standard GRPO assigns uniform advantage to all action tokens based on the final outcome, which both punishes useful exploration in failed rollouts and reinforces redundant actions in successful ones. TRIAGE introduces role-typed credit assignment — differentiating between environment-facing actions (searches, clicks, edits) by their structural role — to provide a more accurate training signal for real-world agent tasks.",
+      "tldr_zh": "TRIAGE 解决 agentic RL 训练的核心缺陷：标准 GRPO 用最终结果对所有动作 token 施加均等优势，导致失败轨迹中的有效探索受惩罚、成功轨迹中的冗余动作被强化。TRIAGE 引入角色类型化信用分配，按结构角色区分不同类型的环境动作（搜索、点击、编辑），提供更精确的训练信号。",
+      "interest_tag": ""
+    },
+    {
+      "title": "AutoMem: Automated Learning of Memory as a Cognitive Skill",
+      "arxiv_id": "2607.01224",
+      "url": "https://arxiv.org/abs/2607.01224",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2607.01224",
+      "tldr": "AutoMem treats memory management itself as a trainable skill for LLMs, inspired by cognitive science's concept of metamemory. Promotes file-system operations (read, write, organize) to first-class agent actions alongside task actions, letting the model learn when to memorize, what to retrieve, and how to structure long-term knowledge — rather than relying on manually-designed memory architectures.",
+      "tldr_zh": "AutoMem 将记忆管理本身作为可训练的认知技能引入 LLM，灵感来自认知科学的元记忆概念。将文件系统操作（读写组织）提升为与任务动作并列的一等公民 agent 动作，让模型自主学习何时记忆、取什么、如何组织长期知识，而非依赖人工设计的记忆架构。",
+      "interest_tag": "Memory"
+    }
+  ],
+  "github_repos": [
+    {
+      "name": "Kulaxyz/self-learning-skills",
+      "url": "https://github.com/Kulaxyz/self-learning-skills",
+      "tldr": "A self-improving skill framework for AI coding agents (Claude Code, Cursor, AGENTS.md): detects hard-won problem-solving patterns during a session and automatically encodes them as reusable skills for future agent runs. Closes the loop between one-off debugging breakthroughs and durable agent capability improvement — the agent gets smarter from its own experience.",
+      "tldr_zh": "面向 AI 编程 agent（Claude Code、Cursor、AGENTS.md）的自我改进技能框架：在会话中检测来之不易的问题解决模式，自动将其编码为可复用技能供未来 agent 调用。将一次性调试突破转化为持久 agent 能力提升，让 agent 从自身经验中变得更强。",
+      "stars": 932,
+      "language": "None",
+      "interest_tag": ""
+    },
+    {
+      "name": "eli-labz/Godcoder",
+      "url": "https://github.com/eli-labz/Godcoder",
+      "tldr": "Local-first, open-source desktop coding agent built in Rust. Users bring their own LLM API key; all code stays on-device, no cloud execution or data leakage. Positions itself as a privacy-preserving alternative to cloud-based coding assistants, with a native desktop UI and direct LLM integration.",
+      "tldr_zh": "本地优先的开源桌面编程 agent，用 Rust 构建。用户自带 LLM API key，所有代码留在本地，无云端执行和数据外泄。定位为云端编程助手的隐私保护替代品，提供原生桌面 UI 和直接 LLM 集成。",
+      "stars": 272,
+      "language": "Rust",
+      "interest_tag": ""
+    },
+    {
+      "name": "Zsun79/ConferenceWatch",
+      "url": "https://github.com/Zsun79/ConferenceWatch",
+      "tldr": "An agent skill that monitors deadlines for the latest AI conferences. Automatically tracks submission, notification, and camera-ready dates for top ML/AI venues, and can alert researchers as deadlines approach. A focused single-purpose agent tool addressing a real pain point for academic researchers.",
+      "tldr_zh": "专门追踪最新 AI 会议截止日期的 agent 技能。自动跟踪顶级 ML/AI 会议的投稿、录用通知和最终版提交时间，在截止日期临近时提醒研究者。针对学术研究者真实痛点的专项 agent 工具。",
+      "stars": 121,
+      "language": "None",
+      "interest_tag": ""
+    },
+    {
+      "name": "xuanxuan321/xuanxuan-prompts",
+      "url": "https://github.com/xuanxuan321/xuanxuan-prompts",
+      "tldr": "A curated collection of prompts for AI agents to replicate beautiful web page designs. Each directory contains a prompt.md and screenshot; drop it into Claude/Codex/Kimi to generate the corresponding website. Targets the UI replication use case where visual fidelity matters, with real examples and output screenshots included.",
+      "tldr_zh": "AI agent 复刻精美网页的提示词合集，每个目录一份 prompt.md 加效果截图，丢给 Claude/Codex/Kimi 即可生成对应网站。针对视觉保真度要求高的 UI 复刻场景，附带真实效果截图验证。",
+      "stars": 106,
+      "language": "Shell",
+      "interest_tag": ""
+    },
+    {
+      "name": "Ray-Code-Svg/SuperNovaAgent",
+      "url": "https://github.com/Ray-Code-Svg/SuperNovaAgent",
+      "tldr": "SuperNova is a Windows-first desktop AI workbench built in Rust that converts chat conversations into traceable, auditable tasks. Combines a native desktop interface with task execution tracking, targeting users who want LLM-driven task automation with full observability of what the agent actually did — not just what it said.",
+      "tldr_zh": "SuperNova 是 Windows 优先的 Rust 桌面 AI 工作台，将对话转化为可追溯的任务。结合原生桌面界面与任务执行追踪，目标用户是需要 LLM 驱动任务自动化同时要求完整可审计性的用户——关注 agent 实际做了什么，而非只看它说了什么。",
+      "stars": 96,
+      "language": "Rust",
+      "interest_tag": ""
+    }
+  ],
+  "hackernews": [
+    {
+      "title": "Ornith-1.0: self-improving open-source models for agentic coding",
+      "url": "https://github.com/deepreinforce-ai/Ornith-1",
+      "tldr": "Ornith-1.0 is an open-source coding model that improves itself through agentic self-play: the model generates code tasks, solves them, evaluates its own outputs, and trains on the good ones — no human curation required. It directly challenges frontier closed-source coding models, and its 261-point HN debut signals strong community appetite for open-weight self-improving coding agents.",
+      "tldr_zh": "Ornith-1.0 是通过 agentic 自我博弈自我改进的开源编程模型：模型生成代码任务、自行解决、评估输出，并在好的样本上训练——无需人工标注。直接挑战闭源前沿编程模型，HN 261 分首秀表明社区对开源自我改进编程 agent 的强烈需求。",
+      "points": 261,
+      "num_comments": 51,
+      "interest_tag": ""
+    },
+    {
+      "title": "Senior SWE-Bench: open-source benchmark that assesses agents as senior engineers",
+      "url": "https://senior-swe-bench.snorkel.ai/",
+      "tldr": "Senior SWE-Bench extends the SWE-Bench paradigm by evaluating coding agents against tasks that require senior engineering judgment: architectural decisions, cross-module refactoring, understanding undocumented legacy code, and writing maintainable solutions rather than just passing tests. Raises the bar from task completion to professional engineering quality, generating significant debate about how far current agents actually are from senior-level work.",
+      "tldr_zh": "Senior SWE-Bench 将 SWE-Bench 评估标准提升到高级工程师层次：架构决策、跨模块重构、理解无文档遗留代码、编写可维护方案而非仅通过测试。从「完成任务」升级到「专业工程质量」，引发关于当前 agent 距高级工程师水准究竟有多远的激烈讨论。",
+      "points": 171,
+      "num_comments": 108,
+      "interest_tag": "Benchmark"
+    },
+    {
+      "title": "Launch HN: Manufact (YC S25) – MCP Cloud",
+      "url": "https://manufact.com",
+      "tldr": "Manufact is a YC-backed MCP (Model Context Protocol) cloud platform that hosts and manages MCP servers as a managed service, removing the self-hosting overhead for teams that want to give LLMs tool access at scale. Targets the growing adoption of MCP as a standard agent-tool integration layer, offering reliability, auth, and observability that self-hosted MCP deployments lack.",
+      "tldr_zh": "Manufact 是 YC 支持的 MCP（模型上下文协议）云平台，以托管服务形式运营 MCP server，消除团队自托管的运维负担。目标是 MCP 作为 agent 工具集成标准层的增长趋势，提供自托管 MCP 缺乏的可靠性、鉴权和可观测性。",
+      "points": 107,
+      "num_comments": 63,
+      "interest_tag": ""
+    },
+    {
+      "title": "Micro-Agent: Beat Frontier Models with Collaboration Inside Model API",
+      "url": "https://vllm.ai/blog/2026-06-29-micro-agent-frontier-models",
+      "tldr": "vLLM blog post presenting Micro-Agent, which achieves frontier-model-level performance by running collaborative sub-agents within a single model API call rather than chaining separate API calls. Demonstrates that structured intra-call agent collaboration (planning, execution, verification micro-agents) can close the gap with larger models at lower latency and cost.",
+      "tldr_zh": "vLLM 博客介绍 Micro-Agent，通过在单个模型 API 调用内运行协作子 agent 而非串联独立 API 调用，实现前沿模型级别性能。证明结构化的 API 内 agent 协作（规划、执行、验证微型 agent）可以在更低延迟和成本下缩小与更大模型的差距。",
+      "points": 80,
+      "num_comments": 22,
+      "interest_tag": "Agent Swarm"
+    },
+    {
+      "title": "OpenWiki: CLI that writes and maintains agent documentation for your codebase",
+      "url": "https://github.com/langchain-ai/openwiki",
+      "tldr": "LangChain's OpenWiki is a CLI tool that automatically generates and maintains agent-readable documentation for codebases — producing structured wiki pages that coding agents can efficiently navigate and reference. Addresses the key challenge that most codebases are poorly documented for LLM consumption, where agents either hallucinate structure or burn tokens exploring files.",
+      "tldr_zh": "LangChain 出品的 OpenWiki CLI 工具，自动为代码库生成和维护 agent 可读文档——产出结构化 wiki 页面供编程 agent 高效导航和引用。解决大多数代码库对 LLM 而言文档质量极差的核心问题：agent 要么产生幻觉，要么浪费大量 token 探索文件结构。",
+      "points": 44,
+      "num_comments": 11,
+      "interest_tag": ""
+    }
+  ]
+}
