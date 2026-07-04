@@ -1,0 +1,226 @@
+{
+  "date": "2026-07-04",
+  "generated_at": "2026-07-04T16:09:20.120167+08:00",
+  "briefing_zh": "今天的 AI 研究界呈现出一个共同主题：**Agent 的自主化与可进化性**。三篇来自 HuggingFace 的高票论文不约而同地指向同一个问题——如何让 agent 真正持续改进，而不只是在固定能力上打分。**EvoPolicyGym** 提出了「自主策略进化」这一评估范式，将 agent 反复修改可执行策略并从反馈中学习的全过程单独建模，而非把最终结果折叠为一个分数；**AgenticSTS** 则从记忆约束的角度切入，构建了一个 bounded-memory testbed，让研究者能够隔离分析不同记忆组件对 long-horizon 任务的影响。两者合力指出：现有 agent benchmark 低估了「能力持续进化」这个维度的难度。\n\n在方法论创新方面，**Program-as-Weights** 是本周最独特的工作——它将那些「用规则写不清楚、用 LLM API 又太贵」的模糊函数（如日志重要性过滤、意图匹配排序）编译为自包含的神经网络权重文件，在本地推理时既有 LLM 的泛化能力又有传统函数的可部署性和可复现性。这个「模糊函数编译器」的概念值得关注，它填补了规则引擎与大模型 API 之间的空白地带。\n\nalphaxiv 本周的热榜同样聚焦 Agent 能力边界。**Orca** 提出了统一世界基础模型，试图通过 Next-State-Prediction 把多模态世界信号统一建模；**Agents-A1** 用一个 35B MoE 模型证明了「scaling agent horizon」（水平扩展任务轨迹与异构能力）可以媲美万亿参数模型的性能，打破了「只有更大模型才更强」的直觉。此外，**TRIAGE** 针对 agentic RL 中的信用分配问题提出了 role-typed 策略，避免对失败 rollout 中有效探索行为的错误惩罚，对 Agent RL 训练工程有直接价值。\n\nGitHub 生态方面，本周最值得关注的是两类截然不同的项目：一是 **self-learning-skills**（813★），这是一个面向 AI 编程 agent（Claude Code、Cursor）的自我进化提示词技能框架，教 agent 识别「黄金路径」并将其固化为可复用规则，呼应了今日研究界对「持续进化 agent」的关注；二是 **open-connector**，通过 MCP/SDK/OpenAPI 统一接入 1000+ SaaS 服务，把权限管理和 OAuth 从 agent 里抽象出来，是当前 agent 工程实践中急需的基础设施层。Hacker News 上，**Senior SWE-Bench**（179pts）火爆全场——它把 SWE-Bench 的难度升级到「高级工程师」水平，直接刺痛了当前 AI coding agent 能力宣称的泡沫，引发大量讨论；而扎克伯格承认 AI agent 开发「比预期慢」的采访也引发了业界反思。",
+  "briefing_en": "Today's AI research landscape converges on a single theme: **the autonomy and evolvability of agents**. Three high-upvote HuggingFace papers collectively tackle the same question—how to make agents genuinely improve over time, rather than just scoring well on fixed-capability benchmarks. **EvoPolicyGym** introduces \"Autonomous Policy Evolution\" as an evaluation paradigm, modeling the full loop of an agent repeatedly editing executable policies and learning from feedback rather than collapsing it into a final score. **AgenticSTS** approaches the problem from a memory-constraint angle, building a bounded-memory testbed that lets researchers isolate the effect of individual memory components on long-horizon tasks. Together they suggest that current agent benchmarks severely underestimate the difficulty of sustained capability evolution.\n\nOn the methodological innovation front, **Program-as-Weights** stands out as the week's most original idea—it compiles \"fuzzy functions\" (log-line importance filtering, intent-ranked search results) that are too nuanced for rule-based code yet too expensive for LLM APIs, into self-contained neural network weight files. These compiled fuzzy functions offer LLM-like generalization with the reproducibility and deployability of traditional software. This \"fuzzy function compiler\" concept fills a real gap between rule engines and LLM APIs.\n\nThe alphaxiv hot list similarly probes agent capability boundaries. **Orca** proposes a unified world foundation model, centering on Next-State-Prediction to unify multimodal world signals into a single latent space. **Agents-A1** demonstrates that a 35B MoE model can match trillion-parameter performance by scaling the agent horizon (long trajectories plus heterogeneous capabilities), challenging the intuition that bigger models are always better. Meanwhile, **TRIAGE** addresses credit assignment in agentic RL with role-typed advantage estimation, preventing the erroneous penalization of useful exploration in failed rollouts—directly useful for agent RL training pipelines.\n\nIn the GitHub ecosystem, two contrasting types of repos stand out. **self-learning-skills** (813★) is a meta-skill framework for AI coding agents (Claude Code, Cursor) that teaches agents to recognize \"golden paths\" in sessions and harvest them as reusable rules—directly echoing today's research focus on continually evolving agents. **open-connector** provides a unified SaaS auth gateway for 1000+ providers via MCP/SDK/OpenAPI, abstracting OAuth and permission management out of agent code—a critical infrastructure layer for current agent engineering practice. On Hacker News, **Senior SWE-Bench** (179pts) exploded—it raises the difficulty bar to \"senior engineer\" level tasks and directly punctures the hype around current AI coding agent capabilities, triggering broad discussion. Zuckerberg's admission that AI agent development is \"going slower than expected\" further fueled the industry soul-searching.",
+  "viral_analysis_zh": "**Senior SWE-Bench**（179pts，112条评论）是今天当之无愧的爆款。它的爆点非常精准：用「高级工程师」这个身份锚点重新框定了现有 AI coding agent 能力评测的天花板，让所有人都能立刻感受到「差距在哪里」。标题里的「Senior」二字就是传播密码——开发者看到后立刻想测自己用的 agent 够不够格，媒体看到后立刻有角度写「AI 距离替代高级工程师还差多远」。**Program-as-Weights** 有潜力成为本周的技术爆款：它解决了一个每个工程师都能 relate 的痛点——那些「规则写不清、API 太贵」的边界场景——并给出了一个概念清晰、命名优雅的解决方案，很适合技术博客和推特传播。",
+  "viral_analysis_en": "**Senior SWE-Bench** (179pts, 112 comments) is today's undisputed viral hit. Its hook is surgical: reframing existing AI coding agent benchmarks through the identity anchor of \"senior engineer\" makes the capability gap instantly relatable. The word \"Senior\" in the title is the distribution key—developers immediately want to know if their agent qualifies, and journalists immediately have an angle (\"how far is AI from replacing senior engineers?\"). **Program-as-Weights** has breakout potential as this week's technical viral hit: it solves a pain point every engineer can relate to—those edge cases too nuanced for rules but too expensive for LLM APIs—and delivers a crisp, elegantly named concept that's tailor-made for tech blog posts and Twitter threads.",
+  "huggingface_papers": [
+    {
+      "title": "Program-as-Weights: A Programming Paradigm for Fuzzy Functions",
+      "arxiv_id": "2607.02512",
+      "url": "https://arxiv.org/abs/2607.02512",
+      "tldr": "Introduces 'fuzzy-function programming': a paradigm that compiles natural-language-specified fuzzy functions (log alerting, intent-ranked search, malformed JSON repair) into self-contained neural network weight files. The compiled model runs locally without LLM API calls, delivering reproducibility and cost efficiency while preserving generalization. Core innovation: treating the trained neural network itself as the deployable artifact, not the prompt.",
+      "tldr_zh": "提出「模糊函数编程」范式：把那些用规则写不清楚（如日志重要性过滤、意图匹配排序）的自然语言规格编译成自包含的神经网络权重文件。编译后的模型可本地运行，无需 LLM API 调用，兼具泛化能力与可复现性。核心创新：把训练完的神经网络本身当作可部署制品，而非提示词。",
+      "upvotes": 63,
+      "authors": "Wentao Zhang, Liliana Hotsko, Woojeong Kim, Pengyu Nie, Stuart Shieber",
+      "ai_keywords": [
+        "fuzzy functions",
+        "program synthesis",
+        "neural compilation"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "EvoPolicyGym: Evaluating Autonomous Policy Evolution in Interactive Environments",
+      "arxiv_id": "2607.02440",
+      "url": "https://arxiv.org/abs/2607.02440",
+      "tldr": "Introduces Autonomous Policy Evolution as a controlled evaluation paradigm: an agent repeatedly edits executable policies via feedback in interactive environments, assessed separately from open-ended engineering tasks. EvoPolicyGym isolates the full improvement loop and reveals that current agents struggle to generalize policy edits across environment variations, exposing a gap in existing benchmarks that collapse learning into a single score.",
+      "tldr_zh": "提出「自主策略进化」评估范式：agent 在交互环境中反复修改可执行策略并从反馈中学习，全过程独立建模，不折叠为单一分数。EvoPolicyGym 揭示了当前 agent 难以在环境变体间泛化策略修改的问题，暴露了现有 benchmark 低估持续进化能力的根本缺陷。",
+      "upvotes": 41,
+      "authors": "Zhilin Wang, Han Song, Runzhe Zhan, Jusen Du, Jiacheng Chen",
+      "ai_keywords": [
+        "agent evaluation",
+        "policy evolution",
+        "reinforcement learning"
+      ],
+      "interest_tag": "Benchmark"
+    },
+    {
+      "title": "AgenticSTS: A Bounded-Memory Testbed for Long-Horizon LLM Agents",
+      "arxiv_id": "2607.02255",
+      "url": "https://arxiv.org/abs/2607.02255",
+      "tldr": "Proposes AgenticSTS, a testbed that instruments long-horizon LLM agents with bounded-memory constraints — each future decision can only access a defined memory contract. Unlike unlimited-context approaches, this isolates and measures the contribution of individual memory components (observations, tool calls, reflections) to task success. Results show that current agents rely heavily on raw observation dumps rather than efficient memory compression.",
+      "tldr_zh": "提出 AgenticSTS，一个为 long-horizon LLM agent 配备 bounded-memory 约束的测试平台——每次决策只能访问预定义的记忆契约。与无限上下文方案不同，这一设计能够隔离测量各记忆组件（观察、工具调用、反思）对任务成功率的贡献。结果表明当前 agent 严重依赖原始观察堆积，而非高效的记忆压缩。",
+      "upvotes": 41,
+      "authors": "Xiangchen Cheng, Yunwei Jiang, Jianwen Sun, Zizhen Li, Chuanhao Li",
+      "ai_keywords": [
+        "memory management",
+        "long-horizon agents",
+        "LLM agents"
+      ],
+      "interest_tag": "Memory"
+    },
+    {
+      "title": "AgenticDataBench: A Comprehensive Benchmark for Data Agents",
+      "arxiv_id": "2607.01647",
+      "url": "https://arxiv.org/abs/2607.01647",
+      "tldr": "Introduces AgenticDataBench, a comprehensive benchmark for evaluating LLM-based data agents across heterogeneous raw data processing tasks. The benchmark covers data cleaning, transformation, analysis, and insight derivation steps individually, revealing that current agents excel at structured queries but fail on multi-step reasoning over messy, real-world data schemas. Provides a standardized evaluation harness for data science automation research.",
+      "tldr_zh": "推出 AgenticDataBench，专门评估基于 LLM 的数据 agent 在异构原始数据处理任务上的能力。Benchmark 分步评估数据清洗、转换、分析和洞察提取，发现当前 agent 擅长结构化查询但在杂乱现实数据上的多步推理中频繁失败。为数据科学自动化研究提供了标准化评测框架。",
+      "upvotes": 24,
+      "authors": "Zhaoyan Sun, Shan Zhong, Daizhou Wen, Jiaxing Han, Guoliang Li",
+      "ai_keywords": [
+        "data agents",
+        "benchmark",
+        "data science automation"
+      ],
+      "interest_tag": "Benchmark"
+    },
+    {
+      "title": "SkillCoach: Self-Evolving Rubrics for Evaluating and Enhancing Agentic Skill-Use",
+      "arxiv_id": "2607.01874",
+      "url": "https://arxiv.org/abs/2607.01874",
+      "tldr": "SkillCoach addresses skill-use reliability in LLM agents where overlapping skill repositories make selection difficult. It automatically generates and refines fine-grained evaluation rubrics that decompose final task success into intermediate skill-selection checkpoints. By training agents on these self-evolving rubrics, SkillCoach improves skill-use accuracy significantly over baselines that rely only on final verifier signals.",
+      "tldr_zh": "SkillCoach 解决的是 LLM agent 在重叠技能库中难以可靠选技能的问题。它自动生成并迭代优化细粒度评测量规，将最终任务成功分解为技能选择的中间检查点。在这些自进化量规上训练后，agent 的技能使用准确率显著优于只依赖最终验证信号的基线。",
+      "upvotes": 14,
+      "authors": "Authors from SkillCoach team",
+      "ai_keywords": [
+        "skill-use",
+        "agentic learning",
+        "rubric generation"
+      ],
+      "interest_tag": ""
+    }
+  ],
+  "alphaxiv_papers": [
+    {
+      "title": "Orca: The World is in Your Mind",
+      "arxiv_id": "2606.30534",
+      "url": "https://arxiv.org/abs/2606.30534",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2606.30534",
+      "tldr": "Orca is a general world foundation model that learns a unified world latent space from multimodal signals and exposes it through multimodal readout interfaces. Centered on Next-State-Prediction rather than isolated next-token/frame/action objectives, it offers a unified state-transition modeling route applicable across perception, planning, and action domains. With 3318 visits and 147 votes, it's the hottest paper on alphaxiv this week.",
+      "tldr_zh": "Orca 是一个通用世界基础模型，从多模态世界信号中学习统一的世界潜在空间，并通过多模态读出接口暴露。以 Next-State-Prediction 为核心，而非孤立的 next-token/帧/动作目标，为感知、规划和行动领域提供统一的状态转移建模路径。本周 alphaxiv 最热，3318 次访问，147 票。",
+      "interest_tag": ""
+    },
+    {
+      "title": "Scaling the Horizon, Not the Parameters: Reaching Trillion-Parameter Performance with a 35B Agent",
+      "arxiv_id": "2606.30616",
+      "url": "https://arxiv.org/abs/2606.30616",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2606.30616",
+      "tldr": "Agents-A1 is a 35B Mixture-of-Experts model that matches trillion-parameter-level performance by scaling the agent horizon rather than model size. Two key axes: scaling long-horizon trajectories (deeper task execution) and scaling heterogeneous agent abilities (broader capability repertoire). Demonstrates that agent-horizon scaling is a viable alternative to parameter scaling for reaching frontier performance.",
+      "tldr_zh": "Agents-A1 是一个 35B MoE 模型，通过扩展 agent horizon 而非模型规模来匹配万亿参数级性能。两个关键维度：扩展长程轨迹（更深的任务执行）和扩展异构 agent 能力（更广的能力谱）。证明 agent-horizon scaling 是达到前沿性能的可行替代路径。",
+      "interest_tag": ""
+    },
+    {
+      "title": "AdaJEPA: An Adaptive Latent World Model",
+      "arxiv_id": "2606.32026",
+      "url": "https://arxiv.org/abs/2606.32026",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2606.32026",
+      "tldr": "AdaJEPA addresses the failure mode of frozen world models under test-time distribution shift: when predictions become inaccurate, planning degrades. It introduces test-time adaptation for latent world models, allowing the model to continuously update its predictions based on discrepancies between predicted and observed states. Evaluated on long-horizon manipulation tasks where standard JEPA-style models fail under domain shift.",
+      "tldr_zh": "AdaJEPA 解决了冻结世界模型在测试时分布偏移下的失败模式：预测不准时规划就崩溃。通过引入 test-time adaptation，模型基于预测与观察状态的差异持续更新，在标准 JEPA 模型因领域迁移而失败的 long-horizon 操控任务上取得显著提升。",
+      "interest_tag": ""
+    },
+    {
+      "title": "TRIAGE: Role-Typed Credit Assignment for Agentic Reinforcement Learning",
+      "arxiv_id": "2606.32017",
+      "url": "https://arxiv.org/abs/2606.32017",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2606.32017",
+      "tldr": "TRIAGE proposes role-typed credit assignment for agentic RL to fix GRPO's structural flaw: applying uniform final-outcome advantages over all action tokens punishes useful exploration in failed rollouts and reinforces redundant steps in successful ones. By assigning different credit weights based on action roles (exploration vs. execution), TRIAGE produces more precise gradient signals and faster agent improvement across web navigation and coding tasks.",
+      "tldr_zh": "TRIAGE 为 agentic RL 提出 role-typed 信用分配，修复 GRPO 的结构性缺陷：对所有 action token 施加统一最终结果优势，会错误惩罚失败 rollout 中的有效探索，也会强化成功 rollout 中的冗余步骤。通过按动作角色（探索 vs 执行）分配不同信用权重，TRIAGE 在网页导航和编程任务上产生更精准的梯度信号，加速 agent 进化。",
+      "interest_tag": ""
+    },
+    {
+      "title": "FARS: A Fully Automated Research System Deployed at Scale",
+      "arxiv_id": "2606.31651",
+      "url": "https://arxiv.org/abs/2606.31651",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2606.31651",
+      "tldr": "FARS is a fully automated AI-for-AI research system that generates hypotheses, runs experiments, and writes complete manuscripts at scale across multiple research topics simultaneously — not just selected examples. Unlike prior systems limited to hand-framed topics, FARS operates across diverse AI research sub-fields and produces peer-reviewable drafts. The work raises important questions about the future role of human researchers in the AI research loop.",
+      "tldr_zh": "FARS 是一个完全自动化的 AI-for-AI 研究系统，可在多个研究课题上同时规模化生成假设、运行实验并撰写完整论文——而非仅处理精选示例。与之前仅限于人工框定课题的系统不同，FARS 跨多个 AI 研究子领域运行，产出可同行评审的草稿，引发对人类研究者未来角色的深层思考。",
+      "interest_tag": ""
+    }
+  ],
+  "github_repos": [
+    {
+      "name": "Kulaxyz/self-learning-skills",
+      "url": "https://github.com/Kulaxyz/self-learning-skills",
+      "tldr": "A meta-skill framework for AI coding agents (Claude Code, Cursor, AGENTS.md) that teaches the agent to recognize a hard-won 'golden path' during a session and automatically harvest it into a reusable skill or rule for future sessions. Addresses a core limitation of stateless AI assistants: they solve the same hard problems repeatedly instead of accumulating institutional knowledge. 813 stars in under a week shows strong developer resonance.",
+      "tldr_zh": "面向 AI 编程 agent（Claude Code、Cursor、AGENTS.md）的元技能框架，教 agent 识别当前会话中的「黄金路径」并自动将其固化为可复用技能或规则。解决了无状态 AI 助手的核心限制：反复解决同样的难题，而非积累知识资本。不到一周 813 颗星，开发者共鸣极强。",
+      "stars": 813,
+      "language": "",
+      "interest_tag": ""
+    },
+    {
+      "name": "lingbol088-spec/reverse-flow-skill",
+      "url": "https://github.com/lingbol088-spec/reverse-flow-skill",
+      "tldr": "A structured reverse-engineering workflow skill for AI agents (Codex, Claude Code), designed for local CTF, crackme, and wargame sandboxes. Activates a dedicated reverse engineering mode with a defined progression: Analyze → Report → Reverse → Deep Reverse → Vulnerability Assessment → User Decision. With 326 stars and 181 forks, the high fork ratio indicates genuine hands-on adoption.",
+      "tldr_zh": "面向 AI agent（Codex、Claude Code）的结构化逆向工程工作流技能，专为本地 CTF、crackme 和 wargame 沙盒设计。激活后按「分析 → 报告 → 逆向 → 深度逆向 → 漏洞研判 → 用户决策」流程推进。326 颗星、181 个 fork，高 fork 率表明真实上手使用率高。",
+      "stars": 326,
+      "language": "Python",
+      "interest_tag": ""
+    },
+    {
+      "name": "Evolink-AI/Awesome-Blender-Seedance-Workflow-Usecases",
+      "url": "https://github.com/Evolink-AI/Awesome-Blender-Seedance-Workflow-Usecases",
+      "tldr": "A curated collection of Blender + Seedance 2.0 workflows for AI-assisted filmmaking, covering previs, camera control, Blender MCP integration, reference video generation, and agent-guided production use cases. Bridges the gap between 3D pipeline tools and the latest AI video generation APIs, making state-of-the-art AI filmmaking accessible to Blender artists.",
+      "tldr_zh": "Blender + Seedance 2.0 工作流案例合集，覆盖 AI 辅助影视制作的预视、摄像机控制、Blender MCP 集成、参考视频生成和 agent 引导制作等场景。弥合了 3D 制作工具链与最新 AI 视频生成 API 之间的鸿沟，让 Blender 艺术家也能用上最先进的 AI 影视制作能力。",
+      "stars": 295,
+      "language": "Python",
+      "interest_tag": ""
+    },
+    {
+      "name": "xuanxuan321/xuanxuan-prompts",
+      "url": "https://github.com/xuanxuan321/xuanxuan-prompts",
+      "tldr": "A collection of prompt templates for AI agents to replicate visually stunning web pages: each directory contains a prompt.md plus effect screenshots that can be handed directly to Claude/Codex/Kimi to generate the corresponding website. Focuses on high-fidelity UI reproduction rather than generic web development, addressing a growing demand for AI-assisted front-end design replication.",
+      "tldr_zh": "AI agent 复刻精美网页的提示词合集：每个目录包含一份 prompt.md 和效果截图，直接丢给 Claude/Codex/Kimi 即可生成对应网站。聚焦高保真 UI 复刻而非通用网页开发，契合当前 AI 辅助前端设计复刻的旺盛需求。",
+      "stars": 112,
+      "language": "Shell",
+      "interest_tag": ""
+    },
+    {
+      "name": "oomol-lab/open-connector",
+      "url": "https://github.com/oomol-lab/open-connector",
+      "tldr": "Open-source auth gateway that connects 1000+ SaaS providers to AI agents through a unified SDK, CLI, MCP (Model Context Protocol), HTTP, and OpenAPI interface. Abstracts OAuth flows, token management, and permission scoping out of agent code—a critical missing infrastructure layer in current AI agent engineering. Self-hostable on Cloudflare Workers.",
+      "tldr_zh": "开源 auth gateway，通过统一的 SDK、CLI、MCP、HTTP 和 OpenAPI 接口将 1000+ SaaS 服务接入 AI agent。把 OAuth 流程、token 管理和权限范围抽象到 agent 代码之外——这是当前 AI agent 工程实践中急需的基础设施层。可自托管在 Cloudflare Workers 上。",
+      "stars": 67,
+      "language": "TypeScript",
+      "interest_tag": ""
+    }
+  ],
+  "hackernews": [
+    {
+      "title": "Senior SWE-Bench: open-source benchmark that assesses agents as senior engineers",
+      "url": "https://senior-swe-bench.snorkel.ai/",
+      "tldr": "Senior SWE-Bench elevates the difficulty ceiling of software engineering benchmarks to tasks requiring senior engineer-level judgment: architectural decisions, cross-repo changes, and complex bug diagnosis requiring deep codebase understanding. Current top AI coding agents score dramatically lower on this benchmark than on standard SWE-Bench, puncturing capability claims and igniting broad debate about where AI coding assistance actually stands.",
+      "tldr_zh": "Senior SWE-Bench 将软件工程 benchmark 的难度上限提升至需要高级工程师判断力的任务：架构决策、跨 repo 变更和需要深度代码库理解的复杂 bug 诊断。当前顶级 AI 编程 agent 在此 benchmark 上的得分远低于标准 SWE-Bench，直接刺穿了能力宣称的泡沫，引发广泛讨论。",
+      "points": 179,
+      "num_comments": 112,
+      "interest_tag": "Benchmark"
+    },
+    {
+      "title": "Launch HN: Manufact (YC S25) – MCP Cloud",
+      "url": "https://manufact.com",
+      "tldr": "Manufact (YC S25) is launching an MCP (Model Context Protocol) cloud platform that lets developers deploy, manage, and scale MCP servers as a managed service. Addresses the operational complexity of hosting MCP integrations in production: authentication, rate limiting, monitoring, and multi-tenant isolation. The YC backing and 108 upvotes signal strong market validation for MCP infrastructure-as-a-service.",
+      "tldr_zh": "Manufact（YC S25）推出 MCP 云平台，让开发者以托管服务方式部署、管理和扩展 MCP server。解决了生产环境中托管 MCP 集成的运维复杂性：身份认证、限流、监控和多租户隔离。YC 背书和 108 票表明 MCP IaaS 市场被强烈看好。",
+      "points": 108,
+      "num_comments": 69,
+      "interest_tag": ""
+    },
+    {
+      "title": "Agentic coding notes from Galapagos Island",
+      "url": "https://danluu.com/ai-coding/#appendix-agentic-loops-and-writing-this-post",
+      "tldr": "Dan Luu's candid field notes on using agentic coding loops in practice, written from Galapagos Island. Documents real failure modes — context bloat, compounding errors in agentic loops, and the gap between benchmark performance and real-world usefulness — with characteristic Luu rigor. The contrast between the exotic location and grounded critique of AI hype makes for compelling reading that cuts through marketing narratives.",
+      "tldr_zh": "Dan Luu 在加拉帕戈斯岛写就的 agentic 编程实践坦率笔记。记录了真实失败模式——上下文膨胀、agentic 循环中的误差叠加、benchmark 表现与真实可用性之间的鸿沟——笔法一如既往的严格。异域取景与对 AI 炒作的接地气批判形成鲜明对比，是难得的清醒声音。",
+      "points": 63,
+      "num_comments": 21,
+      "interest_tag": ""
+    },
+    {
+      "title": "Zuckerberg says AI agent development going slower than expected",
+      "url": "https://www.reuters.com/business/zuckerberg-says-ai-agent-development-going-slower-than-expected-2026-07-02/",
+      "tldr": "In a Reuters interview, Mark Zuckerberg acknowledged that Meta's AI agent development is progressing more slowly than originally anticipated. The admission — from one of the most bullish public figures on AI agent timelines — carries significant weight and sparked industry-wide reflection on the gap between agent demos and production-ready systems. Combined with Senior SWE-Bench's reality check, today was a reckoning day for AI agent capability hype.",
+      "tldr_zh": "扎克伯格在接受路透社采访时承认，Meta 的 AI agent 开发进展比预期慢。这一承认来自业内对 AI agent 时间线最乐观的公众人物之一，分量十足，引发了业界对 agent demo 与生产就绪系统之间差距的广泛反思。结合 Senior SWE-Bench 的现实校准，今天是 AI agent 能力炒作的一个清算日。",
+      "points": 51,
+      "num_comments": 64,
+      "interest_tag": ""
+    },
+    {
+      "title": "OpenWiki: CLI that writes and maintains agent documentation for your codebase",
+      "url": "https://github.com/langchain-ai/openwiki",
+      "tldr": "OpenWiki (from LangChain) is a CLI tool that automatically generates and maintains documentation for AI agent codebases — tracking tool definitions, agent configurations, prompt templates, and chain structures. As agent codebases grow complex, documentation debt becomes a serious obstacle to both human and AI debugging. OpenWiki addresses this by making codebase documentation an active, auto-maintained artifact rather than a neglected afterthought.",
+      "tldr_zh": "OpenWiki（来自 LangChain）是一个 CLI 工具，自动生成并维护 AI agent 代码库的文档——追踪工具定义、agent 配置、提示词模板和链结构。随着 agent 代码库日趋复杂，文档债务已成为人类和 AI 调试的严重障碍。OpenWiki 把代码库文档变成主动维护的制品而非被遗忘的事后补丁。",
+      "points": 44,
+      "num_comments": 12,
+      "interest_tag": ""
+    }
+  ]
+}
