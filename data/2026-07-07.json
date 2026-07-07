@@ -1,0 +1,229 @@
+{
+  "date": "2026-07-07",
+  "generated_at": "2026-07-07T16:05:30.461721+08:00",
+  "briefing_zh": "今日 HuggingFace 日榜被 **ResearchStudio** 系列论文双双领跑——**ResearchStudio-Reel**（34票）和 **ResearchStudio-Idea**（31票）来自同一微软研究团队，前者打通论文→海报/视频/博客的「最后一公里」自动化流水线，后者则构建了一套基于文献证据的研究创意生成框架。两者共同指向同一个方向：AI 辅助科研从「辅助阅读」升级为「辅助产出」。\n\n体现化 AI 与 Embodied 系统方向今日异常活跃。**GigaWorld-1** 提出用世界模型替代真实机器人在线测评的路线图，**EVA-Client** 则提供了从数据采集到真机部署的一体化框架；**InternVLA-A1.5** 把语义理解、潜在预见和动作控制三者统一进一个策略网络。这波工作反映了 robotics 社区正在加速向「闭环自主」迈进。\n\nGUI Agent 方向今日有重要进展：**UI-MOPD** 引入多平台在线策略蒸馏方案，用于解决跨平台 GUI Agent 持续学习中的数据稀缺与遗忘问题，同时在 alphaxiv 热榜高位出现，是今日跨两大榜单的稀有选手。alphaxiv 热榜还特别突出了 **AutoMem**（自动化记忆认知技能学习）和 **CompactionRL**（长视野 agent 的上下文压缩 RL 训练），两者均是 agent memory 与长程规划能力的核心技术突破。\n\nHacker News 今日最热话题是 Zuckerberg 公开承认「AI agent 进展慢于预期」（335票），直接引发 600 余条讨论，成为本周 AI 领域最大的舆论事件。**The Hitchhiker's Guide to Agentic AI** 以 48 票入选技术深度阅读榜，**OfficeCLI** 作为给 AI agent 操作微软 Office 的工具库成为本日最值得关注的开源新项目。GitHub 方向，**T3MP3ST**（2821 星）——一个多 agent 红队攻击平台异军突起，而 **openscience** 则以开源 AI 科研工作台的定位吸引了接近千星的关注。",
+  "briefing_en": "Today's HuggingFace leaderboard was dominated by the **ResearchStudio** series — **ResearchStudio-Reel** (34 upvotes) and **ResearchStudio-Idea** (31 upvotes), both from the same Microsoft Research team. The former automates the \"last mile\" of research dissemination (paper → poster/video/blog), while the latter builds an evidence-grounded research ideation framework. Together they signal a clear trend: AI-assisted research is graduating from reading support to output generation.\n\nEmbodied AI saw unusually heavy activity today. **GigaWorld-1** proposes a roadmap for using world models as robot policy evaluators (replacing costly real-world rollouts), **EVA-Client** delivers an end-to-end framework from data collection to real robot deployment, and **InternVLA-A1.5** unifies semantic understanding, latent foresight, and action control in a single policy network. These works collectively suggest the robotics community is accelerating toward closed-loop autonomy.\n\nGUI Agent research also made a notable mark: **UI-MOPD** introduces multi-platform on-policy distillation to address data scarcity and forgetting in cross-platform GUI agents, and appears on both HuggingFace and alphaxiv — a rare double placement. On the alphaxiv Hot feed, **AutoMem** (treating memory management as a learnable cognitive skill) and **CompactionRL** (RL training with context compaction for long-horizon agents) stand out as key advances in agent memory and long-range planning.\n\nHacker News was dominated by Zuckerberg's frank admission that AI agent development is going slower than expected (335 pts, 600+ comments), triggering the week's biggest public AI debate. **The Hitchhiker's Guide to Agentic AI** and **OfficeCLI** (a tool for AI agents to read/edit Microsoft Office files) round out the discussion. On GitHub, **T3MP3ST** (2,821 stars) — a multi-agent red teaming platform — surged to the top, and **openscience** attracted nearly 1,000 stars as an open AI workbench for scientific research.",
+  "viral_analysis_zh": "**Zuckerberg 承认 AI agent 进展慢于预期**是本周最大的爆款事件——来自 Reuters 的一则企业内部表态，在 HN 获得 335 票和 600+ 评论，之后 TechCrunch 的跟进报道又补了 133 票。这类「大佬坦诚泼冷水」内容天然具有传播性：它与公众的体感共鸣（agent 确实还很难用），又能引发技术和商业两个社群的广泛讨论。**T3MP3ST** 的 2821 星爆发则代表另一类爆款公式：「AI 安全红队」叙事 + 多 agent 系统 + 代码直接可用，精准命中安全/研究/工程三类受众，一周内冲到榜首。",
+  "viral_analysis_en": "**Zuckerberg admitting AI agent progress is slower than expected** was this week's biggest viral moment — a single internal staff comment reported by Reuters earned 335 HN points and 600+ comments, with TechCrunch's follow-up adding another 133. This \"powerful figure gives honest cold water\" content naturally spreads: it resonates with users' lived experience (agents are still frustrating) and sparks simultaneous debate across tech and business communities. **T3MP3ST**'s 2,821-star surge represents the other viral formula: \"AI security red teaming\" narrative + multi-agent system + ready-to-run code = three audiences (security, research, engineering) in one shot, hitting the top of the weekly chart.",
+  "huggingface_papers": [
+    {
+      "title": "ResearchStudio-Reel: Automate the Last Mile of Research from Paper to Poster, Video, and Blog",
+      "arxiv_id": "2607.04438",
+      "url": "https://arxiv.org/abs/2607.04438",
+      "tldr": "ResearchStudio-Reel is a multi-agent pipeline that automates the 'last mile' of research dissemination — taking an academic paper and automatically generating a poster, talk video, and blog post. Unlike prior work that treats each artifact in isolation, it shares a common extracted representation across all three formats, outputs editable PowerPoint/Word files (not static renders), and runs with a single command. Evaluated on 100 recent ML conference papers, it significantly reduces manual effort while maintaining quality.",
+      "tldr_zh": "ResearchStudio-Reel 是一个多智能体流水线，将学术论文自动转化为海报、演讲视频和博客文章三种传播形式。区别于以往各自独立处理的方案，它共用统一提取的论文表示，输出可二次编辑的 PowerPoint/Word 文件，支持一键运行。在 100 篇 ML 会议论文上的评测显示，它大幅降低了研究者的传播工作量。",
+      "upvotes": 34,
+      "authors": "Lingao Xiao, Yalun Dai, Yangyu Huang, Qihao Zhao",
+      "ai_keywords": [
+        "research automation",
+        "multi-agent",
+        "dissemination"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "UI-MOPD: Multi-Platform On-Policy Distillation for Continual GUI Agent Learning",
+      "arxiv_id": "2607.04425",
+      "url": "https://arxiv.org/abs/2607.04425",
+      "tldr": "UI-MOPD tackles the challenge of training GUI agents that can operate across multiple platforms (web, desktop, mobile) without forgetting previously learned skills. It introduces Multi-Platform On-Policy Distillation: collecting new interaction trajectories on-policy per platform while using a teacher model to distill cross-platform knowledge, preventing catastrophic forgetting. Experiments on major GUI benchmarks show it outperforms existing continual learning baselines significantly.",
+      "tldr_zh": "UI-MOPD 解决了 GUI Agent 跨平台持续学习中的数据稀缺与灾难性遗忘问题。方法核心是多平台在线策略蒸馏：在每个平台上采集在线交互轨迹，同时用教师模型蒸馏跨平台知识。在主流 GUI benchmark 上明显优于现有持续学习基线，是目前跨 Web/桌面/移动端 GUI Agent 的最强方案之一。",
+      "upvotes": 33,
+      "authors": "Niu Lian, Alan Chen, Zhehao Yu, Chengzhen Duan",
+      "ai_keywords": [
+        "GUI agent",
+        "continual learning",
+        "on-policy distillation",
+        "multi-platform"
+      ],
+      "interest_tag": "CUA"
+    },
+    {
+      "title": "ResearchStudio-Idea: An Evidence-Grounded Research-Ideation Skill Suite from ML Conference Outcomes",
+      "arxiv_id": "2607.04439",
+      "url": "https://arxiv.org/abs/2607.04439",
+      "tldr": "ResearchStudio-Idea provides an AI-powered research ideation suite that grounds every generated idea in evidence from recent ML conference papers. The system decomposes the ideation process into structured steps: literature grounding, bottleneck identification, differentiation analysis, and idea ranking — moving beyond simple LLM brainstorming toward rigorous, evidence-backed proposal generation. Evaluated on ML conference outcomes, the ideas generated show substantially higher novelty and feasibility than baseline approaches.",
+      "tldr_zh": "ResearchStudio-Idea 构建了一套以 ML 会议论文证据为基础的 AI 研究创意生成框架。系统将创意生成拆解为文献定位、瓶颈识别、差异化分析、创意排序等结构化步骤，超越了简单 LLM 头脑风暴。以 ML 会议成果为评测标准，生成创意的新颖性和可行性均显著优于基线方法。",
+      "upvotes": 31,
+      "authors": "Qihao Zhao, Yangyu Huang, Yalun Dai, Lingao Xiao",
+      "ai_keywords": [
+        "research ideation",
+        "evidence grounding",
+        "LLM",
+        "research automation"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "GigaWorld-1: A Roadmap to Build World Models for Robot Policy Evaluation",
+      "arxiv_id": "2607.02642",
+      "url": "https://arxiv.org/abs/2607.02642",
+      "tldr": "GigaWorld-1 presents a roadmap for using AI world models as cost-effective substitutes for real-world robot evaluation. Current robot policy assessment requires expensive physical hardware and human supervision; world models can simulate these rollouts digitally. The paper identifies key technical gaps — physical realism, generalization, and rollout length — and provides a structured path from today's limited simulators to future high-fidelity evaluation environments.",
+      "tldr_zh": "GigaWorld-1 提出以 AI 世界模型替代真实机器人评测的路线图，解决当前机器人策略评估依赖昂贵硬件和人工监督的瓶颈。论文梳理了当前世界模型在物理真实性、泛化能力和推演长度三方面的技术差距，并给出从现有受限仿真器走向高保真评测环境的结构化路径。",
+      "upvotes": 26,
+      "authors": "GigaWorld Team, Angyuan Ma, Boyuan Wang, Bohan Li",
+      "ai_keywords": [
+        "world models",
+        "robot evaluation",
+        "embodied AI"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "OmniOpt: Taxonomy, Geometry, and Benchmarking of Modern Optimizers",
+      "arxiv_id": "2607.04033",
+      "url": "https://arxiv.org/abs/2607.04033",
+      "tldr": "OmniOpt is a comprehensive survey and benchmark of 100+ modern deep learning optimizers, providing a unified taxonomy and geometric framework to classify and compare methods. The paper benchmarks all covered optimizers on large-scale model training tasks, evaluating compute, memory, and tuning-sensitivity trade-offs. It serves as a practitioner's guide to optimizer selection — an increasingly important system-level decision for LLM training at scale.",
+      "tldr_zh": "OmniOpt 对 100 余种现代深度学习优化器进行了系统性分类与基准评测，提供统一的分类体系和几何框架。论文在大规模模型训练任务上全面对比各优化器的计算开销、内存占用和调参敏感度，是目前最全面的优化器选型参考手册，尤其适用于 LLM 规模化训练的系统级决策。",
+      "upvotes": 24,
+      "authors": "Siyuan Li, Jiabao Pan, Yumou Liu, Zhuoli Ouyang",
+      "ai_keywords": [
+        "optimizer",
+        "benchmark",
+        "LLM training",
+        "deep learning"
+      ],
+      "interest_tag": ""
+    }
+  ],
+  "alphaxiv_papers": [
+    {
+      "title": "Is One Layer Enough? Training A Single Transformer Layer Can Match Full-Parameter RL Training",
+      "arxiv_id": "2607.01232",
+      "url": "https://arxiv.org/abs/2607.01232",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2607.01232",
+      "tldr": "This paper challenges the default assumption that all transformer layers contribute equally during RL post-training. Through systematic layer-wise ablations, it discovers that training only the final transformer layer can match — or even slightly exceed — the performance of full-parameter RL finetuning on reasoning tasks. This finding has major implications for efficient RLHF/GRPO: it suggests post-training compute can be reduced dramatically without quality loss.",
+      "tldr_zh": "本文挑战了 RL 后训练中所有层同等重要的默认假设。通过系统性逐层消融实验，发现只训练最后一层 Transformer 即可匹配甚至略超全参数 RL 微调在推理任务上的表现。这一发现对 RLHF/GRPO 的高效训练意义重大：后训练计算量可大幅压缩而不损失质量。",
+      "interest_tag": ""
+    },
+    {
+      "title": "AutoMem: Automated Learning of Memory as a Cognitive Skill",
+      "arxiv_id": "2607.01224",
+      "url": "https://arxiv.org/abs/2607.01224",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2607.01224",
+      "tldr": "AutoMem treats memory management in LLMs as a trainable cognitive skill rather than a hard-coded mechanism. Inspired by cognitive science's concept of metamemory, it promotes file-system operations (read, write, delete) to first-class actions alongside task actions, letting the model learn when and how to manage its own memory. The memory skill improves along two axes: the supporting structure (prompts, schemas) and the policy that uses it, trained end-to-end.",
+      "tldr_zh": "AutoMem 将 LLM 的记忆管理视为可训练的认知技能，而非固定机制。受认知科学「元记忆」概念启发，它将文件系统操作（读/写/删）提升为与任务动作同等地位的一级动作，让模型自主学习何时、如何管理自身记忆。记忆技能在支撑结构（提示词、文件 schema）和使用策略两个维度同时端到端优化。",
+      "interest_tag": "Memory"
+    },
+    {
+      "title": "PACE: A Proxy for Agentic Capability Evaluation",
+      "arxiv_id": "2607.02032",
+      "url": "https://arxiv.org/abs/2607.02032",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2607.02032",
+      "tldr": "PACE addresses the high cost of evaluating LLM agents on complex benchmarks like SWE-Bench and GAIA (which can cost thousands of dollars and take days). It investigates whether a small set of cheap, non-agentic capability tests can accurately predict performance on expensive agentic benchmarks. The resulting proxy benchmark is fast, cheap to run, and achieves high correlation with state-of-the-art agentic evaluation results.",
+      "tldr_zh": "PACE 针对 SWE-Bench、GAIA 等复杂 agent 评测基准成本高昂（单次评测数千美元、耗时数天）的痛点，探索用一组廉价的非 agent 能力测试来准确预测 agent 基准表现。构建的代理基准运行快、成本低，且与当前主流 agent 评测结果高度相关。",
+      "interest_tag": "Benchmark"
+    },
+    {
+      "title": "CompactionRL: Reinforcement Learning with Context Compaction for Long-Horizon Agents",
+      "arxiv_id": "2607.05378",
+      "url": "https://arxiv.org/abs/2607.05378",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2607.05378",
+      "tldr": "CompactionRL proposes a training strategy that enables long-horizon LLM agents to operate beyond their context window limit. When the interaction trajectory exceeds the maximum context length, the agent compresses previous states into a summary and continues from the compacted context. By integrating this compaction mechanism directly into RL training (rather than applying it as a post-hoc patch), the agent learns to generate summaries that maximize task completion rather than just information preservation.",
+      "tldr_zh": "CompactionRL 提出一种训练策略，使长视野 LLM agent 能够突破上下文窗口限制。当交互轨迹超出最大上下文长度时，agent 将历史状态压缩为摘要后继续执行。区别于事后补丁式方案，CompactionRL 将压缩机制直接集成进 RL 训练，让 agent 学会生成服务于任务完成、而非单纯保留信息的摘要。",
+      "interest_tag": "Memory"
+    },
+    {
+      "title": "Program-as-Weights: A Programming Paradigm for Fuzzy Functions",
+      "arxiv_id": "2607.02512",
+      "url": "https://arxiv.org/abs/2607.02512",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2607.02512",
+      "tldr": "Program-as-Weights (PaW) proposes compiling natural-language-specified 'fuzzy functions' (tasks like ranking search results, repairing malformed JSON, or filtering logs) into compact, locally-executable neural artifacts — eliminating the need for LLM API calls at inference time. The compiled artifacts are small, deterministic, reproducible, and orders of magnitude cheaper to run than querying a large LLM, while matching its accuracy on the target task.",
+      "tldr_zh": "Program-as-Weights (PaW) 将自然语言描述的「模糊函数」（如搜索结果排序、修复格式错误的 JSON、日志过滤等任务）编译为紧凑的本地可执行神经模块，推理时无需调用 LLM API。编译产物体积小、行为确定、可复现，运行成本比大模型查询低几个数量级，同时在目标任务上保持与大模型相近的准确率。",
+      "interest_tag": ""
+    }
+  ],
+  "github_repos": [
+    {
+      "name": "elder-plinius/T3MP3ST",
+      "url": "https://github.com/elder-plinius/T3MP3ST",
+      "tldr": "T3MP3ST is an autonomous multi-agent red teaming platform for AI security research. It orchestrates teams of offensive AI agents that probe LLMs and AI systems for vulnerabilities, dangerous capabilities, and jailbreak vectors — automating the adversarial testing workflow that security researchers currently do manually. Built for scale: agents can run parallel attack campaigns across multiple target models.",
+      "tldr_zh": "T3MP3ST 是一个自主多智能体红队攻击平台，专用于 AI 安全研究。它编排多个攻击性 AI 智能体协同探测 LLM 和 AI 系统的漏洞、危险能力和越狱向量，将安全研究人员目前手动执行的对抗测试工作流自动化。支持并行多目标模型攻击活动。",
+      "stars": 2821,
+      "language": "Python",
+      "interest_tag": "Agent Swarm"
+    },
+    {
+      "name": "synthetic-sciences/openscience",
+      "url": "https://github.com/synthetic-sciences/openscience",
+      "tldr": "OpenScience is an open-source AI workbench designed specifically for scientific research workflows. It provides notebooks, agentic tools, and RAG capabilities tuned for scientific literature review, experiment design, and data analysis. Positioned as an open alternative to proprietary AI research assistants, it integrates with popular scientific Python libraries and supports local model deployment.",
+      "tldr_zh": "OpenScience 是专为科学研究工作流设计的开源 AI 工作台，提供 notebooks、智能体工具和针对科学文献综述、实验设计和数据分析优化的 RAG 能力。定位为专有 AI 科研助手的开源替代品，集成主流科学 Python 库并支持本地模型部署。",
+      "stars": 966,
+      "language": "Python",
+      "interest_tag": ""
+    },
+    {
+      "name": "Vibe-Research",
+      "url": "https://github.com/simonlin1212/Vibe-Research",
+      "tldr": "Vibe-Research is a personal AI trading research agent supporting both A-share (China) and US stock markets. It automates technical analysis, news sentiment parsing, and report generation for short to medium-term trading decisions. The 'vibe' in the name reflects its design philosophy: combining quantitative signals with LLM-interpreted market narratives to produce actionable trade insights.",
+      "tldr_zh": "Vibe-Research 是支持 A 股和美股的个人 AI 交易研究 agent，自动化技术分析、新闻情绪解析和报告生成，服务于中短期交易决策。名称中的「Vibe」体现其设计理念：将量化信号与 LLM 解读的市场叙事相结合，产出可执行的交易洞察。",
+      "stars": 272,
+      "language": "Python",
+      "interest_tag": ""
+    },
+    {
+      "name": "amitshekhariitbhu/ai-agents-tutorial",
+      "url": "https://github.com/amitshekhariitbhu/ai-agents-tutorial",
+      "tldr": "A step-by-step tutorial repository for learning AI agents from scratch, covering function calling, tool use, ReAct patterns, multi-agent orchestration, and production deployment. Written by an IIT Bombay alumnus with a strong track record of educational repos (Go, Android), it follows a progressive difficulty structure that makes it accessible to developers new to the agent space.",
+      "tldr_zh": "一个从零学习 AI Agent 的教程仓库，按步骤覆盖函数调用、工具使用、ReAct 模式、多智能体编排和生产部署。作者来自 IIT Bombay，有多个高质量教育类仓库（Go、Android）背书，采用难度递进结构，对 agent 领域新手友好。",
+      "stars": 102,
+      "language": "Python",
+      "interest_tag": ""
+    },
+    {
+      "name": "akseolabs-seo/fable-soul",
+      "url": "https://github.com/akseolabs-seo/fable-soul",
+      "tldr": "Fable Soul is a 'judgment layer' for AI coding agents that makes the agent pause and reason before executing high-stakes actions. It intercepts agent tool calls, applies structured reasoning templates (analogous to a slow-thinking deliberation step), and either approves, modifies, or blocks the action. Designed to be dropped in front of any existing agent system without re-architecture.",
+      "tldr_zh": "Fable Soul 是 AI 编程 agent 的「判断层」，在执行高风险操作前让 agent 暂停并深度推理。它拦截 agent 的工具调用，应用结构化推理模板（类似慢思考审慎步骤），然后批准、修改或阻断该操作。设计为可无侵入地插入任意现有 agent 系统前端。",
+      "stars": 85,
+      "language": "TypeScript",
+      "interest_tag": ""
+    }
+  ],
+  "hackernews": [
+    {
+      "title": "Zuckerberg says AI agent development going slower than expected",
+      "url": "https://www.reuters.com/business/zuckerberg-says-ai-agent-development-going-slower-than-expected/",
+      "tldr": "In an all-hands meeting, Mark Zuckerberg told Meta employees that AI agent progress has been slower than anticipated, acknowledging that the timeline to truly autonomous, reliable agents is longer than public roadmaps suggested. The admission sparked 600+ comments on HN debating whether this reflects genuine technical difficulty or strategic expectation management. It's a rare moment of public candor from a major AI lab executive about agent limitations.",
+      "tldr_zh": "扎克伯格在 Meta 内部全员会上坦承 AI agent 的进展慢于预期，承认真正自主、可靠的 agent 落地时间线比公开路线图预测的更长。这番表态在 HN 引发 600 余条讨论，核心争议在于这究竟反映了真实技术难题，还是战略性的预期管理。这是大型 AI 实验室高管罕见地公开承认 agent 局限性。",
+      "points": 335,
+      "num_comments": 604,
+      "interest_tag": ""
+    },
+    {
+      "title": "Agentic coding notes",
+      "url": "https://danluu.com/ai-coding/#appendix-agentic-loops-and-writing-this-post",
+      "tldr": "Dan Luu's detailed personal notes on using agentic coding tools in real workflows — focusing on the appendix covering agentic loops and the actual experience of writing the post with AI assistance. Luu is known for meticulous, empirical writing; this piece offers a practitioner's honest accounting of where agentic coding succeeds and where it still fails, including failure modes in multi-step reasoning chains.",
+      "tldr_zh": "Dan Luu 关于在真实工作流中使用 agent 编程工具的详细个人笔记，重点关注覆盖 agentic loop 的附录及用 AI 辅助写作的实际体验。Luu 以严谨实证的写作风格著称，这篇文章提供了从业者对 agent 编程成功与失败场景的诚实评估，包括多步推理链中的故障模式分析。",
+      "points": 177,
+      "num_comments": 83,
+      "interest_tag": ""
+    },
+    {
+      "title": "OfficeCLI: Office suite for AI agents to read and edit Microsoft Office files",
+      "url": "https://github.com/iOfficeAI/OfficeCLI",
+      "tldr": "OfficeCLI provides a command-line interface that allows AI agents to programmatically read and edit Microsoft Office files (Word, Excel, PowerPoint) without launching the Office applications. It converts Office documents to agent-friendly formats, supports structured editing operations, and integrates with MCP and tool-calling frameworks. Fills a critical gap: most AI agents can handle plain text and code but struggle with the ubiquitous .docx/.xlsx/.pptx formats.",
+      "tldr_zh": "OfficeCLI 提供命令行接口，让 AI agent 无需启动 Office 应用即可以编程方式读写微软 Office 文件（Word/Excel/PowerPoint）。它将 Office 文档转换为 agent 友好格式，支持结构化编辑操作，并与 MCP 和工具调用框架集成。填补了一个关键空白：大多数 AI agent 能处理纯文本和代码，但在无处不在的 .docx/.xlsx/.pptx 格式上仍力不从心。",
+      "points": 168,
+      "num_comments": 51,
+      "interest_tag": "CUA"
+    },
+    {
+      "title": "The Hitchhiker's Guide to Agentic AI",
+      "url": "https://arxiv.org/abs/2606.24937",
+      "tldr": "A comprehensive guide to building production-grade agentic AI systems — covering architecture patterns, tool use, memory strategies, multi-agent coordination, evaluation, and deployment pitfalls. Written as a practitioner's handbook rather than an academic paper, it synthesizes lessons from real deployments and provides structured frameworks for each stage of building agentic systems. The HN title framing as a 'Hitchhiker's Guide' signals accessible writing aimed at engineering teams.",
+      "tldr_zh": "一份构建生产级 agent AI 系统的综合指南，涵盖架构模式、工具使用、记忆策略、多 agent 协调、评测和部署坑点。以从业者手册而非学术论文的形式写就，综合了真实部署中的经验教训，并为构建 agent 系统的每个阶段提供结构化框架。标题致敬《银河系漫游指南》，信号其面向工程团队的平易近人写法。",
+      "points": 48,
+      "num_comments": 4,
+      "interest_tag": ""
+    },
+    {
+      "title": "Anatomy of Persistent Memory's 3 Layers: Comparing ContextNest, Mem0 and MemGPT",
+      "url": "https://promptowl.ai/resources/persistent-memory-ai-agents/",
+      "tldr": "A structured comparison of three approaches to persistent memory in AI agents: ContextNest, Mem0, and MemGPT. The analysis breaks down each system's memory architecture into three layers (in-context, external storage, and retrieval mechanisms) and evaluates trade-offs in latency, recall accuracy, and integration complexity. Timely given the growing focus on agent memory as a critical capability gap.",
+      "tldr_zh": "对 AI agent 长期记忆三种主流方案——ContextNest、Mem0 和 MemGPT——的结构化比较。分析将每个系统的记忆架构拆解为三层（上下文内、外部存储、检索机制），并评估延迟、召回准确率和集成复杂度的权衡。在 agent 记忆被广泛认定为关键能力差距的背景下，此时发布尤为及时。",
+      "points": 23,
+      "num_comments": 7,
+      "interest_tag": "Memory"
+    }
+  ]
+}
