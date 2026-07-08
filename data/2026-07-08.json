@@ -1,0 +1,226 @@
+{
+  "date": "2026-07-08",
+  "generated_at": "2026-07-08T16:07:33.975287+08:00",
+  "briefing_zh": "今天的 AI 研究舞台上，世界模型与智能体基础设施同台争锋。**AlayaWorld** 以 48 票领跑 HuggingFace，证明视频世界模型已能生成可玩、长时程的游戏虚拟环境——从被动视频生成跨越到主动交互仿真。**Gemma 4** 技术报告（Google DeepMind）确认了一个强劲的开源多模态竞争者，涵盖 2.3B 到 31B 参数规模，旗舰 12B 版本采用无编码器架构，原生接收音频和图像输入。\n\n智能体基础设施方面同样亮点密集。**Light-Omni** 提出视频智能体的「反射优先于推理」范式——通过长期记忆减少高成本迭代推理的需求。**SkillOpt-Lite** 将智能体技能优化压缩到理论极简（一行 Vibe 提示词），挑战了复杂流水线是必要条件的先设假设。alphaxiv 上，**UI-MOPD** 通过在线蒸馏推进跨平台 GUI 智能体，**CompactionRL** 和 **AutoMem** 则从不同角度攻克上下文管理难题：前者将上下文压缩融入 RL 训练目标，后者将记忆本身视为可训练认知技能。\n\n本周 GitHub 和 HN 信号指向智能体工具生态系统的加速成熟。**T3MP3ST**（3,497 星）将多智能体协作引入攻击性安全测试；**Rowboat** 则提供了开源的本地优先 Claude Desktop 替代方案。本周最耐人寻味的信号或许是**扎克伯格**内部承认智能体进展未及预期——与 YC CEO Garry Tan「每天 37K 行 AI 代码」的病毒式传播形成鲜明对比，Fast Company 的深度调查揭示那些代码大多是测试样板，并非真实业务逻辑。\n\n本周技术贡献中最锐利的可能是 **LLM-as-a-Verifier**，它将验证能力界定为独立于预训练、RLHF 和推理时计算的全新可扩展轴。随着推理类任务激增，验证能力正在成为真正的瓶颈。**RoboDojo** 则在机器人领域攻克了类似缺口：填补了同时横跨仿真与真实部署场景的评估基准空白。",
+  "briefing_en": "Today's AI research landscape is dominated by world models and agentic infrastructure. **AlayaWorld** leads HuggingFace with 48 upvotes, demonstrating that video world models are now capable of generating fully playable, long-horizon game environments — moving from passive video generation to active interactive simulation. **Gemma 4's** technical report (Google DeepMind) confirms a strong open-weight multimodal competitor spanning 2.3B to 31B parameters, with an encoder-free 12B model that natively ingests audio and images.\n\nThe agent infrastructure theme is equally strong. **Light-Omni** proposes a \"reflex over reasoning\" paradigm for video agents — using long-term memory to reduce the need for expensive iterative reasoning. **SkillOpt-Lite** cuts agent skill optimization to a theoretical minimum (one line of vibe), challenging the assumption that complex pipelines are necessary. On alphaxiv, **UI-MOPD** advances cross-platform GUI agents through on-policy distillation, while **CompactionRL** and **AutoMem** both attack the context management problem from different angles: one via RL-aware context compaction, the other by treating memory itself as a trainable skill.\n\nThe GitHub and HN signals this week point to a maturing agentic tooling ecosystem. **T3MP3ST** (3,497 stars) brings multi-agent coordination to offensive security, while **Rowboat** offers an open-source local-first Claude Desktop alternative. The most telling story of the week may be the **Zuckerberg** internal admission that agents have not progressed as expected — a sobering counterpoint to YC CEO Garry Tan's viral \"37K lines of AI code per day\" claim, which a Fast Company investigation revealed to be mostly test boilerplate.\n\nThe week's sharpest technical contribution may be **LLM-as-a-Verifier**, which frames verification as a new independently scalable axis for LLMs — distinct from pretraining, RLHF, or test-time compute scaling. As reasoning-oriented tasks proliferate, verification capability is emerging as the bottleneck. **RoboDojo** addresses an analogous gap in robotics: the absence of benchmarks that span both simulation and real-world deployment simultaneously.",
+  "viral_analysis_zh": "**OfficeCLI** 是本周最强的爆款候选：它以简洁工具解决了 AI 智能体长期面临的具体痛点（无法可靠处理 .docx/.xlsx 文件），HN 213 分和活跃讨论印证了真实需求。**AlayaWorld** 凭借本周最具视觉冲击力的 demo——一个可以「玩」的 AI 生成游戏世界——必将获得持续关注，这个故事会自己传播自己。**T3MP3ST** 不到一周收获 3,497 GitHub 星，证明多智能体攻击性安全自动化有庞大受众愿意先点星再细看。",
+  "viral_analysis_en": "**OfficeCLI** is the week's strongest viral candidate: it solves a concrete, long-standing frustration (AI agents cannot reliably handle .docx/.xlsx files) with a clean, immediately useful tool, and 213 HN points with active discussion confirms real demand. **AlayaWorld** will likely generate sustained attention as the most visually compelling demo of the week — a playable AI-generated game world is a story that writes itself. **T3MP3ST's** 3,497 GitHub stars in under a week shows that multi-agent offensive security automation has a large, engaged audience ready to star first and audit later.",
+  "huggingface_papers": [
+    {
+      "title": "AlayaWorld: Long-Horizon and Playable Video World Generation",
+      "arxiv_id": "2607.06291",
+      "url": "https://arxiv.org/abs/2607.06291",
+      "tldr": "AlayaWorld introduces a video world model capable of generating playable, long-horizon virtual game environments through autoregressive synthesis conditioned on user interactions — closing the gap between passive video generation and interactive simulation.",
+      "tldr_zh": "AlayaWorld 提出了一个视频世界模型，通过以用户交互为条件的自回归合成，生成可交互、长时程的虚拟游戏环境，打通了被动视频生成与主动交互仿真之间的鸿沟。",
+      "upvotes": 48,
+      "authors": "AlayaWorld Team, Kaipeng Zhang, Chuanhao Li, Yifan Zhan et al.",
+      "ai_keywords": [
+        "world model",
+        "video generation",
+        "interactive simulation"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "Vision as Unified Multimodal Generation",
+      "arxiv_id": "2607.06560",
+      "url": "https://arxiv.org/abs/2607.06560",
+      "tldr": "SenseNova-Vision reframes all computer vision tasks (detection, segmentation, depth, etc.) as native text-and-image generation problems within a single multimodal model, eliminating task-specific heads and achieving state-of-the-art performance across diverse benchmarks.",
+      "tldr_zh": "SenseNova-Vision 将所有计算机视觉任务（检测、分割、深度估计等）统一为单个多模态模型的原生文本和图像生成问题，省去任务专用头，在多项基准上达到最优性能。",
+      "upvotes": 21,
+      "authors": "Xiaoyang Han, Jianhua Li, Kewang Deng, Zukai Chen et al.",
+      "ai_keywords": [
+        "multimodal",
+        "unified model",
+        "computer vision"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "Light-Omni: Reflex over Reasoning in Agentic Video Understanding with Long-Term Memory",
+      "arxiv_id": "2607.05511",
+      "url": "https://arxiv.org/abs/2607.05511",
+      "tldr": "Light-Omni argues that heavy iterative reasoning in video agents mainly compensates for poor retrieval, not genuine complexity. By embedding long-term memory deeply into the model architecture, it enables low-latency 'reflex' responses for most queries while reserving deep reasoning for truly ambiguous cases.",
+      "tldr_zh": "Light-Omni 指出视频智能体的大量迭代推理其实是在弥补检索不足，而非处理真实复杂度。通过将长期记忆深度嵌入模型架构，它让大多数查询实现低延迟的「反射式」响应，仅在真正模糊的情况才触发深度推理。",
+      "upvotes": 18,
+      "authors": "Chang Nie, Jiaju Wei, Junlan Feng, Chaoyou Fu et al.",
+      "ai_keywords": [
+        "long-term memory",
+        "video agent",
+        "multimodal"
+      ],
+      "interest_tag": "Memory"
+    },
+    {
+      "title": "SkillOpt-Lite: Better and Faster Agent Self-evolution via One Line of Vibe",
+      "arxiv_id": "2607.03451",
+      "url": "https://arxiv.org/abs/2607.03451",
+      "tldr": "SkillOpt-Lite reduces agent skill optimization to a theoretically justified minimal pipeline — essentially a single Vibe-coded instruction — by formalizing the problem through Zeroth-Order optimization and proving that most existing pipeline complexity is empirically unnecessary.",
+      "tldr_zh": "SkillOpt-Lite 将智能体技能优化精简至理论上可证明的极简流水线——本质上是单条 Vibe 指令——通过将问题形式化为零阶优化，证明现有流水线的大部分复杂度并非必要。",
+      "upvotes": 14,
+      "authors": "Yifei Shen, Bo Li, Xinjie Zhang",
+      "ai_keywords": [
+        "agent",
+        "skill optimization",
+        "self-evolution"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "Gemma 4 Technical Report",
+      "arxiv_id": "2607.02770",
+      "url": "https://arxiv.org/abs/2607.02770",
+      "tldr": "Gemma 4 is Google DeepMind's new open-weight multimodal model family (2.3B–31B), featuring both dense and MoE architectures and a novel encoder-free 12B model that natively ingests raw audio and image patches, with an integrated thinking mode for advanced reasoning.",
+      "tldr_zh": "Gemma 4 是 Google DeepMind 的新一代开放权重多模态模型系列（2.3B 至 31B），涵盖稠密和 MoE 架构，其中 12B 旗舰版采用无编码器架构，原生接收音频和图像块输入，并集成思维模式以支持复杂推理。",
+      "upvotes": 10,
+      "authors": "Gemma Team, Sherif El Abd, Vaibhav Aggarwal, Robin Algayres et al.",
+      "ai_keywords": [
+        "multimodal",
+        "open model",
+        "MoE"
+      ],
+      "interest_tag": ""
+    }
+  ],
+  "alphaxiv_papers": [
+    {
+      "title": "RoboDojo: A Unified Sim-and-Real Benchmark for Comprehensive Evaluation of Generalist Robot Manipulation Policies",
+      "arxiv_id": "2607.04434",
+      "url": "https://arxiv.org/abs/2607.04434",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2607.04434",
+      "tldr": "RoboDojo is the first benchmark that evaluates generalist robot manipulation policies in both simulation and real-world deployment simultaneously, across a wide range of task complexities and capability dimensions. It exposes gaps between sim and real performance that existing narrower benchmarks systematically miss.",
+      "tldr_zh": "RoboDojo 是首个在仿真和真实部署场景同步评测通用机器人操作策略的基准，覆盖多种任务复杂度和能力维度，揭示了现有窄基准系统性遗漏的仿真到现实差距。",
+      "interest_tag": "Benchmark"
+    },
+    {
+      "title": "UI-MOPD: Multi-Platform On-Policy Distillation for Continual GUI Agent Learning",
+      "arxiv_id": "2607.04425",
+      "url": "https://arxiv.org/abs/2607.04425",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2607.04425",
+      "tldr": "UI-MOPD trains cross-platform GUI agents via on-policy distillation with a continual learning framework, addressing the scarcity of high-quality multi-platform interaction trajectories and catastrophic forgetting when adding new platforms.",
+      "tldr_zh": "UI-MOPD 通过在线蒸馏与持续学习框架训练跨平台 GUI 智能体，同时解决高质量多平台交互轨迹稀缺和增加新平台时的灾难性遗忘问题。",
+      "interest_tag": "CUA"
+    },
+    {
+      "title": "CompactionRL: Reinforcement Learning with Context Compaction for Long-Horizon Agents",
+      "arxiv_id": "2607.05378",
+      "url": "https://arxiv.org/abs/2607.05378",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2607.05378",
+      "tldr": "CompactionRL integrates context compaction (summarizing prior interaction history) directly into the RL training objective for long-horizon agents. This allows agents to operate indefinitely without hitting context limits, while the RL reward signal optimizes both the task policy and the compaction quality jointly.",
+      "tldr_zh": "CompactionRL 将上下文压缩（历史交互摘要）直接融入长时程智能体的 RL 训练目标，使智能体可以无限运行而不触及上下文限制，RL 奖励信号同时优化任务策略和压缩质量。",
+      "interest_tag": "Memory"
+    },
+    {
+      "title": "AutoMem: Automated Learning of Memory as a Cognitive Skill",
+      "arxiv_id": "2607.01224",
+      "url": "https://arxiv.org/abs/2607.01224",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2607.01224",
+      "tldr": "AutoMem treats memory management (what to encode, when to retrieve, how to organize) as a first-class trainable skill using file-system operations as memory actions. The model learns its own memory strategy from task feedback rather than following hand-coded rules, achieving better long-horizon task performance.",
+      "tldr_zh": "AutoMem 将记忆管理（编码什么、何时检索、如何组织）视为可训练的一等认知技能，以文件系统操作作为记忆动作，模型从任务反馈中学习自身的记忆策略，而非遵循硬编码规则。",
+      "interest_tag": "Memory"
+    },
+    {
+      "title": "LLM-as-a-Verifier: A General-Purpose Verification Framework",
+      "arxiv_id": "2607.05391",
+      "url": "https://arxiv.org/abs/2607.05391",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2607.05391",
+      "tldr": "LLM-as-a-Verifier frames verification — determining whether a solution is correct — as a new independently scalable capability axis for LLMs, distinct from pretraining scale, RLHF, and test-time compute. The framework provides fine-grained verification signals that improve downstream task performance when used as a reward or filter.",
+      "tldr_zh": "LLM-as-a-Verifier 将验证能力（判断解决方案是否正确）界定为 LLM 独立可扩展的新能力轴，有别于预训练规模、RLHF 和推理时计算。该框架提供细粒度验证信号，用作奖励或过滤器时提升下游任务性能。",
+      "interest_tag": ""
+    }
+  ],
+  "github_repos": [
+    {
+      "name": "elder-plinius/T3MP3ST",
+      "url": "https://github.com/elder-plinius/T3MP3ST",
+      "tldr": "T3MP3ST is a multi-agent offensive-security meta-harness for autonomous red teaming — it coordinates multiple AI agents to systematically test and attack AI systems, generating adversarial scenarios and evaluating defenses at scale.",
+      "tldr_zh": "T3MP3ST 是一个多智能体攻击性安全元测试框架，协调多个 AI 智能体系统性地测试和攻击 AI 系统，大规模生成对抗场景并评估防御效果。",
+      "stars": 3497,
+      "language": "TypeScript",
+      "interest_tag": "Agent Swarm"
+    },
+    {
+      "name": "synthetic-sciences/openscience",
+      "url": "https://github.com/synthetic-sciences/openscience",
+      "tldr": "OpenScience is an open-source AI workbench for scientific research, providing a collaborative environment where researchers can use AI agents to assist with literature review, experiment design, data analysis, and hypothesis generation.",
+      "tldr_zh": "OpenScience 是面向科学研究的开源 AI 工作台，提供协作环境，让研究者可以借助 AI 智能体辅助文献综述、实验设计、数据分析和假设生成。",
+      "stars": 1516,
+      "language": "TypeScript",
+      "interest_tag": ""
+    },
+    {
+      "name": "simonlin1212/Vibe-Research",
+      "url": "https://github.com/simonlin1212/Vibe-Research",
+      "tldr": "Vibe-Research is a personal AI-driven investment research agent for A-share, US, and Hong Kong markets, featuring daily review, news radar, individual stock data, sector analysis, position tracking, and research notes — entirely AI-orchestrated.",
+      "tldr_zh": "Vibe-Research 是面向 A 股、美股、港股的个人 AI 投研智能体，集成每日复盘、资讯雷达、个股数据、板块分析、持仓追踪和研究记录，全程 AI 驱动。",
+      "stars": 492,
+      "language": "TypeScript",
+      "interest_tag": ""
+    },
+    {
+      "name": "rowboatlabs/rowboat",
+      "url": "https://github.com/rowboatlabs/rowboat",
+      "tldr": "Rowboat is an open-source, local-first alternative to Claude Desktop — a general-purpose AI agent interface that runs entirely on your machine, supports any model backend, and gives users full control over their agent's capabilities and data.",
+      "tldr_zh": "Rowboat 是开源的本地优先 Claude Desktop 替代方案——一个完全在本地运行的通用 AI 智能体界面，支持任意模型后端，用户对智能体能力和数据拥有完全控制权。",
+      "stars": 153,
+      "language": "TypeScript",
+      "interest_tag": ""
+    },
+    {
+      "name": "amitshekhariitbhu/ai-agents-tutorial",
+      "url": "https://github.com/amitshekhariitbhu/ai-agents-tutorial",
+      "tldr": "A comprehensive step-by-step tutorial series on building AI agents from scratch — covering function calling, agent loops, multi-agent systems, orchestration, and evaluation, with clean code examples designed for engineers entering the agentic AI space.",
+      "tldr_zh": "从零构建 AI 智能体的系统教程系列，涵盖函数调用、智能体循环、多智能体系统、编排和评测，附清晰代码示例，专为进入智能体 AI 领域的工程师设计。",
+      "stars": 105,
+      "language": "",
+      "interest_tag": ""
+    }
+  ],
+  "hackernews": [
+    {
+      "title": "OfficeCLI: Office suite for AI agents to read and edit Microsoft Office files",
+      "url": "https://github.com/iOfficeAI/OfficeCLI",
+      "tldr": "OfficeCLI provides AI agents with reliable, structured access to Microsoft Office files (.docx, .xlsx, .pptx), solving the long-standing pain point that LLM agents cannot natively manipulate Office formats — a critical bottleneck for enterprise agentic workflows.",
+      "tldr_zh": "OfficeCLI 为 AI 智能体提供对微软 Office 文件（.docx、.xlsx、.pptx）的可靠结构化访问，解决了 LLM 智能体无法原生操作 Office 格式这一长期痛点——企业智能体工作流的关键瓶颈。",
+      "points": 213,
+      "num_comments": 63,
+      "interest_tag": ""
+    },
+    {
+      "title": "Agentic coding notes",
+      "url": "https://danluu.com/ai-coding/#appendix-agentic-loops-and-writing-this-post",
+      "tldr": "Dan Luu's detailed notes on using AI agents for coding work, covering agentic loops, practical limitations, and lessons learned from extended real-world use — a rare, honest technical assessment from a respected engineer rather than marketing material.",
+      "tldr_zh": "Dan Luu 关于使用 AI 智能体编码的详细笔记，涵盖智能体循环、实际限制和来自扩展真实使用的经验教训——来自资深工程师的罕见诚实技术评估，而非营销材料。",
+      "points": 177,
+      "num_comments": 83,
+      "interest_tag": ""
+    },
+    {
+      "title": "Show HN: Rowboat – Open-source, local-first alternative to Claude Desktop",
+      "url": "https://github.com/rowboatlabs/rowboat",
+      "tldr": "Rowboat is a Show HN entry presenting an open-source, privacy-first AI agent interface that runs entirely locally. The strong HN reception (153 points) reflects growing demand for user-controlled, non-cloud-dependent agent platforms.",
+      "tldr_zh": "Rowboat 是一个 Show HN 展示的开源隐私优先 AI 智能体界面，完全本地运行。强烈的 HN 反响（153分）反映了对用户可控、不依赖云端智能体平台的日益增长的需求。",
+      "points": 153,
+      "num_comments": 41,
+      "interest_tag": ""
+    },
+    {
+      "title": "Mark Zuckerberg tells staff that AI agents haven't progressed enough",
+      "url": "https://techcrunch.com/2026/07/02/mark-zuckerberg-tells-staff-that-ai-agents-havent-progressed-as-qu",
+      "tldr": "Zuckerberg reportedly told Meta staff that AI agents are not yet meeting expectations for real-world capability, despite heavy industry investment and hype. The admission from one of AI's biggest backers carries significant signal about the gap between demos and deployment.",
+      "tldr_zh": "扎克伯格据报道向 Meta 员工坦承 AI 智能体的现实世界能力尚未达到预期，尽管行业投入和炒作声浪巨大。来自 AI 最大支持者之一的承认，清晰揭示了演示与实际部署之间的差距。",
+      "points": 133,
+      "num_comments": 2,
+      "interest_tag": ""
+    },
+    {
+      "title": "GitLost: We Tricked GitHub's AI Agent into Leaking Private Repos",
+      "url": "https://noma.security/blog/gitlost-how-we-tricked-githubs-ai-agent-into-leaking-private-repos/",
+      "tldr": "Noma Security researchers demonstrated a prompt injection attack against GitHub's AI agent that caused it to exfiltrate private repository contents. The attack highlights systemic security risks in agentic systems with broad permission scopes, particularly when operating on user-controlled content.",
+      "tldr_zh": "Noma Security 研究人员展示了针对 GitHub AI 智能体的提示注入攻击，使其泄露私有代码仓库内容。该攻击揭示了拥有广泛权限范围的智能体系统中的系统性安全风险，尤其是在处理用户可控内容时。",
+      "points": 86,
+      "num_comments": 27,
+      "interest_tag": ""
+    }
+  ]
+}
