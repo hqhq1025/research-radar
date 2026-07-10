@@ -1,0 +1,226 @@
+{
+  "date": "2026-07-10",
+  "generated_at": "2026-07-10T08:02:00+08:00",
+  "briefing_zh": "今日 AI 领域最引人关注的趋势是 **Agent 安全**正从理论走向攻防实践。Noma 安全团队发布的 **GitLost** 攻击报告以 534 分登顶 Hacker News——他们通过提示注入操纵 GitHub AI Agent 泄露私有仓库，揭示了当前 Agent 系统在权限管理上的根本性缺陷。与此同时，**Rowboat** 和 **OfficeCLI** 等工具的走红，反映出开发者对本地化、可控 Agent 运行环境的强烈需求。\n\n在研究前沿，**Benchmark 建设**成为这两天 HuggingFace 最密集的主题：**UniClawBench**（主动 Agent 评测）、**Video-Oasis**（视频理解评测解耦）、**IdeaGene-Bench**（科学思想谱系推理）密集发布，说明学界正在补齐 Agent 能力评测的短板。而 **CausalDS** 的结论尤其值得警惕——当前最强 LLM 在数据科学 Agent 的因果推理任务上仍远低于人类专家。\n\n生成式 AI 的交互范式也在持续演进。**Vidu S1** 以 88 票高居 HuggingFace 榜首，其实时语音控制 + 无限时长视频生成的能力，预示着人机协同视频创作将迎来新的爆发。微软发布 **Flint** 可视化语言，专为 AI Agent 设计图表生成接口，进一步完善了 Agent 的输出能力栈。\n\n从 GitHub 趋势看，面向 AI Agent 的工具生态正在快速成熟：**Vibe-Research**（投研 Agent）、**FableCut**（可被 Agent 驱动的视频编辑器）、**contextvc**（Agent 上下文版本控制）等项目本周相继爆星，说明「让 Agent 操作专业领域工具」已成为最受市场追捧的产品方向。",
+  "briefing_en": "The most prominent trend today is **agent security** moving from theory to active red-teaming. The **GitLost** attack report by Noma Security topped Hacker News with 534 points — researchers demonstrated a prompt injection attack that tricked GitHub's AI agent into leaking private repos, exposing fundamental permission management flaws in current agent systems. Meanwhile, the popularity of tools like **Rowboat** and **OfficeCLI** reflects strong developer demand for local, controllable agent execution environments.\n\nOn the research front, **benchmark construction** dominated HuggingFace this week: **UniClawBench** (proactive agent evaluation), **Video-Oasis** (disentangled video understanding evaluation), and **IdeaGene-Bench** (scientific idea lineage reasoning) all dropped in quick succession, signaling the community is actively closing the gap in agent capability assessment. **CausalDS**'s finding is particularly sobering — state-of-the-art LLMs still fall far short of human experts on causal reasoning tasks in data science workflows.\n\nThe interaction paradigm for generative AI continues to evolve. **Vidu S1** led HuggingFace with 88 upvotes, combining real-time voice control with infinite-length video generation and pointing to an imminent breakthrough in human-AI collaborative video creation. Microsoft's release of **Flint**, a visualization language designed specifically for AI agents, further rounds out the agent output capability stack.\n\nGitHub trends show the agent tool ecosystem is maturing rapidly. **Vibe-Research** (investment research agent), **FableCut** (agent-driveable video editor), and **contextvc** (context version control for agents) all surged in stars this week, confirming that \"enabling agents to operate domain-specific professional tools\" has become the most market-sought product direction.",
+  "viral_analysis_zh": "今天最可能出圈的项目是 **GitLost**。安全攻击叙事天然具有病毒传播属性——「AI 被骗泄露私密代码」这个标题极具传播力，既能触动开发者的安全焦虑，又能让非技术受众感受到 AI 风险的真实性。534 分 + 203 条评论已验证其爆款潜力。其次是 **Vidu S1**，实时语音控制视频生成是一个极易演示的 wow moment，视频演示在社交媒体上的传播效率远高于论文摘要。",
+  "viral_analysis_en": "**GitLost** is today's most likely breakout project. Security attack narratives are inherently viral — 'AI tricked into leaking private code' is a headline that triggers developer security anxiety while making AI risks tangible to non-technical audiences. Its 534 points and 203 comments already confirm viral potential. **Vidu S1** is the close second — real-time voice-controlled video generation is an incredibly demonstrable wow moment, and video demos spread far more efficiently on social media than paper abstracts ever could.",
+  "huggingface_papers": [
+    {
+      "title": "Vidu S1: A Real-Time Interactive Video Generation Model",
+      "url": "https://huggingface.co/papers/2607.03118",
+      "tldr": "Vidu S1 is a real-time interactive video generation model that supports infinite-length generation with voice control of digital characters. Users can steer content at any moment via spoken instructions without blurring or drift. It sets a new bar for human-in-the-loop video synthesis.",
+      "tldr_zh": "Vidu S1 是一个实时交互式视频生成模型，支持无限时长生成，用户可通过语音指令随时控制数字人物的行为与内容，无模糊或漂移问题。这为人机协同视频合成树立了新标杆。",
+      "upvotes": 88,
+      "authors": "Jintao Zhang, Kai Jiang, Jintao Chen et al.",
+      "ai_keywords": [
+        "video generation",
+        "interactive",
+        "voice control",
+        "real-time"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "Why Can't I Open My Drawer? Mitigating Object-Driven Shortcuts in Zero-Shot Compositional Action Recognition",
+      "url": "https://huggingface.co/papers/2601.16211",
+      "tldr": "This paper addresses a key failure mode in zero-shot compositional action recognition where models predict verbs by relying on object identity rather than temporal cues. The authors propose methods to reduce these object-driven shortcuts, improving generalization to novel verb-object combinations.",
+      "tldr_zh": "该论文解决了零样本组合动作识别中的关键问题：模型倾向于通过物体类别而非时序线索预测动词。作者提出了减少这类捷径的方法，提升了对新颖动词-物体组合的泛化能力。",
+      "upvotes": 39,
+      "authors": "Geo Ahn, Inwoong Lee, Taeoh Kim et al.",
+      "ai_keywords": [
+        "action recognition",
+        "zero-shot",
+        "compositional",
+        "video understanding"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "Video-Oasis: Rethinking Evaluation of Video Understanding",
+      "url": "https://huggingface.co/papers/2603.29616",
+      "tldr": "Video-Oasis proposes a new evaluation framework for Video-LLMs that disentangles visual perception, linguistic reasoning, and knowledge priors. Existing benchmarks conflate these, making it hard to pinpoint model weaknesses. This framework enables more precise assessment of video understanding capabilities.",
+      "tldr_zh": "Video-Oasis 提出了一个新的视频理解评测框架，将视觉感知、语言推理与知识先验解耦。现有 benchmark 混淆了这三者，难以准确定位模型弱点，该框架能更精准地评估视频理解能力。",
+      "upvotes": 37,
+      "authors": "Geuntaek Lim, Sungjune Park, Jaeyun Lee et al.",
+      "ai_keywords": [
+        "video understanding",
+        "benchmark",
+        "evaluation",
+        "Video-LLM"
+      ],
+      "interest_tag": "Benchmark"
+    },
+    {
+      "title": "Ideas Have Genomes: Benchmarking Scientific Lineage Reasoning and Lineage-Grounded Idea Generation",
+      "url": "https://huggingface.co/papers/2607.08758",
+      "tldr": "IdeaGene-Bench introduces a new benchmark testing whether AI can trace the intellectual lineage of scientific ideas, similar to how genes inherit and mutate. The benchmark evaluates both backward reasoning (identifying predecessors) and forward generation (proposing novel ideas grounded in lineage).",
+      "tldr_zh": "IdeaGene-Bench 提出了一个新 benchmark，测试 AI 是否能追踪科学思想的知识谱系，类似基因的遗传与突变。该 benchmark 同时评估逆向推理（识别前驱工作）和前向生成（基于谱系提出新想法）。",
+      "upvotes": 17,
+      "authors": "Yifan Zhou, Qihao Yang, Yan Li et al.",
+      "ai_keywords": [
+        "scientific reasoning",
+        "idea generation",
+        "benchmark",
+        "LLM"
+      ],
+      "interest_tag": "Benchmark"
+    },
+    {
+      "title": "UniClawBench: A Universal Benchmark for Proactive Agents on Real-World Tasks",
+      "url": "https://huggingface.co/papers/2607.08768",
+      "tldr": "UniClawBench is a universal benchmark designed to evaluate proactive agents on real-world tasks involving everyday tools. It addresses the gap where existing benchmarks fail to assess agents that must anticipate needs and act autonomously across diverse environments.",
+      "tldr_zh": "UniClawBench 是一个通用 benchmark，专门评估能主动操作日常工具完成真实任务的智能体。它填补了现有 benchmark 无法有效评估主动型、跨环境自主 Agent 的空缺。",
+      "upvotes": 13,
+      "authors": "Zhekai Chen, Chengqi Duan, Kaiyue Sun et al.",
+      "ai_keywords": [
+        "agent benchmark",
+        "proactive agent",
+        "real-world tasks",
+        "evaluation"
+      ],
+      "interest_tag": "Benchmark"
+    }
+  ],
+  "alphaxiv_papers": [
+    {
+      "title": "The Hitchhiker's Guide to Agentic AI",
+      "arxiv_id": "2606.24937",
+      "url": "https://arxiv.org/abs/2606.24937",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2606.24937",
+      "tldr": "A comprehensive survey and practical guide covering the architecture, planning, memory, tool use, and safety considerations of modern agentic AI systems. It synthesizes lessons from deployed systems and outlines open challenges for building reliable autonomous agents.",
+      "tldr_zh": "一份涵盖现代 Agentic AI 系统架构、规划、记忆、工具使用与安全考量的综合综述与实践指南。整合了已部署系统的经验教训，并梳理了构建可靠自主 Agent 的开放挑战。",
+      "interest_tag": ""
+    },
+    {
+      "title": "OpenCoF: Learning to Reason Through Video Generation",
+      "arxiv_id": "2607.08763",
+      "url": "https://arxiv.org/abs/2607.08763",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2607.08763",
+      "tldr": "OpenCoF proposes using video generation as a reasoning scaffold — the model generates intermediate video frames as a chain-of-thought before producing final answers. This visual reasoning chain improves performance on tasks requiring causal and counterfactual reasoning.",
+      "tldr_zh": "OpenCoF 将视频生成用作推理支架——模型在给出最终答案前生成中间视频帧作为思维链。这种视觉推理链在需要因果和反事实推理的任务上显著提升了性能。",
+      "interest_tag": ""
+    },
+    {
+      "title": "CausalDS: Benchmarking Causal Reasoning in Data-Science Agents",
+      "arxiv_id": "2607.08093",
+      "url": "https://arxiv.org/abs/2607.08093",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2607.08093",
+      "tldr": "CausalDS evaluates the ability of LLM-based data science agents to perform causal reasoning — distinguishing correlation from causation, validating assumptions, and selecting appropriate statistical methods. Current top models score well below human experts on the hardest causal tasks.",
+      "tldr_zh": "CausalDS 评估基于 LLM 的数据科学 Agent 的因果推理能力，包括区分相关与因果、验证假设和选择合适统计方法。当前最强模型在最难的因果任务上得分仍远低于人类专家。",
+      "interest_tag": "Benchmark"
+    },
+    {
+      "title": "Jet-Long: Efficient Long-Context Extension with Dynamic Bifocal RoPE",
+      "arxiv_id": "2607.07740",
+      "url": "https://arxiv.org/abs/2607.07740",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2607.07740",
+      "tldr": "Jet-Long introduces Dynamic Bifocal RoPE, a position encoding scheme that efficiently extends LLM context windows. By dynamically interpolating between near and far position encodings, it achieves strong performance on long-context retrieval and coding tasks with minimal fine-tuning overhead.",
+      "tldr_zh": "Jet-Long 引入了动态双焦点 RoPE 位置编码方案，高效扩展 LLM 上下文窗口。通过动态插值近端和远端位置编码，以极少的微调开销在长上下文检索和编码任务上取得强劲表现。",
+      "interest_tag": ""
+    },
+    {
+      "title": "UP: Unbounded Positive Asymmetric Optimization for Breaking the Exploration-Stability Dilemma",
+      "arxiv_id": "2607.06987",
+      "url": "https://arxiv.org/abs/2607.06987",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2607.06987",
+      "tldr": "UP proposes an asymmetric RL optimization objective that gives unbounded rewards for exploration while stabilizing training. Applied to LLM reasoning fine-tuning, it breaks the classic exploration-stability tradeoff, achieving better reasoning performance than GRPO baselines.",
+      "tldr_zh": "UP 提出了一种非对称 RL 优化目标，对探索给予无上界奖励的同时稳定训练过程。应用于 LLM 推理微调，它突破了经典探索-稳定性权衡，在推理性能上超越 GRPO 基线。",
+      "interest_tag": ""
+    }
+  ],
+  "github_repos": [
+    {
+      "name": "simonlin1212/Vibe-Research",
+      "url": "https://github.com/simonlin1212/Vibe-Research",
+      "tldr": "A personal trading research agent supporting A-shares, US stocks, and HK stocks. Features daily market recaps, news radar, stock data, sector analysis, portfolio tracking, and research notes — all driven by AI agents.",
+      "tldr_zh": "支持 A股/美股/港股的个人投研 Agent，集成每日复盘、资讯雷达、个股数据、板块分析、持仓管理和研究记录，全部由 AI Agent 驱动。",
+      "stars": 606,
+      "language": "TypeScript",
+      "interest_tag": ""
+    },
+    {
+      "name": "nexu-io/motion-anything",
+      "url": "https://github.com/nexu-io/motion-anything",
+      "tldr": "An open-source, chat-native motion engine that lets AI agents design animations by describing the feeling. The agentic motion layer accepts natural language and outputs production-ready animation code.",
+      "tldr_zh": "一个开源的、天然支持对话的动效引擎，让 AI Agent 通过描述感受来设计动画。只需自然语言输入，即可输出生产级动效代码。",
+      "stars": 351,
+      "language": "JavaScript",
+      "interest_tag": ""
+    },
+    {
+      "name": "eli-labz/Cognitive-Core-Skills",
+      "url": "https://github.com/eli-labz/Cognitive-Core-Skills",
+      "tldr": "A universal, industry-neutral taxonomy of cognitive core skills for AI agents, covering perception, memory, reasoning, planning, action, and verification. Intended as a standard vocabulary for building and evaluating agent capabilities.",
+      "tldr_zh": "面向 AI Agent 的通用认知核心技能分类体系，涵盖感知、记忆、推理、规划、行动和验证，旨在为构建和评估 Agent 能力提供标准词汇表。",
+      "stars": 273,
+      "language": "Python",
+      "interest_tag": ""
+    },
+    {
+      "name": "ronak-create/FableCut",
+      "url": "https://github.com/ronak-create/FableCut",
+      "tldr": "A zero-dependency browser video editor that AI agents can drive via a JSON timeline API, MCP, and REST endpoints. Enables agents to compose and edit videos programmatically with a live-reloading UI for human review.",
+      "tldr_zh": "一个零依赖的浏览器视频编辑器，AI Agent 可通过 JSON timeline API、MCP 和 REST 接口驱动它。支持 Agent 程序化合成和剪辑视频，并提供实时刷新 UI 供人工审查。",
+      "stars": 257,
+      "language": "JavaScript",
+      "interest_tag": ""
+    },
+    {
+      "name": "HaochengLu/contextvc",
+      "url": "https://github.com/HaochengLu/contextvc",
+      "tldr": "A Git-native context control plane for AI coding agents, implemented in Rust. It tracks, versions, and manages the context fed to coding agents, enabling reproducible and auditable AI-assisted development workflows.",
+      "tldr_zh": "用 Rust 实现的面向 AI 编码 Agent 的 Git 原生上下文控制平面。它追踪、版本化并管理提供给编码 Agent 的上下文，使 AI 辅助开发工作流可复现、可审计。",
+      "stars": 97,
+      "language": "Rust",
+      "interest_tag": ""
+    }
+  ],
+  "hackernews": [
+    {
+      "title": "GitLost: We Tricked GitHub's AI Agent into Leaking Private Repos",
+      "url": "https://noma.security/blog/gitlost-how-we-tricked-githubs-ai-agent-into-leaking-private-repos",
+      "tldr": "Security researchers at Noma demonstrated a prompt injection attack that manipulated GitHub's AI agent into leaking contents of private repositories. The attack exploits the agent's trust in repository content, highlighting systemic risks when AI agents have broad permissions over sensitive resources.",
+      "tldr_zh": "Noma 安全研究人员展示了一种提示注入攻击，成功操纵 GitHub AI Agent 泄露私有仓库内容。攻击利用了 Agent 对仓库内容的过度信任，揭示了当 AI Agent 拥有广泛敏感资源权限时的系统性风险。",
+      "points": 534,
+      "num_comments": 203,
+      "interest_tag": ""
+    },
+    {
+      "title": "Show HN: Microsoft releases Flint, a visualization language for AI agents",
+      "url": "https://microsoft.github.io/flint-chart/#/",
+      "tldr": "Microsoft released Flint, a declarative visualization language designed for AI agents to generate charts and dashboards. Rather than writing imperative chart code, agents describe data relationships and visual intent, and Flint compiles them to renderable output.",
+      "tldr_zh": "微软发布了 Flint，一种专为 AI Agent 设计的声明式可视化语言，用于生成图表和仪表盘。Agent 只需描述数据关系和视觉意图，Flint 负责编译成可渲染的输出，无需编写命令式图表代码。",
+      "points": 342,
+      "num_comments": 134,
+      "interest_tag": ""
+    },
+    {
+      "title": "Show HN: Rowboat – Open-source, local-first alternative to Claude Desktop",
+      "url": "https://github.com/rowboatlabs/rowboat",
+      "tldr": "Rowboat is an open-source, local-first alternative to Claude Desktop for running AI agents. It emphasizes privacy and local execution, supporting custom tools and multi-step agent workflows without sending data to third-party cloud services.",
+      "tldr_zh": "Rowboat 是 Claude Desktop 的开源本地优先替代品，专注于隐私保护和本地执行，支持自定义工具和多步骤 Agent 工作流，无需将数据发送到第三方云服务。",
+      "points": 216,
+      "num_comments": 94,
+      "interest_tag": ""
+    },
+    {
+      "title": "OfficeCLI: Office suite for AI agents to read and edit Microsoft Office files",
+      "url": "https://github.com/iOfficeAI/OfficeCLI",
+      "tldr": "OfficeCLI provides a CLI interface that enables AI agents to read and edit Word, Excel, and PowerPoint files programmatically. It bridges the gap between AI agents and the Microsoft Office ecosystem, enabling document-centric automation workflows.",
+      "tldr_zh": "OfficeCLI 提供了一个 CLI 接口，让 AI Agent 能够程序化地读写 Word、Excel 和 PowerPoint 文件。它连接了 AI Agent 与 Microsoft Office 生态，赋能以文档为中心的自动化工作流。",
+      "points": 214,
+      "num_comments": 63,
+      "interest_tag": ""
+    },
+    {
+      "title": "YC CEO says he ships 37K LoC AI code per day. A developer looked under the hood",
+      "url": "https://www.fastcompany.com/91520702/y-combinator-garry-tan-agentic-ai-social-me",
+      "tldr": "Fast Company investigates Garry Tan's claim of shipping 37,000 lines of AI-generated code per day. The investigation reveals nuances around code quality, review processes, and what 'shipping' means in an agentic AI workflow — sparking broad debate about productivity metrics for AI-assisted development.",
+      "tldr_zh": "Fast Company 深入调查了 Garry Tan 声称每天用 AI 生成 37000 行代码的说法，揭示了代码质量、审查流程以及「发布」在 Agentic AI 工作流中的含义，引发了关于 AI 辅助开发生产力指标的广泛讨论。",
+      "points": 117,
+      "num_comments": 99,
+      "interest_tag": ""
+    }
+  ]
+}
