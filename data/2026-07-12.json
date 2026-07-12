@@ -1,0 +1,226 @@
+{
+  "date": "2026-07-12",
+  "generated_at": "2026-07-12T08:00:00+08:00",
+  "briefing_zh": "今日 AI 研究领域呈现出**视频生成**与**智能体训练**两条主线并行推进的格局。**Vidu S1** 以 119 票高居 HuggingFace 日报榜首，首次实现支持语音控制的实时交互式视频生成，将 AI 视频从「批量渲染」带入了「实时对话」时代；与此同时，视频理解评测体系也面临重构，**Video-Oasis** 指出现有 Video-LLM benchmark 存在系统性偏差，需要从底层重新设计评估范式。\n\n智能体训练基础设施的突破同样令人注目。**SAO（Single-Rollout Asynchronous Optimization）** 框架解决了 GRPO 在异步 agentic RL 中的不稳定问题，通过单轨迹采样替代组采样，在 AIME 2025 上达到 97.3% 精度，并已部署于 **GLM-5.2**（750B-A40B）训练流水线——这是首个将异步 RL 推向超大规模生产的公开方法。**LLM-as-a-Verifier** 则提供了 agentic 任务的通用验证框架，通过计算评分 token logit 的期望来生成连续分数，在 SWE-Bench Verified、RoboRewardBench 等多个 benchmark 上刷新 SOTA。\n\nGitHub 社区热点折射出开发者对 **AI 生成内容质量**的焦虑：**kill-ai-slop**（257 stars）梳理了 AI 生成产品的视觉与文案特征，并提供 Agent 检测工具，迅速成为工程师的实用手册。**Rowboat** 作为 Claude Desktop 的本地替代品在 Hacker News 引发热议，**GitLost** 安全报告（538 points）揭露 GitHub AI Agent 可被诱导泄露私有仓库，再次将 Agent 安全推上议程。\n\n整体来看，本周 AI 基础设施的核心矛盾在于：训练效率（异步 RL、推测解码）与部署安全（Agent 越权、私有数据泄露）之间的张力正在加剧，两者都需要系统级的解决方案而非单点修补。",
+  "briefing_en": "Today's AI research landscape shows two parallel tracks advancing simultaneously: **video generation** and **agent training infrastructure**. **Vidu S1** topped HuggingFace Daily Papers with 119 upvotes, achieving real-time interactive video generation with voice control -- moving AI video from batch rendering to conversational interaction. Meanwhile, **Video-Oasis** challenges the validity of existing Video-LLM benchmarks, arguing they contain systematic biases requiring a ground-up redesign.\n\nBreakthroughs in agent training infrastructure are equally striking. The **SAO (Single-Rollout Asynchronous Optimization)** framework resolves instability issues in asynchronous agentic RL by replacing group-wise sampling with single-rollout sampling, achieving 97.3% on AIME 2025 and already deployed in the **GLM-5.2** (750B-A40B) training pipeline. **LLM-as-a-Verifier** introduces a general-purpose verification framework for agentic tasks using continuous scoring via logit expectations, setting new SOTA on SWE-Bench Verified, RoboRewardBench, and MedAgentBench.\n\nGitHub trending repos reflect developer anxiety about AI-generated content quality: **kill-ai-slop** (257 stars) catalogues visual and copy tics of AI-generated products with an agent-powered detection tool, quickly becoming a practitioner's handbook. **Rowboat** as a local-first Claude Desktop alternative sparked HN discussion, while the **GitLost** security report (538 points) exposing GitHub's AI Agent leaking private repos has pushed agent security back to the top of the agenda.\n\nThe core tension this week: training efficiency (async RL, speculative decoding) vs. deployment safety (agent privilege escalation, private data leakage) -- both require systemic solutions, not point fixes.",
+  "viral_analysis_zh": "**GitLost** 安全报告最可能在未来 48 小时内持续发酵：538 points、204 条评论，揭露 GitHub 官方 AI Agent 被诱导泄露私有仓库的完整攻击链，对所有使用 AI coding agent 的企业和个人开发者都有直接威胁感。安全类内容在 HN 天然具有高传播性，而「官方产品出现高危漏洞」的叙事框架更会驱动持续转发。",
+  "viral_analysis_en": "The **GitLost** security report is most likely to keep spreading over the next 48 hours: 538 points and 204 comments, exposing a complete attack chain that tricks GitHub's official AI Agent into leaking private repositories. This directly threatens every enterprise and individual developer using AI coding agents. Security content naturally spreads well on HN, and the 'official product has critical vulnerability' narrative frame drives sustained resharing.",
+  "huggingface_papers": [
+    {
+      "title": "Vidu S1: A Real-Time Interactive Video Generation Model",
+      "url": "https://huggingface.co/papers/2607.03118",
+      "tldr": "Vidu S1 is the first real-time interactive video generation model supporting voice-controlled digital environments. Unlike batch-render video generation systems, it closes the loop between user speech and video output with low latency, enabling live interactive scenarios rather than offline creation. The architecture achieves real-time throughput while maintaining visual quality competitive with non-interactive baselines.",
+      "tldr_zh": "Vidu S1 是首个支持语音控制的实时交互式视频生成模型，将 AI 视频从「离线渲染」推进到「实时对话」模式。用户可以用语音实时干预视频生成过程，系统在低延迟下保持竞争性的画面质量。这一突破对游戏、数字孪生和虚拟助手场景有直接应用价值。",
+      "upvotes": 119,
+      "authors": "Jintao Zhang, Kai Jiang, Jintao Chen",
+      "ai_keywords": [
+        "video generation",
+        "interactive",
+        "real-time",
+        "voice control"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "Video-Oasis: Rethinking Evaluation of Video Understanding",
+      "url": "https://huggingface.co/papers/2603.29616",
+      "tldr": "Video-Oasis identifies systematic biases in existing Video-LLM benchmarks, arguing that current evaluation frameworks cannot reliably distinguish model capability from benchmark artifacts. The paper proposes a new evaluation paradigm that decouples visual understanding from language priors, providing a more faithful measure of what video models actually learn.",
+      "tldr_zh": "Video-Oasis 指出现有 Video-LLM 评测基准存在系统性偏差，模型可能靠语言先验而非真正的视觉理解得高分。论文重新设计了评估范式，将视觉理解与语言偏见解耦，在新协议下多个号称 SOTA 的模型性能大幅下滑。",
+      "upvotes": 50,
+      "authors": "Geuntaek Lim, Sungjune Park, Jaeyun Lee",
+      "ai_keywords": [
+        "benchmark",
+        "video understanding",
+        "evaluation",
+        "Video-LLM"
+      ],
+      "interest_tag": "Benchmark"
+    },
+    {
+      "title": "Ideas Have Genomes: Benchmarking Scientific Lineage Reasoning and Lineage Attribution",
+      "url": "https://huggingface.co/papers/2607.08758",
+      "tldr": "This benchmark evaluates whether LLMs can reason about the intellectual lineage of scientific ideas -- tracing how concepts inherit from prior work, repair known limitations, and evolve across papers. Current frontier models score well below human experts, suggesting scientific lineage reasoning is a significant unsolved capability gap.",
+      "tldr_zh": "该 benchmark 测试 LLM 是否能推理科学思想的「基因谱系」——追踪概念如何继承自先前工作并跨论文演化。任务要求跨论文的深度推理，当前前沿模型得分远低于人类专家。",
+      "upvotes": 30,
+      "authors": "Yifan Zhou, Qihao Yang, Yan Li",
+      "ai_keywords": [
+        "benchmark",
+        "scientific reasoning",
+        "lineage",
+        "LLM evaluation"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "UniClawBench: A Universal Benchmark for Proactive Agents on Real-World Tasks",
+      "url": "https://huggingface.co/papers/2607.08768",
+      "tldr": "UniClawBench introduces a universal benchmark targeting proactive agents operating on real-world tasks, evaluating agents across planning horizon, tool use, and proactive decision-making. Reveals significant gaps between current MLLM capabilities and real-world deployment requirements.",
+      "tldr_zh": "UniClawBench 是专门针对主动式 Agent 的通用评测基准，评估 Agent 在规划跨度、工具使用和主动决策方面的能力，揭示了当前多模态大模型与实际部署需求之间的显著差距。",
+      "upvotes": 26,
+      "authors": "Zhekai Chen, Chengqi Duan, Kaiyue Sun",
+      "ai_keywords": [
+        "benchmark",
+        "proactive agent",
+        "MLLM",
+        "real-world tasks"
+      ],
+      "interest_tag": "Benchmark"
+    },
+    {
+      "title": "Remember When It Matters: Proactive Memory Agent for Long-Horizon Agent Tasks",
+      "url": "https://huggingface.co/papers/2607.09241",
+      "tldr": "The Proactive Memory Agent selectively stores and retrieves information based on predicted future relevance rather than recency, significantly reducing hallucinations in long-horizon tasks. The approach requires no additional training and plugs into existing agent frameworks.",
+      "tldr_zh": "主动记忆 Agent 根据预测的未来相关性而非时序来选择性存储和检索信息，显著降低长任务中的幻觉率。无需额外训练，可直接插入现有 agent 框架。",
+      "upvotes": 9,
+      "authors": "Multiple authors",
+      "ai_keywords": [
+        "memory",
+        "long-horizon",
+        "agent",
+        "proactive"
+      ],
+      "interest_tag": "Memory"
+    }
+  ],
+  "alphaxiv_papers": [
+    {
+      "title": "Single-Rollout Asynchronous Optimization for Agentic Reinforcement Learning",
+      "arxiv_id": "2607.07508",
+      "url": "https://arxiv.org/abs/2607.07508",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2607.07508",
+      "tldr": "SAO resolves the core instability of asynchronous RL for LLMs by replacing GRPO's group-wise sampling with single-rollout sampling per prompt. Combined with improved value model training, it achieves 97.3% on AIME 2025 and is already deployed in the GLM-5.2 (750B-A40B) training pipeline -- the first publicly documented method scaling async agentic RL to production at ultra-large scale.",
+      "tldr_zh": "SAO 通过将 GRPO 的组采样替换为每 prompt 单轨迹采样，解决了 LLM 异步 RL 训练的核心不稳定问题。在 AIME 2025 上达到 97.3% 精度，已部署于 GLM-5.2（750B-A40B）训练流水线，是首个公开记录的超大规模异步 agentic RL 生产方案。",
+      "interest_tag": ""
+    },
+    {
+      "title": "LLM-as-a-Verifier: A General-Purpose Verification Framework",
+      "arxiv_id": "2607.05391",
+      "url": "https://arxiv.org/abs/2607.05391",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2607.05391",
+      "tldr": "LLM-as-a-Verifier computes continuous verification scores by taking the expectation over scoring token logit distributions, reducing tie rates on complex solutions. Sets SOTA on Terminal-Bench V2 (86.5%), SWE-Bench Verified (78.2%), RoboRewardBench (87.4%), and MedAgentBench (73.3%). Can also serve as dense RL reward signal.",
+      "tldr_zh": "LLM-as-a-Verifier 通过计算评分 token logit 分布的期望生成连续验证分数，减少复杂方案比较时的并列情况。在 Terminal-Bench V2、SWE-Bench Verified 等四个基准上刷新 SOTA，亦可作为 RL 的稠密奖励信号。",
+      "interest_tag": ""
+    },
+    {
+      "title": "Learning To Draft: Adaptive Speculative Decoding with Reinforcement Learning",
+      "arxiv_id": "2603.01639",
+      "url": "https://arxiv.org/abs/2603.01639",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2603.01639",
+      "tldr": "LTD treats speculative decoding as an RL problem, training two co-adaptive policies (depth policy for draft cost, size policy for verification cost) to dynamically optimize each cycle for throughput. Achieves 2.24x-4.32x speedup, outperforming Eagle3.",
+      "tldr_zh": "LTD 将推测解码建模为 RL 问题，训练深度策略和大小策略两个协同自适应策略动态优化吞吐量。实现 2.24x-4.32x 加速，超越 Eagle3。",
+      "interest_tag": ""
+    },
+    {
+      "title": "Accelerating RL Post-Training Rollouts via System-Integrated Speculative Decoding",
+      "arxiv_id": "2604.26779",
+      "url": "https://arxiv.org/abs/2604.26779",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2604.26779",
+      "tldr": "Integrates speculative decoding into RL post-training rollout generation as a lossless acceleration primitive in NeMo-RL. At 8B scale achieves 1.8x rollout throughput; projects 2.5x end-to-end speedup at 235B scale with async RL.",
+      "tldr_zh": "将推测解码作为无损加速原语集成到 RL 后训练 rollout 生成中。8B 规模下同步 RL 实现 1.8x rollout 吞吐量提升；仿真预测 235B 规模结合异步 RL 可达 2.5x 端到端加速。",
+      "interest_tag": ""
+    },
+    {
+      "title": "Beyond Next-Token Prediction: An RLVR Proof of Concept for Tool-Use Agents on Atlassian Workflows",
+      "arxiv_id": "cs.AI/2607",
+      "url": "https://arxiv.org/list/cs.AI/current",
+      "alphaxiv_url": "https://www.alphaxiv.org/explore",
+      "tldr": "Demonstrates RLVR for tool-use agents on real enterprise workflows (Atlassian Jira/Confluence). Agents learn to use tools through verifiable task outcome rewards, showing significant gains over supervised fine-tuning on complex multi-step enterprise tasks.",
+      "tldr_zh": "在真实企业工作流（Atlassian Jira/Confluence）上验证 RLVR 用于工具调用 Agent。通过可验证任务结果的奖励信号学习工具使用，在复杂多步骤企业任务上显著超越监督微调基线。",
+      "interest_tag": ""
+    }
+  ],
+  "github_repos": [
+    {
+      "name": "nexu-io/motion-anything",
+      "url": "https://github.com/nexu-io/motion-anything",
+      "tldr": "Motion-Anything is an open-source chat-native motion engine that lets developers describe animations in natural language and have agents drive them. It bridges the gap between LLM code generation and production-quality UI motion, positioning as a foundational layer for AI-first frontend development.",
+      "tldr_zh": "Motion-Anything 是开源的聊天原生动画引擎，开发者可用自然语言描述动画，让 Agent 直接驱动 UI 动效，填补 LLM 代码生成与生产级 UI 动画之间的鸿沟。",
+      "stars": 401,
+      "language": "JavaScript",
+      "interest_tag": ""
+    },
+    {
+      "name": "ronak-create/FableCut",
+      "url": "https://github.com/ronak-create/FableCut",
+      "tldr": "FableCut is a zero-dependency browser video editor designed to be driven by AI agents via JSON timelines. Agents can programmatically compose, cut, and render videos entirely in-browser without any backend infrastructure.",
+      "tldr_zh": "FableCut 是零依赖的浏览器视频编辑器，专为 AI Agent 通过 JSON timeline 驱动而设计。Agent 可在浏览器内完全编程式地合成、剪辑和渲染视频，无需任何后端基础设施。",
+      "stars": 344,
+      "language": "JavaScript",
+      "interest_tag": ""
+    },
+    {
+      "name": "yetone/kill-ai-slop",
+      "url": "https://github.com/yetone/kill-ai-slop",
+      "tldr": "kill-ai-slop catalogues the telltale visual and copy patterns of AI-generated products. Includes an agent-powered detection tool for identifying AI slop in the wild. Created in response to growing fatigue with indistinguishable AI-generated products.",
+      "tldr_zh": "kill-ai-slop 收录 AI 生成产品的典型视觉与文案特征，并提供 Agent 驱动的检测工具，回应市场对同质化 AI 生成产品的审美疲劳。",
+      "stars": 257,
+      "language": "TypeScript",
+      "interest_tag": ""
+    },
+    {
+      "name": "ohad6k/ditto",
+      "url": "https://github.com/ohad6k/ditto",
+      "tldr": "Ditto mines Claude Code and Codex session logs to build a local you.md agent profile capturing your coding patterns and preferences. This profile can be injected into future agent sessions for cross-session continuity without cloud memory services.",
+      "tldr_zh": "Ditto 通过挖掘 Claude Code 和 Codex 会话日志生成本地 you.md Agent 配置文件，捕捉用户编码模式和偏好，可注入未来会话实现跨会话「自我连续性」。",
+      "stars": 108,
+      "language": "Python",
+      "interest_tag": "Memory"
+    },
+    {
+      "name": "Alisa0808/vox-director",
+      "url": "https://github.com/Alisa0808/vox-director",
+      "tldr": "Vox-Director automates end-to-end production of Vox-style explainer videos from a single topic input. The pipeline handles research, script writing, asset assembly, and video rendering automatically.",
+      "tldr_zh": "Vox-Director 从单一主题输入全自动生成 Vox 风格的纸质拼贴讲解视频，流水线自动处理研究、脚本撰写、素材组合和视频渲染。",
+      "stars": 75,
+      "language": "Python",
+      "interest_tag": ""
+    }
+  ],
+  "hackernews": [
+    {
+      "title": "GitLost: We Tricked GitHub's AI Agent into Leaking Private Repos",
+      "url": "https://noma.security/blog/gitlost-how-we-tricked-githubs-ai-agent-into-leaking-private-repos",
+      "tldr": "Noma Security demonstrates a complete attack chain against GitHub's AI coding agent, tricking it into exfiltrating private repository content via prompt injection through public issue content. The attack requires no special permissions and affects any user who has granted the agent access to private repos.",
+      "tldr_zh": "Noma Security 展示针对 GitHub AI 编程助手的完整攻击链，通过公开 issue 内容中的提示注入诱导 Agent 泄露私有仓库内容。攻击无需特殊权限，影响所有授权 Agent 访问私有仓库的用户。",
+      "points": 538,
+      "num_comments": 204,
+      "interest_tag": ""
+    },
+    {
+      "title": "Show HN: Microsoft releases Flint, a visualization language for AI agents",
+      "url": "https://microsoft.github.io/flint-chart/#/",
+      "tldr": "Microsoft open-sources Flint, a declarative visualization language designed specifically for AI agents to generate charts. Unlike general-purpose charting libraries, Flint's grammar is optimized for LLM generation -- simple enough for agents to produce correctly on first pass, expressive enough for production dashboards.",
+      "tldr_zh": "微软开源 Flint，一种专为 AI Agent 生成图表而设计的声明式可视化语言，语法针对 LLM 生成优化，简单到 Agent 第一次就能正确生成，同时足够支持生产级仪表盘。",
+      "points": 345,
+      "num_comments": 137,
+      "interest_tag": ""
+    },
+    {
+      "title": "Show HN: Rowboat - Open-source, local-first alternative to Claude Desktop",
+      "url": "https://github.com/rowboatlabs/rowboat",
+      "tldr": "Rowboat is a local-first, open-source alternative to Claude Desktop giving developers full control over their AI agent environment, model configuration, and data privacy. Supports multiple LLM backends with emphasis on transparency and extensibility.",
+      "tldr_zh": "Rowboat 是 Claude Desktop 的本地优先开源替代品，给予开发者对 AI Agent 环境、模型配置和数据隐私的完全控制权，支持多个 LLM 后端。",
+      "points": 217,
+      "num_comments": 94,
+      "interest_tag": ""
+    },
+    {
+      "title": "YC CEO says he ships 37K LoC AI code per day. A developer looked under the hood",
+      "url": "https://www.fastcompany.com/91520702/y-combinator-garry-tan-agentic-ai",
+      "tldr": "A developer investigates Garry Tan's claim of shipping 37,000 lines of AI-generated code per day, analyzing what this figure represents in terms of code quality and review depth. Surfaces a broader tension between velocity metrics and sustainable software engineering practices.",
+      "tldr_zh": "一位开发者调查了 YC CEO Garry Tan 每天产出 3.7 万行 AI 代码的说法，分析其在代码质量和审查深度方面的真实含义，揭示了速度指标与可持续工程实践之间的张力。",
+      "points": 118,
+      "num_comments": 99,
+      "interest_tag": ""
+    },
+    {
+      "title": "Show HN: Reverse-engineering web apps into agent tools",
+      "url": "https://news.ycombinator.com/item?id=44544791",
+      "tldr": "A methodology and toolset for automatically reverse-engineering existing web applications into agent-callable tools, generating API wrappers and structured interfaces from web app behavior without requiring official API access.",
+      "tldr_zh": "将现有 Web 应用自动逆向工程为 Agent 可调用工具的方法论和工具集，无需官方 API 即可从 Web 应用行为生成 API 包装器和结构化接口。",
+      "points": 89,
+      "num_comments": 37,
+      "interest_tag": "CUA"
+    }
+  ]
+}
