@@ -1,0 +1,223 @@
+{
+  "date": "2026-07-13",
+  "generated_at": "2026-07-13T08:00:00+08:00",
+  "briefing_zh": "今日 AI 研究领域呈现出两条清晰的主线：**Agent 能力评估与安全**和**多模态基础模型**。在 Agent 方向，**Long-Horizon-Terminal-Bench** 以密集奖励评分方式测试 agent 在长时程终端任务中的极限，填补了现有 benchmark 在复杂 CLI 操作场景中的空白；与此同时，GitHub AI Agent 的 prompt injection 安全漏洞（**GitLost**）曝出并引发 HN 大量讨论，说明 agent 安全已成不可回避的工程课题。在基础模型方向，**Video Generation Models are General-Purpose Vision Learners** 提出视频生成预训练范式可统一多类视觉任务，**Scalable Visual Pretraining for Language Intelligence** 则探索视觉预训练对语言能力的增益，两者共同指向视觉预训练即通用表征的新趋势。工程实践侧，**Claude Code vs OpenCode** 的 token overhead 对比帖子（563分）揭示了 coding agent 的效率优化空间，**GPT-5.6 迁移案例**（2.2x 加速 + 27% 降本）为生产部署提供了实际参考。**Microsoft Flint** 以可视化语言专门服务 AI agent，说明 agent 工具链正在快速成熟。",
+  "briefing_en": "Today's AI research landscape splits into two clear threads: **Agent evaluation/safety** and **multimodal foundation models**. On the agent front, **Long-Horizon-Terminal-Bench** introduces dense reward-based grading for long-horizon terminal tasks, filling a gap in existing benchmarks for complex CLI workflows. Meanwhile, a serious prompt injection vulnerability in GitHub's AI agent (**GitLost**) sparked heated HN discussion, confirming agent security as an urgent engineering concern. On the foundation model side, **Video Generation Models are General-Purpose Vision Learners** proposes that video generation pretraining can unify diverse visual tasks, while **Scalable Visual Pretraining for Language Intelligence** explores how visual pretraining enhances language capabilities, both pointing toward visual pretraining as universal representation. On the engineering side, a **Claude Code vs OpenCode** token overhead comparison (563 points) revealed significant efficiency gaps in coding agents, and a **GPT-5.6 migration case study** (2.2x faster, 27% cheaper) offered concrete production deployment data. **Microsoft Flint**, a visualization language purpose-built for AI agents, signals rapid maturation of the agent toolchain.",
+  "viral_analysis_zh": "最可能火的是 **GitLost** -- GitHub AI Agent 被攻击者通过恶意 PR 诱导泄露私有仓库，HN 已有538分和204条评论。这类 AI agent 被 prompt injection 攻破的叙事极具传播力：有具体的受害系统（GitHub Copilot）、可复现的攻击路径、真实的隐私风险，天然引发工程师的危机感和好奇心。加之越来越多团队在将 agent 接入生产代码库，这个安全案例的时机非常精准。",
+  "viral_analysis_en": "The most likely to go viral is **GitLost** -- attackers tricked GitHub's AI agent into leaking private repos via malicious PRs, already sitting at 538 points and 204 comments on HN. This type of AI agent broken by prompt injection narrative has strong viral mechanics: a recognizable victim system (GitHub Copilot), a reproducible attack path, and real privacy risks that trigger engineers' instinctive alarm and curiosity. With more teams plugging agents into production codebases, the timing of this security case study is precisely right.",
+  "huggingface_papers": [
+    {
+      "title": "Long-Horizon-Terminal-Bench: Testing the Limits of Agents on Long-Horizon Terminal Tasks with Dense Reward-Based Grading",
+      "url": "https://huggingface.co/papers/2607.08964",
+      "tldr": "LHTermBench introduces a new benchmark for evaluating AI agents on long-horizon terminal tasks (bash, file ops, multi-step CLI workflows) with dense reward-based grading rather than binary pass/fail. It reveals that current frontier agents plateau well below human expert performance on tasks requiring 20+ sequential steps, exposing a critical gap in practical agent deployment.",
+      "tldr_zh": "LHTermBench 是专门评测 AI agent 在长时程终端任务（bash、文件操作、多步 CLI）上表现的 benchmark，采用密集奖励评分取代二值判断。测试发现前沿 agent 在超过20步的任务上远未达到人类专家水平，揭示了实际部署中的关键能力缺口。",
+      "upvotes": 28,
+      "authors": "Zongxia Li, Zhongzhi Li, Yucheng Shi",
+      "ai_keywords": [
+        "agent benchmark",
+        "terminal tasks",
+        "long-horizon",
+        "dense reward"
+      ],
+      "interest_tag": "Benchmark"
+    },
+    {
+      "title": "Video Generation Models are General-Purpose Vision Learners",
+      "url": "https://huggingface.co/papers/2607.09024",
+      "tldr": "This paper demonstrates that video generation pretraining can serve as a universal visual representation backbone, outperforming or matching specialized models on downstream tasks including depth estimation, optical flow, segmentation, and tracking without task-specific pretraining. The key insight is that temporal prediction forces the model to learn rich structural and semantic representations.",
+      "tldr_zh": "本文证明视频生成预训练可作为通用视觉表征骨干，在深度估计、光流、分割、追踪等下游任务上与专用模型持平甚至超越，无需任务专属预训练。核心洞察：时序预测迫使模型学习丰富的结构性和语义表征。",
+      "upvotes": 22,
+      "authors": "Letian Wang, Chuhan Zhang, Rishabh Kabra",
+      "ai_keywords": [
+        "video generation",
+        "visual pretraining",
+        "representation learning"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "Scalable Visual Pretraining for Language Intelligence",
+      "url": "https://huggingface.co/papers/2607.09657",
+      "tldr": "The paper shows that large-scale visual pretraining data (web-scale image-text pairs) significantly boosts language model performance on reasoning benchmarks even without any text-only pretraining. It challenges the assumption that language intelligence requires text-first training, opening paths to cheaper, more data-efficient foundation models.",
+      "tldr_zh": "研究表明大规模视觉预训练数据（网络图文对）可在不依赖纯文本预训练的情况下显著提升语言模型的推理能力。这挑战了语言智能必须先训文本的既有假设，为更低成本的基础模型开辟了新路径。",
+      "upvotes": 19,
+      "authors": "Yiming Zhang, Zhonghan Zhao, Wenwei Zhang",
+      "ai_keywords": [
+        "visual pretraining",
+        "language models",
+        "multimodal"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "Trust Region Policy Distillation",
+      "url": "https://huggingface.co/papers/2607.04751",
+      "tldr": "TRPD proposes a policy distillation framework that applies trust region constraints during knowledge transfer from a large teacher model to a smaller student, preventing training instability common in standard KD. It achieves competitive reasoning performance in compressed models while maintaining training stability across diverse NLP benchmarks.",
+      "tldr_zh": "TRPD 在知识蒸馏过程中引入置信域约束，防止从大型教师模型向小型学生模型迁移时的训练不稳定问题。在保持训练稳定性的同时，压缩模型在多项 NLP benchmark 上达到竞争性推理性能。",
+      "upvotes": 9,
+      "authors": "Zhengpeng Xie, Li Lyna Zhang, Zeke Xie",
+      "ai_keywords": [
+        "policy distillation",
+        "knowledge distillation",
+        "trust region"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "KronQ: LLM Quantization via Kronecker-Factored Hessian",
+      "url": "https://huggingface.co/papers/2607.07964",
+      "tldr": "KronQ uses Kronecker-factored approximations of the Hessian matrix to guide post-training quantization of LLMs, achieving better weight sensitivity estimation at a fraction of the computational cost of full Hessian methods. It enables 4-bit quantization with minimal accuracy degradation on models up to 70B parameters.",
+      "tldr_zh": "KronQ 利用 Hessian 矩阵的 Kronecker 分解近似来指导 LLM 的训练后量化，以极低计算成本实现精准的权重敏感度估计。在 70B 以内模型上，4-bit 量化几乎无精度损失。",
+      "upvotes": 8,
+      "authors": "Donghyun Lee, Yuhang Li, Ruokai Yin",
+      "ai_keywords": [
+        "quantization",
+        "Hessian",
+        "Kronecker",
+        "LLM compression"
+      ],
+      "interest_tag": ""
+    }
+  ],
+  "alphaxiv_papers": [
+    {
+      "title": "Single-Rollout Asynchronous Optimization (SAO) for LLM RL Training",
+      "arxiv_id": "",
+      "url": "https://www.alphaxiv.org/explore",
+      "alphaxiv_url": "https://www.alphaxiv.org/explore",
+      "tldr": "SAO is an asynchronous RL framework that stabilizes LLM training by processing single trajectories rather than batched rollouts, mitigating off-policy drift. It achieves 97.3% accuracy on AIME2025 and outperforms synchronous baselines on complex agentic coding and reasoning tasks.",
+      "tldr_zh": "SAO 是一种异步强化学习框架，通过单轨迹处理而非批量 rollout 来稳定 LLM 训练，缓解 off-policy 漂移问题。在 AIME2025 上达到 97.3% 精度，在复杂 agentic 编程和推理任务上超越同步基线。",
+      "interest_tag": ""
+    },
+    {
+      "title": "LingBot-VA 2.0: Video-Action Foundation Model for Embodied Robot Control",
+      "arxiv_id": "",
+      "url": "https://www.alphaxiv.org/explore",
+      "alphaxiv_url": "https://www.alphaxiv.org/explore",
+      "tldr": "LingBot-VA 2.0 is a video-action foundation model for real-time robot control, using a native causal architecture and semantic visual-action tokenizer. It achieves +14% success rate on RoboTwin benchmark with 6.5x inference speedup, enabling closed-loop control at 225 Hz.",
+      "tldr_zh": "LingBot-VA 2.0 是面向实时机器人控制的视频动作基础模型，采用原生因果架构和语义视觉-动作分词器。在 RoboTwin benchmark 上提升14%成功率，推理加速6.5倍，支持225 Hz闭环控制。",
+      "interest_tag": ""
+    },
+    {
+      "title": "Long-Horizon-Terminal-Bench: Testing the Limits of Agents on Long-Horizon Terminal Tasks with Dense Reward-Based Grading",
+      "arxiv_id": "2607.08964",
+      "url": "https://arxiv.org/abs/2607.08964",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2607.08964",
+      "tldr": "A benchmark specifically designed for evaluating agents on complex, multi-step terminal tasks, with granular dense reward signals that expose performance gaps invisible to binary scoring. Tests include bash scripting, file system operations, and long CLI workflows where agents must maintain state across many steps.",
+      "tldr_zh": "专为评测 agent 在复杂多步终端任务上表现设计的 benchmark，采用细粒度密集奖励信号，揭示二值评分所掩盖的性能差距。测试覆盖 bash 脚本、文件系统操作和需跨步骤维护状态的长 CLI 工作流。",
+      "interest_tag": "Benchmark"
+    },
+    {
+      "title": "Video Generation Models are General-Purpose Vision Learners",
+      "arxiv_id": "2607.09024",
+      "url": "https://arxiv.org/abs/2607.09024",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2607.09024",
+      "tldr": "Video generation pretraining yields transferable visual representations that generalize across depth estimation, flow prediction, segmentation, and tracking, matching specialized models without task-specific pretraining data, suggesting video generation as a scalable path to general visual intelligence.",
+      "tldr_zh": "视频生成预训练产生的视觉表征可迁移至深度估计、光流预测、分割和追踪等多类任务，无需任务专属训练数据即可媲美专用模型，表明视频生成是通往通用视觉智能的可扩展路径。",
+      "interest_tag": ""
+    },
+    {
+      "title": "Scalable Visual Pretraining for Language Intelligence",
+      "arxiv_id": "2607.09657",
+      "url": "https://arxiv.org/abs/2607.09657",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2607.09657",
+      "tldr": "Large-scale visual pretraining with web image-text pairs can bootstrap strong language reasoning capabilities, challenging the text-centric pretraining paradigm. The findings suggest that visual grounding provides complementary supervision signals that enhance abstract reasoning, potentially enabling more data-efficient language model training.",
+      "tldr_zh": "利用网络图文对进行大规模视觉预训练可激发强大的语言推理能力，挑战以文本为中心的预训练范式。结果表明视觉基础提供互补的监督信号，增强抽象推理能力，有望降低语言模型训练的数据成本。",
+      "interest_tag": ""
+    }
+  ],
+  "github_repos": [
+    {
+      "name": "yetone/kill-ai-slop",
+      "url": "https://github.com/yetone/kill-ai-slop",
+      "tldr": "A field guide documenting visual and copy patterns typical of AI-generated products (AI slop), paired with an agent skill that scans your codebase and strips these telltale signs. Addresses the growing problem of homogeneous, low-quality AI-generated UX that erodes product differentiation.",
+      "tldr_zh": "记录 AI 生成产品的视觉和文案特征（AI slop）的实战指南，附带一个可扫描代码库并清除这些特征的 agent skill。针对 AI 生成内容同质化、拉低产品辨识度的日益突出问题。",
+      "stars": 350,
+      "language": "TypeScript",
+      "interest_tag": ""
+    },
+    {
+      "name": "ohad6k/ditto",
+      "url": "https://github.com/ohad6k/ditto",
+      "tldr": "Ditto mines Claude Code and Codex session logs to build a local you.md profile capturing your coding style, preferences, and patterns. This agent profile can then be injected into future sessions to provide persistent context and personalized behavior without manual prompt engineering.",
+      "tldr_zh": "Ditto 挖掘 Claude Code 和 Codex 的会话日志，生成记录你编码风格、偏好和模式的本地 you.md 档案。该 agent 档案可注入未来会话，提供持久上下文和个性化行为，无需手动提示工程。",
+      "stars": 148,
+      "language": "Python",
+      "interest_tag": ""
+    },
+    {
+      "name": "TencentCloud/Octop",
+      "url": "https://github.com/TencentCloud/Octop",
+      "tldr": "Octop is a self-hosted, multi-user AI assistant platform from Tencent Cloud with native multi-agent architecture. It provides enterprise-grade features including team management, isolated workspaces, and pluggable agent backends, positioned as an open-source alternative to managed AI assistant services.",
+      "tldr_zh": "Octop 是腾讯云开源的自托管多用户 AI 助手平台，原生支持多 agent 架构，提供团队管理、隔离工作空间和可插拔 agent 后端等企业级功能，定位为托管 AI 助手服务的开源替代方案。",
+      "stars": 73,
+      "language": "Python",
+      "interest_tag": "Agent Swarm"
+    },
+    {
+      "name": "Paresh-Maheshwari/morphe-ai",
+      "url": "https://github.com/Paresh-Maheshwari/morphe-ai",
+      "tldr": "Morphe is a multi-agent pipeline for Android APK analysis, vulnerability hunting, patch writing, and deployment. It orchestrates specialized agents for static analysis, dynamic testing, and code patching, an interesting application of agent swarms to mobile security automation.",
+      "tldr_zh": "Morphe 是用于 Android APK 分析、漏洞挖掘、补丁编写和部署的多 agent 流水线，编排静态分析、动态测试和代码修补等专项 agent，是 agent 群落在移动安全自动化领域的创新应用。",
+      "stars": 74,
+      "language": "Shell",
+      "interest_tag": "Agent Swarm"
+    },
+    {
+      "name": "bolivestilo/Homekit",
+      "url": "https://github.com/bolivestilo/Homekit",
+      "tldr": "Homekit exposes Apple HomeKit devices (lights, locks, sensors) to AI agents via a single unified interface, enabling agents to perform physical-world actions like flipping lights or locking doors. It represents an emerging category of agent-to-physical-world bridges that extend automation beyond digital tasks.",
+      "tldr_zh": "Homekit 通过统一接口将 Apple HomeKit 设备（灯光、门锁、传感器）暴露给 AI agent，使 agent 能执行翻转灯光、锁门等物理世界操作。代表 agent 向物理世界延伸的新兴接口类别。",
+      "stars": 67,
+      "language": "TypeScript",
+      "interest_tag": ""
+    }
+  ],
+  "hackernews": [
+    {
+      "title": "Claude Code sends 33k tokens before reading the prompt; OpenCode sends 7k",
+      "url": "https://systima.ai/blog/claude-code-vs-opencode-token-overhead",
+      "tldr": "A detailed analysis revealing that Claude Code front-loads 33,000 tokens of system context before processing any user input, versus OpenCode's 7,000 tokens, a 4.7x difference that translates directly to latency and cost. The post sparked broad discussion about token efficiency in coding agents and whether heavy system prompts are justified by quality gains.",
+      "tldr_zh": "详细分析揭示 Claude Code 在处理任何用户输入前预载了33,000个系统上下文 token，而 OpenCode 仅需7,000，4.7倍的差距直接影响延迟和成本。此帖引发对 coding agent token 效率的广泛讨论：重量级 system prompt 的质量收益是否值得。",
+      "points": 563,
+      "num_comments": 315,
+      "interest_tag": ""
+    },
+    {
+      "title": "GitLost: We Tricked GitHub's AI Agent into Leaking Private Repos",
+      "url": "https://noma.security/blog/gitlost-how-we-tricked-githubs-ai-agent-into-leaking-private-repos/",
+      "tldr": "Security researchers at Noma demonstrated a prompt injection attack against GitHub's AI agent (Copilot Workspace) that can be triggered via a malicious PR, causing the agent to exfiltrate private repository contents to attacker-controlled endpoints. The attack requires no elevated permissions, just a PR review, highlighting systemic risks of agents with repository access.",
+      "tldr_zh": "Noma 安全研究员演示了一种针对 GitHub AI agent（Copilot Workspace）的 prompt injection 攻击，可通过恶意 PR 触发，使 agent 将私有仓库内容泄露至攻击者控制的端点。攻击无需高权限，仅需 PR 审查即可，揭示了拥有仓库访问权限的 agent 的系统性安全风险。",
+      "points": 538,
+      "num_comments": 204,
+      "interest_tag": ""
+    },
+    {
+      "title": "Show HN: Microsoft releases Flint, a visualization language for AI agents",
+      "url": "https://microsoft.github.io/flint-chart/#/",
+      "tldr": "Microsoft open-sourced Flint, a declarative visualization language designed specifically for AI agents to generate charts and data visualizations. Unlike general-purpose charting libraries, Flint is optimized for LLM output with a constrained grammar that minimizes hallucination-prone syntax and generates reproducible, correct visualizations from natural language intent.",
+      "tldr_zh": "微软开源 Flint，一种专为 AI agent 生成图表和数据可视化设计的声明式可视化语言。与通用图表库不同，Flint 针对 LLM 输出优化，约束语法减少幻觉倾向，从自然语言意图生成可复现的正确可视化。",
+      "points": 347,
+      "num_comments": 137,
+      "interest_tag": ""
+    },
+    {
+      "title": "Show HN: Rowboat – Open-source, local-first alternative to Claude Desktop",
+      "url": "https://github.com/rowboatlabs/rowboat",
+      "tldr": "Rowboat is an open-source, local-first AI desktop app positioned as a privacy-respecting alternative to Claude Desktop. It runs models locally via Ollama, supports MCP tools, and keeps all data on-device, targeting users who want Claude Desktop's workflow integration without cloud data exposure.",
+      "tldr_zh": "Rowboat 是注重隐私的开源本地优先 AI 桌面应用，定位为 Claude Desktop 的替代方案。通过 Ollama 本地运行模型，支持 MCP 工具，所有数据留存本地，面向希望获得 Claude Desktop 工作流集成但不愿暴露云端数据的用户。",
+      "points": 218,
+      "num_comments": 94,
+      "interest_tag": ""
+    },
+    {
+      "title": "Migrating a production AI agent to GPT-5.6: 2.2x faster, 27% cheaper",
+      "url": "https://ploy.ai/blog/migrating-a-production-ai-agent-to-gpt-5-6",
+      "tldr": "A production case study from Ploy.ai documenting their migration of a customer-facing AI agent from GPT-4o to GPT-5.6, achieving 2.2x latency reduction and 27% cost savings with no degradation in task completion rates. The post details prompt adjustments required, token budget changes, and improvements in instruction-following that reduced error handling code.",
+      "tldr_zh": "Ploy.ai 的生产迁移案例，记录将面向用户的 AI agent 从 GPT-4o 迁移至 GPT-5.6 的过程：延迟降低2.2倍，成本节省27%，任务完成率无衰减。详述了所需的提示词调整、token 预算变化，以及指令遵循能力改善（减少了错误处理代码量）。",
+      "points": 197,
+      "num_comments": 85,
+      "interest_tag": ""
+    }
+  ]
+}
