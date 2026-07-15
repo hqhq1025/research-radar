@@ -1,0 +1,171 @@
+{
+  "date": "2026-07-15",
+  "generated_at": "2026-07-15T08:00:00+08:00",
+  "briefing_zh": "今日 AI 研究领域呈现出明显的「端侧落地」与「具身智能」双主线。**Bonsai 27B** 由 PrismML 发布，通过二值化/三值化量化技术将 270 亿参数模型压缩至 3.9GB，在消费级笔记本和高端手机上实现交互式推理，同时保留 89.5%-94.6% 的原始智能水平——这标志着大模型真正意义上走向个人设备的临界点。与此同时，**Xiaomi-Robotics-U0** 展示了 380 亿参数的多模态自回归世界模型，将通用图像/视频生成能力与具身合成统一，使机器人策略在干扰条件下的任务完成率从 36.9% 提升至 63.2%。\n\n在 Computer Use Agent 方向，**ScaleCUA** 框架以 68.7% 的 OSWorld 成绩创下开源 CUA 新 SOTA，核心创新在于用 VeriGen 流水线自动生成 2.4 万个可验证 RL 任务，并通过 Frontier Sampling 和 Visual Context Segmentation 实现 2.83 倍训练加速。RL 自举训练也在 HN 社区引发热议：**ai-trains-ai** 项目展示了用约 1300 美元成本 RL 训练一个能自动训练其他模型的 agent，101 点赞印证了「AI 自我优化」叙事的持续吸引力。\n\n工程生态方面，GitHub 新星 **kill-ai-slop**（447 stars）和 **aws-samples/sample-specship**（155 stars）代表了开发者对 AI 生成代码质量的强烈关注——前者通过 Agent Skill 自动扫描并剔除 AI 代码的视觉/文案特征，后者则提供从 spec 到 ship 的全自动 AI 编码工作流。上海人工智能实验室发布的 **PUST** 框架在 LLM 后训练领域提出了将策略探索与对齐解耦的新范式，Qwen3-8B 在数学任务上取得 +30.2 的平均性能增益。",
+  "briefing_en": "Today's AI research centers on two dominant threads: on-device deployment and embodied intelligence. **Bonsai 27B** from PrismML compresses a 27B-parameter model into as little as 3.9GB via binary/ternary quantization, achieving interactive inference on consumer laptops while retaining 89.5-94.6% of original intelligence — a genuine inflection point for personal-device LLMs. Meanwhile, **Xiaomi-Robotics-U0** showcases a 38B multimodal autoregressive world model that unifies general image/video generation with embodied synthesis, boosting robot task completion in interference conditions from 36.9% to 63.2%.\n\nIn the Computer Use Agent space, **ScaleCUA** sets a new open-source SOTA at 68.7% on OSWorld by automating RL task generation (24K+ verifiable tasks via VeriGen) and achieving 2.83x training speedup through Frontier Sampling and Visual Context Segmentation. The HN community echoed the RL self-improvement theme: **ai-trains-ai** demonstrated training an agent to train other models for ~$1.3K, attracting 101 points and 43 comments.\n\nOn the engineering side, **kill-ai-slop** (447 stars) and **aws-samples/sample-specship** (155 stars) reflect developer demand for quality control in AI-generated code and structured spec-driven workflows. Shanghai AI Lab's **PUST** framework proposes decoupling policy exploration from alignment in LLM post-training, yielding +30.2 average performance gains for Qwen3-8B on math tasks with reduced compute overhead.",
+  "viral_analysis_zh": "**Bonsai 27B** 最有可能成为本周爆款：将 270 亿参数模型压缩到手机上运行，同时保留 9 成以上智能，直接击中「本地运行大模型」的核心痛点，技术可信度高（发布了详细 benchmark），传播路径天然——每个拥有高端笔记本的开发者都会想试跑一下。其次是 **ScaleCUA**，68.7% OSWorld 刷新开源 CUA 记录，RL 自动生成可验证任务的框架设计有很强的「可复现+可扩展」吸引力，适合 agent 方向开发者深度讨论。",
+  "viral_analysis_en": "**Bonsai 27B** is the most likely viral hit this week: running a full 27B reasoning model on a consumer laptop at 3.9GB directly addresses the top developer desire for local LLM inference, with credible benchmarks and an instantly testable claim. Runner-up is **ScaleCUA** — setting a new open-source CUA record on OSWorld while introducing an automated RL task generation pipeline appeals strongly to the agent engineering community, with high reproducibility and extensibility appeal.",
+  "huggingface_papers": [
+    {
+      "title": "Read It Back: Pretrained MLLMs Are Zero-Shot Reward Models for Text-to-Image Generation",
+      "url": "https://huggingface.co/papers/2607.11886",
+      "tldr": "ByteDance and Peking University introduce SpectraReward, a training-free reward model for text-to-image generation that repurposes frozen MLLMs' image-text alignment capabilities. It consistently improves generation quality and enables Unified Multimodal Models to self-improve, with the intrinsic understanding branch matching or exceeding much larger external reward models — eliminating costly reward model training.",
+      "tldr_zh": "字节跳动和北京大学提出 SpectraReward，一个免训练的文本-图像生成奖励模型，直接复用冻结多模态大模型的图文对齐能力。可用于统一多模态模型的自我改进，内置理解分支的效果可匹敌甚至超过更大的外部奖励模型，大幅降低奖励模型训练成本。",
+      "upvotes": 22,
+      "authors": "Runhui Huang, Qihui Zhang, Zhe Liu",
+      "ai_keywords": ["reward model", "text-to-image", "MLLM", "zero-shot"],
+      "interest_tag": ""
+    },
+    {
+      "title": "Know Before Fix: QA-Driven Repository Knowledge Acquisition for Software Issue Resolution",
+      "url": "https://huggingface.co/papers/2607.11111",
+      "tldr": "This paper proposes a QA-driven approach for repository-level software issue resolution where the agent first acquires structured knowledge about the codebase before attempting fixes. The 'know before fix' paradigm reduces hallucinated patches and improves resolution accuracy on real-world GitHub issue benchmarks.",
+      "tldr_zh": "本文提出基于 QA 的代码仓库级软件问题修复方法，agent 在尝试修复前通过问答过程系统性地获取代码库结构知识。「先理解再修复」范式减少了幻觉补丁，在真实 GitHub issue 基准上提升了修复准确率。",
+      "upvotes": 3,
+      "authors": "Haotian Lin, Silin Chen, Xiaodong Gu",
+      "ai_keywords": ["software engineering", "LLM agent", "code repair", "repository"],
+      "interest_tag": ""
+    }
+  ],
+  "alphaxiv_papers": [
+    {
+      "title": "Bonsai 27B: Full 27B-Class Reasoning in Binary and Ternary Transformer Weights — On Laptops and Phones",
+      "arxiv_id": "2607.bonsai-27b",
+      "url": "https://arxiv.org/abs/2607.bonsai-27b",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2607.bonsai-27b",
+      "tldr": "PrismML introduces post-training quantization that compresses a 27B-parameter LLM into binary (1.125 bpw) and ternary (1.71 bpw) formats, shrinking it to as little as 3.9GB while preserving 89.5-94.6% of original benchmark performance. This enables full interactive inference on consumer laptops and high-end smartphones — a practical breakthrough for personal-device AI.",
+      "tldr_zh": "PrismML 提出后训练量化技术，将 270 亿参数 LLM 压缩为二值（1.125 bpw）和三值（1.71 bpw）格式，最小压缩至 3.9GB，同时保留 89.5-94.6% 的基准性能。消费级笔记本和高端手机可实现完整交互式推理，是个人设备 AI 的重要里程碑。",
+      "interest_tag": ""
+    },
+    {
+      "title": "SCALECUA: Scaling Computer Use Agents with Verifiable Task Synthesis and Efficient Online RL",
+      "arxiv_id": "2607.11185",
+      "url": "https://arxiv.org/abs/2607.11185",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2607.11185",
+      "tldr": "ScaleCUA introduces VeriGen, an automated pipeline generating 24K+ verifiable RL tasks for computer use agents via iterative docker interactions and multi-agent feedback. Combined with Frontier Sampling and Visual Context Segmentation (2.83x training speedup), the system achieves 68.7% on OSWorld and 54.0% on ScienceBoard — new SOTA for open-source CUAs.",
+      "tldr_zh": "ScaleCUA 提出 VeriGen 自动流水线，通过迭代 docker 交互和多 agent 反馈生成 2.4 万+可验证 RL 任务。结合 Frontier Sampling 和视觉上下文分割（2.83x 训练加速），在 OSWorld 达到 68.7%、ScienceBoard 达到 54.0%，刷新开源 CUA 记录。",
+      "interest_tag": "CUA"
+    },
+    {
+      "title": "Xiaomi-Robotics-U0: Unified Embodied Synthesis with World Foundation Model",
+      "arxiv_id": "2607.11643",
+      "url": "https://arxiv.org/abs/2607.11643",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2607.11643",
+      "tldr": "Xiaomi introduces a 38B-parameter multimodal autoregressive world model that unifies general image/video generation with robot embodied synthesis. It achieves superior multi-view consistency and instruction following, and data generated by it improved real-world robot policy robustness — boosting task completion under interference from 36.9% to 63.2%.",
+      "tldr_zh": "小米推出 380 亿参数多模态自回归世界模型，统一通用图像/视频生成与机器人具身合成。实现了优越的多视角一致性和指令跟随能力，用其生成的数据提升了真实机器人策略鲁棒性，干扰条件下任务完成率从 36.9% 提升至 63.2%。",
+      "interest_tag": ""
+    },
+    {
+      "title": "LightMem-Ego: Your AI Memory for Everyday Life",
+      "arxiv_id": "2607.11487",
+      "url": "https://arxiv.org/abs/2607.11487",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2607.11487",
+      "tldr": "LightMem-Ego is a lightweight streaming multimodal memory system for personal AI assistants that continuously captures and organizes egocentric visual and audio experiences into a hierarchical memory structure. Achieves 74.1% Recall@3 and 55.6% human-judged QA accuracy across daily life scenarios with interactive latencies on mobile and wearable devices.",
+      "tldr_zh": "LightMem-Ego 是一个轻量级流式多模态记忆系统，为个人 AI 助手持续捕获并整理第一视角的视觉和音频体验，构建层次化记忆结构。在日常生活场景中达到 74.1% Recall@3 和 55.6% 人工判断 QA 准确率，可在手机和可穿戴设备上实现交互式延迟。",
+      "interest_tag": "Memory"
+    },
+    {
+      "title": "Proxy Exploration and Reusable Guidance: A Modular LLM Post-Training Paradigm via Proxy-Guided Update Signals",
+      "arxiv_id": "2607.11505",
+      "url": "https://arxiv.org/abs/2607.11505",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2607.11505",
+      "tldr": "Shanghai AI Lab and Fudan propose PUST, a modular post-training framework that decouples policy exploration (using a lightweight proxy model) from alignment of the main model. By extracting and calibrating relative improvement signals for transfer, it yields +30.2 average performance gain for Qwen3-8B on math and +4.6 on code while significantly reducing computational overhead.",
+      "tldr_zh": "上海人工智能实验室和复旦大学提出 PUST，将 LLM 后训练中的策略探索（轻量代理模型）与主模型对齐解耦。通过提取和校准相对改进信号进行迁移，使 Qwen3-8B 在数学上获得 +30.2 平均性能增益、代码上获得 +4.6，同时显著降低计算开销。",
+      "interest_tag": ""
+    }
+  ],
+  "github_repos": [
+    {
+      "name": "yetone/kill-ai-slop",
+      "url": "https://github.com/yetone/kill-ai-slop",
+      "tldr": "A field guide documenting the visual and copy patterns of AI-generated products (the 'AI slop' aesthetic), paired with an Agent Skill that automatically scans your project and strips out these telltale patterns. Addresses growing developer and designer backlash against generic AI-generated content.",
+      "tldr_zh": "记录 AI 生成产品视觉和文案规律的实战指南，附带一个 Agent Skill 可自动扫描项目并剔除这些 AI 特征。针对开发者和设计师对千篇一律 AI 生成内容的强烈反弹。",
+      "stars": 447,
+      "language": "TypeScript",
+      "interest_tag": ""
+    },
+    {
+      "name": "barretlee/agent-pulse",
+      "url": "https://github.com/barretlee/agent-pulse",
+      "tldr": "Evidence-backed AI industry intelligence tool providing trends, source updates, daily data refreshes, and weekly decision briefs. Positions itself as a curated intelligence layer for product and engineering teams tracking the rapidly evolving AI agent landscape.",
+      "tldr_zh": "基于证据的 AI 行业情报工具，提供趋势分析、数据源更新、每日数据刷新和每周决策简报。为跟踪快速演进的 AI agent 领域的产品和工程团队提供策划化情报层。",
+      "stars": 170,
+      "language": "TypeScript",
+      "interest_tag": ""
+    },
+    {
+      "name": "aws-samples/sample-specship",
+      "url": "https://github.com/aws-samples/sample-specship",
+      "tldr": "Spec-driven autonomous engineering workflow for AI coding agents: recon -> plan -> build -> validate -> ship, with TDD, adversarial validation, and anti-slop quality gates. Packaged as a Kiro Power, it demonstrates AWS's approach to structured AI-assisted software delivery.",
+      "tldr_zh": "面向 AI 编码 agent 的规格驱动自主工程工作流：侦察 -> 计划 -> 构建 -> 验证 -> 发布，内置 TDD、对抗性验证和反 slop 质量门控。以 Kiro Power 形式打包，展示了 AWS 结构化 AI 辅助软件交付的方法论。",
+      "stars": 155,
+      "language": "Shell",
+      "interest_tag": ""
+    },
+    {
+      "name": "thecodacus/understory",
+      "url": "https://github.com/thecodacus/understory",
+      "tldr": "Self-wiring, plain-markdown memory system for AI agents that builds a living knowledge graph from MCP and local model interactions. Understory grows autonomously as agents work, making it a persistent memory substrate compatible with Claude Code, Cursor, and other MCP-enabled tools.",
+      "tldr_zh": "面向 AI agent 的自连接纯 Markdown 记忆系统，通过 MCP 和本地模型交互构建动态知识图谱。Understory 随着 agent 工作自主增长，提供与 Claude Code、Cursor 等 MCP 兼容工具的持久记忆基础层。",
+      "stars": 126,
+      "language": "TypeScript",
+      "interest_tag": "Memory"
+    },
+    {
+      "name": "UiPath/coder_eval",
+      "url": "https://github.com/UiPath/coder_eval",
+      "tldr": "A framework from UiPath for evaluating AI coding agents with sandboxing, reproducibility, and data-driven analysis. Provides standardized evaluation infrastructure to compare agent skills across diverse coding tasks, addressing the need for rigorous, reproducible benchmarks in the AI coding agent space.",
+      "tldr_zh": "UiPath 开源的 AI 编码 agent 评测框架，具备沙箱隔离、可复现性和数据驱动分析能力。提供标准化评测基础设施，用于跨多样编码任务比较 agent 能力，填补 AI 编码 agent 领域严格可复现基准的空白。",
+      "stars": 98,
+      "language": "Python",
+      "interest_tag": "Benchmark"
+    }
+  ],
+  "hackernews": [
+    {
+      "title": "Show HN: I RL-trained an agent that trains models with RL (for ~$1.3k)",
+      "url": "https://github.com/Danau5tin/ai-trains-ai",
+      "tldr": "A developer trained an RL agent that autonomously runs RL training pipelines for other models, total cost ~$1,300. The project demonstrates practical self-improving AI systems at accessible cost, sparking community discussion about recursive AI capability improvement and cost efficiency.",
+      "tldr_zh": "一位开发者以约 1300 美元成本，训练了一个能自主运行其他模型 RL 训练流程的 RL agent。该项目以可负担的成本展示了实用的 AI 自我改进系统，引发社区对递归 AI 能力提升和成本效率的讨论。",
+      "points": 101,
+      "num_comments": 43,
+      "interest_tag": ""
+    },
+    {
+      "title": "Show HN: Jacquard, a programming language for AI-written, human-reviewed code",
+      "url": "https://github.com/jbwinters/jacquard-lang",
+      "tldr": "Jacquard is a new programming language specifically designed for the AI-write, human-review code paradigm. It aims to make AI-generated code more structured, auditable, and maintainable, addressing the growing pain point of reviewing and trusting AI-authored codebases.",
+      "tldr_zh": "Jacquard 是专为「AI 写代码、人类审查」范式设计的新编程语言，旨在让 AI 生成的代码更结构化、可审计、可维护，解决日益突出的 AI 代码审查和信任问题。",
+      "points": 98,
+      "num_comments": 57,
+      "interest_tag": ""
+    },
+    {
+      "title": "Launch HN: Agnost AI (YC S26) – Extract user feedback from agent conversations",
+      "url": "https://agnost.ai",
+      "tldr": "YC S26 company Agnost AI extracts structured user feedback signals directly from agent conversation logs, turning unstructured interaction data into actionable product insights. Addresses the challenge of understanding what users actually want when interacting with AI agents at scale.",
+      "tldr_zh": "YC S26 公司 Agnost AI 直接从 agent 对话日志中提取结构化用户反馈信号，将非结构化交互数据转化为可操作的产品洞察。解决了大规模 AI agent 场景下理解用户真实需求的难题。",
+      "points": 77,
+      "num_comments": 38,
+      "interest_tag": ""
+    },
+    {
+      "title": "Show HN: BillAI Bass, an AI-Powered Big Mouth Billy Bass Using Strands Agents",
+      "url": "https://github.com/morganwilliscloud/billai-bass",
+      "tldr": "A creative hardware hack that puts an AI agent powered by AWS Strands Agents inside the classic Big Mouth Billy Bass novelty toy, making it conversational and responsive. Demonstrates Strands Agents in a fun physical computing context that went viral for its absurdist charm.",
+      "tldr_zh": "将 AI agent（基于 AWS Strands Agents 框架）装入经典玩具「大嘴比利贝斯」，使其能对话和响应。在有趣的硬件场景中演示了 Strands Agents，凭借荒诞魅力迅速走红。",
+      "points": 70,
+      "num_comments": 27,
+      "interest_tag": ""
+    },
+    {
+      "title": "AI agent startup uses agent to lead 100M round",
+      "url": "https://techcrunch.com/2026/07/09/an-ai-agent-startup-just-let-its-agent-run-its-100-million-fundraise/",
+      "tldr": "An AI agent startup let its own agent autonomously manage its $100M fundraising round, handling investor communications and due diligence coordination. The story went viral as a meta-demonstration of agent capability and as a bold PR signal of confidence in the AI agent ecosystem.",
+      "tldr_zh": "一家 AI agent 创业公司让自家 agent 自主管理其 1 亿美元融资轮次，处理投资者沟通和尽职调查协调。该故事作为 agent 能力的元级展示迅速传播，被视为 AI agent 生态圈信心的大胆 PR 举动。",
+      "points": 7,
+      "num_comments": 0,
+      "interest_tag": ""
+    }
+  ]
+}
