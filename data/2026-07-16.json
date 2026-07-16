@@ -1,0 +1,210 @@
+{
+  "date": "2026-07-16",
+  "generated_at": "2026-07-16T08:05:00+08:00",
+  "briefing_zh": "今日 AI 研究领域呈现出**智能体工程化**与**大规模训练范式**并进的双线趋势。在 agent 方向，**KnowAct-GUIClaw** 将自进化记忆与跨平台 GUI 操作融合，代表了从\"会用工具\"到\"持续学习\"的质的跃升；同期 **Harness Handbook** 从工程视角回应了 agent 代码库可维护性这一被忽视的实际问题——随着 harness 代码复杂度爆炸，如何让系统对人和 AI 都可读可编辑正成为生产瓶颈。\n\n在训练侧，**Ring-Zero** 将无监督 zero RL 推至万亿参数规模，首次系统性地揭示了大规模下的涌现推理行为；**Nemotron-Cascade 2** 则以级联 RL + 在线蒸馏的组合拳刷新了 post-training 的效率上限。这两项工作共同表明：零标注数据的强化学习正从 proof-of-concept 走向生产级 scaling。\n\n社区层面，HN 上 700 分的 **Claude Code vs OpenCode token 开销对比**引发激烈讨论——33k vs 7k 的预提示差距让开发者意识到 AI 编码工具的隐形成本。**Juggler** 作为 JUCE 作者带来的开源 GUI 编码 agent，也显示出社区对可视化、可透明化 agent 工具的强烈需求。GitHub 侧，**kill-ai-slop**（490 ⭐）以\"反 AI 味\"为切入点，折射出行业对 AI 生成内容质量问题的集体焦虑。",
+  "briefing_en": "Today's AI research landscape shows a dual trend of **agent engineering** and **large-scale training paradigms** advancing in parallel. On the agent front, **KnowAct-GUIClaw** merges self-evolving memory with cross-platform GUI interaction, representing a qualitative leap from \"tool use\" to \"continuous learning.\" Simultaneously, **Harness Handbook** addresses the oft-neglected engineering challenge of agent codebase maintainability — as harness complexity explodes, making systems readable and editable for both humans and AI is becoming a production bottleneck.\n\nOn the training side, **Ring-Zero** pushes unsupervised zero RL to trillion-parameter scale, systematically revealing emergent reasoning behaviors visible only at massive scale for the first time. **Nemotron-Cascade 2** extends post-training efficiency limits through cascaded RL combined with on-policy distillation. Together, these works signal that annotation-free reinforcement learning is transitioning from proof-of-concept to production-grade scaling.\n\nAt the community level, the HN viral post on **Claude Code vs OpenCode token overhead** (700 pts) sparked intense debate — a 33k vs 7k pre-prompt gap forces developers to reckon with hidden costs in AI coding tools. **Juggler**, an open-source GUI coding agent from the creator of JUCE, reflects strong community demand for transparent, visual agent tooling. On GitHub, **kill-ai-slop** (490 ⭐) uses \"anti-AI-slop\" as its hook, reflecting collective industry anxiety about AI-generated content quality.",
+  "viral_analysis_zh": "今天最可能出圈的是 **Claude Code vs OpenCode token 开销对比**（HN 699分）。它把抽象的\"AI 工具效率\"问题用具体数字（33k vs 7k）量化，让每个付费用户都能立刻换算成真金白银——这种\"揭秘行业内幕+有切身利益\"的组合是 HN 爆款的标准配方。其次是 **KnowAct-GUIClaw**，GUI Agent + 自进化记忆的组合触及了\"AI 助手能否真正记住我\"这个高频用户痛点，学术影响力和产品想象空间都很大。",
+  "viral_analysis_en": "Today's most likely viral hit is the **Claude Code vs OpenCode token overhead comparison** (HN 699 pts). It quantifies the abstract question of \"AI tool efficiency\" with concrete numbers (33k vs 7k), letting every paying user instantly translate the difference into real money — this combination of \"industry insider reveal + personal financial stakes\" is the classic HN viral formula. Runner-up is **KnowAct-GUIClaw**, where the combination of GUI agent + self-evolving memory directly addresses the high-frequency user pain point of \"can my AI assistant actually remember me,\" with both strong academic impact and large product imagination space.",
+  "huggingface_papers": [
+    {
+      "title": "KnowAct-GUIClaw: Know Deeply, Act Perfectly, Personal GUI Assistant with Self-Evolving Memory and Skill",
+      "url": "https://huggingface.co/papers/2607.12625",
+      "tldr": "KnowAct-GUIClaw extends the OpenClaw agent framework with cross-platform GUI interaction support and a self-evolving memory/skill system. The agent learns from execution history to continuously improve, enabling long-horizon, cross-application workflows. It addresses key gaps in existing GUI agents by combining deep knowledge retention with adaptive skill acquisition.",
+      "tldr_zh": "KnowAct-GUIClaw 在 OpenClaw 框架基础上引入跨平台 GUI 交互支持和自进化记忆/技能机制。智能体通过执行历史持续学习改进，支持跨应用的长周期工作流。核心创新在于将深度知识保留与自适应技能习得相结合，填补了现有 GUI 智能体的关键缺口。",
+      "upvotes": 0,
+      "authors": "HITsz-TMG",
+      "ai_keywords": [
+        "GUI agent",
+        "self-evolving",
+        "memory",
+        "skill learning"
+      ],
+      "interest_tag": "CUA"
+    },
+    {
+      "title": "Ring-Zero: Scaling Zero RL to a Trillion Parameters for Emergent Reasoning",
+      "url": "https://huggingface.co/papers/2607.12395",
+      "tldr": "Ring-Zero scales zero-shot RL (no human annotations) to trillion-parameter models, exploring emergent chain-of-thought reasoning capabilities at unprecedented scale. Previous zero RL work was restricted to small models due to compute constraints; this work reveals new training dynamics and emergent abilities only visible at massive scale.",
+      "tldr_zh": "Ring-Zero 将无需人工标注的 zero RL 扩展到万亿参数量级，探索大规模下涌现的思维链推理能力。此前 zero RL 受算力限制只能在小模型上验证，本工作揭示了只在超大规模下才出现的训练动态和涌现能力。",
+      "upvotes": 0,
+      "authors": "",
+      "ai_keywords": [
+        "reinforcement learning",
+        "reasoning",
+        "scaling",
+        "zero RL"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "OvisOCR2 Technical Report",
+      "url": "https://huggingface.co/papers/2607.13639",
+      "tldr": "OvisOCR2 is a multimodal vision-language model specialized for document OCR and understanding. The second generation of the Ovis series, it targets high-accuracy text extraction from complex document layouts while maintaining strong general visual understanding capabilities.",
+      "tldr_zh": "OvisOCR2 是专为文档 OCR 和理解设计的多模态视觉语言模型，是 Ovis 系列的第二代。在保持强通用视觉理解能力的同时，专门针对复杂文档版面的高精度文字提取进行了优化。",
+      "upvotes": 0,
+      "authors": "An-Yang Ji, Yuhui Chen, Yu Xia, Yinglun Li, Shiyin Lu",
+      "ai_keywords": [
+        "OCR",
+        "document understanding",
+        "multimodal",
+        "VLM"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "Harness Handbook: Making Evolving Agent Harnesses Readable, Navigable, and Editable",
+      "url": "https://huggingface.co/papers/2607.13285",
+      "tldr": "This paper tackles the challenge of maintaining AI agent harnesses as they evolve over time. It provides structured guidelines to make harness codebases readable and editable for both human developers and coding agents, addressing a major pain point in production AI systems where the scaffolding code managing prompts, state, tools, and execution becomes increasingly hard to maintain.",
+      "tldr_zh": "本文聚焦于 AI 智能体 harness（管理提示词、状态、工具和执行的脚手架代码）随时间演进的维护难题。提供结构化指南，让 harness 代码库对人类开发者和编码智能体都易于阅读和修改，解决了生产 AI 系统中的重大痛点。",
+      "upvotes": 0,
+      "authors": "",
+      "ai_keywords": [
+        "agent harness",
+        "code maintainability",
+        "agent engineering"
+      ],
+      "interest_tag": ""
+    }
+  ],
+  "alphaxiv_papers": [
+    {
+      "title": "SkillOpt: A Systematic Text-Space Optimizer for Agent Skills",
+      "arxiv_id": "2607.09234",
+      "url": "https://arxiv.org/abs/2607.09234",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2607.09234",
+      "tldr": "SkillOpt introduces a text-space optimization framework for agent skills, treating skills as external agent state that can be iteratively refined without retraining the underlying model. It achieves superior performance across multiple benchmarks with zero deployment inference overhead, making skill improvement both practical and scalable.",
+      "tldr_zh": "SkillOpt 提出了一种文本空间的智能体技能优化框架，将技能作为外部状态进行迭代精炼，无需重新训练底层模型。在多个基准上取得最优性能，且零额外推理开销，让技能改进既实用又可扩展。",
+      "interest_tag": ""
+    },
+    {
+      "title": "Nemotron-Cascade 2: Post-Training LLMs with Cascade RL and Multi-Domain On-Policy Distillation",
+      "arxiv_id": "2607.10891",
+      "url": "https://arxiv.org/abs/2607.10891",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2607.10891",
+      "tldr": "Nvidia's Nemotron-Cascade 2 introduces a cascade RL post-training pipeline combined with multi-domain on-policy distillation. The approach systematically improves model capabilities across reasoning, coding, and instruction following domains using a staged training strategy that progressively builds capability.",
+      "tldr_zh": "Nvidia Nemotron-Cascade 2 提出级联 RL 后训练流程结合多领域在线蒸馏。通过分阶段训练策略系统地提升模型在推理、编程和指令遵循等领域的能力，形成能力逐步累积的训练范式。",
+      "interest_tag": ""
+    },
+    {
+      "title": "FASTER: Rethinking Real-Time Flow VLAs for Robot Control",
+      "arxiv_id": "2607.08771",
+      "url": "https://arxiv.org/abs/2607.08771",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2607.08771",
+      "tldr": "FASTER rethinks real-time flow-based Vision-Language-Action models for robot control, addressing the latency bottleneck that prevents deployment in fast-paced manipulation tasks. By redesigning the flow matching architecture, it achieves real-time inference without sacrificing action quality.",
+      "tldr_zh": "FASTER 重新设计了用于机器人控制的实时 flow-based 视觉-语言-动作模型，解决了阻碍快速操控任务部署的延迟瓶颈。通过重构 flow matching 架构，在不损失动作质量的前提下实现了实时推理。",
+      "interest_tag": ""
+    },
+    {
+      "title": "LVOmniBench: Pioneering Long Audio-Video Understanding Evaluation for Omnimodal LLMs",
+      "arxiv_id": "2607.11203",
+      "url": "https://arxiv.org/abs/2607.11203",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2607.11203",
+      "tldr": "LVOmniBench introduces the first comprehensive benchmark for evaluating long audio-video understanding in omnimodal LLMs. It tests models on temporally-grounded, multi-modal reasoning tasks requiring simultaneous processing of long-form audio and video content, revealing significant gaps in current models.",
+      "tldr_zh": "LVOmniBench 提出了首个全面评估全模态 LLM 长视频+音频理解能力的基准。测试模型在需要同时处理长篇音视频内容的时序推理任务上的表现，揭示了当前模型的显著能力缺口。",
+      "interest_tag": "Benchmark"
+    },
+    {
+      "title": "Reasoning over Mathematical Objects: On-Policy Reward Modeling and Test Time Aggregation",
+      "arxiv_id": "2607.12018",
+      "url": "https://arxiv.org/abs/2607.12018",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2607.12018",
+      "tldr": "This work advances mathematical reasoning in LLMs through on-policy reward modeling and test-time compute aggregation. By training reward models on the model's own distribution and aggregating multiple solution paths at inference time, it achieves state-of-the-art results on challenging math benchmarks.",
+      "tldr_zh": "通过在线策略奖励建模和测试时计算聚合推进 LLM 的数学推理能力。在模型自身分布上训练奖励模型，并在推理时聚合多条解题路径，在高难度数学基准上取得了最优成绩。",
+      "interest_tag": ""
+    }
+  ],
+  "github_repos": [
+    {
+      "name": "yetone/kill-ai-slop",
+      "url": "https://github.com/yetone/kill-ai-slop",
+      "tldr": "A field guide documenting the visual and copy tics of AI-generated products, packaged as an Agent Skill that scans your designs/copy and flags AI-isms. Targets the growing problem of generic, soulless AI output flooding product design.",
+      "tldr_zh": "系统整理 AI 生成内容的视觉和文案特征，并封装为可直接调用的 Agent Skill，自动扫描你的设计/文案并标记 AI 味。直击 AI 生成内容同质化泛滥的痛点。",
+      "stars": 490,
+      "language": "TypeScript",
+      "interest_tag": ""
+    },
+    {
+      "name": "barretlee/agent-pulse",
+      "url": "https://github.com/barretlee/agent-pulse",
+      "tldr": "Evidence-backed AI industry intelligence platform with automated data refreshes, trend tracking, and weekly digests. Provides structured, source-attributed intelligence rather than raw news aggregation.",
+      "tldr_zh": "基于证据的 AI 行业情报平台，自动刷新数据、追踪趋势、生成周报。相比原始新闻聚合，提供有来源溯源的结构化行业情报。",
+      "stars": 193,
+      "language": "TypeScript",
+      "interest_tag": ""
+    },
+    {
+      "name": "ShenSeanChen/waku-agent",
+      "url": "https://github.com/ShenSeanChen/waku-agent",
+      "tldr": "Waku Agent is a personal AI agent designed to run entirely on your laptop in human-readable code. It emphasizes transparency and ownership — the full agent codebase is compact enough to read in an afternoon, countering the black-box trend in agent frameworks.",
+      "tldr_zh": "Waku Agent 是完全在本地运行的个人 AI 智能体，代码简洁易读，下午就能通读全部。强调透明性和所有权，对抗主流智能体框架黑箱化的趋势。",
+      "stars": 182,
+      "language": "Python",
+      "interest_tag": ""
+    },
+    {
+      "name": "aws-samples/sample-specship",
+      "url": "https://github.com/aws-samples/sample-specship",
+      "tldr": "AWS's spec-driven autonomous engineering workflow for AI coding agents: recon → plan → build → validate pipeline. Provides a structured framework for running multi-step engineering tasks with AI agents using specifications as the driving document.",
+      "tldr_zh": "AWS 发布的 spec 驱动自主工程工作流，为 AI 编码智能体提供侦察→规划→构建→验证完整流水线。以规格文档为驱动，让 AI 智能体完成多步骤工程任务的结构化框架。",
+      "stars": 160,
+      "language": "Shell",
+      "interest_tag": ""
+    },
+    {
+      "name": "TetiAI/memraw",
+      "url": "https://github.com/TetiAI/memraw",
+      "tldr": "memraw is an open experiment in AI agent memory — 'the whole memory, always in the prompt'. It explores the radical simplicity of keeping all agent memory context-present rather than using retrieval-augmented or hierarchical memory systems.",
+      "tldr_zh": "memraw 是 AI 智能体记忆的开放实验：'全部记忆始终在提示词中'。探索将所有记忆保持在上下文中的极简方案，对比检索增强或分层记忆系统的激进简化路径。",
+      "stars": 46,
+      "language": "TypeScript",
+      "interest_tag": "Memory"
+    }
+  ],
+  "hackernews": [
+    {
+      "title": "Claude Code sends 33k tokens before reading the prompt; OpenCode sends 7k",
+      "url": "https://systima.ai/blog/claude-code-vs-opencode-token-overhead",
+      "tldr": "A detailed technical analysis comparing token overhead in Claude Code vs OpenCode before processing the user's actual request. Claude Code's 33k pre-prompt tokens vs OpenCode's 7k reveals significant efficiency differences in AI coding agent initialization, with direct cost and latency implications.",
+      "tldr_zh": "详细技术分析对比 Claude Code 与 OpenCode 在处理用户请求前的 token 开销。Claude Code 33k vs OpenCode 7k 的预提示 token 差异揭示了 AI 编码智能体初始化上下文的效率差距，对成本和延迟有直接影响。",
+      "points": 699,
+      "num_comments": 390,
+      "interest_tag": ""
+    },
+    {
+      "title": "Show HN: Juggler – an open-source GUI coding agent, by the creator of JUCE",
+      "url": "https://github.com/juggler-ai/juggler",
+      "tldr": "Juggler is an open-source GUI coding agent created by Jules Storer (creator of the JUCE audio framework). It provides a visual interface for AI-assisted coding, bringing GUI interaction to the coding agent space dominated by CLI tools.",
+      "tldr_zh": "Juggler 是 JUCE 音频框架作者开发的开源 GUI 编码智能体，为 AI 辅助编程提供可视化界面，将 GUI 交互带入了 CLI 工具主导的编码智能体领域。",
+      "points": 274,
+      "num_comments": 118,
+      "interest_tag": "CUA"
+    },
+    {
+      "title": "Migrating a production AI agent to GPT-5.6: 2.2x faster, 27% cheaper",
+      "url": "https://ploy.ai/blog/migrating-a-production-ai-agent-to-gpt-5-6",
+      "tldr": "Real-world benchmarks from migrating a production AI agent to GPT-5.6, showing 2.2x speed improvement and 27% cost reduction. The writeup covers migration challenges, prompt adjustments needed, and practical performance gains from OpenAI's latest model generation.",
+      "tldr_zh": "将生产 AI 智能体迁移至 GPT-5.6 的真实基准数据：速度提升 2.2 倍，成本降低 27%。记录了迁移挑战、提示词调整需求以及 OpenAI 最新一代模型带来的实际性能收益。",
+      "points": 257,
+      "num_comments": 131,
+      "interest_tag": ""
+    },
+    {
+      "title": "Show HN: I RL-trained an agent that trains models with RL (for ~$1.3k)",
+      "url": "https://github.com/Danau5tin/ai-trains-ai",
+      "tldr": "A meta-RL experiment where an agent is trained with RL to itself train other models using RL, completed for ~$1,300. The recursive nature — AI training AI trainers — is a novel exploration of automated machine learning through reinforcement learning.",
+      "tldr_zh": "用约 1300 美元完成的元 RL 实验：训练一个通过 RL 学会使用 RL 来训练其他模型的智能体。AI 训练 AI 训练师的递归架构，是通过强化学习实现自动化机器学习的新颖探索。",
+      "points": 106,
+      "num_comments": 47,
+      "interest_tag": ""
+    },
+    {
+      "title": "Show HN: Jacquard, a programming language for AI-written, human-reviewed code",
+      "url": "https://github.com/jbwinters/jacquard-lang",
+      "tldr": "Jacquard is a new programming language designed specifically for the human-AI collaboration workflow: AI writes the code, humans review it. The language design prioritizes readability and reviewability over terseness, acknowledging that AI-generated code needs different properties than human-written code.",
+      "tldr_zh": "Jacquard 是专为人机协作工作流设计的新编程语言：AI 写代码，人类审查。语言设计优先保证可读性和可审查性而非简洁性，承认 AI 生成代码需要不同于人类手写代码的特性。",
+      "points": 102,
+      "num_comments": 58,
+      "interest_tag": ""
+    }
+  ]
+}
