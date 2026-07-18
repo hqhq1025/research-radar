@@ -1,0 +1,226 @@
+{
+  "date": "2026-07-18",
+  "generated_at": "2026-07-18T08:03:44Z",
+  "briefing_zh": "今日 AI 研究领域有两条主线交织推进。**长上下文 RL 训练**迎来突破：**LongStraw** 以 116 票居 HuggingFace 榜首，首次将 RL 后训练扩展至 200 万 token 以上，弥合了推理时百万级上下文与训练时止步 256K 之间长期存在的鸿沟；与此同时，**SEED** 提出自进化在策略蒸馏，通过密集信号提升多轮工具调用场景下的信度分配，两者共同预示着长时域智能体训练进入新阶段。\n\n**智能体搜索与多智能体协作**也是今日热点：**SearchOS-V1** 发现单智能体网络搜索在历史增长和反复失败时会陷入僵局，引入角色专化的多智能体协作框架加以解决。开源生态方面，**LM Studio Bionic** 以 323 票横扫 Hacker News，将智能体能力（工具调用、多步任务）带入本地开源模型用户群，隐私优先的定位引发强烈共鸣；**KlaatCode** 和 **RouterClaw** 则分别以 TypeScript 和 Go 推出终端 AI 编程智能体，Claude Code 替代品赛道持续升温。\n\n安全与可靠性方向出现值得关注的研究：**BadWAM** 揭示世界-动作模型在「梦对但做错」上的根本漏洞——即便世界预测准确，动作仍可能灾难性错误，这对机器人基础模型是重要的安全警示。模型发布侧，Thinking Machines 开源 975B 参数的多模态 MoE 模型 **Inkling**（41B 激活参数），直接对标闭源前沿模型，开源多模态大模型竞争格局持续升级。",
+  "briefing_en": "Two major threads define today's AI research landscape. **Long-context RL training** sees a breakthrough: **LongStraw** tops HuggingFace with 116 votes by extending RL post-training beyond 2M tokens — bridging the longstanding gap between million-token inference contexts and training that stalls at 256K. Alongside it, **SEED** introduces self-evolving on-policy distillation to improve credit assignment in multi-turn tool-use tasks. Together, they signal a new phase for long-horizon agentic training.\n\n**Agentic search and multi-agent collaboration** emerge as today's second major theme: **SearchOS-V1** identifies how single-agent web search systems get stuck as interaction history grows and searches fail repeatedly, introducing a role-specialized multi-agent framework as the solution. On the open-source front, **LM Studio Bionic** dominates Hacker News at 323 points by bringing agentic capabilities (tool use, multi-step tasks) to local open-model users — the privacy-first angle resonating strongly. **KlaatCode** and **RouterClaw** add TypeScript and Go terminal AI coding agents respectively, keeping the Claude Code alternative track heating up.\n\nSafety and reliability surface important results: **BadWAM** reveals a fundamental vulnerability in world-action models — accurate world prediction does not guarantee correct actions, a critical safety finding for robot foundation models. On the model release front, Thinking Machines open-sources **Inkling**, a 975B-parameter multimodal MoE (41B active) that competes directly with closed frontier models, continuing to escalate open-source multimodal competition.",
+  "viral_analysis_zh": "**LM Studio Bionic** 以 323 票 + 126 评论成为今日绝对爆款：LM Studio 本身就有数十万本地 AI 用户，Bionic 直接将智能体能力植入这个已有的庞大用户群，无需获客、无需教育市场，发布即是对已有信任的兑现。「开源模型的 AI 智能体」这个标题框架也极为精准——在 Cursor/Claude Code 等付费工具主导的今天，主打「本地 + 开源」立即触达了隐私和成本敏感用户。**Capital One 的 VulnHunter** 则代表另一类爆款逻辑：大公司将内部 AI 工具开源，既获得技术公信力背书，又借助社区放大传播，68 票的成绩对企业技术博文来说相当亮眼。",
+  "viral_analysis_en": "**LM Studio Bionic** dominates at 323 points + 126 comments — LM Studio already has hundreds of thousands of local AI users, so Bionic delivers agentic capabilities to an existing trust base without needing to acquire new users or educate the market. The framing 「AI agent for open models」 is precise: in a landscape dominated by paid tools like Cursor and Claude Code, the 「local + open-source」 pitch instantly reaches privacy- and cost-sensitive developers. **Capital One's VulnHunter** represents a different viral playbook: a major corporation open-sourcing its internal AI tooling earns technical credibility while leveraging the community for amplification — 68 points is impressive for a corporate tech blog post.",
+  "huggingface_papers": [
+    {
+      "title": "LongStraw: Long-Context RL Beyond 2M Tokens under a Fixed GPU Budget",
+      "arxiv_id": "2607.14952",
+      "url": "https://arxiv.org/abs/2607.14952",
+      "tldr": "LongStraw tackles the growing gap between inference context lengths (approaching millions of tokens) and RL post-training (stuck at ~256K). By introducing a fixed GPU budget framework, it enables RL training up to 2M+ tokens for AI agents, making long-context agentic RL practically feasible without requiring ever-larger compute clusters.",
+      "tldr_zh": "LongStraw 解决了推理上下文长度（接近百万 token）与 RL 后训练（通常卡在 256K）之间日益扩大的鸿沟。通过引入固定 GPU 预算框架，使 RL 训练可扩展至 200 万 token 以上，让长上下文智能体 RL 训练无需配置愈来愈大的算力集群。",
+      "upvotes": 116,
+      "authors": "Changhai Zhou, Kieran Liu, Yuhua Zhou, Qian Qiao, Jun Gao",
+      "ai_keywords": [
+        "RL",
+        "long-context",
+        "agent"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "VideoChat3: Fully Open Video MLLM for Efficient and Generalist Video Understanding",
+      "arxiv_id": "2607.14935",
+      "url": "https://arxiv.org/abs/2607.14935",
+      "tldr": "VideoChat3 is a fully open-source video multimodal LLM that generalizes across diverse video types — motion, long-form video, and streaming interaction — in a single model. It addresses fragmentation in current open-source models that struggle outside narrow domains, offering a practical foundation for real-world video AI applications.",
+      "tldr_zh": "VideoChat3 是一个完全开源的视频多模态大模型，能在动态视频、长视频和流式交互等多种场景中统一泛化。解决了当前开源模型只擅长特定领域的碎片化问题，为真实世界视频 AI 应用提供了实用基础。",
+      "upvotes": 112,
+      "authors": "Xinhao Li, Yuhan Zhu, Xiangyu Zeng, Yuhao Dong, Haoning Wu",
+      "ai_keywords": [
+        "video",
+        "MLLM",
+        "open-source"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "SEED: Self-Evolving On-Policy Distillation for Agentic Reinforcement Learning",
+      "arxiv_id": "2607.14777",
+      "url": "https://arxiv.org/abs/2607.14777",
+      "tldr": "SEED proposes a self-evolving on-policy distillation method for training agentic LLMs. Standard outcome-based RL suffers from sparse trajectory-level rewards in multi-turn tool-use tasks; SEED improves credit assignment by distilling dense signals from a teacher across evolving policies, leading to better long-horizon agent performance.",
+      "tldr_zh": "SEED 提出了一种自进化在策略蒸馏方法，用于训练智能体 LLM。标准结果型 RL 在多轮工具调用任务中面临奖励稀疏问题，SEED 通过从教师模型蒸馏密集信号来改善信度分配，显著提升长时域智能体性能。",
+      "upvotes": 75,
+      "authors": "Jinyang Wu, Shuo Yang, Zhengxi Lu, Fan Zhang, Yuhao Shen",
+      "ai_keywords": [
+        "RL",
+        "distillation",
+        "agent"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "SearchOS-V1: Towards Robust Open-Domain Information-Seeking Agent Collaboration",
+      "arxiv_id": "2607.15257",
+      "url": "https://arxiv.org/abs/2607.15257",
+      "tldr": "SearchOS-V1 addresses a critical failure mode of web search agents: as interaction history grows, agents lose track of task progress, and when search fails, single-agent systems get stuck. SearchOS introduces a multi-agent collaboration framework with specialized roles for robust open-domain information seeking, even under repeated search failures.",
+      "tldr_zh": "SearchOS-V1 解决了网络搜索智能体的关键失败模式：随着交互历史增长，智能体会失去对任务进度的追踪，单智能体系统在搜索失败时会陷入僵局。SearchOS 引入多智能体协作框架，通过角色专化确保在反复搜索失败下仍能稳健地完成开放域信息获取。",
+      "upvotes": 53,
+      "authors": "Yuyao Zhang, Junjie Gao, Zhengxian Wu, Jiaming Fan, Jin Zhang",
+      "ai_keywords": [
+        "agent",
+        "search",
+        "multi-agent"
+      ],
+      "interest_tag": "Agent Swarm"
+    },
+    {
+      "title": "BadWAM: When World-Action Models Dream Right but Act Wrong",
+      "arxiv_id": "2607.15207",
+      "url": "https://arxiv.org/abs/2607.15207",
+      "tldr": "BadWAM exposes a fundamental vulnerability in world-action models (WAMs) used for embodied control: although WAMs couple action generation with world prediction for robustness, this coupling can be adversarially exploited. A model that predicts future worlds accurately can still take catastrophically wrong actions — a critical safety finding for robot foundation models.",
+      "tldr_zh": "BadWAM 揭示了具身控制世界-动作模型（WAM）的根本性安全漏洞：尽管 WAM 将动作生成与世界预测耦合以提升鲁棒性，但这种耦合本身可被对抗性利用。准确预测未来世界的模型仍可能采取灾难性错误动作——这对机器人基础模型是重要安全发现。",
+      "upvotes": 37,
+      "authors": "Qi Li, Xingyi Yang, Xinchao Wang",
+      "ai_keywords": [
+        "world model",
+        "embodied",
+        "safety"
+      ],
+      "interest_tag": ""
+    }
+  ],
+  "alphaxiv_papers": [
+    {
+      "title": "Video = World + Event Stream",
+      "arxiv_id": "2607.15038",
+      "url": "https://arxiv.org/abs/2607.15038",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2607.15038",
+      "tldr": "Wan-Streamer v0.3 reframes video understanding with a unifying insight: a video is a persistent world context plus an event stream of changes. This decomposition enables more efficient streaming video models that reason about stable world state separately from dynamic events, pointing toward more scalable video AI architectures.",
+      "tldr_zh": "Wan-Streamer v0.3 提出了统一视角：视频 = 持久世界上下文 + 事件流。这一分解使流式视频模型可以独立推理稳定世界状态与动态事件，为构建更可扩展的视频 AI 架构提供了新思路。",
+      "interest_tag": ""
+    },
+    {
+      "title": "RoboTTT: Context Scaling for Robot Policies",
+      "arxiv_id": "2607.15275",
+      "url": "https://arxiv.org/abs/2607.15275",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2607.15275",
+      "tldr": "RoboTTT (Test-Time-Training Robot Policies) introduces a training recipe that scales visuomotor context at inference time — current robot foundation models operate with very short history windows. By incorporating test-time training, RoboTTT enables robots to adapt their policies on the fly as context grows, significantly improving generalization on complex manipulation tasks.",
+      "tldr_zh": "RoboTTT（测试时训练机器人策略）提出了一种在推理时扩展视觉运动上下文的训练方案。当前机器人基础模型只能处理极短的历史窗口，RoboTTT 通过测试时训练让机器人随着上下文增长动态调整策略，大幅提升复杂操作任务的泛化能力。",
+      "interest_tag": ""
+    },
+    {
+      "title": "Inkling: Our Open-Weights Model",
+      "arxiv_id": "",
+      "url": "https://www.alphaxiv.org/abs/2607.introducing-inkling",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2607.introducing-inkling",
+      "tldr": "Thinking Machines releases Inkling, a 975B-parameter (41B active parameters) open-weights multimodal Mixture-of-Experts model with controllable thinking effort. Available for fine-tuning on the Tinker platform, it represents a major open-weights multimodal MoE release competing directly with closed frontier models.",
+      "tldr_zh": "Thinking Machines 发布 Inkling——一个 975B 参数（41B 激活参数）的开源多模态专家混合模型，支持可控思考强度，可在 Tinker 平台上进行微调。这是一个直接对标闭源前沿模型的重磅开源多模态 MoE 发布。",
+      "interest_tag": ""
+    },
+    {
+      "title": "Scaling Behavior Foundation Model for Humanoid Robots",
+      "arxiv_id": "2607.15163",
+      "url": "https://arxiv.org/abs/2607.15163",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2607.15163",
+      "tldr": "This work investigates scaling laws for humanoid robot behavior foundation models, studying how whole-body coordination, real-time control, and environmental generalization improve with model scale. It provides empirical guidance for building the next generation of general-purpose humanoid robots using data-driven foundation model approaches.",
+      "tldr_zh": "本文研究人形机器人行为基础模型的扩展规律，考察全身协调、实时控制和环境泛化能力如何随模型规模增长。为使用数据驱动基础模型方法构建下一代通用人形机器人提供了实证指导。",
+      "interest_tag": ""
+    },
+    {
+      "title": "T^2MLR: Transformer with Temporal Middle-Layer Recurrence",
+      "arxiv_id": "2607.15178",
+      "url": "https://arxiv.org/abs/2607.15178",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2607.15178",
+      "tldr": "T^2MLR addresses a fundamental limitation in Transformer autoregressive decoding: intermediate reasoning states get compressed through token space at every step, making it hard for rich hidden computation to persist. By introducing temporal recurrence at middle layers, it allows intermediate reasoning states to propagate across steps without passing through the vocabulary bottleneck.",
+      "tldr_zh": "T^2MLR 解决了 Transformer 自回归解码的根本缺陷：中间推理状态每步都被压缩进 token 空间，使得丰富的隐层计算难以持续。通过在中间层引入时序循环，中间推理状态可以跨步传播，无需经过词表瓶颈。",
+      "interest_tag": ""
+    }
+  ],
+  "github_repos": [
+    {
+      "name": "CyberSunil/LLMVault",
+      "url": "https://github.com/CyberSunil/LLMVault",
+      "tldr": "An intentionally vulnerable training platform for OWASP LLM Top 10 security risks. Provides hands-on labs for AI security practitioners to learn prompt injection, insecure output handling, and other LLM-specific vulnerabilities — filling a critical gap in AI security education.",
+      "tldr_zh": "基于 OWASP LLM Top 10 的故意脆弱训练平台，为 AI 安全从业者提供提示注入、不安全输出处理等 LLM 特有漏洞的动手实验室，填补了 AI 安全教育的重要空白。",
+      "stars": 163,
+      "language": "Python",
+      "interest_tag": ""
+    },
+    {
+      "name": "KlaatAI/klaatcode",
+      "url": "https://github.com/KlaatAI/klaatcode",
+      "tldr": "Klaatcode is an open-source AI coding agent for the terminal, positioned as a Claude Code-grade alternative. Built with TypeScript, it aims to bring powerful agentic coding capabilities to developers without requiring a commercial subscription, riding the wave of terminal-based AI coding tools.",
+      "tldr_zh": "Klaatcode 是一个面向终端的开源 AI 编程智能体，定位为 Claude Code 级别的替代方案。基于 TypeScript 构建，旨在让开发者无需商业订阅即可获得强大的智能体编程能力，顺应了终端 AI 编程工具的浪潮。",
+      "stars": 108,
+      "language": "TypeScript",
+      "interest_tag": ""
+    },
+    {
+      "name": "OthmanAdi/plandeck",
+      "url": "https://github.com/OthmanAdi/plandeck",
+      "tldr": "PlanDeck is a visual Kanban interface for long-running AI agents. As agentic workflows grow more complex and span hours or days, visibility into what agents are doing becomes critical — PlanDeck provides a task-tracking UI to watch agents execute multi-step plans in real time.",
+      "tldr_zh": "PlanDeck 是一个面向长时运行 AI 智能体的可视化看板界面。随着智能体工作流越来越复杂、运行时间跨越数小时乃至数天，对智能体行为的可见性变得至关重要——PlanDeck 提供任务追踪 UI，实时观察智能体执行多步计划。",
+      "stars": 60,
+      "language": "JavaScript",
+      "interest_tag": ""
+    },
+    {
+      "name": "Codesteward/codesteward",
+      "url": "https://github.com/Codesteward/codesteward",
+      "tldr": "Codesteward brings structural graph intelligence to agentic code review — rather than reviewing code as text, it builds a graph of the codebase structure and reasons about how PRs affect architectural relationships. This addresses a core weakness of LLM code reviewers that miss structural and dependency impacts.",
+      "tldr_zh": "Codesteward 将结构图智能引入智能体代码审查——不是将代码当文本审查，而是构建代码库结构图，推理 PR 如何影响架构关系。解决了 LLM 代码审查者忽视结构和依赖影响的核心弱点。",
+      "stars": 59,
+      "language": "TypeScript",
+      "interest_tag": ""
+    },
+    {
+      "name": "root643/routerclaw",
+      "url": "https://github.com/root643/routerclaw",
+      "tldr": "RouterClaw is an autonomous AI agent written in Go that runs entirely in the terminal without browser use. It takes a different approach from browser-based automation agents — leveraging Go's concurrency model for reliable, lightweight autonomous task execution with zero UI dependencies.",
+      "tldr_zh": "RouterClaw 是一个用 Go 编写的自主 AI 智能体，完全在终端中运行，无需浏览器。与基于浏览器的自动化智能体不同，它利用 Go 的并发模型实现轻量可靠的自主任务执行，无任何 UI 依赖。",
+      "stars": 47,
+      "language": "Go",
+      "interest_tag": ""
+    }
+  ],
+  "hackernews": [
+    {
+      "title": "LM Studio Bionic: the AI agent for open models",
+      "url": "https://lmstudio.ai/blog/introducing-lm-studio-bionic",
+      "tldr": "LM Studio launches Bionic, a native AI agent feature for running open-source models locally. With 323 upvotes, this is the clear community hit of the day — LM Studio has a massive installed base of local AI enthusiasts, and Bionic brings them agentic capabilities (tool use, multi-step tasks) without cloud dependencies. The open-model angle resonates strongly with the privacy/sovereignty crowd.",
+      "tldr_zh": "LM Studio 推出 Bionic，一个在本地运行开源模型的原生 AI 智能体功能。以 323 票高居社区热榜——LM Studio 拥有庞大的本地 AI 用户群，Bionic 为他们带来无需云服务的智能体能力（工具调用、多步任务）。开放模型定位与隐私/主权诉求高度契合。",
+      "points": 323,
+      "num_comments": 126,
+      "interest_tag": ""
+    },
+    {
+      "title": "VulnHunter: Capital One's agentic AI code security tool",
+      "url": "https://www.capitalone.com/tech/open-source/announcing-vulnhunter/",
+      "tldr": "Capital One open-sources VulnHunter, their internal agentic AI tool for automated code security scanning. This is significant because it shows major financial institutions productizing AI agents for high-stakes security workflows — and open-sourcing it signals confidence in the approach and a bid for community adoption/feedback.",
+      "tldr_zh": "Capital One 开源内部智能体 AI 代码安全扫描工具 VulnHunter。这意义重大——它表明大型金融机构已在高风险安全工作流中将 AI 智能体产品化，开源更彰显了对这一方案的信心，同时寻求社区采纳与反馈。",
+      "points": 68,
+      "num_comments": 33,
+      "interest_tag": ""
+    },
+    {
+      "title": "Show HN: Libretto PR agents – Automatically fix failing playwright scripts",
+      "url": "https://libretto.sh/debug-agents",
+      "tldr": "Libretto launches PR agents that automatically diagnose and fix failing Playwright test scripts. End-to-end test maintenance is notoriously painful; an AI agent that can autonomously debug flaky tests and submit fixes as PRs addresses real developer pain. The Show HN format provides direct community validation for this specific use case.",
+      "tldr_zh": "Libretto 推出 PR 智能体，自动诊断和修复失败的 Playwright 测试脚本。端到端测试维护痛点出名，能自主调试 flaky 测试并以 PR 形式提交修复的 AI 智能体直击真实开发痛点。Show HN 格式为这一具体使用场景获得了社区直接验证。",
+      "points": 21,
+      "num_comments": 4,
+      "interest_tag": ""
+    },
+    {
+      "title": "Show HN: On-chain bond market where the issuers are AI agents",
+      "url": "https://selbonds.now",
+      "tldr": "Selbonds experiments with AI agents as financial issuers on a blockchain bond market — agents autonomously issue and manage bonds. This represents an early experiment in agentic economic actors with real financial stakes, pushing the boundary of what AI agents can do in Web3 contexts.",
+      "tldr_zh": "Selbonds 实验让 AI 智能体作为区块链债券市场的金融发行方——智能体自主发行和管理债券。这是智能体作为具有真实金融利益的经济主体的早期实验，拓展了 AI 智能体在 Web3 场景中的边界。",
+      "points": 15,
+      "num_comments": 19,
+      "interest_tag": ""
+    },
+    {
+      "title": "Show HN: Wolbarg – Local-first shared memory for AI agents using SQLite",
+      "url": "https://wolbarg.com/blog/why-sqlite-is-enough-for-local-ai-agent-memory",
+      "tldr": "Wolbarg proposes SQLite as sufficient infrastructure for local-first shared memory among AI agents — challenging the assumption that agent memory requires vector databases or complex cloud infrastructure. The article argues that for most practical use cases, SQLite's simplicity, reliability, and zero-config setup make it the right tool for agent memory persistence.",
+      "tldr_zh": "Wolbarg 提出 SQLite 足以作为 AI 智能体本地优先共享记忆的基础设施，挑战了智能体记忆需要向量数据库或复杂云基础设施的假设。文章认为对大多数实际使用场景，SQLite 的简单性、可靠性和零配置特性使其成为智能体记忆持久化的正确工具。",
+      "points": 4,
+      "num_comments": 0,
+      "interest_tag": "Memory"
+    }
+  ]
+}
