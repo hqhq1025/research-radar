@@ -1,0 +1,231 @@
+{
+  "date": "2026-07-19",
+  "generated_at": "2026-07-19T08:04:26.195212+00:00",
+  "briefing_zh": "本周 AI 研究最引人注目的主题是**长上下文训练**与**agent 强化学习**的交汇。**LongStraw** 以 174 票高居 HuggingFace 周榜榜首，它解决了一个长期困扰社区的矛盾：推理时系统已支持百万级 token 上下文，但 RL 后训练仍卡在 256K 以下。通过选择性片段采样，LongStraw 在固定 GPU 预算下将训练上下文推进到 200万+ token——这对于工具调用轨迹越来越长的 agent 训练尤为关键。与此同时，**SEED** 提出自进化蒸馏方案，**TRACE** 解决多轮 credit assignment 难题，**SearchOS-V1** 构建多 agent 协作搜索架构，三项工作共同指向同一方向：让 LLM agent 在长程任务中更稳定、更高效地学习。\n\n视觉与视频理解方向同样热闹。**VideoChat3** 开源了一个真正通用的视频多模态模型，覆盖动态、长视频、流式交互三大场景，弥补了现有开源模型各擅一隅的缺陷。alphaxiv 热榜上，**Wan-Streamer v0.3** 提出「视频 = 世界 + 事件流」的统一框架，**RoboTTT** 将机器人视觉运动上下文扩展到 8K 时间步，均在探索如何让模型更好地理解和生成时序连续的视觉信号。值得警惕的是 **BadWAM**：它揭示世界-动作模型存在「预测准确但行动错误」的系统性漏洞，为具身 AI 的安全性研究敲响警钟。\n\nGitHub 本周的开源生态反映出 agent 基础设施的快速成熟。**AgentSmith**（308★）提供模型无关的通用 harness，**KlaatCode** 以轻量级模型复现 Claude Code 级别编码能力，**Memmy-Agent** 直击无状态痛点实现跨 agent 共享记忆。此外 **LLMVault** 作为 OWASP LLM Top 10 漏洞训练平台走红，折射出业界对 LLM 安全的日益重视。HN 上 Capital One 生产级 **VulnHunter** 的披露，以及 Perplexity 发布 **Wandr** 研究 agent 基准，共同印证了 agent 应用正从概念演示加速走向实战部署。",
+  "briefing_en": "This week's most compelling AI research theme is the convergence of **long-context training** and **agent reinforcement learning**. **LongStraw** topped HuggingFace's weekly chart with 174 upvotes by solving a persistent contradiction: inference systems now support million-token contexts, but RL post-training remains stuck below 256K. Using selective segment sampling, LongStraw pushes training context to 2M+ tokens under a fixed GPU budget — critical for agents whose tool-call trajectories grow ever longer. Meanwhile, **SEED** introduces self-evolving distillation, **TRACE** tackles multi-turn credit assignment, and **SearchOS-V1** builds collaborative multi-agent search architectures, all pointing in the same direction: making LLM agents learn more stably and efficiently on long-horizon tasks.\n\nThe visual and video understanding space is equally active. **VideoChat3** open-sources a genuinely generalist video multimodal model covering motion, long-video, and streaming interaction — bridging the gap left by existing open-source models that each excel in only one domain. On the alphaxiv hot feed, **Wan-Streamer v0.3** proposes a unified \"video = world + event stream\" framework, while **RoboTTT** extends robot visuomotor context to 8K timesteps, both exploring how models can better understand and generate temporally continuous visual signals. Worth a careful read is **BadWAM**, which reveals a systematic vulnerability in world-action models: a robot can predict the world accurately yet still take catastrophically wrong actions — a security alarm for embodied AI safety research.\n\nThe GitHub open-source ecosystem this week reflects the rapid maturation of agent infrastructure. **AgentSmith** (308★) provides a model-agnostic universal harness, **KlaatCode** replicates Claude Code-level coding capability with a lighter model, and **Memmy-Agent** directly addresses statelessness by implementing shared cross-agent memory. Security is emerging as a genuine concern: **LLMVault**'s OWASP LLM Top 10 training platform is gaining traction as developers recognize the real attack surface in deployed LLM applications. On HN, Capital One's production-scale **VulnHunter** deployment and Perplexity's **Wandr** research agent benchmark together signal that agent applications are accelerating from concept demos toward real-world deployment.",
+  "viral_analysis_zh": "**LongStraw** 是本周最有爆款潜力的工作。它精准命中了「training-inference context gap」这一被广泛讨论但缺乏实际解决方案的痛点，174票的高热度证明社区早已饥渴于此。标题直接点出「2M Tokens」和「Fixed GPU Budget」两个关键词，降低了大量一线工程师的复现门槛。**Capital One 的 VulnHunter** 则走了另一条爆款路径：大型机构真实生产部署的可信背书 + AI 安全这个高热话题的组合，天然吸引安全从业者和企业决策者同时转发。",
+  "viral_analysis_en": "**LongStraw** has the strongest viral potential of this week. It precisely targets the \"training-inference context gap\" — a widely discussed pain point with no practical solution until now. The 174-upvote hot ranking confirms the community has been hungry for this. The title directly calls out \"2M Tokens\" and \"Fixed GPU Budget,\" both keywords that lower the reproduction barrier for working engineers. **Capital One's VulnHunter** takes a different viral path: the credibility of a large institution's real production deployment combined with the high-heat AI security topic naturally draws security practitioners and enterprise decision-makers to share simultaneously.",
+  "huggingface_papers": [
+    {
+      "title": "LongStraw: Long-Context RL Beyond 2M Tokens under a Fixed GPU Budget",
+      "arxiv_id": "2607.14952",
+      "url": "https://arxiv.org/abs/2607.14952",
+      "tldr": "LongStraw proposes a memory-efficient RL post-training framework that scales to 2M+ token contexts without increasing GPU budget by using selective segment sampling and gradient checkpointing. It closes the gap between inference-time long-context capability and training-time constraints, particularly critical for agents handling long tool outputs and history.",
+      "tldr_zh": "LongStraw 提出了一种内存高效的 RL 后训练框架，能在固定 GPU 预算下将训练上下文扩展到 200万+ token，核心技术是选择性片段采样与梯度检查点。该工作填补了推理时长上下文能力与训练时限制之间的鸿沟，对需要处理长工具输出和历史记录的 agent 尤为关键。",
+      "upvotes": 174,
+      "authors": "Changhai Zhou, Kieran Liu, Yuhua Zhou, Qian Qiao",
+      "ai_keywords": [
+        "long-context",
+        "RL",
+        "post-training",
+        "agents"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "VideoChat3: Fully Open Video MLLM for Efficient and Generalist Video Understanding",
+      "arxiv_id": "2607.14935",
+      "url": "https://arxiv.org/abs/2607.14935",
+      "tldr": "VideoChat3 is a fully open-source video multimodal LLM that achieves state-of-the-art performance across motion, long-video, and streaming tasks with significantly reduced compute. It addresses the limitation of existing models that only excel in specific video domains by training on a diverse mix of video data with efficient architecture choices.",
+      "tldr_zh": "VideoChat3 是完全开源的视频多模态大模型，在动态视频、长视频和流式交互等任务上达到SOTA，同时大幅降低计算需求。它通过多样化数据混合训练克服了现有模型只擅长特定视频类型的局限性。",
+      "upvotes": 123,
+      "authors": "Xinhao Li, Yuhan Zhu, Xiangyu Zeng, Yuhao Dong",
+      "ai_keywords": [
+        "video",
+        "multimodal",
+        "open-source",
+        "MLLM"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "SEED: Self-Evolving On-Policy Distillation for Agentic Reinforcement Learning",
+      "arxiv_id": "2607.14777",
+      "url": "https://arxiv.org/abs/2607.14777",
+      "tldr": "SEED introduces self-evolving on-policy distillation that bridges the gap between sparse RL rewards and dense token-level supervision for training LLM agents. By iteratively distilling from a teacher that also improves via RL, the method provides richer intermediate feedback without requiring a fixed, static teacher model.",
+      "tldr_zh": "SEED 提出了自进化的 on-policy 蒸馏方法，为 LLM agent 训练提供了稠密的 token 级监督，弥补了稀疏 RL 奖励的不足。通过教师模型与学生模型同步迭代进化，无需固定静态教师即可获得丰富的中间反馈信号。",
+      "upvotes": 84,
+      "authors": "Jinyang Wu, Shuo Yang, Zhengxi Lu, Fan Zhang",
+      "ai_keywords": [
+        "RL",
+        "distillation",
+        "agents",
+        "post-training"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "SearchOS-V1: Towards Robust Open-Domain Information-Seeking Agent Collaboration",
+      "arxiv_id": "2607.15257",
+      "url": "https://arxiv.org/abs/2607.15257",
+      "tldr": "SearchOS-V1 addresses a critical failure mode in web-search agents: repetitive looping when searches fail to find useful evidence. It proposes a multi-agent collaboration architecture with explicit task-progress tracking that breaks out of dead-end search loops and recovers gracefully from failed evidence retrieval.",
+      "tldr_zh": "SearchOS-V1 解决了网络搜索 agent 的关键失效模式：当搜索无法找到有用证据时陷入重复循环。通过多 agent 协作架构和显式任务进度追踪，系统能够跳出死循环并从失败的证据检索中优雅恢复。",
+      "upvotes": 58,
+      "authors": "Yuyao Zhang, Junjie Gao, Zhengxian Wu, Jiaming Fan",
+      "ai_keywords": [
+        "search agent",
+        "multi-agent",
+        "web search",
+        "information retrieval"
+      ],
+      "interest_tag": "Agent Swarm"
+    },
+    {
+      "title": "BadWAM: When World-Action Models Dream Right but Act Wrong",
+      "arxiv_id": "2607.15207",
+      "url": "https://arxiv.org/abs/2607.15207",
+      "tldr": "BadWAM reveals a critical vulnerability in world-action models (WAMs) for embodied control: a robot can have accurate world predictions yet still take catastrophically wrong actions. The authors show that coupling world modeling with action generation creates a new attack surface where adversarial inputs can corrupt actions while leaving world predictions intact.",
+      "tldr_zh": "BadWAM 揭示了具身控制中世界-动作模型 (WAM) 的关键漏洞：机器人可以对世界有准确预测，却仍然执行灾难性错误动作。作者证明将世界建模与动作生成耦合创造了新的攻击面，对抗性输入可以在保持世界预测完整的同时破坏动作输出。",
+      "upvotes": 44,
+      "authors": "Qi Li, Xingyi Yang, Xinchao Wang",
+      "ai_keywords": [
+        "embodied AI",
+        "world model",
+        "adversarial",
+        "robotics"
+      ],
+      "interest_tag": ""
+    }
+  ],
+  "alphaxiv_papers": [
+    {
+      "title": "Video = World + Event Stream",
+      "arxiv_id": "2607.15038",
+      "url": "https://arxiv.org/abs/2607.15038",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2607.15038",
+      "tldr": "Wan-Streamer v0.3 proposes a unified framework: video = persistent world + event stream. This decomposition enables more controllable interactive video generation by separately modeling stable context (world) and dynamic changes (events), leading to better temporal consistency and real-time user interaction.",
+      "tldr_zh": "Wan-Streamer v0.3 提出了统一框架：视频 = 持久世界 + 事件流。这种分解将稳定背景（世界）和动态变化（事件）分开建模，实现更可控的交互式视频生成，提升时序一致性和实时用户交互能力。",
+      "interest_tag": ""
+    },
+    {
+      "title": "RoboTTT: Context Scaling for Robot Policies",
+      "arxiv_id": "2607.15275",
+      "url": "https://arxiv.org/abs/2607.15275",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2607.15275",
+      "tldr": "RoboTTT scales visuomotor context for robot policies to 8K timesteps using Test-Time-Training, three orders of magnitude more than current foundation models. This long-context robot policy better handles complex manipulation tasks that require remembering past states and adapting to environmental changes over extended horizons.",
+      "tldr_zh": "RoboTTT 利用测试时训练 (TTT) 将机器人策略的视觉运动上下文扩展到 8K 时间步，比当前基础模型多三个数量级。这种长上下文机器人策略能更好地处理需要记忆过去状态并适应长时间环境变化的复杂操作任务。",
+      "interest_tag": ""
+    },
+    {
+      "title": "T^2MLR: Transformer with Temporal Middle-Layer Recurrence",
+      "arxiv_id": "2607.15178",
+      "url": "https://arxiv.org/abs/2607.15178",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2607.15178",
+      "tldr": "T2MLR introduces recurrent connections at middle transformer layers to allow intermediate reasoning states to persist across time, overcoming the limitation where autoregressive decoding compresses rich hidden computation through the token bottleneck. This enables transformers to maintain longer reasoning chains without enlarging the context window.",
+      "tldr_zh": "T2MLR 在 Transformer 中间层引入循环连接，允许中间推理状态跨时间持续存在，克服了自回归解码通过 token 瓶颈压缩丰富隐藏计算的限制。这使 Transformer 无需扩大上下文窗口即可维持更长的推理链。",
+      "interest_tag": ""
+    },
+    {
+      "title": "TRACE: Turn-level Reward Assignment via Credit Estimation for Long-Horizon Agents",
+      "arxiv_id": "2607.13988",
+      "url": "https://arxiv.org/abs/2607.13988",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2607.13988",
+      "tldr": "TRACE tackles the credit assignment problem for multi-turn agents: when a final outcome is known, how do you assign reward credit to individual turns? It proposes a counterfactual credit estimation approach that enables more precise per-turn reward signals, substantially improving RL training for long-horizon tool-use agents.",
+      "tldr_zh": "TRACE 解决多轮 agent 的信用分配问题：当知道最终结果时，如何将奖励信用分配给各个单独轮次？通过反事实信用估计方法提供更精确的每轮奖励信号，大幅提升长程工具调用 agent 的 RL 训练效果。",
+      "interest_tag": ""
+    },
+    {
+      "title": "Harness Handbook: Making Evolving Agent Harnesses Readable, Navigable, and Maintainable",
+      "arxiv_id": "2607.13285",
+      "url": "https://arxiv.org/abs/2607.13285",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2607.13285",
+      "tldr": "Harness Handbook addresses the growing complexity of agent harnesses — the scaffolding code that constructs prompts, manages state, and invokes tools. As agents become more capable, their harnesses grow unwieldy; this work proposes documentation and structuring patterns to make harnesses readable and maintainable for teams building production agents.",
+      "tldr_zh": "Harness Handbook 针对 agent harness 日益增长的复杂性——负责构建 prompt、管理状态和调用工具的脚手架代码。随着 agent 能力增强，harness 变得难以维护；该工作提出文档和结构化模式，帮助团队构建可读可维护的生产级 agent harness。",
+      "interest_tag": ""
+    }
+  ],
+  "github_repos": [
+    {
+      "name": "PromptPartner/agentsmith",
+      "url": "https://github.com/PromptPartner/agentsmith",
+      "tldr": "AgentSmith is a universal, model-agnostic operating harness for AI agents (Claude, Codex, Gemini), providing a standardized way to define agent capabilities, permissions, and execution environment. It abstracts provider-specific quirks behind a common interface, making it easy to switch between LLM backends without rewriting agent logic.",
+      "tldr_zh": "AgentSmith 是模型无关的通用 AI agent 运行框架，支持 Claude、Codex、Gemini 等，提供标准化的能力定义、权限管理和执行环境。通过统一接口屏蔽各 LLM 提供商的差异，无需重写 agent 逻辑即可切换后端。",
+      "stars": 308,
+      "language": "Shell",
+      "interest_tag": ""
+    },
+    {
+      "name": "CyberSunil/LLMVault",
+      "url": "https://github.com/CyberSunil/LLMVault",
+      "tldr": "LLMVault is an intentionally vulnerable training platform covering the OWASP LLM Top 10 security risks, letting security teams practice prompt injection, jailbreaking, data exfiltration, and other AI-specific attack patterns in a safe environment. As LLM-powered applications proliferate, purpose-built security training platforms like this become essential.",
+      "tldr_zh": "LLMVault 是一个故意设计为脆弱的训练平台，覆盖 OWASP LLM Top 10 安全风险，让安全团队在安全环境中练习提示注入、越狱、数据泄露等 AI 特有攻击模式。随着 LLM 应用普及，这类专项安全训练平台愈发重要。",
+      "stars": 190,
+      "language": "Python",
+      "interest_tag": ""
+    },
+    {
+      "name": "KlaatAI/klaatcode",
+      "url": "https://github.com/KlaatAI/klaatcode",
+      "tldr": "KlaatCode is an open-source terminal coding agent achieving Claude Code-grade accuracy with a smaller, faster model. It positions itself as a lightweight alternative for developers who want autonomous coding assistance without relying on Anthropic's infrastructure, supporting multiple LLM backends.",
+      "tldr_zh": "KlaatCode 是开源终端编码 agent，以更小、更快的模型实现了 Claude Code 级别的准确性。作为轻量级替代方案，它让开发者无需依赖 Anthropic 基础设施即可获得自主编码辅助，支持多个 LLM 后端。",
+      "stars": 139,
+      "language": "TypeScript",
+      "interest_tag": ""
+    },
+    {
+      "name": "MemTensor/memmy-agent",
+      "url": "https://github.com/MemTensor/memmy-agent",
+      "tldr": "Memmy-Agent implements a shared memory architecture where one persistent memory store is accessible by every AI agent in a system, enabling agents to recall past interactions, share learned facts, and maintain coherent state across sessions. This directly addresses the statelessness problem that limits multi-agent collaboration.",
+      "tldr_zh": "Memmy-Agent 实现了共享记忆架构，系统中每个 AI agent 都可访问同一个持久化记忆存储，使 agent 能够回忆过去交互、共享学习到的事实，并跨会话维持一致状态。这直接解决了限制多 agent 协作的无状态问题。",
+      "stars": 46,
+      "language": "TypeScript",
+      "interest_tag": "Memory"
+    },
+    {
+      "name": "Codesteward/codesteward",
+      "url": "https://github.com/Codesteward/codesteward",
+      "tldr": "Codesteward provides agentic code review powered by structural graph intelligence — it builds a code graph to understand architectural relationships and uses this to make PR gatekeeping and branch management decisions that go beyond diff-level analysis. It acts as an AI team member that understands your codebase structure.",
+      "tldr_zh": "Codesteward 提供基于结构图谱的 agent 代码审查——通过构建代码依赖图理解架构关系，对 PR 把关和分支管理做出超越 diff 层面的决策。它充当理解代码库结构的 AI 团队成员。",
+      "stars": 61,
+      "language": "TypeScript",
+      "interest_tag": ""
+    }
+  ],
+  "hackernews": [
+    {
+      "title": "VulnHunter: Capital One's agentic AI code security tool",
+      "url": "https://www.capitalone.com/tech/software-engineering/vulnhunter-agentic-ai-code-security/",
+      "tldr": "Capital One's VulnHunter is a production agentic AI system for code security review, capable of autonomously identifying vulnerabilities, tracing data flows, and suggesting fixes. As a large financial institution deploying this at scale, it represents a significant signal that agentic security tooling has crossed from experiment to production reality.",
+      "tldr_zh": "Capital One 的 VulnHunter 是用于代码安全审查的生产级 agent AI 系统，能自主识别漏洞、追踪数据流并建议修复方案。作为大型金融机构的规模化部署案例，这标志着 agent 安全工具已从实验走向生产现实。",
+      "points": 77,
+      "num_comments": 0,
+      "interest_tag": ""
+    },
+    {
+      "title": "Show HN: On-chain bond market where the issuers are AI agents",
+      "url": "https://selbonds.now",
+      "tldr": "SellBonds proposes an on-chain financial market where AI agents autonomously issue bonds, manage debt, and interact with other financial instruments. This represents an early but significant step toward autonomous AI economic agents that can independently participate in capital markets.",
+      "tldr_zh": "SellBonds 提出一个链上金融市场，AI agent 自主发行债券、管理债务并与其他金融工具交互。这是自主 AI 经济 agent 独立参与资本市场的早期但重要的一步。",
+      "points": 15,
+      "num_comments": 0,
+      "interest_tag": ""
+    },
+    {
+      "title": "We Built Sandbox Infrastructure for Autonomous Agents",
+      "url": "https://neosigma.ai/blog/agent-sandbox",
+      "tldr": "NeoSigma describes their approach to building safe sandbox infrastructure for autonomous agents — isolated execution environments where agents can run code, browse the web, and use tools without being able to cause unintended side effects in production systems. As autonomous agents grow more capable, secure sandbox infra becomes a critical enabling technology.",
+      "tldr_zh": "NeoSigma 介绍了为自主 agent 构建安全沙箱基础设施的方法——隔离执行环境让 agent 能运行代码、浏览网络和使用工具，同时无法对生产系统造成意外副作用。随着自主 agent 能力增强，安全沙箱基础设施成为关键使能技术。",
+      "points": 4,
+      "num_comments": 0,
+      "interest_tag": ""
+    },
+    {
+      "title": "Wandr Benchmark: Evaluating Research Agents That Must Search Wide and Deep",
+      "url": "https://research.perplexity.ai/wandr-benchmark",
+      "tldr": "Wandr is a new benchmark from Perplexity for evaluating research agents on tasks requiring both broad exploration and deep investigation — the kind of complex multi-step research that today's agents struggle with. It addresses a gap where existing benchmarks measure either breadth or depth but rarely both simultaneously.",
+      "tldr_zh": "Wandr 是 Perplexity 推出的新基准，评测需要同时进行广泛探索和深度调查的研究 agent——正是当前 agent 最难处理的复杂多步研究任务。它填补了现有基准只测广度或深度而非同时兼顾的空白。",
+      "points": 3,
+      "num_comments": 0,
+      "interest_tag": "Benchmark"
+    },
+    {
+      "title": "AI Agents for the Working Mathematician",
+      "url": "https://chaoxu.prof/posts/2026/ai-agents-mathematician",
+      "tldr": "A working mathematician shares practical experience using AI agents for mathematical research — what they can and cannot do, where they save time, and where they fail in ways that require mathematical judgment. This practitioner perspective is valuable as the AI community debates how close we are to AI-assisted mathematical discovery.",
+      "tldr_zh": "一位在职数学家分享了使用 AI agent 进行数学研究的实践经验——它们能做什么、不能做什么、在哪里节省时间，以及在哪里以需要数学判断力的方式失败。随着 AI 社区争论 AI 辅助数学发现有多近，这种从业者视角弥足珍贵。",
+      "points": 3,
+      "num_comments": 0,
+      "interest_tag": ""
+    }
+  ]
+}
