@@ -1,0 +1,225 @@
+{
+  "date": "2026-07-20",
+  "generated_at": "2026-07-20T09:00:00+08:00",
+  "briefing_zh": "今日 AI 领域呈现出**具身 AI 与 Agent 基础设施双轨并进**的格局。小米发布的 **Xiaomi-Robotics-1** 以超过 10 万小时真实轨迹数据训练 VLA 模型，标志着中国科技巨头全面押注具身智能规模化；与此同时，**SEED** 框架通过自进化在策略蒸馏为 Agent RL 训练提供了新范式，将奖励模型约束与 token 级监督结合，在长期任务上达到 SOTA——两者共同指向「真实世界交互数据」将成为下一阶段 AI 能力的核心驱动力。\n\n在开发者生态层，**LM Studio Bionic** 的发布以 329 点位居今日 HN 榜首，清晰地反映了市场对「本地运行 + Agent 能力」的强烈需求。**PromptPartner/agentsmith**（308 stars）以模型无关的运行框架快速聚集关注，**KlaatCode** 则以开源终端 Agent 直接挑战 Claude Code 的生态位。这波工具层爆发表明，Agent 基础设施正进入「乐高化」阶段——每个环节都在形成独立的开源标准。\n\n安全与可信赖性成为今日另一重要主题。**Capital One** 开源 **VulnHunter** 将 Agent 推向企业安全场景，**BadWAM** 论文揭示 World-Action Model「梦对了却做错了」的关键失效模式，**Traceforce**（YC S26）提供全公司范围的 AI 应用安全监控。随着 Agent 进入金融、医疗等高风险领域，可观测性和安全基础设施的重要性正在被市场快速验证。",
+  "briefing_en": "Today's AI landscape shows **a dual-track acceleration in embodied AI and agent infrastructure**. Xiaomi's **Xiaomi-Robotics-1** — a VLA model trained on 100K+ hours of real-world trajectories — signals that Chinese tech giants are fully committing to scaling embodied intelligence. Simultaneously, the **SEED** framework offers a new paradigm for agentic RL training through self-evolving on-policy distillation, combining reward model constraints with token-level supervision to achieve SOTA on long-horizon tasks. Both point to the same conclusion: real-world interaction data is becoming the core driver of next-generation AI capabilities.\n\nAt the developer ecosystem layer, **LM Studio Bionic** topped HN today with 329 points, clearly reflecting market demand for \"local execution + agent capabilities.\" **PromptPartner/agentsmith** (308 stars) is rapidly aggregating attention as a model-agnostic orchestration harness, while **KlaatCode** directly challenges Claude Code's market position as an open-source terminal agent. This tooling explosion signals that agent infrastructure is entering a \"LEGO phase\" — with each layer forming independent open standards.\n\nSecurity and trustworthiness emerged as a major secondary theme. **Capital One** open-sourcing **VulnHunter** pushes agents into enterprise security use cases; the **BadWAM** paper exposes a critical failure mode where World-Action Models \"dream right but act wrong\"; and **Traceforce** (YC S26) provides company-wide AI application security monitoring. As agents enter high-stakes domains like finance and healthcare, the market is rapidly validating the importance of observability and security infrastructure.",
+  "viral_analysis_zh": "今日最可能出圈的是 **LM Studio Bionic**：它解决的是所有关心数据隐私的开发者都有的痛点，从「工具」升级为「平台」的叙事非常清晰，而且可以在自己的机器上立即体验。**SEED** 论文在学术传播上有较大潜力，因为它直接回答了「如何让 Agent RL 更实用」这个当下最热的研究问题，具有高可引用性和高实验复现价值。",
+  "viral_analysis_en": "**LM Studio Bionic** is the most likely breakout hit of the day: it solves a clear pain point felt by every privacy-conscious developer, has a compelling 'tool → platform' upgrade narrative, and is immediately hands-on. The **SEED** paper has strong academic viral potential, directly answering the hottest current research question of 'how to make agentic RL practical' — high citability and experimental reproducibility make it a strong candidate for rapid community adoption.",
+  "huggingface_papers": [
+    {
+      "title": "SEED: Self-Evolving On-Policy Distillation for Agentic Reinforcement Learning",
+      "url": "https://arxiv.org/abs/2607.14777",
+      "tldr": "SEED introduces a self-evolving on-policy distillation framework for training agentic LLMs on long-horizon tasks with multi-turn interaction and tool use. By combining outcome-based RL with token-level teacher supervision, it overcomes the constraints of pure RL while maintaining on-policy training fidelity. The method iteratively improves both student and teacher models, achieving state-of-the-art on agentic benchmarks including tool use and code execution tasks.",
+      "tldr_zh": "SEED 提出了一种自进化的在策略蒸馏框架，用于训练具有多轮交互和工具调用能力的 Agent LLM。结合基于结果的 RL 与教师模型的 token 级监督，克服了纯 RL 训练的奖励模型约束，并通过迭代提升师生模型在 agentic benchmark 上达到 SOTA。",
+      "upvotes": 0,
+      "authors": "Arxiv 2607.14777",
+      "ai_keywords": [
+        "reinforcement learning",
+        "distillation",
+        "agentic AI",
+        "tool use"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "Xiaomi-Robotics-1: Scaling Vision-Language-Action Models with over 100K Hours of Real-World Trajectories",
+      "url": "https://arxiv.org/abs/2607.15330",
+      "tldr": "Xiaomi releases Xiaomi-Robotics-1, a VLA model trained on over 100K hours of real-world robot trajectories — one of the largest robotics datasets to date. The model demonstrates strong generalization across diverse manipulation tasks and household environments. This represents a major industry investment in scaling laws for embodied AI.",
+      "tldr_zh": "小米发布 Xiaomi-Robotics-1，一个在超过 10 万小时真实机器人轨迹上训练的 VLA 模型，是目前规模最大的机器人数据集之一。模型在多种操作任务和家居环境中展现出强泛化能力，体现了产业界对具身 AI 规模化的重大投入。",
+      "upvotes": 0,
+      "authors": "Xiaomi Robotics Team",
+      "ai_keywords": [
+        "robotics",
+        "VLA",
+        "vision-language-action",
+        "embodied AI"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "Cura 1T: Specialized Model for Agentic Healthcare",
+      "url": "https://arxiv.org/abs/2607.15314",
+      "tldr": "Cura 1T is a 1-trillion-parameter specialized model for agentic healthcare workflows, capable of multi-step clinical reasoning, EHR navigation, and medical tool use. The model shows that domain-specialized training at scale dramatically outperforms general-purpose LLMs on clinical agentic tasks. It represents a new frontier in AI-driven healthcare automation.",
+      "tldr_zh": "Cura 1T 是一个专为 Agent 医疗场景设计的万亿参数模型，支持多步临床推理、电子健康记录导航和医疗工具调用。研究表明，大规模领域专项训练在临床 Agent 任务上远超通用 LLM，代表了 AI 驱动医疗自动化的新前沿。",
+      "upvotes": 0,
+      "authors": "actAVA AI, Haolin Chen, Leon Qi",
+      "ai_keywords": [
+        "healthcare AI",
+        "agentic",
+        "specialized model"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "DSWorld: A Data Science World Model for Efficient Autonomous Agents",
+      "url": "https://arxiv.org/abs/2607.15901",
+      "tldr": "DSWorld proposes a world model specifically designed for data science workflows, enabling autonomous agents to reason about tabular data, code execution outcomes, and iterative experiment planning. By pre-modeling the data science environment, agents achieve significantly higher efficiency on DS-Bench tasks. The approach bridges world modeling and tool-augmented autonomous coding.",
+      "tldr_zh": "DSWorld 提出了专为数据科学工作流设计的 World Model，让自主 Agent 能够推理表格数据、代码执行结果和迭代实验规划，在 DS-Bench 任务上大幅提升效率，将世界建模与工具增强自主编程结合起来。",
+      "upvotes": 0,
+      "authors": "Zherui Yang, Fan Liu, Hao Liu",
+      "ai_keywords": [
+        "world model",
+        "autonomous agent",
+        "data science",
+        "code generation"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "From Human-Centric to Agentic Code Review: The Impact of Different Generations of Generative AI Technology on Review Quality",
+      "url": "https://arxiv.org/abs/2607.13196",
+      "tldr": "This empirical study traces the evolution of AI-assisted code review from early Copilot suggestions to fully agentic review systems, measuring how each generation affects review quality metrics. Agentic reviewers find significantly more security issues and architectural problems than human-centric tools, but introduce new false-positive patterns. The findings inform how to design human-AI hybrid review workflows.",
+      "tldr_zh": "这项实证研究追踪了 AI 辅助代码审查从早期 Copilot 建议到全 Agent 审查系统的演变，测量每代工具对审查质量指标的影响。Agentic 审查员发现了更多安全问题和架构问题，但引入了新的误报模式，为设计人机混合审查工作流提供了依据。",
+      "upvotes": 0,
+      "authors": "Suzhen Zhong, Shayan Noei, Bram Adams",
+      "ai_keywords": [
+        "code review",
+        "agentic AI",
+        "software engineering",
+        "generative AI"
+      ],
+      "interest_tag": ""
+    }
+  ],
+  "alphaxiv_papers": [
+    {
+      "title": "SEED: Self-Evolving On-Policy Distillation for Agentic Reinforcement Learning",
+      "arxiv_id": "2607.14777",
+      "url": "https://arxiv.org/abs/2607.14777",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2607.14777",
+      "tldr": "SEED combines outcome-based RL with on-policy distillation to train LLM agents on complex multi-turn tasks. The self-evolving mechanism iteratively updates both teacher and student, enabling sustained improvement without human annotation. Outperforms both pure RL and supervised fine-tuning baselines on tool-use and long-horizon agentic tasks.",
+      "tldr_zh": "SEED 将基于结果的 RL 与在策略蒸馏结合，用于训练具有复杂多轮任务能力的 LLM Agent。自进化机制持续更新师生模型，无需人工标注，在工具使用和长期任务上超越纯 RL 和 SFT 基线。",
+      "interest_tag": ""
+    },
+    {
+      "title": "Video = World + Event Stream",
+      "arxiv_id": "2607.15038",
+      "url": "https://arxiv.org/abs/2607.15038",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2607.15038",
+      "tldr": "Wan-Streamer v0.3 reframes video as a composition of a persistent world state and an event stream, enabling more structured native-streaming interaction for video generation models. This decomposition allows for finer-grained control over temporal dynamics and supports real-time interactive video generation applications.",
+      "tldr_zh": "Wan-Streamer v0.3 将视频重新定义为持久世界状态与事件流的组合，使流式视频生成模型具有更结构化的交互方式，支持对时间动态的精细控制和实时交互式视频生成。",
+      "interest_tag": ""
+    },
+    {
+      "title": "RoboTTT: Context Scaling for Robot Policies",
+      "arxiv_id": "2607.15275",
+      "url": "https://arxiv.org/abs/2607.15275",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2607.15275",
+      "tldr": "RoboTTT (Test-Time-Training Robot Policies) scales visuomotor context at inference time, allowing robots to adapt to new environments without fine-tuning. By dynamically extending context with recent trajectory data, the model achieves significant performance gains on manipulation tasks with out-of-distribution objects and scenes.",
+      "tldr_zh": "RoboTTT 在推理时扩展视觉运动上下文，使机器人无需微调即可适应新环境。通过动态扩展近期轨迹上下文，模型在分布外物体和场景的操作任务上取得显著性能提升。",
+      "interest_tag": ""
+    },
+    {
+      "title": "Understanding Reasoning from Pretraining to Post-Training",
+      "arxiv_id": "2607.16097",
+      "url": "https://arxiv.org/abs/2607.16097",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2607.16097",
+      "tldr": "This work systematically studies how reasoning capabilities emerge and evolve from pretraining through post-training stages in LLMs. Key findings: reasoning skills are largely latent in pretraining and amplified — not created — by RLHF and chain-of-thought fine-tuning. Provides guidance for more efficient reasoning model development.",
+      "tldr_zh": "本文系统研究了 LLM 从预训练到后训练阶段推理能力的涌现与演变。关键发现：推理技能在预训练中已潜在存在，RLHF 和 CoT 微调是放大而非创造推理能力，为更高效的推理模型开发提供了指导。",
+      "interest_tag": ""
+    },
+    {
+      "title": "BadWAM: When World-Action Models Dream Right but Act Wrong",
+      "arxiv_id": "2607.15207",
+      "url": "https://arxiv.org/abs/2607.15207",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2607.15207",
+      "tldr": "BadWAM reveals a critical failure mode in World-Action Models (WAMs): they can generate accurate world predictions while producing dangerous or incorrect actions — dreaming right but acting wrong. The paper introduces adversarial evaluation protocols and proposes alignment techniques to close the perception-action gap in embodied world models.",
+      "tldr_zh": "BadWAM 揭示了 World-Action Model 的关键失效模式：模型可以产生准确的世界预测，同时输出危险或错误的动作——「梦对了却做错了」。论文提出对抗性评估协议和对齐技术，弥合具身世界模型的感知-行动差距。",
+      "interest_tag": ""
+    }
+  ],
+  "github_repos": [
+    {
+      "name": "PromptPartner/agentsmith",
+      "url": "https://github.com/PromptPartner/agentsmith",
+      "tldr": "AgentSmith is a universal, model-agnostic operating harness for AI coding agents (Claude, Codex, Gemini, etc.), providing standardized tool interfaces, process isolation, and cross-model compatibility. It abstracts away model-specific quirks so developers can build agent workflows once and run them on any LLM backend. Rapidly gaining traction as a neutral orchestration layer.",
+      "tldr_zh": "AgentSmith 是一个通用、模型无关的 AI 编程 Agent 运行框架，支持 Claude、Codex、Gemini 等，提供标准化工具接口、进程隔离和跨模型兼容性。开发者只需构建一次 Agent 工作流即可在任何 LLM 后端运行，正在快速成为中立的编排层。",
+      "stars": 308,
+      "language": "Shell",
+      "interest_tag": ""
+    },
+    {
+      "name": "KlaatAI/klaatcode",
+      "url": "https://github.com/KlaatAI/klaatcode",
+      "tldr": "KlaatCode is an open-source terminal-based AI coding agent claiming Claude Code-grade accuracy with smaller models. Built in TypeScript, it focuses on efficiency and local model support, positioning itself as a cost-effective alternative to cloud-dependent agents. The rapid star growth suggests strong developer appetite for open alternatives.",
+      "tldr_zh": "KlaatCode 是一个开源的终端 AI 编程 Agent，声称在使用更小模型的情况下达到 Claude Code 级别的精度。基于 TypeScript 构建，专注于效率和本地模型支持，定位为依赖云端 Agent 的经济替代方案，快速增长的 Star 表明开发者对开源替代品的强烈需求。",
+      "stars": 148,
+      "language": "TypeScript",
+      "interest_tag": ""
+    },
+    {
+      "name": "yc-duan/fastctx",
+      "url": "https://github.com/yc-duan/fastctx",
+      "tldr": "FastCtx is a Rust-based MCP tool providing fast, context-efficient repository indexing and code search for AI agents. It dramatically reduces context window usage when agents need to navigate large codebases, enabling more reliable tool-use in coding workflows. Rust implementation ensures near-zero latency overhead.",
+      "tldr_zh": "FastCtx 是一个基于 Rust 的 MCP 工具，为 AI Agent 提供快速、上下文高效的代码库索引和搜索。大幅减少 Agent 在导航大型代码库时的上下文窗口占用，Rust 实现确保近乎零延迟，对编程工作流中的工具调用可靠性有显著提升。",
+      "stars": 116,
+      "language": "Rust",
+      "interest_tag": ""
+    },
+    {
+      "name": "MemTensor/memmy-agent",
+      "url": "https://github.com/MemTensor/memmy-agent",
+      "tldr": "Memmy-Agent proposes a shared persistent memory layer across all AI agents — \"One Agent, One memory, Shared by every AI.\" The system provides a centralized memory substrate that multiple agents can read/write, enabling coordination without explicit message passing. Addresses the fragmentation problem in multi-agent deployments.",
+      "tldr_zh": "Memmy-Agent 提出了跨所有 AI Agent 的共享持久记忆层——「一个 Agent，一份记忆，所有 AI 共享」。系统提供多 Agent 可读写的中心化记忆基底，实现无需显式消息传递的协调，解决多 Agent 部署中的碎片化问题。",
+      "stars": 56,
+      "language": "TypeScript",
+      "interest_tag": "Memory"
+    },
+    {
+      "name": "EndymionLee/PilotBrowseMCP",
+      "url": "https://github.com/EndymionLee/PilotBrowseMCP",
+      "tldr": "PilotBrowseMCP is a browser runtime that lets AI agents control a real Chrome browser via MCP, enabling direct interaction with any website without custom automation scripts. It exposes browser actions as MCP tools, making GUI automation accessible to any MCP-compatible agent. Fills a critical gap for web-based computer use tasks.",
+      "tldr_zh": "PilotBrowseMCP 是一个让 AI Agent 通过 MCP 控制真实 Chrome 浏览器的运行时，无需自定义自动化脚本即可与任何网站交互。将浏览器操作暴露为 MCP 工具，让任何兼容 MCP 的 Agent 都能进行 GUI 自动化，填补了网页端计算机使用任务的关键空白。",
+      "stars": 40,
+      "language": "TypeScript",
+      "interest_tag": "CUA"
+    }
+  ],
+  "hackernews": [
+    {
+      "title": "LM Studio Bionic: the AI agent for open models",
+      "url": "https://lmstudio.ai/blog/introducing-lm-studio-bionic",
+      "tldr": "LM Studio launches Bionic, transforming from a local model runner into a full AI agent platform for open models. Bionic adds persistent memory, tool use, and multi-step task execution — competing with cloud agents like Claude and GPT-4 but running entirely locally. With 329 points, this is clearly striking a nerve with privacy-conscious developers.",
+      "tldr_zh": "LM Studio 发布 Bionic，从本地模型运行器转型为开放模型的完整 AI Agent 平台。Bionic 新增持久记忆、工具使用和多步任务执行，与 Claude、GPT-4 等云端 Agent 竞争，但完全本地运行。329 点的高热度显示隐私敏感型开发者对此强烈共鸣。",
+      "points": 329,
+      "num_comments": 130,
+      "interest_tag": ""
+    },
+    {
+      "title": "Show HN: I RL-trained an agent that trains models with RL (for ~$1.3k)",
+      "url": "https://github.com/Danau5tin/ai-trains-ai",
+      "tldr": "A developer built an RL-trained agent that autonomously trains other models using RL — a meta-RL system — for just $1,300 in compute. The experiment demonstrates that recursive AI self-improvement is achievable at accessible cost, raising questions about capability thresholds for automated AI R&D.",
+      "tldr_zh": "一位开发者构建了一个用 RL 训练的 Agent，能够自主地用 RL 训练其他模型——一个元 RL 系统，计算成本仅约 1300 美元。这个实验表明递归式 AI 自我改进在可及的成本下是可行的，引发了对自动化 AI 研发能力门槛的思考。",
+      "points": 107,
+      "num_comments": 48,
+      "interest_tag": ""
+    },
+    {
+      "title": "Launch HN: Agnost AI (YC S26) – Extract user feedback from agent conversations",
+      "url": "https://agnost.ai",
+      "tldr": "Agnost AI (YC S26) automatically extracts structured user feedback and behavioral signals from AI agent conversation logs, turning raw chat data into product insights. As agent deployments scale, mining conversation data for improvement signals becomes critical infrastructure — Agnost is positioning as the Amplitude for agent workflows.",
+      "tldr_zh": "Agnost AI（YC S26）自动从 AI Agent 对话日志中提取结构化用户反馈和行为信号，将原始对话数据转化为产品洞察。随着 Agent 部署规模扩大，从对话数据中挖掘改进信号成为关键基础设施，Agnost 正定位为 Agent 工作流的 Amplitude。",
+      "points": 85,
+      "num_comments": 52,
+      "interest_tag": ""
+    },
+    {
+      "title": "VulnHunter: Capital One's agentic AI code security tool",
+      "url": "https://www.capitalone.com/tech/open-source/announcing-vulnhunter/",
+      "tldr": "Capital One open-sources VulnHunter, an agentic AI security tool that autonomously hunts for vulnerabilities in codebases. The agent reasons about code paths, generates proof-of-concept exploits, and prioritizes findings by exploitability — going far beyond static analysis. Financial institutions entering the agentic security space signals enterprise validation.",
+      "tldr_zh": "Capital One 开源 VulnHunter，一个自主在代码库中猎寻漏洞的 Agent AI 安全工具。Agent 推理代码路径、生成概念验证漏洞利用，并按可利用性优先排序结果，远超静态分析。金融机构进入 Agent 安全领域标志着企业级认可。",
+      "points": 78,
+      "num_comments": 35,
+      "interest_tag": ""
+    },
+    {
+      "title": "Launch HN: Coasty (YC S26) – An API for computer-use agents",
+      "url": "https://coasty.ai/docs",
+      "tldr": "Coasty (YC S26) provides a managed API for computer-use agents — handling browser provisioning, session management, and action execution so developers don't need to manage infrastructure. The service abstracts CUA complexity into simple REST calls, dramatically lowering the barrier to building web automation agents at scale.",
+      "tldr_zh": "Coasty（YC S26）为计算机使用 Agent 提供托管 API，处理浏览器配置、会话管理和动作执行，开发者无需管理基础设施。该服务将 CUA 复杂性抽象为简单的 REST 调用，大幅降低了大规模构建网页自动化 Agent 的门槛。",
+      "points": 44,
+      "num_comments": 26,
+      "interest_tag": "CUA"
+    }
+  ]
+}
