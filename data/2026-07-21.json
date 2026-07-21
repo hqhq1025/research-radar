@@ -1,0 +1,226 @@
+{
+  "date": "2026-07-21",
+  "generated_at": "2026-07-21T16:04:22.559104+08:00",
+  "briefing_zh": "今日 AI 研究呈现出鲜明的\"Agent 基础设施竞赛\"主题。在论文层面，**SWE-Pruner Pro** 以 41 票领跑，聚焦编程 Agent 的长上下文剪枝——利用模型自身内部表征来识别无关代码，而非依赖外挂分类器，体现了 Agent 效率优化从\"外挂工具\"向\"内生能力\"的范式转变。**EvolvingWorld** 以 40 票紧随，提出角色与世界模型协同进化的框架，标志着交互叙事 Agent 研究从静态人设走向动态共演的新阶段。\n\n在具身智能方向，**RynnBrain 1.1** 推出跨越 2B 至 122B 规模的具身基础模型家族，**Xiaomi-Robotics-1** 发布基于 10 万小时真实轨迹训练的 VLA 模型——两者共同表明，具身 AI 正从实验室原型快速向工业级基础模型演进，大规模真实数据成为新的竞争壁垒。**ReflectWorld-MM** 的实体导向多模态记忆系统则展示了在持续视频流中构建持久 Agent 记忆的可行路径。\n\n在开发者工具和社区层面，**LM Studio Bionic** 以 330 分 132 评论强势登顶 HN，将 Agent 能力带入本地开源模型，成为当日最大爆款。**Capital One VulnHunter** 的开源则标志着企业级 Agent 安全工程的成熟。**Coasty（YC S26）** 推出专为计算机使用 Agent 设计的 API，而 **PilotBrowseMCP** 将真实 Chrome 控制能力通过 MCP 协议标准化——两者共同加速了 CUA 基础设施的标准化进程。整体而言，今日的趋势是：Agent 从\"能力演示\"走向\"工程化落地\"，基础设施层的竞争正在全面展开。",
+  "briefing_en": "Today's AI research landscape is dominated by a clear \"agent infrastructure race.\" On the paper front, **SWE-Pruner Pro** led with 41 upvotes, focusing on long-context pruning for coding agents — using the model's own internal representations rather than external classifiers, signaling a paradigm shift from \"add-on tools\" to \"intrinsic capabilities\" for agent efficiency. **EvolvingWorld** followed closely at 40 upvotes with a co-evolving framework for role-play agents and world models, marking a new era in interactive narrative AI that goes beyond static persona imitation.\n\nIn embodied intelligence, **RynnBrain 1.1** unveiled a family of embodied foundation models spanning 2B to 122B scales, while **Xiaomi-Robotics-1** released a VLA model trained on 100K+ hours of real-world trajectories. Both signal that embodied AI is rapidly transitioning from lab prototypes to industrial-scale foundation models, with real-world data scale becoming the new competitive moat. **ReflectWorld-MM**'s entity-oriented multimodal memory system meanwhile demonstrates a viable path to persistent agent memory over continuous video streams.\n\nAt the developer tooling and community level, **LM Studio Bionic** exploded onto Hacker News with 330 points and 132 comments, bringing agent capabilities to local open-source models. **Capital One's open-source VulnHunter** marks the maturation of enterprise-grade agentic security engineering. **Coasty (YC S26)** launched a dedicated API for computer-use agents while **PilotBrowseMCP** standardizes real Chrome control via the MCP protocol — both accelerating the standardization of CUA infrastructure. The overall signal today: agents are moving from \"capability demonstrations\" to \"engineering deployment,\" and the battle for the infrastructure layer is now fully underway.",
+  "viral_analysis_zh": "今日最可能爆款是 **LM Studio Bionic**——它把「本地运行开源模型」和「Agent 自主执行」两个高热话题合二为一，330 分 132 评论已经说明一切。开发者厌倦了为 GPT-4 付费，LM Studio 给了他们一个完全本地、完全可控的 Agent 替代方案，这个定位极其精准。其次值得关注的是 **SWE-Pruner Pro**：「模型自己知道该剪什么」这个 insight 本身就很有传播力，且直接解决了编程 Agent 的核心痛点——长上下文成本。",
+  "viral_analysis_en": "**LM Studio Bionic** is today's breakout hit — it merges two perpetually trending topics: running open-source models locally and autonomous agent execution. The 330 points and 132 comments speak for themselves. Developers tired of GPT-4 costs now have a fully local, fully controllable agent alternative, a positioning that resonates deeply. Runner-up for virality is **SWE-Pruner Pro**: the insight that 'the coder LLM already knows what to prune' is inherently shareable and directly addresses the core pain point of expensive long-context coding agents.",
+  "huggingface_papers": [
+    {
+      "title": "SWE-Pruner Pro: The Coder LLM Already Knows What to Prune",
+      "url": "https://arxiv.org/abs/2607.18213",
+      "tldr": "SWE-Pruner Pro introduces a self-pruning approach for coding agents: rather than using a separate classifier to filter irrelevant code context, it exploits the agent's own internal representations to identify and prune what's unnecessary. This reduces token overhead in long-context software engineering tasks while maintaining code quality, cutting inference costs significantly.",
+      "tldr_zh": "SWE-Pruner Pro 提出了一种自剪枝方法：不依赖外挂分类器，而是直接利用编程 Agent 自身的内部表征来识别并删除无关代码上下文。在降低长上下文推理成本的同时保持代码质量，为编程 Agent 的高效部署提供了新思路。",
+      "upvotes": 41,
+      "authors": "Yuhang Wang, Yuling Shi, Shaoqiu Zhang",
+      "ai_keywords": [
+        "coding agent",
+        "context pruning",
+        "LLM",
+        "software engineering"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "EvolvingWorld: An Open-Schema Framework for Co-Evolving Role-Play Agents and World Model in Interactive Literary World",
+      "url": "https://arxiv.org/abs/2607.17250",
+      "tldr": "EvolvingWorld introduces a framework where both characters and the world model evolve together in interactive literary simulations. Unlike existing approaches that treat characters as static personas or scenes as isolated generations, this work captures the dynamic co-evolution between agents and their environment, creating richer, more consistent narrative experiences.",
+      "tldr_zh": "EvolvingWorld 提出角色与世界模型协同进化的交互文学仿真框架。不同于现有把角色视为静态人设的方法，它让 Agent 和世界状态相互影响、持续演化，实现更连贯丰富的叙事体验。",
+      "upvotes": 40,
+      "authors": "Qing Zong, Yue Guo, Mengxin Yang",
+      "ai_keywords": [
+        "role-play agent",
+        "world model",
+        "interactive fiction",
+        "character evolution"
+      ],
+      "interest_tag": "Agent Swarm"
+    },
+    {
+      "title": "TimeLens2: Generalist Video Temporal Grounding with Multimodal LLMs",
+      "url": "https://arxiv.org/abs/2607.17423",
+      "tldr": "TimeLens2 tackles the gap between video understanding and temporal localization: current MLLMs can describe video content but struggle to pinpoint *when* events occur. This generalist model predicts variable-cardinality evidence intervals across diverse video lengths, domains, and query types, becoming the first unified solution for temporal grounding at scale.",
+      "tldr_zh": "TimeLens2 解决了多模态大模型「能描述却不能定位」的难题：当前 MLLM 能说清视频内容但很难指出「何时发生」。该模型统一处理不同长度、领域和查询类型的视频时序定位，是首个通用视频时序 grounding 解决方案。",
+      "upvotes": 35,
+      "authors": "Yuhan Zhu, Changlian Ma, Xiangyu Zeng",
+      "ai_keywords": [
+        "video understanding",
+        "temporal grounding",
+        "multimodal LLM",
+        "video QA"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "ReflectWorld-MM: An Entity-Oriented Multimodal Memory System for Open-Ended Video Streams",
+      "url": "https://arxiv.org/abs/2607.09759",
+      "tldr": "ReflectWorld-MM builds a multimodal assistant that continuously watches video streams, stores entity-centric memories, and reasons over accumulated visual experience. It addresses the critical challenge of long-horizon video understanding by organizing memories around entities rather than raw frames, enabling more structured and queryable persistent memory.",
+      "tldr_zh": "ReflectWorld-MM 构建了一个能持续观看视频流、以实体为中心组织记忆并进行长期推理的多模态助手。通过围绕实体而非原始帧来组织记忆，解决了视频流中长时域理解与记忆管理的核心挑战。",
+      "upvotes": 19,
+      "authors": "Xiaokang Ma, Yifan Sun, Zhihong Jin",
+      "ai_keywords": [
+        "multimodal memory",
+        "video understanding",
+        "entity-centric",
+        "long-term memory"
+      ],
+      "interest_tag": "Memory"
+    },
+    {
+      "title": "RynnBrain 1.1: Towards More Capable and Generalizable Embodied Foundation Model",
+      "url": "https://arxiv.org/abs/2607.17977",
+      "tldr": "RynnBrain 1.1 presents a family of embodied foundation models at 2B, 9B, and 122B-A10B scales with a unified spatio-temporal, physically grounded training framework. It supports embodied perception, spatial reasoning, localization, and planning — representing a significant step toward a single model that handles the full stack of embodied intelligence tasks.",
+      "tldr_zh": "RynnBrain 1.1 推出涵盖 2B、9B、122B-A10B 规模的具身基础模型家族，采用统一时空物理接地训练框架，支持具身感知、空间推理、定位和规划。这是朝着单一模型覆盖具身智能全栈任务的重要进展。",
+      "upvotes": 21,
+      "authors": "Kehan Li, Bohan Hou, Minghao Zhu",
+      "ai_keywords": [
+        "embodied AI",
+        "foundation model",
+        "spatial reasoning",
+        "robotics"
+      ],
+      "interest_tag": ""
+    }
+  ],
+  "alphaxiv_papers": [
+    {
+      "title": "SEED: Self-Evolving On-Policy Distillation for Agentic Reinforcement Learning",
+      "arxiv_id": "2607.14777",
+      "url": "https://arxiv.org/abs/2607.14777",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2607.14777",
+      "tldr": "SEED proposes a self-evolving on-policy distillation framework for training LLM agents on long-horizon tasks with multi-turn interaction and tool use. Rather than relying on static teacher data, the agent continuously improves its own training signal through on-policy rollouts, addressing the mismatch between offline distillation and dynamic agentic environments.",
+      "tldr_zh": "SEED 提出自进化在策略蒸馏框架，专门用于训练多轮交互、工具调用等长时域 Agent 任务。Agent 通过在策略 rollout 持续改进自身训练信号，解决了离线蒸馏与动态环境之间的分布偏移问题。",
+      "interest_tag": ""
+    },
+    {
+      "title": "Understanding Reasoning from Pretraining to Post-Training",
+      "arxiv_id": "2607.16097",
+      "url": "https://arxiv.org/abs/2607.16097",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2607.16097",
+      "tldr": "This paper systematically studies how RL post-training for reasoning relates to and depends on the pretraining stage — a connection largely ignored in prior work. It finds that pretraining already shapes the reasoning capacity that RL then amplifies, offering new insights into why some models respond better to RL tuning than others.",
+      "tldr_zh": "本文系统研究推理能力的 RL 后训练与预训练阶段之间的关系——这一联系此前基本被忽视。研究发现预训练已经塑造了 RL 能够放大的推理基础，解释了为什么某些模型对 RL 调优响应更好。",
+      "interest_tag": ""
+    },
+    {
+      "title": "Xiaomi-Robotics-1: Scaling Vision-Language-Action Models with over 100K Hours of Real-World Trajectories",
+      "arxiv_id": "2607.15330",
+      "url": "https://arxiv.org/abs/2607.15330",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2607.15330",
+      "tldr": "Xiaomi releases its first VLA foundation model trained on 100K+ hours of real robot trajectories, capable of following diverse language instructions across mobile manipulation tasks in unseen environments. The scale of real-world data used here sets a new bar for robotics foundation models.",
+      "tldr_zh": "小米发布首个 VLA 基础模型，基于 10 万小时以上真实机器人轨迹训练，能在陌生环境中跟随多样语言指令完成移动操作任务。所用真实数据规模为机器人基础模型树立了新标杆。",
+      "interest_tag": ""
+    },
+    {
+      "title": "Audio-Visual Flamingo: Open Audio-Visual Intelligence for Long and Complex Videos",
+      "arxiv_id": "2607.16107",
+      "url": "https://arxiv.org/abs/2607.16107",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2607.16107",
+      "tldr": "AV-Flamingo is a fully open audio-visual large language model achieving state-of-the-art performance on joint audio, image, and long-form video understanding. By processing all modalities jointly rather than sequentially, it enables richer cross-modal reasoning over complex, long videos where both what is seen and heard matters.",
+      "tldr_zh": "AV-Flamingo 是完全开放的音视频大语言模型，在音频、图像、长视频联合理解上达到最优性能。通过联合而非顺序处理所有模态，实现了对复杂长视频中视听信息的更丰富跨模态推理。",
+      "interest_tag": ""
+    },
+    {
+      "title": "RoboTTT: Context Scaling for Robot Policies",
+      "arxiv_id": "2607.15275",
+      "url": "https://arxiv.org/abs/2607.15275",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2607.15275",
+      "tldr": "RoboTTT introduces Test-Time-Training for robot foundation models, allowing policies to scale their visual context at inference time. Unlike current models that rely on single-step or short-history context, RoboTTT adapts to richer environmental history during deployment, improving generalization to unseen scenarios.",
+      "tldr_zh": "RoboTTT 将测试时训练引入机器人基础模型，允许策略在推理时扩展视觉上下文长度。不同于依赖单步或短历史的现有模型，RoboTTT 在部署时适应更丰富的环境历史，提升了对未见场景的泛化能力。",
+      "interest_tag": ""
+    }
+  ],
+  "github_repos": [
+    {
+      "name": "PromptPartner/agentsmith",
+      "url": "https://github.com/PromptPartner/agentsmith",
+      "tldr": "AgentSmith is a universal, model-agnostic operating harness for AI agents that abstracts away the scaffolding complexity of running agents across different models and environments. It aims to be the 'operating system' layer for agents, handling lifecycle, tool registration, and cross-model compatibility.",
+      "tldr_zh": "AgentSmith 是与模型无关的通用 AI Agent 运行框架，抽象了跨不同模型和环境运行 Agent 的脚手架复杂性，致力于成为 Agent 的「操作系统」层，处理生命周期、工具注册和跨模型兼容性。",
+      "stars": 315,
+      "language": "C++",
+      "interest_tag": ""
+    },
+    {
+      "name": "yc-duan/fastctx",
+      "url": "https://github.com/yc-duan/fastctx",
+      "tldr": "FastCtx provides fast, context-efficient repository tools for AI agents via MCP (Model Context Protocol), tackling the core problem that AI coding agents waste tokens on irrelevant repository context. By optimizing what context gets surfaced, it makes AI coding much cheaper and faster.",
+      "tldr_zh": "FastCtx 通过 MCP 协议为 AI Agent 提供快速、上下文高效的代码仓库工具，解决编程 Agent 在无关仓库上下文上浪费 token 的核心问题，让 AI 编程更便宜更快速。",
+      "stars": 227,
+      "language": "Python",
+      "interest_tag": ""
+    },
+    {
+      "name": "KlaatAI/klaatcode",
+      "url": "https://github.com/KlaatAI/klaatcode",
+      "tldr": "KlaatCode is an open-source terminal AI coding agent in the style of Claude Code. It brings autonomous code generation and editing to the command line without requiring a proprietary subscription, positioning itself as the open-source alternative to commercial coding agents.",
+      "tldr_zh": "KlaatCode 是 Claude Code 风格的开源终端 AI 编程 Agent，让用户无需商业订阅即可在命令行享受自主代码生成和编辑能力，定位为商业编程 Agent 的开源替代方案。",
+      "stars": 174,
+      "language": "Python",
+      "interest_tag": ""
+    },
+    {
+      "name": "EndymionLee/PilotBrowseMCP",
+      "url": "https://github.com/EndymionLee/PilotBrowseMCP",
+      "tldr": "PilotBrowseMCP is a browser runtime that lets AI agents control real Chrome instances through MCP, enabling true computer-use automation. Unlike headless browser solutions, it operates on actual browser sessions, making it suitable for tasks that require real-world web interaction.",
+      "tldr_zh": "PilotBrowseMCP 是让 AI Agent 通过 MCP 控制真实 Chrome 实例的浏览器运行时，实现真正的计算机使用自动化。不同于无头浏览器方案，它操作真实浏览器会话，适合需要真实网页交互的任务。",
+      "stars": 60,
+      "language": "TypeScript",
+      "interest_tag": "CUA"
+    },
+    {
+      "name": "MemTensor/memmy-agent",
+      "url": "https://github.com/MemTensor/memmy-agent",
+      "tldr": "Memmy-Agent provides a shared persistent memory layer for AI agents — 'One Agent. One memory. Shared by every AI.' It addresses the fundamental problem of agents losing context between sessions by providing a centralized memory store accessible across different AI models and instances.",
+      "tldr_zh": "Memmy-Agent 为 AI Agent 提供共享持久记忆层——「一个 Agent，一份记忆，所有 AI 共享」。解决了 Agent 在会话间丢失上下文的根本问题，提供可跨不同 AI 模型和实例访问的集中式记忆存储。",
+      "stars": 62,
+      "language": "Python",
+      "interest_tag": "Memory"
+    }
+  ],
+  "hackernews": [
+    {
+      "title": "LM Studio Bionic: the AI agent for open models",
+      "url": "https://lmstudio.ai/blog/introducing-lm-studio-bionic",
+      "tldr": "LM Studio Bionic is a new agentic interface for running open-source models locally, bringing autonomous task execution to models like Llama and Mistral. With 330 points and 132 comments, it's the day's hottest HN story — signaling strong community demand for open-model agent infrastructure outside cloud providers.",
+      "tldr_zh": "LM Studio Bionic 是本地运行开源模型的新 Agent 界面，为 Llama、Mistral 等模型带来自主任务执行能力。以 330 分 132 评论成为当天 HN 最热帖子，反映了社区对云服务之外开源 Agent 基础设施的强烈需求。",
+      "points": 330,
+      "num_comments": 132,
+      "interest_tag": ""
+    },
+    {
+      "title": "VulnHunter: Capital One's agentic AI code security tool",
+      "url": "https://www.capitalone.com/tech/open-source/announcing-vulnhunter/",
+      "tldr": "Capital One open-sources VulnHunter, an agentic AI system for detecting code vulnerabilities at scale. Unlike point-in-time SAST scanners, VulnHunter uses an agent loop to reason about vulnerability chains and contextual risk, representing enterprise adoption of AI agents for production security workflows.",
+      "tldr_zh": "Capital One 开源 VulnHunter，一个用于大规模检测代码漏洞的 AI Agent 系统。不同于单次扫描的 SAST 工具，VulnHunter 使用 Agent 循环推理漏洞链和上下文风险，代表了企业将 AI Agent 引入生产安全工作流的趋势。",
+      "points": 78,
+      "num_comments": 36,
+      "interest_tag": ""
+    },
+    {
+      "title": "Launch HN: Coasty (YC S26) – An API for computer-use agents",
+      "url": "https://coasty.ai/docs",
+      "tldr": "Coasty (YC S26) launches an API specifically designed for computer-use agents, providing standardized primitives for GUI interaction, state observation, and action execution. It aims to become the infrastructure layer for the emerging computer-use agent ecosystem.",
+      "tldr_zh": "Coasty（YC S26）发布专为计算机使用 Agent 设计的 API，提供 GUI 交互、状态观察和动作执行的标准化原语，致力于成为新兴计算机使用 Agent 生态的基础设施层。",
+      "points": 44,
+      "num_comments": 26,
+      "interest_tag": "CUA"
+    },
+    {
+      "title": "Show HN: LoopGain – Stop agent loops with control theory, not max_iter",
+      "url": "https://github.com/loopgain-ai/loopgain",
+      "tldr": "LoopGain applies control theory principles to prevent runaway agent loops, replacing the crude max_iterations cutoff with principled feedback-based termination. This tackles one of the most frustrating practical failure modes of agentic systems — agents that loop indefinitely or terminate prematurely.",
+      "tldr_zh": "LoopGain 将控制理论应用于防止 Agent 死循环，用基于反馈的原则性终止条件替代粗暴的 max_iterations 截断，解决了 Agent 系统中最令人头疼的实际故障模式之一——无限循环或过早终止。",
+      "points": 31,
+      "num_comments": 13,
+      "interest_tag": ""
+    },
+    {
+      "title": "Show HN: Ratel, give agents unlimited tools and skills without context bloat",
+      "url": "https://github.com/ratel-ai/ratel",
+      "tldr": "Ratel solves the context window vs. tool count tradeoff for agents: as agents gain more tools, their context window fills up with tool definitions. Ratel provides dynamic tool loading, giving agents access to unlimited skills without paying the constant context cost for all of them.",
+      "tldr_zh": "Ratel 解决了 Agent 工具数量与上下文窗口的矛盾：工具越多，上下文越臃肿。Ratel 通过动态工具加载，让 Agent 拥有无限技能而无需为所有工具定义持续占用上下文空间。",
+      "points": 23,
+      "num_comments": 18,
+      "interest_tag": ""
+    }
+  ]
+}
