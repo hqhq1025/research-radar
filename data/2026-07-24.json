@@ -1,0 +1,224 @@
+{
+  "date": "2026-07-24",
+  "generated_at": "2026-07-24T08:10:00+08:00",
+  "briefing_zh": "今日 AI 领域最引人注目的趋势是自主研究 Agent 的能力跃升。HuggingFace 票选最高的论文 AREX 提出了递归自我改进的 Deep Research Agent，通过发现-验证不对称性驱动迭代精炼，标志着 Agent 从搜索更长时间向自我校正范式的转变。与此同时，Tencent WorkBuddy Bench 发布了一套面向编程 Agent 的多领域评测基准，并引入了防污染任务构建机制，反映出业界对 Agent 评测科学化的迫切需求。模型竞争格局方面，Kimi K3 在 HN 上引发 873 分、442 条评论的热议，与 Fireworks AI 的 Fable 模型并列 agentic benchmark SoTA，同时 Echo 项目声称以 1/3 成本复现 Fable 级别效果。GitHub 新兴项目方面，open-kritt（366 stars）实现了用 AI agent 编排发现真实代码漏洞，Agent-Execution-Partnership（186 stars）构建了 Agent 动作授权与可审计控制平面，agents-council（94 stars）为 Claude Code 带来多 agent 协作编排能力，三个项目共同指向：AI agent 正从能力演示走向可信生产部署。",
+  "briefing_en": "The most significant trend today is the capability leap in autonomous research agents. The top-voted HuggingFace paper, AREX, introduces a recursively self-improving Deep Research Agent that exploits discovery-verification asymmetry to drive iterative refinement — a paradigm shift from 'search longer' to 'self-correct.' Simultaneously, Tencent WorkBuddy Bench releases a multi-domain coding agent evaluation suite with contamination-resistant task construction. On the model competition front, Kimi K3 ignited an 873-point, 442-comment HN thread, matching Fireworks AI's Fable on agentic benchmarks. Meanwhile, Echo claims Fable-level results at 1/3 the cost using open-weight models. On GitHub, three new projects signal AI agents moving from demos to trustworthy production deployment: open-kritt orchestrates agents to find real code vulnerabilities, Agent-Execution-Partnership builds an authorization and auditability control plane, and agents-council adds multi-agent collaboration to Claude Code.",
+  "viral_analysis_zh": "Kimi K3 vs Fable 是今天最可能破圈的议题。873 分+442 评论的讨论热度，叠加中国模型追平美国顶尖 agentic 模型的叙事张力，以及同期 Echo 用开源模型平替的对比，构成了完整的技术+商业+开源三角戏剧。这个组合极易在 Twitter/X 和 LinkedIn 双端发酵，预计未来 24-48 小时内持续放量。",
+  "viral_analysis_en": "Kimi K3 vs Fable is the most likely breakout story today. An 873-point HN thread with 442 comments, combined with the narrative of a Chinese model matching top US agentic benchmarks, plus Echo's simultaneous claim of open-weight parity at 1/3 the cost, creates a perfect tech + business + open-source triangle drama. This combination is highly likely to amplify across Twitter/X and LinkedIn over the next 24-48 hours.",
+  "huggingface_papers": [
+    {
+      "title": "AREX: Towards a Recursively Self-Improving Agent for Deep Research",
+      "url": "https://huggingface.co/papers/2607.21461",
+      "tldr": "AREX introduces a recursively self-improving research agent that exploits the discovery-verification asymmetry. Rather than searching longer, it verifies intermediate results constraint-by-constraint and uses the partially-verified state to guide subsequent refinement, achieving better multi-constraint research answers.",
+      "tldr_zh": "AREX 提出递归自我改进的深度研究 Agent，利用发现-验证不对称性——候选答案可逐约束拆解验证。Agent 通过验证中间结果并以部分验证状态引导后续精炼，在多约束研究任务上显著提升答案质量。",
+      "upvotes": 47,
+      "authors": "Shuqi Lu, Chaofan Li, Kun Luo",
+      "ai_keywords": [
+        "deep research",
+        "self-improvement",
+        "agent",
+        "verification"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "Visual Contrastive Self-Distillation",
+      "url": "https://huggingface.co/papers/2607.21556",
+      "tldr": "This paper removes the external teacher from on-policy self-distillation by creating learning asymmetry purely through visual contrastive input conditioning, yielding a simpler method that maintains self-teacher supervision quality without privileged answers or visual evidence.",
+      "tldr_zh": "本文通过视觉对比输入条件消除 on-policy 自蒸馏对外部教师的依赖，无需特权答案或视觉证据即可产生有效自教师学习信号，方法更简洁且保持知识蒸馏质量。",
+      "upvotes": 32,
+      "authors": "Yijun Liang, Yunjie Tian, Yijiang Li",
+      "ai_keywords": [
+        "self-distillation",
+        "knowledge distillation",
+        "vision"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "K12-KGraph: A Curriculum-Aligned Knowledge Graph for Benchmarking and Training Educational LLMs",
+      "url": "https://huggingface.co/papers/2605.09635",
+      "tldr": "K12-KGraph introduces curriculum cognition as a new capability dimension for educational LLMs, covering prerequisite chains, concept taxonomies, and pedagogical sequencing extracted from Chinese textbooks into a structured knowledge graph for training and benchmarking.",
+      "tldr_zh": "K12-KGraph 提出课程认知能力维度，超越简单题目问答，关注 LLM 能否理解知识前置关系、概念分类和教学排序。知识图谱从人教版教材提取，可用于训练和评测面向 K-12 教育的大模型。",
+      "upvotes": 30,
+      "authors": "Hao Liang, Qihan Lin, Zhaoyang Han",
+      "ai_keywords": [
+        "education",
+        "knowledge graph",
+        "benchmark",
+        "LLM"
+      ],
+      "interest_tag": "Benchmark"
+    },
+    {
+      "title": "Tencent WorkBuddy Bench: A Multi-Domain Coding-Agent Benchmark with Contamination-Resistant Task Construction",
+      "url": "https://huggingface.co/papers/2607.20911",
+      "tldr": "WorkBuddy Bench is a multi-domain coding agent evaluation suite from Tencent using distribution-informed task construction to resist data contamination, with a unified scoring framework and public cross-model leaderboard.",
+      "tldr_zh": "WorkBuddy Bench 是腾讯发布的多领域编程 Agent 评测套件，核心创新是防数据污染的分布感知任务构建，附带统一评分协议和跨模型排行榜。",
+      "upvotes": 10,
+      "authors": "Tencent Team",
+      "ai_keywords": [
+        "coding agent",
+        "benchmark",
+        "evaluation",
+        "contamination"
+      ],
+      "interest_tag": "Benchmark"
+    },
+    {
+      "title": "LLMs Get Lost in Evolving User Intent",
+      "url": "https://huggingface.co/papers/2607.20734",
+      "tldr": "This paper studies how LLMs fail as collaborative agents when user intent evolves dynamically across long interactions. Users rarely specify full intent upfront, and current LLMs struggle to track and adapt to intent revision over time.",
+      "tldr_zh": "本文研究 LLM 作为协作 Agent 处理动态演化用户意图时的失效模式。真实交互中用户意图逐步揭示和修正，现有 LLM 在长轮次交互中难以追踪意图演化，导致任务执行偏离用户真实需求。",
+      "upvotes": 7,
+      "authors": "LLM Intent Research Team",
+      "ai_keywords": [
+        "user intent",
+        "collaborative agent",
+        "LLM"
+      ],
+      "interest_tag": ""
+    }
+  ],
+  "alphaxiv_papers": [
+    {
+      "title": "Glia: A Human-Inspired AI for Automated Systems Design and Optimization",
+      "arxiv_id": "",
+      "url": "https://www.alphaxiv.org/acm-cais",
+      "alphaxiv_url": "https://www.alphaxiv.org/acm-cais",
+      "tldr": "Glia, developed at MIT CSAIL, autonomously designs and optimizes computer system mechanisms using a human-inspired multi-agent architecture, combining explainability with agentic coordination for complex system design.",
+      "tldr_zh": "Glia 是 MIT CSAIL 开发的 AI 系统，通过人类启发的多 Agent 架构自主设计和优化计算机系统机制，兼顾可解释性与 Agent 协调能力。",
+      "interest_tag": "Agent Swarm"
+    },
+    {
+      "title": "AI Identity: Standards, Gaps, and Research Directions for Autonomous AI Agents",
+      "arxiv_id": "2604.23280",
+      "url": "https://arxiv.org/abs/2604.23280",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2604.23280",
+      "tldr": "This AIFT/Waseda University report analyzes why human-centric identity systems are inadequate for autonomous AI agents, identifies standards gaps, and proposes research directions for AI agent identity frameworks.",
+      "tldr_zh": "AIFT 与早稻田大学联合报告，分析以人为中心的身份系统为何不适用于自主 AI Agent，梳理标准空白，提出 AI Agent 身份框架研究方向，对 agent 治理和可信部署有重要参考价值。",
+      "interest_tag": ""
+    },
+    {
+      "title": "RAG for End-to-End Security Incident Analysis",
+      "arxiv_id": "",
+      "url": "https://www.alphaxiv.org/acm-cais",
+      "alphaxiv_url": "https://www.alphaxiv.org/acm-cais",
+      "tldr": "A RAG system enabling LLMs to answer forensic questions and reconstruct attack sequences from diverse security logs, providing end-to-end automated security incident analysis.",
+      "tldr_zh": "面向安全事件分析的 RAG 系统，让 LLM 能从多样化安全日志中回答取证问题并重建攻击序列，实现端到端自动化安全事件分析。",
+      "interest_tag": "Memory"
+    },
+    {
+      "title": "Scideator: Human-in-the-Loop Research Idea Generation via Facet Recombination",
+      "arxiv_id": "",
+      "url": "https://www.alphaxiv.org/acm-cais",
+      "alphaxiv_url": "https://www.alphaxiv.org/acm-cais",
+      "tldr": "Scideator enables research idea generation through human-in-the-loop facet recombination: users select facets from retrieved papers, the system finds cross-paper analogies, and a novelty checker verifies originality.",
+      "tldr_zh": "Scideator 通过人在回路的侧面重组生成研究想法：用户选择检索论文关键侧面，系统跨论文发现类比，再通过新颖性检查器验证原创性，支持从同领域到跨领域的创意发现。",
+      "interest_tag": ""
+    },
+    {
+      "title": "AI Realtor: LLM-Based Agent for Grounded Persuasive Language Generation",
+      "arxiv_id": "",
+      "url": "https://www.alphaxiv.org/acm-cais",
+      "alphaxiv_url": "https://www.alphaxiv.org/acm-cais",
+      "tldr": "The AI Realtor framework from University of Chicago builds an LLM-based agent for grounded persuasive language generation in real estate marketing, demonstrating domain-specific contextually grounded agent text generation.",
+      "tldr_zh": "芝加哥大学开发的 AI Realtor 框架，构建基于 LLM 的 Agent 用于房地产营销的有根据说服性语言生成，展示了 Agent 在特定领域生成情境化说服文案的能力。",
+      "interest_tag": ""
+    }
+  ],
+  "github_repos": [
+    {
+      "name": "Jakubantalik/thinking-orbs",
+      "url": "https://github.com/Jakubantalik/thinking-orbs",
+      "tldr": "Thinking-orbs provides polished dotted thought-orb loading indicators for AI and agent UIs, with six tuned states, two sizes, and auto dark/light mode. It solves the UX problem of visually communicating AI thinking states.",
+      "tldr_zh": "Thinking-orbs 为 AI 和 Agent UI 提供精调点状思考球加载指示器，支持六种状态、两种尺寸及自动深色/浅色模式，优雅解决 AI 思考状态的 UX 可视化问题。",
+      "stars": 865,
+      "language": "TypeScript",
+      "interest_tag": ""
+    },
+    {
+      "name": "pireel/pireel",
+      "url": "https://github.com/pireel/pireel",
+      "tldr": "Pireel is an open-source, backend-free AI video editor for talking-head video with storyboarding, kinetic captions, and in-browser WebCodecs export. It is drivable by any AI agent over MCP, making it the first agent-controllable video editor.",
+      "tldr_zh": "Pireel 是开源无后端 AI 视频编辑器，专为真人讲解视频设计，支持分镜、动态字幕和浏览器内 WebCodecs 导出，并可通过 MCP 被任意 AI Agent 驱动，是首个 Agent 可控视频编辑器。",
+      "stars": 679,
+      "language": "TypeScript",
+      "interest_tag": ""
+    },
+    {
+      "name": "Kritt-ai/open-kritt",
+      "url": "https://github.com/Kritt-ai/open-kritt",
+      "tldr": "Open-kritt orchestrates AI agents to find real vulnerabilities in code through agent-driven dynamic security testing, not just static analysis. It applies multi-agent coordination to automated security research.",
+      "tldr_zh": "Open-kritt 编排 AI Agent 在代码中发现真实漏洞，是 Agent 驱动的动态安全测试而非传统静态分析，将多 Agent 协调应用于自动化安全研究领域。",
+      "stars": 366,
+      "language": "JavaScript",
+      "interest_tag": "Agent Swarm"
+    },
+    {
+      "name": "eli-labz/Agent-Execution-Partnership",
+      "url": "https://github.com/eli-labz/Agent-Execution-Partnership",
+      "tldr": "Agent Execution Partnership (AEE) is an open-source control plane ensuring every AI agent action is authorized before running, observable while running, and verifiable after completion — a production governance layer for AI agents.",
+      "tldr_zh": "Agent Execution Partnership 是开源 AI Agent 控制平面，确保每个 Agent 动作执行前已授权、执行中可观测、执行后可验证，为生产级 AI Agent 部署提供治理层。",
+      "stars": 186,
+      "language": "Python",
+      "interest_tag": ""
+    },
+    {
+      "name": "0xwilliamortiz/agents-council",
+      "url": "https://github.com/0xwilliamortiz/agents-council",
+      "tldr": "Agents-council is a multi-agent collaboration plugin for Claude Code enabling parallel orchestration of multiple AI agents, bringing swarm-style coordination directly into the Claude Code development workflow.",
+      "tldr_zh": "Agents-council 是 Claude Code 的多 Agent 协作插件，支持并行编排多个 AI Agent，将 swarm 式协调引入 Claude Code 工作流，提升复杂编程任务的并行化能力。",
+      "stars": 94,
+      "language": "Python",
+      "interest_tag": "Agent Swarm"
+    }
+  ],
+  "hackernews": [
+    {
+      "title": "Kimi K3 Is Competitive with Fable; Kimi K3 and Fable Is SoTA",
+      "url": "https://fireworks.ai/blog/kimik3-fable",
+      "tldr": "Fireworks AI shows Kimi K3 (Moonshot AI) is competitive with Fable on agentic benchmarks, with both achieving state-of-the-art. This signals a Chinese model reaching frontier agentic capabilities, narrowing the gap with top US labs.",
+      "tldr_zh": "Fireworks AI 分析显示 Kimi K3 在 agentic benchmark 上与 Fable 比肩，双双达到 SoTA。这标志着中国模型在 agentic 能力上首次追平美国顶尖水平，引发 HN 873 分热议。",
+      "points": 873,
+      "num_comments": 442,
+      "interest_tag": ""
+    },
+    {
+      "title": "Show HN: Echo - Fable-level results at 1/3 the cost using open-weight models",
+      "url": "https://news.ycombinator.com/item?id=49026810",
+      "tldr": "Echo achieves Fable-level agentic performance at one-third the cost using open-weight models, challenging the assumption that top agentic results require proprietary frontier models.",
+      "tldr_zh": "Echo 使用开源权重模型以 1/3 成本达到 Fable 级 agentic 效果，挑战顶级 agentic 性能必须依赖专有前沿模型的假设，引发开源社区广泛关注。",
+      "points": 366,
+      "num_comments": 173,
+      "interest_tag": ""
+    },
+    {
+      "title": "Show HN: OneCLI - OSS credential gateway that keeps secrets out of AI agents",
+      "url": "https://github.com/onecli/onecli",
+      "tldr": "OneCLI is an open-source credential gateway that prevents AI agents from directly accessing secrets, routing credential usage through a controlled gateway. It addresses the security concern of AI agents mishandling sensitive credentials.",
+      "tldr_zh": "OneCLI 是开源凭证网关，阻止 AI Agent 直接访问密钥，通过受控网关路由凭证使用，解决 AI Agent 泄漏或误用敏感凭证的安全隐患。",
+      "points": 94,
+      "num_comments": 30,
+      "interest_tag": ""
+    },
+    {
+      "title": "Launch HN: Screenpipe (YC S26) - Record how you work and turn that into agents",
+      "url": "https://news.ycombinator.com/item?id=49024620",
+      "tldr": "Screenpipe (YC S26) records user work patterns and converts them into AI agents that replicate those workflows, enabling automation through observation rather than explicit programming.",
+      "tldr_zh": "Screenpipe 录制用户屏幕工作模式并将其转化为可复现该工作流的 AI Agent，实现观察即编程——通过观测学习自动化，无需显式编写脚本。",
+      "points": 74,
+      "num_comments": 53,
+      "interest_tag": "CUA"
+    },
+    {
+      "title": "Kimi K3: second only to Fable 5 on AA-Briefcase",
+      "url": "https://artificialanalysis.ai/articles/kimi-k3-agentic-knowledge-benchmark",
+      "tldr": "Artificial Analysis benchmark data confirms Kimi K3 ranks second only to Fable 5 on AA-Briefcase, providing independent third-party validation of the model's frontier agentic capabilities.",
+      "tldr_zh": "Artificial Analysis 基准数据证实 Kimi K3 在 AA-Briefcase agentic 知识基准上仅次于 Fable 5，为其前沿 agentic 能力提供独立第三方验证，强化技术可信度。",
+      "points": 66,
+      "num_comments": 8,
+      "interest_tag": "Benchmark"
+    }
+  ]
+}
