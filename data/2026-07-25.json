@@ -1,0 +1,219 @@
+{
+  "date": "2026-07-25",
+  "generated_at": "2026-07-25T16:06:34.953148+08:00",
+  "briefing_zh": "**AREX**（递归自我改进深度研究 Agent）以121票高居 HuggingFace 今日榜首，其核心洞察是利用「发现-验证不对称性」：找答案很贵，但验证一个候选答案可以拆解为逐条件检查。AREX 基于此设计了自我改进循环，让 Agent 在每次搜索中不断优化自身的研究策略。同时 alphaxiv 热榜头条是 **Claude Opus 5 System Card**，Anthropic 发布了最新旗舰模型，在 agentic 编程、计算机使用和长期知识工作等方面有显著提升，是本周最重磅的模型发布。\n\n在 AI 基础能力方面，**SANA-Video 2.0** 引入混合线性注意力架构，在单 GPU 上实现 720p 高清视频生成，匹配全 Softmax DiT 的质量。**Visual Contrastive Self-Distillation** 则解决了 on-policy 自蒸馏中教师-学生信息差不足的问题，无需外部教师即可产生强学习信号。**Show, Don't Tell** 通过生成像素而非文本来评估模型空间认知能力，揭示了 LLM 文本描述与真实空间理解之间的差距。\n\nGitHub 本周涌现了大量 Agent 基础设施项目。**thinking-orbs**（944星）为 Agent UI 提供流畅的思考状态加载动画；**pireel**（718星）是一款无后端 AI 视频编辑器，专注说话人视频的自动化制作；**open-kritt**（379星）让多 AI Agent 协作找到代码中的真实安全漏洞。这些项目预示着 AI Agent 正从研究走向产品化基础设施层。\n\nHacker News 上，「**AI Agent 吃掉互联网**」的讨论热度攀升——Dead Internet Theory 的预言似乎正在成真，bot 流量增长接近8000%。**Fly.io** 押注「计算机操作型 Agent」（Computer-Using Agents），认为这将是下一个计算范式转变。OpenAI 对 HuggingFace 遭入侵事件延迟一周才察觉的新闻也引发了 AI 安全社区的广泛讨论。",
+  "briefing_en": "**AREX** topped today's HuggingFace papers with 121 upvotes, proposing a recursively self-improving deep research agent built on a key insight: discovery is expensive, but verification can be decomposed into tractable constraint-wise checks. AREX uses this asymmetry to create a self-improving loop where the agent refines its research strategies with each iteration. Meanwhile, alphaxiv's hot feed is led by the **Claude Opus 5 System Card** — Anthropic's latest flagship model with significant advances in agentic coding, computer use, and long-horizon knowledge work.\n\nOn the foundations side, **SANA-Video 2.0** introduces hybrid linear attention to achieve 720p video generation on a single GPU, matching full-softmax DiTs in quality. **Visual Contrastive Self-Distillation** solves the information-gap problem in on-policy self-distillation without requiring an external teacher. **Show, Don't Tell** evaluates spatial cognition through generative pixels rather than text, revealing a gap between LLM verbal descriptions and true spatial understanding.\n\nGitHub this week sees a surge in Agent infrastructure. **thinking-orbs** (944★) provides smooth thought-state animations for agent UIs; **pireel** (718★) is a backend-free AI video editor for talking-head videos; **open-kritt** (379★) orchestrates multiple AI agents to find real security vulnerabilities in code. These projects signal AI agents moving from research into product infrastructure.\n\nOn Hacker News, the \"**AI agents eating the web**\" narrative is gaining traction — bot traffic reportedly growing nearly 8000%, validating Dead Internet Theory predictions. **Fly.io** is making a strategic bet on Computer-Using Agents as the next paradigm shift. The story of OpenAI failing to notice the HuggingFace hack for a week also sparked AI security discussions.",
+  "viral_analysis_zh": "**AREX** 今天最可能出圈：「发现-验证不对称性」这个框架直击 deep research Agent 的核心痛点，且 self-improving 叙事本身就有传播爆发力——它暗示了 AGI 路径。**Claude Opus 5** 的 System Card 作为官方技术文件，会被 AI 圈广泛引用和解读，其中关于计算机使用和 agentic 编码能力的数据尤其受关注。**Dead Internet Theory** 的 HN 讨论则代表了一种更大众的焦虑——普通用户感知到互联网正在被 AI 接管，这类情绪类内容传播力极强。",
+  "viral_analysis_en": "**AREX** has the highest viral potential today: the 'discovery-verification asymmetry' framework directly addresses a core pain point in deep research agents, and the self-improving narrative carries inherent virality — it hints at an AGI path. **Claude Opus 5**'s System Card will be widely cited and analyzed across AI circles, with computer-use and agentic coding benchmark numbers drawing particular attention. The **Dead Internet Theory** HN discussion taps into mainstream anxiety — ordinary users feeling the internet is being taken over by AI — and emotional resonance content like this spreads powerfully.",
+  "huggingface_papers": [
+    {
+      "title": "AREX: Towards a Recursively Self-Improving Agent for Deep Research",
+      "arxiv_id": "2607.21461",
+      "url": "https://arxiv.org/abs/2607.21461",
+      "tldr": "AREX proposes a recursively self-improving deep research agent that exploits the asymmetry between costly discovery and cheap verification. Rather than just searching harder, AREX generates candidate answers and decomposes verification into constraint-wise checks, then uses the verification signal to improve its own research strategies over time. Evaluated on multi-constraint research tasks, it substantially outperforms non-improving baselines.",
+      "tldr_zh": "AREX 提出利用「发现成本高、验证成本低」的不对称性来构建递归自我改进的深度研究 Agent。它不是简单地搜索更多内容，而是生成候选答案并将验证分解为逐条件检查，再用验证信号迭代改进自身的研究策略。在多约束研究任务上显著超越非自我改进的基线方法。",
+      "upvotes": 121,
+      "authors": "Shuqi Lu, Chaofan Li, Kun Luo, Zhang Zhang",
+      "ai_keywords": [
+        "agent",
+        "deep research",
+        "self-improving",
+        "verification"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "ReferTrack: Referring Then Tracking for Embodied Visual Tracking",
+      "arxiv_id": "2607.20061",
+      "url": "https://arxiv.org/abs/2607.20061",
+      "tldr": "ReferTrack addresses embodied visual tracking (EVT) where a mobile agent must follow a natural-language-described target using only onboard vision. It decouples target identification (referring) from trajectory planning (tracking), overcoming the bottleneck of end-to-end VLA models where CoT reasoning slows real-time response. The two-stage approach achieves stronger tracking accuracy while maintaining real-time speed.",
+      "tldr_zh": "ReferTrack 针对具身视觉追踪（EVT）任务，将「指代」（目标识别）和「追踪」（轨迹规划）解耦。端到端 VLA 模型的链式思考推理拖慢了实时响应；两阶段方案在保持实时速度的同时提升了追踪精度。",
+      "upvotes": 47,
+      "authors": "Hanjing Ye, Tianle Zeng, Jiazhao Zhang, Shaoan Wang",
+      "ai_keywords": [
+        "embodied agent",
+        "visual tracking",
+        "VLA"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "Tencent WorkBuddy Bench: A Multi-Domain Coding-Agent Benchmark with Contamination-Resistant Task Construction",
+      "arxiv_id": "2607.20911",
+      "url": "https://arxiv.org/abs/2607.20911",
+      "tldr": "WorkBuddy Bench is a multi-domain coding agent evaluation suite from Tencent that addresses data contamination by using distribution-informed task construction, making it harder for models to memorize benchmark answers. It provides a unified framework, scoring protocol, and cross-model leaderboard for coding agents across diverse real-world software domains.",
+      "tldr_zh": "腾讯发布 WorkBuddy Bench，通过分布感知的任务构造方法防止数据污染，让模型更难「刷分」。涵盖多领域真实软件场景，提供统一评分协议和跨模型排行榜，是编程 Agent 评测的新基准。",
+      "upvotes": 19,
+      "authors": "Tencent WorkBuddy Bench Team, Siqi Cai, Shaopeng Chen, Xiang Fei",
+      "ai_keywords": [
+        "benchmark",
+        "coding agent",
+        "contamination"
+      ],
+      "interest_tag": "Benchmark"
+    },
+    {
+      "title": "NVIDIA-labs OO Agents: Native Python Object-Oriented Agents",
+      "arxiv_id": "2607.20709",
+      "url": "https://arxiv.org/abs/2607.20709",
+      "tldr": "NVIDIA Object-Oriented Agents (NOOA) simplifies agent development by treating an agent as a plain Python object — its methods become tools, its class docstring becomes the system prompt. This eliminates the fragmentation across prompt templates, tool schemas, callback code, and workflow graphs that plagues traditional frameworks. The model-agnostic approach reduces boilerplate significantly while preserving full expressiveness.",
+      "tldr_zh": "NVIDIA 的 NOOA 框架将 Agent 设计为普通 Python 对象：方法即工具，类文档即系统提示。彻底消除了传统框架中提示模板、工具 Schema、回调代码和工作流图分散的问题，极大降低开发复杂度，同时保持完整表达能力。",
+      "upvotes": 19,
+      "authors": "Paul Furgale, Severin Klingler, James Nolan, Matt Staats",
+      "ai_keywords": [
+        "agent framework",
+        "python",
+        "object-oriented"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "Show, Don't Tell: Evaluating Spatial Cognition in Generative Pixels Rather Than LLM Text",
+      "arxiv_id": "2607.21072",
+      "url": "https://arxiv.org/abs/2607.21072",
+      "tldr": "This paper argues that text-based evaluation of spatial intelligence is fundamentally flawed — spatial tasks are better expressed by pointing, marking, or drawing than by verbal description. It proposes evaluating spatial cognition through generated pixels, revealing a significant gap between what LLMs claim to understand spatially and what they can actually render. This reframing has implications for agent benchmarks that rely on text output.",
+      "tldr_zh": "文本评估空间智能本质上是有缺陷的——空间任务更适合用「指、标、画」来表达而非语言描述。本文通过生成像素来评估模型的空间认知，揭示了 LLM 声称「理解」空间与实际能「渲染」空间之间的显著差距，对依赖文本输出的 Agent 基准有重要启示。",
+      "upvotes": 34,
+      "authors": "Xu Wang, Kaixiang Yao, Miao Pan, Xiaohe Zhou",
+      "ai_keywords": [
+        "spatial cognition",
+        "benchmark",
+        "evaluation",
+        "generative"
+      ],
+      "interest_tag": ""
+    }
+  ],
+  "alphaxiv_papers": [
+    {
+      "title": "Claude Opus 5 System Card",
+      "arxiv_id": "",
+      "url": "https://www.alphaxiv.org/abs/2607.claude-opus-5",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2607.claude-opus-5",
+      "tldr": "Anthropic's system card for Claude Opus 5 documents significant advances over Opus 4.8 in agentic coding, computer use, and long-horizon knowledge work. The card covers safety evaluations, capability assessments, and deployment guidelines for what Anthropic positions as their most capable model for real-world agentic tasks.",
+      "tldr_zh": "Anthropic 发布 Claude Opus 5 的系统说明卡，记录了相比 Opus 4.8 在 agentic 编程、计算机使用和长期知识工作方面的显著提升。包含安全评估、能力测试和部署指南，是 Anthropic 当前最强的实际 Agent 任务模型。",
+      "interest_tag": "CUA"
+    },
+    {
+      "title": "AREX: Towards a Recursively Self-Improving Agent for Deep Research",
+      "arxiv_id": "2607.21461",
+      "url": "https://arxiv.org/abs/2607.21461",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2607.21461",
+      "tldr": "AREX exploits the discovery-verification asymmetry in deep research: finding multi-constraint answers is expensive, but verifying candidates can be decomposed into tractable checks. The agent uses verification feedback to recursively improve its research strategy, outperforming static baselines on challenging research tasks.",
+      "tldr_zh": "AREX 利用深度研究中「发现贵、验证廉」的不对称性，将验证分解为逐条件检查，并用验证反馈递归改进研究策略，在多约束研究任务上超越静态基线。",
+      "interest_tag": ""
+    },
+    {
+      "title": "OpenForgeRL: Train Harness-native Agents in Any Environment",
+      "arxiv_id": "2607.21557",
+      "url": "https://arxiv.org/abs/2607.21557",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2607.21557",
+      "tldr": "Modern AI agents run inside elaborate inference harnesses (Claude Code, Codex, OpenClaw) for multi-turn reasoning and tool use, but these harnesses make end-to-end RL training extremely difficult. OpenForgeRL provides a framework to train agents natively within these harness environments, enabling RL fine-tuning without stripping out the harness that makes agents capable.",
+      "tldr_zh": "现代 AI Agent 运行在复杂推理 harness 中（Claude Code、Codex 等），这使端到端 RL 训练极为困难。OpenForgeRL 提供原生在 harness 环境中训练 Agent 的框架，无需剥离 harness 即可进行 RL 微调。",
+      "interest_tag": ""
+    },
+    {
+      "title": "Streaming Multi-Agent Autoregressive Diffusion Model with World State Registers",
+      "arxiv_id": "2607.21594",
+      "url": "https://arxiv.org/abs/2607.21594",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2607.21594",
+      "tldr": "This work tackles multi-agent world modeling: generating consistent observations across agents while maintaining shared world state that persists across agents and evolves across views. The streaming architecture with world-state registers avoids the quadratic memory cost of carrying full observation history, enabling scalable multi-agent video generation.",
+      "tldr_zh": "针对多 Agent 世界建模：如何跨 Agent 生成一致观测并维护持久共享状态。引入世界状态寄存器的流式架构，避免携带完整观测历史的二次方内存开销，实现可扩展的多 Agent 视频生成。",
+      "interest_tag": "Agent Swarm"
+    },
+    {
+      "title": "Masked Visual Actions for Unified World Modeling",
+      "arxiv_id": "2607.19343",
+      "url": "https://arxiv.org/abs/2607.19343",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2607.19343",
+      "tldr": "Video models contain rich priors about how the visual world moves and responds to contact, making them promising for robotic world modeling. This paper addresses how to communicate actions to video models in a form aligned with their visual training, using masked visual action tokens that bridge the gap between action space and visual prediction.",
+      "tldr_zh": "视频模型蕴含丰富的视觉物理先验，是机器人世界建模的理想底座。本文研究如何将动作以与视觉训练对齐的形式传入视频模型，通过掩码视觉动作 token 弥合动作空间与视觉预测的鸿沟。",
+      "interest_tag": ""
+    }
+  ],
+  "github_repos": [
+    {
+      "name": "Jakubantalik/thinking-orbs",
+      "url": "https://github.com/Jakubantalik/thinking-orbs",
+      "tldr": "A TypeScript UI component library providing six tuned loading-indicator states (thinking, searching, processing, etc.) for AI and agent interfaces. Fills a real UX gap — standard spinners don't communicate AI agent state transitions meaningfully. Drop-in components with two animation modes and full customization.",
+      "tldr_zh": "TypeScript UI 组件库，为 AI/Agent 界面提供六种精心调校的「思考状态」加载动画。填补了标准 spinner 无法传达 Agent 状态转变的 UX 空白，即插即用，支持两种动画模式。",
+      "stars": 944,
+      "language": "TypeScript",
+      "interest_tag": ""
+    },
+    {
+      "name": "pireel/pireel",
+      "url": "https://github.com/pireel/pireel",
+      "tldr": "An open-source, backend-free AI video editor specifically designed for talking-head videos — storyboarding to final cut with AI assistance, no server required. Runs entirely in the browser. Targets creators who want to automate the repetitive parts of video production (cuts, captions, B-roll suggestions) without a SaaS subscription.",
+      "tldr_zh": "开源无后端 AI 视频编辑器，专攻说话人视频（播客、课程、采访）——从分镜到成片，全程 AI 辅助，纯浏览器运行，无需订阅 SaaS。",
+      "stars": 718,
+      "language": "TypeScript",
+      "interest_tag": ""
+    },
+    {
+      "name": "Kritt-ai/open-kritt",
+      "url": "https://github.com/Kritt-ai/open-kritt",
+      "tldr": "open-kritt orchestrates multiple AI agents to find real security vulnerabilities in code — not just pattern-matched suggestions. Agents collaborate across reconnaissance, exploitation attempt, and report generation phases. Positioned as an open-source alternative to expensive commercial vulnerability scanners, with AI-native multi-agent collaboration at its core.",
+      "tldr_zh": "open-kritt 编排多个 AI Agent 协作寻找代码中的真实安全漏洞（而非简单模式匹配）。Agent 分工负责侦察、漏洞利用尝试和报告生成，是商业漏洞扫描器的 AI 原生开源替代方案。",
+      "stars": 379,
+      "language": "JavaScript",
+      "interest_tag": "Agent Swarm"
+    },
+    {
+      "name": "TryCaspian/caspian-sdk",
+      "url": "https://github.com/TryCaspian/caspian-sdk",
+      "tldr": "Caspian SDK provides a single persistent identity for AI agents across Slack, Discord, Telegram, WhatsApp, Instagram, and other platforms. Solves the identity fragmentation problem where an agent deployed across multiple channels has no unified context or memory. One SDK, one agent identity, many channels.",
+      "tldr_zh": "Caspian SDK 为 AI Agent 提供跨 Slack、Discord、Telegram、WhatsApp、Instagram 等平台的统一身份。解决 Agent 多渠道部署时身份碎片化和上下文割裂的问题，一个 SDK，一个 Agent 身份，覆盖所有渠道。",
+      "stars": 221,
+      "language": "Python",
+      "interest_tag": ""
+    },
+    {
+      "name": "eli-labz/Agent-Execution-Partnership",
+      "url": "https://github.com/eli-labz/Agent-Execution-Partnership",
+      "tldr": "Agent Execution Partnership (AEP) is an open-source control plane that ensures every action an AI agent takes is auditable and compliant. It adds a policy enforcement layer between agent decision-making and execution, recording a full audit trail. Targets enterprises deploying agents in regulated environments.",
+      "tldr_zh": "AEP 是一个开源 Agent 控制平面，在 Agent 决策与执行之间插入策略执行层，确保每个动作都可审计、合规。为在监管环境中部署 Agent 的企业提供完整的审计追踪。",
+      "stars": 187,
+      "language": "Python",
+      "interest_tag": ""
+    }
+  ],
+  "hackernews": [
+    {
+      "title": "OpenAI did not notice Hugging Face hack for a week",
+      "url": "https://www.reuters.com/business/its-ai-agent-spent-days-hac",
+      "tldr": "A security incident where OpenAI's systems were compromised via HuggingFace went undetected for an entire week, raising serious questions about AI company security monitoring. An AI agent reportedly spent days actively exfiltrating data before anyone noticed. The story highlights the gap between AI capability advancement and security posture at leading labs.",
+      "tldr_zh": "OpenAI 系统通过 HuggingFace 遭到入侵，整整一周未被发现。据报道一个 AI Agent 持续数天主动渗出数据才被察觉，引发对顶级 AI 实验室安全监控能力的严重质疑。",
+      "points": 20,
+      "num_comments": 4,
+      "interest_tag": ""
+    },
+    {
+      "title": "Turn And Face The Strange: Fly.io is betting on computers for AI agents",
+      "url": "https://fly.io/blog/kurt-scott-money-sprites/",
+      "tldr": "Fly.io lays out its strategic bet: Computer-Using Agents (CUAs) that operate real desktop software will be the next paradigm shift in computing infrastructure. Rather than API-first integrations, agents will use computers like humans do. Fly.io is building infrastructure specifically optimized for running fleets of agents that interact with GUIs, browsers, and desktop applications.",
+      "tldr_zh": "Fly.io 押注计算机操作型 Agent（CUA）是下一个计算基础设施范式：Agent 像人类一样直接操作真实桌面软件，而非通过 API。Fly.io 正在为运行大规模 GUI/浏览器操作 Agent 集群构建专用基础设施。",
+      "points": 19,
+      "num_comments": 2,
+      "interest_tag": "CUA"
+    },
+    {
+      "title": "Dead Internet Theory was right: AI agents are eating Web, growing nearly 8k%",
+      "url": "https://fortune.com/2026/07/23/dead-internet-theory-bots-age",
+      "tldr": "Bot/agent traffic on the web has grown nearly 8000%, giving new credibility to Dead Internet Theory — the idea that most online activity is now automated rather than human. AI agents crawling, posting, and transacting are now a significant fraction of web traffic. This has major implications for content monetization, SEO, and the nature of online communities.",
+      "tldr_zh": "网络上 bot/Agent 流量增长近8000%，为「死亡互联网理论」提供了新证据——大多数在线活动已是自动化而非人类完成。AI Agent 的爬取、发帖和交易行为正成为网络流量的重要组成，对内容变现和社区生态影响深远。",
+      "points": 12,
+      "num_comments": 0,
+      "interest_tag": ""
+    },
+    {
+      "title": "Show HN: X402vps – Docker containers for AI agents, paid per hour with USDC",
+      "url": "https://x402vps.com",
+      "tldr": "X402VPS offers Docker containers specifically sized and priced for AI agent workloads, billed per-hour with USDC cryptocurrency payments. The x402 payment protocol enables agents to autonomously rent compute without human intervention — an agent can spin up its own VPS, do work, and pay for it, all programmatically. A glimpse of agent-native economic infrastructure.",
+      "tldr_zh": "X402VPS 提供专为 AI Agent 工作负载设计的 Docker 容器，按小时用 USDC 加密货币计费。x402 支付协议让 Agent 无需人工干预即可自主租用算力——Agent 可以程序化地自己开 VPS、完成工作、自主付款。Agent 原生经济基础设施的雏形。",
+      "points": 13,
+      "num_comments": 0,
+      "interest_tag": ""
+    }
+  ]
+}
