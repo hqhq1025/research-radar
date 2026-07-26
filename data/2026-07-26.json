@@ -1,0 +1,226 @@
+{
+  "date": "2026-07-26",
+  "generated_at": "2026-07-26T16:03:41.267493+08:00",
+  "briefing_zh": "今日 AI 研究领域最强信号：**Kimi K3** 在 agentic 基准测试上与 **Fable** 并列 SOTA，这标志着中国实验室在 agent 能力（而非通用语言基准）维度首次正面打平顶级西方前沿模型。与此同时，**Echo** 以 1/3 成本实现同等性能的报告在 HN 掀起激烈讨论——开源权重模型生态是否已经追上，专有模型的成本溢价是否还能持续？\n\n论文层面，**AREX** 提出递归自我改进的研究 agent，核心洞见是\"发现答案难、验证答案易\"的不对称性，将约束验证分解为可处理的子任务并用作奖励信号。**NVIDIA** 发布 NOOA 框架，把 agent 的全部复杂性（prompt、工具、状态、流程）收归单个 Python 对象，方向是极简主义。**OpenForgeRL** 则解决了一个长期被忽视的工程问题：当推理框架本身很复杂时如何做 RL 训练。\n\n基础设施与生态侧，**Screenpipe**（YC S26）将屏幕录制变成 agent 工作流的示范编程，**OneCLI** 为 agent 安全性提供凭证隔离网关。更宏观地，Fortune 的报道指出 AI agent 已接近占多数网络流量——这意味着整个网络的流量结构正在被重写，agent-first 的产品设计将从优化项变为必选项。",
+  "briefing_en": "The strongest signal in AI research today: **Kimi K3** from Moonshot AI is now co-SOTA with **Fable** on agentic benchmarks, marking the first time a Chinese lab's model has genuinely matched top Western frontier models specifically on agent capabilities (not just general language benchmarks). Simultaneously, **Echo**'s claim of Fable-level results at 1/3 cost using open-weight models has HN asking whether the open-weight ecosystem has finally caught up and whether proprietary model premiums are still justifiable.\n\nOn the research side, **AREX** proposes a recursively self-improving research agent built on the discovery–verification asymmetry: finding multi-constraint answers is hard, but checking them is decomposable — making verification a reward signal. **NVIDIA**'s NOOA framework takes a minimalist approach, collapsing all agent complexity (prompts, tools, state, workflows) into a single Python object. **OpenForgeRL** tackles the long-ignored engineering problem of doing RL training inside complex real-world inference harnesses.\n\nOn the infrastructure and ecosystem front, **Screenpipe** (YC S26) converts screen recordings into reusable agent workflows, while **OneCLI** provides a security gateway that keeps credentials out of agent prompts. Most provocatively, Fortune reports AI agents are approaching a majority of all web traffic — meaning the web's audience is being rewritten, and agent-first product design is shifting from optimization to prerequisite.",
+  "viral_analysis_zh": "**Kimi K3 vs Fable** 最可能刷屏——874 分、447 评论的热度说明一切。'中国模型打平顶级西方模型'是天然的流量密码，叠加 agent 能力这个当下最热赛道，传播势能极强。**Screenpipe**（YC 背书 + 屏幕录制变 agent 工作流）紧随其后，产品故事直观且演示友好，适合做 demo 视频传播。",
+  "viral_analysis_en": "**Kimi K3 vs Fable** is the runaway viral winner — 874 points and 447 comments on HN tell the story. 'Chinese model matches the best Western frontier model' is a perennial traffic magnet, amplified by the fact it's in agentic capabilities, the hottest current benchmark category. **Screenpipe** (YC-backed + screen-recording-to-agent-workflows pitch) is the most demo-friendly product story: intuitive, visual, and easy to turn into a compelling 60-second video.",
+  "huggingface_papers": [
+    {
+      "title": "AREX: Towards a Recursively Self-Improving Agent for Deep Research",
+      "url": "https://arxiv.org/abs/2607.21461",
+      "tldr": "AREX is a deep research agent that exploits the discovery–verification asymmetry: finding answers that satisfy multiple constraints is expensive, but checking them is decomposable. The agent recursively improves its own search and verification strategies, achieving state-of-the-art on multi-constraint research tasks. The key insight is treating constraint verification as a reward signal for self-improvement.",
+      "tldr_zh": "AREX 是一个深度研究 agent，利用发现-验证不对称性：满足多约束条件的答案难以发现但易于验证。通过将约束验证分解为逐项检查并作为自我改进的奖励信号，AREX 在多约束研究任务上达到新SOTA。",
+      "upvotes": 143,
+      "authors": "Shuqi Lu, Chaofan Li, Kun Luo",
+      "ai_keywords": [
+        "agent",
+        "deep research",
+        "self-improvement",
+        "reasoning"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "NVIDIA-labs OO Agents: Native Python Object-Oriented Agents",
+      "url": "https://arxiv.org/abs/2607.20709",
+      "tldr": "NVIDIA introduces NOOA (Object-Oriented Agents), a framework where agents are simply Python objects: methods are actions, fields are state, and docstrings are prompts. This unifies prompt templates, tool schemas, callbacks, and workflow graphs into standard Python, eliminating the complexity of multi-framework agent development.",
+      "tldr_zh": "NVIDIA 发布 NOOA 框架——Agent 就是 Python 对象：方法是动作、字段是状态、docstring 是 prompt。彻底消除了 prompt 模板、工具 schema、回调、工作流图的碎片化，将 agent 开发统一为标准 Python 范式。",
+      "upvotes": 0,
+      "authors": "Paul Furgale, Severin Klingler, James Nolan",
+      "ai_keywords": [
+        "agent framework",
+        "python",
+        "object-oriented",
+        "NVIDIA"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "Tencent WorkBuddy Bench: A Multi-Domain Coding-Agent Benchmark with Contamination-Resistant Task Construction",
+      "url": "https://arxiv.org/abs/2607.20911",
+      "tldr": "Tencent introduces WorkBuddy Bench, a multi-domain coding agent evaluation suite with contamination-resistant task construction. It uses distribution-informed task generation to prevent benchmark leakage, and includes a cross-model leaderboard covering diverse coding scenarios that existing benchmarks miss.",
+      "tldr_zh": "腾讯发布 WorkBuddy Bench，一个专门针对 coding agent 的多领域评测套件，核心创新是抗污染任务构造——通过分布感知的任务生成防止基准测试数据泄露，并附跨模型排行榜。",
+      "upvotes": 0,
+      "authors": "Tencent WorkBuddy Bench Team, Siqi Cai, Shaopeng Chen",
+      "ai_keywords": [
+        "benchmark",
+        "coding agent",
+        "evaluation",
+        "contamination"
+      ],
+      "interest_tag": "Benchmark"
+    },
+    {
+      "title": "OpenForgeRL: Train Harness-native Agents in Any Environment",
+      "url": "https://arxiv.org/abs/2607.21557",
+      "tldr": "Modern agents rely on complex inference harnesses (Claude Code, Codex) that SFT/RL stacks cannot natively express, blocking end-to-end training. OpenForgeRL solves this by making agents trainable inside their actual inference harness, enabling RL with full multi-turn, tool-use, and stateful harness semantics.",
+      "tldr_zh": "现代 agent 的推理框架（如 Claude Code）过于复杂，传统 SFT/RL 栈无法原生支持端到端训练。OpenForgeRL 让 agent 在真实推理框架内可训练，支持多轮、工具调用和有状态推理的完整 RL 语义。",
+      "upvotes": 0,
+      "authors": "Xiao Yu, Baolin Peng, Ruize Xu",
+      "ai_keywords": [
+        "reinforcement learning",
+        "agent training",
+        "inference harness",
+        "RL"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "LLMs Get Lost in Evolving User Intent",
+      "url": "https://arxiv.org/abs/2607.20734",
+      "tldr": "This paper reveals a critical gap: LLMs are evaluated on single-turn, fully-specified tasks, but real deployment involves dynamic user intent that evolves across conversation turns. The authors show current models fail systematically when users revise or reshape their intent mid-conversation, calling for new evaluation and training paradigms for truly collaborative agents.",
+      "tldr_zh": "本文揭示一个关键缺口：LLM 在静态单轮任务上评测，但真实使用中用户意图会动态演变。研究表明现有模型在用户中途修改意图时系统性失败，呼吁新的动态意图评测和训练范式。",
+      "upvotes": 0,
+      "authors": "Jihoon Tack, Philippe Laban, Jennifer Neville",
+      "ai_keywords": [
+        "user intent",
+        "collaborative agent",
+        "evaluation",
+        "multi-turn"
+      ],
+      "interest_tag": ""
+    }
+  ],
+  "alphaxiv_papers": [
+    {
+      "title": "AREX: Towards a Recursively Self-Improving Agent for Deep Research",
+      "arxiv_id": "2607.21461",
+      "url": "https://arxiv.org/abs/2607.21461",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2607.21461",
+      "tldr": "The most-discussed paper on alphaXiv this week. AREX treats deep research as a recursive self-improvement problem using the discovery-verification asymmetry to guide agent learning. The agent learns to generate better hypotheses by using constraint satisfaction as a reward signal.",
+      "tldr_zh": "本周 alphaXiv 热度最高。AREX 将深度研究建模为递归自我改进问题，利用发现-验证不对称性引导 agent 学习，约束满足作为奖励信号驱动更好的假设生成。",
+      "interest_tag": ""
+    },
+    {
+      "title": "Context-weighted Discrete Flow Matching",
+      "arxiv_id": "2507.17420",
+      "url": "https://arxiv.org/abs/2507.17420",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2507.17420",
+      "tldr": "Trending on alphaXiv with 62 views. Introduces context-weighting into discrete flow matching for generative models, improving sample quality on sequential/structured data by adapting flow trajectories based on context relevance.",
+      "tldr_zh": "alphaXiv 热门论文（62次浏览）。在离散流匹配中引入上下文加权机制，通过根据上下文相关性调整流轨迹，提升序列/结构化数据上的生成质量。",
+      "interest_tag": ""
+    },
+    {
+      "title": "3D-Aware VLMs with Implicit and Explicit Geometries",
+      "arxiv_id": "2507.16000",
+      "url": "https://arxiv.org/abs/2507.16000",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2507.16000",
+      "tldr": "Proposes equipping Vision-Language Models with 3D spatial awareness using both implicit geometry (learned from priors) and explicit geometry (depth/normals as inputs). Addresses the fundamental 2D flatness limitation of current VLMs for spatial reasoning tasks.",
+      "tldr_zh": "提出用隐式几何（从先验学习）和显式几何（深度/法线作为输入）赋予 VLM 3D 空间感知能力，解决现有 VLM 在空间推理任务中的二维平面局限。",
+      "interest_tag": ""
+    },
+    {
+      "title": "FinanceComplexQA: Benchmarking Agentic Reasoning on Industrial-grade Financial Documents",
+      "arxiv_id": "2607.19238",
+      "url": "https://arxiv.org/abs/2607.19238",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2607.19238",
+      "tldr": "FinanceComplexQA evaluates agentic reasoning on real-world industrial financial documents — not toy examples — revealing significant performance variation across agents on complex multi-document analysis tasks. Fills a gap between academic benchmarks and actual financial analyst workloads.",
+      "tldr_zh": "FinanceComplexQA 在真实工业级金融文档（非玩具示例）上评测 agentic reasoning，揭示不同 agent 在复杂多文档分析任务上的显著性能差异，填补学术基准与真实金融分析师工作流之间的空白。",
+      "interest_tag": "Benchmark"
+    },
+    {
+      "title": "Show, Don't Tell: Evaluating Spatial Cognition in Generative Pixels Rather Than LLM Text",
+      "arxiv_id": "2607.21072",
+      "url": "https://arxiv.org/abs/2607.21072",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2607.21072",
+      "tldr": "Argues that spatial intelligence should be evaluated through generated pixels (pointing, marking, drawing) rather than language descriptions, as many spatial tasks are naturally visual. Proposes a new benchmark that tests spatial cognition via generative image outputs rather than text answers.",
+      "tldr_zh": "论文主张空间智能应通过生成像素（指向、标注、绘制）而非文字描述来评测，因为许多空间任务天然是视觉的。提出通过生成图像输出而非文本答案测试空间认知的新基准。",
+      "interest_tag": "Benchmark"
+    }
+  ],
+  "github_repos": [
+    {
+      "name": "Jakubantalik/thinking-orbs",
+      "url": "https://github.com/Jakubantalik/thinking-orbs",
+      "tldr": "Animated 'thinking orb' loading indicators for AI/agent UIs with six tuned states (thinking, reasoning, typing, etc.) and two rendering modes. Virally popular because it solves the visual UX gap when AI agents are doing multi-step background work — users need to see the agent 'thinking'.",
+      "tldr_zh": "为 AI/agent UI 设计的动态'思考球'加载指示器，六种调好的状态（思考、推理、打字等）两种渲染模式。走红原因：解决了 agent 在后台多步工作时的视觉 UX 空白——用户需要看到 agent 在'思考'。",
+      "stars": 1047,
+      "language": "TypeScript",
+      "interest_tag": ""
+    },
+    {
+      "name": "pireel/pireel",
+      "url": "https://github.com/pireel/pireel",
+      "tldr": "Open-source, backend-free AI video editor for talking-head videos with storyboarding and AI-driven editing. Runs entirely in the browser with no server required. Targets content creators and democratizes AI video production without cloud dependencies.",
+      "tldr_zh": "开源、无后端的 AI 视频编辑器，专为 talking-head 视频设计，支持分镜和 AI 驱动编辑。完全在浏览器中运行，无需服务器，面向内容创作者，无云端依赖。",
+      "stars": 758,
+      "language": "TypeScript",
+      "interest_tag": ""
+    },
+    {
+      "name": "Kritt-ai/open-kritt",
+      "url": "https://github.com/Kritt-ai/open-kritt",
+      "tldr": "Open-source AI agent framework that orchestrates multiple specialized agents to find real security vulnerabilities in code. Applies multi-agent collaboration to automated penetration testing — a high-stakes domain where agent reliability and false-positive control matter enormously.",
+      "tldr_zh": "开源 AI agent 框架，编排多个专业化 agent 自动发现代码中的真实安全漏洞。将多 agent 协作应用于自动渗透测试这一高风险领域，对 agent 可靠性和误报控制要求极高。",
+      "stars": 395,
+      "language": "JavaScript",
+      "interest_tag": "Agent Swarm"
+    },
+    {
+      "name": "TryCaspian/caspian-sdk",
+      "url": "https://github.com/TryCaspian/caspian-sdk",
+      "tldr": "One unified identity for AI agents across Slack, Discord, Telegram, WhatsApp, Instagram, and more. Solves the fragmented multi-platform deployment problem for agent products — one agent persona, consistent across all messaging channels.",
+      "tldr_zh": "AI agent 在 Slack、Discord、Telegram、WhatsApp、Instagram 等平台的统一身份 SDK。解决 agent 产品多平台部署碎片化问题——一个 agent persona，跨所有消息平台保持一致。",
+      "stars": 242,
+      "language": "Python",
+      "interest_tag": ""
+    },
+    {
+      "name": "0xwilliamortiz/agents-council",
+      "url": "https://github.com/0xwilliamortiz/agents-council",
+      "tldr": "Multi-agent collaboration plugin for Claude Code that orchestrates a 'council' of specialized sub-agents. Enables parallel workstreams, inter-agent communication, and role-based task delegation within coding workflows — extending Claude Code's single-agent model to a coordinated swarm.",
+      "tldr_zh": "Claude Code 的多 agent 协作插件，将多个专业化子 agent 组成'委员会'。在 coding 工作流中实现并行工作流、agent 间通信和基于角色的任务委派——将 Claude Code 从单 agent 扩展为协调 swarm。",
+      "stars": 111,
+      "language": "Python",
+      "interest_tag": "Agent Swarm"
+    }
+  ],
+  "hackernews": [
+    {
+      "title": "Kimi K3 Is Competitive with Fable; Kimi K3 and Fable Is SoTA",
+      "url": "https://fireworks.ai/blog/kimik3-fable",
+      "tldr": "Moonshot AI's Kimi K3 matches Fable on agentic benchmarks and together they set new state-of-the-art. This is significant: a Chinese lab's model is now peer-competitive with the best Western frontier models on agent capabilities specifically — not just general benchmarks.",
+      "tldr_zh": "月之暗面 Kimi K3 在 agentic 基准上与 Fable 持平，两者联合设立新 SOTA。重要意义：中国实验室模型在 agent 能力（而非通用基准）上首次与最强西方前沿模型平起平坐。",
+      "points": 874,
+      "num_comments": 447,
+      "interest_tag": ""
+    },
+    {
+      "title": "Show HN: Echo – Fable-level results at 1/3 the cost using open-weight models",
+      "url": "https://news.ycombinator.com/item?id=44678321",
+      "tldr": "Echo achieves Fable-level performance at 1/3 the cost by orchestrating open-weight models. The post generated intense HN discussion about whether proprietary frontier models still justify their premium — and whether the open-weight ecosystem has finally caught up for production agentic use.",
+      "tldr_zh": "Echo 通过编排开源权重模型以 1/3 成本实现 Fable 级性能。在 HN 引发激烈讨论：专有前沿模型的溢价是否还合理？开源权重生态是否已追上生产级 agent 使用场景。",
+      "points": 468,
+      "num_comments": 221,
+      "interest_tag": ""
+    },
+    {
+      "title": "Show HN: OneCLI – OSS credential gateway that keeps secrets out of AI agent prompts",
+      "url": "https://github.com/onecli/onecli",
+      "tldr": "OneCLI is an open-source credential gateway that intercepts agent prompts and strips sensitive secrets before they reach the LLM context. Addresses the growing security concern of AI agents inadvertently leaking credentials via their reasoning traces or tool outputs.",
+      "tldr_zh": "OneCLI 是开源凭证网关，拦截 agent prompt 并在到达 LLM 上下文之前剥离敏感密钥。解决 AI agent 通过推理轨迹或工具输出意外泄露凭证的安全隐患。",
+      "points": 106,
+      "num_comments": 32,
+      "interest_tag": ""
+    },
+    {
+      "title": "Launch HN: Screenpipe (YC S26) – Record how you work and turn that into agent workflows",
+      "url": "https://news.ycombinator.com/item?id=44680011",
+      "tldr": "Screenpipe (YC S26) records your screen activity and converts it into reusable agent workflows. The system learns your actual work patterns by observing and codifies them as automatable sequences — program-by-demonstration for AI agents at the OS level.",
+      "tldr_zh": "Screenpipe（YC S26）录制屏幕活动并转换为可复用的 agent 工作流。通过观察学习真实工作模式并将其编码为可自动化的序列——操作系统层面的 AI agent 示范编程。",
+      "points": 84,
+      "num_comments": 62,
+      "interest_tag": "CUA"
+    },
+    {
+      "title": "Dead Internet Theory was right: AI agents are eating Web, growing near majority of traffic",
+      "url": "https://fortune.com/2026/07/23/dead-internet-theory-bots-agents-majority-web-traffic",
+      "tldr": "Fortune reports AI agents now drive close to the majority of web traffic, validating the 'Dead Internet Theory' that human browsing is becoming the minority. This has profound implications for web architecture, content monetization, and how developers should think about who their actual 'users' are.",
+      "tldr_zh": "Fortune 报道 AI agent 驱动的流量已接近网络总流量的多数，验证了'僵尸互联网理论'——人类浏览正成为少数。这对网络架构、内容变现和开发者对'真实用户'的认知都有深远影响。",
+      "points": 14,
+      "num_comments": 0,
+      "interest_tag": ""
+    }
+  ]
+}
