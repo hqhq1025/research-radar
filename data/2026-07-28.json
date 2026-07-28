@@ -1,0 +1,227 @@
+{
+  "date": "2026-07-28",
+  "generated_at": "2026-07-28T09:00:00+08:00",
+  "briefing_zh": "今日 AI 领域最大事件是 **Kimi K3** 的发布——月之暗面开源了一个 2.8T 参数的 MoE 模型，激活参数 104B，支持原生视觉和 100 万 token 上下文。这是继 DeepSeek 之后中国开源大模型的又一里程碑，从 HuggingFace 的 152 票高居榜首可见社区的热情。同期，**Anthropic** 在 alphaxiv 上发布了 Claude Opus 5 系统卡，重点强调了 agentic coding 和 computer use 能力的提升，显示前沿实验室正把「智能体执行力」作为下一个主要竞争维度。\n\n在具体技术方向上，**StateAct** 提出了一个颠覆性洞见：Computer Use Agent 的提升应从「更好的截图感知」转向「程序状态理解」——直接读取 DOM、文件系统和应用后端，而不是解析像素。这与 **JarvisHub** 的方向形成互补，后者构建了一套多模态创意 Agent 画布框架，将图像、视频、音频生成统一在长时序任务流中。**From Proprietary to Open-Source** 则聚焦多智能体协议蒸馏，让开源模型通过学习专有模型的 agentic search 行为来弥合性能差距，是 Agent Swarm 方向的重要进展。\n\nGitHub 本周涌现出多个值得关注的项目：**OptMem** 用 426-token 的极简 prompt 实现 AI Agent 永久记忆，**cindy** 是一个开箱即用的全能 Agent，**deer-workflow** 提供了图结构 TypeScript 编排运行时。HN 社区的「Skynet Day」讨论反映出公众对 OpenAI agent 越权行为的担忧已经从科幻语境进入日常叙事。",
+  "briefing_en": "The biggest story today is the release of **Kimi K3** — Moonshot AI open-sourced a 2.8T parameter MoE model with 104B activated parameters, native vision capabilities, and a 1M-token context window. With 152 upvotes on HuggingFace, this is China's most significant open-source LLM release since DeepSeek. Simultaneously, **Anthropic** published the Claude Opus 5 System Card on alphaxiv, highlighting gains in agentic coding and computer use — signaling that leading labs are treating \"agent execution capability\" as the next primary competitive dimension.\n\nOn the technical front, **StateAct** proposes a paradigm shift for Computer Use Agents: instead of improving screenshot perception (better clicking models), read the underlying program state — DOM, filesystems, and app backends — directly. This is complementary to **JarvisHub**, which builds a canvas-native multimodal creative agent harness unifying image/video/audio generation in long-horizon workflows. **From Proprietary to Open-Source** tackles multi-agent protocol distillation, enabling open-source models to close the performance gap by learning from proprietary agentic search behavior.\n\nGitHub highlights this week include **OptMem** (permanent AI agent memory via a 426-token prompt), **cindy** (an open-source all-purpose agent), and **deer-workflow** (TypeScript graph engineering runtime). On HN, the \"Skynet Day\" discussion shows public anxiety about OpenAI agent overreach moving from sci-fi trope into mainstream narrative.",
+  "viral_analysis_zh": "**Kimi K3** 必然是今天最火的——2.8T MoE 开源模型，直接对标 GPT-4 级别，叠加原生视觉和百万上下文，论文详尽、权重开放，社区有充足理由传播。**StateAct** 的爆款潜力在于它用了一个极具冲击力的叙事框架：「截图是有损渲染」——这种反直觉的表达让技术人员立刻想转发。**OptMem** 在 GitHub 获得高星，因为「426 token 实现 Agent 永久记忆」是一个极度具体、可即刻复用的工具承诺，击中了每个做 Agent 开发者的痛点。",
+  "viral_analysis_en": "**Kimi K3** dominates today — a 2.8T open-source MoE model benchmarking against GPT-4 class, with native vision and 1M context, detailed technical report, and open weights. **StateAct**'s viral hook is its counter-intuitive framing: 'a screenshot is only a lossy rendering of the underlying program state' — engineers immediately want to share this paradigm shift. **OptMem** is gaining GitHub traction because '426-token prompt for permanent agent memory' is an extremely concrete, immediately reusable tool promise that hits every agent developer's pain point.",
+  "huggingface_papers": [
+    {
+      "title": "Kimi K3: Open Frontier Intelligence",
+      "arxiv_id": "2607.24653",
+      "url": "https://arxiv.org/abs/2607.24653",
+      "tldr": "Kimi K3 is a 2.8T parameter Mixture-of-Experts model with 104B activated parameters, native vision, and 1M-token context window. Built on Delta Attention and Attention Residuals, it achieves frontier-level performance while being fully open-sourced. A major milestone for Chinese open-source LLMs.",
+      "tldr_zh": "Kimi K3 是 2.8T 参数的 MoE 模型，激活参数 104B，支持原生视觉和 100 万 token 上下文窗口。基于 Delta Attention 和 Attention Residuals 构建，达到前沿级别性能并完全开源。中国开源大模型的重要里程碑。",
+      "upvotes": 152,
+      "authors": "Kimi Team, Tongtong Bai, Yifan Bai",
+      "ai_keywords": [
+        "MoE",
+        "open-source",
+        "vision",
+        "long-context"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "StateAct: Program State, before Pixels, for Long-Horizon Computer-Use Agents",
+      "arxiv_id": "2607.22798",
+      "url": "https://arxiv.org/abs/2607.22798",
+      "tldr": "Current computer-use agents rely on screenshot perception, but screenshots are lossy renderings of underlying program state. StateAct reads DOM, filesystems, and app backends directly, enabling more reliable long-horizon task execution without pixel-level guesswork.",
+      "tldr_zh": "现有 Computer Use Agent 依赖截图感知，但截图只是程序状态的有损渲染。StateAct 直接读取 DOM、文件系统和应用后端，实现更可靠的长时序任务执行，无需逐像素猜测。",
+      "upvotes": 42,
+      "authors": "Yan Yang, Xiangru Jian, Ziyang Luo",
+      "ai_keywords": [
+        "computer-use",
+        "GUI agent",
+        "program state"
+      ],
+      "interest_tag": "CUA"
+    },
+    {
+      "title": "JarvisHub: An Open Harness for Canvas-Native Multimodal Creative Agents",
+      "arxiv_id": "2607.23588",
+      "url": "https://arxiv.org/abs/2607.23588",
+      "tldr": "JarvisHub is an open framework for canvas-native creative AI agents that orchestrate long-horizon multimodal production workflows — images, videos, audio, storyboards — as a unified task graph rather than isolated generation steps.",
+      "tldr_zh": "JarvisHub 是面向画布原生创意 AI 的开源框架，将图像、视频、音频、分镜等多模态生成统一为长时序任务图，而非孤立的生成步骤。",
+      "upvotes": 65,
+      "authors": "Yunlong Lin, Zixu Lin, Zhaohu Xing",
+      "ai_keywords": [
+        "creative agents",
+        "multimodal",
+        "canvas"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "From Proprietary to Open-Source: Bridging the Distribution Gap via Multi-Agent Protocol Distillation in Agentic Search",
+      "arxiv_id": "2607.24280",
+      "url": "https://arxiv.org/abs/2607.24280",
+      "tldr": "Open-source models lag behind proprietary ones in agentic search because of distribution mismatch. This paper uses multi-agent protocol distillation — letting open models learn the search-reasoning protocols of proprietary agents — to close the performance gap with dense, behavior-level supervision.",
+      "tldr_zh": "开源模型在 agentic search 上落后于专有模型，原因是分布差距。本文通过多智能体协议蒸馏——让开源模型学习专有 agent 的检索推理协议——以行为级密集监督弥合性能差距。",
+      "upvotes": 46,
+      "authors": "Junlin Liu, Jiangwang Chen, Zixin Song",
+      "ai_keywords": [
+        "distillation",
+        "agentic search",
+        "open-source"
+      ],
+      "interest_tag": "Agent Swarm"
+    },
+    {
+      "title": "Progress Reward Modeling for Robotic Learning: A Comprehensive Survey",
+      "arxiv_id": "2607.21655",
+      "url": "https://arxiv.org/abs/2607.21655",
+      "tldr": "Terminal success signals alone are insufficient for robotic learning. This survey covers progress reward modeling — intermediate reward signals that tell a robot whether it is advancing, stalling, or regressing — covering theory, methods, and practical applications in dynamic environments.",
+      "tldr_zh": "仅凭终端成功信号不足以支撑机器人学习。本综述覆盖进度奖励建模——告知机器人当前行为是在推进、停滞还是退步的中间奖励信号，涵盖理论、方法和动态环境中的实际应用。",
+      "upvotes": 51,
+      "authors": "Jianshu Zhang, Keliang Wu, Haoran Lu",
+      "ai_keywords": [
+        "reward modeling",
+        "robotics",
+        "RL"
+      ],
+      "interest_tag": ""
+    }
+  ],
+  "alphaxiv_papers": [
+    {
+      "title": "Claude Opus 5 System Card",
+      "arxiv_id": "",
+      "url": "https://www.alphaxiv.org/abs/2607.claude-opus-5",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2607.claude-opus-5",
+      "tldr": "Anthropic's system card for Claude Opus 5 details improvements in agentic coding, computer use, and long-horizon knowledge work over Opus 4.8. The card explicitly benchmarks computer use and multi-step task execution, positioning Opus 5 as a frontier agent model.",
+      "tldr_zh": "Anthropic 发布 Claude Opus 5 系统卡，详述相比 Opus 4.8 在 agentic coding、computer use 和长时序知识工作方面的提升。系统卡明确对 computer use 和多步任务执行进行了基准测试，将 Opus 5 定位为前沿 agent 模型。",
+      "interest_tag": "CUA"
+    },
+    {
+      "title": "FilmBench: A Film-Grade Benchmark for Cinematic Video Generation",
+      "arxiv_id": "2607.24241",
+      "url": "https://arxiv.org/abs/2607.24241",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2607.24241",
+      "tldr": "Existing video generation benchmarks use web-sourced prompts scored by generic models, missing the nuance of cinematic quality. FilmBench introduces film-grade evaluation criteria — cinematography, narrative coherence, visual aesthetics — to better reflect professional production standards.",
+      "tldr_zh": "现有视频生成基准使用网络来源的提示词和通用模型评分，无法衡量电影质量的细微差异。FilmBench 引入电影级评估标准——摄影技法、叙事连贯性、视觉美学——更好地反映专业制作水准。",
+      "interest_tag": "Benchmark"
+    },
+    {
+      "title": "Skill Self-Play: Pushing the Frontier of LLM Capability with Co-Evolving Skills",
+      "arxiv_id": "2607.22529",
+      "url": "https://arxiv.org/abs/2607.22529",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2607.22529",
+      "tldr": "LLM self-evolution faces a dilemma between task diversity and verification reliability. Skill Self-Play enables LLMs to co-evolve a skill library through self-play, maintaining both diverse task coverage and verifiable feedback — pushing capability boundaries without human annotation.",
+      "tldr_zh": "LLM 自进化在任务多样性和验证可靠性之间存在困境。Skill Self-Play 通过自博弈让 LLM 协同进化技能库，同时保持任务覆盖多样性和可验证反馈——无需人工标注即可突破能力边界。",
+      "interest_tag": ""
+    },
+    {
+      "title": "The Physics of Multi-Turn Long-Horizon Planning: From Pre-training to Post-training via Single- and Multi-Teacher On-Policy Agentic Distillation",
+      "arxiv_id": "2607.24720",
+      "url": "https://arxiv.org/abs/2607.24720",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2607.24720",
+      "tldr": "Multi-turn long-horizon planning is fundamental for agent models but poorly understood. This work studies how planning ability is acquired from pre-training through post-training, introducing on-policy agentic distillation from both single and multiple teacher models to systematically improve it.",
+      "tldr_zh": "多轮长时序规划对 agent 模型至关重要但机制不清。本文研究规划能力如何从预训练到后训练逐步形成，引入单教师和多教师在线 agentic 蒸馏，系统性地提升长时序规划能力。",
+      "interest_tag": ""
+    },
+    {
+      "title": "A New Role for Relevance: Guiding Corpus Interaction in Agentic Search",
+      "arxiv_id": "2607.24223",
+      "url": "https://arxiv.org/abs/2607.24223",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2607.24223",
+      "tldr": "Traditional relevance scores select top-k documents but cannot localize, compose, or verify evidence for complex questions. This paper redefines relevance as a guidance signal for corpus interaction in agentic search, enabling agents to navigate document collections more intelligently.",
+      "tldr_zh": "传统相关性分数选取 top-k 文档，但无法为复杂问题定位、组合或验证证据。本文将相关性重新定义为 agentic search 中语料库交互的引导信号，使 agent 能更智能地遍历文档集合。",
+      "interest_tag": ""
+    }
+  ],
+  "github_repos": [
+    {
+      "name": "VictorTaelin/OptMem",
+      "url": "https://github.com/VictorTaelin/OptMem",
+      "tldr": "Permanent memory for AI agents via a 426-token prompt and a simple script — plug-and-play persistent memory without complex vector databases or RAG infrastructure. Minimal and immediately reusable.",
+      "tldr_zh": "通过 426-token 的极简 prompt 和一个脚本实现 AI Agent 永久记忆，无需复杂向量数据库或 RAG 基础设施，开箱即用。",
+      "stars": 675,
+      "language": "Python",
+      "interest_tag": "Memory"
+    },
+    {
+      "name": "makecindy/cindy",
+      "url": "https://github.com/makecindy/cindy",
+      "tldr": "Cindy is an open-source AI agent that works out of the box — a bilingual (EN/ZH) general-purpose agent platform designed for zero-configuration deployment and broad task coverage.",
+      "tldr_zh": "Cindy 是开箱即用的开源 AI Agent 平台，支持中英文，面向零配置部署和广泛任务覆盖，是通用 Agent 方向的完整实现。",
+      "stars": 929,
+      "language": "TypeScript",
+      "interest_tag": ""
+    },
+    {
+      "name": "deerwork-ai/deer-workflow",
+      "url": "https://github.com/deerwork-ai/deer-workflow",
+      "tldr": "An open-source graph engineering runtime that keeps AI agent orchestration in TypeScript — enabling developers to build, compose, and execute multi-agent workflows as typed graph structures rather than opaque JSON configs.",
+      "tldr_zh": "开源图结构工程运行时，将 AI agent 编排保持在 TypeScript 中——让开发者以类型安全的图结构构建、组合和执行多 agent 工作流，而非不透明的 JSON 配置。",
+      "stars": 291,
+      "language": "TypeScript",
+      "interest_tag": "Agent Swarm"
+    },
+    {
+      "name": "krakonjac300-pixel/podcast-shorts-factory",
+      "url": "https://github.com/krakonjac300-pixel/podcast-shorts-factory",
+      "tldr": "Ten cooperating AI agents that turn long-form podcasts into short-form videos automatically — a concrete multi-agent pipeline for content transformation with practical media production value.",
+      "tldr_zh": "十个协作 AI agent 将长播客自动转换为短视频——一个具有实际媒体制作价值的多 agent 内容转换流水线。",
+      "stars": 80,
+      "language": "Python",
+      "interest_tag": "Agent Swarm"
+    },
+    {
+      "name": "cocofhu/approving",
+      "url": "https://github.com/cocofhu/approving",
+      "tldr": "Approving is a self-hostable Go platform for putting coding agents under human-in-the-loop approval workflows — turning autonomous agent actions into supervised, auditable processes before execution.",
+      "tldr_zh": "Approving 是可自托管的 Go 平台，为 coding agent 引入人在回路审批工作流——在执行前将 agent 的自主行为转变为受监督、可审计的流程。",
+      "stars": 73,
+      "language": "Go",
+      "interest_tag": ""
+    }
+  ],
+  "hackernews": [
+    {
+      "title": "Kimi K3 Now Available via Telnyx Inference API",
+      "url": "https://telnyx.com/release-notes/kimi-k3-telnyx-inference",
+      "tldr": "Telnyx is one of the first inference providers to offer Kimi K3 via API — the massive 2.8T MoE model from Moonshot AI is now accessible without self-hosting, lowering the barrier for developers to experiment with this frontier open-source model.",
+      "tldr_zh": "Telnyx 是最先提供 Kimi K3 API 推理服务的平台之一——月之暗面的 2.8T MoE 大模型现在无需自托管即可通过 API 访问，降低了开发者试用这一前沿开源模型的门槛。",
+      "points": 69,
+      "num_comments": 24,
+      "interest_tag": ""
+    },
+    {
+      "title": "Show HN: Watch 14-Byte AI \"brains\" attempt to solve a 2D maze (Its harder than you think)",
+      "url": "https://con-dog.github.io/MINIMIO-PUBLIC-FRONTEND/",
+      "tldr": "A playful experiment where minimal 14-byte programs act as AI 'brains' navigating 2D mazes, illustrating the surprising difficulty of even simple goal-directed behavior at minimal computational complexity.",
+      "tldr_zh": "一个趣味实验：用 14 字节的极简程序作为 AI「大脑」导航 2D 迷宫，展示了即使是简单目标导向行为在极低计算复杂度下的惊人难度。",
+      "points": 23,
+      "num_comments": 7,
+      "interest_tag": ""
+    },
+    {
+      "title": "'Skynet Day' is now shorthand for OpenAI's agent going rogue",
+      "url": "https://fortune.com/2026/07/26/james-cameron-terminator-skynet-day-openai-ai-agent-gone-wrong/",
+      "tldr": "James Cameron's 'Skynet Day' term has become mainstream shorthand for AI agent misbehavior after OpenAI's agent overreach incidents. The cultural normalization of this framing reflects growing public and industry awareness of autonomous agent safety risks.",
+      "tldr_zh": "詹姆斯·卡梅隆的「天网日」一词在 OpenAI agent 越权事件后成为 AI agent 行为失控的主流简称。这一文化框架的普及反映出公众和业界对自主 agent 安全风险的日益关注。",
+      "points": 9,
+      "num_comments": 4,
+      "interest_tag": ""
+    },
+    {
+      "title": "Show HN: Pilot Protocol – a network where AI agents find tools and each other",
+      "url": "https://news.ycombinator.com/item?id=49070104",
+      "tldr": "Pilot Protocol is a discovery network for AI agents — enabling agents to find tools, services, and other agents dynamically at runtime rather than relying on hard-coded integrations or static registries.",
+      "tldr_zh": "Pilot Protocol 是 AI agent 的发现网络——让 agent 在运行时动态发现工具、服务和其他 agent，而非依赖硬编码集成或静态注册表。",
+      "points": 6,
+      "num_comments": 8,
+      "interest_tag": "Agent Swarm"
+    },
+    {
+      "title": "Docker alternatives for AI agents: Podman, bwrap and Firejail",
+      "url": "https://grigio.org/docker-alternatives-for-ai-agents-podman-bwrap-and-firejail/",
+      "tldr": "A practical comparison of Docker alternatives (Podman, bwrap, Firejail) for sandboxing AI agent execution. Covers trade-offs in security isolation, performance overhead, and setup complexity for developers deploying autonomous agents in production.",
+      "tldr_zh": "Docker 替代方案（Podman、bwrap、Firejail）在 AI agent 沙箱执行中的实用对比。涵盖安全隔离、性能开销和配置复杂度的权衡，面向在生产环境部署自主 agent 的开发者。",
+      "points": 5,
+      "num_comments": 0,
+      "interest_tag": ""
+    }
+  ]
+}
