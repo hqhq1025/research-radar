@@ -1,0 +1,226 @@
+{
+  "date": "2026-07-30",
+  "generated_at": "2026-07-30T08:04:13.667922+00:00",
+  "briefing_zh": "今日 AI 研究的核心主题是**具身智能与实时推理**的突破。**TurboVLA** 以 32Hz 的推理速度和不足 1GB 显存在消费级 GPU 上运行视觉-语言-动作模型，彻底改变了具身 AI 的部署门槛；**HumanCLAW** 则从评测角度揭示了当前 VLM 在面对物理约束时的巨大局限——视觉理解和身体控制之间的鸿沟远比想象中大。\n\n在强化学习和 LLM 训练方法上，**CoRT** 通过反事实 token 回放解决了 GRPO 风格训练中评分信号被压缩为标量的问题，**DecoEvo** 则展示了无需梯度更新、在纯文本空间进行双系统协进化的可行性。这两项工作共同暗示了后训练阶段将出现更精细化的奖励工程方向。\n\nGitHub 上热度最高的项目 **OptMem**（888★）用一个 426-token 提示词解决了 agent 永久记忆问题，体现了社区对「极简可用」工具的强烈需求。**Perplexity AI** 开源的 **Numbat** 则瞄准了一个快速增长的市场空白——随着 AI agent 渗透企业端点，安全监控基础设施变得不可或缺。在学术界，**Kimi K3** 以 2.8 万亿参数和百万 token 上下文进入开放前沿，HN 社区对其 Telnyx API 上线反响热烈。\n\n多个基准测试工作（**HumanCLAW**、**CLBench-V**、**RSIBench-Data**、**HANDBOOK.md**）同日涌现，说明社区正在从「模型能力竞赛」转向「可靠评测体系建设」——这是一个迈向成熟的重要信号。",
+  "briefing_en": "Today's AI research is dominated by **embodied intelligence and real-time inference** breakthroughs. **TurboVLA** achieves 32 Hz inference for vision-language-action models on a consumer RTX 4090 with under 1 GB VRAM, dramatically lowering the deployment threshold for embodied AI. Meanwhile, **HumanCLAW** reveals from an evaluation perspective that current VLMs face enormous limitations when coupled with physical constraints — the gap between visual reasoning and body control is far larger than assumed.\n\nOn reinforcement learning and LLM training methods, **CoRT** addresses the GRPO training issue of rubric judgments being collapsed to scalar rewards via counterfactual token replay, while **DecoEvo** demonstrates gradient-free co-evolution of two systems in pure text space. Both hint at increasingly fine-grained reward engineering as a major post-training direction.\n\nThe hottest GitHub project, **OptMem** (888★), solves permanent agent memory with a single 426-token prompt — reflecting strong community demand for 'minimal and usable' tools. **Perplexity AI**'s open-source **Numbat** targets a rapidly growing gap: as AI agents penetrate enterprise endpoints, security monitoring infrastructure becomes critical. Academically, **Kimi K3** enters the open frontier with 2.8T parameters and 1M token context, generating significant HN buzz upon its Telnyx API availability.\n\nThe simultaneous emergence of multiple benchmark works (**HumanCLAW**, **CLBench-V**, **RSIBench-Data**, **HANDBOOK.md**) signals a community shift from 'model capability racing' to 'building reliable evaluation infrastructure' — an important maturity indicator.",
+  "viral_analysis_zh": "今天最可能出圈的是 **OptMem**：用 426 个 token 解决 agent 永久记忆，不需要向量数据库、不需要 RAG、即插即用——这正是绝大多数开发者的痛点，极简方案加上即时可用性是 GitHub 爆款的经典配方。紧随其后的是 **TurboVLA**，32Hz + <1GB 显存的数字太有冲击力，具身 AI 从实验室走向消费级硬件的故事天然适合传播。",
+  "viral_analysis_en": "The most likely breakout today is **OptMem**: solving permanent agent memory with 426 tokens — no vector database, no RAG, plug-and-play — hits exactly the pain point most developers face. Minimal solution plus immediate usability is the classic formula for GitHub virality. Close behind is **TurboVLA**: the numbers (32 Hz + <1 GB VRAM) are too striking to ignore, and the narrative of embodied AI moving from labs to consumer hardware is inherently shareable.",
+  "huggingface_papers": [
+    {
+      "title": "TurboVLA: Real-Time Vision-Language-Action Model at 32 Hz on an RTX 4090 with <1 GB VRAM",
+      "url": "https://arxiv.org/abs/2607.27205",
+      "tldr": "TurboVLA achieves 32 Hz real-time inference for VLA models on a consumer RTX 4090 GPU using less than 1 GB VRAM. It decouples the vision-language pipeline from the action head, eliminating the LLM bottleneck via parallel early-exit decoding. This enables practical deployment of embodied AI on affordable hardware.",
+      "tldr_zh": "TurboVLA 在消费级 RTX 4090 上实现了 VLA 模型 32Hz 的实时推理，显存占用不足 1GB。通过将视觉语言管线与动作头解耦，利用并行早退解码消除 LLM 推理瓶颈，使具身 AI 可以部署在普通硬件上。",
+      "upvotes": 75,
+      "authors": "Hengyi Xie, Chenfei Yao, Xianjin Wu",
+      "ai_keywords": [
+        "VLA",
+        "Real-time",
+        "Embodied AI",
+        "Inference Optimization"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "HumanCLAW: Can Vision-Language Models Act Through a Body?",
+      "url": "https://arxiv.org/abs/2607.27180",
+      "tldr": "HumanCLAW introduces a benchmark for evaluating whether VLMs can control a physical body, disentangling perception from motor execution. It reveals that current VLMs struggle significantly when coupled with physical constraints, exposing a gap between visual reasoning and embodied action.",
+      "tldr_zh": "HumanCLAW 提出了一个评测 VLM 能否通过身体执行动作的基准，将感知与运动执行解耦评估。研究发现，当前 VLM 在面对物理约束时表现显著下滑，揭示了视觉推理与具身行动之间的巨大差距。",
+      "upvotes": 55,
+      "authors": "Siyao Li, Jiawei Gu, Shuai Liu",
+      "ai_keywords": [
+        "VLM",
+        "Embodied AI",
+        "Benchmark",
+        "Robotics"
+      ],
+      "interest_tag": "Benchmark"
+    },
+    {
+      "title": "DecoEvo: Score-Decoupled Co-Evolution of Solver and Rubric-Generator Skills in Text Space",
+      "url": "https://arxiv.org/abs/2607.25675",
+      "tldr": "DecoEvo optimizes LLMs in text space by co-evolving a problem solver and a rubric generator without gradient updates. By decoupling their scoring to avoid circular reward collapse, the system generates increasingly better natural-language optimization artifacts. This approach achieves SOTA on multiple reasoning benchmarks.",
+      "tldr_zh": "DecoEvo 在文本空间通过协同进化求解器与评分准则生成器来优化 LLM，无需梯度更新。通过解耦双方的打分机制避免循环奖励崩塌，在多个推理基准上达到最优结果。",
+      "upvotes": 45,
+      "authors": "Jiangwang Chen, Zixin Song, Junlin Liu",
+      "ai_keywords": [
+        "Text-space Optimization",
+        "LLM",
+        "RL",
+        "Co-evolution"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "CLBench-V: Evaluating Multimodal Context Learning from Grounding to Knowledge Acquisition",
+      "url": "https://arxiv.org/abs/2607.25294",
+      "tldr": "CLBench-V introduces a comprehensive benchmark for evaluating multimodal context learning, covering visual grounding through in-context knowledge acquisition. It tests whether models can learn from task-specific context rather than relying solely on pre-training, revealing significant gaps in current multimodal models.",
+      "tldr_zh": "CLBench-V 构建了一个全面评估多模态上下文学习的基准，从视觉定位到知识获取全覆盖。测试模型能否从任务特定上下文中学习，而非依赖预训练知识，揭示了当前多模态模型的显著不足。",
+      "upvotes": 36,
+      "authors": "Lai Wei, Chengqi Li, Jiapeng Li",
+      "ai_keywords": [
+        "Multimodal",
+        "Benchmark",
+        "Context Learning",
+        "VLM"
+      ],
+      "interest_tag": "Benchmark"
+    },
+    {
+      "title": "CoRT: Counterfactual Replay for Token-Level Rubric-Guided Policy Optimization",
+      "url": "https://arxiv.org/abs/2607.25659",
+      "tldr": "CoRT addresses a critical flaw in GRPO-style rubric-based RL: structured rubric judgments get collapsed to scalar rewards, losing fine-grained signal. It introduces counterfactual token replay to preserve token-level rubric guidance, achieving significant improvements in mathematical reasoning and instruction following.",
+      "tldr_zh": "CoRT 解决了 GRPO 风格基于评分准则的 RL 中的关键缺陷：结构化评分被压缩为标量奖励导致细粒度信号丢失。引入反事实 token 回放来保留 token 级别的评分指导，在数学推理和指令遵循任务上取得显著提升。",
+      "upvotes": 32,
+      "authors": "Bo-Wen Zhang, Junwei He, Wen Wang",
+      "ai_keywords": [
+        "RLHF",
+        "GRPO",
+        "Policy Optimization",
+        "Reasoning"
+      ],
+      "interest_tag": ""
+    }
+  ],
+  "alphaxiv_papers": [
+    {
+      "title": "Kimi K3: Open Frontier Intelligence",
+      "arxiv_id": "2607.24653",
+      "url": "https://arxiv.org/abs/2607.24653",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2607.24653",
+      "tldr": "Kimi K3 is a 2.8-trillion-parameter multimodal Mixture-of-Experts model by Moonshot AI with 1M token context window. It achieves ~2.5x scaling efficiency over its predecessor and demonstrates frontier-level performance across coding, agentic, reasoning, and vision tasks while competing with top proprietary systems at a fraction of their cost.",
+      "tldr_zh": "Kimi K3 是 Moonshot AI 的 2.8 万亿参数多模态 MoE 模型，支持百万 token 上下文。相比前代提升约 2.5 倍扩展效率，在编程、智能体、推理和视觉任务上达到前沿水平，成本远低于顶级专有系统。",
+      "interest_tag": ""
+    },
+    {
+      "title": "Data Pyramid for Embodied Manipulation",
+      "arxiv_id": "2607.24744",
+      "url": "https://arxiv.org/abs/2607.24744",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2607.24744",
+      "tldr": "Researchers from Peking University introduce the 'data pyramid,' a comprehensive taxonomy of data sources for embodied AI based on scalability and robot alignment. The framework systematically analyzes how different data types contribute to embodied foundation models and identifies trends toward heterogeneous data mixtures.",
+      "tldr_zh": "北京大学研究者提出「数据金字塔」，基于可扩展性与机器人对齐度对具身 AI 数据源进行全面分类。系统分析不同数据类型对具身基础模型的贡献，揭示异构数据混合的发展趋势。",
+      "interest_tag": ""
+    },
+    {
+      "title": "The Physics of Multi-Turn Long-Horizon Planning: From Pre-training to Post-training via Single- and Multi-Teacher On-Policy Agentic Distillation",
+      "arxiv_id": "2607.24720",
+      "url": "https://arxiv.org/abs/2607.24720",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2607.24720",
+      "tldr": "This research systematically maps how long-horizon planning abilities emerge during pre-training and are refined through post-training. It shows that explicit world modeling and high-quality long-horizon data are critical, while multi-teacher distillation enables generalization when planning patterns are compatible across teachers.",
+      "tldr_zh": "系统研究多轮长时程规划能力如何在预训练中涌现并通过后训练精炼。发现显式世界建模和高质量长时程数据至关重要，多教师蒸馏在规划模式兼容时能有效促进泛化。",
+      "interest_tag": ""
+    },
+    {
+      "title": "RSIBench-Data: Benchmarking Data-Centric Research for Recursive Self-Improvement",
+      "arxiv_id": "2607.25886",
+      "url": "https://arxiv.org/abs/2607.25886",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2607.25886",
+      "tldr": "RSIBench-Data evaluates LLM agents as data-centric researchers for recursive self-improvement. It uncovers a 'discovery-reliability gap': agents can achieve initial improvements in 58.33% of settings but fail sustained gains, with 78.26% of searches ending below their historical performance peak.",
+      "tldr_zh": "RSIBench-Data 将 LLM agent 作为递归自我改进的数据研究者进行评测，揭示「发现-可靠性鸿沟」：agent 在 58.33% 场景能取得初步提升，但难以持续，78.26% 的搜索最终低于历史峰值。",
+      "interest_tag": "Benchmark"
+    },
+    {
+      "title": "HANDBOOK.md: A Benchmark for Long-Context Agentic Instruction Following",
+      "arxiv_id": "2607.25398",
+      "url": "https://arxiv.org/abs/2607.25398",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2607.25398",
+      "tldr": "HANDBOOK.md benchmarks LLM agents on their ability to consistently follow lengthy policy documents throughout multi-tool, multi-turn enterprise tasks. Top-performing models achieve only 36.2% strict pass rate, revealing that sustained policy compliance remains a fundamental unsolved challenge.",
+      "tldr_zh": "HANDBOOK.md 评测 LLM agent 在多工具、多轮企业任务中持续遵守长篇策略文档的能力。顶级模型严格通过率仅 36.2%，揭示持续策略合规仍是未解决的根本性挑战。",
+      "interest_tag": "Benchmark"
+    }
+  ],
+  "github_repos": [
+    {
+      "name": "VictorTaelin/OptMem",
+      "url": "https://github.com/VictorTaelin/OptMem",
+      "tldr": "OptMem provides permanent, persistent memory for AI agents using just a 426-token prompt and a lightweight script. It's plug-and-play, requiring no infrastructure changes, making long-term agent memory accessible without complex vector databases or RAG pipelines.",
+      "tldr_zh": "OptMem 用一个 426-token 提示词和轻量脚本为 AI agent 提供永久记忆能力，即插即用，无需复杂的向量数据库或 RAG 基础设施，大幅降低 agent 长期记忆的实现门槛。",
+      "stars": 888,
+      "language": "Python",
+      "interest_tag": "Memory"
+    },
+    {
+      "name": "0xwilliamortiz/ponytail-improved",
+      "url": "https://github.com/0xwilliamortiz/ponytail-improved",
+      "tldr": "Ponytail Improved teaches AI coding agents to think like a pragmatic senior developer — preferring minimal, elegant solutions over over-engineered ones. It optimizes for code reduction and simplicity rather than raw capability, resulting in more maintainable AI-generated code.",
+      "tldr_zh": "Ponytail Improved 让 AI 编程 agent 像务实的高级工程师一样思考——优先选择简洁优雅的方案而非过度工程化。倡导「最好的代码是从未写出的代码」，提升 AI 生成代码的可维护性。",
+      "stars": 553,
+      "language": "JavaScript",
+      "interest_tag": ""
+    },
+    {
+      "name": "deerwork-ai/deer-workflow",
+      "url": "https://github.com/deerwork-ai/deer-workflow",
+      "tldr": "Deer Workflow is an open-source graph engineering runtime that keeps orchestration logic in TypeScript while delegating semantic work to swappable Agent runtimes. This separation of concerns makes multi-agent workflow pipelines more predictable, testable, and maintainable.",
+      "tldr_zh": "Deer Workflow 是开源图工程运行时，将编排逻辑保留在 TypeScript 中，语义工作委托给可替换的 Agent 运行时。这种关注点分离让多 agent 工作流更可预测、可测试、可维护。",
+      "stars": 349,
+      "language": "TypeScript",
+      "interest_tag": "Agent Swarm"
+    },
+    {
+      "name": "QwenAudio/qwen-audio-agent",
+      "url": "https://github.com/QwenAudio/qwen-audio-agent",
+      "tldr": "Qwen Audio Agent is a real-time voice runtime for AI agents, keeping them continuously talking, working, and responsive. It addresses the challenge of maintaining natural voice interaction in long-running agentic tasks without conversational breaks.",
+      "tldr_zh": "Qwen Audio Agent 是 AI agent 的实时语音运行时，让 agent 在持续工作时保持连贯的语音交互。解决了长时间 agentic 任务中保持自然语音对话的难题，来自 Qwen 团队。",
+      "stars": 240,
+      "language": "Python",
+      "interest_tag": ""
+    },
+    {
+      "name": "perplexityai/numbat",
+      "url": "https://github.com/perplexityai/numbat",
+      "tldr": "Numbat by Perplexity AI provides endpoint-level visibility into AI agent activity, with on-device detection, optional pre-action blocking, and forensic reconstruction of agent actions. It addresses the growing need for observability and security as AI agents gain access to enterprise endpoints.",
+      "tldr_zh": "Perplexity AI 开源的 Numbat 提供 AI agent 端点活动可见性，支持设备级检测、预操作拦截和 agent 行为取证重建。随着 AI agent 渗入企业端点，安全监控需求日益迫切。",
+      "stars": 181,
+      "language": "Go",
+      "interest_tag": ""
+    }
+  ],
+  "hackernews": [
+    {
+      "title": "Kimi K3 Now Available via Telnyx Inference API",
+      "url": "https://telnyx.com/release-notes/kimi-k3-telnyx-inference",
+      "tldr": "Moonshot AI's Kimi K3, a 2.8-trillion-parameter multimodal MoE model with 1M token context, is now available via Telnyx's inference API. The model competes with frontier proprietary models at a fraction of the cost, marking a significant milestone in open frontier AI.",
+      "tldr_zh": "Moonshot AI 的 Kimi K3（2.8T 参数多模态 MoE 模型，支持百万 token 上下文）现已通过 Telnyx 推理 API 提供服务。该模型以极低成本媲美顶级专有模型，是开放前沿 AI 的重要里程碑。",
+      "points": 131,
+      "num_comments": 88,
+      "interest_tag": ""
+    },
+    {
+      "title": "Show HN: Formally verified 3D CSG: Trust 93 lines spec, not 1000 lines AI code",
+      "url": "https://github.com/schildep/verified-3d-mesh-intersection",
+      "tldr": "A formally verified implementation of 3D Constructive Solid Geometry (CSG) using only 93 lines of specification, contrasted against 1000+ lines of AI-generated unverified code. This project advocates for formal verification as a trust anchor in the age of AI-generated code.",
+      "tldr_zh": "用 93 行形式规约实现经过严格验证的 3D CSG，对比 AI 生成的 1000+ 行未验证代码。在 AI 代码生成时代，倡导形式验证作为信任锚点，引发 HN 社区对 AI 代码可靠性的热烈讨论。",
+      "points": 113,
+      "num_comments": 48,
+      "interest_tag": ""
+    },
+    {
+      "title": "Launch HN: Tokenless (YC S26) – Automatic model switching to save money",
+      "url": "https://usetokenless.com/",
+      "tldr": "Tokenless (YC S26) automatically routes AI requests to the most cost-effective model without quality degradation. It monitors output quality in real-time and switches models dynamically, promising significant cost savings for production AI applications with heterogeneous workloads.",
+      "tldr_zh": "YC S26 公司 Tokenless 自动将 AI 请求路由到最具成本效益的模型，同时保证输出质量。实时监控输出质量并动态切换模型，为生产环境 AI 应用承诺显著降低成本。",
+      "points": 60,
+      "num_comments": 51,
+      "interest_tag": ""
+    },
+    {
+      "title": "Show HN: Manim (3Blue1Brown's animation engine) in the browser via WebGPU",
+      "url": "https://studio.academa.ai/",
+      "tldr": "Manim, the mathematical animation engine behind 3Blue1Brown's videos, is now available in the browser via WebGPU. This enables accessible creation of professional-quality math and CS visualizations without local setup, democratizing educational content creation.",
+      "tldr_zh": "3Blue1Brown 使用的数学动画引擎 Manim 现已通过 WebGPU 在浏览器中运行。无需本地配置即可创作专业级数学和 CS 可视化内容，大幅降低教育内容创作门槛。",
+      "points": 48,
+      "num_comments": 32,
+      "interest_tag": ""
+    },
+    {
+      "title": "Show HN: Distill and serve models with frontier quality for half the cost",
+      "url": "https://github.com/experientiallabs/world-model-optimizer",
+      "tldr": "World Model Optimizer by Experiential Labs enables distillation and serving of smaller models with frontier-level quality at roughly half the cost of top proprietary models. It uses world model techniques to preserve reasoning quality while dramatically reducing inference costs.",
+      "tldr_zh": "Experiential Labs 的 World Model Optimizer 通过知识蒸馏技术，以约一半成本提供接近前沿模型质量的推理服务。利用世界模型技术在保持推理质量的同时大幅降低推理成本。",
+      "points": 44,
+      "num_comments": 22,
+      "interest_tag": ""
+    }
+  ]
+}
