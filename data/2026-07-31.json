@@ -1,0 +1,226 @@
+{
+  "date": "2026-07-31",
+  "generated_at": "2026-07-31T16:07:34.348096+08:00",
+  "briefing_zh": "今日 AI 研究领域呈现出两条清晰的主线：「记忆与世界模型」和「自主 Agent 基础设施」。**PhiZero** 以「物理语言」为核心构建世界模型，将视频中的物理状态转换用离散符号编码，使模型能够显式推理而非在像素空间盲目预测，115 票的高热度说明研究界对「语言化世界表征」的浓厚兴趣。**Metis Memory Foundation Model** 则提出将记忆能力直接内化到基础模型权重之中，而非依赖外部模块，这是继多模态和推理能力之后，记忆能力「基础模型化」的重要一步。\n\n在 Agent 自主性方面，**Frontis-MA1** 展示了 AI 系统如何通过机器学习工程（MLE）任务实现「递归自我改进」：一个 35B 的元进化 agent 在自己设计的环境中不断优化 AI 构建流程，是目前 AI4AI 领域最完整的开放系统之一。**Qwen-UI-Agent** 瞄准「真实世界 GUI 操作」，强调跨平台、长时域、主动服务和自主改进，是 CUA 领域的重要进展。alphaxiv 热榜则由 **Kimi K3**（2.8T 参数 MoE 开源模型）领跑，**Echoverse** 提出为 CUA 训练生成大规模可重置的真实环境，**MemHarness** 则挑战「记忆即回放」的传统范式，提出记忆应被「重构」而非原样注入。\n\nGitHub 本周出现多个值得关注的工具：**VictorTaelin/OptMem** 用 426 token 的 prompt 为 Agent 提供即插即用的永久记忆；**deerwork-ai/deer-workflow** 提供图工程运行时，让 TypeScript 处理编排逻辑、语义委托给 LLM；**QwenAudio/qwen-audio-agent** 则构建了实时语音 agent 运行时。Hacker News 上，「git worktrees 不是 agent 隔离边界」一文引发工程师热议，揭示了将 worktrees 误用于 Agent 沙箱的常见陷阱，具有很强的工程实践价值。",
+  "briefing_en": "Today's AI research landscape is dominated by two clear threads: **world models and memory** on one side, and **autonomous agent infrastructure** on the other. **PhiZero** introduces a world model built around 'physical language' — a compact discrete representation of world-state transitions — enabling explicit reasoning about physics without predicting pixels directly. Its 115 upvotes signal strong community interest in language-based world representations. **Metis Memory Foundation Model** takes a bold step toward internalizing memory natively into model weights rather than relying on external modules, framing memory as the next frontier after multimodality and reasoning to be absorbed into foundation model architecture.\n\nOn the agent autonomy front, **Frontis-MA1** demonstrates recursive self-improvement through machine learning engineering tasks — a 35B meta-evolution agent running on a full open-source stack (OpenMLE-Gym + OpenMLE-RL + OpenMLE-Evo) that continuously improves its own AI-building process. **Qwen-UI-Agent** targets real-world-centric GUI operation: cross-platform workflows, CLI+GUI hybrid execution, long-horizon tasks, and autonomous self-improvement with minimal human intervention — a significant step for CUA. On alphaxiv's hot feed, **Kimi K3** (2.8T parameter open MoE model) leads the week, **Echoverse** proposes scalable generation of resettable real-application environments for training computer-use agents, and **MemHarness** challenges the 'replay' paradigm in agent memory — arguing that retrieved experiences should be reconstructed for the current situation, not injected verbatim.\n\nGitHub highlights include **VictorTaelin/OptMem** (a 426-token plug-and-play permanent memory for agents), **deerwork-ai/deer-workflow** (graph-based orchestration runtime keeping TypeScript in control while delegating semantics to LLMs), and **QwenAudio/qwen-audio-agent** (real-time voice agent runtime). On Hacker News, the post 'Git worktrees are not an isolation boundary for coding agents' sparked substantial engineering discussion, exposing a common trap where developers incorrectly assume worktrees provide sandboxing for agent code execution.",
+  "viral_analysis_zh": "**PhiZero** 最可能在研究圈持续发酵：它把物理直觉「语言化」这一叙事极具感染力，呼应了人们对「AI 是否真正理解物理世界」的长期焦虑，论文名字简洁有力，概念上能与 DeepMind 的 Genie 系列形成对话。**VictorTaelin/OptMem** 则是 GitHub 爆款的典型：一个 426-token 的 prompt 解决 Agent 记忆痛点，极低的接入成本叠加「即插即用」的标语，在工程师社区中极易形成病毒式传播。**Echoverse** 的传播潜力在于它填补了 CUA 训练数据的基础设施缺口——需求明确、痛点清晰，容易被 CUA 方向的研究者和工程师转发推荐。",
+  "viral_analysis_en": "**PhiZero** is the most likely to sustain momentum in research circles: the narrative of 'languagifying' physical intuition is emotionally resonant, tapping into long-standing anxiety about whether AI truly understands the physical world — and the paper name is crisp enough to become a meme in its own right. **VictorTaelin/OptMem** is a textbook GitHub viral hit: a 426-token prompt solving the agent memory pain point, with near-zero adoption friction and a 'plug and play' tagline that spreads naturally among practitioners. **Echoverse** has strong shareability in the CUA community because it addresses an obvious infrastructure gap — scalable resettable training environments — that every computer-use agent researcher immediately recognizes as a bottleneck.",
+  "huggingface_papers": [
+    {
+      "title": "PhiZero: A World Model Built Around Physical Language",
+      "arxiv_id": "2607.28624",
+      "url": "https://arxiv.org/abs/2607.28624",
+      "tldr": "PhiZero is a physical world model that learns a compact discrete 'physical language' to represent world-state transitions, enabling explicit reasoning about physics without predicting pixels directly. Unlike prior video prediction models, PhiZero encodes observed dynamics as discrete tokens — bridging the gap between visual experience and symbolic reasoning. The approach enables structured planning and understanding of physical causality in a way that high-dimensional pixel predictors cannot.",
+      "tldr_zh": "PhiZero 通过学习「物理语言」——一种对世界状态转换的紧凑离散表示——来构建物理世界模型，让模型可以对物理过程进行显式符号推理，而非在像素空间中隐式预测。与传统视频预测模型不同，PhiZero 将观察到的动态编码为离散 token，弥合了视觉经验与符号推理之间的鸿沟，在结构化规划和物理因果理解上表现出优势。",
+      "upvotes": 115,
+      "authors": "Shuyao Shang, Yuqi Wang, Ruopeng Gao, Xu Chen, Tieniu Tan",
+      "ai_keywords": [
+        "world model",
+        "physical reasoning",
+        "discrete representation"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "Frontis-MA1: Training an AI4AI Model towards Recursive Self-Improvement in Machine Learning Engineering",
+      "arxiv_id": "2607.28568",
+      "url": "https://arxiv.org/abs/2607.28568",
+      "tldr": "Frontis-MA1 is a 35B meta-evolution agent trained on OpenMLE — a full open-source stack for recursive self-improvement research in machine learning engineering. The system includes verifiable execution environments (OpenMLE-Gym), operator learning via RL (OpenMLE-RL), and long-horizon search (OpenMLE-Evo). This is one of the most complete open-source AI4AI frameworks, enabling AI to iteratively improve the very process of building AI systems.",
+      "tldr_zh": "Frontis-MA1 是一个 35B 的元进化 Agent，在完全开源的 OpenMLE 系统栈上训练，用于研究机器学习工程（MLE）场景下的递归自我改进。系统包含可执行反馈的任务环境（OpenMLE-Gym）、基于 RL 的算子学习（OpenMLE-RL）和长时域搜索（OpenMLE-Evo），是目前最完整的 AI4AI 开源框架之一，让 AI 能够迭代优化构建 AI 的流程本身。",
+      "upvotes": 103,
+      "authors": "Junlin Yang, Che Jiang, Yu Fu, Tianwei Luo, Can Ren",
+      "ai_keywords": [
+        "recursive self-improvement",
+        "AI4AI",
+        "meta-learning"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "Metis: Memory Foundation Model",
+      "arxiv_id": "2607.26760",
+      "url": "https://arxiv.org/abs/2607.26760",
+      "tldr": "Metis proposes natively internalizing memory capabilities directly into foundation model weights, rather than relying on external memory modules. This 'memory foundation model' approach parallels how multimodal and reasoning capabilities were previously absorbed into foundation models, and introduces a unified training framework for encoding, storing, and retrieving episodic memories natively. The work marks a significant architectural shift in how AI agents handle long-term memory.",
+      "tldr_zh": "Metis 提出将记忆能力直接内化到基础模型权重中，而非依赖外部记忆模块——这是继多模态和推理能力之后，记忆能力「基础模型化」的重要尝试。论文引入统一的训练框架，让模型原生地编码、存储和检索情景记忆，是 Agent 记忆架构的重大转变。",
+      "upvotes": 92,
+      "authors": "Zeyu Zhang, Ziliang Guo, Yihang Sun, Xichong Zhang, Xixuan Hao",
+      "ai_keywords": [
+        "memory",
+        "foundation model",
+        "agent memory"
+      ],
+      "interest_tag": "Memory"
+    },
+    {
+      "title": "AskChem: Claim-Centered Infrastructure for Chemistry Literature Synthesis",
+      "arxiv_id": "2607.28618",
+      "url": "https://arxiv.org/abs/2607.28618",
+      "tldr": "AskChem shifts the unit of scientific literature retrieval from documents to provenance-carrying claims, enabling chemistry agents and scientists to directly retrieve specific findings across papers rather than ranked document lists. The system is built for cross-paper synthesis, tracking where each claim comes from and allowing AI agents to assemble verified multi-paper answers. This addresses a critical bottleneck in AI-assisted scientific discovery.",
+      "tldr_zh": "AskChem 将科学文献检索的基本单元从「文档」改为「带出处的论断（claim）」，使化学领域的 AI agent 和科学家能够直接检索跨论文的具体发现，而非仅能获取排名文档列表。系统为跨论文综合设计，追踪每个论断的来源，让 agent 能组装经过验证的多论文答案，解决 AI 辅助科学发现中的关键瓶颈。",
+      "upvotes": 79,
+      "authors": "Bing Yan, Gregory Wolfe, Stefano Martiniani, Kyunghyun Cho",
+      "ai_keywords": [
+        "scientific literature",
+        "claim retrieval",
+        "chemistry"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "Qwen-UI-Agent Technical Report: Toward Next-Generation Real-World Centric Foundation GUI Agents",
+      "arxiv_id": "2607.28227",
+      "url": "https://arxiv.org/abs/2607.28227",
+      "tldr": "Qwen-UI-Agent presents a real-world-centric foundation GUI agent designed to operate reliably on real devices across platforms, combining GUI interaction with CLI execution, completing long-horizon tasks, and autonomously improving its own capabilities. The system targets six key challenges for practical deployment: real device reliability, cross-platform workflows, hybrid GUI+CLI execution, long-horizon planning, proactive service initiation, and self-improvement with minimal human oversight.",
+      "tldr_zh": "Qwen-UI-Agent 是面向「真实世界」的基础 GUI Agent，设计目标是在真实设备上跨平台可靠运行、结合 GUI 交互与 CLI 执行、完成长时域任务，并以最少人工干预自主提升自身能力。论文针对实际部署的六大挑战提出系统性解决方案，是 CUA 领域的重要工程里程碑。",
+      "upvotes": 32,
+      "authors": "Hanzhang Zhou, Panrong Tong, Xu Zhang, Quyu Kong, Chenglin Cai",
+      "ai_keywords": [
+        "GUI agent",
+        "computer use",
+        "cross-platform"
+      ],
+      "interest_tag": "CUA"
+    }
+  ],
+  "alphaxiv_papers": [
+    {
+      "title": "Kimi K3: Open Frontier Intelligence",
+      "arxiv_id": "2607.24653",
+      "url": "https://arxiv.org/abs/2607.24653",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2607.24653",
+      "tldr": "Kimi K3 is a 2.8T parameter Mixture-of-Experts model with 104B activated parameters, native vision capabilities, and a 1M-token context window — released as an open-weights frontier model. Built on Kimi Delta Attention and Stable LatentMoE (activating 16 of 896 routed experts per token), K3 represents the most capable open-source MoE model to date. Its combination of vision, scale, and long context makes it a significant milestone for the open-source community.",
+      "tldr_zh": "Kimi K3 是拥有 2.8T 参数的 MoE 模型，激活参数 104B，原生支持视觉能力和 100 万 token 上下文窗口，以开源权重形式发布。基于 Kimi Delta Attention 和 Stable LatentMoE 架构（每 token 激活 896 个路由专家中的 16 个），是目前最强的开源 MoE 模型之一，对开源社区意义重大。",
+      "interest_tag": ""
+    },
+    {
+      "title": "Echoverse: Deep, Evolving Environments for Training Computer-Use Agents at Scale",
+      "arxiv_id": "2607.echoverse",
+      "url": "https://www.alphaxiv.org/abs/2607.echoverse",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2607.echoverse",
+      "tldr": "Echoverse addresses the training infrastructure bottleneck for computer-use agents by generating scalable, resettable, evolving environments based on real login-gated applications. Rather than just generating more synthetic environments, it focuses on three quality dimensions: behavioral depth, state diversity, and adaptation over time. This fills a critical gap in CUA training pipelines that rely on expensive or non-resettable real-app interactions.",
+      "tldr_zh": "Echoverse 通过为计算机使用 Agent 生成大规模可重置、可演化的训练环境，解决 CUA 训练的基础设施瓶颈。区别于单纯增加合成环境数量，系统专注于三个质量维度：行为深度、状态多样性和随时间的自适应演化，填补了 CUA 训练流程中依赖真实应用但难以重置的关键缺口。",
+      "interest_tag": "CUA"
+    },
+    {
+      "title": "MemHarness: Memory Is Reconstructed, Not Replayed",
+      "arxiv_id": "2607.28272",
+      "url": "https://arxiv.org/abs/2607.28272",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2607.28272",
+      "tldr": "MemHarness challenges the dominant 'replay' paradigm in agent memory, where retrieved past experiences are injected verbatim into context regardless of their relevance to the current situation. Instead, it proposes that agent memory should be reconstructed — adapting retrieved experiences to the agent's current context, goals, and constraints, much like human episodic memory. This reconstructive approach improves task performance and reduces context pollution from irrelevant historical details.",
+      "tldr_zh": "MemHarness 挑战 Agent 记忆中「回放即注入」的主流范式——即将检索到的历史经验原样注入上下文而不考虑与当前情况的相关性。论文提出记忆应当被「重构」：将检索到的经验适配到 Agent 当前的上下文、目标和约束中，类似人类情景记忆的工作方式。这种重构方法提升了任务表现，并减少了无关历史细节对上下文的污染。",
+      "interest_tag": "Memory"
+    },
+    {
+      "title": "Can AI agents conduct open-ended AI research? Early evidence from two case studies",
+      "arxiv_id": "2607.27191",
+      "url": "https://arxiv.org/abs/2607.27191",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2607.27191",
+      "tldr": "This paper presents early empirical evidence on whether AI agents can conduct open-ended AI research — beyond narrow verifiable tasks and beyond the noisy signal of blind peer review. Two case studies test current frontier agents on genuine open-ended research problems, examining where they succeed and where they systematically fail. The results provide a grounded basis for calibrating forecasts about AI-driven research acceleration.",
+      "tldr_zh": "本文通过两个案例研究提供早期实证证据，考察 AI agent 能否开展真正的开放式 AI 研究——超越狭窄的可验证任务，也超越嘈杂的盲审信号。实验测试了当前前沿 agent 在真实开放式研究问题上的表现，厘清其成功与系统性失败的边界，为校准「AI 驱动研究加速」的预测提供依据。",
+      "interest_tag": ""
+    },
+    {
+      "title": "Living-Harness Is an Interactive-Agent Evolver",
+      "arxiv_id": "2607.26598",
+      "url": "https://arxiv.org/abs/2607.26598",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2607.26598",
+      "tldr": "Living-Harness addresses the problem of static agent harnesses — the fixed tools, context, memory, and workflow structures that guide agent behavior — which remain unchanged even when repeated failures reveal systematic gaps. The system proposes an interactive harness that evolves post-episode based on failure feedback, continuously revising the persistent scaffolding that shapes future agent interactions. This shifts agent improvement from in-episode recovery to structural harness evolution.",
+      "tldr_zh": "Living-Harness 解决了静态 Agent 框架（固定的工具、上下文、记忆和工作流结构）在部署后无法随失败反馈演化的问题。系统提出在每轮任务结束后根据失败反馈动态修订持久性 harness，将 Agent 改进从单轮恢复转向结构性演化。这使得 Agent 能够从重复失败中系统学习，而非每次独立修复。",
+      "interest_tag": ""
+    }
+  ],
+  "github_repos": [
+    {
+      "name": "VictorTaelin/OptMem",
+      "url": "https://github.com/VictorTaelin/OptMem",
+      "tldr": "OptMem provides permanent memory for AI agents via a single 426-token prompt and a companion script — plug-and-play with no infrastructure overhead. It encodes memories in a compact format that fits within typical LLM context budgets while persisting across sessions. The extreme simplicity (one prompt, one script) is its core value proposition: any agent can gain durable memory without architectural changes.",
+      "tldr_zh": "OptMem 通过一个 426 token 的 prompt 和一个脚本为 AI agent 提供永久记忆能力，即插即用，零基础设施开销。记忆以紧凑格式编码，适合主流 LLM 上下文预算，且跨会话持久。极致简洁（一个 prompt，一个脚本）是其核心价值：任何 agent 无需架构改动即可获得持久记忆。",
+      "stars": 952,
+      "language": "Python",
+      "interest_tag": "Memory"
+    },
+    {
+      "name": "0xwilliamortiz/ponytail-improved",
+      "url": "https://github.com/0xwilliamortiz/ponytail-improved",
+      "tldr": "Ponytail-improved makes AI coding agents reason like a 'laziest senior developer' — favoring the minimal viable solution over over-engineered responses. It steers agents toward deleting code rather than adding it, preferring existing patterns over new abstractions, and treating simplicity as a first-class design goal. The framing as 'the best code is the code you never write' resonates strongly with experienced developers frustrated by verbose AI output.",
+      "tldr_zh": "Ponytail-improved 让 AI 编程 agent 像「最懒的高级工程师」一样思考——优先选择最小可行解，而非过度工程化的方案。它引导 agent 倾向删除代码而非新增，选用已有模式而非创造新抽象，将简洁性作为第一设计目标。「最好的代码是永远不需要写的代码」这一定位对有经验的开发者极具共鸣。",
+      "stars": 565,
+      "language": "JavaScript",
+      "interest_tag": ""
+    },
+    {
+      "name": "QwenAudio/qwen-audio-agent",
+      "url": "https://github.com/QwenAudio/qwen-audio-agent",
+      "tldr": "Qwen-audio-agent is a real-time voice runtime that enables agents to remain conversationally present while executing background tasks — keeping the agent 'talking, working, and present' simultaneously. The runtime handles streaming audio I/O, interruption handling, and state management for voice-first agent interactions. It targets the gap between existing voice assistants (reactive) and true voice agents (proactive and task-executing).",
+      "tldr_zh": "Qwen-audio-agent 是实时语音 agent 运行时，让 agent 在执行后台任务的同时保持对话在线，实现真正的「边说边做」。运行时处理流式音频 I/O、打断响应和状态管理，面向语音优先的 agent 交互。它填补了现有语音助手（被动响应）与真正语音 agent（主动执行任务）之间的空白。",
+      "stars": 508,
+      "language": "JavaScript",
+      "interest_tag": ""
+    },
+    {
+      "name": "deerwork-ai/deer-workflow",
+      "url": "https://github.com/deerwork-ai/deer-workflow",
+      "tldr": "deer-workflow is an open-source graph engineering runtime for agentic workflows that keeps orchestration logic in TypeScript while delegating semantic decisions to LLMs. This 'separation of concerns' architecture lets developers maintain full control over workflow structure and control flow, while LLMs handle the reasoning-heavy parts. The TypeScript-first approach makes it familiar to web developers and enables strong typing and tooling support.",
+      "tldr_zh": "deer-workflow 是一个开源的图工程运行时，让编排逻辑保留在 TypeScript 中，语义决策委托给 LLM。这种「关注点分离」架构让开发者完全掌控工作流结构和控制流，同时让 LLM 处理推理密集的部分。TypeScript 优先的设计对 Web 开发者友好，并支持强类型和工具链集成。",
+      "stars": 360,
+      "language": "TypeScript",
+      "interest_tag": "Agent Swarm"
+    },
+    {
+      "name": "Lucas1479/Amadeus",
+      "url": "https://github.com/Lucas1479/Amadeus",
+      "tldr": "Amadeus is a real-time multimodal AI agent for desktop interaction, enabling voice, vision, and text-based control of a user's desktop environment. It targets the personal assistant use case for desktop automation without requiring cloud services or paid APIs. The combination of local-first processing and multimodal input positions it as a privacy-respecting alternative to cloud-based computer use agents.",
+      "tldr_zh": "Amadeus 是面向桌面交互的实时多模态 AI agent，支持语音、视觉和文本三种方式控制用户的桌面环境。专注个人助手场景的桌面自动化，无需云服务或付费 API。本地优先处理加上多模态输入，使其成为云端计算机使用 agent 的隐私保护型替代方案。",
+      "stars": 44,
+      "language": "",
+      "interest_tag": "CUA"
+    }
+  ],
+  "hackernews": [
+    {
+      "title": "Git worktrees are not an isolation boundary for coding agents",
+      "url": "https://fletch.sh/blog/git-worktrees-vs-clones-for-ai-agents/",
+      "tldr": "This post exposes a critical misconception: developers often assume git worktrees provide file-system isolation for coding agents, similar to separate clones. In reality, worktrees share the same .git directory, object store, and hooks — meaning agents in different worktrees can interfere with each other's index, stashes, and hooks. The post argues for full clones as the correct isolation primitive for multi-agent coding workflows.",
+      "tldr_zh": "本文揭示一个常见误解：开发者常以为 git worktrees 能为编程 agent 提供类似独立克隆的文件系统隔离。实际上 worktrees 共享同一个 .git 目录、对象存储和 hooks，不同 worktree 中的 agent 会相互干扰 index、stash 和 hooks。作者主张完整克隆才是多 agent 编程工作流的正确隔离原语。",
+      "points": 31,
+      "num_comments": 34,
+      "interest_tag": ""
+    },
+    {
+      "title": "Show HN: What should the GUI for AI agents look like?",
+      "url": "https://marbleos.com/demo",
+      "tldr": "MarbleOS presents a demo exploring what a purpose-built GUI for AI agents should look like — moving beyond chat interfaces toward task-oriented, spatial UI paradigms. The demo surfaces questions about how to represent agent state, action history, and parallel task execution in a way that's human-legible. The Show HN framing invites community feedback on a design problem that most agent tools haven't seriously addressed.",
+      "tldr_zh": "MarbleOS 展示了一个探索「AI agent 专属 GUI 应该长什么样」的演示，超越聊天界面，走向以任务为中心的空间化 UI 范式。演示引发了关于如何以人类可读的方式呈现 agent 状态、操作历史和并行任务执行的思考。以 Show HN 的形式公开征求社区对 agent 界面设计这一尚未被认真对待的问题的反馈。",
+      "points": 30,
+      "num_comments": 13,
+      "interest_tag": "CUA"
+    },
+    {
+      "title": "Show HN: Noisegate - a differential-privacy gateway for untrusted AI agents",
+      "url": "https://github.com/yashmahajan10/llm-differential-privacy-gateway",
+      "tldr": "Noisegate is a differential-privacy gateway that sits between untrusted AI agents and sensitive data sources, adding calibrated noise to responses to prevent agents from inferring private information. The project addresses the emerging security concern of agentic access to databases and APIs containing PII or proprietary data. By enforcing privacy at the gateway layer, it allows organizations to deploy AI agents without granting direct database access.",
+      "tldr_zh": "Noisegate 是一个差分隐私网关，部署在不受信任的 AI agent 与敏感数据源之间，通过对响应添加校准噪声来防止 agent 推断私密信息。项目针对 agent 访问包含 PII 或专有数据的数据库和 API 这一新兴安全问题。通过在网关层强制隐私保护，让企业无需授予 agent 直接数据库访问权限即可部署 AI agent。",
+      "points": 17,
+      "num_comments": 0,
+      "interest_tag": ""
+    },
+    {
+      "title": "Can AI agents conduct open-ended AI research?",
+      "url": "https://arxiv.org/abs/2607.27191",
+      "tldr": "This HN story links to the arxiv paper testing frontier agents on genuine open-ended AI research problems — going beyond benchmark performance to ask whether agents can actually advance scientific knowledge. The community discussion focuses on what 'open-ended' research means, how to evaluate it fairly, and whether current capability levels are sufficient for any meaningful contribution without extensive human scaffolding.",
+      "tldr_zh": "此 HN 故事链接到测试前沿 agent 在真实开放式 AI 研究问题上表现的 arxiv 论文，超越基准性能，追问 agent 能否真正推进科学知识边界。社区讨论聚焦于「开放式」研究的定义、公平评估方法，以及当前能力水平能否在无大量人工辅助的情况下做出有意义的贡献。",
+      "points": 5,
+      "num_comments": 0,
+      "interest_tag": ""
+    },
+    {
+      "title": "OpenLore: Deterministic, local-first memory and guardrails for AI coding agents",
+      "url": "https://github.com/clay-good/OpenLore",
+      "tldr": "OpenLore provides deterministic, local-first memory and behavioral guardrails for AI coding agents, designed to give developers predictable and auditable agent behavior without cloud dependencies. The system persists agent knowledge and constraints locally, enabling reproducible agent sessions and compliance-friendly deployments. Its emphasis on determinism distinguishes it from probabilistic RAG-based memory systems.",
+      "tldr_zh": "OpenLore 为 AI 编程 agent 提供确定性的本地优先记忆和行为护栏，让开发者在无云依赖的情况下获得可预测、可审计的 agent 行为。系统在本地持久化 agent 知识和约束，支持可复现的 agent 会话和合规友好的部署。强调确定性使其有别于基于概率 RAG 的记忆系统。",
+      "points": 5,
+      "num_comments": 0,
+      "interest_tag": "Memory"
+    }
+  ]
+}
