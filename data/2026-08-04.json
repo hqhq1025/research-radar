@@ -1,0 +1,226 @@
+{
+  "date": "2026-08-04",
+  "generated_at": "2026-08-04T09:00:00+08:00",
+  "briefing_zh": "今天 AI 研究领域的焦点高度集中在「Agent 基础设施」的两条主线上：如何让 Agent 跑得更远，以及如何让 Agent 记得更准。**LongHorizon-Harness**（HF 67 票）提出了一套专为长程任务设计的 Agent 测试框架，将任务状态管理从日益膨胀的上下文中剥离出来，为评测长期推理、工具调用和多步修订提供了更可靠的基准；同一工作的 GitHub 仓库也随即成为过去一周新仓库中的高星项目。\n\n记忆机制方面，**MemHarness**（alphaxiv 热榜 #2）直接挑战当前主流做法——检索到的历史经验不应被当作「静态快照」回放到上下文，而必须像人类记忆那样经历重构；这一立场与近期多篇 RAG 改进工作形成呼应，让「Memory」主题再度升温。与此同时，**SKT**（Skill-Use Training at Scale）提出用可验证的合成数据大规模训练 Agent 的技能识别与协调能力，而 **Progressive Agent Skill Generation via RL** 则用强化学习统一了跨异构数据源的技能生成，两者共同勾勒出「给 Agent 装上可复用工具箱」的工程路径。\n\n模型层面，Qwen 发布 **Qwen3.8-Max**——2.4 万亿参数、开源权重的旗舰版本，在 Coding 和多智能体协作上再设新标杆，是本周最受关注的模型事件。开源社区同步跟进：**nuphus-mcp**（Rust 编写的桌面自动化 MCP 服务器）和 **CoordClaw**（以「单人公司」模式运行多 Agent 系统）均在 GitHub 快速获得关注，折射出开发者对 Computer Use 和 Agent Swarm 工具链的持续渴求。\n\nHN 社区今日最热话题则带着批判色彩：OpenAI 的超级 PAC 被曝资助 AI 生成新闻站点以攻击行业批评者，引发 200+ 点赞和大量讨论，显示公众对 AI 公司政治影响力的关注正在上升。",
+  "briefing_en": "Today's AI research landscape is sharply focused on two converging threads in agent infrastructure: making agents run longer, and making them remember better. **LongHorizon-Harness** (HF top, 67 upvotes) introduces a new evaluation framework for long-horizon agents that separates task-state management from the ever-growing context window, providing a cleaner substrate for benchmarking sustained reasoning, tool use, and multi-step revision. Its companion GitHub repo also emerged as one of the week's fastest-rising new repositories.\n\nOn the memory front, **MemHarness** (alphaxiv trending #2) directly challenges the dominant approach: retrieved past experiences should not be replayed as static records but must undergo reconstruction like human memory. This resonates with a wave of recent RAG improvement work and reignites the \"Memory\" research thread. In parallel, **SKT** (Skill-Use Training at Scale) leverages verified synthetic data to train agents to identify and coordinate reusable skills at scale, while **Progressive Agent Skill Generation via RL** uses reinforcement learning to unify skill generation across heterogeneous data sources — together sketching a concrete engineering roadmap toward agents with robust, reusable toolboxes.\n\nAt the model layer, Qwen's **Qwen3.8-Max** — a 2.4-trillion-parameter open-weights flagship — sets a new bar for autonomous coding and multi-agent collaboration, making it the week's most-watched model release. The open-source community responded in kind: **nuphus-mcp** (a Rust-based desktop automation MCP server) and **CoordClaw** (running AI like a one-person company) both gained rapid GitHub traction, reflecting developers' sustained appetite for Computer Use and Agent Swarm tooling.\n\nHN's top story today carries a critical edge: OpenAI's super PAC was reported funding an AI-generated news site attacking industry critics, generating 200+ upvotes and extensive discussion — a sign that public scrutiny of AI companies' political reach is intensifying.",
+  "viral_analysis_zh": "**OpenAI 超级 PAC 资助 AI 新闻站**是今日最大爆款，205 点、106 条评论——它触碰了「AI 公司用 AI 攻击批评者」这个极具戏剧性的叙事节点，截图传播性极强。**LongHorizon-Harness** 同时在 HF 和 GitHub 双线发酵，论文+工具仓库组合拳是当前学术工作出圈的标准打法，67 票首日数据说明 Agent Benchmark 赛道仍然是社区最敏感的话题之一。",
+  "viral_analysis_en": "**OpenAI's super PAC funding an AI-generated attack-news site** is today's viral flashpoint — 205 points and 106 comments on HN, driven by the perfect storm narrative of 'AI company using AI to silence critics,' with high screenshot-shareability. **LongHorizon-Harness** went wide simultaneously on HF and GitHub — the paper+tool-repo combo is the current gold standard for academic work crossing over to the practitioner community, and its 67-vote first-day count confirms Agent Benchmarks remain among the community's hottest triggers.",
+  "huggingface_papers": [
+    {
+      "title": "LongHorizon-Harness: Advancing Long-Horizon Agents for Real-World Tasks",
+      "arxiv_id": "2608.01964",
+      "url": "https://arxiv.org/abs/2608.01964",
+      "tldr": "LongHorizon-Harness decouples task-state management and completion assessment from the growing context window, providing a rigorous harness for evaluating agents on sustained multi-step real-world tasks involving tool use, reasoning, and iterative revision.",
+      "tldr_zh": "LongHorizon-Harness 将任务状态管理和完成评估从不断增长的上下文中剥离，为需要持续推理、工具调用和迭代修订的长程真实任务提供了严格的 Agent 评测框架。",
+      "upvotes": 67,
+      "authors": "Ziyu Ma, Hailang Huang, Shun Zou et al.",
+      "ai_keywords": [
+        "long-horizon",
+        "agent evaluation",
+        "tool use"
+      ],
+      "interest_tag": "Benchmark"
+    },
+    {
+      "title": "SwanTale: Unified Multi-Speaker Speech and Audio Generation for Instruct and Zero-Shot Tasks",
+      "arxiv_id": "2608.02023",
+      "url": "https://arxiv.org/abs/2608.02023",
+      "tldr": "SwanTale unifies multi-speaker speech and audio generation in a single model supporting instruction-following and zero-shot voice creation, targeting production use cases in dubbing, audio drama, games, and short-video creation.",
+      "tldr_zh": "SwanTale 将多说话人语音与音频生成统一到单一模型中，同时支持指令跟随和零样本语音创建，面向配音、广播剧、游戏和短视频等生产场景。",
+      "upvotes": 61,
+      "authors": "Yu Zhang, Ruiqi Li, Changhao Pan et al.",
+      "ai_keywords": [
+        "speech synthesis",
+        "multi-speaker",
+        "zero-shot"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "Progressive Agent Skill Generation via Reinforcement Learning",
+      "arxiv_id": "2608.01678",
+      "url": "https://arxiv.org/abs/2608.01678",
+      "tldr": "This work introduces a reinforcement learning approach to unify skill generation across heterogeneous evidence sources, replacing fragile heuristics and pipeline-based consolidation with a learned policy that progressively builds reusable agent skills.",
+      "tldr_zh": "本文用强化学习统一跨异构数据源的技能生成，用可学习的策略替代脆弱的启发式方法，逐步构建 Agent 的可复用技能库。",
+      "upvotes": 27,
+      "authors": "Junhao Shen, Zhanqiu Zhang, Yiwen Guo et al.",
+      "ai_keywords": [
+        "skill generation",
+        "reinforcement learning",
+        "agent"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "SKT: Skill-Use Training at Scale via Verified Synthetic Data Generation",
+      "arxiv_id": "2608.02287",
+      "url": "https://arxiv.org/abs/2608.02287",
+      "tldr": "SKT trains LM agents to identify, apply, and coordinate reusable skills at scale by generating large quantities of verified synthetic training data, significantly improving skill-use capabilities beyond simply providing skills at inference time.",
+      "tldr_zh": "SKT 通过生成大量可验证的合成训练数据，大规模训练语言模型 Agent 识别、应用和协调可复用技能，显著超越仅在推理时提供技能的基线方法。",
+      "upvotes": 17,
+      "authors": "Zelin Tan, Yiqun Zhang, Hao Li et al.",
+      "ai_keywords": [
+        "skill use",
+        "synthetic data",
+        "agent training"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "SWE-Touch: Benchmarking Coding Agents When Users Touch the Code",
+      "arxiv_id": "2608.02499",
+      "url": "https://arxiv.org/abs/2608.02499",
+      "tldr": "SWE-Touch evaluates coding agents in shared workspaces where human users can inspect and modify code mid-task, exposing a critical gap: current agents degrade substantially when humans intervene, unlike the solo-agent regime most benchmarks assume.",
+      "tldr_zh": "SWE-Touch 在用户可在任务进行中修改代码的共享工作区场景下评测编程 Agent，揭示了一个关键缺陷：当人类介入时，当前 Agent 性能显著下降，而现有 benchmark 大多假设 Agent 独立工作。",
+      "upvotes": 14,
+      "authors": "Yuqiao Tan, Jinxiang Meng, Fangyu Lei et al.",
+      "ai_keywords": [
+        "coding agent",
+        "human-in-the-loop",
+        "benchmark"
+      ],
+      "interest_tag": "Benchmark"
+    }
+  ],
+  "alphaxiv_papers": [
+    {
+      "title": "Qwen3.8-Max: A New Bar for Coding and Cowork",
+      "arxiv_id": "",
+      "url": "https://www.alphaxiv.org/abs/2608.blog",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2608.blog",
+      "tldr": "Qwen releases its 2.4-trillion-parameter open-weights flagship model, achieving new state-of-the-art results on autonomous coding, long-horizon tasks, and multimodal agent collaboration — the first Qwen-Max-class model to ship open weights.",
+      "tldr_zh": "Qwen 发布 2.4 万亿参数的开源旗舰模型，在自主编程、长程任务和多模态 Agent 协作上刷新 SOTA，是首个开放权重的 Qwen-Max 级别模型。",
+      "interest_tag": ""
+    },
+    {
+      "title": "MemHarness: Memory Is Reconstructed, Not Replayed",
+      "arxiv_id": "2607.28272",
+      "url": "https://arxiv.org/abs/2607.28272",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2607.28272",
+      "tldr": "MemHarness challenges the dominant paradigm of injecting retrieved memories verbatim into context, arguing that effective agent memory must undergo active reconstruction rather than literal replay — akin to how human episodic memory works.",
+      "tldr_zh": "MemHarness 挑战将检索记忆原文注入上下文的主流做法，主张有效的 Agent 记忆必须经历主动重构而非逐字回放，类似人类情景记忆的工作方式。",
+      "interest_tag": "Memory"
+    },
+    {
+      "title": "Frontis-MA1: Training an AI4AI Model towards Recursive Self-Improvement in Machine Learning Engineering",
+      "arxiv_id": "2607.28568",
+      "url": "https://arxiv.org/abs/2607.28568",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2607.28568",
+      "tldr": "Frontis-MA1 introduces OpenMLE, an open full-stack framework for training AI systems that improve the AI-building process itself (AI4AI), using machine learning engineering as a concrete executable testbed for recursive self-improvement research.",
+      "tldr_zh": "Frontis-MA1 引入 OpenMLE，一个训练能够改善 AI 构建过程本身（AI4AI）的系统的开源全栈框架，以机器学习工程作为递归自我提升研究的具体可执行测试床。",
+      "interest_tag": ""
+    },
+    {
+      "title": "PhiZero: A World Model Built Around Physical Language",
+      "arxiv_id": "2607.28624",
+      "url": "https://arxiv.org/abs/2607.28624",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2607.28624",
+      "tldr": "PhiZero introduces a physical world model that uses 'physical language' — a compact discrete representation of world-state transitions — instead of predicting future video frames in pixel space, enabling more interpretable and efficient physical reasoning.",
+      "tldr_zh": "PhiZero 引入基于「物理语言」的世界模型，用紧凑的离散世界状态转换表示替代像素空间的未来帧预测，实现更可解释、高效的物理推理。",
+      "interest_tag": ""
+    },
+    {
+      "title": "Scaling Properties of Text Conditioning in Visual Generation",
+      "arxiv_id": "2607.29679",
+      "url": "https://arxiv.org/abs/2607.29679",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2607.29679",
+      "tldr": "This paper empirically measures scaling laws for text conditioning in visual generation, making the surprising finding that richer text conditioning does scale meaningfully — contrary to prior belief that diffusion loss doesn't scale with prompt token count.",
+      "tldr_zh": "本文实证测量视觉生成中文本条件的缩放规律，得出令人惊讶的结论：更丰富的文本条件确实有意义地缩放——与先前认为扩散损失不随提示词数量缩放的观点相反。",
+      "interest_tag": ""
+    }
+  ],
+  "github_repos": [
+    {
+      "name": "uczltw6/trace-file-lineage",
+      "url": "https://github.com/uczltw6/trace-file-lineage",
+      "tldr": "Trace-file-lineage tracks the provenance of every file in a project — which script, notebook, data source, command, or AI agent produced it — giving AI-augmented pipelines full data lineage without manual annotation.",
+      "tldr_zh": "Trace-file-lineage 追踪项目中每个文件的来源——是哪个脚本、笔记本、数据源、命令或 AI Agent 生成的——无需手动注释即可为 AI 增强流水线提供完整的数据血缘。",
+      "stars": 238,
+      "language": "Python",
+      "interest_tag": ""
+    },
+    {
+      "name": "mrpulor-gh/nuphus-mcp",
+      "url": "https://github.com/mrpulor-gh/nuphus-mcp",
+      "tldr": "Nuphus-mcp is a Rust-built desktop automation MCP server enabling computer use for any AI agent — screen control, window management, keyboard/mouse simulation — packaged as a Model Context Protocol server for drop-in agent integration.",
+      "tldr_zh": "nuphus-mcp 是 Rust 编写的桌面自动化 MCP 服务器，为任意 AI Agent 提供屏幕控制、窗口管理、键鼠模拟等 Computer Use 能力，以 MCP 协议打包便于即插即用。",
+      "stars": 87,
+      "language": "Rust",
+      "interest_tag": "CUA"
+    },
+    {
+      "name": "AMAP-ML/LongHorizon-Harness",
+      "url": "https://github.com/AMAP-ML/LongHorizon-Harness",
+      "tldr": "The official companion repo for the LongHorizon-Harness paper — a computer-use agent harness running agents across desktop apps and the web for long-horizon task evaluation, with clean task-state separation from context.",
+      "tldr_zh": "LongHorizon-Harness 论文的官方配套仓库，提供跨桌面应用和网页的长程任务 Agent 测试框架，将任务状态管理与上下文干净分离。",
+      "stars": 83,
+      "language": "Python",
+      "interest_tag": "CUA"
+    },
+    {
+      "name": "CoordClaw/CoordClaw",
+      "url": "https://github.com/CoordClaw/CoordClaw",
+      "tldr": "CoordClaw is a multi-agent system that runs multiple AI agents like a one-person company — orchestrating autonomous specialists across tasks without manual coordination, built on TypeScript with a focus on revenue-generating workflows.",
+      "tldr_zh": "CoordClaw 是一个像「单人公司」模式运行的多 Agent 系统，在多个任务间编排自主专家 Agent，无需手动协调，以 TypeScript 构建，专注于创收工作流。",
+      "stars": 60,
+      "language": "TypeScript",
+      "interest_tag": "Agent Swarm"
+    },
+    {
+      "name": "asLody/dexdec",
+      "url": "https://github.com/asLody/dexdec",
+      "tldr": "Dexdec is a fast, accurate Android DEX decompiler written in Rust, designed explicitly for both human readability and AI agent consumption — enabling code-aware agents to reason over Android app binaries directly.",
+      "tldr_zh": "dexdec 是 Rust 编写的高速精准 Android DEX 反编译器，同时为人类可读性和 AI Agent 消费而设计，让具备代码理解能力的 Agent 能直接推理 Android 应用二进制文件。",
+      "stars": 45,
+      "language": "Rust",
+      "interest_tag": ""
+    }
+  ],
+  "hackernews": [
+    {
+      "title": "OpenAI's super PAC is funding AI-generated news site attacking industry critics",
+      "url": "https://www.modelrepublic.org/articles/the-reporters-at-this-news-site-are-ai-bots",
+      "tldr": "A report reveals OpenAI's political action committee is funding an AI-generated news site that publishes stories targeting critics of the AI industry, raising sharp questions about the use of AI for political influence operations at scale.",
+      "tldr_zh": "一份报告披露 OpenAI 的超级政治行动委员会正在资助一个 AI 生成的新闻站点，专门发布针对 AI 行业批评者的文章，引发了关于利用 AI 进行大规模政治影响行动的尖锐质疑。",
+      "points": 205,
+      "num_comments": 106,
+      "interest_tag": ""
+    },
+    {
+      "title": "Show HN: Sprocket – The Best AI Agent for Hardware and Software Development",
+      "url": "https://sprocket-demo.spikonado.com",
+      "tldr": "Sprocket is an AI agent built for combined hardware and software development workflows — bridging the gap between firmware, PCB design, and software agents in a unified interface that aims to be the Copilot for embedded systems engineers.",
+      "tldr_zh": "Sprocket 是面向软硬件联合开发工作流的 AI Agent，统一界面连接固件、PCB 设计与软件 Agent，目标是成为嵌入式系统工程师的 Copilot。",
+      "points": 124,
+      "num_comments": 14,
+      "interest_tag": ""
+    },
+    {
+      "title": "Show HN: Nightcrawler – A local AI pentesting agent running on a smartphone",
+      "url": "https://github.com/garagehq/nightcrawler/",
+      "tldr": "Nightcrawler is a fully local AI pentesting agent that runs on a smartphone, enabling network security assessments without sending data to the cloud — combining on-device LLM inference with automated vulnerability probing workflows.",
+      "tldr_zh": "Nightcrawler 是完全本地运行的 AI 渗透测试 Agent，可在智能手机上运行，无需将数据发送到云端即可进行网络安全评估，结合设备端 LLM 推理与自动化漏洞探测工作流。",
+      "points": 110,
+      "num_comments": 31,
+      "interest_tag": ""
+    },
+    {
+      "title": "Launch HN: Hoplite (YC S26) – Effortlessly deploy cloud coding agents",
+      "url": "https://hoplite.sh",
+      "tldr": "Hoplite (YC S26) provides a managed platform for deploying and scaling cloud-based coding agents, abstracting away infrastructure concerns so teams can focus on building agentic software workflows rather than managing sandboxes and compute.",
+      "tldr_zh": "Hoplite（YC S26）提供托管平台用于部署和扩展云端编程 Agent，屏蔽基础设施复杂性，让团队专注于构建 Agent 化软件工作流而非管理沙盒和计算资源。",
+      "points": 68,
+      "num_comments": 52,
+      "interest_tag": ""
+    },
+    {
+      "title": "Show HN: Hacker News with AI stories filtered out",
+      "url": "https://hcker.news/?view=frontpage&ai=exclude",
+      "tldr": "A satirical-yet-functional HN alternative that filters out all AI stories from the front page — the project went viral precisely because it resonated with users experiencing AI-content fatigue, ironically becoming itself the most-discussed AI story of the day.",
+      "tldr_zh": "一个讽刺性但功能完整的 HN 替代品，将首页所有 AI 故事过滤掉——这个项目爆火正是因为它击中了正在经历 AI 内容疲劳的用户，讽刺地成为当天讨论最多的 AI 话题。",
+      "points": 47,
+      "num_comments": 9,
+      "interest_tag": ""
+    }
+  ]
+}
