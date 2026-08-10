@@ -1,0 +1,221 @@
+{
+  "date": "2026-08-10",
+  "generated_at": "2026-08-10T17:03:12.233952+08:00",
+  "briefing_zh": "今天的研究信号显示，agent 后训练正在从稀疏的任务级奖励转向更细粒度、可自举的学习机制。**On-Policy Self-Distillation without Any Supervision** 用模型自身多次采样的一致性构造伪解，而 **AgentOPSD** 把 teacher-student 的概率差递归聚合为 turn-level credit；两者共同指向一个趋势：减少 critic、人工 rubric 与外部标注，同时让长轨迹中的关键决策获得更准确的训练信号。与此同时，**SFT Conflicts, RL Coexists** 从参数更新角度解释了 RL 为何更能容纳多任务，为这种 agentic RL 扩展提供了理论支撑。\n\n长期运行的系统瓶颈也从模型本身转向环境、memory 与 harness。**StreamArena** 证明短视频 benchmark 会高估 streaming agent，并通过小时级视频与持久多模态记忆暴露远距回忆和实时交互之间的张力；**HarnessOpt-Bench** 则把 prompt、tool、control flow、memory 和 orchestration 的整体优化变成可审计评测。开源侧的 **LongHorizon-Harness** 用 durable state、独立审计和可恢复进度把这些原则落实到跨桌面与 CLI 的长任务中，说明 agent 工程的核心正变成状态管理与验证，而不只是换更强模型。\n\n另一个明显趋势是把昂贵的生成或推理能力留在训练阶段，再交付轻量执行器。**SimWAM** 仅在训练时借助 video generation，推理时丢弃视频分支仍取得 91.5 PDMS；**WorldTrace** 则无需训练，通过可寻址虚拟位置修复长 rollout 中视觉 KV cache 的失忆问题。它们都在回答同一个部署问题：如何保留 world model 的知识增益，却不把完整生成成本带进在线系统。\n\n社区热度同时暴露了 adoption 与基础设施的两面性。**Docker Sandboxes** 用 microVM 为 coding agent 提供可丢弃隔离环境，迅速成为 HN 的高讨论话题；但 Gentoo Bugzilla 因分布式 LLM scraper 过载而关闭，说明 agent 规模化也在制造真实公共成本。**Why Normal People Aren’t Using AI Agents** 的讨论进一步提醒行业：用户要的是更平静、更聚焦的产品结果，而不是名为 agent 的技术类别；安全边界、可恢复执行和具体场景价值将比自主性口号更决定普及速度。",
+  "briefing_en": "Today’s research signal shows agent post-training moving away from sparse task-level rewards toward finer-grained, self-bootstrapped learning. **On-Policy Self-Distillation without Any Supervision** builds pseudo-solutions from consistency across a model’s own samples, while **AgentOPSD** recursively aggregates teacher-student probability gaps into turn-level credit. Together they point toward reducing critics, hand-built rubrics, and external labels while assigning better learning signals to pivotal decisions in long trajectories. **SFT Conflicts, RL Coexists** complements this direction with a parameter-level explanation of why RL can accommodate diverse tasks more cleanly than SFT.\n\nThe bottleneck for long-running systems is also shifting from the base model to environments, memory, and the harness. **StreamArena** shows how short-video benchmarks overestimate streaming agents and uses hour-scale video to expose the trade-off between real-time interaction and distant recall. **HarnessOpt-Bench** turns optimization of prompts, tools, control flow, memory, and orchestration into an auditable capability evaluation, while **LongHorizon-Harness** operationalizes durable state, independent auditing, and recoverable progress across desktop applications and the CLI. The common message is that reliable agent engineering increasingly means state management and verification, not merely swapping in a stronger model.\n\nA parallel trend is to keep expensive generative intelligence in training while deploying a lighter executor. **SimWAM** uses video generation only as a training signal, discards the video branch at inference, and still reaches 91.5 PDMS; **WorldTrace** repairs long-rollout visual forgetting by assigning compressed KV memories addressable in-distribution positions without retraining. Both seek the benefits of world-model priors without carrying full generation cost into production.\n\nCommunity attention exposes both the opportunity and externalities of agent adoption. **Docker Sandboxes** packages coding agents inside disposable microVMs and became one of the day’s most discussed HN stories, while Gentoo took Bugzilla offline after distributed LLM scrapers made it unusable. **Why Normal People Aren’t Using AI Agents** adds the product lesson: users want calmer, more focused outcomes, not a technology category called agents. Security boundaries, recoverability, and concrete user value will matter more for adoption than autonomy rhetoric.",
+  "viral_analysis_zh": "今天最可能持续发酵的是 **LongHorizon-Harness**：它用「跨桌面与 CLI 连续工作数十小时」这一可感知承诺，配合 durable state、独立审计和可恢复进度，精准击中 agent 长任务最常见的失控痛点。**Docker Sandboxes** 则把抽象安全问题压缩成「放心开启 YOLO mode」的强传播叙事，并借 Docker 的品牌与一条安装命令降低尝试门槛。研究侧最具爆款潜力的是 **On-Policy Self-Distillation without Any Supervision**，标题直接承诺摆脱全部监督，且 AIME 等基准上的量化增益足够支持讨论与复现。",
+  "viral_analysis_en": "**LongHorizon-Harness** has the strongest chance of sustaining momentum: the concrete promise of working across desktop apps and the CLI for dozens of hours, backed by durable state, independent auditing, and recoverable progress, targets the most visible failure mode of long-running agents. **Docker Sandboxes** compresses an abstract security problem into the highly shareable promise of running YOLO mode safely, with Docker’s brand and a one-command install lowering trial friction. On the research side, **On-Policy Self-Distillation without Any Supervision** has a viral title, a bold no-supervision claim, and quantified gains on AIME-style benchmarks that invite both debate and reproduction.",
+  "huggingface_papers": [
+    {
+      "title": "Beyond Simply Environment Scaling: Designing Effective Environment Distributions for Multimodal Agent Learning",
+      "url": "https://huggingface.co/papers/2608.03571",
+      "tldr": "Scaling the number of multimodal training environments does not reliably improve agents because the distribution may still be redundant or poorly staged. The paper introduces Ability-aware Environment Selection for diversity and a Hierarchical Difficulty Curriculum spanning harness weakening and state-scale progression. Experiments show that deliberately shaping diversity and difficulty beats indiscriminate environment accumulation, making data composition a first-class lever for agent training.",
+      "tldr_zh": "单纯扩大多模态训练环境数量并不会稳定提升 agent，因为环境分布仍可能重复或难度编排失衡。论文提出 Ability-aware Environment Selection 提升多样性，并用跨 harness weakening 与 state-scale progression 的 Hierarchical Difficulty Curriculum 组织训练。实验表明，主动设计多样性和难度结构优于无差别堆环境，使数据分布成为 agent 训练的一等优化变量。",
+      "upvotes": 23,
+      "authors": "Kejian Zhu, Zhuoran Jin, Dongqi Huang, Hongbang Yuan, Yupu Hao, Kang Liu, Jun Zhao",
+      "ai_keywords": [
+        "multimodal agents",
+        "curriculum learning",
+        "environment distribution"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "SFT Conflicts, RL Coexists: A Theoretical and Empirical Analysis of Multi-Task Learning for LLMs",
+      "url": "https://huggingface.co/papers/2608.03573",
+      "tldr": "The paper explains why sequential SFT suffers severe multi-task interference while RL can preserve performance across diverse reasoning tasks. Its parameter analysis finds that RL updates are sparse and approximately orthogonal, with interference bounded by variance under advantage normalization rather than raw gradient norm. Based on this mechanism, Parallel-RL decouples task training to improve efficiency and flexibility, offering a principled recipe for multi-skill post-training.",
+      "tldr_zh": "论文解释了为何多阶段 SFT 容易发生严重的多任务干扰，而 RL 能让不同推理能力稳定共存。参数分析显示，RL 更新稀疏且近似正交，其干扰受 advantage normalization 后的梯度方差约束，而不是受原始梯度范数支配。基于这一机制，Parallel-RL 解耦不同任务的训练，在效率和灵活性上提供了更有原则的多技能后训练方案。",
+      "upvotes": 23,
+      "authors": "Kejian Zhu, Zhuoran Jin, Shangqing Tu, Hongbang Yuan, Yushi Bai, Kang Liu, Juanzi Li, Jun Zhao",
+      "ai_keywords": [
+        "reinforcement learning",
+        "multi-task learning",
+        "post-training"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "SimWAM: A Simple World Action Model for End-to-End Autonomous Driving",
+      "url": "https://huggingface.co/papers/2608.07468",
+      "tldr": "SimWAM transfers video-dynamics priors into autonomous-driving actions without generating future video at inference time. A video expert and lightweight action expert are co-trained with joint flow matching, then the video branch is discarded so the planner predicts trajectories directly. The system reaches 91.5 PDMS on NAVSIM, lowers latency versus prior WAM planners, and transfers zero-shot to nuScenes, showing that generative priors can remain a training-only asset.",
+      "tldr_zh": "SimWAM 将视频动态先验迁移到自动驾驶动作中，但推理阶段不再生成未来视频。它用 joint flow matching 协同训练 video expert 与轻量 action expert，之后丢弃视频分支，让 planner 直接预测轨迹。系统在 NAVSIM 达到 91.5 PDMS，相比既有 WAM planner 延迟更低，并能 zero-shot 迁移到 nuScenes，证明生成先验可以只作为训练资产存在。",
+      "upvotes": 20,
+      "authors": "Zongchuang Zhao, Xin Zhou, Tianyang Xu, Zhengyang Sun, Kaixuan Zhou, Honglin Li, Dingkang Liang, Xiang Bai",
+      "ai_keywords": [
+        "world action model",
+        "autonomous driving",
+        "video generation"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "StreamArena: Toward Continuous, Interactive, and Long-Horizon Agentic Streaming Video Understanding",
+      "url": "https://huggingface.co/papers/2608.05703",
+      "tldr": "StreamArena evaluates streaming agents on 243 videos averaging 88.8 minutes and 3,646 open-ended questions covering perception, retrospective recall, proactive interaction, and tool use. It reveals that short-clip benchmarks hide major failures: recent-frame systems miss distant events, text summaries discard visual evidence, and repeated compression loses detail. The accompanying StreamMind architecture separates latency-critical frontend workers from asynchronous workers that build persistent multimodal memory, improving both accuracy and response latency.",
+      "tldr_zh": "StreamArena 用 243 段平均 88.8 分钟的视频和 3,646 个开放式问题，评测感知、历史回忆、主动交互与工具使用。结果揭示短视频 benchmark 掩盖了关键失败：只看近期帧会忘记远处事件，文本摘要丢失视觉证据，反复压缩又损伤细节。配套的 StreamMind 将低延迟前台 worker 与异步构建持久多模态记忆的后台 worker 分离，同时改善准确率与响应延迟。",
+      "upvotes": 9,
+      "authors": "Xichen Zhang, Guankai Li, Yinghao Zhu, Shijian Wang, Sitong Wu, Shaozuo Yu, Meng Chu, Yuan Lu, Jiaya Jia",
+      "ai_keywords": [
+        "streaming video",
+        "long-horizon agents",
+        "multimodal memory"
+      ],
+      "interest_tag": "Benchmark"
+    },
+    {
+      "title": "Addressable Memory for Video World Models",
+      "url": "https://huggingface.co/papers/2608.07408",
+      "tldr": "Long video-world-model rollouts fail to retrieve old visual content when temporal RoPE positions move beyond the training range, and naive compression corrupts phase information. WorldTrace creates a training-free addressable cache by assigning compressed summaries distinct virtual positions that remain in distribution, with field and landmark variants for coherence and episodic recall. On LoopBench it improves temporal consistency by 15.5% and episodic recall by 19.5%, extending visual persistence without retraining the model.",
+      "tldr_zh": "视频 world model 的长 rollout 会因 temporal RoPE 超出训练范围而无法检索旧视觉内容，直接在旋转后空间压缩又会破坏相位信息。WorldTrace 无需训练，通过给压缩摘要分配互不冲突且位于训练分布内的虚拟位置，构建可寻址 cache，并分别用 field 与 landmark 方案处理连续性和情景回忆。在 LoopBench 上，它将时间一致性提升 15.5%、情景回忆提升 19.5%，无需重训即可延长视觉持久性。",
+      "upvotes": 5,
+      "authors": "Xindi Wu, Sven Elflein, James Lucas, Olga Russakovsky, Laura Leal-Taixé, Despoina Paschalidou, Jonathan Lorraine, Aljoša Ošep",
+      "ai_keywords": [
+        "video world models",
+        "KV cache",
+        "visual persistence"
+      ],
+      "interest_tag": ""
+    }
+  ],
+  "alphaxiv_papers": [
+    {
+      "title": "On-Policy Self-Distillation without Any Supervision",
+      "arxiv_id": "2608.06296",
+      "url": "https://arxiv.org/abs/2608.06296",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2608.06296",
+      "tldr": "U-OPSD removes ground truth, environment feedback, and larger teacher models from on-policy self-distillation. It uses majority agreement across sampled rollouts to form a confident pseudo-solution, then distills the shortest pseudo-solution into prefixes of the model’s longest incorrect completion to target where it is confidently wrong. Across math benchmarks it matches or exceeds supervised OPSD and GRPO, including average base-model gains of 8.5% and 10.7% for Qwen3 4B and 8B in non-thinking mode.",
+      "tldr_zh": "U-OPSD 从 on-policy self-distillation 中移除了 ground truth、环境反馈和更大 teacher model。它先通过多次 rollout 的多数一致性构造高置信伪解，再把最短伪解蒸馏到最长错误答案的前缀中，精准修正模型自信但错误的位置。在多个数学 benchmark 上，它达到或超过有监督 OPSD 与 GRPO；Qwen3 4B 和 8B 的 non-thinking 模式相对 base model 平均提升 8.5% 和 10.7%。",
+      "interest_tag": ""
+    },
+    {
+      "title": "AgentOPSD: Recursive Self-Distillation for Agentic Reinforcement Learning",
+      "arxiv_id": "2608.05987",
+      "url": "https://arxiv.org/abs/2608.05987",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2608.05987",
+      "tldr": "AgentOPSD addresses the weak credit assignment of trajectory-level rewards in long-horizon, multi-turn agent tasks. It aggregates token-level teacher-student log-probability gaps into turn evidence and recursively updates a Bayesian belief state, converting sparse outcomes into signals for pivotal turns without an extra critic or rollout budget. On ALFWorld, WebShop, and Search-QA it outperforms GRPO and self-distillation baselines, reaching 89.1% ALFWorld success with Qwen2.5-7B.",
+      "tldr_zh": "AgentOPSD 针对长周期、多轮 agent 任务中 trajectory-level reward 难以分配 credit 的问题。它把 token-level teacher-student log-probability gap 聚合成 turn evidence，再递归更新 Bayesian belief state，将稀疏结果转化为关键轮次的训练信号，而且不需要额外 critic 或 rollout 预算。在 ALFWorld、WebShop 与 Search-QA 上，它超过 GRPO 和 self-distillation baseline，Qwen2.5-7B 在 ALFWorld 达到 89.1% 成功率。",
+      "interest_tag": ""
+    },
+    {
+      "title": "HarnessOpt-Bench: Evaluating LLMs at Harness Optimization",
+      "arxiv_id": "2608.06301",
+      "url": "https://arxiv.org/abs/2608.06301",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2608.06301",
+      "tldr": "HarnessOpt-Bench evaluates whether an LLM can improve the prompts, tools, control flow, memory, and orchestration code surrounding a target agent under a fixed evaluation budget. A trusted execution environment hides the held-out test partition, meters resources, and preserves candidate versions, making optimization gains auditable rather than prompt-demo anecdotes. Across 111 runs with five frontier models, optimizer choice mattered more than the coding harness, native harnesses were not consistently best, and performance varied sharply by task and seed.",
+      "tldr_zh": "HarnessOpt-Bench 评测 LLM 能否在固定评估预算下优化 target agent 周围的 prompt、tool、control flow、memory 与 orchestration code。Trusted execution environment 隐藏 held-out test partition、计量资源并保留候选版本，使 harness 优化从 prompt demo 变成可审计能力。对五个 frontier model 的 111 次运行显示，optimizer model 的影响大于其使用的 coding harness，native harness 并不稳定占优，而且不同任务与初始 seed 的收益差异很大。",
+      "interest_tag": "Benchmark"
+    },
+    {
+      "title": "Leanstral",
+      "arxiv_id": "",
+      "url": "https://www.alphaxiv.org/abs/2608.leanstral",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2608.leanstral",
+      "tldr": "Leanstral is a 119B-total, 6B-active mixture-of-experts code-agent family for Lean 4 that operates through the standard open-source Mistral Vibe coding harness rather than a specialized theorem-prover scaffold. It saturates miniF2F, solves 587 of 672 PutnamBench problems, and reaches 34% on FATE-X and 43.2% on FLTEval, with performance scaling smoothly with token budget. The same automated pipeline also found previously unknown bugs in open-source software, and Leanstral 1.5 is released under Apache 2.0.",
+      "tldr_zh": "Leanstral 是面向 Lean 4 的 MoE code-agent 系列，总参数 119B、激活参数仅 6B，并通过开源 Mistral Vibe coding harness 工作，而非依赖专用 theorem-prover scaffold。它在 miniF2F 饱和、解决 PutnamBench 672 题中的 587 题，并在 FATE-X 和 FLTEval 达到 34% 与 43.2%，性能随 token budget 平滑增长。同一自动化 pipeline 还发现了开源软件中的未知 bug，Leanstral 1.5 以 Apache 2.0 开源。",
+      "interest_tag": ""
+    },
+    {
+      "title": "SkillProx: Self-Evolving Agent Skills via Proximal Textual Gradient Descent",
+      "arxiv_id": "2608.07449",
+      "url": "https://arxiv.org/abs/2608.07449",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2608.07449",
+      "tldr": "SkillProx treats reusable textual agent skills as objects that can be optimized without changing model weights. Its forward stage repeatedly diagnoses and tests edits with rollback on regressions, while the backward stage decomposes skills into auditable units and uses leave-one-out utility estimates to consolidate, demote, or delete knowledge. Across multiple models and in- and out-of-distribution tasks, it improves average accuracy by three percentage points over the strongest gradient-based skill-evolution baseline.",
+      "tldr_zh": "SkillProx 将可复用的文本化 agent skill 视为无需更新模型权重即可优化的对象。Forward stage 对诊断驱动的编辑进行反复执行与验证，出现退化时回滚；backward stage 则把 skill 拆成可审计知识单元，用 leave-one-out utility 估计决定合并、降级或删除。跨多个模型以及 in-distribution、out-of-distribution 任务，它比最强的 gradient-based skill evolution baseline 平均提高 3 个百分点。",
+      "interest_tag": ""
+    }
+  ],
+  "github_repos": [
+    {
+      "name": "eternityspring/shuohao-skills",
+      "url": "https://github.com/eternityspring/shuohao-skills",
+      "tldr": "This repository packages reusable skills for Claude Code and Codex, starting with a workflow that turns novels into character bibles containing profiles, visual prompts, voice prompts, and turnaround sheets. Skills are self-contained, symlink-installed, dependency-light, and required to include deterministic self-tests, so updates propagate without reinstalling. Its rapid 595-star, 70-fork rise shows demand for narrowly scoped, production-shaped agent capabilities rather than another general framework.",
+      "tldr_zh": "该仓库为 Claude Code 和 Codex 打包可复用 skill，首个工作流可把小说拆成包含人物画像、视觉提示词、音色提示词与三视图的角色设定集。每个 skill 自包含、通过软链安装、尽量零依赖，并强制提供 deterministic self-test，因此更新后无需重装即可生效。短期内获得 595 stars、70 forks，说明市场更需要边界清晰、可直接生产使用的 agent 能力，而不只是又一个通用框架。",
+      "stars": 595,
+      "language": "JavaScript",
+      "interest_tag": ""
+    },
+    {
+      "name": "AMAP-ML/LongHorizon-Harness",
+      "url": "https://github.com/AMAP-ML/LongHorizon-Harness",
+      "tldr": "LongHorizon-Harness runs computer-use agents across desktop applications and the CLI for extended workflows while preventing state drift. It combines fresh-context execution, durable verified state, independent auditing, recoverable progress, and integrations for Claude Code, Codex, and OpenClaw. The project turns long-horizon autonomy into an infrastructure problem with explicit checkpoints and evidence, making it directly relevant to reliable CUA deployment.",
+      "tldr_zh": "LongHorizon-Harness 让 computer-use agent 在桌面应用与 CLI 之间执行长流程，同时避免状态漂移。它结合 fresh-context execution、可验证的 durable state、独立审计、可恢复进度，并原生集成 Claude Code、Codex 与 OpenClaw。项目把 long-horizon autonomy 转化为带 checkpoint 和 evidence 的基础设施问题，直接面向可靠 CUA 部署。",
+      "stars": 531,
+      "language": "Python",
+      "interest_tag": "CUA"
+    },
+    {
+      "name": "criptogus/HermesOffice",
+      "url": "https://github.com/criptogus/HermesOffice",
+      "tldr": "HermesOffice is an AI-native office suite covering documents, spreadsheets, presentations, and PDFs through five Electron applications sharing one engine layer. Rather than bolting a chat panel onto existing editors, it makes AI editing a first-class workflow and ships installable builds for macOS, Windows, and Linux. Its 425 stars and 52 forks in under a week reflect interest in end-user agent surfaces where output remains editable in familiar office formats.",
+      "tldr_zh": "HermesOffice 是覆盖文档、表格、演示文稿与 PDF 的 AI-native office suite，五个 Electron 应用共享同一 engine layer。它不是在传统编辑器旁附加聊天框，而是把 AI editing 设为一等工作流，并提供 macOS、Windows 与 Linux 的可安装版本。不到一周获得 425 stars、52 forks，反映出用户对可在熟悉 Office 格式中继续编辑的 agent 成品界面具有明显需求。",
+      "stars": 425,
+      "language": "TypeScript",
+      "interest_tag": ""
+    },
+    {
+      "name": "i3T4AN/KADATH",
+      "url": "https://github.com/i3T4AN/KADATH",
+      "tldr": "KADATH evolves populations of complete agents—including prompts, Python code, tools, dependencies, and files—across reproducible, benchmarked epochs. A fixed kernel controls grading, isolation, lineage, deadlines, and selection so evolving agents cannot rewrite their own objective or scores, while stronger organisms reproduce and mutate. It is a concrete agent-swarm architecture for search over whole agent implementations, though its very new repository and low fork count mean the reported gains deserve independent reproduction.",
+      "tldr_zh": "KADATH 在可复现、带 benchmark 的多个 epoch 中进化完整 agent 群体，genome 包含 prompt、Python 实现、tool、依赖和支持文件。固定 kernel 控制评分、隔离、lineage、deadline 与 selection，使被进化的 agent 无法改写自己的目标或分数，强者则复制并变异。它是搜索完整 agent 实现的具体 Agent Swarm 架构，但仓库非常新且 fork 很少，项目自报收益仍需独立复现。",
+      "stars": 170,
+      "language": "Python",
+      "interest_tag": "Agent Swarm"
+    },
+    {
+      "name": "miqdadbadjuber/anti-slop",
+      "url": "https://github.com/miqdadbadjuber/anti-slop",
+      "tldr": "Anti-slop is a rules artifact for coding agents that targets generic AI-generated interface design without imposing one visual style. It combines warning signs, 38 tiered rules, a liveliness toolkit, craftsmanship criteria, and an evidence-based delivery gate that reports PASS or FAIL. The project’s appeal is operational: it turns a subjective complaint about AI aesthetics into an inspectable checklist that agents can load only when doing UI work.",
+      "tldr_zh": "Anti-slop 是供 coding agent 按需加载的规则文档，用于抑制千篇一律的 AI-generated UI，但不强制单一视觉风格。它组合 warning sign、38 条分级规则、liveliness toolkit、craftsmanship 标准，以及必须用证据报告 PASS/FAIL 的 delivery gate。其价值在于把对 AI 审美的主观抱怨转成可检查清单，而且只在 UI 工作时加载，不污染所有会话。",
+      "stars": 137,
+      "language": "",
+      "interest_tag": ""
+    }
+  ],
+  "hackernews": [
+    {
+      "title": "Gentoo bugzilla closed due AI bot scraper overload",
+      "url": "https://social.treehouse.systems/@mgorny/117058483039362779",
+      "tldr": "A Gentoo developer took Bugzilla offline after LLM scrapers using thousands of apparently unrelated IPv4 addresses made the service unusable. The incident shows that AI data acquisition is no longer only a copyright or robots.txt dispute; distributed scraping can impose immediate operational costs on volunteer-maintained infrastructure. Its 170 points and 113 comments reflect rising concern that agent-scale consumption will push more public knowledge systems behind authentication or rate limits.",
+      "tldr_zh": "一名 Gentoo 开发者关闭了 Bugzilla，因为使用数千个看似无关联 IPv4 地址的 LLM scraper 已使服务无法使用。该事件说明 AI 数据获取不再只是版权或 robots.txt 争议；分布式抓取会给志愿者维护的基础设施施加即时运营成本。170 points 与 113 comments 反映出社区担忧：agent 规模的资源消耗会迫使更多公共知识系统转向登录或严格 rate limit。",
+      "points": 170,
+      "num_comments": 113,
+      "interest_tag": ""
+    },
+    {
+      "title": "Docker Sandboxes – Disposable, isolated sandboxes for AI agents",
+      "url": "https://www.docker.com/products/docker-sandboxes/",
+      "tldr": "Docker Sandboxes runs coding agents such as Claude Code, Codex, Gemini CLI, and Copilot CLI inside disposable microVMs with only the project workspace mounted. Agents can install packages, modify configuration, and launch nested containers while filesystem, network, and credential controls protect the host. The product reframes unattended YOLO-mode execution from a sequence of permission prompts into an infrastructure isolation boundary, explaining the strong 154-point, 103-comment response.",
+      "tldr_zh": "Docker Sandboxes 将 Claude Code、Codex、Gemini CLI 与 Copilot CLI 等 coding agent 放进只挂载项目 workspace 的可丢弃 microVM。Agent 可安装 package、修改配置和启动嵌套 container，同时由 filesystem、network 与 credential policy 保护宿主机。它把无人值守的 YOLO-mode 从连续权限确认重构为基础设施隔离边界，因此获得 154 points、103 comments 的强烈响应。",
+      "points": 154,
+      "num_comments": 103,
+      "interest_tag": ""
+    },
+    {
+      "title": "Human vs. AI – Diff-based line-level provenance for text under agentic editing",
+      "url": "https://github.com/eighttrigrams/us-vs-them",
+      "tldr": "Us vs. Them derives line-level human-versus-agent provenance from version history rather than inserting special markup into source files. It models coherent islands of human-authored text inside machine-generated regions, accounting for joins, splits, and diluted authorship instead of attaching a brittle label to each line. This can help future editing agents preserve deliberate human changes while freely revising generated material, turning Git history into a lightweight control signal.",
+      "tldr_zh": "Us vs. Them 从版本历史推导逐行的人类与 agent provenance，而不是往源文件插入专用 markup。它把人类文本建模为机器生成区域中的连贯 island，并处理合并、拆分与作者贡献稀释，而非给每一行贴脆弱标签。该方法可让后续 editing agent 谨慎保护人类明确修改过的内容，同时自由重写生成部分，把 Git history 变成轻量控制信号。",
+      "points": 51,
+      "num_comments": 14,
+      "interest_tag": ""
+    },
+    {
+      "title": "Why Normal People Aren't Using AI Agents",
+      "url": "https://www.wired.com/story/why-normal-people-arent-using-ai-agents/",
+      "tldr": "WIRED contrasts roughly ten million weekly users for leading work agents with the billion-scale monthly audiences of mainstream chatbots and argues that agents still lack a consumer killer product. The central product lesson is that people do not want an abstract technology category; they want outcomes such as a calmer, focused morning briefing that quietly uses tools underneath. Adoption will therefore depend on packaging agency into specific recurring value while hiding harness complexity, not on advertising more autonomy.",
+      "tldr_zh": "WIRED 将领先 work agent 约千万级 weekly users 与主流 chatbot 十亿级 monthly audience 对比，认为消费级 agent 仍缺少 killer product。核心产品教训是，普通用户不需要抽象的技术类别，而需要如「打开电脑就获得更平静、聚焦的晨间简报」这类具体结果，工具调用应隐藏在下层。普及取决于把 agency 封装成持续、明确的价值并隐藏 harness 复杂度，而不是继续宣传更强自主性。",
+      "points": 23,
+      "num_comments": 8,
+      "interest_tag": ""
+    },
+    {
+      "title": "Show HN: A replayable A2A jury for tracing how agents influence decisions",
+      "url": "https://github.com/nMaroulis/protolink/tree/main/examples/ai_courtroom",
+      "tldr": "This ProtoLink demonstration places role-specialized agents in a fictional liability tribunal and records how messages change each juror’s opinion. It supports solo, independent, foreperson-star, and direct-mesh communication topologies while emitting deterministic offline results, JSON traces, transcripts, and interactive reports. The courtroom framing is memorable, but the reusable contribution is replayable evidence for comparing how multi-agent communication structures influence collective decisions.",
+      "tldr_zh": "该 ProtoLink demo 把不同角色的 agent 放入虚构责任法庭，并记录每条消息如何改变 juror 的判断。它支持 solo、independent、foreperson-star 与 direct-mesh 等通信拓扑，并输出 deterministic offline result、JSON trace、transcript 和交互报告。法庭设定负责吸引注意，真正可复用的贡献是提供可回放证据，用于比较不同多 agent 通信结构如何影响集体决策。",
+      "points": 18,
+      "num_comments": 1,
+      "interest_tag": "Agent Swarm"
+    }
+  ]
+}
