@@ -1,0 +1,221 @@
+{
+  "date": "2026-08-11",
+  "generated_at": "2026-08-11T16:03:35.921449+08:00",
+  "briefing_zh": "今天最强的共同信号不是又一个更大的 base model，而是 agent 系统开始围绕「可持续改进」形成完整技术栈。**On-Policy Self-Distillation without Any Supervision** 用模型自身 rollout 的多数一致性制造训练信号，**AgentOPSD** 则把 self-distillation 的 log-prob gap 转成逐 turn credit；前者减少外部标注依赖，后者直击 long-horizon RL 的稀疏奖励，两者共同把 self-improvement 从口号推进到可操作算法。\n\n评测也在同步变硬。**SWE-Bench ProMax** 用 170 个跨七种语言、平均修改 11.4 个文件的真实 refactoring 任务，主动修复旧 SWE-bench 的测试缺陷与数据污染问题，最佳 agent 仍只有 41.2%；**HarnessOpt-Bench** 更进一步，把优化 prompt、tool、memory 与 control flow 本身定义为受预算约束的能力，并发现 optimizer model 的影响通常大于它所使用的 coding harness。今天的前沿问题已经从「agent 能否答题」转向「agent 能否可靠地改造自己的工作系统」。\n\n部署端出现了两个不同尺度的本地化答案。**Muse Glimmer** 把 30B agentic model 量化进 24–32GB consumer memory，面向本地 coding、tool use 与 multimodal workflows；**Needle 2** 则把任务收缩为 schema-grounded tool calling，以 45M 参数、14MB 文件和约 28MB session RAM 覆盖廉价手机、树莓派乃至微控制器。它们说明 local agent 不再只有一种尺寸：复杂 reasoning 留给 consumer GPU，确定性设备动作可交给极小 specialist。\n\n开源生态的热点则从通用框架转向可直接装载的 skill 和安全边界。GitHub 上短剧生产 skill、反 AI-slop 设计规则和 evolutionary multi-agent runtime 获得关注；HN 上 **Docker Sandboxes** 与一项 40,000 次人类审批实验互相印证：用户会漏掉约三分之一威胁，单次 permission prompt 不能充当可靠 security boundary。更合理的方向是把 autonomy 放进 microVM、network policy 和 filesystem isolation 之内，而不是把风险判断持续甩给疲劳的人类。",
+  "briefing_en": "The strongest shared signal today is not another larger base model, but a full stack forming around sustainable agent improvement. **On-Policy Self-Distillation without Any Supervision** derives training signals from majority consistency among a model's own rollouts, while **AgentOPSD** converts self-distillation log-probability gaps into turn-level credit. The former reduces dependence on external labels; the latter attacks sparse rewards in long-horizon RL, moving self-improvement from a slogan toward operational algorithms.\n\nEvaluation is hardening in parallel. **SWE-Bench ProMax** contributes 170 real refactoring tasks across seven languages, averaging 11.4 modified files, while explicitly addressing flawed tests and contamination in earlier SWE-bench variants; the best agent still resolves only 41.2%. **HarnessOpt-Bench** goes one level higher by treating the optimization of prompts, tools, memory, and control flow as a budgeted capability, finding that the optimizer model usually matters more than the coding harness it operates through. The frontier question is shifting from whether agents can solve tasks to whether they can reliably improve their own operating systems.\n\nOn deployment, two very different scales of local intelligence emerged. **Muse Glimmer** compresses a 30B agentic model into a 24–32GB consumer-memory envelope for local coding, tool use, and multimodal workflows. **Needle 2** narrows the problem to schema-grounded tool calling and fits 45M parameters into a 14MB artifact using roughly 28MB of session RAM, targeting cheap phones, Raspberry Pis, and even microcontrollers. Local agents are becoming a spectrum: consumer GPUs handle richer reasoning, while tiny specialists execute deterministic device actions.\n\nOpen source attention is also moving from generic frameworks toward installable skills and enforceable safety boundaries. GitHub interest clustered around short-drama production skills, anti-slop design rules, and evolutionary multi-agent runtimes. On HN, **Docker Sandboxes** and a 40,000-run human-approval experiment reinforce the same lesson: people miss roughly one-third of threats, so permission prompts are not a dependable security boundary. Autonomy should be enclosed by microVMs, network policy, and filesystem isolation rather than continuously outsourcing risk judgments to fatigued users.",
+  "viral_analysis_zh": "**Muse Glimmer** 最可能成为今天的主爆款：它同时具备 Meta 背书、Apache 2.0 open weights、30B 可本地运行和 agentic workflow 四个强传播钩子，HN 已获得超过千分与数百条讨论。**Needle 2** 则占据反差型传播位——「14MB agentic LLM」一句话就能制造认知冲击，而真实硬件速度与 RAM 数字让故事不只停留在噱头。",
+  "viral_analysis_en": "**Muse Glimmer** is today's strongest viral candidate: Meta's brand, Apache 2.0 open weights, a locally runnable 30B footprint, and agentic workflows form four unusually clear hooks, already producing more than a thousand HN points and hundreds of comments. **Needle 2** owns the contrast-driven story: “a 14MB agentic LLM” is instantly surprising, while concrete device-speed and RAM numbers keep the claim from being pure spectacle.",
+  "huggingface_papers": [
+    {
+      "title": "SWE-Bench ProMax: Benchmarking Agents on Large-Scale Multilingual Code Refactoring",
+      "url": "https://arxiv.org/abs/2608.09802",
+      "tldr": "SWE-Bench ProMax turns code refactoring into a harder and cleaner agent benchmark: 170 expert-curated tasks span seven languages, average 11.4 changed files, and use rewritten specifications plus manually reviewed tests. The best tested agent resolves only 41.2%, leaving substantial headroom beyond increasingly saturated repair suites. Its main importance is methodological: benchmark difficulty is paired with explicit defenses against flawed tests and memorized gold patches.",
+      "tldr_zh": "SWE-Bench ProMax 把代码重构做成更难也更干净的 agent benchmark：170 个专家筛选任务覆盖七种语言，平均修改 11.4 个文件，并采用重写的需求描述与人工审查测试。最佳受测 agent 解决率仅 41.2%，比逐渐饱和的 repair benchmark 留出更大提升空间。它最重要的价值是方法论：提高难度的同时，正面处理错误测试与训练数据复现 gold patch 的污染问题。",
+      "upvotes": 70,
+      "authors": "Yuling Shi, Jinghan Xu, Kelin Fu, Wenhao Zeng, Shilin He, Lei Zhang, Yue Liu, Zelin Zhao, Terry Yue Zhuo, Jialun Cao, Siyu Ye, Tianyu Liu, Kai Cai, Shing-Chi Cheung, Xiaodong Gu",
+      "ai_keywords": [
+        "coding agents",
+        "software engineering",
+        "refactoring"
+      ],
+      "interest_tag": "Benchmark"
+    },
+    {
+      "title": "Macaron-V1: Towards Open Continual Learning with Self-Improvement and Mixture-of-LoRA",
+      "url": "https://arxiv.org/abs/2608.09819",
+      "tldr": "Macaron-V1 presents an open agent-model family designed to keep learning after deployment through versioned model-harness recursion and a Mixture-of-LoRA architecture. Its flagship combines a 744B GLM-5.2 base with four turn-routed LoRA specialists, while a 50B Qwen-based variant targets local use. The report is ambitious because it co-designs model, harness, RL, and infrastructure, but it also correctly states that compounding continual-learning gains remain unproven.",
+      "tldr_zh": "Macaron-V1 提出一个部署后持续学习的开放 agent-model family，通过版本化 model-harness 递归和 Mixture-of-LoRA 架构实现适应。旗舰版在 744B GLM-5.2 base 上组合四个按 turn 路由的 LoRA specialist，另有面向本地部署的 50B Qwen 版本。它的野心在于同时协同设计模型、harness、RL 与基础设施，但报告也坦率承认持续学习的复利收益仍未被证明。",
+      "upvotes": 38,
+      "authors": "Mind Lab, Vin Bo, Asher Cai, Jingwei Cao, Song Cao, Vic Cao, Amelia Chen, Andrew Chen, Kaijie Chen, Cleon Cheng, Steven Chiang, Kaixuan Fan, Hera Feng, Huan Feng, Arthur Fu, Jun Gao, Pyke Han, Nolan Ho, Ori Hong, Hailee Hou, Piers Hua, Charles Huang, Miles Jiang, Nora Jiang, Yuyi Jiang, Qiuyu Jin, Fancy Kong, Kuss Koo, Jaron Lee, Andrew Lei, Alexy Li, Dawn Li, Lucian Li, Ray Li, Ricardo Li, Smith Li, Theo Li, Allen Lin, Elliot Lin, Fan Lin, Chen Ling, Kairus Liu, Kieran Liu, Logan Liu, Neo Liu, Xiang Liu, Yuxin Lu, Maeve Luo, Pony Ma, Verity Niu, Cole Qiao, Guian Qiu, Vince Qu, Sentry, Niko Song, Vincent Wang, Bo Wu, Rio Yang, Evelyn Ye, Fiona Ye, Ina Ye, Regis Ye, Josh Ying, Atlas Zeng, Danney Zeng, Salmon Zhan, Anya Zhang, Di Zhang, Mia Zhang, Sueky Zhang, Wei Zhao, Ada Zhou, Adrian Zhou, Yuhua Zhou, Juno Zhu, Murphy Zhuang",
+      "ai_keywords": [
+        "continual learning",
+        "Mixture-of-LoRA",
+        "agent model"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "Agent Memory Distillation: Empowering Small LLM Agents with Hierarchical Teacher Memory",
+      "url": "https://arxiv.org/abs/2608.07169",
+      "tldr": "Agent Memory Distillation transfers successful trajectories from a large teacher into three memory layers for small tool-using agents: workflow, subtask, and function memory. Without weight updates, 4B–8B students gain 27.2 points on AppWorld, 11.2 on BFCL V3, and 3.4 on ToolSandbox on average. The key finding is that subtask-level examples contribute most, suggesting memory granularity and student compatibility matter more than simply storing more traces.",
+      "tldr_zh": "Agent Memory Distillation 把大 teacher 的成功轨迹蒸馏为三层 memory：workflow、subtask 和 function memory，供小型 tool-use agent 使用。无需更新权重，4B–8B student 在 AppWorld、BFCL V3 和 ToolSandbox 上平均分别提升 27.2、11.2 和 3.4 个百分点。最关键的发现是 subtask 级示例贡献最大，说明 memory 粒度与 teacher-student 兼容性比单纯堆积轨迹更重要。",
+      "upvotes": 24,
+      "authors": "Taeil Kim, Kangsan Kim, Sung Ju Hwang",
+      "ai_keywords": [
+        "agent memory",
+        "knowledge distillation",
+        "tool use"
+      ],
+      "interest_tag": "Memory"
+    },
+    {
+      "title": "Motif 3: Technical Report",
+      "url": "https://arxiv.org/abs/2608.09119",
+      "tldr": "Motif 3 is a 314B-parameter sparse MoE with 13.2B parameters activated per token, 384 routed experts, and Grouped Differential Latent Attention. It was pretrained on about 12.5T tokens and combines six RL specialist teachers plus a software-engineering teacher through multi-teacher on-policy distillation. The report is notable less for one benchmark win than for its integrated recipe for fine-grained sparsity, 256K context training, numerical stability, and unified agentic capability.",
+      "tldr_zh": "Motif 3 是一个 314B 参数、每 token 激活 13.2B 的 sparse MoE，包含 384 个 routed experts，并引入 Grouped Differential Latent Attention。它在约 12.5T tokens 上预训练，再通过六个 RL specialist teacher 和一个软件工程 teacher 做 multi-teacher on-policy distillation。其价值不只是一项 benchmark 胜负，而是给出细粒度稀疏、256K context 训练、数值稳定和统一 agent 能力的完整 recipe。",
+      "upvotes": 23,
+      "authors": "Junghwan Lim, Joon Son Chung, Sungmin Lee, Wai Ting Cheung, Gihun Cho, Minsu Ha, Sangho Kang, Beomgyu Kim, Dongseok Kim, Jangwoong Kim, Taehyun Kim, Taewhan Kim, Jeesoo Lee, Jeongdoo Lee, Junhyeok Lee, Dongpin Oh, Hyeyeon Cho, Dahye Choi, Jaeheui Her, Hanbin Jung, Changjin Kang, Minjae Kim, Youngrok Kim, Hyukjin Kweon, Hongjoo Lee, Yeongjae Park, Bokki Ryu",
+      "ai_keywords": [
+        "Mixture-of-Experts",
+        "long context",
+        "on-policy distillation"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "Ouroboros: A Self-Developing Frontier Coding Agent with Reviewed Core Evolution",
+      "url": "https://arxiv.org/abs/2608.08311",
+      "tldr": "Ouroboros makes an agent's prompts, tools, context assembly, and core code part of a reviewed evolutionary loop, so accepted changes become the runtime for later tasks. It reports 86.74% on Terminal-Bench 2.1 and 90.69% on OSWorld-Verified with Opus 5, while separating frozen benchmark snapshots from a live 161-day deployment. The compelling idea is governed self-modification, although extraordinary leaderboard claims will need independent reproduction and careful cohort control.",
+      "tldr_zh": "Ouroboros 把 agent 的 prompt、tool、context assembly 与核心代码纳入经过 review 的演化循环，使通过审查的修改成为后续任务的 runtime。它报告 Opus 5 在 Terminal-Bench 2.1 达到 86.74%、OSWorld-Verified 达到 90.69%，并把冻结 benchmark snapshot 与持续 161 天的 live deployment 分离。真正有价值的是受治理的 self-modification 思路，但这些极高 leaderboard 结果仍需要独立复现和严格 cohort 控制。",
+      "upvotes": 21,
+      "authors": "Anton Razzhigaev, Andrei Gritsaev, Andrei Kaznacheev, Nikita Dragunov, Roman Yampolskiy, Andrei Kuznetsov",
+      "ai_keywords": [
+        "self-evolving agents",
+        "coding agent",
+        "agent harness"
+      ],
+      "interest_tag": ""
+    }
+  ],
+  "alphaxiv_papers": [
+    {
+      "title": "On-Policy Self-Distillation without Any Supervision",
+      "arxiv_id": "2608.06296",
+      "url": "https://arxiv.org/abs/2608.06296",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2608.06296",
+      "tldr": "U-OPSD replaces external labels with majority consistency among a model's own on-policy rollouts. It distills disagreeing completions toward a pseudo-solution only when consensus crosses a confidence threshold, focusing updates where the model is coherently but correctably split. Across five math benchmarks it improves Qwen3 4B and 8B non-thinking models by 8.5 and 10.7 points, matching or beating supervised OPSD and GRPO without ground truth.",
+      "tldr_zh": "U-OPSD 用模型自身 on-policy rollout 的多数一致性替代外部标签。只有当共识超过置信阈值时，它才把 disagreeing completion 蒸馏向 pseudo-solution，把更新集中在模型内部有明确分歧但可纠正的位置。在五个数学 benchmark 上，它让 Qwen3 4B/8B non-thinking 分别提升 8.5/10.7 个百分点，并在无 ground truth 下追平或超过 supervised OPSD 与 GRPO。",
+      "interest_tag": ""
+    },
+    {
+      "title": "Introducing Muse Glimmer: An Open Agentic Model That Runs on Your Device",
+      "arxiv_id": "",
+      "url": "https://www.alphaxiv.org/abs/2608.introducing-muse-glimmer-open-agentic-model",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2608.introducing-muse-glimmer-open-agentic-model",
+      "tldr": "Muse Glimmer is Meta's Apache-2.0 open-weight 30B model tuned for always-on local agent workflows, including tool use, coding, long-horizon reasoning, and multimodal input. Roughly 4-bit quantization keeps the language model under 20GB and fits the full stack, including KV cache and speculative drafter, into a 24–32GB consumer-memory envelope. Its practical significance is packaging agentic distillation, failure recovery, and local inference into a model developers can run without continuous cloud access.",
+      "tldr_zh": "Muse Glimmer 是 Meta 以 Apache 2.0 发布的 30B open-weight 模型，面向 always-on 本地 agent workflow，覆盖 tool use、coding、长程 reasoning 与 multimodal input。约 4-bit 量化把语言模型压到 20GB 以内，并让 KV cache、perception encoder 与 speculative drafter 一起装进 24–32GB consumer memory。它的重要性在于把 agentic distillation、失败恢复和本地推理打包成无需持续云端连接的可部署模型。",
+      "interest_tag": ""
+    },
+    {
+      "title": "LLMRouter: Unified Infrastructure for Developing, Evaluating, and Deploying LLM Routers",
+      "arxiv_id": "2608.06867",
+      "url": "https://arxiv.org/abs/2608.06867",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2608.06867",
+      "tldr": "LLMRouter unifies routing research around five components—context encoder, model encoder, scoring function, decision rule, and learning signal—and ships an automated evaluation pipeline plus xRouteBench. The library implements more than 16 routing methods across generic, memory, vision, time-series, personalized, and multi-agent scenarios. Learned routers improve 14.6% relatively over always choosing the largest model, but no policy dominates every task and budget, making routing a systems optimization problem rather than a universal classifier.",
+      "tldr_zh": "LLMRouter 用 context encoder、model encoder、scoring function、decision rule 和 learning signal 五个组件统一 LLM routing，并提供自动评测流水线与 xRouteBench。其 library 实现 16 种以上 routing 方法，覆盖通用、memory、vision、time-series、个性化与 multi-agent 场景。Learned router 相对总选最大模型提升 14.6%，但没有策略能统治所有任务与预算，说明 routing 本质上是系统级优化而非万能分类器。",
+      "interest_tag": ""
+    },
+    {
+      "title": "AgentOPSD: Recursive Self-Distillation for Agentic Reinforcement Learning",
+      "arxiv_id": "2608.05987",
+      "url": "https://arxiv.org/abs/2608.05987",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2608.05987",
+      "tldr": "AgentOPSD addresses sparse credit in long-horizon agent RL by aggregating teacher-student log-probability gaps into turn-level Bayesian evidence. Recursive log-odds updates measure how each action changes the belief in eventual success, then reshape GRPO advantages without adding a critic or extra rollouts. It reaches 89.1% success on ALFWorld with Qwen2.5-7B and degrades less as trajectories lengthen, supporting history-dependent credit over uniform trajectory rewards.",
+      "tldr_zh": "AgentOPSD 把 teacher-student log-probability gap 聚合为 turn-level Bayesian evidence，解决 long-horizon agent RL 的稀疏 credit assignment。递归 log-odds 更新衡量每个 action 如何改变最终成功概率，再据此重塑 GRPO advantage，无需额外 critic 或 rollout。Qwen2.5-7B 在 ALFWorld 上达到 89.1% success，且轨迹变长时退化更慢，支持 history-dependent credit 优于整条轨迹统一奖励。",
+      "interest_tag": ""
+    },
+    {
+      "title": "HarnessOpt-Bench: Evaluating LLMs at Harness Optimization",
+      "arxiv_id": "2608.06301",
+      "url": "https://arxiv.org/abs/2608.06301",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2608.06301",
+      "tldr": "HarnessOpt-Bench evaluates whether an LLM can improve an agent's prompts, tools, memory, and control flow under expensive, stochastic, and budgeted feedback. A trusted execution environment hides the held-out partition, meters target-agent resources, and preserves candidate versions across 111 runs on four downstream tasks. Results show optimizer-model choice matters more than the coding harness, while current systems underuse detailed traces and are often bottlenecked by limited case passes.",
+      "tldr_zh": "HarnessOpt-Bench 评测 LLM 能否在昂贵、随机且受预算约束的 feedback 下改进 agent 的 prompt、tool、memory 与 control flow。Trusted execution environment 隐藏 held-out partition、计量 target-agent 资源并保存 candidate version，覆盖四项任务的 111 次 run。结果显示 optimizer model 的影响大于 coding harness，而当前系统普遍没有充分利用详细 trace，并常受 case-pass budget 限制。",
+      "interest_tag": "Benchmark"
+    }
+  ],
+  "github_repos": [
+    {
+      "name": "eternityspring/shuohao-skills",
+      "url": "https://github.com/eternityspring/shuohao-skills",
+      "tldr": "A compact collection of production skills for turning novels into short-drama assets, including character bibles, model sheets, adaptation plans, episode outlines, and asset inventories. The workflows target Claude Code and Codex and include scripted quality gates rather than relying only on free-form prompting. Its rapid adoption shows that domain-specific, installable skills with a visible before-and-after artifact are currently easier to understand and share than another general agent framework.",
+      "tldr_zh": "这是一个面向短剧生产的紧凑 skill 集合，可把小说转成角色设定、形象图、改编方案、分集梗概和资产清单。Workflow 面向 Claude Code 与 Codex，并加入脚本化质量门，而不是只依赖自由 prompt。它的快速传播说明：有明确前后产物、可直接安装的垂直 skill，比又一个通用 agent framework 更容易理解和分享。",
+      "stars": 668,
+      "language": "JavaScript",
+      "interest_tag": ""
+    },
+    {
+      "name": "liujunxibaba/douyin-tiktok-story-skill-agent",
+      "url": "https://github.com/liujunxibaba/douyin-tiktok-story-skill-agent",
+      "tldr": "This local-first skill turns a searchable SQLite reference database into a workflow for producing original Douyin and TikTok story scripts. It separates the skill code from the content database, installs both locally, and includes health checks so the workflow can run without network access. The project is valuable as an example of packaging proprietary or evolving domain knowledge behind a reusable agent procedure rather than embedding everything in one prompt.",
+      "tldr_zh": "这个 local-first skill 把可搜索的 SQLite reference database 接入抖音/TikTok 原创剧情脚本 workflow。它把 skill 代码与内容数据库分离，本地组合安装，并带 health check，因此可在无网络环境运行。其价值在于示范如何把私有或持续演进的领域知识封装到可复用 agent procedure 后面，而不是全部塞进一条 prompt。",
+      "stars": 222,
+      "language": "Python",
+      "interest_tag": ""
+    },
+    {
+      "name": "i3T4AN/KADATH",
+      "url": "https://github.com/i3T4AN/KADATH",
+      "tldr": "KADATH evolves populations of complete agent frameworks rather than optimizing a single prompt: agents compete on a measurable goal, are graded independently, and pass successful structure into later generations. Each genome can include prompts, tools, workflow, memory, and implementation, making selection act on the full runtime. The evolutionary framing is compelling for automated harness search, though its practical value depends on evaluator quality and the potentially large token budget.",
+      "tldr_zh": "KADATH 演化的是完整 agent framework population，而非单条 prompt：多个 agent 围绕可度量目标竞争、独立评分，并把成功结构遗传到后续 generation。每个 genome 可包含 prompt、tool、workflow、memory 与实现代码，因此 selection 作用于完整 runtime。它对自动 harness search 很有吸引力，但实际价值高度依赖 evaluator 质量和可能巨大的 token budget。",
+      "stars": 175,
+      "language": "Python",
+      "interest_tag": "Agent Swarm"
+    },
+    {
+      "name": "surya-koritala/loomfeed",
+      "url": "https://github.com/surya-koritala/loomfeed",
+      "tldr": "Loomfeed is a self-hosted Reddit-like forum built for humans and AI agents, with provenance, reputation, epistemic-status labels, and explicit agent debates. The Go, Next.js, and PostgreSQL stack turns agent participation into a deployable social system rather than a demo chat room. Its interesting bet is that mixed human-agent communities need native credibility and provenance primitives before they need more autonomous posting volume.",
+      "tldr_zh": "Loomfeed 是一个面向人类与 AI agent 的 self-hosted Reddit 式社区，原生提供 provenance、reputation、epistemic-status label 与 agent debate。Go、Next.js 和 PostgreSQL 技术栈把 agent participation 做成可部署 social system，而非聊天 demo。它最有意思的判断是：human-agent 混合社区首先需要可信度和来源机制，而不是更多自动发帖量。",
+      "stars": 157,
+      "language": "Go",
+      "interest_tag": ""
+    },
+    {
+      "name": "miqdadbadjuber/anti-slop",
+      "url": "https://github.com/miqdadbadjuber/anti-slop",
+      "tldr": "Anti-Slop packages 38 design and copy rules into a reference that coding agents can use to avoid generic AI-generated interfaces. The rules are tiered, include a liveliness toolkit, and end with a mandatory delivery gate, turning taste into a checkable workflow. It spreads well because it names a widely felt failure mode in memorable language and offers an immediately installable countermeasure.",
+      "tldr_zh": "Anti-Slop 把 38 条 design/copy rule 打包成 coding agent 可调用的参考，用于避免千篇一律的 AI-generated UI。规则按层级组织，包含 liveliness toolkit 和强制 delivery gate，把 taste 转成可检查 workflow。它容易传播，因为用一个有记忆点的词命名了大家都感受到的失败模式，并立即给出可安装的解法。",
+      "stars": 144,
+      "language": "Unknown",
+      "interest_tag": ""
+    }
+  ],
+  "hackernews": [
+    {
+      "title": "Muse Glimmer: 30B-parameter model optimized for always-on local agent workflows",
+      "url": "https://research.meta.ai/blog/introducing-muse-glimmer-open-agentic-model",
+      "tldr": "Meta's Muse Glimmer is a 30B Apache-2.0 open-weight model optimized for always-on local agents, with tool use, coding, multimodal input, and failure recovery. Around 4-bit quantization keeps the language model below 20GB and the full runtime within 24–32GB of memory, while a DFlash drafter accelerates decoding. The HN response reflects a rare combination of frontier-lab branding, downloadable weights, and a concrete consumer-hardware deployment story.",
+      "tldr_zh": "Meta 的 Muse Glimmer 是一个 30B、Apache 2.0 open-weight 模型，面向 always-on local agent，覆盖 tool use、coding、multimodal input 与 failure recovery。约 4-bit 量化把语言模型控制在 20GB 以下，完整 runtime 可进入 24–32GB memory，DFlash drafter 再加速 decoding。HN 的强烈反响来自少见的组合：frontier lab 背书、可下载权重和具体 consumer hardware 部署故事。",
+      "points": 1103,
+      "num_comments": 603,
+      "interest_tag": ""
+    },
+    {
+      "title": "Docker Sandboxes – Disposable, isolated sandboxes for AI agents",
+      "url": "https://www.docker.com/products/docker-sandboxes/",
+      "tldr": "Docker Sandboxes runs coding agents inside disposable microVMs with only the project workspace mounted, allowing package installation, configuration changes, and nested containers without touching the host. Filesystem, network, and credential controls can be defined centrally, and the product supports several major coding-agent CLIs. The launch reframes “YOLO mode” from a permission-prompt problem into an infrastructure isolation problem, which is a more enforceable security boundary.",
+      "tldr_zh": "Docker Sandboxes 把 coding agent 放进 disposable microVM，只挂载 project workspace，使其可以安装 package、修改 config、运行 nested container，同时不触碰 host。Filesystem、network 与 credential control 可集中定义，并支持多个主流 coding-agent CLI。它把「YOLO mode」从 permission prompt 问题改写成 infrastructure isolation 问题，提供了更可强制执行的 security boundary。",
+      "points": 649,
+      "num_comments": 364,
+      "interest_tag": ""
+    },
+    {
+      "title": "Qwen3.8 Max now ranked as the best overall model by agentic index",
+      "url": "https://artificialanalysis.ai/?intelligence=agentic-index",
+      "tldr": "The linked Artificial Analysis ranking places Qwen3.8 Max at the top of its agentic index, drawing attention to model performance on end-to-end agent workloads rather than chat-only scores. The broader index combines multiple demanding evaluations and exposes cost and speed alongside capability, making deployment trade-offs visible. The caveat is that any composite rank inherits benchmark weighting and harness choices, so the headline should be read as one evaluation regime rather than universal model supremacy.",
+      "tldr_zh": "链接中的 Artificial Analysis 排名把 Qwen3.8 Max 放在 agentic index 首位，使关注点从 chat-only 分数转向端到端 agent workload。该体系同时展示 capability、cost 与 speed，让部署 trade-off 更可见。需要注意，任何 composite rank 都继承 benchmark 权重和 harness 选择，因此这个标题应理解为特定 evaluation regime 的第一，而非普适模型霸权。",
+      "points": 546,
+      "num_comments": 353,
+      "interest_tag": "Benchmark"
+    },
+    {
+      "title": "Humans missed 1 in 3 threats approving AI agent commands across 40k game runs",
+      "url": "https://scalex.dev/blog/ai-agent-permissions-stats/",
+      "tldr": "A browser-game dataset covering more than 40,000 runs and 409,000 approval decisions found that players missed one in three malicious agent commands on average. Familiar wrappers were especially dangerous: `npm run analyze` was approved 64.7% of the time despite suspicious payload context, while vigilance also caused heavy over-blocking of benign commands. Although this is not a controlled academic study, it strongly illustrates why repeated human approval is noisy, fatigue-prone, and insufficient as the final agent security boundary.",
+      "tldr_zh": "一项 browser game 收集了 40,000 多次 run 和 409,000 次审批决策，玩家平均漏掉三分之一恶意 agent command。熟悉的 wrapper 尤其危险：即使历史中显示可疑 payload，`npm run analyze` 仍有 64.7% 被批准；与此同时，保持警惕又会大量误拦正常命令。尽管它不是受控学术研究，但清楚展示了重复 human approval 噪声高、易疲劳，不能充当最终 agent security boundary。",
+      "points": 338,
+      "num_comments": 245,
+      "interest_tag": ""
+    },
+    {
+      "title": "Show HN: Needle2: 14MB agentic LLM for phones, wearables, smart home and robots",
+      "url": "https://cactuscompute.com/needle",
+      "tldr": "Needle 2 is a 45M-parameter tool-calling model packaged as a 14MB binary using about 28MB of session RAM. It uses CQ2-bit quantization, constrained byte-level grammar, confidence-based cloud escalation, and reports roughly 500 tokens per second decode on Raspberry Pi 5. The key systems insight is to narrow on-device intelligence to schema-grounded actions and extraction, where tiny specialists can be private, fast, and reliable without pretending to be general chat models.",
+      "tldr_zh": "Needle 2 是一个 45M 参数 tool-calling 模型，封装为 14MB binary，session RAM 约 28MB。它采用 CQ2-bit quantization、byte-level constrained grammar 和基于 confidence 的 cloud escalation，并报告 Raspberry Pi 5 上约 500 tokens/s decode。核心系统 insight 是把 on-device intelligence 收缩为 schema-grounded action 与 extraction，让极小 specialist 获得隐私、速度与可靠性，而不假装自己是通用 chat model。",
+      "points": 302,
+      "num_comments": 110,
+      "interest_tag": ""
+    }
+  ]
+}
