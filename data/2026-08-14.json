@@ -1,0 +1,221 @@
+{
+  "date": "2026-08-14",
+  "generated_at": "2026-08-14T16:05:04+08:00",
+  "briefing_zh": "今天最清晰的主线不是单个更大的模型，而是 agent 能力正在从 weights 向完整 runtime stack 外溢。**DarwinX** 用 population-level evolutionary search 同时改写 prompts、tools、skills 与 control flow，**AI4AI at Test-Time** 则让强模型直接为弱模型生成 inference-time harness；再加上 **LLMRouter** 的统一路由基础设施，研究界正在把 harness、router 与 evaluator 当作一等模型组件，而非部署后的胶水代码。\n\n第二条主线是 world model 从「看起来像」走向「是否真的服从 action」。**DreamX-Phi 1.0** 明确区分视觉 realism 与 action faithfulness，**PlayWorld** 等同期工作也开始用 agent player 和长程目标来检验交互模型；这意味着评测重心正在从单帧质量转向可执行、可追责的 trajectory。与此同时，**Spatial Memory Agent** 与 **Why Does CLAUDE.md Keep Growing?** 分别从 procedure retrieval 和 rationale provenance 处理记忆问题：真正有用的 memory 不只是存得多，而是知道何时复用、为何保留、何时删除。\n\n开源与社区侧出现了明显的 local-first 反弹。**Muse Glimmer** 把 30B agentic model 压进 24–32GB 消费级设备的目标获得 HN 1,201 points，**Needle 2** 更把 tool calling 缩到 14MB、28MB RAM；能力尺度两端都在证明，agent 产品不必默认依赖 cloud frontier model。与此配套，**Docker Sandboxes**、**Moli** 和 **mcp-memory** 分别补 isolation、browser runtime 与 durable local state，说明下一轮竞争会发生在「可长期运行且不失控」的整套系统上。\n\n安全信号也同步升温：**Stealing Reasoning Traces from Proprietary LLM APIs** 把 encrypted reasoning 暴露为潜在架构侧信道，而《The Economist》关于 agent 欺骗与失信的讨论获得 199 条评论。二者共同指向一个现实：更强 autonomy 会放大 runtime boundary、provenance 和 evidence gate 的价值。今天最值得带走的判断是，agent 时代的核心 moat 正从单模型 benchmark 分数，迁移到 harness 搜索、环境隔离、记忆治理和可验证执行的组合。",
+  "briefing_en": "Today's clearest signal is not a single larger model, but the migration of agent capability from weights into the full runtime stack. **DarwinX** uses population-level evolutionary search to modify prompts, tools, skills, and control flow together, while **AI4AI at Test-Time** asks a stronger model to synthesize an inference-time harness for a weaker one. Alongside **LLMRouter**, this makes harnesses, routers, and evaluators first-class model components rather than post-deployment glue.\n\nA second theme is the shift in world models from looking plausible to obeying actions faithfully. **DreamX-Phi 1.0** explicitly separates visual realism from action faithfulness, while contemporaneous work such as **PlayWorld** evaluates interactive models through agent players and long-horizon objectives. In parallel, **Spatial Memory Agent** and **Why Does CLAUDE.md Keep Growing?** attack memory from procedure retrieval and rationale provenance: useful memory is not just more storage, but knowing when to reuse, why to retain, and when to delete.\n\nOpen source and community attention show a strong local-first countercurrent. **Muse Glimmer** targets 30B agentic capability on 24–32GB consumer devices and drew 1,201 HN points, while **Needle 2** compresses tool calling into a 14MB artifact using about 28MB of RAM. Supporting projects—**Docker Sandboxes**, **Moli**, and **mcp-memory**—supply isolation, browser runtime, and durable local state, suggesting the next contest is over systems that can run continuously without running wild.\n\nSafety pressure is rising at the same time. **Stealing Reasoning Traces from Proprietary LLM APIs** presents encrypted reasoning as a possible architectural side channel, and The Economist's discussion of deceptive agents attracted 199 comments. The shared lesson is that greater autonomy increases the value of runtime boundaries, provenance, and evidence gates; the emerging moat is the combination of harness search, isolation, memory governance, and verifiable execution, not benchmark scores alone.",
+  "viral_analysis_zh": "今天最可能持续发酵的是 **Muse Glimmer**：30B、Apache 2.0、consumer hardware、local agent 四个标签同时命中开发者对隐私、成本和自主控制的需求，HN 1,201 points 已形成强 social proof。它的传播 framing 也很聪明——不讲抽象的模型升级，而讲「一台现有 Mac/PC 就能常驻运行 agent」；**Docker Sandboxes** 紧随其后，则用一句「YOLO mode, safely」把复杂安全基础设施压缩成可复述的产品承诺。",
+  "viral_analysis_en": "**Muse Glimmer** is today's strongest viral candidate: 30B, Apache 2.0, consumer hardware, and local agents jointly address privacy, cost, and control, with 1,201 HN points already providing social proof. Its framing is unusually effective—it sells an always-on agent on a Mac or PC rather than an abstract model upgrade—while **Docker Sandboxes** uses the equally memorable promise “YOLO mode, safely” to compress a complex security story into one line.",
+  "huggingface_papers": [
+    {
+      "title": "DreamX-Phi 1.0: Action-Conditioned Video World Model for Robotic Manipulation",
+      "url": "https://arxiv.org/abs/2608.13489",
+      "tldr": "DreamX-Phi 1.0 predicts future robot observations from an initial frame, a language instruction, and a prescribed sequence of end-effector and gripper actions. Its key contribution is to separate visual realism from action faithfulness and evaluate whether the generated rollout actually respects the controls. This matters because training or planning on attractive but causally wrong video can silently corrupt a robotics pipeline.",
+      "tldr_zh": "DreamX-Phi 1.0 根据初始画面、语言指令以及末端执行器与夹爪动作序列，预测机器人后续观测。它的关键不是只追求视频逼真，而是把视觉真实感与动作忠实度分开评估，检查生成轨迹是否真的服从控制。对机器人 world model 而言，这很重要：看起来合理但因果错误的 rollout 会悄悄污染训练与规划。",
+      "upvotes": 61,
+      "authors": "DreamX Team, Rui Chen, Xiangxiang Chu, Geng Li, Jifan Li, Qingfeng Shi, Datao Tang, Jing Tang, Jun Wang, Pengfei Zhang",
+      "ai_keywords": [
+        "world model",
+        "robotics",
+        "action-conditioned video"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "LLMRouter: Unified Infrastructure for Developing, Evaluating, and Deploying LLM Routers",
+      "url": "https://arxiv.org/abs/2608.06867",
+      "tldr": "LLMRouter reframes model routing as a unified sequential decision process spanning query features, candidate models, quality, latency, and cost. It supplies common infrastructure for developing, evaluating, and deploying routers that would otherwise be compared under incompatible assumptions. The practical value is reproducible cost-quality optimization rather than another isolated routing heuristic.",
+      "tldr_zh": "LLMRouter 将模型路由统一表述为序贯决策过程，同时覆盖 query 特征、候选模型、质量、延迟与成本。它提供共同的开发、评测和部署基础设施，避免不同 router 在不兼容设定下各说各话。其价值不在于又一个孤立 heuristic，而在于让 cost-quality 优化可复现、可公平比较。",
+      "upvotes": 53,
+      "authors": "Tao Feng, Fangxu Yu, Haozhen Zhang, Zhongjie Dai, Liangqi Yuan, Zijie Lei, Weizhi Zhang, Kunlun Zhu, Haodong Yue, Keyang Xuan, Ge Liu, Jiaxuan You",
+      "ai_keywords": [
+        "LLM routing",
+        "inference infrastructure",
+        "cost optimization"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "Intern-S2-Preview: Scientific Agentic Foundation Model",
+      "url": "https://arxiv.org/abs/2608.13505",
+      "tldr": "Intern-S2-Preview is a scientific agentic foundation-model family built to reason across heterogeneous scientific evidence, use tools and environments, and sustain long-horizon investigations. The work treats scientific discovery as an integrated agent problem rather than a collection of disconnected QA tasks. If its evaluations hold up, it offers a stronger substrate for end-to-end AI-for-science workflows.",
+      "tldr_zh": "Intern-S2-Preview 是面向科学任务的 agentic foundation model 系列，目标是跨异构科学证据推理、调用工具与环境，并维持长程研究过程。它把科学发现视为一个整合的 agent 问题，而不是彼此割裂的 QA 集合。如果评测经得起复核，它会成为端到端 AI-for-science workflow 更强的底座。",
+      "upvotes": 37,
+      "authors": "Lei Bai, Jiaqi Cao, Chiyu Chen, Guanzhou Chen, Kai Chen, Guangran Cheng, Erfei Cui, Xuanlang Dai, Shengyuan Ding, Shangheng Du, Yanhui Duan, Yue Fan, Youqing Fang, Quan Gan, Yuanyuan Gao, Jiaye Ge, Lixin Gu, Yuzhe Gu, Qipeng Guo, Junjun He, Xin Hong, Ming Hu, Zhouqi Hua, Haian Huang, Junhao Huang, Zixian Huang, Minxi Jin, Lingkai Kong, Alexander Lam, Zehao Li, Zonglin Li, Tianhao Liang, Dahua Lin, Junyao Lin, Tianyang Lin, Zhouhan Lin, Jiangning Liu, Jin Liu, Kuikun Liu, Wenran Liu, Yifei Liu, Yuhong Liu, Yuhong Liu, Zhoumianze Liu, Ziyan Liu, Ziyu Liu, Haijun Lv, Han Lv, Chengqi Lyu, Le Ma, Ningsheng Ma, Zerun Ma, Haoyang Peng, Runyu Peng, Jifei Shan, Zixin Shang, Kou Shi, Xiang Shi, Qisheng Su, Xuerui Su, Hao Sun, Xiao Sun, Yanan Sun, Yu Sun, Huanze Tang, Yinghao Tang, Wenhui Tian, Zhongbo Tian, Bingli Wang, Haomin Wang, Jiarui Wang, Jingzhi Wang, Rui Wang, Xiquan Wang, Yi Wang, Zhecan Wang, Ziyi Wang, Zun Wang, Rubin Wei, Lianyi Wu, Wen Wu, Yue Wu, Yuhan Wu, Zhenyu Wu, Zijian Wu, Shuhao Xing, Jun Xu, Xingle Xu, Xuenan Xu, Xiangchao Yan, Ziang Yan, Bowen Yang, Danni Yang, Lin Yang, Zhiqi Yang, Qian Yao, Haochen Ye, Peng Ye, Jinhui Yin, Jiashuo Yu, Dingbo Yuan, Fei Yuan, Yuhang Zang, Bo Zhang, Chao Zhang, Chen Zhang, Hongjie Zhang, Junming Zhang, Wenlong Zhang, Wenwei Zhang, Yiming Zhang, Zhuo Zhang, Ziyang Zhang, Haiteng Zhao, Penghao Zhao, Yibo Zhao, Zhonghan Zhao, Zhihang Zhong, Bowen Zhou, Peiheng Zhou, Xin Zhou, Xinyu Zhou, Yunhua Zhou, Dongsheng Zhu, Yicheng Zou",
+      "ai_keywords": [
+        "scientific agents",
+        "multimodal reasoning",
+        "tool use"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "DarwinX: Evolving Agent Harnesses Through Natural Selection",
+      "url": "https://arxiv.org/abs/2608.07545",
+      "tldr": "DarwinX evolves complete agent harnesses—prompts, tools, skills, and control flow—using a population rather than a single self-improvement lineage. Selection preserves strong variants while crossover and mutation search beyond local edits, with evaluation guarding against regressions across tasks. The paper is important because it moves AI-for-AI from prompt tweaking toward system-level evolutionary search.",
+      "tldr_zh": "DarwinX 不再沿单一 self-improvement 路径修改 prompt，而是以 population 为单位共同演化 prompt、tools、skills 与 control flow 组成的完整 agent harness。selection 保留强变体，crossover 与 mutation 跳出局部编辑，同时通过跨任务评测防止能力回退。它的重要性在于把 AI-for-AI 从 prompt 微调推进到系统级 evolutionary search。",
+      "upvotes": 33,
+      "authors": "Yifan Zhang, Yutong Dai, Juntao Tan, Luyu Yang, Rishi Mullur, Thai Hoang, Zhiyuan Hu, James Zhu, Phil Mui, Silvio Savarese, Ran Xu, Zeyuan Chen",
+      "ai_keywords": [
+        "agent harness",
+        "self-improvement",
+        "evolutionary search"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "Spatial Memory Agent: Experience-Grounded Procedure Memory for Spatial Intelligence",
+      "url": "https://arxiv.org/abs/2608.12743",
+      "tldr": "Spatial Memory Agent stores experience-grounded procedures so a VLM agent can reuse successful spatial reasoning patterns instead of relearning them through parameter updates. The memory is procedural and task-oriented: it captures how to solve spatial problems and retrieves relevant experience at inference time. This is a useful middle ground between expensive post-training and stateless prompting for embodied spatial intelligence.",
+      "tldr_zh": "Spatial Memory Agent 保存由真实经验支撑的 procedure memory，让 VLM agent 能复用成功的空间推理过程，而不必每次都靠参数更新重新学习。这里的 memory 是面向任务的程序性知识：记录如何解决空间问题，并在 inference 时检索相关经验。它为具身空间智能提供了介于昂贵 post-training 与无状态 prompting 之间的实用路线。",
+      "upvotes": 25,
+      "authors": "Haokai Zhang, Yuhang Ding, Yunshu Zhou, Xinze Du, Shengtao Zhang, Zhiyue Zhao, Yuling Xi, Hao Chen",
+      "ai_keywords": [
+        "spatial intelligence",
+        "procedural memory",
+        "VLM agent"
+      ],
+      "interest_tag": "Memory"
+    }
+  ],
+  "alphaxiv_papers": [
+    {
+      "title": "Stealing Reasoning Traces from Proprietary LLM APIs",
+      "arxiv_id": "2608.09867",
+      "url": "https://arxiv.org/abs/2608.09867",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2608.09867",
+      "tldr": "The paper reports an architectural side channel in proprietary LLM APIs: encrypted reasoning blocks returned to clients can allegedly be transformed into plaintext through weaker models in the same provider ecosystem. The attack surface goes beyond model theft to secret extraction, jailbreaks, and hidden prompt injection. Its popularity reflects a concrete warning that hiding chain-of-thought cryptographically is not equivalent to isolating it architecturally.",
+      "tldr_zh": "论文报告了一种 proprietary LLM API 的架构侧信道：返回给客户端的加密 reasoning block，据称可借助同一 provider 生态中的较弱模型还原为明文。风险不止是模型蒸馏，还包括 secret extraction、jailbreak 与隐形 prompt injection。它受到关注，是因为明确提醒业界：密码学隐藏 chain-of-thought，不等于在架构上真正隔离它。",
+      "interest_tag": ""
+    },
+    {
+      "title": "Why Does CLAUDE.md Keep Growing? Catastrophic Remembering in Agentic Coding",
+      "arxiv_id": "2608.11095",
+      "url": "https://arxiv.org/abs/2608.11095",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2608.11095",
+      "tldr": "This study explains unbounded growth in CLAUDE.md-style instruction files as catastrophic remembering: agents preserve rules after the rationale and evidence for those rules have disappeared. Adding outcome-grounded prompt comments makes instructions auditable and safely removable, cutting excess growth from 211.3% to 1.4% while improving correctness by 11.6 percentage points. It turns agent memory hygiene from manual cleanup into an evidence-tracking problem.",
+      "tldr_zh": "这项工作把 CLAUDE.md 一类 instruction file 的无限膨胀解释为 catastrophic remembering：规则被保留下来，但当初添加规则的原因与证据已经丢失。通过写入 outcome-grounded prompt comments，instruction 变得可审计、可安全删除，使额外增长从 211.3% 降到 1.4%，正确率还提升 11.6 个百分点。它把 agent memory hygiene 从人工清理问题转化为证据追踪问题。",
+      "interest_tag": "Memory"
+    },
+    {
+      "title": "AI4AI at Test-Time: Strong-to-Weak Capability Transfer via Harnesses",
+      "arxiv_id": "2608.12307",
+      "url": "https://arxiv.org/abs/2608.12307",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2608.12307",
+      "tldr": "AI4AI at Test-Time asks a strong builder model to synthesize an inference-time harness for a weaker target model, transferring capability without changing the target weights. The generated scaffold improves GPT-5.4-mini by as much as 87% relatively on Theory-of-Mind evaluations and approaches human-engineered harnesses. The result strengthens the case that model capability is jointly determined by weights and runtime architecture.",
+      "tldr_zh": "AI4AI at Test-Time 让强 builder model 为较弱 target model 自动合成 inference-time harness，在不更新 target 权重的情况下迁移能力。生成的 scaffold 在 Theory-of-Mind 评测上让 GPT-5.4-mini 获得最高 87% 的相对提升，并接近人工设计的 harness。结果进一步说明，模型能力是 weights 与 runtime architecture 的共同产物。",
+      "interest_tag": ""
+    },
+    {
+      "title": "BDH-CQ: In-Context Learning with Recurrent Latent Reasoning",
+      "arxiv_id": "2608.09888",
+      "url": "https://arxiv.org/abs/2608.09888",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2608.09888",
+      "tldr": "BDH-CQ combines in-context learning with recurrent latent reasoning, updating a continuous hidden state from demonstrations and iterating without verbalizing intermediate tokens. A 150M-parameter instance reaches 29.5% pass@2 on ARC-AGI-1 at a reported cost of $0.00070 per task. The striking point is not raw frontier accuracy but a new cost-efficient compute path between fixed-depth inference and long textual chains of thought.",
+      "tldr_zh": "BDH-CQ 将 in-context learning 与 recurrent latent reasoning 结合：模型从 demonstrations 更新连续 hidden state，并在不输出中间语言 token 的情况下反复计算。一个 150M 参数实例在 ARC-AGI-1 上达到 29.5% pass@2，报告的单题成本仅 0.00070 美元。亮点不是绝对 frontier accuracy，而是在固定深度推理与冗长文字 CoT 之间提供了更省成本的计算路径。",
+      "interest_tag": ""
+    },
+    {
+      "title": "Small-Scale Experiments: Are We There Yet?",
+      "arxiv_id": "2608.11859",
+      "url": "https://arxiv.org/abs/2608.11859",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2608.11859",
+      "tldr": "Small-Scale Experiments argues that scaling laws remain visible in very small foundation models when hyperparameters are tuned with enough care. The apparent failure of tiny proxies often comes from greater hyperparameter sensitivity, not from an intrinsic breakdown of scaling behavior. This gives researchers a methodology for testing model-centric hypotheses more cheaply before committing to expensive runs.",
+      "tldr_zh": "Small-Scale Experiments 认为，只要足够严谨地调节 hyperparameters，极小 foundation model 中依然能观察到可靠 scaling law。小模型 proxy 经常失效，原因可能是它们对超参更敏感，而不是 scaling behavior 本身在小尺度彻底崩溃。这为研究者提供了先低成本验证 model-centric hypothesis、再投入昂贵训练的实验方法。",
+      "interest_tag": ""
+    }
+  ],
+  "github_repos": [
+    {
+      "name": "i3T4AN/KADATH",
+      "url": "https://github.com/i3T4AN/KADATH",
+      "tldr": "KADATH is an evolutionary multi-agent runtime that generates populations of agents, grades them against measurable objectives, and carries the strongest traits into later epochs. Its README documents reproducible runs, independent evaluation, mutation, and heredity rather than presenting only a concept demo. The project is interesting as an open implementation of population-level agent improvement, although its very rapid star growth still warrants watching.",
+      "tldr_zh": "KADATH 是一个 evolutionary multi-agent runtime：生成 agent population，按可测目标独立评分，再把强者特征遗传到后续 epoch。README 给出了可复现运行、独立 evaluation、mutation 与 heredity 流程，不只是概念展示。它是 population-level agent improvement 的开源实现，但短时间内极快的 star 增长仍值得持续观察。",
+      "stars": 351,
+      "language": "Python",
+      "interest_tag": "Agent Swarm"
+    },
+    {
+      "name": "0xsline/awesome-deepseek-harness",
+      "url": "https://github.com/0xsline/awesome-deepseek-harness",
+      "tldr": "This repository maps the emerging DeepSeek Harness ecosystem across plugins, tools, infrastructure, and public integration points. Its value is discovery and interoperability: users can see what exists and how components fit together without searching scattered repositories. Strong early forks suggest it is being used as a practical ecosystem index rather than merely bookmarked hype.",
+      "tldr_zh": "该仓库系统整理 DeepSeek Harness 生态中的 plugins、tools、infrastructure 与公开 integration points。它的价值在于 discovery 与 interoperability：用户不必在分散仓库中搜索，就能理解组件版图与组合方式。较高的早期 fork 数也说明它更像实用生态索引，而不只是被收藏的 hype list。",
+      "stars": 276,
+      "language": "Python",
+      "interest_tag": ""
+    },
+    {
+      "name": "lexmount/moli",
+      "url": "https://github.com/lexmount/moli",
+      "tldr": "Moli is a Rust browser designed for AI agents, emphasizing structured page state first and pixels only when needed. That interface can reduce token and bandwidth overhead compared with feeding full screenshots into every browser step, while retaining visual fallback. The project targets a central runtime bottleneck for web agents: stable, efficient observation and action rather than another reasoning wrapper.",
+      "tldr_zh": "Moli 是面向 AI agent 的 Rust browser，优先提供结构化页面状态，只在必要时使用 pixels。相比每一步都向模型输入完整截图，这种接口有望降低 token 与带宽开销，同时保留视觉 fallback。它瞄准 web agent 的核心 runtime 瓶颈：稳定高效的 observation/action，而不是再包一层 reasoning wrapper。",
+      "stars": 269,
+      "language": "Rust",
+      "interest_tag": ""
+    },
+    {
+      "name": "vercel-labs/eve-software-factory-template",
+      "url": "https://github.com/vercel-labs/eve-software-factory-template",
+      "tldr": "Foreman is a Vercel template for an agent software factory that moves GitHub or Linear tasks through classification, implementation, review, and draft-PR stations. Humans remain responsible for judgment and merge decisions while specialized agents handle repeatable stages. The template makes multi-agent orchestration tangible by packaging a usable workflow instead of only describing a reference architecture.",
+      "tldr_zh": "Foreman 是 Vercel 提供的 agent software factory template，把 GitHub 或 Linear task 依次送过 classification、implementation、review 与 draft-PR stations。人类保留判断与 merge 决策，specialized agents 负责可重复阶段。它把 multi-agent orchestration 打包成可直接使用的 workflow，而不是只画一张 reference architecture。",
+      "stars": 217,
+      "language": "TypeScript",
+      "interest_tag": "Agent Swarm"
+    },
+    {
+      "name": "fellowgeek/mcp-memory",
+      "url": "https://github.com/fellowgeek/mcp-memory",
+      "tldr": "mcp-memory is an MCP server for persistent agent memory, combining Open Knowledge Format records with SQLite FTS5 retrieval. It gives coding and desktop agents a local, inspectable store rather than tying memory to one vendor or cloud service. The appeal is architectural simplicity: standardized records, local persistence, and conventional full-text search are enough for many durable-memory use cases.",
+      "tldr_zh": "mcp-memory 是一个持久化 agent memory 的 MCP server，将 Open Knowledge Format 记录与 SQLite FTS5 retrieval 组合起来。它给 coding/desktop agents 提供本地、可检查的存储，不把 memory 绑定到单一 vendor 或 cloud service。其吸引力来自架构克制：标准化记录、本地持久化和传统全文检索，已足以覆盖不少 durable-memory 场景。",
+      "stars": 124,
+      "language": "Python",
+      "interest_tag": "Memory"
+    }
+  ],
+  "hackernews": [
+    {
+      "title": "Muse Glimmer: 30B-parameter model optimized for always-on local agent workflows",
+      "url": "https://research.meta.ai/blog/introducing-muse-glimmer-open-agentic-model",
+      "tldr": "Meta released Muse Glimmer, a 30B open-weight model under Apache 2.0 for always-on local agents, coding, tool use, multimodal input, and judge workflows. A roughly 4-bit build fits the language model under 20GB, targeting 24–32GB consumer hardware, with planned llama.cpp, MLX, and ExecuTorch support. Its 1,201-point HN reception shows that private, offline agent capability on hardware people already own is a much stronger story than another cloud-only benchmark win.",
+      "tldr_zh": "Meta 以 Apache 2.0 发布 Muse Glimmer：一款 30B open-weight model，面向 always-on local agent、coding、tool use、multimodal input 与 judge workflow。约 4-bit 的版本把 language model 压到 20GB 以下，瞄准 24–32GB consumer hardware，并计划支持 llama.cpp、MLX 与 ExecuTorch。HN 获得 1,201 points，说明「在用户已有硬件上运行私密、离线 agent」比又一个 cloud-only benchmark 胜利更有传播力。",
+      "points": 1201,
+      "num_comments": 638,
+      "interest_tag": ""
+    },
+    {
+      "title": "Docker Sandboxes – Disposable, isolated sandboxes for AI agents",
+      "url": "https://www.docker.com/products/docker-sandboxes/",
+      "tldr": "Docker Sandboxes runs coding agents inside disposable microVMs with controlled filesystem, network, and credential access. Agents can install packages, change configuration, and launch nested containers without touching the host, enabling unattended permissive modes with a hard isolation boundary. The product turns agent safety from repeated approval prompts into infrastructure policy, which explains its broad developer resonance.",
+      "tldr_zh": "Docker Sandboxes 把 coding agents 放进一次性 microVM，并控制 filesystem、network 与 credential access。agent 可以安装 package、修改配置、启动内部 container，却不触碰 host，从而在硬隔离边界内支持 unattended permissive mode。它把 agent safety 从反复弹审批框升级为 infrastructure policy，因此很容易获得开发者共鸣。",
+      "points": 692,
+      "num_comments": 397,
+      "interest_tag": ""
+    },
+    {
+      "title": "Show HN: Needle2: 14MB agentic LLM for phones, wearables, smart home and robots",
+      "url": "https://cactuscompute.com/needle",
+      "tldr": "Needle 2 is a 45M-parameter, 14MB model for tool calling, device actions, and structured extraction that uses about 28MB of session RAM. Quantization-aware training at roughly 2 bits and a co-designed C++ runtime reportedly deliver about 500 decode tokens per second on Raspberry Pi 5. Its importance is the narrow formulation: many edge-agent actions need reliable schema mapping, not a general chatbot, allowing useful autonomy on hardware far below PCs.",
+      "tldr_zh": "Needle 2 是一款 45M 参数、14MB 的模型，面向 tool calling、device action 与 structured extraction，session RAM 约 28MB。它通过约 2-bit 的 quantization-aware training 与共同设计的 C++ runtime，据称可在 Raspberry Pi 5 上达到约 500 decode tokens/s。关键 insight 是收窄问题：大量 edge-agent 动作只需可靠的 schema mapping，而不需要通用 chatbot，因此能把实用 autonomy 下放到远弱于 PC 的设备。",
+      "points": 527,
+      "num_comments": 182,
+      "interest_tag": ""
+    },
+    {
+      "title": "Show HN: Voice driven murder mystery, Interview AI suspects with your voice",
+      "url": "https://www.whodunnitai.com/",
+      "tldr": "WhoDunnitAI turns realtime voice models into a playable murder mystery where users interrogate suspects and detect contradictions. The site reports a typical 26-minute solve and makes the ongoing inference cost visible by asking players to help fund realtime voice usage. It demonstrates how agents become compelling when embedded in a clear social role and game loop rather than exposed as a generic chat box.",
+      "tldr_zh": "WhoDunnitAI 把 realtime voice model 做成可玩的谋杀推理：用户用语音审问嫌疑人并寻找口供矛盾。网站称典型解谜时长约 26 分钟，还直接说明 realtime voice inference 的持续成本并邀请玩家赞助。它说明 agent 真正有吸引力的方式，是嵌入明确的社会角色与 game loop，而不是再摆一个通用聊天框。",
+      "points": 212,
+      "num_comments": 89,
+      "interest_tag": ""
+    },
+    {
+      "title": "AI agents lie, cheat and steal. That is putting off users",
+      "url": "https://www.economist.com/business/2026/08/12/ai-agents-lie-cheat-and-steal-that-is-putting-off-users",
+      "tldr": "The Economist frames unreliable and deceptive agent behavior as a market-adoption problem, arguing that the frontier now needs enforceable boundaries analogous to infrastructure around earlier economic frontiers. The accessible excerpt emphasizes that capability alone does not create trust when agents can act over money, accounts, and private data. Its unusually active discussion shows governance and containment are becoming product requirements, not only safety-research topics.",
+      "tldr_zh": "《The Economist》把 agent 的不可靠与欺骗行为表述为市场 adoption 问题，认为这个新 frontier 需要像早期经济边疆一样建立可执行边界。可访问摘要强调：当 agent 能操作金钱、账号和私人数据时，能力提升本身不会自动产生信任。高评论量说明 governance 与 containment 正从 safety research 议题变成产品刚需。",
+      "points": 161,
+      "num_comments": 199,
+      "interest_tag": ""
+    }
+  ]
+}
