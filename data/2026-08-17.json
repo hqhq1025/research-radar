@@ -1,0 +1,217 @@
+{
+  "date": "2026-08-17",
+  "generated_at": "2026-08-17T16:03:56.170909+08:00",
+  "briefing_zh": "今天最强的共同信号，是 agent 研究从「最终答对了多少」转向「长程过程为什么成功或失败」。**Beyond Final Scores** 用 36 个长程 AI R&D 任务、七个前沿模型和 process-level metrics 拆解 Solution Framing、Execution 与 Feedback Control，发现当前 agent 更像不稳定的工程优化器，真正的方法创新只占极少数；与此同时，**GLM-5.3** 的显著跃升几乎全部来自长程环境上的 post-training，说明下一阶段的关键资产正在从单一模型能力转向可执行、可验证、接近真实工作的 environment 与 harness。\n\n模型和系统设计也在主动拆开过去被一个网络硬扛的职责。**Intern-S2-Mobius** 把知识存储放进共享 FFN Memory、把组合推理交给可迭代的 Self-Attn Reasoners，以更少训练数据取得相近效果并报告近 4 倍端到端推理加速；**Marionette** 则把 world state、几何渲染和外观生成分离，让长程一致性可以在显式状态层被检查和修复。这两项工作指向同一趋势：面对长程任务，结构化中间状态和 deterministic computation 往往比让生成模型隐式记住一切更可控。\n\n记忆与 agent 工程开始从功能演示走向可测量的维护问题。**MobileMem** 用一年尺度的移动端经历测试多跳、时间推理、知识更新和隐式偏好，强调 memory 应从事实检索升级为持续的 experiential intelligence；**Why Does CLAUDE.md Keep Growing?** 则把 instruction file 膨胀归因于「catastrophic remembering」，并显示记录 rationale 的 prompt comments 可把 excess size 从 211.3% 降到 1.4%。开源侧的 **mcp-memory**、**agent-safe-pipeline** 和 **eve Software Factory** 也反映出开发者需求已从「让 agent 能做事」转为「让它有记忆、受治理、可编排」。\n\n热度最高的外围议题同样值得警惕：**RA-Bench** 在 17,886 个危机事件视频上发现现有 detector 家族都无法稳定泛化，而且社交传播会进一步削弱检测；**Faraday** 则用 Coding Agent as a Tool 和 rubric reward 推进论文复现实验。今天的整体图景不是某个新模型单点碾压，而是 training environment、evaluation process、explicit state、memory hygiene 与安全执行层正在共同组成下一代 agent stack。",
+  "briefing_en": "The clearest signal today is that agent research is moving from final-score leaderboards toward explaining why long-horizon runs succeed or fail. **Beyond Final Scores** evaluates seven frontier models on 36 long-horizon AI R&D tasks with process-level measures for Solution Framing, Execution, and Feedback Control, finding that current agents behave more like unstable engineering optimizers than autonomous researchers. In parallel, nearly all reported gains in **GLM-5.3** come from scaled post-training in long-horizon environments, suggesting that executable, verifiable, work-like environments and harnesses are becoming as strategically important as the base model.\n\nModel and system designs are also separating responsibilities that monolithic networks previously had to carry implicitly. **Intern-S2-Mobius** stores knowledge in a globally shared FFN Memory while iterative Self-Attention Reasoners perform compositional reasoning, reporting comparable quality with less training data and nearly 4x end-to-end inference speed. **Marionette** similarly separates explicit world-state prediction, deterministic geometric rendering, and neural appearance synthesis, making long-horizon errors inspectable and repairable at the state level. Both works argue that structured intermediate state and deterministic computation can be more controllable than asking a generator to remember everything.\n\nMemory and agent engineering are becoming measurable maintenance disciplines rather than feature demos. **MobileMem** evaluates year-scale mobile experience memory across multi-hop reasoning, temporal reasoning, knowledge updates, and implicit preferences, reframing memory as experiential intelligence. **Why Does CLAUDE.md Keep Growing?** identifies instruction-file bloat as catastrophic remembering and shows that rationale-preserving prompt comments reduce excess size from 211.3% to 1.4%. On GitHub, **mcp-memory**, **agent-safe-pipeline**, and **eve Software Factory** echo the same demand for agents that can remember, be governed, and be orchestrated.\n\nTwo adjacent stories round out the day. **RA-Bench** finds that no detector family generalizes consistently across 17,886 crisis-event videos and that social dissemination further degrades reliability, while **Faraday** advances paper replication through a Coding Agent as a Tool setup and rubric-based rewards. The broader picture is not a single model breakthrough, but the convergence of training environments, process-aware evaluation, explicit state, memory hygiene, and safe execution into a more mature agent stack.",
+  "viral_analysis_zh": "今天最可能出圈的是 **Why Does CLAUDE.md Keep Growing?**：它把每个 coding-agent 用户都见过的文件膨胀问题命名为「catastrophic remembering」，标题即痛点、概念又足够可复述。更关键的是，它给出 1,867 个真实仓库和 211.3%→1.4% 的强数字，再配一个极低门槛的解法「给 prompt 写 rationale comments」，天然适合被工程社区二次传播。",
+  "viral_analysis_en": "**Why Does CLAUDE.md Keep Growing?** is the most likely breakout item because it gives a memorable name—catastrophic remembering—to a pain every coding-agent user has seen. The combination of 1,867 real repositories, a dramatic 211.3%-to-1.4% result, and the low-friction fix of rationale-bearing prompt comments makes it unusually easy to quote, test, and share.",
+  "huggingface_papers": [
+    {
+      "title": "Can We Defend Against AI-Generated Video Attacks on Real-World Crisis Events? A Systematic Evaluation of Detectors, Generators and Social Dissemination",
+      "url": "https://huggingface.co/papers/2608.14391",
+      "tldr": "RA-Bench evaluates AI-generated crisis-video detection with 17,886 clips anchored by 1,830 real videos across ten social-risk categories. It compares traditional detectors, zero-shot multimodal models, and detection-specific MLLMs, yet none generalizes consistently across generators and conditions. Human-fooling videos are also hard for detectors, and social dissemination further reduces reliability, exposing a serious deployment gap for crisis misinformation defenses.",
+      "tldr_zh": "RA-Bench 以 1,830 个真实视频为锚点，构建了覆盖十类社会风险事件、共 17,886 段视频的生成内容检测评测。它比较传统 detector、zero-shot multimodal model 和检测专用 MLLM，但三类方法都无法跨生成器与条件稳定泛化。最容易误导人的视频同样难被机器识别，且社交传播会进一步降低可靠性，暴露出危机 misinformation 防御的现实缺口。",
+      "upvotes": 52,
+      "authors": "Shuo Liang, Yixing Ma, Pengfei Zhou, Xingyan Chen, Zihan Mei, Manting Li, Feihan Chen, Zhiwen Wang, Bin Xu, Haotian Zhang, Jiajun Song, Shiya Su, Run Liu, Zhenghang Ni, Yifa Yu, Jintao Hong, Bolong Feng, Yifei Liu, Zirui Zhang, Jingxuan Zhang, Songlin Zhao, Yifan Bai, Kang Tan, Yizhe Liu, Junhao Du, Yongtao Ge, Zhaopan Xv, Xinyuan Zhang, Mengru Ma, Chunhua Shen, Wei Wang, Yang You, Zheng Zhu, Kaipeng Zhang, Wangbo Zhao",
+      "ai_keywords": [],
+      "interest_tag": ""
+    },
+    {
+      "title": "Intern-S2-Mobius: Foundation Model with Decoupled Knowledge and Reasoning",
+      "url": "https://huggingface.co/papers/2608.14290",
+      "tldr": "Mobius-v0 separates knowledge storage from compositional reasoning: a globally shared FFN Memory stores knowledge vectors, while multiple Self-Attention Reasoners repeatedly query and transform them. A from-scratch 7B model matches a Transformer baseline using 62.6% of its training data. Continued pretraining from Qwen3.5-35B yields similar downstream quality with nearly 4x end-to-end inference speed, suggesting architectural reuse can improve both compression and reasoning efficiency.",
+      "tldr_zh": "Mobius-v0 将知识存储与组合推理解耦：全局共享的 FFN Memory 保存 knowledge vectors，多组 Self-Attention Reasoners 反复查询并变换这些知识。其从零训练的 7B 模型仅使用 Transformer baseline 62.6% 的训练数据便达到相近表现。基于 Qwen3.5-35B 继续预训练的版本在维持下游质量的同时实现近 4 倍端到端推理加速，说明结构化复用可能同时改善知识压缩和推理效率。",
+      "upvotes": 26,
+      "authors": "Kai Chen, Jifeng Ding, Ning Ding, Jiaye Ge, Lixin Gu, Yicheng Gu, Qipeng Guo, Ermo Hua, Haian Huang, Haozheng Hou, Jie Hou, Xiangyu Hong, Che Jiang, Minxi Jin, Cheng Liang, Dahua Lin, Dawei Liu, Kuikun Liu, Chengqi Lv, Haijun Lv, Han Lv, Ningsheng Ma, Biqing Qi, Jianmin Qian, Shiya Su, Youbang Sun, Huanze Tang, Zhongbo Tian, Hanjing Wang, Rui Wang, Ting Wang, Yi Wang, Baiting Wu, Jun Xu, Bowen Yang, Hui Wang, Weida Wang, Haochen Ye, Jiashuo Yu, Shan Yu, Xiaoyi Yu, Qirui Zeng, Qi Zhang, Ming Zhang, Wenwei Zhang, Bowen Zhou, Xinyu Zhou",
+      "ai_keywords": [
+        "architecture",
+        "reasoning",
+        "efficiency"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "Beyond Final Scores: A Systematic Evaluation of Agents for Long-Horizon AI Research and Development",
+      "url": "https://huggingface.co/papers/2608.13417",
+      "tldr": "This study evaluates seven frontier models on 36 long-horizon AI R&D tasks using process metrics for solution framing, execution, and feedback control rather than relying on final scores alone. Agents can optimize artifacts and reuse experience, but results vary sharply across runs and reused experience can either help or mislead. Genuine methodological novelty remains rare, making the framework valuable for diagnosing harness, training, and inference-time bottlenecks instead of hiding them behind one aggregate number.",
+      "tldr_zh": "该研究在 36 个长程 AI R&D 任务上评测七个前沿模型，用 Solution Framing、Execution 和 Feedback Control 的过程指标替代只看最终分数。Agent 能优化 artifact 并复用经验，但跨 run 波动很大，经验复用也可能帮倒忙。真正的方法创新仍然罕见，因此这套框架的重要性在于定位 harness、训练和 inference-time 策略的瓶颈，而不是用单一总分掩盖问题。",
+      "upvotes": 26,
+      "authors": "Yiwei Li, Wanli Yang, Hexiang Tan, Xiangzhou Huang, Zhengyu Chen, Ziran Li, Borun Chen, Shanglin Lei, Huaisheng Zhu, Hao Tian, Fei Sun, Xunliang Cai, Jingang Wang",
+      "ai_keywords": [
+        "agents",
+        "evaluation",
+        "long-horizon"
+      ],
+      "interest_tag": "Benchmark"
+    },
+    {
+      "title": "MobileMem: Learning from a Year of Mobile Experiences",
+      "url": "https://huggingface.co/papers/2608.13606",
+      "tldr": "MobileMem introduces a benchmark and framework for long-term agent memory grounded in a year-scale collection of mobile experiences. Its text and multimodal settings test multi-hop and temporal reasoning, knowledge updating, and implicit preference inference over coherent user-app trajectories. By treating experiences rather than isolated facts as the memory unit, it pushes persistent assistants from retrieval toward continuous, personalized learning.",
+      "tldr_zh": "MobileMem 提出一个基于一年尺度移动端经历的长期 agent memory benchmark 与 framework。其文本和多模态设置通过连贯的 user-app trajectory 测试多跳与时间推理、知识更新以及隐式偏好推断。它把「经历」而非孤立事实作为记忆单元，推动 persistent assistant 从检索走向连续、个性化学习。",
+      "upvotes": 16,
+      "authors": "Xinle Deng, Yida Xue, Xiangyuan Ru, Haoming Xu, Shuofei Qiao, Mengru Wang, Yijun Chen, Buqiang Xu, Chen Jiang, Yuchen Eleanor Jiang, Lizhong Wang, Jianfeng Wang, Li Zeng, Haofen Wang, Guilin Qi, Huajun Chen, Ningyu Zhang",
+      "ai_keywords": [
+        "agent memory",
+        "mobile",
+        "multimodal"
+      ],
+      "interest_tag": "Memory"
+    },
+    {
+      "title": "Marionette: Predicting World States, Rendering Geometry, Painting Appearance",
+      "url": "https://huggingface.co/papers/2608.14530",
+      "tldr": "Marionette decomposes an interactive game world model into explicit 3D state prediction, a fixed zero-parameter geometry renderer, and a neural appearance model. Because long-horizon behavior lives in a 276-dimensional state, constraints such as terrain collision and entity separation can repair drift without retraining the observation model. The result is a strong argument for deterministic geometry and editable state when pure pixel autoregression cannot maintain consistent worlds.",
+      "tldr_zh": "Marionette 将交互式游戏 world model 拆成显式 3D 状态预测、固定的零参数几何 renderer 和神经外观模型。由于长程行为存在于 276 维状态中，terrain collision 与 entity separation 等规则可以直接修复漂移，而无需重训 observation model。它有力说明：当纯 pixel autoregression 难以维持一致世界时，deterministic geometry 与可编辑状态更可靠。",
+      "upvotes": 6,
+      "authors": "Zian Meng, Zhen Li, Chuanhao Li, Qiang Li, Kaipeng Zhang",
+      "ai_keywords": [
+        "world model",
+        "explicit state",
+        "video generation"
+      ],
+      "interest_tag": ""
+    }
+  ],
+  "alphaxiv_papers": [
+    {
+      "title": "GLM-5.3: Frontier Coding with Emergent Cyber Capabilities",
+      "arxiv_id": "",
+      "url": "https://www.alphaxiv.org/abs/2608.glm-5",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2608.glm-5",
+      "tldr": "GLM-5.3 keeps the GLM-5.2 base model and attributes its gains to scaled post-training on executable long-horizon environments. It reports 28.3 on Terminal Bench 3.0, 28.5 on Agents' Last Exam, and 84.5% on CyberGym, alongside more than 2.3x higher long-horizon RL throughput. The release is important less as a new architecture than as evidence that environment synthesis, verifier quality, and rollout infrastructure are now major capability levers; weights are promised after safety hardening.",
+      "tldr_zh": "GLM-5.3 沿用 GLM-5.2 的 base model，能力增长主要来自可执行长程环境上的规模化 post-training。它报告 Terminal Bench 3.0 为 28.3、Agents' Last Exam 为 28.5、CyberGym 为 84.5%，同时长程 RL 吞吐提升超过 2.3 倍。其意义不在新架构，而在于证明 environment synthesis、verifier 质量和 rollout infrastructure 已成为关键能力杠杆；权重计划在安全加固后发布。",
+      "interest_tag": ""
+    },
+    {
+      "title": "Training AI Scientists to Replicate Research",
+      "arxiv_id": "2608.13331",
+      "url": "https://arxiv.org/abs/2608.13331",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2608.13331",
+      "tldr": "Faraday is a 27B AI Scientist trained on Replica, a set of 310 figure-replication tasks drawn from 100 ML and AI-for-science papers. It uses a Coding Agent as a Tool, directing a stronger general coding model while receiving rubric-based rewards for an open-ended task that lacks simple verifiers. Faraday beats the reported Claude Opus 4.8 and GPT-5.5 baselines on held-out replication tasks, showing a practical path from coding competence toward scientifically disciplined experimentation.",
+      "tldr_zh": "Faraday 是一个 27B AI Scientist，训练于 Replica：从 100 篇 ML 与 AI-for-science 论文构建的 310 个 figure-replication 任务。它采用 Coding Agent as a Tool，让科学专用模型指挥更强的通用 coding model，并用 rubric-based reward 处理缺乏简单 verifier 的开放任务。论文报告其在 held-out replication task 上超过 Claude Opus 4.8 与 GPT-5.5 baseline，展示了从 coding 能力迈向严谨科学实验的一条可行路线。",
+      "interest_tag": ""
+    },
+    {
+      "title": "Small-Scale Experiments: Are We There Yet?",
+      "arxiv_id": "2608.11859",
+      "url": "https://arxiv.org/abs/2608.11859",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2608.11859",
+      "tldr": "This work argues that scaling laws are visible even at 4M parameters, but only on a thoroughly tuned hyperparameter frontier. Small models are unusually sensitive because their hyperparameter loss surface has higher intrinsic dimensionality, so under-tuned experiments can produce false architectural conclusions. The proposed methodology recovers the large-scale advantage of pre-normalization from cheap small-scale runs, while warning that extrapolation still faces statistical limits.",
+      "tldr_zh": "这项工作表明，即使只有 4M 参数也能观察到 scaling laws，但前提是走到充分调参后的 hyperparameter frontier。小模型的 hyperparameter loss surface 具有更高 intrinsic dimensionality，因此对超参异常敏感，调参不足很容易得出错误的架构结论。作者用廉价小规模实验重新预测出 pre-normalization 在大规模下的优势，同时提醒外推仍受统计极限约束。",
+      "interest_tag": ""
+    },
+    {
+      "title": "Why Does CLAUDE.md Keep Growing? Catastrophic Remembering in Agentic Coding",
+      "arxiv_id": "2608.11095",
+      "url": "https://arxiv.org/abs/2608.11095",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2608.11095",
+      "tldr": "Across 1,867 repositories and 247,694 instruction lifetimes, agentic instruction files more than triple because old rules become hard to delete once their rationale is forgotten. The paper calls this catastrophic remembering and formalizes why safe deletion becomes combinatorially difficult without outcome context. Adding rationale-bearing prompt comments cuts excess instruction size from 211.3% to 1.4% and improves correctness on true constraints by 11.6 percentage points, turning prompt maintenance into an evidence-preservation problem.",
+      "tldr_zh": "对 1,867 个仓库和 247,694 条 instruction lifetime 的分析显示，agent instruction file 会增长到三倍以上，因为规则的原始 rationale 一旦丢失，安全删除就变得困难。论文将其命名为 catastrophic remembering，并形式化说明缺少 outcome context 时安全删减为何会组合爆炸。加入记录 rationale 的 prompt comments 后，excess instruction size 从 211.3% 降至 1.4%，真实约束正确率提高 11.6 个百分点，把 prompt 维护重新定义为证据保存问题。",
+      "interest_tag": ""
+    },
+    {
+      "title": "AutoDesign: Meta-Harness Optimization for Long-Horizon Agentic Design",
+      "arxiv_id": "2608.13560",
+      "url": "https://arxiv.org/abs/2608.13560",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2608.13560",
+      "tldr": "AutoDesign uses a coding agent as a meta-harness optimizer that edits modular harness components based on rollout trajectories and human-aligned evaluation. In paper-to-poster generation, its learned DesignHarness raises the average PosterBench score by 12.4 points across seven controlled configurations and reaches 78.32 on the main track. A full autonomous run takes about 40 minutes, 253 tool calls, and under $3, making recursive harness improvement concrete rather than purely conceptual.",
+      "tldr_zh": "AutoDesign 让 coding agent 充当 meta-harness optimizer，根据 rollout trajectory 和 human-aligned evaluation 修改模块化 harness 组件。在 paper-to-poster 任务上，学到的 DesignHarness 在七种受控配置中平均提升 12.4 个 PosterBench points，并在主赛道达到 78.32。一次完整自主运行约需 40 分钟、253 次 tool call、成本低于 3 美元，使 recursive harness improvement 从概念变成可复现实验。",
+      "interest_tag": ""
+    }
+  ],
+  "github_repos": [
+    {
+      "name": "vercel-labs/eve-software-factory-template",
+      "url": "https://github.com/vercel-labs/eve-software-factory-template",
+      "tldr": "This Vercel Labs template packages a multi-agent software factory around Foreman, placing specialized agents across planning, implementation, review, and delivery stages. Its value is operational rather than model-centric: a runnable TypeScript starting point for coordinating work instead of opening isolated chat sessions. Rapid adoption suggests developers increasingly want factory-style orchestration and visibility once parallel agents make human coordination the bottleneck.",
+      "tldr_zh": "这个 Vercel Labs 模板围绕 Foreman 打包了一套 multi-agent software factory，把专用 agent 放到规划、实现、review 与交付等阶段。它的价值偏运行层而非模型层：提供一个可运行的 TypeScript 起点，用于协调工作流，而不是不断开启孤立 chat session。快速增长的 star 说明，当 parallel agents 让人类协调成为瓶颈后，开发者正在寻找 factory-style orchestration 与可见性。",
+      "stars": 844,
+      "language": "TypeScript",
+      "interest_tag": "Agent Swarm"
+    },
+    {
+      "name": "0xsline/awesome-deepseek-harness",
+      "url": "https://github.com/0xsline/awesome-deepseek-harness",
+      "tldr": "Awesome DeepSeek Harness is a large bilingual catalog of plugins, tools, and infrastructure for the DeepSeek Harness ecosystem. Rather than proposing one agent architecture, it lowers discovery cost by organizing installable components and public plugin conventions in one place. Its unusually high fork count relative to its age indicates hands-on reuse, though users should still audit third-party plugins before installation.",
+      "tldr_zh": "Awesome DeepSeek Harness 是一个双语的大型目录，汇总 DeepSeek Harness 生态的 plugins、tools 与 infrastructure。它并不提出单一 agent 架构，而是通过整理可安装组件和公共 plugin convention 降低发现成本。相对仓库年龄而言很高的 fork 数显示出真实复用需求，但安装第三方 plugin 前仍应逐项审计。",
+      "stars": 654,
+      "language": "Python",
+      "interest_tag": ""
+    },
+    {
+      "name": "decionis/agent-safe-pipeline",
+      "url": "https://github.com/decionis/agent-safe-pipeline",
+      "tldr": "Agent Safe Pipeline separates an agent's proposed action from the authority to execute it through immutable intent capture, an independent policy verdict, human approval, and a single-use intent-bound grant. This architecture addresses a common governance failure: treating model confidence or a UI confirmation as authorization. The repository is useful as a concrete reference for fail-closed execution paths, although production teams still need independent credential and infrastructure boundaries.",
+      "tldr_zh": "Agent Safe Pipeline 通过 immutable intent capture、独立 policy verdict、human approval 和一次性 intent-bound grant，把 agent 提议动作与执行授权分离。它针对一个常见治理漏洞：把模型自信或 UI confirmation 误当作 authorization。该仓库可作为 fail-closed 执行链路的具体参考，但生产系统仍需独立的 credential 与 infrastructure boundary。",
+      "stars": 495,
+      "language": "TypeScript",
+      "interest_tag": ""
+    },
+    {
+      "name": "ryzqi/learn-agent",
+      "url": "https://github.com/ryzqi/learn-agent",
+      "tldr": "Learn Agent is a 20-chapter Chinese tutorial that builds a production-style agent harness incrementally in runnable TypeScript. It starts with the agent loop and adds tools, permissions, hooks, planning, context compression, memory, scheduling, multi-agent coordination, worktrees, and MCP while preserving one coherent runner. The one-capability-per-chapter structure makes hidden harness responsibilities inspectable and is more educational than another monolithic framework dump.",
+      "tldr_zh": "Learn Agent 是一套 20 章中文教程，用可运行 TypeScript 逐步搭建 production-style agent harness。它从 agent loop 开始，依次加入 tools、permissions、hooks、planning、context compression、memory、scheduling、multi-agent coordination、worktree 和 MCP，并保持同一个 coherent runner。每章只增加一个主要能力，使隐蔽的 harness 职责可观察，比直接抛出一个 monolithic framework 更适合学习。",
+      "stars": 179,
+      "language": "TypeScript",
+      "interest_tag": ""
+    },
+    {
+      "name": "fellowgeek/mcp-memory",
+      "url": "https://github.com/fellowgeek/mcp-memory",
+      "tldr": "MCP-Memory provides persistent long-term memory to agents through an MCP server backed by the Open Knowledge Format and local SQLite FTS5. It emphasizes inspectable records, tags, key-value lookup, and full-text search rather than relying only on opaque vector similarity. The local-first design is easy to integrate with desktop coding agents and attractive for users who want durable memory without an external hosted service.",
+      "tldr_zh": "MCP-Memory 通过 MCP server 为 agent 提供 persistent long-term memory，底层采用 Open Knowledge Format 与本地 SQLite FTS5。它强调可检查的 records、tags、key-value lookup 和 full-text search，而不是只依赖不透明的 vector similarity。本地优先设计便于接入桌面 coding agent，也适合不想依赖外部托管服务的用户。",
+      "stars": 177,
+      "language": "Python",
+      "interest_tag": "Memory"
+    }
+  ],
+  "hackernews": [
+    {
+      "title": "MathCode, Mathematical Coding Agent",
+      "url": "https://math-ai-org.github.io/mathcode/",
+      "tldr": "MathCode is a terminal coding agent that translates natural-language mathematics into Lean 4 theorems and attempts formal proofs. A persistent Lean server reduces iterative compile checks to roughly 0.4 seconds after warm-up, while reusable theorem and axiom libraries preserve verified work. Agent-mode proving, parallel subgoal decomposition, and structured diagnostics make it a concrete bridge between coding-agent workflows and machine-checked mathematics.",
+      "tldr_zh": "MathCode 是一个 terminal coding agent，可把自然语言数学问题转成 Lean 4 theorem 并尝试形式化证明。Persistent Lean server 在 warm-up 后将迭代 compile check 降到约 0.4 秒，同时 theorem 与 axiom library 会保存已验证成果。Agent-mode proving、并行 subgoal decomposition 和结构化 diagnostics 让 coding-agent workflow 与机器可检验数学真正接轨。",
+      "points": 86,
+      "num_comments": 28,
+      "interest_tag": ""
+    },
+    {
+      "title": "Yadda 3.0.0: BDD in the Age of AI Agents",
+      "url": "http://www.stephen-cresswell.com/2026/08/15/Yadda-3.0.0-BDD-in-the-Age-of-AI-Agents.html",
+      "tldr": "Yadda 3 modernizes a long-lived JavaScript BDD library, but the more important story is that Claude Code completed most of the migration in about a day under a carefully staged plan. The author credits a strong pre-existing test suite and the deliberate separation of production-code changes from test changes, so the agent could not redefine correctness while implementing. The experience also surfaces a new bottleneck: once several coding agents run in parallel, human context and orchestration—not code generation—limit throughput.",
+      "tldr_zh": "Yadda 3 对一个长期维护的 JavaScript BDD library 做现代化升级，但更重要的是 Claude Code 在精心分阶段的计划下约一天完成了大部分迁移。作者认为关键在于原有 test suite 足够强，并刻意把 production-code 修改与 test 修改分开，避免 agent 在实现时同时改写「正确性」定义。该案例也指出新瓶颈：多个 coding agents 并行后，限制吞吐的不再是写代码，而是人的 context 与 orchestration。",
+      "points": 64,
+      "num_comments": 28,
+      "interest_tag": ""
+    },
+    {
+      "title": "Ask HN: What tools are you using for human code review of AI-assisted code?",
+      "url": "https://news.ycombinator.com/item?id=49321400",
+      "tldr": "This Ask HN thread argues that human review—not code generation—is becoming the quality gate for agent-assisted development. Existing PR interfaces and AI reviewers catch bugs and style issues more easily than duplication, coupling, separation-of-concerns failures, or architectural drift, especially as diff volume grows. The discussion is small but diagnostic: teams need review workflows organized by explicit lenses and stronger static constraints, not merely another model-generated review comment.",
+      "tldr_zh": "这条 Ask HN 认为，在 agent-assisted development 中，真正的质量门已经从 code generation 转向 human review。随着 diff 体量增长，现有 PR interface 与 AI reviewer 更容易抓 bug 和 style issue，却难发现重复代码、module coupling、separation-of-concerns 破坏或 architectural drift。讨论规模不大但信号明确：团队需要按明确 review lens 组织流程，并加强 static constraint，而不只是再加一条模型生成的 review comment。",
+      "points": 8,
+      "num_comments": 2,
+      "interest_tag": ""
+    },
+    {
+      "title": "Show HN: I spent 3 months making desktop automation stop lying to AI agents",
+      "url": "https://github.com/lahfir/agent-desktop/tree/main",
+      "tldr": "Agent Desktop is a Rust CLI that exposes native applications through accessibility trees, structured references, and JSON rather than making agents depend on screenshots and pixel matching. Progressive skeleton traversal claims 78–96% token reduction on dense apps, while snapshot-bound refs, fail-closed interactions, and trace export improve action grounding and auditability. Its combination of native accessibility and CDP for Chromium apps directly targets the observation, identity, and verification problems that make desktop agents brittle.",
+      "tldr_zh": "Agent Desktop 是一个 Rust CLI，通过 accessibility tree、结构化 reference 和 JSON 暴露原生应用，避免 agent 完全依赖 screenshot 与 pixel matching。Progressive skeleton traversal 在密集应用上声称可减少 78–96% token，而 snapshot-bound refs、fail-closed interaction 与 trace export 提升 action grounding 和可审计性。它把原生 accessibility 与 Chromium CDP 结合，直接处理 desktop agent 最脆弱的 observation、identity 与 verification 问题。",
+      "points": 6,
+      "num_comments": 0,
+      "interest_tag": "CUA"
+    },
+    {
+      "title": "Show HN: A pre-execution guard that stops AI agents running destructive commands",
+      "url": "https://github.com/vandith1/agent-guard",
+      "tldr": "Agent Guard is a roughly 60-line pre-execution shell hook that blocks irreversible commands such as hard resets, recursive deletes, destructive database statements, and force pushes. It fails closed and returns a reason to the agent loop, but explicitly does not claim to resist adversarial obfuscation or replace branch protection, least-privilege credentials, and backups. That narrow threat model is its strength: it is a practical seatbelt for well-intentioned agents that drift, not a falsely comprehensive sandbox.",
+      "tldr_zh": "Agent Guard 是一个约 60 行的 pre-execution shell hook，用于拦截 hard reset、recursive delete、破坏性数据库语句和 force push 等不可逆命令。它采用 fail-closed，并把拒绝原因返回 agent loop，但明确不声称能抵抗 adversarial obfuscation，也不能替代 branch protection、least-privilege credentials 与 backup。这个狭窄 threat model 反而是优点：它是防止善意 agent 漂移的实用安全带，而不是假装完整的 sandbox。",
+      "points": 5,
+      "num_comments": 2,
+      "interest_tag": ""
+    }
+  ]
+}
