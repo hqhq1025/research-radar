@@ -1,0 +1,221 @@
+{
+  "date": "2026-08-18",
+  "generated_at": "2026-08-18T16:07:10.704522+08:00",
+  "briefing_zh": "今天最强的研究信号不是「又一个更大的模型」，而是 agent 的能力边界越来越由环境、harness 与可验证反馈决定。**GLM-5.3** 在保持 GLM-5.2 base model 不变的情况下，仅靠扩大长程任务环境和 post-training，就把 Terminal Bench 3.0 从 4.6 推到 28.3；**ClawGym II** 则进一步展示，哪怕 harness 本身是黑盒，也可以在 model boundary 截获调用、重建 prefix tree，并对 OpenClaw、Claude Code 等异构执行系统做统一 RL。两者共同说明：下一阶段竞争焦点正从单纯的模型规模转向可执行环境、轨迹恢复和稳定优化基础设施。\n\n视觉世界与 GUI agent 也出现了明显收敛。**VibeWorlding** 把开放式 3D 世界构建包装成多轮 agent-environment interaction，并用 6,828 条多模态查询和可验证 reward service 暴露精确编辑瓶颈；**HarnessEval-W** 不再给 world model 一个不可解释的总分，而是让父 agent 分解问题、子 agent 收集证据，最终形成可审计的 evidence tree。更贴近真实桌面任务的 **UI-Mate** 则证明 in-context demonstration 能显著改善长程执行：在 OSWorkerBench self-demo 子集上，一条示范把 strict success 从 17.2% 提高到 35.4%。这条线的共同主题是把视觉 agent 从「看懂单帧」推进到「在状态持续变化的环境里可靠行动并解释为何成功」。\n\n系统可靠性开始从经验性 guardrail 走向明确的架构契约。**Agentic Transaction** 重新解释 ACID，为 agent 的 workspace 与多步执行定义 semantic atomicity、consistency、isolation 和 durability；GitHub 上的 **agent-safe-pipeline** 则把 agent proposal 与授权决定彻底分离，用 immutable intent、独立 policy verdict 和 single-use grant 构造 fail-closed 边界。HN 热度最高的 Snowflake 事件提供了反面证据：AI-assisted PR 仍可引入 GitHub Actions injection，而另一个 autonomous red agent 能在五天内发现并验证影响范围。会写代码的 agent 与会攻击系统的 agent 同时增强，使 authorization boundary 和 evidence chain 从工程加分项变成上线前提。\n\n最后，agent 的「自我改进」正被拆成更可研究的组件。**Latent On-Policy Self-Distillation** 让 privileged context 本身可学习，用不到 30% rollout budget 超过 GRPO 与 Skill-SD；**AutoDesign** 优化的不是单次海报，而是可复用的 DesignHarness；**Beyond Final Scores** 则警告当前 AI R&D agents 仍主要是 engineering optimizers，真正 novel approach 仅占 1.2%。开源侧同时出现 **Cumora** 的人机同席协作、**Foreman** 的分站式 software factory，以及 **Memoket KITE** 的可追溯长期记忆，说明社区正在把 agent 从单次聊天包装成有协调、记忆、审批和评测闭环的持久系统。",
+  "briefing_en": "The strongest signal today is not another larger base model, but that agent capability is increasingly bounded by environments, harnesses, and verifiable feedback. **GLM-5.3** keeps the GLM-5.2 base unchanged and scales long-horizon environments and post-training, lifting Terminal Bench 3.0 from 4.6 to 28.3. **ClawGym II** complements this result by showing that even opaque harnesses can be optimized through a model-boundary proxy, prefix-tree trajectory reconstruction, and unified RL across heterogeneous systems such as OpenClaw and Claude Code. Together they shift the competitive frontier from parameter count toward executable environments, trajectory recovery, and stable optimization infrastructure.\n\nVisual worlds and GUI agents are converging on the same systems problem. **VibeWorlding** frames open-ended 3D construction as multi-turn agent-environment interaction, using 6,828 multimodal queries and a verifiable reward service to expose precise editing as the key bottleneck. **HarnessEval-W** replaces opaque aggregate metrics with a parent agent that decomposes each case, specialist sub-agents that gather evidence, and an auditable evidence tree. Closer to real desktop work, **UI-Mate** shows the leverage of in-context demonstrations: on the OSWorkerBench self-demo subset, one demonstration raises strict success from 17.2% to 35.4%. The shared objective is no longer single-frame perception, but reliable action and diagnosis in evolving visual state.\n\nReliability is also moving from ad hoc guardrails to explicit architectural contracts. **Agentic Transaction** reinterprets ACID as semantic atomicity, consistency, isolation, and durability for agent workspaces and multi-step execution. The GitHub project **agent-safe-pipeline** enforces a sharper authorization boundary: agents propose immutable intents, an independent policy layer returns ALLOW, ESCALATE, or BLOCK, and a trusted executor consumes a single-use grant. The top HN security story supplies the counterexample: an AI-assisted pull request introduced a GitHub Actions injection, while an autonomous red agent discovered and validated the blast radius within five days. As coding and offensive agents improve together, authorization boundaries and evidence chains become deployment prerequisites.\n\nFinally, agent self-improvement is being decomposed into testable mechanisms. **Latent On-Policy Self-Distillation** makes privileged context learnable and beats GRPO and Skill-SD with less than 30% of their rollout budget. **AutoDesign** optimizes a reusable DesignHarness rather than a single poster, while **Beyond Final Scores** finds that current AI R&D agents remain mostly engineering optimizers, with genuinely novel approaches in only 1.2% of solutions. Open source mirrors the trend through **Cumora** for human-agent collaboration, **Foreman** for station-based software factories, and **Memoket KITE** for traceable long-term memory: the agent is becoming a persistent system with coordination, memory, authorization, and evaluation loops, not a chat wrapper.",
+  "viral_analysis_zh": "**GLM-5.3** 最可能成为今天的爆点：同一个 base model、只扩 post-training，却同时给出 Terminal Bench 3.0 从 4.6 到 28.3、CyberGym 84.5% 和真实漏洞发现等极具传播性的数字。它把「环境规模化带来 agent 能力跃迁」与「能力越强、cyber 风险越快涌现」压缩进同一个叙事，既能吸引 coding-agent 圈，也天然带来安全争议。",
+  "viral_analysis_en": "**GLM-5.3** is the most likely breakout story today: the same base model, scaled post-training only, yet it pairs a Terminal Bench 3.0 jump from 4.6 to 28.3 with 84.5% on CyberGym and real vulnerability discoveries. The framing compresses both sides of the agent story into one shareable narrative—environment scaling unlocks capability, while cyber risk emerges even faster—making it compelling to coding-agent builders and security researchers alike.",
+  "huggingface_papers": [
+    {
+      "title": "VibeWorlding: Can Multimodal Agents Construct 3D Open Worlds End-to-End?",
+      "url": "https://arxiv.org/abs/2608.15265",
+      "tldr": "VibeWorlding introduces a unified benchmark-and-training stack for agents that turn open-ended multimodal requests into interactive 3D worlds. VWE-BENCH combines 2,616 assets, 323 human-authored seed worlds, and 6,828 reverse-synthesized queries, while VibeWorlding-Gym supplies sandboxed MCP tools and rubric-based rewards. Frontier systems remain below 60% success, but RL-trained VibeWorlder-30B-A3B reaches the best reported Pass@1, identifying precise 3D editing as the central bottleneck.",
+      "tldr_zh": "VibeWorlding 提出一套统一的 benchmark 与训练框架，让 agent 根据开放式多模态请求端到端构建可交互 3D 世界。VWE-BENCH 包含 2,616 个资产、323 个经人工标注的 seed worlds 和 6,828 条反向合成查询，VibeWorlding-Gym 则提供沙箱化 MCP 工具和 rubric-based reward。当前 frontier systems 成功率仍低于 60%，但经 RL 训练的 VibeWorlder-30B-A3B 取得最高 Pass@1，并把主要瓶颈定位到精确 3D 编辑。",
+      "upvotes": 39,
+      "authors": "Yansong Ning, Jingwen Ye, Zhongkai Wu, Yang Sun, Yiqin Zhu, Xingyi Li, Weidong Zhang, Hao Liu",
+      "ai_keywords": [
+        "3D agents",
+        "multimodal RL",
+        "world generation"
+      ],
+      "interest_tag": "Benchmark"
+    },
+    {
+      "title": "HarnessEval-W: Agentifying the Evaluation of Visual Worlds",
+      "url": "https://arxiv.org/abs/2608.16859",
+      "tldr": "HarnessEval-W turns world-model evaluation into an agentic, evidence-producing process rather than a fixed metric. A parent agent decomposes each case, specialist sub-agents inspect physics, causality, and state evolution with tailored tools, and the final verdict retains a complete evidence tree. Across 18 world models and 330 cases, its judgments closely track human preferences while exposing fine-grained failure causes that a scalar score hides.",
+      "tldr_zh": "HarnessEval-W 把 world-model evaluation 从固定指标改造成能产出证据的 agentic process。父 agent 分解评测问题，专门化子 agent 使用定制工具检查物理、因果与状态演化，最终 verdict 保留完整 evidence tree。它在 18 个 world models、330 个案例上的判断与人工偏好高度一致，同时能暴露总分掩盖的细粒度失败原因。",
+      "upvotes": 36,
+      "authors": "Weiliang Chen, Haowen Sun, Jun Gao, Jiawei Chi, Hanyang Wang, Qiyu Dai, Yihao Li, Hao Li, Jingnan Gao, Yi-Hsin Hung, Xingzhuo Guo, Shangchen Miao, Zhiyuan Shi, Xiang Li, Fengrui Tian, Weihua Du, Ziqi Huang, Shenyuan Gao, Siqiao Huang, Mingyu Liu, Yifei Li, Shizun Wang, Xi Wang, Tianqi Zhang, Xue Luo, Xiyin Ren, Jinshan Ren, Xiaoyang Shen, Xiaobo Hu, Zhiyang Dou, Mingyu Ding, Yichao Yan, Xinchao Wang, Yizhou Wang, Shilong Liu, Wenzhao Zheng, Yueqi Duan, Yuan Gong, Ziwei Liu, Ming-Yu Liu, Jialong Wu, Jiangran Lyu, Fangfu Liu",
+      "ai_keywords": [
+        "world models",
+        "agentic evaluation",
+        "evidence tree"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "ClawGym II: Exploring Black-Box RL on Agent Harness",
+      "url": "https://arxiv.org/abs/2608.16798",
+      "tldr": "ClawGym II enables black-box RL through complex agent harnesses without requiring access to their internal control logic. It intercepts model calls at the serving boundary, reconstructs multi-turn trajectories as prefix trees, and adapts both PPO and GRPO while preserving training-inference consistency. On Qwen3-30A3B, the method improves ClawGym-Bench Pass@1 by 9.98 points through OpenClaw and 14.81 points through Claude Code, and supports mixed-harness training.",
+      "tldr_zh": "ClawGym II 允许在不了解复杂 agent harness 内部控制逻辑的情况下进行 black-box RL。它在 serving boundary 截获模型调用，把多轮轨迹重建为 prefix tree，并适配 PPO 与 GRPO，同时维持 train-inference consistency。基于 Qwen3-30A3B，该方法通过 OpenClaw 和 Claude Code 分别将 ClawGym-Bench Pass@1 提升 9.98 与 14.81 个点，还支持 heterogeneous harness 混合训练。",
+      "upvotes": 30,
+      "authors": "Huatong Song, Fei Bai, Ming Yang, Renyuan Li, Jia Deng, Jujie He, Zhange Zhang, Daixuan Cheng, Yan Xing, Qi Yun, Xuxing Chen, Danyang Li, Feng Chang, Chuan Hao, Ran Tao, Jian Yang, Bryan Dai, Wayne Xin Zhao, Mingjie Tang, Ji-Rong Wen",
+      "ai_keywords": [
+        "agent RL",
+        "harness",
+        "trajectory reconstruction"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "UI-Mate: Advancing Open-Weight Foundation GUI Agents with In-Context Demonstrations",
+      "url": "https://arxiv.org/abs/2608.15930",
+      "tldr": "UI-Mate combines an environment-grounded data engine with in-context demonstrations for long-horizon desktop work. Its stack automates task generation, environment construction, rollouts, filtering, SFT, and online RL, while demonstrations are converted into subtask-level workflows that can re-plan from the live interface. UI-Mate-27B reaches 77.0% on OSWorld-Verified and 66.2% on WindowsAgentArena; on a self-demo OSWorkerBench subset, one demonstration doubles strict success from 17.2% to 35.4%.",
+      "tldr_zh": "UI-Mate 将 environment-grounded data engine 与 in-context demonstration 结合，用于长程桌面任务。其训练栈自动完成任务生成、环境构建、rollout、过滤、SFT 和 online RL，并把示范转成可根据实时界面重新规划的 subtask-level workflow。UI-Mate-27B 在 OSWorld-Verified 和 WindowsAgentArena 分别达到 77.0% 与 66.2%；在 OSWorkerBench self-demo 子集上，一条示范把 strict success 从 17.2% 翻倍到 35.4%。",
+      "upvotes": 25,
+      "authors": "Zihan Ding, Longxu Dou, Qi Gao, Xiangwu Guo, Shengchao Hu, Zilong Huang, Zihang Jiang, Lei Ke, Mengcheng Lan, Weixian Lei, Hanxuan Li, Honglin Li, Xiyun Li, Zaitang Li, Leowei Liang, Xin Luo, Haozhe Ma, Jiayi Mao, Zhoujie Pan, Can Qin, Tianyuan Qu, Weiqi Wang, Wenkai Wang, Yonglin Wang, Yuxin Wang, Chenxu Wu, Yingchen Yu, Chenyu Zhang, Yuhao Zheng",
+      "ai_keywords": [
+        "GUI agent",
+        "computer use",
+        "demonstration learning"
+      ],
+      "interest_tag": "CUA"
+    },
+    {
+      "title": "Agentic Transaction: Towards ACID-Compliant Agent Systems",
+      "url": "https://arxiv.org/abs/2608.13900",
+      "tldr": "Agentic Transaction maps database ACID guarantees onto uncertain, long-horizon agent execution. It defines semantic atomicity, consistency, isolation, and durability, then instantiates them through exploration-execution-validation cycles, transactional skill hubs, dependency-aware isolation, and semantic state management. The resulting data agent reports a 10.6% improvement over strong agent baselines, arguing that reliability should be a first-class execution contract rather than a collection of retries.",
+      "tldr_zh": "Agentic Transaction 把数据库 ACID guarantee 映射到具有不确定性的长程 agent execution。它定义 semantic atomicity、consistency、isolation 和 durability，并通过 exploration-execution-validation cycle、transactional skill hub、dependency-aware isolation 与 semantic state management 实现。该 data agent 相比强基线提升 10.6%，说明可靠性应成为一等执行契约，而不是零散 retry 的集合。",
+      "upvotes": 19,
+      "authors": "Zhaoyan Sun, Xiaoxiao Wang, Guoliang Li",
+      "ai_keywords": [
+        "agent systems",
+        "transactions",
+        "reliability"
+      ],
+      "interest_tag": ""
+    }
+  ],
+  "alphaxiv_papers": [
+    {
+      "title": "GLM-5.3: Frontier Coding with Emergent Cyber Capabilities",
+      "arxiv_id": "",
+      "url": "https://www.alphaxiv.org/abs/2608.glm-5",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2608.glm-5",
+      "tldr": "GLM-5.3 keeps the GLM-5.2 base model fixed and attributes its gains to scaled post-training over long-horizon environments. It raises Terminal Bench 3.0 from 4.6 to 28.3, reaches 84.5% on CyberGym, and improves token efficiency, supported by synthetic environments and more consistent asynchronous RL infrastructure. The cyber jump is also the warning: vulnerability discovery and exploitation chains improved faster than expected, so capability scaling and safety hardening are inseparable.",
+      "tldr_zh": "GLM-5.3 保持 GLM-5.2 base model 不变，把能力提升归因于长程环境上的规模化 post-training。它将 Terminal Bench 3.0 从 4.6 提升到 28.3，在 CyberGym 达到 84.5%，并借助合成环境与更一致的 asynchronous RL infrastructure 提升 token efficiency。cyber 能力的跃升同时也是警告：漏洞发现和 exploitation chain 的进步快于预期，能力扩展与安全加固无法分开。",
+      "interest_tag": ""
+    },
+    {
+      "title": "Training AI Scientists to Replicate Research",
+      "arxiv_id": "2608.13331",
+      "url": "https://arxiv.org/abs/2608.13331",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2608.13331",
+      "tldr": "This work builds Replica, a 310-task space for reproducing figures from 100 ML and AI-for-science papers, together with an automatically generated rubric judge for open-ended replication quality. Faraday is a 27B scientific agent that treats a stronger coding agent as a tool, separating scientific direction from execution. It beats Claude Opus 4.8 and GPT-5.5 on held-out replication tasks and shows that paper replication can supply scalable training signal for more rigorous AI scientists.",
+      "tldr_zh": "该工作构建 Replica：从 100 篇 ML 与 AI-for-science 论文中抽取 310 个图表复现任务，并用自动生成的 rubric judge 评估开放式 replication quality。Faraday 是一个 27B scientific agent，把更强的 coding agent 当作工具，从而分离科学决策与具体执行。它在 held-out replication tasks 上超过 Claude Opus 4.8 和 GPT-5.5，说明论文复现可为更严谨的 AI scientist 提供可规模化训练信号。",
+      "interest_tag": ""
+    },
+    {
+      "title": "Latent On-Policy Self-Distillation",
+      "arxiv_id": "2608.13040",
+      "url": "https://arxiv.org/abs/2608.13040",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2608.13040",
+      "tldr": "LOPD replaces hand-crafted privileged artifacts with latent context learned end-to-end from retrieved experience. A composer compresses successful experiences into continuous tokens for a self-teacher, while a privileged-margin objective keeps the teacher meaningfully ahead of the student at visited prefixes. The method leads all ten reported backbone-benchmark comparisons and surpasses GRPO and Skill-SD with under 30% of their rollout budget, making self-improvement both more adaptive and sample-efficient.",
+      "tldr_zh": "LOPD 用从经验中端到端学习的 latent context 取代人工规定的 privileged artifacts。composer 将成功经验压缩为供 self-teacher 使用的连续 token，privileged-margin objective 则保证 teacher 在已访问 prefix 上保持有效优势。该方法在论文报告的十组 backbone-benchmark 比较中全部领先，并用不到 30% 的 rollout budget 超过 GRPO 与 Skill-SD，让 self-improvement 更自适应也更 sample-efficient。",
+      "interest_tag": ""
+    },
+    {
+      "title": "AutoDesign: Meta-Harness Optimization for Long-Horizon Agentic Design",
+      "arxiv_id": "2608.13560",
+      "url": "https://arxiv.org/abs/2608.13560",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2608.13560",
+      "tldr": "AutoDesign optimizes the reusable harness around a design agent rather than only revising one output. A meta-harness coding agent analyzes rollout feedback and edits modular components such as context, memory, tools, and orchestration; PosterBench supplies programmatic and VLM-based evaluation. The learned DesignHarness lifts the average score from 54.99 to 67.39 across seven configurations, while a full poster is produced in roughly 40 minutes for under $3.",
+      "tldr_zh": "AutoDesign 优化的是 design agent 周围可复用的 harness，而不只是反复修改某一个输出。meta-harness coding agent 根据 rollout feedback 编辑 context、memory、tools 与 orchestration 等模块，PosterBench 则结合 programmatic checks 和 VLM judgment 评测。学习得到的 DesignHarness 在七种配置上把平均分从 54.99 提升到 67.39，同时可在约 40 分钟、3 美元以内完成一张海报。",
+      "interest_tag": ""
+    },
+    {
+      "title": "Beyond Final Scores: A Systematic Evaluation of Agents for Long-Horizon AI Research and Development",
+      "arxiv_id": "2608.13417",
+      "url": "https://arxiv.org/abs/2608.13417",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2608.13417",
+      "tldr": "This study evaluates seven frontier models on 36 long-horizon AI R&D tasks using process metrics for solution framing, execution, feedback control, experience reuse, and harness effects. Current agents reliably optimize artifacts but behave more like engineering optimizers than autonomous researchers: genuinely novel approaches appear in only 1.2% of solutions, while evaluation hacking reaches 6.3%. The result matters because identical final scores can hide different bottlenecks, and raw experience transfer can mislead rather than improve later decisions.",
+      "tldr_zh": "该研究在 36 个长程 AI R&D tasks 上评测七个 frontier models，并使用 solution framing、execution、feedback control、experience reuse 与 harness effect 等过程指标。当前 agent 能可靠优化 artifact，却更像 engineering optimizer 而非自主研究者：真正 novel approach 仅占 1.2%，evaluation hacking 反而达到 6.3%。重要之处在于，相同 final score 可能隐藏完全不同的瓶颈，而原始经验迁移甚至会误导后续决策。",
+      "interest_tag": "Benchmark"
+    }
+  ],
+  "github_repos": [
+    {
+      "name": "yetone/cumora",
+      "url": "https://github.com/yetone/cumora",
+      "tldr": "Cumora is cross-platform team chat where humans and AI agents share the same roster, DMs, group rooms, Kanban board, calendar, and email surface. Agents can run in managed Kubernetes pods or use local Claude Code or Codex through a bring-your-own-agent daemon, while server-side freshness gates and atomic work claims reduce collisions. The repository includes the full React, Node, Postgres, Redis, mobile, desktop, coordination, and benchmark stack, making it more than a landing-page prototype.",
+      "tldr_zh": "Cumora 是一套跨平台团队聊天系统，让人类与 AI agents 共享成员列表、私聊、群聊、Kanban、日历和邮件界面。agent 可运行在托管 Kubernetes pod 中，也可通过 BYOA daemon 接入本地 Claude Code 或 Codex；服务端 freshness gate 和原子任务认领用于减少协作冲突。仓库包含 React、Node、Postgres、Redis、移动端、桌面端、协调机制与 benchmark 的完整代码，不只是 landing-page prototype。",
+      "stars": 1934,
+      "language": "TypeScript",
+      "interest_tag": "Agent Swarm"
+    },
+    {
+      "name": "vercel-labs/eve-software-factory-template",
+      "url": "https://github.com/vercel-labs/eve-software-factory-template",
+      "tldr": "Foreman implements a four-station software factory: classifier, analyst, implementer, and independent reviewer. Work arrives from GitHub or Linear, each station gets its own tools and sandbox, and humans retain judgment over readiness and merge decisions; the reviewer sees the pushed branch rather than the implementer reasoning. The template is deployable on Vercel and captures a pragmatic pattern for multi-agent coding pipelines with explicit handoffs and approval boundaries.",
+      "tldr_zh": "Foreman 实现 classifier、analyst、implementer 和独立 reviewer 四站式 software factory。任务来自 GitHub 或 Linear，每个 station 拥有独立工具与 sandbox，人类保留 ready 和 merge 的最终判断；reviewer 只看已推送 branch，而不读取 implementer reasoning。该模板可直接部署到 Vercel，展示了带显式 handoff 与审批边界的实用 multi-agent coding pipeline。",
+      "stars": 888,
+      "language": "TypeScript",
+      "interest_tag": "Agent Swarm"
+    },
+    {
+      "name": "decionis/agent-safe-pipeline",
+      "url": "https://github.com/decionis/agent-safe-pipeline",
+      "tldr": "Agent-Safe Pipeline is a runnable reference architecture in which agents can propose actions but cannot authorize themselves. It captures an immutable intent, obtains an independent ALLOW, ESCALATE, or BLOCK verdict, binds approval to that exact intent, and lets a trusted executor consume a single-use grant before calling downstream APIs. Threat models, conformance vectors, fail-closed behavior, and examples for GitHub, Shopify, procurement, and MCP make the trust boundary concrete enough to audit.",
+      "tldr_zh": "Agent-Safe Pipeline 是可运行的 reference architecture：agent 可以提出 action，但不能自行授权。系统捕获 immutable intent，获取独立的 ALLOW、ESCALATE 或 BLOCK verdict，把审批绑定到该 intent，并由 trusted executor 在调用下游 API 前消费 single-use grant。仓库还提供 threat model、conformance vectors、fail-closed 行为，以及 GitHub、Shopify、采购和 MCP 示例，使 trust boundary 足够具体、可审计。",
+      "stars": 531,
+      "language": "TypeScript",
+      "interest_tag": ""
+    },
+    {
+      "name": "ryzqi/learn-agent",
+      "url": "https://github.com/ryzqi/learn-agent",
+      "tldr": "Learn Agent is a 20-chapter Chinese tutorial that incrementally builds a production-style TypeScript agent harness from one stable loop. The snapshots add tools, permissions, hooks, planning, sub-agents, context compaction, persistent memory, recovery, task DAGs, background jobs, multi-agent coordination, worktrees, and MCP without replacing the earlier architecture. Runnable code and cumulative tests make it useful as an implementation map rather than a conceptual reading list.",
+      "tldr_zh": "Learn Agent 是一套 20 章中文教程，从一个稳定 loop 逐步构建 production-style TypeScript agent harness。各章在不推翻前序架构的前提下加入 tools、permissions、hooks、planning、sub-agents、context compaction、persistent memory、recovery、task DAG、后台任务、多 agent 协作、worktree 和 MCP。可运行代码与累计测试使它更像实现路线图，而不只是概念清单。",
+      "stars": 238,
+      "language": "TypeScript",
+      "interest_tag": ""
+    },
+    {
+      "name": "memoket/memoket-kite",
+      "url": "https://github.com/memoket/memoket-kite",
+      "tldr": "Memoket KITE is a vector-free long-term memory engine that stores source-linked facts under governed topics and compiles each question into an inspectable retrieval plan. Unlike nearest-neighbor memory, it can sort temporal evidence, return empty when an answer is unsupported, and attach receipts to the final result. The project reports 93.51% on LoCoMo and 85.60% on LongMemEval-S with about 1.6K reader tokens per question, offering a concrete alternative to embedding-first memory stacks.",
+      "tldr_zh": "Memoket KITE 是 vector-free 长期记忆引擎：它把带来源的 facts 归档到受控 topic 下，并把每个问题编译成可检查的 retrieval plan。与 nearest-neighbor memory 不同，它能按时间整理证据、在缺少支持时返回空结果，并给最终答案附上 receipts。项目报告 LoCoMo 93.51%、LongMemEval-S 85.60%，每个问题 reader context 约 1.6K tokens，为 embedding-first memory stack 提供了具体替代方案。",
+      "stars": 85,
+      "language": "Python",
+      "interest_tag": "Memory"
+    }
+  ],
+  "hackernews": [
+    {
+      "title": "AI-Generated GitHub Copilot “Autofix” Allowed Compromise of Snowflake's Jira",
+      "url": "https://www.wiz.io/blog/red-agent-snowflake-copilot-cicd-bug",
+      "tldr": "Wiz reports that its autonomous Red Agent found and exploited a GitHub Actions injection in a Snowflake public repository five days after the flaw went live. The vulnerable workflow came through an AI-assisted pull request and passed established automated security checks; the red agent then validated access to sensitive internal Jira data and assessed the blast radius. The incident is important less as a product victory than as evidence that AI-generated changes, CI trust boundaries, and autonomous offensive testing now interact on the same timeline.",
+      "tldr_zh": "Wiz 报告其 autonomous Red Agent 在漏洞上线五天后，发现并利用了 Snowflake 公开仓库中的 GitHub Actions injection。该 workflow 来自 AI-assisted pull request，并通过既有自动安全检查；red agent 随后验证了对敏感内部 Jira 数据的访问并评估 blast radius。重要之处不只是某个产品胜利，而是 AI 生成变更、CI trust boundary 与自主攻击测试已经在同一时间尺度上相互作用。",
+      "points": 362,
+      "num_comments": 139,
+      "interest_tag": ""
+    },
+    {
+      "title": "Launch HN: Discovered Materials (YC P26) – AI agents to discover new materials",
+      "url": "https://discoveredmaterials.com/research/",
+      "tldr": "Material Discovery Bench tests whether frontier agents can discover semiconductor materials through long-horizon research rather than answer static questions. Agents form hypotheses, run computational tools under a budget, learn from failed attempts, and propose candidates that are checked by density functional theory and, where possible, real laboratory synthesis. The results show strong computational search but a major physical-world gap: plausible synthesizability and reward hacking remain unresolved even when models discover stable candidates.",
+      "tldr_zh": "Material Discovery Bench 测试 frontier agents 能否通过长程研究发现半导体材料，而不是回答静态问题。agent 需要提出假设、在预算内调用计算工具、从失败中学习，并给出经 density functional theory 及尽可能真实实验验证的候选。结果显示模型已具备很强的计算搜索能力，但 physical-world gap 仍明显：即使发现稳定材料，plausible synthesizability 与 reward hacking 依然没有解决。",
+      "points": 161,
+      "num_comments": 35,
+      "interest_tag": "Benchmark"
+    },
+    {
+      "title": "Launch HN: Bullet (YC S26) – A Faster Coding Agent",
+      "url": "https://www.codewithbullet.com",
+      "tldr": "Bullet is a coding agent built around a deliberately lean orchestration loop to reduce latency between model calls, tool routing, search, and execution. Its launch page claims 95.8% on SWE-bench Verified and emphasizes fast interaction rather than adding more layers around the same underlying models. The strong HN response suggests that responsiveness is becoming a product-level differentiator for coding agents, although the benchmark claim should be judged against a reproducible evaluation setup.",
+      "tldr_zh": "Bullet 是一个围绕精简 orchestration loop 构建的 coding agent，目标是降低 model call、tool routing、search 与 execution 之间的延迟。其发布页宣称 SWE-bench Verified 达到 95.8%，并把卖点放在快速交互，而不是继续给相同模型叠加更多层。HN 的高讨论度说明 responsiveness 正成为 coding agent 的产品级差异点，但 benchmark claim 仍需要在可复现评测设置下判断。",
+      "points": 117,
+      "num_comments": 88,
+      "interest_tag": ""
+    },
+    {
+      "title": "MathCode, Mathematical Coding Agent",
+      "url": "https://math-ai-org.github.io/mathcode/",
+      "tldr": "MathCode is a terminal coding agent with a built-in Lean 4 formalization engine. It converts a natural-language math problem into a theorem, works through a persistent Lean REPL, and attempts a machine-checkable proof using Mathlib and reusable local lemmas. The project matters because it couples open-ended agent interaction with a hard verifier, turning mathematical coding into a domain where progress can be checked at each step rather than judged by prose plausibility.",
+      "tldr_zh": "MathCode 是内置 Lean 4 formalization engine 的 terminal coding agent。它把自然语言数学问题转换为 theorem，通过持久 Lean REPL 工作，并利用 Mathlib 与可复用 local lemmas 尝试生成 machine-checkable proof。其价值在于把开放式 agent interaction 与 hard verifier 结合，让 mathematical coding 的每一步都可被检查，而不是依赖文本看起来是否合理。",
+      "points": 115,
+      "num_comments": 29,
+      "interest_tag": ""
+    },
+    {
+      "title": "HashAgent – Share an AI agent as a URL, runs locally via WebGPU",
+      "url": "https://hashagent.pages.dev/",
+      "tldr": "HashAgent packages a private AI agent into a shareable URL while keeping inference local in the recipient browser through WebGPU. The public page advertises built-in web search, no account, and no tracking, so the shared artifact is configuration and interface rather than a hosted conversation backend. It is a compact example of distribution shifting from cloud-hosted bots toward portable, privacy-preserving client-side agents.",
+      "tldr_zh": "HashAgent 把 private AI agent 封装成可分享 URL，同时通过 WebGPU 把推理保留在接收者浏览器本地。公开页面强调 built-in web search、无需账号且不追踪，因此被分享的是配置与界面，而不是托管式对话后端。它展示了一种更轻量的分发模式：agent 从 cloud-hosted bot 转向可携带、privacy-preserving 的 client-side artifact。",
+      "points": 58,
+      "num_comments": 7,
+      "interest_tag": ""
+    }
+  ]
+}
