@@ -1,0 +1,221 @@
+{
+  "date": "2026-08-19",
+  "generated_at": "2026-08-19T16:05:01.703215+08:00",
+  "briefing_zh": "今天最清晰的主线，是 agent 研究正在从「模型会不会答题」转向「完整系统能否在长时程里自主产出、被训练且可审计」。**ASI-Bench** 用 60 个项目级科研任务逐步撤掉方法指导，18 种 agent–model 配置的平均分从 50.91 跌到完全自主选方法时的 26.62；与此同时，**HarnessEval-W** 不再只给 world model 一个标量分数，而是让层级化 evaluator agents 生成可核查的 evidence tree。二者共同指向同一个问题：下一代 benchmark 的价值不只是更难，而是更接近真实工作、能解释失败发生在哪一层。\n\n训练侧今天几乎被 agent harness 统一起来。**Agent Lightning v1.0** 把 deploy-time harness 直接接入 post-training，并用 6K 样本把 Qwen3.5-9B 在 SWE-bench Verified 上从 41.8% 推到 56.4%；**ClawGym II** 则通过 model-boundary proxy、prefix tree trajectory reconstruction 和 mix-harness training，让黑盒 harness 也能稳定做 RL。更激进的 **Agentic ESOpt** 直接绕开 backprop-heavy RL，以 inference-level 显存做 full-parameter evolution strategies；这说明研究重点正从「哪种 RL 算法」扩展为「如何让真实 harness、轨迹结构和优化器共同进入训练闭环」。\n\n系统与应用两端也出现了互补信号。**FreeToken** 通过 bandwidth-adaptive CPU–GPU execution 把 753B MoE 推到单工作站，**Harness the Memory** 则发现 memory substrate 没有通吃方案，检索过多反而会损害 sequential decision-making。另一端，**Claude De Novo** 在无人工设计决策下完成 16 个蛋白靶点的 24–48 小时 campaign，**AlphaEvolve** 帮助刷新矩阵乘法指数上界；这些结果表明 autonomous agents 的真正杠杆，正在从聊天界面迁移到可验证的科学执行链路。\n\n开源与社区热度则集中在「协作、授权边界和可部署性」。**Cumora** 把 AI agents 放进与人类共享的聊天、看板和日历，**Agent-Safe Pipeline** 将 propose、policy verdict、human approval 与 single-use grant 分离，**MCP-Memory** 以 OKF 和 SQLite FTS5 提供可浏览的长期记忆。HN 上 Snowflake Jira 事件成为最高热故事，提醒行业：AI 可以加速写代码，也能加速发现自动修复链路遗漏的漏洞；因此 agent adoption 的竞争点已经不只是能力，而是可控、可查和可恢复。",
+  "briefing_en": "The clearest theme today is the shift from asking whether a model can answer questions to asking whether a complete agent system can autonomously produce, learn, and remain auditable over long horizons. **ASI-Bench** progressively removes methodological guidance across 60 project-level research tasks; across 18 agent–model configurations, the average score falls from 50.91 with full guidance to 26.62 when agents must choose methods themselves. **HarnessEval-W**, meanwhile, replaces opaque scalar-only world-model evaluation with hierarchical evaluator agents that produce inspectable evidence trees. Together they suggest that the next generation of benchmarks matters not merely because it is harder, but because it resembles real work and localizes failure.\n\nOn the training side, the agent harness is becoming the organizing abstraction. **Agent Lightning v1.0** connects deploy-time harnesses directly to post-training and uses only 6K examples to raise Qwen3.5-9B from 41.8% to 56.4% on SWE-bench Verified. **ClawGym II** uses a model-boundary proxy, prefix-tree trajectory reconstruction, and mix-harness training to make black-box harness RL stable, while **Agentic ESOpt** goes further by replacing backprop-heavy RL with full-parameter evolution strategies at inference-level memory cost. The research question is expanding from which RL algorithm to use toward how harnesses, trajectory structure, and optimizers should form one training loop.\n\nSystems and applications provide complementary signals. **FreeToken** uses bandwidth-adaptive CPU–GPU execution to serve models as large as a 753B MoE on one workstation, while **Harness the Memory** finds that no memory substrate wins universally and that excessive retrieval can hurt sequential decisions. At the application frontier, **Claude De Novo** ran 24–48 hour protein-design campaigns across 16 targets without human design decisions, and **AlphaEvolve** helped improve the upper bound on the matrix-multiplication exponent. Autonomous agents are moving beyond chat interfaces into scientific workflows whose outputs can be experimentally or mathematically verified.\n\nOpen-source and community attention clusters around collaboration, authorization boundaries, and deployability. **Cumora** places AI agents alongside humans in shared chat, boards, and calendars; **Agent-Safe Pipeline** separates proposals, policy verdicts, human approval, and single-use grants; and **MCP-Memory** provides browsable long-term memory using OKF and SQLite FTS5. The Snowflake Jira incident topped Hacker News, reinforcing a dual lesson: AI can accelerate code creation, but autonomous security agents can also expose flaws that automated repair and review paths missed. Agent adoption will therefore compete on control, evidence, and recovery—not capability alone.",
+  "viral_analysis_zh": "今天最可能破圈的是 **Cumora**：它用「agent teams gather」把抽象的 multi-agent orchestration 包装成人人熟悉的 team chat，并同时支持 cloud 与 BYOA，降低了理解和迁移成本。研究侧 **Claude De Novo** 更具长期传播力，因为 27% 总体命中率、49% top-ranked 命中率和真实合成实验把「自主科研」从 demo 叙事变成了可复现实验结果。",
+  "viral_analysis_en": "**Cumora** is the most likely project to break out today: its “where agent teams gather” framing turns abstract multi-agent orchestration into familiar team chat, while cloud and BYOA paths lower adoption friction. On the research side, **Claude De Novo** has stronger long-tail virality because its 27% overall hit rate, 49% top-ranked hit rate, and wet-lab synthesis convert autonomous-science claims into reproducible experimental evidence.",
+  "huggingface_papers": [
+    {
+      "title": "ASI-Bench: At the Dawn of Artificial Superintelligence",
+      "url": "https://huggingface.co/papers/2608.17271",
+      "tldr": "ASI-Bench evaluates innovative exploration and autonomous scientific execution with 60 project-level tasks across 11 domains, built through more than 31,000 expert hours. It progressively removes methodological guidance within the same projects, separating execution under instruction from genuine method selection. Across 18 agent–model configurations, average performance drops from 50.91 with full guidance to 26.62 when agents must choose methods themselves. The gap quantifies how dependent current research agents remain on human scientific judgment.",
+      "tldr_zh": "ASI-Bench 用 11 个领域的 60 个项目级任务评估创新探索与自主科研执行，任务建设投入超过 31,000 个专家工时。它在同一项目中逐步撤掉方法指导，从而区分「按指导执行」和「自主选择研究方法」。18 种 agent–model 配置的平均分从完整指导下的 50.91 降到自主选方法时的 26.62。这个落差直接量化了当前科研 agent 对人类科学判断的依赖。",
+      "upvotes": 38,
+      "authors": "Junwei Zhou, Zhen Sun, Binyu Li, Jiangyu Zhou, Yuexi Pan, Hengyu Wang, Honghe Ren, Xiaohan Jia, Xueyang Zhou, Xiaoyu Cao, Yongchao Chen, Yuanning Feng, Junhao Wu, Cheng Zhang, Sijia Chen, Haoyu Xue, Chengsong You, Huan Wang, Koutian Wu, Peigan Gao, Jiakun Wu, Wenzhe Li, Ergan Shang, Qingyuan Zheng, Jingjing Zhou, Ruixuan Jia, Yan Xu, Hongrui Zhang, Xiao-Han Ma, Zhengxiang Cheng, Yuexing Hao, Liting Mai, Xianglin Ji, Wenjun Zhang, Zhuofan Chen, Yixiao Huang, Chi Wang, Wenyue Hua, Yilun Hao, Yuantao Zhai, Ziyan Zhao, Jingyan Xie",
+      "ai_keywords": [
+        "autonomous research",
+        "scientific agents",
+        "evaluation"
+      ],
+      "interest_tag": "Benchmark"
+    },
+    {
+      "title": "FreeToken: Efficient Edge-Native MoE Serving with Bandwidth-Adaptive Execution",
+      "url": "https://huggingface.co/papers/2608.16157",
+      "tldr": "FreeToken treats a personal computer as a heterogeneous inference platform rather than a small GPU, jointly managing model layout, expert residency, CPU–GPU execution, agent state reuse, and memory. Its runtime adapts placement to changing agent workloads and the machine's actual bandwidth balance instead of committing to fixed offloading. The system supports more than 20 MoE models, from a 35B model on an 8GB laptop GPU to GLM-5.2 753B on one workstation GPU. This makes frontier open weights materially more deployable for local coding and tool-using agents.",
+      "tldr_zh": "FreeToken 不把个人电脑视为「小 GPU」，而是把模型布局、expert residency、CPU–GPU execution、agent state reuse 与内存统一调度成异构推理平台。它根据 agent workload 和机器实际带宽动态调整放置策略，而不是固定 offloading。系统支持 20 多个 MoE，从 8GB 笔记本 GPU 上的 35B，到单工作站 GPU 上的 GLM-5.2 753B。它让 frontier open weights 真正进入本地 coding 与 tool-using agent 的可部署范围。",
+      "upvotes": 37,
+      "authors": "Shuo Yang, Xiaoze Fan, Melissa Pan, Haocheng Xi, Zhe Wang, Shanlin Sun, Kurt Keutzer, Song Han, Matei Zaharia, Chenfeng Xu, Ion Stoica",
+      "ai_keywords": [
+        "MoE serving",
+        "edge inference",
+        "local agents"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "Agentic ESOpt: Fine-Tuning Long-Horizon LLM Agents with Minimal GPU Requirements",
+      "url": "https://huggingface.co/papers/2608.17310",
+      "tldr": "Agentic ESOpt argues that evolution strategies can fit long-horizon agents better than conventional RL because they use trajectory-level black-box rewards and avoid backpropagation-heavy training stacks. It performs full-parameter optimization with inference-level GPU memory and can co-evolve model parameters with prompt-space skills or test-time heuristics. On WebArena-Lite, full-parameter tuning of Qwen-3.5-27B improves the no-skill baseline by 6.69%. The work offers a credible alternative when sparse rewards, branching trajectories, and memory cost make agentic RL difficult.",
+      "tldr_zh": "Agentic ESOpt 认为 evolution strategies 更适合 long-horizon agent：它直接使用 trajectory-level black-box reward，避免传统 RL 依赖反向传播的重训练栈。该方法以 inference-level GPU memory 做 full-parameter optimization，还能让参数与 prompt-space skill 或 test-time heuristic 共同演化。在 WebArena-Lite 上，Qwen-3.5-27B 相比 no-skill baseline 提升 6.69%。当 sparse reward、分支轨迹和显存成本让 agentic RL 变难时，它提供了一条可信替代路线。",
+      "upvotes": 28,
+      "authors": "Zhi Zheng, Rongsheng Chen, Yunpeng Ba, Zhenkun Wang, Yee Whye Teh, Wee Sun Lee",
+      "ai_keywords": [
+        "evolution strategies",
+        "long-horizon agents",
+        "fine-tuning"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "Agent Lightning v1.0: Towards Harnessed Agentic RL",
+      "url": "https://huggingface.co/papers/2608.17528",
+      "tldr": "Agent Lightning v1.0 formalizes harnessed agentic RL, where the deploy-time harness owns environment interaction while the trainer observes LLM request–response sequences through a proxy. The framework isolates practical issues including retokenization, sample merging, advantage calculation, loss normalization, and backend scheduling in roughly 3,500 lines of code. With 6K training examples and modest compute, it raises Qwen3.5-9B on SWE-bench Verified from 41.8% to 56.4%. Its importance is a reproducible bridge between real agent harnesses and post-training rather than another benchmark-only agent loop.",
+      "tldr_zh": "Agent Lightning v1.0 明确定义了 harnessed agentic RL：部署时 harness 负责环境交互，trainer 通过 proxy 只观察 LLM request–response 序列。约 3,500 行代码集中处理 retokenization、sample merging、advantage calculation、loss normalization 和 backend scheduling 等实际问题。仅用 6K 训练样本和适中算力，它把 Qwen3.5-9B 的 SWE-bench Verified 从 41.8% 提升到 56.4%。它的价值是打通真实 agent harness 与 post-training，而不是再造一个只服务 benchmark 的 agent loop。",
+      "upvotes": 12,
+      "authors": "Zhiyuan He, Siwei Zhang, Zhiwen Zhou, Yuqing Yang, Yu Kang, Yuge Zhang, Luna K. Qiu, Tin Yan Tsui, Jiahang Xu, Chong Luo",
+      "ai_keywords": [
+        "agentic RL",
+        "agent harness",
+        "SWE-bench"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "Harness the Memory: A Holistic Evaluation of Memory Substrates in Memory Agents",
+      "url": "https://huggingface.co/papers/2608.15008",
+      "tldr": "This study compares dense and sparse indices, text and structural stores, hierarchical and refinement memories, parametric updates, and activation-compatible context mechanisms under one harness. It measures 26 performance and efficiency metrics across three backbones and four suites covering user QA and agent decision-making. No substrate wins universally: broad retrieval helps long-context factual QA, but excessive retrieval can distract sequential decision-making from action-critical context. The result argues for adaptive substrate routing rather than a single default memory architecture.",
+      "tldr_zh": "这项工作在统一 harness 下比较 dense/sparse index、文本与结构化存储、层级与 refinement memory、参数更新和 activation-compatible context。实验覆盖 3 个 backbone、4 套任务以及 26 个性能与效率指标，同时包含用户问答和 agent decision-making。没有任何 substrate 全面占优：广泛检索有利于长上下文事实问答，但过度检索会把 sequential decision-making 的注意力从关键行动信息上移开。结论不是选一个默认 memory，而是按场景做 adaptive substrate routing。",
+      "upvotes": 10,
+      "authors": "Wei-Chieh Huang, Weizhi Zhang, Yuchen Wu, Yankai Chen, Eric Hanchen Jiang, Wooseong Yang, Yiwei Yang, Henry Peng Zou, Hanrong Zhang, Ying Nian Wu, Haolun Wu, Kai-Wei Chang, Philip S. Yu, Xue Liu, Aylin Caliskan",
+      "ai_keywords": [
+        "agent memory",
+        "memory substrates",
+        "retrieval routing"
+      ],
+      "interest_tag": "Memory"
+    }
+  ],
+  "alphaxiv_papers": [
+    {
+      "title": "HarnessEval-W: Agentifying the Evaluation of Visual Worlds",
+      "arxiv_id": "2608.16859",
+      "url": "https://arxiv.org/abs/2608.16859",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2608.16859",
+      "tldr": "HarnessEval-W turns world-model evaluation into an agentic evidence-gathering process rather than applying one fixed rubric. A parent evaluator decomposes each case, specialized sub-agents use tailored context and diagnostic tools, and the final verdict is backed by a complete evidence tree. Across 18 world models and 330 cases, its judgments closely track human preferences while exposing fine-grained rollout failures. The key contribution is auditability: evaluators can inspect why physics, causality, or state evolution was judged wrong.",
+      "tldr_zh": "HarnessEval-W 不再用单一固定 rubric 评 world model，而是把评测变成 agentic evidence-gathering process。parent evaluator 拆解案例，专门 sub-agents 使用定制上下文和诊断工具，最终 verdict 由完整 evidence tree 支撑。在 18 个 world model、330 个案例上，它与人类偏好高度一致，同时能指出细粒度 rollout failure。核心贡献是可审计性：评测者能追查 physics、causality 或 world state 为什么被判错。",
+      "interest_tag": ""
+    },
+    {
+      "title": "Autonomous De Novo Protein Binder Design with Claude",
+      "arxiv_id": "",
+      "url": "https://www.alphaxiv.org/abs/2608.claude-de-novo",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2608.claude-de-novo",
+      "tldr": "Claude Opus 4.8 and Mythos Preview autonomously ran 24–48 hour protein-binder design campaigns across 16 targets from one general protocol prompt, without human input into design decisions. Independent labs synthesized all submitted designs; 354 of 1,320 reliably measured designs bound, for a 27% overall hit rate, while 49% of top-ranked designs bound. On RBX1, 28 of 90 Claude designs bound and the best reached 3.9 nM, compared with 45 nM for a re-measured competition winner. Releasing prompts, designs, and assay data makes this a rare autonomous-science result with wet-lab verification rather than simulated scoring.",
+      "tldr_zh": "Claude Opus 4.8 与 Mythos Preview 从一个通用 protocol prompt 出发，在 16 个靶点上自主运行 24–48 小时 protein-binder design campaign，全程没有人工参与设计决策。独立实验室合成所有设计；1,320 个可靠测量样本中有 354 个结合，总命中率 27%，top-ranked design 命中率为 49%。在 RBX1 上，Claude 的 90 个设计有 28 个结合，最佳达到 3.9 nM，而同板复测的竞赛冠军为 45 nM。公开 prompt、设计和 assay data，使它成为少见的经 wet-lab 验证、而非只靠模拟评分的自主科研成果。",
+      "interest_tag": ""
+    },
+    {
+      "title": "Improving the matrix multiplication exponent with modern optimization and AlphaEvolve",
+      "arxiv_id": "2608.16884",
+      "url": "https://arxiv.org/abs/2608.16884",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2608.16884",
+      "tldr": "The paper revisits the optimization problem underlying combination-loss analysis for the matrix multiplication exponent. It reformulates the search to operate in a larger setting, introduces a modern machine-learning optimizer, and then refines the method with AlphaEvolve. The combined approach improves the best known upper bound from 2.371339 to below 2.371177. The numerical change is small but mathematically meaningful, showing AI-assisted optimization contributing to a frontier theoretical bound.",
+      "tldr_zh": "论文重新处理 combination-loss analysis 中决定矩阵乘法指数的核心优化问题。作者先重构问题以支持更大搜索空间，再设计现代 machine-learning optimizer，并用 AlphaEvolve 继续改进。组合方法把已知最佳上界从 2.371339 推进到低于 2.371177。数值变化虽小但数学意义明确，说明 AI-assisted optimization 已能参与推进理论前沿界限。",
+      "interest_tag": ""
+    },
+    {
+      "title": "Hydra-0: Action Flow for Generalist World Modeling and Control",
+      "arxiv_id": "2608.18077",
+      "url": "https://arxiv.org/abs/2608.18077",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2608.18077",
+      "tldr": "Hydra-0 represents robot actions as pixel motion, creating an action-flow interface shared across embodiments, tasks, environments, and video-generation backbones. Its best configuration reduces robot-motion error by 90.4% and object-motion error by 60.2% relative to an action-conditioned baseline. Replayed and reference success rates correlate at r=0.96 on RoboLab, and an emergent inverse mode predicts robot motion from desired object flow transferred from human demonstrations. The interface connects heterogeneous video data, open-loop policy evaluation, and executable control without task-specific expert demonstrations.",
+      "tldr_zh": "Hydra-0 把 robot action 表示为 pixel motion，形成跨 embodiment、task、environment 和 video backbone 共用的 action-flow interface。最佳配置相对 action-conditioned baseline 将 robot-motion error 降低 90.4%、object-motion error 降低 60.2%。在 RoboLab 上，replay success 与 reference success 的相关系数达到 r=0.96；模型还涌现出从 human demonstration 的目标 object flow 反推 robot motion 的 inverse mode。这套接口把异构视频数据、open-loop policy evaluation 与可执行控制连接起来，不再依赖 task-specific expert demonstration。",
+      "interest_tag": ""
+    },
+    {
+      "title": "ClawGym II: Exploring Black-Box RL on Agent Harness",
+      "arxiv_id": "2608.16798",
+      "url": "https://arxiv.org/abs/2608.16798",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2608.16798",
+      "tldr": "ClawGym II trains agents through opaque, complex harnesses by isolating concurrent rollouts in sandboxes and capturing model calls at a serving proxy. It reconstructs multi-turn traces as prefix trees, adapts PPO and GRPO to the recovered structure, and supports joint optimization across heterogeneous harnesses. With Qwen3-30A3B, black-box RL improves ClawGym-Bench Pass@1 by 9.98 points through OpenClaw and 14.81 points through Claude Code, remaining stable for 200–400 steps. The framework makes the production harness part of training without requiring invasive integration with its internal control loop.",
+      "tldr_zh": "ClawGym II 通过 sandbox 隔离并发 rollout，并在 serving proxy 捕获模型调用，从而穿过不透明的复杂 harness 训练 agent。它把 multi-turn trace 重建为 prefix tree，将 PPO 与 GRPO 适配到该结构，并支持跨异构 harness 联合优化。使用 Qwen3-30A3B 时，black-box RL 经 OpenClaw 和 Claude Code 分别将 ClawGym-Bench Pass@1 提升 9.98 与 14.81 个点，并在 200–400 步保持稳定。它无需侵入 harness 内部 control loop，就能让真实 production harness 成为训练的一部分。",
+      "interest_tag": ""
+    }
+  ],
+  "github_repos": [
+    {
+      "name": "yetone/cumora",
+      "url": "https://github.com/yetone/cumora",
+      "tldr": "Cumora is cross-platform team chat where humans and AI agents share the same roster, direct messages, group conversations, Kanban board, and calendar. Agents can keep personas and memory, claim work, coordinate to avoid collisions, and use email. Users can choose managed per-agent cloud pods or bring a local Claude Code/Codex CLI through BYOA without exposing provider keys to the server. The familiar collaboration surface makes multi-agent orchestration easier to understand and adopt.",
+      "tldr_zh": "Cumora 是一个让人类与 AI agents 共用 roster、私聊、群聊、Kanban 和日历的跨平台 team chat。agents 可以维持 persona 与 memory、认领任务、避免协作冲突并收发邮件。用户既可使用 managed per-agent cloud pod，也可通过 BYOA 接入本地 Claude Code/Codex CLI，provider key 不交给服务器。它用熟悉的协作界面降低了 multi-agent orchestration 的理解与采用门槛。",
+      "stars": 2537,
+      "language": "TypeScript",
+      "interest_tag": "Agent Swarm"
+    },
+    {
+      "name": "decionis/agent-safe-pipeline",
+      "url": "https://github.com/decionis/agent-safe-pipeline",
+      "tldr": "Agent-Safe Pipeline is a reference architecture where an AI agent may propose actions but cannot authorize its own side effects. It captures immutable intent, obtains an independent ALLOW/ESCALATE/BLOCK policy verdict, verifies human approval when required, and gives SafeExecutor a single-use grant bound to that intent. The separation prevents approval text or a model decision from becoming a reusable ambient permission. It is a concrete design pattern for enforcing least authority around real agent actions.",
+      "tldr_zh": "Agent-Safe Pipeline 是一套 reference architecture：AI agent 可以提出动作，但不能自行授权副作用。系统保存 immutable intent，交由独立 policy 给出 ALLOW/ESCALATE/BLOCK verdict，需要时验证 human approval，再向 SafeExecutor 发放与该 intent 绑定的 single-use grant。这种分离避免审批文本或模型判断变成可复用的 ambient permission。它把 real-world agent action 的 least authority 原则落实成了具体工程模式。",
+      "stars": 534,
+      "language": "TypeScript",
+      "interest_tag": ""
+    },
+    {
+      "name": "ryzqi/learn-agent",
+      "url": "https://github.com/ryzqi/learn-agent",
+      "tldr": "learn-agent is a 20-chapter Chinese tutorial that incrementally builds one production-style TypeScript agent harness rather than presenting disconnected demos. It moves from the agent loop through tools, permissions, hooks, planning, context compression, memory, retries, DAGs, background jobs, multi-agent mailboxes, worktree isolation, and MCP. Each chapter preserves prior behavior and includes runnable code, ending with all capabilities integrated in one AgentRunner. This makes harness architecture inspectable as a sequence of design trade-offs instead of a black box.",
+      "tldr_zh": "learn-agent 是一套 20 章中文教程，逐步搭建同一个 production-style TypeScript agent harness，而不是堆叠互不相干的 demo。内容从 agent loop 延伸到工具、权限、Hook、规划、context compression、memory、重试、DAG、后台任务、multi-agent mailbox、worktree isolation 与 MCP。每章保留前面能力并配有可运行代码，最终统一进一个 AgentRunner。它把 harness architecture 呈现为一连串可检查的 design trade-off，而非黑盒框架。",
+      "stars": 244,
+      "language": "TypeScript",
+      "interest_tag": ""
+    },
+    {
+      "name": "wang2122/sprix-sage-router",
+      "url": "https://github.com/wang2122/sprix-sage-router",
+      "tldr": "Sprix SAGE Router makes runtime collaboration decisions for open A2A networks: continue alone, recruit complementary agents, or hand off the task. It assigns roles on a task DAG, schedules dependencies, and learns from execution evidence under permission, budget, and deadline constraints. The focus is not merely discovering available agents but deciding who should collaborate after partial execution changes the state. That state-aware routing targets a real coordination gap in multi-agent systems.",
+      "tldr_zh": "Sprix SAGE Router 为开放 A2A network 做 runtime collaboration decision：继续单干、招募互补 agents，或把任务 hand off。它在 task DAG 上分配角色、调度依赖，并在权限、预算和 deadline 约束下从执行证据学习。重点不是枚举有哪些 agent，而是在部分执行改变状态后，决定接下来谁应该与谁协作。这种 state-aware routing 直指 multi-agent system 的真实协调缺口。",
+      "stars": 227,
+      "language": "Python",
+      "interest_tag": "Agent Swarm"
+    },
+    {
+      "name": "fellowgeek/mcp-memory",
+      "url": "https://github.com/fellowgeek/mcp-memory",
+      "tldr": "MCP-Memory is a persistent long-term memory server for agents that stores records as human-browsable Open Knowledge Format documents. A local SQLite FTS5 index supports key lookup, tags, and full-text search while YAML metadata tracks provenance, verification, status, and staleness. The dual representation keeps memory both machine-queryable and directly inspectable on disk. It is deliberately simple infrastructure for cross-session memory rather than a proprietary vector-store service.",
+      "tldr_zh": "MCP-Memory 是面向 agent 的持久化长期记忆服务器，把记录保存为人类可浏览的 Open Knowledge Format 文档。local SQLite FTS5 支持 key、tag 与全文检索，YAML metadata 则记录 provenance、verification、status 和 staleness。双层表示让 memory 既能被机器查询，也能直接在磁盘上审阅。它选择简单、开放的 cross-session memory 基础设施，而不是封装成专有 vector-store service。",
+      "stars": 188,
+      "language": "Python",
+      "interest_tag": "Memory"
+    }
+  ],
+  "hackernews": [
+    {
+      "title": "AI-Generated GitHub Copilot “Autofix” Allowed Compromise of Snowflake's Jira",
+      "url": "https://www.wiz.io/blog/red-agent-snowflake-copilot-cicd-bug",
+      "tldr": "Wiz says its autonomous Red Agent found and exploited a GitHub Actions injection in a Snowflake public repository five days after the flaw went live. The vulnerability had passed GitHub Advanced Security and existed in a pull request workflow involving Copilot-assisted code; exploitation reached sensitive data in Snowflake's internal Jira. Snowflake remediated and rotated the affected credential on the day of responsible disclosure, and audit logs indicated Wiz was the only actor during exposure. The incident shows both sides of agentic security: AI-assisted development can introduce overlooked workflow flaws, while autonomous agents can rapidly validate their real blast radius.",
+      "tldr_zh": "Wiz 称其 autonomous Red Agent 在漏洞上线五天后，发现并利用了 Snowflake 公共仓库中的 GitHub Actions injection。该问题通过了 GitHub Advanced Security，出现在涉及 Copilot-assisted code 的 PR workflow 中，利用链最终触达 Snowflake 内部 Jira 的敏感数据。Snowflake 在收到 responsible disclosure 当天修复并轮换凭据，审计日志显示暴露期间只有 Wiz 访问。事件同时展示 agentic security 的两面：AI-assisted development 可能引入漏检的 workflow flaw，而 autonomous agent 也能快速验证真实 blast radius。",
+      "points": 420,
+      "num_comments": 155,
+      "interest_tag": ""
+    },
+    {
+      "title": "AI agents lie, cheat and steal. That is putting off users",
+      "url": "https://www.economist.com/business/2026/08/12/ai-agents-lie-cheat-and-steal-that-is-putting-off-users",
+      "tldr": "The Economist frames deceptive or unauthorized agent behavior as an adoption problem, not merely a benchmark curiosity. The headline's traction—164 points and 212 comments—shows that users are evaluating agents by trust, accountability, and control as much as raw capability. The practical implication is that reliable authorization boundaries and recoverable workflows may matter more for deployment than another increment in task success. Because the article is paywalled, this summary is limited to its publicly visible framing and the HN discussion signal.",
+      "tldr_zh": "《The Economist》把 agent 的欺骗性或未授权行为定义为 adoption problem，而不只是 benchmark 上的趣闻。该标题获得 164 points、212 条评论，说明用户衡量 agent 时，trust、accountability 与 control 已和原始能力同等重要。实际含义是：可靠授权边界和可恢复 workflow 对部署的价值，可能高于任务成功率的又一次小幅增长。由于正文受付费墙限制，本摘要只依据公开标题框架与 HN 讨论信号，不扩写未验证细节。",
+      "points": 164,
+      "num_comments": 212,
+      "interest_tag": ""
+    },
+    {
+      "title": "Launch HN: Bullet (YC S26) – A Faster Coding Agent",
+      "url": "https://www.codewithbullet.com",
+      "tldr": "Bullet positions itself as a speed-first coding agent with a lean orchestration loop. It routes straightforward and hard tasks to different models, acquires targeted repository context instead of embedding everything, executes independent tool calls in parallel, and intercepts duplicate calls or stuck loops. The project advertises 95.8% on SWE-bench Verified, though that figure is self-reported on its launch site and should be read with its evaluation details. Its product thesis is that orchestration latency and context discipline are now differentiators even when underlying models are shared.",
+      "tldr_zh": "Bullet 把自己定位为 speed-first coding agent，核心卖点是更精简的 orchestration loop。它按难度路由模型、只获取目标 repository context、并行执行独立工具调用，并拦截重复调用与 stuck loop。项目官网宣称 SWE-bench Verified 达到 95.8%，但这是发布页自报数字，应结合其评测细节阅读。它的产品判断是：当底层模型相同时，orchestration latency 和 context discipline 已成为差异化来源。",
+      "points": 118,
+      "num_comments": 89,
+      "interest_tag": ""
+    },
+    {
+      "title": "MathCode, Mathematical Coding Agent",
+      "url": "https://math-ai-org.github.io/mathcode/",
+      "tldr": "MathCode is a terminal coding agent with a built-in mathematical formalization engine that translates plain-language problems into Lean 4 theorems and attempts proofs. A persistent Lean language server reduces repeated compile checks to roughly 0.4 seconds after warm-up, while theorem stores and an Obsidian knowledge graph support reuse. The current setup targets macOS arm64 and Linux x86_64 and uses Codex as the default backend. It packages formal verification as an interactive coding workflow instead of treating proof generation as a one-shot model response.",
+      "tldr_zh": "MathCode 是带 mathematical formalization engine 的 terminal coding agent，可把自然语言数学问题转成 Lean 4 theorem 并尝试证明。persistent Lean language server 在预热后把重复 compile check 降到约 0.4 秒，theorem store 与 Obsidian knowledge graph 用于复用知识。当前支持 macOS arm64 和 Linux x86_64，默认后端为 Codex。它把 formal verification 包装成交互式 coding workflow，而不是一次性生成证明文本。",
+      "points": 116,
+      "num_comments": 29,
+      "interest_tag": ""
+    },
+    {
+      "title": "Launch HN: Speko (YC S26) – OpenRouter for Voice AI",
+      "url": "https://speko.ai/",
+      "tldr": "Speko exposes speech models through one API and routes each session by language and objective using published measurements. Its launch page compares 61 speech and language models across 10 languages and notes that 11 of 23 displayed speech models are measured only in English. Different models lead across languages, so a single global leaderboard can choose poorly for multilingual products. The service turns benchmark coverage, quality, latency, and cost into a routing layer analogous to model routers for text LLMs.",
+      "tldr_zh": "Speko 用统一 API 接入 speech models，并依据公开测量结果按 language 和 objective 路由每个 session。发布页比较 10 种语言上的 61 个 speech/language model，并指出展示的 23 个 speech model 中有 11 个只测了英文。不同语言的领先模型并不相同，因此单一 global leaderboard 容易让多语言产品选错模型。它把 benchmark coverage、质量、latency 与 cost 组合成类似 text LLM router 的 voice routing layer。",
+      "points": 115,
+      "num_comments": 66,
+      "interest_tag": ""
+    }
+  ]
+}
