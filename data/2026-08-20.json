@@ -1,0 +1,226 @@
+{
+  "date": "2026-08-20",
+  "generated_at": "2026-08-20T08:05:22.470399+00:00",
+  "briefing_zh": "今天最清晰的主线是：**agent harness 正在从外围脚手架变成训练、执行与治理的核心系统层**。**Zetta ζ** 用三种时间尺度的闭环，把在线 critic、恢复技能和验证门禁放进实体执行；**Agent Lightning v1.0** 则指出 deploy-time harness 必须直接参与 RL，并在 SWE-bench Verified 上将 Qwen3.5-9B 从 41.8% 推到 56.4%。两者共同说明，下一阶段的提升不只来自更强 base model，而来自能把观测、动作、反馈和更新真正闭合的 runtime。\n\n研究端同时在寻找更低监督、更长 horizon 的优化信号。**Co-RL** 让异构模型互相提供奖励，在无 ground-truth 标签下缓解 self-reward collapse；**Agentic ESOpt** 则用 Evolution Strategies 绕开长轨迹的反向传播与 credit assignment 压力，只需 inference 级显存即可做全参数优化。**SPADE** 虽未进入 HF 热度前五，但它让 Environment Designer 自动生成可执行训练世界，进一步把「任务分布本身」变成可学习对象。\n\n评测与基础设施的关键词是 evidence、isolation 和 terminal state。**HarnessEval-W** 不是只给 world model 一个标量分数，而是生成可审查的 evidence tree；**MCP State Twin** 让不同 agent 从同一快照 fork，在隔离、有状态的工具世界里比较最终状态；**SemaPLC** 也显示 live runtime trace 比静态检查更能拉开系统差距。今天多个独立项目都在收敛到同一原则：agent 是否可靠，必须由外部世界中的可复现证据证明，而不是由模型自评。\n\n应用侧最醒目的结果是 **Autonomous De Novo Protein Binder Design with Claude**：agent 独立编排 24–48 小时设计 campaign，1,320 个设计中有 354 个真实结合，整体 hit rate 约 27%。与此同时，Snowflake 事件展示了相反一面：Copilot 与常规扫描漏掉的 GitHub Actions injection，被自主 Red Agent 在漏洞上线五天后发现并利用。生成 agent 与审计 agent 的能力同步上升，意味着 permission boundary、短期凭证和全链路 audit 不再是可选项。",
+  "briefing_en": "The clearest theme today is that the **agent harness is moving from peripheral scaffolding to the core systems layer for training, execution, and governance**. **Zetta ζ** closes the physical-execution loop with online critics, recovery skills, and validation gates operating at three timescales, while **Agent Lightning v1.0** argues that the deploy-time harness must participate directly in RL and lifts Qwen3.5-9B on SWE-bench Verified from 41.8% to 56.4%. Together, they suggest that the next capability gains will come not only from stronger base models, but from runtimes that genuinely close the observation-action-feedback-update loop.\n\nResearch is also searching for optimization signals that require less supervision and survive longer horizons. **Co-RL** lets heterogeneous models reward one another and reduces self-reward collapse without ground-truth labels; **Agentic ESOpt** uses Evolution Strategies to avoid backpropagation and fine-grained credit assignment across long trajectories, enabling full-parameter optimization with inference-level memory. Although it missed the HF top five by upvotes, **SPADE** pushes the same frontier further by making executable environment generation itself a learnable component.\n\nFor evaluation and infrastructure, the dominant words are evidence, isolation, and terminal state. **HarnessEval-W** replaces opaque scalar judgments of world models with inspectable evidence trees; **MCP State Twin** forks multiple agents from an identical snapshot inside isolated, stateful tool worlds and compares their final states; **SemaPLC** likewise shows that live runtime traces separate systems more sharply than static checks. Several independent projects are converging on one principle: agent reliability must be demonstrated by reproducible evidence in the external world, not by model self-assessment.\n\nThe most striking applied result is **Autonomous De Novo Protein Binder Design with Claude**: agents ran 24–48 hour campaigns autonomously, producing 354 binders among 1,320 designs for an overall hit rate near 27%. The Snowflake incident shows the inverse side of the same trend: a GitHub Actions injection missed by Copilot and established scanners was found and exploited by an autonomous Red Agent five days after it went live. As generative and auditing agents improve together, permission boundaries, short-lived credentials, and end-to-end audit trails become mandatory rather than optional.",
+  "viral_analysis_zh": "**Autonomous De Novo Protein Binder Design with Claude** 最可能在研究圈出圈：它把「agent 做科研」从 workflow demo 推到可湿实验复核的 1,320 个设计、27% hit rate，并用竞赛人类团队作直观参照。传播层面，**Cumora** 的「AI agents 作为团队一等成员」和 Snowflake 的「一个 agent 漏洞、另一个 agent 五天后攻破」也都具备极强叙事张力——前者卖未来工作方式，后者制造现实紧迫感。",
+  "viral_analysis_en": "**Autonomous De Novo Protein Binder Design with Claude** is the strongest breakout candidate because it moves AI-scientist claims beyond workflow demos to 1,320 physically tested designs, a roughly 27% hit rate, and an intuitive comparison with expert competition teams. **Cumora** also has a highly shareable future-of-work frame, while the Snowflake story supplies the opposite kind of viral tension: one AI-assisted workflow missed a flaw and another agent exploited it only five days later.",
+  "huggingface_papers": [
+    {
+      "title": "Zetta ζ: An Efficient Closed-Loop Embodied Harness for Self-Evolving Physical Intelligence",
+      "url": "https://huggingface.co/papers/2608.16590",
+      "tldr": "Zetta turns embodied-agent improvement into a closed loop while keeping the base policy frozen. Three timescales govern actions, propose critic-and-recovery updates, and admit new skills only after validation; the accompanying Z-Infra decouples agent logic from heterogeneous robot resources. It reports 90.8% success on LIBERO-Pro, 93.6% on RoboCasa, and an 11.1× inference speedup under the stated rollout budget. The important idea is that runtime critics and recovery skills can scale physical reliability without repeatedly retraining the policy.",
+      "tldr_zh": "Zetta 在冻结 base policy 的前提下，把具身 agent 的改进做成真正闭环。系统用三个时间尺度分别治理动作、提出 critic 与 recovery 更新，并只让通过验证的技能进入运行时；Z-Infra 则把 agent 逻辑与异构机器人资源解耦。在给定 rollout budget 下，它报告 LIBERO-Pro 90.8%、RoboCasa 93.6% 的成功率和 11.1× 推理加速。核心意义是：runtime critic 与恢复技能可能在无需反复重训 policy 的情况下持续提升实体执行可靠性。",
+      "upvotes": 89,
+      "authors": "Xin Ding, Liang Mi, Mingzhe Huang, Zixuan Wang, Chao Zhang, Zixu Hao, Fu Chen, Xiangyu Li, Yikai Zheng, Yaoyu Guo, Weijun Wang, Kun Li, Hao Wu, Yunxin Liu, Ting Cao",
+      "ai_keywords": [
+        "embodied agents",
+        "closed-loop harness",
+        "runtime critics",
+        "robotics"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "Co-RL: Unsupervised Reasoning Emerges from Diverse Cohort in Multi-agent RL",
+      "url": "https://huggingface.co/papers/2608.17253",
+      "tldr": "Co-RL trains several parameter-disjoint models with rewards derived from their peers instead of labels. Diversity across model families, scales, and rephrased samples reduces correlated errors, preserving behavioral variety and preventing self-reward collapse. The method gains 3.0–8.6% across seven text benchmarks and 2.3–7.2% across four multimodal benchmarks, matching or beating supervised alternatives in the reported settings. It reframes model heterogeneity as an anti-collapse resource rather than an engineering inconvenience.",
+      "tldr_zh": "Co-RL 让多个参数完全独立的模型用 peer 生成的奖励共同训练，而不依赖人工标签。模型家族、规模和样本改写的异质性会降低 correlated error，从而保留行为多样性并缓解 self-reward collapse。论文报告在 7 个文本 benchmark 上提升 3.0–8.6%，在 4 个多模态 benchmark 上提升 2.3–7.2%，在其设置中可匹配或超过监督方法。它把模型异质性从工程负担重新定义成防止训练坍塌的资源。",
+      "upvotes": 73,
+      "authors": "Yunhao Yang, Yuexin Bian, Yunjie Tian, Di Fu, Tianjin Huang, Yuanyuan Shi, Ziang Xiao, Nuno Vasconcelos, Yijiang Li",
+      "ai_keywords": [
+        "multi-agent RL",
+        "self-rewarding",
+        "unsupervised reasoning",
+        "diversity"
+      ],
+      "interest_tag": "Agent Swarm"
+    },
+    {
+      "title": "SemaPLC: A Project-Grounded, Verification-Gated Agent Harness for PLC Code Generation",
+      "url": "https://huggingface.co/papers/2608.18565",
+      "tldr": "SemaPLC is a project-grounded code-generation harness that refuses to declare success until external checks verify the specification, compilation, and live behavior. Across 117 standalone tasks it reaches a 72.6% mean strict verified pass rate, and on 65 project-context tasks it leads at every evaluation layer. Dynamic runtime traces separate methods far more sharply than static checks, with SemaPLC scoring 52.2 versus 22.4–31.4 for baselines. The work is a concrete demonstration that execution evidence is a better completion criterion than model confidence.",
+      "tldr_zh": "SemaPLC 是面向真实 PLC 项目的代码生成 harness，只有外部检查验证 specification、编译和 live behavior 后才允许任务宣告完成。在 117 个独立任务上，它达到 72.6% 的平均 strict verified pass rate，并在 65 个项目上下文任务的每层评测中领先。动态 runtime trace 比静态检查更能拉开差距：SemaPLC 得分 52.2，而 baseline 为 22.4–31.4。它具体证明了 execution evidence 比模型自信更适合作为 completion criterion。",
+      "upvotes": 58,
+      "authors": "Yanlun Tu, Huacan Wang, Ziyue Zhou, Jie Zhou, Ningyan Zhu, Ge Chen, Wangyi Chen, Tengfei Zhou, Yifan Zhou, Dasheng Yang, Xiaofeng Mou, Hui Zhang, Yi Xu",
+      "ai_keywords": [
+        "agent harness",
+        "PLC code generation",
+        "runtime verification",
+        "industrial automation"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "SemComp-Bench: Benchmarking Semantic Task Completion in Video Generation",
+      "url": "https://huggingface.co/papers/2608.17426",
+      "tldr": "SemComp-Bench evaluates whether generated videos achieve an intended outcome while preserving task-relevant semantic grounding to a reference image. Its outcome-centric protocol uses structured binary questions to produce separate Outcome Achievement and Generation Reliability scores, avoiding a requirement to reproduce every intermediate step. A six-domain dataset supports the evaluation, and experiments show that current video models still struggle to satisfy both outcome and grounding constraints. The benchmark matters because useful video generation increasingly needs task correctness, not just perceptual plausibility.",
+      "tldr_zh": "SemComp-Bench 评估生成视频是否真正达到目标结果，同时保持与参考图像相关的语义 grounding。它用结构化二元问题分别计算 Outcome Achievement 与 Generation Reliability，不要求复现每一个中间步骤。配套数据覆盖 6 个领域，实验显示当前视频模型仍难以同时满足结果正确与语义一致。其价值在于：有用的视频生成正在从「看起来合理」转向「任务结果正确」。",
+      "upvotes": 53,
+      "authors": "Keyu Tu, Zhuowei Chen, Mengqi Huang, Yuxin Wang, Jiahao Zhu, Zhendong Mao, Yongdong Zhang",
+      "ai_keywords": [
+        "video generation",
+        "semantic grounding",
+        "outcome evaluation",
+        "VLM judge"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "OmniScientist: An Omni-Modal Omni-Discipline AI Scientist",
+      "url": "https://huggingface.co/papers/2608.13558",
+      "tldr": "OmniScientist runs an end-to-end research pipeline over raw multimodal evidence rather than precomputed scalar features. Separate agents for ideation, experimentation, and writing sit inside a deterministic pipeline with code-based novelty, rigor, provenance, and claim checks. It completes all 36 cases spanning five discipline families and wins 85% of paired judgments against a perception-blind variant. The result argues that direct access to spatial, temporal, and cross-channel evidence is essential for credible automated science.",
+      "tldr_zh": "OmniScientist 直接在原始多模态证据上运行端到端科研流程，而不是只读取预计算 scalar feature。ideation、experiment 和 writeup 三个 agent 被放入确定性 pipeline，并通过代码执行 novelty、rigour、provenance 与 claim 检查。系统完成了横跨 5 类学科的全部 36 个 case，并在与无感知版本的成对比较中赢得 85%。结果说明，若要让自动科研可信，agent 必须直接接触空间、时间和跨通道证据。",
+      "upvotes": 52,
+      "authors": "Bobo Li, Hao Fei, Tianjie Ju, Mong-Li Lee, Wynne Hsu",
+      "ai_keywords": [
+        "AI scientist",
+        "multimodal evidence",
+        "research agents",
+        "provenance"
+      ],
+      "interest_tag": ""
+    }
+  ],
+  "alphaxiv_papers": [
+    {
+      "title": "Mathematics in the age of AI",
+      "arxiv_id": "2608.16753",
+      "url": "https://arxiv.org/abs/2608.16753",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2608.16753",
+      "tldr": "Terence Tao asks what mathematics should optimize for if AI systems become capable of research-level problem solving. The essay separates solution production from verification, exposition, community acceptance, canonicalization, and human understanding. Its importance is institutional rather than architectural: faster theorem generation may cause these values to diverge instead of advancing together. The paper gives the mathematics community a vocabulary for choosing goals before capability pressure chooses them implicitly.",
+      "tldr_zh": "Terence Tao 追问：如果 AI 能完成研究级数学问题，数学共同体究竟应该优化什么。文章把解题产出与 verification、exposition、community acceptance、canonicalization 及人类理解区分开来。它的重要性不在模型结构，而在制度层面：定理生成更快之后，这些价值可能不再同步前进。论文为数学界提供了一套在能力压力替大家做决定之前主动选择目标的语言。",
+      "interest_tag": ""
+    },
+    {
+      "title": "Recirculation",
+      "arxiv_id": "2608.17981",
+      "url": "https://arxiv.org/abs/2608.17981",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2608.17981",
+      "tldr": "Recirculation feeds deep-layer contextual representations back into shallower layers during prefill, giving an off-the-shelf transformer more iterations for state tracking without retraining its weights. The approach differs from chain of thought and generic depth looping, and adds essentially no generation latency after the serial prefill. Adaptive recirculation reduces perplexity by 23% and improves GSM8K accuracy by 21% on the reported Gemma 3 experiments. It is a notable example of extracting recurrent computation from a trained feed-forward model at inference time.",
+      "tldr_zh": "Recirculation 在 prefill 阶段把深层 contextual representation 回流到浅层，让现成 Transformer 在不重训权重的情况下获得更多 state-tracking 迭代。它不同于 chain of thought 和通用 depth looping，串行 prefill 之后几乎不增加 generation latency。在论文的 Gemma 3 实验中，adaptive recirculation 将 perplexity 降低 23%，并让 GSM8K accuracy 提升 21%。这是一个在 inference time 从已训练 feed-forward 模型中提取递归计算的代表性方案。",
+      "interest_tag": ""
+    },
+    {
+      "title": "Autonomous De Novo Protein Binder Design with Claude",
+      "arxiv_id": "",
+      "url": "https://www.alphaxiv.org/abs/2608.claude-de-novo",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2608.claude-de-novo",
+      "tldr": "Claude Opus 4.8 and Mythos Preview autonomously ran 24–48 hour protein-binder design campaigns, selecting targets, installing tools, optimizing candidates, and ranking designs without human design decisions. Independent labs synthesized all outputs: 354 of 1,320 designs bound, an overall hit rate of 27%, and 49% of top-ranked designs bound. On RBX1, 28 of 90 designs bound and the best reached 3.9 nM affinity, versus 45 nM for the re-tested competition winner. This is unusually strong evidence because the agent's claims terminate in wet-lab measurements rather than simulated scores.",
+      "tldr_zh": "Claude Opus 4.8 与 Mythos Preview 自主运行了 24–48 小时的蛋白 binder 设计 campaign，自行选择靶点、安装工具、优化候选并排序，全程没有人类参与设计决策。独立实验室合成了全部输出：1,320 个设计中有 354 个真实结合，整体 hit rate 为 27%，各 campaign 排名第一的设计有 49% 成功。在 RBX1 上，90 个设计中 28 个结合，最佳 affinity 达 3.9 nM，而复测的竞赛冠军为 45 nM。它的证据格外强，因为 agent 的结论最终落在 wet-lab measurement，而不是模拟分数上。",
+      "interest_tag": ""
+    },
+    {
+      "title": "Agentic ESOpt: Fine-Tuning Long-Horizon LLM Agents with Minimal GPU Requirements",
+      "arxiv_id": "2608.17310",
+      "url": "https://arxiv.org/abs/2608.17310",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2608.17310",
+      "tldr": "Agentic ESOpt applies Evolution Strategies to full-parameter optimization of long-horizon LLM agents. Because updates use trajectory-level black-box rewards, the method needs only inference-level GPU memory and avoids decomposing sparse rewards across many steps. It improves Qwen3.5-27B by 6.69% over the no-skill baseline on WebArena-Lite and supports online prompt-parameter co-evolution. The trade-off is ES sampling efficiency, but the framework opens a practical alternative when backprop-heavy agentic RL becomes the bottleneck.",
+      "tldr_zh": "Agentic ESOpt 用 Evolution Strategies 对长 horizon LLM agent 做全参数优化。更新只依赖 trajectory-level black-box reward，因此仅需 inference 级 GPU memory，也无需把稀疏奖励拆解到大量步骤上。在 WebArena-Lite 上，它让 Qwen3.5-27B 相比 no-skill baseline 提升 6.69%，并支持在线 prompt-parameter co-evolution。代价是 ES 的 sampling efficiency，但当 backprop-heavy agentic RL 成为瓶颈时，这条路线提供了务实替代。",
+      "interest_tag": ""
+    },
+    {
+      "title": "HarnessEval-W: Agentifying the Evaluation of Visual Worlds",
+      "arxiv_id": "2608.16859",
+      "url": "https://arxiv.org/abs/2608.16859",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2608.16859",
+      "tldr": "HarnessEval-W evaluates interactive visual world models through hierarchical evidence gathering rather than a fixed scalar rubric. A parent agent decomposes each case, specialized sub-agents inspect physics, causality, and state evolution with tailored tools, and the parent validates the resulting evidence tree. Across 18 world models and 330 cases, the reported judgments align closely with human preferences while exposing fine-grained failure reasons. Its contribution is making an evaluator's reasoning inspectable, though the benchmark still depends on the reliability of its agentic judges.",
+      "tldr_zh": "HarnessEval-W 不再用固定 scalar rubric 评估 interactive visual world model，而是进行分层 evidence gathering。parent agent 拆解 case，specialized sub-agent 借助定制工具检查物理、因果和状态演化，再由 parent 验证整棵 evidence tree。在 18 个 world model、330 个 case 上，论文报告其判断与人类偏好高度一致，同时能给出细粒度失败原因。它的贡献是让 evaluator 的推理可审查，但 benchmark 仍然依赖 agentic judge 本身的可靠性。",
+      "interest_tag": ""
+    }
+  ],
+  "github_repos": [
+    {
+      "name": "yetone/cumora",
+      "url": "https://github.com/yetone/cumora",
+      "tldr": "Cumora is a cross-platform team workspace where humans and agents share rooms, DMs, a Kanban board, calendars, and email. Agents maintain personas and memory, claim units of work, and coordinate through freshness gates and atomic claims that prevent stale replies or duplicated effort. It supports managed per-agent Kubernetes pods or local Claude Code and Codex brains through BYOA. The repo's unusually complete architecture, tests, and coordination benchmarks explain why it reached the top of this week's search so quickly.",
+      "tldr_zh": "Cumora 是一个跨平台团队 workspace，让人类和 agent 共享群聊、私聊、Kanban、日历与邮件。agent 保持 persona 和 memory，通过 freshness gate 与 atomic claim 认领工作，避免陈旧回复和重复执行。它既支持托管的 per-agent Kubernetes pod，也能通过 BYOA 接入本地 Claude Code 或 Codex。仓库给出了完整架构、测试和多 agent 协作 benchmark，这种「可运行产品而非概念 demo」的完成度解释了它为何快速登顶。",
+      "stars": 2736,
+      "language": "TypeScript",
+      "interest_tag": "Agent Swarm"
+    },
+    {
+      "name": "CopilotKit/openbot",
+      "url": "https://github.com/CopilotKit/openbot",
+      "tldr": "OpenBot gives each AI coworker an isolated computer with its own Chromium profile, files, logins, and explicitly granted tools. Every browser, file, MCP, or component action passes through a fail-closed CEL policy gateway that records the audit row before execution; humans can take over for login or 2FA. Any AG-UI-compatible agent can plug into the platform, while credentials remain encrypted and absent from transcripts. It is a strong example of treating computer use as a governed capability rather than an unrestricted tool call.",
+      "tldr_zh": "OpenBot 为每个 AI coworker 提供隔离 computer，包括独立 Chromium profile、文件、登录状态和显式授权工具。每个 browser、file、MCP 或 component action 都要先经过 fail-closed CEL policy gateway，并在执行前写入 audit row；遇到登录或 2FA 时人类可接管。任何兼容 AG-UI 的 agent 都能接入，credential 加密保存且不会进入 transcript。它代表了一种重要方向：把 computer use 当成受治理的 capability，而不是无限制 tool call。",
+      "stars": 906,
+      "language": "TypeScript",
+      "interest_tag": "CUA"
+    },
+    {
+      "name": "seanlxh/Air-Lingjing",
+      "url": "https://github.com/seanlxh/Air-Lingjing",
+      "tldr": "Air-Lingjing combines a FastAPI and LangGraph agent backend with a Cesium-powered Unreal Engine 5.5 simulation plugin. It closes a perceive-think-act-communicate loop, preserves per-agent observations and replayable trajectories, and offers centralized, star, and broadcast coordination patterns across drones, vehicles, robot dogs, and ships. Runnable mock-engine cases reduce the barrier to backend development, although the large Unreal asset package is still marked as forthcoming and the release currently lacks a selected license. It is promising infrastructure, but not yet a turnkey benchmark distribution.",
+      "tldr_zh": "Air-Lingjing 把 FastAPI/LangGraph agent backend 与基于 Cesium 的 Unreal Engine 5.5 simulation plugin 放在同一仓库中。它闭合 perceive-think-act-communicate loop，保留 per-agent observation 与可 replay trajectory，并为无人机、车辆、机器狗和船只提供 centralized、star、broadcast 三类协作模式。mock engine case 降低了 backend 开发门槛，但大型 Unreal asset 仍标记为即将上传，当前 release 也尚未选择 license。它是有潜力的基础设施，但还不是开箱即用的 benchmark distribution。",
+      "stars": 108,
+      "language": "Python",
+      "interest_tag": "Agent Swarm"
+    },
+    {
+      "name": "only-cli/oc",
+      "url": "https://github.com/only-cli/oc",
+      "tldr": "only-cli converts mostly static websites into a compact numbered command interface for coding agents. Its budget-aware renderer, session state, and read-next-find commands let agents navigate without ingesting raw HTML or screenshots; the authors report 1,936 tokens across six live pages versus 16,402 for Jina Reader and 177,685 for raw HTML. It requires no per-site adapters for common pages and ships tuned shortcuts for major sites. The main limitation is explicit: JavaScript-only and login-gated pages are not yet supported.",
+      "tldr_zh": "only-cli 把大多数静态网站转换成面向 coding agent 的紧凑编号命令界面。budget-aware renderer、session state 以及 read、next、find 命令让 agent 无需吞下 raw HTML 或 screenshot 即可导航；作者报告 6 个 live page 合计使用 1,936 token，而 Jina Reader 为 16,402、raw HTML 为 177,685。常见页面无需逐站 adapter，并为多个主流网站提供 tuned shortcut。它也坦诚当前限制：尚不支持纯 JavaScript 页面和需要登录的网站。",
+      "stars": 65,
+      "language": "JavaScript",
+      "interest_tag": ""
+    },
+    {
+      "name": "augety121/MCP-State-Twin",
+      "url": "https://github.com/augety121/MCP-State-Twin",
+      "tldr": "MCP State Twin provides deterministic, forkable, stateful tool worlds for reproducible agent evaluation. Multiple runs begin from the same immutable snapshot, evolve in isolated SQLite-backed branches through MCP calls, and are scored by assertions and canonical terminal-state diffs rather than identical trajectories. The current development preview includes a six-tool issue-tracker twin, strict schema validation, audit logs, and isolation tests, but explicitly labels its fidelity L1, unverified, and unbound. The design is valuable because it separates environment reproducibility from the inherently stochastic policy being evaluated.",
+      "tldr_zh": "MCP State Twin 为可复现 agent evaluation 提供 deterministic、forkable、stateful 的工具世界。多个 run 从同一 immutable snapshot 出发，经 MCP call 在 SQLite-backed 隔离 branch 中演化，最后按 assertion 与 canonical terminal-state diff 评分，而不要求轨迹完全一致。当前 development preview 已包含 6-tool issue-tracker twin、严格 schema validation、audit log 与 isolation test，但明确把 fidelity 标为 L1、unverified、unbound。它最有价值的设计点，是把环境可复现性与被测 policy 的随机性分离。",
+      "stars": 37,
+      "language": "Go",
+      "interest_tag": "Benchmark"
+    }
+  ],
+  "hackernews": [
+    {
+      "title": "AI-Generated GitHub Copilot “Autofix” Allowed Compromise of Snowflake's Jira",
+      "url": "https://www.wiz.io/blog/red-agent-snowflake-copilot-cicd-bug",
+      "tldr": "Wiz's autonomous Red Agent found a shell-injection flaw in Snowflake's public GitHub Actions workflow five days after it went live. An attacker-controlled issue title was interpolated into a shell block; the agent adapted after its first payload caused a syntax error, then exfiltrated a Jira token and verified read access across sensitive projects. GitHub Advanced Security had inspected the vulnerable revision without flagging it, and Snowflake patched the flaw the day Wiz disclosed it. The episode shows both sides of agentic software: AI-assisted review can miss systemic workflow bugs, while autonomous offensive agents can operationalize them rapidly.",
+      "tldr_zh": "Wiz 的自主 Red Agent 在 Snowflake 公共 GitHub Actions workflow 上线五天后发现了 shell injection。攻击者可控的 issue title 被直接插入 shell block；agent 第一次 payload 因语法错误失败后自行调整，随后外传 Jira token，并验证了对多个敏感项目的读取权限。GitHub Advanced Security 已扫描过该 revision 却未报警，Snowflake 在 Wiz 披露当天完成修复。该事件同时展示 agentic software 的两面：AI-assisted review 可能漏掉系统级 workflow 漏洞，而自主攻击 agent 能迅速把漏洞变成真实 exploit。",
+      "points": 424,
+      "num_comments": 156,
+      "interest_tag": ""
+    },
+    {
+      "title": "Launch HN: Speko (YC S26) – OpenRouter for Voice AI",
+      "url": "https://speko.ai/",
+      "tldr": "Speko routes voice workloads across speech-to-text, language, and text-to-speech providers using measured language-specific quality, latency, and cost. Its central observation is that 11 of 23 surveyed models are measured only in English and four different models win across nine languages, so a single globally fixed stack is usually suboptimal. The product exposes the selection behind one API and explains why a route was chosen. The viral appeal comes from turning a painful recurring benchmark-and-migration problem into a clear OpenRouter-style category for voice AI.",
+      "tldr_zh": "Speko 根据按语言测得的质量、latency 与 cost，在 speech-to-text、LLM 和 text-to-speech provider 之间路由 voice workload。它的核心观察是：23 个模型中有 11 个只测过英文，9 种语言里有 4 个不同模型分别胜出，因此固定一套全球 stack 通常不是最优。产品用一个 API 封装选择，并解释每次 routing 的原因。它容易传播，是因为把持续 benchmark 与迁移这一痛点包装成了清晰的「Voice AI 版 OpenRouter」类别。",
+      "points": 117,
+      "num_comments": 68,
+      "interest_tag": ""
+    },
+    {
+      "title": "MathCode, Mathematical Coding Agent",
+      "url": "https://math-ai-org.github.io/mathcode/",
+      "tldr": "MathCode is a terminal agent that translates natural-language mathematics into Lean 4 theorems and attempts formal proofs. A persistent Lean language server reduces repeated compile checks to roughly 0.4 seconds after warm-up, while theorem and axiom stores, Mathlib search, and structured diagnostics support iterative repair. It also exports theorem dependencies into an Obsidian knowledge graph. The project is notable because formal verification supplies an external correctness signal, but proof quality still depends on faithful formalization of the original problem.",
+      "tldr_zh": "MathCode 是一个 terminal agent，可把自然语言数学题转换成 Lean 4 theorem 并尝试 formal proof。持久 Lean language server 在 warm-up 后把重复编译检查降到约 0.4 秒，theorem/axiom store、Mathlib 搜索和结构化诊断则支持迭代修复。它还能把 theorem dependency 导出成 Obsidian knowledge graph。项目的关键优势是 formal verification 提供外部正确性信号，但最终质量仍取决于最初 formalization 是否忠实表达原题。",
+      "points": 117,
+      "num_comments": 29,
+      "interest_tag": ""
+    },
+    {
+      "title": "Why your Amazon order confirmation emails have become so unhelpful",
+      "url": "https://www.theverge.com/ai-artificial-intelligence/977733/amazon-order-emails-google-gmail-ai-agents-data",
+      "tldr": "Amazon has removed specific item names from many order-confirmation emails, leaving only broad categories. The stated privacy benefit is real, but the change also keeps detailed purchase data away from Gmail and other surfaces that increasingly power cross-merchant shopping agents. This illustrates a new platform conflict: an assistant becomes more useful as it sees more transactional context, while retailers have incentives to retain that context inside their own properties. Agentic commerce may therefore be constrained as much by data-access bargaining as by model capability.",
+      "tldr_zh": "Amazon 已从许多订单确认邮件中移除具体商品名，只保留宽泛类别。官方强调的 privacy 收益确实存在，但这一变化也让 Gmail 等正在构建跨商户 shopping agent 的平台无法读取详细购买数据。它揭示了新的平台冲突：assistant 获得越多 transaction context 就越有用，而 retailer 又有动力把这些 context 留在自己的产品内。因而 agentic commerce 的边界可能更多由数据访问博弈决定，而不只是模型能力。",
+      "points": 76,
+      "num_comments": 30,
+      "interest_tag": ""
+    },
+    {
+      "title": "Launch HN: OneCLI (YC S26) – OSS sandboxed agent harness for teams",
+      "url": "https://github.com/onecli/onecli",
+      "tldr": "OneCLI gives each employee a durable, sandboxed personal agent behind a shared policy and credential-injection gateway. Agents get isolated filesystems and shells, memory, skills, schedules, and Slack identities, while deterministic human approvals guard destructive actions and secrets never enter the sandbox directly. An outbound-only runner allows deployment behind NAT without opening inbound ports, and the harness interface is vendor-neutral. It reflects the enterprise shift from experimenting with one powerful agent to governing a fleet of employee-scoped agents.",
+      "tldr_zh": "OneCLI 为每位员工提供持久、sandboxed 的个人 agent，并统一放在团队 policy 与 credential-injection gateway 后面。agent 拥有隔离 filesystem、shell、memory、skill、schedule 与 Slack identity；破坏性动作受 deterministic human approval 控制，secret 也不会直接进入 sandbox。outbound-only runner 允许在 NAT 后部署且无需开放入站端口，harness interface 则保持 vendor-neutral。它体现了企业 agent 的关键转向：从试用一个强 agent，走向治理一整组按员工划分权限的 agent fleet。",
+      "points": 74,
+      "num_comments": 22,
+      "interest_tag": ""
+    }
+  ]
+}
