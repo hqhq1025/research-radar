@@ -1,0 +1,221 @@
+{
+  "date": "2026-08-21",
+  "generated_at": "2026-08-21T16:07:06.235479+08:00",
+  "briefing_zh": "今天最强的共同信号，是 agent 研究开始把环境与 harness 当作可学习系统的一部分，而不再只优化模型。**EnvHarness** 用可编程插件重塑静态环境，**SPADE** 让模型同时扮演环境设计者和解题者，**Agent Lightning v1.0** 则把真实 deploy-time harness 纳入 RL；三者共同把竞争焦点从单次 prompt engineering 推向环境、控制流与训练信号的闭环共演化。\n\n评测与数据构造也在从总分走向可执行证据。**FACET** 强调 instruction、初始状态、reference solution 与 verifier 必须共享同一可执行事实，**SWE-bench Science** 进一步显示科学软件修复中的失败来自知识抽象、探索、集成和泛化等不同机制。对 agent benchmark 而言，今天最值得带走的结论不是再造一个分数，而是让任务状态、验证器和失败归因形成可审计的证据链。\n\n在模型与 world model 侧，**Recirculation** 通过 inference-time recurrence 改善基础状态追踪，**ForgeWM** 把 action-conditioned video generation 压到 1、2、4 步预算，**Hydra-0** 则用 image-plane action flow 统一不同机器人 embodiment 的预测与控制。这些工作虽然分属 LLM 与具身系统，但都在解决同一个机制问题：如何让有限计算持续维护动态状态，并让预测对真实 action 保持因果敏感。\n\n开源与社区热点更偏向可信落地。**OpenBot**、**OneCLI** 和 **Cumora** 都把 agent 放进独立 computer、权限网关或团队协作界面；与此同时，Snowflake Jira 事件表明 AI-assisted review 仍可能放过可利用的 CI/CD 注入。**MemTrapBench** 的结果也给出相似警告：即便 memory 检索正确且相关，它仍可能让推理变差，因此「更多上下文、更多自动化」必须由隔离、验证和可撤销的人类控制来约束。",
+  "briefing_en": "Today’s strongest shared signal is that agent research is treating environments and harnesses as learnable parts of the system rather than optimizing only the model. **EnvHarness** programmatically reshapes static environments, **SPADE** lets one model alternate between environment designer and solver, and **Agent Lightning v1.0** brings the real deploy-time harness into RL. Together they move the frontier from one-off prompt engineering toward closed-loop co-evolution of environments, control flow, and training signals.\n\nEvaluation and data construction are also shifting from aggregate scores toward executable evidence. **FACET** argues that the instruction, initialized state, reference solution, and verifier must share the same executable ground truth, while **SWE-bench Science** separates scientific-software failures into knowledge abstraction, exploration, integration, and generalization mechanisms. The useful lesson for agent benchmarks is not merely to add another score, but to make state, verification, and failure attribution auditable end to end.\n\nOn models and world models, **Recirculation** adds inference-time recurrence for better basic state tracking, **ForgeWM** distills action-conditioned video generation into one-, two-, and four-step budgets, and **Hydra-0** uses image-plane action flow to connect prediction and control across robot embodiments. Although these span LLMs and embodied systems, they address the same mechanism-level question: how limited computation can maintain dynamic state while keeping predictions causally responsive to actions.\n\nOpen-source and community attention is centered on trustworthy deployment. **OpenBot**, **OneCLI**, and **Cumora** place agents inside dedicated computers, policy gateways, or team collaboration surfaces, while the Snowflake Jira incident shows that AI-assisted review can still approve exploitable CI/CD injection. **MemTrapBench** offers the parallel lesson for memory: even correctly retrieved, relevant memories can degrade reasoning, so more context and more automation need isolation, verification, reversibility, and human control.",
+  "viral_analysis_zh": "今天最可能持续出圈的是 **Mathematics in the age of AI**：Terence Tao 把讨论从「AI 会不会做数学」提升到「数学共同体究竟要优化什么」，名人效应、价值冲突和时代叙事同时具备，已在 alphaxiv 获得显著领先的访问与投票。开源侧 **Cumora** 用「AI agents 是一等团队成员」而非技术组件来包装产品，配合 BYOA、聊天、看板和日历这类熟悉界面，极大降低了传播理解成本。",
+  "viral_analysis_en": "The strongest viral candidate is **Mathematics in the age of AI**: Terence Tao reframes the debate from whether AI can do mathematics to what the mathematical community should optimize for, combining authority, value conflict, and a sweeping historical narrative with a clear engagement lead on alphaXiv. In open source, **Cumora** packages agents as first-class teammates rather than infrastructure, and its familiar chat, Kanban, calendar, and BYOA framing makes the idea instantly legible and shareable.",
+  "huggingface_papers": [
+    {
+      "title": "EnvHarness: Awakening Static Worlds for Agent Learning",
+      "url": "https://arxiv.org/abs/2608.19880",
+      "tldr": "EnvHarness wraps an existing environment with programmable plug-ins that reshape behavior without changing its core logic or original verifier. EnvRigger observes a black-box policy’s trajectories, diagnoses weaknesses, synthesizes targeted components, and validates them with fresh rollouts. Across five benchmarks in four domains, the method reports up to a 9.0-point held-out gain with 9.8% fewer execution steps, making environment adaptation itself a practical optimization loop for agent RL.",
+      "tldr_zh": "EnvHarness 用可编程插件包裹既有环境，在不修改底层逻辑和原始 verifier 的前提下重塑环境行为。EnvRigger 观察黑盒 policy 的轨迹，诊断弱点、合成针对性组件，再通过新 rollout 验证效果。它在四个领域的五个 benchmark 上最高提升 9.0 分且减少 9.8% execution steps，说明环境适配本身可以成为 agent RL 的持续优化环。",
+      "upvotes": 158,
+      "authors": "Chengsong Huang, Zifeng Wang, Rujun Han, Jun Yan, Yanfei Chen, Zoey CuiZhu, Ke Jiang, Peng Xia, Han Yu, Yufan Zhuang, Yifei Ming, Jiaqi Pan, Bhavana Dalvi Mishra, Jiaxin Huang, Burak Gokturk, Tomas Pfister, Chen-Yu Lee",
+      "ai_keywords": [
+        "agent learning",
+        "environment generation",
+        "reinforcement learning"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "FACET: Preserving Source Intent and Executable State in Terminal Task Synthesis",
+      "url": "https://arxiv.org/abs/2608.18580",
+      "tldr": "FACET constructs terminal-agent tasks by first reconstructing source skills into coherent scenarios and realizing the executable environment before writing the instruction, solution, and verifier. All artifacts are grounded in the same container state, while execution-based repair fixes only the failing component instead of regenerating everything. Fine-tuning on the resulting trajectories improves Terminal-Bench 2.1 performance across model scales, supporting shared executable state as a key requirement for trustworthy synthetic supervision.",
+      "tldr_zh": "FACET 先把来源技能重构成连贯场景并真正搭好 executable environment，再生成 instruction、solution 和 verifier。所有任务产物共享同一个 container state，执行校验只修复失败组件，而不是把有效部分全部重生成。基于这些轨迹微调后，不同规模模型在 Terminal-Bench 2.1 上都得到提升，说明共享可执行状态是可信合成监督的关键条件。",
+      "upvotes": 49,
+      "authors": "Kou Shi, Zun Wang, Qisheng Su, Shiting Huang, Ziao Zhang, Zhen Fang, Qingnan Ren, Jin Liu, Yu Zeng, Yiming Zhao, Lin Chen, Zehui Chen, Feng Zhao",
+      "ai_keywords": [
+        "terminal agents",
+        "task synthesis",
+        "executable verification"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "SWE-bench Science: Can Coding Agents Resolve Engineering Tasks in Science?",
+      "url": "https://arxiv.org/abs/2608.19799",
+      "tldr": "SWE-bench Science contains 119 repository-level tasks from 98 projects across 20 scientific domains, organized as issue-driven, expert-exploratory, and engineering-integration work. The strongest reported agent, Claude Code with Opus-5 at maximum settings, remains below 50% pass@1. Its paired analysis identifies distinct failures in scientific abstraction, exploration, repair coverage, integration, and knowledge transfer, turning the benchmark into a diagnostic tool rather than only a leaderboard.",
+      "tldr_zh": "SWE-bench Science 收录 20 个科学领域、98 个项目中的 119 个 repository-level 任务，并分为 issue-driven、expert-exploratory 和 engineering-integration 三类。论文报告的最强 agent——最高配置的 Claude Code with Opus-5——pass@1 仍低于 50%。配对分析把失败拆成科学抽象、探索、修复覆盖、系统集成和知识迁移等机制，使该 benchmark 不只是排行榜，也是诊断工具。",
+      "upvotes": 31,
+      "authors": "Zhipeng Xu, Jiahao Lu, Yining Zheng, Yuxin Wang, Xipeng Qiu",
+      "ai_keywords": [
+        "coding agents",
+        "scientific software",
+        "agent evaluation"
+      ],
+      "interest_tag": "Benchmark"
+    },
+    {
+      "title": "MemTrapBench: Benchmarking Cognitive Traps in LLM Memory Use",
+      "url": "https://arxiv.org/abs/2608.20202",
+      "tldr": "MemTrapBench evaluates how correctly stored and relevant memories can still induce reasoning fixation or belief distortion on the current task. Across two model families and five memory frameworks, every tested memory strategy underperforms the no-memory baseline, with even the strongest dropping by more than 10%. AdaptiveMem uses an inference-time instruction to resist these traps while preserving or improving standard memory-benchmark performance, exposing memory use as a reasoning-safety problem rather than only a retrieval problem.",
+      "tldr_zh": "MemTrapBench 研究一种容易被传统 memory benchmark 忽略的失败：memory 即使被正确保存且语义相关，也可能导致 reasoning fixation 或 belief distortion。两个模型家族、五种 memory framework 的所有策略都不如 no-memory baseline，最强方法也下降超过 10%。AdaptiveMem 通过 inference-time instruction 抵抗这些陷阱，同时维持或改善常规 memory benchmark 表现，说明 memory use 不只是检索问题，也是推理安全问题。",
+      "upvotes": 24,
+      "authors": "Mengru Wang, Haozhe Luo, Zhenqian Xu, Zhixiang Cui, Haoming Xu, Qu Yang, Jizhan Fang, Junfeng Fang, Ningyu Zhang",
+      "ai_keywords": [
+        "agent memory",
+        "cognitive traps",
+        "memory evaluation"
+      ],
+      "interest_tag": "Memory"
+    },
+    {
+      "title": "ForgeWM: Progressive Causal Training for Few-Step Action-Conditioned Video World Models",
+      "url": "https://arxiv.org/abs/2608.14022",
+      "tldr": "ForgeWM progressively converts a bidirectional action-conditioned video generator into causal world models specialized for one-, two-, or four-step denoising budgets. Its four-stage recipe combines domain adaptation, teacher-forced causal training, causal consistency distillation, and on-policy distribution matching, while keeping keyboard and mouse controls aligned with compressed latent chunks. On Minecraft and FPS trajectories it improves visual and action fidelity, and its one-step draft can be refined during replay to approach four-step quality without regenerating from noise.",
+      "tldr_zh": "ForgeWM 逐步把双向 action-conditioned video generator 转成分别适配 1、2、4 步去噪预算的 causal world model。四阶段 recipe 结合 domain adaptation、teacher-forced causal training、causal consistency distillation 和 on-policy distribution matching，并维持键鼠 action 与压缩 latent chunk 的对齐。它在 Minecraft 与 FPS 轨迹上同时改善画质和 action fidelity，还能在 replay 时细化一步生成的草稿，以接近四步质量而不必从噪声重生成。",
+      "upvotes": 12,
+      "authors": "Xinye Li, Lingshuai Lin, Lei Wang, Liuzhou Zhang, Jialin Cui, Qingshan Li, Guanchu Wang, Qingbin Liu, Xi Chen, Jiang Bian, Wai Lam",
+      "ai_keywords": [
+        "world model",
+        "action-conditioned video",
+        "causal distillation"
+      ],
+      "interest_tag": ""
+    }
+  ],
+  "alphaxiv_papers": [
+    {
+      "title": "Mathematics in the age of AI",
+      "arxiv_id": "2608.16753",
+      "url": "https://arxiv.org/abs/2608.16753",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2608.16753",
+      "tldr": "Based on Terence Tao’s 2026 ICM public lecture, this essay assumes research-level mathematical AI will arrive and asks what mathematics is actually trying to preserve. It separates problem solving from values such as understanding, exposition, verification, community acceptance, and canonicalization. The importance is institutional rather than algorithmic: faster answer generation may optimize a proxy that diverges from the human practices that make mathematics cumulative and meaningful.",
+      "tldr_zh": "这篇文章基于 Terence Tao 在 2026 ICM 的公开演讲，不再争论 research-level mathematical AI 是否会出现，而是假设它会出现并追问数学真正想保留什么。它把解题能力与理解、阐释、验证、共同体接受和 canonicalization 等价值区分开。其重要性不在新算法，而在制度层面：更快地产生答案可能优化了一个与数学长期积累和人类理解相偏离的 proxy。",
+      "interest_tag": ""
+    },
+    {
+      "title": "Recirculation",
+      "arxiv_id": "2608.17981",
+      "url": "https://arxiv.org/abs/2608.17981",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2608.17981",
+      "tldr": "Recirculation adds a training-free recurrent pass that feeds deep, contextualized representations back into shallower layers so an off-the-shelf transformer can update state beyond its fixed depth. It targets basic belief-state tracking rather than spending chain-of-thought tokens on routine state maintenance, with extra serial work concentrated in prefill rather than generation. Adaptive recirculation reports a 23% perplexity reduction and a 21% GSM8K accuracy gain on Gemma3, suggesting trained networks can guide useful inference-time architectural changes.",
+      "tldr_zh": "Recirculation 在 inference time 增加 recurrent pass，把深层的 contextualized representation 回流到浅层，使现成 transformer 能突破固定 depth 对状态更新次数的限制。它针对基础 belief-state tracking，而不是用 chain-of-thought token 承担日常状态维护；额外串行计算主要发生在 prefill，不显著增加生成阶段延迟。Adaptive recirculation 在 Gemma3 上报告 23% perplexity 降低和 21% GSM8K accuracy 提升，说明已训练网络本身可以指导有效的 inference-time 架构改造。",
+      "interest_tag": ""
+    },
+    {
+      "title": "SPADE: Self-Play in Adaptive Synthetic Executable Environments",
+      "arxiv_id": "2608.19197",
+      "url": "https://arxiv.org/abs/2608.19197",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2608.19197",
+      "tldr": "SPADE uses one LLM in two alternating roles: an Environment Designer writes complete stateful environments with reset/step interfaces and executable rewards, while a Reasoning Agent learns inside them. The designer optimizes a regret signal derived from the agent’s performance gap with and without privileged hints, keeping tasks feasible but near the capability frontier. At 30B scale it beats fixed-environment training across eight held-out benchmarks and posts notable gains on BFCL-v4 and ACEBench-Agent, making open-ended environment design part of RL itself.",
+      "tldr_zh": "SPADE 让同一个 LLM 交替扮演两个角色：Environment Designer 编写带 reset/step 接口、状态转移和可执行 reward 的完整环境，Reasoning Agent 则在其中学习。设计者利用 agent 在有无 privileged hint 时的 reward gap 构造 regret signal，把任务保持在可解但贴近能力边界的位置。扩展到 30B 后，它在八个 held-out benchmark 上超过固定环境训练，并在 BFCL-v4 与 ACEBench-Agent 上取得明显增益，把开放式环境设计真正纳入 RL。",
+      "interest_tag": ""
+    },
+    {
+      "title": "Hydra-0: Action Flow for Generalist World Modeling and Control",
+      "arxiv_id": "2608.18077",
+      "url": "https://arxiv.org/abs/2608.18077",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2608.18077",
+      "tldr": "Hydra-0 represents robot actions as image-plane motion, creating an action-flow interface shared across embodiments, tasks, environments, and video backbones. Its best setup sharply reduces robot- and object-motion error, supports zero-shot composition, and reaches a 0.96 Pearson correlation between replayed and reference success rates on RoboLab. The same representation also exposes an inverse mode that infers compatible robot motion from desired object flow, linking world prediction, open-loop policy evaluation, and control without task-specific demonstrations.",
+      "tldr_zh": "Hydra-0 把机器人 action 表示为 image-plane motion，由此得到可跨 embodiment、任务、环境和 video backbone 共享的 action-flow interface。最佳配置显著降低 robot/object motion error，支持 zero-shot composition，并在 RoboLab 上让 replay 与真实 success rate 达到 0.96 Pearson correlation。同一表示还涌现出 inverse mode，可从目标 object flow 反推出兼容的 robot motion，从而连接 world prediction、open-loop policy evaluation 与无需任务专属示范的控制。",
+      "interest_tag": ""
+    },
+    {
+      "title": "Agent Lightning v1.0: Towards Harnessed Agentic RL",
+      "arxiv_id": "2608.17528",
+      "url": "https://arxiv.org/abs/2608.17528",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2608.17528",
+      "tldr": "Agent Lightning v1.0 formalizes harnessed agentic RL, where the deploy-time harness owns tools, context, and the environment loop while the trainer observes LLM request-response traces. The framework isolates practical training issues including retokenization, sample merging, advantage calculation, loss normalization, and backend scheduling in roughly 3,500 lines of code. With 6K examples and modest compute, it raises Qwen3.5-9B from 41.8% to 56.4% on SWE-bench Verified, showing that preserving the real harness during post-training can deliver large gains reproducibly.",
+      "tldr_zh": "Agent Lightning v1.0 正式定义 harnessed agentic RL：deploy-time harness 掌管工具、context 和环境交互循环，trainer 只观察 LLM request-response trace。约 3,500 行代码的框架把 retokenization、sample merging、advantage calculation、loss normalization 和 backend scheduling 等真实训练问题显式化。它用 6K 样本和中等算力把 Qwen3.5-9B 的 SWE-bench Verified 从 41.8% 提升到 56.4%，说明 post-training 保留真实 harness 能带来可复现的大幅收益。",
+      "interest_tag": ""
+    }
+  ],
+  "github_repos": [
+    {
+      "name": "yetone/cumora",
+      "url": "https://github.com/yetone/cumora",
+      "tldr": "Cumora is a cross-platform team chat where humans and agents share rosters, DMs, group conversations, Kanban boards, calendars, and email. Agents keep personas and memory, claim work, and coordinate to avoid collisions; they can run in managed pods or use a local Claude Code/Codex brain through BYOA. The project’s rapid traction comes from presenting multi-agent orchestration through familiar collaboration primitives rather than exposing users to a low-level agent framework.",
+      "tldr_zh": "Cumora 是跨平台团队聊天产品，让人类与 agent 共享 roster、私聊、群聊、Kanban、日历和 email。Agent 能保留 persona 与 memory、认领任务并相互协调避免冲突，还可选择 managed pod 或通过 BYOA 接入本地 Claude Code/Codex。它迅速传播的关键，是用所有人都熟悉的协作产品形态承载 multi-agent orchestration，而不是先让用户理解底层 agent framework。",
+      "stars": 2798,
+      "language": "TypeScript",
+      "interest_tag": "Agent Swarm"
+    },
+    {
+      "name": "CopilotKit/OpenBot",
+      "url": "https://github.com/CopilotKit/OpenBot",
+      "tldr": "OpenBot gives each AI coworker a dedicated computer with its own browser logins, files, and explicitly granted tools. Users can watch the agent’s screen, take over at sensitive moments, and hand control back, while planned actions and completed actions are recorded. It is an early self-hosted alpha, but its permission boundaries and human takeover model make trust a first-class part of computer-use deployment rather than a later add-on.",
+      "tldr_zh": "OpenBot 给每个 AI coworker 一台独立 computer，拥有自己的 browser login、文件和显式授权工具。用户可以观看 agent 屏幕、在敏感步骤接管，再把控制权交还；计划动作和已完成动作都会被记录。它仍是 self-hosted alpha，但把权限边界与 human takeover 放在核心交互中，使可信 computer use 不再是部署后的补丁。",
+      "stars": 1835,
+      "language": "TypeScript",
+      "interest_tag": "CUA"
+    },
+    {
+      "name": "squall01337/mixamo-llm-mocap",
+      "url": "https://github.com/squall01337/mixamo-llm-mocap",
+      "tldr": "This repository turns locked-camera single- or two-person video into FK animation for Mixamo rigs without a mocap suit or manual keyframing. Its explicit pipeline combines GVHMR pose estimation, numeric beat analysis, JSON action specifications, proportion-aware retargeting, Blender MCP execution, and QA. The value is not a generic agent wrapper but a deeply instrumented creative workflow whose intermediate artifacts are structured enough for an agent to operate and debug end to end.",
+      "tldr_zh": "该仓库把固定机位的单人或双人视频转换成 Mixamo rig 的 FK animation，无需 mocap suit 或手工 keyframing。显式 pipeline 组合 GVHMR 姿态估计、数字节拍分析、JSON action spec、比例感知 retarget、Blender MCP 执行和 QA。它的价值不是套一层通用 agent，而是把创意生产流程做成中间产物清晰、可由 agent 端到端操作和调试的系统。",
+      "stars": 129,
+      "language": "Python",
+      "interest_tag": ""
+    },
+    {
+      "name": "azrtydxb/procoder",
+      "url": "https://github.com/azrtydxb/procoder",
+      "tldr": "Procoder is a dependency-light Go binary that places deterministic quality gates in front of AI coding-agent commits. It treats unchecked files as failures, detects formatting, scope, conflict-marker, and repository-hygiene problems, and feeds escaped bug classes into a lessons loop. The project’s useful design choice is that the agent stays in control of changes, but cannot redefine completion through prose when executable checks still fail.",
+      "tldr_zh": "Procoder 是低依赖 Go binary，在 AI coding agent 提交前加入确定性的质量门禁。它把 unchecked file 视为失败，检查格式、scope、冲突标记和 repository hygiene，并把逃逸 bug 的类别写回 lessons loop。最值得借鉴的设计是：agent 仍掌控修改过程，但只要 executable check 未通过，就不能靠文字重新定义「已完成」。",
+      "stars": 96,
+      "language": "Go",
+      "interest_tag": ""
+    },
+    {
+      "name": "ztratar/openhistory",
+      "url": "https://github.com/ztratar/openhistory",
+      "tldr": "OpenHistory builds a private, searchable timeline from activity a user explicitly permits on macOS, then produces hourly and daily summaries. Approved local agents can query that history through controlled access, without relying on continuous screenshots or recording every keystroke. It is an opinionated personal-memory substrate: local-first collection, user-visible summaries, and bounded agent access are treated as one product rather than separate components.",
+      "tldr_zh": "OpenHistory 从用户在 macOS 上明确允许的活动构建私有、可搜索的工作时间线，并生成小时与日报总结。获批的本地 agent 可以通过受控接口查询这段历史，而无需持续截图或记录每次键盘输入。它提供了一套明确的个人 memory substrate：local-first 采集、用户可见总结和有边界的 agent 访问被做成同一个产品。",
+      "stars": 75,
+      "language": "TypeScript",
+      "interest_tag": "Memory"
+    }
+  ],
+  "hackernews": [
+    {
+      "title": "AI-Generated GitHub Copilot “Autofix” Allowed Compromise of Snowflake's Jira",
+      "url": "https://www.wiz.io/blog/red-agent-snowflake-copilot-cicd-bug",
+      "tldr": "Wiz’s autonomous Red Agent found and exploited a GitHub Actions script-injection flaw in a Snowflake public repository, reaching sensitive data in the company’s internal Jira five days after the vulnerable workflow became live. A crafted issue title could execute commands on the runner, and GitHub’s security tooling plus Copilot-assisted review had marked the change clear; Wiz notes it is unclear whether AI authored the original code change. Snowflake remediated and rotated the credential on disclosure, but the incident shows that agent-generated or agent-reviewed fixes still require adversarial CI/CD validation and least-privilege secrets.",
+      "tldr_zh": "Wiz 的 autonomous Red Agent 在 Snowflake 公共仓库中发现并利用 GitHub Actions script injection，在漏洞 workflow 上线五天后访问到内部 Jira 的敏感数据。攻击者可通过恶意 issue title 在 runner 上执行命令，而 GitHub 安全工具与 Copilot-assisted review 都曾将改动判为无问题；Wiz 同时说明无法确认原始代码是否由 AI 编写。Snowflake 在披露当天修复并轮换 credential，但事件证明 agent 生成或审查的修复仍需要 adversarial CI/CD validation 和最小权限 secret。",
+      "points": 424,
+      "num_comments": 156,
+      "interest_tag": ""
+    },
+    {
+      "title": "Show HN: Huzzah – a novel approach to coding with AI",
+      "url": "https://www.danielvaughn.dev/posts/huzzah/",
+      "tldr": "Huzzah proposes replacing long, imperative, transient coding-agent chats with declarative pseudocode that persists as the authoritative expression of human intent. The author argues that discarded prompts make intent hard to audit, encourage repeated instructions, and weaken the engineer’s understanding of the resulting system. The idea resonates because it addresses coding-agent fatigue without asking developers to abandon automation: preserve a compact specification, then let models realize it.",
+      "tldr_zh": "Huzzah 主张用持久、声明式 pseudocode 取代冗长、命令式且转瞬即逝的 coding-agent chat，让它成为人类 intent 的权威表达。作者认为被丢弃的 prompt 难以审计，会造成重复指令，并削弱工程师对最终系统的理解。它引发共鸣，是因为它不要求开发者放弃自动化，而是保留紧凑 specification，再让模型去实现，从而直击 coding-agent fatigue。",
+      "points": 289,
+      "num_comments": 154,
+      "interest_tag": ""
+    },
+    {
+      "title": "Launch HN: Speko (YC S26) – OpenRouter for Voice AI",
+      "url": "https://speko.ai/",
+      "tldr": "Speko exposes speech-to-text, text-to-speech, LLM, and speech-to-speech models behind one API and routes by language, objective, quality, and cost. Its public comparison emphasizes that 11 of 23 speech models are measured only in English and that different models win across the nine displayed languages, challenging one-size-fits-all vendor leaderboards. The product’s wedge is therefore measurable multilingual routing rather than merely API aggregation.",
+      "tldr_zh": "Speko 用统一 API 接入 STT、TTS、LLM 和 speech-to-speech model，并按语言、目标、质量与成本路由。公开对比指出 23 个 speech model 中有 11 个只在英语上测量，而且展示的九种语言由不同模型分别胜出，直接挑战单一 vendor leaderboard 的代表性。它的产品 wedge 因此不是简单聚合 API，而是可度量的 multilingual routing。",
+      "points": 118,
+      "num_comments": 68,
+      "interest_tag": ""
+    },
+    {
+      "title": "MathCode, Mathematical Coding Agent",
+      "url": "https://math-ai-org.github.io/mathcode/",
+      "tldr": "MathCode is a terminal coding assistant that translates natural-language mathematics into Lean 4 statements and attempts formally checked proofs. It combines a persistent Lean REPL, Mathlib search through Lean LSP diagnostics, reusable theorem and axiom stores, optional subgoal exploration, and an Obsidian dependency graph. The important design is that the agent may explore freely, but completion is decided by a fresh Lean verification rather than by the model’s confidence.",
+      "tldr_zh": "MathCode 是 terminal coding assistant，可把自然语言数学问题转成 Lean 4 statement 并尝试生成形式化证明。它组合 persistent Lean REPL、基于 Lean LSP diagnostic 的 Mathlib 搜索、可复用 theorem/axiom store、可选 subgoal exploration 和 Obsidian 依赖图。关键设计是 agent 可以自由探索，但完成与否由全新的 Lean verification 决定，而不是由模型自信程度决定。",
+      "points": 118,
+      "num_comments": 29,
+      "interest_tag": ""
+    },
+    {
+      "title": "Launch HN: OneCLI (YC S26) – OSS sandboxed agent harness for teams",
+      "url": "https://github.com/onecli/onecli",
+      "tldr": "OneCLI gives each employee a durable agent inside an isolated sandbox with a filesystem, shell, conversation, memory, skills, and schedule. A central gateway injects credentials the agent never sees, enforces shared policy, and supports deterministic human approval for sensitive actions; runners are outbound-only and need no inbound tunnel. The project addresses the operational gap between a capable single-user agent and safely replicating such agents across an organization.",
+      "tldr_zh": "OneCLI 为每位员工提供运行在隔离 sandbox 中的 durable agent，包含 filesystem、shell、conversation、memory、skills 和 schedule。中央 gateway 注入 agent 永远看不到的 credential、统一执行 policy，并为敏感动作提供 deterministic human approval；runner 仅出站连接，不需要开放入站 tunnel。它解决的是从强大的单用户 agent 扩展到整个组织时，在身份、权限、托管和审计上的运维鸿沟。",
+      "points": 85,
+      "num_comments": 26,
+      "interest_tag": ""
+    }
+  ]
+}
