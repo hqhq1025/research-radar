@@ -1,0 +1,221 @@
+{
+  "date": "2026-08-22",
+  "generated_at": "2026-08-22T16:05:12.076057+08:00",
+  "briefing_zh": "今天最强的研究信号不是又一个更大的模型，而是 agent 学习基础设施开始从固定 benchmark 转向可编程、可适应的环境。**EnvHarness** 用插件层改造已有静态环境，保留原 verifier，同时由 **EnvRigger** 根据 policy 轨迹诊断弱点并生成针对性变化；**SPADE** 则让同一个 LLM 同时扮演环境设计者和解题 agent，以 hint-based regret 把课程推到能力边界。两者共同指向一个重要变化：环境不再只是训练数据的容器，而成为可以与 policy 协同演化的优化对象。\n\n与此同时，评测与数据构造正在变得更重视可执行证据。**FACET** 强调 instruction、初始化状态、reference solution 与 verifier 必须共享同一个已运行容器状态，避免合成任务因假设不一致而不可解；**SWE-bench Science** 用 119 个真实科学软件任务显示，即使最强 coding agent 在完整科学验证上仍低于 50%。**MemTrapBench** 进一步提醒，memory 并非无条件增益：相关且忠实的记忆也会诱发 reasoning fixation 和 belief distortion，所有被测 memory 策略甚至都落后于 no-memory baseline。\n\n系统与 post-training 侧也出现了相同的机制反思。**What is Missing from AI Post-Training AI** 在 1,338 条公开轨迹中发现，只有 2.1% 的相邻训练对发生 strategy change；更多经验、指导或 inference compute 能改善执行，却没有自动带来高层策略重估。**Recirculation** 从模型结构另一端出发，在 prefill 阶段把深层表示回流到浅层，试图用低延迟 recurrence 改善状态追踪；而 **Hawkeye** 证明少量按硬件架构组织的专家 unit tests，能让 coding agents 组合 GPU 优化策略并跨 Ampere、Hopper、Blackwell 与 MI350 迁移。\n\n开源社区则把这些研究理念快速产品化。**Cumora** 把 humans 与多个 agents 放进同一聊天、Kanban 和日历，并用 freshness gate 与 atomic claims 减少协作冲突；**OpenBot** 为每个 bot 提供隔离 browser/files，并让所有 action 先过 fail-closed policy 再写 audit trail。HN 上最热的安全案例形成鲜明警告：Wiz 的 **Red Agent** 发现并利用了一处 Copilot 与 GitHub Advanced Security 都漏掉的 GitHub Actions 注入漏洞，说明可执行 agent 的价值与风险都会被真实权限边界放大。",
+  "briefing_en": "The strongest research signal today is not another larger model, but a shift in agent-learning infrastructure from fixed benchmarks toward programmable, adaptive environments. **EnvHarness** wraps existing static environments with plug-in transformations while retaining their original verifiers, and **EnvRigger** diagnoses policy weaknesses from trajectories to synthesize targeted changes. **SPADE** goes further by training one LLM to act as both environment designer and reasoning agent, using hint-based regret to keep the curriculum near the learner's capability frontier. Together, they turn the environment from a passive container into an optimization object that can co-evolve with the policy.\n\nEvaluation and data synthesis are simultaneously becoming more evidence-driven. **FACET** argues that the instruction, initialized state, reference solution, and verifier must share one executed container state, preventing synthetic terminal tasks from becoming inconsistent or unsolvable. **SWE-bench Science** reports that even the strongest tested coding agent remains below 50% pass@1 on 119 real scientific-software tasks. **MemTrapBench** adds a counterintuitive warning: faithful, relevant memories can still induce reasoning fixation and belief distortion, and every tested memory strategy underperformed a no-memory baseline on its trap suite.\n\nThe same concern appears in post-training and architecture. **What is Missing from AI Post-Training AI** finds strategy changes in only 2.1% of adjacent training pairs across 1,338 public trajectories; more experience, guidance, or inference compute improves execution without reliably triggering high-level strategic revision. **Recirculation** attacks state tracking from the architecture side by feeding deep contextual representations back into shallower layers during prefill with little generation-time latency. **Hawkeye** shows that a small taxonomy of architecture-specific expert unit tests can ground coding agents well enough to compose GPU optimizations across Ampere, Hopper, Blackwell, and MI350.\n\nOpen source is productizing these ideas quickly. **Cumora** puts humans and multiple agents in shared chat, Kanban, and calendar surfaces, using freshness gates and atomic work claims to reduce collisions. **OpenBot** gives each bot an isolated browser and workspace, then routes every action through fail-closed policy and audit controls. The day's top HN security story provides the warning label: Wiz's **Red Agent** found and exploited a GitHub Actions injection missed by both Copilot-assisted review and GitHub Advanced Security, showing that the value and danger of executable agents both scale with real access.",
+  "viral_analysis_zh": "最可能在研究圈持续扩散的是 **EnvHarness**：它把「重新造环境」改写成「给现有环境加可编程 harness」，既保留 verifier，又用 241 个 HF upvotes 证明了清晰机制加可量化收益的传播力。开源侧 **Cumora** 的爆点是把 agent team 直接包装成人人熟悉的 chat、Kanban 和 calendar，并用可见的协作冲突控制而非抽象 multi-agent 叙事完成产品化。Wiz 的安全案例则依靠「防守 AI 漏掉、攻击 AI 找到」这一强反差自然获得最高 HN 讨论度。",
+  "viral_analysis_en": "**EnvHarness** is the research item most likely to keep spreading: it reframes environment generation as a programmable harness around existing environments, preserves verifiers, and pairs a simple mechanism with measurable gains and 241 HF upvotes. On the open-source side, **Cumora** packages agent teams into familiar chat, Kanban, and calendar surfaces while making collision control visible instead of selling abstract multi-agent rhetoric. Wiz's security story has the strongest mass-market hook because the contrast is immediate: defensive AI missed the bug, while an offensive AI agent found and exploited it.",
+  "huggingface_papers": [
+    {
+      "title": "EnvHarness: Awakening Static Worlds for Agent Learning",
+      "url": "https://arxiv.org/abs/2608.19880",
+      "tldr": "EnvHarness adds a programmable plug-in layer around existing agent environments, reshaping behavior without changing their underlying logic or verifier. EnvRigger observes black-box policy trajectories, diagnoses weaknesses, and synthesizes targeted harness components that are validated with fresh rollouts. Across five benchmarks and four domains, it improves held-out performance by up to 9.0 points while reducing execution steps by 9.8%, making adaptive environment-policy co-evolution far cheaper than rebuilding environments.",
+      "tldr_zh": "EnvHarness 在已有 agent 环境外增加可编程插件层，无需修改底层逻辑，也能保留原 verifier。EnvRigger 观察 black-box policy 的执行轨迹，诊断薄弱点，再生成针对性的 harness 组件并用新 rollout 验证。它在四个领域、五个 benchmark 上最高提升 9.0 分，同时减少 9.8% 执行步数，让环境与 policy 的持续协同演化不再依赖重造环境。",
+      "upvotes": 241,
+      "authors": "Chengsong Huang, Zifeng Wang, Rujun Han, Jun Yan, Yanfei Chen, Zoey CuiZhu, Ke Jiang, Peng Xia, Han Yu, Yufan Zhuang, Yifei Ming, Jiaqi Pan, Bhavana Dalvi Mishra, Jiaxin Huang, Burak Gokturk, Tomas Pfister, Chen-Yu Lee",
+      "ai_keywords": [
+        "agent learning",
+        "environment generation",
+        "reinforcement learning"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "FACET: Preserving Source Intent and Executable State in Terminal Task Synthesis",
+      "url": "https://arxiv.org/abs/2608.18580",
+      "tldr": "FACET synthesizes terminal-agent tasks by preserving source intent and grounding instruction, environment, reference solution, and verifier in the same executed container state. It repairs artifact-specific failures after execution instead of regenerating every component from inconsistent assumptions. The resulting tasks provide dense executable checks and data-efficient supervision that improves multiple model scales on Terminal-Bench 2.1, making shared state a first-class requirement for trustworthy task synthesis.",
+      "tldr_zh": "FACET 在合成 terminal-agent 任务时保留源材料的目标与约束，并让 instruction、环境、reference solution 和 verifier 共同锚定到同一个已执行容器状态。它通过 execution-based validation 定点修复失败组件，而不是基于不一致假设整体重生成。生成任务具有密集可执行检查，并能跨多个模型规模提升 Terminal-Bench 2.1，说明 shared executable state 是可信任务合成的基础。",
+      "upvotes": 111,
+      "authors": "Kou Shi, Zun Wang, Qisheng Su, Shiting Huang, Ziao Zhang, Zhen Fang, Qingnan Ren, Jin Liu, Yu Zeng, Yiming Zhao, Lin Chen, Zehui Chen, Feng Zhao",
+      "ai_keywords": [
+        "terminal agents",
+        "task synthesis",
+        "executable verification"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "SWE-bench Science: Can Coding Agents Resolve Engineering Tasks in Science?",
+      "url": "https://arxiv.org/abs/2608.19799",
+      "tldr": "SWE-bench Science evaluates coding agents on 119 repository-level tasks from 98 repositories across 20 scientific domains. Even Claude Code with Opus-5 at maximum settings remains below 50% pass@1, with failures spanning missing scientific abstractions, shallow exploration, incomplete integration, and poor generalization. A paired guidance ablation shows that well-grounded scientific information can improve efficiency, but misaligned guidance can anchor the agent and fail to improve exact repair success.",
+      "tldr_zh": "SWE-bench Science 收录 98 个仓库、20 个科学领域的 119 个 repository-level 工程任务。即便 Claude Code 配合 Opus-5 max，pass@1 仍低于 50%，失败集中在科学抽象不足、浅层探索、修复覆盖不全和知识泛化失败。配对消融还显示，高质量科学提示能提高效率，但错位信息会造成 anchoring，并不保证精确修复成功。",
+      "upvotes": 58,
+      "authors": "Zhipeng Xu, Jiahao Lu, Yining Zheng, Yuxin Wang, Xipeng Qiu",
+      "ai_keywords": [
+        "coding agents",
+        "scientific software",
+        "evaluation"
+      ],
+      "interest_tag": "Benchmark"
+    },
+    {
+      "title": "MemTrapBench: Benchmarking Cognitive Traps in LLM Memory Use",
+      "url": "https://arxiv.org/abs/2608.20202",
+      "tldr": "MemTrapBench tests how retrieved memories reshape current reasoning rather than merely whether memories were stored and recalled correctly. It isolates reasoning fixation and belief distortion, finding that all five evaluated memory frameworks underperform a no-memory setting and that even the strongest drops by more than 10%. AdaptiveMem uses an inference-time instruction to resist these traps while retaining gains on standard memory benchmarks, reframing memory quality as selective influence rather than retrieval accuracy alone.",
+      "tldr_zh": "MemTrapBench 不只检查记忆是否被正确存取，而是评估 retrieved memory 如何改变当前推理。它覆盖 reasoning fixation 与 belief distortion 两类认知陷阱，五种 memory framework 全部低于 no-memory 设置，最强方法也下降超过 10%。AdaptiveMem 用 inference-time 指令抑制陷阱，同时保留标准记忆 benchmark 的收益，把 memory quality 从检索准确率推进到对推理影响是否可控。",
+      "upvotes": 31,
+      "authors": "Mengru Wang, Haozhe Luo, Zhenqian Xu, Zhixiang Cui, Haoming Xu, Qu Yang, Jizhan Fang, Junfeng Fang, Ningyu Zhang",
+      "ai_keywords": [
+        "agent memory",
+        "cognitive traps",
+        "memory evaluation"
+      ],
+      "interest_tag": "Memory"
+    },
+    {
+      "title": "SkillEvo: Self-Renewing Evolution Gradients from Multi-Turn Interaction Feedback",
+      "url": "https://arxiv.org/abs/2608.13120",
+      "tldr": "SkillEvo treats multi-turn user simulation as a continuing source of evolution gradients for agent skills, exposing defects that single-turn evaluation stops revealing after early patches. An independent governance layer repairs factual degradation and structural bloat instead of relying on a scalar pass-fail gate. Across nine production skills and 98 reference files, it beats self-reflection evolution by 23.0 points and single-turn-QA evolution by 15.4 points, arguing that sustained feedback quality is the bottleneck in skill improvement.",
+      "tldr_zh": "SkillEvo 把 multi-turn user simulation 从一次性评测改造成持续产生 evolution gradient 的反馈源，让后续追问逐层暴露单轮 QA 看不到的缺陷。独立 governance layer 主动修复事实退化和结构膨胀，而不是只靠一个标量分数拒绝候选。它在 9 个 production skills、98 个 reference files 上分别领先 self-reflection 23.0 分、领先 single-turn QA 15.4 分，说明持续技能进化的瓶颈是反馈是否长期可信。",
+      "upvotes": 28,
+      "authors": "Qianxi Yan, Chunrong Chen, Jiuzhou Zhao, Min Zhang, Yongzhou Xu, Xiaochuan Xu",
+      "ai_keywords": [
+        "agent skills",
+        "multi-turn feedback",
+        "self-improvement"
+      ],
+      "interest_tag": ""
+    }
+  ],
+  "alphaxiv_papers": [
+    {
+      "title": "Hawkeye: Hardware-Aware GPU Kernel Optimization with Minimal Supervision",
+      "arxiv_id": "",
+      "url": "https://www.alphaxiv.org/abs/2608.hawkeye-hardware-aware-gpu-kernel-optimization",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2608.hawkeye-hardware-aware-gpu-kernel-optimization",
+      "tldr": "Hawkeye grounds coding agents in a small taxonomy of architecture-specific GPU optimization tests instead of handing them broad documentation. Roughly ten expert-written unit tests per accelerator teach reusable strategies that the agent composes through compile, validate, and profile loops. Generated kernels beat torch.compile by 1.13x in BF16 and 1.28x in low precision across Ampere, Hopper, Blackwell, and MI350, with up to 18.9x gains on emerging attention variants.",
+      "tldr_zh": "Hawkeye 不给 coding agent 堆通用硬件文档，而是用一套小型、按架构组织的 GPU 优化 unit-test taxonomy 提供可执行知识。每种新 accelerator 约需 10 个专家测试，agent 就能在 compile、validate、profile 闭环中组合可迁移的优化策略。生成 kernel 在 Ampere、Hopper、Blackwell 与 MI350 上分别较 torch.compile 实现 BF16 1.13x、低精度 1.28x 的几何平均加速，新型 attention 最高达 18.9x。",
+      "interest_tag": ""
+    },
+    {
+      "title": "Mathematics in the age of AI",
+      "arxiv_id": "2608.16753",
+      "url": "https://arxiv.org/abs/2608.16753",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2608.16753",
+      "tldr": "Terence Tao asks what mathematics should value if AI systems can perform research-level mathematical tasks, rather than debating when that capability will arrive. He decomposes problem solving into proof generation, verification, exposition, acceptance, and canonicalization, warning that AI optimization may separate goals that historically moved together. The essay argues that human understanding and community integration remain the scarce stages in a future of proof abundance, making explainability part of completeness rather than an optional presentation layer.",
+      "tldr_zh": "Terence Tao 不再争论 AI 何时具备研究级数学能力，而是假设它会到来，再追问数学共同体究竟应该珍视什么。他把 problem solving 拆成证明生成、验证、阐释、接受与 canonicalization，指出 AI 优化会让过去相关的目标发生分离。在 proof abundance 的未来，稀缺资源将变成人类理解与共同体吸收，因此可解释性不是包装，而是数学贡献是否完整的一部分。",
+      "interest_tag": ""
+    },
+    {
+      "title": "SPADE: Self-Play in Adaptive Synthetic Executable Environments",
+      "arxiv_id": "2608.19197",
+      "url": "https://arxiv.org/abs/2608.19197",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2608.19197",
+      "tldr": "SPADE trains a single LLM as both an Environment Designer that writes executable Gym-style worlds and a Reasoning Agent that learns inside them. Hint-based regret rewards environments that are difficult without privileged hints but feasible with them, while corpus grounding and an environment memory prevent collapse. At 30B-A3B scale it gains 5.3 points over the strongest fixed-environment baseline on eight held-out benchmarks, including +13.9 on ACEBench-Agent and +5.7 on BFCL-v4 multi-turn.",
+      "tldr_zh": "SPADE 让同一个 LLM 同时扮演 Environment Designer 与 Reasoning Agent：前者编写可执行 Gym-style 世界，后者在其中学习。hint-based regret 奖励那些无提示时困难、有 privileged hints 时可解的环境，并用 corpus grounding 与 environment memory 避免 mode collapse。在 30B-A3B 规模上，它较最强固定环境 baseline 平均提升 5.3 分，其中 ACEBench-Agent +13.9、BFCL-v4 multi-turn +5.7。",
+      "interest_tag": ""
+    },
+    {
+      "title": "Recirculation",
+      "arxiv_id": "2608.17981",
+      "url": "https://arxiv.org/abs/2608.17981",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2608.17981",
+      "tldr": "Recirculation introduces inference-time recurrence that feeds contextualized deep-layer representations back into shallower layers, addressing the depth-bounded state updates of feedforward transformers. It adds serial work during prefill but essentially no generation-time latency, and an adaptive variant learns lightweight token-specific mixing while freezing the base model. On Gemma 3, adaptive recirculation reduces perplexity by 23% on average and improves GSM8K accuracy by 21%, suggesting pretrained models can guide useful architectural modifications after training.",
+      "tldr_zh": "Recirculation 在 inference time 把深层 contextualized representation 回流到浅层，以突破 feedforward Transformer 状态更新受固定深度限制的问题。它主要增加 prefill 的串行计算，generation 阶段几乎不增延迟；adaptive 版本只学习轻量、token-specific 的 mixing，并冻结 base model。在 Gemma 3 上，它平均降低 23% perplexity、提升 21% GSM8K accuracy，说明训练后的模型本身可以反向指导架构改造。",
+      "interest_tag": ""
+    },
+    {
+      "title": "What is Missing from AI Post-Training AI: An Empirical Analysis",
+      "arxiv_id": "2608.19072",
+      "url": "https://arxiv.org/abs/2608.19072",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2608.19072",
+      "tldr": "This study separates execution-level competence from strategy-level adaptation in agents that autonomously post-train models. Across 1,338 public trajectories, only 2.1% of adjacent training pairs change strategy; the remaining activity mostly tunes within an early locked-in plan. Experience scaffolds, human guidance, and extra inference compute improve execution but do not reliably trigger spontaneous strategic reevaluation, identifying strategy lock-in as a distinct capability gap for AI-for-AI systems.",
+      "tldr_zh": "这项研究把自动 post-training agent 的能力拆成 execution-level competence 与 strategy-level adaptation。对 1,338 条公开轨迹的分析显示，只有 2.1% 的相邻训练对发生策略变化，绝大多数预算都消耗在早期选定方案内的局部调整。experience scaffold、human guidance 和额外 inference compute 都能改善执行，却无法稳定触发自主高层重估，说明 strategy lock-in 是 AI-for-AI 系统独立且关键的能力缺口。",
+      "interest_tag": ""
+    }
+  ],
+  "github_repos": [
+    {
+      "name": "yetone/cumora",
+      "url": "https://github.com/yetone/cumora",
+      "tldr": "Cumora is a cross-platform team workspace where humans and AI agents share chat, DMs, Kanban, calendars, email, and work ownership. Agents can run in managed Kubernetes pods or use local Claude Code, Codex, Grok Build, or Cursor brains through BYOA. Its strongest design is coordination: freshness gates hold stale replies, atomic claims prevent duplicate work, and the repository includes multi-agent coordination benchmarks rather than treating chat presence as collaboration.",
+      "tldr_zh": "Cumora 是一个跨平台团队 workspace，让 humans 与 AI agents 共享聊天、DM、Kanban、日历、邮件和任务归属。Agent 既可运行在托管 Kubernetes pod，也可通过 BYOA 接入本地 Claude Code、Codex、Grok Build 或 Cursor。其关键不只是把 agent 放进聊天室，而是用 freshness gate 拦截过时回复、用 atomic claims 防止重复劳动，并提供 multi-agent coordination benchmarks。",
+      "stars": 2883,
+      "language": "TypeScript",
+      "interest_tag": "Agent Swarm"
+    },
+    {
+      "name": "CopilotKit/OpenBot",
+      "url": "https://github.com/CopilotKit/OpenBot",
+      "tldr": "OpenBot is a self-hosted platform that gives each AI coworker an isolated computer with its own Chromium profile, files, shell, and credentials. Every browser, file, MCP, or component action goes through a fail-closed CEL policy gateway that records the audit row before acting, and a human can take over for login or 2FA. Because any AG-UI endpoint can become a bot, the project separates governance and computer access from the choice of agent framework.",
+      "tldr_zh": "OpenBot 是 self-hosted AI coworker 平台，为每个 bot 提供独立 Chromium profile、文件、shell 与 credential 边界。所有 browser、file、MCP 和 component action 都先经过 fail-closed CEL policy gateway，并在执行前写入 audit row；遇到登录或 2FA 时可以 human takeover。它允许任意 AG-UI endpoint 接入，因此把治理与 computer access 从具体 agent framework 中解耦。",
+      "stars": 2197,
+      "language": "TypeScript",
+      "interest_tag": "CUA"
+    },
+    {
+      "name": "jaredrhod/fullstack-agent",
+      "url": "https://github.com/jaredrhod/fullstack-agent",
+      "tldr": "fullstack-agent is a Claude Code installation wizard that assembles persistent text-file memory, low-latency voice, synchronized visualizers, and optional webcam-based hand control into one personal agent. Each component stays in its own repository and can be adopted or updated without moving the user's existing vault or identity files. The project is notable less for a new model than for packaging fragmented agent capabilities into a guided consumer setup with explicit migration and no-delete guarantees.",
+      "tldr_zh": "fullstack-agent 是一个 Claude Code 安装向导，把纯文本持久记忆、低延迟语音、同步视觉化界面和可选 webcam 手势控制组装成个人 agent。各组件保持独立仓库，用户已有的 vault 与 identity 文件无需迁移，也能被接管和持续更新。它的价值不在新模型，而在把分散能力包装成可对话完成的消费级安装流程，并明确承诺不删除、不覆盖已有资产。",
+      "stars": 203,
+      "language": "Shell",
+      "interest_tag": ""
+    },
+    {
+      "name": "azrtydxb/procoder",
+      "url": "https://github.com/azrtydxb/procoder",
+      "tldr": "Procoder is a Go binary that imposes evidence-based quality gates on coding agents across more than twenty agent interfaces. It treats unchecked tools as failures, combines formatting, security, tests, documentation, CI, and release checks, and leaves all edits to the agent rather than mutating code behind its back. Escaped bugs enter a lessons ledger that remains open until a reusable adaptation lands, turning review findings into durable process changes rather than one-off fixes.",
+      "tldr_zh": "Procoder 是一个 Go binary，为二十多种 coding-agent interface 增加基于证据的质量门禁。它把 unchecked 明确视为 failure，统一检查 formatting、security、tests、documentation、CI 与 release，同时只报告结果，不在背后修改代码。漏网 bug 会进入 lessons ledger，直到可复用 adaptation 落地才算关闭，把 review finding 从一次性修补变成长期流程改进。",
+      "stars": 135,
+      "language": "Go",
+      "interest_tag": ""
+    },
+    {
+      "name": "augety121/MCP-State-Twin",
+      "url": "https://github.com/augety121/MCP-State-Twin",
+      "tldr": "MCP State Twin provides deterministic, forkable, stateful MCP test worlds so agent runs can start from the same snapshot, take different valid tool paths, and be compared by terminal state. Its SQLite-backed runtime separates private control and MCP data planes, supports snapshot, fork, reset, assertions, and canonical diffs, and avoids production side effects. The project is still a development preview with synthetic L1 fidelity, but its explicit boundaries make it a useful substrate for reproducible tool-agent evaluation.",
+      "tldr_zh": "MCP State Twin 提供 deterministic、forkable、stateful 的 MCP 测试世界，让多个 agent run 从同一 snapshot 出发，走不同合法 tool path，再按 terminal state 比较。其 SQLite runtime 分离私有 control plane 与 MCP data plane，支持 snapshot、fork、reset、assertion 和 canonical diff，且不向生产服务写副作用。它仍是 synthetic L1 fidelity 的 development preview，但清晰声明能力边界，适合作为可复现 tool-agent evaluation 的环境底座。",
+      "stars": 55,
+      "language": "Go",
+      "interest_tag": "Benchmark"
+    }
+  ],
+  "hackernews": [
+    {
+      "title": "AI-Generated GitHub Copilot “Autofix” Allowed Compromise of Snowflake's Jira",
+      "url": "https://www.wiz.io/blog/red-agent-snowflake-copilot-cicd-bug",
+      "tldr": "Wiz's autonomous Red Agent found a GitHub Actions script-injection flaw in Snowflake's public connector repository five days after it went live, then validated access to sensitive internal Jira data under a responsible disclosure program. Copilot had co-authored or checked the merged change and marked it clear, while GitHub Advanced Security also missed the issue; the article clarifies that AI assistance in writing the vulnerable change itself is uncertain. The incident is important because it demonstrates both sides of executable AI: automated review can create false confidence, while an offensive agent can independently traverse discovery, exploitation, and blast-radius assessment.",
+      "tldr_zh": "Wiz 的 autonomous Red Agent 在漏洞上线五天后发现 Snowflake 公开 connector 仓库中的 GitHub Actions script injection，并在负责任披露范围内验证了对内部 Jira 敏感数据的访问。Copilot 曾参与合并变更的检查并给出 all-clear，GitHub Advanced Security 也未发现问题；文章同时澄清，漏洞代码本身是否由 AI 编写并不确定。该案例同时展示 executable AI 的两面：自动 review 会制造虚假安全感，而攻击 agent 已能独立完成发现、利用与 blast-radius assessment。",
+      "points": 424,
+      "num_comments": 157,
+      "interest_tag": ""
+    },
+    {
+      "title": "Show HN: Huzzah – a novel approach to coding with AI",
+      "url": "https://www.danielvaughn.dev/posts/huzzah/",
+      "tldr": "Huzzah proposes replacing long, imperative, transient coding-agent chats with pseudocode that is declarative, compact, and persistent. The core complaint is that normal prompts discard the authoritative record of human intent and force users to restate constraints throughout development. By making intent an editable artifact rather than conversational exhaust, the prototype aims to restore inspectability and professional control without returning to fully manual coding.",
+      "tldr_zh": "Huzzah 试图用 declarative、compact、persistent 的 pseudocode，替代 coding-agent 场景中冗长、命令式且转瞬即逝的聊天 prompt。它认为传统对话会丢失人类意图的权威记录，并迫使用户在开发过程中不断重复约束。把 intent 变成可编辑 artifact，而不是 conversation exhaust，目标是在不回到纯手写代码的前提下恢复可检查性和工程控制感。",
+      "points": 369,
+      "num_comments": 206,
+      "interest_tag": ""
+    },
+    {
+      "title": "Launch HN: Speko (YC S26) – OpenRouter for Voice AI",
+      "url": "https://speko.ai/",
+      "tldr": "Speko offers one API for speech models and routes by language, objective, measured quality, latency, and cost rather than relying on English-only vendor leaderboards. Its public comparison shows that 11 of 23 covered models are measured only in English and that four different models win across nine languages. The product's wedge is therefore not API aggregation alone, but benchmark-driven routing that exposes where a globally marketed voice model has no evidence for a user's language.",
+      "tldr_zh": "Speko 用一个 API 聚合 speech models，并按语言、目标、实测质量、latency 与 cost 路由，而不是依赖厂商的 English-only leaderboard。其公开对比显示，23 个模型中有 11 个只测了英语，九种语言里有四个不同模型分别胜出。它的切入点不只是 API aggregation，而是 benchmark-driven routing：直接暴露一个全球销售的 voice model 在用户语言上是否根本没有证据。",
+      "points": 118,
+      "num_comments": 68,
+      "interest_tag": ""
+    },
+    {
+      "title": "MathCode, Mathematical Coding Agent",
+      "url": "https://math-ai-org.github.io/mathcode/",
+      "tldr": "MathCode is a terminal agent that converts natural-language math problems into Lean 4 statements and attempts formally checked proofs. A persistent Lean REPL cuts repeated compile feedback to roughly 0.4 seconds after warmup, while theorem and axiom libraries, LSP search, and an Obsidian dependency graph support iterative proving. The system keeps subgoal exploration optional and ends with a fresh strict Lean verification, combining agent-directed search with a hard formal correctness boundary.",
+      "tldr_zh": "MathCode 是一个 terminal agent，可把自然语言数学问题转换为 Lean 4 theorem 并尝试生成形式化证明。persistent Lean REPL 在预热后把反复 compile feedback 降到约 0.4 秒，并结合 theorem/axiom library、LSP search 与 Obsidian dependency graph 支持迭代证明。它让 subgoal exploration 保持可选，同时最终执行一次全新的严格 Lean verification，把 agent-directed search 与硬形式正确性边界结合起来。",
+      "points": 118,
+      "num_comments": 29,
+      "interest_tag": ""
+    },
+    {
+      "title": "Launch HN: OneCLI (YC S26) – OSS sandboxed agent harness for teams",
+      "url": "https://github.com/onecli/onecli",
+      "tldr": "OneCLI gives each employee a durable sandboxed agent with a filesystem, shell, memory, skills, schedule, and Slack identity. A centralized gateway enforces policy and injects credentials at request time so secrets do not enter the sandbox, while sensitive operations can require deterministic human approval. Its architecture separates the control plane, outbound-only runners, sandbox supervisor, and Rust credential gateway, targeting the operational gap between a good single-user agent and a governable fleet.",
+      "tldr_zh": "OneCLI 为每位员工提供 durable sandboxed agent，包含 filesystem、shell、memory、skills、schedule 与独立 Slack identity。中央 gateway 在请求时注入 credential 并统一执行 policy，使 secret 不进入 sandbox；发送邮件、删除工单等敏感操作可强制 deterministic human approval。其 control plane、outbound-only runner、sandbox supervisor 与 Rust credential gateway 分离，瞄准从单用户 agent 到可治理团队 fleet 之间的运维缺口。",
+      "points": 87,
+      "num_comments": 29,
+      "interest_tag": ""
+    }
+  ]
+}
