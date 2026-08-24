@@ -1,0 +1,222 @@
+{
+  "date": "2026-08-24",
+  "generated_at": "2026-08-24T16:04:51.274774+08:00",
+  "briefing_zh": "今天最强的研究主线不是又一个更大的模型，而是让 agent 的训练闭环自己变得更强。**EnvHarness** 在不重写底层环境和 verifier 的前提下，用可编程 harness 针对策略弱点动态改造静态环境；**SPADE** 则让同一个 LLM 同时扮演环境设计者与求解者，以 hint-based regret 把课程推到能力边界。两者共同把 environment 从固定数据容器提升为可学习、可适配的训练组件。\n\n但 AI-for-AI 的上限仍被 strategy-level intelligence 卡住。**AI4AI-Bench** 把算法设计从调参和系统工程中单独剥离：最强系统平均仅得 0.250，很多提交根本没有改动学习算法；**What is Missing from AI Post-Training AI** 进一步发现，1,338 条 post-training 轨迹里相邻训练间仅 2.1% 出现策略变化。今天的关键信号因此很清楚：agent 已能可靠执行研究流程，却还不会根据证据主动推翻自己的研究假设。\n\n基础模型侧的进展同样围绕效率与可迁移性。**Let's Scale Step by Step** 结合 MoE 版 μP 与 token-scale extrapolation，用小模型和短预算预测 155B MoE 在 10T tokens 下的学习率，声称把搜索计算量降低 98 倍；on-policy distillation 的新研究则显示，OPD 迁移的是 teacher 的 reasoning behavior，而非题目答案，但跨来源 teacher-student 配对和多 teacher 混合会产生明显能力跷跷板。规模化训练正在从经验调参转向可外推的规律，同时暴露出 capability integration 的新问题。\n\n开源与社区信号更偏向可部署的 agent infrastructure：**Sprix SAGE Router** 把 SELF、COLLABORATE、HANDOFF 放进同一套可审计路由目标，**only-cli/oc** 用数百 token 的编号视图替代完整网页，**OneCLI** 则把凭据注入和 policy enforcement 放到模型外的 gateway。与此同时，Snowflake Jira 事件表明 Copilot 检查和常规安全扫描都可能漏掉 CI/CD 注入，而 autonomous red agent 能在漏洞上线五天内找到并验证影响；agent 能力越强，权限边界和独立验证越不能留在 prompt 层。",
+  "briefing_en": "The strongest research thread today is not another larger model, but a training loop that can improve the conditions under which agents learn. **EnvHarness** dynamically reshapes static environments around policy weaknesses without replacing their underlying logic or verifiers, while **SPADE** trains one LLM to act as both environment designer and solver, using hint-based regret to keep the curriculum near the capability frontier. Together they turn the environment from a fixed data container into an adaptive, learnable component.\n\nThe ceiling on AI-for-AI, however, remains strategy-level intelligence. **AI4AI-Bench** isolates algorithm design from hyperparameter tuning and systems work: the best system averages only 0.250, and many submissions never modify the learning algorithm at all. **What is Missing from AI Post-Training AI** finds the same failure in 1,338 post-training trajectories, where only 2.1% of adjacent training runs involve a strategy change. The message is sharp: agents can execute research pipelines, but they still rarely overturn their own research hypothesis when evidence turns against it.\n\nFoundation-model work is likewise moving toward efficiency and transfer. **Let's Scale Step by Step** combines an MoE adaptation of μP with token-scale extrapolation to predict the learning rate for a 155B MoE trained on 10T tokens from smaller, shorter proxy runs, reporting a 98-fold reduction in search compute. A separate study of on-policy distillation argues that OPD transfers teacher reasoning behavior rather than memorized answers, while also revealing strong origin effects and capability seesaws when multiple teachers are combined. Scaling is becoming less artisanal, but capability integration is emerging as the next optimization problem.\n\nOpen-source and community signals point toward deployable agent infrastructure. **Sprix SAGE Router** compares SELF, COLLABORATE, and HANDOFF in one auditable routing objective; **only-cli/oc** replaces full webpages with compact numbered views; and **OneCLI** moves credential injection and policy enforcement outside the model into a gateway. The Snowflake Jira incident supplies the warning label: Copilot review and standard scanners missed a CI/CD injection that an autonomous red agent found and validated five days after deployment, so stronger agents require permission boundaries and independent verification beyond the prompt layer.",
+  "viral_analysis_zh": "今天最可能持续出圈的是 **Huzzah**：它没有再卖一个更强 coding agent，而是精准命中开发者的 agent fatigue，用「持久化伪代码即意图源」这一句就能解释产品差异，379 points 与 209 条评论说明争议本身就是传播燃料。研究圈最可能发酵的是 **AI4AI-Bench**，因为「最强 agent 仍主要会调 run、不会发明 learning algorithm」既有可复现实验，又直接挑战 recursive self-improvement 的宏大叙事。",
+  "viral_analysis_en": "**Huzzah** is the most likely project to keep spreading today because it does not promise a stronger coding agent; it names agent fatigue and compresses the alternative into one memorable idea: persistent pseudocode as the source of human intent. Its 379 points and 209 comments show that the disagreement is part of the distribution engine. In research, **AI4AI-Bench** has the strongest viral frame: even leading agents mostly modify the run rather than invent the learning algorithm, a reproducible result that directly punctures broad recursive-self-improvement claims.",
+  "huggingface_papers": [
+    {
+      "title": "Let's Scale Step by Step: Compute-Efficient Hyperparameter Transfer for Large-Scale Mixture-of-Experts",
+      "url": "https://huggingface.co/papers/2608.20061",
+      "tldr": "This work adapts Maximal Update Parameterization to MoE models using MLA and Muon, then adds a token-budget scaling law for the optimal learning rate. Small width-scaled models and short proxy runs predict the setting for a 155B-total, 17B-active MoE trained on 10 trillion tokens, with reported R² of 0.95. The authors estimate 98 times less search compute than full-scale tuning, making hyperparameter transfer a practical systems lever rather than a purely theoretical scaling result.",
+      "tldr_zh": "这项工作把 Maximal Update Parameterization 适配到使用 MLA 与 Muon 的 MoE，并进一步建立最优学习率随 token budget 外推的 scaling law。小宽度模型与短预算 proxy run 可以预测 155B 总参数、17B 激活 MoE 在 10T tokens 训练下的配置，拟合 R² 达 0.95。作者估计相比全尺度搜索节省 98 倍计算量，使 hyperparameter transfer 从理论规律变成可落地的训练系统杠杆。",
+      "upvotes": 21,
+      "authors": "Nayeon Kim, Hojin Lee, Yunju Bak, Jaesun Park, Boseop Kim",
+      "ai_keywords": [
+        "MoE",
+        "μP",
+        "Muon",
+        "scaling law"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "OmniAssistBench: Assistant-style Interaction Benchmark for Omni-LLMs",
+      "url": "https://huggingface.co/papers/2608.21360",
+      "tldr": "OmniAssistBench evaluates real-time video assistants whose responses alter the user's next action, a setting that static video QA misses. The benchmark reverse-engineers internet videos into multi-turn guided interactions and uses predefined route priors to keep diverging interaction paths comparable. Gemini-3-Pro scores 66.4 out of 100 and Qwen3-Omni-Instruct 51.2, with recurring failures in gesture understanding, history retention, completeness, and waiting for the right event before responding.",
+      "tldr_zh": "OmniAssistBench 评测会持续感知并指导用户的实时视频助手，其回答会改变用户下一步动作，这是静态 video QA 无法覆盖的。数据集把互联网视频逆向拆成多轮交互，并用预定义 route prior 约束不同模型沿同一路径完成目标。Gemini-3-Pro 得分 66.4/100，Qwen3-Omni-Instruct 为 51.2；主要失败集中在手势理解、历史保持、答案完整性，以及该等待时过早回答。",
+      "upvotes": 20,
+      "authors": "Xianyun Sun, Chaoyou Fu, Zhengye Zhang, Feiyang Duan, Qingyuan Cao, Yonghui Niu, Sihang Yuan, Ge Zhang, Caifeng Shan",
+      "ai_keywords": [
+        "Omni-LLM",
+        "real-time video",
+        "interactive evaluation"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "Graph Engineering in the Era of LLM Agents: From Individual Intelligence to System Intelligence",
+      "url": "https://huggingface.co/papers/2608.21156",
+      "tldr": "This survey argues that prompt, context, harness, and loop engineering still optimize mostly at the individual-agent level. It proposes Graph Engineering as an explicit representation of tasks, agents, dependencies, and evolving execution state for coordinating heterogeneous multi-agent systems. The framing is useful as a taxonomy and systems agenda, although it is a survey and should not be read as evidence that graph-heavy orchestration is universally superior.",
+      "tldr_zh": "这篇综述认为 prompt、context、harness 与 loop engineering 主要仍在优化单 agent，而复杂任务需要异构专长、并行执行、独立验证与持久状态。作者提出 Graph Engineering，用显式动态图表示任务、agent、依赖关系和不断变化的执行状态，以组织 multi-agent system。它作为 taxonomy 与系统研究议程有价值，但本质是综述，不能据此推出 graph-heavy orchestration 在所有任务上都更优。",
+      "upvotes": 14,
+      "authors": "Yuyuan Feng, Zhishang Xiang, Chaobin Yang, Qichao Ma, Zerui Chen, and collaborators",
+      "ai_keywords": [
+        "multi-agent systems",
+        "graph orchestration",
+        "system intelligence"
+      ],
+      "interest_tag": "Agent Swarm"
+    },
+    {
+      "title": "Every Coin Has Two Sides: On the Dual Nature of Generalization in On-Policy Distillation of Large Language Models",
+      "url": "https://huggingface.co/papers/2608.16647",
+      "tldr": "A controlled study finds that on-policy distillation transfers a teacher's reasoning behavior more than answers to specific training problems; even teacher-unsolved problems can help. Generalization is broad for same-origin teacher-student pairs but largely confined to the trained distribution for cross-origin pairs. In multi-teacher settings, routing prompts cannot isolate each teacher's influence, producing a mixture-dependent seesaw among capabilities and complicating generalist-model construction.",
+      "tldr_zh": "受控实验表明，on-policy distillation 主要迁移 teacher 的 reasoning behavior，而不是特定训练题的答案；即使 teacher 没做对的问题也可能提供有效监督。同源 teacher-student 配对能跨语言、推理长度乃至领域广泛迁移，跨来源配对则多半只拟合训练分布。在 multi-teacher 场景中，按领域路由 prompt 无法隔离各 teacher 的影响，最终出现随混合比例变化的 capability seesaw。",
+      "upvotes": 9,
+      "authors": "Zhaoyi Li, Deyang Kong, Yuan Wei, Evan Yang, Ranran Shen, Mahardika Krisna Ihsani, Ming Yang, Wei Zhang, Chuan Hao, Jian Yang, Ran Tao, Bryan Dai, Shikun Zhang, Wei Ye, Ying Wei, Defu Lian",
+      "ai_keywords": [
+        "on-policy distillation",
+        "generalization",
+        "multi-teacher"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "AgentMercury: Your Agent Can Synthesize Verifiable Environments for Business Scenarios at scale",
+      "url": "https://huggingface.co/papers/2608.20634",
+      "tldr": "AgentMercury generates persistent executable worlds from business scenarios rather than building one environment around one benchmark task. It reports 4,783 environments across 14 industries and 50 countries, with services, tools, state, and cross-service invariants that support many emergent tasks. Training on these worlds improves both enterprise workflows and out-of-domain evaluations, while fine-tuning the environment author raises held-out executable-world construction success from 3.3% to 83.3%.",
+      "tldr_zh": "AgentMercury 不围绕单个 benchmark task 搭环境，而是从高层 business scenario 生成带实体、服务、工具、状态和跨服务 invariant 的持久可执行世界，让多种任务自然涌现。论文构建了覆盖 14 个行业、50 个国家的 4,783 个环境，并报告在 enterprise workflow 与域外推理、coding、tool use 上都有收益。环境构造本身也可学习：对 held-out business scenario 的可执行世界构建成功率从 3.3% 提升到 83.3%。",
+      "upvotes": 3,
+      "authors": "Minbyul Jeong, Chanwoong Yoon",
+      "ai_keywords": [
+        "agent environments",
+        "environment synthesis",
+        "reinforcement learning"
+      ],
+      "interest_tag": ""
+    }
+  ],
+  "alphaxiv_papers": [
+    {
+      "title": "EnvHarness: Awakening Static Worlds for Agent Learning",
+      "arxiv_id": "2608.19880",
+      "url": "https://arxiv.org/abs/2608.19880",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2608.19880",
+      "tldr": "EnvHarness wraps an existing verified environment with programmable Stage, Contract, and Chain components instead of rebuilding the world from scratch. EnvRigger observes a black-box policy's trajectories, diagnoses weaknesses, synthesizes targeted harness components, and validates them with fresh rollouts. Across five benchmarks it reports up to a 9.0-point held-out gain and 9.8% fewer steps, suggesting that adaptive environment transformation can deliver stronger learning signals while retaining trusted verifiers.",
+      "tldr_zh": "EnvHarness 不从零重建 world，而是在已有可验证环境外包一层可编程的 Stage、Contract 与 Chain 组件。EnvRigger 把目标 policy 当黑盒，观察轨迹、诊断弱点、合成针对性 harness，并通过新 rollout 验证。它在五个 benchmark 上报告最高 9.0 points 的 held-out 提升和 9.8% 的执行步数下降，说明动态改造环境可能比生成全新环境更容易保留可信 verifier。",
+      "interest_tag": ""
+    },
+    {
+      "title": "Hawkeye: Hardware-Aware GPU Kernel Optimization with Minimal Supervision",
+      "arxiv_id": "",
+      "url": "https://www.alphaxiv.org/abs/2608.hawkeye-hardware-aware-gpu-kernel-optimization",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2608.hawkeye-hardware-aware-gpu-kernel-optimization",
+      "tldr": "Hawkeye supplies coding agents with structured hardware context so they can compose architecture-specific GPU kernel optimizations rather than search blindly. The authors report kernels that beat torch.compile by 1.13× in BF16 and 1.28× in low-precision formats across four GPU architectures, with up to 18.9× speedups on emerging attention variants. Its significance is AI-for-AI at the execution layer: the agent is not inventing a training algorithm, but it can materially improve the kernels that make training and inference economical.",
+      "tldr_zh": "Hawkeye 向 coding agent 提供结构化硬件上下文，使其能够组合 architecture-specific GPU kernel 优化，而不是盲目搜索。作者报告在四种 GPU 架构上，相比 torch.compile 的 BF16 kernel 快 1.13×、低精度格式快 1.28×，新型 attention 变体最高达到 18.9×。它的重要性在于 execution-level AI-for-AI：agent 未必发明训练算法，但能直接优化决定训练与推理成本的底层 kernel。",
+      "interest_tag": ""
+    },
+    {
+      "title": "AI4AI-Bench: Benchmarking LLM Agents in Algorithmic Design for Recursive Self-Improvement",
+      "arxiv_id": "2608.20318",
+      "url": "https://arxiv.org/abs/2608.20318",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2608.20318",
+      "tldr": "AI4AI-Bench isolates whether agents can improve training algorithms, rather than merely tune hyperparameters or collect more data. Ten frozen repositories cover ten algorithm families; agents get four hours on one B300 to modify the algorithm, followed by a hidden 12-hour rerun and evaluator. Across 29 configurations the mean score is 0.166 and the best system reaches 0.250; learning-side changes outperform run-side changes, but fewer than half of submissions attempt them.",
+      "tldr_zh": "AI4AI-Bench 专门隔离 agent 改进训练算法的能力，不把调 hyperparameter、加数据或系统优化混在一起。十个冻结 repository 覆盖十类训练算法，agent 可在单张 B300 上探索 4 小时，随后由不可见 evaluator 从头运行最多 12 小时。29 个配置的平均得分仅 0.166，最好系统为 0.250；learning-side 改动显著优于 run-side 改动，但不足一半提交真正尝试了前者。",
+      "interest_tag": "Benchmark"
+    },
+    {
+      "title": "What is Missing from AI Post-Training AI: An Empirical Analysis",
+      "arxiv_id": "2608.19072",
+      "url": "https://arxiv.org/abs/2608.19072",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2608.19072",
+      "tldr": "The paper separates execution-level skill from strategy-level adaptation in automated post-training. In 1,338 public trajectories, agents lock onto an initial strategy and spend nearly all remaining budget on local adjustments; only 2.1% of adjacent training pairs contain a strategy change. Experience scaffolds, human guidance, and extra inference compute improve execution or redirect the initial plan, but none reliably triggers spontaneous strategy revision during the run.",
+      "tldr_zh": "论文把自动 post-training 中的 execution-level skill 与 strategy-level adaptation 明确分开。在 1,338 条公开轨迹中，agent 几乎总是在开头锁定策略，之后把预算耗在局部调整上；相邻训练对中仅 2.1% 出现策略变化。experience scaffold、human guidance 和更多 inference compute 能改善执行或重定向初始方案，却都不能稳定触发运行中的自发策略重估。",
+      "interest_tag": ""
+    },
+    {
+      "title": "SPADE: Self-Play in Adaptive Synthetic Executable Environments",
+      "arxiv_id": "2608.19197",
+      "url": "https://arxiv.org/abs/2608.19197",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2608.19197",
+      "tldr": "SPADE uses one LLM as both an Environment Designer that writes executable Gym-style worlds and a Reasoning Agent that learns inside them. A hint-based regret signal rewards environments that are difficult without privileged hints but feasible with them, while corpus grounding and environment memory preserve diversity. At 30B-A3B scale it beats the strongest fixed-environment baseline by 5.3 points on average and reports gains of 5.7 on BFCL-v4 multi-turn and 13.9 on ACEBench-Agent.",
+      "tldr_zh": "SPADE 让同一个 LLM 同时扮演编写 Gym-style 可执行世界的 Environment Designer，以及在其中学习的 Reasoning Agent。hint-based regret 奖励「无提示很难、有 privileged hint 可解」的环境，corpus grounding 与 environment memory 则维持多样性。在 30B-A3B 规模上，它平均领先最强固定环境 baseline 5.3 points，并在 BFCL-v4 multi-turn 与 ACEBench-Agent 上分别提升 5.7 和 13.9 points。",
+      "interest_tag": ""
+    }
+  ],
+  "github_repos": [
+    {
+      "name": "wang2122/sprix-sage-router",
+      "url": "https://github.com/wang2122/sprix-sage-router",
+      "tldr": "SAGE makes SELF, COLLABORATE, and HANDOFF compete under one state-aware utility that includes capability, cost, latency, risk, context transfer, and coordination overhead. It assigns remaining requirements over a task DAG, learns requirement-conditioned trust from execution evidence, and emits an auditable routing rationale. The repository is explicit that its 2,500-task benchmark is synthetic and that real traces and stronger baselines are still needed, so this is a substantive research preview rather than proof of production superiority.",
+      "tldr_zh": "SAGE 把 SELF、COLLABORATE 与 HANDOFF 放进同一个 state-aware utility，联合考虑能力、成本、延迟、风险、上下文转移与协作开销。它基于 task DAG 分配剩余 requirement，从执行证据学习 requirement-conditioned trust，并输出可审计的路由理由。仓库明确承认 2,500-task benchmark 是 synthetic、仍缺真实 trace 与强 baseline，因此它是有内容的 research preview，而不是生产优越性的证明。",
+      "stars": 1650,
+      "language": "Python",
+      "interest_tag": "Agent Swarm"
+    },
+    {
+      "name": "Forsy-AI/biosecurity-agent",
+      "url": "https://github.com/Forsy-AI/biosecurity-agent",
+      "tldr": "Biosecurity Agent builds a persistent, target-centered world from official sources, scientific material, news, OSINT, sensors, and private context. It separates observed, inferred, and simulated claims, then uses the resulting state for forward simulation and evidence-backed defensive recommendations. The local-first design, inspectable processing lanes, and explicit defensive-only boundary are more important than the broad marketing claim, although real predictive validity still needs independent evaluation.",
+      "tldr_zh": "Biosecurity Agent 围绕人物、动物、植物、产品或地点等目标，从官方来源、科学资料、新闻、OSINT、传感器与私有上下文构建持久 world。系统区分 observed、inferred 与 simulated claim，再据此做前向模拟和有证据支撑的防御建议。local-first、可检查处理链与明确 defensive-only 边界比宽泛宣传更有价值，但真实预测有效性仍需独立评估。",
+      "stars": 511,
+      "language": "TypeScript",
+      "interest_tag": ""
+    },
+    {
+      "name": "only-cli/oc",
+      "url": "https://github.com/only-cli/oc",
+      "tldr": "only-cli turns mostly static webpages, feeds, and JSON APIs into compact numbered views that agents can navigate with open, do, find, read, and next. Its benchmark reports 1,936 tokens for six real pages versus 16,402 for Jina Reader and 177,685 for raw HTML, while an end-to-end Wikipedia suite preserves 5/5 accuracy at much lower input-token cost. It does not yet render JavaScript-heavy or login-gated sites, but the explicit empty-page signal lets an agent escalate to a real browser only when needed.",
+      "tldr_zh": "only-cli 把大多数静态网页、feed 与 JSON API 压成带编号的紧凑视图，agent 可通过 open、do、find、read、next 导航。其 benchmark 报告读取六个真实页面仅用 1,936 tokens，而 Jina Reader 为 16,402、raw HTML 为 177,685；Wikipedia 端到端任务仍保持 5/5 正确率并显著降低 input token。它尚不支持重 JavaScript 或登录页面，但会显式报告 empty page，使 agent 只在必要时升级到真实浏览器。",
+      "stars": 245,
+      "language": "JavaScript",
+      "interest_tag": ""
+    },
+    {
+      "name": "kgoedecke/doop",
+      "url": "https://github.com/kgoedecke/doop",
+      "tldr": "Doop is a multiplayer design canvas where frames render real HTML and humans and AI agents edit the same artifact live. Its built-in MCP server streams agent edits, exposes screenshots for self-review, carries user identity through OAuth, and includes comments, presence, activity history, and pinned design memory. The project is unusually complete for a new repository, but its AGPL license and embedded-database defaults mean teams should distinguish quick self-hosting from production deployment.",
+      "tldr_zh": "Doop 是 multiplayer design canvas，每个 frame 渲染真实 HTML，人和 AI agent 可实时编辑同一产物。内置 MCP server 支持流式写入、截图 self-review、OAuth 身份继承，并提供评论、presence、activity history 与可固定的 design memory。作为新仓库它的产品链路相当完整，但 AGPL 许可证与默认 embedded database 意味着团队要区分快速自托管和正式生产部署。",
+      "stars": 218,
+      "language": "TypeScript",
+      "interest_tag": ""
+    },
+    {
+      "name": "tabtin-ai/TabTin",
+      "url": "https://github.com/tabtin-ai/TabTin",
+      "tldr": "TabTin targets team continuity rather than another isolated chat: a completed task can hand off frozen context, permitted artifacts, methods, and execution history to the next person or agent. The public-preview stack includes desktop and mobile clients, an agent runtime, collaboration services, documents, tables, presentations, model management, and a locally runnable community server. Its strongest idea is provenance-preserving work transfer, while current maturity varies by component and the repository correctly reserves important judgment and acceptance for humans.",
+      "tldr_zh": "TabTin 重点解决 team continuity，而不是再做一个孤立聊天框：完成的任务可把冻结上下文、有权限的 artifact、方法与执行记录交接给下一位人或 agent。Public Preview 覆盖桌面与移动客户端、agent runtime、协作服务、文档、表格、演示、模型管理及可本地运行的 community server。最值得关注的是保留 provenance 的工作交接，但各组件成熟度仍不一致，重要判断和验收也明确留给人。",
+      "stars": 122,
+      "language": "TypeScript",
+      "interest_tag": ""
+    }
+  ],
+  "hackernews": [
+    {
+      "title": "AI-Generated GitHub Copilot “Autofix” Allowed Compromise of Snowflake's Jira",
+      "url": "https://www.wiz.io/blog/red-agent-snowflake-copilot-cicd-bug",
+      "tldr": "Wiz's autonomous Red Agent found a GitHub Actions script-injection flaw in Snowflake's public connector repository five days after the vulnerable workflow went live. An unauthenticated issue title could escape a shell string, expose a Jira credential, and provide access to internal Jira; Copilot's review and GitHub Advanced Security had both marked the change clear. Snowflake remediated and rotated the credential on disclosure, making the episode a concrete demonstration that AI-assisted code review needs independent adversarial verification and model-external CI/CD controls.",
+      "tldr_zh": "Wiz 的 autonomous Red Agent 在漏洞 workflow 上线五天后，发现 Snowflake 公共 connector repository 中的 GitHub Actions script injection。攻击者只需构造 unauthenticated issue title 就能逃逸 shell string、获取 Jira credential 并访问内部 Jira，而 Copilot review 与 GitHub Advanced Security 都未发现问题。Snowflake 在披露当天修复并轮换凭据；该事件说明 AI-assisted code review 仍需要独立 adversarial verification 与模型外 CI/CD 控制。",
+      "points": 424,
+      "num_comments": 157,
+      "interest_tag": ""
+    },
+    {
+      "title": "Show HN: Huzzah – a novel approach to coding with AI",
+      "url": "https://www.danielvaughn.dev/posts/huzzah/",
+      "tldr": "Huzzah replaces transient imperative chat prompts with persistent, declarative pseudocode files stored beside generated source code. Saving a pseudocode diff triggers regeneration of only the affected code, preserving a durable record of human intent and reducing repeated natural-language instructions. It is still a proof of concept, but the 379-point discussion shows strong demand for an interaction model between fully manual programming and agent-driven prompt loops.",
+      "tldr_zh": "Huzzah 用与生成源码并存的持久 declarative pseudocode 文件，替代一次性、命令式的聊天 prompt。保存 pseudocode diff 时只重新生成受影响代码，从而保留可追溯的人类意图，并减少反复写自然语言指令。它仍是 proof of concept，但 379 points 的讨论说明开发者强烈需要一种介于完全手写代码与 agent prompt loop 之间的新交互范式。",
+      "points": 379,
+      "num_comments": 209,
+      "interest_tag": ""
+    },
+    {
+      "title": "Launch HN: Speko (YC S26) – OpenRouter for Voice AI",
+      "url": "https://speko.ai/",
+      "tldr": "Speko benchmarks STT, LLM, and TTS models by language, cost, latency, and accuracy, then routes each voice workload to a measured stack behind one API. Its public dashboard highlights that 11 of 23 models are measured only in English and that four different models win across nine languages, undermining one-size-fits-all leaderboards. The product combines hosted routing with an open-source BYOK gateway, though customers still need to scrutinize benchmark representativeness and the default anonymous telemetry setting.",
+      "tldr_zh": "Speko 按语言、成本、延迟与准确率 benchmark STT、LLM 和 TTS，再通过统一 API 把 voice workload 路由到实测更合适的组合。公开面板显示 23 个模型中有 11 个只测过英语，九种语言里由四个不同模型夺冠，直接否定 one-size-fits-all leaderboard。产品同时提供 hosted router 与开源 BYOK gateway，但用户仍需审视 benchmark 是否代表自身流量，以及默认开启的匿名 telemetry。",
+      "points": 118,
+      "num_comments": 69,
+      "interest_tag": ""
+    },
+    {
+      "title": "MathCode, Mathematical Coding Agent",
+      "url": "https://math-ai-org.github.io/mathcode/",
+      "tldr": "MathCode converts a natural-language math problem into a Lean 4 theorem and lets an agent iteratively prove it against a persistent Lean language server. Reusable theorem and axiom stores, structured LSP diagnostics, and optional subgoal exploration support search, while a fresh final compilation certificate is the only completion criterion. The architecture matters because it places formal verification, not the model's confidence, at the authority boundary; current setup still depends on the Codex CLI as the default backend.",
+      "tldr_zh": "MathCode 把自然语言数学问题转换为 Lean 4 theorem，并让 agent 借助持久 Lean language server 迭代证明。可复用 theorem/axiom store、结构化 LSP diagnostics 与可选 subgoal exploration 支持搜索，最终只有全新编译产生的 verification certificate 才算完成。其关键价值是把 formal verifier 而非模型自信放在权威边界上；当前默认 backend 仍依赖 Codex CLI。",
+      "points": 118,
+      "num_comments": 29,
+      "interest_tag": ""
+    },
+    {
+      "title": "Launch HN: OneCLI (YC S26) – OSS sandboxed agent harness for teams",
+      "url": "https://github.com/onecli/onecli",
+      "tldr": "OneCLI gives each employee a durable agent in an isolated sandbox with its own memory, skills, schedule, and organizational identity. Real credentials are injected by a gateway after policy checks and never enter the model context, while network-layer rules and deterministic approvals govern sensitive actions. The design directly addresses enterprise blast radius and provenance, although its small enterprise licensing exception should be reviewed alongside the otherwise open-source platform.",
+      "tldr_zh": "OneCLI 为每位员工提供运行在隔离 sandbox 中的持久 agent，各自拥有 memory、skills、schedule 与组织身份。真实 credential 只在 policy check 后由 gateway 注入，不进入模型上下文；network-layer rule 与 deterministic approval 控制敏感操作。该设计直接处理 enterprise blast radius 与 provenance，但采用方仍应审阅其开源平台中附带的小型 enterprise licensing exception。",
+      "points": 87,
+      "num_comments": 31,
+      "interest_tag": ""
+    }
+  ]
+}
