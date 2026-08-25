@@ -1,0 +1,226 @@
+{
+  "date": "2026-08-25",
+  "generated_at": "2026-08-25T16:05:21.280526+08:00",
+  "briefing_zh": "今天最清晰的主线，是 Agent 研究正在从单次答题转向可持续、可验证的真实工作。**Apodex 1.1** 把环境扩展和多 Agent 协调同时作为 scaling 轴，**Prime Agent** 则把 persistent REPL、递归 subagent、恢复与资源核算做成 harness；两者共同指向一个判断：长程能力不只来自更强模型，还来自能保存状态、并行推进并验证交付的执行系统。\n\n第二条主线是训练环境与评测成本开始被当作可优化对象。**EnvHarness** 不重建环境，而是在保留原 verifier 的前提下动态改造静态环境，最高带来 9.0 个点的 held-out 提升并减少 9.8% 执行步数；**Task-CoEvolve** 则把验证任务视为动态采样问题，在 Terminal-Bench 2.1 等场景中削减 67–80% token 成本。与此同时，**AI4AI-Bench** 显示当前系统仍偏爱 run-side 修改，只有 46.4% 会尝试 learning-side 改动，说明所谓 recursive self-improvement 仍远未跨过策略创新门槛。\n\n多模态与 Computer Use 方向也在补结构化中间层。**EchoWM** 将连续 6-DoF 导航与 720p 视频、环境声、音乐和语音共同生成，强调可进入式 world model；**Inducing Task Models from Computer-Use Traces** 则把原始屏幕操作轨迹归纳为层级目标和流程控制图，并让 held-out task 的 skill transfer 准确率相对提升 30%。这比单纯堆 trajectory 更值得注意：研究重点正在转向从轨迹恢复可复用任务结构。\n\n开源侧的热点更贴近 Agent 的生产化接口：**agenttrail** 做本地 coding-agent observability，**Heimdall** 做跨仓库持久记忆，**Doop** 让人和 Agent 在真实 HTML canvas 上协同设计。HN 的讨论同时提醒了边界：Agent 法律人格引发高热争议，Windows 桌面自动化项目 **Hands** 也明确承认 prompt injection、误点击和非 sandbox 风险。能力扩展与责任、审计、可逆性正在成为同一个工程问题的两面。",
+  "briefing_en": "The clearest theme today is a shift from one-shot problem solving toward sustained, verifiable work. **Apodex 1.1** treats environment diversity and multi-agent coordination as complementary scaling axes, while **Prime Agent** packages a persistent REPL, recursive subagents, recovery, verification, and resource accounting into the harness. Together they suggest that long-horizon capability is not produced by a stronger model alone; it also depends on an execution system that preserves state, parallelizes work, and proves delivery.\n\nA second theme is that training environments and evaluation budgets are becoming optimization targets in their own right. **EnvHarness** reshapes static environments while retaining their original verifiers, reporting gains of up to 9.0 points on held-out tasks and 9.8% fewer execution steps. **Task-CoEvolve** adaptively samples the validation tasks that best discriminate between candidate harnesses, cutting token use by 67–80% on expensive settings such as Terminal-Bench 2.1. Yet **AI4AI-Bench** finds that only 46.4% of evaluated systems attempt learning-side changes, showing that recursive self-improvement still struggles to move beyond execution-level edits.\n\nMultimodal and computer-use research is also adding structured intermediate representations. **EchoWM** jointly generates navigable 720p video, environmental audio, music, and speech under continuous 6-DoF control. **Inducing Task Models from Computer-Use Traces** instead converts raw interaction traces into hierarchical objectives and procedural control flow, improving skill-transfer accuracy on held-out tasks by 30% relatively. The important shift is from merely collecting trajectories to recovering reusable task structure from them.\n\nOpen source activity is converging on production interfaces around agents: **agenttrail** provides local coding-agent observability, **Heimdall** offers persistent cross-repository memory, and **Doop** lets humans and agents collaborate on a live HTML design canvas. Hacker News discussion exposes the corresponding governance edge: legal personhood for agents drew the most debate, while the Windows automation project **Hands** explicitly documents prompt-injection, misclick, and non-sandbox risks. Capability, accountability, auditability, and reversibility are increasingly one coupled engineering problem.",
+  "viral_analysis_zh": "今天最可能持续扩散的是 **EnvHarness**：它没有宣传重造一个更宏大的 agent world，而是用可插拔层复用既有环境和 verifier，既降低工程门槛，又给出 1,523 次周访问和 35 票的即时热度信号。开源侧 **huashu-excel** 的传播也值得学：用「AI 算错不会报错」这一具体痛点、+161% 错误案例和可追溯交付承诺，把抽象 skill 包装成人人能复现的风险故事。",
+  "viral_analysis_en": "**EnvHarness** is the strongest candidate for sustained attention: instead of promising a grand new agent world, it adds a programmable layer that reuses existing environments and their trusted verifiers, combining a low adoption barrier with strong early engagement of 1,523 weekly visits and 35 votes. On the open-source side, **huashu-excel** uses an equally effective launch pattern: a concrete claim that silent spreadsheet errors can be 161% wrong, followed by an auditable workflow that readers can immediately test.",
+  "huggingface_papers": [
+    {
+      "title": "Apodex 1.1: Scaling Agentic Intelligence for Complex Work",
+      "url": "https://arxiv.org/abs/2608.23283",
+      "tldr": "Apodex 1.1 defines agentic capability as sustained, verifiable progress on real work rather than isolated reasoning accuracy. It scales both executable environments and coordination behavior, using AgentOS to preserve task state, provenance, recovery, and delegation across long-running workflows. The system reports frontier-band results across professional work, finance, science, mathematics, coding, and search, while a 35B Mini variant retains much of the capability locally. The work matters because it treats the harness and coordination traces as first-class scaling resources alongside model parameters.",
+      "tldr_zh": "Apodex 1.1 将 Agent 能力定义为对真实目标持续推进并完成可验证交付，而不是单次推理正确率。它同时扩展可执行环境与协同行为，并由 AgentOS 在长程工作流中保存任务状态、provenance、恢复信息和委派关系。论文称其在专业工作、金融、科学、数学、Coding 与搜索上进入 frontier performance band，35B Mini 版本也保留了较强的本地部署能力。重要之处在于，它把 harness 和 coordination trace 与模型参数一样视为 scaling 资源。",
+      "upvotes": 143,
+      "authors": "Apodex Team, B. An, B. Li, B. Wang, B. Zhang, B. L. Wang",
+      "ai_keywords": [
+        "long-horizon agents",
+        "AgentOS",
+        "coordination",
+        "verifiable work"
+      ],
+      "interest_tag": "Agent Swarm"
+    },
+    {
+      "title": "EchoWM: Open and Enterable Omnimodal World Models",
+      "url": "https://arxiv.org/abs/2608.23189",
+      "tldr": "EchoWM is an enterable world model that responds to continuous navigation while jointly generating 720p video, environmental sound, music, and speech. It maps discrete commands and continuous camera poses into a shared metric-scale relative 6-DoF trajectory, reducing control mismatch across heterogeneous data. Progressive training and autoregressive post-training target long-horizon audiovisual consistency in both first- and third-person scenes. The result is notable because controllable world simulation is expanded from pixels alone to synchronized multimodal experience.",
+      "tldr_zh": "EchoWM 是一个可进入式 world model，可响应连续导航，同时生成 720p 视频、环境声、音乐和语音。它把离散指令与连续相机 pose 映射到统一、具有真实尺度的相对 6-DoF 轨迹，从而减小异构数据之间的控制偏差。渐进训练与 autoregressive post-training 面向第一、第三人称场景中的长程音画一致性。其价值在于把可控 world simulation 从单纯像素生成扩展为同步的多模态体验。",
+      "upvotes": 44,
+      "authors": "Songchun Zhang, Yaowei Li, Junhao Zhuang, Weiyang Jin, Haoyu Wang, Xin Lu",
+      "ai_keywords": [
+        "world model",
+        "omnimodal generation",
+        "6-DoF control",
+        "long horizon"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "Unlocking the Potential of Image Editing via Concept Scaling and Dense Supervision",
+      "url": "https://arxiv.org/abs/2608.16812",
+      "tldr": "This work argues that image editing needs finer concept coverage and denser supervision than text-to-image training naturally provides. It introduces a hierarchy of more than 1,000 editing concepts, the 12-million-pair ConceptEdit-12M dataset, and a strategy that combines non-interfering edits into each training pair. The denser signal improves training efficiency and overall editing quality, while ConceptEdit-Bench diagnoses performance at granular concept level. It is important as a data-centric recipe for reducing distribution collapse in synthetic editing corpora.",
+      "tldr_zh": "这项工作认为，image editing 需要比 text-to-image 训练更细的概念覆盖和更密集的监督。作者建立了超过 1,000 个编辑概念的层级体系、1,200 万对数据的 ConceptEdit-12M，并把多个互不干扰的编辑合成到同一训练样本中。更密的学习信号提升了训练效率与整体编辑质量，ConceptEdit-Bench 则用于细粒度诊断。它提供了一套以数据为中心、缓解合成编辑数据分布坍缩的 recipe。",
+      "upvotes": 36,
+      "authors": "Long Cui, Xiaoqian Liu, Qi Qin, Yi Xin, Tao Lin, Jianguo Li, Linfeng Zhang",
+      "ai_keywords": [
+        "image editing",
+        "dense supervision",
+        "data scaling",
+        "diffusion"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "MobilePA-Bench: Benchmarking Mobile Planner Agents on Complex Real-World Tasks",
+      "url": "https://arxiv.org/abs/2608.23035",
+      "tldr": "MobilePA-Bench evaluates mobile planning agents in an interactive, stateful sandbox with live application databases and 212 tools across 13 domains. Unlike GUI-only or static function-calling tests, it stresses tool ordering, permissions, runtime errors, subagent delegation, memory use, and reusable skills. Frontier models degrade sharply when these constraints interact, despite appearing capable on simpler API matching. The benchmark matters because evidence-based state verification better reflects whether a mobile agent actually completed the intended workflow.",
+      "tldr_zh": "MobilePA-Bench 在带实时应用数据库的 stateful sandbox 中评测移动端 planning agent，覆盖 13 个领域和 212 个工具。它不局限于 GUI 点击或静态 function-calling，而是同时考查工具顺序、权限、运行时错误、subagent 委派、记忆调用和 skill 复用。当前 frontier model 在这些约束叠加后性能显著下降，即便它们在简单 API matching 上表现不错。该基准的重要性在于用结果状态证据验证 Agent 是否真正完成了移动端工作流。",
+      "upvotes": 28,
+      "authors": "Yi Zhu, Xiongwei Wu, Qiyi Wang, Tingyu Qu, Jiajun Liu, Sihan Cao",
+      "ai_keywords": [
+        "mobile agents",
+        "tool use",
+        "stateful sandbox",
+        "planning"
+      ],
+      "interest_tag": "Benchmark"
+    },
+    {
+      "title": "Prime Agent: A Self-Improving RLM Harness",
+      "url": "https://arxiv.org/abs/2608.23552",
+      "tldr": "Prime Agent is an open-source harness for long-horizon evaluation and coding workflows built around a persistent IPython REPL and recursive language-model abstractions. Its Continual Harness preserves histories, memories, skills, prompts, and subagent specifications across trajectories, while direct agent communication enables parallel work. The authors report raising ARC-AGI-3 RHAE Best@1 from 30% to 95.5% and competitive results on coding, kernel generation, emulation, and autonomous optimization tasks. Its main contribution is separating model strategy from execution, recovery, verification, and resource accounting failures introduced by the harness.",
+      "tldr_zh": "Prime Agent 是面向长程评测与 Coding workflow 的开源 harness，核心是 persistent IPython REPL 与 Recursive Language Model abstraction。它的 Continual Harness 跨 trajectory 保存历史、记忆、skills、prompts 和 subagent 配置，并通过 Agent 间直接通信支持并行工作。论文报告 ARC-AGI-3 RHAE Best@1 从 30% 提升到 95.5%，在 Coding、GPU kernel、emulator 和自主优化任务上也有竞争力。核心贡献是把模型策略与 harness 引入的执行、恢复、验证和资源核算故障分离开。",
+      "upvotes": 16,
+      "authors": "Seth Karten, Alex L. Zhang, Kevin Thomas, Sebastian Müller, Elie Bakouch, Daniel Auras",
+      "ai_keywords": [
+        "agent harness",
+        "recursive agents",
+        "persistent REPL",
+        "self-improvement"
+      ],
+      "interest_tag": ""
+    }
+  ],
+  "alphaxiv_papers": [
+    {
+      "title": "EnvHarness: Awakening Static Worlds for Agent Learning",
+      "arxiv_id": "2608.19880",
+      "url": "https://arxiv.org/abs/2608.19880",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2608.19880",
+      "tldr": "EnvHarness wraps existing static environments with programmable Stage, Contract, and Chain components instead of rebuilding domain-specific worlds. EnvRigger observes policy failures, synthesizes targeted environment modifications, and validates them with fresh rollouts while retaining the original verifier. Across five benchmarks, the approach reports up to a 9.0-point held-out gain and 9.8% fewer execution steps. This is important because adaptive curricula can be created without sacrificing verifier trust or paying the cost of environment generation from scratch.",
+      "tldr_zh": "EnvHarness 不从头构建领域环境，而是用可编程的 Stage、Contract 和 Chain 组件包装既有静态环境。EnvRigger 观察 policy failure、生成针对性的环境改造，并用新 rollout 验证，同时保留原始 verifier。它在五个 benchmark 上报告最高 9.0 个点的 held-out 提升，并减少 9.8% 执行步数。其关键价值是无需牺牲 verifier 可信度，也无需承担从零生成环境的成本，就能形成自适应 curriculum。",
+      "interest_tag": ""
+    },
+    {
+      "title": "AI4AI-Bench: Benchmarking LLM Agents in Algorithmic Design for Recursive Self-Improvement",
+      "arxiv_id": "2608.20318",
+      "url": "https://arxiv.org/abs/2608.20318",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2608.20318",
+      "tldr": "AI4AI-Bench evaluates whether LLM agents can redesign learning algorithms for recursive self-improvement rather than merely tune execution details. Across six leading systems, agents mostly make run-side changes; only 46.4% attempt learning-side modifications, and the mean score is 0.166 out of 1.0. The result exposes a gap between autonomous experimentation and genuine algorithmic invention. It matters because self-improvement claims need benchmarks that distinguish strategic learning changes from superficial pipeline edits.",
+      "tldr_zh": "AI4AI-Bench 评测 LLM Agent 能否重新设计学习算法以实现 recursive self-improvement，而不只是调执行参数。对六个领先系统的实验显示，Agent 大多做 run-side 修改，只有 46.4% 尝试 learning-side 改动，平均得分仅为 0.166/1.0。结果揭示了自主实验与真正算法创新之间的差距。它的重要性在于，自我改进的声明必须区分策略层学习变化和表面 pipeline 编辑。",
+      "interest_tag": "Benchmark"
+    },
+    {
+      "title": "Task-CoEvolve: Efficient Harness Optimization via Adaptive Validation Task Selection",
+      "arxiv_id": "2608.20169",
+      "url": "https://arxiv.org/abs/2608.20169",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2608.20169",
+      "tldr": "Task-CoEvolve reduces harness-search cost by sampling validation tasks where candidate harnesses disagree, rather than repeatedly evaluating the full fixed set. Sampling-aware estimators recover comparable full-set scores even as the selected tasks change over iterations. On text classification and Terminal-Bench 2.1, it matches or improves final harness performance while cutting token use by 67–80% and roughly halving search time. The work turns evaluation allocation into an active-learning problem around the current capability frontier.",
+      "tldr_zh": "Task-CoEvolve 不再让每个候选 harness 反复跑完整固定验证集，而是优先采样候选之间结果分歧最大的任务。sampling-aware estimator 在任务集合逐轮变化时仍估计可比较的全量分数。在文本分类与 Terminal-Bench 2.1 上，它保持或提升最终 harness 表现，同时减少 67–80% token，并将搜索时间约减半。该方法本质上把评测预算分配转化为围绕当前 capability frontier 的 active learning。",
+      "interest_tag": ""
+    },
+    {
+      "title": "MidTool: Mid-training Data Synthesis for Agentic Tool Use",
+      "arxiv_id": "2608.20314",
+      "url": "https://arxiv.org/abs/2608.20314",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2608.20314",
+      "tldr": "MidTool proposes a synthesis framework and a 20.3-billion-token MidTool-Mix corpus for teaching general tool use during mid-training. The premise is that tool competence should become a broad model prior before narrow instruction tuning or reinforcement learning. Reported gains transfer consistently across downstream agentic benchmarks, suggesting that the data stage matters as much as the post-training algorithm. This is significant for foundation-model recipes that currently try to repair tool use only at the final alignment stage.",
+      "tldr_zh": "MidTool 提出一套 mid-training 数据合成框架和 203 亿 token 的 MidTool-Mix corpus，用于培养通用 tool-use 能力。它的核心假设是：工具能力应在窄域 instruction tuning 或 RL 之前成为模型的广泛先验。论文称收益能稳定迁移到多个下游 Agent benchmark，说明数据阶段可能与 post-training algorithm 同样重要。对于当前只在最后对齐阶段补救 tool use 的基座模型 recipe，这一结论尤其关键。",
+      "interest_tag": ""
+    },
+    {
+      "title": "Inducing Task Models from Computer-Use Traces",
+      "arxiv_id": "2608.20319",
+      "url": "https://arxiv.org/abs/2608.20319",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2608.20319",
+      "tldr": "Task Model Induction converts raw computer-use traces into structured representations of human work, including latent task boundaries, hierarchical goals, and procedural control flow. The induced models recover tasks with high fidelity and improve agent skill-transfer accuracy on held-out tasks by 30% relatively. Rather than treating a trajectory as a flat imitation target, the method extracts reusable procedural abstractions. That makes it directly relevant to building computer-use agents that generalize beyond replaying the workflows they observed.",
+      "tldr_zh": "Task Model Induction 将原始 computer-use trace 转换为人类工作的结构化表示，包括隐含任务边界、层级目标和流程控制图。生成的 task model 能较高保真地恢复任务，并使 held-out task 上的 Agent skill-transfer 准确率相对提升 30%。它不把 trajectory 当作平坦的模仿目标，而是抽取可复用的过程抽象。对于希望超越已见 workflow 重放、获得泛化能力的 Computer Use Agent，这一点直接相关。",
+      "interest_tag": "CUA"
+    }
+  ],
+  "github_repos": [
+    {
+      "name": "Forsy-AI/biosecurity-agent",
+      "url": "https://github.com/Forsy-AI/biosecurity-agent",
+      "tldr": "Biosecurity Agent builds a continuously updated evidence world around people, animals, plants, products, places, or organizations. Its local runtime separates discovery, retrieval, claim extraction, and synthesis into inspectable processing lanes, then restores targets and watchers across sessions. The project is narrower and more operational than a generic research agent, emphasizing source tracking and persistent monitoring. Its rapid 513-star launch shows the appeal of vertical agents with a concrete risk domain and visible evidence trail.",
+      "tldr_zh": "Biosecurity Agent 围绕人物、动物、植物、产品、地点或组织构建持续更新的证据世界。它的本地 runtime 把 discovery、retrieval、claim extraction 和 synthesis 分成可检查的 processing lane，并能跨 session 恢复 target 与 watcher。相比通用 research agent，它更垂直、更强调来源追踪和持续监控。短期获得 513 stars，说明具有明确风险领域和可见证据链的 vertical agent 很容易形成传播。",
+      "stars": 513,
+      "language": "TypeScript",
+      "interest_tag": ""
+    },
+    {
+      "name": "kgoedecke/doop",
+      "url": "https://github.com/kgoedecke/doop",
+      "tldr": "Doop is an open-source multiplayer design canvas where humans and AI agents edit live HTML frames together. Designs are represented as shareable canvases with sandboxed iframes, while MCP gives agents a native path into the same workspace used by people. The project turns design collaboration into a stateful shared artifact instead of a prompt-to-image handoff. Its strong early fork ratio suggests that users are testing and extending it rather than merely bookmarking the launch.",
+      "tldr_zh": "Doop 是一个开源多人设计 canvas，让人类和 AI Agent 共同编辑真实 HTML frame。设计以可分享 canvas 和 sandboxed iframe 表示，MCP 则让 Agent 进入与人类相同的工作空间。它把设计协作从 prompt-to-image 交接变成一个有状态的共享 artifact。较高的早期 fork/star 比也说明用户不只是收藏，而是在实际测试和扩展。",
+      "stars": 336,
+      "language": "TypeScript",
+      "interest_tag": ""
+    },
+    {
+      "name": "alchaincyf/huashu-excel",
+      "url": "https://github.com/alchaincyf/huashu-excel",
+      "tldr": "huashu-excel is an agent-agnostic skill for auditing, cleaning, reconciling, analyzing, and delivering messy spreadsheets with only openpyxl as a dependency. Its workflow treats subtotal and total rows as free checksums, preserves provenance for every reported number, and refuses delivery when a master check fails. The README demonstrates why this matters with a silent 161% overcount produced by a naive workflow. It is a strong example of packaging reliability discipline, not just code generation, as a reusable skill.",
+      "tldr_zh": "huashu-excel 是跨 Agent 通用的表格 skill，仅依赖 openpyxl，覆盖脏表体检、清洗、对账、分析与交付。它把小计和合计行当作免费 checksum，为每个数字保留 provenance，并在 master check 失败时拒绝交付。README 用一个没有报错却高估 161% 的案例解释其必要性。它展示了如何把可靠性纪律，而不仅是代码生成，封装成可复用 skill。",
+      "stars": 212,
+      "language": "Python",
+      "interest_tag": ""
+    },
+    {
+      "name": "sodiumsun/agenttrail",
+      "url": "https://github.com/sodiumsun/agenttrail",
+      "tldr": "agenttrail is a local observability map for coding agents including Claude Code, Codex, and Cursor. It surfaces plans, tool calls, file changes, and progress in real time so users can distinguish genuine advancement from loops or stalled work. The value is not another orchestration layer but a human-readable execution trace around existing agents. As autonomous runs become longer, this kind of low-friction supervision becomes core infrastructure rather than optional dashboarding.",
+      "tldr_zh": "agenttrail 是面向 Claude Code、Codex 和 Cursor 等 coding agent 的本地 observability map。它实时展示 plan、tool call、文件变化与进度，帮助用户区分真实推进、循环和卡住。它不是另一层 orchestration，而是给既有 Agent 增加人可读的执行轨迹。随着自主任务变长，这种低摩擦监督会从可选 dashboard 变成核心基础设施。",
+      "stars": 187,
+      "language": "HTML",
+      "interest_tag": ""
+    },
+    {
+      "name": "ArihantDeva/heimdall",
+      "url": "https://github.com/ArihantDeva/heimdall",
+      "tldr": "Heimdall provides persistent, cross-repository memory for AI coding agents through a local CPU-only knowledge base and verified search interface. It targets a concrete failure mode: agents repeatedly rediscover decisions and solutions that already exist in another project. By indexing durable project knowledge and returning evidence-backed matches, it aims to replace repeated grep-and-orientation loops without spending model tokens on reconstruction. The project is small but directly addresses long-term agent memory rather than merely offering semantic code search.",
+      "tldr_zh": "Heimdall 通过本地 CPU-only knowledge base 和可验证搜索接口，为 AI coding agent 提供跨仓库持久记忆。它针对一个具体故障：Agent 会反复重新发现另一个项目中已经存在的决策和解决方案。通过索引 durable project knowledge 并返回带证据的匹配，它希望替代重复的 grep 与环境摸索，减少用 token 重建上下文。项目规模尚小，但核心确实是长期 Agent Memory，而不只是普通 semantic code search。",
+      "stars": 47,
+      "language": "JavaScript",
+      "interest_tag": "Memory"
+    }
+  ],
+  "hackernews": [
+    {
+      "title": "We must not grant AI agents legal personhood",
+      "url": "https://www.ft.com/content/b8cc4bf4-6d3c-4974-8428-9a091983c473",
+      "tldr": "This Financial Times argument warns against granting AI agents legal personhood, a move that could blur accountability between developers, deployers, owners, and automated systems. The debate is especially timely as agents begin to transact, communicate, and act across institutional boundaries. Its 62 points and 112 comments made it the dominant HN discussion in this query. The importance lies less in present-day legal feasibility than in forcing system designers to specify who remains liable when an agent acts autonomously.",
+      "tldr_zh": "这篇 Financial Times 评论反对赋予 AI Agent 法律人格，理由是这可能模糊开发者、部署者、所有者与自动系统之间的责任边界。随着 Agent 开始交易、通信并跨机构执行动作，这一争论变得现实。它以 62 points 和 112 comments 成为本次查询中讨论度最高的 HN 条目。其价值不在于法律人格是否马上可行，而在于迫使系统设计者明确 Agent 自主行动后究竟由谁承担责任。",
+      "points": 62,
+      "num_comments": 112,
+      "interest_tag": ""
+    },
+    {
+      "title": "What languages are agent skills written in?",
+      "url": "https://plicara.ai/research/agent-skill-languages/",
+      "tldr": "Plicara Labs analyzes 255,068 agent skills and finds that the non-English share rose from 13.0% to 16.3% in one quarter. Chinese accounts for 6.2%, followed by Japanese, German, Korean, Portuguese, and other languages, while the authors stress that English-language work outside the United States is invisible to this metric. Because skills are prose interpreted by multilingual models, they can spread globally faster than conventional programming ecosystems. The result suggests that agent tooling is becoming geographically diverse at the instruction layer, not only at the user layer.",
+      "tldr_zh": "Plicara Labs 分析了 255,068 个 Agent skill，发现非英语占比在一个季度内从 13.0% 上升到 16.3%。中文占 6.2%，其后是日语、德语、韩语、葡萄牙语等；作者还强调，印度、尼日利亚等地的英语开发者不会被该指标识别。由于 skill 是由多语模型解释的自然语言流程，它比传统编程生态更容易全球扩散。结果说明 Agent tooling 的地理多样性已经出现在 instruction layer，而不仅是用户层。",
+      "points": 11,
+      "num_comments": 2,
+      "interest_tag": ""
+    },
+    {
+      "title": "Why can AI generate Super Mario but not a wedge ramp for my robot vacuum?",
+      "url": "https://news.ycombinator.com/item?id=49405520",
+      "tldr": "The author contrasts visually impressive generative 3D output with the persistent failure to produce a simple, adjustable, printable ramp. A practical workaround decomposes geometry into ordered specifications and lets an agent execute them through Blender MCP, translating weak spatial reasoning into structured code. The discussion identifies missing parametric-CAD data, unsuitable mesh representations, and weak functional evaluation as likely bottlenecks. It is a useful reminder that aesthetic plausibility and mechanically valid artifact generation are fundamentally different objectives.",
+      "tldr_zh": "作者对比了生成式 3D 能做出漂亮角色，却无法稳定生成一个可调、可打印的扫地机器人斜坡。有效 workaround 是把几何体拆成有顺序的小规格，再让 Agent 通过 Blender MCP 执行，把较弱的空间推理转成更擅长的结构化代码。讨论指向 parametric-CAD 数据不足、mesh 表示不合适和缺少功能性评测等瓶颈。它提醒我们，视觉上像真的结果与机械上可用的 artifact 是两种完全不同的目标。",
+      "points": 11,
+      "num_comments": 6,
+      "interest_tag": ""
+    },
+    {
+      "title": "Nvidia Groq 3 LPX Now in Full Production with World-Class Speed for Agentic AI",
+      "url": "https://nvidianews.nvidia.com/news/nvidia-groq-3-lpx-now-in-full-production-with-world-class-speed-for-agentic-ai",
+      "tldr": "NVIDIA says Groq 3 LPX is now in full production as an inference accelerator attached to the Vera Rubin platform, with Nebius as the first announced adopter. The company reports 3,400 output tokens per second for Gemma 4 31B at 100,000-token context in Artificial Analysis testing. The pitch targets agent workloads where hundreds or thousands of sequential inference steps turn token latency into end-to-end task latency. The announcement matters because specialized token-generation hardware is becoming part of the agent systems stack, not just a model-serving optimization.",
+      "tldr_zh": "NVIDIA 宣布 Groq 3 LPX 已进入全面量产，作为 Vera Rubin 平台的 inference accelerator，Nebius 是首个公布采用者。公司称其在 Artificial Analysis 测试中以 100,000-token context 运行 Gemma 4 31B 时达到每秒 3,400 个 output token。其目标是需要数百到数千次顺序推理的 Agent workload，因为 token latency 会直接累积成端到端任务延迟。该发布的重要性在于，专用 token-generation hardware 正成为 Agent system stack 的一部分，而不只是 serving 优化。",
+      "points": 7,
+      "num_comments": 0,
+      "interest_tag": ""
+    },
+    {
+      "title": "Show HN: Hands-Rust MCP/CLI that sees the Windows desktop and clicks real Chrome",
+      "url": "https://news.ycombinator.com/item?id=49405405",
+      "tldr": "Hands is a Windows MCP/CLI that observes the desktop through screenshots plus UIA and optional Chrome DOM identifiers, then drives the real mouse and keyboard with OS-level input. It deliberately avoids Playwright, Puppeteer, CDP, and remote-debugging flags so agents can operate a normal Chrome profile. The README is unusually explicit that the system is not a sandbox and that prompt injection, financial actions, broad extension permissions, and misclicks remain real risks. It is relevant to computer-use agents because it combines native interaction with a candid statement of the unresolved safety boundary.",
+      "tldr_zh": "Hands 是一个 Windows MCP/CLI，通过 screenshot、UIA 和可选的 Chrome DOM identifier 观察桌面，再用 OS-level input 驱动真实鼠标键盘。它刻意不使用 Playwright、Puppeteer、CDP 或 remote-debugging flag，使 Agent 能操作普通 Chrome profile。README 明确承认它不是 sandbox，prompt injection、资金操作、扩展广泛权限和误点击都是真实风险。它对 Computer Use Agent 很有参考价值，因为同时展示了 native interaction 的能力与尚未解决的安全边界。",
+      "points": 5,
+      "num_comments": 1,
+      "interest_tag": "CUA"
+    }
+  ]
+}
