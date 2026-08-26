@@ -1,0 +1,221 @@
+{
+  "date": "2026-08-26",
+  "generated_at": "2026-08-26T16:04:25.099330+08:00",
+  "briefing_zh": "今天最强的信号不是又一个更大的基础模型，而是 agent 系统开始把「能力上限」从模型权重转移到可验证的执行外壳。**AutoSaddler** 用失败轨迹离线优化 harness，在 GAIA2、SWE-Bench Pro 与 Terminal-Bench 2.0 上取得 9.0–10.0 个百分点提升；**Prime Agent** 则把持久 REPL、跨轨迹 memory、skills 与 subagent 通信整合成统一执行膜。两者共同说明，harness 已从手写胶水升级为可以被学习、测量和迭代的系统层。\n\n第二条主线是长程任务中的 state 与 memory。**Recuris** 将 Working Memory 和 Experiential Memory 解耦，再用验证门控的局部更新演化 Skill Memory，最长任务上的提升达到 32.2 个百分点；**Apodex 1.1** 则把 environment scaling 与 agentic coordination scaling 并列训练，强调持续、可验证的复杂工作。与此同时，**SWE Refactor Bench** 揭示了一个重要评测盲点：测试通过不等于迁移完成，520 次运行中仅 5.4% 同时通过迁移审计、行为测试和 agentic verification。\n\n生成与感知方向同样在追求更直接的 supervision。**OraRL** 把人工 annotation 直接作为 oracle rollout，并通过解耦 advantage 避免 advantage inversion，在 video MLLM 上以显著低于 GRPO-CoT 的成本扩展 RL；**DiffusionOPSD** 则把 image-level reward 转成可拟合的中间 clean-output target，让 diffusion post-training 更可诊断。**EchoWM** 和 **ReWorld** 代表另一端：world model 正从短片生成转向可进入、可持续控制且带长程一致性的交互媒体。\n\n开源生态的热点落在 agent 落地所需的「控制面」。**Halofy** 处理组织级 identity、ACL、provenance 与可验证删除，**OneCLI** 提供每人一个 sandboxed agent 与 gateway credential injection，**agenttrail** 则把计划、tool call 和真实文件改动映射成实时项目视图。HN 上最热的 **Huzzah** 反而提出反向问题：当聊天式 coding agent 让 human intent 变得短暂且不可追溯时，持久、声明式 pseudocode 是否能重新成为软件的意图权威。",
+  "briefing_en": "The strongest signal today is not another larger foundation model, but a shift of agent capability from model weights toward verifiable execution harnesses. **AutoSaddler** learns durable harness updates offline from failure traces and gains 9.0–10.0 percentage points on GAIA2, SWE-Bench Pro, and Terminal-Bench 2.0. **Prime Agent** combines a persistent REPL, cross-trajectory memory and skills, and subagent communication into a common execution membrane, suggesting that harnesses are becoming learnable and measurable systems rather than handwritten glue.\n\nThe second theme is state and memory for long-horizon work. **Recuris** separates Working Memory from Experiential Memory and evolves Skill Memory through localized, validation-gated updates, reaching a 32.2-point gain on the longest tasks. **Apodex 1.1** jointly scales executable environments and agentic coordination, while **SWE Refactor Bench** exposes a critical evaluation blind spot: passing tests does not prove a migration happened, and only 5.4% of 520 runs passed migration audit, behavioral tests, and agentic verification together.\n\nGeneration and perception research is also moving toward more explicit supervision. **OraRL** inserts annotations as oracle rollouts and avoids advantage inversion with a decoupled estimator, scaling video-MLLM reinforcement learning at far lower cost than GRPO with chain-of-thought. **DiffusionOPSD** converts image-level rewards into trainable intermediate clean-output targets, while **EchoWM** and **ReWorld** push world models from short clips toward enterable, continuously controlled media with long-horizon consistency.\n\nOpen source attention is clustering around the control plane needed to deploy agents. **Halofy** governs organizational identity, ACLs, provenance, and verifiable erasure; **OneCLI** gives each employee a sandboxed agent with gateway-based credential injection; and **agenttrail** maps plans, tool calls, and actual file changes into a live project view. The hottest HN discussion, **Huzzah**, asks the inverse question: if chat-based coding agents make human intent transient and hard to audit, can persistent declarative pseudocode become the authoritative specification again?",
+  "viral_analysis_zh": "今天最可能形成持续讨论的是 **Huzzah**：它没有再卖「更自动」，而是精准命中 coding-agent 用户已经出现的 prompt fatigue、失控感和 human intent 丢失，384 points 与 210 条评论证明这一反叙事具备共鸣。研究侧最可能扩散的是 **AutoSaddler**，因为「让 agent 自动优化自己的 harness」既有清晰 headline，又有三个主流 benchmark 上接近两位数的绝对提升，容易被复述和复现。",
+  "viral_analysis_en": "**Huzzah** is the likeliest sustained discussion driver because it does not promise more automation; it targets prompt fatigue, loss of control, and the disappearance of durable human intent, a counter-narrative already validated by 384 points and 210 comments. On the research side, **AutoSaddler** has the strongest viral shape: “agents optimize their own harness” is an immediately legible claim backed by near-double-digit absolute gains on three recognizable benchmarks.",
+  "huggingface_papers": [
+    {
+      "title": "Annotations as Rollouts: Efficient and Scalable Reinforcement Learning for Video MLLMs",
+      "url": "https://arxiv.org/abs/2608.20492",
+      "tldr": "OraRL treats each annotation as an oracle rollout inside the on-policy group instead of using it only to score sampled trajectories. A decoupled advantage estimator prevents the high-reward oracle from flipping otherwise positive policy advantages, while sign-balanced pruning keeps only the oracle and strongest rollouts of each sign. It reaches stronger video understanding results from 0.8B to 9B with 2.2× SFT step time, versus 4.9× for GRPO with chain-of-thought, making large-scale video RL substantially more practical.",
+      "tldr_zh": "OraRL 不再只用 annotation 给采样轨迹打分，而是把它直接作为 on-policy group 中的 oracle rollout。解耦 advantage estimator 避免高奖励 oracle 抬高 baseline 后反转原本为正的 policy advantage，sign-balanced pruning 则只保留 oracle 与正负两侧最强 rollout。它从 0.8B 扩展到 9B，在多项视频理解任务上提升结果，同时单步成本仅为 SFT 的 2.2 倍，显著低于带 CoT 的 GRPO 的 4.9 倍。",
+      "upvotes": 65,
+      "authors": "Yunheng Li, Guohong Mu, Hao Li, Shengsheng Qian, Dingwen Zhang, Qibin Hou, Ming-Ming Cheng",
+      "ai_keywords": [
+        "video MLLM",
+        "reinforcement learning",
+        "oracle rollout"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "WeMM-Embedding: WeChat Multi-Modal Embedding Technical Report",
+      "url": "https://arxiv.org/abs/2608.24053",
+      "tldr": "WeMM-Embedding maps text, images, video, visual documents, and interleaved multimodal inputs into one flexible-dimensional representation space. Its two-stage recipe combines large-scale alignment with curated refinement, fine-grained relevance supervision, and cross-scale knowledge transfer across 2B, 4B, and 9B variants. The 2B model already beats the prior 8B open baseline on MMEB-v2, while the 9B model reaches 80.6 and has been validated across 14 online A/B tests in WeChat search and recommendation.",
+      "tldr_zh": "WeMM-Embedding 将文本、图片、视频、视觉文档和任意交错多模态输入映射到同一可变维度表示空间。训练分为大规模 multimodal alignment 与精炼两阶段，后者加入精选数据、细粒度 relevance supervision 和跨尺度知识迁移，覆盖 2B、4B、9B 三种规模。2B 版本已超过此前 8B 开源 baseline 的 MMEB-v2 表现，9B 达到 80.6，并在微信搜索与推荐的 14 个线上 A/B test 中得到验证。",
+      "upvotes": 46,
+      "authors": "Junjie Zhou, Ke Mei, Lei Li, Tianyi Wang, Fengyun Rao, Jing Lyu",
+      "ai_keywords": [
+        "multimodal embedding",
+        "retrieval",
+        "recommendation"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "AutoSaddler: Automatic Harness Optimization with Durable Updates from Agent Execution Traces",
+      "url": "https://arxiv.org/abs/2608.23041",
+      "tldr": "AutoSaddler formulates agent-harness improvement as offline learning over execution failures rather than manual prompt and tool tuning. It diagnoses failed traces, generates structured patches that treat the harness as code, and accepts updates only through validation-based selection. The method improves base harnesses by 9.0, 9.6, and 10.0 percentage points on GAIA2, SWE-Bench Pro, and Terminal-Bench 2.0, with ablations favoring deep debugging, targeted edits, and generalization-aware selection.",
+      "tldr_zh": "AutoSaddler 把 agent harness 改进建模为基于执行失败的 offline learning，而不是继续手工调 prompt、tool 与控制逻辑。系统诊断失败轨迹，把 harness 当作代码生成结构化 patch，再通过 validation-based selection 决定是否保留更新。它在 GAIA2、SWE-Bench Pro 和 Terminal-Bench 2.0 上分别提升 9.0、9.6、10.0 个百分点，消融实验表明 deep debugging、定向修改和面向泛化的选择缺一不可。",
+      "upvotes": 43,
+      "authors": "Sungho Park, Wonjoong Kim, Rongyuan Tan, Jue Zhang, Wook-Shin Han, Pengfei Gao, Chanyoung Park, Yongqiang Yao, Rao Fu, Elsie Nallipogu, Qingwei Lin, Saravan Rajmohan, Dongmei Zhang",
+      "ai_keywords": [
+        "agent harness",
+        "execution traces",
+        "offline learning"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "On-Policy Self-Distillation in Diffusion Models",
+      "url": "https://arxiv.org/abs/2608.24646",
+      "tldr": "DiffusionOPSD turns sparse image-level reward guidance into explicit targets for clean-output predictions at sampled denoising states. A frozen behavior policy supplies on-policy trajectories and anchors, reward gradients create bounded positive and negative targets, and finite fitting precedes an EMA refresh. It wins 19 of 20 reward-matched settings across two backbones and ten evaluators while cutting GPU-hours by 40% to 63% versus DiffusionNFT, making diffusion alignment both cheaper and easier to diagnose.",
+      "tldr_zh": "DiffusionOPSD 把稀疏的 image-level reward 转换为采样 denoising state 上明确的 clean-output prediction target。冻结的 behavior policy 提供 on-policy trajectory 与 anchor，reward gradient 构造有界正负 target，有限步拟合后再用 EMA 刷新 behavior policy。它在两个 backbone、十个 evaluator 的 20 组同奖励设置中赢下 19 组，并相对 DiffusionNFT 节省 40%–63% GPU-hours，让 diffusion alignment 更便宜也更可诊断。",
+      "upvotes": 37,
+      "authors": "Wei Zhou, Xiongwei Zhu, Lingdong Kong, Bo Chen, Lei Zhang, Yongyuan Liang, Xiaoxia Hou, Ye Tian, Xian Sun, Yingshuo Wang, Linfeng Li, Shengqiong Wu, Leigang Qu, Feng Li, Wei Liu, Julian McAuley, Tat-Seng Chua",
+      "ai_keywords": [
+        "diffusion",
+        "self-distillation",
+        "reward optimization"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "Recursive Experiential-Working Memory Evolution for Long-Horizon Agent Harnesses",
+      "url": "https://arxiv.org/abs/2608.24876",
+      "tldr": "Recuris separates Working Memory for current progress from Experiential Memory for skill retrieval, preventing long histories from obscuring state and misrouting skills. A fixed meta-agent uses localized execution evidence to propose validation-gated updates to Skill Memory, forming a bounded recursive improvement loop. Across four long-horizon benchmarks and ten models it improves 35 of 37 completed pairs, reaches a 32.2-point gain on the longest tasks, and reduces common failures by up to 80%.",
+      "tldr_zh": "Recuris 用 Working Memory 跟踪当前进度，用 Experiential Memory 检索技能，避免长历史遮蔽 task state 并误导 skill invocation。固定 Meta-Agent 根据局部执行证据提出对 Skill Memory 的更新，只有通过验证才写入，从而形成有边界的递归改进循环。它在四个长程 benchmark、十个模型的 37 个有效组合中提升了 35 个，最长任务上增加 32.2 个百分点，常见失败最多下降 80%。",
+      "upvotes": 15,
+      "authors": "Zhaochen Yu, Yingcheng Wu, Zhenfei Yin, Kaiyuan Chen, Zhe Zhao, Mengdi Wang, Shuicheng Yan, Ling Yang",
+      "ai_keywords": [
+        "long-horizon agents",
+        "working memory",
+        "skill evolution"
+      ],
+      "interest_tag": "Memory"
+    }
+  ],
+  "alphaxiv_papers": [
+    {
+      "title": "Prime Agent: A Self-Improving RLM Harness",
+      "arxiv_id": "2608.23552",
+      "url": "https://arxiv.org/abs/2608.23552",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2608.23552",
+      "tldr": "Prime Agent is an open-source long-horizon harness built around a persistent IPython REPL that lets models process context and allocate test-time computation programmatically. Its Continual Harness carries histories, memories, skills, prompts, and subagent specifications across trajectories, while daemon-backed sessions expose recovery, verification, and resource accounting to humans. The reported system raises ARC-AGI-3 RHAE Best@1 from 30% to 95.5% and performs competitively across coding, GPU-kernel, emulator, nanoGPT, and Factorio tasks, arguing that harness failures should not be mistaken for model limits.",
+      "tldr_zh": "Prime Agent 是面向长程任务的开源 harness，核心是持久 IPython REPL，让模型能程序化处理 context 并分配 test-time compute。Continual Harness 跨 trajectory 保存 history、memory、skill、prompt 与 subagent specification，daemon session 则向人暴露恢复、验证和资源计量。其报告称 ARC-AGI-3 RHAE Best@1 从 30% 提升到 95.5%，并在 coding、GPU kernel、emulator、nanoGPT 与 Factorio 等任务上保持竞争力，强调不要把 harness failure 误判为 model limit。",
+      "interest_tag": ""
+    },
+    {
+      "title": "Apodex 1.1: Scaling Agentic Intelligence for Complex Work",
+      "arxiv_id": "2608.23283",
+      "url": "https://arxiv.org/abs/2608.23283",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2608.23283",
+      "tldr": "Apodex 1.1 defines working capability as sustained, verifiable progress through files, information sources, and executable code rather than isolated reasoning answers. It scales both executable environment diversity and agentic coordination, training agents to decompose work, delegate parallel tasks, integrate asynchronous results, and replan while AgentOS preserves state and provenance. The 35B Mini variant retains strong performance in a locally deployable size, suggesting that coordination traces and environment trajectories can partly substitute for brute-force parameter scaling on complex work.",
+      "tldr_zh": "Apodex 1.1 把 working capability 定义为跨文件、信息源和可执行代码持续推进并可验证交付，而不是一次性的 reasoning answer。它同时扩展 executable environment diversity 与 agentic coordination，训练 agent 分解任务、并行委派、整合异步结果和重规划，AgentOS 则保存 state 与 provenance。35B Mini 在可本地部署的规模上仍保持强结果，说明 coordination trace 与 environment trajectory 可能在复杂工作中部分替代单纯的参数扩张。",
+      "interest_tag": "Agent Swarm"
+    },
+    {
+      "title": "Speculative Programmatic Tool Calling",
+      "arxiv_id": "",
+      "url": "https://www.alphaxiv.org/abs/2608.spec-ptc",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2608.spec-ptc",
+      "tldr": "Speculative programmatic tool calling launches high-latency tool calls as soon as they can be resolved from partially streamed REPL code, overlapping subagent work with continued token generation. A shadow REPL executes only the partial program needed to resolve inputs and registers promises, while the real executor later consumes those promises without exposing real state to incomplete code. On OOLONG and OOLONG-Pairs the author reports roughly 1–1.2× wall-time speedups, with wide intervals but consistent directional gains across tested concurrency and temperature settings.",
+      "tldr_zh": "Speculative programmatic tool calling 在 streamed REPL code 尚未生成完时，只要能解析出输入就预启动高延迟 tool call，让 subagent 执行与后续 token generation 重叠。shadow REPL 只运行解析输入所需的部分程序并登记 promise，真实 executor 随后复用结果，因此不让不完整代码污染真实 state。作者在 OOLONG 与 OOLONG-Pairs 上报告约 1–1.2 倍 wall-time 加速；置信区间较宽，但不同 concurrency 和 temperature 设置下方向一致。",
+      "interest_tag": ""
+    },
+    {
+      "title": "EchoWM: Open and Enterable Omnimodal World Models",
+      "arxiv_id": "2608.23189",
+      "url": "https://arxiv.org/abs/2608.23189",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2608.23189",
+      "tldr": "EchoWM is an enterable omnimodal world model that responds to continuous navigation while jointly generating 720p video, environmental sound, music, and speech. It maps discrete commands and continuous camera poses into a shared metric-scale relative 6-DoF trajectory, using dataset-level calibration to preserve motion magnitude across heterogeneous sources. A complementary data engine, progressive training, and autoregressive post-training support both first- and third-person control with synchronized audio over longer horizons, moving world models closer to interactive media engines.",
+      "tldr_zh": "EchoWM 是可进入的 omnimodal world model，可响应连续导航并联合生成 720p 视频、环境声、音乐与语音。它把离散命令和连续 camera pose 映射到统一的 metric-scale relative 6-DoF trajectory，并通过 dataset-level calibration 保持异构数据中的运动幅度一致。配套 data engine、progressive training 与 autoregressive post-training 支持第一和第三人称控制及长程音画同步，让 world model 更接近交互媒体引擎。",
+      "interest_tag": ""
+    },
+    {
+      "title": "SWE Refactor Bench: Can Coding Agents Complete a Long-Horizon, Whole-Repository Stack Migration?",
+      "arxiv_id": "2608.23564",
+      "url": "https://arxiv.org/abs/2608.23564",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2608.23564",
+      "tldr": "SWE Refactor Bench evaluates 20 whole-repository migrations and explicitly separates whether a migration occurred from whether behavior still passes tests. Its three-stage protocol combines migration audit, fixed behavioral tests, and targeted tests generated by six independent coding agents to catch hidden differences. Across 520 runs only 5.4% pass all stages and 13 of 20 tasks receive no accepted solution, showing that test-passing shortcuts and near-complete migrations can substantially overstate real coding-agent capability.",
+      "tldr_zh": "SWE Refactor Bench 评测 20 个 whole-repository migration，并明确区分「迁移是否真的发生」与「行为测试是否仍通过」。三阶段协议依次做 migration audit、固定 behavioral tests，再由六个独立 coding agent 生成定向测试寻找隐藏差异。520 次运行中只有 5.4% 通过全部阶段，20 个任务里有 13 个没有任何 accepted solution，说明仅看测试通过会被绕过迁移或近乎完成的结果严重高估。",
+      "interest_tag": "Benchmark"
+    }
+  ],
+  "github_repos": [
+    {
+      "name": "Forsy-AI/biosecurity-agent",
+      "url": "https://github.com/Forsy-AI/biosecurity-agent",
+      "tldr": "Biosecurity Agent builds a persistent, target-centered evidence world from official science, news, OSINT, sensors, and custom sources. Its pipeline keeps observed, inferred, and simulated claims separate, restores targets and watchers locally across restarts, and exposes evidence through a terminal-first interface with an optional read-only visualizer. The defensive framing, inspectable evidence, local runtime, and one-command launch make a sensitive domain concrete without presenting pathogen engineering or clinical diagnosis as product features.",
+      "tldr_zh": "Biosecurity Agent 围绕指定目标，把官方科学来源、新闻、OSINT、sensor 和自定义来源组织成持续更新的证据世界。它明确分离 observed、inferred 与 simulated claim，在本地跨重启恢复 target 和 watcher，并通过 terminal-first 界面及只读 visualizer 暴露证据。防御性定位、可检查证据、本地运行与一条命令启动，让敏感领域变得具体，同时不把病原体工程或临床诊断包装成能力。",
+      "stars": 514,
+      "language": "TypeScript",
+      "interest_tag": ""
+    },
+    {
+      "name": "kgoedecke/doop",
+      "url": "https://github.com/kgoedecke/doop",
+      "tldr": "Doop is a multiplayer design canvas where humans edit in the browser and AI agents modify real HTML frames through a built-in MCP server. WebSocket presence, comments, streaming edits, agent status, activity history, and pinned design exemplars make agent work visible and collaborative instead of prompt-and-refresh. It self-hosts with embedded Postgres and supports external MCP clients or a resident design team, though the README correctly warns that using ChatGPT subscription credentials through a third-party server is not a sanctioned production path.",
+      "tldr_zh": "Doop 是多人设计画布：人类在浏览器编辑，AI agent 通过内置 MCP server 修改真实 HTML frame。WebSocket presence、评论、streaming edit、agent status、activity history 与可固定的设计 exemplar，让 agent 工作从 prompt-and-refresh 变成可见协作。它可用 embedded Postgres 自托管，既支持外部 MCP client 也支持内置设计团队；README 也明确提醒，通过第三方服务器使用 ChatGPT subscription credential 不是受官方支持的生产路径。",
+      "stars": 383,
+      "language": "TypeScript",
+      "interest_tag": ""
+    },
+    {
+      "name": "alchaincyf/huashu-excel",
+      "url": "https://github.com/alchaincyf/huashu-excel",
+      "tldr": "huashu-excel packages an eight-step auditable workflow for profiling, cleaning, aligning, analyzing, reconciling, delivering, visualizing, and independently checking messy spreadsheets. Its central idea is to treat subtotal and total rows as free checksums and to refuse delivery when a master reconciliation fails, directly targeting silent spreadsheet errors that produce plausible numbers. The skill is agent-agnostic, depends only on openpyxl for XLSX paths, and includes standalone verification scripts, making the methodology portable rather than tied to one model or UI.",
+      "tldr_zh": "huashu-excel 把脏表处理整理成八步可审计流程：体检、清洗、对齐、分析、对账、交付、验图与独立复核。核心做法是把表内小计和合计当作免费 checksum，只要 master reconciliation 不通过就拒绝交付，直接打击那类数字看似合理却静默出错的问题。该 skill 跨 agent 通用，XLSX 路径仅依赖 openpyxl，并附带可独立运行的 verification script，因此方法论不绑定单一模型或 UI。",
+      "stars": 274,
+      "language": "Python",
+      "interest_tag": ""
+    },
+    {
+      "name": "halofyai/halofy",
+      "url": "https://github.com/halofyai/halofy",
+      "tldr": "Halofy is an organizational context and memory layer that resolves identity server-side, enforces namespace ACLs, and records provenance, supersedence, audit events, and signed erasure. Postgres remains the authority while retrieval backends receive only ACL-scoped read-only views, preventing every agent from becoming a separate policy and identity silo. The repository ships an offline PGlite demo, MCP and HTTP surfaces, connectors, a control room, and a large hermetic test lane, making governance part of the runnable open kernel rather than a slideware promise.",
+      "tldr_zh": "Halofy 是组织级 context 与 memory 层：由服务器解析 identity，执行 namespace ACL，并记录 provenance、supersedence、audit event 与 signed erasure。Postgres 保持权威存储，retrieval backend 只能看到 ACL-scoped 的只读 view，避免每个 agent 各自形成 policy 和 identity 孤岛。仓库提供离线 PGlite demo、MCP/HTTP 接口、connector、control room 与大规模 hermetic test lane，使 governance 成为可运行 open kernel 的一部分，而不是概念承诺。",
+      "stars": 268,
+      "language": "TypeScript",
+      "interest_tag": "Memory"
+    },
+    {
+      "name": "sodiumsun/agenttrail",
+      "url": "https://github.com/sodiumsun/agenttrail",
+      "tldr": "agenttrail is a local observability map for coding agents that contrasts declared plans with the files and tools actually changing in real time. It combines a durable PLAN.md component map with ephemeral filesystem and hook events, highlighting reopened completed work, active components, dependencies, and blocked tasks without replaying a raw transcript. A dependency-free local daemon, static UI, localhost-only binding, and no telemetry keep adoption friction low while preserving the important distinction between agent intent and observed execution.",
+      "tldr_zh": "agenttrail 是本地 coding-agent observability map，把 agent 声称的计划与实时发生的文件修改和 tool activity 放在一起对照。它用持久 PLAN.md 表示 component map，用短期 filesystem 与 hook event 表示真实执行，突出已完成任务被重开、当前活跃组件、依赖和阻塞，而不是回放整段 transcript。无依赖 daemon、静态 UI、仅绑定 localhost 且无 telemetry，降低了采用成本，同时保留 agent intent 与 observed execution 的关键区分。",
+      "stars": 247,
+      "language": "HTML",
+      "interest_tag": ""
+    }
+  ],
+  "hackernews": [
+    {
+      "title": "Show HN: Huzzah – a novel approach to coding with AI",
+      "url": "https://www.danielvaughn.dev/posts/huzzah/",
+      "tldr": "Huzzah replaces transient imperative chat prompts with persistent declarative pseudocode files that serve as the human-authored specification. Saving a diff triggers regeneration of the affected source code, so intent remains terse, versionable, and readable as documentation instead of disappearing into chat history. The project is explicitly experimental and may struggle with existing codebases, cross-file dependencies, and missing LSP behavior, but its 384 points and 210 comments show strong demand for a post-chat coding interface.",
+      "tldr_zh": "Huzzah 用持久、声明式 pseudocode 文件替代短暂的 imperative chat prompt，让 human-authored specification 成为代码意图的权威来源。保存 diff 会触发受影响源码的重新生成，因此意图更精炼、可版本化，也能作为文档阅读，而不会消失在 chat history 里。项目明确处于实验阶段，在既有代码库、跨文件依赖和 LSP 行为上仍可能受限，但 384 points 与 210 条评论表明用户强烈需要 chat 之后的新 coding interface。",
+      "points": 384,
+      "num_comments": 210,
+      "interest_tag": ""
+    },
+    {
+      "title": "Show HN: I made a Raspberry with Qwen my local car AI",
+      "url": "https://github.com/ThinkOffApp/CarWatch",
+      "tldr": "CarWatch runs a quantized Qwen3.6-35B-A3B on a 16 GB Raspberry Pi 5 as a fully offline in-car agent, measured at 3.5 generated tokens per second. It combines cited retrieval over a 745-page owner manual, live self-state sensing, whisper.cpp voice input, OBD-II data, a local dashboard, and queued delivery through connectivity gaps. The README separates proven-on-car, built-and-tested, and planned features unusually clearly, making the real-hardware evidence and graceful degradation more credible than a typical edge-AI demo.",
+      "tldr_zh": "CarWatch 在 16 GB Raspberry Pi 5 上运行量化 Qwen3.6-35B-A3B，实测生成速度 3.5 tok/s，构成完全离线的车载 agent。系统结合 745 页车主手册的带引用检索、实时 self-state sensing、whisper.cpp 语音输入、OBD-II 数据、本地 dashboard，以及断网时排队后补发。README 清楚区分 real-car proven、built-and-tested 与 planned feature，这种证据分级和 graceful degradation 让它比一般 edge-AI demo 更可信。",
+      "points": 130,
+      "num_comments": 37,
+      "interest_tag": ""
+    },
+    {
+      "title": "Show HN: OzBrain, a shared brain for knowledge between agents and your team",
+      "url": "https://ozbrain.com",
+      "tldr": "OzBrain positions itself as a shared source of truth that multiple assistants and teammates can read and write through an MCP connector. Rather than storing short preference snippets, it organizes projects, decisions, research, and linked articles so agents retrieve only the relevant current material and reduce copy drift across tools. The product directly targets the recurring handoff problem between Claude, ChatGPT, Cursor, and coding agents, although the landing page provides a product narrative rather than independent evidence of retrieval quality or long-term maintenance cost.",
+      "tldr_zh": "OzBrain 把自己定位为多个 assistant 与团队成员可通过 MCP connector 共同读写的 single source of truth。它不只保存简短 preference snippet，而是组织项目、决策、研究和 linked article，让 agent 只检索当前相关材料，减少不同工具间的副本漂移。它精准命中 Claude、ChatGPT、Cursor 与 coding agent 之间反复搬运 context 的痛点，但当前页面主要是产品叙事，尚未提供独立的 retrieval quality 或长期维护成本证据。",
+      "points": 92,
+      "num_comments": 55,
+      "interest_tag": "Memory"
+    },
+    {
+      "title": "Launch HN: OneCLI (YC S26) – OSS sandboxed agent harness for teams",
+      "url": "https://github.com/onecli/onecli",
+      "tldr": "OneCLI gives each employee a durable sandboxed agent with its own conversation, memory, skills, schedule, and company-managed access. An outbound-only runner hosts sandboxes while a Rust gateway intercepts requests, injects credentials by host and path policy, and supports deterministic human approvals without revealing secrets to the agent. The architecture turns the hard team-agent problems—identity, replication, policy, credentials, and lifecycle—into a shared control plane, with Apache-2.0 core code and separately licensed enterprise directories.",
+      "tldr_zh": "OneCLI 为每位员工提供一个持久 sandboxed agent，分别拥有 conversation、memory、skill、schedule 和公司管理的访问权限。outbound-only runner 承载 sandbox，Rust gateway 按 host/path policy 拦截请求并注入 credential，同时支持确定性的 human approval，而不把 secret 暴露给 agent。它把团队部署 agent 最难的 identity、复制、policy、credential 与 lifecycle 问题集中成 control plane；核心代码为 Apache-2.0，企业目录另行授权。",
+      "points": 88,
+      "num_comments": 34,
+      "interest_tag": ""
+    },
+    {
+      "title": "Run Minecraft in a Windows sandbox for computer use agents",
+      "url": "https://cua.ai/docs/how-to-guides/sandbox/minecraft",
+      "tldr": "This guide boots a Windows Server 2022 sandbox, installs Minecraft Java Edition, and lets a vision-capable agent drive the GUI through cua-driver’s MCP server. Minecraft acts as a demanding end-to-end check for internet access, Java, software OpenGL, Windows GUI interaction, exposed ports, and sandbox networking, with both local QEMU and hosted Fleet paths documented. The workflow still requires manual Microsoft device authorization and substantial hardware support, but it is a concrete reproducible example of a computer-use agent operating a non-browser 3D application.",
+      "tldr_zh": "该指南启动 Windows Server 2022 sandbox，安装 Minecraft Java Edition，并让 vision-capable agent 通过 cua-driver 的 MCP server 操作 GUI。Minecraft 同时检验 internet access、Java、software OpenGL、Windows GUI interaction、端口暴露和 sandbox networking，并给出本地 QEMU 与 hosted Fleet 两条路径。流程仍需人工完成 Microsoft device authorization，也要求较强硬件支持，但它是 CUA 操作非浏览器 3D 应用的具体可复现实例。",
+      "points": 23,
+      "num_comments": 8,
+      "interest_tag": "CUA"
+    }
+  ]
+}
