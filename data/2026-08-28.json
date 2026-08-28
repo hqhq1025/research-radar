@@ -1,0 +1,226 @@
+{
+  "date": "2026-08-28",
+  "generated_at": "2026-08-28T16:03:24.060564+08:00",
+  "briefing_zh": "今天最清晰的研究信号，是 agent 能力正在从「更强的 base model」转向「模型与 harness 共同学习」。**What Makes Good Agentic Data?** 用 ACE 框架把数据质量拆成 Accuracy、learner-relative Complexity 与 divErsity，强调有效经验必须执行可验证、难度匹配且覆盖非冗余；**TaoLive** 则进一步用 Harness-Aware Training 让小模型适应持续变化的 Skills、Hooks、工具 schema 和 prompt。在实际直播系统里，它同时给出 94.8 的 QA 得分、单张 H20 上 3.4 秒 P50 延迟和线上业务收益，说明 harness-aware training 已不只是实验室概念。\n\n第二条主线是 long-horizon agent 的「在线进化」。**PILOT** 让 supervisor 在 worker 执行过程中实时重定向或中止，并把当前轨迹中的程序与失败模式即时沉淀为 skills 和 memory；**Prime Agent**、**JIT-Agent** 和 **Recuris** 分别从持久执行环境、按任务生成 harness、递归演化工作记忆三个方向扩展这一思路。值得注意的是，这些工作都在试图把 harness 从静态脚手架变成可训练、可验证、可累积的能力层，而不是继续把失败全部归因于模型。\n\nworld model 方向也开始从「单条视频看起来合理」走向更严格的结构与分布要求。**PAWBench** 要求同一初始状态和动作下的多次 rollout 恢复正确的结果分布，测试 50 个场景和 11 个系统后发现没有模型能稳定匹配参考概率；**Code World Model** 则让 coding agent 维护可执行世界状态，再用 proxy representation 约束视频模型渲染。两者共同指向一个关键判断：训练级 world simulation 不能只靠视觉逼真，还必须保留持久因果、可控状态与正确的不确定性。\n\n工程生态里的热点与研究主线高度一致。GitHub 上的 **doop** 把 human-agent 协同直接做成实时多人设计画布，**Halofy** 为组织级 agent context 增加 identity、policy、provenance 和可验证删除；HN 上 **Terminal-Bench-Science** 用 70 个真实科研 workflow 和任务专属测试揭示最强组合也只有 30% resolution rate。与此同时，**Six Months of Writing Code Exclusively With Agents** 记录了并行 agent 带来的环境隔离、协调和认知模型迁移问题，提醒我们吞吐提升并不会自动转化为可靠的软件工程能力。",
+  "briefing_en": "The clearest signal today is that agent capability is shifting from “a stronger base model” toward joint adaptation between the model and its harness. **What Makes Good Agentic Data?** decomposes useful experience through the ACE lens: execution-grounded Accuracy, learner-relative Complexity, and non-redundant divErsity. **TaoLive** makes the idea operational with Harness-Aware Training across changing Skills, Hooks, tool schemas, and prompts, reporting 94.8 on Live-Stream QA, 3.4-second P50 latency on one H20, and positive online business impact.\n\nA second theme is live improvement during long-horizon execution. **PILOT** lets a supervisor redirect or abort an active worker and immediately distill procedures and failure modes into reusable skills and memory; **Prime Agent**, **JIT-Agent**, and **Recuris** attack the same frontier through persistent execution, task-conditioned harness synthesis, and recursively evolving working memory. Together they treat the harness as a trainable, verifiable, compounding capability layer rather than a static wrapper around the model.\n\nWorld-model research is also moving beyond single-video plausibility toward structural and distributional correctness. **PAWBench** asks repeated rollouts from the same state and action to recover the correct outcome distribution, and finds that none of eleven tested systems consistently matches reference probabilities across 50 scenarios. **Code World Model** takes a complementary route: a coding agent maintains executable world state while a proxy representation constrains video rendering, separating causal evolution from visual realization.\n\nThe engineering ecosystem mirrors these research priorities. **doop** turns human-agent collaboration into a live multiplayer design canvas, while **Halofy** adds identity, policy, provenance, and verifiable deletion to organizational agent context. On HN, **Terminal-Bench-Science** reports only a 30% resolution rate for the strongest evaluated stack on 70 expert-authored scientific workflows, while **Six Months of Writing Code Exclusively With Agents** shows that higher agent throughput creates new isolation, coordination, and human-understanding costs rather than eliminating engineering work.",
+  "viral_analysis_zh": "今天最可能出圈的是 **Prime Agent**：95.5% 对 30% 的 ARC-AGI-3 对比极易传播，而「self-improving harness」又正好承接了社区从模型能力转向 agent runtime 的叙事。工程侧最值得学的是 **doop** 和 **huashu-excel**：前者用可观看的实时协作画布制造 demo 冲击，后者用「主流做法算错 161%」把抽象可靠性问题压缩成一个人人都懂的反差证据。",
+  "viral_analysis_en": "**Prime Agent** is the strongest viral candidate: the 95.5% versus 30% ARC-AGI-3 contrast is instantly legible, while “self-improving harness” matches the community’s shift from model-only narratives to agent runtimes. On the product side, **doop** wins through a visually demonstrable live collaboration loop, while **huashu-excel** turns an abstract reliability pitch into a memorable “161% wrong with zero errors” proof point.",
+  "huggingface_papers": [
+    {
+      "title": "PAWBench: How Far Are We from Probabilistically Aligned World Modeling?",
+      "url": "https://arxiv.org/abs/2608.27345",
+      "tldr": "PAWBench reframes video generators as stochastic world models: repeated rollouts from the same initial observation and action should reproduce the full distribution of valid physical outcomes, not merely one plausible clip. PAWEval converts those rollouts into empirical outcome distributions across 50 scenarios. None of eleven tested systems consistently recovered both the reference probabilities and the range of valid behaviors, exposing a gap that conventional video-quality metrics hide.",
+      "tldr_zh": "PAWBench 把视频生成器当作随机 world model 来评估：同一初始观察和动作下的多次 rollout，不仅要生成一条看似合理的视频，还应恢复所有有效物理结果的真实分布。PAWEval 在 50 个场景中把重复生成转成经验结果分布。测试的 11 个系统没有一个能稳定同时匹配参考概率与结果覆盖范围，揭示了传统视频质量指标看不到的缺口。",
+      "upvotes": 69,
+      "authors": "Yuandong Pu, Le Zhuo, Sayak Paul, Gabriel Jorge Menezes, Avram Đorđević, Shiyang Li, Yifan Zhou, Bin Fu, Wenlong Zhang, Junjun He, Yu Qiao, Yihao Liu, Jingbo Xing, Xi Chen",
+      "ai_keywords": [
+        "world model",
+        "video generation",
+        "probabilistic alignment",
+        "evaluation"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "What Makes Good Agentic Data? An ACE Lens on Data Generation for LLM Agents",
+      "url": "https://arxiv.org/abs/2608.27260",
+      "tldr": "This survey factorizes agentic data into environment, task signal, interaction trajectory, and optional verifier, then organizes generation methods by their dependency structure. Its ACE lens argues that useful data must first be accurate and grounded, then place complexity relative to a declared learner while expanding behavioral diversity without redundancy. The practical message is that scaling agent training requires adaptive allocation of valid and informative experience, not simply more synthetic trajectories.",
+      "tldr_zh": "这项工作把 agentic data 分解为环境、任务信号、交互轨迹和可选 verifier，并按依赖结构统一整理不同生成范式。ACE 框架主张先保证数据准确且 grounded，再针对明确的 learner 校准难度，同时扩大行为覆盖而非制造表面多样性。它的重要结论是：agent 训练扩展的关键不是堆更多合成轨迹，而是持续分配有效、信息量高且非冗余的经验。",
+      "upvotes": 45,
+      "authors": "Xingshan Zeng, Zishan Xu, Boju Zhang, Yuzhou Wu, Lingzhi Wang, Jianghao Lin, Liangyou Li, Yasheng Wang, Lifeng Shang, Xin Jiang, Weinan Zhang, Yong Yu, Qun Liu, Weiwen Liu",
+      "ai_keywords": [
+        "agentic data",
+        "data generation",
+        "verification",
+        "training"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "Training Agents to Evolve with Their Harness: TaoLive Digital Avatar Agent Technical Report",
+      "url": "https://arxiv.org/abs/2608.15763",
+      "tldr": "TaoLive introduces Harness-Aware Training so a compact serving model can remain robust as Skills, Hooks, prompts, and tool schemas change independently of its weights. The three-stage recipe combines harness-state-augmented SFT, general on-policy distillation, and RL over augmented harness environments. It reaches 94.8 on Live-Stream QA and 94.6 on Harness-Variant QA, avoids the IFEval regression of fixed-harness SFT, and delivers 3.4-second P50 latency on one H20 with positive production A/B results.",
+      "tldr_zh": "TaoLive 提出 Harness-Aware Training，让小型服务模型在 Skills、Hooks、prompt 和工具 schema 脱离权重持续变化时仍保持鲁棒。三阶段 recipe 依次使用 harness-state augmentation SFT、general on-policy distillation，以及在增强 harness 环境上的 RL。它在 Live-Stream QA 和 Harness-Variant QA 上分别达到 94.8 与 94.6，避免 fixed-harness SFT 的 IFEval 退化，并在单张 H20 上实现 3.4 秒 P50 延迟和正向线上 A/B 结果。",
+      "upvotes": 39,
+      "authors": "TaoLive AIGC LLM Team, Yuhan Sun, Wenhao Lin, Yongdong Luo, Yibo Hu, Meiguang Jin, Junfeng Ma, Weihang Pan, Jiaxin Zhao, Zulong Chen",
+      "ai_keywords": [
+        "agent harness",
+        "on-policy distillation",
+        "reinforcement learning",
+        "production agents"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "UrbanGround: From Local Perception to Spatial Agency in a Real-Scale City",
+      "url": "https://arxiv.org/abs/2608.27456",
+      "tldr": "UrbanGround builds a physically constrained Hong Kong replica from territory-wide 3D geospatial data to test whether local visual grounding composes into sustained urban agency. Agents interact in closed loop from a first-person view and must answer spatial questions, navigate increasingly ambiguous destinations, and handle route or pedestrian changes. Current MLLM agents show useful recognition and short-range reasoning, but orientation and pedestrian-aware control remain brittle and errors accumulate over extended exploration.",
+      "tldr_zh": "UrbanGround 用全港 3D 地理数据构建受物理约束的城市副本，检验局部视觉 grounding 能否组合成持续的城市行动能力。Agent 以第一人称闭环交互，完成空间问答、逐渐更模糊的导航目标，以及路线和行人变化下的行动。现有 MLLM agent 虽具备有效的识别和短程推理能力，但方向判断与行人感知控制仍不可靠，长程探索中误差会持续累积。",
+      "upvotes": 35,
+      "authors": "Tianjie Ju, Zheng Wu, Yueqing Sun, Yuhan Cui, Bobo Li, Shengqiong Wu, Pengzhou Cheng, Haodong Zhao, Zongru Wu, Xinbei Ma, Doris Zhang, Kunling Li, Mong-Li Lee, Wynne Hsu, Hao Fei, Qi Gu, Gongshen Liu, Zhuosheng Zhang",
+      "ai_keywords": [
+        "embodied agent",
+        "urban navigation",
+        "spatial reasoning",
+        "evaluation"
+      ],
+      "interest_tag": "Benchmark"
+    },
+    {
+      "title": "PILOT in the Loop: Live Self-Improvement for Long-Horizon Agents",
+      "url": "https://arxiv.org/abs/2608.26530",
+      "tldr": "PILOT couples a supervisor with an active worker so self-improvement can happen during, rather than only after, a long-horizon run. Live steering redirects or aborts execution, while live self-evolution distills observed procedures and failure modes into reusable skills and memory. It ranks first in five of six benchmark configurations, improves Terminal-Bench 2.0 by up to 9.8 points, and more than doubles successful evaluations per million output tokens in its self-improvement setting.",
+      "tldr_zh": "PILOT 用 supervisor-worker 架构让自我改进发生在长程任务执行期间，而不是只在轨迹结束后离线处理。Live steering 可实时重定向或中止 worker，live self-evolution 则把观察到的流程和失败模式沉淀为可复用 skills 与 memory。它在六组配置中的五组排名第一，Terminal-Bench 2.0 最多提升 9.8 分，并在 self-improvement 设置下把每百万输出 token 的成功评测数提高一倍以上。",
+      "upvotes": 21,
+      "authors": "Yang Xiao, Yusong Sun, Haoyi Wu, Wenyang Hui, Wen Da, Zhaokai Luo, Mu Chuan, Yao Hu, Wenjie Li, Chengyue Jiang",
+      "ai_keywords": [
+        "long-horizon agents",
+        "live steering",
+        "self-improvement",
+        "skills"
+      ],
+      "interest_tag": ""
+    }
+  ],
+  "alphaxiv_papers": [
+    {
+      "title": "Prime Agent: A Self-Improving RLM Harness",
+      "arxiv_id": "2608.23552",
+      "url": "https://arxiv.org/abs/2608.23552",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2608.23552",
+      "tldr": "Prime Agent is an open-source long-horizon harness built around a persistent IPython environment, continual storage of histories and skills, recursive subagents, and explicit recovery and resource accounting. It aims to prevent runtime limitations from being mistaken for model limitations while keeping strategy construction model-driven. The reported ARC-AGI-3 RHAE Best@1 jump from 30% to 95.5%, plus gains across coding and emulator tasks, makes a strong case that harness design can unlock latent model capability.",
+      "tldr_zh": "Prime Agent 是面向长程任务的开源 harness，组合持久 IPython 环境、跨轨迹保存的历史与 skills、递归 subagent，以及显式恢复和资源核算。它试图避免把 runtime 限制误判为模型限制，同时仍让模型负责策略构造。ARC-AGI-3 RHAE Best@1 从 30% 提升到 95.5%，并在 coding 与 emulator 任务上取得增益，说明 harness design 确实可能释放模型原本被遮蔽的能力。",
+      "interest_tag": ""
+    },
+    {
+      "title": "Code World Model: Coding Agent as World Brain",
+      "arxiv_id": "2608.25927",
+      "url": "https://arxiv.org/abs/2608.25927",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2608.25927",
+      "tldr": "Code World Model separates causal world evolution from photorealistic realization. A coding agent maintains executable state and rule-consistent consequences, then compiles frame-wise constraints into a proxy video that conditions a video generator. This hybrid design directly targets the persistence and causality failures of purely visual world models, although its training-grade value will depend on how faithfully the renderer preserves the executable state.",
+      "tldr_zh": "Code World Model 把因果世界演化与高保真视觉实现分离。Coding agent 维护可执行状态和符合规则的持续后果，再把逐帧时空约束编译为 proxy video 去条件化视频生成器。该混合设计直接针对纯视觉 world model 的状态漂移与因果一致性问题，但它能否用于 training-grade simulation，仍取决于 renderer 对可执行状态的忠实程度。",
+      "interest_tag": ""
+    },
+    {
+      "title": "Prefix Sliding for efficient test-time scaling",
+      "arxiv_id": "2608.26070",
+      "url": "https://arxiv.org/abs/2608.26070",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2608.26070",
+      "tldr": "Prefix Sliding keeps the instruction-and-tool prefix plus only a recent reasoning window, discarding intermediate tokens whose attention value has decayed. This caps KV-cache growth even when reasoning extends past one hundred thousand tokens. The method reportedly makes existing models up to 3× faster without training, while RL under the same attention pattern enables longer and stronger test-time scaling than summarization or a vanilla sliding window.",
+      "tldr_zh": "Prefix Sliding 保留包含指令和工具的 prefix，以及最近一段 reasoning window，丢弃注意力价值已衰减的中间 token。这样即使推理超过十万 token，KV cache 也不会无限增长。该方法无需训练即可让现有模型最高提速 3 倍，而在同一注意力模式下做 RL，则能比摘要压缩或普通 sliding window 支持更长、更强的 test-time scaling。",
+      "interest_tag": ""
+    },
+    {
+      "title": "Recursive Experiential-Working Memory Evolution for Long-Horizon Agent Harnesses",
+      "arxiv_id": "2608.24876",
+      "url": "https://arxiv.org/abs/2608.24876",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2608.24876",
+      "tldr": "Recuris separates Working Memory for current task state from Experiential Memory for reusable skills, then uses execution evidence to localize and validate memory updates. A fixed Meta-Agent performs bounded, component-level evolution rather than rewriting the whole harness. Across four long-horizon benchmarks and ten models it improves 35 of 37 completed model-benchmark pairs, with gains widening to 32.2 points on the longest tasks and common failures dropping by up to 80%.",
+      "tldr_zh": "Recuris 把跟踪当前任务状态的 Working Memory 与保存可复用技能的 Experiential Memory 分离，再用执行证据定位并验证具体 memory component 的更新。固定 Meta-Agent 进行有边界的局部演化，而不是整体重写 harness。它在四个长程 benchmark、十个模型的 37 组有效组合中提升了 35 组，最长任务上的增益扩大到 32.2 分，常见失败最多下降 80%。",
+      "interest_tag": "Memory"
+    },
+    {
+      "title": "JIT-Agent: Scaling Harness Intelligence via Just-in-Time Harness Evolution",
+      "arxiv_id": "2608.25593",
+      "url": "https://arxiv.org/abs/2608.25593",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2608.25593",
+      "tldr": "JIT-Agent trains a dedicated harness-intelligence model to synthesize, repair, and evolve task-specific agent runtimes under a fixed four-module protocol. The generated harness can be attached to off-the-shelf models, making runtime adaptation a transferable axis separate from foundation-model scaling. Reported results include DeepSeek-V4-Flash surpassing GPT-5.6 on DeepSearchQA and OdysseyBench, and gains of up to 20.2 points for GLM-5.2.",
+      "tldr_zh": "JIT-Agent 训练专门的 harness-intelligence model，在固定四模块协议下按任务生成、修复并演化 agent runtime。生成的 harness 可挂接到现成模型上，使 runtime adaptation 成为独立于基座模型 scaling 的可迁移能力轴。论文报告 DeepSeek-V4-Flash 在 DeepSearchQA 与 OdysseyBench 上超过 GPT-5.6，GLM-5.2 的增益最高达到 20.2 分。",
+      "interest_tag": ""
+    }
+  ],
+  "github_repos": [
+    {
+      "name": "Forsy-AI/biosecurity-agent",
+      "url": "https://github.com/Forsy-AI/biosecurity-agent",
+      "tldr": "Biosecurity Agent builds a persistent, target-centered evidence world from official sources, science, news, OSINT, sensors, and private context. Its local runtime explicitly separates observed, inferred, and simulated claims, restores watchers across sessions, and exposes the evidence graph through a terminal-first interface. The narrow domain and inspectable provenance make it a more concrete agent product than a generic research assistant, though its predictive claims still require domain validation.",
+      "tldr_zh": "Biosecurity Agent 围绕指定目标，从官方来源、科研、新闻、OSINT、传感器和私有上下文构建可持续更新的证据世界。它的本地 runtime 明确区分观察、推断与模拟主张，跨会话恢复 watcher，并用 terminal-first 界面暴露证据图。垂直领域和可检查 provenance 让它比通用 research assistant 更具体，但预测性结论仍需要专业领域验证。",
+      "stars": 513,
+      "language": "TypeScript",
+      "interest_tag": ""
+    },
+    {
+      "name": "kgoedecke/doop",
+      "url": "https://github.com/kgoedecke/doop",
+      "tldr": "doop is a self-hostable multiplayer canvas where humans edit in the browser while agents manipulate sandboxed HTML frames through MCP, with both sides seeing live cursors, status, and activity. It combines comments, access inheritance, exemplar frames, and distilled style rules into one collaborative loop. The key product insight is that agent work becomes observable and steerable in the same shared surface instead of disappearing into a prompt-and-refresh cycle.",
+      "tldr_zh": "doop 是可自托管的多人设计画布：人类在浏览器编辑，agent 通过 MCP 操作 sandboxed HTML frame，双方实时看到 cursor、状态和 activity。它把评论、权限继承、exemplar frame 与蒸馏出的风格规则放进同一个协作闭环。核心产品洞察是把 agent 工作变成共享界面中可观察、可干预的过程，而不是隐藏在 prompt-and-refresh 循环里。",
+      "stars": 466,
+      "language": "TypeScript",
+      "interest_tag": ""
+    },
+    {
+      "name": "halofyai/halofy",
+      "url": "https://github.com/halofyai/halofy",
+      "tldr": "Halofy provides an identity and policy boundary between organizational knowledge and AI agents over MCP or HTTP. Postgres remains authoritative while retrieval is replaceable, and every memory operation carries ACL scope, provenance, append-only history, and signed erasure. This is valuable infrastructure for multi-tenant deployments because shared context is treated as governed data rather than an unbounded vector-store dump.",
+      "tldr_zh": "Halofy 通过 MCP 或 HTTP 在组织知识与 AI agent 之间提供统一 identity 和 policy 边界。Postgres 保持权威数据源，retrieval engine 可替换，而每次 memory 操作都带 ACL scope、provenance、append-only history 与 signed erasure。它对多租户部署的重要性在于：共享上下文被当作受治理的数据，而不是无限制塞进 vector store 的文本。",
+      "stars": 429,
+      "language": "TypeScript",
+      "interest_tag": "Memory"
+    },
+    {
+      "name": "alchaincyf/huashu-excel",
+      "url": "https://github.com/alchaincyf/huashu-excel",
+      "tldr": "huashu-excel is an agent-agnostic skill for inspecting, cleaning, analyzing, reconciling, and delivering messy spreadsheets with only openpyxl as a dependency. Its workflow treats subtotal and total rows as built-in checksums and refuses delivery when a master reconciliation fails. The project’s strongest evidence is a test workbook where naïve processing produces a 161% error with no exception, turning auditability into a measurable product claim.",
+      "tldr_zh": "huashu-excel 是跨 agent 的脏表体检、清洗、分析、对账与交付 skill，仅依赖 openpyxl。它把表内小计和合计行当作免费 checksum，并在 master reconciliation 不通过时拒绝交付。项目最有说服力的证据是一份测试表：朴素处理在零报错的情况下产生 161% 偏差，把「可审计」从口号变成可测量的产品主张。",
+      "stars": 323,
+      "language": "Python",
+      "interest_tag": ""
+    },
+    {
+      "name": "truespar/sentio",
+      "url": "https://github.com/truespar/sentio",
+      "tldr": "Sentio gives each AI agent a real email identity with authenticated inbound mail delivered as structured webhooks and in-thread replies sent through REST. Unlike a thin SaaS wrapper, it implements the underlying multi-tenant mail server, including DKIM, SPF, DMARC, ARC, MTA-STS, DANE, rate limits, and anti-spam. It addresses a practical gap for production agents that must participate in durable external workflows without sharing one human inbox.",
+      "tldr_zh": "Sentio 给每个 AI agent 独立的真实邮箱身份，把经过认证的入站邮件转成结构化 webhook，并通过 REST 在原 thread 中回复。它不是薄 SaaS wrapper，而是实现了多租户 mail server 底层，包括 DKIM、SPF、DMARC、ARC、MTA-STS、DANE、限流和反垃圾。它解决了 production agent 参与持久外部 workflow、又不应共用一个人类邮箱的实际缺口。",
+      "stars": 221,
+      "language": "Rust",
+      "interest_tag": ""
+    }
+  ],
+  "hackernews": [
+    {
+      "title": "AI Engineer Notebooks – free, framework-free RAG/agents/evals on Colab",
+      "url": "https://github.com/calmrocks/ai-engineer-notebooks",
+      "tldr": "This repository teaches the applied-LLM stack through runnable Colab notebooks that use raw model APIs rather than LangChain-style abstractions. Evaluation is introduced before RAG and agents, then reused through case studies on production debugging, pipeline-versus-agent cost, and red-team robustness. Its appeal is practical portability: the notebooks are free to run on Groq and expose the mechanisms that fast-changing frameworks often hide.",
+      "tldr_zh": "该仓库通过可运行的 Colab notebook 教授 applied-LLM stack，并刻意使用原始 model API 而非 LangChain 一类抽象。它在 RAG 和 agent 之前先建立 evaluation 习惯，再通过 production debugging、pipeline 与 agent 成本对比、red-team robustness 案例反复使用。其吸引力在于免费、可迁移，并把快速变化的框架经常遮蔽的底层机制直接暴露出来。",
+      "points": 96,
+      "num_comments": 9,
+      "interest_tag": ""
+    },
+    {
+      "title": "Terminal-Bench-Science: Evaluating AI agents on scientific research workflows",
+      "url": "https://www.terminal-bench-science.ai/announcement",
+      "tldr": "Terminal-Bench-Science 0.1 evaluates agents on 70 expert-curated workflows across life, physical, Earth, mathematical, and engineering sciences. Tasks produce concrete artifacts such as analyses, simulations, proofs, code, and data products that are graded by reproducible task-specific tests. Claude Opus 5 with Claude Code leads at only 30% resolution, showing a large gap between coding-benchmark progress and dependable scientific workflow execution.",
+      "tldr_zh": "Terminal-Bench-Science 0.1 用 70 个专家筛选的真实 workflow 评测 agent，覆盖生命、物理、地球、数学和工程科学。任务要求产出分析、模拟、证明、代码或数据产品，并由可复现的任务专属测试评分。Claude Opus 5 搭配 Claude Code 以 30% resolution rate 领先，说明 coding benchmark 的进展距离可靠执行科研 workflow 仍有很大差距。",
+      "points": 72,
+      "num_comments": 23,
+      "interest_tag": "Benchmark"
+    },
+    {
+      "title": "Six months of writing code exclusively with agents",
+      "url": "https://blog.exe.dev/engineering-with-ai",
+      "tldr": "After six months of refusing to hand-write code, the author reports that agentic development shifts work from typing to environment design, review, and coordination. Parallel agents quickly collide on Git state, ports, databases, processes, and deploy rights, so isolated per-task VMs become more useful than worktrees alone. The deeper cost is epistemic: throughput rises, but the engineer’s detailed mental model of the system can decay unless understanding is rebuilt deliberately.",
+      "tldr_zh": "作者坚持六个月不手写代码后发现，agentic development 并没有消灭工作，而是把工作从 typing 转移到环境设计、review 和协调。并行 agent 很快会在 Git state、端口、数据库、进程和部署权限上冲突，因此每任务独立 VM 比单纯 worktree 更完整。更深层的代价是认知性的：吞吐提高了，但如果不刻意重建理解，工程师对系统的细粒度 mental model 会逐渐退化。",
+      "points": 67,
+      "num_comments": 99,
+      "interest_tag": ""
+    },
+    {
+      "title": "AC2 Protocol: The missing security layer for AI agents",
+      "url": "https://www.ac2protocol.org",
+      "tldr": "AC2 places a cryptographic approval channel between agents and sensitive actions such as payments, code signing, messages, and API calls. Agents request intent but never receive private keys; users authorize exact payloads with hardware-bound FIDO2 or WebAuthn signatures, producing a defensible audit trail. The protocol’s value is stronger than ordinary chat-based HITL, although deployment complexity and wallet-oriented trust assumptions may limit adoption outside high-risk workflows.",
+      "tldr_zh": "AC2 在 agent 与支付、代码签名、消息发送、API 调用等敏感动作之间加入 cryptographic approval channel。Agent 只请求意图而永远拿不到私钥，用户通过硬件绑定的 FIDO2 或 WebAuthn 对精确 payload 签名，留下可辩护的 audit trail。它比普通聊天按钮式 HITL 提供更强保证，但部署复杂度和 wallet-oriented trust assumption 可能限制其在非高风险 workflow 中的普及。",
+      "points": 16,
+      "num_comments": 14,
+      "interest_tag": ""
+    },
+    {
+      "title": "Show HN: Concord – let Claude Code, Codex and Cursor talk to each other",
+      "url": "https://github.com/Get-Concord-AI/concord-mcp",
+      "tldr": "Concord is a local-first MCP coordination layer that lets coding agents in different harnesses discover one another, exchange messages, claim files, detect overlap, and hand off tasks with evidence. Its demo targets a concrete failure mode of parallel agents: two sessions editing the same file without shared work state. It is useful orchestration infrastructure, but reliable outcomes still depend on conflict protocols and independent verification rather than communication alone.",
+      "tldr_zh": "Concord 是 local-first MCP 协调层，让不同 harness 中的 coding agent 相互发现、交换消息、认领文件、检测重叠，并带证据交接任务。它的 demo 直接针对并行 agent 的具体失败：两个 session 在没有共享 work state 时同时修改同一文件。它是有价值的 orchestration infrastructure，但可靠结果仍依赖冲突协议和独立验证，而不只是让 agent 能聊天。",
+      "points": 9,
+      "num_comments": 3,
+      "interest_tag": "Agent Swarm"
+    }
+  ]
+}
