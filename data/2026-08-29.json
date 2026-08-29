@@ -1,0 +1,226 @@
+{
+  "date": "2026-08-29",
+  "generated_at": "2026-08-29T16:03:51.615726+08:00",
+  "briefing_zh": "今天最强的共同信号，是 agent 研究正从「会生成答案」转向「在可执行世界里产生可核验轨迹」。**Agentic Game Development** 把游戏引擎视为 world model 的 reward environment：碰撞、物理、可达性和可玩性都能给出密集验证，而不是继续依赖模糊的 CLIP proxy。与之呼应，**Code World Model** 把 coding agent 作为维护规则与持久状态的「world brain」，再用 proxy video 把可执行状态交给生成模型渲染；两项工作都在尝试拆开逻辑正确性与视觉逼真度，但前者偏数据与 RL，后者偏架构与生成。\n\n评测侧开始追问更难、也更真实的问题。**PAWBench** 不再满足于单条视频看起来合理，而是要求重复 rollout 恢复真实世界可能结果的概率分布；11 个系统在 50 个场景上都未能稳定做到。**UrbanGround** 则把 MLLM agent 放进按香港地理数据构建的闭环城市沙箱，发现局部识别和短程推理无法自然组合成长程导航，orientation、行人避让和错误修正仍是主要断点。HN 上的 **Terminal-Bench-Science** 进一步把 70 个科学工作流交给 agent，最强配置也只有 30% resolution rate，说明可验证的长程执行仍远未饱和。\n\n训练与自我改进的重点也从「更多数据」转向「更好的反馈结构」。**What Makes Good Agentic Data?** 用 ACE 框架把生成数据拆成 accuracy、learner-relative complexity 与 diversity，强调环境、任务、轨迹和 verifier 必须一致；**TTPO** 则利用多数票错误的不对称性，在无标签 test-time training 中分别蒸馏一致 rollout、惩罚不一致 rollout。**WikiSkill** 更进一步，把 raw traces、persistent wiki 和 executable skills 分层，让经验能跨轮次积累并迁移到其他模型，这比把失败经验散落在优化日志里更接近真正的 agent learning loop。\n\n开源生态今天呈现的是「把 agent 接入真实工作表面」。**Sentio** 为 agent 提供完整邮件身份与多租户 mail infrastructure，**huashu-excel** 用审计、对账和 master check 把电子表格分析变成可追溯交付，**Pentest Harness** 则将 durable session、subagent、background job 和授权渗透流程封装成垂直 harness。HN 热议的 `Accept: text/markdown` 也指向同一趋势：当 agent 成为网站和工具的正式客户端，低噪声内容协商、权限边界和可验证接口会像传统 API 一样成为基础设施。",
+  "briefing_en": "The strongest shared signal today is that agent research is moving from generating answers to producing verifiable trajectories inside executable worlds. **Agentic Game Development** treats a game engine as a reward environment for world models, where collision, physics, navigability, and playability provide dense checks instead of fuzzy CLIP-like proxies. **Code World Model** makes a coding agent the world brain that maintains rules and persistent state, then passes a proxy video to a generative renderer. Both separate logical correctness from visual fidelity, but the former emphasizes data and RL while the latter emphasizes architecture and generation.\n\nEvaluation is also asking harder and more realistic questions. **PAWBench** goes beyond whether one generated video looks plausible and tests whether repeated rollouts recover the probability distribution of valid outcomes; none of eleven systems consistently succeeds across fifty scenarios. **UrbanGround** places MLLM agents in a closed-loop city sandbox reconstructed from Hong Kong geospatial data and finds that local recognition and short-range reasoning do not compose into reliable long-horizon navigation. On Hacker News, **Terminal-Bench-Science** extends the same realism to seventy scientific workflows, where the strongest evaluated setup reaches only a 30% resolution rate.\n\nTraining and self-improvement are shifting from more data toward better feedback structure. **What Makes Good Agentic Data?** uses the ACE lens to separate accuracy, learner-relative complexity, and diversity while requiring consistency among environments, tasks, trajectories, and verifiers. **TTPO** exploits the asymmetric failure pattern of noisy majority-vote pseudo-labels to distill agreeing rollouts and penalize disagreeing ones during label-free test-time training. **WikiSkill** then separates raw traces, a persistent wiki, and executable skills so experience can compound across iterations and transfer across models rather than remaining buried in optimization logs.\n\nOpen source is meanwhile connecting agents to real work surfaces. **Sentio** gives agents complete email identities and multi-tenant mail infrastructure, **huashu-excel** turns spreadsheet analysis into an auditable workflow with reconciliation and a master check, and **Pentest Harness** packages durable sessions, subagents, background jobs, and authorized security workflows into a vertical harness. The HN discussion around `Accept: text/markdown` points in the same direction: as agents become first-class clients of websites and tools, low-noise content negotiation, permission boundaries, and verifiable interfaces will become infrastructure rather than optional polish.",
+  "viral_analysis_zh": "今天最可能出圈的是 **Accelerating Scientific Research with Gemini in the Real-World**：它把抽象的 multi-agent 科研叙事压缩成材料、湿实验、医学评测和自动写论文四组可讲述结果，并给出「hallucination 降至 4%、完整数据捏造归零」这种极易传播的数字。标题中的 Gemini 品牌与 real-world framing 同时覆盖模型热度和科研生产力想象，但真正值得学习的是用 execution logs 与实验结果建立可信证据链，而不是只讲 autonomous scientist 愿景。",
+  "viral_analysis_en": "The item most likely to break out is **Accelerating Scientific Research with Gemini in the Real-World**. It compresses the abstract multi-agent-science narrative into concrete stories across materials, wet-lab biology, medical evaluation, and automated paper writing, backed by highly shareable claims such as reducing invalidating hallucinations to 4% and eliminating complete data fabrication. The Gemini brand and real-world framing amplify reach, but the durable promotional lesson is the execution-grounded evidence chain rather than the autonomous-scientist slogan alone.",
+  "huggingface_papers": [
+    {
+      "title": "Agentic Game Development as a Verifiable Trajectory Data Engine for Scaling World Models",
+      "url": "https://arxiv.org/abs/2608.25518",
+      "tldr": "This paper argues that world-model scaling needs a recursive, verifiable data engine rather than merely more crawled video. It proposes Reinforcement Learning with Human-Engine Verification, using game engines to provide dense checks for collision, physics, navigability, and bounded playability while human acceptance supplies a global signal. Game development also naturally produces long-horizon action trajectories. The key contribution is reframing executable game creation as an RL environment for spatial generation, where rewards can be grounded instead of approximated by fuzzy visual scores.",
+      "tldr_zh": "这篇论文认为，world model 的扩展不能只靠更多抓取视频，还需要能递归产生并验证数据的引擎。作者提出 Reinforcement Learning with Human-Engine Verification，用游戏引擎检查碰撞、物理、可达性和有限可玩性，再以开发者是否接受场景作为全局反馈。游戏开发过程还会自然产生长程 action trajectory。它的重要性在于把可执行游戏创作重新定义为空间生成的 RL environment，使 reward 从模糊视觉分数转向 grounded verification。",
+      "upvotes": 128,
+      "authors": "Pengfei Zhou, Hexin Wang, Zhengfeiyang Zhang, Yixing Ma, Zhenglin Wan, Kaipeng Zhang, Wangbo Zhao, Yang You",
+      "ai_keywords": [
+        "world models",
+        "verifiable trajectories",
+        "RLHEV",
+        "game engines"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "PAWBench: How Far Are We from Probabilistically Aligned World Modeling?",
+      "url": "https://arxiv.org/abs/2608.27345",
+      "tldr": "PAWBench evaluates whether video generators recover the distribution of valid future outcomes, not just whether a single sample looks plausible. PAWEval converts repeated rollouts into empirical distributions over physical behaviors across 50 scenarios. Eleven current systems fail to consistently match both reference probabilities and outcome coverage. This exposes a fundamental gap between visually convincing video generation and world models that are calibrated stochastic simulators.",
+      "tldr_zh": "PAWBench 评估视频生成器能否恢复多种合法未来结果的概率分布，而不只是让单个样本看起来合理。PAWEval 在 50 个场景中把重复 rollout 转换成物理结果的经验分布。11 个当前系统都无法同时稳定匹配参考概率与结果覆盖。它揭示了视觉上可信的视频生成与概率校准的 stochastic world simulator 之间仍有根本差距。",
+      "upvotes": 77,
+      "authors": "Yuandong Pu, Le Zhuo, Sayak Paul, Gabriel Jorge Menezes, Avram Đorđević, Shiyang Li, Yifan Zhou, Bin Fu, Wenlong Zhang, Junjun He, Yu Qiao, Yihao Liu, Jingbo Xing, Xi Chen",
+      "ai_keywords": [
+        "world models",
+        "video generation",
+        "probabilistic alignment",
+        "evaluation"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "UrbanGround: From Local Perception to Spatial Agency in a Real-Scale City",
+      "url": "https://arxiv.org/abs/2608.27456",
+      "tldr": "UrbanGround is a closed-loop sandbox built from territory-wide Hong Kong geospatial data to test whether local visual understanding becomes reliable urban agency. Agents interact from a first-person view and use a map while facing increasingly difficult grounding, navigation, route-change, and pedestrian-motion tasks. Current MLLM agents show useful recognition and short-range spatial reasoning but fail as errors accumulate over extended exploration. The benchmark matters because it tests composition of capabilities under movement rather than isolated perception snapshots.",
+      "tldr_zh": "UrbanGround 使用香港全域 3D 地理数据构建闭环城市沙箱，测试局部视觉理解能否转化为可靠的 urban agency。Agent 从第一人称视角交互并使用地图，依次面对 grounding、长距离导航、路线变化和行人运动等任务。当前 MLLM agent 具备一定识别与短程空间推理能力，但长时间探索中误差累积且缺乏有效修正。它的重要性在于评测移动过程中的能力组合，而不是孤立的单帧感知。",
+      "upvotes": 71,
+      "authors": "Tianjie Ju, Zheng Wu, Yueqing Sun, Yuhan Cui, Bobo Li, Shengqiong Wu, Pengzhou Cheng, Haodong Zhao, Zongru Wu, Xinbei Ma, Doris Zhang, Kunling Li, Mong-Li Lee, Wynne Hsu, Hao Fei, Qi Gu, Gongshen Liu, Zhuosheng Zhang",
+      "ai_keywords": [
+        "multimodal agents",
+        "spatial agency",
+        "closed-loop navigation",
+        "urban simulation"
+      ],
+      "interest_tag": "Benchmark"
+    },
+    {
+      "title": "TTPO: Test-Time Policy Optimization",
+      "url": "https://arxiv.org/abs/2608.27448",
+      "tldr": "TTPO enables label-free test-time policy updates despite noisy majority-vote pseudo-labels. Its asymmetric objective distills rollouts that agree with the vote while applying grouped RL penalties to disagreeing rollouts, with token-level weighting focused on unconverged positions and confident errors. The method matches label-supervised on-policy self-distillation on five competition benchmarks and improves Qwen3-1.7B from 38.0% to 45.2% in test-time training. The important insight is that disagreement remains informative even when the pseudo-label itself is occasionally wrong.",
+      "tldr_zh": "TTPO 在多数票 pseudo-label 含噪时仍能进行无标签 test-time policy update。它采用不对称目标：蒸馏与多数票一致的 rollout，同时用 grouped RL 惩罚不一致 rollout，并在 token 级聚焦尚未收敛的位置和高置信错误。在 5 个竞赛级 benchmark 上，它达到有标签 on-policy self-distillation 的水平，并把 Qwen3-1.7B 的 test-time training 成绩从 38.0% 提升到 45.2%。核心 insight 是，即使 pseudo-label 偶尔错误，不一致本身仍然提供稳定的负向信息。",
+      "upvotes": 67,
+      "authors": "Aozhe Wang, Zhengxi Lu, Jianze Wang, Shangke Lv, Ying Liu, Weiming Lu, Jun Xiao, Yueting Zhuang, Hua Yang, Qianglong Chen, Yongliang Shen",
+      "ai_keywords": [
+        "test-time training",
+        "policy optimization",
+        "self-distillation",
+        "reinforcement learning"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "What Makes Good Agentic Data? An ACE Lens on Data Generation for LLM Agents",
+      "url": "https://arxiv.org/abs/2608.27260",
+      "tldr": "This survey and framework represents agentic data as environment, task, trajectory, and verifier components, then analyzes generation through Accuracy, Complexity, and divErsity. Accuracy defines grounded feasible support, complexity must be calibrated to a declared learner and execution setup, and diversity controls behavioral coverage rather than surface variation alone. The framework separates candidate construction from verification and selection across agent domains. Its value is a clearer recipe for allocating valid, informative, non-redundant experience instead of maximizing raw dataset size.",
+      "tldr_zh": "这项综述与框架把 agentic data 表示为 environment、task、trajectory 和 verifier 四部分，再用 Accuracy、Complexity、divErsity 三个维度分析生成过程。Accuracy 确定 grounded 的可行支持集，complexity 必须相对于指定 learner 与执行配置校准，diversity 则控制行为覆盖而非表面改写。该框架还跨领域区分 candidate construction、verification 与 selection。它的价值是给出如何分配有效、有信息量且不冗余经验的清晰方法，而不是继续追求数据集体量。",
+      "upvotes": 56,
+      "authors": "Xingshan Zeng, Zishan Xu, Boju Zhang, Yuzhou Wu, Lingzhi Wang, Jianghao Lin, Liangyou Li, Yasheng Wang, Lifeng Shang, Xin Jiang, Weinan Zhang, Yong Yu, Qun Liu, Weiwen Liu",
+      "ai_keywords": [
+        "agentic data",
+        "data generation",
+        "verification",
+        "ACE framework"
+      ],
+      "interest_tag": ""
+    }
+  ],
+  "alphaxiv_papers": [
+    {
+      "title": "Accelerating Scientific Research with Gemini in the Real-World",
+      "arxiv_id": "2608.26701",
+      "url": "https://arxiv.org/abs/2608.26701",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2608.26701",
+      "tldr": "Google DeepMind extends Co-Scientist into an execution-grounded multi-agent pipeline spanning ideation, experimentation, and paper writing. It reports real-world validation in materials science, biology, and computer science, with code execution, laboratory feedback, automated review, and two-layer safety oversight closing the loop. In a 450-review double-blind study, reliability modules reduced invalidating hallucinations to 4%, eliminated complete data fabrication, and the safety system refused 98.7% of harmful directions. The work is important because it evaluates autonomous research against executed evidence rather than in-silico plausibility alone.",
+      "tldr_zh": "Google DeepMind 将 Co-Scientist 扩展为覆盖 ideation、experimentation 与 paper writing 的 execution-grounded multi-agent pipeline。系统在材料、生命科学和计算机科学中接受真实验证，并通过代码执行、实验室反馈、自动 review 与双层安全监督闭环。在 450 次双盲评审中，可靠性模块把致命 hallucination 降到 4%、把完整数据捏造降到 0%，安全系统拒绝了 98.7% 的有害方向。它的重要性在于用已执行证据评估 autonomous research，而不是只看 in-silico 叙事是否合理。",
+      "interest_tag": "Agent Swarm"
+    },
+    {
+      "title": "Code World Model: Coding Agent as World Brain",
+      "arxiv_id": "2608.25927",
+      "url": "https://arxiv.org/abs/2608.25927",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2608.25927",
+      "tldr": "Code World Model separates executable world evolution from visual realization. A coding agent maintains persistent state and rule-consistent consequences, while a programmable proxy representation is compiled into video conditions for a fine-tuned MiniMax-H3 renderer. The proxy provides precise control over entities, motion, layout, and camera trajectories without asking the video model to infer all causal structure from pixels. This decomposition offers a path to open-ended virtual worlds, although current evidence is primarily qualitative and demonstrated on simple interactive environments.",
+      "tldr_zh": "Code World Model 将可执行世界演化与视觉呈现分离。Coding agent 维护持久状态和符合规则的因果后果，可编程 proxy representation 则被编译成视频条件，交给微调后的 MiniMax-H3 渲染。Proxy 能精确控制实体、运动、布局和相机轨迹，不再要求 video model 仅从像素中推断全部因果结构。这种拆分为 open-ended virtual world 提供了新路径，但当前证据仍以简单交互环境上的定性结果为主。",
+      "interest_tag": ""
+    },
+    {
+      "title": "Prefix Sliding for efficient test-time scaling",
+      "arxiv_id": "2608.26070",
+      "url": "https://arxiv.org/abs/2608.26070",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2608.26070",
+      "tldr": "Prefix Sliding keeps the fixed instruction and tool prefix plus a moving window of recent reasoning tokens, discarding most intermediate trace tokens. This bounds memory and per-token computation even as total reasoning grows, and can be applied to pretrained transformers without architectural retraining. The authors report roughly 3x faster inference at similar performance and RL rollouts beyond 100,000 tokens under practical memory budgets. The result suggests that long test-time reasoning may depend more on preserving task anchors and current working state than retaining every intermediate thought.",
+      "tldr_zh": "Prefix Sliding 保留固定的 instruction/tool prefix 与最近 reasoning token 的滑动窗口，并丢弃多数中间轨迹。这样无论总推理长度如何增长，memory 和每 token 计算都能保持有界，而且可直接应用于预训练 Transformer，无需重做架构训练。作者报告约 3 倍 inference 加速且性能接近，并能在可控显存下进行超过 10 万 token 的 RL rollout。结果表明，长程 test-time reasoning 可能更依赖任务锚点与当前工作状态，而不是保存每一步中间思考。",
+      "interest_tag": ""
+    },
+    {
+      "title": "Automated Researchers Can Reliably Mitigate Alignment Failures",
+      "arxiv_id": "",
+      "url": "https://www.alphaxiv.org/abs/2608.automated-alignment-researchers",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2608.automated-alignment-researchers",
+      "tldr": "Automated Alignment Researchers iteratively propose, train, and evaluate post-training interventions for ten measurable failures including deception, sycophancy, and jailbreak susceptibility. The strongest automated methods generalize to held-out benchmarks, behavioral audits, and models up to 4.7 times larger while preserving general capabilities. In the reported comparison, they outperform methods designed by 28 experienced researchers and can bring an early Claude Opus 4.8 checkpoint near production alignment with about 2,400 examples. The evidence supports automation on well-specified alignment objectives, but it does not establish autonomous discovery for open-ended or poorly measured safety problems.",
+      "tldr_zh": "Automated Alignment Researchers 针对 deception、sycophancy、jailbreak 等 10 类可测 failure，迭代提出、训练并评估 post-training 干预。最强自动方法能泛化到 held-out benchmark、行为审计和最高大 4.7 倍的模型，同时保持通用能力。论文报告它们超过 28 位有经验研究者提出的方法，并用约 2,400 条样本把早期 Claude Opus 4.8 checkpoint 推近 production alignment。证据支持在定义清晰的 alignment objective 上自动化研究，但尚不能证明它能处理开放式或难以测量的安全问题。",
+      "interest_tag": ""
+    },
+    {
+      "title": "WikiSkill: Compiling Agent Experience into Persistent Knowledge for Skill Evolution",
+      "arxiv_id": "2608.27454",
+      "url": "https://arxiv.org/abs/2608.27454",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2608.27454",
+      "tldr": "WikiSkill co-evolves executable agent skills with a persistent wiki that consolidates experience across iterations. Its three layers separate immutable raw traces, structured knowledge about failures and strategies, and deployable procedural skills; a gating mechanism validates proposed edits. Across multiple models and tasks, the framework improves over prior skill-evolution methods, and evolved skills transfer across model families. The key finding is that persistent knowledge helps the skill proposer, while exposing that wiki directly to the inference agent during training can hide deficiencies and degrade the resulting skills.",
+      "tldr_zh": "WikiSkill 让 executable agent skill 与一个跨轮次积累经验的 persistent wiki 共同演化。三层架构分别保存不可变 raw trace、关于失败与策略的结构化知识、以及可部署 procedural skill，并用 gating mechanism 验证修改。在多个模型和任务上，它超过既有 skill-evolution 方法，演化出的 skill 还能跨模型家族迁移。关键发现是 persistent knowledge 应服务于 skill proposer；若训练时让 inference agent 直接读取 wiki，反而会遮蔽能力缺口并降低最终 skill 质量。",
+      "interest_tag": "Memory"
+    }
+  ],
+  "github_repos": [
+    {
+      "name": "alchaincyf/huashu-excel",
+      "url": "https://github.com/alchaincyf/huashu-excel",
+      "tldr": "huashu-excel packages an eight-stage spreadsheet workflow covering inspection, cleaning, requirement alignment, analysis, reconciliation, and delivery. Its differentiator is fail-closed verification: subtotal and total rows become built-in checksums, and a master check blocks delivery when cleaned details do not reconcile. The README demonstrates silent errors such as duplicated detail rows and subtotals being summed as records, where ordinary pandas pipelines can be wrong without exceptions. It is a strong example of turning a generic agent skill into an auditable professional process rather than a prompt collection.",
+      "tldr_zh": "huashu-excel 把电子表格处理封装为覆盖体检、清洗、需求对齐、分析、对账和交付的八阶段流程。它的差异点是 fail-closed verification：把小计与合计行当作内置 checksum，清洗后明细若无法对上，master check 就阻止交付。README 展示了重复明细、把小计当记录等不会抛异常却能让普通 pandas 流程严重算错的问题。它是把通用 agent skill 做成可审计专业流程的好例子，而不只是提示词合集。",
+      "stars": 335,
+      "language": "Python",
+      "interest_tag": ""
+    },
+    {
+      "name": "S1N6H/pentest-harness",
+      "url": "https://github.com/S1N6H/pentest-harness",
+      "tldr": "Pentest Harness is a self-hosted workspace for authorized penetration tests, bug bounty work, security labs, and CTFs. It combines multi-provider model adapters with shell, filesystem, research, skills, goals, subagents, background jobs, durable JSONL/SQLite sessions, and automatic context compaction. Credentials are referenced from an owner-only store, while a plugin architecture makes the model, tool, session, and configuration layers replaceable. Its value is the vertical harness design: a general agent runtime is constrained and packaged around a specific professional operating standard.",
+      "tldr_zh": "Pentest Harness 是面向授权渗透测试、bug bounty、安全实验室与 CTF 的 self-hosted workspace。它把 multi-provider model adapter 与 shell、filesystem、research、skills、goals、subagents、background jobs、持久化 JSONL/SQLite session 和 context compaction 组合起来。凭据通过仅 owner 可读的 store 引用，plugin architecture 则允许替换模型、工具、session 与配置层。它的价值在于 vertical harness 设计：把通用 agent runtime 约束并包装进特定专业操作规范。",
+      "stars": 238,
+      "language": "TypeScript",
+      "interest_tag": ""
+    },
+    {
+      "name": "truespar/sentio",
+      "url": "https://github.com/truespar/sentio",
+      "tldr": "Sentio gives each agent a real email identity, delivers authenticated inbound mail as structured webhooks, and supports in-thread replies over REST. Rather than wrapping a third-party inbox API, it implements inbound and outbound mail infrastructure including DKIM, SPF, DMARC, ARC, MTA-STS, DANE, anti-spam, queues, and suppression handling. Multi-tenancy extends to domains, mailboxes, credentials, rate limits, and reputation boundaries. The project matters because email is a stateful, adversarial external environment, so production agent access requires protocol correctness and isolation rather than only a send-message tool.",
+      "tldr_zh": "Sentio 为每个 agent 提供真实邮件身份，把经过认证的入站邮件转换成 structured webhook，并支持通过 REST 在原 thread 中回复。它不是第三方 inbox API 的薄封装，而是实现了收发邮件、DKIM、SPF、DMARC、ARC、MTA-STS、DANE、反垃圾、queue 和 suppression 等基础设施。Multi-tenancy 延伸到 domain、mailbox、credential、rate limit 与信誉边界。它的重要性在于 email 是有状态且具对抗性的外部环境，生产级 agent 接入需要协议正确性和隔离，而不只是一个 send-message tool。",
+      "stars": 226,
+      "language": "Rust",
+      "interest_tag": ""
+    },
+    {
+      "name": "Merit-Systems/OpenInstinct",
+      "url": "https://github.com/Merit-Systems/OpenInstinct",
+      "tldr": "OpenInstinct is a self-hosted personal iMessage assistant that can operate websites to complete chores, bookings, and purchases. It deploys into the user's own Vercel account and combines cloud browsers, Postgres, private image storage, per-user memory, and encrypted secrets that are not exposed directly to models. The design focuses on the real deployment boundary for browser agents: authenticated action with passwords and payment data under user-controlled infrastructure. Its appeal is less a new planning algorithm than a packaged path from chat request to credentialed computer-use execution.",
+      "tldr_zh": "OpenInstinct 是可 self-host 的个人 iMessage assistant，能够操作网站完成日常事务、预订和购买。它部署在用户自己的 Vercel account 中，组合 cloud browser、Postgres、私有截图存储、per-user memory 与不直接暴露给模型的加密 secret。设计重点正是 browser agent 的真实部署边界：在用户控制的基础设施里，带着密码和支付数据执行 authenticated action。它的吸引力不在新 planning algorithm，而在于把聊天请求到带凭据 computer-use execution 的路径包装完整。",
+      "stars": 198,
+      "language": "TypeScript",
+      "interest_tag": "CUA"
+    },
+    {
+      "name": "hkqr/my-free-code",
+      "url": "https://github.com/hkqr/my-free-code",
+      "tldr": "My Free Code is a multi-provider gateway for coding agents that exposes Anthropic Messages and OpenAI Responses-compatible protocols. It separates wire adapters, model routing, provider runtimes, and launcher adapters while supporting streaming, tool calls, images, reasoning metadata, ordered fallback, health backoff, concurrency control, and local models. Launchers cover multiple coding-agent clients, and the provider catalog spans hosted, gateway, and local backends. The project is useful as an interoperability layer, though its breadth makes adapter quality and behavioral parity more important than the provider count itself.",
+      "tldr_zh": "My Free Code 是面向 coding agent 的 multi-provider gateway，对外提供 Anthropic Messages 与 OpenAI Responses-compatible protocol。它拆分 wire adapter、model routing、provider runtime 与 launcher adapter，并支持 streaming、tool call、image、reasoning metadata、有序 fallback、health backoff、并发控制和 local model。Launcher 覆盖多个 coding-agent client，provider catalog 同时包含托管、gateway 与本地后端。它适合作为 interoperability layer，但如此广的覆盖意味着 adapter 质量和行为一致性比 provider 数量本身更重要。",
+      "stars": 158,
+      "language": "Python",
+      "interest_tag": ""
+    }
+  ],
+  "hackernews": [
+    {
+      "title": "Serve Markdown to AI Agents with Accept Headers",
+      "url": "https://acceptmarkdown.com/",
+      "tldr": "This proposal uses ordinary HTTP content negotiation so the same URL can return clean Markdown to agent clients that send `Accept: text/markdown`. Removing navigation, scripts, layout wrappers, and ads reduces token usage, retrieval noise, and time to first useful model input. The site documents correct use of `Vary: Accept`, quality values, and 406 responses, plus recipes for common web stacks. The HN traction reflects a timely infrastructure idea: make websites agent-readable without inventing another discovery protocol or parallel URL namespace.",
+      "tldr_zh": "这个方案使用标准 HTTP content negotiation，让同一个 URL 在 agent client 发送 `Accept: text/markdown` 时返回干净 Markdown。去掉导航、脚本、布局 wrapper 与广告后，可降低 token 消耗、retrieval 噪声和模型开始处理前的延迟。网站还说明了 `Vary: Accept`、quality value、406 response 的正确做法，并提供常见 web stack recipe。它在 HN 走红，是因为用已有协议解决了 agent-readable web 的现实需求，无需再发明 discovery protocol 或平行 URL。",
+      "points": 175,
+      "num_comments": 108,
+      "interest_tag": ""
+    },
+    {
+      "title": "Show HN: TeXbrain, a LaTeX editor that runs pdfTeX in the browser via WASM",
+      "url": "https://github.com/swimmingbrain/texbrain",
+      "tldr": "TeXbrain runs pdfTeX entirely in the browser through WebAssembly, combining live preview, on-demand packages, and Git integration without accounts, local installation, or a backend compilation service. The architecture keeps documents and compilation local to the tab, reducing operational dependencies and privacy exposure. Its popularity is adjacent rather than central to agent research, but it demonstrates how mature native toolchains can become zero-install web capabilities. That pattern is relevant for agents because deterministic in-browser execution can provide a safer, reproducible tool surface.",
+      "tldr_zh": "TeXbrain 通过 WebAssembly 在浏览器内运行 pdfTeX，提供 live preview、按需 package 与 Git integration，同时不需要账号、本地安装或后端编译服务。文档和编译过程保留在 tab 内，减少运维依赖与隐私暴露。它并非 agent 研究本身，但展示了成熟 native toolchain 如何变成 zero-install web capability。对 agent 而言，这种确定性的 browser-local execution 可形成更安全、可复现的工具表面。",
+      "points": 118,
+      "num_comments": 27,
+      "interest_tag": ""
+    },
+    {
+      "title": "Terminal-Bench-Science: Evaluating AI agents on scientific research workflows",
+      "url": "https://www.terminal-bench-science.ai/announcement",
+      "tldr": "Terminal-Bench-Science 0.1 evaluates agents on 70 expert-curated workflows from life, physical, Earth, mathematical, and engineering sciences. Tasks are contributed by practicing researchers and executed in realistic terminal environments with verifiable outcomes, rather than being reduced to textbook question answering. The strongest reported setup, Claude Opus 5 with Claude Code, resolves only 30%, while GPT-5.6 Sol with Codex reaches 22.4%. The low ceiling and continuous-benchmark design make it a useful measure of whether agents can actually carry out scientific work, not merely discuss it.",
+      "tldr_zh": "Terminal-Bench-Science 0.1 用来自生命、物理、地球、数学和工程科学的 70 个专家策划工作流评测 agent。任务由真实研究者贡献，在可验证结果的 terminal environment 中执行，而不是退化成课本问答。当前最强的 Claude Opus 5 + Claude Code 只有 30% resolution rate，GPT-5.6 Sol + Codex 为 22.4%。低上限与 continuous benchmark 设计使它能衡量 agent 是否真的会完成科研工作，而不只是会谈论科学。",
+      "points": 115,
+      "num_comments": 35,
+      "interest_tag": "Benchmark"
+    },
+    {
+      "title": "AI Engineer Notebooks – free, framework-free RAG/agents/evals on Colab",
+      "url": "https://github.com/calmrocks/ai-engineer-notebooks",
+      "tldr": "AI Engineer Notebooks is a free Colab curriculum that builds the applied LLM stack without hiding fundamentals behind orchestration frameworks. It covers model APIs, structured outputs, tool calling, RAG, evaluation, agent loops, MCP, skills, security, fine-tuning, serving, operations, and customer-facing system design. The repository emphasizes runnable systems and treats evaluation as the spine connecting the modules. Its HN appeal comes from combining breadth, zero-cost execution, and interview relevance while still exposing the mechanisms learners must understand.",
+      "tldr_zh": "AI Engineer Notebooks 是可免费运行于 Colab 的课程，不用 orchestration framework 隐藏 applied LLM stack 的基础机制。内容覆盖 model API、structured output、tool calling、RAG、evaluation、agent loop、MCP、skills、安全、微调、serving、operations 与客户侧系统设计。仓库强调可运行系统，并把 evaluation 作为连接各模块的主线。它在 HN 的吸引力来自广度、零成本与面试相关性的组合，同时仍要求学习者理解底层机制。",
+      "points": 111,
+      "num_comments": 14,
+      "interest_tag": ""
+    },
+    {
+      "title": "Six months of writing code exclusively with agents",
+      "url": "https://blog.exe.dev/engineering-with-ai",
+      "tldr": "The author reports six months of refusing to write production code by hand, forcing every agent failure to be solved by improving context, process, or tooling instead. The main shift is from directly encoding code to maintaining specifications, interfaces, review discipline, and the system-level mental model that constrains generated changes. Incremental work and accountability remain essential because agents can still make unnecessary or dangerous cross-layer edits. The essay resonates because it frames agentic coding as an organizational and epistemic transition, not simply faster typing.",
+      "tldr_zh": "作者记录了连续六个月不手写生产代码的实验：每当 agent 卡住，就改进 context、process 或 tooling，而不是自己把剩余代码补完。核心转变是从直接编码，转向维护 specification、interface、review discipline 与约束生成修改的系统级 mental model。增量工作和人工责任仍不可替代，因为 agent 依然可能做出多余或跨层危险修改。文章引发共鸣，是因为它把 agentic coding 描述为组织方式和认知方式的迁移，而不只是提高打字速度。",
+      "points": 68,
+      "num_comments": 105,
+      "interest_tag": ""
+    }
+  ]
+}
