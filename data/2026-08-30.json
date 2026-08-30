@@ -1,0 +1,226 @@
+{
+  "date": "2026-08-30",
+  "generated_at": "2026-08-30T16:03:43.695799+08:00",
+  "briefing_zh": "今天最强的主线不是单一模型刷新榜单，而是 agent 研究开始把「可验证执行」当作规模化基础设施。**Agentic Game Development as a Verifiable Trajectory Data Engine** 用可执行游戏引擎提供碰撞、物理、可导航性和人工接受信号，试图把 world model 从模糊视觉评分推进到可做 RL 的轨迹数据闭环；**PAWBench** 则提醒我们，生成一条看似合理的视频还不等于学会世界，真正的 world model 必须恢复同一初始条件下多种可能结果的概率分布。两项工作共同把焦点从视觉逼真度移向 dynamics、verification 与 distributional correctness。\n\n另一条清晰趋势是 agent 的能力提升正从「更大模型」转向运行时与经验管理。**TTPO** 在无标签测试时训练中利用同意/不同意伪标签的不对称性，为 rollout 提供更稳的 token-level 更新；**WikiSkill** 把执行经验、持久知识和可执行 skill 分层，让 agent 的改进不再散落在一次性轨迹里。alphaxiv 上的 **Accelerating Scientific Research with Gemini in the Real-World** 更进一步，把 multi-agent Co-Scientist 接入真实实验和论文生成闭环，显示 agent 的价值开始由文本产出转向可验证的现实结果。\n\n视觉与具身方向也在寻找更可控的系统分解。**Code World Model** 让 coding agent 维护可执行状态与规则，再由 video model 负责视觉实现；这与单体生成模型直接重绘整个世界相比，更强调因果状态持久性。**LeVJEPA** 从另一端降低视频表征学习成本，而 **Zero-WAM** 用人类视频作为 in-context task specification，说明「世界理解」正在同时沿 representation、simulation 和 action 三层推进。\n\n工程社区的热点则集中在 agent-native interfaces 与可运营性：**Accept: text/markdown** 和 **WebMCP** 都在减少 agent 对脆弱 DOM/视觉解析的依赖，**Terminal-Bench-Science** 用 70 个专家工作流把科学 agent 的真实差距量化到当前最好系统仅 30%。GitHub 新项目进一步把焦点落到安全执行、模型网关、浏览器操作、视频缓存和云端工作区；共同信号是，下一阶段竞争不只是模型会不会推理，而是系统能否以低成本、可观测、可验证的方式持续完成工作。",
+  "briefing_en": "Today's strongest signal is not a single model topping a leaderboard, but agent research treating verifiable execution as scaling infrastructure. **Agentic Game Development as a Verifiable Trajectory Data Engine** uses executable game engines to supply collision, physics, navigability, and human-acceptance signals, turning world-model development from fuzzy visual scoring into an RL-ready trajectory loop. **PAWBench** supplies the complementary warning: producing one plausible video is not equivalent to modeling a world; a world model should recover the distribution of valid outcomes from the same initial state and action. Together, they shift attention from visual fidelity toward dynamics, verification, and distributional correctness.\n\nA second trend is that capability gains are moving beyond model scale toward runtime adaptation and experience management. **TTPO** exploits the asymmetry between rollouts that agree or disagree with noisy pseudo-labels to make label-free test-time updates more reliable, while **WikiSkill** separates raw executions, persistent knowledge, and executable skills so improvements survive beyond one trajectory. On alphaXiv, **Accelerating Scientific Research with Gemini in the Real-World** pushes this further by connecting a multi-agent Co-Scientist to real experiments and manuscript generation, measuring value through grounded outcomes rather than fluent text alone.\n\nVision and embodied work is also converging on more controllable system decompositions. **Code World Model** assigns executable state and rules to a coding agent and leaves visual realization to a video model, prioritizing persistent causal state over monolithic frame regeneration. **LeVJEPA** attacks the representation-cost side of the stack, while **Zero-WAM** treats human video as an in-context task specification, showing world intelligence advancing simultaneously across representation, simulation, and action.\n\nThe engineering community is focused on agent-native interfaces and operability. **Accept: text/markdown** and **WebMCP** both reduce dependence on brittle DOM or pixel interpretation, while **Terminal-Bench-Science** quantifies the gap on 70 expert workflows, with the best evaluated system resolving only 30%. New GitHub projects similarly cluster around secure execution, model gateways, browser operation, video caching, and cloud workspaces. The shared message is that the next competitive frontier is not reasoning alone, but whether systems can complete work continuously with low cost, observability, and verifiable outcomes.",
+  "viral_analysis_zh": "今天最可能形成研究圈爆款的是 **Agentic Game Development as a Verifiable Trajectory Data Engine**：它把 coding agent 已被验证的「可执行反馈」叙事迁移到 world model，又以 RLHEV 给出易传播的新缩写，正好击中当前生成式 world model 缺少可靠 reward 的痛点。工程圈更容易出圈的是 **Accept: text/markdown**，因为它把复杂的 agent-friendly Web 改造压缩成一个所有开发者都懂的 HTTP header，并提供可立即测试和复制的配置。",
+  "viral_analysis_en": "The research item most likely to go viral is **Agentic Game Development as a Verifiable Trajectory Data Engine**: it transfers the proven executable-feedback story from coding agents to world models, packages it as the memorable RLHEV paradigm, and targets the field's lack of trustworthy rewards. In the developer community, **Accept: text/markdown** has the strongest viral shape because it compresses agent-friendly web delivery into one familiar HTTP header with an immediately testable, copyable implementation path.",
+  "huggingface_papers": [
+    {
+      "title": "Agentic Game Development as a Verifiable Trajectory Data Engine for Scaling World Models",
+      "url": "https://arxiv.org/abs/2608.25518",
+      "tldr": "The paper argues that world models need an executable data engine, not merely more web video and compute. It introduces Reinforcement Learning with Human-Engine Verification (RLHEV), combining dense checks from game engines—physics, collisions, navigability, and playability—with developers' implicit acceptance feedback. The key importance is a path toward long-horizon spatial trajectories with rewards that are more grounded than CLIP-style similarity scores.",
+      "tldr_zh": "论文认为，world model 的扩展瓶颈不只是视频和算力不足，更缺少可执行的数据引擎。作者提出 Reinforcement Learning with Human-Engine Verification（RLHEV），把游戏引擎对物理、碰撞、可导航性和可玩性的稠密检查，与开发者的隐式验收反馈结合起来。其重要性在于为长程空间轨迹提供比 CLIP 类相似度更可验证的 reward，有望支撑真正的 RL post-training。",
+      "upvotes": 136,
+      "authors": "Pengfei Zhou, Hexin Wang, Zhengfeiyang Zhang, Yixing Ma, Zhenglin Wan, Kaipeng Zhang, Wangbo Zhao, Yang You",
+      "ai_keywords": [
+        "world models",
+        "RLHEV",
+        "verifiable trajectories",
+        "game engines"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "PAWBench: How Far Are We from Probabilistically Aligned World Modeling?",
+      "url": "https://arxiv.org/abs/2608.27345",
+      "tldr": "PAWBench evaluates whether repeated video generations reproduce the distribution of physically valid outcomes, rather than judging isolated clips for plausibility. Its PAWEval protocol turns multiple rollouts into empirical outcome distributions across 50 scenarios and tests eleven current systems. No model consistently matches both the reference probabilities and the diversity of valid behaviors, exposing a major gap between video generation and genuine stochastic world modeling.",
+      "tldr_zh": "PAWBench 不再只判断单段生成视频是否看起来合理，而是检验多次生成能否恢复物理世界中多种有效结果的概率分布。其 PAWEval 协议在 50 个场景上把重复 rollout 转化为经验结果分布，并评估 11 个现有系统。没有模型能同时稳定匹配参考概率与有效行为覆盖度，说明视频生成距离真正的随机 world modeling 仍有关键鸿沟。",
+      "upvotes": 82,
+      "authors": "Yuandong Pu, Le Zhuo, Sayak Paul, Gabriel Jorge Menezes, Avram Đorđević, Shiyang Li, Yifan Zhou, Bin Fu, Wenlong Zhang, Junjun He, Yu Qiao, Yihao Liu, Jingbo Xing, Xi Chen",
+      "ai_keywords": [
+        "world models",
+        "video generation",
+        "probabilistic alignment",
+        "evaluation"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "UrbanGround: From Local Perception to Spatial Agency in a Real-Scale City",
+      "url": "https://arxiv.org/abs/2608.27456",
+      "tldr": "UrbanGround is a physically constrained Hong Kong-scale sandbox for testing whether multimodal agents can turn local street-view perception into sustained spatial action. It progresses from active visual grounding to navigation and then to robustness under route and pedestrian changes. Current agents handle recognition and short-range reasoning better than long-horizon orientation and recovery, making the benchmark useful for studying how local competence fails to compose into reliable agency.",
+      "tldr_zh": "UrbanGround 在基于香港全域 3D 地理数据构建的真实尺度沙盒中，测试多模态 agent 能否把局部街景感知转化为持续行动。评测从主动视觉 grounding 递进到导航，再考察路线变化和行人运动下的鲁棒性。现有 agent 在识别与短程推理上尚可，但长程定向和错误恢复明显失效，因此该基准能直接揭示局部能力为何无法组合成可靠 agency。",
+      "upvotes": 73,
+      "authors": "Tianjie Ju, Zheng Wu, Yueqing Sun, Yuhan Cui, Bobo Li, Shengqiong Wu, Pengzhou Cheng, Haodong Zhao, Zongru Wu, Xinbei Ma, Doris Zhang, Kunling Li, Mong-Li Lee, Wynne Hsu, Hao Fei, Qi Gu, Gongshen Liu, Zhuosheng Zhang",
+      "ai_keywords": [
+        "multimodal agents",
+        "spatial agency",
+        "navigation",
+        "urban simulation"
+      ],
+      "interest_tag": "Benchmark"
+    },
+    {
+      "title": "TTPO: Test-Time Policy Optimization",
+      "url": "https://arxiv.org/abs/2608.27448",
+      "tldr": "TTPO performs label-free test-time training by treating agreement and disagreement with majority-vote pseudo-labels asymmetrically. Agreeing rollouts are distilled, while disagreeing rollouts receive grouped RL penalties focused on confident token-level errors, reducing damage from a wrong majority vote. It lifts Qwen3-1.7B from 38.0% to 45.2% in test-time training and matches label-supervised on-policy self-distillation across five competition-level math benchmarks.",
+      "tldr_zh": "TTPO 利用 rollout 与多数投票伪标签之间的非对称性，实现无标签 test-time training。与伪标签一致的轨迹用于蒸馏，不一致轨迹则通过 grouped RL 只惩罚高置信错误 token，从而降低多数投票出错时的连锁污染。它将 Qwen3-1.7B 的测试时训练成绩从 38.0% 提升到 45.2%，并在五个竞赛级数学基准上追平有标签的 on-policy self-distillation。",
+      "upvotes": 70,
+      "authors": "Aozhe Wang, Zhengxi Lu, Jianze Wang, Shangke Lv, Ying Liu, Weiming Lu, Jun Xiao, Yueting Zhuang, Hua Yang, Qianglong Chen, Yongliang Shen",
+      "ai_keywords": [
+        "test-time training",
+        "policy optimization",
+        "self-distillation",
+        "mathematical reasoning"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "WikiSkill: Compiling Agent Experience into Persistent Knowledge for Skill Evolution",
+      "url": "https://arxiv.org/abs/2608.27454",
+      "tldr": "WikiSkill co-evolves agent skills with a persistent wiki that consolidates lessons from execution histories. The design explicitly separates raw experience, accumulated knowledge, and executable skills, allowing later optimization rounds to reuse prior discoveries instead of restarting from scattered traces. Its gains across models and benchmarks—including cross-model skill transfer—suggest that persistent knowledge infrastructure can complement model scaling.",
+      "tldr_zh": "WikiSkill 让 agent skill 与一个持续积累的 wiki 共同演化，把执行历史中的经验系统化沉淀下来。它明确分离原始轨迹、累积知识和可执行 skill，使后续优化能复用此前发现，而不是每轮都从零整理零散记录。跨模型、跨 benchmark 的提升以及 skill transfer 结果表明，持久知识基础设施可以成为模型规模之外的能力杠杆。",
+      "upvotes": 12,
+      "authors": "Liyan Tang, Cyrus Rashtchian, Chun-Sung Ferng, Andrew Tomkins, Da-Cheng Juan, Tu Vu",
+      "ai_keywords": [
+        "agent skills",
+        "persistent knowledge",
+        "experience consolidation",
+        "skill evolution"
+      ],
+      "interest_tag": "Memory"
+    }
+  ],
+  "alphaxiv_papers": [
+    {
+      "title": "Accelerating Scientific Research with Gemini in the Real-World",
+      "arxiv_id": "2608.26701",
+      "url": "https://arxiv.org/abs/2608.26701",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2608.26701",
+      "tldr": "This work extends Google's Gemini-based Co-Scientist from in-silico ideation into closed-loop research across materials science, biology, and computer science. The system interfaces with laboratory processes, predicts unpublished experimental behavior, and autonomously discovers an inference-time scaling architecture, while reliability modules reduce paper-generation hallucination to 4% and eliminate complete data fabrication in the reported study. Its significance is the shift from evaluating scientific agents on plausible hypotheses to judging them by executed experiments, measured outcomes, and expert review.",
+      "tldr_zh": "这项工作把 Google 基于 Gemini 的 Co-Scientist 从 in-silico 假设生成扩展到材料、生物和计算机科学的闭环研究。系统接入实验流程、预测未公开实验现象，并自主发现 inference-time scaling 架构；报告中的可靠性模块把论文生成幻觉降至 4%，且消除了完整数据捏造。其意义在于科学 agent 的评价标准开始从「假设是否像样」转向真实执行、可测结果和专家审查。",
+      "interest_tag": "Agent Swarm"
+    },
+    {
+      "title": "Automated Researchers Can Reliably Mitigate Alignment Failures",
+      "arxiv_id": "",
+      "url": "https://www.alphaxiv.org/abs/2608.automated-alignment-researchers",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2608.automated-alignment-researchers",
+      "tldr": "The study asks whether automated alignment researchers can design post-training interventions for ten measurable failures such as deception, sycophancy, and jailbreak susceptibility. Its strongest methods improve targeted and held-out safety evaluations while preserving general capability, generalize to models up to 4.7 times larger, and outperform methods proposed by 28 experienced researchers under an eight-hour budget. The result is important because it frames automated safety research as an experimentally testable optimization loop rather than a speculative agent demo.",
+      "tldr_zh": "该研究考察 automated alignment researchers 能否针对欺骗、迎合和 jailbreak 等十类可测量失效，自主设计 post-training 干预。最强方法在保留通用能力的同时改善目标与 held-out 安全评测，可迁移到大 4.7 倍的模型，并在八小时预算下超过 28 位有经验研究者提出的方法。其价值在于把自动化安全研究变成可实验检验的优化闭环，而不只是一个概念性 agent demo。",
+      "interest_tag": ""
+    },
+    {
+      "title": "LeVJEPA: Efficient & Scalable Video Pretraining without the Heuristics",
+      "arxiv_id": "2608.27395",
+      "url": "https://arxiv.org/abs/2608.27395",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2608.27395",
+      "tldr": "LeVJEPA simplifies self-supervised video pretraining to a single encoder and projector, using an invariance objective plus SIGReg to prevent collapse without EMA target encoders, stop-gradient branches, or pixel reconstruction. Random token dropping cuts pretraining compute by 5.6–20.8 times versus V-JEPA 2 at matched epochs while maintaining or improving downstream accuracy. The work makes video a more credible substrate for general-purpose representation learning and supports block-causal encoders without measurable accuracy loss.",
+      "tldr_zh": "LeVJEPA 将自监督视频预训练简化为单 encoder 与 projector，利用 invariance objective 和 SIGReg 防止表示坍塌，不再依赖 EMA target encoder、stop-gradient 分支或像素重建。随机 token dropping 在相同训练 epoch 下将计算量降至 V-JEPA 2 的约 1/5.6 至 1/20.8，同时保持或提升下游精度。该工作让视频成为更现实的通用表征学习载体，并表明 block-causal encoder 可以不损失可测精度。",
+      "interest_tag": ""
+    },
+    {
+      "title": "Code World Model: Coding Agent as World Brain",
+      "arxiv_id": "2608.25927",
+      "url": "https://arxiv.org/abs/2608.25927",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2608.25927",
+      "tldr": "Code World Model separates logical world evolution from visual rendering: a coding agent maintains executable state and rule-consistent consequences, while a video model realizes the scene. A compiled proxy representation carries frame-level spatiotemporal constraints between those layers, and paired pipelines align proxies with gameplay or real-world observations. This decomposition matters because persistent causal state is difficult for monolithic video generators, although the reported experiments remain an early proof of concept on relatively simple interactive worlds.",
+      "tldr_zh": "Code World Model 将世界的逻辑演化与视觉渲染拆开：coding agent 用可执行代码维护状态和规则一致的后果，video model 再负责生成画面。两者之间通过可编译的 proxy representation 传递逐帧时空约束，并用 gameplay/现实视频构造配对数据。这个分解切中了单体视频生成器难以维持长期因果状态的问题，但当前实验仍主要是简单交互世界上的早期 proof of concept。",
+      "interest_tag": ""
+    },
+    {
+      "title": "Zero-WAM: In-Context World-Action Modeling from Human Videos for Open-Ended Task Generalization",
+      "arxiv_id": "2608.26103",
+      "url": "https://arxiv.org/abs/2608.26103",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2608.26103",
+      "tldr": "Zero-WAM treats a human demonstration video as an in-context specification for a robotic task the policy has never seen. Its HumanGen pipeline creates 74.2K paired human-robot examples across 8.6K tasks, and an in-context future-chunk objective discourages shortcuts based on familiar tasks. The model reaches 47.0% average success on seven unseen RoboTwin 2.0 tasks, a 29.5-point gain over the strongest video-action baseline, and transfers to long-horizon real-world manipulation.",
+      "tldr_zh": "Zero-WAM 把人类示范视频视为机器人未见任务的 in-context specification。HumanGen 流程构造了覆盖 8.6K 个任务的 74.2K 组人机配对样本，并用 in-context future-chunk objective 抑制模型依赖已见任务捷径。模型在 RoboTwin 2.0 七个未见任务上达到 47.0% 平均成功率，比最强 video-action baseline 高 29.5 个百分点，并展示了向现实长程操作的迁移。",
+      "interest_tag": ""
+    }
+  ],
+  "github_repos": [
+    {
+      "name": "S1N6H/pentest-harness",
+      "url": "https://github.com/S1N6H/pentest-harness",
+      "tldr": "Pentest Harness is a self-hosted workspace for authorized penetration tests, bug bounty work, security labs, and CTFs driven by AI agents. Its plugin architecture separates model providers, tools, sessions, settings, and credentials, with support for multiple commercial and OpenAI-compatible APIs. The project stands out because it combines a concrete high-value workflow with local session control and a substantive, actively maintained implementation rather than a generic agent wrapper.",
+      "tldr_zh": "Pentest Harness 是面向授权渗透测试、漏洞赏金、安全实验室和 CTF 的自托管 AI agent 工作台。其插件架构将模型 provider、工具、session、设置和凭据解耦，并支持多种商业及 OpenAI-compatible API。它的价值在于聚焦明确的高价值工作流，同时强调本地会话控制，且仓库内容与更新活跃度都明显强于泛化 agent 壳项目。",
+      "stars": 294,
+      "language": "TypeScript",
+      "interest_tag": ""
+    },
+    {
+      "name": "hkqr/my-free-code",
+      "url": "https://github.com/hkqr/my-free-code",
+      "tldr": "My Free Code is a multi-provider gateway built for Claude Code and other coding agents. It exposes Anthropic Messages and OpenAI Responses-compatible endpoints, streams tool calls and reasoning metadata, and adds ordered fallbacks, health backoff, concurrency controls, and an admin UI. Its traction reflects a practical demand for decoupling agent clients from any single model vendor while preserving the protocol details those clients expect.",
+      "tldr_zh": "My Free Code 是面向 Claude Code 等 coding agent 的多 provider 网关。它同时提供 Anthropic Messages 与 OpenAI Responses-compatible 接口，支持流式 tool call、reasoning metadata、顺序 fallback、健康退避、并发控制和管理界面。其热度反映了一个现实需求：在保持 agent client 协议兼容的同时，摆脱对单一模型供应商的绑定。",
+      "stars": 286,
+      "language": "Python",
+      "interest_tag": ""
+    },
+    {
+      "name": "Merit-Systems/OpenInstinct",
+      "url": "https://github.com/Merit-Systems/OpenInstinct",
+      "tldr": "OpenInstinct is a self-hostable personal assistant controlled through iMessage that can operate websites to complete chores such as booking tickets or handling groceries. The design keeps passwords, payment details, and user context under the operator's control while allowing model choice and one-click deployment. It is notable as a consumer-facing computer-use product that packages browser action, messaging, and credential custody into one understandable workflow.",
+      "tldr_zh": "OpenInstinct 是一个通过 iMessage 交互的自托管个人助手，可操作网站完成订票、购物等事务。其设计让密码、支付信息和用户上下文仍由部署者掌控，同时允许自由选择模型并提供一键部署。它值得关注，因为它把 browser action、消息入口与凭据托管组合成了用户容易理解的 Computer Use 产品闭环。",
+      "stars": 206,
+      "language": "TypeScript",
+      "interest_tag": "CUA"
+    },
+    {
+      "name": "UditAkhourii/cdaf",
+      "url": "https://github.com/UditAkhourii/cdaf",
+      "tldr": "CDAF proposes a plain-text, timestamped sidecar format that lets agents reuse a video's description instead of repeatedly running expensive video understanding. The format binds the sidecar to the media via hashes and ships with a CLI, an agent skill, tests, and a reproducible benchmark. The idea is small but strategically useful: it turns repeated multimodal inference into a cacheable artifact that different agents and tools can share.",
+      "tldr_zh": "CDAF 提出一种带时间戳的纯文本视频 sidecar 格式，让 agent 复用既有描述，而不是反复执行昂贵的视频理解。格式通过 hash 与原始媒体绑定，并配套 CLI、agent skill、测试和可复现 benchmark。这个想法虽小却很实用：它把重复的多模态推理变成可缓存、可由不同 agent 与工具共享的资产。",
+      "stars": 99,
+      "language": "Python",
+      "interest_tag": ""
+    },
+    {
+      "name": "useagenthq/useagent",
+      "url": "https://github.com/useagenthq/useagent",
+      "tldr": "useAgent is an open-source team coworker that runs Claude Code, Codex, or OpenCode inside cloud computers and returns finished artifacts such as websites, decks, spreadsheets, reports, and pull requests. It combines workspace context, tool access, self-hosting, and a live session timeline rather than presenting another chat-only shell. The product framing is strong because it sells the handoff and completed deliverable, while still exposing the execution environment needed for trust and debugging.",
+      "tldr_zh": "useAgent 是一个开源团队 AI coworker，可在云端计算机中运行 Claude Code、Codex 或 OpenCode，并交付网站、演示文稿、表格、报告和 PR 等成品。它把团队上下文、工具接入、自托管和实时 session timeline 组合起来，而不是只做聊天壳。其产品表达很有效：前台强调「交办后拿结果」，后台仍暴露执行过程以支持信任与调试。",
+      "stars": 86,
+      "language": "TypeScript",
+      "interest_tag": ""
+    }
+  ],
+  "hackernews": [
+    {
+      "title": "Serve Markdown to AI Agents with Accept Headers",
+      "url": "https://acceptmarkdown.com/",
+      "tldr": "The proposal uses standard HTTP content negotiation so the same URL can return clean Markdown when an agent sends `Accept: text/markdown`, while browsers continue receiving HTML. It emphasizes correct caching with `Vary: Accept`, quality values, and 406 handling, and provides deployment recipes for common servers and frameworks. The appeal is leverage: a tiny protocol-level change can reduce tokens, retrieval noise, parsing work, and time to first useful model input without inventing a new agent API.",
+      "tldr_zh": "该方案利用标准 HTTP content negotiation：agent 发送 `Accept: text/markdown` 时，同一 URL 返回干净 Markdown，而浏览器仍获得 HTML。它强调用 `Vary: Accept` 保证缓存正确，并覆盖 q-value、406 响应及常见服务器和框架的部署配方。其吸引力来自极高杠杆率：无需发明新 agent API，一个很小的协议改动就能减少 token、检索噪声、解析成本和首个有效输入的延迟。",
+      "points": 176,
+      "num_comments": 108,
+      "interest_tag": ""
+    },
+    {
+      "title": "Terminal-Bench-Science: Evaluating AI agents on scientific research workflows",
+      "url": "https://www.terminal-bench-science.ai/announcement",
+      "tldr": "Terminal-Bench-Science 0.1 evaluates agents on 70 expert-curated workflows drawn from life, physical, Earth, mathematical, and engineering sciences. The tasks are contributed by working scientists and the benchmark is designed to evolve continuously with real research needs. Its strongest evaluated system, Claude Opus 5 with Claude Code, resolves only 30.0%, revealing substantial headroom even for frontier agents on authentic scientific work.",
+      "tldr_zh": "Terminal-Bench-Science 0.1 用来自生命、物理、地球、数学和工程科学的 70 个专家策划工作流评测 agent。任务由真实科研人员贡献，benchmark 还计划随科学需求持续演化。当前最强组合 Claude Opus 5 + Claude Code 的解决率也只有 30.0%，说明 frontier agent 在真实科研工作流上仍有巨大提升空间。",
+      "points": 117,
+      "num_comments": 36,
+      "interest_tag": "Benchmark"
+    },
+    {
+      "title": "AI Engineer Notebooks – free, framework-free RAG/agents/evals on Colab",
+      "url": "https://github.com/calmrocks/ai-engineer-notebooks",
+      "tldr": "AI Engineer Notebooks is a free Colab curriculum for building the applied-LLM stack with raw APIs rather than abstraction-heavy frameworks. It covers prompting, RAG, evaluation, agents, adaptation, serving, and red-team testing in runnable notebooks aimed at AI Engineer and Forward Deployed Engineer skills. Its popularity comes from combining zero setup with implementation transparency, letting learners see the mechanics that frameworks often hide.",
+      "tldr_zh": "AI Engineer Notebooks 是一套可在免费 Colab 中运行的 applied-LLM 课程，刻意使用 raw API 而不是重型框架。内容覆盖 prompting、RAG、evaluation、agent、adaptation、serving 和 red-team testing，面向 AI Engineer 与 Forward Deployed Engineer 的实际能力。它受欢迎的原因是同时做到零配置与机制透明，让学习者看到框架通常遮蔽的实现细节。",
+      "points": 112,
+      "num_comments": 15,
+      "interest_tag": ""
+    },
+    {
+      "title": "Six months of writing code exclusively with agents",
+      "url": "https://blog.exe.dev/engineering-with-ai",
+      "tldr": "After six months of avoiding hand-written code, the author argues that agentic engineering is not vibe coding: the human must still co-design architecture, interfaces, constraints, and trade-offs before owning the result. The workflow evolved toward parallel agents in isolated disposable VMs, centralized supervision, strong tests, and selective review instead of approving every command. The deeper lesson is that coding throughput shifts the bottleneck from typing to system understanding, verification, and coordination.",
+      "tldr_zh": "作者在连续六个月不手写代码后认为，agentic engineering 不等于 vibe coding：人仍需先与 agent 共同确定架构、接口、约束和 trade-off，并最终对系统负责。其工作流逐步转向隔离的一次性 VM、并行 agent、集中式监督、强测试和选择性 review，而不是逐条批准命令。更深层的变化是，代码吞吐提升后，瓶颈从打字转向系统理解、验证与协调。",
+      "points": 68,
+      "num_comments": 105,
+      "interest_tag": ""
+    },
+    {
+      "title": "WebMCP: Teaching Your Website to Talk to AI Agents",
+      "url": "https://sreenathmenon.com/blog/2026-08-04-webmcp-teaching-websites-to-talk-to-ai-agents/",
+      "tldr": "WebMCP is a proposed web standard from the W3C Web Machine Learning Community Group that lets pages register structured tools for agents to call inside the user's logged-in browser session. Its imperative and declarative APIs wrap actions a site already supports, replacing brittle DOM or pixel inference with explicit schemas and execution functions; Chrome currently exposes the young API behind a trial. The approach could make web automation more reliable and same-origin, but consent, prompt injection, and the still-evolving security model remain important constraints.",
+      "tldr_zh": "WebMCP 是 W3C Web Machine Learning Community Group 推进的拟议标准，让网页在用户已登录的浏览器 session 中向 agent 注册结构化工具。它通过 imperative 或 declarative API 包装网站已有操作，以显式 schema 和执行函数替代脆弱的 DOM/像素推断；Chrome 目前通过试验机制提供这一年轻 API。该方向有望提升 Web 自动化的可靠性与 same-origin 控制，但用户授权、prompt injection 和尚未成熟的安全模型仍是关键约束。",
+      "points": 57,
+      "num_comments": 59,
+      "interest_tag": ""
+    }
+  ]
+}
