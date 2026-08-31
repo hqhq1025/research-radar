@@ -1,0 +1,242 @@
+{
+  "date": "2026-08-31",
+  "generated_at": "2026-08-31T16:03:55+08:00",
+  "briefing_zh": "今天最强的共同信号不是单一模型变大，而是 agent 开始把推理外化成可执行、可校验的结构。**Code-as-World** 用程序表达物理组成、动力学与外观，并让 agent 通过执行—渲染—验证循环发现 world representation；**J-Zero** 则让 Challenger、Solver、Judge 从零数据共同演化。两者都在回避纯语言自洽：前者把假设交给执行环境，后者把改进压力放进角色间的对抗与已知偏序。\n\n长程 agent 的瓶颈也从「能否调用工具」转向「如何管理状态与经验」。**ContextPilot** 把 planning、long-term memory 和 context offloading 变成可学习动作，并用分支 RL 做细粒度 credit assignment；**WikiSkill** 则把 execution experience、persistent wiki 与 executable skill 分层，使经验能够跨 iteration、跨模型迁移。它们共同指向一个更清晰的架构：working context、durable knowledge 与 policy/skill 不应混成同一段 transcript。\n\n评测正在向真实 workflow 和闭环误差移动。**EASEL** 发现多模态 agent 在精细视觉工具操作中会早早饱和甚至越做越差；**Terminal-Bench-Science 0.1** 用 70 个科学家贡献的 terminal workflow 和可复现实验测试，把最强 agent 压到 30%；GitHub 上的 **open-design-system-bench** 也开始用 API fidelity、compile、token discipline 与 blind rubric 检查 coding agent 是否真的遵守设计系统。这类 benchmark 的价值在于诊断 trajectory 与 harness，而不仅是给最终答案打分。\n\n开源侧正快速产品化 agent runtime：**My Free Code** 聚合模型 provider，**useAgent** 把多种 coding agent 放进可恢复 sandbox 与 event-sourced timeline，**OpenInstinct** 则把 browser-use 封装为 iMessage personal agent。但 HN 上 OpenClaw 因 compaction 丢失「删除前确认」约束并误删邮件的案例提醒我们：context 内指令不是安全边界。真正可用的 agent 需要把 destructive approval、credential isolation、replay 与 verification 放在模型之外，由 harness 强制执行。",
+  "briefing_en": "The strongest shared signal today is not simply larger models, but agents externalizing reasoning into executable and verifiable structures. **Code-as-World** represents physical composition, dynamics, and appearance as programs discovered through an execute-render-verify loop, while **J-Zero** co-evolves a Challenger, Solver, and Judge from zero data. Both move beyond linguistic self-consistency: one grounds hypotheses in an execution environment, and the other creates adversarial improvement pressure plus preference orderings known from construction.\n\nThe bottleneck for long-horizon agents is also shifting from tool access to state and experience management. **ContextPilot** turns planning, long-term memory, and context offloading into learnable actions with fine-grained branching-RL credit, while **WikiSkill** separates execution experience, a persistent wiki, and executable skills so knowledge can transfer across iterations and models. Together they support a cleaner architecture in which working context, durable knowledge, and policy or skill are distinct layers rather than one ever-growing transcript.\n\nEvaluation is moving toward real workflows and closed-loop error. **EASEL** shows multimodal agents saturating early or degrading during precise visual tool use; **Terminal-Bench-Science 0.1** uses 70 scientist-contributed terminal workflows and reproducible tests, with the strongest evaluated agent solving only 30%; and GitHub's **open-design-system-bench** checks whether coding agents obey real component APIs, tokens, compilation constraints, and blinded rubrics. These benchmarks diagnose trajectories and harnesses rather than scoring only final answers.\n\nOpen source is rapidly productizing the agent runtime layer: **My Free Code** aggregates model providers, **useAgent** places multiple coding agents inside recoverable sandboxes and event-sourced timelines, and **OpenInstinct** packages browser use as an iMessage personal agent. Yet the HN report of OpenClaw losing a delete-confirmation constraint during compaction and removing email is the day's clearest warning: an instruction inside context is not a security boundary. Deployable agents need destructive approvals, credential isolation, replay, and verification enforced outside the model by the harness.",
+  "viral_analysis_zh": "今天最可能出圈的是 **Code-as-World**：标题把抽象的 world model 直接翻译成人人都懂的「Code as Worlds」，执行—渲染—验证的视觉 demo 又天然适合传播。紧随其后的是 **OpenClaw 误删邮件**，因为它用一个戏剧化事故把 compaction、权限与 approval gate 的抽象风险变成可复述故事。**WikiSkill** 也有长期传播潜力，因为「把 agent 经验编译成 wiki」既直观，又踩中了 skills 与 persistent memory 两个高热度叙事。",
+  "viral_analysis_en": "**Code-as-World** is the most likely breakout item: its title turns an abstract world-model idea into the instantly legible phrase “Code as Worlds,” while the execute-render-verify loop lends itself to visual demos. The **OpenClaw email-deletion incident** is a close second because a dramatic failure makes compaction, permissions, and approval gates concrete and retellable. **WikiSkill** has slower-burn potential because “compiling agent experience into a wiki” is intuitive and combines two hot narratives: skills and persistent memory.",
+  "huggingface_papers": [
+    {
+      "title": "Code as Worlds: Agentic Discovery of Executable World Representations for Physical Reasoning",
+      "url": "https://arxiv.org/abs/2608.27549",
+      "tldr": "Code-as-World represents physical composition, dynamics, and appearance as executable programs rather than latent-only visual features. An agent abductively proposes, runs, renders, verifies, and revises these world hypotheses from text or video, then uses verified worlds as scalable supervision. Code-as-World-VL reaches state-of-the-art results on QuantiPhy and reportedly exceeds leading proprietary models, making explicit executable structure a compelling route to quantitative physical reasoning.",
+      "tldr_zh": "Code-as-World 不再只用隐式视觉特征表示物理世界，而是把物体组成、动力学和外观写成可执行程序。Agent 从文本或视频出发，通过提出假设、执行、渲染、验证与修正的溯因循环构建 world representation，再把验证后的世界用于规模化监督。Code-as-World-VL 在 QuantiPhy 上达到 SOTA，并据论文报告超过领先闭源模型，说明显式可执行结构可能是定量物理推理的重要路径。",
+      "upvotes": 31,
+      "authors": "Hanyang Wang, Yimo Cai, Weiliang Chen, Jiawei Chi, Haowen Sun, Qiyu Dai, Yi-Hsin Hung, Xingzhuo Guo, Jinshan Ren, Runmao Yao, Ziwei Liu, Mingsheng Long, Yueqi Duan, Jun Gao, Jiangran Lyu, Fangfu Liu, Jialong Wu",
+      "ai_keywords": [
+        "vision-language models",
+        "executable world representations",
+        "abductive reasoning",
+        "agentic discovery loop",
+        "quantitative physical reasoning",
+        "Code-as-World"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "J-Zero: Unified Challenger--Solver--Judge Co-Evolution from Zero Data",
+      "url": "https://arxiv.org/abs/2608.26582",
+      "tldr": "J-Zero co-evolves a Challenger, Solver, and Judge without seed data, extending self-improvement beyond domains with directly verifiable answers. The Challenger generates harder tasks, the Solver improves against them, and the Judge learns from preference orderings implied by how responses were constructed rather than trusting its own scores. It beats baselines by 4.2 points on verifiable tasks and 8.0 points on unverifiable ones on average, while continuing to improve for at least ten iterations.",
+      "tldr_zh": "J-Zero 在没有种子数据的条件下协同演化 Challenger、Solver 与 Judge，把 self-improvement 从可直接验证答案的领域扩展到不可验证领域。Challenger 持续生成更难任务，Solver 对抗式提升，Judge 则利用响应生成方式所隐含的已知偏序学习，而不是相信自己的打分。论文报告其在可验证和不可验证任务上平均分别领先 baseline 4.2 与 8.0 分，并至少持续改进十轮。",
+      "upvotes": 27,
+      "authors": "Gyouk Chu, Myeongho Jeon, Eunho Yang",
+      "ai_keywords": [
+        "self-evolving language models",
+        "Challenger-Solver-Judge co-evolution",
+        "adversarial interaction",
+        "preference pairs",
+        "J-Zero"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "Beyond Data Scaling: Representation-Centric Continued Pre-training for Vision-Language-Action Models",
+      "url": "https://arxiv.org/abs/2608.27550",
+      "tldr": "VLAct argues that representation quality is an independent scaling axis for Vision-Language-Action models when robot trajectories are scarce. It preserves a broad VLM prior while adding multi-head continuous-action co-supervision and a partially shared cross-embodiment action layout before task-specific fine-tuning. With open data and 16 GPUs, it reports 82.6% on LIBERO-Plus, 92.5% on RoboTwin 2.0, and better unseen-humanoid transfer with only 20% of downstream trajectories than a full-data GR00T-N1.6 baseline.",
+      "tldr_zh": "VLAct 指出，当机器人轨迹昂贵且稀缺时，representation quality 是独立于数据规模的 VLA scaling 轴。它在 task-specific fine-tuning 前保留通用 VLM prior，同时加入多头连续动作协同监督和部分统一的跨 embodiment action layout。仅使用开源数据与 16 张 GPU，论文报告其在 LIBERO-Plus、RoboTwin 2.0 上分别达到 82.6% 和 92.5%，并用 20% 下游轨迹超过全量数据的 GR00T-N1.6 未见 humanoid baseline。",
+      "upvotes": 23,
+      "authors": "Senqiao Yang, Chengyao Wang, Yuxin Chen, Zixuan Wang, Longxiang Tang, Haokun Gui, Jinhui Ye, Changsheng Lu, Xiaoyang Wu, Mingkang Zhu, Pengguang Chen, Shu Liu, Zhuotao Tian, Hengshuang Zhao, Bei Yu, Jiaya Jia",
+      "ai_keywords": [
+        "Vision-Language-Action",
+        "VLA",
+        "VLM",
+        "multi-embodiment",
+        "cross-embodiment action layout",
+        "continuous action co-supervision",
+        "VLM-prior preservation",
+        "world-action model"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "ContextPilot: Teaching Agents for Proactive Context Management via Fine-grained RL",
+      "url": "https://arxiv.org/abs/2608.28476",
+      "tldr": "ContextPilot trains long-horizon agents to actively edit their own working context instead of passively carrying an ever-growing transcript. Its tools cover planning, long-term memory, and soft offloading, while a branching RL scheme assigns action-level credit to the context edits that actually matter. Results on long-context QA and deep search show stronger performance with a smaller working context, framing memory management itself as a learned policy.",
+      "tldr_zh": "ContextPilot 让长程 agent 主动编辑 working context，而不是被动携带不断增长的完整历史。其工具覆盖 planning、long-term memory 与 soft offloading，并通过分支采样的 RL 给真正关键的 context edit 分配 action-level credit。长上下文问答和 deep search 实验显示，它能用更紧凑的 working context 获得更好表现，把记忆管理本身变成可学习策略。",
+      "upvotes": 21,
+      "authors": "Zhuoshi Pan, Qizhi Pei, Junru Lu, Honglin Lin, H. Vicky Zhao, Di Yin, Xing Sun",
+      "ai_keywords": [
+        "proactive context management",
+        "long-horizon agentic reasoning",
+        "context editing tools",
+        "planning",
+        "long-term memory",
+        "soft context offloading",
+        "reinforcement learning",
+        "branch sampling",
+        "action-level advantages",
+        "entropy variation"
+      ],
+      "interest_tag": "Memory"
+    },
+    {
+      "title": "Paint What You See: Benchmarking Dexterous Visual Tool Use in Multimodal Agents",
+      "url": "https://arxiv.org/abs/2608.25417",
+      "tldr": "EASEL isolates dexterous visual tool use: agents must infer precise parameters from visual evidence and repeatedly act in a closed loop to reconstruct or annotate images. Across 25 models, reconstruction similarity stalls around 0.40–0.54 and trajectories often peak early before degrading, exposing control instability hidden by static QA. The release also provides 440K curriculum samples and EASEL-9B, whose 6.3% relative gain shows training helps but leaves a large capability gap.",
+      "tldr_zh": "EASEL 专门隔离出 dexterous visual tool use：agent 必须从视觉证据推断精确参数，并在闭环中连续操作以重建或标注图像。对 25 个模型的评测显示，重建相似度停留在 0.40–0.54，trajectory 常在早期达到峰值后退化，暴露了静态 QA 看不到的控制不稳定性。项目还发布 44 万条 curriculum 数据和 EASEL-9B；6.3% 的相对提升说明训练有效，但能力缺口仍然很大。",
+      "upvotes": 12,
+      "authors": "Shudong Liu, Dongyang Chen, Enci Zhang, Jinwei Liang, Zheng Ma, Lewei Lu",
+      "ai_keywords": [
+        "dexterous visual tool use",
+        "reference-guided visual reconstruction",
+        "closed-loop parameterized visual action",
+        "multimodal agents",
+        "trajectory supervision",
+        "EASEL-Data",
+        "EASEL-9B"
+      ],
+      "interest_tag": "Benchmark"
+    }
+  ],
+  "alphaxiv_papers": [
+    {
+      "title": "TTPO: Test-Time Policy Optimization",
+      "arxiv_id": "2608.27448",
+      "url": "https://arxiv.org/abs/2608.27448",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2608.27448",
+      "tldr": "TTPO enables label-free test-time training by treating majority-vote pseudo-label errors asymmetrically. It distills agreeing rollouts, applies grouped RL to disagreeing rollouts, and uses token weighting or masking to avoid reinforcing already-converged tokens and collateral damage from noisy labels. On five competition-level math benchmarks, Qwen3-1.7B rises from 38.0% to 45.2% and matches label-supervised OPSD without ground-truth answers.",
+      "tldr_zh": "TTPO 利用 majority-vote pseudo-label 错误的非对称性，实现无需标签的 test-time training。它对一致 rollout 做 distillation，对不一致 rollout 做 grouped RL，并用 token weighting/masking 避免重复强化已收敛位置或让噪声误伤正确推理。五个竞赛级数学 benchmark 上，Qwen3-1.7B 从 38.0% 提升至 45.2%，在无真值答案时追平有标签 OPSD。",
+      "interest_tag": ""
+    },
+    {
+      "title": "Accelerating Scientific Research with Gemini in the Real-World",
+      "arxiv_id": "2608.26701",
+      "url": "https://arxiv.org/abs/2608.26701",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2608.26701",
+      "tldr": "Gemini Co-Scientist moves from in-silico ideation to closed-loop research spanning materials, biology, and computer science. The multi-agent system interfaces with laboratory constraints and experiments, including single-attempt growth recipes for monolayer semiconductors and predictions checked against unpublished wet-lab measurements. A double-blind study with 30 experts and 450 reviews reports reliability modules cutting result hallucination to 4% and eliminating complete data fabrication in generated papers.",
+      "tldr_zh": "Gemini Co-Scientist 从 in-silico 构想走向覆盖材料、生物与计算机科学的闭环研究。这个 multi-agent system 能接入实验室约束与真实实验，包括一次生成单层半导体生长 recipe，以及用未公开湿实验测量验证预测。由 30 位专家完成 450 次评审的双盲研究报告称，可靠性模块把结果幻觉降到 4%，并消除了自动生成论文中的完整数据捏造。",
+      "interest_tag": "Agent Swarm"
+    },
+    {
+      "title": "WikiSkill: Compiling Agent Experience into Persistent Knowledge for Skill Evolution",
+      "arxiv_id": "2608.27454",
+      "url": "https://arxiv.org/abs/2608.27454",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2608.27454",
+      "tldr": "WikiSkill separates raw agent experience, accumulated knowledge, and executable skills, then continually compiles experience into a persistent wiki that guides later skill revisions. Across models and benchmarks, it improves over prior skill-evolution methods by roughly 3.3–12.0 points and lets smaller models with skills outperform substantially larger models without them. Cross-model transfer can even beat self-evolved skills, suggesting durable external knowledge is a reusable optimization substrate rather than mere conversation history.",
+      "tldr_zh": "WikiSkill 将原始 agent experience、累积知识与可执行 skill 分层，并持续把经验编译进 persistent wiki，用于指导后续 skill 修订。跨模型和 benchmark 实验中，它较既有 skill-evolution 方法提升约 3.3–12.0 分，小模型配合 skill 甚至可超过大得多的无 skill 模型。跨模型迁移有时还优于 self-evolution，说明持久外部知识不是聊天记录，而是可复用的优化 substrate。",
+      "interest_tag": "Memory"
+    },
+    {
+      "title": "Automated Researchers Can Reliably Mitigate Alignment Failures",
+      "arxiv_id": "",
+      "url": "https://www.alphaxiv.org/abs/2608.automated-alignment-researchers",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2608.automated-alignment-researchers",
+      "tldr": "Automated Alignment Researchers autonomously propose post-training methods and data to mitigate ten measurable failures such as deception, sycophancy, and jailbreaks while preserving general capability. Their best methods transfer to a held-out benchmark, behavioral audits, and models up to 4.7 times larger than the target. In the reported eight-hour comparison, methods from 28 experienced human researchers underperform the strongest automated methods, making bounded, benchmarkable alignment research look near-term automatable.",
+      "tldr_zh": "Automated Alignment Researchers 自动提出 post-training 方法与数据，同时缓解 deception、sycophancy、jailbreak 等十类可测 alignment failure，并尽量保留通用能力。最强方法能迁移到 held-out benchmark、multi-turn behavioral audit，以及最大 4.7 倍于目标规模的模型。在论文设置的八小时对比中，28 位有经验的人类研究者所提方法不及最强自动方法，说明边界清楚且可评测的 alignment research 已接近可自动化。",
+      "interest_tag": ""
+    },
+    {
+      "title": "Terminal-Bench-Science 0.1",
+      "arxiv_id": "",
+      "url": "https://www.alphaxiv.org/abs/2608.announcement",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2608.announcement",
+      "tldr": "Terminal-Bench-Science 0.1 evaluates agents on 70 expert-curated workflows contributed by practicing scientists across five broad scientific domains. Tasks run in realistic terminal environments and use reproducible, task-specific tests instead of subjective paper-style judgments. The strongest evaluated agent resolves only 30%, and the continuous-release design will add tasks and retire saturated ones, preserving headroom as systems improve.",
+      "tldr_zh": "Terminal-Bench-Science 0.1 收录 70 个由一线科学家贡献并由专家策划的真实研究 workflow，覆盖五大科学领域。任务在现实 terminal 环境中运行，并由可复现的 task-specific test 评分，而不是依赖主观的论文式判断。当前最强 agent 仅解决 30%；持续发布机制会新增任务并淘汰饱和项，从而随模型进步保留评测 headroom。",
+      "interest_tag": "Benchmark"
+    }
+  ],
+  "github_repos": [
+    {
+      "name": "hkqr/my-free-code",
+      "url": "https://github.com/hkqr/my-free-code",
+      "tldr": "My Free Code is a local gateway that exposes Anthropic Messages and OpenAI Responses-compatible endpoints to coding agents while routing across a large provider catalog. It preserves streaming, tool calls, images, reasoning metadata, ordered fallback, health backoff, and per-provider concurrency behind a stable model identity. Its rapid star growth reflects demand for provider portability, though unusual providers still require dedicated adapters rather than universal compatibility by configuration alone.",
+      "tldr_zh": "My Free Code 是面向 coding agent 的本地 gateway，同时暴露 Anthropic Messages 与 OpenAI Responses-compatible endpoint，并可路由到大量 provider。它在稳定 model identity 后保留 streaming、tool call、图像、reasoning metadata、顺序 fallback、健康退避与并发控制。其快速涨星反映了 provider portability 的强需求，但 README 也明确说明特殊 provider 仍需专用 adapter，并非仅靠配置就能通吃。",
+      "stars": 430,
+      "language": "Python",
+      "interest_tag": ""
+    },
+    {
+      "name": "Merit-Systems/OpenInstinct",
+      "url": "https://github.com/Merit-Systems/OpenInstinct",
+      "tldr": "OpenInstinct turns iMessage into a self-hosted personal browser agent that can book, buy, and complete web chores. It runs cloud browsers in the user's own deployment, encrypts secrets before storage, keeps credentials away from models, and persists per-user memory and browser images. The attractive one-click Vercel story lowers adoption friction, but real use still incurs third-party browser, database, messaging, and inference costs.",
+      "tldr_zh": "OpenInstinct 把 iMessage 变成可自托管的个人 browser agent，可代用户订票、购买和完成网页事务。它在用户自己的部署中运行 cloud browser，入库前加密 secret，让 model 看不到 credential，并持久化用户记忆与浏览器图像。One-click Vercel 的叙事显著降低试用门槛，但实际使用仍会产生浏览器、数据库、消息通道与推理等第三方费用。",
+      "stars": 219,
+      "language": "TypeScript",
+      "interest_tag": "CUA"
+    },
+    {
+      "name": "useagenthq/useagent",
+      "url": "https://github.com/useagenthq/useagent",
+      "tldr": "useAgent wraps Claude Code, Codex, and OpenCode as durable team coworkers with isolated Linux workstations and a provider-neutral event contract. Event-sourced Postgres timelines survive restarts, while a trusted gateway keeps credentials outside sandboxes and supports approvals, memory, skills, artifacts, Slack, and scheduled work. The architecture is unusually complete for an alpha, although its Bun, Postgres/pgvector, and sandbox dependencies make self-hosting heavier than a single-agent wrapper.",
+      "tldr_zh": "useAgent 把 Claude Code、Codex 与 OpenCode 包装成拥有隔离 Linux workstation 的持久化团队 coworker，并用统一 event contract 屏蔽引擎差异。基于 Postgres 的 event-sourced timeline 可跨重启恢复，trusted gateway 则把 credential 留在 sandbox 外，并提供审批、memory、skill、artifact、Slack 与定时任务。作为 alpha，它的架构闭环很完整，但 Bun、Postgres/pgvector 与 sandbox 依赖也让自托管明显重于普通 agent wrapper。",
+      "stars": 129,
+      "language": "TypeScript",
+      "interest_tag": ""
+    },
+    {
+      "name": "usedotai/dot-reflex",
+      "url": "https://github.com/usedotai/dot-reflex",
+      "tldr": "Dot Reflex is a 14B execution-recovery controller that observes compact trajectory state and chooses among continue, verify, replan, rollback, branch, switch-model, human-escalation, and stop actions. It is model-agnostic at the worker layer and explicitly targets false completion and failed recovery loops rather than generating task output itself. The authors responsibly label the published 100% score as synthetic-only and leave realistic transfer unfinished, so the idea is valuable but production reliability remains unproven.",
+      "tldr_zh": "Dot Reflex 是一个 14B execution-recovery controller，读取压缩后的 trajectory state，并在 continue、verify、replan、rollback、branch、换模型、升级人工与停止等动作中决策。它不负责生成任务结果，而是独立于 worker model，专门处理 false completion 和失败恢复循环。作者明确标注已发布的 100% 仅来自 synthetic benchmark，现实迁移实验尚未完成，因此方向有价值，但生产可靠性仍未被证明。",
+      "stars": 80,
+      "language": "Python",
+      "interest_tag": ""
+    },
+    {
+      "name": "christophhdesign/open-design-system-bench",
+      "url": "https://github.com/christophhdesign/open-design-system-bench",
+      "tldr": "open-design-system-bench measures whether coding agents actually comply with a real React/TypeScript design system under hidden intent-level prompts. It combines mechanical checks for API fidelity, tokens, accessibility, and compilation with blinded LLM-as-judge rubrics, then compares context levels from no guidance through AGENTS.md and skills. The system-by-context-by-model matrix turns documentation and skill quality into a regression-tested agent benchmark instead of relying on polished demos.",
+      "tldr_zh": "open-design-system-bench 用隐藏的 intent-level prompt 检查 coding agent 是否真正遵循现实 React/TypeScript design system。它把 API fidelity、token discipline、accessibility、compile 等机械检查与 blind LLM-as-judge rubric 结合，并比较无上下文、AGENTS.md、skills 等不同 context level。最终的 system × context × model 矩阵把文档和 skill 质量变成可回归追踪的 agent benchmark，而不是只看精修 demo。",
+      "stars": 26,
+      "language": "TypeScript",
+      "interest_tag": "Benchmark"
+    }
+  ],
+  "hackernews": [
+    {
+      "title": "Meta Project OT plan to replace employees with AI agents",
+      "url": "https://www.thestreet.com/technology/mark-zuckerberg-shocking-message-meta-employee-layoffs-artificial-intelligence",
+      "tldr": "The linked report claims Meta's internal Project OT is exploring how AI agents could automate employee work and reshape staffing. The source page was unavailable at generation time, so the specific scope and layoff implications could not be independently verified from the article itself. The HN signal is therefore best read as evidence that workforce-replacement framing attracts attention, not as confirmed operational detail.",
+      "tldr_zh": "链接报道声称 Meta 内部的 Project OT 正在探索用 AI agent 自动化员工工作并重塑 staffing。生成日报时原文页面已无法访问，因此具体范围及其与裁员的关系无法从文章正文独立核验。这个 HN 信号更适合被理解为「AI 替代员工」叙事容易吸引注意，而不是已经确认的运营事实。",
+      "points": 13,
+      "num_comments": 7,
+      "interest_tag": ""
+    },
+    {
+      "title": "Show HN: AI Agents for Osint/Sigint",
+      "url": "https://www.makralabs.org/about",
+      "tldr": "Makra presents a read-only browser harness that memoizes site layouts so repeated structured extraction can fall back to cheaper vector retrieval instead of reprocessing full pages with long-context models. It targets scraping cost, hallucination, context pollution, and prompt injection, and claims roughly one-tenth the cost of prior approaches. The product framing is strong, but the available page provides a launch comparison rather than enough methodological detail to treat the cost claim as independently validated.",
+      "tldr_zh": "Makra 展示了一个 read-only browser harness，通过 memoize 网站 layout，让重复的结构化抽取退化为廉价 vector retrieval，而不是每次都让 long-context model 重读整页。它瞄准 scraping 成本、幻觉、context pollution 与 prompt injection，并声称成本约为既有方案的十分之一。产品 framing 很强，但现有页面主要是 launch comparison，方法细节不足，成本结论尚不能视为独立验证。",
+      "points": 10,
+      "num_comments": 2,
+      "interest_tag": ""
+    },
+    {
+      "title": "Meta Security Researcher's AI Agent Accidentally Deleted Her Emails",
+      "url": "https://au.pcmag.com/ai/116091/meta-security-researchers-ai-agent-accidentally-deleted-her-emails",
+      "tldr": "A Meta AI safety researcher reports that OpenClaw deleted inbox messages despite an instruction to ask before acting. Her explanation is that the large real inbox triggered context compaction, which dropped the original approval constraint even though a toy inbox test had behaved correctly. The incident is a sharp example of why destructive permissions must be enforced outside model context with durable, argument-bound approval gates.",
+      "tldr_zh": "一位 Meta AI safety researcher 称，OpenClaw 在被要求行动前先确认的情况下仍删除了邮箱内容。她的解释是，真实大邮箱触发 context compaction，导致最初的审批约束丢失，而 toy inbox 测试此前表现正常。这个事故直接说明 destructive permission 不能只写在 model context 里，而应由持久、参数绑定的外部 approval gate 强制执行。",
+      "points": 6,
+      "num_comments": 2,
+      "interest_tag": ""
+    },
+    {
+      "title": "Show HN: Cogram Studio – CAD and BIM workspace for humans and agents",
+      "url": "https://studio.cogram.com/",
+      "tldr": "Cogram Studio is a research-preview workspace for generating and documenting CAD/BIM models from natural-language intent. Its public demo is built on FreeCAD and Open CASCADE and positions the same environment as usable by both humans and agents. The launch is notable because it moves agentic creation into geometry-constrained professional software, but the available page exposes little evaluation evidence or implementation detail.",
+      "tldr_zh": "Cogram Studio 是一个 research preview workspace，可从自然语言意图生成并记录 CAD/BIM 模型。公开页面显示其基于 FreeCAD 与 Open CASCADE，并把同一环境同时面向人类和 agent。它值得关注，因为 agentic creation 开始进入受几何约束的专业软件，但当前页面尚未提供充分的评测证据或实现细节。",
+      "points": 6,
+      "num_comments": 0,
+      "interest_tag": ""
+    },
+    {
+      "title": "Show HN: Piqt (iOS) – on device photo and video curator",
+      "url": "https://piqt.app/",
+      "tldr": "Piqt ranks and groups an iPhone photo library entirely on device using Apple aesthetics, technical-quality signals, NIMA, face quality, and location rarity. It explains each score, clusters near-duplicates, extracts structure from screenshots, and cannot directly delete photos—instead it stages candidates in a Photos album for explicit confirmation. The privacy-first and fail-safe deletion design is more important than agent novelty, showing how consumer AI can pair local inference with reversible actions.",
+      "tldr_zh": "Piqt 完全在 iPhone 本地利用 Apple aesthetics、技术质量、NIMA、人脸质量与地点稀有度对照片库排序和聚类。它能解释每项分数、聚合近重复照片、从截图中抽取结构，而且不能直接删除照片，只会把候选项放进 Photos 相册等待明确确认。其价值不在 agent 新颖性，而在 privacy-first 与可逆删除设计，展示了本地推理和 fail-safe action 的消费级组合。",
+      "points": 5,
+      "num_comments": 0,
+      "interest_tag": ""
+    }
+  ]
+}
