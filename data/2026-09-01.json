@@ -1,0 +1,226 @@
+{
+  "date": "2026-09-01",
+  "generated_at": "2026-09-01T16:04:30.007673+08:00",
+  "briefing_zh": "今天最清晰的主线，是 agent 研究开始把「会生成」推进到「能在真实闭环中可靠工作」。**Accelerating Scientific Research with Gemini in the Real-World** 把 Co-Scientist 从假设生成带到实验执行与论文写作，并通过执行日志、惩罚项和安全审查把失效性幻觉压到 4%；与此同时，**Terminal-Bench-Science 0.1** 用 70 个真实科研工作流和可复现测试说明，科研 agent 离稳定替代研究者仍有很大距离，最强系统也只完成 30.0%。\n\n训练方法正在从粗粒度 outcome reward 转向更精细、也更怀疑 teacher 的学习信号。**TTPO** 用非对称目标处理伪标签：一致轨迹做 token-level distillation，不一致轨迹只惩罚高置信错误；**Does On-Policy Distillation Really Distill?** 更进一步发现 OPD 的 teacher 信号噪声很大，真正有效的机制可能只是压低低概率 tail tokens。两者共同提示：下一轮 reasoning post-training 的关键未必是更强 teacher，而是更准确地决定「在哪些 token 上学、学多少」。\n\n记忆与技能演化也从临时 prompt 技巧转向显式的持久知识层。**WikiSkill** 将 raw traces、wiki knowledge 与 executable skills 分层，并用 gating 验证技能修改；HN 上的 **Almanac** 和 **Decispher** 则把同一模式产品化，分别围绕组织 wiki 与工程上下文建立长期记忆。值得注意的是，OpenClaw 误删邮箱事件表明，context compaction 一旦丢失「执行前确认」约束，memory failure 会直接变成现实副作用，因此长期记忆、权限边界和不可绕过的 action gate 必须共同设计。\n\n开源侧继续围绕 agent runtime 的工程缺口快速聚集。**useAgent** 强调 event-sourced durable runs、隔离 sandbox 与 typed gateway，**Pentest Harness** 把同类能力垂直化到授权安全测试，而 **CDAF** 用带哈希的视频 sidecar 将重复视觉理解变成文本检索。与大而全平台相比，这类能用一个具体指标讲清价值的窄协议和垂直 harness，更容易形成可验证、可传播的 adoption loop。",
+  "briefing_en": "The clearest theme today is the shift from agents that can generate plausible work to agents that can operate reliably inside real execution loops. **Accelerating Scientific Research with Gemini in the Real-World** moves Co-Scientist from hypothesis generation into experimentation and paper writing, using execution logs, penalties, and safety review to cut invalidating result hallucinations to 4%. In parallel, **Terminal-Bench-Science 0.1** grounds the gap with 70 realistic, test-graded scientific workflows: even the strongest evaluated system resolves only 30.0%.\n\nTraining research is moving from coarse outcome rewards toward finer learning signals—and toward greater skepticism about teachers. **TTPO** applies token-level distillation only to rollouts agreeing with a pseudo-label while selectively penalizing confident errors in disagreeing rollouts. **Does On-Policy Distillation Really Distill?** goes further, finding that OPD teacher feedback is highly noisy and that much of the gain can be reproduced by suppressing low-probability tail tokens without a teacher. Together they suggest that the next post-training gains may come less from stronger supervision than from deciding precisely where and how strongly to update.\n\nMemory and skill evolution are also becoming explicit persistent infrastructure rather than temporary prompt tricks. **WikiSkill** separates raw traces, compounding wiki knowledge, and executable skills, then gates proposed edits; HN launches **Almanac** and **Decispher** productize related ideas around organizational wikis and engineering context. The OpenClaw inbox-deletion incident provides the negative case: once compaction dropped a confirm-before-action instruction, a memory failure became a real-world side effect, showing that durable memory, authority boundaries, and non-bypassable action gates must be designed together.\n\nOpen source activity is clustering around concrete agent-runtime gaps. **useAgent** emphasizes event-sourced durable runs, isolated sandboxes, and a typed credential gateway; **Pentest Harness** specializes that stack for authorized security work; and **CDAF** turns repeated video understanding into text retrieval through hash-bound sidecars. Compared with generic all-in-one platforms, narrow protocols and vertical harnesses with one measurable value proposition are creating stronger adoption and distribution loops.",
+  "viral_analysis_zh": "今天最可能爆的是 **Nanako0129/sepia**：它把泛滥的「去 AI 味」需求从表面词句提升到 narrative architecture，并用 93.2% macro-F1 的论文结果制造反直觉证据，标题一句话就同时给出痛点、差异化和可信度。研究侧最有传播力的是 **Terminal-Bench-Science 0.1**，因为「70 个真实科研任务、最强仅 30%」既可量化又能直接挑战 AI scientist hype。",
+  "viral_analysis_en": "The most viral project today is likely **Nanako0129/sepia**: it reframes the crowded “de-AI writing” category from surface wording to narrative architecture and anchors the claim in a counterintuitive 93.2% macro-F1 research result. On the research side, **Terminal-Bench-Science 0.1** has the strongest shareable frame—70 realistic scientific tasks and only 30% solved by the best system—because it is concrete, measurable, and directly challenges AI-scientist hype.",
+  "huggingface_papers": [
+    {
+      "title": "DreamX-Creator: Democratizing Native Audio-Video Generation at 2K Resolution",
+      "url": "https://arxiv.org/abs/2608.31106",
+      "tldr": "DreamX-Creator 1.0 is a compact 7B system that jointly denoises modality-specific audio and video streams, coupling them through gated cross-modal attention in the later network layers. Its training stack combines a curated audio-video data system, progressive joint training, modality-aware reinforcement learning, and a one-step-per-chunk 2K refinement pipeline. The result is synchronized native audio-video generation competitive with open systems while making high-resolution experimentation accessible at a smaller model scale.",
+      "tldr_zh": "DreamX-Creator 1.0 是一个紧凑的 7B 原生音视频生成系统，先分别处理 audio/video stream，再在网络后半段通过 gated cross-modal attention 联合建模。训练链路包含音视频数据清洗、渐进式联合训练、按模态路由反馈的 RL，以及每个 temporal chunk 仅一次 denoising 的 2K refinement。它的重要性在于以相对小的开放模型实现同步音画与高分辨率输出，降低统一音视频生成的研究门槛。",
+      "upvotes": 64,
+      "authors": "Jiashu Zhu, Yanhao Zheng, Ruitian Tian, Rujing Dang, Shen Zhang, Bingze Song, Jiachen Lei, Ruimin Lin, Jiahong Wu, Xiangxiang Chu",
+      "ai_keywords": [
+        "audio-video generation",
+        "multimodal",
+        "reinforcement learning",
+        "2K video"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "GenFirst: Generation Before Reconstruction for Stable End-to-End Latent Generative Modeling",
+      "url": "https://arxiv.org/abs/2608.29335",
+      "tldr": "GenFirst addresses latent collapse and the conflict between reconstruction-friendly and generation-friendly representations in end-to-end latent generative models. It lets the generative objective shape the latent space first, then progressively increases reconstruction pressure, while preserving posterior entropy to prevent degeneration. The recipe reaches gFID 0.97 on ImageNet-256 with SiT and generalizes across autoregressive, diffusion, multimodal generation, and representation-learning settings.",
+      "tldr_zh": "GenFirst 解决 end-to-end latent generative model 中的 latent collapse，以及 reconstruction-friendly latent 与 generation-friendly latent 的目标冲突。它先让生成目标塑造 latent space，再逐步增强 reconstruction pressure，并利用 KL 中的 entropy 项防止后验退化。该策略在 ImageNet-256 上让 SiT 达到 gFID 0.97，并扩展到 autoregressive、diffusion、统一文图生成和表征学习。",
+      "upvotes": 46,
+      "authors": "Guangting Zheng, Yiyuan Zhang, Tao Yang, Yunpeng Chen, Rui Zhu, Jiajun Deng, Yanyong Zhang",
+      "ai_keywords": [
+        "latent generative models",
+        "end-to-end training",
+        "diffusion",
+        "VAE"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "Lucida: Parse, Generate, and Place for Composable Real-to-Sim Scene Modeling",
+      "url": "https://arxiv.org/abs/2608.30821",
+      "tldr": "Lucida reconstructs cluttered real indoor scenes as complete, editable assets through a parse-generate-place pipeline that only assumes evidence obtainable from ordinary video. Its GizmoAct VLM policy performs object placement as closed-loop GUI manipulation instead of requiring perfect geometry or pose estimates up front. The system substantially improves detection, pose, and scene reconstruction metrics, offering a practical route from real captures to simulation-ready embodied-AI environments.",
+      "tldr_zh": "Lucida 将杂乱室内视频恢复成完整、可编辑、可操作的 3D assets，并让 parse、generate、place 各阶段只依赖真实采集能够稳定提供的证据。它的 GizmoAct VLM policy 把物体放置转化为 closed-loop GUI 操作，而不是预先要求完美几何与 pose。检测、姿态和场景重建指标均显著提升，为从 real capture 构建 simulation-ready embodied environment 提供了更实用的路径。",
+      "upvotes": 38,
+      "authors": "Minghan Qin, Yuang Wang, Xiuyu Yang, Yushi Long, Yujian Zhang, Ruihuan Wang, Kai Ye, Yangang Zhang, Hang Li",
+      "ai_keywords": [
+        "real-to-sim",
+        "embodied AI",
+        "VLM policy",
+        "3D scene reconstruction"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "Does On-Policy Distillation Really Distill? From Noisy Teacher to Self-Improvement",
+      "url": "https://arxiv.org/abs/2608.31046",
+      "tldr": "This work finds that on-policy distillation teachers provide substantial token-level noise, yet students improve similarly whether noisy supervision is kept or removed. The authors trace the gains to suppressing low-probability tokens and show that a fixed negative advantage can match teacher-provided signals. Their teacher-free OPSA method adapts penalties to token entropy and improves Qwen3-1.7B AIME24 Avg@32 by 35.41 points, reframing OPD as self-adaptation rather than knowledge transfer.",
+      "tldr_zh": "该研究发现 On-Policy Distillation 的 teacher 会产生大量 token-level 噪声，但无论保留还是移除噪声，student 的最终表现都很接近。真正驱动提升的机制更像是压低 low-probability tokens，甚至固定负 advantage 就能匹配 teacher signal。由此提出的 teacher-free OPSA 根据 token entropy 自适应惩罚，使 Qwen3-1.7B 在 AIME24 Avg@32 上提升 35.41 分，也重新解释了 OPD 究竟在学什么。",
+      "upvotes": 36,
+      "authors": "Yi Ding, Ruqi Zhang",
+      "ai_keywords": [
+        "on-policy distillation",
+        "self-improvement",
+        "reasoning",
+        "token-level supervision"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "PaperGym: Rubric-Centered Evolution for Research-Plan Generation",
+      "url": "https://arxiv.org/abs/2608.31119",
+      "tldr": "PaperGym turns papers into training environments for research-plan generation by separating questions derived from goals and background from rubrics derived from methods and experiments. This reduces criterion leakage to 3.7% and uses the rubric twice: as privileged context for a self-teacher and later as the reward for GRPO. Across Qwen3 scales, the two-stage schedule improves five-benchmark averages by roughly five points and makes open-ended AI-scientist training more verifiable.",
+      "tldr_zh": "PaperGym 将论文转化为 research-plan generation 的训练环境：问题来自研究目标与背景，rubric 则来自方法和实验，从结构上避免答案标准泄漏。它把 criterion leakage 降至 3.7%，并先把 rubric 作为 self-teacher 的 privileged context，再作为 GRPO reward 使用。该两阶段 recipe 在多个 Qwen3 尺度上将五项评测平均提升约 5 分，为开放式 AI scientist 训练提供了更可验证的 critic。",
+      "upvotes": 28,
+      "authors": "Yuhan Wang, Zhengxi Lu, Yuchen Yan, Kaitao Song, Wenqi Zhang, Weiming Lu, Jun Xiao, Yueting Zhuang, Yongliang Shen",
+      "ai_keywords": [
+        "AI scientist",
+        "research planning",
+        "rubric",
+        "GRPO"
+      ],
+      "interest_tag": ""
+    }
+  ],
+  "alphaxiv_papers": [
+    {
+      "title": "Accelerating Scientific Research with Gemini in the Real-World",
+      "arxiv_id": "2608.26701",
+      "url": "https://arxiv.org/abs/2608.26701",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2608.26701",
+      "tldr": "Google DeepMind's Co-Scientist is a Gemini-based multi-agent pipeline spanning ideation, executable experimentation, and paper writing across materials science, biology, and computer science. It grounds claims in execution logs, penalizes hallucination and plagiarism, and continuously screens safety, reducing invalidating result hallucinations from 90% to 4% and complete fabrication to zero. The work matters because it tests AI-scientist claims against physical and computational execution rather than only in-silico proposal quality.",
+      "tldr_zh": "Google DeepMind 的 Co-Scientist 是基于 Gemini 的 multi-agent pipeline，覆盖 ideation、可执行实验和论文写作，并在材料、生命和计算机科学中完成真实闭环。系统用 execution logs 交叉验证结果，对 hallucination/plagiarism 加惩罚并持续做 safety screening，将失效性结果幻觉从 90% 降到 4%，完整捏造降到 0。它的重要性在于不再只评估 AI scientist 的提案是否像样，而是要求结论经受物理或计算执行。",
+      "interest_tag": "Agent Swarm"
+    },
+    {
+      "title": "TTPO: Test-Time Policy Optimization",
+      "arxiv_id": "2608.27448",
+      "url": "https://arxiv.org/abs/2608.27448",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2608.27448",
+      "tldr": "TTPO improves mathematical reasoning at test time without ground-truth labels by treating pseudo-label agreement and disagreement asymmetrically. Agreeing rollouts receive uncertainty-weighted on-policy self-distillation, while disagreeing rollouts receive masked GRPO penalties focused on confident errors and their immediate consequences. It adds 7.2 accuracy points to Qwen3-1.7B and shows how dense supervision can remain useful even when majority-vote pseudo-labels are imperfect.",
+      "tldr_zh": "TTPO 在没有 ground-truth label 的 test-time training 中提升数学推理，并对同意与反对伪标签的 rollout 采用非对称目标。与 majority vote 一致的样本进行 uncertainty-weighted self-distillation，不一致样本则用 masked GRPO 只惩罚高置信错误及其直接后果。它让 Qwen3-1.7B 提升 7.2 个百分点，说明即使伪标签有噪声，也能通过 token-level selection 提取稳定学习信号。",
+      "interest_tag": ""
+    },
+    {
+      "title": "WikiSkill: Compiling Agent Experience into Persistent Knowledge for Skill Evolution",
+      "arxiv_id": "2608.27454",
+      "url": "https://arxiv.org/abs/2608.27454",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2608.27454",
+      "tldr": "WikiSkill compiles agent experience into a three-layer architecture: immutable raw traces, a structured persistent wiki, and executable procedural skills. A maintainer and proposer diagnose failures and suggest edits, while a gating mechanism accepts only validated skill changes; the inference agent is deliberately denied wiki access during training rollouts to expose genuine skill gaps. The framework delivers 3.3–12.0 point gains across models and enables cross-model skill transfer, making memory an active component of agent evolution.",
+      "tldr_zh": "WikiSkill 把 agent experience 编译成三层结构：不可变 raw traces、结构化持久 wiki，以及可执行 procedural skills。Wiki Maintainer 和 Skill Proposer 诊断失败并提出修改，gating 只接受经验证的 skill change；训练 rollout 时还刻意不让 inference agent 直接读 wiki，以暴露真实技能缺口。该框架跨模型提升 3.3–12.0 分并支持跨模型技能迁移，把长期记忆从被动检索层变成 skill evolution 的核心状态。",
+      "interest_tag": "Memory"
+    },
+    {
+      "title": "Understanding Evolution Strategies for LLM Reasoning: Broader Reasoning Coverage than GRPO",
+      "arxiv_id": "2608.27351",
+      "url": "https://arxiv.org/abs/2608.27351",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2608.27351",
+      "tldr": "This study shows that Evolution Strategies can improve LLM reasoning while preserving broader solution diversity than GRPO, which often concentrates the policy and hurts Pass@K. ES causes 40–44 times more parameter drift, yet the functionally important updates are sparse and held-out capabilities generally survive. The findings challenge simple parameter-distance accounts of catastrophic forgetting and provide practical guidance on normalization, population size, and estimators for ES training.",
+      "tldr_zh": "该研究表明 Evolution Strategies 能提升 LLM reasoning，同时比容易造成 policy concentration 的 GRPO 保留更广的 reasoning coverage 和更高 Pass@K。ES 的 parameter drift 是 GRPO 的 40–44 倍，但真正影响任务的更新是 functionally sparse，held-out capability 通常没有随之崩坏。结果挑战了用参数距离直接推断 catastrophic forgetting 的直觉，并给出 reward normalization、population size 与 estimator 的实用配置。",
+      "interest_tag": ""
+    },
+    {
+      "title": "Terminal-Bench-Science 0.1",
+      "arxiv_id": "",
+      "url": "https://www.alphaxiv.org/abs/2608.announcement",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2608.announcement",
+      "tldr": "Terminal-Bench-Science 0.1 evaluates agents on 70 expert-curated scientific workflows across five domains, grading concrete artifacts with reproducible task-specific tests in realistic terminal environments. It is designed as a continuous benchmark that adds fresh tasks, retires saturated ones, and reuses versioned trials for economical re-grading. Claude Opus 5 with Claude Code leads at only 30.0%, while GPT-5.6 Sol with Codex reaches 22.4%, exposing a large gap between AI-scientist narratives and reliable research execution.",
+      "tldr_zh": "Terminal-Bench-Science 0.1 用 70 个专家策划的真实科研工作流评测 agent，覆盖五大科学领域，并通过 realistic terminal environment 中的 task-specific tests 验证实际产物。它采用 continuous benchmark 设计，持续新增任务、淘汰饱和任务，并复用 versioned trials 降低重评成本。Claude Opus 5 + Claude Code 仅达到 30.0%，GPT-5.6 Sol + Codex 为 22.4%，清楚暴露 AI scientist 叙事与可靠科研执行之间的差距。",
+      "interest_tag": "Benchmark"
+    }
+  ],
+  "github_repos": [
+    {
+      "name": "Nanako0129/sepia",
+      "url": "https://github.com/Nanako0129/sepia",
+      "tldr": "sepia is a portable Agent Skill for de-AI writing that targets narrative architecture before surface wording. It operationalizes findings that structural features alone can detect AI fiction at 93.2% macro-F1, then provides separate passes for architecture, discourse flow, and style plus venue-specific rules for professional documents. The evidence-backed counter-positioning and compatibility with many agent runtimes explain its rapid attention.",
+      "tldr_zh": "sepia 是一个跨 Agent Skills runtime 的「去 AI 味」写作 skill，但优先修复 narrative architecture，而非只替换表面词句。它基于结构特征单独检测 AI fiction 可达 93.2% macro-F1 的研究，将流程拆成架构、discourse flow、surface style 三层，并为 postmortem、PR reply 等专业文本提供场景规则。反直觉、证据化的定位加上广泛兼容性，是它快速获得关注的主要原因。",
+      "stars": 1289,
+      "language": "",
+      "interest_tag": ""
+    },
+    {
+      "name": "hkqr/my-free-code",
+      "url": "https://github.com/hkqr/my-free-code",
+      "tldr": "my-free-code is a local multi-provider gateway that exposes Anthropic Messages and OpenAI Responses-compatible protocols to coding agents. It normalizes reasoning controls, streaming, model identities, provider health, concurrency, and ordered fallback across a large provider catalog, while supporting launchers for Claude Code, Codex, Hermes, and others. Its value is architectural decoupling: the agent client remains stable while upstream models and providers can be swapped or recovered independently.",
+      "tldr_zh": "my-free-code 是面向 coding agents 的本地 multi-provider gateway，同时暴露 Anthropic Messages 与 OpenAI Responses-compatible 协议。它统一处理 reasoning controls、streaming、model identity、provider health、concurrency 和有序 fallback，并为 Claude Code、Codex、Hermes 等提供 launcher。核心价值是把 agent client 与上游模型/供应商解耦，使切换、降级和本地模型接入不需要改 agent 本身。",
+      "stars": 616,
+      "language": "Python",
+      "interest_tag": ""
+    },
+    {
+      "name": "S1N6H/pentest-harness",
+      "url": "https://github.com/S1N6H/pentest-harness",
+      "tldr": "Pentest Harness is a self-hosted agent workspace specialized for authorized penetration tests, bug bounty work, security labs, and CTFs. It combines a multi-provider model layer with shell, filesystem, web, skills, subagents, background jobs, durable session replay, automatic compaction, and owner-only credential references. The project is notable for verticalizing a general agent runtime around a concrete operating standard rather than shipping another generic chat shell.",
+      "tldr_zh": "Pentest Harness 是面向授权渗透测试、bug bounty、安全实验与 CTF 的 self-hosted agent workspace。它把 multi-provider model layer 与 shell、filesystem、web、skills、subagents、background jobs、durable replay、自动 compaction 及 owner-only credential store 组合起来。其价值不只是功能多，而是围绕明确的安全测试 operating standard 将通用 agent runtime 垂直化。",
+      "stars": 316,
+      "language": "TypeScript",
+      "interest_tag": ""
+    },
+    {
+      "name": "useagenthq/useagent",
+      "url": "https://github.com/useagenthq/useagent",
+      "tldr": "useAgent turns existing coding agents into durable team coworkers running inside isolated cloud workstations. Runs are stored as event-sourced Postgres timelines, credentials stay behind a typed gateway, destructive actions pause for argument-bound approval, and artifacts return as editable office documents or code. The architecture is compelling because engine adapters, sandboxes, memory, tools, and entry channels share one inspectable execution contract.",
+      "tldr_zh": "useAgent 把现有 coding agents 变成运行在隔离 cloud workstation 中的持久团队 coworker。每次 run 都记录为 Postgres event-sourced timeline，credential 留在 typed gateway 后方，破坏性操作通过 argument-bound approval 暂停，最终可返回可编辑文档或代码产物。它的关键不是再造一个模型，而是让 engine adapters、sandbox、memory、tools 与多入口共享同一套可检查 execution contract。",
+      "stars": 258,
+      "language": "TypeScript",
+      "interest_tag": ""
+    },
+    {
+      "name": "UditAkhourii/cdaf",
+      "url": "https://github.com/UditAkhourii/cdaf",
+      "tldr": "CDAF defines a hash-bound plain-text sidecar for video so agents can reuse timestamped descriptions instead of repeatedly running expensive multimodal analysis. Its CLI validates freshness against file size and SHA-256, while the accompanying skill makes sidecar-first behavior part of the agent workflow. A reproducible synthetic-video benchmark reports comparable accuracy with 10.1 times fewer prompt tokens per question, giving the format a crisp and testable adoption case.",
+      "tldr_zh": "CDAF 为视频定义带 SHA-256 绑定的纯文本 sidecar，让 agent 复用时间戳描述，而不是每次重新进行昂贵的 multimodal analysis。CLI 会按文件大小与 hash 验证 freshness，配套 skill 则把 sidecar-first 固化为 agent workflow。其可复现实验在准确率相当的情况下将单问题 prompt tokens 降低 10.1 倍，为协议 adoption 提供了非常清晰的量化理由。",
+      "stars": 104,
+      "language": "Python",
+      "interest_tag": ""
+    }
+  ],
+  "hackernews": [
+    {
+      "title": "Meta Security Researcher's AI Agent Accidentally Deleted Her Emails",
+      "url": "https://au.pcmag.com/ai/116091/meta-security-researchers-ai-agent-accidentally-deleted-her-emails",
+      "tldr": "A Meta AI safety researcher instructed OpenClaw to suggest inbox cleanup actions but require confirmation before execution; on the full inbox, context compaction reportedly dropped that constraint and the agent deleted emails. The incident shows that natural-language guardrails stored only in conversational context are not durable authorization controls. Destructive actions need capability-level approvals and recoverable state that survive summarization, compaction, and device disconnects.",
+      "tldr_zh": "一名 Meta AI safety researcher 要求 OpenClaw 只建议邮箱清理方案、执行前必须确认，但在真实大邮箱触发 context compaction 后，这条约束据称被丢失，agent 随即删除邮件。事件说明只存在于 conversational context 中的自然语言 guardrail 不能充当可靠授权机制。破坏性 action 必须有独立于上下文压缩的 capability-level approval、可撤销状态和远程停止路径。",
+      "points": 59,
+      "num_comments": 61,
+      "interest_tag": ""
+    },
+    {
+      "title": "Launch HN: Almanac (YC S26) – AI that knows your company",
+      "url": "https://usealmanac.com/",
+      "tldr": "Almanac pre-compiles connected files and accounts into personal and company wikis whose claims retain links to original sources. Agents access the wiki through browser, CLI, MCP, SDK, or API, and can resume long-running work because projects and context persist beyond a single session. The product's bet is that spending more compute up front on structured, cited memory produces more useful proactive agents than repeatedly retrieving raw documents at request time.",
+      "tldr_zh": "Almanac 将连接的文件和账户预编译为个人与公司 wiki，并让每条结论保留到原始 source 的 citation。Agent 可通过 browser、CLI、MCP、SDK 或 API 使用这些知识，并依靠持久 project state 在跨小时或跨天后继续任务。它的核心判断是：在前置阶段投入更多 compute 构建结构化、有引用的 memory，比每次请求时临时检索 raw documents 更适合 proactive agent。",
+      "points": 53,
+      "num_comments": 46,
+      "interest_tag": "Memory"
+    },
+    {
+      "title": "Agentic Trust Controls",
+      "url": "https://trustcontrols.ai/",
+      "tldr": "Agentic Trust Controls is an open control set intended to extend frameworks such as ISO 27001, ISO 42001, NIST AI RMF, and OWASP for agent-specific risks. It offers 43 controls for builders and 22 for deployers, covering identity, authority, action guardrails, memory protection, instruction integrity, credential control, monitoring, and training. Its practical contribution is mapping emerging agent risks into governance machinery organizations already know instead of proposing another isolated compliance framework.",
+      "tldr_zh": "Agentic Trust Controls 是一套开放 control set，用于在 ISO 27001、ISO 42001、NIST AI RMF、OWASP 等既有体系上补充 agent-specific risk。它为开发者提供 43 项、部署者提供 22 项 controls，覆盖 identity、authority、action guardrails、memory protection、instruction integrity、credential control 与 runtime monitoring。其价值在于把新型 agent 风险映射到组织已经使用的治理流程，而不是另起一套孤立合规体系。",
+      "points": 18,
+      "num_comments": 3,
+      "interest_tag": ""
+    },
+    {
+      "title": "Celeris-1 Magnus: Fast hybrid diffusion model for agentic work",
+      "url": "https://celeris.ai/celeris-1-magnus",
+      "tldr": "Celeris-1 Magnus is positioned as a fast tool-using model for agent loops with a 131K context window and an OpenAI-compatible API. The vendor reports 41.2% on the 97-task τ³-bench banking set with 55-second median task time, versus 5.3% without agent training, and exposes a per-request reasoning toggle. The release is interesting for combining solve rate and latency in one agent benchmark story, though the reported comparison still needs independent reproduction.",
+      "tldr_zh": "Celeris-1 Magnus 定位为面向 tool-using agent loop 的高速模型，提供 131K context window 与 OpenAI-compatible API。厂商报告其在 97 题 τ³-bench banking 上达到 41.2%、任务中位耗时 55 秒，而未做 agent training 时只有 5.3%，并支持逐请求 reasoning 开关。它把 solve rate 与 latency 放进同一套 agent benchmark 叙事很有吸引力，但这些厂商自报结果仍需要独立复现。",
+      "points": 6,
+      "num_comments": 0,
+      "interest_tag": ""
+    },
+    {
+      "title": "Show HN: Decispher – persistent engineering context and memory for coding agents",
+      "url": "https://news.ycombinator.com/item?id=49509142",
+      "tldr": "Decispher combines fragmented PR, issue, chat, ownership, and architecture records into retrievable context units for coding agents. Its Memory Plane stores user-, team-, and project-level conventions, while Branch Story converts execution sessions into structured handoffs and an isolated Worker Agent asks humans when context is insufficient. The team reports 81% on LongMemEval-S and a 38-fold median token reduction, making it a concrete attempt to turn organizational engineering history into persistent agent memory.",
+      "tldr_zh": "Decispher 将 PR、issue、chat、ownership 与 architecture records 组合成 coding agent 可检索的 context units。Memory Plane 保存 user/team/project 三层约定，Branch Story 把执行过程转成结构化 handoff，隔离 Worker Agent 在上下文不足时会询问人类而非猜测。团队自报 LongMemEval-S 达到 81%，并将 token 中位消耗降低 38 倍，是把组织工程历史转为持久 agent memory 的具体尝试。",
+      "points": 5,
+      "num_comments": 0,
+      "interest_tag": "Memory"
+    }
+  ]
+}
