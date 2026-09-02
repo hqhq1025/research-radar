@@ -1,0 +1,221 @@
+{
+  "date": "2026-09-02",
+  "generated_at": "2026-09-02T16:03:02+08:00",
+  "briefing_zh": "今天最强的研究信号不是单一模型变大，而是系统开始围绕「可行动、可适应、可验证」重新组织。HF 榜首 **StudentSim** 用可训练的学生模拟器缓解个性化教学缺少真实交互数据的问题；**UI-Venus-2** 则把 GUI Agent 的重点从 benchmark 分数推向真实环境覆盖、鲁棒交互和部署可靠性。两者共同说明，agent 研究正在从静态答题转向持续建模用户与环境。\n\n第二条主线是 world model 与控制接口融合。**H3-World** 把语言作为大型视频生成器的控制界面，试图将理解能力直接转换为可交互世界中的动作；alphaxiv 热门的 **Lucida** 和 **Motus2** 分别从可编辑 real-to-sim 场景、统一 policy/simulator/evaluator 的方向补齐环境构建与闭环改进。值得注意的是，这些工作的重要性不只在生成质量，而在能否保持状态一致性、动作可控性和评价闭环。\n\n训练方法也在回到更细的机制层。**Normalized Low-Rank Adaptation** 通过规范 LoRA 的 rank 维度改善优化平衡；**Does On-Policy Distillation Really Distill?** 则质疑 noisy teacher 是否真的提供了有效监督，并提出无需教师打分的自适应目标。与此同时，**Safin-1** 把安全性嵌入 memory-native state evolution，显示长期状态不再只是能力模块，也成为安全边界的一部分。\n\n开源侧的热点非常工程化：**sepia** 用叙事结构而非表层词汇处理 AI 写作痕迹，**useAgent**、**my-free-code** 和 **dot-reflex** 分别覆盖 durable agent runtime、多 provider gateway 与执行恢复控制器。HN 上 **Wasmer SDK** 的本地 WebAssembly sandbox 和 **Supafork** 的 agent-native version control 进一步表明，下一轮竞争很可能发生在 agent 的执行底座：隔离、恢复、分支、审计和真实流量验证，而不只是 prompt 或模型本身。",
+  "briefing_en": "Today's strongest research signal is not simply larger models, but a reorganization around systems that can act, adapt, and be verified. HF leader **StudentSim** trains student simulators to address the shortage of real interaction data for personalized tutoring, while **UI-Venus-2** shifts GUI-agent emphasis from benchmark scores toward environment coverage, robust interaction, and deployment reliability. Together they show agent research moving from static question answering to persistent modeling of users and environments.\n\nA second theme is the convergence of world models and control interfaces. **H3-World** uses language as the control interface for a large video generator, attempting to turn understanding directly into action in an interactive world; alphaxiv favorites **Lucida** and **Motus2** complement this with editable real-to-sim scenes and a unified policy-simulator-evaluator network. Their real importance is not image quality alone, but whether state consistency, action controllability, and evaluation remain closed-loop.\n\nTraining research is also returning to mechanism-level questions. **Normalized Low-Rank Adaptation** normalizes LoRA along the rank dimension to improve optimization balance, while **Does On-Policy Distillation Really Distill?** questions whether a noisy teacher provides useful supervision and proposes a teacher-free adaptive objective. In parallel, **Safin-1** embeds safety into memory-native state evolution, suggesting that persistent state is becoming both a capability layer and a safety boundary.\n\nOpen source is especially infrastructure-heavy today. **sepia** attacks AI-writing artifacts at the level of narrative structure rather than vocabulary, while **useAgent**, **my-free-code**, and **dot-reflex** cover durable agent runtimes, multi-provider gateways, and execution recovery. On HN, **Wasmer SDK** local WebAssembly sandboxes and **Supafork** agent-native version control reinforce the same conclusion: the next competitive layer may be the execution substrate— isolation, recovery, branching, auditability, and live-traffic verification—rather than prompts or models alone.",
+  "viral_analysis_zh": "今天最可能形成跨圈传播的是 **sepia**：它用「表层 humanizer 无效，真正暴露 AI 的是叙事结构」这一反常识结论制造了强 hook，又把论文证据直接封装成可安装 skill，兼具争议性和可试用性。研究侧则是 **UI-Venus-2**，GUI Agent 从 benchmark demo 走向真实环境可靠性的叙事正好击中当前行业痛点；若公开视频案例和失败分析充分，它会比单纯刷新分数更容易扩散。",
+  "viral_analysis_en": "**sepia** is today's strongest viral candidate: its counterintuitive hook—surface humanizers miss the narrative structures that actually reveal AI writing—turns research evidence into an immediately installable skill. On the research side, **UI-Venus-2** has breakout potential because its move from benchmark demos to real-world GUI-agent reliability matches a widely felt industry pain point; strong videos and honest failure analysis would travel further than another leaderboard gain.",
+  "huggingface_papers": [
+    {
+      "title": "StudentSim: Training LLM-based Student Simulators",
+      "url": "https://arxiv.org/abs/2609.01591",
+      "tldr": "StudentSim trains LLM-based student simulators so tutoring policies can be evaluated and improved without requiring every experiment to involve real learners. The work targets the scarcity and cost of personalized educational interaction data, modeling heterogeneous strengths, weaknesses, and response patterns. Its significance is methodological: a credible simulator can make adaptive tutoring research faster, but usefulness depends on how faithfully simulated behavior transfers to actual students.",
+      "tldr_zh": "StudentSim 训练基于 LLM 的学生模拟器，让教学策略无需每次都招募真实学习者即可评估和迭代。它针对个性化教育交互数据稀缺且昂贵的问题，建模不同学生的优势、薄弱点与反馈模式。其意义主要在方法层：可信模拟器能显著加速自适应教学研究，但最终价值取决于模拟行为能否迁移到真实学生。",
+      "upvotes": 220,
+      "authors": "Ke Yang, Chenglong Wang, Michel Galley, Chandan Singh, Jeevana Priya Inala, ChengXiang Zhai, Jianfeng Gao",
+      "ai_keywords": [
+        "student simulation",
+        "personalized tutoring",
+        "LLM agents"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "Qwen-Drive-1.0: An Initial Step towards a Vision-Language Foundation Model for Autonomous Driving",
+      "url": "https://arxiv.org/abs/2609.00111",
+      "tldr": "Qwen-Drive-1.0 adapts a pretrained vision-language architecture into a foundation model for autonomous driving, combining 3D perception, visual question answering, spatial reasoning, and driving decisions. The unified formulation aims to reduce fragmentation between perception and planning modules while retaining general VLM knowledge. It matters because driving is a stringent test of whether multimodal foundation models can ground language in geometry and safety-critical action rather than merely describe scenes.",
+      "tldr_zh": "Qwen-Drive-1.0 将预训练视觉语言架构改造成自动驾驶基础模型，统一处理 3D 感知、视觉问答、空间推理与驾驶决策。该方案试图减少感知和规划模块之间的割裂，同时保留通用 VLM 知识。它的重要性在于：自动驾驶能严格检验多模态基础模型是否真正把语言落到几何关系和安全关键动作，而不只是描述画面。",
+      "upvotes": 56,
+      "authors": "Xin Zhou, Zongchuang Zhao, Zhibo Yang, Mingsheng Li, Humen Zhong, Shuai Bai, Du Chu, Ruizhe Chen, Zhaohai Li, Jun Tang, Qiuyue Wang, Mingkun Yang, Jiazhao Zhang, Dayiheng Liu, Dingkang Liang, Xiang Bai",
+      "ai_keywords": [
+        "autonomous driving",
+        "vision-language model",
+        "3D perception"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "UI-Venus-2 Technical Report",
+      "url": "https://arxiv.org/abs/2609.00028",
+      "tldr": "UI-Venus-2 targets the gap between benchmark-oriented GUI agents and dependable deployment. Its report emphasizes broader environment coverage, robust perception-action loops, and reduced brittleness under real interface variation rather than treating a single leaderboard as sufficient evidence. This is important because computer use fails at the seams—window state, dynamic layouts, recovery, and long-horizon interaction—where static benchmark success often overstates reliability.",
+      "tldr_zh": "UI-Venus-2 直接瞄准 benchmark 导向 GUI Agent 与可靠部署之间的鸿沟。报告强调扩大环境覆盖、增强 perception-action 闭环，并降低真实界面变化下的脆弱性，而不是把单一榜单当作充分证据。其重要性在于，Computer Use 往往失败在窗口状态、动态布局、恢复和长程交互这些接缝处，静态 benchmark 成绩容易高估真实可靠性。",
+      "upvotes": 49,
+      "authors": "Venus Team, Zhuohan Cai, Haoxing Chen, Jiaxuan Chen, Weizhi Chen, Changlong Gao, Zhangxuan Gu, Yuan Guo, Yusong Hu, Jianrong Jiang, Jianguo Li, Runze Li, Jinzhen Lin, Zhenyu Ma, Changhua Meng, Han Peng, Xinyu Qiu, Shuheng Shen, Zhongyi Shui, Weiqiang Wang, Ming Wen, Zhuoer Xu, Hang Yan, Kaiwen Yang, Ruilin Yao, Nanjun Yu, Zhengwen Zeng, Lianrui Zhang, Yunzhu Zhang, Zhe Zhao, Beitong Zhou",
+      "ai_keywords": [
+        "GUI agent",
+        "computer use",
+        "multimodal agent"
+      ],
+      "interest_tag": "CUA"
+    },
+    {
+      "title": "H3-World: Turning Language Understanding into World Control",
+      "url": "https://arxiv.org/abs/2609.01560",
+      "tldr": "H3-World converts the 33B MiniMax-H3 video generator into an interactive world model with language as a high-level control interface. The central claim is that sufficiently capable video generators already contain useful world knowledge, so control can be added without rebuilding the entire model around action labels. If stable over long horizons, this offers a scalable route from passive video pretraining to controllable simulation; state drift and action fidelity remain the decisive tests.",
+      "tldr_zh": "H3-World 将 33B 参数的 MiniMax-H3 视频生成器改造成交互式 world model，并以语言作为高层控制接口。核心判断是：足够强的视频生成器已包含可用的世界知识，因此无需完全围绕动作标注重建模型也能加入控制能力。若长程状态能保持稳定，这将提供从被动视频预训练通向可控模拟的可扩展路径；状态漂移与动作保真度仍是关键检验。",
+      "upvotes": 29,
+      "authors": "Danze Chen, Zeqing Wang, Ziyue Lin, Xingyi Yang, Yeying Jin",
+      "ai_keywords": [
+        "world model",
+        "video generation",
+        "language control"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "Safin-1: Safety from Within through Memory-Native State Evolution",
+      "url": "https://arxiv.org/abs/2609.00092",
+      "tldr": "Safin-1 treats memory and safety as coupled state-evolution problems for long-horizon foundation models. Instead of applying safety only as an output-time behavioral constraint, it seeks to make accumulated internal state evolve within safer dynamics as the model gathers information and adapts. This matters because persistent agents can become unsafe through what they retain and how that memory changes future behavior, even when each individual response looks acceptable.",
+      "tldr_zh": "Safin-1 把长期任务中的记忆与安全视为耦合的状态演化问题。它不只在输出时施加行为约束，而是试图让模型在积累信息、持续适应时，其内部状态沿更安全的动力学演化。这个方向很重要，因为持久 agent 的风险可能来自它保留了什么、记忆如何改变后续行为，即使单次回复看起来都合规。",
+      "upvotes": 16,
+      "authors": "Ming Zhang, Kaisen Yang, Shu Yu, Ermo Hua, Zhekai Chen, Cheng Jin, Jingnan Zheng, Yi Zhang, Zhongtian Ma, Jiawei Zhou, Sirui Chen, Qiaosheng Zhang, Xiang Wang, Ning Ding, Xia Hu, Bowen Zhou, Youbang Sun, Chaochao Lu",
+      "ai_keywords": [
+        "persistent memory",
+        "state evolution",
+        "AI safety"
+      ],
+      "interest_tag": "Memory"
+    }
+  ],
+  "alphaxiv_papers": [
+    {
+      "title": "Normalized Low-Rank Adaptation",
+      "arxiv_id": "2608.31036",
+      "url": "https://arxiv.org/abs/2608.31036",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2608.31036",
+      "tldr": "NoRA normalizes LoRA's down-projection along the rank dimension to correct optimization imbalances that arise from standard low-rank parameterization. The method improves convergence and downstream performance across pretraining, supervised fine-tuning, and reinforcement learning while preserving LoRA's mergeability. An initialization-only variant, NoRA-init, suggests that a meaningful share of the gain comes from fixing early training geometry rather than adding permanent complexity.",
+      "tldr_zh": "NoRA 沿 rank 维度规范化 LoRA 的 down-projection，用于纠正标准低秩参数化带来的优化失衡。该方法在预训练、监督微调与强化学习中改善收敛和下游表现，同时保留 LoRA 可合并的优点。仅调整初始化的 NoRA-init 也有明显收益，说明相当一部分提升来自修正早期训练几何，而非增加长期复杂度。",
+      "interest_tag": ""
+    },
+    {
+      "title": "Does On-Policy Distillation Really Distill? From Noisy Teacher to Self-Improvement",
+      "arxiv_id": "2608.31046",
+      "url": "https://arxiv.org/abs/2608.31046",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2608.31046",
+      "tldr": "This paper finds that on-policy distillation can expose students to noisy teacher token scores while the student remains surprisingly insensitive to much of that signal. It introduces On-Policy Self-Adaptation, which removes teacher supervision and applies entropy-adaptive negative advantages to low-probability tokens. The result reframes part of distillation's benefit as self-improvement induced by the on-policy training process, not necessarily knowledge transferred from a superior teacher.",
+      "tldr_zh": "该论文发现，on-policy distillation 会给学生模型提供噪声较大的教师 token 分数，而学生对其中大量信号却并不敏感。作者提出 On-Policy Self-Adaptation，移除教师监督，并对低概率 token 施加 entropy-adaptive negative advantage。结果把蒸馏的部分收益重新解释为 on-policy 训练过程诱发的自我改进，而不一定是强教师的知识迁移。",
+      "interest_tag": ""
+    },
+    {
+      "title": "Lucida: Parse, Generate, and Place for Composable Real-to-Sim Scene Modeling",
+      "arxiv_id": "2608.30821",
+      "url": "https://arxiv.org/abs/2608.30821",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2608.30821",
+      "tldr": "Lucida reconstructs real indoor scenes as complete, editable object assets plus their spatial arrangement for simulation. Its parse-generate-place pipeline deliberately defers precision to a closed-loop placement stage, avoiding the need for every earlier module to be perfectly geometric. This composability is valuable for embodied-agent training because objects can be manipulated and scenes can be varied, but simulation usefulness will depend on physical and visual fidelity under interaction.",
+      "tldr_zh": "Lucida 将真实室内场景重建为完整、可编辑的物体资产及其空间布局，用于 simulation。它的 parse-generate-place 流程把高精度要求后移到闭环 placement 阶段，避免要求每个前置模块都具备完美几何能力。可组合性对 embodied agent 训练很有价值，因为物体可操控、场景可变化，但最终用途仍取决于交互中的物理与视觉保真度。",
+      "interest_tag": ""
+    },
+    {
+      "title": "Motus2: A Self-Evolving General World Model for Dexterous Manipulation",
+      "arxiv_id": "2608.30237",
+      "url": "https://arxiv.org/abs/2608.30237",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2608.30237",
+      "tldr": "Motus2 unifies policy, simulator, and evaluator interfaces inside a single self-evolving world model for dexterous manipulation. It combines hierarchical egocentric human-data pretraining with value-guided policy improvement and reports an 84% average success rate across five tasks. The architectural bet is important: if one representation can predict, act, judge, and improve coherently, it may reduce the interface mismatch that plagues modular embodied systems.",
+      "tldr_zh": "Motus2 在一个可自我演化的灵巧操作 world model 中统一 policy、simulator 与 evaluator 接口。它结合分层第一视角人类数据预训练和 value-guided policy improvement，并在五项任务上报告 84% 平均成功率。其架构赌注值得关注：若同一表示能连贯地预测、行动、评价和改进，就可能减少模块化 embodied system 常见的接口错配。",
+      "interest_tag": ""
+    },
+    {
+      "title": "PaperGym: Rubric-Centered Evolution for Research-Plan Generation",
+      "arxiv_id": "2608.31119",
+      "url": "https://arxiv.org/abs/2608.31119",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2608.31119",
+      "tldr": "PaperGym turns scientific papers into structured environments for training research-plan generation, using explicit rubrics as the critic when no single verifiable answer exists. A decoupled data pipeline is designed to prevent criterion leakage, followed by a two-stage rubric-centered training schedule. The work is important for AI-scientist systems because it operationalizes feedback for open-ended planning, although rubric quality and leakage resistance determine whether gains reflect genuine research judgment.",
+      "tldr_zh": "PaperGym 把科学论文转化为训练研究计划生成的结构化环境，在不存在唯一可验证答案时，用显式 rubric 充当 critic。其解耦数据流程用于防止 criterion leakage，再配合两阶段 rubric-centered 训练。它对 AI Scientist 很重要，因为它把开放式规划的反馈机制具体化；但 rubric 质量和抗泄漏能力决定了提升是否代表真实研究判断。",
+      "interest_tag": ""
+    }
+  ],
+  "github_repos": [
+    {
+      "name": "Nanako0129/sepia",
+      "url": "https://github.com/Nanako0129/sepia",
+      "tldr": "sepia is a portable Agent Skill for de-AI writing that starts with narrative architecture rather than synonym replacement. It translates findings from StoryScope and related studies into three passes covering structure, discourse flow, and surface style, plus venue-specific rules for technical prose. The strong framing is that humans occupy a distribution rather than the opposite of an AI fingerprint, so the tool applies only a few calibrated edits instead of maximizing every anti-AI heuristic.",
+      "tldr_zh": "sepia 是一个可移植的 Agent Skill，处理 AI 写作痕迹时先修叙事架构，而不是先做同义词替换。它把 StoryScope 等研究转化为结构、篇章流动和表层风格三阶段流程，并为技术文档提供场景化规则。其关键理念是人类写作是一种分布，而不是 AI 特征的简单反面，因此只做少量校准修改，不把所有 anti-AI heuristic 拉满。",
+      "stars": 1384,
+      "language": "Python",
+      "interest_tag": ""
+    },
+    {
+      "name": "hkqr/my-free-code",
+      "url": "https://github.com/hkqr/my-free-code",
+      "tldr": "my-free-code is a local multi-provider gateway that exposes Anthropic Messages and OpenAI Responses-compatible endpoints to coding agents. It separates wire protocols, model routing, provider adapters, reasoning policy, streaming, fallbacks, and launchers for clients including Claude Code, Codex, OpenCode, and Hermes. The project is useful as infrastructure rather than a new agent: it makes provider substitution and failure handling explicit while warning users not to expose the admin plane publicly.",
+      "tldr_zh": "my-free-code 是本地 multi-provider gateway，为 coding agent 提供 Anthropic Messages 与 OpenAI Responses 兼容端点。它分离 wire protocol、模型路由、provider adapter、reasoning policy、streaming、fallback，以及 Claude Code、Codex、OpenCode、Hermes 等客户端 launcher。其价值在基础设施层而非新 agent：把 provider 替换和故障处理显式化，同时提醒不要把 admin plane 暴露到公网。",
+      "stars": 620,
+      "language": "Python",
+      "interest_tag": ""
+    },
+    {
+      "name": "useagenthq/useagent",
+      "url": "https://github.com/useagenthq/useagent",
+      "tldr": "useAgent packages existing coding agents as durable coworkers running in isolated cloud workstations. Runs are event-sourced in Postgres, survive backend restarts, expose terminals, browsers and visible desktops, and pause destructive actions for argument-bound human approval. Its differentiator is the control plane around agents—recovery, typed tools, artifacts, memory, Slack threads, and self-hosting—rather than a proprietary worker model.",
+      "tldr_zh": "useAgent 把现有 coding agent 封装成运行在隔离云工作站中的 durable coworker。任务以 event-sourcing 方式写入 Postgres，可跨后端重启恢复，并提供 terminal、browser、可见桌面以及对破坏性操作的参数绑定人工审批。它的差异化主要是 agent 周围的 control plane——恢复、typed tools、产物、memory、Slack thread 与 self-hosting——而不是私有 worker model。",
+      "stars": 272,
+      "language": "TypeScript",
+      "interest_tag": ""
+    },
+    {
+      "name": "ZJU-REAL/Easel",
+      "url": "https://github.com/ZJU-REAL/Easel",
+      "tldr": "Easel is an open-source social-media workbench spanning trend discovery, planning, multimodal creation, publishing, and attribution. Persistent account profiles encode audience, style, platform constraints, preferences, and historical performance, while executable skills produce and archive real artifacts rather than only recommendations. It is notable for closing the content loop across six Chinese platforms, though the maintainers explicitly recommend human confirmation where browser automation can trigger platform risk controls.",
+      "tldr_zh": "Easel 是覆盖热点发现、策划、多模态创作、发布与归因的开源社媒工作台。持久账号画像记录受众、风格、平台约束、偏好和历史表现，可执行 skills 则产出并归档真实内容，而不只给建议。它值得关注之处是打通六个中文平台的内容闭环，但维护者也明确建议在浏览器自动化可能触发风控时保留人工确认。",
+      "stars": 142,
+      "language": "Python",
+      "interest_tag": ""
+    },
+    {
+      "name": "usedotai/dot-reflex",
+      "url": "https://github.com/usedotai/dot-reflex",
+      "tldr": "Dot Reflex is a 14B QLoRA execution-recovery controller that sits beside a coding or tool-using agent and chooses among ten actions such as verify, retry, replan, rollback, branch, or escalate. It consumes compact trajectory summaries and returns machine-readable control decisions, making recovery a separate model-level component. The release is unusually explicit about evidence limits: its headline result comes from a held-out synthetic recovery benchmark, not SWE-bench or production transfer.",
+      "tldr_zh": "Dot Reflex 是一个 14B QLoRA 执行恢复控制器，部署在 coding/tool-using agent 旁边，可在 verify、retry、replan、rollback、branch、人工升级等十种动作中选择。它读取压缩后的 trajectory summary 并输出机器可读控制决策，把恢复能力拆成独立模型组件。该发布对证据边界说明得很清楚：主要结果来自 held-out synthetic recovery benchmark，并非 SWE-bench 或生产迁移验证。",
+      "stars": 81,
+      "language": "Python",
+      "interest_tag": ""
+    }
+  ],
+  "hackernews": [
+    {
+      "title": "AI Coding Agent Skills for Real Engineers",
+      "url": "https://github.com/mattpocock/skills",
+      "tldr": "Matt Pocock's repository publishes the working Agent Skills he uses for software engineering rather than a generic prompt collection. The appeal is operational specificity: each skill encodes a repeatable workflow that can be copied directly into an agent environment. Its HN traction reflects a broader shift from clever one-shot prompts toward versioned, inspectable procedural context for coding agents.",
+      "tldr_zh": "Matt Pocock 的仓库公开他真实用于软件工程的 Agent Skills，而不是泛化 prompt 合集。吸引力在于操作具体：每个 skill 都编码了可重复、可直接复制到 agent 环境的工作流。它在 HN 的热度反映了一个更大的转向——coding agent 正从聪明的一次性 prompt 转向可版本化、可检查的程序性上下文。",
+      "points": 26,
+      "num_comments": 7,
+      "interest_tag": ""
+    },
+    {
+      "title": "Show HN: Supafork – Share and Fork Sessions Across Harnesses",
+      "url": "https://www.supafork.com",
+      "tldr": "Supafork proposes Git-compatible version control redesigned for high-frequency autonomous agents, with cheap branches, instant forks, exhaustive provenance, and an S3-backed versioned filesystem. Its core insight is that agent workloads create many parallel experiments and far more filesystem events than human-centric Git workflows assume. The product is compelling if its latency and compatibility claims hold, but the current public page is primarily a product description rather than independent performance evidence.",
+      "tldr_zh": "Supafork 提出面向高频 autonomous agent 重设计、同时兼容 Git 的版本控制：低成本 branch、即时 fork、完整 provenance，以及基于 S3 的 versioned filesystem。核心洞察是 agent workload 会产生大量并行实验和远超人类 Git 流程的文件事件。若延迟和兼容性主张成立，它会很有吸引力；但当前公开页面主要是产品说明，还不是独立性能证据。",
+      "points": 13,
+      "num_comments": 8,
+      "interest_tag": ""
+    },
+    {
+      "title": "Show HN: Orthogonal – One integration for agents to discover and pay for APIs",
+      "url": "https://www.orthogonal.com/",
+      "tldr": "Orthogonal gives agents one SDK, REST API, or MCP integration for discovering, calling, and paying for more than 40 external data and action services. It pools credentials, normalizes request shapes, monitors providers, and meters each call through credits or agent-oriented payment rails. This reduces integration overhead, but it also concentrates trust in a broker that sits between the agent, vendor credentials, billing, and returned data.",
+      "tldr_zh": "Orthogonal 用一个 SDK、REST API 或 MCP 接口，让 agent 发现、调用并支付 40 多种外部数据与执行服务。它集中管理凭据、统一请求形态、监控 provider，并通过 credits 或 agent-oriented payment rail 按次计费。这样能降低集成成本，但也把 agent、vendor credential、billing 与返回数据之间的信任集中到一个 broker。",
+      "points": 11,
+      "num_comments": 0,
+      "interest_tag": ""
+    },
+    {
+      "title": "Show HN: Selfship.ai – Surface and fix isues with your agentic applications 24x7",
+      "url": "https://selfship.ai/",
+      "tldr": "Selfship watches production agent conversations, clusters recurring failures, diagnoses where they occur, and opens human-reviewed pull requests with eval evidence. After merge, it verifies the change against new live traffic and can retry within limits, turning observability into a closed improvement loop. The attractive idea is evidence-backed self-improvement without autonomous writes to the default branch; the reported gains are vendor claims from early teams and still need independent validation.",
+      "tldr_zh": "Selfship 监控生产环境中的 agent 对话，聚类重复故障、定位出错环节，并提交带 eval 证据、需要人工 review 的 pull request。合并后，它继续用新真实流量验证修复效果，并可在限制内重试，把 observability 变成闭环改进。吸引人的点是实现有证据的自我改进，同时不自动写入默认分支；不过当前增益数字来自厂商早期客户，仍需独立验证。",
+      "points": 9,
+      "num_comments": 8,
+      "interest_tag": ""
+    },
+    {
+      "title": "Show HN: Wasmer SDK – Local Sandboxes for AI Agents",
+      "url": "https://wasmer.io/posts/wasmer-local-sandboxes-for-ai-agents",
+      "tldr": "Wasmer's new SDK embeds WebAssembly sandboxes directly inside Python, JavaScript, Rust, and even the browser, avoiding a Docker daemon, VM boot, or remote round trip. The launch claims 0.1 ms sandbox creation and substantially faster command execution and startup for supported workloads, while exposing Python, Node.js, PHP, and Postgres as libraries. For local agents this could sharply reduce tool-call overhead, though WebAssembly compatibility and capability constraints mean it complements rather than universally replaces containers or microVMs.",
+      "tldr_zh": "Wasmer 新 SDK 把 WebAssembly sandbox 直接嵌入 Python、JavaScript、Rust，甚至浏览器中，无需 Docker daemon、VM 启动或远程往返。官方声称对支持 workload 可实现 0.1 ms sandbox 创建，并显著加快命令执行与启动，同时把 Python、Node.js、PHP、Postgres 作为 library 暴露。它可能大幅降低本地 agent 的 tool-call 开销，但 WebAssembly 的兼容性与 capability 限制意味着它更像 container/microVM 的补充，而非通用替代。",
+      "points": 5,
+      "num_comments": 0,
+      "interest_tag": ""
+    }
+  ]
+}
