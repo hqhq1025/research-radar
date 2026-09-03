@@ -1,0 +1,224 @@
+{
+  "date": "2026-09-03",
+  "generated_at": "2026-09-03T16:04:50.282038+08:00",
+  "briefing_zh": "今天最明确的研究主线，是把 agent 的能力边界从 model weights 扩展到可学习、可评测的执行系统。**Repo-To-Skill** 把 1,000 个 ML repository 蒸馏成 5,000 多个经过验证的 operational skills，在固定 backbone、harness 与执行预算下显著提升 MLE-bench 和 PaperBench；**WHALE** 与 **HarnessDev** 则从另一侧说明，weights 和 harness 是耦合系统，单独优化任何一侧都可能被另一侧卡住。\n\n评测研究开始正面处理 agent evaluation 的经济性和真实性。**EarlyEval** 不再只缩减 task 数量，而是根据中间行为预测成败、提前停止单次 rollout，最多减少 44.1% input tokens；与此同时，**Terminal-Bench-Science 0.1** 用 70 个由科学家贡献、可验证真实产物的 workflow 把 frontier system 的最高 resolution rate 压到 30%。前者降低迭代成本，后者提高真实性门槛，两者共同把重点从一次性 leaderboard 转向可持续的 evaluation infrastructure。\n\nworld model 方向也在从短视频生成走向可控、长程、可复现的交互系统。**SolarWM** 统一 10 个数据源的 143 万 clips，并在 5B–33B 多种 video backbone 上提供 minutes-to-hours rollout；**H3-World** 则只训练 0.199% 参数，把 video generator 已有的语言理解转化为时间对齐的角色与镜头控制。这里真正重要的不是 demo 时长，而是 data contract、action grounding 与 native representation 能否跨模型复用。\n\n开源侧出现两个互补趋势：一类项目把 domain knowledge 封装成 portable Agent Skills，如 **sepia** 和 **Scientific Agent Skills**；另一类项目补齐 durable execution、memory、approval 与 recovery，如 **useAgent** 和 **Dot Reflex**。HN 上 OpenClaw 因 context compaction 丢失「删除前确认」约束并误删邮件的案例，则提醒我们：skill 与 memory 只是能力层，权限绑定、不可逆操作门禁和 compaction 后的 invariant preservation 才是生产安全底座。",
+  "briefing_en": "Today's clearest research thread is the expansion of agent capability from model weights to learnable and evaluable execution systems. **Repo-To-Skill** distills 1,000 ML repositories into more than 5,000 verified operational skills and reports large gains on MLE-bench and PaperBench while holding the backbone, harness, and execution budget fixed. **WHALE** and **HarnessDev** expose the complementary lesson: weights and harnesses form a coupled system, so optimizing either side alone can leave performance bottlenecked by the other.\n\nEvaluation work is directly confronting both cost and realism. **EarlyEval** reduces expense within each rollout by predicting success or failure from intermediate behavior, cutting as much as 44.1% of input tokens, while **Terminal-Bench-Science 0.1** uses 70 scientist-contributed workflows with verifiable artifacts and leaves the strongest tested system at only 30% resolution. One lowers iteration cost and the other raises the realism bar, together shifting evaluation from one-off leaderboards toward durable infrastructure.\n\nWorld-model research is likewise moving from short video generation toward controllable, long-horizon, reproducible interaction. **SolarWM** normalizes 1.43 million clips from ten datasets and supports multiple 5B–33B video backbones with minute-to-hour rollouts, while **H3-World** trains only 0.199% of parameters to convert a video generator's language understanding into temporally grounded character and camera control. The consequential question is no longer demo length alone, but whether data contracts, action grounding, and native representations transfer across models.\n\nOpen source shows two complementary patterns: projects such as **sepia** and **Scientific Agent Skills** package domain knowledge as portable Agent Skills, while **useAgent** and **Dot Reflex** add durable execution, memory, approvals, and recovery. The HN case in which OpenClaw lost a delete-confirmation constraint during context compaction and removed email is the counterweight: skills and memory add capability, but argument-bound permissions, irreversible-action gates, and invariant preservation across compaction are the real production safety substrate.",
+  "viral_analysis_zh": "**Repo-To-Skill** 最可能在研究社区持续扩散：它既有「1,000 repos → 5,000+ skills」这种一眼可传播的规模叙事，又用固定 backbone/harness 的对照把 skill 的独立价值讲清楚。开源侧 **sepia** 的爆发则展示了另一种公式：把人人都感知到的「AI 味」痛点，从表层措辞升级为有论文证据的 narrative architecture 问题，再用跨 77+ agents 的一键分发放大传播。",
+  "viral_analysis_en": "**Repo-To-Skill** is the strongest candidate for sustained research virality: the “1,000 repos to 5,000+ skills” framing is instantly legible, while the fixed-backbone and fixed-harness comparison isolates the value of skills. On the open-source side, **sepia** demonstrates a different formula: reframe the widely felt problem of AI-sounding prose from surface wording to evidence-backed narrative architecture, then amplify distribution through one-command compatibility with 77+ agents.",
+  "huggingface_papers": [
+    {
+      "title": "Repo-To-Skill: Distilling GitHub Repositories Into AI4AI Skills",
+      "url": "https://arxiv.org/abs/2609.02749",
+      "tldr": "The paper defines operational knowledge as the missing layer between knowing an ML method and executing it reliably. DisCo distills 1,000 widely used ML repositories into an AREX library of more than 5,000 verified skills across 178 capability families. With backbone, harness, and execution budget fixed, adding those skills raises scores by 134.3% on MLE-bench and 34.4% on PaperBench. The result is strong evidence that reusable repository-derived procedures can improve research agents without another round of model training.",
+      "tldr_zh": "论文把 operational knowledge 定义为「知道方法」与「可靠做成」之间缺失的一层。DisCo 从 1,000 个常用 ML repository 蒸馏出 5,000 多个经过验证的 skills，覆盖 178 个能力族。在固定 backbone、harness 和执行预算时，引入 skills 让 MLE-bench 提升 134.3%、PaperBench 提升 34.4%。这说明 repository 中可复用的操作程序能在不重新训练模型的前提下，实质增强 research agent。",
+      "upvotes": 252,
+      "authors": "Jianlyu Chen, Yuyang Hu, Hongjin Qian, Jiawei Liu, Wenqing Wei, Xiaolong Chen, Defu Lian, Zhicheng Dou, Chaozhuo Li, Qiwei Ye, Zheng Liu",
+      "ai_keywords": [
+        "AI4AI",
+        "Agent Skills",
+        "Operational Knowledge",
+        "Research Agent"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "SolarWM: Open Data and Scalable Training for Long-Horizon Video World Models",
+      "url": "https://arxiv.org/abs/2609.02886",
+      "tldr": "SolarWM releases an end-to-end foundation for interactive video world models, from data processing to long-horizon inference. Its data engine converts 1.43 million clips from ten heterogeneous datasets into a frame-aligned contract containing observations, metric camera geometry, captions, quality metadata, selection decisions, and provenance. A shared three-stage recipe adapts four models spanning 5B to 33B parameters while preserving each backbone's native representation and objective. Models trained on five-second sequences can produce causal interactive rollouts lasting minutes to hours, making the work valuable as reproducible infrastructure rather than only a generation demo.",
+      "tldr_zh": "SolarWM 开放了一套从数据处理到长程推理的 interactive video world model 基础设施。其 data engine 把十个异构数据源的 143 万 clips 统一成 frame-aligned contract，包含 observation、metric camera geometry、caption、质量元数据、筛选决策与 provenance。统一的三阶段 recipe 适配了 5B–33B 的四种模型，同时保留各 backbone 的原生表示与目标。模型只用五秒序列训练，却能生成持续数分钟到数小时的 causal interactive rollout，因此价值更接近可复现实验底座，而不只是长视频 demo。",
+      "upvotes": 103,
+      "authors": "Junchao Huang, Guian Fang, Shengju Qian, Xianghao Kong, Zhuoran Zhao, Wei Huang, Yihua Du, Zixin Zhang, Justin Cui, Yuchao Gu, Yukang Chen, Xinting Hu, Tianyu He, Shaoshuai Shi, Zhuotao Tian, Xin Wang, Mike Zheng Shou, Li Jiang",
+      "ai_keywords": [
+        "World Model",
+        "Interactive Video",
+        "Long-Horizon",
+        "Open Data"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "EarlyEval: Cheaper Agent Evaluation via Early Outcome Prediction",
+      "url": "https://arxiv.org/abs/2609.02783",
+      "tldr": "EarlyEval attacks agent-evaluation cost within each task rather than only distilling the benchmark to fewer tasks. Two lightweight LightGBM classifiers use behavioral, textual, and reference-solution features to predict success or failure and halt a run once calibrated confidence is reached. Across SWE-bench Verified, TerminalBench, and Toolathlon, it removes 13–26% of agent steps and up to 44.1% of input tokens at 89–97% prediction accuracy. The trade-off is a small one-to-two-point average perturbation in resolve rate, making calibration and reporting transparency essential.",
+      "tldr_zh": "EarlyEval 不只是减少 benchmark task 数量，而是直接压缩每个 task 内部的 agent 执行成本。它用两个轻量 LightGBM classifier，从行为、文本和 reference solution 特征预测成功或失败，并在置信度超过校准阈值时提前停止。在 SWE-bench Verified、TerminalBench 和 Toolathlon 上，它减少 13–26% steps、最多 44.1% input tokens，同时达到 89–97% 预测准确率。代价是 resolve rate 平均会有一到两个百分点的扰动，因此阈值校准与透明报告非常关键。",
+      "upvotes": 70,
+      "authors": "Yuling Shi, Zhensu Sun, Junsen Dong, Chengcheng Wan, David Lo, Xiaodong Gu",
+      "ai_keywords": [
+        "Agent Evaluation",
+        "Early Stopping",
+        "Cost Efficiency"
+      ],
+      "interest_tag": "Benchmark"
+    },
+    {
+      "title": "Language Models Can Control Their Own Attention",
+      "url": "https://arxiv.org/abs/2609.02737",
+      "tldr": "Declarative Attention lets a language model mark its desired attention mode inside its own reasoning using global, focus, and local declarations. The inference engine interprets those declarations like tool calls and avoids reading irrelevant KV-cache regions. Zero-shot tests on 15 long-context tasks reduce attended tokens by 52.0% for Gemma-4-31B and 31.1% for Qwen-3.6-27B, with modest accuracy losses of 1.27 and 2.75 points. It opens a sparse-attention design axis in which the model itself exposes relevance decisions instead of relying entirely on external proxy scoring.",
+      "tldr_zh": "Declarative Attention 让语言模型在自身 reasoning 中声明 global、focus 或 local attention mode。推理引擎像解析 tool call 一样读取这些声明，从而跳过无关 KV-cache 区域。在 15 个 long-context tasks 的 zero-shot 测试中，Gemma-4-31B 与 Qwen-3.6-27B 的 attended tokens 分别减少 52.0% 和 31.1%，准确率仅下降 1.27 与 2.75 个百分点。它开启了一条新的 sparse attention 路径：不完全依赖外部 proxy，而让模型显式暴露自己的 relevance decision。",
+      "upvotes": 37,
+      "authors": "Namgyu Ho, Huzama Ahmad, Woosung Koh, Se-Young Yun, Tal Schuster, Cicero Nogueira dos Santos",
+      "ai_keywords": [
+        "Sparse Attention",
+        "KV Cache",
+        "Long Context",
+        "Inference Efficiency"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "HarnessDev: Can LLMs Create and Evolve Their Own Agent Harness?",
+      "url": "https://arxiv.org/abs/2609.01437",
+      "tldr": "HarnessDev evaluates whether models can build and iteratively improve the execution infrastructure around an agent, shifting the unit of evaluation from answers to runnable harnesses. Its Creation and Evolution stages cover six creator models, four domains, five downstream benchmarks, and 2,207 hidden evaluation instances. Generated harnesses can match selected human references in writing and ML experimentation, but remain far behind in coding, search, and research; evolutionary gains are unstable and only partly transfer to held-out tasks or different runtime models. The benchmark matters because it separates model intelligence from the ability to engineer the system that exposes it.",
+      "tldr_zh": "HarnessDev 评测模型能否创建并迭代改进 agent 周围的执行基础设施，把 evaluation unit 从答案转成 runnable harness。其 Creation 与 Evolution 两阶段覆盖六个 creator models、四个领域、五个下游 benchmark 和 2,207 个隐藏评测实例。生成的 harness 在写作和 ML experimentation 上可匹配部分人工 reference，但在 coding、search 与 research 上仍明显落后；演化收益也不稳定，跨 held-out task 或 runtime model 的迁移有限。它的重要性在于把 model intelligence 与「能否工程化释放这种能力」拆开测量。",
+      "upvotes": 16,
+      "authors": "Yuhao Wu, Jingyuan Zhang, Jiajun Shi, Xinping Lei, Qingshui Gu, Yuxuan Zhang, Zexuan Wang, Chen He, Chen Huang, Maojia Song, Zhiyuan Zeng, Shaowen Wang, Jinkai Liu, Yunfeng Shi, Jiaheng Liu, Shen Yan, Wenhao Huang, Ge Zhang, Wenxuan Zhang",
+      "ai_keywords": [
+        "Agent Harness",
+        "Self-Improvement",
+        "Execution Infrastructure"
+      ],
+      "interest_tag": "Benchmark"
+    }
+  ],
+  "alphaxiv_papers": [
+    {
+      "title": "Normalized Low-Rank Adaptation",
+      "arxiv_id": "2608.31036",
+      "url": "https://arxiv.org/abs/2608.31036",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2608.31036",
+      "tldr": "NoRA targets LoRA's early optimization imbalance, which arises because the zero-initialized up-projection leaves the random down-projection to dominate initial dynamics. Normalizing the down-projection throughout training improves convergence, stability, performance, and catastrophic-forgetting behavior across pretraining, SFT, and RL. An initialization-only variant captures meaningful gains without repeated normalization. Because it adds neither trainable parameters nor inference cost and remains mergeable, the method has an unusually low adoption barrier.",
+      "tldr_zh": "NoRA 针对 LoRA 的早期优化失衡：up-projection 被初始化为零后，初始 dynamics 主要由随机 down-projection 支配。训练中归一化 down-projection 能在 pretraining、SFT 和 RL 中改善收敛速度、稳定性、性能与 catastrophic forgetting。只在初始化时执行一次归一化的版本也能获得明显收益。由于它不增加 trainable parameters 和 inference cost，且仍可 merge，实际采用门槛非常低。",
+      "interest_tag": ""
+    },
+    {
+      "title": "WHALE: A Simple Recipe for Joint Harness-Weight Optimization",
+      "arxiv_id": "2609.00196",
+      "url": "https://arxiv.org/abs/2609.00196",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2609.00196",
+      "tldr": "WHALE treats model weights and executable harness code as a coupled optimization problem. It alternates online rejection-sampling fine-tuning with Meta-Harness search, switching phases by fixed duration or an adaptive patience rule. On SearchQA, math reasoning, and chess with Qwen3.5-2B/4B, the recipe beats weight-only, harness-only, and prior joint baselines by 4.15–24.38 points in best mean@8 accuracy. Its most useful finding is diagnostic: either component can become the bottleneck, so interleaved co-adaptation can outperform a weight-then-harness pipeline in both quality and rollout cost.",
+      "tldr_zh": "WHALE 把 model weights 与 executable harness code 视为耦合优化问题。它交替进行 online rejection-sampling fine-tuning 与 Meta-Harness search，并用固定时长或 adaptive patience 决定切换时机。在 Qwen3.5-2B/4B 的 SearchQA、数学推理和 chess 实验中，它比 weight-only、harness-only 及既有联合方法的 best mean@8 高 4.15–24.38 个百分点。最有价值的结论是：任一侧都可能成为瓶颈，细粒度交替 co-adaptation 在质量和 rollout cost 上都可能优于先 weights 后 harness 的流水线。",
+      "interest_tag": ""
+    },
+    {
+      "title": "Does On-Policy Distillation Really Distill? From Noisy Teacher to Self-Improvement",
+      "arxiv_id": "2608.31046",
+      "url": "https://arxiv.org/abs/2608.31046",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2608.31046",
+      "tldr": "The paper finds that on-policy distillation contains substantial teacher noise, yet student performance changes little when that noisy supervision is removed. Learning concentrates on low-probability tokens, and a fixed negative advantage can match teacher-provided signals, suggesting much of OPD works by suppressing tail tokens rather than transferring teacher knowledge. This motivates OPSA, a teacher-free method that scales negative advantages with entropy and redistributes mass among head tokens. On Qwen3-1.7B, OPSA raises AIME24 Avg@32 by 35.41 points over the base model and outperforms OPD by 16.77 points.",
+      "tldr_zh": "论文发现 on-policy distillation 中存在大量 teacher noise，但移除这些噪声监督后，student performance 几乎不变。学习主要集中在 low-probability tokens，固定 negative advantage 也能匹配 teacher signal，说明 OPD 的主要作用可能不是蒸馏知识，而是压制 tail tokens。基于此，作者提出无需 teacher 的 OPSA：按 entropy 调节负优势，并在 head tokens 间重新分配概率。对 Qwen3-1.7B，OPSA 让 AIME24 Avg@32 比 base 提高 35.41 分，并比 OPD 高 16.77 分。",
+      "interest_tag": ""
+    },
+    {
+      "title": "H3-World: Turning Language Understanding into World Control",
+      "arxiv_id": "2609.01560",
+      "url": "https://arxiv.org/abs/2609.01560",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2609.01560",
+      "tldr": "H3-World converts the 33B MiniMax-H3 video generator into an interactive world model without adding a dedicated action module. Structured language instructions represent character and camera actions, while temporal attention routing binds each instruction to its intended latent interval and limits control leakage. With only 8,000 gameplay samples, 10,000 LoRA steps, and 0.199% trainable parameters, it achieves precise control while preserving generation quality and generalizing to unseen scenes. The work suggests that sufficiently strong video generators may already contain a semantic control interface that lightweight adaptation can expose.",
+      "tldr_zh": "H3-World 不新增专用 action module，而是把 33B MiniMax-H3 video generator 转成 interactive world model。它用结构化语言指令表示角色和镜头动作，再通过 temporal attention routing 把每条指令绑定到目标 latent interval，减少跨动作的 control leakage。仅用 8,000 个 gameplay samples、10,000 个 LoRA steps 和 0.199% trainable parameters，就能获得精确控制、保持生成质量并泛化到 unseen scenes。工作暗示：足够强的 video generator 可能已经隐含 semantic control interface，轻量适配即可将其显露出来。",
+      "interest_tag": ""
+    },
+    {
+      "title": "Harness-of-Harness: Multi-Day Autonomous Software Development with Continual Improvement",
+      "arxiv_id": "2609.01481",
+      "url": "https://arxiv.org/abs/2609.01481",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2609.01481",
+      "tldr": "Harness-of-Harness wraps existing coding-agent harnesses in repeated planning, coding, testing, and independent-evaluation loops. It keeps increments small and verifiable, balances repair with capability growth, progressively exposes tools and skills, and maintains versioned project history. Across GameCraft-Bench, FrontierSWE, and ProgramBench, three harness-model pairs gain 52.25% on average relative to their standalone baselines, with a maximum gain of 82.86% after three iterations. A 70-plus-iteration deployment builds a playable FPS, but the deeper contribution is an orchestration pattern for preserving evidence and improvement across multi-day runs.",
+      "tldr_zh": "Harness-of-Harness 在既有 coding-agent harness 外层组织反复的 planning、coding、testing 与独立 evaluation loop。它把增量限制为小而可验证的单元，平衡修复与能力增长，逐步开放 tools 和 skills，并保留版本化项目历史。在 GameCraft-Bench、FrontierSWE 与 ProgramBench 上，三种 harness-model pair 相对 standalone baseline 平均提升 52.25%，三轮后的最大提升达 82.86%。70 多轮自动开发出可玩的 FPS 很吸睛，但更深层贡献是：为 multi-day run 保存 evidence 与持续改进的 orchestration pattern。",
+      "interest_tag": ""
+    }
+  ],
+  "github_repos": [
+    {
+      "name": "Nanako0129/sepia",
+      "url": "https://github.com/Nanako0129/sepia",
+      "tldr": "sepia is a portable Agent Skill for removing AI-writing signatures at the level of narrative architecture, discourse flow, and venue-specific professional conventions rather than merely swapping words. Its fiction protocol is grounded in StoryScope and eleven related studies, and it includes diagnostic rubrics plus model-specific fingerprints without inventing guidance that vendors did not publish. One canonical SKILL.md supports standard-compatible agents, with native packaging for Claude Code, Codex, Grok Build, and Antigravity. The combination of an evidence-backed thesis, a visible everyday pain point, and broad one-command distribution explains its rapid star growth.",
+      "tldr_zh": "sepia 是一个 portable Agent Skill，不只替换词汇，而是从 narrative architecture、discourse flow 与不同 professional venue 的写作规范层面去除 AI 痕迹。它的 fiction protocol 基于 StoryScope 和另外十一项研究，并提供诊断 rubric 与有证据的 model-specific fingerprints，不会编造厂商未发布的规则。一份 canonical SKILL.md 可服务所有兼容标准的 agent，并为 Claude Code、Codex、Grok Build 与 Antigravity 提供原生 packaging。「有论文支持的独特论点 + 人人可感知的痛点 + 一键跨平台分发」很好解释了其快速涨星。",
+      "stars": 1707,
+      "language": "Python",
+      "interest_tag": ""
+    },
+    {
+      "name": "useagenthq/useagent",
+      "url": "https://github.com/useagenthq/useagent",
+      "tldr": "useAgent turns existing coding agents into durable team coworkers running in isolated cloud workstations. It normalizes Claude Code, Codex, and OpenCode behind an event-sourced session contract, with restart recovery, inspectable timelines, browser desktops, artifact publishing, and Slack integration. Credentials remain behind a trusted gateway, while destructive actions pause for argument-bound one-shot approvals. Team knowledge and human-reviewed memory are integrated, but the project is explicitly alpha and uses AGPL for open-source deployment with separate commercial terms.",
+      "tldr_zh": "useAgent 把现有 coding agents 变成运行在隔离 cloud workstation 中的 durable team coworker。它用 event-sourced session contract 统一 Claude Code、Codex 与 OpenCode，支持重启恢复、可检查 timeline、浏览器桌面、artifact publishing 与 Slack 集成。凭据留在 trusted gateway 后方，破坏性动作通过参数绑定、一次性的 approval 暂停。项目还整合 team knowledge 与 human-reviewed memory，但目前明确处于 alpha，开源部署采用 AGPL，商业嵌入需另行授权。",
+      "stars": 276,
+      "language": "TypeScript",
+      "interest_tag": ""
+    },
+    {
+      "name": "ZJU-REAL/Easel",
+      "url": "https://github.com/ZJU-REAL/Easel",
+      "tldr": "Easel is an open-source social-media agent workbench spanning trend discovery, planning, multimodal creation, publishing, and post-publication attribution. Account profiles preserve positioning, audience, style, platform constraints, preferences, and long-term performance signals across sessions. More than one hundred executable skills produce concrete text, image, audio, and video artifacts and adapt a single source into platform-specific forms. Its strongest product idea is the closed loop from real performance back into the account profile, although publishing automation still carries platform verification and account-risk trade-offs.",
+      "tldr_zh": "Easel 是覆盖趋势发现、策划、多模态创作、发布与发布后归因的开源 social-media agent workbench。账号画像跨 session 保存定位、受众、风格、平台约束、偏好以及长期表现信号。上百个可执行 skills 能生成真实文本、图像、音频和视频产物，并把同一母版适配成不同平台形态。它最强的产品思路是把真实内容表现回流到账号画像形成闭环，但自动发布仍需权衡平台验证、限流与账号风控。",
+      "stars": 275,
+      "language": "Python",
+      "interest_tag": ""
+    },
+    {
+      "name": "Tyche-MKR/scientific-agent-skills",
+      "url": "https://github.com/Tyche-MKR/scientific-agent-skills",
+      "tldr": "Scientific Agent Skills packages more than 160 validated procedures and connectors to over 100 scientific databases for biology, chemistry, medicine, and drug discovery. The library follows the open Agent Skills standard and targets multiple coding-agent ecosystems instead of locking its content to one vendor. Tests, security scans, version metadata, citations, and per-skill licensing make it closer to a maintained scientific capability registry than a prompt collection. Users still need to inspect each skill's individual license and verify outputs against primary scientific sources.",
+      "tldr_zh": "Scientific Agent Skills 为生物、化学、医学与药物发现封装了 160 多个经过验证的 procedures，并连接 100 多个科学数据库。它遵循开放 Agent Skills 标准，面向多个 coding-agent ecosystem，而非绑定单一厂商。测试、安全扫描、版本 metadata、引用信息与逐 skill license，让它更接近受维护的科学能力 registry，而不是 prompt 合集。使用者仍需检查每个 skill 的独立许可证，并用 primary scientific source 核验输出。",
+      "stars": 98,
+      "language": "Python",
+      "interest_tag": ""
+    },
+    {
+      "name": "usedotai/dot-reflex",
+      "url": "https://github.com/usedotai/dot-reflex",
+      "tldr": "Dot Reflex is a 14B QLoRA execution-recovery controller that supervises another coding or tool-using agent rather than replacing it. From a compact trajectory summary it selects one of ten control decisions, including verify, retry differently, replan, rollback, branch, switch model, escalate to a human, or stop. The release includes a strict JSON contract, integration examples, provenance receipts, checksums, and explicit claim boundaries. Its published 100% result is only on a held-out synthetic recovery benchmark, so realistic transfer remains unproven despite the unusually honest packaging.",
+      "tldr_zh": "Dot Reflex 是一个 14B QLoRA execution-recovery controller，它监督其他 coding 或 tool-using agent，而不是替代 worker。根据压缩后的 trajectory summary，它在 verify、换策略 retry、replan、rollback、branch、switch model、请求人工或停止等十种决策中选择。发布包包含严格 JSON contract、集成示例、provenance receipts、checksum 与清晰 claim boundary。其 100% 成绩只来自 held-out synthetic recovery benchmark，真实场景迁移仍未证明，但这种诚实披露本身很值得肯定。",
+      "stars": 81,
+      "language": "Python",
+      "interest_tag": ""
+    }
+  ],
+  "hackernews": [
+    {
+      "title": "Terminal-Bench-Science: Evaluating AI agents on scientific research workflows",
+      "url": "https://www.terminal-bench-science.ai/announcement",
+      "tldr": "Terminal-Bench-Science 0.1 contains 70 expert-curated, objectively graded workflows across life, physical, Earth, mathematical, and engineering sciences. Tasks produce concrete artifacts such as analyses, simulations, proofs, code, and data products, and only 70 survived a pipeline that began with 920 proposals. Claude Opus 5 with Claude Code leads at 30.0%, while GPT-5.6 Sol with Codex reaches 22.4% at less than one-third of Claude Fable 5's reported cost for similar performance. The benchmark's continuous, versioned contribution model is as important as its low scores because it creates infrastructure for realistic scientific-agent evaluation.",
+      "tldr_zh": "Terminal-Bench-Science 0.1 包含 70 个由领域专家策划、可客观评分的科学 workflow，覆盖生命、物理、地球、数学与工程科学。任务要求产出 analysis、simulation、proof、code 或 data product 等具体 artifact；从 920 个提案到首版只保留 70 个，筛选门槛很高。Claude Opus 5 + Claude Code 以 30.0% 居首，GPT-5.6 Sol + Codex 为 22.4%，在相近表现下成本不到 Claude Fable 5 的三分之一。其 continuous、versioned contribution model 与低分本身同样重要，因为它建立了真实 scientific-agent evaluation 的长期基础设施。",
+      "points": 117,
+      "num_comments": 36,
+      "interest_tag": "Benchmark"
+    },
+    {
+      "title": "AI Engineer Notebooks – free, framework-free RAG/agents/evals on Colab",
+      "url": "https://github.com/calmrocks/ai-engineer-notebooks",
+      "tldr": "This repository teaches the applied-LLM stack through runnable, framework-free Colab notebooks using raw APIs. Its curriculum treats evaluation as the spine, covering model APIs, structured output, RAG, agent loops, adaptation, security, serving, operations, system design, and customer-facing case studies. Most exercises use a free Groq API, while LoRA and self-hosted serving are optional GPU appendices verified on a Colab T4. The project is useful because it teaches durable primitives before abstractions and connects every subsystem to measurable behavior.",
+      "tldr_zh": "该 repository 用可运行、framework-free 的 Colab notebooks 教授 applied-LLM stack，要求学习者直接使用 raw APIs。课程把 evaluation 作为主轴，覆盖 model API、structured output、RAG、agent loop、adaptation、安全、serving、operations、system design 与面向客户的 case studies。多数练习可用免费 Groq API，LoRA 和 self-hosted serving 则是经 Colab T4 验证的可选 GPU 附录。它的价值在于先教稳定的底层 primitive，再引入抽象，并让每个子系统都连接到可测量行为。",
+      "points": 112,
+      "num_comments": 15,
+      "interest_tag": ""
+    },
+    {
+      "title": "Meta Security Researcher's AI Agent Accidentally Deleted Her Emails",
+      "url": "https://au.pcmag.com/ai/116091/meta-security-researchers-ai-agent-accidentally-deleted-her-emails",
+      "tldr": "A Meta AI safety researcher instructed OpenClaw to suggest email cleanup but wait for confirmation; on the real inbox, context compaction reportedly dropped that original constraint and the agent began deleting messages. The incident demonstrates that approval intent stored only in conversational context is not a durable safety boundary. Irreversible actions need external, argument-bound authorization that survives summarization, restart, and model handoff. It also shows why production tests must include realistic context volume rather than only toy inboxes where compaction never occurs.",
+      "tldr_zh": "一名 Meta AI safety researcher 要求 OpenClaw 只建议邮件清理方案、删除前等待确认；但在真实大邮箱中，context compaction 据称丢失了这条原始约束，agent 随后开始删除邮件。事故说明：仅存在对话 context 中的 approval intent 不能构成 durable safety boundary。不可逆操作需要独立于模型上下文、参数绑定的授权，并在 summarization、restart 与 model handoff 后继续有效。它也说明生产测试必须覆盖真实 context volume，而不能只在不会触发 compaction 的 toy inbox 上验证。",
+      "points": 60,
+      "num_comments": 61,
+      "interest_tag": ""
+    },
+    {
+      "title": "Launch HN: Almanac (YC S26) – AI that knows your company",
+      "url": "https://usealmanac.com/",
+      "tldr": "Almanac turns existing files into a shared, source-backed wiki that both people and agents can search, read, and update. It preserves links from claims to original sources and exposes the knowledge layer through a browser, CLI, MCP, SDK, and API. The product framing addresses a practical gap: agents need durable organizational context without forcing users to dump entire document collections into every prompt. Its differentiation will depend on update quality, conflict handling, permissions, and citation fidelity rather than retrieval alone.",
+      "tldr_zh": "Almanac 把现有文件整理成由 source 支撑、供人和 agent 共同搜索、读取与更新的 shared wiki。它保留 claim 到 original source 的链接，并通过 browser、CLI、MCP、SDK 与 API 暴露知识层。产品 framing 抓住了实际缺口：agent 需要 durable organizational context，但用户不应在每次 prompt 中塞入整个文档库。它最终能否形成差异化，将取决于增量更新质量、冲突处理、权限与 citation fidelity，而不只是 retrieval。",
+      "points": 59,
+      "num_comments": 48,
+      "interest_tag": "Memory"
+    },
+    {
+      "title": "AI Agents and the Refactoring That Never Happens",
+      "url": "https://www.rosenfeld.page/articles/programming/2026_09_02_ai_agents_and_the_refactoring_that_never_happens/",
+      "tldr": "The essay argues that agents remove a traditional refactoring trigger: the moment a human becomes unable to hold tangled code in working memory. Because an agent can keep tracing and extending a complex module, teams may continue shipping while human understanding and meaningful review quietly decay. The same complexity still costs agents more context, tokens, and error risk, so modularity remains economically useful rather than merely aesthetic. The practical recommendation is to encode complexity and refactoring checkpoints into the harness while retaining human responsibility for system comprehensibility.",
+      "tldr_zh": "文章指出，agent 消除了一个传统 refactoring trigger：人类因 working memory 限制而无法继续理解 tangled code 的时刻。agent 仍能追踪并扩展复杂 module，团队因此可能持续交付，却让人的理解能力与有效 review 悄然退化。同样的复杂度仍会增加 agent 的 context、token 成本与错误风险，因此 modularity 不是审美偏好，而有直接经济价值。实践上应把 complexity 与 refactoring checkpoint 编入 harness，同时由人继续对系统可理解性负责。",
+      "points": 43,
+      "num_comments": 57,
+      "interest_tag": ""
+    }
+  ]
+}
