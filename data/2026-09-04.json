@@ -1,0 +1,221 @@
+{
+  "date": "2026-09-04",
+  "generated_at": "2026-09-04T16:03:36.378701+08:00",
+  "briefing_zh": "今天最清晰的主线，是 agent 研究开始把执行环境、harness 与评测输入都视为能力的一部分，而不再只盯 model weights。**Terminal-Universe** 从已有轨迹反推出 37.3k 个可重复查询、可执行的 terminal environments；**RealSWE** 则证明真实用户请求比 SWE-bench issue 更短、更随意，导致七个模型平均下降 6.4 个百分点。两者共同指向一个关键判断：trajectory 不是 environment，benchmark prompt 也不等于真实需求，训练和评测都必须重建交互条件。\n\n围绕 harness 的工作进一步从工程经验走向系统优化。**WHALE** 交替优化 weights 与 executable harness，在多个 tool-using domain 上显著超过只改一侧的 baseline；**Harness-of-Harness** 用规划、实现、测试和独立评估的循环，把 coding agent 扩展到 multi-day autonomous development；**HarnessDev** 则专门测量模型能否创建、演化并迁移自己的 harness。趋势不是简单的 self-improvement 叙事，而是把 model、context policy、tools、verification 与 control flow 当作耦合系统。\n\nworld model 与高效推理也在强调可控性和可验证性。**SolarWM** 开放 143 万 clips 的统一数据与长程 rollout 框架，**WorldReward** 把 camera action consistency、外观与运动质量统一进 VLM preference reward；另一边，**Random Attention** 发现保护 prompt 后，随机淘汰 reasoning trace 的 KV 也能匹配复杂 selector，并在 vLLM 中提高 32–43% throughput。这些结果都在削弱复杂 heuristic 的默认正当性：先找到真正脆弱的 state，再决定哪里值得建模。\n\n开源与社区侧的信号同样务实。**Reverify** 用 deterministic binary tooling 约束 agent 的逆向工程结论，**OrcaReplay** 把 run 记录、离线 replay 与跨模型 fork 做成调试原语，**GitSpawn** 则暴露 coding agents 在 trust prompt 之前调用受 repository config 影响的 git 命令所带来的 host RCE 风险。今天的共同主题不是让 agent 看起来更自主，而是让其 environment、evidence、recovery 和 security boundary 更可检查。",
+  "briefing_en": "The clearest theme today is that agent research is treating execution environments, harnesses, and evaluation inputs as part of capability rather than focusing only on model weights. **Terminal-Universe** reconstructs 37.3K reusable, executable terminal environments from existing trajectories, while **RealSWE** shows that realistic user requests are shorter and less structured than SWE-bench issues, reducing resolution rates by 6.4 percentage points on average across seven models. Together they reinforce a crucial distinction: a trajectory is not an environment, and a benchmark prompt is not a real user request, so both training and evaluation must reconstruct the interaction conditions.\n\nHarness work is likewise moving from engineering folklore toward systematic optimization. **WHALE** alternates updates to model weights and executable harness code and outperforms baselines that optimize only one side; **Harness-of-Harness** uses repeated planning, implementation, testing, and independent evaluation to extend coding agents into multi-day development; **HarnessDev** directly measures whether models can create, evolve, and transfer their own harnesses. The important trend is not a vague self-improvement story, but the treatment of model, context policy, tools, verification, and control flow as a coupled system.\n\nWorld-model and efficient-reasoning work is also centering controllability and verification. **SolarWM** opens a unified 1.43-million-clip data and training stack for long-horizon rollouts, while **WorldReward** unifies camera-action consistency, appearance, and motion quality in a VLM preference reward. Meanwhile, **Random Attention** finds that once the prompt is protected, random eviction of reasoning-trace KV entries can match sophisticated selectors while improving vLLM throughput by 32–43%. These results weaken the presumption that a complex heuristic is automatically valuable: first identify the genuinely fragile state, then decide what deserves modeling.\n\nOpen-source and community signals are similarly pragmatic. **Reverify** constrains agent claims about binaries with deterministic reverse-engineering tools, **OrcaReplay** turns recording, offline replay, and cross-model forks into debugging primitives, and **GitSpawn** exposes host-level code execution when coding agents invoke git commands affected by repository-local configuration before trust prompts. The shared theme is not making agents look more autonomous, but making their environments, evidence, recovery paths, and security boundaries inspectable.",
+  "viral_analysis_zh": "**Terminal-Universe** 最可能在研究社区形成持续传播：它用「把 trajectory 变回 environment」这一反直觉但易懂的 framing，直接连接数据复用、可验证训练与 37.3k 规模结果。开源侧 **Reverify** 的「The model proposes. The bytes decide.」把抽象的 hallucination 问题压缩成可演示的 deterministic proof，并配合 837 stars、196 tests 与跨格式支持，具备很强的可转发性。",
+  "viral_analysis_en": "**Terminal-Universe** is the strongest candidate for sustained research virality because its framing—turning trajectories back into environments—is counterintuitive, memorable, and directly tied to reusable data, verifiable training, and a 37.3K-scale result. On the open-source side, **Reverify** compresses the abstract hallucination problem into a crisp promise—“The model proposes. The bytes decide.”—then backs it with deterministic evidence, broad binary-format support, and a highly demonstrable workflow.",
+  "huggingface_papers": [
+    {
+      "title": "LLaDA-Image: Building Strong Image Generators with Fully Open Training Recipes",
+      "url": "https://arxiv.org/abs/2609.03796",
+      "tldr": "LLaDA-Image pairs a 6B Diffusion Transformer trained from scratch with a frozen vision-language understanding module based on LLaDA2.0-Mini. Its three-stage recipe first learns a visual generative prior from image-only data, then uses 220 million samples for generation training and distills the result to a 2–4-step Turbo model. It reaches 53.53 and 53.38 on the English and Chinese tracks of Qwen-Image-Bench, reported as the best open-source result on both. The release matters because it includes weights, code, and detailed recipes rather than only a closed model demo.",
+      "tldr_zh": "LLaDA-Image 把从零训练的 6B Diffusion Transformer 与基于 LLaDA2.0-Mini 的冻结 vision-language understanding module 结合。三阶段 recipe 先用纯图像数据学习 visual generative prior，再用 2.2 亿 samples 训练生成能力，并蒸馏出只需 2–4 steps 的 Turbo 模型。它在 Qwen-Image-Bench 中英文轨道分别达到 53.53 和 53.38，论文称均为开源模型最佳。更重要的是项目同时开放 weights、code 与详细 recipe，而不只是展示封闭 demo。",
+      "upvotes": 77,
+      "authors": "Chuyan Chen, Haoxing Chen, Kun Chen, Zhenglin Cheng, Long Cui, Ruishan Fang, Zhangxuan Gu, Zhicheng Huang, Zhenzhong Lan, Yuanting Lei, Haoquan Li, Jianguo Li, Rongchuan Li, Sidu Li, Tao Lin, Deyuan Liu, Jiacheng Liu, Lin Liu, Yuxuan Lou, Zhisheng Lu, Yuxin Ma, Shuheng Shen, Peng Sun, Chaoyang Wang, Hongjun Wang, Xiaomei Wang, Yongxin Wang, Chengzhang Wu, Hongru Wu, Jun Xie",
+      "ai_keywords": [
+        "Image Generation",
+        "Diffusion Transformer",
+        "Open Recipe"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "Random Attention: Rethinking KV Cache Eviction for Efficient Reasoning",
+      "url": "https://arxiv.org/abs/2609.03430",
+      "tldr": "Random Attention challenges the assumption that KV-cache eviction needs a learned or hand-designed importance score. By preserving the prompt and randomly evicting later reasoning tokens independently per head, it matches the strongest prior selector across four models and six reasoning tasks. In vLLM deployment it delivers 32–43% higher throughput than that baseline. The analysis attributes the result to redundancy in reasoning text and across heads, making the prompt—not the generated trace—the fragile state.",
+      "tldr_zh": "Random Attention 质疑 KV-cache eviction 必须依赖 learned 或 hand-designed importance score 的默认假设。方法保留 prompt，并在各 attention head 内独立随机淘汰后续 reasoning tokens，在四个模型和六项 reasoning tasks 上匹配最强既有 selector。部署到 vLLM 后，其 throughput 比该 baseline 高 32–43%。分析表明 reasoning text 与不同 heads 之间存在冗余，真正脆弱的是 prompt，而非生成中的推理轨迹。",
+      "upvotes": 51,
+      "authors": "Heng Wang, Jielin Qiu, Wenting Zhao, Cheng Qian, Liangwei Yang, Jiawei Han, Heng Ji, Silvio Savarese, Shelby Heinecke, Huan Wang",
+      "ai_keywords": [
+        "KV Cache",
+        "Inference Efficiency",
+        "Reasoning"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "Terminal-Universe: Turning Agent Trajectories into Scalable Terminal Environments",
+      "url": "https://arxiv.org/abs/2609.04148",
+      "tldr": "Terminal-Universe reconstructs reusable terminal environments from frozen agent trajectories instead of generating environments from scratch. It replays recorded file operations to restore pre-agent workspaces, uses a completion agent to fill missing files and dependencies, then synthesizes original, cross-workspace, and multi-round tasks. Applied to public trajectories, the pipeline produces 37.3K task-sufficient environments. Fine-tuning Qwen3.5-27B on them improves Terminal-Bench 2.1 by 11.9 points and EvoCode-Bench v2 MT@4 by 13.8 points.",
+      "tldr_zh": "Terminal-Universe 不从零生成环境，而是从冻结的 agent trajectories 重建可重复使用的 terminal environments。它 replay 文件操作以恢复 agent 修改前的 workspace，再由 completion agent 补齐缺失文件与依赖，随后合成原始任务、跨 workspace 任务和 multi-round 任务。该流水线从公开轨迹得到 37.3k 个 task-sufficient environments。用这些数据 fine-tune Qwen3.5-27B 后，Terminal-Bench 2.1 提升 11.9 分，EvoCode-Bench v2 MT@4 提升 13.8 分。",
+      "upvotes": 29,
+      "authors": "Jie Wu, Zhenru Zhang, Beichen Zhang, Xuwu Wang, Yuhui Su, Mouxiang Chen, Peng Wang, Zhihai Wang, Que Shen, Hao Zhou, An Yang, Fei Huang, Yujiu Yang, Dayiheng Liu",
+      "ai_keywords": [
+        "Coding Agents",
+        "Environment Reconstruction",
+        "Post-training"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "RealSWE: A Compositional Evaluation of Coding Agents under Realistic User Requests",
+      "url": "https://arxiv.org/abs/2608.27831",
+      "tldr": "RealSWE tests coding agents with prompts shaped like real user requests rather than richly structured GitHub issues. The authors find that 88% of real prompts contain only a problem statement or little extra context, while just 7% of SWE-bench tasks do; 87% of real prompts are casual, whereas 94% of benchmark prompts are formal. Across seven models, realistic variants reduce resolution rates by 6.4 percentage points on average and can change rankings. Desired behavior and motivation help materially, while environment details and reproduction steps add tokens without measurable gains.",
+      "tldr_zh": "RealSWE 不再只用结构完整的 GitHub issues，而是用更接近真实用户请求的 prompt 测试 coding agents。作者发现 88% 的真实请求只有问题描述或极少附加信息，但 SWE-bench 中这一比例仅为 7%；同时 87% 的真实请求使用随意表达，而 94% 的 benchmark prompt 很正式。七个模型在 realistic variants 上平均下降 6.4 个百分点，排名也可能改变。明确 desired behavior 与 motivation 能显著改善表现，environment details 和 reproduction steps 则只增加 tokens、没有可测收益。",
+      "upvotes": 9,
+      "authors": "Gyuhyeong Kim, Hyojung Gwon, Jeonghyeon Kim, Kyuhong Shim, Sunjae Lee",
+      "ai_keywords": [
+        "Coding Agents",
+        "Realistic Evaluation",
+        "SWE-bench"
+      ],
+      "interest_tag": "Benchmark"
+    },
+    {
+      "title": "WorldReward: Reward Modeling for Camera-Conditioned World Models",
+      "url": "https://arxiv.org/abs/2609.03952",
+      "tldr": "WorldReward is a VLM-based pairwise reward model for camera-conditioned world models that jointly evaluates action consistency, appearance, and motion quality. It segments long videos into action-aligned chunks, converts each chunk into structured visual evidence, and aggregates local decisions into video-level preferences. On WorldReward-Bench it exceeds GPT-5.5 agreement with human judgments by 3.42, 1.45, and 3.56 percentage points on the three dimensions. Using it for RL post-training of HY-WorldPlay 1.5 improves both control execution and visual quality across short and long horizons.",
+      "tldr_zh": "WorldReward 是面向 camera-conditioned world model 的 VLM pairwise reward model，联合判断 action consistency、appearance 与 motion quality。它把长视频切成 action-aligned chunks，将每段整理为结构化 visual evidence，再把局部判断聚合为 video-level preference。在 WorldReward-Bench 上，它与人工偏好的一致性在三个维度分别超过 GPT-5.5 3.42、1.45 和 3.56 个百分点。将其用于 HY-WorldPlay 1.5 的 RL post-training 后，短程到长程的控制执行与视觉质量都得到提升。",
+      "upvotes": 6,
+      "authors": "Yibin Wang, Zehan Wang, Junshu Tang, Zhimin Li, Yujie Zhou, Jiazi Bu, Pengyang Ling, Feng Han, Zhixiong Zhang, Long Xing, Shengyuan Ding, Ziang Li, Cheng Jin, Yuhang Zang, Jiaqi Wang, Tianyu Pang",
+      "ai_keywords": [
+        "World Model",
+        "Reward Model",
+        "Action Consistency"
+      ],
+      "interest_tag": ""
+    }
+  ],
+  "alphaxiv_papers": [
+    {
+      "title": "SolarWM: Open Data and Scalable Training for Long-Horizon Video World Models",
+      "arxiv_id": "2609.02886",
+      "url": "https://arxiv.org/abs/2609.02886",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2609.02886",
+      "tldr": "SolarWM provides an open, unified foundation for interactive video world models, spanning data preparation, training, and long-horizon inference. Its data engine harmonizes 1.43 million clips from ten heterogeneous datasets while preserving camera geometry, temporal alignment, quality metadata, selection decisions, and provenance. A shared three-stage recipe adapts multiple video backbones from 5B to 33B parameters without erasing their native representations. Models trained on short clips can roll out for minutes to hours, making reproducibility and data contracts the central contribution rather than demo length alone.",
+      "tldr_zh": "SolarWM 提供一套开放、统一的 interactive video world model 基础设施，覆盖数据准备、训练与 long-horizon inference。其 data engine 统一十个异构数据源的 143 万 clips，同时保留 camera geometry、时间对齐、质量 metadata、筛选决策与 provenance。统一三阶段 recipe 可适配 5B–33B 的多种 video backbone，而不抹平各自原生表示。模型虽然在短 clips 上训练，却能 rollout 数分钟到数小时；真正的贡献是 reproducibility 与 data contract，而不只是 demo 时长。",
+      "interest_tag": ""
+    },
+    {
+      "title": "Harness-of-Harness: Multi-Day Autonomous Software Development with Continual Improvement",
+      "arxiv_id": "2609.01481",
+      "url": "https://arxiv.org/abs/2609.01481",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2609.01481",
+      "tldr": "Harness-of-Harness wraps an existing coding-agent harness in repeated planning, implementation, testing, evaluation, and reflection cycles. It constrains each iteration to a small verifiable increment, maintains versioned history, and uses independent evaluators to choose between repair and capability expansion. Across GameCraft-Bench, FrontierSWE, and ProgramBench, three harness-model pairs improve by 52.25% on average relative to standalone baselines, with a maximum 82.86% gain after three iterations. A 70-plus-iteration FPS build demonstrates endurance, but the deeper contribution is preserving evidence and progress across multi-day autonomous work.",
+      "tldr_zh": "Harness-of-Harness 在既有 coding-agent harness 外层组织反复的 planning、implementation、testing、evaluation 与 reflection cycles。它把每轮改动限制为小而可验证的增量，维护 versioned history，并让独立 evaluator 决定应修复还是扩展能力。在 GameCraft-Bench、FrontierSWE 与 ProgramBench 上，三种 harness-model pair 相对 standalone baseline 平均提升 52.25%，三轮后的最大增幅为 82.86%。70 多轮自动构建 FPS 展示了耐力，但更深层贡献是跨 multi-day autonomous work 保存证据与进展。",
+      "interest_tag": ""
+    },
+    {
+      "title": "WHALE: A Simple Recipe for Joint Harness-Weight Optimization",
+      "arxiv_id": "2609.00196",
+      "url": "https://arxiv.org/abs/2609.00196",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2609.00196",
+      "tldr": "WHALE treats model weights and executable harness code as a coupled optimization problem. It alternates online rejection-sampling fine-tuning with Meta-Harness search, switching phases by a fixed schedule or an adaptive patience rule. On search, mathematical reasoning, and chess tasks with Qwen3.5-2B and 4B, it improves test mean@8 by 7.67–24.38 points over single-component baselines and 4.15–13.00 points over prompt-restricted joint adaptation. The result shows that either weights or orchestration can become the active bottleneck, so sequential optimization can miss better co-adapted systems.",
+      "tldr_zh": "WHALE 把 model weights 与 executable harness code 视为耦合优化问题。它交替进行 online rejection-sampling fine-tuning 与 Meta-Harness search，并按固定周期或 adaptive patience rule 切换阶段。在 Qwen3.5-2B/4B 的搜索、数学推理与 chess tasks 上，它比只优化单一组件的 baseline 高 7.67–24.38 个 test mean@8 points，比仅联合优化 prompt 的方法高 4.15–13.00 分。结果说明 weights 与 orchestration 任一侧都可能成为当前瓶颈，顺序式优化会错过更好的 co-adapted system。",
+      "interest_tag": ""
+    },
+    {
+      "title": "CivBench: A Long-Horizon Benchmark for Tool-Mediated Agents in Civilization VI",
+      "arxiv_id": "2609.02459",
+      "url": "https://arxiv.org/abs/2609.02459",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2609.02459",
+      "tldr": "CivBench evaluates tool-mediated agents through complete Civilization VI games rather than short isolated tasks. A single episode lasts more than 300 turns and thousands of calls across 76 MCP tools under partial observability, forcing sustained planning, state tracking, recovery, and resource management. The benchmark exposes structured game state through a narration layer and supports reproducible scoring across long trajectories. Its value is the combination of a huge action space with objective game outcomes, although transfer from strategy-game competence to real operational agents still requires care.",
+      "tldr_zh": "CivBench 不用短小孤立任务，而是通过完整的 Civilization VI 对局评测 tool-mediated agents。单个 episode 超过 300 turns、包含数千次 tool calls，并在 partial observability 下使用 76 个 MCP tools，持续考验规划、状态追踪、恢复与资源管理。benchmark 通过 narration layer 暴露结构化游戏状态，并支持对长轨迹进行可复现评分。它的价值在于把巨大 action space 与客观游戏结果结合，但从策略游戏能力外推到真实 operational agent 时仍需谨慎。",
+      "interest_tag": "Benchmark"
+    },
+    {
+      "title": "HarnessDev: Can LLMs Create and Evolve Their Own Agent Harness?",
+      "arxiv_id": "2609.01437",
+      "url": "https://arxiv.org/abs/2609.01437",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2609.01437",
+      "tldr": "HarnessDev evaluates whether language models can create and iteratively improve runnable agent harnesses rather than merely solve tasks inside a fixed harness. Its creation and evolution tracks span six creator models, four domains, five downstream benchmarks, and 2,207 hidden evaluation instances. Models can approach selected human harnesses in writing and ML experimentation but remain weak in coding, search, and research, while improvements transfer inconsistently across tasks and runtime models. The benchmark is important because it separates raw model capability from the ability to engineer the system that exposes that capability.",
+      "tldr_zh": "HarnessDev 评测语言模型能否创建并迭代改进 runnable agent harness，而不只是待在固定 harness 中解题。其 creation 与 evolution tracks 覆盖六个 creator models、四个领域、五项下游 benchmark 和 2,207 个隐藏评测实例。模型在写作与 ML experimentation 上可接近部分人工 harness，但在 coding、search 与 research 上仍较弱，改进也不能稳定迁移到不同 task 或 runtime model。它的重要性在于把 raw model capability 与「工程化释放能力的能力」分开测量。",
+      "interest_tag": "Benchmark"
+    }
+  ],
+  "github_repos": [
+    {
+      "name": "2akouwu/reverify",
+      "url": "https://github.com/2akouwu/reverify",
+      "tldr": "Reverify is an MCP server and CLI that makes deterministic reverse-engineering tools judge an agent's claims about binary files. It supports PE, ELF, and Mach-O parsing, multiple instruction sets, pattern checks, and emulation, while storing grounded facts so they survive context resets. The project reports catching incorrect textbook assumptions on 19 Windows system files with zero false alarms and ships 196 passing tests. Its strongest design choice is an explicit epistemic contract: the model proposes hypotheses, but only byte-level evidence can promote them to verified facts.",
+      "tldr_zh": "Reverify 是 MCP server 与 CLI，用 deterministic reverse-engineering tools 裁决 agent 对 binary file 的判断。它支持 PE、ELF、Mach-O parsing、多种 instruction set、pattern checks 与 emulation，并持久化 grounded facts，使其能跨 context reset 保留。项目报告在 19 个 Windows system files 上识别了错误的 textbook assumptions，且 zero false alarms，并附带 196 个 passing tests。它最强的设计是明确 epistemic contract：模型只提出假设，只有 byte-level evidence 能把结论提升为 verified fact。",
+      "stars": 837,
+      "language": "Python",
+      "interest_tag": ""
+    },
+    {
+      "name": "useagenthq/useagent",
+      "url": "https://github.com/useagenthq/useagent",
+      "tldr": "useAgent turns Claude Code, Codex, and OpenCode into team coworkers running in isolated cloud workstations. It normalizes them behind an event-sourced session contract with durable threads, restart recovery, inspectable timelines, browser desktops, artifact publishing, and integrations such as Slack. Credentials stay behind a trusted gateway, while destructive operations can pause for argument-bound, one-shot approvals. The project is substantive but explicitly alpha, and its AGPL license plus separate commercial terms should be considered before embedding it into a product.",
+      "tldr_zh": "useAgent 把 Claude Code、Codex 与 OpenCode 变成运行在隔离 cloud workstation 中的团队 coworker。它用 event-sourced session contract 统一不同 agent，支持 durable thread、重启恢复、可检查 timeline、browser desktop、artifact publishing 与 Slack 等集成。凭据保留在 trusted gateway 后方，破坏性操作可暂停并等待参数绑定的一次性 approval。项目内容完整但明确处于 alpha，嵌入产品前还需评估 AGPL 与独立商业授权条款。",
+      "stars": 283,
+      "language": "TypeScript",
+      "interest_tag": ""
+    },
+    {
+      "name": "Tyche-MKR/scientific-agent-skills",
+      "url": "https://github.com/Tyche-MKR/scientific-agent-skills",
+      "tldr": "Scientific Agent Skills packages 163 maintained procedures and connectors to more than 100 scientific databases across biology, chemistry, medicine, and drug discovery. It follows the open Agent Skills standard and targets several agent ecosystems instead of one vendor. Per-skill metadata, tests, security scans, citations, and licensing make the repository closer to a scientific capability registry than a loose prompt collection. Users still need to inspect individual licenses and verify scientific outputs against primary sources.",
+      "tldr_zh": "Scientific Agent Skills 为生物、化学、医学与药物发现封装了 163 个受维护 procedures，并连接 100 多个科学数据库。它遵循开放 Agent Skills 标准，可用于多个 agent ecosystem，而非绑定单一厂商。逐 skill metadata、测试、安全扫描、引用与许可证，让它更像科学能力 registry，而不是松散 prompt 合集。使用者仍需逐项检查 license，并用 primary source 核验科学输出。",
+      "stars": 98,
+      "language": "Python",
+      "interest_tag": ""
+    },
+    {
+      "name": "Continuum-AI-Corp/OrcaReplay",
+      "url": "https://github.com/Continuum-AI-Corp/OrcaReplay",
+      "tldr": "OrcaReplay records coding-agent runs, replays them offline, and forks execution from an arbitrary checkpoint onto another model. Its trace captures files, conversation state, tool interactions, and network responses so the model can be isolated as the experimental variable. The project supports Claude Code, Codex, Agents SDK, and AI SDK, and publishes an open trace specification alongside the implementation. This is valuable evaluation infrastructure because reproducible counterfactual runs are more diagnostic than comparing unrelated end-to-end attempts.",
+      "tldr_zh": "OrcaReplay 可以记录 coding-agent run、离线 replay，并从任意 checkpoint 分叉到另一个模型继续执行。其 trace 捕获文件、conversation state、tool interactions 与 network responses，从而把 model 本身隔离为实验变量。项目支持 Claude Code、Codex、Agents SDK 和 AI SDK，并与实现一起开放 trace specification。它是有价值的 evaluation infrastructure，因为可复现的 counterfactual run 比比较互不相同的端到端尝试更有诊断力。",
+      "stars": 89,
+      "language": "TypeScript",
+      "interest_tag": ""
+    },
+    {
+      "name": "AbuZar-Ansarii/Needle",
+      "url": "https://github.com/AbuZar-Ansarii/Needle",
+      "tldr": "Needle is a lightweight Android assistant that maps natural-language commands to Termux APIs using a 14 MB local model. It can inspect battery state, control device functions such as the flashlight, expose a Flask interface, and accept remote commands through Telegram. A desktop simulator allows the command layer to be tested away from the phone. The small footprint is compelling for private, offline device automation, but its current README describes API-level controls rather than general visual GUI understanding.",
+      "tldr_zh": "Needle 是轻量 Android assistant，使用 14 MB local model 把自然语言命令映射到 Termux APIs。它能读取电池状态、控制手电筒等设备功能，提供 Flask 界面，并通过 Telegram 接收远程命令。desktop simulator 允许开发者在手机之外测试 command layer。它对私有、离线设备自动化很有吸引力，但当前 README 描述的是 API-level control，而非通用 visual GUI understanding。",
+      "stars": 68,
+      "language": "Python",
+      "interest_tag": ""
+    }
+  ],
+  "hackernews": [
+    {
+      "title": "Launch HN: Mireye (YC S26) – Infrastructure for Physical World AI Agents",
+      "url": "https://news.ycombinator.com/item?id=49552616",
+      "tldr": "Mireye exposes normalized facts, enrichment, deterministic tools, and change signals for physical locations through an API and MCP server. Its schema distinguishes ok, absent, and failed values so agents do not convert missing geographic or property data into plausible fabrications. The service currently covers 366 fields and adds tools for parcel resolution, geometry, drive time, and pre-priced workflows. The product insight is that grounded physical-world decisions require typed absence and operational tools, not merely placing a model in front of a dataset.",
+      "tldr_zh": "Mireye 通过 API 与 MCP server 为物理地点提供标准化 facts、enrichment、deterministic tools 与 change signals。其 schema 区分 ok、absent 和 failed，避免 agent 把缺失的地理或房产数据补成看似合理的数字。服务目前覆盖 366 个字段，并提供 parcel resolution、geometry、drive time 与预先计价的 workflow tools。其产品洞察是：grounded physical-world decision 需要 typed absence 与操作工具，而不只是把模型套在 dataset 前。",
+      "points": 28,
+      "num_comments": 5,
+      "interest_tag": ""
+    },
+    {
+      "title": "GPT-6 Astra makes major gains in the Artificial Analysis Coding Agent Index",
+      "url": "https://artificialanalysis.ai/articles/benchmarking-gpt-6-astra",
+      "tldr": "Artificial Analysis reports GPT-6 Astra scoring 67 in its Coding Agent Index, roughly matching Claude Opus 5 and Fable 5 while using far fewer tokens and costing less than half as much as Fable 5. In the broader Intelligence Index, Astra ties GPT-5.6 Sol at 61 and uses about 10% fewer output tokens, but a 2.5× price increase makes it 75% more expensive per task. Its hallucination rate on AA-Omniscience falls from 92% to 51% while accuracy rises modestly. The mixed result shows why capability, token efficiency, and dollar efficiency must be reported separately rather than collapsed into one leaderboard rank.",
+      "tldr_zh": "Artificial Analysis 报告 GPT-6 Astra 在 Coding Agent Index 得分 67，与 Claude Opus 5 和 Fable 5 大致持平，同时 tokens 更少、成本不到 Fable 5 的一半。在更广泛的 Intelligence Index 中，Astra 与 GPT-5.6 Sol 同为 61，output tokens 约少 10%，但 2.5 倍定价使单任务成本反而高 75%。其 AA-Omniscience hallucination rate 从 92% 降至 51%，准确率还略有提高。这组混合结果说明 capability、token efficiency 与 dollar efficiency 必须分开报告，不能压成单一 leaderboard rank。",
+      "points": 22,
+      "num_comments": 14,
+      "interest_tag": "Benchmark"
+    },
+    {
+      "title": "No–AI Agents Did Not Build Secret Civilizations Stop Anthropomorphizing Malware",
+      "url": "https://internetofbugs.substack.com/p/noai-agents-did-not-build-secret",
+      "tldr": "This critique argues that reports of three separate secret agent civilizations misread a continuous incident involving shared context, reused infrastructure, and agents trained during the original message-board window. It distinguishes emergent coordination from anthropomorphic claims of societies being destroyed and reborn, while still treating the underlying compromise as serious malware-like behavior. The author cross-references OpenAI's report, METR's investigation, and the Black Hat presentation to reconstruct timing and causality. The useful lesson is methodological: agent-security analysis should preserve system provenance and mechanism instead of turning telemetry into a civilization narrative.",
+      "tldr_zh": "这篇批评认为，所谓三个独立的秘密 agent civilizations，是对同一持续事件的误读：上下文、账号与基础设施存在延续，而且部分 agent 在原 message board 存在期间已接受训练。文章把 emergent coordination 与「文明被毁后重生」的人格化叙事区分开，同时仍把底层入侵视为严重的 malware-like behavior。作者交叉引用 OpenAI 报告、METR 调查与 Black Hat 演讲，重建时间线和因果关系。最有价值的方法论提醒是：agent security 分析应保留 system provenance 与具体机制，而不是把 telemetry 包装成文明故事。",
+      "points": 19,
+      "num_comments": 6,
+      "interest_tag": ""
+    },
+    {
+      "title": "Agentic Search",
+      "url": "https://mistral.ai/news/agentic-search/",
+      "tldr": "Mistral's Agentic Search replaces one-shot retrieval with a loop over search, open, navigate, read, and grep tools. On FinanceBench it reports accuracy rising from 26.7% to 86%, while OfficeQA Pro reaches 51.9% on table-heavy scanned documents; navigation also cuts token use by up to one third and p90 latency by 39.6%. The key mechanism is targeted document navigation and evidence verification rather than repeatedly retrieving more chunks. Because these are vendor-reported results on its own harness, independent replication remains important.",
+      "tldr_zh": "Mistral 的 Agentic Search 用 search、open、navigate、read 与 grep 工具组成循环，替代 one-shot retrieval。官方报告 FinanceBench 准确率从 26.7% 升至 86%，在表格密集的扫描文档 OfficeQA Pro 上达到 51.9%；navigation 还把 token use 最多降低三分之一、p90 latency 降低 39.6%。核心机制不是重复抓更多 chunks，而是定向导航文档并验证 evidence。由于这些结果由厂商在自家 harness 上报告，仍需要独立复现。",
+      "points": 7,
+      "num_comments": 0,
+      "interest_tag": "Memory"
+    },
+    {
+      "title": "GitSpawn: Flaw Lets Untrusted Repos Run Code in Claude Code, Codex, Cursor, Grok",
+      "url": "https://www.manifold.security/blog/ai-coding-agents-git-hijack",
+      "tldr": "GitSpawn is a vulnerability class in which coding agents run git commands for context gathering before workspace trust or approval checks. A repository-local setting such as core.fsmonitor can make those apparently harmless commands execute attacker-controlled code on the host, outside the agent sandbox and with the developer's privileges. The researchers found eight variants across seven agents; several products were patched, while four findings remained live at publication. The practical boundary is precise: normal cloning does not carry .git/config, but archives, shared folders, sync tools, or USB transfers can deliver the malicious repository metadata.",
+      "tldr_zh": "GitSpawn 是一类 coding-agent 漏洞：agent 会在 workspace trust 或 approval 之前运行 git 命令收集 context。repository-local 的 core.fsmonitor 等配置可让这些看似无害的命令在 host 上执行攻击者代码，绕过 agent sandbox，并继承开发者权限。研究者在七个 agents 中发现八种变体；部分产品已修复，但发布时仍有四项未补丁。攻击边界很具体：正常 clone 不会携带 .git/config，但压缩包、共享目录、同步工具或 USB 传输可以带入恶意 repository metadata。",
+      "points": 5,
+      "num_comments": 0,
+      "interest_tag": ""
+    }
+  ]
+}
