@@ -1,0 +1,245 @@
+{
+  "date": "2026-09-09",
+  "generated_at": "2026-09-09T16:06:49.916878+08:00",
+  "briefing_zh": "今天最强的主线不是又一个更大的 foundation model，而是把部署、评测与训练连成闭环。**NeoHorse-1** 用 routing harness 记录能力需求、模型选择与真实交互，再将这些轨迹转成 post-training 数据；4B 与 9B 模型的跨十一项评测宏平均分别提升 5.93 与 3.44 分。它把 recursive self-improvement 从口号收缩成一个可审计的 evaluation-selection-update loop，但目前仍只是单轮结果，尚未证明多代递归迭代会持续增益。\n\nEmbodied AI 同时在追问 world model 怎样真正产生可执行动作。**GE-Act 2.0** 以 300 到 30,000 小时数据展示 world-action pretraining 的 scaling，**OpenWAM** 则把视觉编码、信息流、训练与评测拆成可控模块；**SyncWorld** 更进一步，用视觉 calibration episode 在 context 中解释不同环境的 action-to-pixel 映射。这三项工作共同说明，关键已从生成好看的未来画面转向动作语义、监督一致性与跨 embodiment 泛化。\n\n可靠性成为另一条更务实的主线。**ExecCritic** 发现同一 agent 同时写 patch 和 test 会产生共谋式假阳性，因此把 Test 与 Repair 角色分离并用 fail-closed harness 冻结测试；组合 post-training 后在 SWE-bench Verified 达到 72.6%，比无测试反馈基线高 11.4 分。HN 上有关 agent security、长期可维护性和 coding-agent benchmark 的讨论也很热，说明社区开始从「agent 能不能做」转向「证据是否可信、系统是否仍由人类理解」。\n\n开源侧的热点高度产品化：**OKF Agent Memory** 用 Git-native Markdown、BM25 与 MCP 解决 coding agent 的持久记忆，**Penelopa.ai** 从真实会话抽取可复用 skills，**Kander** 则用 kanban 调度多个 coding agents。它们的共同模式不是再造通用 agent，而是占据 memory、observability、orchestration 等明确基础设施层；这类窄而可安装的工具，比笼统的 autonomous agent 宣言更容易形成传播与采用。",
+  "briefing_en": "The strongest thread today is not another larger foundation model, but a closed loop linking deployment, evaluation, and training. **NeoHorse-1** uses a routing harness to record capability demand, model selection, and real interactions, then turns those traces into post-training data; macro averages across eleven evaluations rise by 5.93 points for the 4B model and 3.44 for the 9B model. It narrows recursive self-improvement into an auditable evaluation-selection-update loop, although one training round does not yet establish sustained gains across recursive generations.\n\nEmbodied AI is simultaneously asking how world models can produce executable action rather than merely plausible video. **GE-Act 2.0** reports scaling from 300 to 30,000 hours of world-action pretraining, **OpenWAM** factorizes representation, information flow, training, and evaluation into controlled modules, and **SyncWorld** uses a visual calibration episode to infer setup-specific action-to-pixel mappings in context. Together they move the frontier from visually convincing futures toward action semantics, supervision consistency, and cross-embodiment generalization.\n\nReliability forms a second, more operational theme. **ExecCritic** argues that one trajectory writing both patch and test can create mutually consistent false confidence, so it separates Test and Repair roles and freezes qualified tests behind a fail-closed harness; role-specific post-training reaches 72.6% on SWE-bench Verified, 11.4 points above the no-test-feedback baseline. Strong Hacker News discussion around agent security, maintainability, and coding-agent benchmarks likewise shows attention shifting from whether agents can act to whether their evidence is trustworthy and their systems remain legible to humans.\n\nOpen source is becoming sharply productized. **OKF Agent Memory** combines Git-native Markdown, BM25, and MCP for persistent coding-agent memory, **Penelopa.ai** extracts reusable skills from real sessions, and **Kander** schedules multiple coding agents through a kanban workflow. These projects occupy concrete infrastructure layers—memory, observability, and orchestration—instead of pitching another generic autonomous agent, a narrower positioning that is easier to install, explain, and spread.",
+  "viral_analysis_zh": "**NeoHorse-1** 最可能在研究圈传播：它把宏大的 recursive self-improvement 叙事绑定到 routing harness、真实交互数据和明确的 benchmark delta，既有愿景又有可复现实验抓手。开源侧则是 **OKF Agent Memory**，其「Git-native、zero database、减少 80% token bloat」的定位同时命中 coding-agent memory 痛点和一句话传播需求。",
+  "viral_analysis_en": "**NeoHorse-1** is the most likely research breakout because it connects the ambitious recursive-self-improvement narrative to a routing harness, real interaction data, and explicit benchmark deltas. In open source, **OKF Agent Memory** has the strongest viral framing: “Git-native,” no external database, and an 80% token-bloat claim compress a widespread coding-agent memory pain point into a highly shareable pitch.",
+  "huggingface_papers": [
+    {
+      "title": "NeoHorse-1: Towards Recursive Self-Improvement via Agentic Post-Training with Routing Harness",
+      "url": "https://arxiv.org/abs/2609.08183",
+      "tldr": "NeoHorse-1 turns a routing harness into a data engine: deployed turns record predicted capability demand, selected model tier, tool traces, and outcomes, which are filtered into agentic post-training examples. A three-stage curriculum, routing-guided on-policy distillation, and capability-guided mixture updates raise macro-average performance from 58.94 to 64.87 at 4B and 65.60 to 69.04 at 9B across eleven evaluations. The important contribution is a concrete evaluation-selection-update mechanism for recursive self-improvement, though the paper has not yet demonstrated stable gains over multiple recursive generations.",
+      "tldr_zh": "NeoHorse-1 把 routing harness 变成数据引擎：线上请求记录能力需求、模型档位、工具轨迹与结果，再经过过滤转成 agentic post-training 样本。三阶段 curriculum、routing-guided on-policy distillation 与 capability-guided 数据配比，使 4B 和 9B 模型在十一项评测上的宏平均分别从 58.94 升至 64.87、从 65.60 升至 69.04。其价值是为 recursive self-improvement 给出具体的 evaluation-selection-update 机制，但论文尚未证明多代递归训练仍能稳定增益。",
+      "upvotes": 136,
+      "authors": "NeoHorse Team, Guoliang Cao, Guohao Dai, Tianyu Guo, Kai Han, Hailin Hu, Zihan Jiang, Xiang Kuang, Boxun Li, Yulong Li, Zehua Pei, Yuchuan Tian, Jiamin Wang, Yu Wang, Yunhe Wang, Yihong Wu, Haiyang Xu, Shuo Zhang, Hang Zhou, Siyang Cheng, Jiayu Fan, Wei He, Qingrui Jiao, Hongguang Li, Zhiyuan Li, Runke Liu, Xi Liu, Xinchen Liu, Sinno Jialin Pan, Yi Ren, Liuyang Song, Chenyu Wang, Bei Yu, Quanlu Zhang, Xiangyu Zhang, Mengyu Zheng, Yingjie Zong",
+      "ai_keywords": [
+        "recursive self-improvement",
+        "agent-native models",
+        "agentic post-training",
+        "intelligent routing",
+        "supervised fine-tuning",
+        "routing-guided on-policy distillation",
+        "capability-guided allocation",
+        "harness-mediated RSI"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "Omni Interaction Agent Technical Report",
+      "url": "https://arxiv.org/abs/2609.08977",
+      "tldr": "Gander unifies streaming video, speech, and text with full-duplex interaction, allowing interruption, proactive feedback, and agentic workflows in one model. Its Cerebellum-Brain design separates low-latency conversation from complex reasoning while connecting both through tool calls and an orchestration runtime. The report matters because it treats realtime interaction as an architectural property rather than a turn-based interface add-on, although much of the reported evidence relies on internal human evaluation.",
+      "tldr_zh": "Gander 在一个模型中统一流式视频、语音和文本，支持随时打断、主动反馈与 agentic workflow。其 Cerebellum-Brain 架构把低延迟交互和复杂推理解耦，再通过 tool calling 与 orchestration runtime 持续协作。重要之处在于它把 realtime interaction 视为架构属性，而不是给 turn-based 模型加一层界面；局限是相当一部分证据仍来自内部人工评测。",
+      "upvotes": 59,
+      "authors": "Orantqing, Shengpeng Ji, Junlong Tong, Jialong Zuo, Dongjie Fu, Di Cao, Yangzhuo Li, Shangda Wu, Franz, Evan, Theron Veyra, Changhao Pan, Jingyu Lu, Dongchao Yang, Zhifei Xie, Yang Tan, Xiaoyu Shen, Xiaoda Yang, Wenfu Wang, Teddysun, Steveyves, Zhou Zhao, Bryanytian",
+      "ai_keywords": [
+        "Cerebellum-Brain collaborative framework",
+        "streaming Thinker-Talker architecture",
+        "token stream",
+        "tool calling",
+        "agent orchestration runtime",
+        "omni perception",
+        "full-duplex interaction"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "Eliciting Weak-to-Strong Generalization with On-Policy Reverse Distillation",
+      "url": "https://arxiv.org/abs/2609.08798",
+      "tldr": "On-Policy Reverse Distillation avoids treating a weak teacher as the student's final target. It measures the teacher's policy shift on student rollouts and amplifies only verifier-supported student updates aligned with that direction, preserving the stationary points of policy optimization. Across successive-model transfer and multi-teacher settings, the method learns faster and exceeds the weak teacher, suggesting supervision can accelerate a stronger student's own optimization without imposing the teacher's style or ceiling.",
+      "tldr_zh": "On-Policy Reverse Distillation 不把弱 teacher 当作 student 的最终优化目标。它在 student rollout 上测量 teacher 相对参考策略的 policy shift，只放大与该方向一致且得到 verifier 支持的更新，因此不改变 policy optimization 的 stationary points。该方法在跨代模型迁移和 multi-teacher 场景中以更少更新超过弱 teacher，说明监督可以加速强 student 自身优化，而不必继承 teacher 的风格和能力上限。",
+      "upvotes": 58,
+      "authors": "Youngrok Park, Sangmin Bae, Hojung Jung, Jongwoo Ko, Yunseon Choi, Young Jin Kim, Pashmina Cameron, Aaron Courville, Se-Young Yun",
+      "ai_keywords": [
+        "weak-to-strong generalization",
+        "On-Policy Reverse Distillation",
+        "policy gradient",
+        "verifier-driven policy optimization",
+        "multi-teacher distillation",
+        "RL distillation"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "DriveZero: End-to-End Driving Beyond Human Demonstrations",
+      "url": "https://arxiv.org/abs/2609.06055",
+      "tldr": "DriveZero separates autonomous driving into a perception model pretrained from diverse visual data and an action model trained with closed-loop reinforcement learning. DriveRL turns logged drives into interactive worlds for PPO training, while DriveVFM consolidates frozen vision foundation models; the final camera-only planner distills rolled-out teacher trajectories rather than human demonstrations. Results across nuPlan, NAVSIM, and HUGSIM argue that closed-loop synthetic supervision can move end-to-end driving beyond imitation, but the safety case still depends on how faithfully converted logs reproduce rare real-world failures.",
+      "tldr_zh": "DriveZero 将自动驾驶拆为从海量视觉数据预训练的 perception model，以及通过 closed-loop RL 学习的 action model。DriveRL 把真实驾驶日志转成可交互世界供 PPO rollout，DriveVFM 则整合多个冻结的 vision foundation models；最终 camera-only planner 蒸馏 teacher rollout，而非模仿人类轨迹。nuPlan、NAVSIM 与 HUGSIM 的结果说明 closed-loop synthetic supervision 能突破 imitation 上限，但安全可信度仍取决于日志转换环境能否忠实覆盖罕见真实失效。",
+      "upvotes": 44,
+      "authors": "Hao He, Chengcheng Hu, Zirun Su, Heng Zhang, Haisong Liu, Jinke Li, Haochen Tian, Zhenwei Shen, Hongyang Li, Zhichao Li, Yunchen Yang, Bochao Huang, Siyu Zhang, Kuangye Chen, Xiongjie Zhang, Wentao Dai, Hengchen Dai, Siyuan Liu, Zehao Huang, Naiyan Wang",
+      "ai_keywords": [
+        "DriveZero",
+        "DriveRL",
+        "PPO",
+        "closed-loop reinforcement learning",
+        "vision foundation models",
+        "DINOv3",
+        "SigLIP2",
+        "SAM",
+        "Depth Anything V2",
+        "goal-conditioned teacher",
+        "value-guided test-time action search"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "GE-Act 2.0: Pretraining and Scaling a World-Action Model for Robotic Manipulation",
+      "url": "https://arxiv.org/abs/2609.05588",
+      "tldr": "GE-Act 2.0 pretrains a world-action model from scratch on manipulation data using a control-oriented autoencoder, single-step visual planner, and inverse dynamics model. Knowledge-aligned selective optimization filters predicted futures that are behaviorally incompatible with recorded actions, directly addressing conflicting world and action supervision. Scaling co-training from 300 to 30,000 hours raises zero-shot success from 17.1% to 44.1% on G1-OP and from 13.4% to 31.1% on G2-90D, providing unusually clear evidence for cross-embodiment scaling.",
+      "tldr_zh": "GE-Act 2.0 在 manipulation data 上从头预训练 world-action model，由 control-oriented autoencoder、single-step visual planner 与 inverse dynamics model 组成。Knowledge-aligned selective optimization 会过滤与记录动作在行为上不兼容的预测未来，直接处理 world supervision 与 action supervision 的冲突。将 co-training 数据从 300 小时扩到 30,000 小时后，G1-OP 的 zero-shot 成功率从 17.1% 升至 44.1%，G2-90D 从 13.4% 升至 31.1%，给出了清晰的 cross-embodiment scaling 证据。",
+      "upvotes": 38,
+      "authors": "AgiBot Research Team, Renhang Liu, Wenzhi Zhao, Zhuo Yang, Liliang Chen, Pengfei Zhou, Shengcong Chen, Guanghui Ren, Youlun Peng, Rongjun Jin, Nan Wang, Sukai Wang, Xindong He, Jinyuan Feng, Ziyu Xiong, Linqing Zhong, Yifei Wei, Feng Han, Long Zhang, Da Huang, Nanshu Zhao, Chenghao Yin, Mo Wu, Zhaodong Yan, Kongtao Hu, Yuxiang Yan, Aogelijiang Niyazi, Yu Fang, Jia Zeng, Lizhu Meng, Daizhen Lv, Haoyu Cao, Zhiwen Hou, Lianjin Ye, Yuehan Niu, Zhikai Cai, Xuan Hu, Hui Min, Xiongfeng Cai, Yue Liao, Jing Wu, Soujanya Poria, Ye Li, Sanping Zhou, Maoqing Yao",
+      "ai_keywords": [
+        "world-action models",
+        "control-oriented autoencoder",
+        "single-step visual planner",
+        "inverse dynamics model",
+        "knowledge-aligned selective optimization",
+        "cross-embodiment transfer",
+        "zero-shot out-of-distribution"
+      ],
+      "interest_tag": ""
+    }
+  ],
+  "alphaxiv_papers": [
+    {
+      "title": "Finite Time Blowup for Navier–Stokes",
+      "arxiv_id": "",
+      "url": "https://www.alphaxiv.org/abs/2609.navier-stokes",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2609.navier-stokes",
+      "tldr": "The work constructs a three-dimensional incompressible Navier–Stokes solution that starts from rest and develops unbounded velocity in finite time under a smooth, compactly supported external force while retaining bounded kinetic energy. Its multiscale mechanism uses localized oscillatory pulses amplified by background shear to generate the momentum flux sustaining a contracting vortex. If the proof survives expert scrutiny, it resolves the forced formulation by establishing finite-time blowup; the extraordinary claim and slug-only publication path warrant careful verification rather than headline acceptance.",
+      "tldr_zh": "该工作构造了一个三维不可压 Navier–Stokes 解：流体从静止开始，在光滑且紧支撑的外力下于有限时间出现无界速度，同时保持有界动能。其多尺度机制利用背景 shear 放大局部振荡脉冲，产生维持收缩 vortex 所需的 momentum flux。若证明通过专家审查，它将解决带外力表述下的 finite-time blowup；但鉴于结论极其重大且目前是 slug 页面，应该审慎核验而非只看标题。",
+      "interest_tag": ""
+    },
+    {
+      "title": "OpenWAM: An Open, Modular Exploration Towards Systematic World-Action Model Pretraining",
+      "arxiv_id": "2609.07398",
+      "url": "https://arxiv.org/abs/2609.07398",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2609.07398",
+      "tldr": "OpenWAM replaces monolithic world-action models with a modular stack for controlled comparisons of visual representations, generative backbones, information flow, and training recipes. Experiments identify three practical principles: capable generative priors with compact latents, explicit world-to-action flow with synchronized denoising, and one-stage co-training on egocentric plus robot data. OpenWAM-α applies them across roughly 6,400 hours and eight simulation benchmarks plus real robots, making the released infrastructure as important as the headline scores.",
+      "tldr_zh": "OpenWAM 用模块化研究栈替代 monolithic world-action model，使视觉表示、生成 backbone、信息流与训练 recipe 可以受控比较。实验总结出三条原则：足够强的生成先验配合紧凑 latent、显式 world-to-action 信息流与同步 denoising，以及在 egocentric 和 robot data 上做 one-stage co-training。OpenWAM-α 在约 6,400 小时数据、八项 simulation benchmark 和真实机器人上验证这些原则，因此其开放基础设施与分数本身同样重要。",
+      "interest_tag": ""
+    },
+    {
+      "title": "SyncWorld: Visual Calibration Enables World Models as Zero-Shot Simulators",
+      "arxiv_id": "2609.09155",
+      "url": "https://arxiv.org/abs/2609.09155",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2609.09155",
+      "tldr": "SyncWorld observes that identical numeric robot actions map to different pixels under new cameras, embodiments, and scene layouts, creating contradictory supervision for mixed training. It supplies a visual calibration episode—paired frames and actions spanning controllable degrees of freedom—as in-context evidence for the local action-visual mapping. The resulting world model simulates unseen setups without additional training and can support test-time policy improvement, a promising alternative to assuming globally standardized action semantics.",
+      "tldr_zh": "SyncWorld 指出，同一个数值机器人动作在不同相机、embodiment 和场景布局下会映射成不同像素变化，混合训练因此产生冲突监督。它提供覆盖可控自由度的 frame-action calibration episode，让模型在 context 中推断局部 action-visual mapping。所得 world model 无需额外训练即可模拟未见环境并支持 test-time policy improvement，为「动作语义全局统一」这一不现实假设提供了替代方案。",
+      "interest_tag": ""
+    },
+    {
+      "title": "Continual Learning Mechanisms Compose for Long-Horizon Memorization",
+      "arxiv_id": "",
+      "url": "https://www.alphaxiv.org/abs/2609.compose-cl",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2609.compose-cl",
+      "tldr": "This study tests continual supervised updates over 100 query-answer tasks without retaining old examples or exposing task IDs at inference. No individual mechanism retains knowledge well, but composing data, function, and weight anchors with merged LoRA raises average final retention from 1.2% to 34.9% and extends memory half-life to as many as 44 tasks. The result is a strong mechanistic lesson about complementary anti-forgetting interventions, while the authors also show that memorizing task facts does not automatically preserve broad reasoning capabilities.",
+      "tldr_zh": "该研究让模型连续学习 100 个 query-answer 任务，既不保留旧样本，也不在推理时提供 task ID。单一 continual-learning 机制都无法长期保留知识，但组合 data、function、weight anchors 与 merged LoRA 后，平均最终 retention 从 1.2% 升至 34.9%，memory half-life 最长达到 44 个任务。结果说明互补的抗遗忘机制存在明显组合收益，同时也提醒：记住任务事实并不会自动保住通用推理能力。",
+      "interest_tag": ""
+    },
+    {
+      "title": "ExecCritic: Learn to Test, Test to Improve for Coding Agents",
+      "arxiv_id": "2609.09133",
+      "url": "https://arxiv.org/abs/2609.09133",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2609.09133",
+      "tldr": "ExecCritic separates test construction from repair because a single agent can write a flawed patch and a flawed test that agree with each other. A Test agent produces repository-native tests, a fail-closed harness qualifies and freezes them, and a Repair agent must revise code without changing those tests; each role receives separate reinforcement-learning post-training. On SWE-bench Verified, the composed Qwen agents reach 72.6%, an 11.4-point gain over the no-test-feedback baseline, showing that feedback quality—not merely feedback availability—determines whether execution helps.",
+      "tldr_zh": "ExecCritic 将 test construction 与 repair 分开，因为同一个 agent 可能同时写出错误 patch 和与之共谋的错误 test。Test agent 生成 repository-native tests，经 fail-closed harness 验证并冻结；Repair agent 只能根据执行反馈改代码，两个角色分别进行 RL post-training。在 SWE-bench Verified 上，组合后的 Qwen agents 达到 72.6%，比无测试反馈基线高 11.4 分，说明 execution feedback 是否有效取决于反馈质量，而不只是有没有反馈。",
+      "interest_tag": ""
+    }
+  ],
+  "github_repos": [
+    {
+      "name": "okf-memory/okf-agent-memory",
+      "url": "https://github.com/okf-memory/okf-agent-memory",
+      "tldr": "A Git-native persistent memory layer for coding agents, storing vendor-neutral OKF v0.2 records as Markdown with YAML frontmatter inside the repository. The pure-Go implementation adds validation, sub-millisecond in-memory BM25 search, progressive disclosure, and an embedded MCP server without an external database. Its value is operational simplicity and inspectability: memory can be reviewed and versioned like code instead of disappearing into an opaque vector store.",
+      "tldr_zh": "这是一个面向 coding agents 的 Git-native 持久记忆层，以仓库内 Markdown 加 YAML frontmatter 保存 vendor-neutral OKF v0.2 记录。纯 Go 实现提供校验、亚毫秒级 in-memory BM25、progressive disclosure 和内嵌 MCP server，无需外部数据库。其核心价值是简单且可审计：记忆像代码一样接受 review 和版本控制，而不是藏在黑盒 vector store 中。",
+      "stars": 498,
+      "language": "Go",
+      "interest_tag": "Memory"
+    },
+    {
+      "name": "i-am-manware/Manware-s-AI-Learning-Toolkit",
+      "url": "https://github.com/i-am-manware/Manware-s-AI-Learning-Toolkit",
+      "tldr": "This toolkit reconfigures coding assistants as tutors that require the learner to predict, attempt, test, and explain before receiving help. Twelve prompt workflows expose actions such as hints, debugging, and explanation across Copilot, Cursor, Claude Code, OpenCode, and other branches. The project is notable less for technical novelty than for a strong pedagogical contract that counters passive code generation and makes the user's reasoning observable.",
+      "tldr_zh": "该 toolkit 将 coding assistant 改造成 tutor，要求学习者先预测、尝试、测试和解释，再获得帮助。十二套 prompt workflow 提供 hint、debug、explain 等动作，并为 Copilot、Cursor、Claude Code、OpenCode 等工具维护不同分支。它的亮点不在底层技术创新，而在清晰的教学契约：抵抗被动代码生成，并让用户的推理过程可观察。",
+      "stars": 257,
+      "language": "",
+      "interest_tag": ""
+    },
+    {
+      "name": "chigwell/Penelopa.ai",
+      "url": "https://github.com/chigwell/Penelopa.ai",
+      "tldr": "Penelopa connects to Codex and Claude Code sessions, analyzes recurring workflow patterns, and surfaces skills, checks, prompts, and recommendations in a personal dashboard. The product targets continuous improvement of the human-agent system rather than another one-shot coding agent. Its strongest idea is closing the loop from real session telemetry to reusable operating procedures, though the installer-led product and private runtime deserve the usual privacy and trust review.",
+      "tldr_zh": "Penelopa 连接 Codex 与 Claude Code session，分析反复出现的 workflow pattern，并在个人 dashboard 中生成 skills、checks、prompts 与 recommendations。它优化的是持续演进的人机系统，而不是再做一个 one-shot coding agent。最有价值的思路是把真实 session telemetry 闭环为可复用操作流程；不过 installer 驱动且包含私有 runtime，使用前仍需审查隐私与信任边界。",
+      "stars": 107,
+      "language": "JavaScript",
+      "interest_tag": ""
+    },
+    {
+      "name": "jangtrinh/design-os-3d-blender",
+      "url": "https://github.com/jangtrinh/design-os-3d-blender",
+      "tldr": "Design OS packages Blender automation as an agent-facing production system with skills, a verified bpy knowledge base, explicit AGENT_OK/AGENT_FAIL contracts, and gates for printable output. The repository includes native Blender assets, tests, releases, and a robot-arm demonstration rather than only prompts or screenshots. It is a useful example of domain agents becoming credible through deterministic execution contracts and artifact-level validation.",
+      "tldr_zh": "Design OS 将 Blender automation 封装为 agent-facing production system，包含 skills、经验证的 bpy knowledge base、明确的 AGENT_OK/AGENT_FAIL contract，以及 3D 可打印产物门禁。仓库提供原生 Blender assets、tests、releases 和 robot-arm demo，不只是 prompts 或截图。它说明垂直领域 agent 要获得可信度，关键是 deterministic execution contract 与 artifact-level validation。",
+      "stars": 59,
+      "language": "Python",
+      "interest_tag": ""
+    },
+    {
+      "name": "dualface/kander",
+      "url": "https://github.com/dualface/kander",
+      "tldr": "Kander gives one operator a kanban interface for launching and tracking tasks across Codex, Claude, Grok, and Cursor agents. Its workflow makes goals and acceptance criteria explicit before dispatch, then keeps multiple sessions visible through a shared board. The project is a pragmatic orchestration layer rather than a new model, and its appeal comes from mapping multi-agent work onto a familiar human project-management metaphor.",
+      "tldr_zh": "Kander 用 kanban 界面帮助单个操作者启动并跟踪 Codex、Claude、Grok 与 Cursor 等多个 agents 的任务。工作流要求 dispatch 前明确目标和 acceptance criteria，再通过共享看板保持多个 session 可见。它不是新模型，而是务实的 orchestration layer；传播优势来自把 multi-agent 工作映射到人们熟悉的项目管理隐喻。",
+      "stars": 37,
+      "language": "Go",
+      "interest_tag": "Agent Swarm"
+    }
+  ],
+  "hackernews": [
+    {
+      "title": "Muse – Meta’s personal AI agent",
+      "url": "https://ai.meta.com/muse/",
+      "tldr": "Meta's official page introduces Muse as a personal AI agent for everyday tasks, but the public page exposes little technical detail beyond the product framing. The Hacker News thread drew 479 points and 515 comments, far more discussion than any other item in this query, indicating that a consumer agent from Meta is as much a trust and platform-governance story as a capability launch. The signal is therefore market attention and controversy, not yet a research result with reproducible evidence.",
+      "tldr_zh": "Meta 官方页面将 Muse 定位为处理日常任务的 personal AI agent，但公开页面除产品定位外几乎没有披露技术细节。该 HN 讨论获得 479 points 和 515 comments，远高于本次查询中的其他条目，说明 Meta 推出 consumer agent 同时也是信任与平台治理事件。当前可确认的核心信号是市场关注和争议，而不是已经具备可复现证据的研究成果。",
+      "points": 479,
+      "num_comments": 515,
+      "interest_tag": ""
+    },
+    {
+      "title": "OKF Agent Memory – Git-native persistent memory for AI coding agents",
+      "url": "https://github.com/okf-memory/okf-agent-memory",
+      "tldr": "OKF Agent Memory brings persistent coding-agent memory into the repository as standardized Markdown and YAML, searchable through an embedded BM25 engine and MCP interface. The approach avoids an external vector database and keeps decisions, discoveries, and operational facts auditable through Git history. Its 79 HN points and 32 comments, alongside rapid GitHub growth, suggest strong demand for memory systems that are transparent and boring enough to operate.",
+      "tldr_zh": "OKF Agent Memory 把 coding-agent 持久记忆以标准化 Markdown 和 YAML 放回仓库，并通过内嵌 BM25 与 MCP 接口检索。它避免外部 vector database，让决策、发现和运维事实都可经 Git history 审计。79 个 HN points、32 条评论和快速增长的 GitHub stars 共同表明，社区需要的是透明、朴素且容易运维的 memory system。",
+      "points": 79,
+      "num_comments": 32,
+      "interest_tag": "Memory"
+    },
+    {
+      "title": "AI Agents and the Refactoring That Never Happens",
+      "url": "https://www.rosenfeld.page/articles/programming/2026_09_02_ai_agents_and_the_refactoring_that_never_happens/",
+      "tldr": "The essay argues that AI agents remove a crucial maintainability alarm: the moment a human gets lost in tangled code and decides to refactor. Agents can keep extending code that no teammate fully understands, making reviews weaker and dependence on the agent self-reinforcing; messy code also costs agents more context and tokens. The proposed response is to encode structural review and refactoring triggers into the harness instead of assuming correct local edits will preserve global legibility.",
+      "tldr_zh": "文章认为 AI agents 消除了一个关键的可维护性警报：人类在复杂代码中迷路、因而决定 refactor 的时刻。Agent 可以继续扩展无人完全理解的代码，使 review 越来越弱，并形成对 agent 的自我强化依赖；混乱结构也会消耗更多 agent context 和 tokens。应对方式不是假设局部改动正确就会自然保持全局可读，而是把结构审查与 refactoring trigger 显式写进 harness。",
+      "points": 50,
+      "num_comments": 69,
+      "interest_tag": ""
+    },
+    {
+      "title": "GPT-6 Astra makes major gains in the Artificial Analysis Coding Agent Index",
+      "url": "https://artificialanalysis.ai/articles/benchmarking-gpt-6-astra",
+      "tldr": "Artificial Analysis reports GPT-6 Astra scoring 67 in its Coding Agent Index, roughly level with Fable 5 and two points above GPT-5.6 Sol at max effort for similar per-task cost. The gain comes from using about one third as many tokens as Sol in the Codex harness, while the broader Intelligence Index remains flat at 61 and becomes 75% more expensive per task because list prices rose 2.5×. The mixed result is important: agentic coding efficiency improved sharply, but capability and cost conclusions change with the harness and evaluation slice.",
+      "tldr_zh": "Artificial Analysis 报告 GPT-6 Astra 在 Coding Agent Index 得分 67，大致与 Fable 5 持平，并在每任务成本相近时比 max-effort GPT-5.6 Sol 高 2 分。主要收益来自 Codex harness 中 token 用量约降至 Sol 的三分之一；但更广泛的 Intelligence Index 仍为 61，且因标价上涨 2.5 倍，每任务成本反而高 75%。这组混合结果很重要：coding-agent 效率显著提升，但能力与成本结论会随 harness 和评测切片变化。",
+      "points": 27,
+      "num_comments": 17,
+      "interest_tag": "Benchmark"
+    },
+    {
+      "title": "A docs page is a search query to find AI agents and route them to your company",
+      "url": "https://blog.val.town/aeo",
+      "tldr": "Val Town describes Answer or Agentic Engine Optimization as making documentation discoverable to models that recommend tools to users. Its practical loop is to measure AI referrals, distinguish search crawlers from training crawlers, and expose useful docs without sacrificing human UX; the company found AI was already a major reported referral source. The post's sharper insight is that agent traffic is both acquisition and infrastructure load, so teams need crawler policy, attribution, and model-facing evaluation rather than keyword stuffing.",
+      "tldr_zh": "Val Town 将 Answer/Agentic Engine Optimization 描述为：让会向用户推荐工具的模型能够发现文档。其实践闭环是测量 AI referrals、区分 search crawler 与 training crawler，并在不牺牲 human UX 的前提下开放有用文档；公司发现 AI 已是用户自报的重要来源。更关键的 insight 是 agent traffic 同时意味着获客与基础设施负载，因此团队需要 crawler policy、attribution 和 model-facing eval，而不是 keyword stuffing。",
+      "points": 27,
+      "num_comments": 1,
+      "interest_tag": ""
+    }
+  ]
+}
