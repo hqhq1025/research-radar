@@ -1,0 +1,226 @@
+{
+  "date": "2026-09-10",
+  "generated_at": "2026-09-10T16:03:56.411935+08:00",
+  "briefing_zh": "今天最清晰的研究主线，是把基础模型能力与可控执行层解耦。**Show-Harness** 用紧凑的语义动作接口把 VLM 意图映射到不同机器人，而 **Programmable World Model** 则把显式状态演化与视频渲染拆开，分别解决动作可移植性和长程状态一致性。它们与 alphaxiv 上的 **OpenWAM** 共同说明：下一阶段的 embodied/world-model 系统，竞争点正在从单纯扩大模型转向接口、状态和信息流设计。\n\n评测侧也在从排行榜分数走向可审计证据。**SAEScientist-Bench** 发现前沿 agent 已能设计对照实验并搜索 SAE 特征，却仍常误读测量结果；**Discovery Certification Protocol** 更进一步，要求研究 agent 的发现通过 sealed evaluation、恢复测试和可复现 verifier。对 autonomous AI R&D 而言，这比再造一个 aggregate score 更关键，因为它开始区分有用结果、可由既有线索恢复的结果和真正受反馈驱动的发现。\n\n训练与系统研究同时强调 on-policy 和结构匹配。**On-Policy Reverse Distillation** 只放大 verifier 支持且与教师策略变化一致的更新，试图避免弱教师成为学生上限；**NeoHorse-1** 与 HF 上的 harness/model co-evolution 工作则提示，完整模仿强模型轨迹可能破坏弱模型原有的 planning style。共同信号是：agent post-training 不能只搬运答案，还要保留 rollout 分布、harness 语境与模型自身可执行的策略形态。\n\n开源生态的热点已明显转向 agent 的可运维性。**OKF Agent Memory** 用 Git-native、可审计的 Markdown 与 BM25 做持久记忆，**Geiger** 用只读扫描盘点本机 agent、MCP 和插件暴露面，**Unpeel** 则让长运行 terminal agent 保持会话并在批准门禁下协作。Google 的威胁情报同时显示，恶意软件已开始利用 agent 配置、workspace hooks 和 prompt injection；这使 provenance、权限边界、可观测性与人类 approval gate 从产品加分项变成基础设施要求。",
+  "briefing_en": "The clearest research thread today is the separation of foundation-model capability from controllable execution layers. **Show-Harness** maps VLM intent through a compact semantic action interface across robot embodiments, while **Programmable World Model** separates explicit state evolution from video rendering to preserve long-horizon rules and off-screen state. Together with **OpenWAM**, they suggest that the next phase of embodied and world-model systems will compete as much on interfaces, state representations, and information flow as on model scale.\n\nEvaluation is also moving beyond leaderboard scores toward auditable evidence. **SAEScientist-Bench** finds that frontier agents can design contrasts and search SAE dictionaries but still misread experimental measurements, while the **Discovery Certification Protocol** demands sealed evaluation, recovery tests, and deterministic verification for research claims. For autonomous AI R&D, this matters more than another aggregate score because it distinguishes useful outcomes, recoverable prior routes, and discoveries that genuinely depend on experimental feedback.\n\nTraining and systems work converge on the importance of on-policy data and model-scaffold fit. **On-Policy Reverse Distillation** amplifies only verifier-supported updates aligned with a teacher's policy shift, avoiding the weak teacher as a hard ceiling; **NeoHorse-1** and the HF work on harness-model co-evolution similarly show that imitating complete expert trajectories can disrupt a weaker model's native planning style. The shared lesson is that agent post-training must preserve rollout distribution, harness context, and strategies the student can actually execute rather than merely copying final behavior.\n\nOpen-source attention is shifting toward agent operability. **OKF Agent Memory** offers Git-native, auditable persistence over Markdown and BM25, **Geiger** inventories local agents, MCP servers, plugins, and their exposure in read-only mode, and **Unpeel** keeps terminal agents alive while gating cross-session writes. Google's threat report shows malware already exploiting agent configuration, workspace hooks, and prompt injection, making provenance, permission boundaries, observability, and human approval gates baseline infrastructure rather than optional polish.",
+  "viral_analysis_zh": "最可能引爆讨论的是 **On the Navier–Stokes Millennium Prize Problem**：千禧年难题、OpenAI、多 agent 搜索与 Lean 形式化叠加，天然具备跨圈传播性，但其结论必须等待独立数学验证，不能把热度当作定论。开源侧 **Geiger** 更可能形成可持续扩散，因为它把抽象的 agent 安全焦虑压缩成一次只读命令和可分享的暴露报告，价值主张极易演示。",
+  "viral_analysis_en": "**On the Navier–Stokes Millennium Prize Problem** is the likeliest breakout story: a Millennium problem, OpenAI, coordinated agents, and Lean formalization create unusually strong cross-community appeal, although the claim still requires independent mathematical verification. In open source, **Geiger** has the more durable viral loop because it turns abstract agent-security anxiety into one read-only command and a shareable exposure report that demos instantly.",
+  "huggingface_papers": [
+    {
+      "title": "Show-Harness: Just a VLM Agent Can Play Robots",
+      "url": "https://huggingface.co/papers/2609.10522",
+      "tldr": "Show-Harness gives a VLM a compact vocabulary of semantic action units, while embodiment-specific interpreters deterministically translate those units into local robot controls. This keeps the model responsible for fine-grained decisions without requiring it to emit hardware-specific low-level commands. The same abstraction supports frontier closed models, cheaply adapted open models, and GUMI, a GUI-based demonstration interface, making interface design the central source of transfer across embodiments.",
+      "tldr_zh": "Show-Harness 向 VLM 暴露一组紧凑的语义动作单元，再由不同 embodiment 的解释器确定性地落到本地机器人控制。这样既保留模型对细粒度决策的责任，又避免让它直接生成硬件专属的低层命令。同一抽象同时支持闭源前沿模型、低成本微调的开源小模型和 GUI 演示采集工具 GUMI，把接口设计变成跨 embodiment 迁移的关键。",
+      "upvotes": 45,
+      "authors": "Yanzhe Chen, Zechen Bai, Zhijun Cao, Wenzheng Zeng, Kevin Qinghong Lin, Yiqi Lin, Guoqiang Liang, Kevin Yuchen Ma, Qiming Huang, Mike Zheng Shou",
+      "ai_keywords": [
+        "VLM agent",
+        "embodied AI",
+        "semantic action interface",
+        "robot control"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "Programmable World Model",
+      "url": "https://huggingface.co/papers/2609.10540",
+      "tldr": "Programmable World Model separates symbolic world-state evolution from visual observation generation. An agent compiles natural-language rules into executable programs, a lightweight engine maintains persistent entity state, and state-augmented 3D boxes condition a pretrained video renderer. This explicit-state design reaches 94% count accuracy and 98% state accuracy on CombatStateBench, offering a concrete alternative to asking a generative renderer to remember every long-horizon fact implicitly.",
+      "tldr_zh": "Programmable World Model 将符号化世界状态演化与视觉观测生成分离。Agent 把自然语言规则编译成可执行程序，轻量引擎维护持久实体状态，再用带状态的 3D bounding boxes 条件化预训练视频渲染器。该显式状态设计在 CombatStateBench 上达到 94% Count Accuracy 和 98% State Accuracy，为依赖生成式渲染器隐式记住所有长程事实提供了具体替代方案。",
+      "upvotes": 35,
+      "authors": "Zheng-Hui Huang, Guixu Lin, Jiacheng Lin, Yi-Chuan Huang, Ruihan Yu, Muyao Niu, Siqi Yang, Yu-Lun Liu, Yung-Yu Chuang, Kaipeng Zhang, Zhixiang Wang",
+      "ai_keywords": [
+        "world model",
+        "explicit state",
+        "video generation",
+        "long-horizon consistency"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "WearableQA: A Benchmark for Health Reasoning over Real-World Wearable Data",
+      "url": "https://huggingface.co/papers/2609.05405",
+      "tldr": "WearableQA contains 4,084 ten-choice questions built from up to 500 days of wearable signals, biomarkers, and demographics for 200 real users. Its 16 question types separate data computation from health interpretation and single-signal from cross-signal reasoning, while dual grounding combines literature evidence with statistically validated population patterns. Fourteen models range from 19.6% to 72.9%, showing that realistic longitudinal health reasoning remains substantially unsolved.",
+      "tldr_zh": "WearableQA 基于 200 名真实用户最长 500 天的 wearable 信号、血液生物标志物和人口统计信息，构造了 4,084 道十选一问题。它用 16 类问题区分数据计算与健康解释、单信号与跨信号推理，并通过文献证据和统计验证的人群规律进行双重 grounding。14 个模型的准确率从 19.6% 到 72.9%，说明真实纵向健康推理仍远未解决。",
+      "upvotes": 24,
+      "authors": "Ji Soo Lee, Xilun Chen, Pierce Chuang, Ashish Shenoy, Jason Wei, Dohwan Ko, Hyunwoo J. Kim, Benoit Corda",
+      "ai_keywords": [
+        "wearable data",
+        "health reasoning",
+        "longitudinal data",
+        "evaluation"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "SAEScientist-Bench: Can AI Agents Conduct Autonomous SAE Interpretability Research?",
+      "url": "https://huggingface.co/papers/2609.09113",
+      "tldr": "SAEScientist-Bench tests whether agents can use a 131K-feature Gemma Scope SAE dictionary to conduct mechanistic discovery rather than merely answer interpretability questions. Agents must design contrastive probes, identify a target feature, and support it through activation rank, selectivity, and causal steering across 20 tasks. Frontier systems show real discovery behavior but remain below experts, especially because they often misinterpret experimental measurements and causal effects.",
+      "tldr_zh": "SAEScientist-Bench 测试 agent 能否使用包含 13.1 万个特征的 Gemma Scope SAE 字典开展机制发现，而不只是回答可解释性问题。Agent 需要设计对照 probe、定位目标特征，并在 20 个任务上用激活排名、概念选择性和因果 steering 提供证据。前沿系统已表现出真实发现能力，但仍明显落后于专家，尤其常误读实验测量与因果效应。",
+      "upvotes": 14,
+      "authors": "Yuqiao Tan, Shizhu He, Jun Zhao, Kang Liu",
+      "ai_keywords": [
+        "research agent",
+        "mechanistic interpretability",
+        "sparse autoencoder",
+        "agent evaluation"
+      ],
+      "interest_tag": "Benchmark"
+    },
+    {
+      "title": "Scores Alone Do Not Prove Discovery: The Discovery Certification Protocol for Auditing AI Research Agents",
+      "url": "https://huggingface.co/papers/2609.09219",
+      "tldr": "The Discovery Certification Protocol asks whether an AI research agent's result is useful, recoverable from registered prior information, or genuinely driven by experimental feedback. Its gates combine sealed evaluation, matched-agent recovery tests, optional truthful-versus-neutral feedback comparisons, and a deterministic verifier over frozen evidence. Audits in SQLite optimization and virtual catalyst control demonstrate how the protocol turns vague discovery claims into falsifiable, reproducible evidence packages.",
+      "tldr_zh": "Discovery Certification Protocol 区分 AI research agent 的结果究竟只是有用、能否从已注册的先验信息恢复，还是确实由实验反馈推动的新发现。它把 sealed evaluation、matched-agent 恢复测试、可选的真实反馈对中性策略比较，以及对冻结证据运行的确定性 verifier 组合成多道门禁。SQLite 优化和虚拟催化剂控制审计展示了如何把模糊的 discovery 声称转化为可证伪、可复现的证据包。",
+      "upvotes": 13,
+      "authors": "Jingjie Ning, Shanshan Zhong, Xiaochuan Li, Ji Zeng",
+      "ai_keywords": [
+        "research agent",
+        "discovery audit",
+        "reproducibility",
+        "evaluation protocol"
+      ],
+      "interest_tag": "Benchmark"
+    }
+  ],
+  "alphaxiv_papers": [
+    {
+      "title": "Finite Time Blowup for Navier–Stokes",
+      "arxiv_id": "",
+      "url": "https://www.alphaxiv.org/abs/2609.navier-stokes",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2609.navier-stokes",
+      "tldr": "This alphaXiv-hosted work claims to construct, for every positive viscosity, a smooth compactly forced three-dimensional incompressible Navier–Stokes flow whose velocity becomes unbounded in finite time while kinetic energy stays bounded. If correct, the construction would directly bear on one of the Clay Millennium Prize problems. The claim is extraordinary and should be treated as an unverified preprint until specialists independently check the argument and its admissibility conditions.",
+      "tldr_zh": "这项由 alphaXiv 托管的工作声称：对任意正黏度，都能构造从静止出发、受光滑紧支撑外力驱动的三维不可压 Navier–Stokes 流，使速度在有限时间发散而动能仍有界。若结论成立，它将直接触及 Clay 千禧年难题之一。由于主张极其重大，在领域专家独立核验论证及其可接受条件前，应严格视为尚未验证的 preprint。",
+      "interest_tag": ""
+    },
+    {
+      "title": "On the Navier–Stokes Millennium Prize Problem",
+      "arxiv_id": "",
+      "url": "https://www.alphaxiv.org/abs/2609.navier-stokes-solution",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2609.navier-stokes-solution",
+      "tldr": "OpenAI reports that a coordinated multi-agent search produced an analytical proof and a Lean formalization for finite-time singularity in three-dimensional Navier–Stokes flow. The combination of natural-language mathematics, agent orchestration, and machine-checkable artifacts is important even before the mathematical claim is settled because it exposes a richer verification trail than prose alone. It is still a reported resolution, not an accepted theorem, and independent scrutiny of both the proof and formalization is essential.",
+      "tldr_zh": "OpenAI 报告称，协同 multi-agent 搜索产出了三维 Navier–Stokes 流有限时间奇点的解析证明与 Lean 形式化。即使数学结论尚未尘埃落定，自然语言数学、agent 编排和机器可检查 artifact 的组合也很重要，因为它比纯文字证明提供了更丰富的核验链。当前它仍是被提出的解答而非已获接受的定理，证明与形式化都必须接受独立审查。",
+      "interest_tag": "Agent Swarm"
+    },
+    {
+      "title": "AuK Technical Report: An Open-Source Foundational Model for Speech Generation and Editing",
+      "arxiv_id": "2609.08936",
+      "url": "https://arxiv.org/abs/2609.08936",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2609.08936",
+      "tldr": "AuK unifies speech generation, cloning, editing, enhancement, separation, and acoustic control behind natural-language instructions plus optional audio context. It is trained on roughly 3.03 billion instruction-audio instances and 1.95 million hours of effective supervision, then post-trained with preference optimization and reward-based RL. The distilled AuK-Flash uses four inference steps without classifier-free guidance and reports a 4.5× wall-clock speedup, making the open release notable for both breadth and deployability.",
+      "tldr_zh": "AuK 用自然语言指令和可选音频上下文统一语音生成、克隆、编辑、增强、分离及声学控制。它使用约 30.3 亿条 instruction-audio 样本和 195 万小时有效监督训练，再通过偏好优化与 reward-based RL 做 post-training。蒸馏后的 AuK-Flash 无需 classifier-free guidance、仅用 4 个推理步，并报告 4.5 倍 wall-clock 加速，因此其开源价值同时体现在能力广度与可部署性。",
+      "interest_tag": ""
+    },
+    {
+      "title": "OpenWAM: An Open, Modular Exploration Towards Systematic World-Action Model Pretraining",
+      "arxiv_id": "2609.07398",
+      "url": "https://arxiv.org/abs/2609.07398",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2609.07398",
+      "tldr": "OpenWAM turns world-action model pretraining from a monolithic recipe into a modular stack for controlled comparisons of backbones, latent spaces, information flow, inference, and data mixtures. Its study argues that transfer needs a capable generative backbone and compact latent space, while world-action synergy requires dedicated action capacity, explicit world-to-action flow, and synchronized joint denoising. OpenWAM-α combines those principles with about 6,400 hours of egocentric and robot data and releases infrastructure, protocols, models, and recipes for reproducible embodied research.",
+      "tldr_zh": "OpenWAM 把单体式的 World-Action Model 预训练 recipe 拆成模块化研究栈，可控比较 backbone、latent space、信息流、推理流程和数据混合。其研究认为，上游迁移需要足够强的生成 backbone 与紧凑 latent space，而 world-action 协同还需要专门的动作容量、显式 world-to-action 信息流和同步联合去噪。OpenWAM-α 用约 6,400 小时第一视角与机器人数据组合这些原则，并开放基础设施、评测协议、模型和数据 recipe，便于可复现 embodied research。",
+      "interest_tag": ""
+    },
+    {
+      "title": "Eliciting Weak-to-Strong Generalization with On-Policy Reverse Distillation",
+      "arxiv_id": "2609.08798",
+      "url": "https://arxiv.org/abs/2609.08798",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2609.08798",
+      "tldr": "On-Policy Reverse Distillation measures a teacher's policy shift relative to its reference policy on student rollouts, then amplifies only the verifier-supported component of the student's gradient aligned with that shift. Because it rescales valid updates instead of making teacher outputs the optimization target, the weak teacher need not become the student's ceiling. Experiments on successive-model transfer and multi-teacher consolidation report better performance with fewer updates while keeping student response style closer to verifier-based RL than to imitation.",
+      "tldr_zh": "On-Policy Reverse Distillation 在 student rollout 上测量 teacher 相对其 reference policy 的策略位移，再只放大 student gradient 中与该方向一致且被 verifier 支持的分量。由于它是重标定有效更新，而不是把 teacher 输出直接当作优化目标，弱 teacher 不必成为 student 的能力上限。在连续模型迁移与 multi-teacher consolidation 中，该方法用更少更新获得更高性能，同时让 student 的回答风格更接近 verifier-based RL 而非简单模仿。",
+      "interest_tag": ""
+    }
+  ],
+  "github_repos": [
+    {
+      "name": "okf-memory/okf-agent-memory",
+      "url": "https://github.com/okf-memory/okf-agent-memory",
+      "tldr": "OKF Agent Memory stores durable agent knowledge as Git-versioned Markdown with YAML metadata instead of a black-box vector database. A zero-dependency Go CLI provides validation, link-graph checks, in-memory BM25 search, bootstrapping, and an embedded MCP server, with progressive disclosure to reduce context loading. Its strongest idea is not raw retrieval novelty but an auditable lifecycle for provenance, trust tiers, staleness, search-before-write, and human review.",
+      "tldr_zh": "OKF Agent Memory 不依赖黑盒 vector database，而是把持久 agent 知识保存为 Git 版本化的 Markdown 与 YAML metadata。零依赖 Go CLI 提供校验、链接图检查、内存 BM25 搜索、项目初始化和内嵌 MCP server，并用 progressive disclosure 降低上下文加载量。它最有价值的并非检索算法新颖性，而是为 provenance、信任等级、过期管理、search-before-write 和人工审阅建立了可审计生命周期。",
+      "stars": 528,
+      "language": "Go",
+      "interest_tag": "Memory"
+    },
+    {
+      "name": "i-am-manware/Manware-s-AI-Learning-Toolkit",
+      "url": "https://github.com/i-am-manware/Manware-s-AI-Learning-Toolkit",
+      "tldr": "This toolkit deliberately turns coding agents from answer generators into learning coaches through a fixed loop: predict, receive graded hints, implement, test, explain, and retrieve later. Twelve slash-command workflows cover debugging, code reading, architecture, tests, review, and spaced retrieval, while lightweight learning logs retain misconceptions and durable concepts. The project is notable because its product constraint is pedagogical friction: the agent withholds the solution until the learner has committed to reasoning.",
+      "tldr_zh": "该工具包用一套固定闭环把 coding agent 从答案生成器改造成学习教练：先预测，再获得分级提示，随后实现、测试、解释并在之后做 retrieval。12 个 slash-command workflow 覆盖调试、读代码、架构、测试、review 和间隔复习，轻量 learning logs 则记录误区与持久概念。项目的核心产品约束很有价值：刻意保留学习摩擦，在用户先投入推理前不直接给出解法。",
+      "stars": 301,
+      "language": "",
+      "interest_tag": ""
+    },
+    {
+      "name": "Jakeschincariol/linkedin-agent-skill",
+      "url": "https://github.com/Jakeschincariol/linkedin-agent-skill",
+      "tldr": "This repository packages eleven LinkedIn-focused agent skills for drafting posts, comments, replies, profile audits, weekly plans, carousels, DMs, and content repurposing. Its local humanizer combines deterministic cleanup with a five-signal heuristic report, but explicitly avoids claiming detector-proof text and flags structural rewrites for human judgment. The most responsible design choice is a hard publication boundary: the skills prepare copy, while the user must approve and post it manually.",
+      "tldr_zh": "该仓库提供 11 个面向 LinkedIn 的 agent skills，覆盖帖子、评论、回复、个人主页审计、周计划、carousel、私信和内容复用。其本地 humanizer 将确定性清理与五项启发式评分结合，但明确不宣称能绕过检测，并把结构性改写留给人工判断。最负责任的设计是硬性的发布边界：skills 只准备文案，必须由用户审批并手动发布。",
+      "stars": 99,
+      "language": "Python",
+      "interest_tag": ""
+    },
+    {
+      "name": "Atomburstofficial/geiger",
+      "url": "https://github.com/Atomburstofficial/geiger",
+      "tldr": "Geiger runs a read-only inventory of installed agents, MCP servers, hooks, plugins, extensions, and their reachable capabilities across major developer ecosystems. It labels execution, filesystem, network, and secret exposure, supports JSON baselines and drift detection, and reports credential shapes without printing values. The tool is intentionally an exposure inventory rather than a malware verdict, which makes its security boundary clear and its output actionable.",
+      "tldr_zh": "Geiger 以只读方式盘点主流开发生态中已安装的 agent、MCP server、hook、plugin、extension 及其可触达能力。它标注执行、文件系统、网络和 secret 暴露，支持 JSON baseline 与 drift detection，并只报告 credential 的形态而不输出具体值。该工具明确把自己定位为 exposure inventory 而非恶意软件判定器，因此安全边界清楚，输出也更容易转化为行动。",
+      "stars": 89,
+      "language": "JavaScript",
+      "interest_tag": ""
+    },
+    {
+      "name": "unpeel-com/unpeel",
+      "url": "https://github.com/unpeel-com/unpeel",
+      "tldr": "Unpeel is a Rust-based, agent-first terminal multiplexer whose PTY sessions survive client exits and service upgrades while exposing busy, idle, and needs-attention states. It bundles isolated browser artifacts, worktrees, transcripts, and approval-gated communication between sibling agent sessions, with Mac and iOS controllers over a versioned host protocol. The design is compelling for long-running agent operations because persistent state remains in plain local files and cross-session writes require explicit user policy.",
+      "tldr_zh": "Unpeel 是 Rust 实现的 agent-first terminal multiplexer，其 PTY session 可跨客户端退出和服务升级存活，并暴露 busy、idle、needs-attention 状态。它把隔离浏览器 artifact、worktree、transcript 和带 approval gate 的 sibling agent 通信整合起来，再通过版本化 host protocol 提供 Mac 与 iOS 控制端。对长运行 agent 运维而言，它的关键价值是持久状态保留在本地普通文件中，而跨 session 写入必须经过明确的用户策略。",
+      "stars": 37,
+      "language": "Rust",
+      "interest_tag": ""
+    }
+  ],
+  "hackernews": [
+    {
+      "title": "Muse, the band, lost its social media handles to Muse, Meta's new AI agent",
+      "url": "https://www.engadget.com/2254419/muse-the-band-lost-its-social-media-handles-to-muse-meta-s-new-ai-agent/",
+      "tldr": "Meta's newly launched Muse agent is using the @Muse handle on Instagram, while the English rock band now appears as @museband on Instagram and X. The article says the circumstances are unclear and notes that Meta did not answer questions, so it does not establish whether the handles were transferred, purchased, or reassigned. The story spread because it compresses platform power, AI branding, trademark identity, and an ironic collision with a technology-anxious band into one instantly legible incident.",
+      "tldr_zh": "Meta 新发布的 Muse agent 正在 Instagram 使用 @Muse，而英国摇滚乐队 Muse 在 Instagram 与 X 上现为 @museband。报道明确指出具体过程尚不清楚，Meta 也未回应，因此不能断言这些 handle 是转让、购买还是平台重新分配。它迅速传播，是因为平台权力、AI 品牌、商标身份与一支长期表达技术焦虑的乐队被压缩进了一个极易理解的冲突。",
+      "points": 179,
+      "num_comments": 6,
+      "interest_tag": ""
+    },
+    {
+      "title": "Show HN: Geiger – See every AI agent on your machine and what it can touch",
+      "url": "https://github.com/Atomburstofficial/geiger",
+      "tldr": "Geiger gives users one read-only command to discover local agents, MCP servers, hooks, plugins, browser extensions, and the capabilities each configuration exposes. It classifies execution, filesystem, network, and secret access, can compare against a reviewed baseline, and never prints secret values. The HN traction reflects a timely shift from asking what agents can do to asking what has already been installed and trusted on a developer machine.",
+      "tldr_zh": "Geiger 用一条只读命令发现本机 agent、MCP server、hook、plugin、浏览器扩展，以及每项配置暴露的能力。它分类执行、文件系统、网络和 secret 访问，可与已审阅 baseline 比较，并且不打印 secret 值。HN 的关注说明问题正在从 agent 能做什么转向开发机器上究竟已经安装并信任了什么。",
+      "points": 45,
+      "num_comments": 21,
+      "interest_tag": ""
+    },
+    {
+      "title": "Show HN: Self-hosted company OS, Claude Code and Codex agents in departments",
+      "url": "https://github.com/OtoDock/oto-dock",
+      "tldr": "OtoDock presents a self-hosted multi-tenant company OS where persistent Claude Code or Codex processes operate as departmental agents. Each agent receives an isolated workspace, memory, schedules, tools, and a bubblewrap-based kernel sandbox with network isolation, while teams can collaborate through four modes and connect remote machines over outbound WebSockets. The repository is public under a Fair Source model and self-hosting is free for up to five users, making it a concrete attempt to productize multi-agent organizational structure rather than just demo agent chat.",
+      "tldr_zh": "OtoDock 是一个 self-hosted、multi-tenant 的 company OS，让持久运行的 Claude Code 或 Codex 进程作为部门 agent 工作。每个 agent 拥有隔离 workspace、memory、schedule、tool，以及基于 bubblewrap 的 kernel sandbox 与网络隔离；团队还可通过四种协作模式和 outbound WebSocket 连接远端机器。项目采用 Fair Source，五人以内可免费 self-host，因而是把 multi-agent 组织结构产品化的具体尝试，而不只是 agent chat demo。",
+      "points": 44,
+      "num_comments": 11,
+      "interest_tag": "Agent Swarm"
+    },
+    {
+      "title": "Show HN: Give your AI agent on-screen guides that show users where to click",
+      "url": "https://news.ycombinator.com/item?id=49627872",
+      "tldr": "Frigade's Assist API gives an in-app agent a tool that can generate contextual on-screen guidance when direct automation is unavailable or inappropriate. A browser agent first maps the product, then a query combines current screen context, permissions, and feature flags to either render a guide, return conceptual help, or reject the request. The approach is important because it treats UI guidance as a maintained executable product map rather than static help-center retrieval, though it guides the human rather than operating the interface itself.",
+      "tldr_zh": "Frigade 的 Assist API 为应用内 agent 提供一个工具：当直接自动化不可用或不合适时，生成与当前界面相关的 on-screen guidance。浏览器 agent 先遍历并绘制产品地图，查询时再结合当前屏幕、权限和 feature flag，选择渲染引导、返回概念帮助或拒绝请求。它的重要性在于把 UI 指引视为持续维护、可执行的产品地图，而不是静态 help-center retrieval；但它是在指导人点击，并非 agent 自主操作界面。",
+      "points": 18,
+      "num_comments": 8,
+      "interest_tag": ""
+    },
+    {
+      "title": "Google: Attackers are using prompt injection against coding agents",
+      "url": "https://cloud.google.com/blog/topics/threat-intelligence/from-prompting-to-autonomy-the-evolution-of-adversarial-ai",
+      "tldr": "Google Threat Intelligence reports that attackers progressed from basic prompting to agentic workflows, including a cloud compromise followed by an agent-enabled mass credential-harvesting campaign in under six hours. UNC6780 allegedly backdoored MCP-related packages and project configurations, used hidden agent workspace files to trigger commands, and embedded adversarial prompts intended to make LLM security scanners refuse analysis. The report makes agent security a supply-chain and runtime-governance problem: signed packages, familiar workspace paths, and model safeguards can each be manipulated rather than treated as independent trust anchors.",
+      "tldr_zh": "Google Threat Intelligence 报告称，攻击者已从基础 prompting 发展到 agentic workflow，其中一次云资源入侵后，不到六小时便规划、构建并执行了 agent 驱动的大规模 credential harvesting。报告称 UNC6780 后门化 MCP 相关 package 与项目配置，利用隐藏的 agent workspace 文件触发命令，并嵌入 adversarial prompt 诱导 LLM 安全扫描器拒绝分析。它说明 agent 安全本质上是供应链与 runtime governance 问题：签名 package、熟悉的 workspace 路径和模型 safeguard 都可能被操纵，不能分别当作独立 trust anchor。",
+      "points": 11,
+      "num_comments": 0,
+      "interest_tag": ""
+    }
+  ]
+}
