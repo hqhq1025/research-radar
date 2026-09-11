@@ -1,0 +1,226 @@
+{
+  "date": "2026-09-11",
+  "generated_at": "2026-09-11T16:06:40.367572+08:00",
+  "briefing_zh": "今天最清晰的主线，是 Agent 系统的瓶颈正在从「会不会推理」转向「能否长期、低成本、可验证地运行」。**DeepSeek-V4.1-Flash** 把百万 token 多模态上下文的成本问题压到 KV cache 设计层，**T1** 则把真实 shell 中 300 多轮工具调用纳入强化学习；二者共同表明，长程 Agent 的进展越来越取决于训练基础设施、状态管理与执行闭环，而不只是单轮模型分数。\n\n第二条主线是 world model 与 action interface 开始分工。**SyncWorld** 用短视觉校准轨迹适配新相机和新机器人，**Show-Harness** 则把高层语义动作与 embodiment-specific 控制解耦；这对 GUI/Computer Use 也有直接启发：比起让模型端到端吞下所有像素到动作差异，更稳妥的路线可能是让模型负责语义决策，再用可验证的适配层完成落地。与此同时，**Procedural Graphs** 将长轨迹里的流程知识显式化，说明 Agent reliability 正从扩大上下文转向构造可编辑、可验证的执行结构。\n\n基础模型侧，**NCP-ArchPreview** 尝试在 next-token prediction 之外加入离散概念预测，以更少 token 达到强基线的预训练损失；**SenseNova-U1.5** 则继续推进理解、推理、生成一体化的 native multimodal 路线。值得注意的是，今天的高热工作并非都在堆参数：**EvoSafeHarness** 搜索部署特定的安全护栏，**MetroLLM-Bench** 用结构化工具调用和可执行终态测试 kiosk policy，研究重心正向系统级可控性和真实任务验证移动。\n\n开源生态进一步印证了这一点。**okf-agent-memory** 与 **agent-work-runtime** 都把长期工作状态落到本地、可版本控制的数据结构中，**YourDesk** 把屏幕与键鼠控制暴露给 MCP，**kander** 用看板编排多个 coding agents，而 **spec-wins** 专门检验 Agent 是遵循规格还是只迎合可见测试。HN 的最大热点反而是 Meta 的 **Muse** 与乐队同名账号争议，提醒我们：Agent 产品的传播速度已经快到会与品牌、平台治理和身份权发生正面碰撞。",
+  "briefing_en": "The clearest theme today is that the bottleneck for agents is shifting from whether they can reason to whether they can operate for long periods cheaply, reliably, and verifiably. **DeepSeek-V4.1-Flash** attacks million-token multimodal workloads at the KV-cache layer, while **T1** brings reinforcement learning into real shells with trajectories exceeding 300 tool calls. Together they suggest that progress in long-horizon agents increasingly depends on training infrastructure, state management, and closed-loop execution rather than single-turn model scores alone.\n\nA second theme is a cleaner separation between world models and action interfaces. **SyncWorld** uses a short visual calibration trajectory to adapt to unseen cameras and embodiments, while **Show-Harness** separates high-level semantic actions from embodiment-specific control. The same design lesson applies to GUI and computer-use systems: instead of forcing one model to absorb every pixel-to-action variation end to end, it may be more robust to let the model make semantic decisions and use a verifiable adapter for execution. **Procedural Graphs** similarly externalizes procedural knowledge from long histories, moving agent reliability away from merely enlarging context and toward editable, testable execution structures.\n\nOn foundation models, **NCP-ArchPreview** adds discrete concept prediction alongside next-token prediction and reports reaching a strong baseline's pretraining loss with fewer tokens. **SenseNova-U1.5** continues the native multimodal push by unifying visual understanding, reasoning, and generation. Not all high-signal work is about scale: **EvoSafeHarness** searches deployment-specific safety policies, while **MetroLLM-Bench** evaluates kiosk policies through structured tool calls and executable terminal states, reflecting a broader move toward system-level control and realistic validation.\n\nOpen source reinforces the same pattern. **okf-agent-memory** and **agent-work-runtime** persist work state in local, versionable structures; **YourDesk** exposes screen and input control through MCP; **kander** orchestrates multiple coding agents through a Kanban workflow; and **spec-wins** tests whether agents follow specifications rather than gaming visible tests. The largest HN story was instead the dispute around Meta's **Muse** and the rock band's former handles, a reminder that agent launches are now colliding directly with branding, platform governance, and digital identity.",
+  "viral_analysis_zh": "最可能形成技术圈持续传播的是 **DeepSeek-V4.1-Flash**：它把「百万上下文 Agent 太贵」这一普遍痛点压缩成每 token KV cache 字节数，指标直观、可比较，也天然能引发部署成本讨论。开源侧最容易扩散的是 **okf-agent-memory**，因为「Git 原生、零外部数据库、减少 token 膨胀」同时击中了 coding agent 用户的可迁移性与成本焦虑；但其性能数字仍需独立复现。大众传播上，Meta **Muse** 的账号争议会凭借知名乐队、AI 品牌和平台权力三重冲突获得更高点击，但它贡献的是治理话题而非技术突破。",
+  "viral_analysis_en": "**DeepSeek-V4.1-Flash** is the strongest candidate for sustained technical attention because it turns the broad pain point of expensive million-token agents into concrete per-token KV-cache numbers that are easy to compare and debate. In open source, **okf-agent-memory** has a highly shareable pitch—Git-native persistence, no external database, and lower context bloat—although its performance claims still need independent reproduction. For mainstream reach, Meta's **Muse** handle dispute combines a famous band, an AI product, and platform power, making it more clickable even though it is a governance story rather than a technical advance.",
+  "huggingface_papers": [
+    {
+      "title": "NCP-ArchPreview Technical Report: Moving towards Latent Space Language Models through Next Concept Prediction",
+      "url": "https://arxiv.org/abs/2609.10715",
+      "tldr": "NCP-ArchPreview jointly trains next-token and next-concept prediction using a product-quantized concept vocabulary derived from hidden states. At 8.9B parameters and 5.73T training tokens, the authors report reaching OLMo-3-7B's final pretraining loss with 51.3% of the tokens. The full run also improves the reported downstream macro-average by 2.45 points, making concept-level supervision a concrete alternative to token-only scaling.",
+      "tldr_zh": "NCP-ArchPreview 从隐藏状态构建乘积量化的概念词表，联合训练 next-token 与 next-concept prediction。作者报告称，89 亿参数模型在 5.73 万亿 token 的训练中，只用 OLMo-3-7B 约 51.3% 的 token 就达到其最终预训练损失。完整训练后的下游宏平均还高出 2.45 分，使概念级监督成为单纯扩展 token 之外的具体路线。",
+      "upvotes": 98,
+      "authors": "NCP Team, Jiaqi Cao, Chiyu Chen, Shuang Cheng, Xu Cheng, Beiya Dai, Yufan Feng, Kewen Ge, Ruijun Ge, Jiayi Huang, Yang Jiao, Dahua Lin, Zhouhan Lin, Yifan Liu, Yuliang Liu, Biqing Qi, Mowen Ruan, Junzhe Shen, Yunchong Song, Hao Sun, Zhongbo Tian, Yixuan Wang, Rubin Wei, Jiaxin Xiong, Kangyu Yang, Qian Yao, Qi Zhang, Bowen Zhou",
+      "ai_keywords": [
+        "latent-space language model",
+        "next concept prediction",
+        "product quantization",
+        "pretraining"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "SenseNova-U1.5: Towards Native Unified Visual Intelligence",
+      "url": "https://arxiv.org/abs/2609.11929",
+      "tldr": "SenseNova-U1.5 is an 8B-MoT unified multimodal model that performs visual understanding, reasoning, and generation without a separate visual encoder or VAE. It supports native resolutions up to 4K and trains specialized experts for aesthetics, bilingual text rendering, infographic generation, and image editing. Multi-expert on-policy distillation then consolidates those capabilities, offering a test of whether native multimodality can avoid the seams of modular pipelines.",
+      "tldr_zh": "SenseNova-U1.5 是一个 8B-MoT 原生统一多模态模型，不依赖独立视觉 encoder 或 VAE，即可同时完成视觉理解、推理与生成。模型支持最高 4K 原生分辨率，并分别优化视觉美学、双语文字渲染、信息图生成和图像编辑专家。随后通过 multi-expert on-policy distillation 汇总能力，用来检验 native multimodality 能否减少模块化流水线的接口割裂。",
+      "upvotes": 76,
+      "authors": "Haiwen Diao, Jiahao Wang, Chenjing Ding, Hanming Deng, Jiangnan Chen, Ruixi Zhang, Ruohui Wang, Wenwen Tong, Xiangyu Fan, Yubo Wang, Yue Zhu, Yuwei Niu, Zhengqi Bai, Zhiqian Lin, Zhitao Yang, Zhongang Cai, Bo Yang, Chen Feng, Chengguang Lv, Guangjia Liu, Guanlin Wang, Hanyu Zhang, Haojia Yu, Hongcan Xiao, Hongli Wang, Huan Wu, Huaping Zhong, Jian Fang, Jianan Fan, Jiaqi Li, Jiefan Lu, Jing Zuo, Jingcheng Ni, Junxiang Xu, Linjun Dai, Mutian Xu, Peishen Yan, Penghao Wu, Ruijie Mao, Ruisi Wang, Shihao Bai, Shuang Yang, Shuya Yang, Shuyan Zheng, Silei Wu, Siying Li, Tao Chu, Tianbo Zhong, Tongxi Zhou, Weichao Luo, Weichen Fan, Wenhao Jia, Wenjie Gao, Xiangli Kong, Yan Li, Yang Yong, Zimo Wen, Zixuan Qian, Wenxiu Sun, Ruihao Gong, Quan Wang, Lewei Lu, Lei Yang, Ziwei Liu, Dahua Lin",
+      "ai_keywords": [
+        "unified multimodal model",
+        "MoT",
+        "image generation",
+        "on-policy distillation"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "EvoSafeHarness: Evolving Model- and Domain-Specific Harnesses for Securing Agents",
+      "url": "https://arxiv.org/abs/2609.05903",
+      "tldr": "EvoSafeHarness automatically searches for a deployment-specific agent safety harness by jointly optimizing a natural-language policy and executable enforcement logic around a frozen model. Across four agent benchmark families, the paper reports a better safety-utility frontier than fixed expert-designed guards. On DecodingTrust-Agent it lowers attack success from 45.6% to 10.0% at a 3.3-point utility cost, while on AgentDojo it reports 0.0% attack success with 82.8% utility.",
+      "tldr_zh": "EvoSafeHarness 围绕冻结模型联合优化自然语言安全策略与可执行约束逻辑，自动搜索适配具体模型和领域的 Agent safety harness。论文在四类 Agent benchmark 上报告了优于固定专家规则的安全—效用边界。其结果包括把 DecodingTrust-Agent 攻击成功率从 45.6% 降至 10.0%，效用损失 3.3 分；在 AgentDojo 上则以 82.8% 效用达到 0.0% 攻击成功率。",
+      "upvotes": 32,
+      "authors": "Nanxi Li, Yingzi Ma, Yulong Cao, Edward Suh, Bo Li, Dawn Song, Chaowei Xiao",
+      "ai_keywords": [
+        "agent safety",
+        "safety harness",
+        "prompt injection",
+        "policy synthesis"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "SpatialBlock: Enhancing Spatial Intelligence in LVLMs via Synthetic Block-Stacking Problem",
+      "url": "https://arxiv.org/abs/2609.07064",
+      "tldr": "SpatialBlock introduces 15,000 synthetic block-stacking problems that isolate 3D-to-2D projection, viewpoint transformation, and structural composition. LVLMs are trained either to answer directly or to expose a reasoning process, and both variants outperform the reported baselines. Transfer to real-scene spatial tasks suggests that carefully controlled synthetic geometry can teach reusable spatial priors without expensive dense annotations.",
+      "tldr_zh": "SpatialBlock 构造了 1.5 万道合成积木堆叠问题，分别考查三维到二维投影、视角变换和结构组合。论文用直接作答与显式推理两种方式训练 LVLM，两者都优于其报告的基线。对真实场景空间任务的迁移结果表明，受控的合成几何数据可能在不依赖昂贵稠密标注的情况下学到可复用空间先验。",
+      "upvotes": 32,
+      "authors": "Soohyun Ryu, Sohee Kim, Eunho Yang",
+      "ai_keywords": [
+        "spatial intelligence",
+        "LVLM",
+        "synthetic data",
+        "3D reasoning"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "MetroLLM-Bench: Evaluating Language Models as Transit Kiosk Runtimes",
+      "url": "https://arxiv.org/abs/2609.10016",
+      "tldr": "MetroLLM-Bench evaluates language models as transit-kiosk policy runtimes through 955 cases spanning six metro systems and eleven task categories. Models must call structured tools and emit a machine-renderable terminal state, so the benchmark tests stateful action correctness rather than free-form answers alone. On the held-out split, the paper reports a PEFT-trained 4B Qwen 3.5 student scoring 91.3 on deterministic Tier 1, nearly matching GPT-5.4 full at maximum reasoning effort.",
+      "tldr_zh": "MetroLLM-Bench 用覆盖六个地铁系统、十一类任务的 955 个案例，将语言模型作为售票机 policy runtime 进行评测。模型必须调用结构化工具并输出机器可执行的终态，因此它测的是有状态行动正确性，而不只是自由文本回答。论文报告称，经 PEFT 训练的 4B Qwen 3.5 学生模型在留出集 deterministic Tier 1 获得 91.3 分，接近最大推理强度下 GPT-5.4 full 的 91.4 分。",
+      "upvotes": 1,
+      "authors": "Remco Hendriks",
+      "ai_keywords": [
+        "agent benchmark",
+        "tool calling",
+        "structured actions",
+        "policy runtime"
+      ],
+      "interest_tag": "Benchmark"
+    }
+  ],
+  "alphaxiv_papers": [
+    {
+      "title": "DeepSeek-V4.1-Flash: Pushing the Limits of KV Cache Compression",
+      "arxiv_id": "",
+      "url": "https://www.alphaxiv.org/abs/2609.deepseek-v4-1-flash",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2609.deepseek-v4-1-flash",
+      "tldr": "DeepSeek-V4.1-Flash targets the deployment bottleneck of long-horizon agents with cross-layer KV reuse, FP4 caching, and bounded replay. Its report says the always-resident global KV cache falls to 890 bytes per token, roughly one quarter of its predecessor, while persistent-cache demand drops to about one eighth. Supporting million-token multimodal contexts turns memory bandwidth and storage into first-class model-design objectives rather than afterthoughts.",
+      "tldr_zh": "DeepSeek-V4.1-Flash 针对长程 Agent 的部署瓶颈，引入跨层 KV 复用、FP4 缓存和 bounded replay。报告称，其常驻全局 KV cache 降至每 token 890 字节，约为前代四分之一，持久缓存需求约降至八分之一。对百万 token 多模态上下文的支持，也把显存带宽与存储从部署细节提升成模型设计的一等目标。",
+      "interest_tag": ""
+    },
+    {
+      "title": "Show-Harness: Just a VLM Agent Can Play Robots",
+      "arxiv_id": "2609.10522",
+      "url": "https://arxiv.org/abs/2609.10522",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2609.10522",
+      "tldr": "Show-Harness presents robot control as compact semantic action units that a VLM can reason over, while deterministic embodiment-specific interpreters ground them into local actions. The same interface supports zero-shot control with frontier VLMs and inexpensive adaptation of smaller open models. Its significance is architectural: a better action abstraction may unlock embodied competence without forcing every model to relearn low-level control.",
+      "tldr_zh": "Show-Harness 把机器人控制表示成 VLM 易于推理的紧凑语义动作单元，再由确定性的 embodiment-specific interpreter 落地为局部动作。同一接口既支持前沿 VLM 的 zero-shot control，也允许以较低成本适配小型开源模型。它的重要性在架构层面：更合适的 action abstraction 可能无需让每个模型重新学习低层控制，就能释放具身能力。",
+      "interest_tag": ""
+    },
+    {
+      "title": "SyncWorld: Visual Calibration Enables World Models as Zero-Shot Simulators",
+      "arxiv_id": "2609.09155",
+      "url": "https://arxiv.org/abs/2609.09155",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2609.09155",
+      "tldr": "SyncWorld conditions an action-driven world model on a short visual calibration episode so it can infer how actions map to pixels in an unseen camera, environment, or embodiment. The calibrated model then serves as a zero-shot simulator for policy rollouts without retraining for each setup. The work reframes embodiment shift as an in-context calibration problem, which could make world-model evaluation and policy improvement more portable.",
+      "tldr_zh": "SyncWorld 用一段短视觉校准轨迹对 action-driven world model 做条件化，让模型在新相机、新环境或新机器人中推断动作如何映射到像素变化。校准后的模型无需针对每个场景重新训练，就能作为 zero-shot simulator 生成 policy rollout。该工作把 embodiment shift 重述为 in-context calibration 问题，可能提升 world model 评测与策略改进的可迁移性。",
+      "interest_tag": ""
+    },
+    {
+      "title": "Procedural Graphs: Self-Evolving Execution Structures for LLM Agents",
+      "arxiv_id": "2609.09153",
+      "url": "https://arxiv.org/abs/2609.09153",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2609.09153",
+      "tldr": "Procedural Graphs externalize an agent's next-step knowledge as linked procedure triples instead of relying on an ever-growing trajectory history. A refiner contrasts successful and failed runs to evolve the graph, while held-out validation gates proposed edits. The result is reusable execution guidance that targets invalid ordering and repetitive tool loops without treating a larger context window as the only form of memory.",
+      "tldr_zh": "Procedural Graphs 将 Agent 的下一步执行知识显式表示为相互连接的流程三元组，而不是完全依赖不断膨胀的轨迹历史。系统对比成功与失败运行来演化图结构，并用留出验证集筛选修改。由此形成的可复用执行指引，针对工具顺序错误和重复循环，也避免把扩大 context window 当作唯一记忆方案。",
+      "interest_tag": ""
+    },
+    {
+      "title": "T1: Terminal Agent Reinforcement Learning for Long-Horizon Tasks",
+      "arxiv_id": "2609.11042",
+      "url": "https://arxiv.org/abs/2609.11042",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2609.11042",
+      "tldr": "T1 is a 122B-total Mixture-of-Experts terminal agent trained with reinforcement learning inside real cloud sandboxes for tasks lasting more than 300 tool calls. Its recipe combines an aggressive warm start, dense process rewards, and each task's executable verifier to stabilize long-horizon actor-critic training. By publishing a concrete training recipe rather than only benchmark scores, the work makes long-horizon terminal-agent RL easier to inspect and reproduce.",
+      "tldr_zh": "T1 是一个总参数 122B 的 MoE terminal agent，在真实云端 sandbox 中通过 reinforcement learning 训练，单项任务可持续 300 多次工具调用。其 recipe 结合激进 warm start、稠密过程奖励和每项任务自带的 executable verifier，以稳定长程 actor-critic 训练。相比只公布 benchmark 分数，这项工作给出具体训练路径，使长程 terminal-agent RL 更便于审视和复现。",
+      "interest_tag": ""
+    }
+  ],
+  "github_repos": [
+    {
+      "name": "okf-memory/okf-agent-memory",
+      "url": "https://github.com/okf-memory/okf-agent-memory",
+      "tldr": "A Git-native memory layer for coding agents that stores project knowledge as Markdown/YAML, adds local BM25 retrieval, and exposes CLI and MCP interfaces. The repository contains working Go code, tests, benchmarks, documentation, and a quickstart rather than only a launch page. Its sub-300-microsecond latency and token-saving figures are project-reported claims and still need independent reproduction.",
+      "tldr_zh": "一个面向 coding agent 的 Git 原生记忆层：用 Markdown/YAML 保存项目知识，通过本地 BM25 检索，并提供 CLI 与 MCP 接口。仓库包含可运行的 Go 代码、测试、benchmark、文档和 quickstart，并非只有发布页。其亚 300 微秒延迟和节省 token 的数字来自项目方自报，仍需独立复现。",
+      "stars": 553,
+      "language": "Go",
+      "interest_tag": "Memory"
+    },
+    {
+      "name": "VaderChen/YourDesk",
+      "url": "https://github.com/VaderChen/YourDesk",
+      "tldr": "A macOS/Windows remote-desktop implementation whose MCP interface lets an agent connect to another machine, capture its screen, and operate the keyboard and mouse. The repository has substantial cross-platform code, tests, and active updates, making it a concrete computer-use substrate rather than a thin MCP wrapper. The README nevertheless marks at least one macOS pre-login mode as experimental and not yet hardware-verified.",
+      "tldr_zh": "一个面向 macOS/Windows 的远程桌面实现，其 MCP 接口允许 Agent 连接另一台机器、截取屏幕并操作键盘鼠标。仓库拥有较完整的跨平台代码、测试与持续更新，因此它是具体的 computer-use substrate，而非薄层 MCP wrapper。不过 README 明确标注至少一项 macOS 未登录连接模式仍属实验功能，尚未经过真机验证。",
+      "stars": 165,
+      "language": "Go",
+      "interest_tag": "CUA"
+    },
+    {
+      "name": "originoneai/agent-work-runtime",
+      "url": "https://github.com/originoneai/agent-work-runtime",
+      "tldr": "A local Rust CLI/MCP runtime for preserving coding-agent work state by indexing Markdown/YAML sources, recording checkpoints, and compiling bounded context packets for later sessions. Its 244-commit, multi-crate repository includes extensive tests and documentation, giving it more credibility than a README-only launch. The design is notable because it treats context as a compiled artifact with explicit bounds instead of repeatedly replaying an entire transcript.",
+      "tldr_zh": "一个本地 Rust CLI/MCP runtime，用于保存 coding agent 的工作状态：索引 Markdown/YAML、记录 checkpoint，并为后续会话编译有界 context packet。仓库有 244 次提交、多 crate 代码以及大量测试与文档，可信度明显高于只靠 README 的发布。其关键设计是把 context 当作有明确边界的编译产物，而不是每次重放完整对话。",
+      "stars": 76,
+      "language": "Rust",
+      "interest_tag": "Memory"
+    },
+    {
+      "name": "dualface/kander",
+      "url": "https://github.com/dualface/kander",
+      "tldr": "A Kanban-based orchestrator for launching and tracking multiple coding-agent tasks across Codex, Claude, Grok, and Cursor. The repository contains hundreds of Go files, tests, 120 commits, and release-oriented setup, providing substance beyond its unusually terse English README. Its board metaphor is useful because it makes parallel work, ownership, and task state inspectable by humans rather than hiding coordination inside prompts.",
+      "tldr_zh": "一个用看板启动、调度和跟踪多个 coding agent 任务的编排工具，覆盖 Codex、Claude、Grok 与 Cursor。仓库包含数百个 Go 文件、测试、120 次提交和面向 Release 的安装方式，实质内容超过其偏简略的英文 README。看板隐喻的价值在于让并行工作、责任归属和任务状态对人类可见，而不是把协调过程藏在 prompt 里。",
+      "stars": 41,
+      "language": "Go",
+      "interest_tag": "Agent Swarm"
+    },
+    {
+      "name": "thecodacus/spec-wins",
+      "url": "https://github.com/thecodacus/spec-wins",
+      "tldr": "A compact adversarial benchmark for coding-agent judgment in which three broken Python tasks pair misleading visible artifacts with hidden graders. It tests whether an agent follows the specification instead of merely satisfying visible tests, and ships generators, hidden checks, solutions, model results, and reproduction instructions. The repository has only two commits, so its unusually high fork ratio and complete artifacts are encouraging but not a substitute for broader validation.",
+      "tldr_zh": "一个紧凑的 coding-agent 判断力对抗 benchmark：三项损坏的 Python 任务把误导性的可见材料与隐藏 grader 配对。它检验 Agent 是否真正遵循规格，而不是只把可见测试跑绿，并提供生成器、隐藏检查、答案、模型结果和复现说明。仓库只有两次提交，因此较高 fork 比例和完整产物是积极信号，但不能替代更广泛验证。",
+      "stars": 24,
+      "language": "Python",
+      "interest_tag": "Benchmark"
+    }
+  ],
+  "hackernews": [
+    {
+      "title": "Muse, the band, lost its social media handles to Muse, Meta's new AI agent",
+      "url": "https://www.engadget.com/2254419/muse-the-band-lost-its-social-media-handles-to-muse-meta-s-new-ai-agent/",
+      "points": 183,
+      "num_comments": 8,
+      "tldr": "Engadget reports that the @Muse handles on Instagram and X, previously used by the English rock band Muse, are now associated with Meta's newly released AI agent of the same name. The article says the circumstances of the transfers remain unclear and frames the episode as another case raising questions about platforms' control over desirable usernames. The story's 183 points came with only eight comments, suggesting broad curiosity driven more by the brand collision than by technical debate.",
+      "tldr_zh": "Engadget 报道，英国摇滚乐队 Muse 此前在 Instagram 和 X 使用的 @Muse 账号名，如今已与 Meta 新发布的同名 AI agent 关联。报道强调账号名如何易手仍不清楚，并将此事置于平台如何处置稀缺用户名的治理争议中。该帖获得 183 分但只有 8 条评论，说明传播动力更多来自品牌冲突带来的广泛好奇，而不是技术争论。",
+      "interest_tag": ""
+    },
+    {
+      "title": "Show HN: Open-source simulation testing infra for voice agents",
+      "url": "https://github.com/egma-ai/egma",
+      "points": 14,
+      "num_comments": 5,
+      "tldr": "Egma is an open-source platform for testing voice agents before deployment and monitoring them in production. Its documented features include simulated voice/text regression tests, mocked tool responses, graders, conversation and tool-call inspection, self-hosting, and current integrations with LiveKit (JS/TS) and Retell. The project addresses a practical gap between demo-quality voice systems and repeatable pre-deployment validation, but its effectiveness has not been independently benchmarked here.",
+      "tldr_zh": "Egma 是一套用于语音 agent 上线前测试与生产监控的开源平台。其文档列出的能力包括模拟语音/文本回归测试、mock 工具返回、grader、对话与工具调用检查、自托管，以及目前对 LiveKit（JS/TS）和 Retell 的集成。该项目瞄准了语音系统从 demo 到可重复上线验证之间的实际缺口，但本日报未独立复测其效果。",
+      "interest_tag": ""
+    },
+    {
+      "title": "Show HN: Botbin.io – pastebin for AI agent artifacts",
+      "url": "https://botbin.io/?v=next",
+      "points": 9,
+      "num_comments": 5,
+      "tldr": "Botbin is a lightweight hosting service for HTML artifacts produced by agents, such as dashboards, reports, and landing pages. Agents can upload an artifact with a curl request or use its MCP tools to publish, update, and retrieve artifacts, then share a hosted link instead of raw HTML. Its appeal is operational simplicity: it gives agents a shareable output surface without requiring users to deploy a full application stack.",
+      "tldr_zh": "Botbin 是面向 agent 生成 HTML 产物的轻量托管服务，可用于仪表盘、报告和落地页等内容。Agent 可通过 curl 上传，或借助其 MCP 工具发布、更新和读取产物，再分享托管链接而不是直接发送原始 HTML。它的吸引力在于操作简单：无需用户部署完整应用栈，Agent 就能获得可分享的输出界面。",
+      "interest_tag": ""
+    },
+    {
+      "title": "My Rebuttal to the Anthropic Extinction Event Hype Train",
+      "url": "https://news.ycombinator.com/item?id=49637237",
+      "points": 7,
+      "num_comments": 0,
+      "tldr": "In this HN text post, the author argues that claims about near-term AI extinction risk are often presented without enough evidence and can distract from more concrete risks. The post calls for attention to bioweapons, autonomous weapons, critical infrastructure, and large-scale cyberattacks; it is an opinion piece rather than an empirical analysis. Its value is mainly in agenda-setting—separating contested catastrophic forecasts from nearer-term security questions—rather than offering new measurements.",
+      "tldr_zh": "这篇 HN 文本帖认为，近期 AI 灭绝风险的说法往往缺少充分证据，也可能分散对更具体风险的注意力。作者主张聚焦生物武器、自主武器、关键基础设施与大规模网络攻击；该文属于观点评论，并非实证研究。它的价值主要在议程区分：把有争议的灾难性预测与近期安全问题拆开，而非提供新的量化证据。",
+      "interest_tag": ""
+    },
+    {
+      "title": "AI Agent Builder gives memory across voice, SMS, email, web chat and social",
+      "url": "https://boldagents.co",
+      "points": 5,
+      "num_comments": 0,
+      "tldr": "Bold Agent Kit markets a multichannel sales agent spanning email, SMS, phone, web chat, and social DMs. Its central memory feature links cookies, email addresses, and phone numbers into one contact record so the agent can consult a shared conversation history across channels; the page is a product claim, not an independent evaluation. The product illustrates why identity resolution, not merely a larger context window, is central to persistent memory in real multichannel deployments.",
+      "tldr_zh": "Bold Agent Kit 主打覆盖邮件、短信、电话、网页聊天和社交私信的多渠道销售 agent。其核心记忆能力将 cookie、邮箱与电话号码合并为同一联系人，使 agent 能跨渠道读取共享对话历史；这些信息来自产品页面，并非独立评测。该产品说明，在真实多渠道部署中，持久记忆的核心不只是扩大 context window，还包括跨渠道身份解析。",
+      "interest_tag": "Memory"
+    }
+  ]
+}
