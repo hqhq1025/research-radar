@@ -1,0 +1,226 @@
+{
+  "date": "2026-09-15",
+  "generated_at": "2026-09-15T16:04:55.039793+08:00",
+  "briefing_zh": "今天最强的共同信号不是又一个更大的模型，而是 Agent 研发开始围绕「可验证经验—递归改进—现实反馈」形成闭环。**Atria Dawn** 用可执行环境和外部验证训练科研/工程 Agent，并用 769 条真实任务记录展示人机协作正在从单任务代办走向项目级伙伴；**Dream-RSI** 则把历史探索树变成 replay simulator，用低成本 dreaming 改进探索策略。两者都把可验证 outcome 放在中心，但前者强调真实生产过程，后者强调降低长程搜索的在线试错成本。\n\n模型与系统侧同时在压缩 Agent 的长期运行成本。**ZGCM-1** 以 7B dense 模型、256K context、MDP mid-training 和完整开放 recipe 证明小模型可借助推理与工具调用弥补参数容量；**DeepSeek-V4.1-Flash** 则从架构与 KV cache 下手，把 million-token multimodal Agent 的全局缓存压到 890 bytes/token。**Recurrent Looped Transformer** 与 **FlashREINFORCE** 进一步把 test-time recurrent computation、current-policy replay 和 asynchronous RL 对齐，说明下一阶段不只是扩参数，而是扩有效计算深度与 rollout 覆盖率。\n\n评测研究也在从静态问答转向可执行、可追责的任务。**BVB** 要求 Agent 在 Blender 中程序化重建真实视频，结果显示高感知相似度并不等于保留时空事实；**RSIAgent** 在新环境中通过 curriculum、actor、verifier 协作构建可复用因果记忆，并在 OSWorld-v2 与 Agent’s Last Exam 上检验迁移效果。这与 **Reality Is the Final Verifier** 的观点呼应：test suite 只能近似需求与部署世界，真正可靠的 Agent 需要持续用 deployment evidence 修订 evaluator。\n\n开源社区今天的热点更偏 Agent 基础设施而非模型 wrapper：**ToolReplay** 和 **TraceCrate** 分别解决 tool-call 的确定性回放、权限越界审计与本地 trace 可视化；**AgentVerse OS** 把 coding agent workspace 做成 Tailscale-only 的个人云桌面。HN 上安全议题同步升温，从客服 Agent 的 prompt injection 到 coding agent 同时接触私有数据、互联网与 public repo 的「lethal trifecta」，都指向同一结论：能力增长之后，provenance、egress control 与现实验证正在成为 Agent stack 的第一等组件。",
+  "briefing_en": "Today’s strongest common signal is not another larger model, but the emergence of a closed loop around verifiable experience, recursive improvement, and real-world feedback. **Atria Dawn** trains research and engineering agents against executable environments and externally verified outcomes, then analyzes 769 real task records to show human–AI collaboration moving from task assistance toward project-level partnership. **Dream-RSI** turns historical discovery trees into a replay simulator, using low-cost dreaming to improve exploration policies. Both center verifiable outcomes, while the former emphasizes real production practice and the latter reduces the cost of online trial and error in long-horizon search.\n\nModel and systems work is simultaneously attacking the cost of long-running agents. **ZGCM-1** combines a 7B dense model, 256K context, MDP mid-training, and a fully open recipe to argue that compact models can offset limited parametric capacity through reasoning and tool use. **DeepSeek-V4.1-Flash** redesigns architecture and KV caching, shrinking the global cache for million-token multimodal agents to 890 bytes per token. **Recurrent Looped Transformer** and **FlashREINFORCE** align recurrent test-time computation, current-policy replay, and asynchronous RL, suggesting that the next scaling axis is effective computation depth and rollout coverage rather than parameter count alone.\n\nEvaluation is also moving from static QA toward executable and accountable tasks. **BVB** asks agents to reconstruct real videos programmatically in Blender and finds that high perceptual similarity does not guarantee retention of spatiotemporal facts. **RSIAgent** coordinates curriculum, actor, and verifier roles to build reusable causal memory in unfamiliar environments, evaluating transfer on OSWorld-v2 and Agent’s Last Exam. This echoes **Reality Is the Final Verifier**: test suites only approximate requirements and deployment conditions, so reliable agents must continually revise evaluators using deployment evidence.\n\nOpen-source attention today is concentrated on agent infrastructure rather than thin model wrappers. **ToolReplay** and **TraceCrate** address deterministic tool-call replay, permission-overreach auditing, and local trace inspection, while **AgentVerse OS** packages coding-agent workspaces as a Tailscale-only personal cloud desktop. Hacker News security discussions—from prompt injection against customer-service agents to coding agents exposed simultaneously to private data, the internet, and public repositories—point to the same conclusion: provenance, egress control, and reality-grounded verification are becoming first-class layers of the agent stack.",
+  "viral_analysis_zh": "**Atria Dawn** 最可能成为今日论文爆款：它把「agentic superintelligence」的强叙事、167 个 HF upvotes、16 个 benchmark 与 769 条真实协作记录绑在一起，既满足能力想象，也提供可传播的人机伙伴数据。开源侧 **ToolReplay** 更可能在开发者圈持续扩散，因为它用 dependency-free CLI 和可复现的 dirty sample，把抽象的 Agent 安全问题压缩成一条可立即运行、可截图分享的命令。",
+  "viral_analysis_en": "**Atria Dawn** is the strongest viral candidate today: it combines the high-arousal framing of “agentic superintelligence” with 167 HF upvotes, 16 benchmarks, and 769 real collaboration records, offering both capability spectacle and shareable evidence about project-level partnership. In open source, **ToolReplay** is positioned for durable developer spread because its dependency-free CLI and reproducible dirty sample turn an abstract agent-security concern into one command that can be run, inspected, and shared immediately.",
+  "huggingface_papers": [
+    {
+      "title": "Atria Dawn: The Dawn of Agentic Superintelligence",
+      "url": "https://arxiv.org/abs/2609.15818",
+      "tldr": "Atria Dawn Preview is a foundation agentic language model for scientific research, engineering, and digital work, trained through a Verifiable Experience Pipeline that ties tool interactions to executable environments and externally checked outcomes. It reports frontier-competitive results across 16 benchmarks and leads five of them. More unusually, the paper studies 769 task records from 56 participants, finding that humans retain most final decisions while agents increasingly propose methods and implement revisions—evidence for a shift toward project-level partnership.",
+      "tldr_zh": "Atria Dawn Preview 是面向科研、工程与数字工作的 foundation agentic language model，通过 Verifiable Experience Pipeline 将工具交互连接到可执行环境和外部验证结果。它在 16 个 benchmark 上与 frontier agent 竞争，并在其中 5 个取得最高报告分数。更特别的是，论文分析了 56 名参与者的 769 条任务记录：人类仍掌握多数最终决策，但 Agent 已频繁提出方法并完成修改，显示协作正在走向项目级伙伴关系。",
+      "upvotes": 167,
+      "authors": "Honglin Guo, Tao Gui, Yicheng Chen, Guanting Dong, Qiming Ge, Yuyang Hu, Zixian Huang, Jiajie Jin, Alexander Lam, Yining Li",
+      "ai_keywords": [
+        "agentic model",
+        "verifiable experience",
+        "scientific discovery",
+        "human-AI collaboration"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "Dream-RSI: Recursive Self-Improvement through Evolving Worlds",
+      "url": "https://arxiv.org/abs/2609.14858",
+      "tldr": "Dream-RSI makes an agent’s exploration strategy explicit and programmable without changing the underlying coding agent. It converts accumulated discovery trees into a replay simulator, where “dreaming” supplies immediate off-policy feedback for refining exploration before expensive online deployment. Across algorithm engineering, mathematical optimization, and GPU-kernel work, the framework preserves or improves discovery quality while reducing evaluation cost, offering a practical route to recursive improvement through better search rather than repeated model retraining.",
+      "tldr_zh": "Dream-RSI 在不修改底层 coding agent 的前提下，把探索策略显式化、可编程化。它将累积的 discovery tree 转为 replay simulator，通过「dreaming」获得即时 off-policy feedback，在昂贵的在线部署前先优化探索策略。在算法工程、数学优化和 GPU kernel 任务中，该方法维持或提升发现质量并降低评测成本，给出一条通过改进搜索而非反复重训模型实现递归改进的实用途径。",
+      "upvotes": 157,
+      "authors": "Tong Zheng, Xidong Wu, Zheng Zhang, Zhankui He, Chaoyi Zhang, Benjamin Coleman, Ruoqiao Wei, Di Bai",
+      "ai_keywords": [
+        "recursive self-improvement",
+        "exploration",
+        "replay simulator",
+        "coding agent"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "ZGCM-1: A Fully Open and Extremely Efficient Foundation Model for Math and Agentic Search",
+      "url": "https://arxiv.org/abs/2609.13356",
+      "tldr": "ZGCM-1 is a fully open 7B dense model built around the idea that compact models can compensate for limited memorization through deliberate reasoning and external tool use. Its recipe combines interleaved sliding-window and full attention, FP8 Muon, progressive context scaling to 256K, and MDP-formatted interaction traces during mid-training. The authors report roughly 4.2× better 16K pretraining time-to-loss and release weights, intermediate checkpoints, code, data recipes, and W&B logs, making the systems and training claims unusually auditable.",
+      "tldr_zh": "ZGCM-1 是完全开放的 7B dense 模型，核心假设是小模型可借助审慎推理与外部工具使用弥补有限的记忆容量。其 recipe 结合 sliding-window/full attention 交错架构、FP8 Muon、逐步扩展到 256K context，以及 mid-training 中的 MDP 化交互轨迹。作者报告 16K pretraining time-to-loss 约提升 4.2 倍，并开放权重、中间 checkpoint、代码、数据 recipe 与 W&B 日志，使系统和训练结论具备少见的可审计性。",
+      "upvotes": 125,
+      "authors": "Jiyan He, Guang Liang, Hao Liu, Haoxiang Guan, Jinbo Sun, Junyi Guo, Wenjun Feng, Yantai Xie",
+      "ai_keywords": [
+        "open foundation model",
+        "agentic search",
+        "long context",
+        "MDP mid-training"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "BVB: Benchmarking Agentic Video Understanding via Programmatic Reconstruction in Blender",
+      "url": "https://arxiv.org/abs/2609.15478",
+      "tldr": "BVB replaces conventional video question answering with an executable test: agents must reconstruct real-world videos as animated Blender scenes under a shared sandbox and cost limit. Dual VQA measures retained spatiotemporal facts, while Latent Similarity measures perceptual fidelity, and the combined score penalizes systems that optimize only one side. Across 51 configurations, the best reconstruction reached 88.6 latent similarity but preserved only 53.7% of source-correct facts, exposing a sharp gap between looking right and understanding correctly.",
+      "tldr_zh": "BVB 不再只用视频问答测理解，而要求 Agent 在统一 sandbox 和成本上限下，将真实视频程序化重建为 Blender 动画场景。Dual VQA 衡量保留的时空事实，Latent Similarity 衡量感知相似度，组合分数会惩罚只优化单一维度的系统。在 51 个配置中，最佳重建达到 88.6 的 latent similarity，却只保留 53.7% 的源视频正确事实，直接揭示「看起来像」与「真正理解」之间的巨大差距。",
+      "upvotes": 17,
+      "authors": "Yolo Y. Tang, Daiki Shimada, Jiayue Meng, Jing Bi, Pinxin Liu, Yicheng Wang, Yunzhong Xiao, Zhangyun Tan",
+      "ai_keywords": [
+        "agent evaluation",
+        "video understanding",
+        "Blender",
+        "programmatic reconstruction"
+      ],
+      "interest_tag": "Benchmark"
+    },
+    {
+      "title": "RSIAgent: Autonomous Exploration for Recursive Self-improvement in New Environments",
+      "url": "https://arxiv.org/abs/2609.15364",
+      "tldr": "RSIAgent is a training-free multi-agent framework that adapts to unfamiliar digital environments by constructing reusable, environment-specific memory. Curriculum, actor, and verifier agents explore broadly and then probe hard cases deeply, retaining validated causal relations among actions, conditions, and consequences. The frozen memory can be reused without parameter updates, and experiments on OSWorld-v2 and Agent’s Last Exam report substantial gains for strong open models, making the work directly relevant to environment adaptation rather than generic conversation memory.",
+      "tldr_zh": "RSIAgent 是无需训练的 multi-agent 框架，通过构建可复用的环境专属记忆适应陌生数字环境。curriculum、actor 与 verifier Agent 先广泛探索环境结构，再深入挖掘 hard case，并保存经验证的 action、condition 与 consequence 因果关系。冻结后的记忆无需更新参数即可复用，论文在 OSWorld-v2 和 Agent’s Last Exam 上报告强开源模型显著提升，因此它研究的是环境适应记忆，而非泛化的对话记忆。",
+      "upvotes": 13,
+      "authors": "Sibo Zhu, Shicheng Fan, Xinyue Wang, Wenyi Wu, Kun Zhou, Biwei Huang",
+      "ai_keywords": [
+        "autonomous exploration",
+        "causal memory",
+        "environment adaptation",
+        "multi-agent"
+      ],
+      "interest_tag": "Memory"
+    }
+  ],
+  "alphaxiv_papers": [
+    {
+      "title": "Recurrent Looped Transformer",
+      "arxiv_id": "",
+      "url": "https://www.alphaxiv.org/abs/2609.recurrent-looped-transformer",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2609.recurrent-looped-transformer",
+      "tldr": "Recurrent Looped Transformer separates a parallel causal encoder from a recurrent decoder whose hidden state and sliding-window cache persist across prompt and response tokens. This gives the model unbounded temporal computation depth while keeping a fixed number of blocks per token. Exact current-policy replay reconstructs recurrent states under updated parameters, aligning pretraining, rollouts, and RL updates instead of optimizing against stale latent states; the hardware-aware split also exposes batching and memory-reuse opportunities.",
+      "tldr_zh": "Recurrent Looped Transformer 将并行 causal encoder 与 recurrent decoder 分离，后者的 hidden state 和 sliding-window cache 会跨 prompt 与 response token 持续传递。这样在每个 token 仍使用固定 block 数的同时，模型获得不设固定上限的时间计算深度。Exact current-policy replay 会用更新后的参数重建 recurrent state，让 pretraining、rollout 与 RL update 对齐而不依赖陈旧 latent state；硬件感知的拆分也带来 batching 和 memory reuse 空间。",
+      "interest_tag": ""
+    },
+    {
+      "title": "FlashREINFORCE: Critic-Free Single-Rollout Asynchronous RL for Agentic Language Models",
+      "arxiv_id": "",
+      "url": "https://www.alphaxiv.org/abs/2609.flashreinforce-asynchronous-rl-agentic-models",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2609.flashreinforce-asynchronous-rl-agentic-models",
+      "tldr": "FlashREINFORCE removes group sampling from asynchronous agent RL, using one rollout per prompt to increase prompt coverage and eliminate synchronization barriers. One-Batch REINFORCE, a sequence trust region, and sample-mean optimization stabilize signed feedback under stale, variable-length trajectories. It reports 38.0 average accuracy across five math benchmarks with half the rollouts of the cited GRPO baseline, and preserves tool use on ALFWorld where GRPO collapses, making rollout efficiency the central contribution.",
+      "tldr_zh": "FlashREINFORCE 在 asynchronous Agent RL 中移除 group sampling，每个 prompt 只做一次 rollout，从而扩大 prompt 覆盖并消除组同步障碍。One-Batch REINFORCE、sequence trust region 与 sample-mean optimization 用于稳定陈旧、变长 trajectory 下的有符号反馈。它以所引 GRPO baseline 一半的 rollout 在五个数学 benchmark 上达到 38.0 平均准确率，并在 ALFWorld 上避免 GRPO 停止调用工具，核心价值是显著提高 rollout 效率。",
+      "interest_tag": ""
+    },
+    {
+      "title": "The Last AI Built by Humans: Toward Genuine Recursive Self-Improvement",
+      "arxiv_id": "2609.11873",
+      "url": "https://arxiv.org/abs/2609.11873",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2609.11873",
+      "tldr": "This survey distinguishes persistent learning from genuine recursive self-improvement with a staged roadmap covering improvement execution, strategy, experience acquisition, environment adaptation, and eventually meta-improvement. It introduces the Headroom-Closed Index to characterize where current LLM systems still lack room-closing autonomy. By comparing scientific discovery, embodied intelligence, and software engineering, the paper is most useful as a taxonomy of which improvement decisions remain human-governed rather than as evidence that full RSI has already arrived.",
+      "tldr_zh": "这篇综述用分阶段 roadmap 区分持续学习与真正的 recursive self-improvement，阶段包括改进执行、改进策略、经验获取、环境适应，最终到 recursive meta-improvement。论文提出 Headroom-Closed Index，用于刻画当前 LLM 系统在哪些环节仍缺少自主缩小能力差距的能力。它横跨科学发现、具身智能和软件工程，主要价值是厘清哪些改进决策仍由人类掌控，而不是证明完整 RSI 已经到来。",
+      "interest_tag": ""
+    },
+    {
+      "title": "DeepSeek-V4.1-Flash: Pushing the Limits of KV Cache Compression",
+      "arxiv_id": "",
+      "url": "https://www.alphaxiv.org/abs/2609.deepseek-v4-1-flash",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2609.deepseek-v4-1-flash",
+      "tldr": "DeepSeek-V4.1-Flash is a 552B-parameter multimodal MoE that activates 16B parameters per decode token and 8B during prefill, targeting million-token agent workloads. Cross-layer cache reuse, FP4 KV storage, and SWA bounded replay reduce the always-in-HBM global cache to 890 bytes per token—about one quarter of DeepSeek-V4-Flash—and the persistent host/SSD cache to roughly one eighth. The work matters less as a headline context-length claim than as a concrete attempt to make input-heavy, long-horizon agents economically servable.",
+      "tldr_zh": "DeepSeek-V4.1-Flash 是 552B 参数的 multimodal MoE，decode 每 token 激活 16B 参数、prefill 激活 8B，面向 million-token Agent workload。跨层 cache reuse、FP4 KV storage 与 SWA bounded replay 将常驻 HBM 的 global cache 压到 890 bytes/token，约为 DeepSeek-V4-Flash 的四分之一，并把 host/SSD persistent cache 降到约八分之一。它的重要性不只在超长 context 宣传，而在于让 input-heavy、long-horizon Agent 具备更现实的服务成本。",
+      "interest_tag": ""
+    },
+    {
+      "title": "Reality Is the Final Verifier: On Two Key Gaps in Agentic Software Engineering",
+      "arxiv_id": "2609.12039",
+      "url": "https://arxiv.org/abs/2609.12039",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2609.12039",
+      "tldr": "The paper argues that agentic software engineering is bounded by two irreducible mismatches: requirements only approximate stakeholder intent, and evaluation models only approximate deployment reality. Reward hacking exploits omissions in either approximation, while hallucination widens them by inventing requirements or environment assumptions. Its proposed assurance-revision loop uses deployment evidence to update requirements, models, or evaluators, reframing reliability as continuous gap reduction rather than proof that a predeployment test suite is complete.",
+      "tldr_zh": "论文认为 agentic software engineering 受两类不可消除的偏差约束：requirement 只能近似 stakeholder intent，evaluation model 只能近似真实部署环境。Reward hacking 利用这两种近似中的遗漏，hallucination 则通过编造需求或环境假设进一步扩大差距。作者提出 assurance-revision loop，用 deployment evidence 持续更新需求、模型或 evaluator，把可靠性从「证明测试集完整」改写为「持续缩小现实差距」。",
+      "interest_tag": ""
+    }
+  ],
+  "github_repos": [
+    {
+      "name": "agentverse-os/AgentVerse-OS",
+      "url": "https://github.com/agentverse-os/AgentVerse-OS",
+      "tldr": "AgentVerse OS packages a browser-accessible personal cloud for developers and their coding agents on one Ubuntu server. It combines persistent isolated workspaces, VS Code, Claude Code/Codex integrations, app management, backups, and updates behind Tailscale rather than exposing services publicly. The value is operational cohesion: it treats the agent workspace as a durable remote computer instead of another chat wrapper, though its very recent creation means maturity should still be watched.",
+      "tldr_zh": "AgentVerse OS 将开发者与 coding agent 的个人云工作区打包到一台 Ubuntu 服务器，并通过浏览器访问。它把持久化隔离 workspace、VS Code、Claude Code/Codex 集成、应用管理、备份与更新放在 Tailscale 后面，而非直接暴露公网。其价值是把 Agent workspace 当作长期运行的远程电脑，而不是又一个聊天 wrapper；但仓库创建时间很近，成熟度仍需观察。",
+      "stars": 405,
+      "language": "Rust",
+      "interest_tag": ""
+    },
+    {
+      "name": "youngyangyang04/llm-master",
+      "url": "https://github.com/youngyangyang04/llm-master",
+      "tldr": "LLM-Master is a Chinese full-stack learning path that progresses from API use and prompt engineering through RAG, agents, fine-tuning, deployment, Transformers, projects, and interviews. The repository is structured as a curriculum rather than a link dump, emphasizing design rationale, production debugging, and how to explain concepts clearly. Its rapid star growth reflects the enduring distribution advantage of a concrete beginner-to-production roadmap, not a new research contribution.",
+      "tldr_zh": "LLM-Master 是中文大模型全栈学习路线，从 API 与 Prompt Engineering 逐步覆盖 RAG、Agent、微调、部署、Transformer、项目和面试。仓库以课程路径而非链接堆砌组织内容，强调设计原因、生产排错与清晰表达概念。它的快速涨星反映了「从入门到生产」明确路线的传播优势，但本身不是新的研究贡献。",
+      "stars": 287,
+      "language": "",
+      "interest_tag": ""
+    },
+    {
+      "name": "Matthew0822/ToolReplay",
+      "url": "https://github.com/Matthew0822/ToolReplay",
+      "tldr": "ToolReplay is a dependency-free Python CLI for auditing recorded agent tool-call transcripts. It can seal JSONL sessions with a hash chain, replay calls deterministically, detect repeated calls or changed outputs, and flag actions outside a declared scope; the README includes a runnable dirty sample with verbatim output. This tight problem definition makes it useful for provenance and incident review, while also making the project easy for developers to evaluate without adopting a larger observability platform.",
+      "tldr_zh": "ToolReplay 是 dependency-free Python CLI，用于审计 Agent 的 tool-call transcript。它可用 hash chain 封存 JSONL session、做 deterministic replay、检测重复调用或输出变化，并标记超出声明 scope 的动作；README 还提供可运行的 dirty sample 与原样输出。问题边界足够紧，使其适合 provenance 与 incident review，也让开发者无需引入大型 observability 平台即可快速验证价值。",
+      "stars": 168,
+      "language": "Python",
+      "interest_tag": ""
+    },
+    {
+      "name": "FankChen/tracecrate",
+      "url": "https://github.com/FankChen/tracecrate",
+      "tldr": "TraceCrate is a privacy-first, client-side workbench for inspecting Claude Code, Codex, and OTLP agent traces. It focuses on reconstructing event sequences, comparing runs, questioning suspicious patterns, and exporting reports without requiring a backend or API keys. Relative to log viewers, its differentiator is a deliberate review workflow and local data boundary, which fits teams that need to share evidence without uploading sensitive traces.",
+      "tldr_zh": "TraceCrate 是 privacy-first、client-side 的 Agent trace 工作台，可读取 Claude Code、Codex 与 OTLP 日志。它聚焦重建事件序列、比较 run、检查可疑模式并导出报告，不需要 backend 或 API key。相较普通 log viewer，它的差异点是面向审查的工作流与本地数据边界，适合需要分享证据但不愿上传敏感 trace 的团队。",
+      "stars": 124,
+      "language": "TypeScript",
+      "interest_tag": ""
+    },
+    {
+      "name": "ivyfan-toowell/IvyClaw",
+      "url": "https://github.com/ivyfan-toowell/IvyClaw",
+      "tldr": "IvyClaw is a multi-agent software-engineering system built with DeepAgents and LangGraph. Planner, researcher, coder, tester, and reviewer roles share a workflow that includes sandboxed execution, persistent state, asynchronous jobs, human approval, model routing, and production observability. Its scope is much broader than a demo swarm, but that breadth also brings substantial PostgreSQL, Redis, Docker, and monitoring overhead compared with a lean coding-agent harness.",
+      "tldr_zh": "IvyClaw 是基于 DeepAgents 与 LangGraph 的 multi-agent 软件工程系统。Planner、researcher、coder、tester 与 reviewer 分工协作，并包含 sandbox execution、状态持久化、异步任务、human approval、模型路由和生产观测。它比演示型 swarm 覆盖更完整，但相较精简 coding-agent harness，也引入 PostgreSQL、Redis、Docker 与监控栈的显著工程开销。",
+      "stars": 59,
+      "language": "Python",
+      "interest_tag": "Agent Swarm"
+    }
+  ],
+  "hackernews": [
+    {
+      "title": "Hacking AI customer service agents",
+      "url": "https://www.intigriti.com/researchers/blog/hacking-tools/hacking-ai-customer-service-agents",
+      "tldr": "This security walkthrough examines customer-service agents as compound attack surfaces rather than ordinary chatbots. The core risks include prompt injection, access to private customer or business data, and downstream tool actions that can turn model manipulation into real account or workflow impact. The practical takeaway is that testing must cover the full agent chain—identity, retrieval, tools, permissions, and output handling—not just whether the model refuses a malicious sentence.",
+      "tldr_zh": "这篇安全分析将客服 Agent 视为复合攻击面，而不是普通 chatbot。核心风险包括 prompt injection、私有客户/企业数据访问，以及下游工具动作把模型操纵转化为真实账户或工作流影响。实际启示是安全测试必须覆盖 identity、retrieval、tool、permission 与 output handling 的完整链路，而不能只测模型是否拒绝一句恶意指令。",
+      "points": 33,
+      "num_comments": 5,
+      "interest_tag": ""
+    },
+    {
+      "title": "Transitions.dev: UI transitions for AI agents",
+      "url": "https://transitions.dev/",
+      "tldr": "Transitions.dev offers a searchable collection of production-style UI transitions that can be copied directly or consumed through an agent skill. The site frames motion design as structured context for coding agents, covering common interactions such as card resizing, number changes, notifications, menus, modals, and panels. Its traction comes from combining immediate visual payoff with an agent-native distribution format: users can browse the result, while coding agents receive reusable implementation guidance.",
+      "tldr_zh": "Transitions.dev 提供可搜索的 production-style UI transition 集合，既能直接复制，也能通过 Agent skill 使用。内容覆盖 card resize、数字变化、通知、菜单、modal 与 panel 等常见交互，把 motion design 转成 coding agent 可消费的结构化上下文。它的传播力来自「即时视觉效果 + Agent-native 分发」：人能直接浏览结果，coding agent 也能获得可复用的实现指导。",
+      "points": 23,
+      "num_comments": 8,
+      "interest_tag": ""
+    },
+    {
+      "title": "Ask HN: Are we losing our engineering literacy?",
+      "url": "https://news.ycombinator.com/item?id=49685036",
+      "tldr": "The discussion challenges the tendency to describe LLM agents through anthropomorphic or mystical narratives rather than mechanisms and evidence. Its author argues that engineering communities once filtered similar technology hype more aggressively, whereas AI discourse now jumps quickly to replacement, deception, and AGI-level claims. The value is diagnostic rather than technical: it highlights a widening gap between system behavior that deserves investigation and causal stories that are easy to share but weakly grounded.",
+      "tldr_zh": "这场讨论质疑人们用拟人化或神秘化叙事描述 LLM Agent，而不是从机制与证据出发。作者认为工程社区过去会更强地过滤类似技术 hype，但今天 AI 讨论很容易直接跳到替代、欺骗与 AGI 级结论。它的价值不在新技术，而在诊断一种话语偏差：值得研究的系统行为，与易传播却缺乏因果依据的解释正在被混为一谈。",
+      "points": 22,
+      "num_comments": 20,
+      "interest_tag": ""
+    },
+    {
+      "title": "Show HN: I built Otis, a minimal AI agent that runs local models out of the box",
+      "url": "https://triangllabs.ai/otis",
+      "tldr": "Otis presents a minimal agent experience across local and hosted open-weight models, with privacy as the default positioning. During setup it recommends a local model from the available hardware, downloads it, and runs it through llama.cpp, while also supporting Ollama, LM Studio, and NVIDIA PAIR. The project targets setup friction rather than novel agent architecture: its pitch is one coherent path from hardware detection to a working private local agent.",
+      "tldr_zh": "Otis 为本地和托管 open-weight model 提供统一的极简 Agent 体验，并把 privacy 作为默认定位。初始化时它会根据硬件推荐本地模型、自动下载并通过 llama.cpp 运行，同时支持 Ollama、LM Studio 与 NVIDIA PAIR。项目解决的是部署摩擦而非新的 Agent 架构：卖点是从硬件检测到可工作的私有本地 Agent 只有一条连贯路径。",
+      "points": 19,
+      "num_comments": 3,
+      "interest_tag": ""
+    },
+    {
+      "title": "We gave a coding agent the lethal trifecta: data, internet, a public repo",
+      "url": "https://archestra.ai/blog/fixing-small-bugs-from-a-slack-thread",
+      "tldr": "Archestra describes a Slack-triggered coding agent that can inspect internal Slack and Kubernetes data, work in disposable environments, and open pull requests. The “lethal trifecta” is simultaneous access to private data, untrusted internet content, and a public exfiltration channel, so read-only source access alone is not a sufficient control. The case study argues for destination-aware egress policy, isolated workspaces, and review gates that constrain where information may flow while preserving enough access for useful debugging.",
+      "tldr_zh": "Archestra 展示了一个由 Slack 触发的 coding agent：它可读取内部 Slack 与 Kubernetes 数据，在 disposable environment 中修复问题并创建 PR。「lethal trifecta」指同时拥有私有数据、非可信互联网内容和公开外泄通道，因此仅把源数据设为 read-only 并不构成充分防护。案例主张使用 destination-aware egress policy、隔离 workspace 与 review gate，在保留有效排错能力的同时约束信息流向。",
+      "points": 10,
+      "num_comments": 1,
+      "interest_tag": ""
+    }
+  ]
+}
