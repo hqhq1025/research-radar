@@ -1,0 +1,221 @@
+{
+  "date": "2026-09-17",
+  "generated_at": "2026-09-17T16:05:34.873554+08:00",
+  "briefing_zh": "今天最清晰的主线，是 agent 研究正在从『让模型完成一次任务』转向『把可验证经验变成可复用的学习基础设施』。**ScienceIDE** 将科学代码仓库封装为带专家验收标准、可执行环境和私有 verifier 的训练与评测底座；**ProgramDistill** 则从可交互的参考 Web 应用中自动挖掘 1,975 个可回放行为，构造 4,063 个 coding-agent 任务。两者共同说明，下一阶段的瓶颈不是再写一套 prompt，而是规模化生产既真实、又可执行验证的环境与任务。\n\n第二条主线是长程 agent 的 learning loop 正在变得更便宜、更异步。**FlashREINFORCE** 用单 prompt 单 rollout、batch-centered reward 和 sequence trust region，在显著 policy lag 下仍保持稳定，并避免 group sampling 的同步壁垒；**Dream-RSI** 更进一步，把历史 discovery tree 当成 replay simulator，在不反复调用昂贵在线 evaluator 的情况下改进探索策略。与此同时，**Rethinking Critic Learning in PPO** 指出 critic 会出现 Value Flattening，并用仅监督少量分离状态的 SP³O 缓解，说明 RL 系统的关键正从『是否有 reward』下钻到 credit assignment、采样分配与 off-policy 稳定性。\n\n在 agent 能力评测与协作层面，**ProgramDistill** 显示完整应用重建仍远未解决：即使是最强 coding agent，累计工作流成功率也只有 49.2%。**Agora** 则把多 agent 研究过程写成 Git 中不可变、可复现的贡献 DAG，让 13 个 worker 在 12 天内形成 1,703 次贡献；它的价值不只是一组结果，而是把 shared memory、provenance 和独立复现变成协作协议。**RSIAgent** 也沿着类似方向，把新软件环境中的因果关系、前置条件和失败模式固化为可复用 memory，并在 OSWorld-v2 等环境中检验迁移。\n\n开源与产业信号同样指向『agent control plane』。**ToolReplay** 用 hash-chain、确定性 replay 和权限越界检查审计 tool-call transcript；**AgentVerse OS** 与 HN 上关于 agent fleet OS 的讨论，则把 isolation、identity、accounting、scheduling 和 governance 提升到多 agent 基础设施层。最受关注的产业新闻是 **Sponsored Agents**：广告不再只导向网页，而是导向品牌资助、明确标注的对话 agent，这会让 agent 同时成为交互界面、销售渠道和新的信任边界。",
+  "briefing_en": "The clearest theme today is a shift from making an agent complete one task to turning verifiable experience into reusable learning infrastructure. **ScienceIDE** packages scientific repositories as executable environments with expert acceptance criteria and private verifiers, while **ProgramDistill** mines 1,975 replay-verified behaviors from interactive reference web apps to create 4,063 coding-agent tasks. Together they suggest that the next bottleneck is not another prompting trick, but scalable production of realistic environments whose outcomes can actually be checked.\n\nA second theme is cheaper and more asynchronous learning for long-horizon agents. **FlashREINFORCE** uses one rollout per prompt, batch-centered rewards, and a sequence trust region to remain stable under substantial policy lag without group-sampling barriers. **Dream-RSI** treats historical discovery trees as replay simulators, improving exploration policies without repeatedly paying for online evaluations. In parallel, **Rethinking Critic Learning in PPO** identifies Value Flattening in learned critics and mitigates it with sparse supervision, showing that progress now depends on credit assignment, sampling allocation, and off-policy stability rather than reward availability alone.\n\nEvaluation and collaboration are also becoming more structural. **ProgramDistill** shows that full application reconstruction remains unsolved: even the strongest reported coding agent reaches only 49.2% success on cumulative workflows. **Agora** records multi-agent research as an immutable, reproducible Git DAG, allowing 13 workers to produce 1,703 contributions over nearly 12 days; its larger contribution is a protocol for shared memory, provenance, and independent reproduction. **RSIAgent** follows a related path by retaining environment-specific causal knowledge, prerequisites, and failure modes, then testing transfer on OSWorld-v2 and other agent environments.\n\nOpen-source and industry signals both point toward an agent control plane. **ToolReplay** audits tool-call transcripts through hash-chain sealing, deterministic replay, and scope-overreach checks, while **AgentVerse OS** and an HN essay on fleet operating systems elevate isolation, identity, accounting, scheduling, and governance to first-class infrastructure. The biggest industry story is **Sponsored Agents**: ads can now lead into clearly labeled, business-sponsored conversations, turning agents into an interface, a sales channel, and a new trust boundary at the same time.",
+  "viral_analysis_zh": "今天最可能形成跨圈传播的是 **Sponsored Agents**：它把『ChatGPT 加广告』改写成『点击广告后直接与品牌 agent 对话』，既触发商业模式讨论，也触发独立回答与付费话术边界的信任争议。研究圈最可能持续发酵的是 **ScienceIDE**，因为『把全世界科学代码变成 agent 可学习环境』这一叙事宏大且可演示，又同时抓住 executable verification、AI for Science 与 agent training 三个热点。",
+  "viral_analysis_en": "**Sponsored Agents** is the most likely cross-community viral story because it reframes ChatGPT advertising as a direct conversation with a business-sponsored agent, combining a major monetization shift with an immediate trust-boundary debate. In research circles, **ScienceIDE** has the strongest staying power: its framing of turning the world's scientific code into agent-learnable environments is ambitious, demonstrable, and sits at the intersection of executable verification, AI for Science, and agent training.",
+  "huggingface_papers": [
+    {
+      "title": "ScienceIDE: Turning World's Scientific Codebase into Agent Learnable Environments",
+      "url": "https://arxiv.org/abs/2609.19134",
+      "tldr": "ScienceIDE converts scientific repositories into executable, versioned environments with expert-defined observables, tolerances, task factories, and private verification policies. It spans 64 environments and 2,812 tasks, supporting evaluation, supervised fine-tuning, and verifier-based reinforcement learning from the same substrate. The associated PhAI-IDE model family improves held-out scientific-code repair and selected general coding, reasoning, and knowledge benchmarks. The important contribution is infrastructure for turning domain software into scientifically valid experience, not merely tests that a program runs.",
+      "tldr_zh": "ScienceIDE 把科学代码仓库转化为可执行、版本固定的环境，并加入专家定义的观测量、容差、任务工厂和私有验证策略。它覆盖 64 个环境、2,812 个任务，可用同一底座支持评测、SFT 和基于 verifier 的 RL。配套的 PhAI-IDE 模型族在 held-out 科学代码修复以及部分通用代码、推理和知识任务上获得提升。真正重要的是它把领域软件转成『科学上有效的经验』，而不只是验证程序能否运行。",
+      "upvotes": 62,
+      "authors": "Hejia Geng, Zesen Huang, Haoyang Li, Wenbin Li, Koutian Wu, Zihan Zhou, Yuanbo Pang, Weihao Liu, Zigong Xu, Zhiping Li, Zongzheng Zhang, Chuanfei Dong, Jiankai Sun, Tianzhe Zheng, Fengyu Xie, Yue Ma, Yueheng Shi, Tong Xie, Zonglin Di, Xianrong Liu, Qucheng Gao, Yimin Liu, Jiaming Pan, Sheng Huang, Xiao-Han Ma, Lanqing Yuan, Zhenlin Zhu, Ziang Liu, Ziyang Xu, Junkai Wang, Kangkai Liang, Jiayi Xian, Zehong Zhao, Liuwei Xu, Jingxu Xie, Peijin Zhang, Qiang Gao, Chengyi Xing, Zhe Zhao, Xi Wang, Yaopeng Xing, Xing Meng, Zhenfei Yin, Yingcheng Wu, Ling Yang",
+      "ai_keywords": [
+        "scientific agents",
+        "verifiable environments",
+        "reinforcement learning"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "Confidence Comes from Experience: Experiential Confidence Estimation from Reasoning to Agents",
+      "url": "https://arxiv.org/abs/2609.17708",
+      "tldr": "XConf estimates confidence using a model's graded history of similar episodes rather than only its current logits, self-report, or repeated samples. It retrieves past cases with comparable stated confidence, computes their empirical success rate, and asks the model to reflect on recurring failure modes before restating confidence. Across reasoning, coding, multimodal QA, and interactive-agent tasks, it matches or beats ten-sample self-consistency on 23 of 24 AUROC comparisons at roughly one tenth of the generation cost. Selectively abstaining on the least-confident 10% raises delivered agent-task success by up to 8.7 points.",
+      "tldr_zh": "XConf 不只看当前 logits、自报置信度或重复采样，而是利用模型过去相似任务的已评分经历来估计置信度。它检索自报置信度相近的历史案例，读取真实成功率，再让模型反思反复出现的失败模式并重新校准。在推理、代码、多模态 QA 和交互式 agent 任务上，它在 24 组 AUROC 对比中的 23 组追平或超过十次 self-consistency，而生成成本约为后者的十分之一。若拒答置信度最低的 10% episode，实际交付的 agent 成功率最多提高 8.7 个百分点。",
+      "upvotes": 43,
+      "authors": "Caiqi Zhang, Xiaochen Zhu, Chengzu Li, Yulong Chen, Dharshan Kumaran, Nigel Collier",
+      "ai_keywords": [
+        "confidence calibration",
+        "experiential retrieval",
+        "selective prediction"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "ProgramDistill: From Interactive Web Apps to Verifiable Reference-Guided SWE Tasks",
+      "url": "https://arxiv.org/abs/2609.18805",
+      "tldr": "ProgramDistill evaluates coding agents that must infer behavior by interacting with a working reference application and then recreate it in incomplete code. Its mine-craft-patch pipeline automatically discovers 1,975 replay-verified behaviors across 26 apps and turns them into 4,063 tasks with controlled restoration depth. On full-application reconstruction, the best reported agent reaches only 49.2% success on cumulative workflows, while performance falls sharply as partial reconstruction depth grows. The benchmark matters because it tests behavioral reverse engineering and long-horizon integration rather than issue-following alone.",
+      "tldr_zh": "ProgramDistill 要求 coding agent 先与正常运行的参考应用交互、推断行为，再把这些行为复现在不完整代码中。其 mine-craft-patch 流程在 26 个应用中自动发现 1,975 个可回放验证的行为，并构造 4,063 个可控制 restoration depth 的任务。在完整应用重建上，最佳报告结果的累计工作流成功率也只有 49.2%，而部分重建会随深度增加显著退化。它的重要性在于评测 behavioral reverse engineering 与长程集成，而不只是照着 issue 修补。",
+      "upvotes": 40,
+      "authors": "Jeonghye Kim, Minseon Kim, Young Jin Kim, Matheus Pereira, Marc-Alexandre Côté, Alessandro Sordoni, Xingdi Yuan, Zhengyan Shi",
+      "ai_keywords": [
+        "coding agents",
+        "reference applications",
+        "software reconstruction"
+      ],
+      "interest_tag": "Benchmark"
+    },
+    {
+      "title": "Rethinking Critic Learning in PPO: Understanding and Mitigating Value Flattening",
+      "url": "https://arxiv.org/abs/2609.18708",
+      "tldr": "The paper identifies Value Flattening, a PPO failure mode where Monte Carlo state values change sharply along a response but the learned critic predicts nearly flat values. Analysis links the effect to an implicit variance penalty and redundant updates from temporally correlated states with similar gradients. SP³O mitigates both causes by applying value loss to only a few well-separated states per response. Supervising just three states improves learned policies across tested Qwen3-Base sizes and evaluation suites, challenging the assumption that denser critic targets are always better.",
+      "tldr_zh": "论文发现 PPO critic 的一种系统性失败：真实 Monte Carlo state value 沿 response 剧烈变化，但 critic 预测却近乎平坦，即 Value Flattening。分析将其归因于 critic loss 隐含的方差惩罚，以及时间相邻、梯度相似状态带来的重复更新。SP³O 只在每条 response 的少数分离状态上施加 value loss，从而同时缓解两类问题。实验中仅监督三个状态就能改善多个 Qwen3-Base 尺寸和评测套件上的策略，反驳了 critic target 越密越好的直觉。",
+      "upvotes": 33,
+      "authors": "Yizhuo Li, Jianhao Yan, Yun Luo, Zhi Wang, Futing Wang, Rong-Xi Tan, Kanghui Tian, Ganqu Cui, Ning Ding, Peilin Zhao, Yafu Li, Yu Cheng",
+      "ai_keywords": [
+        "PPO",
+        "critic learning",
+        "value estimation"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "Agora: Git as Shared Memory for Collective AutoResearch",
+      "url": "https://arxiv.org/abs/2609.18094",
+      "tldr": "Agora stores autonomous research as an append-only Git DAG where results, hypotheses, verification, and reports are immutable commits with explicit ancestry. A derived index exposes frontier branches and verification state, while diversity-aware selection reduces duplicated search and premature convergence. In a nearly 12-day run, 13 workers produced 1,703 contributions and improved a weight-transfer evaluator from 3.39 to 1.899 bits per byte, with 165 successful independent reproductions. The key idea is to make shared research state auditable and executable rather than relying on a central planner's transient context.",
+      "tldr_zh": "Agora 把自主研究存成 append-only 的 Git DAG：结果、假设、验证和报告都是带显式 ancestry 的不可变 commit。派生索引暴露 frontier、冷门分支和验证状态，diversity-aware selection 则减少重复搜索与过早收敛。在接近 12 天的运行中，13 个 worker 产生 1,703 次贡献，把一个权重迁移 evaluator 从 3.39 改进到 1.899 bits per byte，并完成 165 次独立复现且无失败。核心不是 Git 这个工具本身，而是把 shared research state 做成可审计、可执行的协作协议。",
+      "upvotes": 29,
+      "authors": "Yifan Zhang, Yunheng Zou, Shaokun Zhang, Jian Hu, Hao Zhang, Binfeng Xu, Jan Kautz, Yi Dong",
+      "ai_keywords": [
+        "collective autoresearch",
+        "shared memory",
+        "provenance"
+      ],
+      "interest_tag": "Agent Swarm"
+    }
+  ],
+  "alphaxiv_papers": [
+    {
+      "title": "Atria Dawn: The Dawn of Agentic Superintelligence",
+      "arxiv_id": "2609.15818",
+      "url": "https://arxiv.org/abs/2609.15818",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2609.15818",
+      "tldr": "Atria Dawn Preview is a 744B-parameter mixture-of-experts agentic model trained through a Verifiable Experience Pipeline linking tool interactions, artifacts, and externally checked outcomes. It is evaluated across 16 research, engineering, productivity, and security benchmarks, with the highest reported result on five. A field study of 769 tasks from 56 participants finds that agents often propose methods and implement revisions, while humans retain most final decisions over goals and acceptance. The work is notable for pairing benchmark claims with process evidence about how human authority changes in project-level collaboration.",
+      "tldr_zh": "Atria Dawn Preview 是一个 744B 参数的 MoE agentic model，通过 Verifiable Experience Pipeline 把工具交互、中间 artifact 与外部验证结果连接起来训练。它在覆盖科研、工程、生产力和安全的 16 个 benchmark 上评测，并在其中五项报告最高结果。对 56 名参与者、769 个任务的实地研究发现，agent 经常提出方法并执行 revision，但目标和验收的最终决定多数仍由人类掌握。其亮点是没有只报 benchmark，而是同时提供项目级人机协作中 authority 如何分配的过程证据。",
+      "interest_tag": ""
+    },
+    {
+      "title": "Discrete Beckmann Transport Models for One-Step Language Modeling and Reasoning",
+      "arxiv_id": "2609.15903",
+      "url": "https://arxiv.org/abs/2609.15903",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2609.15903",
+      "tldr": "Discrete Beckmann Transport Models learn a time-independent transport map that sends noisy continuous token representations toward discrete sequences without teacher distillation. One evaluation can generate a complete sequence, while repeated mapping selectively refines uncertain tokens rather than integrating an ODE. Refinement-in-loop training substantially improves generative perplexity and reaches up to 97.5% accuracy on hard Sudoku at 16 evaluations. The result offers a teacher-free route to parallel one- or few-step generation with iterative self-correction.",
+      "tldr_zh": "Discrete Beckmann Transport Models 学习一个 time-independent transport map，把连续噪声 token 表示直接推向离散序列，不需要 teacher distillation。一次函数求值即可生成完整序列，后续迭代通过重新映射不确定 token 来修正，而不是做 ODE integration。refinement-in-loop training 显著降低生成 perplexity，并在 16 次求值时对 hard Sudoku 达到最高 97.5% accuracy。它提供了一条无需 teacher、可并行的一步或少步生成路线，同时保留迭代自纠能力。",
+      "interest_tag": ""
+    },
+    {
+      "title": "Dream-RSI: Recursive Self-Improvement through Evolving Worlds",
+      "arxiv_id": "2609.14858",
+      "url": "https://arxiv.org/abs/2609.14858",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2609.14858",
+      "tldr": "Dream-RSI makes an autonomous discovery system's exploration controller programmable and recursively improvable while keeping the underlying coding agent fixed. It replays historical discovery trees as deterministic simulators, allowing candidate exploration policies to receive cheap off-policy feedback before online deployment. Across algorithm engineering, mathematical optimization, and GPU-kernel tasks, it reduces search cost or improves discovery quality in several settings. Its main caveat is that improvement inside the replayed world does not automatically guarantee transfer to genuinely new trajectories.",
+      "tldr_zh": "Dream-RSI 把自主 discovery system 的探索控制器做成可编程、可递归改进的模块，同时保持底层 coding agent 不变。它将历史 discovery tree 重放为确定性 simulator，使候选探索策略在重新上线前就能获得低成本 off-policy feedback。在算法工程、数学优化和 GPU kernel 任务中，它在多个设置下降低搜索成本或提高发现质量。关键 caveat 是：在 replay world 中变好，并不自动保证能迁移到真正新的在线 trajectory。",
+      "interest_tag": ""
+    },
+    {
+      "title": "FlashREINFORCE: Critic-Free Single-Rollout Asynchronous RL for Agentic Language Models",
+      "arxiv_id": "",
+      "url": "https://www.alphaxiv.org/abs/2609.flashreinforce-asynchronous-rl-agentic-models",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2609.flashreinforce-asynchronous-rl-agentic-models",
+      "tldr": "FlashREINFORCE trains agentic language models asynchronously with one rollout per prompt, removing group-sampling barriers and learned critics. Batch-centered signed rewards preserve positive and negative learning signals, while a sequence-level trust region filters trajectories whose policy drift is too large. It remains stable under policy lag, beats a reported GRPO math baseline with half the rollouts, and preserves tool use in ALFWorld where the comparison stops calling tools. The practical contribution is broader prompt coverage and asynchronous throughput without surrendering training stability.",
+      "tldr_zh": "FlashREINFORCE 用每个 prompt 仅一次 rollout 的异步方式训练 agentic language model，去掉 group sampling barrier 和 learned critic。batch-centered signed reward 保留正负学习信号，sequence-level trust region 则过滤 policy drift 过大的 trajectory。它在明显 policy lag 下保持稳定，用一半 rollout 超过报告中的 GRPO 数学基线，并在对照方法停止调用工具时仍能保持 ALFWorld tool use。实际价值是同时获得更广的 prompt coverage、异步吞吐与训练稳定性。",
+      "interest_tag": ""
+    },
+    {
+      "title": "RSIAgent: Autonomous Exploration for Recursive Self-improvement in New Environments",
+      "arxiv_id": "2609.15364",
+      "url": "https://arxiv.org/abs/2609.15364",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2609.15364",
+      "tldr": "RSIAgent adapts computer-use agents to unfamiliar software without weight updates by constructing persistent, environment-specific memory from verified interactions. Actor, verifier, and curriculum agents explore broadly, then investigate hard cases, hidden constraints, and suspected overgeneralizations in depth. The resulting memory stores procedures together with prerequisites, causal effects, verification signals, and failure modes for later task transfer. Experiments on OSWorld-v2 and Agent's Last Exam report substantial gains for strong open models, making this a direct study of training-free CUA adaptation rather than generic multi-agent prompting.",
+      "tldr_zh": "RSIAgent 不更新模型权重，而是从经过验证的交互中构建持久、环境特定的 memory，让 computer-use agent 适应陌生软件。actor、verifier 和 curriculum agent 先广泛探索，再深入调查难例、隐藏约束和可疑的过度泛化。最终 memory 不只保存操作流程，还记录前置条件、因果效果、验证信号和失败模式，以供后续任务迁移。论文在 OSWorld-v2 和 Agent's Last Exam 上报告强开源模型的显著提升，因此它研究的是 training-free CUA adaptation，而不只是泛化的 multi-agent prompting。",
+      "interest_tag": "CUA"
+    }
+  ],
+  "github_repos": [
+    {
+      "name": "agentverse-os/AgentVerse-OS",
+      "url": "https://github.com/agentverse-os/AgentVerse-OS",
+      "tldr": "AgentVerse OS packages a personal cloud workspace for developers and AI agents into a one-command Ubuntu installation. Its Rust core and Svelte desktop expose isolated workspaces, browser-based VS Code, coding agents, self-hosted apps, backups, and updates while restricting access through Tailscale. The repository includes a substantive quick start and implementation tree rather than being an empty launch page. Its appeal is the concrete operating-system metaphor: agents receive durable, isolated places to work instead of another chat surface.",
+      "tldr_zh": "AgentVerse OS 把开发者和 AI agent 的个人云工作空间封装成 Ubuntu 一键安装系统。Rust core 与 Svelte desktop 提供隔离 workspace、浏览器 VS Code、coding agent、自托管应用、备份和更新，并通过 Tailscale 限制访问。仓库包含完整 quick start 和实际实现目录，不是空壳发布页。它的吸引力来自具体的 operating-system 隐喻：给 agent 持久且隔离的工作场所，而不是再做一个聊天界面。",
+      "stars": 699,
+      "language": "Rust",
+      "interest_tag": ""
+    },
+    {
+      "name": "youngyangyang04/llm-master",
+      "url": "https://github.com/youngyangyang04/llm-master",
+      "tldr": "LLM-Master is a Chinese full-stack learning roadmap covering model APIs, prompt engineering, RAG, agents, MCP, fine-tuning, deployment, Transformers, and interview preparation. Rather than presenting one framework, it organizes the path from first API call to evaluable and production-oriented AI systems. The repository is linked to a broader tutorial series and has accumulated strong early bookmarking and fork activity. Its popularity reflects continued demand for a coherent learning sequence across an increasingly fragmented LLM stack.",
+      "tldr_zh": "LLM-Master 是一条中文大模型全栈学习路线，覆盖模型 API、Prompt Engineering、RAG、Agent、MCP、微调、部署、Transformer 与面试准备。它不押注单一框架，而是把第一次 API 调用到可评测、可上线 AI 系统的路径组织起来。仓库与完整教程专栏相连，早期收藏和 fork 信号都较强。它的热度反映出 LLM 技术栈越来越碎片化后，用户仍强烈需要一条连贯学习顺序。",
+      "stars": 655,
+      "language": "",
+      "interest_tag": ""
+    },
+    {
+      "name": "Matthew0822/ToolReplay",
+      "url": "https://github.com/Matthew0822/ToolReplay",
+      "tldr": "ToolReplay is a dependency-free Python CLI for auditing AI-agent tool-call transcripts. It seals sessions with hash chains, replays recorded calls deterministically, and flags non-determinism, redundant actions, and behavior outside declared permissions. The README includes executable samples and pasted outputs, making the security claim inspectable rather than purely aspirational. It addresses a practical gap between agent observability and evidence strong enough for incident review or compliance.",
+      "tldr_zh": "ToolReplay 是一个零依赖 Python CLI，用于审计 AI agent 的 tool-call transcript。它用 hash chain 封存 session，确定性重放调用，并标出非确定性、冗余动作和超出声明权限的行为。README 给出可执行 sample 和实际输出，使安全主张可以检查，而不是停留在口号。它补上了 agent observability 与事故复盘、合规所需强证据之间的缺口。",
+      "stars": 173,
+      "language": "Python",
+      "interest_tag": ""
+    },
+    {
+      "name": "Qiuner/agent-isles",
+      "url": "https://github.com/Qiuner/agent-isles",
+      "tldr": "agent-isles turns AI-assisted coding education into an explorable island world where learners build real projects with persistent agent companions. The project uses a game-like spatial metaphor rather than a conventional chat or IDE sidebar, aiming to connect learning progress with visible places and artifacts. Its repository contains bilingual documentation, installation guidance, and a working implementation rather than only concept art. The differentiation is product design: it makes coding-agent interaction legible and motivating for beginners through an environment they can explore.",
+      "tldr_zh": "agent-isles 把 AI 辅助编程教育做成可探索的岛屿世界，让学习者与持久存在的 agent companion 一起构建真实项目。它采用游戏化空间隐喻，而不是传统 chat 或 IDE sidebar，希望把学习进展映射成可见地点和 artifact。仓库包含双语文档、安装说明和实际实现，不只是概念图。其差异化主要在产品设计：通过可探索环境，让初学者更容易理解 agent 交互并保持动机。",
+      "stars": 90,
+      "language": "TypeScript",
+      "interest_tag": ""
+    },
+    {
+      "name": "ivyfan-toowell/IvyClaw",
+      "url": "https://github.com/ivyfan-toowell/IvyClaw",
+      "tldr": "IvyClaw is a production-oriented multi-agent software-engineering system built on DeepAgents and LangGraph. It assigns planning, research, implementation, testing, and review across specialized roles, with sandboxing, persistent state, asynchronous jobs, human-in-the-loop gates, authentication, and observability around them. The repository documents a substantial deployment stack including FastAPI, PostgreSQL, Redis, Docker, Prometheus, and Grafana. Its value is not a novel agent algorithm, but an integrated reference for operating a collaborative agent workflow as a service.",
+      "tldr_zh": "IvyClaw 是一个基于 DeepAgents 与 LangGraph 的生产型 multi-agent 软件工程系统。它把规划、研究、实现、测试和 review 分配给专门角色，并在外围加入 sandbox、持久状态、异步任务、HITL gate、鉴权和可观测性。仓库记录了 FastAPI、PostgreSQL、Redis、Docker、Prometheus 与 Grafana 等完整部署栈。它的价值不在新算法，而在提供一个把协作式 agent workflow 当作服务运行的集成参考。",
+      "stars": 60,
+      "language": "Python",
+      "interest_tag": "Agent Swarm"
+    }
+  ],
+  "hackernews": [
+    {
+      "title": "OpenAI expands ChatGPT ads with Sponsored Agents",
+      "url": "https://openai.com/index/reimagining-advertising-with-ai/",
+      "tldr": "OpenAI is testing clearly labeled Sponsored Agents that users can enter after clicking an ad, creating a conversation distinct from ChatGPT's independent answer and the original chat. The release also adds natural-language campaign creation in ChatGPT Work, AI-assisted copy and imagery, contextual text customization, and integrations with HubSpot and Shopify. The product shift turns advertising from a static destination into an interactive brand representative inside the AI interface. The open question is whether labeling and conversation separation are sufficient to preserve user trust when commercial persuasion becomes agentic.",
+      "tldr_zh": "OpenAI 正在测试明确标注的 Sponsored Agents：用户点击广告后可进入品牌资助的对话，该对话与 ChatGPT 独立回答及原始聊天分离。此次发布还加入 ChatGPT Work 中的自然语言建 campaign、AI 文案与图片辅助、上下文文本定制，以及 HubSpot、Shopify 集成。产品形态把广告从静态跳转目标变成 AI 界面内的互动品牌代表。核心问题是，当商业说服变成 agentic interaction 后，仅靠标注和会话隔离能否维持用户信任。",
+      "points": 153,
+      "num_comments": 173,
+      "interest_tag": ""
+    },
+    {
+      "title": "Show HN: Give your AI agents access to WhatsApp",
+      "url": "https://news.ycombinator.com/item?id=49728159",
+      "tldr": "Chat-Man exposes WhatsApp through an MCP server so agents can read, search, summarize, extract structured data, send messages, and manage group membership. A companion web interface supports nontechnical operations such as CSV matching, member export, bulk messaging, and invite-link management, while webhooks cover selected incoming conversations. The creator built it to avoid paying for a separate WhatsApp integration in every project. The utility is straightforward, but privacy, consent, and platform-policy compliance become central once agents can inspect and send private messages.",
+      "tldr_zh": "Chat-Man 通过 MCP server 向 agent 暴露 WhatsApp，使其可以读取、搜索、总结、抽取结构化数据、发送消息和管理群成员。配套 Web UI 支持 CSV 匹配、成员导出、批量消息与邀请链接等非技术操作，webhook 则覆盖选定会话的入站消息。作者的直接动机是避免每个项目都单独购买 WhatsApp 集成。价值很清楚，但当 agent 能检查和发送私人消息后，隐私、同意与平台政策合规会成为核心约束。",
+      "points": 14,
+      "num_comments": 31,
+      "interest_tag": ""
+    },
+    {
+      "title": "An agent fleet needs a new kind of OS, not a bigger harness",
+      "url": "https://pentad.ai/blog/fleet-needs-an-os/",
+      "tldr": "The essay argues that a harness controls one agent run, whereas a fleet operating system must sit outside every run and manage contention among many agents. It maps context, tools, execution, orchestration, observability, verification, and governance onto operating-system concepts such as protection, capabilities, processes, scheduling, and supervisor mode. Identity and accounting emerge as fleet-level facts that a single-agent harness does not own. The framing is useful because it defines an agent OS by authority boundaries and shared-resource contention rather than by UI or product size.",
+      "tldr_zh": "文章认为 harness 控制的是单个 agent run，而 fleet operating system 必须位于所有 run 之外，管理多个 agent 之间的资源竞争。它把 context、tools、execution、orchestration、observability、verification 与 governance 映射为 protection、capability、process、scheduler 和 supervisor mode 等 OS 概念。identity 与 accounting 则是单 agent harness 原本没有所有权的 fleet-level fact。这个框架的价值在于用 authority boundary 和共享资源 contention 定义 agent OS，而不是按 UI 或产品体量命名。",
+      "points": 13,
+      "num_comments": 5,
+      "interest_tag": "Agent Swarm"
+    },
+    {
+      "title": "Show HN: I built a router for agent tools",
+      "url": "https://github.com/monid-ai/monid",
+      "tldr": "Monid presents itself as an OpenRouter for agent tools: one base URL and API key route agents to a catalog of more than 2,000 tools. The project centralizes discovery, authentication, and invocation so each agent application does not need a bespoke integration for every service. Its repository includes a quick start, documentation, and development guidance, indicating a usable implementation rather than a directory-only launch. The design trades local control for a simpler tool plane, making permission scoping, credential custody, and provider reliability the key evaluation questions.",
+      "tldr_zh": "Monid 把自己定位为 agent tools 的 OpenRouter：通过一个 base URL 和 API key，把 agent 路由到超过 2,000 个工具。它集中处理发现、鉴权和调用，避免每个 agent 应用都为每项服务单独集成。仓库包含 quick start、文档和开发指南，说明它不是只有目录的发布页。其设计用更简单的 tool plane 换取部分本地控制，因此 permission scope、credential custody 与 provider reliability 是关键评估点。",
+      "points": 11,
+      "num_comments": 3,
+      "interest_tag": ""
+    },
+    {
+      "title": "Show HN: Friday – Self-hosted persistent memory for AI coding agents (MCP)",
+      "url": "https://github.com/itskie/friday",
+      "tldr": "Friday is a self-hosted persistent memory layer for coding agents connected through MCP. It stores architecture decisions, schemas, and user preferences across sessions, exposing them through a FastAPI-based service and integrations for common coding environments. The repository provides substantial documentation and a runnable stack rather than only a memory concept. Its appeal is the concrete promise of ending session amnesia, although retrieval quality, write governance, contradiction handling, and privacy determine whether persistent memory remains useful over time.",
+      "tldr_zh": "Friday 是一个通过 MCP 接入 coding agent 的 self-hosted 持久记忆层。它跨 session 保存架构决策、schema 和用户偏好，并通过 FastAPI 服务与常见 coding 环境集成。仓库提供了完整文档和可运行 stack，不只是 memory 概念。它以『结束 session amnesia』形成直接卖点，但长期价值取决于 retrieval quality、写入治理、冲突处理与隐私边界。",
+      "points": 9,
+      "num_comments": 3,
+      "interest_tag": "Memory"
+    }
+  ]
+}
