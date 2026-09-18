@@ -1,0 +1,226 @@
+{
+  "date": "2026-09-18",
+  "generated_at": "2026-09-18T16:04:47.556991+08:00",
+  "briefing_zh": "今天最清晰的主线不是又一个更大的模型，而是 agent 的竞争重心继续从 model capability 下沉到 harness economics。**SoL-Pi** 用自动研究循环筛出 action execution、context compaction、observation handling 与 delegated reading 四类可迁移机制，在保持接近基线表现的同时把 token 流量压低 44.7%–49.0%；**An Empirical Study of Harness Design for Coding Agents** 则用 176 组配对实验解释了为什么 rule-based elision、planning 和 action space 必须按模型能力与 context budget 配置。二者合起来说明：长期 agent 的有效 scaling 单位正从单次推理转向可审计、可消融的执行系统。\n\n基础模型侧，**DeepSeek-V4.1-Flash** 把长程 agent 的部署瓶颈明确拆成 prefill、HBM KV cache、持久化存储与数据搬运，并通过 CED、CSA2、FP4 KV cache 和 SWA Bounded Replay 将全局 KV footprint 降至 890 bytes/token。与此同时，**Score Centering Stabilizes Off-policy Reinforcement Learning** 把 training–inference mismatch 的核心问题归因于逐步累积的 drift，而非笼统的 off-policy variance，并给出可与 importance sampling 叠加的加性修正。这两项工作分别从 serving 与 RL optimization 两端压低长程 agent 的系统税。\n\n对 General Agents 更重要的是环境和反馈闭环正在变得具体。**ScienceIDE** 将科学代码库封装成带专家 acceptance criteria、可执行 runtime 和 private verifier 的学习环境；**Agora** 则用 Git append-only DAG 保存多 agent 的实验、假设、失败和复现关系，在 13 个 worker、近 12 天的运行中暴露了共享记忆的价值，也诚实记录了重复搜索和 monoculture。**Reflect, Revise, Reuse** 把类似思想带到 GUI agent：运行时从成功与失败轨迹中抽取、修订并复用 procedural skills，而不是依赖一次性固定计划。\n\n开源与社区信号显示，产品层开始围绕 agent 的异步性、可携带性和治理重新设计。**Pizza Bot** 用 inbox/Action 视图承载后台任务与延迟审批，**Skillsync** 把 session、reasoning 和 tool history 视为跨 harness 可转换资产，**ToolReplay** 则提供 hash-chain、deterministic replay 与 scope audit。与 HN 上关于 agent spam 和 Sponsored Agents 的激烈讨论放在一起看，下一阶段的差异化不只是让 agent 能做事，而是让它的工作可暂停、可迁移、可复现、可约束。",
+  "briefing_en": "Today's clearest theme is not another larger model, but the migration of agent competition from raw model capability toward harness economics. **SoL-Pi** uses auto-research loops to select transferable mechanisms for action execution, context compaction, observation handling, and delegated reading, cutting recorded token traffic by 44.7%–49.0% while retaining comparable performance. **An Empirical Study of Harness Design for Coding Agents** complements it with 176 matched settings that isolate when rule-based elision, planning, and action-space design help. Together they suggest that the useful scaling unit for long-running agents is becoming an auditable, ablatable execution system rather than a single inference call.\n\nOn the model side, **DeepSeek-V4.1-Flash** decomposes the deployment bottleneck for long-horizon agents into prefill compute, HBM KV cache, persistent storage, and data movement. Its CED, CSA2, FP4 KV cache, and SWA Bounded Replay designs reduce the global cache footprint to 890 bytes per token. Meanwhile, **Score Centering Stabilizes Off-policy Reinforcement Learning** attributes training–inference mismatch failures to accumulating drift and proposes an additive correction that composes with importance sampling. The two works attack the systems tax of long-running agents from serving and RL optimization, respectively.\n\nFor general agents, environments and feedback loops are becoming more concrete. **ScienceIDE** turns scientific repositories into executable learning environments with expert acceptance criteria and private verifiers. **Agora** stores experiments, hypotheses, failures, and reproductions from multiple agents in a Git-backed append-only DAG; its nearly 12-day, 13-worker run demonstrates useful shared state while also exposing duplicated search and monoculture. **Reflect, Revise, Reuse** carries the same adaptive principle into GUI agents by extracting, revising, and reusing procedural skills from both successful and failed trajectories.\n\nOpen-source and community signals show product design reorganizing around agent asynchrony, portability, and governance. **Pizza Bot** uses inbox and Action views for background work and delayed approvals, **Skillsync** treats sessions, reasoning, and tool history as convertible assets across harnesses, and **ToolReplay** adds hash-chain sealing, deterministic replay, and scope auditing. Read beside the HN backlash over agent spam and Sponsored Agents, the next product moat is not merely enabling action, but making agent work pausable, portable, reproducible, and bounded.",
+  "viral_analysis_zh": "今天最可能形成持续扩散的是 **SoL-Pi**：它把「更强 agent」改写成可量化的 token 与 API 成本下降，并给出 44.7%–49.0% 这一易传播数字，既击中开发者预算焦虑，也适合被各类 harness 复现。产品侧 **mysetup.ai** 的 210 points 说明另一种爆款公式同样有效：不再推销抽象 framework，而是展示真实用户的 setup、迁移经历和工具取舍，让读者快速对照自己的工作流。",
+  "viral_analysis_en": "**SoL-Pi** is the strongest candidate for sustained attention because it reframes a better agent as measurable reductions in token traffic and API cost, with a highly shareable 44.7%–49.0% figure that speaks directly to developer budgets and invites replication across harnesses. On the product side, the 210-point reception for **mysetup.ai** validates a different viral formula: showcase real setups, migrations, and tool trade-offs instead of selling an abstract framework, so readers can immediately compare their own workflows.",
+  "huggingface_papers": [
+    {
+      "title": "SoL-Pi: Recursively Scaling Auto-Research Loops for Efficient Agent Harness",
+      "url": "https://arxiv.org/abs/2609.20519",
+      "tldr": "SoL-Pi treats the agent harness itself as an object of recursive auto-research, scaling experiments across diverse environments and selecting four mechanisms that survive transfer. On EdgeBench, it matches the Pi baseline across GPT-5.6 Sol and Opus 5 while reducing recorded token traffic by 44.7%–49.0% and API cost by roughly one third. The important result is not a new prompt trick, but evidence that harness components can be discovered, selected, and amortized like model-side improvements.",
+      "tldr_zh": "SoL-Pi 把 agent harness 本身作为 recursive auto-research 的对象，在多样环境中扩展实验，并筛出四类能跨设置迁移的机制。在 EdgeBench 上，它使用 GPT-5.6 Sol 和 Opus 5 时保持与 Pi 接近的表现，同时将记录的 token 流量降低 44.7%–49.0%、API 成本降低约三分之一。关键不在又一个 prompt 技巧，而在于证明 harness 组件也能像模型改进一样被自动发现、选择并摊薄成本。",
+      "upvotes": 34,
+      "authors": "Haozhe Liu, Tian Ye, Sensen Gao, Qihang Cao, Yitong Li, Mingchen Zhuge, Duomin Wang, Ruihua Zhang, Ping Luo, Jiawang Bian, Lei Zhu, Ligeng Zhu, Enze Xie, Song Han",
+      "ai_keywords": [
+        "agent harness",
+        "auto-research",
+        "context compaction",
+        "token efficiency"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "An Empirical Study of Harness Design for Coding Agents",
+      "url": "https://arxiv.org/abs/2609.20804",
+      "tldr": "This study holds a lightweight coding-agent loop fixed and varies planning, action space, and context management across 176 matched settings on SWE-Bench Verified and Terminal-Bench 2.1. Rule-based elision before LLM summarization gives the best overall efficiency, planning shifts from an accuracy scaffold to a cost saver as models strengthen, and bash-only interfaces work well for bash-capable models. The work matters because it replaces monolithic harness comparisons with component-level causal evidence and exposes where extra machinery adds no value.",
+      "tldr_zh": "这项研究固定一个轻量 coding-agent loop，只改变 planning、action space 和 context management，并在 SWE-Bench Verified 与 Terminal-Bench 2.1 上完成 176 组配对实验。结果显示，先做 rule-based elision 再做 LLM summarization 的总体效率最好；模型变强后，planning 从准确率脚手架转为节省成本的工具；擅长 bash 的模型用 bash-only interface 已足够有效。它的重要性在于把整套 harness 的黑盒比较拆成组件级因果证据，并指出哪些复杂机制实际没有收益。",
+      "upvotes": 31,
+      "authors": "Run-Ze Fan, Zihao Zhang, Simin Ma, Yebowen Hu, Shouju Wang, Kaiqiang Song, Fei Liu, Hamed Zamani, Xiaoyang Wang",
+      "ai_keywords": [
+        "coding agents",
+        "harness design",
+        "context management",
+        "planning"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "DeepSeek-V4.1-Flash: Pushing the Limits of KV Cache Compression",
+      "url": "https://arxiv.org/abs/2609.19969",
+      "tldr": "DeepSeek-V4.1-Flash is a 552B-parameter multimodal MoE that activates 16B parameters for decode and 8B for prefill while supporting one-million-token contexts. Cross-layer reuse in CSA2 plus FP4 KV caching reduces the always-HBM global KV footprint to 890 bytes per token, about one quarter of the prior Flash model, while SWA Bounded Replay cuts persistent cache requirements further. This is important because long-horizon agent cost is increasingly dominated by repeated prefill, storage, and cache movement rather than only decode FLOPs.",
+      "tldr_zh": "DeepSeek-V4.1-Flash 是一个 552B 参数的 multimodal MoE，decode 激活 16B 参数、prefill 激活 8B 参数，并支持 100 万 token context。CSA2 的跨层复用配合 FP4 KV cache，将常驻 HBM 的全局 KV footprint 降至 890 bytes/token，约为上一代 Flash 的四分之一；SWA Bounded Replay 又进一步降低持久化 cache 开销。其意义在于，长程 agent 的成本越来越由重复 prefill、存储和 cache 搬运主导，而不只是 decode FLOPs。",
+      "upvotes": 29,
+      "authors": "DeepSeek-AI",
+      "ai_keywords": [
+        "MoE",
+        "KV cache",
+        "long context",
+        "inference efficiency"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "JEPA-Anything: Learning Predictive Models across Different Worlds",
+      "url": "https://arxiv.org/abs/2609.20800",
+      "tldr": "JEPA-Anything proposes a domain-agnostic predictive-learning framework that separates source-specific tokenization from a shared orthogonalized JEPA objective. The paper evaluates the same learning principle across heterogeneous worlds rather than building a bespoke world model for each domain. If the reported transfer holds under stronger controls, it points toward reusable predictive objectives that can support agents across visual, physical, and other structured environments.",
+      "tldr_zh": "JEPA-Anything 提出一个 domain-agnostic predictive learning framework，将不同来源的 tokenization 与共享的 orthogonalized JEPA objective 分离。论文尝试用同一学习原则覆盖异质世界，而不是为每个领域单独设计 world model。若其跨域结果能在更强控制实验下成立，它将指向可复用的预测目标，为 agent 跨视觉、物理及其他结构化环境学习提供共同底座。",
+      "upvotes": 21,
+      "authors": "Taoyong Cui, Zhongyao Wang, Xinyue Xu, Weiyang Liu, Zhaochen Yu, Yuying Zhang, Qiang Gao, Mengyue Yang, Wanli Ouyang, Pheng Ann Heng, Yingcheng Wu, Zhenfei Yin, Ling Yang",
+      "ai_keywords": [
+        "JEPA",
+        "world models",
+        "predictive learning",
+        "cross-domain"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "Reflect, Revise, Reuse: Training-Free Skill Evolution for GUI Agents",
+      "url": "https://arxiv.org/abs/2609.17653",
+      "tldr": "This work introduces training-free skill evolution for GUI agents: the agent reflects on both successful and failed executions, revises procedural skills, and retrieves them for later tasks. The design targets long-horizon interfaces where pop-ups, delayed loads, and relocated widgets invalidate static plans, so skills must encode recoverable procedures rather than brittle action scripts. It matters because it moves GUI-agent adaptation from per-episode replanning toward an explicit, reusable layer of experience without additional model training.",
+      "tldr_zh": "这项工作为 GUI agent 引入 training-free skill evolution：agent 会反思成功与失败执行，修订 procedural skills，并在后续任务中检索复用。它针对 pop-up、延迟加载和控件位置变化会破坏静态计划的长程界面，因此 skill 需要表达可恢复过程，而不是脆弱的 action script。其价值在于把 GUI agent 的适应从单 episode 重规划推进到显式、可复用的经验层，而且不需要额外训练模型。",
+      "upvotes": 6,
+      "authors": "Bofan Chen, Boxuan Zhang, Fei Tang, Zhengxi Lu, Yong Du, Tongbo Chen, Weiming Lu, Jun Xiao, Yueting Zhuang, Yongliang Shen",
+      "ai_keywords": [
+        "GUI agents",
+        "skill evolution",
+        "reflection",
+        "long-horizon"
+      ],
+      "interest_tag": "CUA"
+    }
+  ],
+  "alphaxiv_papers": [
+    {
+      "title": "Reinforcement Learning for Real-Time Vision-Language-Action Policies",
+      "arxiv_id": "2609.18207",
+      "url": "https://arxiv.org/abs/2609.18207",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2609.18207",
+      "tldr": "Real-Time EXPO-FT separates slow semantic action generation by a pretrained VLA from fast residual corrections produced by a lightweight edit policy using the latest observation. With at most ten minutes of online robot data, average performance across four dynamic physical tasks rises from 42% to 97%, while delayed Kinetix policies lead all compared delayed and non-delayed methods in all ten environments. The key insight is that inference latency must be modeled inside RL credit assignment and control, not treated only as a serving optimization.",
+      "tldr_zh": "Real-Time EXPO-FT 将预训练 VLA 的慢速语义动作生成，与轻量 edit policy 基于最新观测做出的快速 residual correction 分离。使用最多 10 分钟在线机器人数据后，四项动态真实任务的平均表现从 42% 提升到 97%；在 Kinetix 的十个环境中，延迟策略也全部领先对比的延迟与非延迟方法。核心 insight 是：inference latency 必须进入 RL credit assignment 与控制建模，而不能只被当成 serving 优化。",
+      "interest_tag": ""
+    },
+    {
+      "title": "Score Centering Stabilizes Off-policy Reinforcement Learning",
+      "arxiv_id": "2609.20807",
+      "url": "https://arxiv.org/abs/2609.20807",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2609.20807",
+      "tldr": "Score centering identifies persistent gradient drift as the main destabilizer when rollout and training engines disagree. It subtracts the sampler-expected policy score from token gradients, an additive correction that can be approximated with top-128 probabilities and combined with importance sampling. Under the harshest 30B MoE quantization mismatch, it reaches about 30% training accuracy where other baselines remain below 12%, reportedly with under 1% overhead.",
+      "tldr_zh": "Score centering 将 rollout engine 与 training engine 不一致时的主要不稳定源定位为持续累积的 gradient drift。方法从 token gradient 中减去 sampler-expected policy score，这个加性修正可用 top-128 概率近似，并能与 importance sampling 组合。在最严苛的 30B MoE 量化 mismatch 下，它达到约 30% training accuracy，而其他 baseline 低于 12%，报告的额外开销不足 1%。",
+      "interest_tag": ""
+    },
+    {
+      "title": "In-Context Robot Learning with VLM Agents",
+      "arxiv_id": "2609.19138",
+      "url": "https://arxiv.org/abs/2609.19138",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2609.19138",
+      "tldr": "GPT-Policy connects a fixed general-purpose VLM to a context compiler, structured robot tools, and a constrained execution controller, allowing deployment-time adaptation without parameter updates. Human videos improve towel and notebook pickup from 0/3 to 2/3, and aligned robot actions raise bottle-cap unscrewing to 3/3, although trials are small. The study is most useful for showing both the promise of heterogeneous in-context demonstrations and the remaining gap in collision avoidance, contact, grasp verification, and physical success checks.",
+      "tldr_zh": "GPT-Policy 将固定的通用 VLM 与 context compiler、结构化 robot tools 和受约束 execution controller 连接，使机器人无需参数更新即可在部署时适应。Human video 将毛巾与笔记本抓取从 0/3 提升到 2/3，对齐的 robot action reference 又把拧瓶盖提升到 3/3，但实验次数仍很少。它最有价值之处，是同时展示异质 in-context demonstration 的潜力，以及 collision avoidance、contact、grasp verification 和物理成功检查仍存在的缺口。",
+      "interest_tag": ""
+    },
+    {
+      "title": "ScienceIDE: Turning World's Scientific Codebase into Agent Learnable Environments",
+      "arxiv_id": "2609.19134",
+      "url": "https://arxiv.org/abs/2609.19134",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2609.19134",
+      "tldr": "ScienceIDE turns scientific repositories into pinned executable environments with expert-defined observables, calibrated tolerances, private verifiers, and reusable task factories for evaluation, SFT, and RL. Its registry contains 64 environments, 2,812 tasks, and 1,076 scientific checks; top agents reach 67.1% on an 85-task hard split. The deeper contribution is a definition of scientific correctness beyond compilation and unit tests, while the paper remains cautious about transfer to unseen repositories and open-ended discovery.",
+      "tldr_zh": "ScienceIDE 将科学代码库封装成固定版本的可执行环境，包含专家定义 observables、校准 tolerance、private verifier，以及可复用于 evaluation、SFT 和 RL 的 task factory。其 registry 包含 64 个环境、2,812 个任务和 1,076 个 scientific checks，头部 agent 在 85 题 hard split 上达到 67.1%。更深层的贡献是定义了超越 compilation 与 unit test 的科学正确性，但论文也谨慎承认对 unseen repository 和开放式发现的迁移仍未验证。",
+      "interest_tag": ""
+    },
+    {
+      "title": "Agora: Git as Shared Memory for Collective AutoResearch",
+      "arxiv_id": "2609.18094",
+      "url": "https://arxiv.org/abs/2609.18094",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2609.18094",
+      "tldr": "Agora models collective auto-research as an append-only Git DAG in which results, hypotheses, failures, and reproductions are immutable commits with explicit ancestry. In a nearly 12-day run, 13 workers published 1,703 contributions and improved a frozen model initialization from 3.3923 to 1.8990 bits per byte, with the winning lineage spanning 145 commits and 15 accounts. The trace demonstrates rich multi-agent provenance but also records 696 duplicate cross-account results and lacks a controlled comparison proving that shared state caused the gain.",
+      "tldr_zh": "Agora 把 collective auto-research 建模为 append-only Git DAG，其中结果、假设、失败与复现都是带明确 ancestry 的 immutable commit。在近 12 天运行中，13 个 worker 发布 1,703 条 contribution，将冻结模型初始化从 3.3923 改进到 1.8990 bits/byte；最终 lineage 横跨 145 个 commit 和 15 个 account。这条 trace 展示了丰富的 multi-agent provenance，也诚实记录了 696 个跨账号重复结果，而且尚无 controlled comparison 能证明增益由共享状态导致。",
+      "interest_tag": "Agent Swarm"
+    }
+  ],
+  "github_repos": [
+    {
+      "name": "agentverse-os/AgentVerse-OS",
+      "url": "https://github.com/agentverse-os/AgentVerse-OS",
+      "tldr": "AgentVerse OS packages a browser-accessed personal cloud for developers and their agents, with isolated Incus workspaces, VS Code, Codex and Claude Code, app installation, backups, and Tailscale-only exposure. The Rust/Svelte project has substantial working documentation and explicitly labels itself alpha, single-user, and without permissions yet. Its rapid attention reflects demand for an agent-native workspace, but the missing multi-user authorization model remains a serious deployment constraint.",
+      "tldr_zh": "AgentVerse OS 将开发者与 agent 的个人云封装为浏览器工作台，提供隔离的 Incus workspace、VS Code、Codex 与 Claude Code、应用安装、备份，以及仅经 Tailscale 暴露的访问路径。这个 Rust/Svelte 项目有较完整的可运行说明，也明确标注目前仍是 alpha、单用户且尚无权限系统。它的快速增长说明 agent-native workspace 需求强烈，但缺失 multi-user authorization 仍是严肃的部署约束。",
+      "stars": 763,
+      "language": "Rust",
+      "interest_tag": ""
+    },
+    {
+      "name": "youngyangyang04/llm-master",
+      "url": "https://github.com/youngyangyang04/llm-master",
+      "tldr": "LLM-Master is a Chinese, developer-oriented curriculum spanning APIs, prompt engineering, evaluable RAG, agents, fine-tuning, deployment, Transformer internals, projects, and interviews. More than 150 tutorials are organized as a dependency-aware roadmap with explicit completion criteria rather than a flat link collection. Its value is packaging a rapidly changing stack into an approachable learning path, though it is an educational resource rather than a novel agent system.",
+      "tldr_zh": "LLM-Master 是面向中文开发者的系统课程，覆盖 API、Prompt Engineering、可评估 RAG、Agent、微调、部署、Transformer 原理、项目和面试。150 多篇教程按知识依赖组织，并为每阶段给出完成标准，而不是平铺链接。它的价值在于把快速变化的技术栈包装成可进入的学习路径，但本质上是教育资源，不是新的 agent system。",
+      "stars": 726,
+      "language": "N/A",
+      "interest_tag": ""
+    },
+    {
+      "name": "Matthew0822/ToolReplay",
+      "url": "https://github.com/Matthew0822/ToolReplay",
+      "tldr": "ToolReplay audits agent tool-call transcripts for redundant calls, nondeterministic replay, and permission overreach. It is a dependency-free Python 3.11 CLI with deterministic output, strict JSONL parsing, and hash-chain sealing, making it suitable for CI or post-incident inspection. The narrow scope is a strength: it does not claim to prove agent correctness, but turns three common operational failures into reproducible evidence.",
+      "tldr_zh": "ToolReplay 审计 agent tool-call transcript 中的重复调用、非确定性 replay 和权限越界。它是一个无第三方 runtime dependency 的 Python 3.11 CLI，提供确定性输出、严格 JSONL 解析与 hash-chain sealing，适合接入 CI 或事后调查。其窄 scope 反而是优势：它不声称证明 agent 正确，而是把三类常见运维失败转成可复现证据。",
+      "stars": 179,
+      "language": "Python",
+      "interest_tag": ""
+    },
+    {
+      "name": "kitze/skillbox",
+      "url": "https://github.com/kitze/skillbox",
+      "tldr": "skillbox is a self-hosted, versioned skills library for AI agents with MCP access, scoped clients, and optional recommendation support. It addresses a practical gap between copying SKILL.md files manually and relying on a centralized marketplace, especially when teams need controlled distribution and history. The project is useful infrastructure rather than a new memory architecture, so it is intentionally left without an interest tag.",
+      "tldr_zh": "skillbox 是面向 AI agent 的 self-hosted、versioned skills library，提供 MCP access、scoped client 和可选推荐能力。它填补了手工复制 SKILL.md 与依赖中心化 marketplace 之间的实际空白，尤其适合需要受控分发与版本历史的团队。它属于实用基础设施而非新的 memory architecture，因此不标兴趣标签。",
+      "stars": 123,
+      "language": "TypeScript",
+      "interest_tag": ""
+    },
+    {
+      "name": "friday-memory/friday",
+      "url": "https://github.com/friday-memory/friday",
+      "tldr": "Friday is a self-hosted MCP memory layer for coding agents that stores decisions and preferences across sessions using Mem0, ChromaDB, and Neo4j. Four explicit tools support writing facts and memories, semantic retrieval, and targeted context assembly instead of injecting entire project documents every time. The architecture is heavier than file-based memory, but it directly tackles session amnesia and makes the retrieval layer inspectable through a knowledge-graph UI.",
+      "tldr_zh": "Friday 是面向 coding agent 的 self-hosted MCP memory layer，使用 Mem0、ChromaDB 和 Neo4j 跨 session 保存决策与偏好。四个显式工具负责写入 fact/memory、语义检索和定向 context assembly，避免每次都注入整份项目文档。它比 file-based memory 更重，但直接解决 session amnesia，并通过 knowledge graph UI 让 retrieval layer 可检查。",
+      "stars": 33,
+      "language": "HTML",
+      "interest_tag": "Memory"
+    }
+  ],
+  "hackernews": [
+    {
+      "title": "There's a 100% Chance AI Agents Are Ruining the Internet",
+      "url": "https://www.404media.co/theres-a-100-chance-ai-agents-are-already-ruining-the-internet/",
+      "tldr": "404 Media argues that agent harm is already concrete even without speculative AGI scenarios: autonomous systems are sending incoherent pitches, spamming journalists, operating wallets, joining calls, and taking consequential support actions. The article's evidence is anecdotal but vivid, and the 230-point, 168-comment discussion shows strong concern about identity, liability, and degradation of the open web. Its importance is the shift from model safety in the abstract to permissioned agents imposing externalities on real people and shared infrastructure.",
+      "tldr_zh": "404 Media 认为，即使不谈推测性的 AGI 风险，agent 的现实伤害已经很具体：自动系统正在发送混乱公关邮件、骚扰记者、操作钱包、加入会议，并执行有后果的客服动作。文章证据以案例为主，但非常鲜明；230 points、168 comments 的讨论集中在身份标识、责任归属和开放网络退化。它的重要性在于把抽象 model safety 拉回到 permissioned agent 对真实个人和公共基础设施造成的 externality。",
+      "points": 230,
+      "num_comments": 168,
+      "interest_tag": ""
+    },
+    {
+      "title": "Show HN: Share your AI Setup, Learn from others",
+      "url": "https://mysetup.ai/",
+      "tldr": "mysetup.ai is a community directory where builders publish the agents, models, skills, infrastructure, and workflow changes behind their day-to-day AI use. Entries expose update dates and emphasize what users abandoned as well as what they kept, addressing the rapid staleness of setup advice. The enthusiastic response shows that practitioners increasingly want comparative operational playbooks, although commenters raised reasonable concerns about requiring an unknown MCP server and GitHub connection to contribute.",
+      "tldr_zh": "mysetup.ai 是一个社区目录，builder 可以公开日常 AI 工作中的 agent、model、skill、infrastructure 及 workflow 变化。条目显示更新时间，并同时记录保留与放弃的工具，以应对 setup 建议快速过时的问题。热烈反馈说明从业者越来越需要可比较的实战 playbook，但评论区对贡献时必须连接陌生 MCP server 和 GitHub 账号提出了合理担忧。",
+      "points": 210,
+      "num_comments": 119,
+      "interest_tag": ""
+    },
+    {
+      "title": "OpenAI expands ChatGPT ads with Sponsored Agents",
+      "url": "https://openai.com/index/reimagining-advertising-with-ai/",
+      "tldr": "OpenAI's Sponsored Agents proposal turns an ad placement into a user-initiated conversational agent for a merchant or service. Supporters see lower friction for gathering product details, while critics worry that financial incentives will blur the boundary between neutral assistance and persuasion, especially when the sponsored handoff resembles the existing chat. The 156-point, 178-comment response suggests that disclosure, liability, and model-ranking separation will matter as much as the interaction design itself.",
+      "tldr_zh": "OpenAI 的 Sponsored Agents 方案把广告位变成用户主动开启的商家或服务对话 agent。支持者认为它能降低获取商品细节的摩擦，批评者则担心商业激励会模糊中立协助与说服之间的边界，尤其当 sponsored handoff 看起来像原有聊天的延续。156 points、178 comments 的反馈表明，披露、责任和 model-ranking 分离将与交互设计本身同样重要。",
+      "points": 156,
+      "num_comments": 178,
+      "interest_tag": ""
+    },
+    {
+      "title": "Show HN: Pizza Bot – An inbox for AI agents that work in the background",
+      "url": "https://github.com/pizza-bot-app/pizza-bot",
+      "tldr": "Pizza Bot is an Apache-2.0 desktop inbox for background agents, with Unread for completed work and Action for approvals that can survive disconnection and be answered from another client. Its server checkpoints LangGraph/DeepAgents state, maps subagents one-to-one to skills, uses explicit tool calls, and keeps opt-in memory as local Markdown. The strongest validation is product rather than benchmark evidence: an internal predecessor reportedly reached more than 2,000 Amazon users, though the public version ships without the proprietary skill catalog that drove much of that adoption.",
+      "tldr_zh": "Pizza Bot 是 Apache-2.0 的后台 agent desktop inbox，用 Unread 展示完成任务，用 Action 汇总可跨断线、跨客户端延迟处理的审批。其 server 用 LangGraph/DeepAgents checkpoint 状态，将 subagent 与 skill 一一映射，显式展示 tool call，并把 opt-in memory 保存在本地 Markdown。最强证据来自产品而非 benchmark：内部前身据称在 Amazon 有超过 2,000 名用户，但公开版缺少当初推动采用的专有 skill catalog。",
+      "points": 59,
+      "num_comments": 33,
+      "interest_tag": ""
+    },
+    {
+      "title": "Launch HN: Skillsync (YC W26) – AI chat sessions made portable across agents",
+      "url": "https://news.ycombinator.com/item?id=49743049",
+      "tldr": "Skillsync makes coding-agent sessions portable by translating each tool's on-disk format, including messages, reasoning, and tool calls, through an open-source Rust engine called txcript. A local-first app adds search, inspection, cross-agent conversion, and optional team workspaces, while skills and memory remain human-readable Markdown exposed over MCP. The central insight is that the session—not only a summary—is becoming a collaboration and migration unit, although commenters correctly question how much fidelity survives translation between different harness semantics.",
+      "tldr_zh": "Skillsync 通过名为 txcript 的开源 Rust engine 翻译各 coding agent 的本地存储格式，让 message、reasoning 和 tool call 随 session 一起迁移。local-first app 提供搜索、检查、跨 agent 转换与可选 team workspace，skill 和 memory 则保持为可读 Markdown 并通过 MCP 暴露。核心 insight 是 session 正在成为协作与迁移单元，而不只是 summary；但评论区也正确追问，不同 harness semantics 之间转换后能保留多少 fidelity。",
+      "points": 55,
+      "num_comments": 53,
+      "interest_tag": "Memory"
+    }
+  ]
+}
