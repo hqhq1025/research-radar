@@ -1,0 +1,201 @@
+{
+  "date": "2026-09-19",
+  "generated_at": "2026-09-19T16:02:42+08:00",
+  "briefing_zh": "今天最强的主线不是再堆一个更大的模型，而是把长程 Agent 的成本、稳定性与执行闭环拆成可测量的工程问题。**DeepSeek-V4.1-Flash** 用跨层 KV 复用、FP4 KV cache 与 bounded replay，把百万 token 多模态 Agent 的常驻缓存压到上一代约八分之一；**SoL-Pi** 则从 harness 层自动搜索可复用机制，在保持任务表现的同时减少 44.7%–49.0% 的 token 流量。两者共同说明，下一阶段 Agent scaling 的关键瓶颈正在从模型会不会做，转向系统能否以可承受成本持续做。\n\n训练侧也出现了相同的机制化趋势。**Score Centering Stabilizes Off-policy Reinforcement Learning** 把 training–inference mismatch 的主要破坏因素归因于逐步累积的 score drift，并用一个可与 importance sampling 组合的加性校正稳定训练；**When EOS Tokens Disagree** 则指出 on-policy distillation 的长度膨胀部分来自师生模型对等价 EOS token 的概率分配不一致。这些工作都不是用更复杂的 recipe 掩盖异常，而是先找出导致失稳的最小机制，再做针对性修复。\n\n对 General Agents 更直接的信号来自 harness、GUI 与共享研究状态。**An Empirical Study of Harness Design for Coding Agents** 显示 context management 的主要价值是避免 overflow，强模型上的 planning 更像节省成本而非提升准确率，bash 熟练的模型也未必需要繁复工具层；**EvoSkill-GUI** 让 GUI skill 在部署中根据失败轨迹反思、修订和复用，在 MobileWorld、AndroidWorld 与 OSWorld 上获得稳定增益。与此同时，**Agora** 用 Git 中的 append-only DAG 让 13 个研究 Agent 共享可复现实验记忆，说明 multi-agent 的杠杆不只是并发，而是减少重复搜索并保留可验证谱系。\n\n开源与社区讨论把可信执行推到台前。**ToolReplay**、**RepoPilot** 和 **iPad Computer Use** 分别从轨迹审计、独立验证与物理设备控制补齐 Agent 的证据链；HN 热点则集中在 ZCode 被指静默上传完整 Git 历史的安全争议。今天最值得记住的判断是：Agent 产品的竞争优势正在从一句“能自动完成任务”，转向可复现、可审计、成本可控，并且默认尊重权限边界。",
+  "briefing_en": "Today's strongest theme is not another larger model, but turning the cost, stability, and execution loop of long-horizon agents into measurable engineering problems. **DeepSeek-V4.1-Flash** combines cross-layer KV reuse, FP4 KV caching, and bounded replay to cut persistent cache requirements for million-token multimodal agents to roughly one eighth of its predecessor, while **SoL-Pi** searches the harness layer for reusable mechanisms and reports 44.7–49.0% less recorded token traffic at comparable task performance. Together, they suggest that the next bottleneck in agent scaling is shifting from whether a model can act to whether the system can keep acting economically.\n\nThe training work follows the same mechanistic direction. **Score Centering Stabilizes Off-policy Reinforcement Learning** attributes much of training–inference mismatch instability to accumulating score drift and introduces an additive correction that composes with importance sampling. **When EOS Tokens Disagree** shows that length inflation in on-policy distillation partly comes from teachers and students assigning stopping probability to different, functionally equivalent EOS tokens. Both papers isolate a small failure mechanism before proposing a targeted correction instead of hiding instability behind a more elaborate recipe.\n\nFor general agents, the most actionable signals come from harness design, GUI execution, and shared research state. **An Empirical Study of Harness Design for Coding Agents** finds that context management mainly prevents overflow, planning becomes a cost-saving device for stronger models, and bash-capable models may not benefit from elaborate tool layers; **EvoSkill-GUI** revises reusable GUI skills from deployment failures and improves results across MobileWorld, AndroidWorld, and OSWorld. Meanwhile, **Agora** stores collective research as an append-only Git DAG, showing that multi-agent leverage comes not merely from parallelism but from avoiding duplicated search and preserving reproducible ancestry.\n\nOpen-source launches and community discussion put trustworthy execution at center stage. **ToolReplay**, **RepoPilot**, and **iPad Computer Use** strengthen the evidence chain through transcript auditing, independent verification, and physical-device control, while the leading HN story alleges that ZCode silently uploads complete Git history. The durable takeaway is that agent products are increasingly judged not by a promise to automate work, but by whether their actions are reproducible, auditable, cost-controlled, and permission-respecting by default.",
+  "viral_analysis_zh": "今天最可能出圈的是 **DeepSeek-V4.1-Flash**：一百万 token、FP4 KV cache 与“常驻缓存约降至八分之一”同时击中模型能力和部署成本，数字明确、品牌自带传播势能。社区侧最容易形成争议扩散的是 ZCode Git 历史上传事件，因为它把抽象的 Agent 隐私风险变成了 313 MB、42,411 个文件和“关闭相关开关仍上传”的具体证据。",
+  "viral_analysis_en": "**DeepSeek-V4.1-Flash** is the likeliest research release to break out: one-million-token context, FP4 KV caching, and an approximately eightfold reduction in persistent cache combine a recognizable brand with concrete deployment economics. On the community side, the ZCode Git-history upload story has the strongest controversy loop because it turns abstract agent privacy risk into vivid evidence: 313 MB, 42,411 files, and allegations that uploads continue despite related settings being disabled.",
+  "huggingface_papers": [
+    {
+      "title": "DeepSeek-V4.1-Flash: Pushing the Limits of KV Cache Compression",
+      "url": "https://arxiv.org/abs/2609.19969",
+      "tldr": "DeepSeek-V4.1-Flash is a 552B-parameter multimodal MoE that activates 16B parameters during decoding and 8B during prefill, with context support up to one million tokens. Its CED architecture combines cross-layer KV reuse, FP4 KV caching, and SWA Bounded Replay, reducing global KV memory to 890 bytes per token and persistent cache to roughly one eighth of DeepSeek-V4-Flash. The work matters because it attacks compute, storage, and bandwidth together—the practical bottlenecks of long-horizon agent deployment—while reporting stronger downstream performance.",
+      "tldr_zh": "DeepSeek-V4.1-Flash 是一个 552B 参数的多模态 MoE，decode 激活 16B 参数、prefill 激活 8B 参数，并支持最长一百万 token 上下文。其 CED 架构结合跨层 KV 复用、FP4 KV caching 与 SWA Bounded Replay，将全局 KV 占用降至每 token 890 bytes，常驻缓存约为 DeepSeek-V4-Flash 的八分之一。它的重要性在于同时压缩算力、存储和带宽成本，直接针对长程 Agent 部署的现实瓶颈，而不是只扩大上下文规格。",
+      "upvotes": 67,
+      "authors": "DeepSeek-AI, Anyi Xu, B. Li, Bangcai Lin, Bing Xue, BingCheng Xian, Bingzheng Xu, Bochao Wu, Bowei Zhang, Boyi Deng, C. C. Yu, Chao Jin, Chaofan Lin, Chen Dong, Chenbing Wang, Chenfan Feng, Chengda Lu, Chenggang Zhao, Chengqi Deng, Chengyuan Zhang, Chenhao Xu, Chenqi Zhao, Chenze Shao, Chuhao Wang, Chuqi Zhang, Damai Dai, Dejian Yang, Deli Chen, Di Huang, Di Wu, Donghao Li, Erhang Li, Eric Fu, F. Zhou, Fangwei Zhou, Fangyun Lin, Fangzhou Yuan, Feiyu Xia, Fucong Dai, Guangbo Hao, Guanglin Li, Guanting Chen, Guoai Cao, Guofan Fan, Guolai Meng, Guowei Li, Haichuan Zhang, Haiyang Ma, Haiyang Shen, Han Li, Han Yu, Han Zhang, Hangyuan Deng, Hanwei Xu, Hanxiang Xu, Hanxun Zhong, Hao Guo, Hao Jiang, Hao Li, Hao Qin, Haodong Wen, Haofen Liang, Haofeng Huang, Haohua Liu, Haoling Zhang, Haoming Luo, Haoran Yang, Haotian Xu, Haotian Yuan, Haoting Huang, Haowen Luo, Haoyang Cai, Haoyu Chen, Haozhe Ji, Hengran Zhang, Hengrui Wang, Hengxu Wu, Honghui Ding, Hongxuan Tang, Huadong Wang, Huanqi Cao, Huazuo Gao, Hui Qu, Hui Zeng, J. Yang, J. H. Jin, J. H. Zhang, J. X. Zou, Jia Yu, Jiahui Zhou, Jiajun Chen, Jialiang Huang, Jialin Zhao, Jiamin Tang, Jian Zhou, Jianan Tong, Jianwen Li, Jiaqi Zhu, Jiarui Wang, Jiasheng Ye, Jiashi Li, Jiaxin Xu, Jiaying Ding, Jibai Lu, Jiewen Hu, Jin Yan, Jincheng Zhai, Jingchang Chen, Jingcheng Hu, Jingli Zhou, Jingsheng Xu, Jingting Xiang, Jingyan Yun, Jingyang Yuan, Jingyuan Cheng, Jinhua Zhu, Jinpeng Wang, Jinyi Chen, Jinyi Hu, Jiping Yu, Jueliang Guo, Junbo Pei, Junbo Sun, Junguang Jiang, Junjie Qiu, Junkang Zhou, Junqi Liu, Junren Li, Junxian Li, Junxiao Song, Junyi Guo, Kai Dong, Kaifeng Chen, Kaige Gao, Kang Guan, Kangdong Yuan, Ke Hong, Ke Xu, Kefan Zhao, Kexin Ji, Kexin Zhang, Kexing Zhou, Kuai Yu, Lan Zhang, Lean Wang, Lecong Zhang, Lei Wang, Letian Gao, Liang Zhao, Liansheng Xu, Lihua Guo, Lingxiao Luo, Lingyue Fu, Litao Deng, Litong Wang, Liyue Zhang, Longhao Chen, Lu Chen, Luotian Huang, Luyao Ma, Luyao Wang, M. S. Di, Max Mei, Menghao Ye, Miao Cui, Mingchuan Zhang, Minghua Zhang, Minghui Tang, Mingjing Zhang, Mingqi Wei, Mingshu Chen, Mingxing Liu, Mingxu Zhou, Mingyu Xu, Mingyu Yang, Mingze Wang, Muyang Chen, Ni Shentu, Ning Wang, Niufang Ning, Panpan Huang, Peixin Cong, Peiyi Wang, Peiyuan Xin, Pengfei Ren, Pengfei Yan, Pengle Zhang, Qi Kang, Qi Tang, Qiancheng Wang, Qiang Li, Qihao Zhu, Qingyang Li, Qinyu Chen, Qiushi Du, Qizhou Guo, Rongxian Xu, Rui Ding, Rui Hu, Rui Tian, Rui Yu, Ruidong Zhu, Ruifan Xu, Ruihan Yang, Ruihang Xia, Ruijie Lu, Ruilin Geng, Ruipeng Hong, Ruiqi Ge, Ruisong Zhang, Ruize Sun, Ruizhe Pan, Runji Wang, Runqian Chen, Runxin Xu, Ruohong Tian, Ruomeng Shen, Ruoyu Zhang, Ryan X., S. H. Liu, Shanghao Lu, Shangyan Zhou, Shanhuang Chen, Shaofei Cai, Shaoheng Nie, Shaoyuan Chen, Shengding Hu, Shengkai Lin, Shengwen Ran, Shengyu Liu, Shengyuan Jia, Shi Bai, Shi Feng, Shicheng Xu, Shichun Liu, Shiqiang Hu, Shirong Ma, Shiyu Wang, Shiyuan Feng, Shufan Gong, Shuhan Lin, Shuiping Yu, Shunfeng Zhou, Shuo Yang, Shuomeng Wang, Shuting Guo, Shuting Pan, Shuying Yu, Sinuo Cao, Siyi Lin, Sizhe Chen, Songyang Chen, Songyang Zhou, Tao Ni, Tao Yun, Tian Jin, Tian Pei, Tian Ye, Tianle Lin, Tianran Ji, Tianyi Cui, Tianyuan Yue, Tingting Yu, Tongrui Xiong, Wangding Zeng, Wei Liu, Wei Zhang, Weibin Xu, Weihao Zeng, Weilin Zhao, Wen Liu, Wenfeng Liang, Wenjie Pang, Wenjing Luo, Wenjing Yao, Wenjun Gao, Wenkai Shao, Wenkai Yang, Wenli Zhang, Wenlu Wang, Wenlve Huang, Wenqian Yan, Wentao Zhang, Xi Gao, Xiang He, Xiang Li, Xiangli Li, Xiangwen Wang, Xiangying Zhang, Xiankui Wei, Xiao Bi, Xiaodong Liu, Xiaohan Wang, Xiaojian Qu, Xiaokang Chen, Xiaokang Zhang, Xiaotao Nie, Xiaoyao Zou, Xiaoyuan Li, Xicheng Guo, Xieting Chu, Xin Cheng, Xin Liu, Xin Xie, Xinbo Xu, Xingchao Liu, Xingchen Liu, Xingkai Yu, Xingyou Li, Xintong Yao, Xinyang Chen, Xinyong Jiang, Xinyu Yang, Xinyu Yang, Xu Chen, Xuanyu Wang, Xubei Zhong, Xuecheng Su, Xuejie Liu, Xuheng Lin, Xujie Fan, Xuncheng Zhao, Xuwei Fu, Y. C. Yan, Y. H. Jiang, Y. T. Wu, Y. W. M., Y. Z. Wang, Yafei Gao, Yang Yang, Yang Zhang, Yanru Ma, Yanwen Huang, Yao Li, Yao Li, Yao Meng, Yao Zhao, Yaofeng Sun, Yaohui Wang, Yaoyang Ye, Yehang Yin, Yexinrui Wu, Yi Qian, Yi Tao, Yi Yu, Yichao Zhang, Yichen Jiang, Yicheng Wang, Yifan Ding, Yifan Shi, Yifeng Peng, Yifeng Zhai, Yijia Wu, Yiliang Xiong, Yilun Wang, Ying He, Ying Zhou, Yingjia Luo, Yinmin Zhong, Yiping Wang, Yisong Wang, Yixiang Zhang, Yixiao Chen, Yixuan Tan, Yixuan Wei, Yiyang Ma, Yiyao Yang, Yiyuan Liu, Yizai Cai, Yizhen Wei, Yizhi Wang, Yonglun Yang, Yongqi Zhuo, Yongqiang Guo, Yongtong Wu, Yu Wu, Yu Zhang, Yuan Bian, Yuan Cheng, Yuan Ou, Yuan Sun, Yuanfan Xu, Yuanhang Sun, Yuanhao Li, Yuchen Liu, Yuchen Yao, Yudong Han, Yuduan Wang, Yuhan Wu, Yuhao Meng, Yuheng Zou, YuKun Li, Yunchuan Wang, Yunfan Xiao, Yunfan Xiong, Yupeng Chen, Yuqian Cao, Yuqian Wang, Yuqing Chen, Yushun Zhang, Yutong Lin, Yuwei Xiao, Yuxian Gu, Yuxiang Chen, Yuxiang Huang, Yuxiang Luo, Yuxiang You, Yuxin Chen, Yuxin Xiang, Yuxuan Liu, Yuxuan Zhou, Yuyang Zhou, Yuzhe Guo, Yuzhen Huang, Yuzhuo Bai, Z. Y. Z., Zanlin Ni, Zehao Wang, Zehua Zhao, Zehui Ren, Zejun Zhao, Zhangli Sha, Zhanying Wang, Zhaochen Zhang, Zhaoshuai Du, Zhe Fu, Zhean Xu, Zhenda Xie, Zheng Liu, Zhengyan Zhang, Zhenhua Dong, Zhewen Hao, Zhibang Wang, Zhibin Gou, Zhicheng Ma, Zhihao Li, Zhihong Shao, Zhihuan Huang, Zhijie Li, Zhirui Lu, Zhixian Huang, Zhixuan Chen, Zhixuan Chen, Zhixuan Pan, Zhiyu Wu, Zhizhou Ren, Zhu He, Zhuoshu Li, Zhuping Zhang, Zian Xu, Zihao Wang, Zihui Gu, Zijia Zhu, Zili Zhang, Zilin Li, Zilong Hou, Zilong Lyu, Ziqiao Wang, Ziwei Xie, Ziya Zhang, Ziyi Gao, Zizheng Pan, Zonglin Li, Zongqing Yao, Zui Chen, Zuofan Wu, Chenchen Ling, Chengyu Hou, Chong Chen, D. Li, Di Qi, Dongjie Ji, Fang Wei, Fanyi Xia, Fei Xie, Feiyi Tan, Hailong Guo, Haiyan Zhai, Hui Zhou, Huihui Tan, Huijie Li, Jia Luo, Jia Song, Jialu Cai, Jian Liang, Jiangting Zhou, Jiaqi Gao, Jiayi Shao, Jie Chen, Jieyu Yang, Jin Chen, Jingde Zhang, Jingzi Zhou, Jinqian Wang, Jinyang Liu, JinZhao Sun, Junhua Ling, Junmin Zheng, Kaicheng Yang, Ke Xu, Le Su, Leyi Xia, Liangfeng Ding, Lin Zhuo, Linwang Ma, Linyan Zhu, Liyu Cai, Luqi Yao, M. K. Zhang, Meng Li, Miao Lin, Miaojun Wang, Min Zhang, Mingming Li, Mingming Wang, Mingze Yin, Minmin Han, Nan Cao, Ning Wang, Ningxin Ma, Panpan Wang, Peihan Lin, Peng Sun, Peng Zhang, Qian Ying, Qiang Xiang, Qiao Wang, Qingmiao Mao, Qiwei Jiang, Rongli Jin, Ruyi Chen, Sha Tao, Shangmian Sun, Shaoqing Wu, Shichao Zou, Si Lei, Tianyang Zhang, Tianyu Sun, Tingting Yin, W. L. Xiao, Wei An, Wei Li, Wei Wang, Weiwei Lin, Wenqing Hou, X. Lin, Xiangfei Meng, Xianzhu Huang, Xiao Peng, Xiaoqian Li, Xiaoting Zhang, Xiaowen Sun, Xiaoxiang Wang, Xiaoyu Ye, Xinrou Zhang, Xinyu Zhang, Xue Cao, Xueyin Chen, Yanan Zhou, Yanhong Xu, Yao Xia, Yao Xu, Yi Shao, Yihong Zhang, Yiling Ma, Ying Tang, Yining Lou, Yiru Chen, Yishi Piao, Yixuan Chen, Yong Xiong, Yuchen Xuan, Yuehan Yang, Yuer Xu, Yukun Zha, Yunxian Ma, Yuping Lin, Yuting Yan, Yutong Xie, Yuwen Sheng, Yuxuan Zhu, Zekai Zhang, Zhe Ju, Zhenzhen Lin, Zheren Gao, Zheyang Sun, Zhigang Yan, Zhongyu Wu, Zi Wang, Zihua Qu, Ziling Yan, Ziyi Wan",
+      "ai_keywords": [],
+      "interest_tag": ""
+    },
+    {
+      "title": "When EOS Tokens Disagree: Understanding Length Inflation in On-Policy Distillation",
+      "url": "https://arxiv.org/abs/2609.20511",
+      "tldr": "This paper identifies termination-token mismatch between base students and post-trained teachers as a concrete cause of response-length inflation in on-policy distillation. Merely aligning decoding stop sets is insufficient; treating functionally equivalent EOS tokens as one semantic stopping action consistently reduces the problem across Qwen3, Llama, and Gemma. A stage-wise analysis also finds a later form of inflation that remains after EOS alignment, showing that termination mismatch is important but not the whole story.",
+      "tldr_zh": "该工作把 on-policy distillation 中回答异常变长的一项具体根因定位为：base student 与 post-trained teacher 对不同 EOS token 分配停止概率。只统一 decoding stop set 并不够，把功能等价的 EOS token 合并为同一语义停止动作，才能在 Qwen3、Llama 和 Gemma 上稳定缓解问题。分阶段实验还发现训练后期存在无法由 EOS 对齐完全解释的长度膨胀，因此这是一项关键机制，但不是全部原因。",
+      "upvotes": 57,
+      "authors": "Yuxiao Yang, Tianrun Yu, Shangzhe Li, Kaixiang Zhao, Xuchao Zhang, Chetan Bansal, Huaxiu Yao, Taylor W. Killian, Weitong Zhang",
+      "ai_keywords": [],
+      "interest_tag": ""
+    },
+    {
+      "title": "SoL-Pi: Recursively Scaling Auto-Research Loops for Efficient Agent Harness",
+      "url": "https://arxiv.org/abs/2609.20519",
+      "tldr": "SoL-Pi recursively searches for improvements to coding-agent harnesses across diverse rollout environments rather than optimizing only model weights. Four selected mechanisms cover action execution, context compaction, observation handling, and delegated reading. On 51 EdgeBench tasks it matches Pi across GPT-5.6 Sol and Opus 5 while cutting recorded token traffic by 44.7–49.0% and API cost by about one third, making harness efficiency a first-class scaling axis.",
+      "tldr_zh": "SoL-Pi 不只优化模型权重，而是在多种 rollout 环境里递归搜索 coding-agent harness 的改进。最终保留下来的四项机制覆盖 action execution、context compaction、observation handling 与 delegated reading。在 51 个 EdgeBench 任务上，它跨 GPT-5.6 Sol 和 Opus 5 达到与 Pi 相当的表现，同时减少 44.7%–49.0% 的记录 token 流量和约三分之一 API 成本，说明 harness efficiency 本身就是可扩展的研究轴。",
+      "upvotes": 53,
+      "authors": "Haozhe Liu, Tian Ye, Sensen Gao, Qihang Cao, Yitong Li, Mingchen Zhuge, Duomin Wang, Ruihua Zhang, Ping Luo, Jiawang Bian, Lei Zhu, Ligeng Zhu, Enze Xie, Song Han",
+      "ai_keywords": [],
+      "interest_tag": ""
+    },
+    {
+      "title": "An Empirical Study of Harness Design for Coding Agents",
+      "url": "https://arxiv.org/abs/2609.20804",
+      "tldr": "This study holds a lightweight coding-agent loop fixed and varies planning, action space, and context management across 176 matched settings on SWE-Bench Verified and Terminal-Bench 2.1. Context management helps mainly by preventing overflow, staged rule-based elision before LLM summarization is the most efficient strategy, and recoverable elision adds machinery without measurable accuracy gain. Planning shifts from an accuracy scaffold for weaker models to a cost saver for stronger ones, while bash-capable models often do well with a simpler bash-only interface.",
+      "tldr_zh": "这项研究固定轻量 coding-agent execution loop，在 SWE-Bench Verified 与 Terminal-Bench 2.1 的 176 组匹配设置中分别改变 planning、action space 和 context management。结果显示 context management 的主要收益是避免 overflow；先规则删减再做 LLM summarization 最有效，而可恢复删减增加了复杂度却没有准确率收益。Planning 对弱模型更像准确率脚手架，对强模型更像成本优化；擅长 bash 的模型通常用更简单的 bash-only interface 就足够。",
+      "upvotes": 40,
+      "authors": "Run-Ze Fan, Zihao Zhang, Simin Ma, Yebowen Hu, Shouju Wang, Kaiqiang Song, Fei Liu, Hamed Zamani, Xiaoyang Wang",
+      "ai_keywords": [],
+      "interest_tag": ""
+    },
+    {
+      "title": "Reflect, Revise, Reuse: Training-Free Skill Evolution for GUI Agents",
+      "url": "https://arxiv.org/abs/2609.17653",
+      "tldr": "EvoSkill-GUI treats GUI skills as editable deployment-time artifacts rather than static prompts. An executor performs immediate revisions, an isolated critic diagnoses failed trajectories, and a restricted interface updates retrieval metadata, plans, fallback localization, recovery rules, and failure cases without additional training. It improves multiple models by as much as 16.2% on MobileWorld, 6.0% on AndroidWorld, and 10.5% on OSWorld, while evolved libraries transfer to related tasks.",
+      "tldr_zh": "EvoSkill-GUI 不把 GUI skill 当作静态 prompt，而是允许其在部署阶段持续演化。Executor 做即时修订，隔离的 critic 诊断失败轨迹，再通过受限接口更新检索元数据、执行计划、备用定位、恢复规则和失败案例，全程无需额外训练。它在 MobileWorld、AndroidWorld 和 OSWorld 上的最高增益分别达到 16.2%、6.0% 和 10.5%，且演化后的 skill library 能迁移到相关任务。",
+      "upvotes": 12,
+      "authors": "Bofan Chen, Boxuan Zhang, Fei Tang, Zhengxi Lu, Yong Du, Tongbo Chen, Weiming Lu, Jun Xiao, Yueting Zhuang, Yongliang Shen",
+      "ai_keywords": [],
+      "interest_tag": "CUA"
+    }
+  ],
+  "alphaxiv_papers": [
+    {
+      "title": "Score Centering Stabilizes Off-policy Reinforcement Learning",
+      "arxiv_id": "2609.20807",
+      "url": "https://arxiv.org/abs/2609.20807",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2609.20807",
+      "tldr": "The paper argues that the damaging part of training–inference mismatch in off-policy LLM reinforcement learning is persistent score drift, not mismatch in the abstract. It derives an additive score-centering correction that cancels this drift and remains compatible with importance sampling. Across 0.6B–30B models, the method matches or beats importance-sampling baselines under quantization, with larger gains as mismatch grows, and the combination performs best under stale rollouts.",
+      "tldr_zh": "论文认为 off-policy LLM reinforcement learning 中真正破坏稳定性的并非抽象的 training–inference mismatch，而是两套引擎之间持续累积的 score drift。作者推导出一个加性的 score-centering 校正项来抵消漂移，并且它能与 importance sampling 组合。在 0.6B–30B 模型上，该方法在量化 mismatch 下达到或超过 importance-sampling baseline，偏差越严重优势越大；在 stale rollout 场景中，二者组合效果最好。",
+      "interest_tag": ""
+    },
+    {
+      "title": "Reinforcement Learning for Real-Time Vision-Language-Action Policies",
+      "arxiv_id": "2609.18207",
+      "url": "https://arxiv.org/abs/2609.18207",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2609.18207",
+      "tldr": "Real-Time EXPO-FT separates slow, expressive VLA action generation from a lightweight policy that reactively edits actions using the newest observation. This directly addresses stale observations caused by model latency while retaining reinforcement learning's ability to improve beyond demonstrations. It wins all 10 Kinetix environments against delayed and non-delayed alternatives and raises average success on four dynamic real-robot tasks from 42% to 97% with at most 10 minutes of online robot data.",
+      "tldr_zh": "Real-Time EXPO-FT 将较慢但表达力强的 VLA action generation，与根据最新 observation 快速修正动作的轻量策略解耦。这样既直接处理模型延迟导致的 stale observation，又保留 reinforcement learning 超越示范分布的能力。它在 Kinetix 的 10 个环境中全部领先，并仅用最多 10 分钟在线机器人数据，把四个动态真机任务的平均成功率从 42% 提升到 97%。",
+      "interest_tag": ""
+    },
+    {
+      "title": "In-Context Robot Learning with VLM Agents",
+      "arxiv_id": "2609.19138",
+      "url": "https://arxiv.org/abs/2609.19138",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2609.19138",
+      "tldr": "GPT-Policy is a general-agent framework for in-context robot learning without gradient updates or persistent task-specific parameter changes. A context compiler preserves relevant visual transitions, a VLM proposes robot-tool actions, and a constrained controller verifies execution and returns outcomes to the context. Real-robot experiments show that unlabeled human videos improve completion, with aligned action references helping further on contact-sensitive tasks, offering a concrete route from general VLM reasoning to verifiable physical behavior.",
+      "tldr_zh": "GPT-Policy 是一个无需 gradient update、也无需永久修改任务参数的 in-context robot learning 框架。Context compiler 保留关键视觉转移，VLM 提议 robot-tool action，受约束 controller 则验证执行并把结果反馈给上下文。真机实验显示，无动作标签的人类视频也能提升任务完成率，而对接触敏感任务，带对齐动作的参考会进一步增益，为通用 VLM 推理转化为可验证物理行为提供了具体路径。",
+      "interest_tag": ""
+    },
+    {
+      "title": "ScienceIDE: Turning World's Scientific Codebase into Agent Learnable Environments",
+      "arxiv_id": "2609.19134",
+      "url": "https://arxiv.org/abs/2609.19134",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2609.19134",
+      "tldr": "ScienceIDE converts scientific-code repositories into executable agent environments using expert-defined cases and acceptance criteria. The resulting environments support task generation, execution, scientific verification, supervised fine-tuning, reinforcement learning, and evaluation from a shared substrate. Models trained on verified interaction trajectories improve held-out scientific-code repair and selected general coding, reasoning, and knowledge benchmarks, suggesting that executable scientific experience can transfer beyond its source domains.",
+      "tldr_zh": "ScienceIDE 用专家定义的 scientific cases 与 acceptance criteria，把科学代码仓库转成可执行的 Agent 环境。统一环境同时支持任务生成、执行、科学验证、SFT、RL 与 evaluation。基于验证轨迹训练的模型不仅提升 held-out 科学代码修复，也在部分通用 coding、reasoning 和 knowledge benchmark 上获得增益，说明可执行的科学经验可能跨领域迁移。",
+      "interest_tag": ""
+    },
+    {
+      "title": "Agora: Git as Shared Memory for Collective AutoResearch",
+      "arxiv_id": "2609.18094",
+      "url": "https://arxiv.org/abs/2609.18094",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2609.18094",
+      "tldr": "Agora stores collective auto-research as an append-only DAG in Git, where hypotheses, results, verification, and reports are immutable commits with explicit ancestry. In a nearly 12-day run, 13 unassigned agents produced 1,703 contributions and 165 successful independent reproductions while improving a weight-transfer objective from 3.39 to 1.899 bits per byte. Its key contribution is a verifiable shared-memory substrate that reduces duplicated search and tracks research lineage, although the authors explicitly note that a controlled compute-matched comparison is still needed.",
+      "tldr_zh": "Agora 把 collective auto-research 存成 Git 中 append-only 的 DAG，让 hypothesis、result、verification 与 report 都成为带明确谱系的不可变 commit。一次近 12 天的运行中，13 个无中心任务分配的 Agent 产生 1,703 次贡献和 165 次全部成功的独立复现，并把 weight-transfer 指标从 3.39 改进到 1.899 bits per byte。它的核心贡献是可验证的共享记忆底座，用于减少重复搜索并追踪研究谱系；不过作者也明确承认，仍需 compute-matched 的受控比较来证明系统增益。",
+      "interest_tag": "Agent Swarm"
+    }
+  ],
+  "github_repos": [
+    {
+      "name": "Matthew0822/ToolReplay",
+      "url": "https://github.com/Matthew0822/ToolReplay",
+      "tldr": "ToolReplay is a dependency-free Python CLI for auditing recorded agent tool-call transcripts. It can hash-chain seal JSONL logs, detect repeated calls whose outputs diverge, flag redundant operations, and compare calls against declared tool scope. The fixed-order, byte-stable report makes it useful as a small evidence layer for reproducibility and permission-overreach checks rather than another agent framework.",
+      "tldr_zh": "ToolReplay 是一个无第三方运行时依赖的 Python CLI，用于审计 Agent 的 tool-call transcript。它可以对 JSONL 日志做 hash-chain sealing，检测同一调用返回不同结果的 non-determinism、重复操作，以及超出声明权限的调用。固定排序、byte-stable 的报告让它更像一层轻量可复现与越权证据基础设施，而不是又一个 Agent framework。",
+      "stars": 180,
+      "language": "Python",
+      "interest_tag": ""
+    },
+    {
+      "name": "kitze/skillbox",
+      "url": "https://github.com/kitze/skillbox",
+      "tldr": "Skillbox is a self-hosted, versioned skill library for AI agents, built with React, Bun, Hono, and PostgreSQL. It provides immutable revisions, conflict detection, scoped client grants, revocable keys, usage reporting, MCP access, and checksum-verified downloads while explicitly refusing to execute uploaded skill code. The project addresses an emerging operational gap: skills need distribution, review, rollback, and access control just like code and packages.",
+      "tldr_zh": "Skillbox 是一个基于 React、Bun、Hono 与 PostgreSQL 的 self-hosted、versioned Agent skill library。它提供不可变 revision、冲突检测、按 client 授权、可撤销 key、使用统计、MCP 接入与 checksum 校验下载，并明确不执行上传的 skill 代码。它瞄准一个正在出现的运维缺口：skill 与代码和 package 一样，需要分发、审查、回滚和权限控制。",
+      "stars": 166,
+      "language": "TypeScript",
+      "interest_tag": ""
+    },
+    {
+      "name": "indada/repopilot",
+      "url": "https://github.com/indada/repopilot",
+      "tldr": "RepoPilot turns maintainer-selected GitHub issues and pull requests into a bounded repair loop driven by the OpenAI Codex SDK. It generates requirement-linked tests, requires reproducible failure before repair, freezes tests, and runs candidate changes in a separate Docker verifier before publishing a branch and draft PR. The repository is careful about scope—humans retain merge and deployment control—which makes its verification architecture more credible than broad autonomous-development claims.",
+      "tldr_zh": "RepoPilot 使用 OpenAI Codex SDK，把 maintainer 选定的 GitHub Issue 和 PR 转成有边界的 repair loop。它生成与需求绑定的测试，要求修复前先复现失败，冻结测试，并让独立 Docker verifier 检查候选改动，之后才发布 branch 和 draft PR。项目明确保留人工 merge 与 deployment 决策，这种克制的 scope 让其 verification architecture 比宽泛的自动开发承诺更可信。",
+      "stars": 149,
+      "language": "TypeScript",
+      "interest_tag": ""
+    },
+    {
+      "name": "jamiepinheiro/ipad_computer_use",
+      "url": "https://github.com/jamiepinheiro/ipad_computer_use",
+      "tldr": "iPad Computer Use gives an agent fresh screenshots and ordered high-level actions while an RP2040 replays input as physical USB HID. A native iPad app handles ReplayKit capture, a control server manages sessions and calibration, and the hardware bridge avoids relying on private Apple automation APIs. It is an early single-device system with an intentionally private-network security model, but it opens a practical path for computer-use agents on iPadOS and USB-C iPhones.",
+      "tldr_zh": "iPad Computer Use 向 Agent 提供新鲜 screenshot 与有序高层动作，再由 RP2040 将输入重放为真实 USB HID。原生 iPad app 负责 ReplayKit capture，control server 管理 session 与 calibration，硬件桥则绕开对 Apple 私有自动化 API 的依赖。它仍是面向单设备、要求私有网络部署的早期系统，但为 iPadOS 与 USB-C iPhone 上的 Computer Use Agent 打开了可行路径。",
+      "stars": 74,
+      "language": "JavaScript",
+      "interest_tag": "CUA"
+    },
+    {
+      "name": "ivyfan-toowell/IvyClaw",
+      "url": "https://github.com/ivyfan-toowell/IvyClaw",
+      "tldr": "IvyClaw is a production-oriented multi-agent software-engineering stack built on DeepAgents and LangGraph. Planner, researcher, coder, tester, and reviewer roles connect to sandboxed execution, PostgreSQL state, Redis-backed asynchronous work, human approvals, model routing, and observability. Its breadth is useful as an integration reference, though teams should weigh the operational complexity of this many services against simpler single-agent harnesses.",
+      "tldr_zh": "IvyClaw 是一个基于 DeepAgents 与 LangGraph 的 production-oriented 多 Agent 软件工程系统。Planner、researcher、coder、tester、reviewer 等角色连接 sandbox execution、PostgreSQL 状态、Redis 异步任务、human approval、model routing 与 observability。它作为完整集成参考很有价值，但团队也应权衡多服务架构的运维复杂度，是否真的优于更简单的 single-agent harness。",
+      "stars": 64,
+      "language": "Python",
+      "interest_tag": "Agent Swarm"
+    }
+  ],
+  "hackernews": [
+    {
+      "title": "ZCode, the GLM coding agent, silently uploads your Git history",
+      "url": "https://tokenstead.ai/guides/zcode-silent-git-history-upload",
+      "tldr": "A reverse-engineering report alleges that ZCode packages and uploads the entire workspace, including Git objects, LFS data, reflogs, and global app configuration, whenever the client is authenticated. The reported capture contained 42,411 files and produced a 313 MB encrypted archive, with the corresponding private decryption key held only by Z.ai's cloud. The report further claims that user-facing optimization and snapshot-indexing settings do not disable packaging and upload, turning a general privacy concern into a concrete warning about closed-source coding-agent harnesses.",
+      "tldr_zh": "一份 reverse-engineering 报告指称，ZCode 在客户端登录后会打包并上传整个 workspace，包括 Git objects、LFS 数据、reflog 和全局应用配置。报告中的一次抓包覆盖 42,411 个文件，生成 313 MB 加密归档，而对应私钥只由 Z.ai 云端持有。报告还称界面中的体验优化与 snapshot indexing 开关不会停止打包上传，使抽象的隐私担忧变成了对 closed-source coding-agent harness 的具体警告。",
+      "points": 259,
+      "num_comments": 14,
+      "interest_tag": ""
+    },
+    {
+      "title": "Show HN: Scry, programmable internet search w/ congestion pricing",
+      "url": "https://scry.io/",
+      "tldr": "Scry exposes an MCP and HTTP interface for running bounded programs over source-native records from Hacker News, Reddit, arXiv, Stack Exchange, Wikipedia, prediction markets, and other corpora. Instead of returning ten links, it targets questions requiring thousands of rows, joins, time windows, and aggregate computation while preserving source identifiers and provenance. The service claims 71.8% fully correct on a self-run DeepSearchQA evaluation, but explicitly notes that the benchmark has no official submission process, so the number should be treated as vendor-reported evidence.",
+      "tldr_zh": "Scry 通过 MCP 与 HTTP 接口，让 Agent 在 Hacker News、Reddit、arXiv、Stack Exchange、Wikipedia、prediction market 等 source-native record 上运行受限程序。它不只返回十个链接，而是面向需要数千行数据、join、时间窗口和聚合计算的问题，同时保留 source identifier 与 provenance。服务方称其在自行运行的 DeepSearchQA 上达到 71.8% fully correct，但也明确说明该 benchmark 没有官方提交流程，因此这一数字应视为 vendor-reported evidence。",
+      "points": 49,
+      "num_comments": 23,
+      "interest_tag": ""
+    },
+    {
+      "title": "GrassLobster: AI Agentic Generation of Parametric Geometry Workflows",
+      "url": "https://www.miro.vision/index.php/2026/09/17/grasslobbster/",
+      "tldr": "GrassLobster connects external coding agents to Rhino and Grasshopper through file-backed, human-visible Geometry Stations. The agent turns an evolving design brief into editable parametric workflows while dimensions, rules, and station code remain inspectable rather than collapsing into opaque generated geometry. It is explicitly an experimental prototype, but the text-mirroring design is a useful pattern for giving agents structured control over expert visual tools without hiding domain logic.",
+      "tldr_zh": "GrassLobster 通过基于文件、对人可见的 Geometry Station，把外部 coding agent 接入 Rhino 与 Grasshopper。Agent 将持续变化的设计 brief 转成可编辑的 parametric workflow，而尺寸、规则与 station code 仍可检查，不会退化成不可解释的生成几何。它明确仍是实验性 prototype，但这种 text-mirroring 设计为 Agent 控制专业视觉工具、同时保留领域逻辑提供了值得借鉴的模式。",
+      "points": 28,
+      "num_comments": 5,
+      "interest_tag": ""
+    },
+    {
+      "title": "Show HN: Agentgit – a Git host for AI agents, no account, no token, no key",
+      "url": "https://agentgit.co/",
+      "tldr": "Agentgit creates an append-only Git repository on first push, allowing agents to hand work off with only a URL and no account, token, or setup step. Repositories can be claimed through signed pushes, with signer and reader lists stored as Git refs; a companion client watches remote changes and warns when they collide with local uncommitted work. The zero-onboarding design is compelling for ephemeral sandboxes, but unclaimed names are initially world-writable, so the convenience comes with an explicit need to establish signing policy quickly.",
+      "tldr_zh": "Agentgit 在第一次 push 时自动创建 append-only Git repository，让 Agent 只凭 URL 就能交接工作，无需 account、token 或预先配置。Repository 可通过 signed push 认领，signer 与 reader list 存在 Git ref 中；配套 client 还能监听远端变更，并在其与本地未提交修改冲突时报警。对短命 sandbox 而言，zero-onboarding 很有吸引力，但未认领名称最初是全网可写，因此便利性要求使用者尽快建立签名策略。",
+      "points": 8,
+      "num_comments": 6,
+      "interest_tag": ""
+    },
+    {
+      "title": "The Provenance Tax: How LLM Watermarking Changes AI Agent Behavior",
+      "url": "https://www.lasso.security/blog/the-provenance-tax-understanding-the-impact-of-llm-watermarking-on-ai-agent-behavior",
+      "tldr": "This study asks whether generation-time text watermarking changes not only prose but agent decisions. Using paired watermarked and unwatermarked runs, it evaluates BFCL v4 tool calling plus harmful and benign refusal sets, arguing that key-dependent token sampling can alter tool arguments and prompt-injection outcomes even when quality is preserved in expectation. The broader implication is that provenance mechanisms should be regression-tested at the agent behavior level, not treated as a metadata-only compliance layer.",
+      "tldr_zh": "这项研究追问 generation-time text watermarking 是否不仅改变文本，也会改变 Agent 决策。它通过成对的有水印与无水印运行，在 BFCL v4 tool calling、恶意请求和 benign refusal 数据上测试，指出即便期望意义上的质量不变，key-dependent token sampling 仍可能改变 tool argument 与 prompt-injection 结果。更广泛的启示是，provenance 机制需要在 Agent 行为层做 regression test，而不能只视作 metadata 层的合规功能。",
+      "points": 8,
+      "num_comments": 1,
+      "interest_tag": ""
+    }
+  ]
+}
