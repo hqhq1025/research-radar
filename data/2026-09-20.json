@@ -1,0 +1,226 @@
+{
+  "date": "2026-09-20",
+  "generated_at": "2026-09-20T16:05:50.651687+08:00",
+  "briefing_zh": "今天最清晰的主线不是更大的模型，而是更可靠、更便宜的 agent runtime。**SoL-Pi** 用自动研究循环搜索可迁移的 harness 改进，在保持性能的同时把 token 流量降低 44.7%–49.0%；**An Empirical Study of Harness Design for Coding Agents** 则用 176 组对照实验说明，没有单一组件配置能适配所有模型、任务和 context budget。两者共同把 agent 工程从经验配方推进到可测量、可归因的系统设计。\n\n训练侧也在处理部署时最现实的偏差。**Score Centering Stabilizes Off-policy Reinforcement Learning** 把 sampler 与 trainer 的不一致分解为会累积的 drift，并用加性校正稳定量化或陈旧 rollout 下的 RL；**Real-Time EXPO-FT** 则把慢速 VLA 的语义规划与轻量级实时动作修正解耦，在动态机器人任务中用很少的在线数据恢复可靠性。共同趋势是：不再假设训练、推理和执行环境完美同步，而是显式建模系统延迟与分布偏移。\n\n长期任务所需的状态表示也在变得更务实。**Workspace Models** 把训练时 VLM 监督蒸馏为部署时可快速更新的 latent memory，**SELF-INDEX** 让检索索引形成诊断、修改、验证闭环，**EvoSkill-GUI** 则把 GUI skill 变成能从执行失败中持续修订的程序性知识。对 General Agents 而言，memory、skill 与 context management 正从外挂模块变成 runtime 的核心控制面。\n\n社区信号进一步强化了「可信基础设施」主题：**ToolReplay** 面向工具调用审计与确定性重放，**Skillsync** 试图打破 coding-agent 会话锁定，而 ZCode 上传完整 Git 历史的争议提醒大家，agent 的能力扩展必须伴随 provenance、权限边界和可验证的数据流。今天真正值得关注的竞争点，已从谁能调用更多工具，转向谁能用更少成本、更多证据和更清晰的边界完成长程任务。",
+  "briefing_en": "Today's clearest theme is not simply larger models, but more reliable and economical agent runtimes. **SoL-Pi** uses recursive auto-research to discover transferable harness improvements, cutting recorded token traffic by 44.7%–49.0% while preserving performance. **An Empirical Study of Harness Design for Coding Agents** complements it with 176 matched experiments showing that no single combination of planning, action space, and context management works best across every model, task, and context budget. Together, they move agent engineering from folklore toward measurable, component-level system design.\n\nTraining research is also confronting deployment mismatch directly. **Score Centering Stabilizes Off-policy Reinforcement Learning** identifies an accumulating drift between sampler and trainer and cancels it with an additive correction under quantized or stale rollouts. **Real-Time EXPO-FT** separates the semantic planning of a slow VLA from lightweight reactive action edits, restoring reliability on dynamic robot tasks with little online data. Both works reject the assumption that training, inference, and execution remain perfectly synchronized.\n\nState for long-horizon work is becoming more practical as well. **Workspace Models** distills training-time VLM supervision into a fast latent memory for deployment, **SELF-INDEX** turns retrieval indexing into a diagnose–revise–validate loop, and **EvoSkill-GUI** treats GUI skills as procedural knowledge that can be repaired after execution failures. For general agents, memory, skills, and context management are becoming part of the runtime control plane rather than optional add-ons.\n\nCommunity signals reinforce the same trust-infrastructure theme. **ToolReplay** focuses on auditable and deterministic tool-call replay, **Skillsync** attacks coding-agent session lock-in, while the controversy over ZCode uploading complete Git history shows that broader agent capability must come with provenance, explicit permission boundaries, and verifiable data flows. The important competition is shifting from who can call more tools to who can finish long-horizon work with lower cost, stronger evidence, and clearer boundaries.",
+  "viral_analysis_zh": "今天最可能形成研究圈爆款的是 **SoL-Pi**：它把抽象的 recursive self-improvement 落到人人都能感知的 token 与 API 成本，并用跨模型、跨任务的数字证明收益，标题同时占据 Agent Harness 与 AI for AI 两个高热叙事。社区侧最容易扩散的是 ZCode Git 历史上传争议，因为它把隐私风险具体化为 `.git`、reflog、LFS 等可验证对象，冲击性强且天然引发信任讨论。",
+  "viral_analysis_en": "**SoL-Pi** is the strongest research-side viral candidate because it turns the abstract promise of recursive self-improvement into immediately legible token and API-cost savings, backed by cross-model and cross-task results. On the community side, the ZCode Git-history controversy is highly shareable because it makes privacy risk concrete through inspectable artifacts such as `.git`, reflogs, and LFS data, naturally triggering debate about trust and permission boundaries.",
+  "huggingface_papers": [
+    {
+      "title": "SoL-Pi: Recursively Scaling Auto-Research Loops for Efficient Agent Harness",
+      "url": "https://arxiv.org/abs/2609.20519",
+      "tldr": "SoL-Pi scales recursive auto-research across many executable environments to discover harness improvements that transfer beyond their development tasks. Its selected mechanisms cover action fusion, online context compaction, observation handling, and evidence-preserving delegated reading. On the 51-task EdgeBench suite, it matches Pi-level performance across GPT-5.6 Sol and Opus 5 while cutting recorded token traffic by 44.7%–49.0% and API cost by about one third. This makes harness optimization a concrete lever for scaling long-running coding agents rather than merely a prompt-engineering exercise.",
+      "tldr_zh": "SoL-Pi 在大量可执行环境中递归运行自动研究循环，搜索能够迁移到开发任务之外的 harness 改进。最终保留的机制覆盖动作融合、在线上下文压缩、观察处理和保留证据的委托阅读。在 51 项 EdgeBench 上，它对 GPT-5.6 Sol 与 Opus 5 保持接近 Pi 的性能，同时将记录到的 token 流量降低 44.7%–49.0%，API 成本约降低三分之一。这说明 harness 优化可以成为扩展长时 coding agent 的实质杠杆，而不只是 prompt 技巧。",
+      "upvotes": 88,
+      "authors": "Haozhe Liu, Tian Ye, Sensen Gao, Qihang Cao, Yitong Li, Mingchen Zhuge, Duomin Wang, Ruihua Zhang, Ping Luo, Jiawang Bian, Lei Zhu, Ligeng Zhu, Enze Xie, Song Han",
+      "ai_keywords": [
+        "coding agents",
+        "agent harness",
+        "recursive self-improvement",
+        "context compaction"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "An Empirical Study of Harness Design for Coding Agents",
+      "url": "https://arxiv.org/abs/2609.20804",
+      "tldr": "This study fixes the agent execution loop and varies planning, action space, and context management across 176 matched settings on SWE-Bench Verified and Terminal-Bench 2.1. Rule-based elision followed by LLM summarization offers the strongest overall efficiency, while recoverable elisions add complexity that models rarely use. Planning mainly improves weaker models' accuracy but becomes a cost-saving device for stronger models, and bash-proficient models can benefit from a simpler bash-only interface. The result is a practical argument for model- and budget-specific harness design rather than a universal stack.",
+      "tldr_zh": "这项研究固定 agent 执行循环，仅改变规划、动作空间和上下文管理，在 SWE-Bench Verified 与 Terminal-Bench 2.1 上完成 176 组匹配实验。先做规则式删减、再做 LLM 摘要的整体效率最好，而允许恢复已删内容会增加复杂度，却很少被模型使用。规划主要提升弱模型准确率，对强模型则更多体现为节省成本；bash 能力强的模型甚至更适合简化的 bash-only 接口。结论是 harness 应按模型能力、任务与预算定制，而不是追求统一技术栈。",
+      "upvotes": 69,
+      "authors": "Run-Ze Fan, Zihao Zhang, Simin Ma, Yebowen Hu, Shouju Wang, Kaiqiang Song, Fei Liu, Hamed Zamani, Xiaoyang Wang",
+      "ai_keywords": [
+        "coding agents",
+        "harness design",
+        "context management",
+        "SWE-Bench"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "Verifiable Social Reasoning for LLM Assistants",
+      "url": "https://arxiv.org/abs/2609.17496",
+      "tldr": "Fuse creates social interactions in which a target agent has a hidden motive and a user agent later asks the evaluated assistant to infer it, yielding verifiable ground truth by construction. A 24,000-annotation human study validates simulation faithfulness, and the authors evaluate 12 LLMs on a released 21,000-example dataset. Results show that user mediation compounds social-reasoning difficulty, biased framing systematically changes predictions, and longer conversations do not reliably help. The work turns an otherwise subjective assistant capability into a controlled agent benchmark.",
+      "tldr_zh": "Fuse 构造带隐藏动机的目标 agent，让用户 agent 在交互后向被测助手转述并要求推断动机，因此能从生成过程直接获得可验证真值。作者用 2.4 万条人工标注验证模拟可信度，并在公开的 2.1 万样本数据集上评估 12 个 LLM。结果显示，用户转述会叠加社会推理难度，带偏见的叙事会系统性改变模型判断，更长对话也不一定有帮助。它把原本高度主观的助手能力转化为可控的 agent benchmark。",
+      "upvotes": 44,
+      "authors": "Amir Taubenfeld, Zorik Gekhman, Avigail Grinstein-Dabush, Itay Laish, Ariel Goldstein, Marian Croak, Avinatan Hassidim, Yossi Matias, Amir Feder",
+      "ai_keywords": [
+        "social reasoning",
+        "LLM assistants",
+        "multi-agent simulation",
+        "evaluation"
+      ],
+      "interest_tag": "Benchmark"
+    },
+    {
+      "title": "Self-Evolving Search Index",
+      "url": "https://arxiv.org/abs/2609.19656",
+      "tldr": "SELF-INDEX lets a retrieval index adapt to its environment without a human repeatedly redesigning index keys. An optimizer diagnoses retrieval failures, selectively revises responsible keys, validates each change, and a query simulator proactively explores demands absent from the observed query set. The method consistently improves retrieval across corpora and retrievers and also benefits search agents and memory retrieval downstream. Its key contribution is moving index optimization into a closed, evidence-driven evolution loop.",
+      "tldr_zh": "SELF-INDEX 让检索索引无需人工反复设计 index key，也能随环境演化。Optimizer 会诊断检索失败、只修改相关键并验证更新，Query Simulator 则主动探索现有查询之外的潜在需求。该方法在多种语料和 retriever 上持续提升检索效果，并改善下游 search agent 与历史交互召回。其关键价值是把索引优化变成有证据约束的闭环演化过程。",
+      "upvotes": 40,
+      "authors": "Sangam Lee, Wonjae Lee, Sunghwan Kim, Deogyong Kim, Jaehoon Kim, Daye Nam, SeongKu Kang, Dongha Lee",
+      "ai_keywords": [
+        "retrieval",
+        "self-evolving index",
+        "search agents",
+        "agent memory"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "Reflect, Revise, Reuse: Training-Free Skill Evolution for GUI Agents",
+      "url": "https://arxiv.org/abs/2609.17653",
+      "tldr": "EvoSkill-GUI represents each GUI skill as a structured package containing executable plans, backup localization, accessibility utilities, failure recovery, and prior failure cases. During deployment, the executor makes immediate revisions while an information-isolated critic diagnoses failed trajectories and edits are constrained through a restricted tool interface. Without additional training, the framework improves multiple base models by up to 16.2% on MobileWorld, 6.0% on AndroidWorld, and 10.5% on OSWorld. It reframes GUI skills as living procedural memory rather than static predeployment artifacts.",
+      "tldr_zh": "EvoSkill-GUI 把每个 GUI skill 表示为结构化包，包含可执行计划、备用定位、accessibility 工具、失败恢复规则与历史失败案例。部署时，executor 即时修订技能，信息隔离的 critic 诊断失败轨迹，所有修改通过受限工具接口完成。无需额外训练，该框架在 MobileWorld、AndroidWorld、OSWorld 上对多个基础模型的最高提升分别达到 16.2%、6.0% 和 10.5%。它把 GUI skill 从部署前的静态文件改造成可持续演化的程序性记忆。",
+      "upvotes": 37,
+      "authors": "Bofan Chen, Boxuan Zhang, Fei Tang, Zhengxi Lu, Yong Du, Tongbo Chen, Weiming Lu, Jun Xiao, Yueting Zhuang, Yongliang Shen",
+      "ai_keywords": [
+        "GUI agents",
+        "skill evolution",
+        "OSWorld",
+        "training-free adaptation"
+      ],
+      "interest_tag": "CUA"
+    }
+  ],
+  "alphaxiv_papers": [
+    {
+      "title": "Score Centering Stabilizes Off-policy Reinforcement Learning",
+      "arxiv_id": "2609.20807",
+      "url": "https://arxiv.org/abs/2609.20807",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2609.20807",
+      "tldr": "The paper traces instability under training–inference mismatch to a systematic gradient drift caused by sampling from a quantized, stale, or otherwise different policy. Score centering subtracts the sampler-expected policy score, preserving the reward-dependent covariance signal while canceling the mismatch drift. A top-128 approximation adds under 1% reported runtime overhead and remains effective under severe mismatch. In the harshest 30B MoE setting, it reaches roughly 30% training accuracy while most alternatives stay below 5%.",
+      "tldr_zh": "论文把 training–inference mismatch 下的不稳定性追溯为一种系统性 gradient drift：rollout 来自量化、陈旧或其他不同的 sampler policy。Score centering 减去 sampler 期望的 policy score，在保留 reward covariance 信号的同时抵消这项漂移。top-128 近似的报告开销低于 1%，在严重 mismatch 下依然有效。在最苛刻的 30B MoE 设置中，它达到约 30% 训练准确率，而多数替代方案低于 5%。",
+      "interest_tag": ""
+    },
+    {
+      "title": "Reinforcement Learning for Real-Time Vision-Language-Action Policies",
+      "arxiv_id": "2609.18207",
+      "url": "https://arxiv.org/abs/2609.18207",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2609.18207",
+      "tldr": "Real-Time EXPO-FT keeps a large pretrained VLA as a high-level action-chunk generator and adds a lightweight policy that edits actions using the latest observation. A chunk-level critic chooses between original and corrected candidates, aligning RL with delayed asynchronous execution instead of pretending latency does not exist. It achieves 96.2% average success across ten delayed Kinetix environments and 29 of 30 average successes on four physical tasks after at most ten minutes of online robot data. The separation of semantic generation from rapid correction is a practical architecture for latency-bound embodied agents.",
+      "tldr_zh": "Real-Time EXPO-FT 保留大型预训练 VLA 作为高层 action chunk 生成器，再用轻量策略根据最新观察修正动作。chunk-level critic 在原始候选与修正候选之间选择，使 RL 直接适配异步延迟执行，而不是假设 latency 不存在。它在十个延迟 Kinetix 环境中达到 96.2% 平均成功率，并在四项真实机器人任务上用最多十分钟在线数据取得平均 29/30 次成功。把语义动作生成与快速反应修正解耦，是面向 latency-bound embodied agent 的实用架构。",
+      "interest_tag": ""
+    },
+    {
+      "title": "In-Context Robot Learning with VLM Agents",
+      "arxiv_id": "2609.19138",
+      "url": "https://arxiv.org/abs/2609.19138",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2609.19138",
+      "tldr": "GPT-Policy connects a fixed general-purpose VLM to a context compiler and a constrained robot execution layer, enabling adaptation from human videos, goal images, action records, and interaction feedback without parameter updates. Different context types contribute complementary procedural, geometric, and sequential information. Human video raises towel and notebook pickup from 0/3 to 2/3, while aligned action references bring bottle-cap unscrewing to 3/3. The small trial counts and persistent contact, collision, and success-verification failures make this promising evidence rather than a solved general robot policy.",
+      "tldr_zh": "GPT-Policy 把固定的通用 VLM、context compiler 与受约束的机器人执行层连接起来，无需更新参数即可从人类视频、目标图像、动作记录和交互反馈中适应。不同 context 分别提供程序、几何与时序信息：人类视频让毛巾和笔记本抓取从 0/3 提升到 2/3，加入对齐动作参考后，瓶盖旋开达到 3/3。论文仍只有每条件三次试验，并暴露出接触、碰撞与成功验证问题。因此它是值得关注的实证信号，而不是已经解决的通用机器人策略。",
+      "interest_tag": ""
+    },
+    {
+      "title": "Workspace Models: Lightweight Robotic Memory via Saliency-Driven Supervision",
+      "arxiv_id": "2609.20820",
+      "url": "https://arxiv.org/abs/2609.20820",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2609.20820",
+      "tldr": "Workspace Models uses VLMs offline to identify salient historical events, then trains a causal encoder to compress them into a continuously updated latent workspace token. The expensive semantic supervision happens during training, so deployment avoids online VLM queries while retaining task-relevant history. Across four memory-dependent manipulation tasks, the approach averages 91.5% success versus 53.8% for HistoryDP and 66.8% for VLM keyframes. Optimized latency is 49.2 ms, showing that long-horizon memory can be both compact and control-loop friendly.",
+      "tldr_zh": "Workspace Models 在离线阶段用 VLM 标注历史中的关键事件，再训练 causal encoder 将其压缩为持续更新的 latent workspace token。昂贵的语义监督只发生在训练时，因此部署无需在线调用 VLM，也能保留任务相关历史。在四项依赖记忆的操作任务上，它平均达到 91.5% 成功率，高于 HistoryDP 的 53.8% 和 VLM keyframe 的 66.8%。优化后延迟为 49.2 ms，说明长程记忆可以同时做到紧凑并适配实时控制循环。",
+      "interest_tag": ""
+    },
+    {
+      "title": "DexTouch-WM: Learning Action-Conditioned Tactile World Models from Human Touch for Dexterous Robot Manipulation",
+      "arxiv_id": "2609.20649",
+      "url": "https://arxiv.org/abs/2609.20649",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2609.20649",
+      "tldr": "DexTouch-WM aligns human and robot tactile layouts and retargets human motion into a shared robot action space to learn future RGB and full-hand contact dynamics. With robot data fixed at five hours, adding 100 hours of human interaction lifts visual PSNR from 23.473 to 27.096 and tactile Contact-F1 from 0.551 to 0.706. It also improves agreement with real-world policy rankings, suggesting human touch is a useful scaling axis for robot world models. However, synthetic rollouts do not consistently improve downstream policy training, an important warning against equating better prediction with better control data.",
+      "tldr_zh": "DexTouch-WM 对齐人手与机器人手的触觉布局，并把人类动作 retarget 到共享机器人动作空间，以预测未来 RGB 与全手接触动态。在机器人数据固定为五小时的情况下，加入 100 小时人类交互把视觉 PSNR 从 23.473 提升到 27.096，触觉 Contact-F1 从 0.551 提升到 0.706。它与真实策略排名的一致性也更高，说明人类触觉可以成为机器人 world model 的新数据扩展轴。但 synthetic rollout 并未稳定改善下游策略训练，提醒我们更好的预测不等于更好的控制数据。",
+      "interest_tag": ""
+    }
+  ],
+  "github_repos": [
+    {
+      "name": "kitze/skillbox",
+      "url": "https://github.com/kitze/skillbox",
+      "tldr": "Skillbox is a self-hosted, versioned library for managing reusable AI-agent skills. Its README documents HTTP and stdio MCP access, scoped client permissions, revision history, GitHub imports, and data export, with optional skill recommendations. The project treats skills as governed artifacts rather than loose prompt files, which is increasingly important as agents share procedures across teams. Its early traction suggests developers want a neutral control plane for portable agent capabilities.",
+      "tldr_zh": "Skillbox 是一个自托管、带版本管理的 AI agent skill 库。README 显示它支持 HTTP 与 stdio MCP、按客户端划分权限、修订历史、GitHub 导入和数据导出，并可选启用技能推荐。它把 skill 当作受治理的可复用资产，而不是散落的 prompt 文件，这对团队共享 agent 工作流越来越重要。早期热度说明开发者正在寻找可移植能力的中立控制面。",
+      "stars": 203,
+      "language": "TypeScript",
+      "interest_tag": ""
+    },
+    {
+      "name": "Matthew0822/ToolReplay",
+      "url": "https://github.com/Matthew0822/ToolReplay",
+      "tldr": "ToolReplay audits agent tool-call transcripts with hash-chain sealing, deterministic replay, duplicate-call detection, result-drift checks, and scope-overreach analysis. The repository includes a dependency-free Python CLI, examples, and tests rather than only a concept page. This makes it useful for investigating whether an agent actually executed the claimed sequence and whether replayed tools still return equivalent results. The larger signal is that observability and provenance are becoming first-class agent-runtime features.",
+      "tldr_zh": "ToolReplay 用 hash-chain 封存、确定性重放、重复调用检测、结果漂移检查和权限越界分析来审计 agent 工具调用记录。仓库提供无依赖 Python CLI、样例与测试，并非只有概念说明。它适合核验 agent 是否真的执行了所声称的步骤，以及工具重放结果是否仍然等价。更大的趋势是 observability 与 provenance 正成为 agent runtime 的一等能力。",
+      "stars": 180,
+      "language": "Python",
+      "interest_tag": ""
+    },
+    {
+      "name": "agentscope-ai-java/agentscope-java",
+      "url": "https://github.com/agentscope-ai-java/agentscope-java",
+      "tldr": "AgentScope Java targets distributed, production-grade, long-running agents in the Java ecosystem. Its documented runtime includes tool permissions, middleware, workspaces, context compaction, session recovery, and distributed state backed by Redis, MySQL, or PostgreSQL. That combination addresses operational concerns that prototype-focused agent frameworks often postpone. The trade-off is a heavier enterprise stack, but it offers a coherent path for durable agent services already built around Java infrastructure.",
+      "tldr_zh": "AgentScope Java 面向 Java 生态中的分布式、生产级长时 agent。其文档覆盖工具权限、中间件、workspace、上下文压缩、会话恢复，以及由 Redis、MySQL 或 PostgreSQL 支撑的分布式状态。这些能力正面处理了许多原型型 agent framework 延后的运维问题。代价是更重的 enterprise stack，但对已有 Java 基础设施的团队，它提供了构建 durable agent service 的连贯路径。",
+      "stars": 108,
+      "language": "Java",
+      "interest_tag": ""
+    },
+    {
+      "name": "jamiepinheiro/ipad_computer_use",
+      "url": "https://github.com/jamiepinheiro/ipad_computer_use",
+      "tldr": "This project gives an AI agent real iPad or iPhone control through native screen sharing, a control server, and an RP2040-based USB HID input path. The README includes session authorization, coordinate calibration, and an MCP interface, making the setup more concrete than a screenshot-only demo. Hardware-mediated input avoids depending on private mobile automation APIs and exposes a useful route for testing agents on locked-down consumer devices. Its main trade-off is physical setup complexity and the need to secure remote-control sessions carefully.",
+      "tldr_zh": "该项目通过原生屏幕共享、控制服务器和基于 RP2040 的 USB HID 输入链路，让 AI agent 真正控制 iPad 或 iPhone。README 提供会话授权、坐标校准和 MCP 接口，因此它比只展示截图的 demo 更完整。硬件注入避免依赖私有移动自动化 API，为在封闭消费设备上测试 agent 提供了一条现实路径。代价是需要额外硬件配置，并且必须严格保护远程控制会话。",
+      "stars": 74,
+      "language": "JavaScript",
+      "interest_tag": "CUA"
+    },
+    {
+      "name": "friday-memory/friday",
+      "url": "https://github.com/friday-memory/friday",
+      "tldr": "Friday is a self-hosted persistent memory layer for coding agents, exposed through MCP. It combines a knowledge graph, factual storage, and semantic retrieval to preserve architecture decisions, schemas, and preferences across sessions. The design targets a real failure mode of coding assistants: losing project context when the conversation or provider changes. Because durable memory can also preserve stale or incorrect facts, its practical value will depend on provenance, update rules, and deletion controls.",
+      "tldr_zh": "Friday 是一个通过 MCP 暴露的自托管 coding-agent 持久记忆层。它组合知识图谱、事实存储和语义检索，用于跨会话保存架构决策、schema 与偏好。该设计针对 coding assistant 的真实痛点：对话或 provider 切换后丢失项目上下文。由于持久记忆也可能保留过时或错误事实，实际价值取决于 provenance、更新规则和删除控制是否可靠。",
+      "stars": 46,
+      "language": "HTML",
+      "interest_tag": "Memory"
+    }
+  ],
+  "hackernews": [
+    {
+      "title": "ZCode, the GLM coding agent, silently uploads your Git history",
+      "url": "https://tokenstead.ai/guides/zcode-silent-git-history-upload",
+      "tldr": "The investigation reports that ZCode packages and uploads a workspace including `.git` history, reflogs, and LFS cache after sign-in. It says the archive is encrypted with a server-provided public key and alleges that visible settings do not fully stop the transfer. The finding matters because Git history can contain deleted secrets and proprietary context beyond the current working tree. Independent reproduction is still important, but the concrete network and filesystem claims make this a serious agent-permission audit case.",
+      "tldr_zh": "这篇调查称，ZCode 在登录后会打包并上传 workspace，其中包括 `.git` 历史、reflog 和 LFS cache。文章称归档使用服务器提供的公钥加密，并指出界面中的相关设置无法完全阻止传输。Git 历史可能包含已删除密钥与当前工作树之外的专有上下文，因此风险远大于普通 telemetry。结论仍值得独立复现，但其具体网络与文件系统证据已经构成严肃的 agent 权限审计案例。",
+      "points": 261,
+      "num_comments": 14,
+      "interest_tag": ""
+    },
+    {
+      "title": "Show HN: Share your AI Setup, Learn from others",
+      "url": "https://mysetup.ai/",
+      "tldr": "MySetup is a community site for publishing the complete AI workflows people actually use, rather than reviewing isolated models or tools. Profiles expose combinations of agents, skills, parallel workflows, and long-running task practices so others can compare and adapt them. The high comment count reflects a market shift: productivity increasingly depends on system configuration and habits, not only model choice. Its value will depend on maintaining authentic, current setups instead of becoming a promotional directory.",
+      "tldr_zh": "MySetup 是一个分享真实 AI 工作流的社区站点，关注完整配置，而不是孤立评测某个模型或工具。用户可以展示 agent、skills、并行工作流和长任务管理方式，让其他人比较并复用。高评论量反映出一个变化：生产力越来越取决于系统配置与使用习惯，而不只取决于模型选择。它能否长期有价值，取决于是否能维持真实、及时的 setup，而不是退化成推广目录。",
+      "points": 242,
+      "num_comments": 138,
+      "interest_tag": ""
+    },
+    {
+      "title": "OpenAI expands ChatGPT ads with Sponsored Agents",
+      "url": "https://openai.com/index/reimagining-advertising-with-ai/",
+      "tldr": "OpenAI is extending ChatGPT advertising from static placements toward Sponsored Agents that let users converse with an advertiser's AI representative. The announcement also connects the format to marketing tooling and commerce integrations. Conversational ads could compress discovery, qualification, and purchase into one interaction, but they blur the boundary between assistance and persuasion. The unusually high discussion count shows that disclosure, bias, privacy, and user trust are the real product questions.",
+      "tldr_zh": "OpenAI 正把 ChatGPT 广告从静态展示扩展到 Sponsored Agents，让用户与广告主的 AI 代表直接对话，并连接营销工具与 commerce integration。对话式广告可能把发现、筛选和购买压缩到一次交互中，但也模糊了帮助与说服之间的边界。其评论数高于 points，说明真正引发争议的不是广告格式本身，而是披露、偏置、隐私和用户信任。这个方向可能形成新的商业入口，也会迫使产品明确回答谁在代表谁。",
+      "points": 157,
+      "num_comments": 180,
+      "interest_tag": ""
+    },
+    {
+      "title": "Launch HN: Skillsync (YC W26) – AI chat sessions made portable across agents",
+      "url": "https://news.ycombinator.com/item?id=49743049",
+      "tldr": "Skillsync converts chat sessions so work can continue across coding agents such as Claude Code, Codex, and Cursor instead of being trapped in proprietary transcript formats. Its open `txcript` core supplies the translation layer, while past sessions can be surfaced through MCP. The HN discussion highlights the core trade-off between moving a complete transcript and handing off only verified decisions, open questions, and next steps. Portability is valuable, but full-history transfer can increase token cost and carry irrelevant or sensitive context forward.",
+      "tldr_zh": "Skillsync 转换 coding-agent 会话，使工作能在 Claude Code、Codex、Cursor 等工具之间继续，而不被专有 transcript 格式锁定。其开源 `txcript` core 提供格式翻译层，历史会话还能通过 MCP 检索。HN 讨论集中在关键 trade-off：迁移完整对话，还是只交接已验证决策、开放问题与下一步。可移植性很有价值，但全量历史也会增加 token 成本，并可能把无关或敏感上下文带入新 agent。",
+      "points": 65,
+      "num_comments": 57,
+      "interest_tag": "Memory"
+    },
+    {
+      "title": "Show HN: AutoBot – live voice control for long-running AI work",
+      "url": "https://github.com/demeyer1/Autobot",
+      "tldr": "AutoBot is a long-running agent harness combining voice control, hierarchical on-disk memory, persistent task graphs, independent verification, and Computer Use. Its repository reports 50.70% on the official AssistantBench hidden set and 32.41% binary accuracy on 108 OSWorld 2.0 tasks, with methodology and artifacts linked in the repo. The compelling product story is that difficult workflows can improve the harness and survive worker replacement instead of disappearing with one chat session. The benchmark claims are repository-reported and should still be interpreted through their published evaluation protocol and cohort choices.",
+      "tldr_zh": "AutoBot 是一个长时 agent harness，组合语音控制、分层磁盘记忆、持久任务图、独立验证和 Computer Use。仓库报告其在 AssistantBench 官方 hidden set 上达到 50.70%，在 108 项 OSWorld 2.0 任务上达到 32.41% binary accuracy，并提供方法与结果材料。它最有传播力的叙事是：困难任务可以反过来改进 harness，且任务状态能在 worker 更换后继续存在。这些 benchmark 数字来自项目仓库，仍应结合其公开评测协议与 cohort 口径解读。",
+      "points": 20,
+      "num_comments": 3,
+      "interest_tag": "CUA"
+    }
+  ]
+}
