@@ -1,0 +1,226 @@
+{
+  "date": "2026-09-21",
+  "generated_at": "2026-09-21T16:04:37.369338+08:00",
+  "briefing_zh": "今天最强的共同信号不是单一模型刷新榜单，而是 agent 系统开始把瓶颈从「模型会不会」移到「环境、harness 与知识层是否可验证」。**RecreationWorld** 用五个平台上的可复现任务、隐藏行为测试和视觉断言评测 hybrid CUA；**CodeMidas** 则直接从已有代码提炼 5,545 个可执行 RL 任务。两者都把真实软件与可执行验证器当作规模化训练的来源，说明 agent training 正从静态指令数据转向可运行、可判分的环境资产。\n\n第二条主线是长程 agent 的效率工程。**DeepSeek-V4.1-Flash** 通过跨层 KV 复用、FP4 cache 和 bounded replay，将 global KV footprint 压到 890 bytes/token，并面向 million-token multimodal agent workload；**SoL-Pi** 不改模型，而是自动搜索 harness，在 EdgeBench 上将 token traffic 降低 44.7–49.0%，API 成本约降三分之一。**Score Centering** 又从训练侧指出，异步 rollout、量化和 stale sampler 带来的 training-inference mismatch，本质上会累积成 drift，可以用加性修正稳定 off-policy RL。\n\n今天的开源热点也从「再做一个聊天 UI」转向完整 agent workbench 和可控基础设施。**ZCode** 一周内获得 4.3K stars，把 Desktop、Web、TUI、Agent CLI 与远程 workspace 放进同一 monorepo；**Skillbox** 把 skills 做成有 revision、权限、checksum 和 MCP 接口的可治理资产；**RepoPilot** 则坚持先复现失败、冻结测试、独立执行验证，再允许生成 draft PR。与此同时，**iPad Computer Use** 用 ReplayKit、控制服务和 RP2040 USB HID 打通真实 iPad 屏幕与输入，展示了 CUA 从浏览器自动化走向物理设备控制的工程路径。\n\n更值得注意的是，今天几项工作都在压缩 agent 系统里的「不可验证魔法」。**Code2Skill** 从近两万个仓库抽取超过一百万条带来源证据的 procedural records；**EvoOntology** 通过 paired evaluation 决定 ontology edits 是否接受；HN 上关于 AI 时代如何面试开发者的讨论则提醒，组织尚未形成与 agent-assisted engineering 匹配的能力评估方法。趋势很清楚：下一阶段竞争不只是谁的模型更强，而是谁能把上下文、技能、环境、验证与人类控制组合成可审计的闭环。",
+  "briefing_en": "The strongest signal today is not a single model topping a leaderboard, but agent systems moving their bottleneck from raw model capability to verifiable environments, harnesses, and knowledge layers. **RecreationWorld** evaluates hybrid computer-use agents through reproducible tasks, hidden behavioral tests, and visual assertions across five platforms, while **CodeMidas** extracts 5,545 executable RL tasks directly from implemented code. Both treat real software plus executable verification as scalable training assets, marking a shift from static instruction data toward runnable, scoreable environments.\n\nA second theme is efficiency engineering for long-horizon agents. **DeepSeek-V4.1-Flash** combines cross-layer KV reuse, FP4 caching, and bounded replay to reach a global KV footprint of 890 bytes per token for million-token multimodal workloads. **SoL-Pi** leaves the model untouched and instead searches the harness, cutting recorded token traffic by 44.7–49.0% and API cost by roughly one third on EdgeBench. **Score Centering** attacks the training side, showing that quantization, stale samplers, and asynchronous rollouts create accumulating drift under training-inference mismatch and that an additive correction can stabilize off-policy RL.\n\nOpen-source momentum is also shifting from yet another chat UI toward complete agent workbenches and controllable infrastructure. **ZCode** reached 4.3K stars in a week by packaging Desktop, Web, TUI, Agent CLI, and remote workspaces in one monorepo. **Skillbox** treats skills as governed assets with revisions, scoped permissions, checksums, and MCP access, while **RepoPilot** requires failure reproduction, frozen tests, and independent execution before it can publish a draft repair PR. **iPad Computer Use** extends the frontier beyond browser automation by combining ReplayKit, a control server, and RP2040 USB HID input for a physical iPad.\n\nThe deeper pattern is a reduction in unverifiable magic. **Code2Skill** mines more than one million provenance-backed procedural records from almost twenty thousand repositories; **EvoOntology** accepts ontology edits only after paired evaluation; and the Hacker News debate over interviewing developers in the agent era shows that organizations still lack matching methods for evaluating human capability. The next competitive frontier is therefore not only stronger models, but auditable loops that combine context, skills, environments, verification, and human control.",
+  "viral_analysis_zh": "今天最可能出圈的是 **RecreationWorld**：它把「看懂现有应用并复刻」这个人人能直观看懂的挑战，扩展到 Ubuntu、macOS、Windows、Android 和 Web，还用 GPT-6 Astra 仅 58.1% overall、完整通过 programmatic tests 仅 2.8% 的反差制造传播张力。项目同时给出 benchmark、环境和测试套件，既有醒目的失败数字，也有可复现资产，天然适合研究社区二次评测和产品团队转发。",
+  "viral_analysis_en": "**RecreationWorld** is the most likely breakout today because its challenge—inspect a running app and faithfully recreate it—is immediately legible, yet spans Ubuntu, macOS, Windows, Android, and the Web. The contrast between GPT-6 Astra's 58.1% overall score and only 2.8% of tasks passing every programmatic test creates a sharp headline, while the released benchmark, environments, and test suites invite reproducible follow-up work.",
+  "huggingface_papers": [
+    {
+      "title": "EvoOntology: A Self-Evolving Ontology Layer for Data Agents",
+      "url": "https://huggingface.co/papers/2609.15779",
+      "tldr": "EvoOntology places an MCP-accessible semantic layer between data agents and heterogeneous tables, files, and databases. A builder agent constructs the schema, content, and tool layers, while an attribution-guided evolution loop accepts typed edits only after backbone-conditional paired evaluation. Across three data-agent benchmarks and four LLM backbones, it consistently beats direct exploration and manually built semantic-layer baselines. The work matters because it turns data understanding from repeated prompt-time exploration into an adaptive, testable system asset.",
+      "tldr_zh": "EvoOntology 在 data agent 与异构表格、文件、数据库之间加入一个可通过 MCP 查询的语义层。builder agent 自动构建 schema、content 和 tool 三层，后续再通过 attribution-guided typed edits 演化，并仅在 backbone-conditional paired evaluation 通过后接受修改。在三个 data-agent benchmark 和四种 LLM backbone 上，它持续优于直接探索与人工 semantic layer。重要性在于，它把每次 prompt 内临时摸索数据，变成可演化、可测试的系统资产。",
+      "upvotes": 56,
+      "authors": "Meiduo Chong, Shaolei Zhang, Ju Fan, Xiaoyong Du",
+      "ai_keywords": [
+        "data agents",
+        "ontology",
+        "MCP",
+        "self-evolution"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "Grounded Skill Synthesis from Code at Scale for Agentic Intelligence",
+      "url": "https://huggingface.co/papers/2609.05571",
+      "tldr": "Code2Skill converts source-code units into atomic operations, composite workflows, and recurring patterns grounded in executable evidence. It applies reconstruction and source-aware comparison to 19,769 repositories, producing CodeSkillBank with 1,006,822 accepted records carrying provenance and boundary metadata. Retrieved skills improve matched agent baselines by 11.7% on average across 72 evaluations and outperform trajectory-derived skill banks on all seven shared benchmarks. The result offers a scalable way to acquire procedural knowledge before an agent has accumulated its own environment trajectories.",
+      "tldr_zh": "Code2Skill 把源代码单元转成带可执行证据的 atomic operations、composite workflows 与 recurring patterns。它在 19,769 个仓库上做 reconstruction 和 source-aware comparison，产出含 provenance 与 boundary metadata 的 1,006,822 条 CodeSkillBank 记录。在 72 组匹配评测中，检索到的 skills 平均提升 11.7%，并在七个共享 benchmark 上全面超过 trajectory-derived skill bank。它给出了一条无需先积累环境交互轨迹，也能规模化获得 procedural knowledge 的路径。",
+      "upvotes": 54,
+      "authors": "Yongqi Tong, Pan Wang, Hang Wang, Jianshe Li, Xin Zhang, Jiang-Ming Yang, Wei Wu",
+      "ai_keywords": [
+        "agent skills",
+        "code mining",
+        "procedural knowledge",
+        "verification"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "RecreationWorld: Scalable and Verifiable Environments for Hybrid Computer-Use Agents",
+      "url": "https://huggingface.co/papers/2609.22000",
+      "tldr": "RecreationWorld asks hybrid computer-use agents to inspect a running reference application, rebuild it, and visually verify the result without a prescribed GUI-versus-code workflow. It provides reproducible Ubuntu, macOS, Windows, Android, and Web environments plus RecreationBench, a frozen 250-task suite with reference-grounded programmatic and visual assertions. Training on generated recreation trajectories transfers to five out-of-distribution coding and hybrid-CUA benchmarks, yet the leading GPT-6 Astra passes every programmatic test on only 2.8% of tasks. This exposes interaction fidelity—not static UI resemblance—as the central unsolved problem for agents that both operate and build software.",
+      "tldr_zh": "RecreationWorld 要求 hybrid computer-use agent 先探索一个正在运行的参考应用，再自行复刻并进行视觉验证，而不预设 GUI 与 coding 的工作流。它提供 Ubuntu、macOS、Windows、Android、Web 五个平台的可复现环境，以及含 250 个冻结任务、programmatic 与 visual assertions 的 RecreationBench。由复刻轨迹训练的模型能迁移到五个 OOD coding/hybrid-CUA benchmark，但领先的 GPT-6 Astra 也只有 2.8% 任务能通过全部 programmatic tests。这说明真正未解的是交互行为与计算结果的 fidelity，而不是静态界面长得像。",
+      "upvotes": 48,
+      "authors": "Shuai Bai, Jiayong Deng, Yikun Fu, Chang Gao, Xuhao Hu, Mianqiu Huang, Yizhen Jiang, et al.",
+      "ai_keywords": [
+        "computer use agents",
+        "hybrid agents",
+        "GUI",
+        "verifiable environments"
+      ],
+      "interest_tag": "CUA"
+    },
+    {
+      "title": "CodeMidas: Scaling Agentic Coding RL Environments from Code Itself",
+      "url": "https://huggingface.co/papers/2609.22068",
+      "tldr": "CodeMidas turns functionality already implemented in open-source repositories into executable coding-agent RL environments using source code as the only task-specific input. Agents formulate behavioral specifications, construct tests against the original implementation, and filter tasks through execution checks and repeated solution rollouts. The pipeline yields 5,545 tasks from 3,185 codebases across 23 languages, and GRPO training improves issue repair, whole-program construction, and Terminal-Bench v2.1 by 11.7, 17, and 8.5 percentage points respectively. It broadens verifiable RL data beyond the narrow supply of issue-and-commit artifacts.",
+      "tldr_zh": "CodeMidas 仅以开源仓库的源代码为 task-specific input，把已经实现的功能反向构造成可执行的 coding-agent RL environment。agents 先提炼行为规格，再对原实现构造测试，并通过 execution checks 与重复 solution rollouts 筛除不可靠任务。最终得到来自 3,185 个 codebase、覆盖 23 种语言的 5,545 个任务；GRPO 训练分别让 issue repair、whole-program construction 和 Terminal-Bench v2.1 提升 11.7、17 与 8.5 个百分点。它把可验证 RL 数据的来源从稀缺的 issue/commit 扩展到了代码本身。",
+      "upvotes": 41,
+      "authors": "Bowen Ye, Lei Li, Shicheng Li, Zihao Yue, Linghao Zhang, Hanglong Lv, Yuanxin Liu, et al.",
+      "ai_keywords": [
+        "coding agents",
+        "reinforcement learning",
+        "environment generation",
+        "verifiers"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "MintAct: A Unified Visual Agent for Digital Environments",
+      "url": "https://huggingface.co/papers/2609.22083",
+      "tldr": "MintAct trains one visual-agent family at 2B, 4B, and 8B scales to cover UI grounding, multi-step navigation, and visual tool use across mobile, desktop, and web. Its core claim is that carefully designed environments, scalable RL infrastructure, and a unified recipe can match per-domain specialists rather than requiring separate agents for every interface class. The work directly tests whether cross-environment computer use can share a common policy backbone. If the released infrastructure is reproducible, it could reduce the fragmentation that currently separates grounding models from full navigation agents.",
+      "tldr_zh": "MintAct 训练 2B、4B、8B 三种规模的统一 visual agent，同时覆盖 mobile、desktop、web 上的 UI grounding、multi-step navigation 与 visual tool use。核心主张是：通过精心设计的环境、可扩展 RL infrastructure 和统一 recipe，一个模型可以匹配各领域 specialist，而不必为每类界面维护独立 agent。它直接检验跨环境 computer use 是否能共享同一 policy backbone。若其基础设施可复现，将有机会缓解 grounding model 与完整 navigation agent 长期割裂的问题。",
+      "upvotes": 6,
+      "authors": "Mingfei Gao, Rui Tian, Haiming Gang, Bohan Zhai",
+      "ai_keywords": [
+        "visual agents",
+        "UI grounding",
+        "navigation",
+        "reinforcement learning"
+      ],
+      "interest_tag": "CUA"
+    }
+  ],
+  "alphaxiv_papers": [
+    {
+      "title": "DeepSeek-V4.1-Flash: Pushing the Limits of KV Cache Compression",
+      "arxiv_id": "2609.19969",
+      "url": "https://arxiv.org/abs/2609.19969",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2609.19969",
+      "tldr": "DeepSeek-V4.1-Flash is a 552B-parameter multimodal MoE that activates 16B parameters during decoding and 8B during prefill, with context support up to one million tokens. Its CED architecture, cross-layer reuse in CSA2, FP4 KV caching, and SWA Bounded Replay reduce the global cache to 890 bytes per token and persistent cache to roughly one eighth of the prior model. The model reports strong coding, reasoning, multimodal, and agentic results despite the smaller cache, including 90.6% on Terminal-Bench 2.1. The key contribution is co-designing model architecture and serving infrastructure around the input-heavy economics of long-horizon agents.",
+      "tldr_zh": "DeepSeek-V4.1-Flash 是 552B 参数的 multimodal MoE，decode 激活 16B、prefill 激活 8B，并支持最长一百万 token context。CED、CSA2 跨层复用、FP4 KV cache 与 SWA Bounded Replay 将 global cache 压到 890 bytes/token，persistent cache 约为前代的八分之一。在 cache 大幅缩小后，它仍报告了强劲的 coding、reasoning、multimodal 与 agentic 结果，包括 Terminal-Bench 2.1 的 90.6%。关键贡献是围绕长程 agent 输入占比高的成本结构，同时设计模型架构和 serving infrastructure。",
+      "interest_tag": ""
+    },
+    {
+      "title": "SoL-Pi: Recursively Scaling Auto-Research Loops for Efficient Agent Harness",
+      "arxiv_id": "2609.20519",
+      "url": "https://arxiv.org/abs/2609.20519",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2609.20519",
+      "tldr": "SoL-Pi applies recursive auto-research to the agent harness rather than retraining the underlying model. Across 535 executable environments it selects four mechanisms—Action Fusion, Online Context Compact, ObservationPack, and an Evidence-Preserving Reducer—that transfer from GPT-5.6 Sol to Opus 5. On EdgeBench the full stack cuts recorded token traffic by 44.7–49.0% and API cost by about one third while staying near the Pi baseline. It demonstrates that context and observation plumbing can be optimized empirically as a first-class research surface, though some task scores trade off against efficiency.",
+      "tldr_zh": "SoL-Pi 把 recursive auto-research 用在 agent harness，而不是重新训练底层模型。它在 535 个可执行环境中筛出 Action Fusion、Online Context Compact、ObservationPack 和 Evidence-Preserving Reducer 四种机制，并从 GPT-5.6 Sol 迁移到 Opus 5。在 EdgeBench 上，完整组合将 recorded token traffic 降低 44.7–49.0%，API 成本约降三分之一，同时总体表现接近 Pi baseline。它证明 context 与 observation plumbing 可以成为可实验优化的一等研究对象，但部分任务仍存在性能与效率 trade-off。",
+      "interest_tag": ""
+    },
+    {
+      "title": "Score Centering Stabilizes Off-policy Reinforcement Learning",
+      "arxiv_id": "2609.20807",
+      "url": "https://arxiv.org/abs/2609.20807",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2609.20807",
+      "tldr": "The paper decomposes training-inference mismatch into useful reward-score covariance and an accumulating drift caused by the sampler's expected policy score. Score centering subtracts that expectation as an additive correction, avoiding the high-variance multiplicative ratios and clipping choices of pure importance sampling. It remains effective under quantization and stale rollouts, reaching about 30% training accuracy in the harshest tested 30B MoE setting where most baselines remain below 5%, with under 1% reported overhead. This is practically important for asynchronous agentic RL systems that cannot make rollout and training engines numerically identical.",
+      "tldr_zh": "论文把 training-inference mismatch 分解为有用的 reward-score covariance，以及由 sampler 期望 policy score 引发、会逐步累积的 drift。Score centering 用加性修正减去这一期望，避免纯 importance sampling 的高方差乘法权重和 clipping 超参。在量化与 stale rollout 下它仍然稳定；最严苛的 30B MoE 设置中训练准确率约 30%，而多数 baseline 低于 5%，报告开销不足 1%。这对无法让 rollout engine 与 training engine 数值完全一致的异步 agentic RL 系统尤其实际。",
+      "interest_tag": ""
+    },
+    {
+      "title": "JEPA-Anything: Learning Predictive Models across Different Worlds",
+      "arxiv_id": "2609.20800",
+      "url": "https://arxiv.org/abs/2609.20800",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2609.20800",
+      "tldr": "JEPA-Anything introduces orthogonal predictive factorization, splitting latent targets into complementary subspaces with dedicated predictors and recombining them through a conditioned synthesis map. The same predictive core is tested across vision, biology, clinical events, control, molecular dynamics, physical fields, and weather. It improves all ten matched dynamics tasks, lowers one-step intervention error in Pong by 34.8%, and produces stronger 100-step molecular rollouts. The result suggests that explicit factor separation may be a reusable principle for stable world modeling, although domain-specific adapters still handle tokenization and target construction.",
+      "tldr_zh": "JEPA-Anything 提出 orthogonal predictive factorization，把 latent target 分解到互补子空间，由不同 predictor 学习，再通过条件良好的 synthesis map 重组。相同的 predictive core 被用于 vision、biology、clinical events、control、molecular dynamics、physical fields 与 weather。它在十个匹配 dynamics tasks 上全部提升，将 Pong 的单步 intervention error 降低 34.8%，并改善 100-step molecular rollout。结果说明显式 factor separation 可能是稳定 world modeling 的通用原则，不过 tokenization 与 target construction 仍依赖 domain-specific adapter。",
+      "interest_tag": ""
+    },
+    {
+      "title": "Reinforcement Learning for Real-Time Vision-Language-Action Policies",
+      "arxiv_id": "2609.18207",
+      "url": "https://arxiv.org/abs/2609.18207",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2609.18207",
+      "tldr": "Real-Time EXPO-FT addresses VLA latency by separating slow, expressive action-chunk generation from a lightweight policy that edits those actions using the newest observation. A chunk-level critic selects between original and corrected candidates, while RL trains the edit policy under delayed execution rather than pretending observations are fresh. The method reaches 96.2% average success across ten delayed Kinetix environments and improves four real-world tasks from 42% to 97% with at most ten minutes of online robot data. It reframes inference latency as a policy-learning problem rather than only a systems optimization problem.",
+      "tldr_zh": "Real-Time EXPO-FT 针对 VLA latency，把缓慢但表达力强的 action-chunk generation，与根据最新 observation 快速修正动作的轻量 edit policy 分开。chunk-level critic 在原始和修正候选间选择，RL 则直接按 delayed execution 训练，而不是假装 observation 始终新鲜。方法在十个有延迟的 Kinetix 环境中平均成功率达 96.2%，并用最多十分钟在线机器人数据把四个真实任务从 42% 提升到 97%。它把 inference latency 从纯系统优化问题，重新定义成 policy learning 问题。",
+      "interest_tag": ""
+    }
+  ],
+  "github_repos": [
+    {
+      "name": "zai-org/ZCode",
+      "url": "https://github.com/zai-org/ZCode",
+      "tldr": "ZCode is Z.ai's open-source coding-agent workbench, combining an Electron desktop app, browser workspace, TUI, backend services, and the Agent CLI/runtime in one monorepo. The same local runtime can be launched through desktop, terminal, or Web modes, with explicit SSH/WSL support and authenticated remote hosting options. Its 4.3K stars and 1.1K forks in the first week indicate unusually strong hands-on adoption rather than bookmark-only attention. The appeal is the complete product surface: users can inspect and extend the runtime instead of receiving only a thin model wrapper.",
+      "tldr_zh": "ZCode 是 Z.ai 开源的 coding-agent workbench，把 Electron desktop、browser workspace、TUI、backend services 与 Agent CLI/runtime 放在同一 monorepo。相同的本地 runtime 可从 desktop、terminal 或 Web 启动，并明确支持 SSH/WSL 与带认证的远程访问。一周内 4.3K stars、1.1K forks，说明关注不只是收藏，而有很强的实际试用意愿。它的吸引力在于交付完整产品面：用户拿到的是可审计、可扩展的 runtime，而非薄薄一层模型 wrapper。",
+      "stars": 4297,
+      "language": "TypeScript",
+      "interest_tag": ""
+    },
+    {
+      "name": "kitze/skillbox",
+      "url": "https://github.com/kitze/skillbox",
+      "tldr": "Skillbox is a self-hosted library that treats agent skills as versioned, permissioned packages instead of loose Markdown files. It supports immutable revisions, conflict detection, scoped client keys, MCP discovery, checksum-verified downloads, GitHub imports pinned to commits, and backup/restore workflows. Optional model-based recommendations are explicitly separated from deterministic search and fail back rather than returning partial rankings. The project is valuable because skill governance, provenance, and revocation become operational concerns once multiple agents share the same procedural library.",
+      "tldr_zh": "Skillbox 是自托管的 agent skill library，把 skills 当作有版本和权限的 package，而不是散落的 Markdown 文件。它支持 immutable revisions、冲突检测、scoped client keys、MCP discovery、checksum-verified download、固定 commit 的 GitHub import，以及 backup/restore。可选的模型推荐与 deterministic search 明确分离，失败时整体 fallback，而不是返回不完整 ranking。当多个 agents 共享同一 procedural library 时，governance、provenance 与 revocation 都会变成现实运维问题，这正是项目的价值。",
+      "stars": 220,
+      "language": "TypeScript",
+      "interest_tag": ""
+    },
+    {
+      "name": "indada/repopilot",
+      "url": "https://github.com/indada/repopilot",
+      "tldr": "RepoPilot wraps the OpenAI Codex SDK in a bounded Issue/PR workflow that first creates requirement-driven tests, reproduces failures, freezes test identities, and only then proposes repairs. A separate Docker runner independently checks candidate changes, while protected paths, budgets, freshness checks, and human-controlled draft PR publication constrain side effects. Version 1.5 adds durable Planner, Tester, Developer, and Reviewer handoffs without giving those roles final authority over evidence. It is a concrete example of verification-first agent orchestration rather than trusting a model's self-reported success.",
+      "tldr_zh": "RepoPilot 把 OpenAI Codex SDK 放进有边界的 Issue/PR workflow：先生成 requirement-driven tests、复现失败、冻结测试身份，之后才允许提出修复。独立 Docker runner 验证候选修改，同时 protected paths、预算、freshness checks 与 human-controlled draft PR publication 限制副作用。1.5 版加入持久化的 Planner、Tester、Developer、Reviewer handoff，但不让这些角色凌驾于执行证据之上。它是 verification-first agent orchestration 的具体实现，而不是相信模型自己宣称成功。",
+      "stars": 153,
+      "language": "TypeScript",
+      "interest_tag": ""
+    },
+    {
+      "name": "jamiepinheiro/ipad_computer_use",
+      "url": "https://github.com/jamiepinheiro/ipad_computer_use",
+      "tldr": "This project gives an AI agent fresh iPad screenshots and high-level input actions through a native ReplayKit app, a separate control server, and a Seeed XIAO RP2040 that replays commands as real USB HID events. The physical input path avoids relying on private iPad automation APIs, while calibration profiles map abstract pointer actions to the device. Its security model intentionally assumes a local or private network and warns against exposing the unauthenticated MCP adapter publicly. It is a practical bridge from screen-based agents to real mobile hardware, albeit with a nontrivial firmware, signing, and networking setup.",
+      "tldr_zh": "该项目通过原生 ReplayKit app、独立 control server，以及将命令重放成真实 USB HID 事件的 Seeed XIAO RP2040，为 AI agent 提供新鲜 iPad 截图和高层输入动作。物理输入路径绕开私有 iPad automation API，calibration profile 则把抽象 pointer action 映射到设备。安全模型明确假设本地或私有网络，并警告不要把无认证的 MCP adapter 暴露到公网。它把 screen-based agent 接到真实移动硬件上，但代价是 firmware、签名与网络配置都不算轻。",
+      "stars": 74,
+      "language": "JavaScript",
+      "interest_tag": "CUA"
+    },
+    {
+      "name": "aibuildai-inc/aibuildai-llm-posttrain-agent",
+      "url": "https://github.com/aibuildai-inc/aibuildai-llm-posttrain-agent",
+      "tldr": "AIBuildAI's post-training agent autonomously designs training algorithms, curates data, writes experiment code, runs bounded searches, and packages the best resulting model. A task-specific meta-agent can generate the search topology itself, while a curated MCP knowledge base supplies methods, datasets, and framework guidance; runs are journaled in a durable PostgreSQL-backed execution graph. The repository reports 46.6% on PostTrainBench, close to the 51.1% human-expert baseline, and ships a reproducible single-GPU GSM8K example. It is ambitious evidence that agentic experimentation is moving from code repair toward closed-loop model development, though the reported benchmark should still be independently reproduced.",
+      "tldr_zh": "AIBuildAI post-training agent 能自动设计训练算法、整理数据、编写实验代码、运行有预算的搜索，并打包最优模型。task-specific meta-agent 可以自行生成 search topology，MCP knowledge base 提供方法、数据集和框架知识，所有运行则记录在 PostgreSQL 支撑的 durable execution graph 中。仓库报告 PostTrainBench 46.6%，接近 human expert 的 51.1%，并给出单卡可复现的 GSM8K 示例。它显示 agentic experimentation 正从修代码延伸到闭环模型开发，不过报告的 benchmark 仍需要独立复现。",
+      "stars": 68,
+      "language": "Python",
+      "interest_tag": ""
+    }
+  ],
+  "hackernews": [
+    {
+      "title": "Ask HN: How do you interview devs in a post-AI world?",
+      "url": "https://news.ycombinator.com/item?id=49768826",
+      "tldr": "The thread starts from an interviewer observing that many candidates now describe themselves as directing coding agents rather than writing much code by hand. That creates a measurement problem: traditional whiteboard coding may test an increasingly artificial workflow, while unrestricted agent use can hide whether a candidate can debug, reason about systems, or judge bad output. The discussion matters because hiring processes need to evaluate decomposition, verification, and engineering judgment without pretending tool-assisted development does not exist. Its high comment-to-point ratio signals unresolved disagreement rather than a settled best practice.",
+      "tldr_zh": "讨论源于一位面试官的观察：越来越多候选人说自己主要在指挥 coding agents，而不是亲手写大量代码。这造成新的测量难题：传统白板编程可能测试一个越来越不真实的工作流，但无限制使用 agent 又可能掩盖候选人是否能调试、做系统推理和识别错误输出。招聘流程需要在承认 tool-assisted development 已存在的同时，真正评估任务分解、验证能力与工程判断。很高的评论/points 比例说明社区仍有强烈分歧，尚无成熟答案。",
+      "points": 42,
+      "num_comments": 33,
+      "interest_tag": ""
+    },
+    {
+      "title": "Can I Let My AI Agent Run on Shabbat?",
+      "url": "https://www.chabad.org/library/article_cdo/aid/7288064/jewish/Can-I-Let-My-AI-Agent-Run-on-Shabbat.htm",
+      "tldr": "The article frames autonomous AI agents as a new case for an old question: whether work initiated before Shabbat may continue automatically when the system can make decisions and take actions on its own. The interesting distinction is not merely whether electricity runs unattended, but how agency, instruction, commercial benefit, and observable outcomes should be attributed when software continues operating. Even without settling technical design, the piece shows that autonomous systems create governance questions outside conventional safety and employment debates. Its HN traction comes from applying a concrete religious-legal framework to the fuzzy boundary between a tool and a delegated actor.",
+      "tldr_zh": "文章把 autonomous AI agent 放进一个古老问题的新版本：若工作在安息日前启动，当系统能够自行决策并行动时，是否可以让它继续运行。关键区别不只是电器是否自动工作，而是当软件持续执行时，agency、instruction、commercial benefit 与可观察结果应归属于谁。即便不讨论具体系统设计，它也显示 autonomous systems 带来的治理问题远超常见的安全和就业议题。它在 HN 受到关注，是因为用具体的宗教法框架切入了「工具」与「被委托行动者」之间模糊的边界。",
+      "points": 30,
+      "num_comments": 14,
+      "interest_tag": ""
+    },
+    {
+      "title": "Show HN: I created an open source locally usable full fledged AI platform",
+      "url": "https://github.com/theguysudo/ENZO",
+      "tldr": "ENZO packages chat across 300-plus models, a two-pass agent builder, research and coding loops, skill injection, and a browser-side encrypted key vault into a self-hosted Docker workspace. It emphasizes direct BYOK provider billing, no platform subscription, and a one-command local deployment, while documenting that scheduled self-hosted agents may persist one claimed key server-side. The repository backs its positioning with a visible demo, extensive README, 298 tests, and a 44-assertion black-box security stage. Its appeal is breadth and low-friction onboarding, though users should independently review the large security surface and strong self-improvement claims.",
+      "tldr_zh": "ENZO 把 300 多个模型的聊天、two-pass agent builder、research/coding loops、skill injection 与浏览器端加密 key vault 集成进自托管 Docker workspace。它强调 BYOK 直接向 provider 付费、无平台订阅和一条命令部署，同时也明确说明 scheduled self-hosted agents 可能在服务端持久化首次认领的 key。仓库用可见 demo、详尽 README、298 个测试和 44 项 black-box security stage 支撑定位。吸引力来自功能广度与低门槛 onboarding，但用户仍应独立审查其较大的安全面和强烈的 self-improvement 主张。",
+      "points": 16,
+      "num_comments": 13,
+      "interest_tag": ""
+    },
+    {
+      "title": "Show HN: Agentgit – a Git host for AI agents, no account, no token, no key",
+      "url": "https://agentgit.co/",
+      "tldr": "Agentgit provides disposable Git hosting where the first push creates a public repository, with no account, API token, or separate repository-creation call. Refs are append-only, repositories expire 24 hours after the last push, and signed pushes can attach SSH-key provenance; a WebSocket watcher lets agents react to new pushes without polling. The design is deliberately optimized for scratch handoffs between sandboxed agents rather than durable source hosting. Its virality comes from reducing coordination to the one protocol coding agents already know, while making the security and ephemerality trade-offs explicit.",
+      "tldr_zh": "Agentgit 提供 disposable Git hosting：第一次 push 就创建公开仓库，不需要账号、API token 或单独建仓操作。refs 只能追加，仓库在最后一次 push 24 小时后过期，signed push 可记录 SSH-key provenance，WebSocket watcher 则让 agent 无需轮询即可等待新提交。它明确面向 sandboxed agents 之间的临时交接，而不是持久源码托管。传播点在于把协作压缩到 coding agents 已经会用的 Git protocol，同时把公开性、不可删除与短生命周期 trade-off 说得很清楚。",
+      "points": 10,
+      "num_comments": 6,
+      "interest_tag": ""
+    },
+    {
+      "title": "Show HN: Gdocs-me-up: a high-fidelity Google Docs exporter",
+      "url": "https://github.com/behdad/gdocs-me-up",
+      "tldr": "Gdocs-me-up exports Google Docs into self-hostable HTML and CSS while preserving headings, line spacing, nested lists, tables, RTL text, images, crops, fonts, and table-of-contents structure. It reads detailed styling from the Docs API, merges compatible runs into semantic markup, and optimizes image formats without silently enlarging or flattening them. Unit, snapshot, content-verification, and visual-comparison tests make fidelity a measurable target rather than a vague promise. The project is a useful example of an AI-assisted tool whose value comes from a narrow, testable output contract instead of generic agent breadth.",
+      "tldr_zh": "Gdocs-me-up 把 Google Docs 导出为可自托管 HTML/CSS，同时保留 headings、line spacing、嵌套列表、表格、RTL 文本、图片裁剪、字体与 TOC 结构。它从 Docs API 读取细粒度样式，把兼容 text runs 合并成 semantic markup，并在不盲目放大或扁平化的前提下优化图片格式。unit、snapshot、content-verification 与 visual-comparison tests 让 fidelity 成为可测目标，而不是模糊承诺。它也说明 AI-assisted 工具不一定要功能宽泛，围绕窄而可验证的输出契约同样能形成价值。",
+      "points": 9,
+      "num_comments": 2,
+      "interest_tag": ""
+    }
+  ]
+}
