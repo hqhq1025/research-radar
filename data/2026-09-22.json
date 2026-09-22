@@ -1,0 +1,221 @@
+{
+  "date": "2026-09-22",
+  "generated_at": "2026-09-22T16:04:24.398143+08:00",
+  "briefing_zh": "今天最强的主线不是又一个更大的模型，而是 agent system 本身开始成为可训练、可蒸馏、可评测的对象。**RRSI** 用 proposal budget、critic 和 pruner 约束 harness 的递归自我改进，在八个 benchmark 上降低了对训练任务的过拟合；**Harness-Zero** 则进一步把专用 harness 诱导出的行为蒸馏回模型权重。这两项工作共同指出：未来能力提升不只来自 backbone scale，也来自对 prompts、tools、context management 和 execution loop 的系统化优化。\n\n第二条主线是长期交互所需的状态表示。**WorldCrafter** 用 camera-queryable 的隐式 3D-aware memory 提升分钟级视频世界模型的一致性，而 **Jev-Mem** 把快速的 System-One controller 放在 memory construction 与 retrieval 的关键路径上，减少昂贵的 autoregressive 控制。它们解决的是同一个底层问题：长程 agent 不能反复重读全部历史，必须把过去压缩成可查询、可更新、与当前任务相关的状态。\n\n评测与数据构造也在从静态答案转向可执行环境。**GameHorizon Suite** 以 5,000 小时、21 款 AAA 游戏和超过一百万次模型调用建立跨时间尺度的 gameplay evaluation；**RecreationWorld** 则要求 hybrid CUA 在 Ubuntu、macOS、Windows、Android 与 Web 上探索 reference app、重建功能并通过隐藏测试。后者尤其重要，因为它把 GUI exploration、coding 和 visual verification 放进同一条可验证 trajectory，而不是分别测几个孤立能力。\n\n开源与社区信号呈现鲜明反差：**ZCode** 一周内获得超过 6,000 stars，但其工作区与 Git history 上传争议同时登上 HN 榜首，说明 coding-agent 的增长已经与 provenance、privacy 和 harness trust 绑定。与此同时，**Skillbox**、**RepoPilot**、**Friday** 和 **Skillsync** 都围绕 skills、verification、memory 与 session portability 补齐 agent 基础设施；**SoL-Pi** 和 test-time communication 的结果则表明，下一阶段的规模化可能来自更便宜的 harness loop 与有效的 agent 协作，而不只是更长的单体推理。",
+  "briefing_en": "Today’s strongest theme is not another larger model, but the agent system itself becoming an object of training, distillation, and evaluation. **RRSI** constrains recursive harness improvement with proposal budgets, a critic, and a pruner to reduce overfitting across eight benchmarks; **Harness-Zero** goes further by distilling behaviors induced by specialized harnesses back into model weights. Together they suggest that future capability gains will come not only from backbone scale, but from systematic optimization of prompts, tools, context management, and execution loops.\n\nA second thread concerns state representations for long-running interaction. **WorldCrafter** introduces camera-queryable implicit 3D-aware memory to improve minute-scale consistency in video world models, while **Jev-Mem** places a fast System-One controller on the critical path of memory construction and retrieval to avoid expensive autoregressive control. Both attack the same systems problem: long-horizon agents cannot repeatedly reread their entire history and need compact state that is queryable, updateable, and relevant to the current task.\n\nEvaluation and data generation are also shifting from static answers toward executable environments. **GameHorizon Suite** uses 5,000 hours from 21 AAA games and more than one million model calls to evaluate gameplay across time horizons; **RecreationWorld** asks hybrid CUAs to inspect reference applications, rebuild their behavior, and pass hidden tests across Ubuntu, macOS, Windows, Android, and the Web. RecreationWorld is especially notable because it puts GUI exploration, coding, and visual verification into one verifiable trajectory instead of scoring those abilities in isolation.\n\nOpen-source and community signals show a sharp tension. **ZCode** gained more than 6,000 stars in a week, yet allegations that it uploads workspaces and Git history simultaneously became the top HN story, tying coding-agent growth to provenance, privacy, and harness trust. Meanwhile, **Skillbox**, **RepoPilot**, **Friday**, and **Skillsync** are filling infrastructure gaps around skills, verification, memory, and session portability; results from **SoL-Pi** and test-time communication suggest the next scaling axis may be cheaper harness loops and effective collaboration rather than merely longer single-agent reasoning.",
+  "viral_analysis_zh": "今天最可能形成跨圈层爆款的是 **ZCode**：6,000+ stars 提供正向增长叙事，而 Git history 上传争议又制造了强烈的安全冲突，同一项目同时占据 GitHub 与 HN 的注意力。研究侧最有传播潜力的是 **SoL-Pi**，因为「性能相当、token 减少约一半、API 成本下降约三分之一」把复杂 harness research 压缩成了开发者一眼可懂的成本收益。",
+  "viral_analysis_en": "**ZCode** is the clearest cross-community viral story today: 6,000-plus stars create a strong growth narrative, while the Git-history upload controversy adds a high-stakes security conflict, giving the same project simultaneous GitHub and HN momentum. On the research side, **SoL-Pi** has the strongest shareability because its message compresses harness research into an immediately legible developer payoff: comparable performance with roughly half the token traffic and about one-third lower API cost.",
+  "huggingface_papers": [
+    {
+      "title": "RRSI: Regularized Recursive Self-Improvement of Agent Harnesses",
+      "url": "https://arxiv.org/abs/2609.24972",
+      "tldr": "RRSI treats an agent harness—prompts, control flow, tools, memory, and context policy—as an object that can recursively improve itself without changing the backbone model. It regularizes both proposal and selection through an annealed edit budget, exploration incentives, a critic, and a pruner, targeting the overfitting that appears when harness evolution memorizes development tasks. Across eight coding, workspace, and engineering-design benchmarks, it gains up to 14.1 points in distribution and 4.7 points out of distribution while using 30% fewer policy tokens than unregularized evolution. The key result is that harness search can produce reusable mechanisms rather than benchmark-specific patches when complexity and transfer are explicit selection pressures.",
+      "tldr_zh": "RRSI 把 prompts、control flow、tools、memory 与 context policy 组成的 agent harness 视为可递归自我改进的对象，而不修改 backbone model。它通过退火式 edit budget、探索激励、critic 和 pruner 同时约束 proposal 与 selection，专门抑制 harness evolution 对开发任务的记忆式过拟合。在八个 coding、workspace 与 engineering-design benchmark 上，它取得最高 14.1 个点的分布内增益和 4.7 个点的分布外增益，同时比无正则演化少用 30% policy tokens。核心意义是：只要把复杂度与迁移性显式纳入选择压力，harness search 可以发现可复用机制，而不只是 benchmark-specific patch。",
+      "upvotes": 65,
+      "authors": "Peng Xia, Rujun Han, Zifeng Wang, Yanfei Chen, Yufan Zhang, Yoonho Lee, Chengsong Huang, Han Yu, Zhongying CuiZhu, Yifei Ming, Huaxiu Yao, Burak Gokturk, Tomas Pfister, Chen-Yu Lee",
+      "ai_keywords": [
+        "agent harness",
+        "recursive self-improvement",
+        "regularization"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "WorldCrafter: Consistent Video World Model with Implicit 3D-aware Memory",
+      "url": "https://arxiv.org/abs/2609.24984",
+      "tldr": "WorldCrafter equips a video world model with an implicit 3D-aware memory that can be queried by a requested camera pose. A learned encoder and pose-conditioned readout compress multi-view history into a fixed token budget before denoising, avoiding explicit depth correspondences while combining long-term evidence with recent temporal context. The model improves long-horizon visual consistency and camera-control accuracy across static and dynamic scenes and supports minute-scale streaming exploration from one image or a text prompt. It matters because persistent spatial state, rather than raw frame history, is a plausible route to interactive world models that do not redraw the environment on every turn.",
+      "tldr_zh": "WorldCrafter 为 video world model 加入可按目标 camera pose 查询的隐式 3D-aware memory。学习到的 encoder 与 pose-conditioned readout 在 denoising 前把多视角历史压缩到固定 token budget，无需显式 depth correspondence，并把长期证据与近期 temporal context 结合。模型在静态和动态场景中提升了长时视觉一致性与相机控制精度，可从单张图像或文本进行分钟级 streaming exploration。它的重要性在于：持久的空间状态，而非原始 frame history，可能是避免交互式 world model 每一步都重绘环境的关键。",
+      "upvotes": 44,
+      "authors": "Wangbo Yu, Kunhao Liu, Wenbo Hu, Shenghai Yuan, Chaoran Feng, Haiyang Zhou, Yukun Huang, Yiran Wang, Wang Zhao, Yingmin Luo, Ying Shan",
+      "ai_keywords": [
+        "world model",
+        "video generation",
+        "3D-aware memory"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "GameHorizon Suite: Multi-Horizon Data and Evaluation in Gameplay",
+      "url": "https://arxiv.org/abs/2609.25001",
+      "tldr": "GameHorizon unifies data construction and evaluation for gameplay abilities that span perception, instruction decomposition, planning, and precise control over different time horizons. Its dataset contains 5,000 hours from 21 AAA games played by 100 experts, with aligned video, actions, and automatically produced multi-horizon instructions. The benchmark combines reproducible offline questions with stepwise online tests and evaluates 47 models through more than one million invocations. This is valuable because it tests whether static diagnostic scores predict actual closed-loop gameplay and localizes where long-horizon behavior fails.",
+      "tldr_zh": "GameHorizon 统一了 gameplay 能力的数据构建与评测，覆盖感知、instruction decomposition、规划以及不同时间尺度下的精确控制。其数据集包含 100 名专家在 21 款 AAA 游戏中的 5,000 小时录像，并对齐视频、动作与自动生成的 multi-horizon instructions。benchmark 结合可复现的 offline questions 与 stepwise online tests，用超过一百万次调用评测了 47 个模型。价值在于它能检查静态诊断分数是否真正预测 closed-loop gameplay，并定位长程行为具体在哪一步失败。",
+      "upvotes": 34,
+      "authors": "Yiran Wang, Xingyilang Yin, Junfu Pu, Guangzhi Wang, Kaifeng Li, Mingyu Ouyang, Huiqiang Sun, Lingen Li, Cheng Cheng, Wangbo Yu, Honghao Chen, Xiaodong Cun, Chi-Man Pun, Zhiguo Cao, Ying Shan",
+      "ai_keywords": [
+        "gameplay agents",
+        "multi-horizon evaluation",
+        "offline and online evaluation"
+      ],
+      "interest_tag": "Benchmark"
+    },
+    {
+      "title": "Harness-Zero: Harness Distillation via Agent-as-Harness",
+      "url": "https://arxiv.org/abs/2609.24974",
+      "tldr": "Harness-Zero asks whether behaviors created by a specialized agent harness can be transferred into model weights and survive under a simpler deployment harness. Because source and target harnesses expose different actions and information, it uses an agent-as-harness to correct student outputs in the target action space and convert harness guidance into trainable demonstrations. After fine-tuning, the specialized harness can be removed: macro task success rises from 23.3% to 44.3%, exceeding the 41.7% achieved when the base model still uses that harness. The work reframes harnesses as temporary teachers whose operational knowledge can be internalized rather than permanent inference dependencies.",
+      "tldr_zh": "Harness-Zero 研究 specialized agent harness 诱导出的行为能否被迁移进模型权重，并在更简单的 deployment harness 下保留。由于 source 与 target harness 的 action space 和可见信息不同，它让 agent-as-harness 在目标动作空间中纠正 student output，把 harness guidance 转成可训练 demonstration。fine-tuning 后可移除专用 harness：macro task success 从 23.3% 升至 44.3%，甚至超过基础模型继续挂载该 harness 时的 41.7%。这项工作把 harness 重新定义为可被内化的临时教师，而非永久的 inference dependency。",
+      "upvotes": 10,
+      "authors": "Haoran Ye, Yuxing Lu, Haonan Dong, Zhaochen Su, Guojie Song",
+      "ai_keywords": [
+        "harness distillation",
+        "agent-as-harness",
+        "tool use"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "Jev-Mem: System-One-Controlled Agentic Memory for Efficient AI Agents",
+      "url": "https://arxiv.org/abs/2609.23986",
+      "tldr": "Jev-Mem separates fast memory control from slow reasoning instead of placing an autoregressive LLM on every construction and retrieval decision. A System-One controller handles memory typing, relation formation, query routing, retrieval budgets, graph traversal, scoring, and adaptive stopping, while System Two is reserved for difficult reasoning and synthesis. On LoCoMo it reports a 0.777 judge score, an 11% relative gain over the strongest baseline, while cutting construction time by 6.6× and average query latency by 36.7%. The architecture is important because memory quality and memory serving cost are optimized together rather than treating retrieval control as free.",
+      "tldr_zh": "Jev-Mem 将快速 memory control 与慢速 reasoning 分离，避免让 autoregressive LLM 参与每一次构建和检索决策。System-One controller 负责 memory typing、关系组织、query routing、retrieval budget、graph traversal、candidate scoring 与 adaptive stopping，System Two 只处理复杂推理和答案合成。在 LoCoMo 上，它报告 0.777 的 judge score，相对最强 baseline 提升 11%，同时将构建时间加速 6.6 倍、平均 query latency 降低 36.7%。重要之处在于它把 memory quality 与 serving cost 联合优化，而不是把 retrieval control 当成免费的步骤。",
+      "upvotes": 5,
+      "authors": "Dongming Jiang, Yi Li, Bingzhe Li",
+      "ai_keywords": [
+        "agentic memory",
+        "retrieval control",
+        "long-horizon agents"
+      ],
+      "interest_tag": "Memory"
+    }
+  ],
+  "alphaxiv_papers": [
+    {
+      "title": "MiMo-V2.6: Scaling Reinforcement Learning Towards Self-Improvement",
+      "arxiv_id": "2609.mimo-scaling-reinforcement-learning",
+      "url": "https://www.alphaxiv.org/abs/2609.mimo-scaling-reinforcement-learning",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2609.mimo-scaling-reinforcement-learning",
+      "tldr": "MiMo-V2.6 scales agentic reinforcement learning along batch throughput, environment diversity, and grader compute rather than relying on a single algorithmic trick. Its asynchronous system processes 1,568 samples and 2.7–3.7 billion tokens per step at contexts up to one million tokens, mixing code, general, visual, and cyber environments under multiple harnesses. Stability comes from freezing the MoE router, defending against reward hacking, and unifying trajectory representation across rollout frameworks. The report is notable for exposing training dynamics, environments, and infrastructure details that make large mixed-task RL runs reproducible rather than presenting only final benchmark scores.",
+      "tldr_zh": "MiMo-V2.6 沿 batch throughput、environment diversity 与 grader compute 三条轴扩展 agentic reinforcement learning，而不是依赖单一算法技巧。其 asynchronous system 每步处理 1,568 个 samples 和 27–37 亿 tokens，context 最长达一百万，并在多种 harness 下混合 code、general、visual 与 cyber 环境。稳定性来自冻结 MoE router、多层 reward-hacking 防御，以及跨 rollout framework 的 unified trajectory representation。报告的价值在于公开 training dynamics、RL environments 和 infrastructure，使大规模 mixed-task RL 不再只有最终分数而缺少复现路径。",
+      "interest_tag": ""
+    },
+    {
+      "title": "Reinforcing Agents with Collective Skills",
+      "arxiv_id": "2609.reinforcing-agents-collective-skills",
+      "url": "https://www.alphaxiv.org/abs/2609.reinforcing-agents-collective-skills",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2609.reinforcing-agents-collective-skills",
+      "tldr": "Skill2Env converts public Agent Skills—human-written workflows, artifacts, and success criteria—into executable environments for agentic RL. The pipeline filters 3,400 web-crawled skills into 8,000 terminal environments with both programmatic tests and behavioral rubrics, turning procedural knowledge into scalable supervision. After only 300 DPPO training steps, Qwen-3.8 27B gains 4.7 points on Terminal-Bench 2.1 and 4.3 points on a hand-verified private benchmark. The broader insight is that the open skill ecosystem can serve as a distribution of socially useful tasks, not merely as inference-time prompt files.",
+      "tldr_zh": "Skill2Env 将公开 Agent Skills 中的人类工作流、真实 artifacts 与 success criteria 转成可执行的 agentic RL environments。pipeline 从 3,400 个网页抓取 skills 中构建 8,000 个 terminal environments，并同时提供 programmatic tests 与 behavioral rubrics，把 procedural knowledge 变成可规模化 supervision。Qwen-3.8 27B 仅经过 300 步 DPPO training，就在 Terminal-Bench 2.1 提升 4.7 个点、在人工核验的私有 benchmark 提升 4.3 个点。更广泛的 insight 是：开放 skill ecosystem 不只是 inference-time prompt 文件库，也可以成为与人类真实需求对齐的训练任务分布。",
+      "interest_tag": ""
+    },
+    {
+      "title": "SoL-Pi: Recursively Scaling Auto-Research Loops for Efficient Agent Harness",
+      "arxiv_id": "2609.20519",
+      "url": "https://arxiv.org/abs/2609.20519",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2609.20519",
+      "tldr": "SoL-Pi scales automated harness research across increasingly numerous and diverse environments, selecting reusable changes in action execution, context compaction, observation handling, and delegated reading. On 51 EdgeBench tasks, it matches the reference Pi harness across GPT-5.6 Sol and Opus 5 while reducing recorded token traffic by 44.7–49.0% and API cost by about one third. Estimated hourly savings range from $8.75 to $13.50 versus native Codex and Claude Code harnesses. The result makes token efficiency a first-class scaling variable for unattended coding agents, where small per-step waste compounds over long recursive loops.",
+      "tldr_zh": "SoL-Pi 在越来越多且更具多样性的环境上扩展 automated harness research，最终筛出 action execution、context compaction、observation handling 与 delegated reading 四类可复用改进。在 51 个 EdgeBench tasks 上，它跨 GPT-5.6 Sol 与 Opus 5 达到与 Pi harness 相当的表现，同时减少 44.7–49.0% 的 token traffic，并把 API cost 降低约三分之一。相对原生 Codex 与 Claude Code harness，估算每小时可节省 8.75–13.50 美元。它把 token efficiency 提升为 unattended coding agent 的一等 scaling variable，因为长 recursive loop 会放大每一步的微小浪费。",
+      "interest_tag": ""
+    },
+    {
+      "title": "RecreationWorld: Scalable and Verifiable Environments for Hybrid Computer-Use Agents",
+      "arxiv_id": "2609.22000",
+      "url": "https://arxiv.org/abs/2609.22000",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2609.22000",
+      "tldr": "RecreationWorld evaluates hybrid computer-use agents by giving them a running reference application and asking them to discover its behavior, rebuild it, and verify the result without a prescribed workflow. The framework spans Ubuntu, macOS, Windows, Android, and Web, combining native GUI control with coding tools and deriving hidden behavioral tests from the reference app. RecreationBench contains 250 frozen tasks with programmatic and visual assertions at multiple interaction depths; the leading model reaches 58.1% overall but passes every programmatic test on only 2.8% of tasks. The gap between static visual resemblance and interaction correctness makes this a useful benchmark and training environment for truly end-to-end CUA behavior.",
+      "tldr_zh": "RecreationWorld 给 hybrid computer-use agent 一个正在运行的 reference application，要求它在没有预设 workflow 的情况下探索行为、重建应用并自行验证结果。framework 覆盖 Ubuntu、macOS、Windows、Android 与 Web，把 native GUI control 和 coding tools 放进统一 harness，并从 reference app 派生 hidden behavioral tests。RecreationBench 含 250 个冻结 tasks，以多层 interaction depth 的 programmatic 与 visual assertions 评测；领先模型总体达到 58.1%，但只有 2.8% tasks 能通过全部 programmatic tests。静态视觉相似与真实交互正确之间的巨大差距，使它成为端到端 CUA 训练和评测的重要环境。",
+      "interest_tag": "CUA"
+    },
+    {
+      "title": "Scaling Discovery through Test-Time Communication",
+      "arxiv_id": "2609.21032",
+      "url": "https://arxiv.org/abs/2609.21032",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2609.21032",
+      "tldr": "This work studies groups of agents that communicate through a shared directory at test time without predefined roles. On ARC-AGI-3, a communicating team of k agents matches the success rate of four times as many independent agents, and teams solve some tasks that no individual attempt can complete. The effect transfers to research-style optimization, including improved polyomino packing and a 1,957-byte MNIST classifier with 99.4% accuracy. The important qualification is that collaboration helps only when compute is sufficient and progress is measurable; under tight budgets or weak feedback, independent sampling can still win.",
+      "tldr_zh": "这项工作研究没有预定义角色、仅通过 shared directory 在 test time 通信的 agent groups。在 ARC-AGI-3 上，k 个通信 agent 的团队可达到 4k 个独立 agent 的成功率，并能稳定解决任何单次独立尝试都未完成的任务。该效应还迁移到 research-style optimization，包括更优的 polyomino packing，以及仅 1,957 bytes、准确率 99.4% 的 MNIST classifier。关键限定是 collaboration 只在 compute 充足且 progress 可度量时有效；预算紧张或反馈模糊时，independent sampling 仍可能更好。",
+      "interest_tag": "Agent Swarm"
+    }
+  ],
+  "github_repos": [
+    {
+      "name": "zai-org/ZCode",
+      "url": "https://github.com/zai-org/ZCode",
+      "tldr": "ZCode is Z.ai’s open-source coding-agent workbench, combining an Electron desktop app, browser interface, terminal agent, backend services, shared UI, and an agent CLI/runtime in one repository. Its 6,000-plus stars and unusually high fork count make it the dominant new repository in this week’s search. The launch is inseparable from a concurrent privacy controversy alleging silent workspace and Git-history uploads, so adoption should be paired with a careful review of data-flow controls and current maintainers’ response. Its virality shows both the demand for integrated coding-agent harnesses and the trust burden created when those harnesses can inspect entire repositories.",
+      "tldr_zh": "ZCode 是 Z.ai 开源的 coding-agent workbench，在同一仓库中整合 Electron desktop app、browser interface、terminal agent、backend services、shared UI 与 agent CLI/runtime。超过 6,000 stars 且 forks 数量显著，使它成为本周搜索中压倒性的新增项目。发布热度与同期的 privacy controversy 无法分开：外部分析指控其静默上传 workspace 与 Git history，因此采用前应仔细核对 data-flow controls 及维护者的最新回应。它的爆发既说明集成式 coding-agent harness 需求旺盛，也说明能读取整个 repository 的 harness 必须承担更高的信任成本。",
+      "stars": 6018,
+      "language": "TypeScript",
+      "interest_tag": ""
+    },
+    {
+      "name": "kitze/skillbox",
+      "url": "https://github.com/kitze/skillbox",
+      "tldr": "Skillbox is a self-hosted and versioned skills library for AI agents, exposed through MCP and scoped clients. It targets a practical operational gap: teams can store reusable procedural knowledge centrally while controlling which clients and agents can access which skills. Optional Jev-based recommendations add contextual skill selection, but the repository remains useful as a catalog and versioning layer without that service. The project is timely because skill files are evolving from ad hoc prompt snippets into managed artifacts with provenance, access boundaries, and lifecycle control.",
+      "tldr_zh": "Skillbox 是面向 AI agents 的 self-hosted、versioned skills library，通过 MCP 与 scoped clients 暴露能力。它解决一个实际运维缺口：团队可以集中保存可复用 procedural knowledge，同时控制不同 client 与 agent 能访问哪些 skills。可选的 Jev recommendation 提供 contextual skill selection，但即使不使用该服务，仓库仍可作为 catalog 与 versioning layer。它的时机很好，因为 skill files 正从零散 prompt snippets 演进为需要 provenance、access boundary 与 lifecycle control 的正式 artifacts。",
+      "stars": 224,
+      "language": "TypeScript",
+      "interest_tag": ""
+    },
+    {
+      "name": "indada/repopilot",
+      "url": "https://github.com/indada/repopilot",
+      "tldr": "RepoPilot turns GitHub issues and pull-request feedback into a bounded cycle of test generation, failure reproduction, code repair, and independent verification. It runs Codex-powered reasoning on a self-hosted worker while a separate Docker runner checks the proposed change before a repair branch or draft PR can be published. Maintainers retain the merge decision, making verification and human control explicit instead of treating autonomous execution as automatic deployment. The architecture is a useful example of converting an agent demo into a reviewable software-delivery pipeline with execution boundaries.",
+      "tldr_zh": "RepoPilot 将 GitHub issues 与 pull-request feedback 转成 test generation、failure reproduction、code repair 和 independent verification 的有界循环。它在 self-hosted worker 上运行 Codex 驱动的推理，并用独立 Docker runner 检查变更，验证通过后才允许发布 repair branch 或 draft PR。maintainer 始终保留 merge decision，把 verification 与 human control 显式放进流程，而不是把 autonomous execution 等同于自动部署。其架构展示了如何把 agent demo 变成具有执行边界、可审查的软件交付 pipeline。",
+      "stars": 153,
+      "language": "TypeScript",
+      "interest_tag": ""
+    },
+    {
+      "name": "friday-memory/friday",
+      "url": "https://github.com/friday-memory/friday",
+      "tldr": "Friday is a self-hosted persistent cognitive-memory layer for coding agents, delivered through MCP. It stores architecture decisions, schemas, preferences, and other cross-session context so that tools such as Cursor, Claude, and VS Code agents do not restart from an empty state. The project frames memory as owned infrastructure rather than a provider-specific chat-history feature, with the repository and README showing a substantive implementation rather than a placeholder. Its relevance comes from making long-term agent context portable and inspectable, although real value will depend on retrieval quality and disciplined write policies rather than storage alone.",
+      "tldr_zh": "Friday 是通过 MCP 提供的 self-hosted persistent cognitive-memory layer，面向 coding agents 保存 architecture decisions、schemas、preferences 与跨 session context。它让 Cursor、Claude 与 VS Code agents 等工具不必在每次会话中从空状态重新开始。项目把 memory 定义为用户拥有的 infrastructure，而非某个 provider 私有的 chat-history feature，仓库与 README 也显示它并非占位项目。其价值在于让长期 agent context 可迁移、可检查，但最终效果仍取决于 retrieval quality 与克制的 write policy，而不只是把内容存下来。",
+      "stars": 51,
+      "language": "HTML",
+      "interest_tag": "Memory"
+    },
+    {
+      "name": "ueboxai/uebox",
+      "url": "https://github.com/ueboxai/uebox",
+      "tldr": "UE Box is an open-source agent that operates a live Unreal Editor project, including placing actors, editing Blueprints, wiring materials, and compiling C++. Its workflow emphasizes per-step approval and inspectable changes, and the repository provides desktop packaging, documentation, and source rather than only a concept page. This is a useful vertical computer-use pattern: the agent is embedded in a complex GUI application but can combine interface actions with structured development operations. The narrow domain makes verification more tractable than general desktop autonomy while still covering meaningful multimodal work.",
+      "tldr_zh": "UE Box 是直接操作实时 Unreal Editor project 的开源 agent，可执行放置 actors、修改 Blueprints、连接 materials 与编译 C++ 等任务。workflow 强调逐步 approval 与可核对变更，仓库提供 desktop packaging、文档和源码，而不只是概念页面。这是一种有价值的 vertical computer-use pattern：agent 嵌入复杂 GUI application，同时结合界面操作与结构化开发动作。限定领域让 verification 比通用桌面 autonomy 更可控，但仍覆盖了真实且多模态的工作。",
+      "stars": 36,
+      "language": "TypeScript",
+      "interest_tag": "CUA"
+    }
+  ],
+  "hackernews": [
+    {
+      "title": "ZCode, the GLM coding agent, silently uploads your Git history",
+      "url": "https://tokenstead.ai/guides/zcode-silent-git-history-upload",
+      "tldr": "A reverse-engineering report alleges that logged-in ZCode clients package and upload entire workspaces, including .git objects, reflogs, LFS caches, and global configuration, to Aliyun OSS. In the captured case, a 345 MB commercial workspace produced a 313 MB encrypted archive, and the report says the decryption key was controlled only by Z.ai’s cloud. The story matters because Git history can contain deleted secrets, private branches, and years of engineering provenance, making repository access materially broader than sending currently open files for inference. The claim should be read as an external security analysis pending the project maintainers’ definitive response, but it already demonstrates why closed data paths in coding harnesses trigger intense scrutiny.",
+      "tldr_zh": "一份 reverse-engineering report 指控：ZCode 登录后会打包并上传整个 workspace，包括 .git objects、reflogs、LFS cache 与 global configuration，目标为 Aliyun OSS。报告中的 345 MB 商业 workspace 生成了 313 MB encrypted archive，并称解密所需 private key 只由 Z.ai cloud 控制。Git history 可能包含已删除 secrets、私有 branches 与多年工程 provenance，因此这远比上传当前打开文件的风险边界更大。该结论目前应视为外部安全分析、等待项目维护者给出权威回应，但已经说明 coding harness 的封闭 data path 为什么会迅速引发信任危机。",
+      "points": 262,
+      "num_comments": 14,
+      "interest_tag": ""
+    },
+    {
+      "title": "Show HN: Share your AI Setup, Learn from others",
+      "url": "https://mysetup.ai/",
+      "tldr": "mysetup.ai is a community directory where builders publish the tools, agents, skills, and workflows behind their personal AI setups. Profiles emphasize what users tried, what they abandoned, and how they coordinate practices such as parallel coding agents or local models, making the site closer to a living workflow catalog than a static stack list. Its HN traction reflects a common problem: agent ecosystems are now complex enough that people learn more from complete, opinionated setups than from isolated tool announcements. The product’s strongest growth loop is social proof—read a credible operator’s stack, adapt it, then publish your own evolving setup.",
+      "tldr_zh": "mysetup.ai 是一个社区目录，builders 可以公开自己使用的 tools、agents、skills 与完整 workflows。profile 不只列出当前 stack，也强调尝试过什么、放弃了什么，以及如何组织 parallel coding agents 或 local models，因此更像持续更新的 workflow catalog，而非静态工具清单。它在 HN 获得关注反映了一个共性问题：agent ecosystem 已复杂到用户更愿意学习一套有取舍的完整配置，而不是孤立的工具发布。其最强增长循环是 social proof——阅读可信操作者的 setup、复制改造，再公开自己的演进版本。",
+      "points": 249,
+      "num_comments": 138,
+      "interest_tag": ""
+    },
+    {
+      "title": "M5 Ultra Mac Studio Review",
+      "url": "https://www.macstories.net/stories/m5-ultra-mac-studio-review-the-dream-mac-for-local-ai-agents/",
+      "tldr": "MacStories tests a 256 GB M5 Ultra Mac Studio as a practical host for local AI agents and compares the experience with an M3 Ultra system and an RTX 5090 desktop. The author reports that Qwen3.8-Flash-Next is fast enough to become the default model for personal assistants and usable as local main threads or subagents, with unified memory helping larger contexts and long loops. The review is candid that cloud frontier models remain stronger and that expensive hardware may not beat subscriptions on cost alone. Its significance is experiential: local inference is shifting from a privacy-minded hobby into an always-on agent runtime that mainstream power users can plausibly adopt.",
+      "tldr_zh": "MacStories 将 256 GB M5 Ultra Mac Studio 作为 local AI agent 主机进行实测，并与 M3 Ultra 系统和 RTX 5090 desktop 比较体验。作者认为 Qwen3.8-Flash-Next 已快到可以成为个人助手默认模型，也能作为 local main thread 或 subagent 使用；unified memory 对更大 context 与长循环尤其有帮助。文章也坦率承认 cloud frontier models 仍然更强，昂贵硬件若只看成本未必优于多年订阅。其意义主要在体验层：local inference 正从偏隐私的爱好，转向主流 power user 可以实际采用的 always-on agent runtime。",
+      "points": 245,
+      "num_comments": 246,
+      "interest_tag": ""
+    },
+    {
+      "title": "Amazon blocks Meta’s new Muse AI agent from shopping on amazon.com",
+      "url": "https://www.forbes.com/sites/jonmarkman/2026/09/21/amazon-blocks-metas-new-muse-ai-agent-from-shopping-on-amazoncom/",
+      "tldr": "Amazon reportedly blocked Meta’s Muse shopping agent from operating on amazon.com, turning agentic commerce into a platform-access dispute rather than only a model-capability story. The episode highlights that an agent’s ability to browse, compare, and transact depends on website permission, anti-bot policy, commercial incentives, and liability—not merely UI competence. A marketplace may see third-party agents as customer acquisition, disintermediation, or unwanted automation depending on who controls the relationship and data. The broader implication is that successful consumer agents will need negotiated access and policy compatibility alongside technical reliability.",
+      "tldr_zh": "报道称 Amazon 阻止 Meta 的 Muse shopping agent 在 amazon.com 上执行购物任务，使 agentic commerce 从纯模型能力问题变成 platform-access dispute。事件说明 agent 能否浏览、比较和交易，不只取决于 UI competence，也受网站授权、anti-bot policy、商业利益与责任边界影响。marketplace 可能把第三方 agent 视为获客渠道、对用户关系的去中介化，或未经允许的自动化，关键取决于谁控制用户与数据。更广泛的结论是：consumer agent 除了技术可靠性，还需要协商式接入与 policy compatibility。",
+      "points": 146,
+      "num_comments": 152,
+      "interest_tag": ""
+    },
+    {
+      "title": "Launch HN: Skillsync (YC W26) – AI chat sessions made portable across agents",
+      "url": "https://news.ycombinator.com/item?id=49743049",
+      "tldr": "Skillsync converts local conversation records among coding agents so a user can move messages, reasoning traces, tool calls, and loaded skills without starting over. Its open-source Rust core, txcript, is described as an ffmpeg or pandoc for agent-session formats, while a local-first desktop app adds search, context inspection, and optional team workspaces. The project addresses provider lock-in at the session layer rather than the model API layer, where accumulated context and memory increasingly determine switching cost. The hard part will be preserving semantics safely across proprietary and changing formats, especially when agents expose different tool schemas or hidden reasoning fields.",
+      "tldr_zh": "Skillsync 在不同 coding agents 的本地会话格式之间转换，使用户可以迁移 messages、reasoning traces、tool calls 与 loaded skills，而不必从头开始。其开源 Rust core `txcript` 被描述为 agent-session formats 的 ffmpeg 或 pandoc，local-first desktop app 则增加搜索、context inspection 与可选 team workspaces。它解决的是 session layer 而非 model API layer 的 provider lock-in，因为累积 context 与 memory 正日益成为迁移成本。真正困难的是在私有且持续变化的格式之间安全保留语义，尤其当不同 agent 的 tool schema 或 hidden reasoning fields 并不一致时。",
+      "points": 66,
+      "num_comments": 59,
+      "interest_tag": ""
+    }
+  ]
+}
