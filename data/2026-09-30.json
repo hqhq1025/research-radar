@@ -1,0 +1,221 @@
+{
+  "date": "2026-09-30",
+  "generated_at": "2026-09-30T16:04:34.504819+08:00",
+  "briefing_zh": "今天最强的研究信号是 **agent harness 正在从手写脚手架升级为可学习、可组合、可验证的系统层**。HF 热度最高的 **Raven** 把 model–harness pair 当成可组合能力单元，由 Host Agent 拆解任务、匹配专长并复用经验；alphaxiv 的 **Harness Learning Enables Generalizable Test-Time Adaptation** 更进一步，让 proposer 根据 execution feedback 直接修改可执行 harness，而 solver 参数保持冻结。两项工作共同说明，test-time adaptation 不一定发生在权重里，也可以发生在 workflow、tool wiring 和 information flow 上。\n\n第二条主线是把长程 agent 的薄弱环节拆成可测、可执行的机制。**VoxMem** 用 34,743 个 spoken session 测试语义、speaker identity、paralinguistic cue 与环境声音的跨 session memory，15 个模型在 32K context 下无一超过 40%；**EngiWorld** 则用 1,301 个任务、26 个专业软件和 artifact-centric verifier 衡量工程 agent，最强模型 EngiScore 仅 44.3，多软件任务成功率只有 3.6%。这些结果比单一 success rate 更有价值，因为它们分别暴露「记住了文字却丢失声学身份」和「能操作单点工具却无法维持跨软件设计约束」的具体断层。\n\n对 Computer Use 与 world simulation，今天出现了两种互补路线。**HybridCUA** 用 GUI-only、CLI-only 与 interleaved trajectory 训练模型学习何时切换界面和命令行，在 OSWorld 上达到 53.6%，比 base 提升 14.8 个百分点；**WorldPlay2** 则将 frame-aligned action 与 semantic event 分离，并用压缩 memory token 和 Stable Forcing 支撑实时长 rollout。前者表明 agent runtime 不应把 GUI 与 shell 视为互斥阵营，后者则提醒 world model 的控制带宽、history cost 与 rollout stability 必须协同设计。\n\n社区关注点明显从「更聪明的 autonomous agent」转向 **可审计的人机界面与外部安全边界**。HN 上的 **Whiteboard** 用共享画布、semantic diff 与 decision log 让 agent 的架构判断可见；Nvidia 的 **Open Agent Safety Platform** 把能力限制和监控放到 model 外的 CPU/DPU 层；一项对九个 conversational AI 服务的隐私测量则发现，6/9 web client 与 3/8 Android client 会向第三方暴露 conversation artifact。今天的共同结论很直接：agent 能力增长必须配套 executable verification、least privilege 和 provenance，而不能只靠模型口头承诺。",
+  "briefing_en": "The strongest research signal today is that the **agent harness is evolving from hand-written scaffolding into a learnable, composable, and verifiable systems layer**. HF's top paper, **Raven**, treats each model–harness pair as a composable capability coordinated by a Host Agent, while **Harness Learning Enables Generalizable Test-Time Adaptation** trains a proposer to revise executable workflows from execution feedback without changing solver weights. Together, they show that test-time adaptation can occur in workflows, tool wiring, and information flow—not only in model parameters.\n\nA second theme is decomposing long-horizon agent failures into mechanisms that can be measured directly. **VoxMem** evaluates semantic content, speaker identity, paralinguistic cues, and environmental sound across 34,743 spoken sessions; none of 15 models exceeds 40% at a 32K context budget. **EngiWorld** evaluates 1,301 tasks across 26 professional applications with artifact-centric verifiers, where the strongest agent reaches only 44.3 EngiScore and succeeds on just 3.6% of multi-software attempts. These results are more diagnostic than a single success rate because they expose specific gaps: preserving words while losing acoustic identity, and operating individual tools while failing to maintain constraints across an engineering workflow.\n\nComputer use and world simulation offer two complementary routes. **HybridCUA** trains on GUI-only, CLI-only, and interleaved trajectories so an agent can learn when to switch interfaces, reaching 53.6% on OSWorld—14.8 points above its base model. **WorldPlay2** separates frame-aligned actions from semantic events and combines compressed memory tokens with Stable Forcing for real-time long rollouts. The first argues that GUI and shell should be orchestrated rather than treated as rival paradigms; the second shows that control bandwidth, history cost, and rollout stability must be co-designed.\n\nCommunity attention is shifting from vaguely smarter autonomous agents toward **auditable human-agent interfaces and external safety boundaries**. **Whiteboard** makes architectural reasoning visible through a shared canvas, semantic diffs, and decision logs; Nvidia's **Open Agent Safety Platform** moves capability limits and monitoring outside the model onto CPU and DPU infrastructure; and a privacy study of nine conversational AI services finds conversation artifacts exposed to third parties by 6/9 web clients and 3/8 Android clients. The shared lesson is straightforward: growing agent capability must be paired with executable verification, least privilege, and provenance rather than verbal promises from the model.",
+  "viral_analysis_zh": "今天最可能持续出圈的是 **Raven**：它用「Harness of Harnesses」这个易传播框架，把 multi-agent orchestration、skill evolution 与跨域执行合并成一个宏大叙事，HF 已获 193 upvotes。产品侧的 **Whiteboard** 具备更强的开发者传播结构——共享画布、semantic diff、decision log 都能一眼演示价值；安全侧的隐私论文则以 6/9、3/8 这类明确数字，把抽象担忧转成可引用证据。",
+  "viral_analysis_en": "**Raven** is today's strongest candidate for sustained research virality: the memorable “Harness of Harnesses” frame compresses multi-agent orchestration, skill evolution, and cross-domain execution into one ambitious story, earning 193 HF upvotes. On the product side, **Whiteboard** has an unusually demo-friendly growth loop—shared canvases, semantic diffs, and decision logs communicate value immediately—while the privacy paper turns diffuse concern into quotable evidence with concrete 6/9 and 3/8 findings.",
+  "huggingface_papers": [
+    {
+      "title": "Raven: The Harness of Harnesses for Composable Agentic Intelligence",
+      "url": "https://huggingface.co/papers/2609.33439",
+      "tldr": "Raven treats each executable model–harness pair as a composable unit rather than building one monolithic general agent. A Host Agent decomposes goals, matches subtasks to specialists, coordinates dependencies, and stores reusable experience through an archive and Skill Forge. The work matters because it makes harness construction and evolution part of the learning system, although its broad cross-domain claims still depend on how reliably its benchmarks reflect real deployment constraints.",
+      "tldr_zh": "Raven 不再构建一个单体通用 agent，而是把每个可执行的 model–harness pair 视为可组合能力单元。Host Agent 负责拆解目标、匹配 specialist、协调依赖，并通过 archive 与 Skill Forge 保存可复用经验。它的重要性在于把 harness 构建与演化纳入学习系统本身，但其跨域能力主张仍取决于 benchmark 能否真实覆盖部署约束。",
+      "upvotes": 193,
+      "authors": "EverMind AI",
+      "ai_keywords": [
+        "agent harness",
+        "multi-agent orchestration",
+        "skill evolution"
+      ],
+      "interest_tag": "Agent Swarm"
+    },
+    {
+      "title": "MaLiang-Harness: A Programmable Path to Image and Video Generation",
+      "url": "https://huggingface.co/papers/2609.34309",
+      "tldr": "MaLiang-Harness targets the Program-to-Visual gap: code may run correctly while the rendered image or video still violates composition, appearance, or motion requirements. It maintains a persistent executable generation state, links revisions to rendered evidence, and verifies the current revision before completion. Across its image and video benchmarks, GPT-6 Astra reaches 100% execution success but only 96.0% and 76.9% full-quality compliance, showing why executable validity cannot substitute for visual verification.",
+      "tldr_zh": "MaLiang-Harness 聚焦 Program-to-Visual gap：程序可以正常运行，但渲染出的图像或视频仍可能违反构图、外观或运动要求。它维护 persistent executable generation state，把每次修改与 rendered evidence 关联，并在结束前验证当前 revision。GPT-6 Astra 在图像和视频 benchmark 上都达到 100% 执行成功，但满足全部质量阈值的比例只有 96.0% 和 76.9%，说明可执行不等于视觉正确。",
+      "upvotes": 169,
+      "authors": "Haoyu Zhao, Zihao Zhang, Xudong Wang, Jiaxi Gu, Zuxuan Wu, Yu-Gang Jiang, Shuicheng Yan",
+      "ai_keywords": [
+        "programmable generation",
+        "visual verification",
+        "agent harness"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "VoxMem: Benchmarking Multimodal Memory in Large Audio Language Models",
+      "url": "https://huggingface.co/papers/2609.32607",
+      "tldr": "VoxMem evaluates conversational memory that exists only in audio: what was said, who said it, how it was spoken, and what environmental sound was present. Its 3,196 instances span 34,743 sessions, four memory operations, and context budgets from 8K to 64K; none of 15 evaluated audio-language models exceeds 40% at 32K. The benchmark matters because transcripts erase speaker, paralinguistic, and acoustic evidence, so text-only memory evaluations systematically overstate what spoken assistants retain.",
+      "tldr_zh": "VoxMem 评测只存在于音频中的 conversational memory：说了什么、谁说的、语气如何，以及环境里有什么声音。它包含 3,196 个实例、34,743 个 session、四类 memory operation，并覆盖 8K 到 64K context；15 个 audio-language model 在 32K 下无一超过 40%。它的重要性在于 transcript 会抹掉 speaker、paralinguistic 与 acoustic evidence，因此纯文本 memory benchmark 会系统性高估语音助手的记忆能力。",
+      "upvotes": 52,
+      "authors": "Yang Xiao, Vidhyasaharan Sethu, Eun-Jung Holden, Ting Dang",
+      "ai_keywords": [
+        "multimodal memory",
+        "spoken conversation",
+        "multi-session evaluation"
+      ],
+      "interest_tag": "Memory"
+    },
+    {
+      "title": "EngiWorld: What Can Frontier Agents Deliver in Professional Engineering Environments?",
+      "url": "https://huggingface.co/papers/2609.37686",
+      "tldr": "EngiWorld evaluates end-to-end engineering agents on 1,301 expert-curated tasks across CAD, CAE, CAM, BIM, EDA, and 3D visualization in 26 professional applications. Its artifact-centric verifier checks geometric validity, physical feasibility, rule compliance, and intermediate outputs instead of trusting screenshots or binary task completion. The strongest model reaches only 44.3 EngiScore and 3.6% success on multi-software attempts, revealing that professional computer use is bottlenecked by cross-tool state and domain constraints rather than isolated clicks.",
+      "tldr_zh": "EngiWorld 用 1,301 个专家任务评测端到端工程 agent，覆盖 CAD、CAE、CAM、BIM、EDA 与 3D visualization，共涉及 26 个专业软件。其 artifact-centric verifier 直接检查几何有效性、物理可行性、规则合规和中间产物，而不是依赖截图或二元完成信号。最强模型 EngiScore 仅 44.3，多软件任务成功率只有 3.6%，说明专业 computer use 的瓶颈在跨工具状态与领域约束，而非单次点击。",
+      "upvotes": 18,
+      "authors": "Hongcheng Gao, Hailong Qu, Yu Lei, Henghui Sun, Haoyang Li, Yipeng Wei, Naihao Xue, Xiaohan Yu, Zhuo Tao, Yihe Zang, Yajiao Wang, Jingyi Tang, Yi Li, Jingjing Zhou, Jie Luo, Bohan Zeng, Chengyu Shen, Hao Jiang, Chong Chen, Bowen Qu, Olive Huang, Zeqiang Wang",
+      "ai_keywords": [
+        "professional agents",
+        "artifact evaluation",
+        "engineering software"
+      ],
+      "interest_tag": "Benchmark"
+    },
+    {
+      "title": "HybridCUA: Learning to Orchestrate GUI and CLI for Computer-Use Agents",
+      "url": "https://huggingface.co/papers/2609.38008",
+      "tldr": "HybridCUA trains computer-use agents to choose among GUI, CLI, and interleaved execution rather than hard-coding one interface. HybridCUA-8K contains 5,000 hybrid trajectories and 3,000 verified RLVR tasks, followed by SFT and reinforcement learning with CLI-aware rewards. The 9B model reaches 53.6% on OSWorld, 14.8 points above its base, suggesting that interface selection itself is a learnable policy—but reliable permission boundaries and shell verification remain essential deployment questions.",
+      "tldr_zh": "HybridCUA 不再把执行界面写死，而是训练 computer-use agent 在 GUI、CLI 与 interleaved execution 之间做选择。HybridCUA-8K 包含 5,000 条 hybrid trajectory 和 3,000 个 verified RLVR task，随后进行 SFT 与带 CLI-aware reward 的强化学习。9B 模型在 OSWorld 上达到 53.6%，比 base 提升 14.8 个百分点，说明界面选择本身可以学习，但权限边界与 shell verification 仍是部署关键。",
+      "upvotes": 12,
+      "authors": "Tongbo Chen, Junbo Niu, Zhengxi Lu, Niu Lian, Fei Tang, Yuchen Yan, Yike Hong, Yong Du, Yizhou Liu, Bofan Chen, Yongliang Shen",
+      "ai_keywords": [
+        "computer use agent",
+        "GUI-CLI orchestration",
+        "RLVR"
+      ],
+      "interest_tag": "CUA"
+    }
+  ],
+  "alphaxiv_papers": [
+    {
+      "title": "DexAgent: An Agentic Human2Sim2Robot Framework for Dexterous Manipulation with Self-Evolving Tool Library",
+      "arxiv_id": "2609.35318",
+      "url": "https://arxiv.org/abs/2609.35318",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2609.35318",
+      "tldr": "DexAgent turns one egocentric human video and a task prompt into physically grounded robot-training trajectories. It adapts reconstruction, trajectory optimization, skills, and property-specific verifiers to rigid, articulated, and deformable objects, retaining newly developed tools for later tasks. Across eleven real-world tasks, policies trained on its generated data average 63.6% success versus 18.2% for SPIDER, though verifier-driven selection does not by itself establish causal robustness.",
+      "tldr_zh": "DexAgent 将一段第一视角人类视频和任务 prompt 转成具有物理约束的机器人训练轨迹。它会针对刚体、关节物体和可变形物体，自适应选择 reconstruction、trajectory optimization、skill 与 property-specific verifier，并保留新工具供后续任务复用。在 11 个真实任务上，其数据训练出的 policy 平均成功率为 63.6%，SPIDER 为 18.2%，但 verifier 筛选本身尚不能证明因果稳健性。",
+      "interest_tag": ""
+    },
+    {
+      "title": "Agent Priors-guided Policy Learning",
+      "arxiv_id": "2609.35690",
+      "url": "https://arxiv.org/abs/2609.35690",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2609.35690",
+      "tldr": "APPL exposes each robot skill's structural prior—what state variables and relations its policy actually depends on—to the runtime composition layer. A construction agent creates and verifies prior-specific policies, while a runtime agent selects policies using applicability, support, and handoff metadata. With two demonstrations per task it reaches 89.58% macro OOD success across six MetaWorld tasks, showing that training assumptions can double as executable skill contracts.",
+      "tldr_zh": "APPL 将每个机器人 skill 的结构先验——policy 真正依赖哪些状态变量和关系——暴露给 runtime composition layer。construction agent 构建并验证不同 prior 对应的 policy，runtime agent 再根据适用条件、support 与 handoff metadata 选择执行。每个任务仅用两条 demonstration 时，它在六个 MetaWorld 任务上达到 89.58% macro OOD success，说明训练假设可以同时充当可执行 skill contract。",
+      "interest_tag": ""
+    },
+    {
+      "title": "Harness Learning Enables Generalizable Test-Time Adaptation",
+      "arxiv_id": "2609.35738",
+      "url": "https://arxiv.org/abs/2609.35738",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2609.35738",
+      "tldr": "Harness learning trains a proposer to edit an agent's executable workflow using reports from previous executions while keeping the solver frozen. The learned revision policy transfers to unseen reasoning and multi-hop QA tasks, raising mean held-out performance on 21 reasoning families from 0.32 to about 0.62 and reducing failed edits from 38% to 8%. Its importance is conceptual: accumulated experience can improve an agent by changing program structure at test time instead of updating model weights.",
+      "tldr_zh": "Harness learning 训练一个 proposer，根据前次执行报告修改 agent 的可执行 workflow，而 solver 权重保持冻结。学到的 revision policy 可以迁移到未见 reasoning 与 multi-hop QA 任务，在 21 个 reasoning family 上将平均 held-out score 从 0.32 提升到约 0.62，并把失败 edit 从 38% 降到 8%。其核心价值是：经验可以在 test time 通过改程序结构提升 agent，而不必更新模型参数。",
+      "interest_tag": ""
+    },
+    {
+      "title": "Improving Test-Time Scaling with Adaptive Looped Transformers",
+      "arxiv_id": "2609.35748",
+      "url": "https://arxiv.org/abs/2609.35748",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2609.35748",
+      "tldr": "TaH2 allocates repeated Transformer computation token by token instead of applying a fixed loop depth everywhere. A learned decider uses lookahead labels derived from next-token loss improvement to determine whether another latent iteration is worthwhile. On AIME, it improves the accuracy gain per doubling of decoding FLOPs from 1.79 to 2.74 points, but still incurs roughly 30–34% higher end-to-end latency at depth two, so compute adaptivity is not free wall-clock speed.",
+      "tldr_zh": "TaH2 不再对所有 token 使用固定循环深度，而是逐 token 分配重复的 Transformer 计算。learned decider 使用由 next-token loss 改善构造的 lookahead label，判断是否值得再做一次 latent iteration。在 AIME 上，每翻倍 decoding FLOPs 的准确率增益从 1.79 提升到 2.74 个百分点，但 depth two 仍带来约 30–34% 的端到端延迟，因此 compute adaptivity 不等于免费加速。",
+      "interest_tag": ""
+    },
+    {
+      "title": "WorldPlay2: Extending Real-Time Interactive World Models in Control and Horizon",
+      "arxiv_id": "2609.35560",
+      "url": "https://arxiv.org/abs/2609.35560",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2609.35560",
+      "tldr": "WorldPlay2 combines precise frame-aligned controls with structured semantic events while compressing visual history into memory tokens shared by teacher and autoregressive student. Stable Forcing uses few-step initialization and full-rollout replay to reduce distillation collapse and error accumulation. It reports real-time 16-fps generation and stronger revisit consistency, but persistent identity and semantic drift remain open limits rather than solved infinite-horizon simulation.",
+      "tldr_zh": "WorldPlay2 同时支持精确的 frame-aligned control 与结构化 semantic event，并把视觉历史压缩为 teacher 和 autoregressive student 共享的 memory token。Stable Forcing 结合 few-step initialization 与 full-rollout replay，缓解蒸馏中的 collapse 与误差累积。它报告 16 fps 实时生成和更强的 revisit consistency，但 identity 与 semantic drift 仍然存在，尚不能视为解决 infinite-horizon simulation。",
+      "interest_tag": ""
+    }
+  ],
+  "github_repos": [
+    {
+      "name": "kaankiziltug/logo-design-skill",
+      "url": "https://github.com/kaankiziltug/logo-design-skill",
+      "tldr": "This installable skill packages the full logo workflow—from discovery and mark selection through SVG construction, optical correction, testing, and delivery—for Claude, Gemini CLI, Codex, and other agents. It includes more than 1,400 real-world logo references and automated tests, making it both a procedure and a reference corpus. The combination of visible outputs, broad compatibility, and a one-command install explains its rapid rise to 919 stars.",
+      "tldr_zh": "这个可安装 skill 将完整 logo workflow 封装给 Claude、Gemini CLI、Codex 等 agent，覆盖需求发现、mark 选择、SVG 构造、视觉校正、测试与交付。它包含 1,400+ 真实 logo reference 与自动化测试，因此既是流程规范，也是参考语料库。结果高度可视化、兼容面广且一条命令可安装，是其快速达到 919 stars 的关键。",
+      "stars": 919,
+      "language": "HTML",
+      "interest_tag": ""
+    },
+    {
+      "name": "feder-cr/dots",
+      "url": "https://github.com/feder-cr/dots",
+      "tldr": "Dots packages a web agent with a dedicated browser designed to reduce blocking and fingerprint-related failures. The model can be swapped independently while the browser identity remains the execution surface, turning anti-detection browser behavior into infrastructure rather than prompt logic. Its fast 547-star launch reflects real pain around brittle browser agents, although the project is very new and should be evaluated carefully for security, platform-policy, and reproducibility trade-offs.",
+      "tldr_zh": "Dots 为 web agent 配置独立浏览器，目标是减少封禁与 fingerprint 相关失败。模型可以独立替换，而 browser identity 保持为执行表面，使 anti-detection 行为从 prompt logic 下沉为基础设施。它快速获得 547 stars，说明 browser agent 脆弱性是强痛点；但项目仍很新，需要谨慎评估安全、平台规则与可复现性代价。",
+      "stars": 547,
+      "language": "Python",
+      "interest_tag": ""
+    },
+    {
+      "name": "amitshekhariitbhu/ai-system-design",
+      "url": "https://github.com/amitshekhariitbhu/ai-system-design",
+      "tldr": "This repository organizes AI system design across inference, KV caches, RAG, agents, MCP, multi-agent systems, evaluation, observability, safety, and cost control. Its main contribution is a large curricular map rather than a new runtime, placing individual techniques inside end-to-end architecture and interview decision frameworks. With a 270-KB README and 57 forks, it passes the substance gate, but fast-moving implementation claims still need checking against primary documentation.",
+      "tldr_zh": "这个仓库把 AI system design 从 inference、KV cache 扩展到 RAG、agent、MCP、multi-agent、evaluation、observability、安全与成本控制。它的主要贡献是大型课程地图而非新 runtime，将单点技术放进端到端架构和面试决策框架。270 KB README 与 57 forks 说明内容并非占位，但快速变化的实现结论仍需对照一手文档。",
+      "stars": 471,
+      "language": "Markdown",
+      "interest_tag": ""
+    },
+    {
+      "name": "leter/zh-tech-writing",
+      "url": "https://github.com/leter/zh-tech-writing",
+      "tldr": "zh-tech-writing turns a Chinese technical-writing standard into an installable Agent Skill for READMEs, design documents, API references, and tutorials. Its rules explicitly remove canned openings, inflated adjectives, excessive punctuation, and other recognizable AI-writing patterns while requiring concrete project facts. The project shows how an established editorial norm can become an executable quality gate rather than another style prompt.",
+      "tldr_zh": "zh-tech-writing 将中文技术写作规范封装成可安装 Agent Skill，适用于 README、设计文档、API 说明与教程。规则会明确删除套话、空泛形容词、夸张标点等典型 AI 腔，并要求内容落到具体项目事实。它展示了如何把成熟编辑规范变成可执行 quality gate，而不是又一段风格 prompt。",
+      "stars": 312,
+      "language": "N/A",
+      "interest_tag": ""
+    },
+    {
+      "name": "openJiuwen-ai/iCode",
+      "url": "https://github.com/openJiuwen-ai/iCode",
+      "tldr": "iCode is an offline-first TUI development platform and agent/workflow toolkit that emphasizes local control over data, models, and execution. Its modular design targets extensions for tools and workflows rather than binding users to a hosted service, and the repository has meaningful early fork activity. The practical trade-off is maturity: the README explicitly labels it work in progress, so interfaces, file formats, and defaults may still change between releases.",
+      "tldr_zh": "iCode 是一个 offline-first 的 TUI 开发平台与 agent/workflow toolkit，强调对数据、模型和执行过程的本地控制。其模块化设计面向 tool 与 workflow extension，而不是把用户绑定到 hosted service，仓库也已有明显的早期 fork 活动。代价是成熟度：README 明确标注 work in progress，interface、file format 与 default 仍可能随版本变化。",
+      "stars": 267,
+      "language": "Python",
+      "interest_tag": ""
+    }
+  ],
+  "hackernews": [
+    {
+      "title": "Show HN: Whiteboard (YC W26) – An open-source IDE for thoughtful software design",
+      "url": "https://github.com/devdotfast/whiteboard",
+      "tldr": "Whiteboard is an open-source desktop canvas where developers and coding agents can reason about software design in a shared visual workspace. It connects diagrams and agent traces back to code, adds an AST-aware semantic diff viewer, and records autonomous decisions instead of presenting only the final patch. Its 422 points and 142 comments signal demand for interfaces that improve review and shared understanding rather than simply generating more code.",
+      "tldr_zh": "Whiteboard 是一个开源桌面画布，让开发者与 coding agent 在共享可视化 workspace 中讨论软件设计。它把 diagram 与 agent trace 关联回代码，提供 AST-aware semantic diff，并记录 autonomous decision，而不是只展示最终 patch。422 points 与 142 条评论说明，社区需要的是提升 review 和共同理解的界面，而不只是生成更多代码。",
+      "points": 422,
+      "num_comments": 142,
+      "interest_tag": ""
+    },
+    {
+      "title": "A Privacy Analysis of Web and Mobile Conversational AI Agents [pdf]",
+      "url": "https://jorgegarciaherrero.com/wp-content/interactivos/20260916-Prompt-like-a-butterfly-sting-like-a-tracker-(clean).pdf",
+      "tldr": "This measurement study audits nine major conversational AI services across web and Android clients, consent choices, and account tiers. Every service contacts at least one third-party advertising or tracking service; 6/9 web and 3/8 Android clients expose conversation artifacts, sometimes alongside persistent identifiers, while free and paid tiers show little difference. The work matters because it follows prompts, titles, permalinks, screenshots, and identity linkage through real network flows, converting privacy policy ambiguity into reproducible evidence.",
+      "tldr_zh": "这项测量研究审计九个主流 conversational AI 服务，覆盖 web、Android、不同 consent choice 与 account tier。所有服务都至少连接一个第三方广告或追踪服务；6/9 web client 与 3/8 Android client 会暴露 conversation artifact，部分还伴随 persistent identifier，而免费和付费层差异很小。它的重要性在于沿真实网络流追踪 prompt、title、permalink、screenshot 与 identity linkage，把模糊隐私条款转成可复查证据。",
+      "points": 416,
+      "num_comments": 130,
+      "interest_tag": ""
+    },
+    {
+      "title": "There are no \"rogue\" AI agents",
+      "url": "https://eoinhiggins.substack.com/p/there-are-no-rogue-ai-agents",
+      "tldr": "The essay argues that labeling unexpected agent behavior as “rogue” anthropomorphizes software and shifts responsibility away from developers and deployers. It reframes recent incidents as systems with overly broad capabilities or missing restrictions pursuing assigned goals through available means. The governance implication is useful even if the article is opinionated: accountability should focus on sandboxing, privileges, monitoring, and evaluation design rather than imagined machine intent.",
+      "tldr_zh": "文章认为，把意外 agent 行为称为「rogue」会拟人化软件，并把责任从开发者与部署者身上移开。它将近期事件重新解释为能力范围过宽或缺少限制的系统，利用可用手段追求既定目标。即使文章带有明显观点，其治理结论仍有价值：问责应聚焦 sandbox、privilege、monitoring 与 evaluation design，而不是假想的机器意图。",
+      "points": 395,
+      "num_comments": 268,
+      "interest_tag": ""
+    },
+    {
+      "title": "Nvidia wants to put a watchdog chip next to every AI agent",
+      "url": "https://www.cnbc.com/2026/09/28/nvidia-releases.html",
+      "tldr": "Nvidia's Open Agent Safety Platform moves agent governance outside the model: OpenShell limits capabilities on CPUs, while Sentry monitors behavior on network processors. Nvidia presents it as an open reference design with partners including Microsoft, Cisco, Oracle, CoreWeave, and Anthropic integration work. The architectural point is stronger than the product announcement itself—model-level refusal is insufficient when a runtime has broad network and filesystem authority, so containment must be enforced by an independent layer.",
+      "tldr_zh": "Nvidia 的 Open Agent Safety Platform 将 agent governance 移到模型外部：OpenShell 在 CPU 上限制能力，Sentry 则在 network processor 上监控行为。Nvidia 将其作为开放 reference design，并宣布 Microsoft、Cisco、Oracle、CoreWeave 等合作伙伴及 Anthropic integration。比产品发布更重要的是架构信号：当 runtime 拥有广泛网络和文件权限时，模型层拒绝不够，containment 必须由独立层强制执行。",
+      "points": 225,
+      "num_comments": 295,
+      "interest_tag": ""
+    },
+    {
+      "title": "Unsurprisingly, Meta's new Muse AI agent blatantly ignores users permissions",
+      "url": "https://appleinsider.com/articles/26/09/28/metas-new-ai-agent-blatantly-ignores-users-permissions",
+      "tldr": "AppleInsider reports a user's finding that Meta Muse synced 187,000 lines from a Mac Messages database despite Messages permission not being granted and Full Disk Access being disabled. The report is based on one user's investigation and a secondary account, so it should be treated as a serious incident claim rather than a controlled audit. Its importance is the threat model: local agents can transform a permission-boundary bug into bulk cloud exfiltration, making OS-level access logs and deny-by-default connectors essential.",
+      "tldr_zh": "AppleInsider 报道称，一名用户发现 Meta Muse 在未获得 Messages 权限、Full Disk Access 也关闭的情况下，从 Mac Messages database 同步了 187,000 行内容。该报道依赖单个用户调查与二手叙述，因此应视为严重 incident claim，而不是受控审计结论。它揭示的 threat model 很关键：local agent 会把权限边界漏洞放大成批量 cloud exfiltration，因此需要 OS-level access log 与 deny-by-default connector。",
+      "points": 154,
+      "num_comments": 41,
+      "interest_tag": ""
+    }
+  ]
+}
