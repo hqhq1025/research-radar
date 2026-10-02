@@ -1,0 +1,221 @@
+{
+  "date": "2026-10-02",
+  "generated_at": "2026-10-02T16:02:55+08:00",
+  "briefing_zh": "今天最值得关注的主线，是长程 Agent 正从被动保存历史转向主动维护可执行状态。**Beyond Memory** 用显式 belief state 同时记录世界状态与未完成要求，并检测 Agent 持续行动却没有进展的 Belief Trapping；**Context Language Models** 则更激进地让模型直接编辑自己的 context 文件。两者共同说明：真正的瓶颈不是上下文窗口够不够长，而是 Agent 能否持续维护一份与当前任务一致、可更新、可验证的内部工作状态。\n\nComputer Use 方向同时出现了数据生成与评测两端的推进。**AutoGUIWorld** 把图像生成器当作 GUI visual world model，合成 79,266 个带空间标注的 step，并报告 OSWorld 从 33.0% 升至 40.8%；但离线 benchmark 增益并不能自动证明生成 transition 具有真实环境的一致性，背景漂移、状态守恒和动作因果仍需单独审计。另一端，**OSWorld-Science** 用 146 个科学软件任务和 artifact-based evaluator 检查分子结构、分割掩码、图表与数值结果，把 GUI Agent 评测从通用办公推进到可验证的专业工作流。\n\nAgent training 与 evaluation 也在从单一 pass rate 转向机制诊断。**Sharpening Tax in Post-Training** 发现 RL 后训练常提高 pass@1，却降低重复采样时的 solution coverage；**OpenCollab** 则用 Adherence 衡量多 Agent 组织是否真的按设计发生协作，而不是只看最终分数。**ScholarCatalyst** 对科研检索给出相似警告：agentic search 的 Recall@20 只有 0.42，甚至低于 embedding retrieval 的 0.48，说明增加循环和工具调用并不等于获得专家式研究直觉。\n\n开源生态今天更偏向可落地的 Agent infrastructure：浏览器 Agent **dots** 一周内获得 2.4k stars，强调真实浏览器与抗阻断执行；logo-design-skill、yomiyasu 等项目则把垂直知识、测试工具和交付流程封装为可复用 Skill。HN 对 Agent identity 和跨运行时通信的关注也在上升，表明系统开始从单次 demo 转向长期运行所需的身份、委托、审计和消息控制面。",
+  "briefing_en": "The clearest theme today is a shift from passively storing history to actively maintaining executable state for long-horizon agents. **Beyond Memory** keeps an explicit belief state that combines the estimated world state with unresolved requirements and detects Belief Trapping, where an agent keeps acting without progress. **Context Language Models** goes further by allowing models to edit their own context files. Together, they suggest that the real bottleneck is not context-window length but whether an agent can maintain a consistent, updateable, and verifiable working state.\n\nComputer use advanced on both the data and evaluation fronts. **AutoGUIWorld** treats an image generator as a visual world model and synthesizes 79,266 spatially annotated GUI steps, reporting an OSWorld gain from 33.0% to 40.8%; however, offline benchmark gains do not by themselves establish transition fidelity, so background stability, state conservation, and action causality still require dedicated audits. **OSWorld-Science** complements this with 146 scientific-software tasks and artifact-based evaluators that inspect molecular structures, segmentation masks, plots, and numerical outputs, moving GUI-agent evaluation toward verifiable professional workflows.\n\nAgent training and evaluation are also moving beyond a single pass rate. **Sharpening Tax in Post-Training** finds that RL post-training can improve pass@1 while reducing solution coverage under repeated sampling. **OpenCollab** measures whether a declared multi-agent organization actually collaborates through an Adherence metric, while **ScholarCatalyst** reports that agentic scientific search reaches only 0.42 Recall@20, below embedding retrieval at 0.48. More loops and tools are not substitutes for expert search intuition or verified coordination.\n\nOpen source is concentrating on deployable agent infrastructure. The browser agent **dots** reached 2.4k stars by emphasizing a real browser and resistance to blocking, while projects such as logo-design-skill and yomiyasu package domain knowledge, tests, and delivery workflows into reusable skills. Hacker News attention around agent identity and cross-runtime messaging also signals a transition from one-shot demos toward the identity, delegation, audit, and communication control planes required by persistent agents.",
+  "viral_analysis_zh": "今天最可能扩散的是 **dots**：浏览器 Agent 容易被验证码、登录态和反自动化机制卡住，这是用户一眼就能理解的痛点，而「拥有自己的、不容易被拦截的浏览器」比抽象的 Agent framework 更容易形成 demo 传播。研究侧 **AutoGUIWorld** 也具备爆款结构——79,266 条数据与 OSWorld 33.0%→40.8% 都是醒目的数字，但真正决定后续口碑的会是生成轨迹能否通过 transition realism 审计。",
+  "viral_analysis_en": "**dots** is the most likely project to spread today because browser agents getting blocked by CAPTCHAs, login state, and anti-automation systems is an immediately legible pain point; an agent with its own resilient browser is easier to demonstrate than an abstract framework. On the research side, **AutoGUIWorld** has a viral package of 79,266 samples and a 33.0% to 40.8% OSWorld gain, but its lasting credibility will depend on whether the generated trajectories survive transition-realism audits.",
+  "huggingface_papers": [
+    {
+      "title": "Beyond Memory: Harnessing Long-Horizon Agents with Explicit Belief States",
+      "url": "https://arxiv.org/abs/2610.01415",
+      "tldr": "PoS replaces history-centric memory management with an explicit belief state that tracks both the estimated world state and unresolved task requirements. It validates consistency, monitors progress, and detects Belief Trapping when an agent acts without meaningful advancement. Across four execution and diagnosis benchmarks and three LLM backbones, it reports the best overall performance and stronger resilience to context growth. The important shift is from remembering past events to maintaining an actionable model of the present.",
+      "tldr_zh": "PoS 不再以历史压缩或检索为中心，而是显式维护当前世界状态与未完成任务要求组成的 belief state。它通过一致性校验和进度监控识别 Agent 持续行动却没有实质进展的 Belief Trapping，并按陷阱类型恢复。论文在四个执行与诊断 benchmark、三个 LLM backbone 上报告最高总体表现，对 context 增长也更稳健。关键转变是从「记住过去」走向「维护可行动的现在」。",
+      "upvotes": 44,
+      "authors": "Yu Luo, Jiamin Jiang, Yimin Zuo, Xidao Wen, Rongchen Gao, Yongqian Sun, Shenglin Zhang, Guiyang Liu, Cheng Zhang, Fang Situ, Qi Zhou, Dan Pei",
+      "ai_keywords": [
+        "long-horizon agents",
+        "belief state",
+        "context management"
+      ],
+      "interest_tag": "Memory"
+    },
+    {
+      "title": "Sharpening Tax in Post-Training",
+      "url": "https://arxiv.org/abs/2610.01509",
+      "tldr": "The paper compares 14 base and post-trained model pairs across four families and three agentic benchmarks. RL post-training often raises pass@1 by pushing tasks toward always-solved or never-solved extremes, but it can reduce solution coverage when more test-time samples are available. Sharpening Tax quantifies that loss of test-time scalability, while posterior-tempered group sampling adapts temperature to estimated prompt difficulty. The work exposes a hidden trade-off between single-shot reliability and exploration capacity.",
+      "tldr_zh": "论文比较了四个模型家族的 14 组 base/post-trained 模型，并覆盖三个 agent benchmark。RL 后训练常通过把任务推向「总能解」或「永远不能解」两端来提高 pass@1，却可能降低增加 test-time samples 后的 solution coverage。Sharpening Tax 用于量化这种 test-time scalability 损失，PTGS 则按题目难度自适应采样温度。它揭示了单次可靠性与探索覆盖率之间常被忽视的 trade-off。",
+      "upvotes": 31,
+      "authors": "Changdae Oh, Qi Zeng, Qi Qi, Andrey Zhmoginov, Deren Lei, Yun He, Hoang Phan, Hangoo Kang, Azalia Mirhoseini, Sharon Li",
+      "ai_keywords": [
+        "post-training",
+        "test-time scaling",
+        "reinforcement learning"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "AutoGUIWorld: Image Generators as Visual World Models for GUI Agent",
+      "url": "https://arxiv.org/abs/2610.01215",
+      "tldr": "AutoGUIWorld uses an image generator as a visual world model to synthesize GUI trajectories without installing or running the target software. A planner specifies atomic actions and intended visual consequences, while grounding and transition filters produce 79,266 annotated steps across Ubuntu, Windows, macOS, and Chrome. Fine-tuning Qwen3.5-35B-A3B reportedly improves OSWorld from 33.0% to 40.8% and ScienceBoard success from 14.0% to 32.2%. The gains are notable, but benchmark transfer should be separated from evidence that generated transitions preserve real GUI state and causality.",
+      "tldr_zh": "AutoGUIWorld 将图像生成器作为 visual world model，在不安装或运行目标软件的情况下合成 GUI trajectory。Planner 指定原子动作及预期视觉结果，grounding 与 transition filter 最终得到覆盖 Ubuntu、Windows、macOS 和 Chrome 的 79,266 个标注 step。微调 Qwen3.5-35B-A3B 后，论文报告 OSWorld 从 33.0% 升至 40.8%，ScienceBoard 成功率从 14.0% 升至 32.2%。结果值得关注，但 benchmark transfer 不能替代对真实 GUI 状态守恒和动作因果的单独验证。",
+      "upvotes": 27,
+      "authors": "Cheng Yang, Yifan Wu, Yutao Huang, Zhaohua Zhang, Beiduo Chen, Muxi Chen, Chenchen Zhao, Hexuan Deng, Haolin Yang, Geyuan Zhu, Sa Zhu, Jianhuan Zhuo, Qiuyong Xiao, Jianhao Ruan, Yiran Peng, Jiayi Zhang, Tian Ye, Xinlei Yu, Tianwen Jiang, Jihong Zhang, Yuyu Luo",
+      "ai_keywords": [
+        "GUI agent",
+        "visual world model",
+        "synthetic trajectories"
+      ],
+      "interest_tag": "CUA"
+    },
+    {
+      "title": "Adaptive Reward Routing: Dynamic Multi-Reward Optimization for Joint Audio-Video Diffusion via Forward-Process RL",
+      "url": "https://arxiv.org/abs/2609.37200",
+      "tldr": "Adaptive Reward Routing addresses two moving targets in multi-reward diffusion RL: where reward-driven updates should act and how competing rewards should be combined. It uses bidirectional cross-attention as a proxy for cross-modal influence, then adjusts token losses, layer gradients, and reward weights while preserving predefined preference priors. Experiments report consistent gains in modality quality, semantic alignment, and audio-video synchronization over strong baselines. Its broader contribution is a dynamic alternative to fixed reward routing in multi-objective generative-model training.",
+      "tldr_zh": "Adaptive Reward Routing 同时处理多奖励 diffusion RL 中两个动态问题：奖励更新应作用在哪里，以及相互竞争的奖励应如何组合。方法用双向 cross-attention 近似跨模态影响，再动态调整 token loss、跨模态层梯度和 reward weight，同时保留预设偏好先验。实验报告其在单模态质量、语义一致性和音视频同步上持续优于强 baseline。更一般的价值，是为多目标生成模型训练提供固定 reward routing 之外的动态方案。",
+      "upvotes": 109,
+      "authors": "Songlin Yang, Xiaotong Zhao, Jiacheng Zhang, Zhe Wang, Toyota Li, Eric Liu, Alan Zhao, Anyi Rao",
+      "ai_keywords": [
+        "audio-video diffusion",
+        "multi-reward RL",
+        "reward routing"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "Hierarchical Continuous Diffusion Language Models",
+      "url": "https://arxiv.org/abs/2610.02193",
+      "tldr": "HC-DLM couples discrete token generation with a continuous latent trajectory under a variational likelihood objective. The latent remains the only persistent state, while tokens are repeatedly decoded and fed back as scaffolding for subsequent denoising. This aims to preserve dependencies lost by parallel discrete diffusion while grounding continuous diffusion in valid token configurations. It improves over matched diffusion baselines on Sudoku, Countdown, and LM1B, spanning structured reasoning, planning, and language modeling.",
+      "tldr_zh": "HC-DLM 在变分似然目标下，把离散 token 生成与连续 latent trajectory 耦合到同一去噪过程。连续 latent 是唯一持续存在的状态，而每一步读出的 token 会作为 scaffold 反馈给下一轮 denoising。这样既试图保留离散扩散并行解码时容易丢失的 token 依赖，也让连续扩散在生成途中受到合法 token 配置约束。论文在 Sudoku、Countdown 和 LM1B 上均优于同规模 diffusion baseline。",
+      "upvotes": 47,
+      "authors": "Hui Ren, Zihan Li, Chang Liu, Huidong Liu, Alexander Schwing",
+      "ai_keywords": [
+        "diffusion language model",
+        "continuous latent",
+        "structured reasoning"
+      ],
+      "interest_tag": ""
+    }
+  ],
+  "alphaxiv_papers": [
+    {
+      "title": "ScholarCatalyst: A Benchmark for Retrieving Papers That Inspire New Research",
+      "arxiv_id": "2610.02202",
+      "url": "https://arxiv.org/abs/2610.02202",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2610.02202",
+      "tldr": "ScholarCatalyst asks whether systems can retrieve papers that genuinely inspired or could have advanced a research project, using judgments from 184 lead authors across 207 projects. The task starts from an initial research question and restricts retrieval to literature available when the project began. Agentic search reaches 0.42 Recall@20, below embedding retrieval at 0.48, while a stronger model reaches only 0.51. The result challenges the assumption that tool-using search loops automatically reproduce expert scientific intuition.",
+      "tldr_zh": "ScholarCatalyst 评测系统能否找出真正启发过、或本可推进某项研究的论文，标注来自 184 位主作者和 207 个真实项目。任务从项目最初的研究问题出发，并把检索范围限制在当时已经公开的文献。Agentic search 的 Recall@20 只有 0.42，低于 embedding retrieval 的 0.48，更强模型也仅达到 0.51。结果直接挑战了「加上工具调用和搜索循环就能复现专家科研直觉」的假设。",
+      "interest_tag": "Benchmark"
+    },
+    {
+      "title": "SkillRefiner: Offline Skill Refinement from Historical Agent Traces",
+      "arxiv_id": "",
+      "url": "https://www.alphaxiv.org/abs/2610.skillrefiner-offline-skill-refinement",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2610.skillrefiner-offline-skill-refinement",
+      "tldr": "SkillRefiner improves reusable agent instructions offline from historical traces and observed outcomes, avoiding new environment rollouts. It summarizes long trajectories, clusters recurring successes and failures, and evidence-checks failure-derived edits before merging them. Across spreadsheet manipulation, math reasoning, and production pull-request review, it improves over LLM- and human-authored skills while using 1.4 to 42 times fewer refinement tokens than competing methods. The method is especially relevant when environments are expensive, non-replayable, or supervised only after deployment.",
+      "tldr_zh": "SkillRefiner 从历史执行轨迹和结果中离线改进 Agent Skill，不需要重新运行环境。它先总结长轨迹、聚类反复出现的成功行为和失败模式，再对失败导出的修改做证据校验后合并。论文在表格操作、数学推理和生产级 PR review 上均改进 LLM 或人工编写的 Skill，并将 refinement token 消耗降低 1.4–42 倍。对于环境昂贵、不可复现或只能在部署后获得监督的任务，这条路线尤其实际。",
+      "interest_tag": ""
+    },
+    {
+      "title": "Context Language Models",
+      "arxiv_id": "2609.37725",
+      "url": "https://arxiv.org/abs/2609.37725",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2609.37725",
+      "tldr": "Context Language Models treat context as an editable file and allow the model to decide what to retain, rewrite, or remove. Zero-shot CLMs report higher accuracy with fewer FLOPs on BrowseComp-Plus and long-running EdgeBench tasks, and the abstraction extends naturally to multiple coexisting agent contexts. Online RL further improves Qwen3.5-9B by 47.6% on BrowseComp-Plus, while suffix-cache reuse reduces serving compute. The work moves context management from an external harness policy into the model's learned behavior, with corresponding risks around deletion, persistent errors, and prompt injection.",
+      "tldr_zh": "Context Language Models 把 context 当作可编辑文件，让模型自行决定保留、改写或删除什么。Zero-shot CLM 在 BrowseComp-Plus 和长时 EdgeBench 任务上报告更高准确率和更低 FLOPs，这一抽象也能自然扩展到多个共存的 Agent context。Online RL 让 Qwen3.5-9B 在 BrowseComp-Plus 上进一步提升 47.6%，suffix-cache reuse 则降低 serving compute。它把 context management 从外部 harness 策略移入模型行为，同时也带来误删、错误持久化和 prompt injection 风险。",
+      "interest_tag": ""
+    },
+    {
+      "title": "OSWorld-Science: A Benchmark of Computer Use Agents for Learning and Using Scientific Software",
+      "arxiv_id": "2609.39903",
+      "url": "https://arxiv.org/abs/2609.39903",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2609.39903",
+      "tldr": "OSWorld-Science evaluates computer-use agents on 146 expert-shaped tasks across scientific software, including molecular drawing, pathology analysis, statistics, and physical simulation. Execution-based graders inspect application state and generated artifacts such as molecular structures, segmentation masks, plots, and numerical results, with partial credit for incomplete outcomes. Even strong VLMs and harnesses still struggle, and only 26.3% of reported runs receive full credit. The benchmark matters because it anchors GUI-agent success in verifiable scientific artifacts rather than superficial screen completion.",
+      "tldr_zh": "OSWorld-Science 用 146 个专家参与设计的任务评测科学软件中的 Computer Use Agent，覆盖分子绘制、病理分析、统计计算和物理仿真。Execution-based grader 会检查应用状态及分子结构、分割掩码、图表和数值结果等 artifact，并对不完整结果给部分分。即使使用强 VLM 和 harness，论文报告也只有 26.3% 的运行获得 full credit。它的重要性在于把 GUI Agent 成功锚定到可验证科学产物，而不是表面上的界面完成。",
+      "interest_tag": "CUA"
+    },
+    {
+      "title": "OpenCollab: A Multi-Agent Coding Framework with Programmable Collaboration and Controllable Runtime",
+      "arxiv_id": "2609.38345",
+      "url": "https://arxiv.org/abs/2609.38345",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2609.38345",
+      "tldr": "OpenCollab provides a shared runtime for programmable multi-agent coding organizations and records fine-grained execution events. Its Adherence metric checks whether declared roles, delegation, information flow, and budget sharing actually occur; measured adherence ranges from 47.2% to 97.2% across configurations. A two-coder workflow reports strong benchmark results, but it also uses multiple solving processes and more tokens, so coordination effects should not be inferred from raw scores alone. The lasting contribution is making collaboration observable and experimentally controllable.",
+      "tldr_zh": "OpenCollab 为可编程的多 Agent coding 组织提供统一 runtime，并记录细粒度执行事件。其 Adherence 指标检查角色、委托、信息流和预算共享是否真的发生，不同配置下实测从 47.2% 到 97.2%。双 coder workflow 报告了很强的 benchmark 成绩，但它也使用更多 solving process 和 token，因此不能仅凭 raw score 归因于协作。更持久的贡献是让多 Agent collaboration 变得可观察、可控制、可做因果对照。",
+      "interest_tag": "Agent Swarm"
+    }
+  ],
+  "github_repos": [
+    {
+      "name": "feder-cr/dots",
+      "url": "https://github.com/feder-cr/dots",
+      "tldr": "dots is an open-source web agent that runs with its own browser and emphasizes resistance to common blocking failures. The repository provides cross-platform uvx startup, model substitution, a live chat-and-browser interface, source code, and tests. Its 2,407 stars and 420 forks indicate unusually strong hands-on interest for a newly created repository. The project is compelling because it targets the practical reliability gap between browser-agent demos and real websites.",
+      "tldr_zh": "dots 是一个自带浏览器的开源 Web Agent，重点解决真实网页中的阻断与可用性问题。仓库提供跨平台 uvx 启动、模型替换、实时聊天与浏览器界面，并包含源码和测试。新仓库已获得 2,407 stars 和 420 forks，显示出很强的实际试用意愿。它抓住的是浏览器 Agent 从 demo 走向真实网站时最直接的 reliability gap。",
+      "stars": 2407,
+      "language": "Python",
+      "interest_tag": "CUA"
+    },
+    {
+      "name": "kaankiziltug/logo-design-skill",
+      "url": "https://github.com/kaankiziltug/logo-design-skill",
+      "tldr": "This project packages logo-design principles, workflow, SVG craft, and delivery checks into an agent skill for Claude, Gemini CLI, Codex, and similar systems. It includes more than 1,400 categorized SVG references plus tools for auditing, 16-pixel legibility, monochrome testing, competitive boards, and icon export. The repository also ships evaluations rather than relying on a prompt alone. Its popularity shows that narrowly scoped skills become more valuable when they bundle references, executable checks, and a complete delivery process.",
+      "tldr_zh": "该项目把 logo 设计原则、工作流、SVG 工艺和交付检查封装为适用于 Claude、Gemini CLI、Codex 等 Agent 的 Skill。它包含 1,400 多个分类 SVG 参考，以及审计、16px 可读性、单色测试、竞品陈列和图标导出工具。仓库还提供 eval，而不是只有一段 prompt。它的热度说明，垂直 Skill 在同时打包参考资料、可执行检查和完整交付流程时更容易形成真实价值。",
+      "stars": 1393,
+      "language": "HTML",
+      "interest_tag": ""
+    },
+    {
+      "name": "nanaism/yomiyasu",
+      "url": "https://github.com/nanaism/yomiyasu",
+      "tldr": "yomiyasu is an agent skill for rewriting AI-generated Japanese into more natural prose for technical articles, design documents, pull requests, and internal reports. It targets specific Japanese failure patterns instead of offering a generic humanization prompt. The repository includes a skill specification, references, scripts, evaluations, and tests. Its 1,072 stars show strong demand for language-specific post-editing workflows with explicit quality criteria.",
+      "tldr_zh": "yomiyasu 是一个把 AI 生成日语润色为自然表达的 Agent Skill，面向技术文章、设计文档、PR 描述和内部报告。它针对具体日语问题，而不是提供泛化的「去 AI 味」prompt。仓库包含 Skill 规范、参考资料、脚本、eval 和测试。1,072 stars 说明，具有明确质量标准的语言特定 post-editing workflow 存在强需求。",
+      "stars": 1072,
+      "language": "Python",
+      "interest_tag": ""
+    },
+    {
+      "name": "openJiuwen-ai/iCode",
+      "url": "https://github.com/openJiuwen-ai/iCode",
+      "tldr": "iCode is a lightweight, extensible, fully offline platform for managing agents and workflows through a TUI. It exposes models, commands, files, shell actions, per-node tool calls, and token usage while keeping data under local control. The repository includes source code, tests, documentation, examples, and a locked dependency environment. Its 49 forks on 291 stars suggest meaningful experimentation beyond passive bookmarking.",
+      "tldr_zh": "iCode 是一个轻量、可扩展、完全离线的 Agent 与 workflow 平台，通过 TUI 管理模型、命令、文件和 shell action。它能逐节点展示 tool call 与 token 消耗，同时让数据保留在本地。仓库包含源码、测试、文档、示例和锁定依赖环境。291 stars 对应 49 forks，说明其吸引了不少真实试用，而不只是收藏。",
+      "stars": 291,
+      "language": "Python",
+      "interest_tag": ""
+    },
+    {
+      "name": "strands-labs/strands-decider",
+      "url": "https://github.com/strands-labs/strands-decider",
+      "tldr": "strands-decider is a small decision model for selecting among options or rating on a scale inside agentic workflows. It aims to replace expensive general LLM calls at frequent decision points with lower latency and calibrated confidence. The repository includes training, evaluation, data, examples, and tests, with reported high accuracy above a confidence threshold on unseen short classification tasks. The design illustrates a cost-effective pattern: reserve frontier models for hard reasoning and route routine control decisions to specialized small models.",
+      "tldr_zh": "strands-decider 是一个用于 Agent workflow 中选项选择和量表评分的小型决策模型。它希望在高频决策节点用低延迟、带校准置信度的模型替代昂贵通用 LLM 调用。仓库包含训练、评测、数据、示例和测试，并报告在未见短分类任务的高置信区间取得较高准确率。其架构模式很实用：前沿模型负责困难推理，例行控制决策交给专用小模型。",
+      "stars": 100,
+      "language": "Python",
+      "interest_tag": ""
+    }
+  ],
+  "hackernews": [
+    {
+      "title": "Identity Management for Agentic AI [pdf] (2025)",
+      "url": "https://openid.net/wp-content/uploads/2025/10/Identity-Management-for-Agentic-AI.pdf",
+      "tldr": "The OpenID Foundation report maps identity, authentication, authorization, and delegation requirements for agentic AI. It argues that conventional OAuth patterns are insufficient for asynchronous cross-domain execution, recursive delegation, shared agents, and independent agent auditability. A central lesson is that agents should not simply impersonate users; authority needs explicit provenance, scope, attenuation, and revocation. The report turns a broad security concern into a concrete standards agenda for persistent agents.",
+      "tldr_zh": "OpenID Foundation 的报告系统梳理了 Agent 的身份、认证、授权和委托需求。它指出传统 OAuth 模式难以覆盖跨域异步执行、递归委托、多人共享 Agent 和 Agent 独立审计等场景。核心结论是 Agent 不应简单冒充用户，权限必须具有明确来源、范围、衰减和撤销机制。报告把宽泛的安全担忧整理成了面向长期运行 Agent 的具体标准议程。",
+      "points": 70,
+      "num_comments": 23,
+      "interest_tag": ""
+    },
+    {
+      "title": "Aweb – Communication for AI Agents",
+      "url": "https://aweb.ai",
+      "tldr": "Aweb provides stable identities, persistent mail and chat, offline delivery, wake-up events, and federated communication for agents across runtimes and organizations. Its open protocol and CLI can be self-hosted rather than tied to one orchestration framework. This addresses a control-plane problem that process-local multi-agent systems often ignore: messages and identities must outlive a single session. The project is relevant to agent swarms because durable communication is a prerequisite for collaboration across machines and trust domains.",
+      "tldr_zh": "Aweb 为跨 runtime、机器和组织的 Agent 提供稳定身份、持久邮件与聊天、离线投递、唤醒事件和联邦通信。其开放协议与 CLI 支持自托管，不绑定单一 orchestration framework。它解决了进程内多 Agent 系统常忽略的控制面问题：消息和身份必须能够跨越单次 session 存活。对于 Agent Swarm，跨机器和信任域的持久通信是协作的前提。",
+      "points": 34,
+      "num_comments": 24,
+      "interest_tag": "Agent Swarm"
+    },
+    {
+      "title": "Show HN: Fast browser agent (using Jev) with deep reasoning as needed",
+      "url": "https://github.com/ironbee-ai/ironbee-express",
+      "tldr": "IronBee Express uses constrained Jev decisions for routine browser actions and invokes deeper reasoning only when needed. The agent selects only controls and values exposed by the page, reducing the action space and limiting hallucinated operations. It verifies outcomes using page state, APIs, logs, and traces rather than trusting a visual success message alone. The project demonstrates a promising CUA pattern: cheap constrained execution for the common path, with expensive reasoning reserved for ambiguity and failure recovery.",
+      "tldr_zh": "IronBee Express 用受约束的 Jev decision 处理常规浏览器动作，只在必要时调用更深推理。Agent 只能选择页面实际暴露的控件和值，从而缩小 action space 并减少幻觉操作。执行后它结合页面状态、API、日志和 trace 验证结果，而不是只相信界面上的成功提示。这个项目展示了一条值得关注的 CUA 路线：常规路径低成本受限执行，歧义和失败恢复再使用昂贵推理。",
+      "points": 7,
+      "num_comments": 0,
+      "interest_tag": "CUA"
+    },
+    {
+      "title": "Best-of-Agent-Harnesses – Ranked list of 167 AI agent harnesses, rescored weekly",
+      "url": "https://github.com/ryanalberts/best-of-agent-harnesses",
+      "tldr": "Best-of-Agent-Harnesses maintains a weekly rescored catalog of 167 agent harnesses, orchestration frameworks, and reliability techniques. It provides structured JSON, an MCP service, llms.txt, templates, and operational playbooks in addition to a human-readable ranking. That makes the collection queryable by both people and agents rather than a static link list. Its emergence reflects a broader shift in attention from model choice alone toward harness design, recovery, verification, and runtime engineering.",
+      "tldr_zh": "Best-of-Agent-Harnesses 每周重新评分 167 个 Agent harness、orchestration framework 和可靠性技术。除了人类可读榜单，它还提供结构化 JSON、MCP service、llms.txt、模板和实践 playbook，因此人和 Agent 都能查询。它不是简单链接合集，而是一份可机器消费的技术地图。该项目的出现反映出关注点正从单纯选模型转向 harness 设计、恢复、验证和 runtime engineering。",
+      "points": 6,
+      "num_comments": 0,
+      "interest_tag": ""
+    },
+    {
+      "title": "Extract v2.5: Rebuilding extraction agents on LlamaParse",
+      "url": "https://www.llamaindex.ai/blog/introducing-extract-v2-5",
+      "tldr": "Extract v2.5 rebuilds document extraction around a specialized agent harness on top of LlamaParse. It adds structural reasoning, cross-page association, schema validation, and precise citation grounding for difficult documents. LlamaIndex reports ExtractBench value-F1 gains from 87.1 to 93.9 in its cost-effective setting and from 89.8 to 95.8 in its agentic setting. The case study shows how task-specific scaffolding and verification can improve the same underlying model on long lists, scanned forms, and cross-page records.",
+      "tldr_zh": "Extract v2.5 在 LlamaParse 之上用专用 Agent harness 重构文档抽取。它加入结构推理、跨页关联、schema 校验和精确引用定位，针对长列表、扫描表单和跨页记录等真实难点。LlamaIndex 报告其 ExtractBench value F1 在 cost-effective 配置中从 87.1 升至 93.9，在 agentic 配置中从 89.8 升至 95.8。这个案例说明，task-specific scaffold 与验证循环可以显著放大同一底层模型的能力。",
+      "points": 5,
+      "num_comments": 0,
+      "interest_tag": ""
+    }
+  ]
+}
