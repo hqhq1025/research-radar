@@ -1,0 +1,221 @@
+{
+  "date": "2026-10-04",
+  "generated_at": "2026-10-04T16:05:59.302677+08:00",
+  "briefing_zh": "今天最值得关注的变化，是 Agent 训练开始把「数据是否可验证」放到与模型规模同等重要的位置。**GraphForge** 从真实 workspace 文件构建 evidence graph，再由同一证据生成任务与 rubric；**AutoGUIWorld** 则用 planner 约束图像生成器，在不运行目标软件的情况下合成 GUI transition。两者都试图把数据扩展从自由生成改造成受约束的 world construction，但后者能否成为 training-grade 数据，仍取决于长程视觉一致性和真实应用状态语义是否被保留。\n\n第二条主线是对 post-training 收益的重新记账。**Sharpening Tax** 发现，更高的 pass@1 可能以多次采样下更窄的 solution coverage 为代价；**Towards Looped Models Done Right Part II** 则把 recurrent state 向 fixed point 收敛变成训练、prefill、decoding 与 RL 的共同效率杠杆。前者提醒评测不能只看单次成功率，后者说明模型结构、训练目标和 serving cache 必须协同设计。\n\n长程 Agent 的关键也正从「保留更多历史」转向「维护可行动状态」。**Beyond Memory** 显式维护 world belief 与未完成需求，**VISTA** 让多模态模型主动回看并重组历史视觉观察，**Context Language Models** 更进一步把 context 变成模型可编辑的文件。共同结论是：context window 只是容量，真正决定长程能力的是信息如何被更新、检索、验证并重新进入决策回路。\n\n开源与社区讨论显示，Agent runtime 的竞争正在扩展到 browser identity、sandbox、permission 和 audit。**dots** 以持久 Firefox profile 解决真实网站中的阻断与登录态问题，**Pi pod** 把 coding-agent 会话放进自托管 sandbox；与此同时，HN 最热隐私审计发现多个对话式 AI 服务会向第三方泄露 conversation-derived artifacts，Meta Muse 的权限争议则再次证明，模型指令无法替代操作系统级强制边界。",
+  "briefing_en": "The most important shift today is that agent training is treating data verifiability as a first-class concern rather than a secondary property of scale. **GraphForge** builds evidence graphs from real workspace files and derives both tasks and rubrics from the same evidence, while **AutoGUIWorld** constrains image generation with a planner to synthesize GUI transitions without running the target applications. Both replace unconstrained generation with structured world construction, although AutoGUIWorld still depends on preserving long-horizon visual coherence and real application-state semantics before its data can be considered training-grade.\n\nA second theme is more honest accounting of post-training gains. **Sharpening Tax** shows that higher pass@1 can come with narrower solution coverage under repeated sampling, whereas **Towards Looped Models Done Right Part II** turns recurrent-state convergence toward fixed points into a shared efficiency lever for training, prefill, decoding, and RL. The former warns against single-shot evaluation, and the latter demonstrates that architecture, objectives, and serving caches increasingly need to be co-designed.\n\nLong-horizon agents are also moving from retaining more history to maintaining actionable state. **Beyond Memory** explicitly tracks world beliefs and unresolved requirements, **VISTA** lets multimodal models revisit and reorganize past visual observations, and **Context Language Models** makes context an editable file controlled by the model itself. Their shared message is that a context window provides capacity, but long-horizon competence depends on how information is updated, retrieved, validated, and returned to the decision loop.\n\nOpen source and community discussion show agent-runtime competition expanding toward browser identity, sandboxes, permissions, and auditability. **dots** uses persistent Firefox profiles to address blocking and login state on real sites, while **Pi pod** runs coding-agent sessions in self-hosted sandboxes. At the same time, the hottest HN privacy audit reports that several conversational AI products expose conversation-derived artifacts to third parties, and the Meta Muse permission controversy again shows that model instructions cannot substitute for operating-system-enforced boundaries.",
+  "viral_analysis_zh": "今天最可能形成传播飞轮的是 **dots**：一句「每个 Agent 都有自己的 browser」把复杂的 browser identity、登录态与反阻断问题压成了清晰品类，配合一条命令启动和可替换模型，已快速获得 2.5k+ stars。研究侧的 **AutoGUIWorld** 也很容易火，因为「无需运行软件即可生成 GUI 训练轨迹」与 OSWorld、ScienceBoard 的明确增益可以被压缩成一张结果图；但真正决定后续口碑的会是 transition realism，而不是首发数字。",
+  "viral_analysis_en": "**dots** is the strongest viral candidate today because the phrase “every agent gets its own browser” compresses browser identity, login persistence, and anti-blocking infrastructure into a memorable category, backed by one-command setup and model portability; it has already passed 2.5k stars. On the research side, **AutoGUIWorld** is highly shareable because “GUI training trajectories without running the software” plus explicit OSWorld and ScienceBoard gains fits into one results graphic, although sustained credibility will depend on transition realism rather than launch-day numbers.",
+  "huggingface_papers": [
+    {
+      "title": "GraphForge: Training Working Agents with Graph-Anchored Workspace Synthesis",
+      "url": "https://arxiv.org/abs/2609.38923",
+      "tldr": "GraphForge synthesizes realistic workspace-agent tasks by grounding both task requirements and verification rubrics in evidence graphs built from real files. Training Qwen3.6-27B on 2,169 resulting trajectories improves GDPVal, Workspace-Bench-Lite, and SpreadsheetBench II, with particularly large gains on spreadsheet work. Its main contribution is a scalable recipe for executable, auditable training data whose graders remain tied to source evidence.",
+      "tldr_zh": "GraphForge 从真实文件关系构建 evidence graph，并用同一份证据同时生成任务要求和验证 rubric，使 workspace Agent 的训练数据既真实又可审计。仅用 2,169 条轨迹微调 Qwen3.6-27B，就在 GDPVal、Workspace-Bench-Lite 和 SpreadsheetBench II 上取得一致提升，其中电子表格任务增益尤其明显。它最重要的贡献不是新 Agent 架构，而是一条规模化生产可执行、可验证训练数据的路线。",
+      "upvotes": 144,
+      "authors": "Qisheng Su, Hanchen Wang, Guanru Zhu, Huicheng Jiang, Qiuyinzhe Zhang, Kou Shi, Zhen Fang, Ziao Zhang, Qingnan Ren, Zehui Chen, Tao Gui, Feng Zhao",
+      "ai_keywords": [
+        "workspace agents",
+        "synthetic data",
+        "evidence graphs"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "Sharpening Tax in Post-Training",
+      "url": "https://arxiv.org/abs/2610.01509",
+      "tldr": "This paper shows that post-training can improve single-shot agent accuracy while reducing the diversity of tasks recoverable through repeated sampling. Across 14 base/post-trained model pairs and three agentic benchmarks, the proposed Sharpening Tax is positive in most of the 42 evaluated settings. Posterior-tempered group sampling adapts temperature by estimated prompt difficulty, improving pass@1 while preserving more solution coverage than fixed-temperature training.",
+      "tldr_zh": "这项工作指出，post-training 虽能提高 Agent 的单次成功率，却可能压缩重复采样时能够探索到的有效解空间。作者在 14 组模型和三个 Agent benchmark 的 42 种设置中发现 Sharpening Tax 普遍存在。提出的 PTGS 根据题目难度动态调节采样温度，在提升 pass@1 的同时，比固定温度训练保留更多 solution coverage。",
+      "upvotes": 78,
+      "authors": "Changdae Oh, Qi Zeng, Qi Qi, Andrey Zhmoginov, Deren Lei, Yun He, Hoang Phan, Hangoo Kang, Azalia Mirhoseini, Sharon Li",
+      "ai_keywords": [
+        "post-training",
+        "test-time sampling",
+        "solution coverage"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "Beyond Memory: Harnessing Long-Horizon Agents with Explicit Belief States",
+      "url": "https://arxiv.org/abs/2610.01415",
+      "tldr": "PoS replaces raw interaction-history accumulation with an explicit belief state containing the estimated world state and unresolved task requirements. It validates belief consistency, detects when an agent keeps acting without meaningful progress, and applies recovery strategies tailored to the trapping pattern. Leading four execution and diagnosis benchmarks across three LLM backbones suggests that maintained state estimates matter more than memory compression alone.",
+      "tldr_zh": "PoS 不再让长程 Agent 只携带或压缩历史，而是显式维护当前 world state 以及尚未完成的任务要求。它会检查 belief 一致性，并识别 Agent 持续行动却没有实质进展的 Belief Trapping，再按停滞类型实施恢复。其在四个执行与诊断 benchmark、三个 LLM backbone 上取得最高总体表现，说明显式状态维护可能比单纯扩大或压缩记忆更关键。",
+      "upvotes": 78,
+      "authors": "Yu Luo, Jiamin Jiang, Yimin Zuo, Xidao Wen, Rongchen Gao, Yongqian Sun, Shenglin Zhang, Guiyang Liu, Cheng Zhang, Fang Situ, Qi Zhou, Dan Pei",
+      "ai_keywords": [
+        "long-horizon agents",
+        "belief state",
+        "recovery"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "AutoGUIWorld: Image Generators as Visual World Models for GUI Agent",
+      "url": "https://arxiv.org/abs/2610.01215",
+      "tldr": "AutoGUIWorld uses image generators as visual transition models to synthesize GUI interaction trajectories without installing or executing the corresponding applications. Planning, iterative screenshot editing, and transition filtering produce 79,266 spatially annotated samples across Ubuntu, Windows, macOS, and Chrome. Fine-tuning raises Qwen3.5-35B-A3B from 33.0% to 40.8% on OSWorld and from 14.0% to 32.2% on ScienceBoard, although training-grade use still depends on transition realism.",
+      "tldr_zh": "AutoGUIWorld 把图像生成器当作 GUI transition model，无需真正安装或运行软件，就能根据动作及其视觉后果合成交互轨迹。planner、迭代 screenshot editing 和 transition 过滤共同生成了覆盖 Ubuntu、Windows、macOS 与 Chrome 的 79,266 条空间标注样本。微调后模型在 OSWorld 上从 33.0% 提升到 40.8%，ScienceBoard 从 14.0% 提升到 32.2%，但 training-grade 使用仍取决于 transition realism。",
+      "upvotes": 49,
+      "authors": "Cheng Yang, Yifan Wu, Yutao Huang, Zhaohua Zhang, Beiduo Chen, Muxi Chen, Chenchen Zhao, Hexuan Deng, Haolin Yang, Geyuan Zhu, Sa Zhu, Jianhuan Zhuo, Qiuyong Xiao, Jianhao Ruan, Yiran Peng, Jiayi Zhang, Tian Ye, Xinlei Yu, Tianwen Jiang, Jihong Zhang, Yuyu Luo",
+      "ai_keywords": [
+        "GUI agent",
+        "visual world model",
+        "synthetic trajectories"
+      ],
+      "interest_tag": "CUA"
+    },
+    {
+      "title": "Argo-Bench: Evaluating Data Agents on Enterprise-Scale Workflows",
+      "url": "https://arxiv.org/abs/2610.02122",
+      "tldr": "Argo-Bench evaluates data agents in an enterprise-scale simulated warehouse containing 235 tables and 7.5 billion rows derived from 81 million modeled delivery orders. Its 210 tasks go beyond text-to-SQL by requiring agents to reconstruct hidden business facts and take consequential actions such as banning fraudulent accounts or allocating incentive budgets. The strongest of 14 models scores at least 95 on only 34.8% of tasks and averages 59.5, exposing the gap between query generation and dependable enterprise decision-making.",
+      "tldr_zh": "Argo-Bench 构建了一个包含 235 张表、75 亿行数据的企业级 ERP warehouse，其业务世界基于 8,100 万笔模拟外卖订单。210 个任务不止测试 SQL，还要求 Agent 重建隐藏业务事实，并执行封号、预算分配和工资补发等会产生实际后果的操作。14 个模型中，最强者也只有 34.8% 的任务达到至少 95 分，平均仅 59.5，揭示了查询能力与可靠企业决策之间的差距。",
+      "upvotes": 21,
+      "authors": "Gabriel Tomitsuka, Arman Raayatsanati, Emma Xing, Duke Gand, Joseph J Ma",
+      "ai_keywords": [
+        "data agents",
+        "enterprise workflows",
+        "evaluation"
+      ],
+      "interest_tag": "Benchmark"
+    }
+  ],
+  "alphaxiv_papers": [
+    {
+      "title": "Towards Looped Models Done Right Part II: Rethinking at Fixed Points",
+      "arxiv_id": "",
+      "url": "https://www.alphaxiv.org/abs/2610.looped-models-fixed-points",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2610.looped-models-fixed-points",
+      "tldr": "This work trains looped language models to approach fixed points so that recurrent endpoints can substitute for much of the full computation path. Learned depth priors and orthogonal input injection improve perplexity from 100M to 1.6B parameters, while terminal KV sharing lets the 1.6B model match fixed-depth downstream performance with a three-times smaller cache. Saved-state RL roughly halves update time and distilled prefill reaches up to 1.79× speedup, connecting one convergence principle across training and serving.",
+      "tldr_zh": "这项工作训练 looped language model 向 fixed point 收敛，使 recurrent endpoint 可以替代大量完整计算路径。learned depth prior 与 orthogonal input injection 在 100M 到 1.6B 参数范围内持续降低 perplexity，terminal KV sharing 让 1.6B 模型用缩小三倍的 cache 匹配 fixed-depth 的下游表现。saved-state RL 约减半更新耗时，distilled prefill 最高加速 1.79 倍，把同一收敛原则贯穿训练与 serving。",
+      "interest_tag": ""
+    },
+    {
+      "title": "ScholarCatalyst: A Benchmark for Retrieving Papers That Inspire New Research",
+      "arxiv_id": "2610.02202",
+      "url": "https://arxiv.org/abs/2610.02202",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2610.02202",
+      "tldr": "ScholarCatalyst asks whether AI can retrieve prior work that would genuinely inspire a research project rather than merely match its topic. Judgments come from 184 lead authors who identified useful predecessors to 207 completed projects. Agentic search reaches 0.42 Recall@20 versus 0.48 for embedding retrieval, revealing a large gap between broad literature search and expert scientific intuition.",
+      "tldr_zh": "ScholarCatalyst 衡量 AI 能否找到真正可能启发研究项目的前序工作，而不只是主题相似的论文。其判断来自 184 位主要作者对 207 个已完成项目的亲身标注。Agentic search 的 Recall@20 为 0.42，低于 embedding retrieval 的 0.48，揭示了广泛文献搜索与科学家专家直觉之间仍然很大的差距。",
+      "interest_tag": ""
+    },
+    {
+      "title": "VISTA: A Visual Harness for Reasoning in an Interactive World",
+      "arxiv_id": "2610.02200",
+      "url": "https://arxiv.org/abs/2610.02200",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2610.02200",
+      "tldr": "VISTA equips a general multimodal model with lossless visual memory and active retrieval of past observations. On ARC-AGI-3, it raises Claude Opus 5.0's relative human action efficiency from 40.68 to 100 and completes all 25 public games with 57.4% fewer actions than first-time humans. The result suggests that better organization of visual history can unlock capabilities already latent in frontier models without weight updates.",
+      "tldr_zh": "VISTA 为通用多模态模型加入无损视觉记忆，使其能主动回看并重组历史观察。在 ARC-AGI-3 上，它把 Claude Opus 5.0 的相对人类动作效率从 40.68 提升至 100，并以比首次参与人类少 57.4% 的动作完成全部 25 个公开游戏。结果表明，改进视觉历史的组织方式就可能释放前沿模型已有但未被 harness 激活的能力。",
+      "interest_tag": "Memory"
+    },
+    {
+      "title": "SkillRefiner: Offline Skill Refinement from Historical Agent Traces",
+      "arxiv_id": "",
+      "url": "https://www.alphaxiv.org/abs/2610.skillrefiner-offline-skill-refinement",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2610.skillrefiner-offline-skill-refinement",
+      "tldr": "SkillRefiner improves deployed agent instructions from historical traces, avoiding expensive or impossible environment replay. It summarizes runs, clusters recurring successes and failures, and turns them into evidence-backed reinforcements, guardrails, and procedural corrections. The method beats LLM-authored and human-authored skills across spreadsheet work, mathematical reasoning, and production PR review while using 1.4–42× fewer refinement tokens than competing methods.",
+      "tldr_zh": "SkillRefiner 直接利用历史执行轨迹改进已部署的 Agent 指令，无需昂贵或无法实现的环境重放。它摘要运行过程、聚类反复出现的成功与失败，再把证据转化为强化规则、护栏与流程修正。在电子表格、数学推理和生产级 PR review 中，它都优于 LLM 与人工编写的 skills，同时比其他 refinement 方法少用 1.4–42 倍 token。",
+      "interest_tag": ""
+    },
+    {
+      "title": "Context Language Models",
+      "arxiv_id": "2609.37725",
+      "url": "https://arxiv.org/abs/2609.37725",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2609.37725",
+      "tldr": "Context Language Models let agents manage context as an editable file instead of relying entirely on an external harness. The zero-shot implementation improves accuracy and compute efficiency on long-horizon browsing and coding tasks, and online RL raises Qwen3.5-9B by 47.6% on BrowseComp-Plus while using 12% fewer FLOPs. By combining context policy, skill optimization, multi-agent coordination, and serving-level cache reuse, the work frames context management as a learned systems problem.",
+      "tldr_zh": "Context Language Models 把 context 变成模型可主动编辑的文件，而不是完全交给外部 harness 管理。零样本版本已在长时浏览和编程任务上同时改善准确率与计算效率，online RL 还让 Qwen3.5-9B 在 BrowseComp-Plus 上提升 47.6%，同时少用 12% FLOPs。它把 context policy、skill 优化、多 Agent 协调和 serving cache 复用串成一个可学习的系统问题。",
+      "interest_tag": ""
+    }
+  ],
+  "github_repos": [
+    {
+      "name": "feder-cr/dots",
+      "url": "https://github.com/feder-cr/dots",
+      "tldr": "dots packages a web agent with its own persistent Firefox browser, targeting blocking, login-state, and identity failures that often break automation on real sites. Its model layer can be replaced independently while profiles preserve cookies and sessions across runs. With 2,582 stars and 436 forks in under a week, it combines strong traction, focused positioning, and immediately runnable computer-use infrastructure.",
+      "tldr_zh": "dots 为 Web Agent 配置独立、可持久化的 Firefox browser，重点解决真实网站中的阻断、登录态和 browser identity 问题。模型层可以独立替换，profile 则能跨运行保留 cookie 与 session。项目不到一周获得 2,582 stars 和 436 forks，是本批结果中热度、定位与可运行 CUA 基础设施结合最强的项目。",
+      "stars": 2582,
+      "language": "Python",
+      "interest_tag": "CUA"
+    },
+    {
+      "name": "nanaism/yomiyasu",
+      "url": "https://github.com/nanaism/yomiyasu",
+      "tldr": "yomiyasu is an agent skill for rewriting recognizable AI-generated Japanese into more natural and information-dense prose. Instead of a generic humanization prompt, it codifies seven language-specific principles and ships linting, diff, corpus, benchmark, and test assets. Its rapid growth to 1,347 stars demonstrates demand for narrow, culturally localized skills with visible before-and-after quality.",
+      "tldr_zh": "yomiyasu 是一个将典型 AI 生成日语改写为更自然、更高信息密度文本的 Agent Skill。它没有停留在泛化的「去 AI 味」prompt，而是整理出七项日语特定原则，并提供 lint、diff、语料、benchmark 和测试工具。项目快速达到 1,347 stars，说明范围明确、语言本地化且效果可直观看出的 Skill 很有传播力。",
+      "stars": 1347,
+      "language": "Python",
+      "interest_tag": ""
+    },
+    {
+      "name": "QingYunA/answer-me-with-html",
+      "url": "https://github.com/QingYunA/answer-me-with-html",
+      "tldr": "answer-me-with-html turns a short agent-authored Markdown draft into a structured one-page HTML answer through a bundled CLI and reusable visual components. The design avoids asking the model to emit repetitive CSS, wrappers, and SVG markup, reducing generated output while preserving richer presentation. Its 56 JavaScript and TypeScript files plus benchmark discussion make it more than a prompt-only presentation skill.",
+      "tldr_zh": "answer-me-with-html 让 Agent 只编写简短 Markdown，再通过随 Skill 提供的 CLI 和可复用视觉组件生成结构清晰的单页 HTML。这样无需模型重复输出 CSS、容器和 SVG 代码，在保留丰富呈现的同时减少生成内容。仓库包含 56 个 JavaScript 与 TypeScript 代码文件和 benchmark 讨论，并非只有一段提示词的展示型 Skill。",
+      "stars": 619,
+      "language": "JavaScript",
+      "interest_tag": ""
+    },
+    {
+      "name": "strands-labs/strands-decider",
+      "url": "https://github.com/strands-labs/strands-decider",
+      "tldr": "Strands Decider is a specialized model for choosing among options or assigning scalar ratings without invoking a full generative LLM at every control point. It returns calibrated confidence and includes training, synthetic-data, calibration, evaluation, inference, and CLI layers. The project demonstrates a practical runtime pattern: reserve large reasoning models for hard cases and route frequent classification or gating decisions to a smaller model.",
+      "tldr_zh": "Strands Decider 是一个专门处理选项选择和量表评分的 decision model，避免 Agent 在每个控制节点都调用完整生成式 LLM。它能返回 calibrated confidence，并公开训练、合成数据、校准、评测、推理和 CLI 等完整层次。其架构代表一种实用 runtime 模式：大型模型负责困难推理，高频分类与 gating 交给小模型。",
+      "stars": 307,
+      "language": "Python",
+      "interest_tag": ""
+    },
+    {
+      "name": "openJiuwen-ai/iCode",
+      "url": "https://github.com/openJiuwen-ai/iCode",
+      "tldr": "iCode is a local-first, fully offline TUI for configuring agents, switching models, approving actions, accessing files and shells, and observing workflows node by node. The repository includes a substantial implementation with source, tests, documentation, playgrounds, localization, and offline-build tooling. Its interfaces are still evolving, but it offers an inspectable foundation for users who prioritize control over data, execution, agent definitions, and workflows.",
+      "tldr_zh": "iCode 是一个 local-first、fully offline 的 TUI 平台，用于配置 Agent、切换模型、审批操作、访问文件与 shell，并逐节点观察 workflow。仓库包含源码、测试、文档、playground、本地化和离线构建工具，是本批结果中实现最完整的项目之一。接口仍在快速演进，但对于重视数据、执行、Agent 定义与 workflow 控制权的用户，它提供了可检查的完整基础。",
+      "stars": 297,
+      "language": "Python",
+      "interest_tag": ""
+    }
+  ],
+  "hackernews": [
+    {
+      "title": "A Privacy Analysis of Web and Mobile Conversational AI Agents [pdf]",
+      "url": "https://jorgegarciaherrero.com/wp-content/interactivos/20260916-Prompt-like-a-butterfly-sting-like-a-tracker-(clean).pdf",
+      "tldr": "A systematic audit of nine web and eight Android conversational AI services finds that every service integrates at least one third-party advertising or tracking component. Six web clients and three Android clients disclose conversation-derived artifacts such as prompts, titles, URLs, or screenshots, sometimes alongside persistent identifiers. The findings challenge the assumption that an AI chat remains a private exchange between the user and provider.",
+      "tldr_zh": "一项针对 9 个 Web 和 8 个 Android 对话式 AI 服务的系统审计发现，所有服务都集成了至少一个第三方广告或追踪组件。6 个 Web 客户端和 3 个 Android 客户端会披露提示词、标题、会话 URL 或截图等 conversation-derived artifacts，有时还附带持久标识符。研究挑战了「AI 对话只存在于用户和服务商之间」这一普遍假设。",
+      "points": 425,
+      "num_comments": 141,
+      "interest_tag": ""
+    },
+    {
+      "title": "Unsurprisingly, Meta's new Muse AI agent blatantly ignores users permissions",
+      "url": "https://appleinsider.com/articles/26/09/28/metas-new-ai-agent-blatantly-ignores-users-permissions",
+      "tldr": "A tester reported that Meta's Muse synchronized a large portion of his Messages database despite lacking explicit permission and Full Disk Access. Muse then used information from those messages to proactively suggest article ideas. The incident shows why agent safety must enforce permissions at the operating-system boundary rather than relying on model instructions alone.",
+      "tldr_zh": "一名测试者报告称，Meta Muse 在未获得明确授权、Full Disk Access 也未开启时，仍同步了大量 Messages 数据。随后，Muse 利用这些消息中的信息主动推荐文章选题。这一事件说明，Agent 权限必须由操作系统边界强制执行，不能只依赖模型遵守文字指令。",
+      "points": 163,
+      "num_comments": 43,
+      "interest_tag": ""
+    },
+    {
+      "title": "Show HN: Made an open-source Lego AI generator",
+      "url": "https://github.com/anteloc/ldraw-nova",
+      "tldr": "LDraw Nova turns natural-language model ideas into executable LEGO CAD source code rather than merely generating images. Its agent pipeline searches for parts, assembles geometry, validates models, and exports interactive or Blender-editable assets. The project demonstrates agents producing structured, potentially physical artifacts, although generation remains slow and dependent on frontier models.",
+      "tldr_zh": "LDraw Nova 将自然语言中的模型构想转化为可执行的 LEGO CAD 源码，而不只是生成图片。其 Agent pipeline 会检索零件、组装几何结构、校验模型，并导出交互式或可在 Blender 中编辑的资产。它展示了 Agent 生成结构化乃至可实体化产物的潜力，但当前速度较慢，且仍依赖前沿模型。",
+      "points": 145,
+      "num_comments": 49,
+      "interest_tag": ""
+    },
+    {
+      "title": "Show HN: Pi pod – Run your pi coding agent in sandboxes on your own server",
+      "url": "https://pipod.dev/",
+      "tldr": "Pi pod provides a self-hosted control plane for running coding-agent sessions inside isolated remote sandboxes. It combines terminal and mobile clients with centralized lifecycle, identity, and project-level configuration, addressing operational needs beyond a basic Docker container. The open-source self-hosted edition is usable now, while the commercial hosted service is still forthcoming.",
+      "tldr_zh": "Pi pod 提供一个自托管控制平面，让 coding agent 会话在隔离的远程 sandbox 中运行。它把终端与移动客户端、会话生命周期、身份认证以及项目级配置整合起来，解决了简单 Docker 容器之外的团队运维需求。开源自托管版本已经可用，但商业托管服务仍未上线。",
+      "points": 93,
+      "num_comments": 35,
+      "interest_tag": ""
+    },
+    {
+      "title": "Identity Management for Agentic AI [pdf] (2025)",
+      "url": "https://openid.net/wp-content/uploads/2025/10/Identity-Management-for-Agentic-AI.pdf",
+      "tldr": "The OpenID Foundation argues that existing identity standards cover simple agent deployments but become strained by asynchronous work, cross-domain access, recursive delegation, and shared agents. It recommends making agents identifiable principals with explicit delegated authority, scopes, and audit trails instead of letting them impersonate users. The paper also highlights computer-use agents as a major gap because GUI actions can bypass API-level authorization controls.",
+      "tldr_zh": "OpenID Foundation 认为，现有身份标准能处理简单 Agent 场景，但面对异步执行、跨域访问、递归委托和多人共享 Agent 时会迅速失效。白皮书建议把 Agent 视为可识别的独立主体，赋予其明确的委托权限、作用域和审计轨迹，而不是让 Agent 直接冒充用户。文中还指出，computer-use agents 能通过 GUI 绕过 API 层授权，是当前身份体系的重要缺口。",
+      "points": 82,
+      "num_comments": 28,
+      "interest_tag": ""
+    }
+  ]
+}
