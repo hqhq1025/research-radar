@@ -1,0 +1,208 @@
+{
+  "date": "2026-10-05",
+  "generated_at": "2026-10-05T16:03:04.303670+08:00",
+  "briefing_zh": "今天最值得关注的主线不是单一更大模型，而是如何把通用模型变成可靠的长程执行系统。**VISTA** 用可检索、无损的视觉历史把同一底座在 ARC-AGI-3 上从弱基线推到完成全部 25 个公开游戏；**MotorMind** 则以中层动作表示、确定性控制和异步反馈，让通用 VLM 在无需任务专用策略训练的情况下完成零样本机器人操作。两者共同说明，harness 已经不只是工程包装，而是在观察、记忆与动作接口上释放模型能力的关键变量。\n\n训练侧出现了两条互补路线。**Finetuning with Sampling** 不修改 SFT objective，而是通过 MCMC 将专家轨迹投影到更贴近学习模型的分布，在多个任务上兼顾新能力和旧能力保持；**Recursive Self-Rewrite** 则把多种专用 harness 找到的成功经验重写成通用 harness 可执行的训练轨迹。前者回答「怎样让 off-policy 数据更可学」，后者回答「怎样把脚手架带来的成功沉淀进模型」，都在把 post-training 的重点从单纯扩大数据量转向控制数据分布与可迁移性。\n\n评测也在从静态正确率走向真实过程。**HyperBrowseComp** 用 13 种语言、视频、扫描件、图像与地图构造持久检索任务；**ScholarCatalyst** 让 184 位研究者标注真正启发过项目的论文，结果显示 agentic search 仍未超过简单 embedding retrieval。与此同时，**Source Preference in the Wild** 发现 agent 会让来源偏好压过需求匹配，提醒我们端到端 agent evaluation 必须测选择过程中的系统性偏差，而不只测最终答案。\n\n开源侧的热度集中在可直接体验的 agent 产品与可复用 skill。**feder-cr/dots** 把反检测 Firefox、持久身份和真实输入事件包装成 web agent，短时间获得 2.6k stars；**open-dot** 则把后台个人 agent、Computer Use、审批、调度和多应用连接放进本地 Mac app。**yomiyasu** 与 **answer-me-with-html** 的走红说明，窄而清晰、安装后立刻可见效果的 agent skill，比泛化的「万能 agent」叙事更容易形成传播闭环。",
+  "briefing_en": "Today's strongest theme is not a single larger model, but the machinery that turns general models into reliable long-horizon systems. **VISTA** uses lossless, retrievable visual history to move the same backbone from a weak ARC-AGI-3 baseline to completing all 25 public games, while **MotorMind** combines mid-level actions, deterministic control, and asynchronous feedback to enable zero-shot robot manipulation without task-specific policy training. Together they show that a harness is no longer mere engineering glue: observation, memory, and action interfaces can determine how much capability a model can actually express.\n\nPost-training is advancing along two complementary paths. **Finetuning with Sampling** keeps the ordinary SFT objective but uses MCMC to project expert traces toward the learner's distribution, improving skill acquisition while preserving prior capabilities; **Recursive Self-Rewrite** converts successes found under specialized harnesses into trajectories executable under a general harness. One asks how to make off-policy data learnable, and the other how to internalize scaffolding-assisted success, shifting attention from raw data volume to distribution control and transferability.\n\nEvaluation is also moving from static accuracy toward realistic processes. **HyperBrowseComp** tests persistent evidence seeking across 13 languages and heterogeneous media, while **ScholarCatalyst** asks 184 researchers which papers genuinely inspired their projects and finds that agentic search still fails to beat embedding retrieval. **Source Preference in the Wild** further shows that agents can value provenance over requirement satisfaction, so end-to-end evaluation must measure systematic decision bias, not just final-answer correctness.\n\nOpen-source attention is clustering around immediately usable agent products and narrow, reusable skills. **feder-cr/dots** packages a patched Firefox, persistent identities, and trusted input events into a web agent and reached 2.6k stars within the search window; **open-dot** combines background personal agents, Computer Use, approvals, schedules, and app integrations in a local Mac application. The rise of **yomiyasu** and **answer-me-with-html** suggests that a focused skill with a visible before-and-after result spreads more reliably than another generic all-purpose-agent pitch.",
+  "viral_analysis_zh": "今天最可能继续扩散的是 **feder-cr/dots**：它把「模型不是 web agent 失败的主要原因，浏览器才是」压缩成一句可复述的反共识，并用反检测、持久身份和真实输入事件提供即时 demo，天然适合开发者转发。研究侧的潜在爆款是 **VISTA**，因为「同一模型 + 一个视觉 harness = ARC-AGI-3 全部公开游戏完成」既有醒目的数字，也把抽象的长程视觉记忆变成了可理解的产品机制。",
+  "viral_analysis_en": "**feder-cr/dots** is the most likely project to keep spreading: its counter-consensus claim that the browser, not the model, is the main failure point for web agents is memorable, while stealth, persistent identity, and visible cursor actions make for an immediate demo. On the research side, **VISTA** has the strongest viral frame because “same model plus a visual harness completes all public ARC-AGI-3 games” pairs a striking number with an intuitive mechanism for long-horizon visual memory.",
+  "huggingface_papers": [
+    {
+      "title": "MotorMind: Scaffolding General Vision Language Models for Zero-Shot Robot Manipulation",
+      "url": "https://huggingface.co/papers/2609.38078",
+      "tldr": "MotorMind wraps a general-purpose VLM with mid-level action proposals, deterministic robot control, asynchronous monitoring, and background memory updates. Without task-specific policy training or extra grounding models, it reaches 66.7% success on base LIBERO-PRO, 53.8% under perturbations, and 95% average success on a real xArm6. The result matters because it isolates harness design as a practical route for transferring fast-moving VLM capability into embodied control.",
+      "tldr_zh": "MotorMind 用中层动作提议、确定性机器人控制、异步监控和后台记忆更新，为通用 VLM 搭建执行脚手架。它无需任务专用策略训练或额外 grounding 模型，在 LIBERO-PRO 基础任务达到 66.7%，扰动条件达到 53.8%，真实 xArm6 平均成功率达到 95%。这项工作的价值在于，它把 harness design 明确为将快速进步的通用 VLM 能力迁移到具身控制的一条现实路径。",
+      "upvotes": 63,
+      "authors": "Bingxuan Li, Siqi Song, Yizhuo Wu, Jiarui Yao, Tong Zhang, Huan Zhang",
+      "ai_keywords": [
+        "robotics",
+        "vision-language model",
+        "zero-shot manipulation",
+        "agent harness"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "Does Learning Protein Folding Generalize to Broader Reasoning?",
+      "url": "https://huggingface.co/papers/2609.38879",
+      "tldr": "Fold2Reason post-trains a language model on protein-derived supervision through both discrete structural answers and continuous 3D geometry decoded from shared representations. It improves Qwen3.5-9B's macro-average from 45.09% to 48.33% across ten spatial, graph, scientific, and general-reasoning benchmarks, while random or shuffled controls do not reproduce the gain. The study suggests that structure-dense scientific data can teach transferable reasoning rather than merely domain facts.",
+      "tldr_zh": "Fold2Reason 同时使用离散结构问答和从共享表示解码的连续 3D 几何，对语言模型进行蛋白质数据后训练。它让 Qwen3.5-9B 在十个空间、图、科学与通用推理基准上的宏平均从 45.09% 提升到 48.33%，随机或打乱结构的对照无法复现这一收益。结果表明，结构密集型科学数据可能教会模型可迁移的推理机制，而不只是领域知识。",
+      "upvotes": 50,
+      "authors": "Yong Liu, Zhanpeng Shi, Yizhou Dang, Zhongyue Zhang, Xiaoliang Shi, Zhijian Wei, Shuangjia Zheng",
+      "ai_keywords": [
+        "protein folding",
+        "reasoning",
+        "multitask post-training",
+        "3D structure"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "Source Preference in the Wild: How LLM Agents Favor Items by Source, and How to Reduce It",
+      "url": "https://huggingface.co/papers/2610.03195",
+      "tldr": "This study evaluates 12 agent models in end-to-end search and finds stable preferences for particular source sites across products, hotels, and papers. A slightly worse item from a preferred source is selected about two-thirds of the time, while the reverse substitution is almost never made; hiding or relabeling provenance changes the behavior. The finding exposes source identity as a shortcut that can override user requirements, with missing-information completion and explicit counter-prompts offering partial mitigation.",
+      "tldr_zh": "该研究在商品、酒店与论文三类端到端搜索中评估 12 个 agent model，发现它们会稳定偏爱特定来源。来自偏好来源但少满足一项要求的条目约有三分之二概率仍被选中，反向情况却几乎不会发生；隐藏或替换来源标签会直接改变选择。它揭示了来源身份可能成为压过用户需求的 shortcut，而补全缺失信息和显式反偏见提示只能部分缓解。",
+      "upvotes": 15,
+      "authors": "Jonghyun Song, Haewon Park, Jeonghoon Shim, Woojung Song, Yohan Jo",
+      "ai_keywords": [
+        "LLM agents",
+        "search bias",
+        "source preference",
+        "decision making"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "Scaling Trajectories for Complex Tasks through Recursive Self-Rewrite",
+      "url": "https://huggingface.co/papers/2610.02826",
+      "tldr": "Recursive Self-Rewrite uses one base model to discover successful terminal-task solutions under several specialized harnesses, then rewrites them into clean trajectories for a general harness. It expands 2,001 source successes into 11,094 training trajectories and raises Terminal-Bench 2 pass@3 from 57.0% to 74.2%, with gains on harder suites as well. The key contribution is a concrete mechanism for distilling scaffold-assisted success into deployable model behavior while screening verifier and solution leakage.",
+      "tldr_zh": "Recursive Self-Rewrite 让同一个 base model 在多个专用 harness 下发现终端任务的成功解，再把这些经验重写成通用 harness 可执行的干净轨迹。它将 2,001 条成功源轨迹扩展为 11,094 条训练轨迹，并把 Terminal-Bench 2 的 pass@3 从 57.0% 提升到 74.2%，在更难测试集上也有增益。核心贡献是给出一条可操作路径：在检查 verifier 与答案泄漏的同时，把脚手架辅助的成功蒸馏为部署时可用的模型行为。",
+      "upvotes": 14,
+      "authors": "Zongxia Li, Yucheng Shi, Zhongzhi Li, Junyao Yang, Ruhan Wang, Chengsong Huang, Fuxiao Liu, Haitao Mi, Jordan Boyd-Graber, LeoweiLiang",
+      "ai_keywords": [
+        "coding agents",
+        "trajectory synthesis",
+        "supervised fine-tuning",
+        "terminal tasks"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "HyperBrowseComp: A Multilingual and Multimodal Stress Test for Web-Browsing Agents",
+      "url": "https://huggingface.co/papers/2610.03574",
+      "tldr": "HyperBrowseComp contains 423 human-authored, human-validated browsing questions across 13 languages. Solving them requires persistent multi-step search through videos, scanned documents, images, maps, and obscure web evidence, while questions answerable from parametric knowledge are filtered out. It matters as an agent benchmark because it tests multilingual evidence discovery and cross-modal persistence under a common protocol rather than rewarding memorized answers.",
+      "tldr_zh": "HyperBrowseComp 收录 423 道人工编写并验证的浏览任务，覆盖 13 种语言。解题需要在视频、扫描文档、图像、地图和冷门网页证据之间进行持续多步搜索，并过滤掉仅靠参数知识即可回答的问题。它作为 agent benchmark 的价值在于，在统一协议下测量多语言证据发现与跨模态坚持能力，而不是奖励背诵答案。",
+      "upvotes": 12,
+      "authors": "Alham Fikri Aji, Faiz Rizki Ramadhan, Zayd M. K. Zuhri, Seung Hun Eddie Han, Ryandito Diandaru, Qinrong Cui, Jan Christian Blaise Cruz, Badrinath Chandana, Peerawat Chomphooyod, Ahmed Attia, Jonibek Mansurov, Emilio Villa-Cueva, Canh Duong Nguyen, Imran Turganov, Minghao Wu, Peerat Limkonchotiwat, Irina Nikishina",
+      "ai_keywords": [
+        "web agents",
+        "multilingual browsing",
+        "multimodal retrieval",
+        "agent evaluation"
+      ],
+      "interest_tag": "Benchmark"
+    }
+  ],
+  "alphaxiv_papers": [
+    {
+      "title": "Finetuning with Sampling: SFT Learns Better Than You Think",
+      "arxiv_id": "2610.02140",
+      "url": "https://arxiv.org/abs/2610.02140",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2610.02140",
+      "tldr": "Projection sampling uses an MCMC procedure to transform expert demonstrations into trajectories that are more likely under the model being fine-tuned. Ordinary SFT on the transformed data rivals or exceeds stronger post-training baselines on chemistry and math while retaining more prior capability than vanilla SFT, though medical QA results are mixed. The broader idea is important because it treats sampling as a data-distribution operator rather than changing the learning objective.",
+      "tldr_zh": "Projection sampling 通过 MCMC 将专家示范转换为更符合待微调模型自身分布的轨迹。对转换后数据做普通 SFT，在化学与数学任务上可比肩或超过更强的 post-training baseline，并比 vanilla SFT 保留更多旧能力，不过医学问答结果并非全面领先。更重要的观点是：把 sampling 当作控制数据分布的算子，而不是继续修改学习目标。",
+      "interest_tag": ""
+    },
+    {
+      "title": "VISTA: A Visual Harness for Reasoning in an Interactive World",
+      "arxiv_id": "2610.02200",
+      "url": "https://arxiv.org/abs/2610.02200",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2610.02200",
+      "tldr": "VISTA stores every visual observation losslessly outside the active context and lets a multimodal agent retrieve, compare, crop, and inspect earlier frames while reasoning. Claude Opus 5.0 completes all 25 public ARC-AGI-3 games at a Relative Human Action Efficiency of 100, and the same harness improves results on three other visual environments. The caveat is that the headline public-set result does not establish generalization to unseen games, but the ablations strongly support visual-memory tooling as a capability multiplier.",
+      "tldr_zh": "VISTA 将每次视觉观察无损保存在 active context 之外，并允许多模态 agent 在推理时检索、比较、裁剪和检查历史帧。Claude Opus 5.0 在 ARC-AGI-3 的 25 个公开游戏上全部完成，Relative Human Action Efficiency 达到 100，同一 harness 在另外三个视觉环境中也带来提升。需要注意的是公开集成绩不能证明 unseen game 泛化，但消融结果有力说明视觉记忆工具能显著放大模型能力。",
+      "interest_tag": ""
+    },
+    {
+      "title": "Towards Looped Models Done Right Part II: Rethinking at Fixed Points",
+      "arxiv_id": "",
+      "url": "https://www.alphaxiv.org/abs/2610.looped-models-fixed-points",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2610.looped-models-fixed-points",
+      "tldr": "This work treats repeated blocks in looped language models as convergence toward fixed points, then exploits stable endpoints for truncated training, terminal KV sharing, faster prefill, and cheaper RL updates. At 1.6B parameters, a learned depth prior with a three-times smaller KV cache matches the downstream average of fixed-depth training with the full cache, while saved-state RL roughly halves update time with small quality differences. It offers a coherent efficiency story, although several gains remain approximate and distilled prefill trades some quality for speed.",
+      "tldr_zh": "这项工作把 looped language model 的重复 block 视为向 fixed point 收敛，并利用稳定终点实现截断训练、terminal KV sharing、更快 prefill 和更低成本的 RL 更新。在 1.6B 参数下，学习得到的 depth prior 配合缩小三倍的 KV cache，可匹配完整 cache 的固定深度训练平均成绩；saved-state RL 约将更新时间减半且质量差异较小。它给出了一套统一效率框架，但部分优化仍是近似计算，蒸馏 prefill 也以一定质量损失换速度。",
+      "interest_tag": ""
+    },
+    {
+      "title": "ScholarCatalyst: A Benchmark for Retrieving Papers That Inspire New Research",
+      "arxiv_id": "2610.02202",
+      "url": "https://arxiv.org/abs/2610.02202",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2610.02202",
+      "tldr": "ScholarCatalyst asks 184 lead authors of 207 computer-science papers which earlier work actually helped or could have helped their projects, producing 894 research queries and author-grounded judgments. Agentic search reaches 0.42 Recall@20 versus 0.48 for embedding retrieval, and many useful papers are uncited or outside the project's subfield. The benchmark matters because it separates genuinely catalytic prior work from topical similarity, while remaining a retrospective measure rather than direct evidence of generated discoveries.",
+      "tldr_zh": "ScholarCatalyst 邀请 207 篇计算机论文的 184 位主要作者，标注哪些早期工作确实帮助或可能帮助过项目，形成 894 个研究问题与作者级判断。Agentic search 的 Recall@20 为 0.42，低于 embedding retrieval 的 0.48，而且许多有用论文既未被引用，也来自项目子领域之外。该 benchmark 的价值在于区分真正具有启发作用的前作与表面主题相似，但它仍是回顾性测量，不能等同于直接产生新发现。",
+      "interest_tag": ""
+    },
+    {
+      "title": "SkillRefiner: Offline Skill Refinement from Historical Agent Traces",
+      "arxiv_id": "",
+      "url": "https://www.alphaxiv.org/abs/2610.skillrefiner-offline-skill-refinement",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2610.skillrefiner-offline-skill-refinement",
+      "tldr": "SkillRefiner improves reusable agent instructions from historical traces without generating fresh rollouts during refinement. It summarizes and clusters successes and failures, proposes targeted edits, and evidence-checks failure-derived guardrails before merging; across spreadsheet, math, and pull-request review tasks it matches or beats competing refiners with 1.4–42× fewer refinement tokens. The method is especially relevant when environments cannot be replayed, though its ceiling depends on trace quality and outcome labels.",
+      "tldr_zh": "SkillRefiner 无需在 refinement 阶段生成新 rollout，而是从历史轨迹中改进可复用的 agent instruction。它总结并聚类成功与失败行为，提出定向修改，并在合并前对失败产生的 guardrail 做证据检查；在表格、数学和 PR review 任务上，它以少 1.4–42 倍的 refinement token 持平或超过竞争方法。该方法尤其适合环境不可 replay 的场景，但上限依赖轨迹质量与 outcome label。",
+      "interest_tag": ""
+    }
+  ],
+  "github_repos": [
+    {
+      "name": "feder-cr/dots",
+      "url": "https://github.com/feder-cr/dots",
+      "tldr": "dots is a web agent built around a patched Firefox engine, deterministic browser identities, persistent profiles, and human-like trusted input events. Its thesis is that many agent failures happen before reasoning because sites block or distort the browser environment, so it makes the browser itself the primary product surface. The repository contains working source, tests, and an MCP path for integrating the same browser into other assistants.",
+      "tldr_zh": "dots 围绕经过修改的 Firefox engine、确定性浏览器身份、持久 profile 和类人可信输入事件构建 web agent。它的核心判断是，许多 agent 失败发生在推理之前，因为网站阻断或扭曲了浏览器环境，因此把 browser 本身做成主要产品能力。仓库包含可用源码、测试，以及将同一浏览器接入其他 assistant 的 MCP 路径。",
+      "stars": 2609,
+      "language": "Python",
+      "interest_tag": "CUA"
+    },
+    {
+      "name": "nanaism/yomiyasu",
+      "url": "https://github.com/nanaism/yomiyasu",
+      "tldr": "yomiyasu is an agent skill for rewriting AI-generated Japanese into clearer, denser professional prose. Instead of banning fashionable words, it codifies seven structural transformations covering explicit actors, literal verbs, preserved constraints, sentence length, and reduced formatting, with corpora and evaluation material in the repository. Its popularity shows the appeal of language-specific skills that make a visible improvement without requiring a new model.",
+      "tldr_zh": "yomiyasu 是一个将 AI 生成日语改写为更清晰、更高信息密度专业文本的 agent skill。它不只禁止流行词，而是定义七类结构转换，覆盖明确动作主体、使用直接动词、保留约束、控制句长和减少格式噪声，仓库还提供语料与评估材料。它的热度说明，无需新模型、但能立即展示前后差异的语言专用 skill 很有传播力。",
+      "stars": 1442,
+      "language": "Python",
+      "interest_tag": ""
+    },
+    {
+      "name": "QingYunA/answer-me-with-html",
+      "url": "https://github.com/QingYunA/answer-me-with-html",
+      "tldr": "Answer me with HTML turns a short Markdown draft from an agent into a polished one-page visual explanation through a bundled renderer. Its published benchmark reports 7.4× fewer model output tokens and 3.6× lower latency than asking the model to hand-write an equivalent HTML page, although repeated context reads keep cost roughly unchanged. The project is compelling because it separates semantic generation from deterministic presentation and ships examples, tests, and reproducible benchmark scripts.",
+      "tldr_zh": "Answer me with HTML 让 agent 只生成简短 Markdown 草稿，再由内置 renderer 转成精致的一页式可视化解释。项目公布的 benchmark 显示，相比让模型手写等价 HTML，输出 token 减少 7.4 倍、延迟降低 3.6 倍，但由于多轮重复读取 context，成本大致不变。它的亮点是将语义生成与确定性呈现分离，并提供示例、测试和可复现实验脚本。",
+      "stars": 1201,
+      "language": "JavaScript",
+      "interest_tag": ""
+    },
+    {
+      "name": "composio-community/open-dot",
+      "url": "https://github.com/composio-community/open-dot",
+      "tldr": "Open Dot is a local Mac application for persistent personal agents with browser control, app integrations, schedules, triggers, voice, approvals, memory, and isolated code workspaces. Risky actions are checked against user rules, while credentials live in the macOS Keychain and the model can hand browser control back to the user for login or captchas. It is a substantive end-to-end CUA product rather than a demo, though background reliability still depends on the Mac remaining awake or an external cloud workspace.",
+      "tldr_zh": "Open Dot 是一款本地 Mac 应用，为持久个人 agent 集成 browser control、多应用连接、调度、trigger、语音、审批、记忆和隔离代码工作区。高风险动作会按照用户规则检查，凭据保存在 macOS Keychain，登录或验证码阶段还可把浏览器控制权交还用户。它是完整的端到端 CUA 产品而非单一 demo，不过后台可靠性仍依赖 Mac 保持唤醒或外部 cloud workspace。",
+      "stars": 566,
+      "language": "TypeScript",
+      "interest_tag": "CUA"
+    },
+    {
+      "name": "strands-labs/strands-decider",
+      "url": "https://github.com/strands-labs/strands-decider",
+      "tldr": "Strands Decider is a small system-one decision model for choosing among options or scoring on a scale inside agent workflows. It returns calibrated confidence, aims to cover the gap between frontier LLM calls and task-specific classifiers, and publishes training data provenance, evaluation, and a candid preregistered experiment history. Its practical value is cheaper, faster routing and policy checks, with low-confidence decisions explicitly escalated to a larger model or person.",
+      "tldr_zh": "Strands Decider 是一个用于 agent workflow 内选项选择和连续评分的小型 system-one decision model。它输出校准后的置信度，定位于 frontier LLM call 与任务专用 classifier 之间，并公开训练数据来源、评估和包含失败实验的预注册研究记录。它的现实价值是更便宜、更快的路由与策略检查，同时把低置信度决策明确升级给更大模型或人类。",
+      "stars": 354,
+      "language": "Python",
+      "interest_tag": ""
+    }
+  ],
+  "hackernews": [
+    {
+      "title": "98% of US households aren't paying for AI yet",
+      "url": "https://www.a16z.news/p/state-of-markets-ii",
+      "tldr": "a16z's market survey argues that AI adoption remains broad but shallow: only about 2% of U.S. households were paying for an AI service as of April, and only a small share of enterprises report tracked impact metrics. At the same time, compute demand still exceeds supply, keeping even older GPUs economically useful and shifting capital toward semiconductors, power, networking, and robotics. The gap between infrastructure spending and paid adoption is the central strategic signal, though the source is an investor narrative rather than neutral market research.",
+      "tldr_zh": "a16z 的市场报告认为 AI adoption 仍然是覆盖广但使用浅：截至 4 月，约 2% 的美国家庭为 AI 服务付费，企业中真正报告可追踪影响指标的比例也很低。与此同时，compute 需求仍超过供给，使旧 GPU 继续具有经济价值，并推动资本流向半导体、电力、网络和机器人。基础设施投入与付费采用之间的巨大落差是核心战略信号，但应注意来源本身是投资机构叙事，而非中立市场研究。",
+      "points": 6,
+      "num_comments": 1,
+      "interest_tag": ""
+    },
+    {
+      "title": "Show HN: SuperLocalMemory 4.0 \"Governed Memory Operating System for AI Agents\"",
+      "url": "https://arxiv.org/abs/2608.08253",
+      "tldr": "SuperLocalMemory 4.0 proposes a local-first memory operating system for agents with fused retrieval, bi-temporal recall, scope isolation, access control, verifiable erasure, and a hash-chained audit trail. Its most valuable contribution is methodological honesty: the revised paper retracts earlier claims and distinguishes code that is implemented and reachable from behavior that is actually effective, using fault injection and independent invariants. The architecture is ambitious and governance-heavy, but the negative results offer a useful standard for validating memory systems beyond feature checklists.",
+      "tldr_zh": "SuperLocalMemory 4.0 提出一套 local-first agent memory operating system，包含融合检索、双时态 recall、scope isolation、访问控制、可验证删除和 hash-chain audit trail。它最有价值的贡献是方法论诚实：修订版撤回早期结论，并通过 fault injection 与独立 invariant 区分「已实现且可调用」和「实际有效」。这套架构较重，但其负结果为 memory system 如何超越功能清单进行验证提供了有用标准。",
+      "points": 5,
+      "num_comments": 0,
+      "interest_tag": "Memory"
+    },
+    {
+      "title": "Show HN: UI for answering agent questions async",
+      "url": "https://docs.plannotator.ai/open-source/workflows/questions",
+      "tldr": "Plannotator adds asynchronous question cards for decisions that an agent cannot safely infer from code or context. Agents write structured question blocks into plans or documents, users answer them in one batch, and settled choices return in a machine-readable form instead of blocking a live terminal session. The design matters because it treats human clarification as a durable workflow artifact, although it depends on agents asking only genuinely decision-changing questions.",
+      "tldr_zh": "Plannotator 为 agent 无法从代码或上下文安全推断的决策提供异步 question card。Agent 把结构化问题块写入计划或文档，用户集中回答，已确定选择再以机器可读形式返回，从而避免阻塞实时 terminal session。它的重要性在于把人类澄清变成持久 workflow artifact，但前提是 agent 只询问真正会改变决策的问题。",
+      "points": 5,
+      "num_comments": 0,
+      "interest_tag": ""
+    }
+  ]
+}
