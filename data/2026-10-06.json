@@ -1,0 +1,190 @@
+{
+  "date": "2026-10-06",
+  "generated_at": "2026-10-06T16:03:44.678684+08:00",
+  "briefing_zh": "今天最清晰的研究主线是：模型能力正在从「参数规模」转向「训练分布、推理计算与执行接口」的联合设计。**Beam** 用 501B 总参数、23B 激活参数和超过一亿次 RL rollout 把高计算量强化学习本身变成 scaling axis；**Finetuning with Sampling** 则反过来证明，不必改写 SFT objective，只要把专家轨迹投影到更贴近 learner 的分布，SFT 也能兼顾新技能学习与旧能力保持。两者共同指向一个更成熟的 post-training 观：关键不只是数据多少，而是数据与当前 policy 的可学习性。\n\n架构侧的关键词是「按难度分配计算」。**ALoDLM** 不再让所有 masked token 经过统一深度，而是让困难 token 在 latent space 中多循环几次，并把已确定 token 回填为离散上下文；**Towards Looped Models Done Right Part II** 则让 recurrent state 收敛到 fixed point，从而共享 terminal KV cache、加速 prefill 和 RL replay。这两项工作都在尝试打破固定深度 Transformer 的均匀计算假设，但 trade-off 也很明确：自适应或循环计算带来效率空间，同时增加了训练稳定性和近似误差的控制难度。\n\nAgent 研究今天更关注「过程可见」而非只看最终成功。**OSWorld-Pro** 用 300 多个任务、2,800 多个 subgoal 和 67,000 多条人工标注，把 CUA 的键盘输入、点击和无关动作等失败拆到过程中；**VISTA** 证明 lossless visual memory、历史帧检索和局部放大可以显著释放同一 multimodal model 的交互推理能力；**4DCodeBench** 则显示 coding agents 即使能重建外观与静态几何，动态重建仍明显落后。共同信号是：harness、observation history 和 process verifier 已成为 agent capability 的一部分，而不再只是外围工程。\n\n开源侧最容易传播的项目仍然是「一句话能懂、装完立刻见效」的窄工具。**answer-me-with-html** 把复杂回答压缩成可读的一页 HTML，并用 token/time benchmark 支撑卖点；**yomiyasu** 把日语 AI 味拆成可验证的句法规则；**Brewery** 则把模型选择、数据准备、训练、评测与发布包装成引导式 agent。与此同时，**AI Agent Gateway**、**Pantheon** 和 **dotpals** 代表另一条更基础设施化的趋势：真实部署需要 MCP/tool-call governance、multi-agent 可观测性和基于执行证据的验证，而不只是更会写 prompt。",
+  "briefing_en": "The clearest research theme today is a shift from parameter scale alone toward joint design of training distribution, inference compute, and execution interfaces. **Beam** turns high-compute reinforcement learning into a scaling axis with 501B total parameters, 23B active parameters, and more than 100 million RL rollouts. **Finetuning with Sampling** makes the complementary argument that ordinary SFT can acquire new skills while preserving prior capabilities when expert trajectories are projected toward the learner's own distribution. Together they frame post-training as a problem of learnability and policy-data alignment, not just dataset volume.\n\nOn the architecture side, the key idea is allocating computation by difficulty. **ALoDLM** lets hard masked tokens undergo more latent recurrence while committed tokens return as discrete context, whereas **Towards Looped Models Done Right Part II** trains recurrent states toward fixed points so terminal KV caches can be shared and prefill or RL replay can be accelerated. Both challenge the uniform-compute assumption of fixed-depth Transformers, with a clear trade-off: adaptive recurrence creates efficiency headroom but makes stability and approximation error harder to control.\n\nAgent research is increasingly measuring visible process rather than only terminal success. **OSWorld-Pro** decomposes more than 300 tasks into over 2,800 subgoals backed by more than 67,000 human annotations, exposing keyboard, click, and irrelevant-action failures in CUAs. **VISTA** shows how lossless visual memory, frame retrieval, and close inspection can unlock interactive reasoning in the same multimodal model, while **4DCodeBench** finds that coding agents reconstruct appearance and static geometry far better than dynamics. The shared signal is that harnesses, observation history, and process verifiers are now part of agent capability rather than peripheral engineering.\n\nIn open source, the most shareable projects still have a narrow promise that is understandable in one sentence and visible immediately after installation. **answer-me-with-html** turns complex answers into readable single-page artifacts and supports its pitch with token and latency measurements; **yomiyasu** converts the vague complaint of AI-sounding Japanese into testable syntactic rules; and **Brewery** wraps model choice, data preparation, training, evaluation, and publishing in a guided agent. Meanwhile, **AI Agent Gateway**, **Pantheon**, and **dotpals** point toward the infrastructure layer: real deployment needs MCP and tool-call governance, multi-agent observability, and evidence-backed verification, not merely better prompting.",
+  "viral_analysis_zh": "今天最可能继续爆发的是 **QingYunA/answer-me-with-html**：它用「一页可读 HTML，而不是文字墙」定义了极易复述的痛点，并把 7.4× 更少输出 token、3.6× 更快等数字做成可截图证据。研究侧最有爆款相的是 **Beam**，因为「501B open-weight + 1 亿次 RL rollout + 10.5K GB300」同时满足规模震撼、开放权重和 agent/coding 性能三种传播叙事。",
+  "viral_analysis_en": "**QingYunA/answer-me-with-html** is the strongest candidate for continued viral growth: “a readable one-page HTML instead of a wall of text” is instantly repeatable, while claims such as 7.4× fewer output tokens and 3.6× faster delivery create screenshot-ready proof. On the research side, **Beam** has the best viral frame because “501B open-weight, 100M+ RL rollouts, and 10.5K GB300s” combines spectacular scale, open weights, and coding-agent performance in one story.",
+  "huggingface_papers": [
+    {
+      "title": "Kandinsky 6.0 Video: Foundation Models for Synchronized Video and Audio Generation",
+      "url": "https://huggingface.co/papers/2610.05608",
+      "tldr": "Kandinsky 6.0 Video is a pair of 3B and 29B diffusion foundation models that jointly generate five-second video and synchronized 44 kHz audio, including speech lip-sync. Its dual-stream CrossDiT connects pretrained video representations to a newly trained audio stream through bidirectional cross-attention, followed by joint pretraining, SFT, RL-based post-training, and distillation. The release matters because it packages code, checkpoints, Full-HD super-resolution, and Diffusers integration under MIT, making synchronized audio-video generation more reproducible.",
+      "tldr_zh": "Kandinsky 6.0 Video 是一组 3B 和 29B diffusion foundation model，可联合生成 5 秒视频与同步 44 kHz 音频，并支持语音 lip-sync。其 dual-stream CrossDiT 通过双向 cross-attention 连接预训练视频流和新训练的音频流，再进行联合预训练、SFT、基于 RL 的后训练与蒸馏。项目以 MIT 许可证开放代码、checkpoint、Full-HD 超分辨率和 Diffusers integration，使同步音视频生成更易复现与部署。",
+      "upvotes": 63,
+      "authors": "Team Kandinsky, Julia Agafonova, Bulat Akhmatov, Mikhail Aksyutin, Grigorii Alekseenko, Anastasia Aliaskina, Olga Androsova, Vladimir Arkhipkin, Anna Averchenkova, Alexander Belykh, Serafima Bocharova, Sofiya Bogakovskaya, Anton Bukashkin, Mark Bulygin, Kirill Buzygin, Irina Cheremnykh, Kirill Chernyshev, Mikhail Chernyshov, Vladimir Chernyy, David Chikovani, Georgy Daniltsev, Denis Dimitrov, Anna Dmitrienko, Vladimir Dokholyan, Sergey Emelyanov, Dmitry Ermilov, Georgii Fedorov, Polina Gavrilova, Nikolai Gerasimenko, Aleksandr Gordeev, Andrey Inozemtsev, Andrei Ivaniuta, Alexander Ivanov, Mikhail Karaev, Anastasiia Kargapoltseva, Ivan Kirillov, Nikita Kiselev, Valeria Kobenko, Yury Kolabushin, Denis Koposov, Anatoly Korobov, Vladimir Korviakov, Kirill Kozlov, Denis Krzhivokolskiy, Konstantin Kuklev, Alexander Kunitsyn, Sergey Kuzin, Vladislav Lakhtionov, Alexey Letunovskiy, Maxim Litvinov, Alexander Lyulkov, Georgy Makarov, Kirill Malakhov, Egor Malykh, Mikhail Mamaev, Dmitrii Mikhailov, Polina Mikhailova, Ivan Mikheev, Elizaveta Muromtseva, Nikolai Nazarkin, Tatiana Nikulina, Lev Novitskiy, Stanislav Onuchin, Nikita Osterov, Denis Parkhomenko, Anatoliy Parpara, Vladimir Polovnikov, Konstantin Reznikov, Azat Saginbaev, Nikita Samsonov, Alexander Sentsov, Nikita Shaimov, Artem Sherstyuk, Andrey Shutkin, Egor Silvestrov, Bulat Suleimanov, Matvey Suprunov, Sergey Taranov, Irina Tolstykh, Tatiana Trofimuk, Ilya Trushkin, Aleksandra Tsybina, Olga Varlashina, Viacheslav Vasilev, Ilya Vasiliev, Eugeny Vilisov, Sergey Yakubson, Konstantin Zakharov",
+      "ai_keywords": [
+        "audio-video generation",
+        "diffusion model",
+        "CrossDiT",
+        "multimodal generation"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "ALoDLM: Adaptively Looped Diffusion Language Models",
+      "url": "https://huggingface.co/papers/2610.04198",
+      "tldr": "ALoDLM replaces uniform per-token computation in diffusion language models with token-adaptive latent recurrence. Easy tokens commit early and become discrete context, while unresolved tokens keep refining their hidden states; a conditional NELBO jointly learns prediction and computation schedules. At 1.7B and 8B scales it reports stronger average benchmark performance than evaluated diffusion and matched autoregressive baselines while retaining parallel decoding, making adaptive compute a credible route to closing the DLM quality gap.",
+      "tldr_zh": "ALoDLM 将 diffusion language model 中统一的 token 计算深度改为按难度分配的 latent recurrence。容易的 token 提前提交并成为离散上下文，未确定 token 则继续迭代隐藏状态；conditional NELBO 同时学习预测与计算调度。论文在 1.7B 和 8B 规模上报告了高于所测 diffusion model 及对应 autoregressive baseline 的平均表现，同时保留并行解码，说明 adaptive compute 可能是缩小 DLM 质量差距的有效路径。",
+      "upvotes": 36,
+      "authors": "Liancheng Fang, Zhuowei Li, Youngeun Kim, Tianchen Zhao, Rajat Koner, Jiaye Wu, Linghan Xu, Xuanbai Chen, Xiang Xu, Zheng Zhang, Jakub Zablocki, Nishant Sankaran, Yifan Xing",
+      "ai_keywords": [
+        "diffusion language model",
+        "adaptive computation",
+        "latent recurrence",
+        "parallel decoding"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "ASCENT: Online Test-Time Training of Long-Horizon Agents via Self-Distillation of Verified Experience",
+      "url": "https://huggingface.co/papers/2610.05303",
+      "tldr": "ASCENT studies online agentic test-time training, updating an agent's weights from its own single-pass deployment trajectories and terminal verification signals. Instead of directly imitating unstable self-generated tokens, a frozen initial model uses the verified trajectory as privileged hindsight and distills next-token distributions into persistent LoRA fast weights. Results across ALFWorld, WebShop, and AppWorld suggest that verified experience can accumulate into transferable policy improvement without external solutions, a stronger form of adaptation than retrieving textual reflections alone.",
+      "tldr_zh": "ASCENT 研究 online agentic test-time training：agent 在部署流中只执行一次任务，并用自身轨迹与终局验证信号持续更新权重。它不直接模仿容易导致策略失稳的自生成 token，而让冻结的初始模型把已验证轨迹作为 privileged hindsight，再将 next-token distribution 蒸馏到持久 LoRA fast weights。ALFWorld、WebShop 和 AppWorld 的结果表明，verified experience 可以在没有外部答案的情况下积累为可迁移的策略改进，比单纯检索文字 reflection 更进一步。",
+      "upvotes": 11,
+      "authors": "Haodong Lu, Dong Gong",
+      "ai_keywords": [
+        "agent test-time training",
+        "self-distillation",
+        "verified trajectories",
+        "LoRA"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "OSWorld-Pro: Process-based Evaluation for Computer Use Agents",
+      "url": "https://huggingface.co/papers/2609.24890",
+      "tldr": "OSWorld-Pro moves computer-use evaluation from final-state scoring to process-based diagnosis. It provides more than 300 tasks, over 2,800 sequential subgoals, and more than 67,000 human annotations, then uses human-aligned LLM judges to measure progress and isolate failures such as irrelevant actions, keyboard mistakes, and imprecise clicks. The benchmark matters because a lower final score cannot reveal which intervention a CUA needs, whereas subgoal traces directly connect failure type to system improvement.",
+      "tldr_zh": "OSWorld-Pro 将 Computer Use Agent 评测从终局结果打分推进到过程诊断。它包含 300 多个任务、2,800 多个顺序依赖 subgoal 和 67,000 多条人工标注，并使用 human-aligned LLM judge 衡量进展，拆出无关动作、键盘错误和点击不准等失败。其价值在于，单个终局分数无法说明 CUA 需要哪种改进，而 subgoal trace 能把失败类型直接连接到系统优化。",
+      "upvotes": 7,
+      "authors": "Zhilin Wang, Shaokun Zhang, Yifan Zhang, Hao Zhang, Jin Xu, Binfeng Xu, Jian Hu, Yunheng Zou, Karan Sapra, Andrew Tao, Jan Kautz, Yi Dong",
+      "ai_keywords": [
+        "computer use agent",
+        "process evaluation",
+        "OSWorld",
+        "subgoal verification"
+      ],
+      "interest_tag": "CUA"
+    },
+    {
+      "title": "Memadapter: Counterfactual Adaptation Against Memory-induced Sycophancy",
+      "url": "https://huggingface.co/papers/2610.05162",
+      "tldr": "MemAdapter targets memory-induced sycophancy: even factually correct long-term memories can bias an agent when their relevance or authority changes with context. The framework combines counterfactual induction to expose risk, context-aware reflection to calibrate each memory's influence, and evidence-based reasoning for the final answer. Across three benchmarks it improves memory reliability, highlighting that memory safety requires adaptive use at inference time rather than only filtering supposedly bad memories during storage or retrieval.",
+      "tldr_zh": "MemAdapter 针对 memory-induced sycophancy：即使长期记忆在事实层面正确，当其相关性或权威性随当前语境变化时，也可能让 agent 过度迎合历史观点。该框架结合 counterfactual induction 发现风险、context-aware reflection 校准每条记忆的影响，以及 evidence-based reasoning 生成最终答案。它在三个 benchmark 上提升记忆可靠性，说明 memory safety 不能只在写入或检索阶段过滤「坏记忆」，还需要在推理时动态控制记忆权重。",
+      "upvotes": 6,
+      "authors": "Ruqing Ning, Haibo Meng, Zhishang Xiang, Zerui Chen, Jinsong Su, Xin Wang, Qinggang Zhang",
+      "ai_keywords": [
+        "agent memory",
+        "sycophancy",
+        "counterfactual reasoning",
+        "memory reliability"
+      ],
+      "interest_tag": "Memory"
+    }
+  ],
+  "alphaxiv_papers": [
+    {
+      "title": "Introducing Beam: Reflection’s 501B open-weight model",
+      "arxiv_id": "",
+      "url": "https://www.alphaxiv.org/abs/2610.introducing-beam",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2610.introducing-beam",
+      "tldr": "Beam is a 501B-parameter sparse MoE with 23B active parameters, pretrained on 23.8T curated tokens and post-trained with more than 100 million RL rollouts. Reflection reports 80.9 on SWE-bench Verified and 80.1 on Terminal-Bench v2.1 while claiming 3–4× less inference compute than larger open models, supported by asynchronous RL infrastructure running up to 110,000 concurrent rollouts. The significance is less the headline size than the attempt to scale RL compute, environment quality, and policy-staleness tolerance as first-class ingredients; weights are promised under Apache 2.0 rather than already released.",
+      "tldr_zh": "Beam 是一个 501B 总参数、23B 激活参数的 sparse MoE，在 23.8T 精选 token 上预训练，并使用超过 1 亿次 RL rollout 进行后训练。Reflection 报告其 SWE-bench Verified 为 80.9、Terminal-Bench v2.1 为 80.1，并声称相较更大开源模型减少 3–4× inference compute，背后是最高 11 万并发 rollout 的异步 RL 基础设施。真正值得关注的不只是参数规模，而是它把 RL compute、environment quality 和 policy staleness tolerance 都作为 scaling ingredient；目前权重是承诺以 Apache 2.0 发布，而非已经开放。",
+      "interest_tag": ""
+    },
+    {
+      "title": "Finetuning with Sampling: SFT Learns Better Than You Think",
+      "arxiv_id": "2610.02140",
+      "url": "https://arxiv.org/abs/2610.02140",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2610.02140",
+      "tldr": "Projection sampling uses an MCMC procedure to transform expert demonstrations into trajectories that remain informative but better match the learner's distribution before ordinary SFT. On Qwen2.5-7B-Instruct, sampling SFT reaches 66.0% on SciKnowEval Chemistry L-3 versus 61.8% for vanilla SFT, while retaining more prior capability; results are mixed in medical QA and the practical sampler only approximates the theoretical target. The work matters because it treats data transformation as a model-native post-training primitive rather than assuming that off-policy data requires a new objective.",
+      "tldr_zh": "Projection sampling 在普通 SFT 之前用 MCMC 将专家示范转换为仍保留信息、但更贴近 learner 分布的轨迹。在 Qwen2.5-7B-Instruct 上，sampling SFT 的 SciKnowEval Chemistry L-3 达到 66.0%，高于 vanilla SFT 的 61.8%，同时保留更多旧能力；但医疗问答结果并非全面领先，实际 sampler 也只是理论目标的近似。这项工作的意义在于把 data transformation 视为 model-native post-training primitive，而不是默认 off-policy 数据必须配套新 objective。",
+      "interest_tag": ""
+    },
+    {
+      "title": "VISTA: A Visual Harness for Reasoning in an Interactive World",
+      "arxiv_id": "2610.02200",
+      "url": "https://arxiv.org/abs/2610.02200",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2610.02200",
+      "tldr": "VISTA stores every visual observation losslessly outside the active context and lets a multimodal model retrieve prior frames, crop details, inspect pixels, and maintain notes while acting. With Claude Opus 5.0 it reports completing all 25 public ARC-AGI-3 games at RHAE 100.00 using 7,302 actions versus 17,135 for first-time humans, plus gains on three other visual environments. This is strong evidence that observation and memory interfaces can unlock latent capability, but the public-game result does not establish generalization to unseen ARC-AGI-3 games.",
+      "tldr_zh": "VISTA 将每一帧视觉 observation 无损存放在 active context 之外，让 multimodal model 在行动时检索历史帧、裁剪细节、读取像素并维护 notes。论文报告 Claude Opus 5.0 在 25 个公开 ARC-AGI-3 游戏上全部完成，RHAE 为 100.00，使用 7,302 次动作，而首次体验的人类为 17,135 次，并在另外三个视觉环境中获得提升。这有力说明 observation 与 memory interface 能释放潜在能力，但公开游戏结果不能证明对 unseen ARC-AGI-3 游戏的泛化。",
+      "interest_tag": ""
+    },
+    {
+      "title": "Towards Looped Models Done Right Part II: Rethinking at Fixed Points",
+      "arxiv_id": "2610.06833",
+      "url": "https://arxiv.org/abs/2610.06833",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2610.06833",
+      "tldr": "This work trains looped language models so recurrent states approach fixed points, making the endpoint useful even when the full recurrent path is discarded. Learned depth priors and orthogonal input injection enable terminal KV sharing, a 3× smaller cache at 1.6B with matched downstream average, 1.54–1.79× faster distilled prefill, and roughly 2× faster saved-state RL updates in the reported setup. The trade-off is explicit: these shortcuts approximate full recurrence and distilled prefill can lose quality, so the contribution is a controlled efficiency frontier rather than free depth.",
+      "tldr_zh": "这项工作让 looped language model 的 recurrent state 逐渐接近 fixed point，使模型即使丢弃完整循环路径，也能利用最终 endpoint。learned depth prior 与 orthogonal input injection 支持 terminal KV sharing；论文在 1.6B 规模报告 3× 更小 cache 且下游平均分相当、蒸馏 prefill 加速 1.54–1.79×，saved-state RL update 约快 2×。trade-off 也很明确：这些方法近似而非等价于完整 recurrence，蒸馏 prefill 可能损失质量，因此它给出的是可控效率前沿，不是免费深度。",
+      "interest_tag": ""
+    },
+    {
+      "title": "4DCodeBench: Benchmarking Agents on Inverse Graphics of Dynamic Scenes",
+      "arxiv_id": "2610.03715",
+      "url": "https://arxiv.org/abs/2610.03715",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2610.03715",
+      "tldr": "4DCodeBench asks agents to reconstruct 200 real and synthetic videos as executable graphics programs with explicit geometry, camera, material, and motion outputs. Across 18 multimodal coding models, the leading system averages 0.91 on appearance and static geometry but only 0.67 on dynamic measures; 90.1% of submissions execute, showing that code validity is not the main bottleneck. The benchmark is valuable because it separates visual plausibility from explicit 4D reconstruction, although it measures fidelity to observed motion rather than transferable physical understanding.",
+      "tldr_zh": "4DCodeBench 要求 agent 将 200 个真实与合成视频重建为可执行 graphics program，并显式输出几何、相机、材质与运动。在 18 个 multimodal coding model 中，领先系统的外观与静态几何平均分为 0.91，但动态指标只有 0.67；90.1% 的提交可以执行，说明代码可运行性并非主要瓶颈。该 benchmark 的价值在于把视觉上「像」与显式 4D 重建区分开，但它衡量的是对观测运动的复现，不等同于可迁移的物理理解。",
+      "interest_tag": "Benchmark"
+    }
+  ],
+  "github_repos": [
+    {
+      "name": "QingYunA/answer-me-with-html",
+      "url": "https://github.com/QingYunA/answer-me-with-html",
+      "tldr": "This agent skill turns a short Markdown content draft into a polished one-page HTML explainer using a bundled renderer, rather than asking the model to emit every CSS and SVG token. Its published three-topic benchmark reports a median 923 output tokens versus 6,873 for direct HTML and 13 seconds versus 46 seconds, while cost stays roughly flat because extra turns reread context. The project is compelling because the output is immediately demoable, the trade-off is disclosed, and the repository includes benchmarks, examples, tests, and multi-agent installation paths.",
+      "tldr_zh": "这个 agent skill 让模型只写简短 Markdown 内容，再由内置 renderer 生成一页式 HTML explainer，而不是让模型逐 token 输出 CSS 和 SVG。项目公布的三主题 benchmark 中位数为 923 output tokens 对 6,873、13 秒对 46 秒，但由于额外轮次会重读 context，成本基本持平。它的吸引力来自即时可演示的结果、诚实披露的 trade-off，以及完整的 benchmark、example、test 与多 agent 安装路径。",
+      "stars": 1553,
+      "language": "JavaScript",
+      "interest_tag": ""
+    },
+    {
+      "name": "nanaism/yomiyasu",
+      "url": "https://github.com/nanaism/yomiyasu",
+      "tldr": "yomiyasu is an agent skill for rewriting AI-generated Japanese into denser, more natural professional prose. Instead of relying on a blacklist of fashionable words, it formalizes seven syntactic transformations covering explicit agents, subject-predicate recovery, literal verbs, information preservation, and restrained formatting, then evaluates the rules on public and OSS corpora. Its rapid adoption shows how a language-specific pain point, concrete before-and-after examples, and an evidence-backed taxonomy can outperform a generic “humanizer” pitch.",
+      "tldr_zh": "yomiyasu 是一个将 AI 生成日语改写为更自然、更高信息密度专业文本的 agent skill。它不依赖流行词黑名单，而是把显式动作主体、主谓恢复、比喻动词改写、信息保持和格式克制等归纳为七类句法转换，并在公开文档与 OSS corpus 上验证。它的快速传播说明，语言特定痛点、具体前后对照和有证据的错误分类，比泛化的「humanizer」叙事更有说服力。",
+      "stars": 1552,
+      "language": "Python",
+      "interest_tag": ""
+    },
+    {
+      "name": "empero-org/brewery-ai",
+      "url": "https://github.com/empero-org/brewery-ai",
+      "tldr": "Brewery is a conversational control plane for fine-tuning text and image models, guiding users through model choice, data preparation, cost estimation, training, testing, export, and Hugging Face publication. It supports LoRA, QLoRA, full fine-tuning, CPT, SFT, DPO, remote GPU execution, and resumable project state, while constraining recipes to model-specific safety ranges. The repo is notable for turning a fragmented MLOps workflow into an inspectable agent process, though its custom license becomes commercial above a revenue threshold and the project is still early.",
+      "tldr_zh": "Brewery 是一个面向文本与图像模型微调的对话式 control plane，引导用户完成模型选择、数据准备、成本估算、训练、测试、导出和 Hugging Face 发布。它支持 LoRA、QLoRA、full fine-tuning、CPT、SFT、DPO、远程 GPU 执行和可恢复项目状态，并将 recipe 限制在特定模型的安全参数范围内。项目的价值是把碎片化 MLOps workflow 变成可检查的 agent process；但其自定义许可证在收入超过阈值后转为商业许可，且当前仍属早期阶段。",
+      "stars": 192,
+      "language": "Python",
+      "interest_tag": ""
+    },
+    {
+      "name": "Tuskira/ai-agent-gateway",
+      "url": "https://github.com/Tuskira/ai-agent-gateway",
+      "tldr": "AI Agent Gateway is a Go gateway that intercepts and governs both MCP tool calls and LLM traffic, with separate control, data, and analytics planes. The repository includes policies, observability, examples, Docker and Kubernetes deployment assets, end-to-end tests, release automation, and an embedded admin console rather than only a protocol sketch. It matters because agent security increasingly requires enforcement at the execution boundary, although the project labels itself pre-1.0 and its APIs may still change.",
+      "tldr_zh": "AI Agent Gateway 是一个 Go 实现的 gateway，可拦截并治理 MCP tool call 与 LLM traffic，并拆分 control、data 和 analytics plane。仓库不只提供协议草图，还包含 policy、observability、example、Docker/Kubernetes 部署、端到端测试、release automation 和嵌入式管理控制台。它的重要性在于 agent security 越来越需要在执行边界实施强制策略；但项目明确标注为 pre-1.0，API 仍可能变化。",
+      "stars": 59,
+      "language": "Go",
+      "interest_tag": ""
+    },
+    {
+      "name": "adityaagarw/Pantheon",
+      "url": "https://github.com/adityaagarw/Pantheon",
+      "tldr": "Pantheon is a self-hosted multi-agent office where supervisors design teams, agents delegate and review work, and users observe plans, tool calls, costs, messages, and approvals through a 3D workspace and operational dashboards. It supports hosted or local models, role-based permissions, token budgets, searchable traces, and sandboxed computer use, making coordination inspectable rather than hiding it behind one orchestration call. The project directly addresses multi-agent governance, but it is early software with only a few initial commits and should be treated as an experimental runtime rather than a production platform.",
+      "tldr_zh": "Pantheon 是一个 self-hosted multi-agent office：supervisor 可以设计团队，agent 之间分工、通信和 review，用户则通过 3D workspace 与运营面板观察计划、tool call、成本、消息和审批。它支持 hosted/local model、基于角色的权限、token budget、可搜索 trace 和 sandboxed computer use，使协作过程不再隐藏在一次 orchestration call 后面。项目直接解决 multi-agent governance，但目前只有少量初始 commit，仍应视为实验 runtime，而非生产平台。",
+      "stars": 32,
+      "language": "Python",
+      "interest_tag": "Agent Swarm"
+    }
+  ],
+  "hackernews": [
+    {
+      "title": "Opus 5.5 agents discover two room-temperature magnetic semiconductor candidates",
+      "url": "https://www.vals.ai/blogs/room-temperature-magnetic-semiconductors",
+      "tldr": "A Vals AI team used Claude Opus 5.5 agents and density-functional-theory workflows to propose YBaMnFeO5 and re-identify KV[Cr(CN)6] as candidate room-temperature Luttinger-compensated semiconductors for spintronics. The first is predicted to have strong spin windows but may be difficult to synthesize in the required ordered structure; the second was already made in 1999 and reportedly remained magnetically ordered to 376 K, but still needs direct spin-sorting measurements. The story is important as a transparent agentic-science case study because calculations, code, caveats, and independent reruns are published, while the claims remain computational predictions rather than experimental discovery.",
+      "tldr_zh": "Vals AI 团队使用 Claude Opus 5.5 agents 与 density functional theory workflow，提出 YBaMnFeO5，并重新识别 KV[Cr(CN)6] 作为面向 spintronics 的室温 Luttinger-compensated semiconductor 候选。前者预测具有较大的 spin window，但可能难以合成所需有序结构；后者在 1999 年已经制备，报告其磁有序保持到 376 K，但仍需直接测量 spin sorting。这个案例的重要性在于公开了计算、代码、已知 caveat 和独立复跑，是透明 agentic science 的样本；同时其结论仍是计算预测，不能写成实验发现。",
+      "points": 331,
+      "num_comments": 216,
+      "interest_tag": ""
+    }
+  ]
+}
