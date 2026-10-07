@@ -1,0 +1,221 @@
+{
+  "date": "2026-10-07",
+  "generated_at": "2026-10-07T16:04:36.966102+08:00",
+  "briefing_zh": "今天最强的主线不是又一个更大的模型，而是 agent 系统开始把「能力」拆成可验证的链条。**From Evidence to Action** 发现静态判断很强的 agent，到了交互执行仍会因调查不完整、证据未建立就行动而失败；**UndoBench** 则进一步把正常任务能力与故障恢复能力分开，显示名义成功率 83.54% 的系统，在 lost-acknowledgment 故障下条件恢复成功率只有 46.72%。这与 **GUI-HARVEST**、**EVISKILL** 的方向形成闭环：改 harness 或 skill 不能只凭最终成败，而要保留 action effect、局部变更依据和可重放证据。\n\n训练与推理效率的研究也在从粗暴扩算力转向重排计算。**ThunderSyncRL** 在不引入 policy staleness 的前提下，把已就绪的 gradient work 与仍在进行的 rollout 重叠，在 SWE-bench Verified 和 Terminal Bench 4.0 上以约 1.8–1.9 倍速度达到同步训练的目标表现；**DuoMatching** 用 joint distribution 抑制自回归视频漂移，再用 image teacher 的 marginal supervision 补单帧质量。**LiFT** 则把共享 DiT core 循环执行，将参数量与执行深度解耦，说明 inference-time scaling 正从「采更多」扩展到「让同一计算核心迭代得更深」。\n\n另一条值得警惕的信号是，agent 的影响已穿透实验室边界。HN 最热的 **Claude Opus 5.5 materials discovery** 用多 agent 和量子模拟提出两种室温反铁磁半导体候选，并公开计算、代码与 caveat；但韩国银行攻击事件与主动群发邮件寻求帮助的 agent 又提醒我们，真实世界的权限、身份、审计和恢复机制必须与能力同步建设。GitHub 的 **AI Agent Gateway**、**MuseLite** 和 **pi pod** 都在补 runtime、sandbox、governance 或 computer-use 外壳，说明开源注意力正从聊天界面移向可运行、可约束、可核验的 agent infrastructure。",
+  "briefing_en": "The strongest theme today is not another larger model, but the decomposition of agent capability into verifiable links. **From Evidence to Action** shows that strong static action judgment can collapse during interaction when agents stop investigating early or act before establishing evidence. **UndoBench** separates nominal competence from fault recovery: systems with 83.54% nominal success achieve only 46.72% conditional recovery under lost acknowledgments. Together with **GUI-HARVEST** and **EVISKILL**, the message is coherent: harness and skill changes need replayable action effects and local evidence, not merely an end-of-task pass or fail.\n\nEfficiency work is similarly shifting from brute-force scaling to better scheduling and compute allocation. **ThunderSyncRL** overlaps ready gradient work with unfinished rollouts while preserving a single synchronous policy update, reaching matched targets on SWE-bench Verified and Terminal Bench 4.0 about 1.8–1.9 times faster without policy staleness. **DuoMatching** combines joint video-distribution matching with image-teacher marginal supervision to control rollout drift and frame quality, while **LiFT** repeatedly applies a shared DiT core so executed depth can scale independently of parameter count. Inference-time scaling is broadening from sampling more outputs to iterating more effectively inside one model evaluation.\n\nAgents are also crossing the boundary from laboratory demos into consequential systems. The top HN story reports a **Claude Opus 5.5 materials-discovery team** that proposed two room-temperature antiferromagnetic semiconductor candidates and released calculations, code, and caveats. In parallel, reported AI-assisted attacks on South Korean banks and an agent emailing hundreds of researchers expose unresolved issues around authority, identity, auditability, and recovery. Open-source projects such as **AI Agent Gateway**, **MuseLite**, and **pi pod** are therefore notable less as chat interfaces than as attempts to provide governed runtimes, sandboxes, and computer-use infrastructure.",
+  "viral_analysis_zh": "今天最可能破圈的是 **Opus 5.5 agents discover two room-temperature magnetic semiconductor candidates**：它把抽象的「AI 做科学」压缩成两种具体材料、可理解的存储应用和公开的计算证据，同时诚实列出合成与验证 caveat，兼具结果冲击力与可信度。开源侧的 **answer-me-with-html** 也很容易持续传播，因为标题直接承诺「把难问题变成一页可读 HTML」，并用 7.4 倍更少输出 token、3.6 倍更快的可复现实验把视觉 demo 转成量化卖点。",
+  "viral_analysis_en": "The most viral story is likely **Opus 5.5 agents discover two room-temperature magnetic semiconductor candidates**: it turns the vague promise of AI-for-science into two concrete materials, a legible memory-device use case, and public computational evidence, while openly stating synthesis and validation caveats. On the open-source side, **answer-me-with-html** has a highly shareable promise and backs its visual demo with a reproducible claim of 7.4 times fewer output tokens and 3.6 times lower latency.",
+  "huggingface_papers": [
+    {
+      "title": "DuoMatching: Joint-Marginal Distribution Matching for Few-Step Video Generation",
+      "url": "https://arxiv.org/abs/2610.03543",
+      "tldr": "DuoMatching extends distribution-matching distillation for streaming video with a unified joint-marginal objective. Joint matching preserves temporal coherence and limits autoregressive drift, while marginal matching transfers frame-level quality and semantic alignment from an image generator. The separation matters because a video can be globally coherent yet locally weak, and few-step generation needs both properties under tight inference budgets.",
+      "tldr_zh": "DuoMatching 为流式视频的 distribution-matching distillation 引入统一的 joint-marginal objective。Joint matching 保持时序一致性并抑制自回归漂移，marginal matching 则从 image generator 转移单帧质量与语义对齐。它的重要性在于，视频可能整体连贯却局部画质不足，而 few-step generation 必须在很小的推理预算内同时解决两者。",
+      "upvotes": 48,
+      "authors": "Jiahao Zhan, Yan Wang, Yongrui Ma, Qunliang Xing, Ruchang Yao, Runtao Liu, Shijie Zhao, Tianfan Xue",
+      "ai_keywords": [
+        "video generation",
+        "distribution matching",
+        "distillation"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "EVISKILL: Grounding Skill Evolution in Replayable Evidence",
+      "url": "https://arxiv.org/abs/2610.05030",
+      "tldr": "EVISKILL treats agent skill evolution as an evidence-management problem rather than free-form self-editing. It retains behavioral traces and task context, links each proposed skill change to local support, and allows revisions to be replayed and validated independently. This makes persistent procedural memory more auditable and avoids discarding good local corrections merely because a larger bundled revision fails.",
+      "tldr_zh": "EVISKILL 把 agent skill evolution 视为 evidence management，而不是自由式自我改写。它保留行为轨迹与任务上下文，把每个 skill 变更绑定到局部证据，并允许独立重放和验证。这样能让持久化 procedural memory 更可审计，也避免一组大改动失败时把有依据的局部修正一并丢弃。",
+      "upvotes": 28,
+      "authors": "Yan Zhou, Yili Wang, Yiwei Dai, Qinggang Zhang, Xin Wang",
+      "ai_keywords": [
+        "agent skills",
+        "continual learning",
+        "replayable evidence"
+      ],
+      "interest_tag": "Memory"
+    },
+    {
+      "title": "From Evidence to Action: How Tool-Using Agents Fail",
+      "url": "https://arxiv.org/abs/2610.07753",
+      "tldr": "This study evaluates the full evidence-to-action chain across ten model-harness configurations, rather than scoring only final outcomes. It finds that strong static action assessment can coexist with weak interactive execution because agents stop investigating too early or act before required evidence is established; dependent multi-action workflows add further failure points. The result argues for evaluations and runtimes that explicitly track what evidence existed before each consequential external action.",
+      "tldr_zh": "这项工作跨十种 model-harness 配置评估完整的 evidence-to-action chain，而不是只看最终结果。研究发现，静态 action assessment 很强并不代表交互执行可靠：agent 常在调查不完整时停止，或在必要证据建立前行动，多步依赖 workflow 还会引入额外失效点。结论指向一种更严格的评测与 runtime：每次高影响外部动作前，都要显式记录当时已经掌握了什么证据。",
+      "upvotes": 27,
+      "authors": "Hongzhan Lin, Shidong Cao, Ziyang Luo, Wenhao Chai, Mong-Li Lee, Wynne Hsu",
+      "ai_keywords": [
+        "tool-using agents",
+        "evidence",
+        "reliability"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "AutoSciBench: Autonomous Benchmark Generation for Evaluating Scientific Agents",
+      "url": "https://arxiv.org/abs/2610.05140",
+      "tldr": "AutoSciBench asks whether scientific-agent benchmarks can be generated and iteratively adapted as agents improve. It represents tasks through high-level concepts spanning domain, modality, and reasoning requirements, then turns those concepts into executable evaluations instead of relying on a fixed manually authored set. If its validity controls hold, the framework could reduce benchmark saturation and shorten the lag between new scientific-agent capabilities and discriminative tests.",
+      "tldr_zh": "AutoSciBench 探索能否随着 scientific agent 进步而自动生成并迭代更新 benchmark。它用涵盖科学领域、数据模态和推理要求的高层 concept 表示任务，再将其转成可执行评测，而不是依赖固定的人工题集。如果有效性门禁可靠，这一框架可缓解 benchmark saturation，并缩短 agent 能力进步与评测更新之间的滞后。",
+      "upvotes": 22,
+      "authors": "Dongki Kim, Namkyeong Lee, Surag Nair, Carl Edwards, Xiner Li, Edward De Brouwer, Jenna Lynn Collier, Sung Ju Hwang, Gabriele Scalia, Ehsan Hajiramezanali",
+      "ai_keywords": [
+        "scientific agents",
+        "benchmark generation",
+        "evaluation"
+      ],
+      "interest_tag": "Benchmark"
+    },
+    {
+      "title": "GUI-HARVEST: Self-Improving GUI Agents through Evidence-Driven Harness Evolution",
+      "url": "https://arxiv.org/abs/2610.00948",
+      "tldr": "GUI-HARVEST optimizes the executable harness around a frozen GUI model, including observation assembly, action execution, verification, recovery, and termination. Its central mechanism grounds failure diagnosis in observed action effects, aggregates recurring patterns across tasks, and converts supported findings into reusable runtime changes. The work is important because GUI-agent gains may come from better closed-loop infrastructure, not only stronger backbone models, and those changes need causal evidence to avoid brittle overfitting.",
+      "tldr_zh": "GUI-HARVEST 优化 frozen GUI model 周围的 executable harness，覆盖 observation assembly、action execution、verification、recovery 与 termination。核心机制用真实 action effect 支撑失败诊断，跨任务聚合重复模式，再把有证据的发现转成可复用 runtime 变更。它的重要性在于，GUI agent 的提升可能来自更好的 closed-loop infrastructure，而不只是更强 backbone；这些改动也必须有因果证据，避免脆弱过拟合。",
+      "upvotes": 7,
+      "authors": "Geyi Yang, Zikun Qu, Xiang Li, Zhiyong Wang, Min Zhang, Shipei Zeng, Zhongxiang Dai",
+      "ai_keywords": [
+        "GUI agent",
+        "harness optimization",
+        "self-improvement"
+      ],
+      "interest_tag": "CUA"
+    }
+  ],
+  "alphaxiv_papers": [
+    {
+      "title": "H-JEPA: End-to-End Learning of Hierarchical World Models for Visual Planning",
+      "arxiv_id": "2610.06805",
+      "url": "https://arxiv.org/abs/2610.06805",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2610.06805",
+      "tldr": "H-JEPA trains a hierarchy of action-conditioned JEPA world models, with each level predicting farther ahead in its own latent space. Planning runs top-down: higher levels choose long-horizon progress and pass latent subgoals to lower levels, reducing search over primitive actions. It reaches 73% success on Visual AntMaze versus 18% for a flat baseline, but the paper also shows that abstraction depends on separated temporal scales and that deeper hierarchies can hurt short datasets.",
+      "tldr_zh": "H-JEPA 训练多层 action-conditioned JEPA world model，每层在独立 latent space 中预测更远未来。规划自顶向下进行：高层负责长程进展并向低层传递 latent subgoal，从而减少对 primitive action 的直接搜索。它在 Visual AntMaze 上达到 73% success，而 flat baseline 为 18%；但论文也说明，抽象收益依赖数据中的时间尺度分离，短轨迹上更深层级反而可能伤害性能。",
+      "interest_tag": ""
+    },
+    {
+      "title": "Base Models Can Reason By Taking a Cue From Training Data",
+      "arxiv_id": "2610.06851",
+      "url": "https://arxiv.org/abs/2610.06851",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2610.06851",
+      "tldr": "The paper shows that fixing one or two opening tokens can unlock reasoning already associated with those cues during pretraining. On MATH-500, a short cue raises Olmo-3-7B from 42% to 78% and Qwen3-14B from 72% to 87%, roughly matching their RL counterparts without weight updates. Causal data edits make new words acquire or redirect this effect, suggesting that some RL gains come from increasing the probability of useful response modes, although the effect is model- and prompt-dependent and also affects safety behavior.",
+      "tldr_zh": "论文发现，固定回复开头的一两个 token，就可能唤起 pretraining 中与这些 cue 关联的 reasoning mode。MATH-500 上，短 cue 将 Olmo-3-7B 从 42% 提升到 78%，将 Qwen3-14B 从 72% 提升到 87%，无需更新权重便接近对应 RL 模型。训练数据的因果编辑还能让新词获得或重定向这种效果，说明部分 RL 增益来自提高有效 response mode 的出现概率；但效果依赖模型与 prompt，并会同时影响 safety behavior。",
+      "interest_tag": ""
+    },
+    {
+      "title": "LiFT: Loop Flow Transformers",
+      "arxiv_id": "2610.05538",
+      "url": "https://arxiv.org/abs/2610.05538",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2610.05538",
+      "tldr": "LiFT repeatedly applies a shared Diffusion Transformer core and supervises intermediate loops along a trajectory from the initial estimate to the flow-matching target. This lets inference use more recurrent depth than training without changing parameters, separating model size from executed compute. At selected ImageNet operating points, a 270M-parameter LiFT outperforms a 675M dense model with lower estimated FLOPs, though gains vary by scale and are not yet validated on broader modalities or deployment hardware.",
+      "tldr_zh": "LiFT 重复调用共享的 Diffusion Transformer core，并让中间 loop 沿初始估计到 flow-matching target 的轨迹接受监督。这样推理时可以在不增加参数的情况下使用比训练更深的 recurrence，把模型大小与实际执行计算解耦。在部分 ImageNet operating point 上，270M 参数 LiFT 以更低估算 FLOPs 超过 675M dense model；但收益依赖模型尺度，尚未在更多模态和真实部署硬件上验证。",
+      "interest_tag": ""
+    },
+    {
+      "title": "UndoBench: Separating Task Competence from Recovery Capability in Tool-Using AI Agents",
+      "arxiv_id": "2610.05622",
+      "url": "https://arxiv.org/abs/2610.05622",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2610.05622",
+      "tldr": "UndoBench pairs nominal and faulted executions across enterprise workflows so recovery is measured only when the agent first demonstrates baseline competence. In its primary lost-acknowledgment study, nominal success is 83.54% but conditional recovery falls to 46.72%, while naive retry duplicates external effects in 53.33% of trials. Wire-level effect histories reveal failures that final-state scoring misses and show why idempotency, verification, and repair must be matched to the fault phase.",
+      "tldr_zh": "UndoBench 在 enterprise workflow 中配对 nominal 与 faulted execution，只有 agent 先证明具备基础任务能力时才计入 recovery。其 lost-acknowledgment 主实验中，nominal success 为 83.54%，conditional recovery 却降至 46.72%，naive retry 更在 53.33% 的 trial 中造成重复外部副作用。Wire-level effect history 揭示了 final-state scoring 看不到的失败，也说明 idempotency、verification 与 repair 必须针对不同 fault phase 设计。",
+      "interest_tag": "Benchmark"
+    },
+    {
+      "title": "ThunderSyncRL: Lossless Acceleration of Agentic Reinforcement Learning",
+      "arxiv_id": "2610.05935",
+      "url": "https://arxiv.org/abs/2610.05935",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2610.05935",
+      "tldr": "ThunderSyncRL starts gradient work as soon as its inputs are fixed while delaying the optimizer step until the full logical batch closes. For GRPO it streams trajectory score gradients before group advantages are finalized; for on-policy distillation it processes ready turns while later tool interactions continue. The method reaches matched SWE-bench Verified and Terminal Bench 4.0 targets about 1.8–1.9 times faster while preserving the policy snapshot, with trade-offs in partial-gradient storage and workload-dependent overlap.",
+      "tldr_zh": "ThunderSyncRL 在输入一旦确定后就提前启动 gradient work，但直到完整 logical batch 关闭才执行 optimizer step。对 GRPO，它在 group advantage 完成前流式计算 trajectory score gradient；对 on-policy distillation，它在后续 tool interaction 仍进行时处理已就绪 turn。该方法保持同一 policy snapshot，并以约 1.8–1.9 倍速度达到 SWE-bench Verified 与 Terminal Bench 4.0 的同等目标，但代价是 partial-gradient storage 增加，且收益依赖 rollout 与 learner workload 的重叠程度。",
+      "interest_tag": ""
+    }
+  ],
+  "github_repos": [
+    {
+      "name": "QingYunA/answer-me-with-html",
+      "url": "https://github.com/QingYunA/answer-me-with-html",
+      "tldr": "An agent skill that turns a short Markdown draft into a polished single-page HTML explainer instead of making the model emit every CSS rule, wrapper, and SVG coordinate. Its published benchmark reports 7.4 times fewer output tokens and 3.6 times lower latency than directly asking the same model for HTML, while cost stays similar because extra turns reread context. The repository includes a bundled renderer, diagrams, examples, tests, and support for Claude Code, Codex, Cursor, and OpenCode.",
+      "tldr_zh": "这是一个 agent skill：模型只写简短 Markdown draft，再由 bundled renderer 生成可读的单页 HTML，避免模型逐行输出 CSS、wrapper 和 SVG 坐标。其公开 benchmark 相比直接让同一模型写 HTML，报告 output token 减少 7.4 倍、延迟降低 3.6 倍；但因为额外 turn 会重读 context，成本大致不变。仓库包含 renderer、diagram、示例和测试，并支持 Claude Code、Codex、Cursor 与 OpenCode。",
+      "stars": 1860,
+      "language": "JavaScript",
+      "interest_tag": ""
+    },
+    {
+      "name": "empero-org/brewery-ai",
+      "url": "https://github.com/empero-org/brewery-ai",
+      "tldr": "Brewery is a conversational control plane for fine-tuning text and image models locally or over SSH. It guides model and dataset selection, enforces supported hyperparameter ranges, estimates memory, time, and cost, runs CPT, SFT, DPO, LoRA, QLoRA, or full fine-tuning, and exports documented Hugging Face artifacts. Two end-to-end demo models and a resumable project state make it more substantive than a wrapper, although its custom commercial threshold license is not standard MIT.",
+      "tldr_zh": "Brewery 是面向本地或 SSH 训练的对话式 fine-tuning control plane。它引导模型与数据选择，限制 recipe 在支持的 hyperparameter 范围内，预估显存、时间和成本，并执行 CPT、SFT、DPO、LoRA、QLoRA 或 full fine-tuning，最后导出带文档的 Hugging Face artifact。两个端到端 demo model 与可恢复 project state 证明它不只是薄 wrapper，但其带商业收入阈值的自定义 license 并非标准 MIT。",
+      "stars": 194,
+      "language": "Python",
+      "interest_tag": ""
+    },
+    {
+      "name": "longsurf-ai/openchart",
+      "url": "https://github.com/longsurf-ai/openchart",
+      "tldr": "OpenChart is a self-hostable charting and market-research workspace that places agents alongside charts, alerts, scripts, and live events. The repository contains a desktop application, server components, tests, security policy, and a scripting environment rather than only a landing-page demo. Its main design signal is product integration: agents operate inside the analytical surface where users inspect evidence, although financial automation and the project-specific license require careful review.",
+      "tldr_zh": "OpenChart 是可 self-host 的 charting 与 market-research workspace，把 agent 与图表、alert、script 和实时事件放在同一工作面。仓库包含 desktop app、server component、测试、安全策略与 scripting environment，并非只有 landing-page demo。它最值得关注的是 product integration：agent 直接工作在用户检查证据的分析界面中；但涉及金融自动化，且使用项目自定义 license，落地前需仔细审查。",
+      "stars": 101,
+      "language": "TypeScript",
+      "interest_tag": ""
+    },
+    {
+      "name": "Tuskira/ai-agent-gateway",
+      "url": "https://github.com/Tuskira/ai-agent-gateway",
+      "tldr": "AI Agent Gateway is a Go-based proxy and governance layer for MCP tool calls and LLM traffic. It provides policy enforcement, observability, an admin console, credential-free examples, Docker and Kubernetes deployment assets, CI, releases, and end-to-end smoke tests. The project is still pre-1.0, but its data-plane and control-plane framing addresses a real infrastructure gap as agents gain permission to mutate external systems.",
+      "tldr_zh": "AI Agent Gateway 是面向 MCP tool call 与 LLM traffic 的 Go 代理和 governance layer。它提供 policy enforcement、observability、admin console、免外部 credential 的示例、Docker/Kubernetes 部署资产、CI、release 与端到端 smoke test。项目仍处于 pre-1.0，但其 data-plane/control-plane 架构直面了 agent 获得外部系统写权限后出现的基础设施缺口。",
+      "stars": 63,
+      "language": "Go",
+      "interest_tag": ""
+    },
+    {
+      "name": "yxq953/MuseLite",
+      "url": "https://github.com/yxq953/MuseLite",
+      "tldr": "MuseLite packages an OpenAI-compatible agent workspace into a native Android app with persistent conversations, an Alpine PRoot sandbox, browser tools, scheduling, and optional phone control. Through Android accessibility it can inspect the screen, tap, type, swipe, navigate system controls, and wait for UI state changes, with explicit opt-in and a stoppable foreground service. The project is early and Windows-centric to build, but its 54-commit repository and verified APK pipeline make it a concrete mobile computer-use runtime rather than a mockup.",
+      "tldr_zh": "MuseLite 把 OpenAI-compatible agent workspace 做成原生 Android app，包含持久对话、Alpine PRoot sandbox、browser tool、定时任务和可选 phone control。通过 Android accessibility，它能检查屏幕、点击、输入、滑动、执行系统导航并等待 UI 状态变化，同时要求显式授权且可从 foreground service 停止。项目仍早期、构建流程偏 Windows，但 54 个 commit 和已验证 APK pipeline 使其成为真实 mobile computer-use runtime，而非 mockup。",
+      "stars": 29,
+      "language": "Python",
+      "interest_tag": "CUA"
+    }
+  ],
+  "hackernews": [
+    {
+      "title": "Opus 5.5 agents discover two room-temperature magnetic semiconductor candidates",
+      "url": "https://www.vals.ai/blogs/room-temperature-magnetic-semiconductors",
+      "tldr": "A team of Claude Opus 5.5 agents used density-functional calculations to propose YBaMnFeO5 and re-identify the 1999 compound KV[Cr(CN)6] as room-temperature Luttinger-compensated semiconductor candidates. The latter was experimentally magnetic up to 376 K, while calculations predict useful spin-sorted windows, but neither band-gap nor spin sorting has been directly measured and the newly designed oxide may be difficult to synthesize in the required ordering. The team released inputs, outputs, analysis code, independent reruns, and caveats, making this a strong example of evidence-forward AI-for-science rather than a claim of completed discovery.",
+      "tldr_zh": "Claude Opus 5.5 agent 团队用 density-functional calculation 提出 YBaMnFeO5，并重新识别 1999 年合成的 KV[Cr(CN)6]，将其视为室温 Luttinger-compensated semiconductor 候选。后者实验上在 376 K 前保持磁有序，计算预测其有可用的 spin-sorted window；但 band gap 与 spin sorting 尚未直接测量，新设计氧化物也可能难以按所需原子排序合成。团队公开 input、output、分析代码、独立复算与 caveat，使它更像 evidence-forward AI-for-science，而不是把计算候选包装成已完成发现。",
+      "points": 482,
+      "num_comments": 328,
+      "interest_tag": ""
+    },
+    {
+      "title": "Show HN: Made an open-source Lego AI generator",
+      "url": "https://github.com/anteloc/ldraw-nova",
+      "tldr": "ldraw-nova gives an agent tools, retrieval, geometry checks, and validation rules for generating buildable LEGO models in the executable LDraw format. Outputs include source, multiple rendered views, editable glTF, and the agent trace, while semantic reranking has a full-text-search fallback. The project is compelling because it moves generative agents from text artifacts toward physically constrained assemblies, although generation remains slow, expensive, and unreliable for several model families.",
+      "tldr_zh": "ldraw-nova 为 agent 提供 tool、retrieval、geometry check 与 validation rule，用可执行的 LDraw 格式生成可搭建 LEGO 模型。产物包括 source、多视角渲染、可编辑 glTF 与 agent trace，semantic reranking 不可用时还能退回 full-text search。它的价值在于把 generative agent 从文本 artifact 推向受物理约束的 assembly；但当前生成仍慢且昂贵，对若干模型类别也不够可靠。",
+      "points": 166,
+      "num_comments": 52,
+      "interest_tag": ""
+    },
+    {
+      "title": "Show HN: Pi pod – Run your pi coding agent in sandboxes on your own server",
+      "url": "https://pipod.dev/",
+      "tldr": "Pi pod wraps the minimalist pi coding harness in self-hosted isolated workstations with sandboxing, native clients, role-based session sharing, and planned browser or desktop automation. The hosted product is not available yet, so the current value is the open-source self-hosting path and a concrete opinion about the minimum environment an engineering agent needs. Its appeal reflects demand for agent runtimes that preserve user customization and model choice without surrendering data or infrastructure control.",
+      "tldr_zh": "Pi pod 在极简 pi coding harness 外增加 self-hosted isolated workstation、sandbox、native client、基于角色的 session sharing，以及规划中的 browser/desktop automation。Hosted service 尚未上线，因此当前价值主要是开源 self-host 路径，以及对 engineering agent 最小运行环境的明确主张。它的热度反映了用户对 agent runtime 的需求：既保留自定义与模型选择，又不交出数据和基础设施控制权。",
+      "points": 121,
+      "num_comments": 47,
+      "interest_tag": ""
+    },
+    {
+      "title": "South Korea says AI agents appear to have been used to hack the country's banks",
+      "url": "https://www.reuters.com/world/south-koreas-lee-says-ai-appears-have-been-used-bank-hacks-2026-10-06/",
+      "tldr": "South Korean authorities are investigating breaches reported by several major banks, and the president said signs suggest AI models were used in some incidents. Regulators shared 28 suspect IP addresses with the financial sector, but officials have not disclosed which AI tools were involved or the full scale of the breaches. The story is therefore a high-consequence warning, not yet technical attribution proof, and it strengthens the case for governed tool access, audit trails, and incident-specific recovery in agent deployments.",
+      "tldr_zh": "韩国当局正在调查多家主要银行报告的数据泄露，总统称部分事件已出现使用 AI model 的迹象。监管机构向金融业共享了 28 个可疑 IP，但尚未披露具体使用了哪些 AI tool，也未公布完整泄露规模。因此这是一条高影响预警，而非已经完成的技术归因；它进一步凸显 agent 部署需要受控 tool access、audit trail 与面向具体 incident 的 recovery。",
+      "points": 72,
+      "num_comments": 16,
+      "interest_tag": ""
+    },
+    {
+      "title": "An AI agent emailed researchers for help. It told us why",
+      "url": "https://www.science.org/content/article/exclusive-ai-agent-emailed-hundreds-researchers-help-it-told-us-why",
+      "tldr": "Science reports on an autonomous agent that emailed hundreds of researchers seeking engagement or assistance, with some recipients responding because the outreach itself was novel. The episode turns persistent agents, self-described goals, and outbound communication from speculative concerns into an observable social-system problem. Regardless of whether its language reflects genuine intent, agents that can select targets and contact people need clear identity disclosure, rate limits, consent rules, and accountable operators.",
+      "tldr_zh": "Science 报道了一个 autonomous agent 向数百名研究者发送邮件、寻求互动或帮助的事件，一些收件人仅因这种 outreach 足够新奇而回应。它把 persistent agent、自述目标与主动外联从抽象讨论变成了可观察的社会系统问题。无论其语言是否代表真实意图，能够选择目标并联系真人的 agent 都需要明确身份披露、rate limit、consent rule 与可追责 operator。",
+      "points": 50,
+      "num_comments": 80,
+      "interest_tag": ""
+    }
+  ]
+}
