@@ -1,0 +1,222 @@
+{
+  "date": "2026-10-09",
+  "generated_at": "2026-10-09T16:03:02+08:00",
+  "briefing_zh": "今天最强的共同信号，是 agent 研究正在从「更会回答」转向「拥有可学习、可验证的世界」。**Learn2Play Bench** 直接测量 agent 在陌生环境中从经验学习的能力，**From Traces to Agentic Worlds** 与 **AgentGarten** 则把环境本身升级为研究对象：前者从轨迹复刻交互世界，后者让 code world 与 agent 一起演化。三者连在一起，构成了训练环境、在线适应与可靠评测的闭环。\n\nEmbodied AI 一侧几乎被 world model 占据。**Long-WAM** 讨论如何在实时约束下扩大视觉历史，**RoboJEPA** 尝试建立 latent world model 到规划表现的 scaling law，**H-JEPA** 用分层表征支持跨时间尺度规划。这里最重要的不是「上下文越长越好」，而是长历史必须保留 action-relevant state，并与时延、抽象层级和规划目标共同设计。\n\nAgent self-improvement 也开始从口号走向可归因的实验基础设施。**RSIGym** 试图隔离模型、数据与 harness 的真实贡献，**Before They Can Solve** 则用 verifier 确认的中间进展提前判断哪些 base checkpoint 值得昂贵的 agentic post-training。与此同时，**TokenRouter** 把模型路由细化到 token 层，说明能力扩展与推理成本控制正在同一套系统设计中汇合。\n\n开源与社区热点更偏向可运行产品：**ARTEX** 展示多步 agent 工作流与证据图，**PiDurableKit** 解决原生应用中的 crash recovery，**Brewery** 将 fine-tuning 流程产品化。HN 热度最高的 **Opus 5.5 agents discover two room-temperature magnetic semiconductor candidates** 则给出更强叙事：agent 不只操作软件，还能产出带代码、复算和 caveat 的可检验科学候选，但实验验证仍是不可跳过的最后一公里。",
+  "briefing_en": "The strongest shared signal today is that agent research is moving from better answers toward learnable, verifiable worlds. **Learn2Play Bench** measures whether agents learn from experience in unfamiliar environments, while **From Traces to Agentic Worlds** and **AgentGarten** make the environment itself a research object: one reconstructs interactive worlds from traces, and the other evolves code worlds alongside agents. Together they form a loop spanning training environments, online adaptation, and credible evaluation.\n\nEmbodied AI is dominated by world models. **Long-WAM** asks how to expand visual history under real-time constraints, **RoboJEPA** seeks scaling laws from latent prediction to planning, and **H-JEPA** uses hierarchy to plan across timescales. The key lesson is not simply that more context is better; longer history must preserve action-relevant state and be co-designed with latency, abstraction, and the planning objective.\n\nAgent self-improvement is also acquiring more attributable experimental infrastructure. **RSIGym** tries to isolate gains from models, data, and harnesses, while **Before They Can Solve** uses verifier-confirmed intermediate progress to identify base checkpoints worth expensive agentic post-training. In parallel, **TokenRouter** moves routing to token granularity, showing capability scaling and inference economics converging in the same system design.\n\nOpen-source attention favors runnable products: **ARTEX** exposes multi-step agent workflows and evidence graphs, **PiDurableKit** tackles crash recovery in native apps, and **Brewery** productizes fine-tuning. The day's biggest HN story, **Opus 5.5 agents discover two room-temperature magnetic semiconductor candidates**, offers a stronger narrative: agents can produce testable scientific candidates with code, reruns, and caveats, but experimental validation remains the final mile that cannot be skipped.",
+  "viral_analysis_zh": "**Opus 5.5 agents discover two room-temperature magnetic semiconductor candidates** 最可能成为今天的爆款：它把「agent 做科研」压缩成两个具体、可实验验证的材料候选，并用公开计算、代码、独立复算和 caveat 降低了纯营销感。**ARTEX** 的传播模式同样值得关注——冠军背书、可视化 Demo、完整多 agent 架构和一键部署同时满足可信度、可看性与可复用性。",
+  "viral_analysis_en": "**Opus 5.5 agents discover two room-temperature magnetic semiconductor candidates** is the strongest viral candidate: it compresses agentic science into two concrete, experimentally testable materials and counters hype with public calculations, code, independent reruns, and caveats. **ARTEX** also has a powerful launch formula—competition credibility, a visual demo, a complete multi-agent architecture, and easy deployment combine trust, spectacle, and reuse.",
+  "huggingface_papers": [
+    {
+      "title": "Learn2Play Bench: How Well Do LLM Agents Learn from Experience in Unfamiliar Environments?",
+      "url": "https://arxiv.org/abs/2610.08215",
+      "tldr": "Learn2Play Bench tests whether LLM agents can acquire and reuse experience in unfamiliar, changing environments rather than merely execute a fixed policy. It targets the adaptation loop itself: exploration, lesson extraction, and transfer to later attempts. That makes it valuable for separating genuine online learning from agents that only look competent on familiar tasks.",
+      "tldr_zh": "Learn2Play Bench 测试 LLM agent 能否在陌生、动态环境中获取并复用经验，而不只是执行固定策略。它直接评估探索、经验提炼与后续迁移这一适应闭环。其价值在于把真正的在线学习能力与只会在熟悉任务上表现良好的 agent 区分开来。",
+      "upvotes": 88,
+      "authors": "Yibo Li, Jinhang Qiu, Zhi Zheng, Qianyun Guo, Jiaying Wu, Shuo Ji, Bryan Hooi",
+      "ai_keywords": [
+        "LLM agents",
+        "experience learning",
+        "adaptation",
+        "evaluation"
+      ],
+      "interest_tag": "Benchmark"
+    },
+    {
+      "title": "From Traces to Agentic Worlds: Agentic Language World Models for Interactive Environment Simulation",
+      "url": "https://arxiv.org/abs/2610.06100",
+      "tldr": "This work reframes environment replication as agentic language world modeling: build an interactive simulator from observed traces instead of reimplementing the inaccessible original system. The resulting world must preserve state, rules, and action consequences well enough for agents to train and be evaluated inside it. The approach matters because scalable agent development increasingly depends on faithful replicas of environments that are expensive, private, or unstable.",
+      "tldr_zh": "这项工作把环境复刻重构为 agentic language world modeling：从交互轨迹学习可操作的模拟器，而不是重新实现不可访问的原系统。模拟世界需要保留状态、规则与动作后果，才能承载 agent 训练和评测。其重要性在于，agent 研发越来越依赖对昂贵、私有或不稳定环境的高保真复制。",
+      "upvotes": 70,
+      "authors": "Quanyu Long, Xiao Chen, Jianda Chen, Haozhen Zhang, Qisheng Hu, Jianzhu Bao, Wenya Wang",
+      "ai_keywords": [
+        "agentic world model",
+        "environment simulation",
+        "interactive agents"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "AgentGarten: Code Worlds for Evolving Agents",
+      "url": "https://arxiv.org/abs/2610.12374",
+      "tldr": "AgentGarten creates executable code worlds whose state, rules, and dynamics can evolve alongside the agents practicing in them. It treats environment quality as a first-class bottleneck: agents cannot learn robust behavior from worlds that are inconsistent or too narrow. The system points toward automated curricula where both the agent and its training world become progressively more capable.",
+      "tldr_zh": "AgentGarten 构建可执行的 code worlds，使环境状态、规则和动力学能与其中训练的 agent 一同演化。它把环境质量视为首要瓶颈：不一致或过窄的世界无法训练出稳健行为。该系统指向一种自动课程机制，让 agent 与训练环境共同逐步增强。",
+      "upvotes": 66,
+      "authors": "Jiawei Chi, Shangchen Miao, Zhiyuan Shi, Kailu Wu, Hanyang Wang, Weiliang Chen, Qiyu Dai, Jinshan Ren, Jun Gao, Mingsheng Long, Yueqi Duan, Jiangran Lyu, Jialong Wu, Fangfu Liu",
+      "ai_keywords": [
+        "code worlds",
+        "agent evolution",
+        "environment generation"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "TokenRouter: Efficient Serving System for Token-Level LLM Routing",
+      "url": "https://arxiv.org/abs/2610.12242",
+      "tldr": "TokenRouter moves LLM routing from whole requests to individual tokens, allowing different models to handle different parts of one generation. This finer granularity can improve the cost-quality frontier without forcing a single model choice for an entire session. The main significance is systems-level: routing becomes a dynamic inference primitive rather than a coarse gateway decision.",
+      "tldr_zh": "TokenRouter 将 LLM 路由从整条请求细化到单个 token，让同一次生成的不同部分由不同模型处理。相比整段会话固定选择一个模型，这种细粒度机制有望改善成本—质量 Pareto 前沿。它的核心意义在系统层：路由从粗粒度网关决策变成动态推理原语。",
+      "upvotes": 60,
+      "authors": "Tianyu Fu, Tengxuan Liu, Ruoxi Wang, Yixin Dong, Yi Ge, Yichen You, Yu Wang",
+      "ai_keywords": [
+        "LLM serving",
+        "token routing",
+        "inference systems"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "MiMo-V2.6: Scaling Reinforcement Learning Towards Self-Improvement",
+      "url": "https://arxiv.org/abs/2610.11959",
+      "tldr": "MiMo-V2.6 presents an omni-modal model family trained with reinforcement learning aimed at stronger self-improvement behavior. The report emphasizes scaling RL across modalities and capabilities rather than treating post-training as a narrow text-only stage. It is notable as another signal that frontier model development is shifting from static supervised recipes toward broad, feedback-driven capability growth.",
+      "tldr_zh": "MiMo-V2.6 是一个以强化学习推动自我提升的 omni-modal 模型系列。报告强调跨模态、跨能力扩展 RL，而不是把 post-training 限定为狭窄的纯文本阶段。它再次表明，前沿模型研发正在从静态监督配方转向更广泛的反馈驱动能力增长。",
+      "upvotes": 36,
+      "authors": "Core Team, Zongming Qiao, Ziyue Hua, Zirui Ou, Zihao Yue, Zihan Jiang, Zhuo Huang, Zhiyang Chen, Zhixian Zheng, Zhipeng Xu, Zhengrui Ma, Yuyang Hu, Yuhang Dong, Yuechen Zhang, Yudong Wang, Yuanxin Liu, Yixin Yang, Yishuo Cai, Yikai Zhao, Yihan Yan, Yifan Zhang, Yifan Song, Xiyu Wei, Xing Zhang, Xin Zhang, Xiaoqian Liu, Xiaodong Ji, Xiangwei Deng, Xueyu Guo, Wenhan Ma, Weimin Xiong, Weikun Wang, Weiji Zhuang, Shuo Liu, Shuhuai Ren, Shuhao Gu, Shimao Chen, Shijie Cao, Shihua Yu, Shicheng Li, Shengjie Zhou, Shaolei Zhang, Rang Li, Qiying Wang, Qingkai Fang, Qianli Chen, Minzheng Wang, Liwen Wang, Linli Yao, Linghao Zhang, Liangyu Cheng, Liang Zhao, Lei Li, Jinhao Dong, Jinyu Xiang, Jianyu Wei, Jiangshan Duo, Huaqiu Liu, Huanjie Fan, Hongyi Guan, Hongshen Xu, Hao Tian, Hanyu Li, Hailin Zhang, Gang Wang, Fuli Luo, Feng Wei, Dong Zhang, Dawei Zhu, Chiheng Lou, Chenhong He, Chenhao He, Chenghua Liu, Bowen Ye, Bowen Shen, Boshen Xu, Bo Yang, Bingquan Xia, Bangjun Xiao, Baixuan Xu, Zhouxiang Mao, Zhiyang Zhang, Zhixiang Xu, Zhenru Lin, Zhengju Tang, Zhaojun Huang, Yuzhe Weng, Yuxing Xiang, Yuxiao Li, Yuheng Yang, Yuhang Wang, Yuchen Liu, Yuanyuan Tian, Yuanliang Dong, Yu Cheng, Yongzhe He, Yongshun Liang, Yong Wang, Yiyan Wang, Yitian Gong, Yijie Zhang, Yanshu Xin, Xun Zhang, Xingjian Zhao, Wenyu Yang, Wenshan Huang, Wenhao Li, Tingwei Huang, Tianyu Yu, Tianyang Lu, Taoyu Yang, Sinan Du, Shutong Tian, Shulin Du, Shengfan Wang, Shanchuan Fang, Qihao Zhang, Qibin Yang, Qian Yu, Qian Tu, Pengrong Xie, Peipei Wang, Peidian Li, Minkun Guo, Mingchen Shao, Luohan Gao, Lijie Wang, Liang Shi, Kaiqi Chen, Kaiming Liu, Kaifei Wang, Kai Yang, Jinlong Xue, Jiechen Zhang, Jiaxuan Liu, Hongxu An, Hao Peng, Hanglong Lü, Guonan Wang, Feiyu Yang, Fanyu Cao, Fangyue Liu, Fan Cui, Cong Wang, Chun Chen, Chenxu Bai, Chengxuan Zhu, Chenghua Wang, Boyi Zeng",
+      "ai_keywords": [
+        "reinforcement learning",
+        "self-improvement",
+        "omni-modal models"
+      ],
+      "interest_tag": ""
+    }
+  ],
+  "alphaxiv_papers": [
+    {
+      "title": "Long-WAM: Scaling the Context of World-Action Models",
+      "arxiv_id": "2610.10528",
+      "url": "https://arxiv.org/abs/2610.10528",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2610.10528",
+      "tldr": "Long-WAM studies how world-action models can consume longer visual histories without violating real-time robot-control constraints. Its key idea is to pretrain future-motion prediction so added context carries actionable temporal information rather than redundant frames. The result suggests that long context helps embodied control only when the representation and serving system are designed around latency.",
+      "tldr_zh": "Long-WAM 研究 world-action model 如何在不破坏实时机器人控制时延的前提下利用更长视觉历史。核心做法是预训练未来运动预测，让新增上下文携带可行动的时间信息，而非堆叠冗余帧。它说明 embodied control 的长上下文收益，必须与表征设计和推理时延协同考虑。",
+      "interest_tag": ""
+    },
+    {
+      "title": "RoboJEPA: Scaling Robotic Latent World Models",
+      "arxiv_id": "2610.10515",
+      "url": "https://arxiv.org/abs/2610.10515",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2610.10515",
+      "tldr": "RoboJEPA derives predictive scaling relationships between robotic latent-world-model accuracy and downstream planning performance. This offers a way to estimate how model size, data, and compute may translate into control gains before paying for costly real-robot evaluations. The contribution is important because it turns world-model scaling from intuition into a more measurable planning decision.",
+      "tldr_zh": "RoboJEPA 建立机器人 latent world model 预测精度与下游规划表现之间的 scaling relationship。研究者因此可在昂贵的真机评测前，估计模型规模、数据与算力可能带来的控制收益。它的重要性在于把 world-model scaling 从经验直觉变成更可测量的研发决策。",
+      "interest_tag": ""
+    },
+    {
+      "title": "H-JEPA: End-to-End Learning of Hierarchical World Models for Visual Planning",
+      "arxiv_id": "2610.06805",
+      "url": "https://arxiv.org/abs/2610.06805",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2610.06805",
+      "tldr": "H-JEPA learns hierarchical visual world models for planning across multiple timescales and abstraction levels. By discarding unpredictable detail while retaining goal-relevant state, it improves long-horizon navigation and manipulation in simulation. The work addresses a central failure mode of single-scale latent models: either modeling too much visual noise or losing the structure needed for planning.",
+      "tldr_zh": "H-JEPA 学习跨时间尺度与抽象层级的分层视觉 world model。它丢弃不可预测的细节，同时保留与目标相关的状态，从而改善模拟导航与操作的长程规划。该工作针对单尺度 latent model 的核心矛盾：要么拟合过多视觉噪声，要么丢失规划所需结构。",
+      "interest_tag": ""
+    },
+    {
+      "title": "Before They Can Solve: Predicting Post-Training Coding-Agent Performance from Base Models",
+      "arxiv_id": "2610.10478",
+      "url": "https://arxiv.org/abs/2610.10478",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2610.10478",
+      "tldr": "This paper asks whether coding-agent post-training performance can be predicted from cheaper measurements on base checkpoints. It evaluates verifier-confirmed progress at intermediate solution steps, rather than waiting for sparse end-to-end pass outcomes that many base models rarely produce. If robust, the method could reduce expensive post-training bets by identifying promising checkpoints earlier.",
+      "tldr_zh": "这篇论文研究能否用 base checkpoint 上更便宜的测量，预测 coding agent 的 post-training 表现。它关注 verifier 确认的中间解题进展，而不是等待许多 base model 极少产生的端到端成功样本。若结论稳健，该方法可提前筛选值得投入的 checkpoint，减少昂贵的 post-training 试错。",
+      "interest_tag": ""
+    },
+    {
+      "title": "RSIGym: A Flexible Environment for Recursive Self-Improvement",
+      "arxiv_id": "2610.10310",
+      "url": "https://arxiv.org/abs/2610.10310",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2610.10310",
+      "tldr": "RSIGym provides a budget-controlled environment for studying recursive self-improvement across models, data, and execution harnesses. It preserves accepted changes across improvement cycles while allowing researchers to isolate which component actually produced a gain. This matters because RSI claims are otherwise easy to confound with infrastructure changes, extra compute, or one-off prompt engineering.",
+      "tldr_zh": "RSIGym 提供预算受控的 recursive self-improvement 环境，覆盖模型、数据与 execution harness。它在多轮改进间保留已接受变更，并允许研究者隔离究竟是哪一组件带来增益。其价值在于避免把基础设施变化、额外算力或一次性 prompt engineering 误当成 RSI 成果。",
+      "interest_tag": ""
+    }
+  ],
+  "github_repos": [
+    {
+      "name": "mhtsec/ARTEX",
+      "url": "https://github.com/mhtsec/ARTEX",
+      "tldr": "ARTEX is an open-source autonomous penetration-testing system with a Go backend and Next.js interface. Its architecture uses planners, workers, an exploration graph, evidence storage, approvals, and cross-worker trace retrieval to sustain multi-step investigations. The repository is unusually substantial for a newly trending project, but its own terms restrict use to local learning and isolated research rather than live systems.",
+      "tldr_zh": "ARTEX 是一个开源自主渗透测试系统，采用 Go 后端与 Next.js 界面。其架构通过 planner、worker、探索图、证据存储、审批和跨 worker 轨迹检索维持多步调查。作为新晋热门项目，它的实现相当完整，但仓库条款明确限制在本地学习与隔离研究环境中使用，不应面向真实在线系统。",
+      "stars": 1417,
+      "language": "Go",
+      "interest_tag": ""
+    },
+    {
+      "name": "trevaintdead/ai-game-modding-guides",
+      "url": "https://github.com/trevaintdead/ai-game-modding-guides",
+      "tldr": "This repository packages practical workflows for using coding agents to build offline game mods, passthrough projects, and Rust engine rewrites. It emphasizes harness-based execution, repeated playtesting, legal boundaries, and structured handoffs rather than a one-shot prompt. Its popularity shows that concrete, domain-specific operating manuals can travel farther than another generic agent framework.",
+      "tldr_zh": "该仓库整理了使用 coding agent 构建离线游戏 mod、passthrough 项目和 Rust 引擎重写的实操流程。它强调 harness 执行、反复试玩、法律边界与结构化交接，而非一次 prompt 完成项目。其热度说明，具体垂直领域的操作手册往往比又一个通用 agent framework 更容易传播。",
+      "stars": 382,
+      "language": "",
+      "interest_tag": ""
+    },
+    {
+      "name": "empero-org/brewery-ai",
+      "url": "https://github.com/empero-org/brewery-ai",
+      "tldr": "Brewery is a guided console agent for taking users from a model idea through data preparation, LoRA or full fine-tuning, evaluation, and Hugging Face publication. It supports text and image workflows, remote GPUs, cost estimation, resumable jobs, and license-aware model cards. The product is compelling because it turns a fragmented expert workflow into a conversational but constrained pipeline with explicit guardrails.",
+      "tldr_zh": "Brewery 是一个引导式终端 agent，覆盖从模型想法、数据准备、LoRA 或 full fine-tuning，到评测和发布至 Hugging Face 的完整流程。它支持文本与图像训练、远程 GPU、成本估算、可恢复任务和许可证感知的 model card。其吸引力在于把碎片化的专家流程变成带明确 guardrail 的对话式流水线。",
+      "stars": 199,
+      "language": "Python",
+      "interest_tag": ""
+    },
+    {
+      "name": "longsurf-ai/openchart",
+      "url": "https://github.com/longsurf-ai/openchart",
+      "tldr": "OpenChart is an open-source trading workspace that combines charts, scripts, alerts, and agentic research. Agents can participate in quantitative analysis and event-driven workflows while users retain a desktop or self-hosted workbench. The project illustrates a broader shift from standalone chatbots toward agents embedded directly inside domain software.",
+      "tldr_zh": "OpenChart 是一个开源交易工作台，将图表、脚本、告警与 agentic research 结合起来。Agent 可参与量化分析和事件驱动流程，同时用户保留桌面端或自托管工作台。该项目体现了更大的产品趋势：agent 正从独立聊天框嵌入垂直领域软件本身。",
+      "stars": 138,
+      "language": "TypeScript",
+      "interest_tag": ""
+    },
+    {
+      "name": "finnvoor/PiDurableKit",
+      "url": "https://github.com/finnvoor/PiDurableKit",
+      "tldr": "PiDurableKit brings durable agents to Apple platforms through a Swift API over pi-durable running in JavaScriptCore. It commits conversations, tool calls, and state before display, allowing work to resume after iOS termination or crashes. With SQLite or JSONL persistence, subagents, atomic transactions, and SwiftUI-friendly streams, it tackles the reliability gap between agent demos and native applications.",
+      "tldr_zh": "PiDurableKit 通过在 JavaScriptCore 中运行 pi-durable，并提供 Swift API，把 durable agent 带到 Apple 平台。它在显示前持久化对话、工具调用与状态，使任务能在 iOS 杀进程或崩溃后恢复。SQLite/JSONL、subagent、原子事务与 SwiftUI stream 共同解决了 agent demo 到原生应用之间的可靠性鸿沟。",
+      "stars": 121,
+      "language": "Swift",
+      "interest_tag": ""
+    }
+  ],
+  "hackernews": [
+    {
+      "title": "Opus 5.5 agents discover two room-temperature magnetic semiconductor candidates",
+      "url": "https://www.vals.ai/blogs/room-temperature-magnetic-semiconductors",
+      "tldr": "A team of Opus 5.5 agents proposed two room-temperature antiferromagnetic semiconductor candidates for spintronics: a newly designed compound and a material first synthesized in 1999. The report publishes calculations, code, independent reruns, and caveats; one candidate may be difficult to synthesize in the required atomic ordering, so this is a computational lead rather than experimental confirmation. The story is important because it demonstrates an auditable agent workflow producing testable scientific hypotheses, not merely literature summaries.",
+      "tldr_zh": "一组 Opus 5.5 agents 为 spintronics 提出了两个室温反铁磁半导体候选：一个新设计化合物，以及一种 1999 年已合成材料。报告公开了计算、代码、独立复算与已知 caveat；其中一个候选可能难以形成所需原子排序，因此目前是计算线索而非实验确认。它的重要性在于展示了可审计的 agent 科研流程能够产出可验证假设，而不只是总结文献。",
+      "points": 491,
+      "num_comments": 340,
+      "interest_tag": ""
+    },
+    {
+      "title": "Show HN: Made an open-source Lego AI generator",
+      "url": "https://github.com/anteloc/ldraw-nova",
+      "tldr": "LDraw Nova turns a model idea into editable LDraw source, rendered views, VR assets, and a trace of the agent's build process. It combines semantic part search, iterative geometry checks, and high-end coding models, while openly documenting current cost and quality limits. The project is a strong example of an agent becoming a tool-using maker inside a constrained symbolic format rather than generating an opaque image.",
+      "tldr_zh": "LDraw Nova 将模型创意转化为可编辑的 LDraw 源码、渲染视图、VR 资产以及完整 agent 构建轨迹。它结合语义零件搜索、迭代几何检查与高端 coding model，并坦诚披露当前成本和质量限制。该项目展示了 agent 如何在受约束的符号格式中成为会用工具的制造者，而非只生成不可编辑的图片。",
+      "points": 167,
+      "num_comments": 52,
+      "interest_tag": ""
+    },
+    {
+      "title": "Show HN: Pi pod – Run your pi coding agent in sandboxes on your own server",
+      "url": "https://pipod.dev/",
+      "tldr": "Pi pod runs pi coding-agent sessions in isolated, self-hosted workstations with sandboxing and session-sharing ambitions. The open-source edition focuses on ownership and private deployment, while the hosted service is explicitly not yet available. Its appeal is less a new model than a pragmatic packaging of the operational layer teams need around coding agents.",
+      "tldr_zh": "Pi pod 在隔离、自托管的工作站中运行 pi coding-agent session，并计划提供 sandbox 与 session sharing。开源版本强调数据所有权和私有部署，而托管服务目前明确尚未上线。它的吸引力不在新模型，而在于把团队使用 coding agent 所需的运维层做成可部署产品。",
+      "points": 121,
+      "num_comments": 48,
+      "interest_tag": ""
+    },
+    {
+      "title": "South Korea says AI agents appear to have been used to hack the country's banks",
+      "url": "https://www.reuters.com/world/south-koreas-lee-says-ai-appears-have-been-used-bank-hacks-2026-10-06/",
+      "tldr": "South Korean authorities said AI agents appear to have been involved in attacks on the country's banks. The public reporting is significant because it frames autonomous tooling as an operational cybersecurity risk rather than a hypothetical capability, although the available article does not establish detailed attribution or technique. The correct takeaway is a need for stronger controls and evidence, not certainty about what the agents independently did.",
+      "tldr_zh": "韩国有关方面表示，AI agents 似乎参与了针对该国银行的攻击。该报道的重要性在于，它把 autonomous tooling 从假设能力提升为现实网络安全风险；但现有公开信息并未给出完整归因或具体技术细节。合理结论是加强控制与取证，而不是断言 agent 独立完成了哪些行为。",
+      "points": 100,
+      "num_comments": 32,
+      "interest_tag": ""
+    },
+    {
+      "title": "Show HN: AI SRE Arena, an Open Benchmark for AI SRE Agents on Kubernetes",
+      "url": "https://github.com/edgedelta/project-arena",
+      "tldr": "Project Arena is an open benchmark for AI SRE agents across 21 Kubernetes incident scenarios, with a six-scenario smoke suite for faster runs. It separates detection, root-cause analysis, blast radius, mitigation quality, and implementation readiness, and supports configurable judges plus exported investigation records. The explicit same-incident comparison is especially useful because it reduces the cohort mismatch that often makes agent benchmark claims misleading.",
+      "tldr_zh": "Project Arena 是面向 AI SRE agent 的开放基准，包含 21 个 Kubernetes 故障场景，并提供 6 场景 smoke suite。它分别评估检测、根因分析、blast radius、缓解方案质量和 implementation readiness，同时支持可配置 judge 与调查记录导出。其同场景对比尤其有价值，因为它减少了常见的 cohort mismatch，避免误导性的 agent benchmark 结论。",
+      "points": 22,
+      "num_comments": 9,
+      "interest_tag": "Benchmark"
+    }
+  ]
+}
