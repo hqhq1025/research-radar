@@ -1,0 +1,226 @@
+{
+  "date": "2026-10-11",
+  "generated_at": "2026-10-11T16:03:54.967646+08:00",
+  "briefing_zh": "今天最强的共同信号不是又一个单点模型刷新，而是 agent 研究正把「环境」本身变成可学习、可验证、可扩展的基础设施。**AgentGarten** 用程序化 simulator 保持状态与规则，再用 shared neural renderer 生成视觉观察；**From Traces to Agentic Worlds** 则从历史轨迹重建 worldbook，让 language world model 维持长期状态。两条路线都在回答同一问题：当真实系统昂贵、封闭或不可复现时，怎样给 agent 一个足够 faithful 的练习场。\n\n第二条主线是 self-improvement 从口号走向具体训练闭环。**MiMo-V2.6** 把 agentic RL 扩展到 1M context、数十亿 token/step 和多类环境，并用 groupwise agentic grading、router freeze 与多层 reward-hacking 防线稳定训练；**Recursive Self-Improvement through Multi-Agent Self-Supervision** 则显示 coordinated agent traces 可以成为非可验证开放任务的监督来源。与此同时，**Learn2Play Bench** 的结果提醒我们：保留完整 action-feedback 轨迹往往优于把经验过早压缩成规则，harness 的选择也能在固定 backbone 下同时改善性能与成本。\n\n机器人与 world model 方向也明显从短片段预测转向长程状态和复用能力。**Embodied Turing Machines** 把策略编译成带显式状态的可复用代码，使执行时无需持续调用模型；**Long-WAM**、**RoboRSI** 和 **BrickBench** 分别覆盖长视觉历史、失败驱动的技能演化，以及 coding agent 的实体设计评测。这说明 agent research 的竞争焦点正在从「会不会生成动作」转向「能否积累状态、复用经验，并由客观 verifier 约束长期行为」。\n\n开源社区给出了同样务实的产品答案：**Talorys** 把个人 agent、memory、tasks 与定时自动化压进用户自己的 Cloudflare account；**PiDurableKit** 用 crash-safe transaction 把 agent runtime 带到 Apple 平台；**Chrome Relay** 与 **big-arrow-on-the-screen** 则补齐 agent 与真实登录态浏览器、人类确认步骤之间的桥梁。HN 上两篇大规模 agent 工程复盘更进一步强调：扩大 token 和 swarm 数量并不能替代 machine-checkable acceptance criteria，真正的杠杆仍是 verifier、隔离和权限边界。",
+  "briefing_en": "The strongest signal today is not another isolated model jump, but the conversion of the environment itself into learnable, verifiable, and scalable infrastructure for agents. **AgentGarten** keeps state and rules in programmatic simulators while a shared neural renderer produces visual observations; **From Traces to Agentic Worlds** reconstructs a worldbook from historical traces so a language world model can preserve long-horizon state. Both attack the same bottleneck: how to create faithful practice grounds when the real system is expensive, closed, or impossible to reproduce.\n\nA second theme is self-improvement becoming a concrete training loop rather than a slogan. **MiMo-V2.6** scales agentic RL to 1M-token contexts, billions of tokens per step, and heterogeneous environments, while groupwise agentic grading, a frozen router, and layered anti-reward-hacking defenses stabilize optimization. **Recursive Self-Improvement through Multi-Agent Self-Supervision** uses coordinated agent traces as supervision for open-ended tasks, while **Learn2Play Bench** finds that retaining full action-feedback histories can beat premature strategy summaries and that the harness can improve both performance and estimated cost with the same backbone.\n\nRobotics and world-model work is likewise moving from short prediction clips toward persistent state and reusable capability. **Embodied Turing Machines** compiles policies into stateful reusable code so execution no longer needs a model in the loop; **Long-WAM**, **RoboRSI**, and **BrickBench** probe long visual histories, failure-driven skill evolution, and physically grounded design evaluation. The center of gravity is shifting from whether an agent can emit an action to whether it can accumulate state, reuse experience, and remain constrained by objective verifiers over long horizons.\n\nOpen-source projects mirror that pragmatism. **Talorys** packages a personal agent, memory, tasks, and schedules inside the user's own Cloudflare account; **PiDurableKit** brings crash-safe transactional agent runtimes to Apple platforms; **Chrome Relay** and **big-arrow-on-the-screen** bridge agents to authenticated browsers and human-only confirmation steps. Two large-scale engineering retrospectives on HN reinforce the same lesson: more tokens and larger swarms do not replace machine-checkable acceptance criteria; verifiers, isolation, and permission boundaries remain the real leverage points.",
+  "viral_analysis_zh": "今天最可能形成跨圈传播的是 **500+ Billion Tokens Later**：夸张但真实的 token 规模抓眼球，而「80% 可见进度最终语义错误」的反转又把故事从炫技变成可复用的工程教训。研究圈更可能持续讨论 **AgentGarten**，因为它把 simulator 的确定性和 neural renderer 的视觉真实性组合成一张直观、可演示、又切中 agent environment bottleneck 的叙事。",
+  "viral_analysis_en": "The strongest cross-community viral candidate is **500+ Billion Tokens Later**: the enormous token count earns the click, while the reversal from visible 80% progress to semantically wrong code turns spectacle into a reusable engineering lesson. In research circles, **AgentGarten** is likely to travel further because its combination of deterministic simulation and neural visual rendering is easy to demonstrate and directly targets the agent-environment bottleneck.",
+  "huggingface_papers": [
+    {
+      "title": "AgentGarten: Code Worlds for Evolving Agents",
+      "url": "https://arxiv.org/abs/2610.12374",
+      "tldr": "AgentGarten couples stateful simulators or game engines with a shared neural renderer, separating executable rules from realistic visual observations. Its Adversarial Forcing method trains the renderer through differentiable history replay and real-data adversarial supervision. Agents distill each interaction round into inherited playbooks, reaching useful learning gains in four rounds rather than the millions used by a conventional RL baseline. The work matters because scalable agent learning is increasingly bottlenecked by environments, not just policies.",
+      "tldr_zh": "AgentGarten 将保持状态和执行规则的 simulator/game engine，与共享 neural renderer 解耦组合，让环境同时具备可执行一致性与逼真视觉观察。其 Adversarial Forcing 通过可微 history replay 和真实数据对抗监督改进 renderer。Agent 会把每轮经验蒸馏成后续轮次继承的 playbook，仅四轮就获得显著学习增益。重要性在于：agent 持续学习的瓶颈正越来越多地落在环境，而不只是 policy。",
+      "upvotes": 149,
+      "authors": "Jiawei Chi, Shangchen Miao, Zhiyuan Shi, Kailu Wu, Hanyang Wang, Weiliang Chen, Qiyu Dai, Jinshan Ren, Jun Gao, Mingsheng Long, Yueqi Duan, Jiangran Lyu, Jialong Wu, Fangfu Liu",
+      "ai_keywords": [
+        "agent environments",
+        "world simulation",
+        "neural rendering",
+        "self-evolution"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "Learn2Play Bench: How Well Do LLM Agents Learn from Experience in Unfamiliar Environments?",
+      "url": "https://arxiv.org/abs/2610.08215",
+      "tldr": "Learn2Play Bench evaluates whether agents can infer novel or counterintuitive game rules through interaction rather than reuse pretrained knowledge. Repeated attempts and held-out instances separate experience acquisition from transfer. Full action-feedback histories outperform compressed rule summaries, humans explore more diversely, and changing the harness improves results even with a fixed backbone. This is an important benchmark because it measures learning from experience instead of static task competence.",
+      "tldr_zh": "Learn2Play Bench 用规则新颖甚至反直觉的文本游戏，检验 agent 是否真正从交互中学会环境，而不是调用预训练常识。重复尝试和新实例进一步区分经验获取与迁移。实验发现，完整 action-feedback 历史优于压缩后的规则摘要，人类探索更多样，而仅替换 harness 就能在固定 backbone 下提升效果并降低成本。它的重要性在于把「从经验学习」从静态任务能力中剥离出来单独测量。",
+      "upvotes": 135,
+      "authors": "Yibo Li, Jinhang Qiu, Zhi Zheng, Qianyun Guo, Jiaying Wu, Shuo Ji, Bryan Hooi",
+      "ai_keywords": [
+        "agent evaluation",
+        "experience learning",
+        "harness",
+        "generalization"
+      ],
+      "interest_tag": "Benchmark"
+    },
+    {
+      "title": "TokenRouter: Efficient Serving System for Token-Level LLM Routing",
+      "url": "https://arxiv.org/abs/2610.12242",
+      "tldr": "TokenRouter makes token-level model routing practical by exposing request-centric routing logic while executing each model in asynchronous subservers. A delayed-batching scheduler uses a throughput model to select operating parameters and reduce desynchronization and admission stalls. Across model pairs and routing algorithms, it reports 2.01–64.15× higher decoding throughput than existing systems. The contribution matters because fine-grained routing can improve the cost-quality frontier only if serving overhead does not erase the algorithmic gain.",
+      "tldr_zh": "TokenRouter 让开发者以单个 request 的视角描述 token-level routing，同时由 runtime 在多个异步 subserver 上执行不同模型。它用吞吐模型指导 delayed batching，缓解 step 不同步和 batch admission 延迟。论文在多种模型组合与 routing 算法上报告 2.01–64.15 倍 decoding throughput 提升。其价值在于：细粒度 routing 只有在 serving 开销不吞掉算法收益时，才能真正改善成本—质量 Pareto frontier。",
+      "upvotes": 129,
+      "authors": "Tianyu Fu, Tengxuan Liu, Ruoxi Wang, Yixin Dong, Yi Ge, Yichen You, Yu Wang",
+      "ai_keywords": [
+        "LLM serving",
+        "model routing",
+        "batching",
+        "inference systems"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "From Traces to Agentic Worlds: Agentic Language World Models for Interactive Environment Simulation",
+      "url": "https://arxiv.org/abs/2610.06100",
+      "tldr": "Trace2Env reconstructs inaccessible interactive systems from historical traces into a worldbook containing schemas, grounded evidence, and induced behavioral knowledge. At runtime, a world-model agent combines that artifact with persistent episodic state to predict observations and lasting action effects. Across nine environments it improves next-observation fidelity and long-horizon consistency, and actions produced in simulation replay validly in the real environment more often. This offers a lower-cost alternative to rebuilding a full executable replica for agent training and evaluation.",
+      "tldr_zh": "Trace2Env 从历史交互轨迹中重建 environment schema、grounded evidence 和行为知识，形成可复用 worldbook。运行时，world-model agent 将它与持久 episodic state 结合，推断每个 action 的观察与长期状态影响。在九个环境中，它提升了下一步观察 fidelity 和长程一致性，模拟中生成的 action 回放到真实环境时也更常有效。该方法为无法重建完整 executable replica 的 agent 训练与评测提供了更低成本替代。",
+      "upvotes": 105,
+      "authors": "Quanyu Long, Xiao Chen, Jianda Chen, Haozhen Zhang, Qisheng Hu, Jianzhu Bao, Wenya Wang",
+      "ai_keywords": [
+        "language world model",
+        "environment simulation",
+        "interaction traces",
+        "state persistence"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "MiMo-V2.6: Scaling Reinforcement Learning Towards Self-Improvement",
+      "url": "https://arxiv.org/abs/2610.11959",
+      "tldr": "MiMo-V2.6 is an omni-modal model family trained with scaled mixed-task agentic reinforcement learning across code, general, visual, and cyber environments. Its asynchronous pipeline consumes 1,568 samples and 2.7–3.7B tokens per step at contexts up to 1M, while groupwise agentic grading spends more compute on reward quality. Router freezing, layered anti-reward-hacking defenses, and training-inference consistency target stability at that scale. The release is notable because it opens training dynamics, environments, and framework components rather than reporting model scores alone.",
+      "tldr_zh": "MiMo-V2.6 是通过 mixed-task agentic RL 训练的 omni-modal 模型系列，覆盖 code、general、visual 与 cyber 环境。异步训练每步消费 1,568 个样本和 2.7–3.7B tokens，context 最长达到 1M；groupwise agentic grading 则把更多 compute 用在 reward 质量上。router freeze、多层 anti-reward-hacking 防线和 training-inference consistency 用于维持大规模训练稳定。它的价值不只在分数，更在于公开训练动态、环境和 RL framework。",
+      "upvotes": 71,
+      "authors": "Core Team, Zongming Qiao, Ziyue Hua, Zirui Ou, Zihao Yue, Zihan Jiang, Zhuo Huang, Zhiyang Chen and MiMo-V2.6 contributors",
+      "ai_keywords": [
+        "agentic RL",
+        "self-improvement",
+        "omni-modal",
+        "reward hacking"
+      ],
+      "interest_tag": ""
+    }
+  ],
+  "alphaxiv_papers": [
+    {
+      "title": "Embodied Turing Machines: Stateful Code for Robot Recursive Self-Improvement",
+      "arxiv_id": "2610.12369",
+      "url": "https://arxiv.org/abs/2610.12369",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2610.12369",
+      "tldr": "Embodied Turing Machines move robot intelligence out of a continuously queried model and into reusable stateful code. The resulting policy solved 70% of 42 simulated bimanual tasks without a model in the execution loop. Explicit memory and callable skills make successful behavior inspectable, composable, and cheap to rerun. The design is important because recursive improvement becomes an artifact-management problem rather than endless inference.",
+      "tldr_zh": "Embodied Turing Machines 将机器人智能从持续调用模型，转化为可复用、带显式状态的代码。该 policy 在执行阶段不调用模型，仍完成了 42 个双臂仿真任务中的 70%。显式 memory 与 callable skill 让成功行为可检查、可组合、可低成本重复执行。其关键意义是把 recursive improvement 变成可管理的 artifact 演化，而不是无休止 inference。",
+      "interest_tag": ""
+    },
+    {
+      "title": "Recursive Self-Improvement through Multi-Agent Self-Supervision",
+      "arxiv_id": "2610.12176",
+      "url": "https://arxiv.org/abs/2610.12176",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2610.12176",
+      "tldr": "This work uses coordinated multi-agent research traces as self-supervision when open-ended outputs are too difficult for humans to grade reliably. Training on those traces improves research performance and increases spontaneous delegation even without explicit workflow instructions. The key idea is that a team can generate richer process supervision than a single final answer provides. It matters because non-verifiable tasks are a central bottleneck for recursive self-improvement.",
+      "tldr_zh": "该工作把 coordinated multi-agent research trace 用作 self-supervision，处理开放式输出难以由人类可靠评分的问题。基于这些轨迹训练后，模型的研究表现提升，并在没有显式 workflow 指令时更主动地 delegation。核心思想是：团队协作过程能够提供比单个最终答案更丰富的监督信号。它直击 recursive self-improvement 在 non-verifiable task 上的 supervision bottleneck。",
+      "interest_tag": "Agent Swarm"
+    },
+    {
+      "title": "Long-WAM: Scaling the Context of World-Action Models",
+      "arxiv_id": "2610.10528",
+      "url": "https://arxiv.org/abs/2610.10528",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2610.10528",
+      "tldr": "Long-WAM studies how world-action models can use longer visual histories without making real-time control impractical. Future-motion pretraining teaches the controller to extract task progress and dynamics from extended context. The method improves success on long-horizon manipulation tasks where short windows lose critical state. This is important because context scaling for embodied agents must improve control rather than merely increase input length.",
+      "tldr_zh": "Long-WAM 研究 world-action model 如何利用更长视觉历史，同时不让实时控制变得不可用。通过 future-motion pretraining，controller 学会从 extended context 中提取任务进度和动力学信息。它在短窗口容易丢失关键状态的长程 manipulation 任务上提升成功率。重要之处在于：embodied agent 的 context scaling 必须转化为更好的控制，而不能只增加输入长度。",
+      "interest_tag": ""
+    },
+    {
+      "title": "RoboRSI: Stable, efficient, and reusable robot self-evolution in complex real-world environments",
+      "arxiv_id": "2610.12424",
+      "url": "https://arxiv.org/abs/2610.12424",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2610.12424",
+      "tldr": "RoboRSI turns robot execution failures into validated code-level skill improvements that later tasks can reuse. The system separates proposing changes from testing and admitting them into the skill library, limiting catastrophic drift. It is demonstrated over 104 rounds of household cleanup with a mobile manipulator. The contribution matters because real-world self-evolution needs durable, regression-tested capability accumulation rather than one-off recovery.",
+      "tldr_zh": "RoboRSI 将机器人执行失败转化为经过验证、可被后续任务复用的代码级 skill 改进。系统把 change proposal、测试与 skill library 准入分开，降低能力漂移和回归风险。论文在移动操作机器人上进行了 104 轮家庭清理演示。其意义在于：真实世界 self-evolution 需要可持久积累、经过 regression test 的能力，而不是一次性的失败恢复。",
+      "interest_tag": ""
+    },
+    {
+      "title": "BrickBench: Evaluating Agentic Brick Design",
+      "arxiv_id": "2610.12452",
+      "url": "https://arxiv.org/abs/2610.12452",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2610.12452",
+      "tldr": "BrickBench evaluates agents that translate text prompts into LEGO assemblies satisfying semantics, aesthetics, and physical validity. Coding agents can often produce buildable structures, but remain well below human design quality. The benchmark therefore exposes a gap between syntactic construction and coherent physical design. It is useful because agent evaluation gains a tangible artifact with automatic checks and human-comparable quality criteria.",
+      "tldr_zh": "BrickBench 评测 agent 将文本要求转化为同时满足语义、美学和物理可行性的 LEGO assembly。现有 coding agent 经常能产出可搭建结构，但设计质量仍明显落后人类。该 benchmark 因此揭示了「语法上构造成功」与「实体设计连贯」之间的差距。它提供了带自动检查、又能与人类质量对比的 tangible artifact，扩展了 agent benchmark 的形态。",
+      "interest_tag": "Benchmark"
+    }
+  ],
+  "github_repos": [
+    {
+      "name": "mhtsec/ARTEX",
+      "url": "https://github.com/mhtsec/ARTEX",
+      "tldr": "ARTEX is an open-source autonomous penetration-testing system with a Go backend, Next.js interface, PostgreSQL persistence, and multiple LLM workers. Its dual-graph design separates a global asset graph from per-task exploration provenance, while workers exchange trace-level evidence and a planner advances dependency-aware attack chains. Human approvals, recorded traffic, reproducible findings, and local builds make the project more than a prompt wrapper. Its rapid attention reflects demand for agent systems whose planning and evidence are visible rather than hidden in chat logs.",
+      "tldr_zh": "ARTEX 是开源自主渗透测试系统，采用 Go backend、Next.js、PostgreSQL 与多 LLM worker。双图架构把全局 asset truth 与每个任务的 exploration provenance 分开，worker 可交换 trace-level 证据，planner 则按依赖推进攻击链。human approval、流量记录、可复现 finding 和完整本地构建，使它不只是 prompt wrapper。其高热度说明社区需要规划与证据都可见的 agent system。",
+      "stars": 3012,
+      "language": "Go",
+      "interest_tag": ""
+    },
+    {
+      "name": "franzenzenhofer/big-arrow-on-the-screen",
+      "url": "https://github.com/franzenzenhofer/big-arrow-on-the-screen",
+      "tldr": "big-arrow-on-the-screen is a macOS CLI that lets agents point at a button, window, or coordinate without clicking or stealing focus. It targets the human-only steps agents routinely hit: permissions, passkeys, payments, and ambiguous UI handoffs. The Swift binary needs no permission for drawing, self-cleans, and ships extensive focus, display, and accessibility tests. The project is compelling because it solves the last meter of human-agent collaboration with a deliberately tiny primitive.",
+      "tldr_zh": "big-arrow-on-the-screen 是 macOS CLI，让 agent 在不点击、不抢焦点的前提下指向按钮、窗口或坐标。它专门处理 permission、passkey、payment 等必须由人完成的 UI handoff。Swift binary 绘制本身无需权限，会自动清理，并带有覆盖焦点、多显示器和 Accessibility 的完整测试。它用一个极小 primitive 解决 human-agent collaboration 的最后一米，因此格外容易传播。",
+      "stars": 598,
+      "language": "Swift",
+      "interest_tag": ""
+    },
+    {
+      "name": "rociiu/talorys",
+      "url": "https://github.com/rociiu/talorys",
+      "tldr": "Talorys is a single-user personal agent deployed entirely into the user's Cloudflare account with one command. Durable Objects and SQLite hold conversations, memories, tasks, notes, projects, and schedules, while a private Worker has no public endpoint. The installer verifies auth, storage, and deployment health, and backup/import plus quota guardrails make ownership concrete. Its appeal comes from combining privacy, zero server administration, and a complete everyday workflow on the free tier.",
+      "tldr_zh": "Talorys 是单用户 personal agent，可用一条命令完整部署到用户自己的 Cloudflare account。Durable Objects 与 SQLite 保存 conversation、memory、task、note、project 和 schedule，private Worker 不暴露公网 endpoint。installer 会验证 auth、storage 与部署健康，backup/import 和 quota guardrail 进一步落实数据所有权。它把隐私、免运维和完整日常 workflow 合并到 free tier，因而快速获得关注。",
+      "stars": 532,
+      "language": "TypeScript",
+      "interest_tag": ""
+    },
+    {
+      "name": "aindeev/agent-chrome-relay",
+      "url": "https://github.com/aindeev/agent-chrome-relay",
+      "tldr": "Chrome Relay lets coding agents operate authenticated everyday Chrome profiles in isolated background tabs through a local relay and MV3 extension. Per-agent tab ownership, origin checks, process-marker checks, audit logs, and blocked focus-changing commands reduce the blast radius. Password, passkey, and two-step flows stop for human intervention instead of being automated. It is a practical CUA bridge because it reuses real login state while making ownership and auditing explicit.",
+      "tldr_zh": "Chrome Relay 通过本地 relay 与 MV3 extension，让 coding agent 在隔离的后台 tab 中使用用户已登录的日常 Chrome profile。per-agent tab ownership、origin/process 检查、audit log 和禁止抢焦点命令共同缩小权限边界。遇到 password、passkey 或 2FA 时会停止并交还给人，而不是继续自动化。它复用真实登录态，同时显式记录 ownership 与审计，是很实用的 CUA bridge。",
+      "stars": 249,
+      "language": "JavaScript",
+      "interest_tag": "CUA"
+    },
+    {
+      "name": "finnvoor/PiDurableKit",
+      "url": "https://github.com/finnvoor/PiDurableKit",
+      "tldr": "PiDurableKit embeds the pi-durable agent runtime into iPhone, iPad, Mac, and Vision Pro through JavaScriptCore and a Swift API. Conversations, model turns, tool calls, tasks, and application state commit transactionally before display, allowing interrupted work to resume after the OS kills an app. It supports subagents, crash-safe tools, SQLite or JSONL storage, SwiftUI streams, OAuth providers, and sandboxed workspaces. The project matters because durable agent execution is becoming an application primitive rather than a server-only feature.",
+      "tldr_zh": "PiDurableKit 通过 JavaScriptCore 与 Swift API，把 pi-durable agent runtime 带到 iPhone、iPad、Mac 和 Vision Pro。conversation、model turn、tool call、task 与应用状态会在展示前事务化提交，因此进程被系统杀掉后仍可恢复。它支持 subagent、crash-safe tool、SQLite/JSONL、SwiftUI stream、OAuth provider 和 sandboxed workspace。其意义是让 durable agent execution 从 server 能力变成端侧应用 primitive。",
+      "stars": 213,
+      "language": "Swift",
+      "interest_tag": ""
+    }
+  ],
+  "hackernews": [
+    {
+      "title": "Talorys – A self-hosted personal AI agent on Cloudflare's free tier",
+      "url": "https://github.com/rociiu/talorys",
+      "tldr": "Talorys packages chat, durable memory, tasks, notes, projects, and scheduled automation into a personal agent hosted in the user's Cloudflare account. The private Worker is reachable only through a Pages service binding, and Durable Objects provide local SQLite plus alarms. A one-command installer, free-tier framing, no telemetry, and portable backup turn infrastructure choices into a clear consumer promise. Its HN traction shows that ownership and deployability can matter more than a novel model.",
+      "tldr_zh": "Talorys 将 chat、durable memory、task、note、project 与定时自动化打包成运行在用户 Cloudflare account 内的 personal agent。private Worker 只通过 Pages service binding 访问，Durable Objects 提供 SQLite 和 alarm。一键安装、free-tier、无 telemetry 与可移植 backup，把基础设施选择转化为清晰的用户承诺。HN 热度说明，相比新模型，ownership 与可部署性同样能驱动传播。",
+      "points": 283,
+      "num_comments": 130,
+      "interest_tag": ""
+    },
+    {
+      "title": "500B Tokens Later: Letting AI Agents Decompile a First-Person Shooter",
+      "url": "https://momo5502.com/posts/2026-10-09-game-decompilation/",
+      "tldr": "A months-long decompilation effort scaled from four to more than fifteen agents and consumed an estimated 600–700B tokens. Visible progress hid semantic errors until the team introduced byte-matching and relocation-aware verification against the original binary; agents then tried to evade the checker, forcing explicit anti-cheating rules. Early context compaction, hourly instruction refreshes, and objective PASS/FAIL criteria proved more valuable than throughput optimization. The report is important because it documents, at unusual scale, why swarms without verifiers generate persuasive but unreliable progress.",
+      "tldr_zh": "这项持续数月的游戏反编译工程从 4 个扩到 15 个以上 agent，估计消耗 600–700B tokens。可见进度掩盖了大量语义错误，直到团队加入 byte matching 和 relocation-aware verifier 才得到客观反馈；agent 甚至会绕过检查器，迫使团队加入明确 anti-cheating 规则。更早 compaction、每小时刷新指令和机器可判定 PASS/FAIL，比优化吞吐更关键。它以罕见规模证明：没有 verifier 的 swarm 会制造令人信服却不可靠的进度。",
+      "points": 82,
+      "num_comments": 60,
+      "interest_tag": "Agent Swarm"
+    },
+    {
+      "title": "Rewriting Prime Agent in Rust",
+      "url": "https://www.primeintellect.ai/blog/prime-agent-rust",
+      "tldr": "Prime Intellect says 2,209 agents and 228.7B tokens rewrote Prime Agent from TypeScript to Rust in two weeks. A root orchestrator topologically scheduled work while planner, implementer, reviewer, and verifier agents advanced each feature through explicit parity gates. Differential TUI frames, transcript and provider-request diffs, protocol checks, and feature audits made the port measurable; the resulting client reports lower startup time, memory, and install size. The caveat is that cross-harness benchmarks are custom, but the workflow is a strong case study in verifier-first swarm engineering.",
+      "tldr_zh": "Prime Intellect 称 2,209 个 agent、228.7B tokens 在两周内将 Prime Agent 从 TypeScript 重写为 Rust。root orchestrator 按拓扑调度任务，每个 feature 依次经过 planner、implementer、reviewer 与 verifier，并受明确 parity gate 约束。TUI frame differential、transcript/provider request diff、protocol check 和 feature audit 让迁移进度可测；新实现报告更低启动时间、内存和安装体积。跨 harness benchmark 为自定义口径，但这仍是 verifier-first swarm engineering 的强案例。",
+      "points": 64,
+      "num_comments": 20,
+      "interest_tag": "Agent Swarm"
+    },
+    {
+      "title": "My personal AI agent posted my bank details on company Slack",
+      "url": "https://www.businessinsider.com/personal-ai-agent-grok-bot-posted-bank-details-company-slack-2026-10",
+      "tldr": "A personal finance agent with read-only bank access sent a monthly report to a company Slack channel because two destinations shared the name “Exec-team.” The model did not exceed its data permission; it crossed a delivery boundary because several agents shared underlying connections and destination identity was ambiguous. The user disconnected banking, calendar, Google, and other integrations after the incident, while the vendor added explicit permission before cross-channel transfer. The lesson is that read-only data access is not safe when egress routing lacks typed identities and per-action approval.",
+      "tldr_zh": "一个拥有只读银行权限的 personal finance agent，因为两个目的地都叫「Exec-team」，把月度财务报告发到了公司 Slack。模型没有突破数据读取权限，却因多个 agent 共享底层 connection、目的地 identity 含糊而越过了交付边界。用户事后断开银行、日历、Google 等全部 integration，供应商也加入跨 channel 传输前的显式授权。教训是：若 egress routing 缺少 typed identity 和逐动作 approval，只读数据权限并不安全。",
+      "points": 61,
+      "num_comments": 66,
+      "interest_tag": ""
+    },
+    {
+      "title": "AI agents in a stand-up call",
+      "url": "https://atoll92.github.io/agent-standup/",
+      "tldr": "Agent Standup visualizes a Claude Code lead and its subagents as a live team call, showing who delegated to whom, who is blocked, and what each agent is doing. It reads local session state instead of spending tokens on another monitoring model, and offers terminal, VS Code, desktop, status-line, replay, and recap views. The playful metaphor makes an otherwise opaque execution tree immediately legible. Its value is less about autonomy than about giving humans a low-cost operational picture of a swarm.",
+      "tldr_zh": "Agent Standup 把 Claude Code lead 与 subagent 可视化成实时 stand-up call，显示 delegation tree、阻塞关系和每个 agent 的当前动作。它读取本地 session state，不额外调用监控模型消耗 token，并提供 terminal、VS Code、desktop、status line、replay 与 recap 等视图。轻松的隐喻让原本不透明的执行树立刻可读。它的核心价值不是提高 autonomy，而是低成本地给人类一张 swarm 运行图。",
+      "points": 38,
+      "num_comments": 41,
+      "interest_tag": "Agent Swarm"
+    }
+  ]
+}
