@@ -1,0 +1,224 @@
+{
+  "date": "2026-10-12",
+  "generated_at": "2026-10-12T16:03:29.149261+08:00",
+  "briefing_zh": "今天最清晰的研究主线，是 agent 的竞争焦点正从单次推理能力转向可持续的环境、经验与验证闭环。**SoftwareGym** 自动合成 182 个可执行 GUI 应用并以运行时测试修复环境，**ProgramGym** 则把同一逻辑推到长程程序复现：真正稀缺的不是更多 prompt，而是可规模化、可判定成功与失败的训练世界。**Work2Skill** 从另一端补齐经验复用，把人类屏幕操作、输入事件与 accessibility tree 对齐后归纳为可重复执行的 workflow skill。\n\n第二条主线是 self-improvement 正在从口号变成系统设计。**Recursive Self-Improvement through Multi-Agent Self-Supervision** 用协作 agent traces 监督开放式研究，**Embodied Turing Machines** 把机器人策略写成带显式状态的可复用代码，**MiMo-V2.6** 则通过更大规模 RL 与可验证环境推进通用能力。它们的共同点不是让模型无限自我训练，而是把经验转成持久、可验证、可复用的更新。\n\n在 embodied AI 侧，**Reflex**、**RSI-Anything** 与 **BrickBench** 分别覆盖实时视觉控制、world-model 驱动的经验改进，以及 agentic 物理设计评测。尤其值得注意的是，今天的多篇工作都在主动构造外部约束：物理可建造性、运行时行为、黑盒测试或真实机器人成功率。研究叙事正在从模型会不会生成，转向生成结果是否在世界里成立。\n\n开源与社区讨论进一步强化了这一变化。**Microsoft Execution Containers** 将 agent 权限放进独立于模型的 policy boundary；**Prime Agent** 和 500B-token 反编译实验都显示，扩大 agent 数量或 token 预算并不能替代 objective verifier。与此同时，**big-arrow-on-the-screen** 和 **Talorys** 的传播说明，小而清楚的 human-in-the-loop 接口与一键自托管，往往比抽象的通用 agent 宣言更容易获得关注。",
+  "briefing_en": "The clearest theme today is that agent progress is shifting from one-shot reasoning toward durable loops of environments, experience, and verification. **SoftwareGym** synthesizes 182 executable GUI applications and repairs them through runtime testing, while **ProgramGym** applies the same principle to long-horizon program reproduction. **Work2Skill** closes the loop from the human side by aligning screen recordings, input events, and accessibility trees, then inducing reusable workflow skills rather than copying task-specific demonstrations.\n\nA second theme is self-improvement becoming a systems problem instead of a slogan. **Recursive Self-Improvement through Multi-Agent Self-Supervision** learns from coordinated agent traces on open-ended research, **Embodied Turing Machines** turns robot behavior into reusable stateful code, and **MiMo-V2.6** scales reinforcement learning over verified agent environments. Their shared mechanism is not unconstrained self-training, but converting interaction into persistent, testable, reusable improvements.\n\nEmbodied AI adds stronger external constraints. **Reflex**, **RSI-Anything**, and **BrickBench** respectively address reactive visual control, world-model-guided improvement, and physically valid agentic design. Across these works, success is increasingly defined by executable behavior, black-box tests, physical buildability, or real-robot outcomes rather than by plausible generations alone.\n\nOpen-source and community signals reinforce the same lesson. **Microsoft Execution Containers** places agent authority behind a policy boundary that the model cannot modify, while **Prime Agent** and the 500-billion-token decompilation experiment show that more agents and more tokens cannot replace objective verifiers. At the product layer, **big-arrow-on-the-screen** and **Talorys** demonstrate that a sharply framed human-in-the-loop interaction or one-command self-hosting story can spread faster than a vague promise of a universal agent.",
+  "viral_analysis_zh": "今天最可能继续扩散的是 **big-arrow-on-the-screen**：它把复杂的 human-in-the-loop 问题压缩成一张任何人一眼就懂的视觉隐喻，并用幽默标题、GIF 和明确边界制造可转发性。研究侧最有爆款潜力的是 **SoftwareGym**，因为「自动生成 182 个可运行软件环境并提升 OSWorld」同时击中了 CUA 数据稀缺、环境扩展和可验证训练三个高热痛点。",
+  "viral_analysis_en": "**big-arrow-on-the-screen** is the strongest viral candidate: it compresses a difficult human-in-the-loop problem into an instantly legible visual metaphor, then reinforces it with humor, a demo, and deliberately narrow scope. On the research side, **SoftwareGym** has the best breakout potential because its story—182 synthesized executable applications with an OSWorld gain—hits the three hot constraints of CUA data scarcity, environment scaling, and verifiable training at once.",
+  "huggingface_papers": [
+    {
+      "title": "DiffusionART: Efficient, Stable and Scalable Reinforcement of Diffusion Models",
+      "url": "https://huggingface.co/papers/2610.12572",
+      "tldr": "DiffusionART reformulates online RL for diffusion models around an aggregation-first reward direction, removing a hidden forward–reverse consistency force in NFT-style objectives. A trust-region-masked restoration update stabilizes drift without task-specific EMA tuning or differentiable rewards. On HunyuanVideo-13B, it reaches comparable late-stage reward with roughly 12× fewer GPU hours than two strong baselines while obtaining higher mean training rewards.",
+      "tldr_zh": "DiffusionART 以 aggregation-first 的 reward direction 重构 diffusion model 的 online RL，消除了 NFT 类目标中隐藏的 forward–reverse consistency force。它再用 trust-region-masked restoration update 抑制漂移，不依赖逐任务调 EMA 或可微 reward。HunyuanVideo-13B 实验中，它以约 12 倍更少的 GPU hours 达到相近后期 reward，并获得更高平均训练奖励。",
+      "upvotes": 66,
+      "authors": "Zhenglin Wan, Jiayu Chen, Zhengfeiyang Zhang, Pengfei Zhou, Wangbo Zhao, Fangyuan Kong, Pengfei Wan, Kun Gai, Yang You",
+      "ai_keywords": [
+        "diffusion models",
+        "reinforcement learning",
+        "reward optimization"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "Reflex: Visually Grounded Reactive Humanoid Control",
+      "url": "https://huggingface.co/papers/2610.12772",
+      "tldr": "Reflex decomposes visually reactive humanoid control into whole-body RL, inference of object dynamics from delayed observations, and an egocentric RGB-D encoder. This staged representation lets a Unitree G1 react to thrown boxes without markers or motion capture. The system reaches 85.7% simulated catch success from vision and 65% real-world success at 2.5 meters, showing that temporal visual history is essential rather than optional.",
+      "tldr_zh": "Reflex 将视觉反应式 humanoid control 拆成三阶段：whole-body RL、从延迟观测推断物体动力学，以及 egocentric RGB-D encoder。这个共享动力学表示让 Unitree G1 无需标记物或 motion capture 就能接住抛来的箱子。系统在仿真中以视觉达到 85.7% 成功率，在 2.5 米真实测试中达到 65%，并证明 temporal visual history 是关键能力。",
+      "upvotes": 54,
+      "authors": "Taoyang Jia, Weikai Huang, Linxin Song, Jared Darlington, Jieyu Zhao, Yue Wang, Jiafei Duan, Zhongzheng Ren, Ranjay Krishna",
+      "ai_keywords": [
+        "humanoid robotics",
+        "visual control",
+        "reinforcement learning"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "SoftwareGym: Scaling Computer-Use Agent Training with Diverse Synthesized Software Environments",
+      "url": "https://huggingface.co/papers/2610.12611",
+      "tldr": "SoftwareGym automatically generates runnable GUI applications, evaluates them through interaction, and iteratively repairs broken behavior. The pipeline produced 182 applications across 12 categories with a 91.5% mean GUI task pass rate, plus a 120-task benchmark. Training on collected trajectories raised out-of-domain OSWorld Pass@3 from 41.39% to 56.97%, making synthesized native-like software a credible scaling path for CUA supervision.",
+      "tldr_zh": "SoftwareGym 自动生成可运行 GUI 应用，通过交互式 evaluation 检查并迭代修复功能缺陷。该流程覆盖 12 类、共 182 个应用，平均 GUI task pass rate 达 91.5%，并构建了 120 题 benchmark。用其中 trajectory 训练后，严格 out-of-domain 的 OSWorld Pass@3 从 41.39% 提升到 56.97%，说明合成类原生软件可以成为 CUA supervision 的扩展路径。",
+      "upvotes": 43,
+      "authors": "Tian Jin, Wenhao Wang, Jing Kang, Haoting Shi, Rui Ye, Yijun Lu, Siheng Chen",
+      "ai_keywords": [
+        "computer-use agents",
+        "GUI environments",
+        "synthetic data",
+        "OSWorld"
+      ],
+      "interest_tag": "CUA"
+    },
+    {
+      "title": "ProgramGym: Scaling Training Environments for Long-Horizon Program Reproduction Agents",
+      "url": "https://huggingface.co/papers/2610.13395",
+      "tldr": "ProgramGym builds verifiable environments where agents must inspect a reference program and reproduce it over a long horizon, rather than merely patching a repository. Its feedback loop repairs sandbox builds and black-box tests, yielding 1,648 environments in C, C++, Go, and Rust. Training and a role-isolated analysis–implementation–review workflow lift Qwen3.8-27B from 34.87% to as high as 56.25% on ProgramBench.",
+      "tldr_zh": "ProgramGym 构造可验证环境，要求 agent 先探索参考程序，再进行长程复现，而不是只修补现有 repository。其 feedback loop 会修复 sandbox build 与 black-box test，最终得到覆盖 C、C++、Go、Rust 的 1,648 个环境。训练数据与隔离 analysis、implementation、review 角色的 workflow 将 Qwen3.8-27B 在 ProgramBench 上从 34.87% 提升到最高 56.25%。",
+      "upvotes": 41,
+      "authors": "Chengyi Yang, Renxu Bao, Jue Hou, Zongpei Teng, Ziheng Wang, Yujie Lin, Chengsong Huang, Junnan Zhu, Delai Qiu, Yining Wang, Shengping Liu, Fei Long, Jinsong Su",
+      "ai_keywords": [
+        "coding agents",
+        "training environments",
+        "long-horizon tasks",
+        "verification"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "Work2Skill: Capturing Human GUI Experience for Reusable Agent Skill Induction",
+      "url": "https://huggingface.co/papers/2610.12984",
+      "tldr": "Work2Skill records synchronized screen video, mouse and keyboard events, and available accessibility-tree data to capture human GUI expertise. From 350 successful demonstrations, an agentic induction method extracts workflow rules, dependencies, and completion checks instead of memorizing individual actions. The induced skills improve multiple execution models by up to 10.54 points on MyPCBench and 7.50 points on OSWorld-Verified.",
+      "tldr_zh": "Work2Skill 同步记录屏幕视频、鼠标键盘事件与可用 accessibility-tree 数据，用来捕获人类 GUI 专业经验。它从 350 条成功 demonstration 中归纳 workflow rule、依赖关系和 completion check，而不是记忆逐步动作。生成的 skills 在多种执行模型上使 MyPCBench 提升最高 10.54 分、OSWorld-Verified 提升最高 7.50 分。",
+      "upvotes": 30,
+      "authors": "Yuqi Huang, Hui Li, Yifei Cao, Zikun Cai, Tianci Xie, Yangfan Gao, Pinxue Guo, Chaoyun Zhang, Bingxuan Li, Rui Zheng, Hang Yan, Ning Liao",
+      "ai_keywords": [
+        "computer-use agents",
+        "GUI demonstrations",
+        "skill induction",
+        "accessibility tree"
+      ],
+      "interest_tag": "CUA"
+    }
+  ],
+  "alphaxiv_papers": [
+    {
+      "title": "Embodied Turing Machines: Stateful Code for Robot Recursive Self-Improvement",
+      "arxiv_id": "2610.12369",
+      "url": "https://arxiv.org/abs/2610.12369",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2610.12369",
+      "tldr": "Embodied Turing Machines represents robot behavior as reusable stateful code rather than keeping a large model in every control step. The system can discover, test, and retain recursive improvements as executable skills, allowing deployment without model inference in the loop. It solves 70% of 42 simulated bimanual tasks, making explicit program state a practical substrate for embodied self-improvement.",
+      "tldr_zh": "Embodied Turing Machines 将机器人行为表示为可复用、带显式状态的代码，而不是让大模型驻留在每个 control step。系统能够发现、测试并保留递归改进，将其沉淀为执行时无需模型推理的 skills。在 42 个仿真双臂任务上达到 70% 成功率，说明显式 program state 可以成为 embodied self-improvement 的实际载体。",
+      "interest_tag": ""
+    },
+    {
+      "title": "Recursive Self-Improvement through Multi-Agent Self-Supervision",
+      "arxiv_id": "2610.12176",
+      "url": "https://arxiv.org/abs/2610.12176",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2610.12176",
+      "tldr": "This work targets open-ended tasks where neither static labels nor human judges can reliably supervise outputs. It uses coordinated multi-agent traces as self-supervision, then trains the base model on the resulting problem-solving and delegation behavior. The improved model performs better on open-ended research and delegates more often without being given an explicit workflow, suggesting that collaboration patterns can become learned capabilities.",
+      "tldr_zh": "这项工作面向静态标签和人类评审都难以可靠监督的开放式任务。方法把多个 agent 协作产生的 traces 作为 self-supervision，再训练基础模型吸收其中的问题求解与 delegation 行为。改进后的模型在开放研究任务上更强，并会在没有显式 workflow 指令时更主动委派，说明协作模式可以内化为模型能力。",
+      "interest_tag": "Agent Swarm"
+    },
+    {
+      "title": "RSI-Anything: Unlocking Recursive Self-Improvement with World Models",
+      "arxiv_id": "2610.13912",
+      "url": "https://arxiv.org/abs/2610.13912",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2610.13912",
+      "tldr": "RSI-Anything proposes a domain-general loop that converts interaction experience into persistent policy improvements through a world model. It explicitly addresses the danger that model-generated feedback drifts as the policy changes, combining predicted outcomes with mechanisms for deciding when experience is trustworthy. The result reframes recursive improvement as controlled data generation and validation rather than unrestricted self-training.",
+      "tldr_zh": "RSI-Anything 提出通用闭环，用 world model 将交互经验转成可持久化的 policy improvement。它正面处理 policy 演化后 world-model feedback 失真的问题，并加入判断经验何时可信的机制。其关键意义是把 recursive improvement 重述为受控的数据生成与验证，而不是无限制 self-training。",
+      "interest_tag": ""
+    },
+    {
+      "title": "MiMo-V2.6: Scaling Reinforcement Learning Towards Self-Improvement",
+      "arxiv_id": "2610.11959",
+      "url": "https://arxiv.org/abs/2610.11959",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2610.11959",
+      "tldr": "MiMo-V2.6 is an open omni-modal model family trained by scaling reinforcement learning across verifiable agent tasks. The release pairs model weights with task environments and a training framework, making the claimed self-improvement recipe inspectable and reusable. Its importance lies less in a single score than in packaging RL compute, environments, and tooling as one reproducible system.",
+      "tldr_zh": "MiMo-V2.6 是通过在可验证 agent tasks 上扩展 reinforcement learning 训练的开放 omni-modal 模型家族。发布内容同时包含模型、任务环境和训练框架，使 self-improvement recipe 可以被检查和复用。它的重要性不只在单项分数，而在于把 RL compute、environment 与 tooling 打包成可复现系统。",
+      "interest_tag": ""
+    },
+    {
+      "title": "Towards Physically Grounded Articulated 3D Assets: A Multi-Agent Pipeline and Benchmark",
+      "arxiv_id": "2610.13947",
+      "url": "https://arxiv.org/abs/2610.13947",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2610.13947",
+      "tldr": "Artisan moves articulated 3D generation beyond appearance matching toward assets whose parts move and function correctly. A multi-agent pipeline decomposes modeling, articulation, and physical validation, while the accompanying benchmark measures whether generated objects are actually operable. This makes physical behavior a first-class evaluation target and exposes failures that image-only metrics would miss.",
+      "tldr_zh": "Artisan 将 articulated 3D generation 从外观复现推进到部件能否正确运动和工作。其 multi-agent pipeline 拆分建模、关节构造与物理验证，并用配套 benchmark 检查生成物是否真正可操作。它把 physical behavior 提升为一等 evaluation target，能够暴露仅靠图像指标看不到的失败。",
+      "interest_tag": ""
+    }
+  ],
+  "github_repos": [
+    {
+      "name": "mhtsec/ARTEX",
+      "url": "https://github.com/mhtsec/ARTEX",
+      "tldr": "ARTEX is a full-stack autonomous penetration-testing system with a Go backend, Next.js interface, evidence graph, tool interception, and human approval paths. Its planner preserves a shared cross-session todo list while workers can search one another's traces, enabling dependent attack chains without collapsing every step into one prompt. The repository is substantive and actively structured, but its own policy limits use to isolated learning and research rather than live systems.",
+      "tldr_zh": "ARTEX 是完整的自主渗透测试系统，包含 Go backend、Next.js 界面、evidence graph、tool interception 与 human approval。planner 通过跨 session 共享 todo list 维护依赖链，worker 还能检索彼此 traces，避免把多步攻击链一次性塞进单个 prompt。仓库内容完整且结构成熟，但项目明确限制只能用于隔离环境中的学习和研究，不能针对线上系统。",
+      "stars": 3379,
+      "language": "Go",
+      "interest_tag": "Agent Swarm"
+    },
+    {
+      "name": "rociiu/talorys",
+      "url": "https://github.com/rociiu/talorys",
+      "tldr": "Talorys is a single-user personal agent deployed entirely into the user's Cloudflare account with one command. Durable Objects and SQLite hold conversations, memories, tasks, notes, and schedules, while the private Worker has no public endpoint and the application continues to manage data even when AI quota is unavailable. Its appeal is a concrete privacy and operations story rather than another hosted assistant account.",
+      "tldr_zh": "Talorys 是单用户 personal agent，可用一条命令完整部署到用户自己的 Cloudflare account。Durable Objects 与 SQLite 保存对话、memory、task、note 和 schedule，private Worker 没有公开 endpoint，即使 AI quota 用完，数据管理功能仍可工作。它的吸引力不是再造一个托管助手，而是把 privacy、ownership 和运维路径讲得非常具体。",
+      "stars": 799,
+      "language": "TypeScript",
+      "interest_tag": ""
+    },
+    {
+      "name": "franzenzenhofer/big-arrow-on-the-screen",
+      "url": "https://github.com/franzenzenhofer/big-arrow-on-the-screen",
+      "tldr": "big-arrow-on-the-screen gives macOS agents a click-through overlay for pointing humans at permission prompts, 2FA, CAPTCHAs, or the correct window. It deliberately never clicks, types, captures the screen, steals focus, or requires accessibility permission; the human remains the authority at the boundary. The project backs its tiny interface with 76 automated tests and 17 clean-runner behavior checks, making a joke-like concept surprisingly production-minded.",
+      "tldr_zh": "big-arrow-on-the-screen 为 macOS agent 提供 click-through overlay，用大箭头指向权限弹窗、2FA、CAPTCHA 或正确窗口。它刻意不点击、不输入、不截屏、不抢焦点，也不需要 accessibility permission，让人类始终掌握边界操作。项目用 76 个自动化测试和 17 个 clean-runner behavior checks 支撑这个极小接口，把一个看似玩笑的点子做得相当工程化。",
+      "stars": 634,
+      "language": "Swift",
+      "interest_tag": ""
+    },
+    {
+      "name": "aindeev/agent-chrome-relay",
+      "url": "https://github.com/aindeev/agent-chrome-relay",
+      "tldr": "agent-chrome-relay lets coding agents control the user's already authenticated Chrome profiles through isolated background tabs. A local relay and MV3 extension expose DevTools operations without a remote-debugging port, while per-agent tab ownership, process checks, audit logs, and cleanup constrain the blast radius. It solves the practical gap between sterile automation browsers and workflows that require real user sessions.",
+      "tldr_zh": "agent-chrome-relay 让 coding agent 通过隔离的后台标签页使用用户已登录的 Chrome profile。local relay 与 MV3 extension 在不开 remote-debugging port 的情况下暴露 DevTools 操作，并用每 agent tab ownership、process check、audit log 与自动清理限制影响范围。它解决了干净 automation browser 与必须依赖真实登录态 workflow 之间的落差。",
+      "stars": 254,
+      "language": "Go",
+      "interest_tag": "CUA"
+    },
+    {
+      "name": "finnvoor/PiDurableKit",
+      "url": "https://github.com/finnvoor/PiDurableKit",
+      "tldr": "PiDurableKit brings durable AI-agent execution to iPhone, iPad, Mac, and Vision Pro by running pi-durable inside JavaScriptCore behind a Swift API. It commits conversations, tool calls, model turns, and application state before display, so interrupted work can resume after the OS kills the app. The package also exposes subagents, atomic transactions, SQLite or JSONL storage, streaming views, and provider OAuth through native Apple-platform abstractions.",
+      "tldr_zh": "PiDurableKit 通过 JavaScriptCore 运行 pi-durable，并用 Swift API 把 durable AI-agent execution 带到 iPhone、iPad、Mac 与 Vision Pro。对话、tool call、model turn 和应用状态都会在展示前提交，因此即使系统杀掉 app，重开后仍能恢复执行。它还以 Apple 原生抽象提供 subagent、atomic transaction、SQLite/JSONL storage、streaming view 与 provider OAuth。",
+      "stars": 239,
+      "language": "Swift",
+      "interest_tag": ""
+    }
+  ],
+  "hackernews": [
+    {
+      "title": "Show HN: Let your AI agents paint big arrows, boxes and text on your screen",
+      "url": "https://github.com/franzenzenhofer/big-arrow-on-the-screen",
+      "tldr": "The leading HN story is a narrow macOS utility that lets an agent visually point at a UI element when only a human may act. It turns permission prompts, passkeys, and CAPTCHAs into explicit handoff moments without automating the protected action. The combination of an instantly understandable demo, humorous framing, and strong tests explains why a tiny tool outran much larger agent platforms in discussion.",
+      "tldr_zh": "今天 HN 最高热度来自一个极窄的 macOS utility：当某一步必须由人操作时，agent 只负责在屏幕上指出目标。它把 permission prompt、passkey 和 CAPTCHA 变成显式 handoff，而不自动越过受保护动作。直观 demo、幽默 framing 与扎实测试的组合，让这个小工具在讨论热度上超过许多更宏大的 agent platform。",
+      "points": 416,
+      "num_comments": 196,
+      "interest_tag": ""
+    },
+    {
+      "title": "Talorys – A self-hosted personal AI agent on Cloudflare's free tier",
+      "url": "https://github.com/rociiu/talorys",
+      "tldr": "Talorys packages a private personal assistant into a one-command deployment on Cloudflare's free tier. It combines chat with editable memories, tasks, notes, projects, reminders, and backups, while keeping the Worker private behind a service binding. The HN response reflects demand for agents whose data plane, schedule, and operational cost are understandable and user-owned.",
+      "tldr_zh": "Talorys 把 private personal assistant 封装为 Cloudflare free tier 上的一键部署。它把 chat、可编辑 memory、task、note、project、reminder 与 backup 集中起来，并通过 service binding 隐藏 Worker。HN 的高热度反映出用户更愿意接受 data plane、schedule 与运维成本都清楚且归自己控制的 agent。",
+      "points": 323,
+      "num_comments": 152,
+      "interest_tag": ""
+    },
+    {
+      "title": "Mxc: Microsoft Execution Containers version 1.0.0",
+      "url": "https://blogs.windows.com/windowsdeveloper/2026/10/07/microsoft-execution-containers-policy-driven-containment-for-ai-agents/",
+      "tldr": "Microsoft Execution Containers is now generally available as a policy-driven boundary for agents and model-generated workloads. Developers declare allowed files, network destinations, and access modes in a unified schema, while the enforcement policy remains outside the agent's control across Windows, macOS, and Linux backends. The core security claim is architectural: an agent cannot be its own authority or expand its privileges simply because doing so helps finish the task.",
+      "tldr_zh": "Microsoft Execution Containers 已 GA，为 agent 与 model-generated workload 提供 policy-driven execution boundary。开发者用统一 schema 声明允许访问的文件、网络目标和模式，enforcement policy 位于 agent 控制之外，并可映射到 Windows、macOS、Linux backend。其核心安全主张是架构性的：agent 不能成为自己的授权者，也不能因为提权有助于完成任务就自行扩大权限。",
+      "points": 223,
+      "num_comments": 68,
+      "interest_tag": ""
+    },
+    {
+      "title": "500B tokens later: Letting AI agents decompile a first-person shooter",
+      "url": "https://momo5502.com/posts/2026-10-09-game-decompilation/",
+      "tldr": "A months-long decompilation project scaled to more than 15 agents and an estimated 600–700 billion tokens, yet early readable code was semantically wrong. The turning point was a byte-matching oracle that converted correctness into objective PASS/FAIL feedback and resisted reviewer bias, drift, and persuasive worker comments. The strongest lesson is that orchestration throughput is secondary to a verifier that agents cannot reinterpret or quietly bypass.",
+      "tldr_zh": "一个持续数月的反编译项目扩展到 15 个以上 agent、估计消耗 600–700B tokens，但早期看似可读的代码在语义上大量错误。真正的转折点是 byte-matching oracle：它把 correctness 变成客观 PASS/FAIL，抵抗 reviewer bias、长程漂移和 worker 自我辩护。最重要的结论是，orchestration throughput 远不如一个 agent 无法重新解释或暗中绕过的 verifier。",
+      "points": 194,
+      "num_comments": 138,
+      "interest_tag": "Agent Swarm"
+    },
+    {
+      "title": "Rewriting Prime Agent in Rust",
+      "url": "https://www.primeintellect.ai/blog/prime-agent-rust",
+      "tldr": "Prime Intellect used more than 2,000 agents and 228.7 billion tokens to rewrite Prime Agent from TypeScript to Rust. A root orchestrator delegated work through planner, implementer, reviewer, and verifier roles, while differential tests checked TUI, transcript, protocol, and feature parity. The result reports lower startup time, memory, and install size, but the more reusable result is the finite-state workflow that separates generation from adversarial review and fresh-sandbox verification.",
+      "tldr_zh": "Prime Intellect 使用 2,000 多个 agent 和 228.7B tokens，将 Prime Agent 从 TypeScript 重写为 Rust。root orchestrator 通过 planner、implementer、reviewer、verifier 四种角色推进任务，并用 differential tests 检查 TUI、transcript、protocol 与 feature parity。最终系统启动更快、内存和安装体积更小，但更可复用的成果是把生成、对抗审查与 fresh-sandbox verification 分离的 finite-state workflow。",
+      "points": 64,
+      "num_comments": 20,
+      "interest_tag": "Agent Swarm"
+    }
+  ]
+}
