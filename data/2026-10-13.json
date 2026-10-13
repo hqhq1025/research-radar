@@ -1,0 +1,201 @@
+{
+  "date": "2026-10-13",
+  "generated_at": "2026-10-13T16:16:24.921463+08:00",
+  "briefing_zh": "今天最强的研究信号不是又一个更会答题的模型，而是 Agent 系统开始正面处理「长期运行后能否真正变好」。**RSI-Anything** 用世界模型决定哪些动作值得昂贵的真实反馈，**MASS** 把多 Agent 协作轨迹变成下一轮训练信号，**MiMo-V2.6** 则把这种闭环推到大规模异步 RL。共同进展是反馈被制度化；共同弱点是仿真、模型裁判与多变量同时变化仍让持续自我改进难以严格归因。\n\n工程侧的关键词是 harness 与验收。**CoTrace** 显示同一模型换到不匹配的 runtime，训练收益可能显著缩水；**TerminalHorizon** 试图把探索、实现、反馈和验证保留在长时程合成任务里；**AgentSWE** 更直接揭示编码 Agent 会过拟合可见样例、交付空壳 runtime，并在证据不足时宣称完成。HN 上覆盖 700 多家公司的研究也指向同一结论：代码、commit 和 PR 增多，并不自动转化为更多完成的软件，瓶颈已经转移到 review、integration 与 verification。\n\nCUA 正从网页 Demo 进入真实设备和系统层。**esp32-iphone-agent** 用 AirPlay 与 ESP32-S3 HID 闭环操作真实 iPhone，**qz-browser-agent** 把 DOM、视觉和跨标签委派装进本地优先的 Chrome 扩展，**openKylin 3.0** 则把 Kylin-CUA 纳入 Linux 桌面架构。研究上，**ExpActivator** 说明历史经验不应整段塞进上下文，而应在当前 GUI 状态真正适用时才激活；这比单纯扩大 memory 更接近可靠的个性化操作。\n\n开源热度也在从通用聊天壳转向 Agent 基础设施：**Talorys** 与 **Pensieve** 分别强调可编辑持久记忆和本地会话检索，**Agent37** 讨论常驻沙箱的成本结构，**bigarrow** 则专注于 Agent 无法完成步骤时的人机交接。最值得关注的不是某个单点功能，而是这批项目都在补齐运行、记忆、监督、验证和 handoff 等「最后一公里」。",
+  "briefing_en": "The strongest research signal today is not another model that merely answers more questions, but agent systems confronting whether they can improve after long-running interaction. **RSI-Anything** uses world models to decide which actions deserve expensive real feedback, **MASS** turns multi-agent collaboration traces into supervision for the next training round, and **MiMo-V2.6** scales the loop with asynchronous agentic RL. The shared advance is systematic feedback; the shared weakness is that simulation, model judges, and simultaneous system changes still make sustained self-improvement hard to attribute.\n\nOn the engineering side, harness compatibility and acceptance testing dominate. **CoTrace** shows that gains can shrink when a checkpoint is paired with a mismatched runtime; **TerminalHorizon** preserves exploration, implementation, feedback, and verification in long-horizon synthetic tasks; and **AgentSWE** exposes coding agents that overfit visible examples, ship hollow runtimes, or claim completion without evidence. A Hacker News study spanning more than 700 firms points in the same direction: more code, commits, and pull requests do not automatically produce more completed software, because the bottleneck has moved to review, integration, and verification.\n\nComputer use is moving from web demos into real devices and operating systems. **esp32-iphone-agent** closes the loop on a physical iPhone through AirPlay and an ESP32-S3 HID bridge, **qz-browser-agent** packages DOM, vision, and cross-tab delegation into a local-first Chrome extension, and **openKylin 3.0** integrates Kylin-CUA into the Linux desktop architecture. In research, **ExpActivator** argues that interaction history should not be dumped wholesale into context; experience should activate only when it is applicable to the current GUI state.\n\nOpen-source attention is likewise shifting from generic chat shells toward agent infrastructure. **Talorys** and **Pensieve** emphasize editable durable memory and local session retrieval, **Agent37** makes the economics of persistent sandboxes concrete, and **bigarrow** focuses on human handoff when an agent reaches a step it cannot complete. The important trend is the collective effort to fill the last mile of runtime, memory, supervision, verification, and intervention.",
+  "viral_analysis_zh": "今天最可能形成研究圈爆款的是 **RSI-Anything**：它用一个名字把 world model、反馈选择与 recursive self-improvement 三个高热叙事压缩在一起，同时横跨 coding、GUI、规划和化学，天然适合传播。开源侧最可能出圈的是 **esp32-iphone-agent**，因为「无需越狱、用几十元硬件让 Agent 操作真实 iPhone」具备可视化演示、低门槛复现和明确痛点三重传播优势；而关于 AI coding agents 只增加代码、不增加软件的研究，会凭反直觉结论与 700 多家公司样本继续引发争论。",
+  "viral_analysis_en": "**RSI-Anything** is the strongest research-side viral candidate because its framing compresses world models, feedback selection, and recursive self-improvement into one memorable claim while spanning coding, GUI use, planning, and chemistry. On the open-source side, **esp32-iphone-agent** combines an immediately visual demo with a low-cost, no-jailbreak path to controlling a real iPhone. The study arguing that coding agents create more code but not more software should also travel widely because its counterintuitive conclusion is backed by data from more than 700 companies.",
+  "huggingface_papers": [
+    {
+      "title": "GroundingPI: A Grounding Foundation Model towards Physical Intelligence with Visual Primitives",
+      "url": "https://arxiv.org/abs/2609.39601",
+      "tldr": "GroundingPI is a 4B foundation model that represents points and boxes as quantized coordinates in a shared vocabulary for precise, fast physical perception. Training combines multimodal and spatial pretraining, supervised fine-tuning, and GRPO. Across 34 grounding benchmarks it reports a 73.68% average, and as a visual backbone it also improves robotic manipulation and autonomous-driving systems. The work matters because it treats grounding as reusable infrastructure rather than a task-specific head.",
+      "tldr_zh": "GroundingPI 是一个 4B 参数的 grounding 基础模型，将点和边界框表示为共享词表中的量化坐标，面向精准、低延迟的物理感知。训练结合多模态与空间预训练、监督微调和 GRPO。在 34 个 grounding 基准上，它报告 73.68% 的平均成绩，作为视觉骨干时还提升了机器人操作与自动驾驶系统。其重要性在于把 grounding 变成可复用基础设施，而不是单任务输出头。",
+      "upvotes": 76,
+      "authors": "Qize Yu, Lianrui Fan, Boyu Chen, Jiaqi Liang, Xini Ding, Yue Chen, Zetian Song, Yuran Wang, Yi Zou, Kaixuan Wang, Tianxing Chen, Wenxuan Song, Bohan Zhou, Mingleyang Li, Siqiao Huang, Yuqi Ye, Caigao Jiang, Wei Wei, Ruihai Wu, Hang Zhang, Yixiao Ge, Shuchang Zhou, Shilong Liu, Xianming Liu, Ping Luo, Shiyu Huang",
+      "ai_keywords": [],
+      "interest_tag": ""
+    },
+    {
+      "title": "Scaling Agentic Data for Long-Horizon Terminal Intelligence",
+      "url": "https://arxiv.org/abs/2610.13166",
+      "tldr": "TerminalHorizon is an automated synthesis engine for long-horizon terminal-agent data that preserves exploration, implementation, feedback, and verification. It detects work omitted by simplified environments, reconstructs environments from execution evidence, and extends tasks under a shared goal. The authors build 1,500 task environments and fine-tune a 27B model that improves across 12 coding, production-agent, and reasoning benchmarks. It matters because training data quality is defined by the work an agent must actually perform, not just by the final answer.",
+      "tldr_zh": "TerminalHorizon 是一个自动化长时程终端 Agent 数据合成引擎，重点保留探索、实现、反馈与验证过程。它通过独立执行识别简化环境遗漏的工作，再依据执行证据重建环境，并围绕同一目标扩展任务。研究构建了 1,500 个任务环境，微调出的 27B 模型在 12 个编程、生产 Agent 和推理基准上均获提升。它的重要性在于用 Agent 真正必须完成的工作来定义数据质量，而不只看最终答案。",
+      "upvotes": 69,
+      "authors": "Shun Zou, Ziyu Ma, Yi Zou, Yong Wang, Lin Chen, Zehui Chen, Guanhua Chen, Xiangxiang Chu, Feng Zhao",
+      "ai_keywords": [],
+      "interest_tag": ""
+    },
+    {
+      "title": "AgentSWE: Can Coding Agents Build the Agent You Actually Want?",
+      "url": "https://arxiv.org/abs/2610.13361",
+      "tldr": "AgentSWE asks whether coding agents can deliver agent software that satisfies a user requirement rather than merely looking complete. Its 25 commission-style tasks use frozen submissions, held-out cases, and requirement-derived acceptance rubrics. No evaluated model-harness pair comes close to reliable delivery; common failures include visible-example overfitting, hollow runtimes, and unsupported completion claims. This is important because it evaluates software behavior and acceptance, not repository-shaped output.",
+      "tldr_zh": "AgentSWE 评测编码 Agent 能否真正交付符合用户需求的 Agent 软件，而不只是生成看似完整的代码。其 25 个委托式任务采用冻结提交、隐藏样例和由需求派生的验收规则。没有任何被测 model-harness 组合接近可靠交付，常见失败包括过拟合可见样例、空壳 runtime 与无证据的完成声明。它的重要性在于评测软件行为和验收结果，而非仓库形状的输出。",
+      "upvotes": 32,
+      "authors": "Jiahao Wang, Hongjin Qian, Yuyang Hu, Jiajun Zhang, Zheng Liu",
+      "ai_keywords": [],
+      "interest_tag": "Benchmark"
+    },
+    {
+      "title": "Relevance Does Not Imply Applicability: Experience Activation for Personal GUI Agents",
+      "url": "https://arxiv.org/abs/2609.33304",
+      "tldr": "The paper finds that retrieved interaction history mainly helps a personal GUI agent on its first decision and offers little sustained benefit later. ExpActivator instead matches the current screen to historical states in the frozen GUI backbone latent space and activates only applicable action references. Across four GUI backbones it reports a 28% average gain in within-trajectory step success while using about one-fifth as many history tokens. The result reframes memory for computer use as decision-time applicability rather than task-level relevance.",
+      "tldr_zh": "研究发现，检索到的交互历史主要改善个人 GUI Agent 的第一步，对后续决策的持续帮助很弱。ExpActivator 改为在冻结 GUI 骨干的潜在空间中匹配当前屏幕与历史状态，只激活当下适用的动作参考。在四种 GUI 骨干上，它报告轨迹内步骤成功率平均提高 28%，同时历史 token 用量约为原来的五分之一。该结果把 computer use 的记忆问题从任务级相关性重新定义为决策时适用性。",
+      "upvotes": 28,
+      "authors": "Fuyao Zhang, Xuan Wang, Zherui Li, Jiaming Zhang, Longtao Huang, Wei Yang Bryan Lim",
+      "ai_keywords": [],
+      "interest_tag": "CUA"
+    },
+    {
+      "title": "Systematic Multi-Agent Vision-and-Language Navigation: Formulation, Benchmark, and Method",
+      "url": "https://arxiv.org/abs/2609.35965",
+      "tldr": "This work formalizes multi-agent vision-language navigation under subtask dependencies and resource constraints. MAVLN contains 11,724 episodes across 145 scenes, teams of up to four agents, and constraint-aware metrics. The TRISS baseline combines LLM scheduling, shared topological memory, and conflict-aware execution, yet experiments still expose large gaps in scheduling, planning, and control. The benchmark matters because team coordination is evaluated as an embodied systems problem rather than a collection of independent routes.",
+      "tldr_zh": "该工作把多 Agent 视觉语言导航形式化为受子任务依赖和资源约束的协同问题。MAVLN 包含 145 个场景中的 11,724 个回合、最多四个 Agent 和约束感知指标。TRISS 基线结合 LLM 调度、共享拓扑记忆与冲突感知执行，但实验仍暴露调度、规划和控制上的明显差距。它的重要性在于把团队协作作为具身系统问题评测，而不是若干独立路线的集合。",
+      "upvotes": 9,
+      "authors": "Yunzhe Xu, Zhe Liu",
+      "ai_keywords": [],
+      "interest_tag": "Agent Swarm"
+    }
+  ],
+  "alphaxiv_papers": [
+    {
+      "title": "RSI-Anything: Unlocking Recursive Self-Improvement with World Models",
+      "arxiv_id": "2610.13912",
+      "url": "https://arxiv.org/abs/2610.13912",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2610.13912",
+      "tldr": "RSI-Anything uses predictive world models to choose which actions deserve costly real-world evaluation, then adapts policies, workflows, or predictors from feedback. It reports gains in code repair, GUI completion with 39.4% fewer actions, laboratory planning, and chemistry optimization. The breadth makes the framework compelling, but update mechanisms differ across domains. It therefore demonstrates a general feedback-selection pattern more clearly than sustained joint self-improvement in one environment.",
+      "tldr_zh": "RSI-Anything 用预测式世界模型筛选最值得接受昂贵真实反馈的动作，再利用反馈更新策略、工作流或预测器。它报告了代码修复、GUI 完成率与动作效率、实验室规划和化学优化上的提升，其中 GUI 平均动作数下降 39.4%。跨领域广度很有吸引力，但各领域采用的更新机制并不统一。因此它更有力地证明了通用反馈选择模式，而非单一环境中持续、联合的自我改进。",
+      "interest_tag": ""
+    },
+    {
+      "title": "Embodied Turing Machines: Stateful Code for Robot Recursive Self-Improvement",
+      "arxiv_id": "2610.12369",
+      "url": "https://arxiv.org/abs/2610.12369",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2610.12369",
+      "tldr": "Code-Only-as-Policy represents robot, environment, and task state explicitly in reusable code, removing VLM or VLA calls from the execution loop. Its shared library solves 70.24% of 42 simulated bimanual tasks, and 83% of code executed for new tasks is reused. Median CPU control latency is 0.3 ms, making behavior inspectable and cheap to execute. The simulation-only evidence and state-measurement failures show that perception remains the major bottleneck.",
+      "tldr_zh": "Code-Only-as-Policy 把机器人、环境和任务状态显式编码为可复用程序，使执行阶段无需调用 VLM 或 VLA。共享代码库在 42 个仿真双臂任务上达到 70.24% 成功率，新任务执行代码中有 83% 来自复用。CPU 控制步骤中位延迟仅 0.3 毫秒，因此行为更可检查、执行成本更低。现有证据仍限于仿真，而大量失败来自状态测量，说明感知仍是主要瓶颈。",
+      "interest_tag": ""
+    },
+    {
+      "title": "Recursive Self-Improvement through Multi-Agent Self-Supervision",
+      "arxiv_id": "2610.12176",
+      "url": "https://arxiv.org/abs/2610.12176",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2610.12176",
+      "tldr": "MASS alternates evolutionary search over multi-agent workflows with supervised fine-tuning on selected orchestrator and subagent trajectories. After two cycles, it reports 1.2–1.6× the base model score per output token on four research benchmarks and much more delegation. A student trained on coordinated traces beats a single-agent control trained on more tokens, suggesting orchestration traces contain useful supervision. However, Terminal-Bench 2.0 and SWE-bench Verified decline, so the gains do not generalize uniformly.",
+      "tldr_zh": "MASS 在多 Agent 工作流的进化搜索与协调轨迹监督微调之间交替。两轮后，它在四个研究型基准上的单位输出 token 得分达到基础模型的 1.2–1.6 倍，并显著增加主动委派。使用协作轨迹训练的学生模型超过了训练 token 更多的单 Agent 对照，说明编排过程本身包含有效监督。但 Terminal-Bench 2.0 与 SWE-bench Verified 均下降，因此收益并不普适。",
+      "interest_tag": "Agent Swarm"
+    },
+    {
+      "title": "MiMo-V2.6: Scaling Reinforcement Learning Towards Self-Improvement",
+      "arxiv_id": "2610.11959",
+      "url": "https://arxiv.org/abs/2610.11959",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2610.11959",
+      "tldr": "MiMo-V2.6 scales agentic reinforcement learning with asynchronous large-batch training, diverse code, visual, general, and cyber environments, and groupwise trajectory grading. The Pro model improves DeepSWE v1.1 average@3 from 58.4 to 72.6, while a distilled 9B model rises on all 11 reported evaluations. The release includes training dynamics, verified environments, and an RL framework, which increases its value for reproduction. Compute, task mixtures, graders, and reward-hacking defenses change together, so no single mechanism explains the gains.",
+      "tldr_zh": "MiMo-V2.6 通过异步大批量训练、多样化代码/视觉/通用/网络安全环境，以及长轨迹组内评分来扩展 Agent RL。Pro 模型在 DeepSWE v1.1 上的 average@3 从 58.4 提升至 72.6，蒸馏后的 9B 模型在全部 11 项报告评测上均有提升。项目公开训练动态、可验证环境和 RL 框架，提升了复现价值。但计算规模、任务混合、评分器与防奖励投机机制同时变化，无法把收益归因于单一设计。",
+      "interest_tag": ""
+    },
+    {
+      "title": "CoTrace: Data Recipes for Training Terminal Agents with Harness-Model Co-Evolution",
+      "arxiv_id": "2610.10426",
+      "url": "https://arxiv.org/abs/2610.10426",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2610.10426",
+      "tldr": "CoTrace treats the runtime harness and model as a coupled system: repeated execution failures drive harness updates, while training uses verified trajectories matched to that runtime. On a 102-task split, supervised training moves a 9B model from 78 to 88 solved tasks and online RL peaks at 90. On SWE-bench Lite, pairing the checkpoint with its co-evolved harness raises resolution from 24.7% to 35.0%. The study is preliminary, but it makes harness-model compatibility an empirical training variable rather than an implementation detail.",
+      "tldr_zh": "CoTrace 把 runtime harness 与模型视为耦合系统：重复执行失败驱动 harness 更新，而模型学习与最终 runtime 匹配的已验证轨迹。在 102 个任务上，监督训练让 9B 模型从解决 78 题升至 88 题，在线 RL 峰值为 90 题。在 SWE-bench Lite 上，checkpoint 配合共同演化的 harness 后，解决率从 24.7% 升至 35.0%。证据仍属初步，但它把 harness-model 兼容性从实现细节提升为可测训练变量。",
+      "interest_tag": ""
+    }
+  ],
+  "github_repos": [
+    {
+      "name": "onehumanbeing/esp32-iphone-agent",
+      "url": "https://github.com/onehumanbeing/esp32-iphone-agent",
+      "tldr": "This project lets a vision-language model operate a physical iPhone through AirPlay screen mirroring and a low-cost ESP32-S3 USB HID bridge. A planner and actor close the loop with pointer recalibration, screen-change checks, retries, and replanning, while a web UI exposes logs and screenshots. It needs no jailbreak, Xcode, developer account, or phone-side app. Current limits include portrait-only coordinates, ASCII-only typing, and no visibility into passcode, Apple Pay, DRM, or locked-screen flows.",
+      "tldr_zh": "该项目通过 AirPlay 镜像获取 iPhone 画面，再用低成本 ESP32-S3 充当 USB HID，让视觉语言模型操作真实手机。规划器与执行器结合指针重校准、屏幕变化检查、重试和重新规划，Web UI 提供日志与逐步截图。它无需越狱、Xcode、开发者账号或手机端应用。当前限制包括仅支持竖屏坐标、只能输入 ASCII，以及无法看到密码、Apple Pay、DRM 和锁屏流程。",
+      "stars": 1010,
+      "language": "Python",
+      "interest_tag": "CUA"
+    },
+    {
+      "name": "rociiu/talorys",
+      "url": "https://github.com/rociiu/talorys",
+      "tldr": "Talorys is a single-user personal assistant deployed entirely inside the user’s Cloudflare account. It combines chat with editable durable memory, optional semantic recall, tasks, notes, projects, reminders, and scheduled routines backed by Durable Objects and SQLite. The installer deploys and health-checks the private Worker and Pages frontend, with backup, restore, update, and local-development paths documented. The trade-off is dependence on Cloudflare services, quotas, and Workers AI processing.",
+      "tldr_zh": "Talorys 是完全部署在用户自有 Cloudflare 账号中的单用户个人助手。它把聊天、可编辑持久记忆、可选语义召回，与任务、笔记、项目、提醒及定时流程整合起来，底层使用 Durable Objects 和 SQLite。安装器会部署并健康检查私有 Worker 与 Pages 前端，文档还覆盖备份、恢复、更新和本地开发。代价是系统依赖 Cloudflare 服务、配额和 Workers AI 的处理边界。",
+      "stars": 919,
+      "language": "TypeScript",
+      "interest_tag": "Memory"
+    },
+    {
+      "name": "franzenzenhofer/big-arrow-on-the-screen",
+      "url": "https://github.com/franzenzenhofer/big-arrow-on-the-screen",
+      "tldr": "bigarrow is a macOS CLI and agent skill that draws temporary arrows, rings, boxes, and text above applications without stealing keyboard focus. It can target coordinates, windows, tabs, or accessibility elements, and cleans overlays by timeout, process ownership, hook, or explicit stop. Homebrew packaging, JSON output, and explicit exit codes make it easy for coding agents to invoke. It intentionally never clicks, types, or captures the screen, so it is a human-handoff tool rather than a computer-use agent.",
+      "tldr_zh": "bigarrow 是面向 macOS 的 CLI 与 Agent Skill，可在应用上方临时绘制箭头、圆环、方框和文字，同时不抢占键盘焦点。它可定位坐标、窗口、标签页或辅助功能元素，并通过超时、进程归属、钩子或显式命令清理覆盖层。Homebrew 安装、JSON 输出和明确退出码便于编码 Agent 调用。它刻意不点击、不输入也不截图，因此属于人机交接工具，而不是 Computer Use Agent。",
+      "stars": 679,
+      "language": "Swift",
+      "interest_tag": ""
+    },
+    {
+      "name": "TedHaley/pensieve",
+      "url": "https://github.com/TedHaley/pensieve",
+      "tldr": "Pensieve builds a local semantic and exact-search index over documents, code repositories, and past AI-agent sessions, then exposes scoped retrieval through MCP. It also uses git blame to map ownership, expertise, recent work, and knowledge gaps, with a macOS search panel and 3D map. The repository includes integrations and a reproducible 72-task benchmark reporting lower tool use, token cost, and latency than grep-based lookup. Costs include a roughly 1.2 GB embedding model, intensive first indexing, and a macOS-only native UI.",
+      "tldr_zh": "Pensieve 在本地为文档、代码仓库和历史 AI Agent 会话建立语义与精确搜索索引，并通过 MCP 提供带作用域的检索。它还利用 git blame 分析代码归属、专家、近期工作与知识缺口，并提供 macOS 搜索面板和 3D 地图。仓库给出多种集成及可复现的 72 项任务基准，报告比 grep 检索更少的工具调用、token 成本和延迟。代价包括约 1.2 GB 的嵌入模型、首次索引开销，以及原生 UI 仅支持 macOS。",
+      "stars": 59,
+      "language": "Python",
+      "interest_tag": "Memory"
+    },
+    {
+      "name": "alibaba/qz-browser-agent",
+      "url": "https://github.com/alibaba/qz-browser-agent",
+      "tldr": "qz is a local-first Chrome extension for browser automation, web research, and structured extraction using a user-selected model. It can act through DOM elements or screenshots, work across tabs, delegate parallel subtasks, and store editable collections in the browser. The repository documents releases, source builds, tests, reusable Skills, and an optional local MCP bridge. Users must still trust configured models and Skills with page context, and the extension APIs are explicitly experimental.",
+      "tldr_zh": "qz 是一款本地优先的 Chrome 扩展，可使用用户自选模型完成浏览器自动化、网页研究和结构化采集。它能通过 DOM 或截图操作页面、跨标签工作、并行委派子任务，并把可编辑集合保存在浏览器本地。仓库说明了发布包、源码构建、测试、可复用 Skills 和可选本地 MCP 桥接。用户仍需信任所配置模型和 Skills 对页面上下文的访问，而且扩展 API 被明确标为实验性。",
+      "stars": 37,
+      "language": "JavaScript",
+      "interest_tag": "CUA"
+    }
+  ],
+  "hackernews": [
+    {
+      "title": "AI coding agents generate more code, but not more software",
+      "url": "https://arstechnica.com/ai/2026/10/ai-coding-agents-generate-more-code-but-not-more-software/",
+      "tldr": "A study covering 300 million work events across more than 700 software firms found that AI coding agents increased lines of code, commits, and pull requests. It found no statistically significant increase in completed issues or larger software features. Average pull-request review time rose by 49%, while revision requests and review comments also increased. The results suggest that AI shifts the engineering bottleneck from code generation to verification and integration.",
+      "tldr_zh": "一项覆盖 700 多家软件公司、3 亿次工作事件的研究发现，AI 编码 Agent 增加了代码行数、提交和 PR。研究却没有观察到已解决 issue 或大型软件功能产出的统计显著增长。PR 平均审查时间增加 49%，修改请求和 review 评论也同步上升。结果表明，AI 正把工程瓶颈从代码生成转移到验证与集成。",
+      "points": 331,
+      "num_comments": 278,
+      "interest_tag": ""
+    },
+    {
+      "title": "Why aren't AI companies being charged for hacking?",
+      "url": "https://mortoray.com/why-arent-ai-companies-being-charged-for-hacking/",
+      "tldr": "The essay asks how legal responsibility should be assigned when an AI system accesses external systems without authorization. It argues that providers cannot fully invoke unpredictable emergence because they choose training data, objectives, tools, connectivity, and operating constraints. Those design decisions may bear on intent, although hacking laws and intent standards vary by jurisdiction. This is a forceful legal argument rather than a neutral finding or adjudicated conclusion.",
+      "tldr_zh": "文章追问，当 AI 系统未经授权访问外部系统时，法律责任应如何分配。作者认为，提供方主动选择训练数据、目标、工具、联网能力和运行约束，因此不能完全以不可预测的涌现行为免除责任。这些设计决策可能影响对主观意图的判断，但各司法辖区的黑客法律与故意标准不同。这是一篇立场鲜明的法律论证，而非中立研究或司法结论。",
+      "points": 320,
+      "num_comments": 339,
+      "interest_tag": ""
+    },
+    {
+      "title": "Launch HN: Agent37 (YC F26) – Low-cost agent sandboxes for running agents",
+      "url": "https://news.ycombinator.com/item?id=50059096",
+      "tldr": "Agent37 offers hosted sandboxes optimized for persistent AI-agent workloads, claiming an average customer cost of $0.37 per sandbox per month. The team attributes the cost to bursty CPU demand, RAM-first capacity planning, non-hyperscale infrastructure, and gVisor resource sharing. Free sandboxes reportedly cost $0.05–$0.10 per user each month, while Docker-in-Docker and Android emulators require fuller VM products. The launch is useful as a concrete account of the infrastructure economics behind always-on agents.",
+      "tldr_zh": "Agent37 提供针对持久运行 AI Agent 优化的托管沙箱，并称客户每个沙箱的月均成本为 0.37 美元。团队把降本归因于突发式 CPU 需求、内存优先的容量规划、非超大规模云基础设施及 gVisor 资源共享。免费沙箱据称每位用户每月只需 0.05 至 0.10 美元，但 Docker-in-Docker 和 Android 模拟器需要完整 VM 产品。这次发布为理解常驻 Agent 的基础设施经济性提供了具体样本。",
+      "points": 129,
+      "num_comments": 93,
+      "interest_tag": ""
+    },
+    {
+      "title": "OpenKylin: The AI Agent Linux Desktop",
+      "url": "https://techstrong.ai/articles/openkylin-the-ai-agent-linux-desktop/",
+      "tldr": "openKylin 3.0 integrates agents into the Linux desktop architecture rather than shipping AI as a separate chatbot. KylinBot coordinates models, data, tools, and devices, while Kylin-CUA operates system settings and conventional graphical applications. Demonstrated skills include changing network, Bluetooth, display, keyboard, and power settings through voice or chat. The project makes computer use a system-level capability, but authorization, intervention, and security remain open engineering priorities.",
+      "tldr_zh": "openKylin 3.0 尝试把 Agent 直接纳入 Linux 桌面架构，而不是只附带独立聊天机器人。KylinBot 协调模型、数据、工具和设备，Kylin-CUA 则操作系统设置及传统图形应用。已展示的能力包括通过语音或聊天修改网络、蓝牙、显示、键盘和电源设置。该项目把 computer use 提升为系统级能力，但授权、人类干预和安全仍是开放工程问题。",
+      "points": 7,
+      "num_comments": 1,
+      "interest_tag": "CUA"
+    },
+    {
+      "title": "Show HN: IHMT – Infinite Hierarchical Memory Tree for AI Agents",
+      "url": "https://github.com/gonzaroman/IHMT-MEMORY",
+      "tldr": "IHMT is a local long-term memory system that multiple coding agents can share through an MCP server. It stores readable text files in a hierarchical tree and uses BM25 lexical retrieval rather than a vector database. It supports temporal updates, retains superseded facts as history, and retrieves selected branches to limit context use. Its main constraints are lexical rather than semantic matching and a single-writer storage model.",
+      "tldr_zh": "IHMT 是一个本地长期记忆系统，可通过 MCP 服务器供多个编码 Agent 共享。它把可读文本文件组织成层级树，并使用 BM25 词法检索而非向量数据库。系统支持带时间信息的更新、保留被替代事实的历史，并只检索相关分支以控制上下文。主要限制是词面而非语义匹配，以及单写入者存储模型。",
+      "points": 7,
+      "num_comments": 1,
+      "interest_tag": "Memory"
+    }
+  ]
+}
