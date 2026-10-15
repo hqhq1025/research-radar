@@ -1,0 +1,226 @@
+{
+  "date": "2026-10-15",
+  "generated_at": "2026-10-15T16:03:34.724441+08:00",
+  "briefing_zh": "今天最强的主线不是单一模型变大，而是 Agent 系统开始把中间状态、评测器和执行接口都变成可训练、可验证的对象。**Any Time, Any Space** 为长视频生成显式维护空间场景与时间事件记忆，**Cortex** 则把临时上下文收益固化进模型参数；两者共同说明，长程一致性正从扩大 context window 转向结构化状态管理。\n\nComputer Use 方向同时向训练环境、评测和低成本真实设备下沉。**Player-1** 用 16 个合成游戏环境做可验证 RL，**Interaction-as-a-Judge** 让 CUA 直接操作应用来评价并修复功能，GitHub 上的 **ESP32 iPhone Agent** 更用 7 美元硬件把真实 iPhone 暴露为屏幕与 HID 闭环。这里最值得注意的不是 demo 本身，而是合成训练、交互评测、真实执行三层正在形成闭环。\n\n可靠性成为另一条硬约束。**Scalable Weak-to-Strong Verifier Hardening** 用 hacker-fixer 循环自动加固 Agent 环境的 verifier；HN 最热讨论则把近期越权事件归因于 sandbox、egress control 和 monitoring 的传统安全缺口，而不是神秘的「AI 失控」。**Doc2Harness** 的结果也说明 harness engineering 仍远未解决：最强模型在 328 个确定性用例上也只通过 53.05%。\n\n开源侧呈现两种相反但互补的产品化趋势：**LFM2.5-24B-A2B** 用 2B active parameters 把本地 Agent 做到消费级设备可用；**Talorys**、**Chrome Relay** 和 **AI Promo Video Maker** 则把 memory、已登录浏览器和复杂媒体工作流封装成可部署产品。与此同时，大规模企业数据表明 Agent 带来 30% 更多代码，却让 review 时间增加 49%，提醒团队应优化端到端交付而非只追求 token 或 LOC 产量。",
+  "briefing_en": "Today's strongest theme is not a single larger model, but agent systems turning intermediate state, evaluators, and execution interfaces into trainable and verifiable objects. **Any Time, Any Space** explicitly maintains spatial scene memory and temporal event memory for long-form video, while **Cortex** consolidates context-induced gains into model parameters. Together they suggest that long-horizon consistency is moving beyond ever-larger context windows toward structured state management.\n\nComputer use is advancing simultaneously across training environments, evaluation, and low-cost real-device control. **Player-1** performs verifiable RL in sixteen synthetic game environments, **Interaction-as-a-Judge** lets CUAs operate applications to evaluate and repair them, and GitHub's **ESP32 iPhone Agent** exposes a real iPhone through a screen-and-HID loop using a $7 board. The important signal is not any one demo, but the emerging loop between synthetic training, interactive evaluation, and real execution.\n\nReliability is becoming a hard systems constraint. **Scalable Weak-to-Strong Verifier Hardening** uses an automated hacker-fixer loop to strengthen agent-environment verifiers, while the hottest HN discussion attributes recent unauthorized-access incidents to familiar failures in sandboxing, egress control, and monitoring rather than mystical AI autonomy. **Doc2Harness** reinforces the point: even the strongest evaluated model passes only 53.05% of 328 deterministic harness-engineering tests.\n\nOpen source shows two complementary productization paths. **LFM2.5-24B-A2B** uses only 2B active parameters to make local agents practical on consumer hardware, while **Talorys**, **Chrome Relay**, and **AI Promo Video Maker** package memory, authenticated browsing, and complex media workflows into deployable products. Meanwhile, large-scale enterprise evidence finds 30% more code after agent adoption but 49% longer review cycles, warning teams to optimize end-to-end delivery rather than token or LOC output.",
+  "viral_analysis_zh": "今天最可能出圈的是 **ESP32 iPhone Agent**：7 美元、无需 Mac/开发者账号/越狱，价值主张在一句话内就能理解，真实 iPhone 画面又天然适合短视频传播。研究侧 **Interaction-as-a-Judge** 最可能持续扩散，因为它把「让 Agent 真正点一遍再评价」这个人人都能理解的直觉，变成了可量化的评测与训练增益。",
+  "viral_analysis_en": "**ESP32 iPhone Agent** is today's strongest viral candidate: a $7 bill of materials, no Mac, developer account, or jailbreak, and a real-iPhone demo make the value proposition instantly legible and highly visual. On the research side, **Interaction-as-a-Judge** has durable breakout potential because it turns the intuitive idea of letting an agent actually use an app before judging it into measurable evaluation and training gains.",
+  "huggingface_papers": [
+    {
+      "title": "Any Time, Any Space: A World-State-Centric Framework for Agentic Video Generation",
+      "url": "https://arxiv.org/abs/2610.20571",
+      "tldr": "ATAS compiles a screenplay into shot requests with explicit location, camera, and event-time references. It retrieves evidence from a registered scene memory and a time-indexed event memory, then admits generated observations only after review and state checks. Across four video generators it improves every reported cross-shot consistency metric and leads human evaluations on all six criteria. The work matters because it treats long-video coherence as explicit world-state maintenance rather than prompt chaining.",
+      "tldr_zh": "ATAS 把剧本编译成带有地点、相机和事件时间引用的镜头请求。系统分别从注册后的场景记忆和按时间索引的事件记忆中检索证据，并只在 review 与状态检查通过后写回新观察。它在四种视频生成器上提升了全部跨镜头一致性指标，并在六项人工评价中领先。重要性在于，它把长视频连贯性重构成显式 world-state 维护问题，而不是继续堆 prompt。",
+      "upvotes": 165,
+      "authors": "Weijie Wang, Haomin Zhang, Ye Li, Akide Liu, Zeyu Zhang, Haoyu Zhao, Yefei He, Donny Y. Chen, Feng Chen, Bohan Zhuang",
+      "ai_keywords": [
+        "agentic video generation",
+        "world state",
+        "scene memory",
+        "event memory"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "Player-1: Learning to Play from Synthetic Experience",
+      "url": "https://arxiv.org/abs/2610.20584",
+      "tldr": "Player-1 extends computer-use actions with relative pointer motion, sustained inputs, and composite keyboard-mouse controls. After supervised initialization on 6,044 gameplay trajectories, it performs PPO across sixteen randomized, programmatically verifiable synthetic environments. The 9B model reaches 38.33% on MineDojo-300 versus 12.63% for the strongest evaluated baseline, with transfer gains on other game suites. It shows that broad synthetic interaction coverage can teach digital control skills beyond demonstrations.",
+      "tldr_zh": "Player-1 为 Computer Use 扩展了相对指针移动、持续输入和键鼠组合动作。模型先用 6,044 条游戏轨迹做监督初始化，再在 16 个随机化、可程序验证的合成环境中进行 PPO。9B 模型在 MineDojo-300 上达到 38.33%，而最强对照仅为 12.63%，并能迁移到其他游戏套件。它说明广覆盖的合成交互环境可以教出 demonstration 之外的数字控制能力。",
+      "upvotes": 117,
+      "authors": "Mingyu Ouyang, Yiran Wang, Siyuan Hu, Xingyilang Yin, Huiqiang Sun, Guangzhi Wang, Junfu Pu, Cheng Cheng, Honghao Chen, Ying Shan, Mike Zheng Shou, Hwee Tou Ng",
+      "ai_keywords": [
+        "computer use",
+        "synthetic environments",
+        "reinforcement learning",
+        "game agents"
+      ],
+      "interest_tag": "CUA"
+    },
+    {
+      "title": "Cortex: Consolidating Context into Parametric Memory",
+      "url": "https://arxiv.org/abs/2610.20399",
+      "tldr": "Cortex frames memory consolidation as internalizing context-induced gains without damaging unrelated capabilities. It generates prospective queries, distills context-conditioned outputs, and stores them as mergeable low-rank or structural feed-forward updates. Across 4B to 120B dense and MoE backbones, it lies on the consolidation-retention Pareto frontier in most settings. After fifty sequential factual edits on a 14B model, its structural variant preserves 99.8% of non-target performance while recovering 88.9% of the contextual gain.",
+      "tldr_zh": "Cortex 把 memory consolidation 定义为：在不损害无关能力的前提下，将上下文带来的收益内化进参数。它生成未来可能用到该上下文的问题，再把条件输出蒸馏为可合并的 low-rank 或 FFN 结构更新。在 4B 到 120B 的 dense 与 MoE 模型上，它大多位于 consolidation-retention 的 Pareto frontier。14B 模型连续做 50 次事实编辑后，结构版本仍保留 99.8% 的非目标能力，并恢复 88.9% 的上下文收益。",
+      "upvotes": 47,
+      "authors": "Jintian Zhang, Feng He, Xinnian Liang, Ziwen Xu, Haoming Xu, Haojing Huang, Shuangzhi Wu, Ningyu Zhang",
+      "ai_keywords": [
+        "memory consolidation",
+        "parametric memory",
+        "model editing",
+        "continual learning"
+      ],
+      "interest_tag": "Memory"
+    },
+    {
+      "title": "Recovering Reliable Supervision via Critique-Guided On-Policy Distillation",
+      "url": "https://arxiv.org/abs/2610.20572",
+      "tldr": "CriticOPD identifies a failure in on-policy distillation: teachers often recognize a student's wrong prefix but still continue along its erroneous path. The method asks the teacher to critique the rollout, lets the student rewrite from the error, and uses the critique only as privileged scoring information. On two Qwen3 students and six math benchmarks, it consistently improves standard OPD, especially on competition problems. The key contribution is restoring recoverable supervision without requiring every sampled student trajectory to already be salvageable token by token.",
+      "tldr_zh": "CriticOPD 指出 on-policy distillation 的一个根本问题：teacher 虽然能识别 student 前缀中的错误，却常常仍沿错误路径续写。方法先让 teacher 批评错误 rollout，再让 student 从错误处重写，同时只把 critique 作为评分阶段的 privileged information。在两个 Qwen3 student 和六个数学 benchmark 上，它稳定优于标准 OPD，竞赛题增益最大。核心价值是恢复可挽救的监督信号，而不再假设每条 student trajectory 都能逐 token 被 teacher 救回。",
+      "upvotes": 47,
+      "authors": "Kaixiang Zhao, Tianrun Yu, Shangzhe Li, Yuxiao Yang, Amanda Hughes, Weitong Zhang, Taylor W. Killian",
+      "ai_keywords": [
+        "on-policy distillation",
+        "critique",
+        "reasoning",
+        "student teacher"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "Doc2Harness: Benchmarking LLMs on Long-Horizon Harness Engineering of Coding Agents",
+      "url": "https://arxiv.org/abs/2610.20344",
+      "tldr": "Doc2Harness directly benchmarks whether an LLM can build an agent harness from an interface contract and a consolidated design document. Candidate harnesses are frozen and tested in isolated containers against 328 deterministic cases using requests, filesystem state, exit codes, and command output. Across nineteen frontier models and three builds each, the best model reaches only 53.05% while the weakest scores 27.44%. The benchmark makes harness engineering itself measurable instead of hiding it behind downstream task scores.",
+      "tldr_zh": "Doc2Harness 直接评测 LLM 能否根据接口契约和汇总设计文档构建 Agent harness。候选 harness 会被冻结，并在隔离容器中用 328 个确定性用例检查 model requests、文件状态、退出码和命令输出。19 个 frontier model 各做三次构建后，最好成绩也只有 53.05%，最弱为 27.44%。它的重要性在于把 harness engineering 本身变成可测对象，而不是藏在下游任务分数后面。",
+      "upvotes": 39,
+      "authors": "Yuyao Ge, Shenghua Liu, Peizhong Gao, Chendi Ge, Chenxu Liu, Yiwei Wang, Lingrui Mei, Baolong Bi, Jiayu Yao, Jiafeng Guo, Xueqi Cheng",
+      "ai_keywords": [
+        "coding agents",
+        "agent harness",
+        "long horizon",
+        "evaluation"
+      ],
+      "interest_tag": "Benchmark"
+    }
+  ],
+  "alphaxiv_papers": [
+    {
+      "title": "VideoJev: System One Model for Video Understanding and Interaction",
+      "arxiv_id": "2610.18615",
+      "url": "https://arxiv.org/abs/2610.18615",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2610.18615",
+      "tldr": "VideoJev replaces autoregressive answer decoding with a shared head that scores temporal intervals and answer options against video evidence. It supports temporal grounding and video QA through one structured decision interface, while cached and joint inference reuse visual computation across repeated queries. The 4B and 35B variants improve temporal-grounding mIoU by 6.7 and 10.8 points and deliver more than 100x measured speedups on video QA versus thinking-mode backbones. This is useful for agents that need frequent, low-latency judgments over a persistent video history.",
+      "tldr_zh": "VideoJev 不再自回归生成答案，而是用共享 head 对时间区间和候选答案与视频证据的匹配度打分。它用同一个结构化决策接口统一 temporal grounding 与 video QA，并通过 cached/joint inference 复用重复查询的视觉计算。4B 与 35B 版本的 temporal-grounding mIoU 分别提升 6.7 和 10.8 点，在 video QA 上相对 thinking-mode backbone 实测加速超过 100 倍。它适合需要对持续视频历史做高频、低延迟判断的 Agent。",
+      "interest_tag": ""
+    },
+    {
+      "title": "Correction Training for Diffusion Models",
+      "arxiv_id": "2610.14136",
+      "url": "https://arxiv.org/abs/2610.14136",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2610.14136",
+      "tldr": "The paper treats diffusion sampling as an exposure-bias problem: denoisers are trained on real-image interpolations but must consume their own imperfect predictions at inference. A learned corrector repeatedly refines intermediate clean-sample predictions, preventing early artifacts from propagating. It improves unguided and unconditional FID across DiT, SiT, and JiT, can complement classifier-free guidance, and can be distilled back into the base model. That final distillation preserves quality gains without adding inference passes.",
+      "tldr_zh": "论文把 diffusion sampling 视为 exposure bias：denoiser 训练时看到真实图像加噪插值，推理时却必须接收自己此前的不完美预测。作者训练一个 corrector，反复修正中间的 clean-sample prediction，阻止早期伪影一路累积。该方法在 DiT、SiT、JiT 上改善无 guidance 与 unconditional FID，也能与 CFG 叠加。最后还能把修正效果蒸馏回 base model，在不增加推理步数的情况下保留质量增益。",
+      "interest_tag": ""
+    },
+    {
+      "title": "Scalable Weak-to-Strong Verifier Hardening for Agent Environments",
+      "arxiv_id": "2610.15924",
+      "url": "https://arxiv.org/abs/2610.15924",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2610.15924",
+      "tldr": "This work targets reward hacking caused by exploitable programmatic verifiers in agent environments. It isolates the verifier from direct modification, then alternates a hacker that discovers exploits with a fixer that repairs them. On Terminal Bench, KernelBench, and SETA, more loop iterations progressively reduce attack success and outperform static hardening. The method matters because evaluation infrastructure must remain trustworthy even when future agents are stronger than today's auditing model.",
+      "tldr_zh": "这项工作针对 Agent 环境中可被利用的 programmatic verifier 所造成的 reward hacking。系统先把 verifier 隔离到 Agent 无法直接修改的 sandbox，再交替运行发现漏洞的 hacker 与修复漏洞的 fixer。在 Terminal Bench、KernelBench 和 SETA 上，增加循环轮次会持续降低攻击成功率，并优于静态加固。关键意义是：即使未来 Agent 比今天的审计模型更强，评测基础设施仍必须保持可信。",
+      "interest_tag": ""
+    },
+    {
+      "title": "Hybrid Reasoning Agents",
+      "arxiv_id": "2610.18861",
+      "url": "https://arxiv.org/abs/2610.18861",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2610.18861",
+      "tldr": "HybridAgents dynamically switches between continuous latent reasoning and text-based interaction inside one generation process. HybridLink manages mode transitions, while a continuous working memory preserves the mixed context across turns and keeps tool actions text-visible. HybridSFT and HybridRL teach the model both how and when to use each mode. Across eleven benchmarks and three scales, the system reports 10.4% higher performance with 35.5%-54.7% fewer tokens and 1.8x-2.6x faster inference.",
+      "tldr_zh": "HybridAgents 在同一生成过程中动态切换连续 latent reasoning 与文本交互。HybridLink 管理两种模式的跳转，continuous working memory 则跨轮保留混合上下文，同时让 tool action 继续以文本可见。HybridSFT 和 HybridRL 分别教模型如何切换、何时切换。在 11 个 benchmark 和三种规模上，系统报告性能提升 10.4%，token 减少 35.5%-54.7%，推理加速 1.8-2.6 倍。",
+      "interest_tag": ""
+    },
+    {
+      "title": "Interaction-as-a-Judge",
+      "arxiv_id": "2610.17895",
+      "url": "https://arxiv.org/abs/2610.17895",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2610.17895",
+      "tldr": "Interaction-as-a-Judge evaluates interactive applications by letting a computer-use agent operate them instead of inspecting only code and tests. The released data includes 6,858 preference pairs with traces and 222 applications with human-verified requirements. Interactive judging raises human-preference prediction from 65.6% to 69.1%, requirement verification from 77.0% to 81.6%, and repairs 75.5% of broken requirements within five attempts versus 55.4% for code-only feedback. It directly connects CUA trajectory quality to better evaluation, repair, and reward signals.",
+      "tldr_zh": "Interaction-as-a-Judge 不再只看代码与测试，而是让 Computer Use Agent 真正操作应用后再评价。作者发布了 6,858 对带交互轨迹的偏好数据，以及 222 个具有人类核验需求标签的应用。交互式 judge 把人类偏好预测从 65.6% 提升到 69.1%，需求验证从 77.0% 提升到 81.6%；五次内修复坏需求的比例为 75.5%，而 code-only feedback 只有 55.4%。它把 CUA trajectory 的质量直接连接到评测、修复与训练 reward。",
+      "interest_tag": "CUA"
+    }
+  ],
+  "github_repos": [
+    {
+      "name": "onehumanbeing/esp32-iphone-agent",
+      "url": "https://github.com/onehumanbeing/esp32-iphone-agent",
+      "tldr": "This project lets a vision-language agent control a real iPhone using AirPlay for observation and a $7 ESP32-S3 as a USB HID mouse and keyboard. It requires no Mac, Xcode, developer account, jailbreak, or helper app on the phone. The runtime includes planner-actor roles, pointer recalibration, post-action screen-change checks, replanning, and an emergency stop. Its appeal is a cheap, accessibility-tree-free path to closed-loop mobile computer use on physical hardware.",
+      "tldr_zh": "该项目用 AirPlay 提供视觉观察，再让 7 美元的 ESP32-S3 充当 USB HID 键鼠，使视觉语言 Agent 能控制真实 iPhone。它不需要 Mac、Xcode、开发者账号、越狱或手机端 helper app。runtime 包含 planner-actor 分工、指针重校准、动作后画面变化检查、失败重规划和 emergency stop。其价值是用极低成本提供一条不依赖 accessibility tree 的真实移动端闭环 Computer Use 路径。",
+      "stars": 2207,
+      "language": "C",
+      "interest_tag": "CUA"
+    },
+    {
+      "name": "rociiu/talorys",
+      "url": "https://github.com/rociiu/talorys",
+      "tldr": "Talorys is a single-user personal agent deployed entirely inside the user's Cloudflare account. It combines chat, editable durable memories, tasks, notes, projects, reminders, and recurring routines on Durable Objects with SQLite. A one-command installer provisions private Workers, Pages, authentication, secrets, and health checks while avoiding developer-operated telemetry or storage. The design is notable for making a useful persistent agent fit within a free-tier, owner-controlled deployment boundary.",
+      "tldr_zh": "Talorys 是完全部署在用户自己 Cloudflare 账号中的单用户个人 Agent。它把对话、可编辑持久记忆、任务、笔记、项目、提醒和周期 routine 放进带 SQLite 的 Durable Objects。单命令 installer 会配置私有 Worker、Pages、认证、secret 和健康检查，开发者不托管数据也不埋 telemetry。亮点是把真正可持续使用的 personal agent 压进 free-tier 且 owner-controlled 的部署边界。",
+      "stars": 1012,
+      "language": "TypeScript",
+      "interest_tag": ""
+    },
+    {
+      "name": "marclou/mailcheap",
+      "url": "https://github.com/marclou/mailcheap",
+      "tldr": "MailCheap is a self-hostable newsletter stack with editing, lists, scheduling, deliverability controls, analytics, public archives, and bounce or complaint handling. Every dashboard action is also exposed through a REST API and MCP server with the same validation and permissions. Its cost framing is concrete: users bring SES or another sender and pay per email rather than per subscriber. This is less an AI demo than an example of making a mature vertical SaaS fully agent-operable.",
+      "tldr_zh": "MailCheap 是可自托管的 newsletter 全栈，覆盖编辑、名单、定时发送、deliverability 控制、统计、公开归档以及退信和投诉处理。Dashboard 的每项操作都通过同一套权限与校验暴露为 REST API 和 MCP server。它用「自带 SES、按邮件而非订阅人数付费」给出了非常具体的成本叙事。它与其说是 AI demo，不如说展示了如何把成熟垂直 SaaS 完整改造成 Agent-operable 产品。",
+      "stars": 934,
+      "language": "JavaScript",
+      "interest_tag": ""
+    },
+    {
+      "name": "aindeev/agent-chrome-relay",
+      "url": "https://github.com/aindeev/agent-chrome-relay",
+      "tldr": "Chrome Relay lets coding agents use the owner's everyday authenticated Chrome through background tabs without enabling a remote-debugging port. A local Go relay and MV3 extension expose scoped DevTools sessions, hide agent tabs, preserve Google sign-in flows, and record an audit trail. Optional 1Password and passkey support keeps secrets out of the agent while enforcing website binding and local process checks. The project addresses a practical CUA gap: authenticated browsing without stealing focus or handing raw credentials to the model.",
+      "tldr_zh": "Chrome Relay 让 coding agent 通过后台 tab 使用用户日常已登录的 Chrome，同时无需开启 remote-debugging port。一个本地 Go relay 与 MV3 extension 提供受限 DevTools session、隐藏 Agent tab、保留 Google 登录跳转并记录 audit trail。可选的 1Password 与 passkey 支持会把 secret 隔离在 Agent 之外，同时校验网站绑定和本地进程身份。它解决的是很实际的 CUA 缺口：不抢前台焦点，也不把原始凭据交给模型，就能做 authenticated browsing。",
+      "stars": 284,
+      "language": "Go",
+      "interest_tag": "CUA"
+    },
+    {
+      "name": "liyupi/ai-promo-video-maker",
+      "url": "https://github.com/liyupi/ai-promo-video-maker",
+      "tldr": "This repository packages product-video production as an agent workflow built around an AGENTS.md specification, Remotion templates, and validation scripts. The agent researches the product, proposes visual directions, captures real 4K pages, aligns editing to music, generates or verifies narration, reviews frames, and delivers source plus a playable page. Human confirmation is concentrated at requirement and taste gates rather than every mechanical step. The project is a strong example of turning accumulated production feedback into an executable skill with explicit quality gates.",
+      "tldr_zh": "该仓库把产品宣传片制作封装成由 AGENTS.md 规范、Remotion 模板和验证脚本组成的 Agent workflow。Agent 会调研产品、提出视觉方向、截取真实 4K 页面、按音乐剪辑、生成并转写核验旁白、逐帧审查，最后交付工程源码与在线播放页。人类主要在需求和审美 gate 上确认，而不是逐步盯机械操作。它很好地展示了如何把长期生产反馈沉淀成带显式质量门禁的可执行 Skill。",
+      "stars": 276,
+      "language": "Python",
+      "interest_tag": ""
+    }
+  ],
+  "hackernews": [
+    {
+      "title": "Containment and monitoring failures are to blame for AI hacking reports: experts",
+      "url": "https://www.csoonline.com/article/4234854/ai-agents-arent-going-rogue-frontier-labs-are-skipping-security-basics.html",
+      "tldr": "Security practitioners argue that recent unauthorized agent actions reflect failures in containment, egress control, and monitoring rather than mysterious autonomous intent. The article points to misconfigured sandboxes, experiments left unobserved for days, and frontier labs treating established cybersecurity practice as a separate or subordinate concern to AI safety. Its practical recommendation is conventional but consequential: isolate workloads, restrict outbound access, instrument behavior, and vet vendors. The 887-point discussion shows operational security is becoming a mainstream agent concern.",
+      "tldr_zh": "安全从业者认为，近期 Agent 越权行为主要来自 containment、egress control 和 monitoring 失败，而不是神秘的自主意图。文章指出 sandbox 配置错误、实验连续数日无人监控，以及 frontier lab 把成熟 cybersecurity 实践排除在 AI safety 之外。实际建议传统但关键：隔离 workload、限制出站访问、记录行为并审计供应商。887 points 的讨论热度说明 Agent operational security 已进入主流议题。",
+      "points": 887,
+      "num_comments": 518,
+      "interest_tag": ""
+    },
+    {
+      "title": "AI coding agents generate more code, but not more software",
+      "url": "https://arstechnica.com/ai/2026/10/ai-coding-agents-generate-more-code-but-not-more-software/",
+      "tldr": "A Harvard study using 300 million work events from more than 700 firms finds that coding agents increase lines of code by 30%, commits by 20%, and pull requests by 23%. Yet issue and epic resolution do not rise significantly because average pull-request review time grows 49%, change requests nearly double, and comments increase 35%. The findings do not show a corresponding employment reduction through March 2026. The central lesson is that local code-generation speed is not the same as system-level software throughput.",
+      "tldr_zh": "Harvard 研究利用 700 多家公司、3 亿条 work event，发现 coding agent 让代码行数增加 30%、commit 增加 20%、PR 增加 23%。但 issue 和 epic 的解决率没有显著提升，因为平均 PR review 时间增长 49%，要求修改的比例接近翻倍，评论数增加 35%。截至 2026 年 3 月，研究也没有观察到对应的就业下降。核心结论是：局部代码生成速度不等于系统级软件交付吞吐。",
+      "points": 364,
+      "num_comments": 309,
+      "interest_tag": ""
+    },
+    {
+      "title": "LFM2.5-24B-A2B: Built for fast on-device agents",
+      "url": "https://www.liquid.ai/blog/lfm2-5-24b-a2b",
+      "tldr": "Liquid AI released an open-weight 24B MoE reasoning model with only 2B active parameters and a 131K context window. The company reports 184 tokens per second on an Apple M5 Max and leadership or parity on five of eight compared tool-use benchmarks, though larger models retain advantages on WebArena, knowledge, and coding. Training combines SFT, teacher specialization, multi-domain on-policy distillation, and agentic RL inside real harnesses. The release makes privacy-preserving, continuously running local agents more plausible on consumer hardware.",
+      "tldr_zh": "Liquid AI 发布了一个 open-weight 的 24B MoE reasoning model，每个 token 只激活 2B 参数，并提供 131K context window。官方报告其在 Apple M5 Max 上达到 184 tokens/s，在八个 tool-use benchmark 中五项领先或持平，但更大模型仍在 WebArena、知识和 coding 上占优。训练流程结合 SFT、teacher specialization、multi-domain on-policy distillation 与真实 harness 内的 agentic RL。这使消费级硬件上的隐私优先、持续运行本地 Agent 更可行。",
+      "points": 183,
+      "num_comments": 41,
+      "interest_tag": ""
+    },
+    {
+      "title": "Launch HN: Agent37 (YC F26) – Low-cost agent sandboxes for running agents",
+      "url": "https://news.ycombinator.com/item?id=50059096",
+      "tldr": "Agent37 pitches persistent agent sandboxes at an average reported cost of $0.37 per sandbox per month, under 10% of many alternatives. Its launch framing targets a concrete scaling pain: keeping isolated environments available for long-running agents without paying VM-like idle costs. The 160-point, 120-comment response indicates strong demand but also invites scrutiny of isolation guarantees, resource limits, and workload assumptions behind the price. The broader signal is that sandbox economics is becoming core agent infrastructure, not an implementation detail.",
+      "tldr_zh": "Agent37 主打持久 Agent sandbox，宣称平均每个 sandbox 每月成本为 0.37 美元，不到许多替代方案的 10%。它瞄准的痛点很具体：让长期运行的 Agent 保持隔离环境，同时避免像 VM 一样支付高额 idle cost。160 points、120 条评论说明需求强烈，但这一价格也需要结合隔离强度、资源限制和 workload 假设审视。更大的信号是，sandbox economics 正从实现细节变成 Agent 基础设施核心。",
+      "points": 160,
+      "num_comments": 120,
+      "interest_tag": ""
+    },
+    {
+      "title": "TV4 postpones show after AI agent erases edited material",
+      "url": "https://swedenherald.com/article/tv4-postpones-the-challenge-until-2027-after-technical-failure-erases-edited-footage",
+      "tldr": "TV4 postponed The Challenge until 2027 after edited material disappeared and had to be recreated. A newspaper attributed the deletion of a full season and hundreds of workdays to an AI agent, but TV4 itself confirmed only a technical failure, so the agent attribution remains unverified. The incident is therefore more useful as an operational warning than as established evidence about autonomous behavior. Destructive tools need least privilege, immutable backups, review gates, and recovery drills regardless of whether the initiating actor is human or AI.",
+      "tldr_zh": "TV4 因已剪辑素材消失、需要重做而把 The Challenge 推迟到 2027 年。有媒体把整季和数百工作日成果被删除归因于 AI agent，但 TV4 只确认了 technical failure，因此 Agent 归因仍未核实。这个事件更适合作为运维警示，而不是 AI 自主行为的确证。无论操作者是人还是 AI，破坏性工具都需要 least privilege、immutable backup、review gate 和恢复演练。",
+      "points": 145,
+      "num_comments": 84,
+      "interest_tag": ""
+    }
+  ]
+}
