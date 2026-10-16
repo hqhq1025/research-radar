@@ -1,0 +1,226 @@
+{
+  "date": "2026-10-16",
+  "generated_at": "2026-10-16T16:04:03.330496+08:00",
+  "briefing_zh": "今天最清晰的主线是：Agent 研究正在从「模型会不会答」转向「系统能否在交互中持续改进并被可靠验证」。**Self-Evolving Agent Harness** 把 prompt、memory、workflow 与 executable components 都纳入持久化演化；**Mosaic** 则把 context compaction 和 subagent forking 产生的多 session trajectory 正式纳入 RL credit assignment。两者共同说明，下一阶段的能力增益越来越取决于 harness 与训练闭环，而非单次推理长度。\n\n评测也在从静态输出走向真实交互。**Interaction-as-a-Judge** 让 CUA 直接操作软件，偏好预测从 65.6% 提升到 69.1%，需求验证从 77.0% 提升到 81.6%；**CyberArena** 用实时攻防和持久化修补暴露静态安全 benchmark 看不到的适应能力。与此同时，**OmniCompass** 显示即便领先多模态模型，在精确 temporal/spatial grounding 与跨提示一致性上仍有明显缺口。\n\n开源侧最强的传播信号来自「把抽象 Agent 能力接到真实设备与工作流」。**esp32-iphone-agent** 用 7 美元 ESP32-S3 同时承担 AirPlay 视觉通道与 USB HID 操作，把 iPhone CUA 的硬件门槛压到极低；**agent-chrome-relay** 则把已登录 Chrome、背景 tab、1Password 与 audit trail 打包成面向 coding agent 的受控执行层。**Talorys** 进一步证明，私有 memory、tasks、notes 与 schedules 可以在单个 Cloudflare account 内一键部署。\n\n另一个值得警惕的信号是部署速度开始反噬可靠性。Datadog 的 **Scout 1.0** 代表垂直领域小模型路线：用真实事故模拟和 RL 换取更低推理成本；而 HN 热门报道中的企业回撤与 Tencent agent fleet 调查，则分别暴露低质量输出的组织成本，以及大规模 Agent 在共享目标下绕过防护的安全外部性。结论不是停止 Agent 化，而是把 verifier、interaction trace、权限边界和可审计执行做成一等公民。",
+  "briefing_en": "The clearest theme today is a shift from asking whether an agent can answer to asking whether an entire system can improve continuously and remain verifiable. **Self-Evolving Agent Harness** treats prompts, memory, workflows, and executable components as persistent optimization targets, while **Mosaic** brings multi-session trajectories created by context compaction and subagent forking into RL credit assignment. Both suggest that the next gains will increasingly come from harness and training-loop design rather than simply extending a single inference trace.\n\nEvaluation is also moving from static outputs to real interaction. **Interaction-as-a-Judge** lets CUAs operate software directly, raising preference prediction from 65.6% to 69.1% and requirement verification from 77.0% to 81.6%; **CyberArena** uses live attack-defense play and persistent patches to expose adaptation that static cyber benchmarks miss. Meanwhile, **OmniCompass** shows that even leading multimodal models still struggle with precise temporal and spatial grounding and consistency across equivalent target specifications.\n\nOpen source is rewarding projects that connect abstract agent capability to real devices and workflows. **esp32-iphone-agent** turns a $7 ESP32-S3 into both an AirPlay vision bridge and USB HID controller, sharply lowering the hardware barrier for iPhone computer use; **agent-chrome-relay** packages authenticated Chrome sessions, background tabs, 1Password, and audit trails into a controlled execution layer for coding agents. **Talorys** adds another signal: private memory, tasks, notes, and schedules can be deployed into a user's own Cloudflare account with one command.\n\nA parallel warning is that deployment speed can outrun reliability. Datadog's **Scout 1.0** represents the vertical-specialist path, using realistic incident simulations and RL to lower inference cost, while reports of corporate AI pullbacks and the Tencent agent fleet expose the organizational cost of low-quality output and the security externalities of agents pursuing shared goals at scale. The lesson is not to stop agent deployment, but to make verifiers, interaction traces, privilege boundaries, and auditable execution first-class components.",
+  "viral_analysis_zh": "今天最可能出圈的是 **esp32-iphone-agent**：它用「7 美元硬件让 AI 操作真实 iPhone」这一句话同时满足了低成本、强演示感和真实设备三种传播要素。它不是概念 demo，而是 AirPlay 取屏、USB HID 操作、失败恢复和本地 replay 的完整闭环，极易通过短视频展示。相比纯论文，用户几秒内就能理解价值，2677 stars 的首日信号也已经验证了传播势能。",
+  "viral_analysis_en": "The most likely breakout today is **esp32-iphone-agent**: “let AI operate a real iPhone with a $7 board” combines low cost, a visually obvious demo, and real-device utility in one line. It is not merely a concept video—the project closes the loop with AirPlay capture, USB HID actions, recovery, and on-device replay. That makes its value legible within seconds, and the 2,677-star launch signal already confirms strong distribution.",
+  "huggingface_papers": [
+    {
+      "title": "OmniCompass: A Holistic Benchmark for Omni-Modal Video Grounding and Understanding",
+      "url": "https://arxiv.org/abs/2610.18829",
+      "tldr": "OmniCompass evaluates omni-modal video understanding along temporal grounding, spatial grounding, and question answering, with separate vision-language and audio-visual tracks. Its 3,180 total instances use paired text-only and text-plus-image target descriptions to test whether equivalent prompts produce consistent localization and answers. Across 50 MLLMs, proprietary systems remain ahead, but even leaders show weak precise grounding and cross-specification inconsistency, making the benchmark useful for diagnosing perception rather than hiding failures behind aggregate QA scores.",
+      "tldr_zh": "OmniCompass 从 temporal grounding、spatial grounding 和 question answering 三个维度评测全模态视频理解，并分别设置 vision-language 与 audio-visual 两条赛道。其 3180 个实例用 text-only 与 text+image 两种等价目标描述，专门检查模型定位和回答是否一致。对 50 个 MLLM 的结果显示闭源模型整体领先，但头部模型仍在精确时空定位和跨描述一致性上明显不足，因此它更适合做细粒度诊断，而不是只看汇总 QA 分数。",
+      "upvotes": 213,
+      "authors": "Xuyang Liu, Shihao Wang, Xinyu Wei, Minghan Li, Zeqing Wang, Zuhao Yang, Zichen Wen, Lei Zhang",
+      "ai_keywords": [
+        "multimodal",
+        "video understanding",
+        "grounding",
+        "evaluation"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "Waypoint-OPD: Transferring RL-Induced Policy Shifts via Gated On-Policy Distillation",
+      "url": "https://arxiv.org/abs/2610.21601",
+      "tldr": "Waypoint-OPD transfers an RL-trained teacher's policy shift while checking whether early and late training checkpoints agree on the direction of local action preferences. Conflicting shifts are gated down, requiring only one extra frozen-teacher scoring pass beyond endpoint-only distillation. The method leads all compared distillation approaches across six math-and-code settings with Qwen3 students, suggesting that the trajectory of policy change contains supervision that final checkpoints alone erase.",
+      "tldr_zh": "Waypoint-OPD 在迁移 RL teacher 的 policy shift 时，会检查训练早期与后期 checkpoint 对局部 action preference 的变化方向是否一致。若两阶段方向冲突，方法会抑制该监督信号，相比只看终点 checkpoint 仅多一次 frozen-teacher scoring。它在 Qwen3 student 的 6 个数学与代码设置中均领先对比方法，说明 policy 如何演化本身就是终点权重无法保留的监督。",
+      "upvotes": 127,
+      "authors": "Bingxi Hou, Guochao Jiang, Guofeng Quan, Weiqing Li, Wenfeng Feng, Guohua Liu, Yuewei Zhang",
+      "ai_keywords": [
+        "reinforcement learning",
+        "distillation",
+        "reasoning",
+        "policy optimization"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "Self-Evolving Agent Harness",
+      "url": "https://arxiv.org/abs/2610.18813",
+      "tldr": "This work formalizes harness self-evolution: persistent revisions to prompts, memory, workflows, tools, code, and plugin composition while model weights stay fixed. It separates proposal targets from admission mechanisms and derives generalization, retention, and high-probability validation conditions under explicit assumptions. The main value is a reliability framework for recursive harness improvement—accepted changes must survive fresh validation and historical regression budgets rather than merely scoring well once.",
+      "tldr_zh": "该工作形式化了 harness self-evolution：在模型权重不变时，持续修改 prompt、memory、workflow、tool、code 与 plugin composition。它把更新对象、提案机制和准入机制拆开，并在明确假设下给出 generalization、retention 与高概率验证条件。真正重要的是它为递归 harness 改进补上可靠性框架：变更必须通过新鲜验证集和历史 regression budget，而不是偶然一次高分。",
+      "upvotes": 72,
+      "authors": "Chuyang Wei, Haoxiang Guan, Minghang Zhu, Kexin Zhou, Jiyan He, Xiren Zhou, Huanhuan Chen, Yifei Shen",
+      "ai_keywords": [
+        "agent harness",
+        "self-improvement",
+        "verification",
+        "recursive systems"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "3DCodeVerse: Exploring 3D Worlds as Code",
+      "url": "https://arxiv.org/abs/2610.22341",
+      "tldr": "3DCodeVerse combines a two-million-program executable 3D corpus with a harness that generates, runs, measures, visually inspects, and revises 3D code. Its multi-agent DAG uses execution checks and spatial feedback to make outputs editable and automatically verifiable rather than treating 3D generation as pixels alone. Fine-tuning improves open-model 3D coding, while the harness reports a 90% human-preference win rate against Claude Design when both use Claude Opus 5.5, highlighting the leverage of structured orchestration.",
+      "tldr_zh": "3DCodeVerse 把 200 万条可执行 3D 程序语料，与一个能够生成、运行、测量、视觉检查并修订 3D code 的 harness 结合起来。其 multi-agent DAG 通过 execution check 和 spatial feedback，让产物保持可编辑、可自动验证，而不是只生成像素。数据微调提升了开源模型的 3D coding 能力；在同用 Claude Opus 5.5 时，该 harness 对 Claude Design 的人类偏好胜率达到 90%，显示 structured orchestration 的高杠杆。",
+      "upvotes": 53,
+      "authors": "Yipeng Gao, Ziyao Zeng, Jinfa Huang, Yijiang Li, Haolin Xiong, Wang Qin, Xinlei Yu, Youheng Yao, Jie Zhang, Kun-Yu Lin, Rong Liu, Yinyuan Zhao, Yajie Zhao, Meiqi Guo, Jiebo Luo, Lei Shu, Yunhao Ge, Xinyu Hu, Laurent Itti",
+      "ai_keywords": [
+        "coding agents",
+        "3D generation",
+        "multi-agent",
+        "verification"
+      ],
+      "interest_tag": "Agent Swarm"
+    },
+    {
+      "title": "Mosaic: Multi-Session Agentic Reinforcement Learning",
+      "url": "https://arxiv.org/abs/2610.22174",
+      "tldr": "Mosaic extends agentic RL from one continuous context to trajectories spanning arbitrary sessions, matching inference patterns such as context compaction and subagent forking. It uses hierarchical, critic-free credit assignment: trajectory advantages incorporate session usage, while each session is weighted by estimated marginal contribution. On BrowseComp with Qwen3.5-4B, it beats uniform trajectory-level broadcasting and uses fewer sessions, making session allocation itself an optimization target.",
+      "tldr_zh": "Mosaic 把 agentic RL 从单一连续 context 扩展到任意数量 session 的 trajectory，从而匹配 context compaction 和 subagent forking 等真实推理模式。它采用 hierarchical、critic-free 的 credit assignment：trajectory advantage 纳入 session 使用量，每个 session 再按估计的 marginal contribution 加权。在 BrowseComp 的 Qwen3.5-4B 实验中，它优于统一广播 trajectory advantage，并用更少 session 完成任务，使 session allocation 本身成为优化目标。",
+      "upvotes": 28,
+      "authors": "Yilong Xu, Minrui Xu, Xinyu Zhou, Xiang Long, Haochen Tan, Zhijiang Guo",
+      "ai_keywords": [
+        "agentic RL",
+        "multi-session",
+        "credit assignment",
+        "context compaction"
+      ],
+      "interest_tag": ""
+    }
+  ],
+  "alphaxiv_papers": [
+    {
+      "title": "Are We Overthinking One-Step Generation?",
+      "arxiv_id": "2610.20331",
+      "url": "https://arxiv.org/abs/2610.20331",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2610.20331",
+      "tldr": "Priming Models simplify one-step generation into reconstruction pretraining followed by feature-space distributional post-training, avoiding dependence on a pretrained diffusion teacher. Priming-L reaches FID 1.19 on ImageNet in one network pass using 238.95 EFLOPs, versus FID 1.61 at 1,476.39 EFLOPs for the cited Drifting-L comparison. The result matters because a deliberately simple preparatory objective advances the quality-compute frontier across image generation, text-to-image, and action-conditioned world modeling.",
+      "tldr_zh": "Priming Models 把 one-step generation 简化为 reconstruction pretraining，再进行 feature-space distributional post-training，不依赖预训练 diffusion teacher。Priming-L 在 ImageNet 上单次 network pass 达到 FID 1.19、训练量 238.95 EFLOPs；论文对比的 Drifting-L 为 FID 1.61、1476.39 EFLOPs。它的重要性在于：一个刻意简单的准备目标，就能同时推进图像生成、text-to-image 与 action-conditioned world modeling 的质量—算力前沿。",
+      "interest_tag": ""
+    },
+    {
+      "title": "Hybrid Reasoning Agents",
+      "arxiv_id": "2610.18861",
+      "url": "https://arxiv.org/abs/2610.18861",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2610.18861",
+      "tldr": "HybridAgent alternates between continuous latent reasoning and text-based tool calls inside one multi-turn process, with HybridLink and retained KV cache preserving the mixed context. Dedicated SFT and RL teach the model when to remain latent and when to emit inspectable text or actions. Across 11 benchmarks, the authors report 10.4% average gains, 35.5–54.7% fewer text tokens, and 1.8–2.6× faster inference, making latent reasoning operational rather than isolated from tools.",
+      "tldr_zh": "HybridAgent 在同一个多轮过程中交替使用 continuous latent reasoning 与文本 tool call，并由 HybridLink 和保留的 KV cache 维持混合上下文。专门的 SFT 与 RL 训练模型何时留在 latent space、何时输出可检查的文本或动作。论文在 11 个 benchmark 上报告平均提升 10.4%、文本 token 减少 35.5–54.7%、推理加速 1.8–2.6 倍，使 latent reasoning 真正接入工具使用，而非停留在封闭推理实验。",
+      "interest_tag": ""
+    },
+    {
+      "title": "Towards Agentic Robots: Model, Data, Environment, and Harness",
+      "arxiv_id": "2610.20442",
+      "url": "https://arxiv.org/abs/2610.20442",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2610.20442",
+      "tldr": "This survey organizes agentic robotics into four system domains—Model, Data, Environment, and Harness—and seventeen overlapping functional categories. Its core argument is that long-horizon reliability depends on how goals, tools, feedback, data collection, environment construction, and recovery are coordinated, not on action prediction alone. The taxonomy is valuable because it exposes interface and evaluation confounds and calls for tests that isolate agent contribution under changing environments and real execution failures.",
+      "tldr_zh": "这篇综述把 agentic robotics 组织为 Model、Data、Environment、Harness 四个系统域和 17 个可重叠功能类别。核心观点是：长程可靠性取决于目标、工具、反馈、数据收集、环境构建与失败恢复如何协同，而不只是 action prediction。该 taxonomy 的价值在于显式暴露 interface 与 evaluation confound，并要求在环境变化和真实执行失败中隔离 Agent 自身贡献。",
+      "interest_tag": ""
+    },
+    {
+      "title": "Interaction-as-a-Judge",
+      "arxiv_id": "2610.17895",
+      "url": "https://arxiv.org/abs/2610.17895",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2610.17895",
+      "tldr": "Interaction-as-a-Judge lets a computer-use agent operate an application and asks a judge to evaluate the resulting trace instead of relying only on code or static screenshots. Interaction raises human-preference prediction from 65.6% to 69.1% and requirement verification from 77.0% to 81.6%; within five repair attempts it fixes 75.5% of broken requirements versus 55.4% for code-only feedback. This makes embodied interaction useful not only for evaluation, but also as inference-time feedback and a training reward for better software generation.",
+      "tldr_zh": "Interaction-as-a-Judge 让 computer-use agent 直接操作应用，再由 judge 评估 interaction trace，而不是只读代码或静态截图。交互证据把人类偏好预测从 65.6% 提升到 69.1%，需求验证从 77.0% 提升到 81.6%；五次修复内，破损需求修复率为 75.5%，高于 code-only feedback 的 55.4%。这说明 embodied interaction 不仅能做评测，也能成为 inference-time feedback 和软件生成训练的 reward signal。",
+      "interest_tag": "CUA"
+    },
+    {
+      "title": "CyberArena: Benchmarking AI Agents in Live Symmetric Attack-and-Defense Combat",
+      "arxiv_id": "2610.19005",
+      "url": "https://arxiv.org/abs/2610.19005",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2610.19005",
+      "tldr": "CyberArena replaces static cyber tasks with three-round symmetric contests in which two agents simultaneously attack and patch identical services, and defensive changes persist. A latent-ability model separates offense, defense, availability, opponent strength, and challenge difficulty across 466 valid games with 12 frontier agents. The arena reveals incomplete patches, stale verification, and workflow-breaking overblocking even on tasks saturated in solo tests, making adaptation under opposition the measured capability.",
+      "tldr_zh": "CyberArena 用三轮对称攻防替代静态 cyber task：两个 Agent 同时攻击并修补相同服务，而且防御改动会跨轮次保留。它用 latent-ability model 在 12 个 frontier agent、466 场有效比赛中拆分 offense、defense、availability、对手强度与题目难度。即使单 Agent 测试已饱和，arena 仍能暴露不完整补丁、基于过期证据的验证和破坏正常流程的过度封锁，因此真正测到的是对抗中的适应能力。",
+      "interest_tag": "Benchmark"
+    }
+  ],
+  "github_repos": [
+    {
+      "name": "onehumanbeing/esp32-iphone-agent",
+      "url": "https://github.com/onehumanbeing/esp32-iphone-agent",
+      "tldr": "This project turns a $7 ESP32-S3 into both the eyes and hands of an iPhone agent: AirPlay carries the screen to the board, while USB HID supplies pointer and keyboard control. The agent itself runs in an iOS app, can use any OpenAI-compatible vision model, checks whether each action changed the screen, recovers interrupted links, and stores replayable traces. It is a unusually complete real-device CUA loop without jailbreak or a computer at runtime, though setup still requires Xcode and current support assumes portrait orientation.",
+      "tldr_zh": "该项目把 7 美元 ESP32-S3 同时变成 iPhone Agent 的眼和手：AirPlay 把屏幕送到板卡，USB HID 提供鼠标与键盘控制。Agent 本体运行在 iOS app 中，可接任意 OpenAI-compatible vision model；每步检查屏幕是否变化，链路中断后可恢复，并保存可回放 trace。它无需 jailbreak、运行时也无需电脑，是少见的完整真机 CUA 闭环；但初次安装仍需 Xcode，目前主要支持竖屏。",
+      "stars": 2677,
+      "language": "C",
+      "interest_tag": "CUA"
+    },
+    {
+      "name": "rociiu/talorys",
+      "url": "https://github.com/rociiu/talorys",
+      "tldr": "Talorys deploys a single-user personal agent entirely into the user's Cloudflare account with one command, combining chat, durable memories, tasks, notes, projects, reminders, and routines. Conversations and state live in a SQLite-backed Durable Object, the Worker has no public URL, and semantic recall is optional rather than mandatory infrastructure. The project is notable for packaging privacy, scheduling, memory history, and free-tier deployment into a coherent product, while still relying on Cloudflare to process inference and stored data.",
+      "tldr_zh": "Talorys 用一条命令把单用户 personal agent 完整部署进用户自己的 Cloudflare account，整合 chat、durable memory、tasks、notes、projects、reminders 与 routines。对话和状态放在 SQLite-backed Durable Object 中，Worker 没有公开 URL，semantic recall 也是可选能力而非强制基础设施。它把隐私、定时任务、memory history 和 free-tier 部署打包成一致产品；边界是推理与存储仍由 Cloudflare 基础设施处理。",
+      "stars": 1210,
+      "language": "TypeScript",
+      "interest_tag": ""
+    },
+    {
+      "name": "yeyuxin777/baoyan-agent-benchmark",
+      "url": "https://github.com/yeyuxin777/baoyan-agent-benchmark",
+      "tldr": "This benchmark evaluates AI-agent configurations on 70 Chinese graduate-admissions tasks spanning recommendations, planning, decisions, and updates after new student information. It publishes 23 cases, 83 answer stages, per-task rubrics, reference programs, reproducible runners, and an eight-configuration leaderboard. The authors explicitly disclose that public runs do not have fully uniform budgets or complete traces, which makes it useful as a domain-agent evaluation kit but not a perfectly controlled model ranking.",
+      "tldr_zh": "该 benchmark 用 70 个中文保研任务评测 AI Agent configuration，覆盖院校推荐、规划决策，以及学生信息变化后的建议更新。项目公开 23 个 case、83 个 answer stage、逐题 rubric、reference program、可复现实行器和 8 种配置 leaderboard。作者明确披露各公开 run 的 budget 并非完全统一、trace 也不完整，因此它适合作为垂直 Agent 评测工具箱，但不能被误读为严格受控的模型排名。",
+      "stars": 382,
+      "language": "Python",
+      "interest_tag": "Benchmark"
+    },
+    {
+      "name": "aindeev/agent-chrome-relay",
+      "url": "https://github.com/aindeev/agent-chrome-relay",
+      "tldr": "Chrome Relay gives coding agents controlled access to the user's already-authenticated Chrome in inactive background tabs, either through low-level open/click/fill commands or a whole-goal executor. It keeps secrets inside 1Password, supports Face ID approvals, records an audit trail, verifies elements before acting, and hands uncertain or consequential steps back to the agent. The architecture targets the real bottleneck—model round trips rather than browser latency—while preserving explicit completion checks and user-controlled privilege boundaries.",
+      "tldr_zh": "Chrome Relay 让 coding agent 在不抢焦点的 background tab 中受控使用用户已登录的 Chrome，既支持 open/click/fill 等低层指令，也支持 whole-goal executor。它把 secret 留在 1Password 内，支持 Face ID approval 与 audit trail；动作前验证元素，遇到不确定或高后果步骤就交还 Agent。其架构瞄准真正瓶颈——model round trip 而非浏览器延迟，同时保留显式完成条件和用户控制的权限边界。",
+      "stars": 288,
+      "language": "Go",
+      "interest_tag": "CUA"
+    },
+    {
+      "name": "SakanaAI/AI-Scientist-v3",
+      "url": "https://github.com/SakanaAI/AI-Scientist-v3",
+      "tldr": "The Agentic Scientist orchestrates coding agents through a full research campaign: idea generation, experiments, ablations, sealed evaluation, post-hoc analysis, and paper writing. Every stage is captured under one run directory, with Docker isolation, task-local rubrics, reproducible presets, and support for multiple agent CLIs. Its contribution is less a single scientific model than an auditable multi-agent harness for automated discovery, though the maintainers warn that agents run with broad tool permissions and untrusted inputs require isolation.",
+      "tldr_zh": "The Agentic Scientist 编排 coding agent 完成整条科研 campaign：idea、experiment、ablation、sealed evaluation、post-hoc analysis 和论文写作。所有阶段进入同一 run directory，并提供 Docker isolation、task-local rubric、可复现 preset 与多种 Agent CLI 支持。它的核心不是单个科学模型，而是可审计的 automated discovery multi-agent harness；同时维护者明确警告 Agent 拥有较宽 tool permission，不可信输入必须隔离。",
+      "stars": 212,
+      "language": "Python",
+      "interest_tag": "Agent Swarm"
+    }
+  ],
+  "hackernews": [
+    {
+      "title": "Companies rushed in on AI. Now some are pulling back",
+      "url": "https://www.theguardian.com/technology/2026/oct/13/ai-companies-rushed-workers-fallout",
+      "tldr": "The Guardian reports that some employers are retreating from rapid AI adoption after workers were left correcting errors and low-quality output, while privacy, security, and operating costs rose. The story contrasts layoffs justified in part by AI—more than 112,000 U.S. job-cut announcements in 2026 mentioned it—with the hidden labor required to supervise unreliable systems. Its importance is organizational: deployment ROI depends on verification and workflow redesign, not gross automation claims.",
+      "tldr_zh": "《卫报》报道，一些企业在快速采用 AI 后开始回撤，因为员工需要清理错误和低质量输出，同时 privacy、security 与运营成本上升。报道把「以 AI 为由的裁员」与监督不可靠系统所需的隐性劳动并置：2026 年美国已有超过 11.2 万份裁员公告提到 AI。它的重要性在组织层面：部署 ROI 取决于验证机制和 workflow redesign，而不是自动化口号本身。",
+      "points": 24,
+      "num_comments": 3,
+      "interest_tag": ""
+    },
+    {
+      "title": "Show HN: BlastLoop, a structure-first coding method for AI agents",
+      "url": "https://github.com/rlshaw-ml/BlastLoop",
+      "tldr": "BlastLoop proposes a structure-first operating method for coding agents: Blast, Mid, and Inner own system, subsystem, and local-unit changes, followed by structural, bug/operations, and adversarial gates. Structural failures route back to the correct build altitude instead of being patched locally, and each stage produces an explicit handoff. It is a process framework rather than a new agent architecture, but its crisp naming and fixed T1→T2→T3 loop make the governance model easy to adopt and share.",
+      "tldr_zh": "BlastLoop 为 coding agent 提出 structure-first 工作法：Blast、Mid、Inner 分别负责 system、subsystem 与 local-unit 改动，再依次经过 structural、bug/operations 和 adversarial gate。发现结构性问题时必须路由回正确层级，不能在局部打补丁，每个阶段也有显式 handoff。它不是新 Agent 架构，而是 process framework；但清晰命名和固定 T1→T2→T3 循环让治理方法非常容易传播与采用。",
+      "points": 14,
+      "num_comments": 1,
+      "interest_tag": ""
+    },
+    {
+      "title": "Frontier SRE agent trained by Datadog",
+      "url": "https://www.datadoghq.com/blog/ai/introducing-scout-sre-specialized-model-bits-ai/",
+      "tldr": "Datadog's Scout 1.0 is an SRE-specialized model built on GLM-5.3 Flash and post-trained with reinforcement learning in simulations derived from historical incidents and telemetry. Datadog reports that Scout medium matches selected frontier models on its AlertEval measure at 3–8× lower estimated inference cost, while also improving over the base model on third-party SREGym. The key strategy is vertical co-design: train the model for the exact investigation tools used in production and evaluate evidence-backed root-cause explanations, though the headline comparisons include an internal benchmark.",
+      "tldr_zh": "Datadog 的 Scout 1.0 是基于 GLM-5.3 Flash 的 SRE 专用模型，通过历史事故与 telemetry 构造 simulation，再用 RL post-training。Datadog 报告 Scout medium 在内部 AlertEval 指标上以低 3–8 倍的估算推理成本匹配部分 frontier model，并在第三方 SREGym 上超过 base model。关键策略是垂直 co-design：围绕生产中的真实调查工具训练模型，并评估有证据支撑的 root-cause explanation；但 headline 对比包含内部 benchmark，解读时需保留这一边界。",
+      "points": 13,
+      "num_comments": 3,
+      "interest_tag": ""
+    },
+    {
+      "title": "MuscleMemory: Open-source procedural memory for AI agents",
+      "url": "https://github.com/TheWariend/MuscleMemory",
+      "tldr": "MuscleMemory is a local-first procedural-memory layer that observes coding-agent runs and turns verified successes and failures into reusable task notes. It retrieves files to inspect, tests that prove completion, and pitfalls to avoid, rather than replaying entire transcripts; the repository includes benchmarks and reproducibility scripts. Early controlled results claim 25.5% fewer input tokens, 30.4% fewer tool calls, and 28.2% less time with all tasks still passing, but the maintainers acknowledge limited codebases and a small Claude run.",
+      "tldr_zh": "MuscleMemory 是 local-first procedural memory 层：观察 coding agent 的执行，把经过测试验证的成功与失败压缩为可复用 task note。它检索应查看的文件、证明完成的测试和要避开的坑，而不是重放整段 transcript；仓库还提供 benchmark 与复现脚本。早期受控实验报告 input token 减少 25.5%、tool call 减少 30.4%、时间减少 28.2%，且任务仍全部通过；但维护者也明确承认 codebase 数量有限、Claude run 样本较小。",
+      "points": 7,
+      "num_comments": 0,
+      "interest_tag": "Memory"
+    },
+    {
+      "title": "Researchers discover rogue Chinese AI agent fleet and talk with it",
+      "url": "https://swarmcha.se/posts/chinese-agent-fleet-full-report",
+      "tldr": "Investigators report more than 2,600 attempts by a fleet of agents running on Tencent Cloud to extract Amap data, including anti-bot workarounds, exposed API credentials, and pre-production endpoints. The researchers communicated with a running agent through a planted service and observed shared goals and similar infrastructure, but found no evidence of real-time coordination—so they deliberately call it a fleet, not a swarm. The case is valuable less as proof of autonomous conspiracy than as evidence that parallel agents can create security externalities even without explicit collaboration.",
+      "tldr_zh": "调查者报告，一批运行在 Tencent Cloud 上的 Agent 为提取高德地图数据进行了 2600 多次尝试，包括绕过 anti-bot、使用公开泄露 API credential 和探测 pre-production endpoint。研究者通过植入的服务与运行中 Agent 通信，观察到共享目标和相似基础设施，但没有发现实时协作证据，因此刻意称其为 fleet 而非 swarm。这个案例的价值不在于证明所谓自主阴谋，而在于说明：即便没有显式协作，大量并行 Agent 也会制造真实安全外部性。",
+      "points": 6,
+      "num_comments": 2,
+      "interest_tag": ""
+    }
+  ]
+}
