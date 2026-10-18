@@ -1,0 +1,223 @@
+{
+  "date": "2026-10-18",
+  "generated_at": "2026-10-18T16:03:39.339892+08:00",
+  "briefing_zh": "今天最清晰的主线，是 agent 研究从单一模型能力转向完整系统栈。**OpenGCUA** 把 generalist computer use 定义为模型在视觉与程序化接口之间自主选择观察、动作和工作组织方式；**MAI-Gym** 则把 GUI agent 的评测、数据收集和 online RL 放进同一条 rollout pipeline。与之呼应，**Self-Evolving Agent Harness** 直接把 prompts、memory、workflow、tools 和 code 的持续修订形式化，说明竞争焦点正在从模型权重扩展到可验证、可演化的 harness。\n\n评测也开始逼近真实工作，而不再只检查规格明确的任务。**FDE-Gym** 用 95 个跨 18 个行业的端到端交付任务，要求 agent 主动澄清模糊需求、发现隐含约束并操作 production-like system；**Sphinx** 和 53-agent behavioral testing 则从另一端强调，人类理解门禁和行为级回归测试正在成为 coding agent 上线的必要设施。今天的共同信号不是「agent 会不会做」，而是「在不完整信息、真实系统和可追责流程中能否可靠交付」。\n\n训练方法正同时优化能力传递和失败方式。**Waypoint-OPD** 利用 RL 过程中间 checkpoint 判断策略变化是否方向一致，只转移更可信的 policy shift；**Training Language Models to Fail Gracefully** 则改变奖励结构，让模型在不可靠时选择安全 fallback，而不是被成功奖励逼着猜测。两者都在把粗粒度 outcome reward 细化为更可靠的学习信号：前者过滤不稳定增益，后者把不可避免的失败变成可控行为。\n\n开源热度集中在 agent-native infrastructure。**gitai** 用一句「Git designed for AI agents」切中大规模并发 coding agents 的 source-control 痛点，三天内获得超过千星；**earshot** 为 coding agents 增加本地、CPU-only 的听觉检查能力，**trim-1** 则用 1.2 MB 的确定性模型压缩工具输出。与此同时，**Librarian Agents** 和 **Learning Self-Orchestration in Decentralized Agent Swarms** 分别把长期 workspace 整理与协作拓扑本身变成可训练对象，表明 memory 与 multi-agent 的价值正从组件堆叠转向任务驱动的结构学习。",
+  "briefing_en": "The clearest theme today is a shift from isolated model capability to the full agent stack. **OpenGCUA** defines generalist computer use as letting the model choose how to observe, act, and organize work across visual and programmatic interfaces, while **MAI-Gym** unifies GUI-agent evaluation, data collection, and online RL in one rollout pipeline. **Self-Evolving Agent Harness** pushes the same idea further by formalizing persistent revisions to prompts, memory, workflows, tools, and code, suggesting that the competitive frontier now includes verifiable and evolvable scaffolding around model weights.\n\nEvaluation is also moving closer to real work rather than cleanly specified tasks. **FDE-Gym** contains 95 end-to-end delivery tasks across 18 sectors, requiring agents to clarify ambiguous requirements, discover hidden constraints, and modify production-like systems. From the deployment side, **Sphinx** and the 53-agent behavioral-testing report argue for human-understanding gates and behavioral regression tests before agent-written code reaches production. The shared question is no longer merely whether an agent can finish a task, but whether it can deliver reliably under incomplete information, live-system constraints, and accountable processes.\n\nTraining research is improving both capability transfer and the shape of failure. **Waypoint-OPD** uses an intermediate RL checkpoint to test whether policy shifts remain directionally consistent before distilling them, whereas **Training Language Models to Fail Gracefully** reshapes reward optimization so a model can choose a safe fallback instead of being pushed to guess. Both refine coarse outcome rewards into more dependable learning signals: one suppresses unstable gains, and the other turns unavoidable failure into controlled behavior.\n\nOpen-source attention is clustering around agent-native infrastructure. **gitai** packages the message “Git designed for AI agents” around the source-control bottleneck created by many concurrent coding agents and crossed one thousand stars in three days; **earshot** gives coding agents local, CPU-only audio inspection, while **trim-1** uses a deterministic 1.2 MB model to filter tool output. At the research layer, **Librarian Agents** and **Learning Self-Orchestration in Decentralized Agent Swarms** make workspace organization and coordination topology trainable, moving memory and multi-agent systems away from component stacking toward task-driven structural learning.",
+  "viral_analysis_zh": "今天最可能继续爆发的是 **gitai**：它借势 Anthropic 未开源的 Scion，用「Git designed for AI agents」把复杂架构压缩成一句人人都懂的痛点，并配合高并发对比演示形成强传播钩子。其增长模式是「大厂内部趋势验证需求 + 开源平替占位 + 可视化性能叙事」，比泛化的 agent framework 更容易让开发者立即转发和试用。",
+  "viral_analysis_en": "**gitai** is the item most likely to keep spreading. It rides the demand validated by Anthropic’s closed Scion system, compresses a complex architecture into the instantly legible promise “Git designed for AI agents,” and supports it with a visual concurrency comparison. The pattern—big-lab validation, an open-source substitute, and a demonstrable performance story—creates a much stronger sharing hook than another generic agent framework.",
+  "huggingface_papers": [
+    {
+      "title": "Waypoint-OPD: Transferring RL-Induced Policy Shifts via Gated On-Policy Distillation",
+      "url": "https://arxiv.org/abs/2610.21601",
+      "tldr": "Policy-shift distillation usually transfers only the difference between a teacher before and after RL, even when that endpoint hides unstable changes during training. Waypoint-OPD adds one intermediate teacher checkpoint and gates transfer according to whether early and late shifts in action preference agree on student-visited prefixes. Opposing shifts are suppressed, requiring only one extra frozen-teacher scoring pass. Across six mathematics and coding teacher-student settings, the method consistently improves on endpoint-only transfer, making RL capability transfer more selective and reliable.",
+      "tldr_zh": "传统 policy-shift distillation 只看 teacher 在 RL 前后的差异，但相同终点可能掩盖训练过程中相互抵消的不稳定变化。Waypoint-OPD 引入一个中间 checkpoint，在 student 实际访问的 prefix 上比较早期与后期 action preference 的方向是否一致，并据此门控迁移。方向冲突的 shift 会被抑制，额外成本仅是一轮 frozen teacher scoring。该方法在数学与代码推理的六组 teacher-student 配置中均优于只看终点的迁移，使 RL 能力蒸馏更有选择性。",
+      "upvotes": 666,
+      "authors": "Bingxi Hou, Guochao Jiang, Guofeng Quan, Weiqing Li, Wenfeng Feng, Guohua Liu",
+      "ai_keywords": [
+        "reinforcement learning",
+        "on-policy distillation",
+        "policy shift"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "OpenGCUA: Toward a Fully Open Stack for Generalist Computer Use",
+      "url": "https://arxiv.org/abs/2610.22200",
+      "tldr": "OpenGCUA defines a generalist computer-use agent as a system that chooses among visual and programmatic interfaces, rather than treating computer use as GUI clicking alone. Its first release emphasizes code execution and transfers selected observation and task-state decisions from fixed harness rules into the model. The project opens the stack needed to study these choices instead of relying on closed frontier implementations. On OSWorld-v2, the full configuration improves task scores across all eight evaluated models, making it an important reference for model-harness co-design.",
+      "tldr_zh": "OpenGCUA 将 generalist computer-use agent 定义为能够在视觉与程序化接口之间自主选择的系统，而不是只会 GUI 点击的模型。首个版本强调 code execution，并把部分 observation 与 task-state 决策从固定 harness 规则迁移给模型。项目开放完整技术栈，使研究者可以系统分析这些设计，而不必依赖封闭的 frontier implementation。在 OSWorld-v2 上，完整配置提升了全部八个受测模型的任务得分，是研究 model-harness co-design 的重要基线。",
+      "upvotes": 316,
+      "authors": "Hanzhang Zhou, Long Li, Quyu Kong, Lei Wang, Panrong Tong, Long Chen",
+      "ai_keywords": [
+        "computer use agent",
+        "GUI agent",
+        "agent harness",
+        "OSWorld-v2"
+      ],
+      "interest_tag": "CUA"
+    },
+    {
+      "title": "FDE-Gym: The Last Mile of AI Delivery",
+      "url": "https://arxiv.org/abs/2610.22350",
+      "tldr": "FDE-Gym targets the gap between benchmark tasks with clear tickets and real customer delivery with ambiguous requirements. It contains 95 end-to-end tasks from 20 customer scenarios across 18 sectors, using scripted stakeholders and modifiable production-like systems. Scores measure improvement to the customer's own success metric while penalizing excessive messages, trial runs, and waiting. The best evaluated configuration reaches only 0.56 in the realistic setting, exposing requirement discovery and delivery efficiency as major unsolved agent capabilities.",
+      "tldr_zh": "FDE-Gym 针对「清晰工单 benchmark」与真实客户交付之间的差距，重点考察模糊需求和隐含约束。它包含来自 18 个行业、20 个客户场景的 95 个端到端任务，并提供 scripted stakeholder 与可修改的 production-like system。评分依据客户自身成功指标的改善，同时惩罚过多消息、试跑和等待。最佳配置在 realistic setting 中也只有 0.56，说明需求发现与高效交付仍是 agent 的明显短板。",
+      "upvotes": 284,
+      "authors": "Dongxu Yang, Hongda Yan, Renxin Wang, Baoli Zhang, Haojia Zuo, Ying Zhao",
+      "ai_keywords": [
+        "agent evaluation",
+        "forward-deployed engineering",
+        "interactive benchmark"
+      ],
+      "interest_tag": "Benchmark"
+    },
+    {
+      "title": "Self-Evolving Agent Harness",
+      "url": "https://arxiv.org/abs/2610.18813",
+      "tldr": "This work formalizes harness self-evolution: persistent revision of prompts, memory, workflows, executable components, and repository-level control while model weights stay fixed. It separates what is updated from how revisions are proposed and admitted, then analyzes evolutionary search through continual PAC-learning. The resulting framework provides conditions for generalization, historical-retention budgets, and high-probability admission using fresh validation data. Its importance is architectural: agent improvement becomes a governed software evolution problem rather than ad hoc prompt tweaking.",
+      "tldr_zh": "这项工作形式化了 harness self-evolution：在模型权重不变时，持续修订 prompts、memory、workflows、executable components 与 repository-level control。它区分「更新什么」和「如何提出并准入修订」，再用 continual PAC-learning 分析 evolutionary search。框架给出 generalization、历史能力保留预算和基于独立新验证集的高概率准入条件。它的重要性在于把 agent 改进从临时 prompt 调整，提升为有治理边界的软件演化问题。",
+      "upvotes": 198,
+      "authors": "Chuyang Wei, Haoxiang Guan, Minghang Zhu, Kexin Zhou, Jiyan He, Xiren Zhou",
+      "ai_keywords": [
+        "agent harness",
+        "self-evolution",
+        "continual validation"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "MAI-Gym: An Open All-in-One Platform for GUI Agent Evaluation and RL Training across Mobile and Computer Environments",
+      "url": "https://arxiv.org/abs/2610.20939",
+      "tldr": "MAI-Gym unifies GUI-agent evaluation, data collection, and online RL across mobile, desktop, and web environments through one rollout pipeline. It supports ten established benchmarks, scales to 20,000 parallel environment instances, and synthesizes resettable applications, cross-app worlds, and execution-validated verifiers. The resulting MAI-Gym-9B reaches 78.4% on MobileWorld and 76.2% on OSWorld-Verified, leading open GUI agents below 10B parameters. Transfer from a mocked train-ticketing app to its real counterpart is especially important evidence that scalable synthetic interaction can improve real computer use.",
+      "tldr_zh": "MAI-Gym 用统一 rollout pipeline 打通 mobile、desktop 和 web 环境中的 GUI agent 评测、数据收集与 online RL。平台支持十个既有 benchmark，可扩展到 20,000 个并行环境实例，并自动合成可重置应用、跨应用 world 与 execution-validated verifier。基于该平台训练的 MAI-Gym-9B 在 MobileWorld 达到 78.4%、OSWorld-Verified 达到 76.2%，成为 10B 以下 open GUI agent 的领先结果。更关键的是，mock train-ticketing app 上的 RL 能迁移到真实对应应用，为可扩展 synthetic interaction 改善真实 computer use 提供了证据。",
+      "upvotes": 154,
+      "authors": "Panrong Tong, Quyu Kong, Pengxiang Li, Tianyu Xia, Hanzhang Zhou, Lei Wang",
+      "ai_keywords": [
+        "GUI agent",
+        "online RL",
+        "computer use",
+        "OSWorld-Verified"
+      ],
+      "interest_tag": "CUA"
+    }
+  ],
+  "alphaxiv_papers": [
+    {
+      "title": "Generative Representation Learning for Scalable Latent Tokenization",
+      "arxiv_id": "2610.20533",
+      "url": "https://arxiv.org/abs/2610.20533",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2610.20533",
+      "tldr": "This paper trains self-supervised representations specifically to serve as latent tokenizers for generative models. Its objective factorizes pointwise mutual information using information differences from conditional generative predictions, avoiding dimensional collapse and feature suppression seen in common alternatives. The authors jointly analyze tokenizer and generator FLOP efficiency and report an FID-50K of 2.18 with JiT-L. The broader result is a scalable tokenizer whose representation quality improves predictably with compute and can beat direct pixel-space diffusion on total compute efficiency.",
+      "tldr_zh": "论文专门面向生成模型的 latent tokenizer 训练 self-supervised representation。其目标通过条件生成预测的信息差来分解 pointwise mutual information，从而避免常见方法中的 dimensional collapse 与 feature suppression。作者联合计算 tokenizer 与 generator 的 FLOP 效率，并用 JiT-L 报告 2.18 的 FID-50K。核心意义是得到一种可随 compute 稳定扩展、且在总计算效率上优于直接 pixel-space diffusion 的 tokenizer。",
+      "interest_tag": ""
+    },
+    {
+      "title": "T2-z: Test-Time Optimization of Environment Latents for Robotic World Models",
+      "arxiv_id": "2610.22364",
+      "url": "https://arxiv.org/abs/2610.22364",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2610.22364",
+      "tldr": "T2-z augments a robotic world model with a compact latent representing hidden environmental factors such as friction, mass, or task rules. Training alternates between learning shared action-conditioned dynamics and optimizing per-environment latents, without labels for which factors exist. At test time, the world model stays frozen while a fresh latent adapts from a small number of interactions in an unseen environment. This turns world-model adaptation into lightweight system identification instead of full parameter fine-tuning.",
+      "tldr_zh": "T2-z 为 robotic world model 加入一个紧凑 latent，用来表示摩擦、质量或任务规则等不可直接观察的环境因素。训练时交替学习共享的 action-conditioned dynamics 与每个环境的 latent，无需标注具体因素及其数值。测试时 world model 保持冻结，只用少量新交互优化新的 environment latent。这样，环境适配就从全参数 fine-tuning 变成轻量的 system identification。",
+      "interest_tag": ""
+    },
+    {
+      "title": "Librarian Agents: Training LLMs to Curate Long-Context Workspaces that Anticipate Future Queries",
+      "arxiv_id": "2610.22273",
+      "url": "https://arxiv.org/abs/2610.22273",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2610.22273",
+      "tldr": "Librarian Agents replaces reactive retrieval with anticipatory workspace construction. A builder agent reorganizes raw documents into a hierarchical filesystem of synthetic files and reference links designed to help a downstream answering agent with future queries. Workspace construction is formulated as an MDP and optimized with reinforcement learning against downstream answer accuracy. The key advance is treating reusable memory organization as a learned policy rather than a fixed chunking, retrieval, or knowledge-graph heuristic.",
+      "tldr_zh": "Librarian Agents 不再等问题出现后被动 retrieval，而是提前构建面向未来查询的 workspace。一个 builder agent 把原始文档重组为包含 synthetic files 与 reference links 的层级文件系统，供后续 answering agent 使用。Workspace construction 被建模为 MDP，并以最终回答准确率进行 reinforcement learning。其关键进步是把可复用的 memory organization 变成 learned policy，而不是固定的 chunking、retrieval 或 knowledge graph heuristic。",
+      "interest_tag": "Memory"
+    },
+    {
+      "title": "Learning Self-Orchestration in Decentralized Agent Swarms",
+      "arxiv_id": "2610.22322",
+      "url": "https://arxiv.org/abs/2610.22322",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2610.22322",
+      "tldr": "Market-based post-training jointly learns what each agent does and how a decentralized swarm organizes itself. Agents bid to participate; those bids determine who acts and convert collective outcomes into local credit, eliminating a fixed central coordinator. Experiments in embodied crafting, robot navigation, and deep research show learned orchestration outperforming alternative coordination strategies even with the same action policies. The result suggests that participation structure is itself a trainable capability, not merely an external workflow choice.",
+      "tldr_zh": "Market-based post-training 同时学习每个 agent 的 action policy 与 decentralized swarm 的组织方式。Agent 通过 bidding 表达参与意愿，bid 决定谁行动，并把 collective outcome 转换为局部 credit，不需要固定中央协调器。具身 crafting、robot navigation 与 deep research 实验表明，即使 action policy 相同，learned orchestration 仍优于其他 coordination strategy。结果说明 participation structure 本身就是可训练能力，而不只是外部 workflow 配置。",
+      "interest_tag": "Agent Swarm"
+    },
+    {
+      "title": "Training Language Models to Fail Gracefully",
+      "arxiv_id": "2610.20401",
+      "url": "https://arxiv.org/abs/2610.20401",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2610.20401",
+      "tldr": "Standard success-only RL rewards a risky guess over a safe fallback, which is dangerous when actions can corrupt databases or ship broken code. GracefulRL reshapes optimization so models preserve successful task behavior while selectively falling back when action would be unreliable. The behavior is learned from outcome-level rewards without labels saying when to abstain and without an inference-time verifier. This makes graceful failure a trainable policy property rather than a bolt-on safety rule.",
+      "tldr_zh": "只奖励成功的标准 RL 会让冒险猜测总是优于安全 fallback；当动作可能破坏数据库或发布错误代码时，这种激励非常危险。GracefulRL 重塑优化过程，使模型在保留任务能力的同时，能在不可靠时选择 fallback。该行为只依赖 outcome-level reward 学得，不需要标注何时 abstain，也不需要 inference-time verifier。它把 graceful failure 变成 policy 自身可训练的属性，而不是外挂的安全规则。",
+      "interest_tag": ""
+    }
+  ],
+  "github_repos": [
+    {
+      "name": "feder-cr/git-ai",
+      "url": "https://github.com/feder-cr/git-ai",
+      "tldr": "gitai is an open-source, server-centric version-control system designed for many coding agents reading, writing, and landing changes concurrently. It explicitly positions itself as a public implementation of the design direction behind Anthropic's internal Scion system. The server orders changes and preserves agent attribution, targeting throughput and coordination patterns that ordinary laptop-centric Git was not built for. Its rapid growth reflects a concrete infrastructure bottleneck created by agent swarms in software engineering.",
+      "tldr_zh": "gitai 是面向大量 coding agents 并发读取、写入和落地变更的开源 server-centric version-control system。它明确定位为 Anthropic 内部 Scion 设计方向的公共实现。Server 负责排序变更并保留 agent attribution，解决传统 laptop-centric Git 未针对的吞吐与协作模式。其快速增长反映出 software-engineering agent swarm 已经制造了真实的基础设施瓶颈。",
+      "stars": 1156,
+      "language": "Go",
+      "interest_tag": "Agent Swarm"
+    },
+    {
+      "name": "Leonxlnx/earshot",
+      "url": "https://github.com/Leonxlnx/earshot",
+      "tldr": "earshot gives coding agents a local audio-analysis layer so they can inspect the sound produced by games, demos, and generated media. It turns audio into textual and visual evidence, including descriptions, event timing, transcripts, similarity judgments, and quality scorecards. The project runs on CPU and exposes a CLI, Python API, and MCP server, while its forge and fit workflows let agents synthesize or reconstruct sounds in code. It is a strong example of extending agent observability into a modality that coding tools normally ignore.",
+      "tldr_zh": "earshot 为 coding agents 提供本地 audio-analysis 层，使其能够检查游戏、demo 与生成媒体实际发出的声音。它把音频转成可推理的文本和视觉证据，包括描述、事件时间、transcript、相似度判断与质量 scorecard。项目可在 CPU 上运行，并提供 CLI、Python API 和 MCP server；forge 与 fit workflow 还能让 agent 用代码合成或重建声音。它展示了如何把 agent observability 扩展到 coding tool 通常忽略的模态。",
+      "stars": 712,
+      "language": "Python",
+      "interest_tag": ""
+    },
+    {
+      "name": "anujasid/blender-ai-mcp-addon",
+      "url": "https://github.com/anujasid/blender-ai-mcp-addon",
+      "tldr": "This Blender add-on combines a visual chat workspace with an embedded MCP server for inspecting and editing scenes. Agents can create objects, modify materials, find assets, script with bpy, and execute multi-step workflows while the user remains inside Blender. It supports multiple model providers and keeps scene operations visible in the viewport for inspection. The value is less a new agent algorithm than a practical, integrated action surface for 3D creative work.",
+      "tldr_zh": "这个 Blender add-on 把 visual chat workspace 与内置 MCP server 结合起来，用于检查和编辑 scene。Agent 可以创建 object、修改 material、查找 asset、调用 bpy scripting，并执行多步 workflow，用户则始终留在 Blender 内。它支持多个模型 provider，并让 scene operation 在 viewport 中保持可见、可检查。其价值不在新 agent algorithm，而在为 3D creative work 提供集成且实用的 action surface。",
+      "stars": 680,
+      "language": "Python",
+      "interest_tag": ""
+    },
+    {
+      "name": "yeyuxin777/baoyan-agent-benchmark",
+      "url": "https://github.com/yeyuxin777/baoyan-agent-benchmark",
+      "tldr": "This open benchmark evaluates agents for Chinese graduate-admissions advising, application planning, and updating advice as student information changes. It includes 70 Chinese tasks, 23 cases, 83 answer stages, per-task rubrics, and reference programs, with results for eight agent configurations. The public dataset is available without approval, while scoring materials are meant to remain hidden from tested agents. Its domain is narrow, but the staged cases test whether an agent can maintain and revise plans rather than answer one-shot questions.",
+      "tldr_zh": "这个开放 benchmark 评测 agent 在中文保研咨询、申请规划以及学生信息变化后的建议更新能力。项目包含 70 个中文任务、23 个 case、83 个 answer stage、逐任务 rubric 与 reference program，并公布八种 agent configuration 的结果。公开 dataset 无需审批即可获取，但 scoring material 应对被测 agent 保密。虽然领域较窄，分阶段 case 能检验 agent 是否会持续维护和修订计划，而不只是回答一次性问题。",
+      "stars": 599,
+      "language": "Python",
+      "interest_tag": "Benchmark"
+    },
+    {
+      "name": "caveman-ai/trim-1",
+      "url": "https://github.com/caveman-ai/trim-1",
+      "tldr": "trim-1 is a 1.2 MB model that selects the lines an agent needs from logs, tool outputs, files, or long chats. Rather than summarizing, it preserves selected lines exactly and inserts markers where content was removed, protecting identifiers and error text. The implementation uses 712 gradient-boosted trees, runs deterministically on one CPU core, and targets millisecond latency. It offers a cheap context-reduction layer when semantic compression would be too lossy or expensive.",
+      "tldr_zh": "trim-1 是一个 1.2 MB 模型，用于从日志、tool output、文件或长对话中筛出 agent 当前需要的行。它不做摘要，而是原样保留选中行，并在删除处插入 marker，因此 identifier 和 error text 不会被改写。实现由 712 棵 gradient-boosted tree 组成，可在单个 CPU core 上确定性、毫秒级运行。对于不能接受语义摘要失真的场景，它提供了廉价的 context reduction 层。",
+      "stars": 143,
+      "language": "Go",
+      "interest_tag": ""
+    }
+  ],
+  "hackernews": [
+    {
+      "title": "Show HN: Sphinx – A hook that quizzes you on your AI's code before shipping",
+      "url": "https://sphinx-six-theta.vercel.app/",
+      "tldr": "Sphinx inserts an understanding check into Git pushes made in agent-assisted development. An independent reviewer reads the diff, asks the human about failure behavior, and blocks protected branches until the answer demonstrates understanding; bypasses are possible but logged. It works with common coding agents or plain Git and is designed to avoid opening secret files. The project directly addresses the accountability gap where a developer can ship agent-written code they cannot explain.",
+      "tldr_zh": "Sphinx 在 agent-assisted development 的 Git push 中插入 understanding check。独立 reviewer 读取 diff，围绕 failure behavior 向人类提问，只有回答表明真正理解后才允许推送到受保护分支；可以绕过，但会留下日志。它兼容常见 coding agents 或普通 Git，并避免读取 secret file。项目直接针对「开发者发布了自己无法解释的 agent-generated code」这一责任缺口。",
+      "points": 95,
+      "num_comments": 26,
+      "interest_tag": ""
+    },
+    {
+      "title": "Show HN: rStation – A shared research lab for your AI agents",
+      "url": "https://rstation.ai/",
+      "tldr": "rStation is a research community where independent AI agents choose problems, discuss work, and publish reviewed papers while humans can observe. Its initial problem set spans mathematics, computer science, AI, and open scientific questions, with a dedicated onboarding path for agents. The product experiments with turning scientific collaboration into an agent-native social and publication environment. Its main uncertainty is not the interface but whether review, identity, and contribution quality remain credible at scale.",
+      "tldr_zh": "rStation 是一个让独立 AI agents 选择研究问题、讨论并发表 reviewed paper，而人类可以旁观的 research community。初始问题覆盖数学、计算机科学、AI 与开放科学问题，并提供专门的 agent onboarding path。它尝试把科学协作变成 agent-native 的社交与出版环境。最大的未知不在界面，而在规模扩大后 review、identity 与 contribution quality 是否仍可信。",
+      "points": 58,
+      "num_comments": 19,
+      "interest_tag": "Agent Swarm"
+    },
+    {
+      "title": "We ran 53 open-source AI agents through behavioral tests and filed 37 bugs",
+      "url": "https://defuzex.ai/blog/we-ran-53-open-source-ai-agents-through-behavioral-tests-and-filed-37-bugs",
+      "tldr": "The report applies behavioral tests to 53 open-source AI agents and says the process produced 37 actionable bug reports. The framing matters because it evaluates observable end-to-end behavior rather than only model outputs or unit-level implementation details. Filing bugs turns benchmark findings into maintainable upstream feedback instead of a static leaderboard. Even without broad HN engagement yet, the test-to-issue workflow is a useful model for evidence-driven agent quality work.",
+      "tldr_zh": "这份报告对 53 个 open-source AI agents 运行 behavioral tests，并称由此提交了 37 个可执行 bug report。其价值在于评测可观察的端到端行为，而不只看模型输出或 unit-level implementation。把发现直接转成 issue，使 benchmark 结果进入 upstream maintenance，而不是停留在静态 leaderboard。虽然目前 HN 讨论不多，这种 test-to-issue workflow 仍是 evidence-driven agent quality 的好范式。",
+      "points": 10,
+      "num_comments": 1,
+      "interest_tag": "Benchmark"
+    },
+    {
+      "title": "Show HN: Weatherdeck – a read-only status board for AI coding agent lanes",
+      "url": "https://github.com/Moshik21/weatherdeck",
+      "tldr": "Weatherdeck is a local, read-only status board for work reported by many agent or automation sources. Sources push small JSON documents; the board separates items needing human action, uncertain progress, completed work, and silent feeds without pretending stale data is healthy. It uses the Python standard library, SQLite, and plain HTML, with no model calls or telemetry. The notable design choice is epistemic honesty: missing or ambiguous status is represented explicitly rather than collapsed into a reassuring dashboard.",
+      "tldr_zh": "Weatherdeck 是本地、read-only 的 status board，用于汇总多个 agent 或 automation source 上报的工作。Source 推送小型 JSON 文档；面板区分需要人处理、进度不确定、已完成以及静默 feed，不会把 stale data 假装成正常。它只依赖 Python standard library、SQLite 与纯 HTML，不调用模型也不含 telemetry。最值得学习的设计是 epistemic honesty：缺失或模糊状态会被明确呈现，而不是压成一个让人安心的绿色 dashboard。",
+      "points": 9,
+      "num_comments": 0,
+      "interest_tag": ""
+    },
+    {
+      "title": "Three LLM judges couldn't tell an AI agent's real memory from a counterfeit one",
+      "url": "https://kairos-experiment.com/checks.html",
+      "tldr": "This study stress-tests common agent-memory evaluations with counterfeit memories, no-memory baselines, and binding-corrupted histories. Three LLM judges failed to distinguish a fabricated biography from the agent's lived record under the original rubric, while five of seven models passed a recognition probe with no memory document at all. A redesigned symmetric-alternative probe restored validity and showed behavior tracking whichever memory document was supplied. The central lesson is methodological: memory claims need counterfeit controls, empty-context baselines, and corruption tests before judge scores can be trusted.",
+      "tldr_zh": "这项研究用 counterfeit memory、no-memory baseline 与 binding-corrupted history 压力测试常见 agent-memory evaluation。三种 LLM judge 在原 rubric 下无法区分伪造生平与真实经历，而七个模型中有五个在完全没有 memory document 时仍能通过 recognition probe。重新设计的 symmetric-alternative probe 恢复了有效性，并显示行为会跟随被注入的 memory 内容。核心结论是方法论上的：相信 memory score 之前，必须加入伪造对照、空上下文 baseline 与关系破坏测试。",
+      "points": 5,
+      "num_comments": 0,
+      "interest_tag": "Memory"
+    }
+  ]
+}
