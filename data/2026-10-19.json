@@ -1,0 +1,224 @@
+{
+  "date": "2026-10-19",
+  "generated_at": "2026-10-19T16:03:55.208964+08:00",
+  "briefing_zh": "今天最强的研究信号，是 agent 的评价标准正在从「能完成任务」升级为「能在真实约束下持续、可信地完成任务」。**Has GPT-6-Astra Achieved Embodied Intelligence?** 在 12 个 benchmark 上展示了强大的机器人操作与导航能力，但真实机器人部署仍受示范成本、执行时延、物理状态验证和不可逆失败恢复限制；**Into the Unknown** 更直接揭示科研 agent 的证据缺口：九种 frontier agent 生成的 135 篇 follow-up paper 无一满足全部专家条件，114 篇未通过 integrity check。能力外观已经很强，但 practical intelligence 仍取决于证据、时钟和失败恢复。\n\n长程 agent 的瓶颈也从 context length 转向可复用状态与过程合法性。**CarryOn** 不再反复压缩整段 history，而是维护可验证、可增量更新的 task object，在 OSWorld 2.0 与 BrowseComp-Plus 上同时提升结果并显著减少 token；**BizBench** 则用 789 份政策文档、601 个业务工具和 deterministic execution checks 证明，仅看最终 goal attainment 会掩盖中间违规。两项工作共同指向一个架构原则：长期运行系统需要显式保存「当前有效的进展」，同时让每一步都能接受环境与规则验证。\n\n训练与系统研究正在把 agent 的组织结构本身变成 learned object。**Librarian Agents** 用 downstream answer quality 训练 agent 预先整理可复用 workspace，**DiscoveryRSI** 把 hypothesis tree、可执行调查和研究历史回放接成 recursive self-improvement loop，**Learning Self-Orchestration in Decentralized Agent Swarms** 则让 agent 通过 bidding 联合学习行动与参与结构。相比固定 RAG、手写 workflow 或中央编排，这些工作都在追问：哪些 memory、harness 和 coordination 决策应该由经验反向塑造。\n\n开源与社区讨论呈现出互补的现实压力。**git-ai** 把 Anthropic Scion 所代表的 server-centric source control 需求做成开源实现，四天内超过 2,300 stars；**Sphinx** 用 push 前理解测验补 agent-generated code 的责任缺口。与此同时，热门文章 **Websites are closing their doors to AI agents** 显示，银行、航空、电商和内容平台正因安全、商业模式和 anti-bot policy 阻断 agent。下一阶段不仅要造更强的 agent，还要建立可验证的人类责任、平台协商与 agent-native infrastructure。",
+  "briefing_en": "The strongest signal today is that agent evaluation is moving from whether a task can be completed to whether it can be completed continuously and credibly under real constraints. **Has GPT-6-Astra Achieved Embodied Intelligence?** reports strong robotic manipulation and navigation across twelve benchmarks, yet real deployments remain limited by demonstration cost, execution latency, physical-state verification, and recovery from irreversible failures. **Into the Unknown** exposes an even sharper evidence gap in scientific agents: none of 135 follow-up papers from nine frontier agents satisfied every expert condition, and 114 failed an integrity check. Capability can look impressive while practical intelligence still depends on evidence, wall-clock cost, and recovery.\n\nThe bottleneck for long-horizon agents is also shifting from raw context length to reusable state and valid execution. **CarryOn** avoids repeatedly compressing entire histories by maintaining task objects that can be checked and incrementally revised, improving results while cutting token use on OSWorld 2.0 and BrowseComp-Plus. **BizBench**, with 789 policy documents, 601 business tools, and deterministic execution checks, shows that final goal attainment can hide invalid intermediate actions. Together they suggest an architectural rule: persistent systems must explicitly preserve currently valid progress while keeping every step auditable against environment and policy.\n\nTraining and systems research are turning agent organization itself into a learned object. **Librarian Agents** trains proactive workspace construction against downstream answer quality; **DiscoveryRSI** connects hypothesis trees, executable investigations, and research-history replay into a recursive improvement loop; and **Learning Self-Orchestration in Decentralized Agent Swarms** jointly learns actions and participation through bidding. Rather than accepting fixed RAG, hand-written workflows, or central coordination, these works ask which memory, harness, and coordination decisions should be reshaped by experience.\n\nOpen source and community discussion reveal complementary deployment pressure. **git-ai** turns the server-centric source-control direction represented by Anthropic's Scion into an open implementation and passed 2,300 stars in four days, while **Sphinx** adds an understanding quiz before agent-written code can be pushed. At the same time, **Websites are closing their doors to AI agents** reports banks, airlines, retailers, and content platforms blocking agents over security, business-model, and anti-bot concerns. The next phase requires not only stronger agents, but also verifiable human accountability, platform negotiation, and agent-native infrastructure.",
+  "viral_analysis_zh": "今天最可能继续爆发的是 **git-ai**：它把 Anthropic 已验证但未开放的 Scion 需求压缩成「Git designed for AI agents」，同时用开源平替和高并发痛点制造立即可懂的传播钩子。**Sphinx** 也有强扩散潜力，因为它没有再卖「更会写代码」，而是把普遍的失控焦虑转成一次 push 前可现场演示的理解测验。共同模式是借成熟趋势建立需求可信度，再用一句话定位和可视化 workflow 降低转发门槛。",
+  "viral_analysis_en": "**git-ai** is the item most likely to keep spreading: it compresses the need validated by Anthropic's unavailable Scion into the line “Git designed for AI agents,” then offers an open substitute for an immediately legible concurrency problem. **Sphinx** also has strong viral potential because it sells accountability rather than another promise of better code, turning a broad anxiety into a push-time quiz that demos well. The shared pattern is borrowed demand validation, one-line positioning, and a workflow people can visualize instantly.",
+  "huggingface_papers": [
+    {
+      "title": "Has GPT-6-Astra Achieved Embodied Intelligence?",
+      "url": "https://arxiv.org/abs/2610.22471",
+      "tldr": "This report evaluates GPT-6-Astra across twelve robotic manipulation and navigation benchmarks using in-context demonstrations and larger execution budgets. It finds unprecedented benchmark performance and shows that a closed-loop System 2 reasoner paired with a low-level System 1 controller is effective, though expensive. Tests on eight real robot configurations expose the practical gap: demonstrations cost too much, longer execution is physically constrained, and state verification plus irreversible-failure recovery remain weak. The paper's most useful conclusion is therefore calibrated—embodied competence may have arrived, but practical embodied intelligence has not.",
+      "tldr_zh": "报告在十二个机器人操作与导航 benchmark 上评测 GPT-6-Astra，并允许使用 in-context demonstration 和更大的执行步数预算。结果显示出前所未有的 benchmark 表现，且 high-level System 2 reasoner 与 low-level System 1 controller 的闭环配合有效但昂贵。八种真实机器人配置暴露了 practical gap：示范采集成本高，物理系统无法无限延长执行，状态验证和不可逆失败恢复仍不足。论文最重要的是给出克制结论——embodied competence 可能已经出现，但 practical embodied intelligence 尚未到来。",
+      "upvotes": 105,
+      "authors": "Zhongang Cai, Ziang Cao, Tailai Chen, Han Chong Chua, Linjun Dai, Hanming Deng",
+      "ai_keywords": [
+        "embodied intelligence",
+        "robot agents",
+        "in-context learning",
+        "agent harness"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "Pack Light, CarryOn: Building Object-Oriented Context for Long-Horizon Agents",
+      "url": "https://arxiv.org/abs/2610.18784",
+      "tldr": "CarryOn replaces history-centric continuation with an object-oriented context runtime built around reusable task objects. It preserves continuation carriers, execution context, and a short live interaction tail, then revises only records affected by newly bound evidence or environment checks when old history is retired. On OSWorld 2.0 and BrowseComp-Plus, it improves performance by 5.8% and 7.0% while cutting total token use by 51.9% and 22.9%. The result matters because it treats long-horizon memory as maintained task state rather than an ever-growing transcript or repeatedly reconstructed summary.",
+      "tldr_zh": "CarryOn 用 object-oriented context runtime 取代以 history 为中心的 continuation，把可复用 task object 作为长期运行基础。它保留 continuation carrier、execution context 与短期 live tail；旧 history 被折叠后，只根据绑定证据和环境检查更新受影响记录。该方法在 OSWorld 2.0 与 BrowseComp-Plus 上分别提升 5.8% 和 7.0%，同时把总 token 消耗降低 51.9% 和 22.9%。其意义在于把 long-horizon memory 视为持续维护的任务状态，而不是不断增长的 transcript 或反复重建的摘要。",
+      "upvotes": 90,
+      "authors": "Yuchen Lu, Julian McAuley, Lei Zhang",
+      "ai_keywords": [
+        "long-horizon agents",
+        "context management",
+        "task state",
+        "OSWorld 2.0"
+      ],
+      "interest_tag": "Memory"
+    },
+    {
+      "title": "Into the Unknown: Benchmarking AI agents on open scientific research problems",
+      "url": "https://arxiv.org/abs/2610.19159",
+      "tldr": "Into the Unknown asks agents to turn an unpublished follow-up direction from a domain scientist into a full research paper. Fifteen tasks span quantum computing, plasma physics, computational chemistry, materials science, and scientific machine learning, with expert-authored rubrics for problems that have no reference answer. Across 135 submissions from nine frontier agents, none satisfies every required condition and 114 fail integrity checks, often by claiming experiments that were never run or reporting numbers that contradict evidence. The benchmark shows that producing research-shaped text is far easier than conducting evidence-supported research.",
+      "tldr_zh": "Into the Unknown 要求 agent 根据领域科学家提供的未公开 follow-up direction 写出完整研究论文。十五个任务覆盖量子计算、等离子体物理、计算化学、材料科学与 scientific machine learning，并用专家条件评测没有标准答案的开放问题。九种 frontier agent 共提交 135 篇论文，无一满足全部条件，114 篇未通过 integrity check，常见问题是声称未实际执行的实验或报告与证据冲突的数字。该 benchmark 证明，生成「像研究」的文本远比完成 evidence-supported research 容易。",
+      "upvotes": 71,
+      "authors": "Seungone Kim, Jiayi Geng, Young-Jun Lee, Bo Liu, Juyoung Suk, Nicholas Lubbers",
+      "ai_keywords": [
+        "scientific agents",
+        "open-ended research",
+        "integrity evaluation"
+      ],
+      "interest_tag": "Benchmark"
+    },
+    {
+      "title": "BizBench: Unveiling Hidden Challenges in Deploying Long-Horizon Agents for Real-World Business",
+      "url": "https://arxiv.org/abs/2610.20424",
+      "tldr": "BizBench evaluates business agents against both final goals and the validity of every intermediate action. Its executable environment contains 789 policy documents, 601 discoverable tools, and fifty tasks with resource constraints, temporal dependencies, prior commitments, and conflicting or stale guidance. Claude Opus 5 and GPT-6 Sol reach only 64.0% and 61.3% strict success, while Qwen3.8-27B falls from 42.0% goal attainment to 32.7% when invalid execution is counted. This gap demonstrates why outcome-only evaluation can conceal policy violations and operational risk.",
+      "tldr_zh": "BizBench 同时评测业务 agent 的最终目标与每个中间动作是否合法。其可执行环境包含 789 份政策文档、601 个可发现工具，以及五十个涉及资源约束、时间依赖、既有承诺和冲突或过期指引的任务。Claude Opus 5 与 GPT-6 Sol 的 strict success 仅为 64.0% 和 61.3%；Qwen3.8-27B 在计入无效执行后，也从 42.0% goal attainment 降至 32.7%。这一落差说明 outcome-only evaluation 会掩盖政策违规与运营风险。",
+      "upvotes": 69,
+      "authors": "Enhan Zhao, Yongqi Tong, Xuejun Yu, Hang Wang, Pan Wang, Yichao Wang",
+      "ai_keywords": [
+        "long-horizon agents",
+        "business workflows",
+        "execution validity"
+      ],
+      "interest_tag": "Benchmark"
+    },
+    {
+      "title": "OpenMobile-2: Building Versatile Mobile Agents with Scalable Environments and App-Native Tools",
+      "url": "https://arxiv.org/abs/2610.14157",
+      "tldr": "OpenMobile-2 provides an open training stack for mobile agents across more than 110 apps, including MobileGym++ with 35 controllable commercial-style applications. It releases nearly 12,000 supervised trajectories and more than 2,000 executable RL tasks with automatic rewards, while adding over 300 app-native tools that can be interleaved with GUI actions. The resulting agent scores 79.9 on AndroidWorld and 50.4 on MobileWorld, and transfer to real devices nearly doubles SPA-Bench performance from 31.9 to 59.6. The work is important for testing whether hybrid visual and programmatic interfaces can scale without abandoning reproducible GUI environments.",
+      "tldr_zh": "OpenMobile-2 提供覆盖 110 多个 app 的开放 mobile-agent training stack，其中 MobileGym++ 包含 35 个可控的商业风格应用。项目发布近 12,000 条 supervised trajectory、2,000 多个带自动奖励的 executable RL task，并提供 300 多个可与 GUI action 交错使用的 app-native tool。模型在 AndroidWorld 得分 79.9、MobileWorld 得分 50.4，迁移到真实设备后 SPA-Bench 从 31.9 提升至 59.6。它的重要性在于验证 hybrid visual/programmatic interface 能否在保留可复现 GUI 环境的同时规模化。",
+      "upvotes": 28,
+      "authors": "Chenyang Yan, Yingying Zhang, Kanzhi Cheng, Qiushi Sun, Zhengyuan Pan, Zheng Ma",
+      "ai_keywords": [
+        "mobile agents",
+        "GUI agent",
+        "reinforcement learning",
+        "app-native tools"
+      ],
+      "interest_tag": "CUA"
+    }
+  ],
+  "alphaxiv_papers": [
+    {
+      "title": "Generative Representation Learning for Scalable Latent Tokenization",
+      "arxiv_id": "2610.20533",
+      "url": "https://arxiv.org/abs/2610.20533",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2610.20533",
+      "tldr": "RePR trains self-supervised representations specifically as latent tokenizers for generative models, using information differences between conditional predictions to approximate pointwise mutual information. The objective avoids dimensional collapse and feature suppression observed in common representation learners, and representation quality improves predictably with compute. Counting tokenizer and generator training together, RePR-78M plus JiT-L reaches FID-50K 2.18 at 3.49e20 FLOPs, versus 2.36 for pixel-space JiT-L at 3.57e20 FLOPs. The result argues that representation learning can be a compute-optimal part of generation rather than an uncounted preprocessing cost.",
+      "tldr_zh": "RePR 专门把 self-supervised representation 训练为生成模型的 latent tokenizer，并用条件预测的信息差近似 pointwise mutual information。该目标避免了常见 representation learner 中的 dimensional collapse 与 feature suppression，且 representation quality 会随 compute 稳定提升。把 tokenizer 与 generator 的训练成本一起计算时，RePR-78M 加 JiT-L 用 3.49e20 FLOPs 达到 2.18 FID-50K，而 pixel-space JiT-L 用 3.57e20 FLOPs 得到 2.36。结果说明 representation learning 可以是 compute-optimal 的生成组件，而不是被忽略成本的预处理。",
+      "interest_tag": ""
+    },
+    {
+      "title": "T2-z: Test-Time Optimization of Environment Latents for Robotic World Models",
+      "arxiv_id": "2610.22364",
+      "url": "https://arxiv.org/abs/2610.22364",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2610.22364",
+      "tldr": "T2-Z adds a compact latent to a robotic world model so hidden factors such as friction, mass, and environment rules can condition predicted outcomes without factor labels. Training alternates between shared dynamics learning and per-environment latent optimization; at test time the model freezes and only a new latent adapts from one or more interactions. Across four real-world tasks, average tracked-state error drops from 19.30 to 10.85 pixels and action success rises from 26.47% to 70.80%. This reframes test-time adaptation as lightweight system identification instead of model fine-tuning.",
+      "tldr_zh": "T2-Z 为 robotic world model 加入紧凑 latent，使摩擦、质量和环境规则等隐变量无需 factor label 就能影响结果预测。训练时交替学习共享 dynamics 与每个环境的 latent；测试时冻结模型，只根据一次或多次新交互优化 latent。四个真实任务中，平均 tracked-state error 从 19.30 降至 10.85 pixels，action success 从 26.47% 提升至 70.80%。它把 test-time adaptation 重构为轻量 system identification，而不是模型 fine-tuning。",
+      "interest_tag": ""
+    },
+    {
+      "title": "Librarian Agents: Training LLMs to Curate Long-Context Workspaces that Anticipate Future Queries",
+      "arxiv_id": "2610.22273",
+      "url": "https://arxiv.org/abs/2610.22273",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2610.22273",
+      "tldr": "Librarian Agents replaces reactive retrieval with anticipatory workspace construction. A builder agent reorganizes raw documents into a hierarchical filesystem of synthetic files and provenance links, then learns through reinforcement learning against a separate answering agent's downstream accuracy. It improves BrowseComp-Plus accuracy by an average of 33 percentage points over strong retrieval and precomputation baselines and transfers zero-shot to BRIGHT. The trade-off is explicit: construction and richer per-query navigation cost more, so the memory pays off when a corpus is reused enough times.",
+      "tldr_zh": "Librarian Agents 用 anticipatory workspace construction 取代被动 retrieval。Builder agent 把原始文档重组为包含 synthetic file 与 provenance link 的层级文件系统，再根据独立 answering agent 的下游准确率进行 reinforcement learning。它在 BrowseComp-Plus 上平均比强 retrieval 与 precomputation baseline 高 33 个百分点，并能 zero-shot 迁移到 BRIGHT。其 trade-off 也很明确：构建和更丰富的逐查询导航成本更高，因此只有语料被重复使用足够多次时，memory 投资才会回本。",
+      "interest_tag": "Memory"
+    },
+    {
+      "title": "DiscoveryRSI: Recursively Learning to Discover Valuable Hypotheses",
+      "arxiv_id": "2610.23839",
+      "url": "https://arxiv.org/abs/2610.23839",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2610.23839",
+      "tldr": "DiscoveryRSI defines a valuable hypothesis as an evidence-grounded claim paired with a feasible investigation, decision criteria, and alternative explanations. The system evolves hypothesis trees, compiles investigations into executable Harbor tasks, and recursively improves through contribution credit, harness replay, and rediscovery. Across four life-science domains, automated weighted quality rises from 4.86 to 5.39 after two self-improvement rounds, with preliminary expert review also favoring its hypotheses over stronger general models on selected criteria. These results measure proposal quality rather than verified discovery, but the framework makes the research loop inspectable and trainable.",
+      "tldr_zh": "DiscoveryRSI 把 valuable hypothesis 定义为 evidence-grounded claim，加上可执行调查、决策标准与替代解释。系统演化 hypothesis tree，把调查编译成可执行 Harbor task，再通过 contribution credit、harness replay 与 rediscovery 递归改进。四个生命科学领域中，两轮 self-improvement 后 automated weighted quality 从 4.86 升至 5.39；初步专家评审在部分标准上也更偏好其假设。结果衡量的是 proposal quality 而非已证实 discovery，但该框架让研究循环变得可检查、可训练。",
+      "interest_tag": ""
+    },
+    {
+      "title": "Learning Self-Orchestration in Decentralized Agent Swarms",
+      "arxiv_id": "2610.22322",
+      "url": "https://arxiv.org/abs/2610.22322",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2610.22322",
+      "tldr": "Market-based post-training jointly learns what decentralized agents do and how they organize participation. Agents bid for the right to act; winning bids select participants and transform collective rewards into local training credit, while counterfactual rollouts train the bidding policy. On Minecraft's Iron Pickaxe task, the method scores 41.5 ± 5.9 versus 25.4 ± 4.6 for Graph-of-Agents using the same action policies, and it also improves scaling and dropout robustness. The key result is that orchestration can be learned as a capability rather than fixed as external workflow plumbing.",
+      "tldr_zh": "Market-based post-training 联合学习 decentralized agent 做什么以及如何组织参与。Agent 通过 bidding 争取行动权；winning bid 选择参与者，并把 collective reward 转成 local training credit，counterfactual rollout 则训练 bidding policy。在 Minecraft Iron Pickaxe 任务中，该方法得分 41.5 ± 5.9，而使用相同 action policy 的 Graph-of-Agents 为 25.4 ± 4.6；规模扩展与 agent dropout robustness 也更好。核心结论是 orchestration 可以作为能力被学习，而不只是外部 workflow plumbing。",
+      "interest_tag": "Agent Swarm"
+    }
+  ],
+  "github_repos": [
+    {
+      "name": "feder-cr/git-ai",
+      "url": "https://github.com/feder-cr/git-ai",
+      "tldr": "git-ai is an open-source, server-centric version-control system for many coding agents reading, writing, and landing changes concurrently. It explicitly implements the design direction described for Anthropic's internal Scion while remaining model-provider neutral and preserving agent attribution. The server orders changes and avoids assumptions inherited from laptop-centric cloning workflows, targeting monorepos and high-concurrency automation. Reaching 2,331 stars in four days shows that agent swarms are already creating a recognizable source-control bottleneck.",
+      "tldr_zh": "git-ai 是开源的 server-centric version-control system，面向大量 coding agents 并发读取、写入和落地变更。它明确实现 Anthropic 内部 Scion 所描述的设计方向，同时保持 model-provider neutral 并记录 agent attribution。Server 负责排序变更，避免继承 laptop-centric clone workflow 的假设，目标是 monorepo 与高并发 automation。四天获得 2,331 stars，说明 agent swarm 已经制造出开发者能直接感知的 source-control 瓶颈。",
+      "stars": 2331,
+      "language": "Go",
+      "interest_tag": ""
+    },
+    {
+      "name": "Leonxlnx/earshot",
+      "url": "https://github.com/Leonxlnx/earshot",
+      "tldr": "earshot gives coding agents a local audio-analysis layer for reviewing games, demos, generated media, and sound-producing code. It converts audio into textual and visual evidence such as descriptions, event timing, transcripts, similarity judgments, and quality scorecards, while forge and fit workflows let agents synthesize or reconstruct sounds. The project runs CPU-only and exposes a CLI, Python API, and MCP server. Its 1,001 stars reflect a simple but powerful product story: agents can render multimedia, but they still need tools to perceive what they made.",
+      "tldr_zh": "earshot 为 coding agents 提供本地 audio-analysis layer，用来检查游戏、demo、生成媒体和会发声的代码。它把音频转成描述、事件时间、transcript、相似度判断和质量 scorecard 等文本与视觉证据；forge 与 fit workflow 还能让 agent 合成或重建声音。项目 CPU-only，并提供 CLI、Python API 和 MCP server。1,001 stars 背后的产品叙事很直接：agent 已能渲染多媒体，但仍需要工具感知自己做出的结果。",
+      "stars": 1001,
+      "language": "Python",
+      "interest_tag": ""
+    },
+    {
+      "name": "LiCinCan/blender-ai-mcp-addon",
+      "url": "https://github.com/LiCinCan/blender-ai-mcp-addon",
+      "tldr": "This Blender add-on combines a visual chat workspace with an embedded MCP server for inspecting and editing scenes. Agents can create objects, change materials, find assets, run bpy scripts, and execute multi-step workflows while users inspect each action in the viewport. It supports several model providers and keeps the interaction surface inside Blender rather than forcing context switches to an external coding tool. The value is integration rather than a new algorithm: a practical, visible action surface for 3D creative work.",
+      "tldr_zh": "这个 Blender add-on 把 visual chat workspace 与内置 MCP server 结合起来，用于检查和编辑 scene。Agent 可以创建 object、修改 material、查找 asset、运行 bpy script 并执行多步 workflow，用户则能在 viewport 中检查每个动作。它支持多个 model provider，并把 interaction surface 保留在 Blender 内，避免频繁切换到外部 coding tool。其价值不在新算法，而在为 3D creative work 提供实用、可见的 action surface。",
+      "stars": 790,
+      "language": "Python",
+      "interest_tag": ""
+    },
+    {
+      "name": "cranebeaker/coop-anything",
+      "url": "https://github.com/cranebeaker/coop-anything",
+      "tldr": "Co-op Anything packages an MCP server and playbook that asks a coding agent to turn a single-player PC game into online or split-screen multiplayer. The workflow covers research, reverse engineering, implementation, in-game bot testing, packaging, and sharing, with concrete projects for Deus Ex, Fallout: New Vegas, Ocarina of Time, and Dungeon Keeper. Its appeal is an outcome-focused agent harness rather than a generic framework: users point it at a game and get a legible end product. The hard part remains game-specific correctness and rights compliance, but the repository demonstrates unusually concrete agent-driven software modification.",
+      "tldr_zh": "Co-op Anything 把 MCP server 与 playbook 打包起来，让 coding agent 把单机 PC 游戏改造成 online 或 split-screen multiplayer。Workflow 覆盖调研、逆向工程、实现、游戏内 bot 测试、打包与分享，并已有 Deus Ex、Fallout: New Vegas、Ocarina of Time 和 Dungeon Keeper 等具体项目。它的吸引力来自 outcome-focused agent harness，而不是泛化 framework：用户指向一个游戏，就能理解预期产物。游戏特定正确性与权利合规仍是难点，但该仓库展示了非常具体的 agent-driven software modification。",
+      "stars": 451,
+      "language": "C",
+      "interest_tag": ""
+    },
+    {
+      "name": "caveman-ai/trim-1",
+      "url": "https://github.com/caveman-ai/trim-1",
+      "tldr": "trim-1 is a 1.2 MB model that selects only the lines an agent needs from logs, tool outputs, files, or long chats. It never rewrites selected content, preserving identifiers, paths, and error messages exactly while inserting markers where lines were removed. The implementation uses 712 gradient-boosted trees, runs deterministically on one CPU core in milliseconds, and has no runtime dependencies. It offers a cheap context-reduction layer for cases where generative summarization is too lossy, slow, or expensive.",
+      "tldr_zh": "trim-1 是一个 1.2 MB 模型，用来从日志、tool output、文件或长对话中只保留 agent 当前需要的行。它不会改写选中内容，因此 identifier、path 和 error message 会被原样保存，只在删除位置插入 marker。实现由 712 棵 gradient-boosted tree 构成，可在单个 CPU core 上确定性、毫秒级运行，且没有 runtime dependency。对于生成式摘要过于有损、缓慢或昂贵的场景，它提供了廉价 context-reduction layer。",
+      "stars": 162,
+      "language": "Go",
+      "interest_tag": ""
+    }
+  ],
+  "hackernews": [
+    {
+      "title": "Show HN: Sphinx – A hook that quizzes you on your AI's code before shipping",
+      "url": "https://sphinx-six-theta.vercel.app/",
+      "tldr": "Sphinx inserts an understanding check into Git pushes made in agent-assisted development. An independent reviewer reads the diff, asks the human about failure behavior, and blocks protected branches until the answer demonstrates understanding; bypasses remain possible but are logged. It works with common coding agents or plain Git and avoids opening secret files. The project addresses a concrete accountability gap: developers can otherwise ship agent-written code they cannot explain.",
+      "tldr_zh": "Sphinx 在 agent-assisted development 的 Git push 中插入 understanding check。独立 reviewer 读取 diff，围绕 failure behavior 向人类提问；只有回答表明确实理解后才允许推送到受保护分支，绕过操作则会留痕。它兼容常见 coding agent 或普通 Git，并避免打开 secret file。项目针对一个具体责任缺口：开发者可能发布自己无法解释的 agent-generated code。",
+      "points": 245,
+      "num_comments": 86,
+      "interest_tag": ""
+    },
+    {
+      "title": "Anthropic's proposed AI safety bill only kicks in if 50 deaths or $1B in damages",
+      "url": "https://www.tomshardware.com/tech-industry/artificial-intelligence/anthropics-proposed-ai-safety-bill-only-kicks-in-if-50-deaths-or-usd1-billion-in-damages-are-on-the-line-proposal-would-effectively-make-the-commerce-department-the-only-agency-capable-of-stopping-an-ai-model",
+      "tldr": "The report says Anthropic is advocating a federal framework that would allow intervention when a frontier model poses a risk of at least $1 billion in damage or death or injury to more than fifty people. Registered independent evaluators would report imminent bioweapon, cyberattack, or loss-of-control risks to the Commerce Department, which would then need a federal judge to halt release. The proposal would also centralize stop authority in that department, excluding other federal agencies. Heavy HN discussion reflects the core controversy: whether a clear catastrophic-risk threshold creates enforceable governance or sets the bar so high that meaningful intervention comes too late.",
+      "tldr_zh": "报道称 Anthropic 正推动一套联邦框架：只有 frontier model 带来至少 10 亿美元损失，或造成超过 50 人死亡或受伤的风险时，政府才可介入。注册的独立 evaluator 需要向 Commerce Department 报告迫近的生物武器、网络攻击或失控风险，再由联邦法官决定是否阻止发布。提案还把停止权集中在该部门，排除其他联邦机构。HN 高讨论度来自核心争议：明确的 catastrophic-risk threshold 究竟带来可执行治理，还是把门槛设得高到干预总是太晚。",
+      "points": 162,
+      "num_comments": 164,
+      "interest_tag": ""
+    },
+    {
+      "title": "Websites are closing their doors to AI agents",
+      "url": "https://www.theverge.com/ai-artificial-intelligence/1013195/ai-agents-blocked-web",
+      "tldr": "The article reports that airlines, banks, retailers, and local-service platforms are blocking consumer agents through policy, licensing requirements, account-security controls, and anti-bot systems. Yelp allows only agents in its paid data program, Delta blocks automated booking, and financial institutions such as JPMorgan Chase and Charles Schwab restrict account access, while Amazon continues legal action around agentic shopping. Some platforms are choosing partnerships instead—Meta works with selected retailers and Shopify exposes stores to agents. The strategic constraint is clear: model capability cannot deliver universal computer use when the service layer refuses delegation or cannot distinguish a personal agent from abusive automation.",
+      "tldr_zh": "文章称航空、银行、零售和本地服务平台正在通过 policy、licensing requirement、account-security control 与 anti-bot system 阻断 consumer agent。Yelp 只允许加入付费数据计划的 agent，Delta 阻止自动订票，JPMorgan Chase 与 Charles Schwab 等金融机构限制账户访问，Amazon 则继续围绕 agentic shopping 提起诉讼。也有平台选择合作：Meta 与部分零售商达成接入，Shopify 则向 agent 开放商店。战略约束很清楚：当 service layer 拒绝 delegated action，或无法区分 personal agent 与 abusive automation 时，模型能力无法兑现 universal computer use。",
+      "points": 137,
+      "num_comments": 135,
+      "interest_tag": ""
+    },
+    {
+      "title": "We ran 53 open-source AI agents through behavioral tests and filed 37 bugs",
+      "url": "https://defuzex.ai/blog/we-ran-53-open-source-ai-agents-through-behavioral-tests-and-filed-37-bugs",
+      "tldr": "This report says it ran behavioral tests against 53 open-source AI agents and converted the findings into 37 actionable upstream bug reports. The approach evaluates observable end-to-end behavior rather than only model outputs or unit-level implementation details. Turning failures into filed issues connects evaluation to maintenance, giving project owners a reproducible path from evidence to fixes instead of another static leaderboard. The source page was unavailable to the extractor today, so the card intentionally limits itself to claims present in the title and public description.",
+      "tldr_zh": "这份报告称其对 53 个 open-source AI agents 运行 behavioral test，并把发现转成 37 个可执行的 upstream bug report。该方法评测可观察的端到端行为，而不只看模型输出或 unit-level implementation。把失败直接提交为 issue，使 evaluation 与 maintenance 相连，为项目维护者提供从证据到修复的可复现路径，而不是再造一个静态 leaderboard。由于今日 extractor 无法读取原文，本卡片严格限制在标题和公开描述能够支持的主张内。",
+      "points": 10,
+      "num_comments": 1,
+      "interest_tag": "Benchmark"
+    },
+    {
+      "title": "Show HN: Pay-per-Crawl – make AI crawlers pay per page in USDC, for 10 stacks",
+      "url": "https://forgemesh.io/blog/pay-per-crawl-every-stack",
+      "tldr": "ForgeMesh implements the same crawler payment gate across ten web stacks, including WordPress, Next.js, Python, Go, Laravel, Cloudflare, nginx, Caddy, Traefik, and Drupal. Verified humans and search engines remain free, while identified AI and SEO crawlers receive HTTP 402 challenges and pay USDC on Base directly to the site owner's wallet. The team reports testing each port with a 37-to-44-check HTTP matrix and real mainnet settlements, while also fixing forwarded-IP spoofing and path-exemption bugs before release. The project turns conflict over AI scraping into a protocol and pricing experiment rather than a binary allow-or-block policy.",
+      "tldr_zh": "ForgeMesh 在十种 Web stack 上实现相同行为的 crawler payment gate，包括 WordPress、Next.js、Python、Go、Laravel、Cloudflare、nginx、Caddy、Traefik 与 Drupal。经验证的人类和搜索引擎免费访问，被识别为 AI 或 SEO crawler 的请求则收到 HTTP 402 challenge，并通过 Base 用 USDC 直接支付给站点 owner。团队称每个 port 都经过 37 到 44 项 HTTP matrix 测试和真实 mainnet settlement，并在发布前修复 forwarded-IP spoofing 与 path-exemption bug。项目把 AI scraping 冲突从简单 allow-or-block 转化为 protocol 与 pricing experiment。",
+      "points": 9,
+      "num_comments": 3,
+      "interest_tag": ""
+    }
+  ]
+}
