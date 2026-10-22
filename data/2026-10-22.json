@@ -1,0 +1,221 @@
+{
+  "date": "2026-10-22",
+  "generated_at": "2026-10-22T16:04:10.198037+08:00",
+  "briefing_zh": "今天最强的共同信号，是 agent 系统开始把长程执行的瓶颈从「模型会不会推理」转向「运行时如何保存、裁剪和复用状态」。**Cache Engineering for Agents** 允许 agent 直接 drop 或 reposition KV cache，在不改写轨迹、不重新 prefill 的情况下控制 active context；**Meta²** 则把 harness evolution 从离线寻找一个通用配置，提升为可在单次任务中依据新证据进行 task-local 修改的 online process。两项工作都说明，下一轮 agent 增益会越来越多地来自 model 之外、但又与 model state 紧密耦合的 execution substrate。\n\n对 Computer Use Agent 而言，**Agent World Model in the Wild** 和 **Evolving Agent Interfaces** 给出了互补路线：前者自动合成同时支持 GUI、MCP 与 CLI 的可执行世界，并用 rollout、cross-judge 与 counterfactual probe 做 solvability 和 verifier gate；后者让 meta-agent 从经验中自行发明并演化 interface，在 OSWorld V2 上用开源 backbone 获得显著提升。核心变化不是再堆更多截图轨迹，而是把 environment、interface、verifier 都变成可学习、可验证、可扩展的研究对象。\n\n记忆与协作也从 feature 走向 learning mechanism。**Memory-Centric Continual Learning for AI Agents** 主张用未来行为提升而非 retrieval 命中率评价 memory，**MemT-1.0** 则把 token-level memory update 内化进模型计算；与此同时，**Building AI Research Teams for Autonomous Discovery of Linear Attention Architectures** 与 **Sage-A1.5** 都强调异质角色、私有历史、并行 delegation 和 evidence-based revision。OpenAI 在生物数据上并行部署数千 agent 的案例进一步表明，Agent Swarm 的价值不在数量本身，而在任务切分、证据汇总和 human validation 的闭环。\n\n开源侧的热点更偏向可演示、可落地的 agent plumbing。**Co-op Anything** 用「把任意单机游戏改成联机」形成极强的单句价值主张，**whatsapp-mcp** 以 read-only 和 self-hosted 降低私人数据接入风险，**Lampline**、**ResearchBoost-Agent** 与 **Physical Hermes** 则分别瞄准 voice agent、AI-for-AI 优化和低成本实体入口。HN 上 **Sphinx** 与 Trail of Bits 的 regression workflow 同时走红，说明社区正在从「让 agent 多写代码」转向「让人真正理解变更，并以 live evidence 证明它没有破坏别处」。",
+  "briefing_en": "The clearest signal today is that long-horizon agents are shifting their bottleneck from whether a model can reason to how a runtime preserves, trims, and reuses state. **Cache Engineering for Agents** lets an agent drop or reposition KV cache entries without rewriting the trajectory or re-prefilling retained context, while **Meta²** turns harness evolution from offline search for one global configuration into task-local online adaptation driven by evidence from the current run. Both suggest that the next wave of agent gains will increasingly come from execution substrates outside the model but tightly coupled to model state.\n\nFor computer-use agents, **Agent World Model in the Wild** and **Evolving Agent Interfaces** offer complementary routes. The former synthesizes executable worlds spanning GUI, MCP, and CLI, then gates tasks and verifiers with heterogeneous rollouts, cross-judge consistency, and counterfactual probes; the latter lets a meta-agent invent and evolve interfaces from experience, substantially improving an open backbone on OSWorld V2. The important change is not simply collecting more screenshot trajectories, but making environments, interfaces, and verifiers learnable, testable, and scalable research objects.\n\nMemory and collaboration are also becoming learning mechanisms rather than add-on features. **Memory-Centric Continual Learning for AI Agents** evaluates memory by improvements in future behavior instead of retrieval accuracy, while **MemT-1.0** internalizes token-level memory updates in model computation. In parallel, **Building AI Research Teams for Autonomous Discovery of Linear Attention Architectures** and **Sage-A1.5** emphasize heterogeneous roles, private histories, parallel delegation, and evidence-based revision; OpenAI's deployment of thousands of agents over biological data shows that swarm value comes from decomposition, evidence aggregation, and human validation rather than agent count alone.\n\nOpen-source attention is concentrating on agent plumbing that is easy to demonstrate and deploy. **Co-op Anything** has an unusually sharp promise—turn any single-player game into co-op—while **whatsapp-mcp** reduces private-data risk through a read-only, self-hosted design, and **Lampline**, **ResearchBoost-Agent**, and **Physical Hermes** target voice agents, AI-for-AI optimization, and a low-cost physical endpoint. The simultaneous popularity of **Sphinx** and Trail of Bits' regression workflow shows the community moving from making agents write more code toward ensuring humans understand the change and can prove with live evidence that it did not break adjacent behavior.",
+  "viral_analysis_zh": "今天最可能出圈的是 **Agent World Model in the Wild**：它把 CUA 最缺的可执行环境、长程任务和可靠 verifier 打包成一条 open-source pipeline，并用 341 个环境任务、100+ steps 和跨 8 个 OOD benchmark 的结果形成完整证据链。**SuperMimic** 的「单卡 3 小时对比 128 卡 7 天、GPU-hours 降低 1000×」则拥有最强数字钩子；开源项目中 **Co-op Anything** 用一句话即可让用户想象 demo，传播门槛最低。",
+  "viral_analysis_en": "The most likely breakout paper is **Agent World Model in the Wild** because it packages executable CUA environments, long-horizon tasks, and reliable verifiers into one open-source pipeline, backed by 341 environment-task pairs, 100-plus-step difficulty, and gains across eight out-of-distribution benchmarks. **SuperMimic** has the strongest numerical hook—three hours on one GPU versus seven days on 128 GPUs and over 1,000× fewer GPU-hours—while **Co-op Anything** has the lowest sharing friction because its demo value is understandable in one sentence.",
+  "huggingface_papers": [
+    {
+      "title": "Cache Engineering for Agents",
+      "url": "https://arxiv.org/abs/2610.28577",
+      "tldr": "Long agent trajectories make KV-cache storage, I/O, and context limits first-class serving bottlenecks. The paper introduces agent-controlled drop and reposition operations that modify the active cache without rewriting the trajectory or re-prefilling retained tokens, plus the AKV engine for history-dependent cache states. A rolling-drop policy improves benchmark scores by 1.7 points while cutting average cost by 27.7%, and AKV reaches up to 1.2× output throughput and 1.5× faster P95 latency. This matters because context management becomes a programmable systems layer rather than lossy prompt summarization.",
+      "tldr_zh": "长程 agent 轨迹让 KV cache 的存储、I/O 与 context 上限成为核心 serving 瓶颈。论文提出由 agent 控制的 drop 和 reposition 操作，无需改写轨迹或重新 prefill 保留 token，并配套处理 history-dependent cache state 的 AKV engine。rolling-drop policy 在平均成本降低 27.7% 的同时让 benchmark 提升 1.7 分，AKV 最高实现 1.2× output throughput 与 1.5× P95 latency 加速。其重要性在于把 context management 从有损摘要升级为可编程系统层。",
+      "upvotes": 63,
+      "authors": "Tianyu Fu, Ruoxi Wang, Zihan Min, Zhongqi Ren, Zhihao Li, Tengxuan Liu, Shengxu Mu, Hanling Zhang, Yu Wang",
+      "ai_keywords": [
+        "LLM agents",
+        "KV cache",
+        "serving systems"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "Agent World Model in the Wild: Computer-Use Agent Environment Synthesis",
+      "url": "https://arxiv.org/abs/2610.26828",
+      "tldr": "WildAWM synthesizes executable training worlds that expose GUI, MCP, and CLI interfaces to the same computer-use agent. It adds execution-based gates for solvability, difficulty, and verifier reliability using heterogeneous rollouts, cross-judge agreement, and counterfactual robustness probes. The pipeline produces 341 long-horizon tasks, some exceeding 100 steps, and training two Qwen models only in these worlds improves results across eight out-of-distribution web, claw, and computer-use benchmarks. It is important because it treats environment and verifier generation—not just trajectory collection—as the scalable unit of CUA learning.",
+      "tldr_zh": "WildAWM 自动合成可执行训练世界，让同一个 Computer Use Agent 同时使用 GUI、MCP 与 CLI。它用异构 agent rollout、cross-judge consistency 和 counterfactual robustness probe，对 solvability、difficulty 与 verifier reliability 进行 execution-based gating。该 pipeline 生成 341 个长程任务，部分超过 100 steps；仅在这些世界中训练的两种 Qwen 模型，在 8 个 OOD web、claw 和 computer-use benchmark 上均获益。它的重要性是把 environment 与 verifier generation，而不只是 trajectory collection，变成 CUA 学习的可扩展单元。",
+      "upvotes": 56,
+      "authors": "Zhaoyang Wang, Qianhui Wu, Haorui Wang, Simon Yu, Baolin Peng, Canwen Xu, Hao Cheng, Wenlin Yao, Boyi Liu, Yite Wang, Jianfeng Gao, Huaxiu Yao",
+      "ai_keywords": [
+        "computer-use agent",
+        "environment synthesis",
+        "verifier"
+      ],
+      "interest_tag": "CUA"
+    },
+    {
+      "title": "Socratic Skill Learning: Interleaving Teaching and Practice for Transferable Agent Skills",
+      "url": "https://arxiv.org/abs/2610.17860",
+      "tldr": "Socratic Skill Learning interleaves expert teaching with student practice while keeping the student as the sole environment operator and skill author. SkillTransferBench tests whether acquired procedures transfer to fresh sessions across 35 task families and 408 executable cases. Fixed-window SSL reaches 0.801 utility, and issue-guided review preserves 0.805 while using 61.7% fewer educator tokens. The result argues that transferable skills emerge from testing and revising advice, not merely distilling successful trajectories.",
+      "tldr_zh": "Socratic Skill Learning 将 expert teaching 与 student practice 交错进行，同时保持 Student 是唯一的环境操作者和 Skill 作者。SkillTransferBench 通过 35 个 task family、408 个可执行 case，测试所学 procedure 能否迁移到 fresh session。Fixed-window SSL 达到 0.801 utility，而 issue-guided review 以少 61.7% 的 Educator token 保持 0.805。结果说明 transferable skill 来自对建议的测试与修订，而不是简单蒸馏成功轨迹。",
+      "upvotes": 27,
+      "authors": "Letian Zhu, Han Li, Yifan Yao, Xinping Lei, Xinyu Che, Jiahao Wang, Dianyi Wang, Yucheng Fu, Jiakai Wang, Zhiqi Bai, Wenbo Su, Jiaheng Liu",
+      "ai_keywords": [
+        "agent skills",
+        "transfer learning",
+        "interactive teaching"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "Memory-Centric Continual Learning for AI Agents",
+      "url": "https://arxiv.org/abs/2610.29357",
+      "tldr": "MCCL reframes agent memory as a continual-learning mechanism whose success is measured by better future actions, not by recalling stored text. It organizes memory along substrate, asset, and policy axes, then separates an inner loop that updates memory state from an outer loop that improves management policy. Its evaluation protocol targets retention under interference, adaptation to change, and task transfer, while its scaling framework connects performance to experience, storage, and compute. This gives memory research a behavioral target that distinguishes genuine learning from simply extending context.",
+      "tldr_zh": "MCCL 将 agent memory 重构为 continual-learning mechanism，评价标准是能否改善未来行动，而非能否召回存储文本。它从 substrate、asset、policy 三个轴组织 memory，并把更新 memory state 的 inner loop 与改进 management policy 的 outer loop 分开。评测协议关注 interference 下的 retention、对变化的 adaptation 与 task transfer，scaling framework 则连接 performance、experience、storage 和 compute。该框架为 memory research 提供了行为目标，可区分真正学习与单纯扩展 context。",
+      "upvotes": 17,
+      "authors": "Dongfang Li, Zhuoen Chen, Bonian Jia, Zixuan Liu, Zhengxuan Lu, Can Deng, Yukun Shi, Yuhang Meng, Xin Zhang, Jiahe Huang, Fuhao Li, Junmai Wang, Shunyao Wen, Jingjun Sun, Jiaxu Tian, Jiangling Zhang, Zihan Wang, Liangyou Li, Yitong Yao, Shuangyong Song, Beilun Wang, Pengxu Wei, Hanlin Xu, Chang Liu, Yongxiang Li, Baotian Hu, Xiangyang Ji, Min Zhang",
+      "ai_keywords": [
+        "agent memory",
+        "continual learning",
+        "memory evaluation"
+      ],
+      "interest_tag": "Memory"
+    },
+    {
+      "title": "Building AI Research Teams for Autonomous Discovery of Linear Attention Architectures",
+      "url": "https://arxiv.org/abs/2610.28887",
+      "tldr": "This work builds persistent AI researchers with different disciplinary backgrounds, private research histories, shared experimental evidence, and adaptive allocation of scarce experiment opportunities. The team searches for linear-attention architectures and reports a design that outperforms GDN2 at 1.3B scale across language modeling, reasoning, and retrieval evaluations. Ablations show that removing disciplinary diversity, private histories, or adaptive selection weakens discovery under the same budget. The key contribution is organizational: autonomous science depends on who explores, what each agent remembers, and how the team allocates experiments.",
+      "tldr_zh": "该工作构建了一支 persistent AI researcher team：成员拥有不同学科背景、私有 research history、共享实验证据，并通过 adaptive allocation 分配稀缺实验机会。团队搜索 linear-attention architecture，并报告在 1.3B scale 的 language modeling、reasoning 与 retrieval 评测上超过 GDN2 的设计。Ablation 表明，移除学科多样性、private history 或 adaptive selection，都会在相同预算下削弱 discovery。核心贡献是组织机制：autonomous science 的效果取决于谁探索、每个 agent 记住什么，以及团队如何分配实验。",
+      "upvotes": 12,
+      "authors": "Yujian Liu, Li An, Zelin He, Jacob Helwig, Jiabao Ji, Rohit Jain, Siyu Zhu, Shiyu Chang",
+      "ai_keywords": [
+        "multi-agent research",
+        "autonomous discovery",
+        "linear attention"
+      ],
+      "interest_tag": "Agent Swarm"
+    }
+  ],
+  "alphaxiv_papers": [
+    {
+      "title": "SuperMimic: Scaling Humanoid Whole-Body Control with One Differentiable World Model",
+      "arxiv_id": "2610.28480",
+      "url": "https://arxiv.org/abs/2610.28480",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2610.28480",
+      "tldr": "SuperMimic replaces brute-force model-free tracking with one differentiable world model learned from simulator transitions. Short imagined rollouts provide analytic gradients through time, allowing the world model and tracking policy to train jointly. It surpasses a baseline trained for seven days on 128 GPUs after three hours on one GPU, reduces GPU-hours by more than 1,000×, and eventually reaches zero failures over 129,514 motions. The result makes large-scale humanoid motion tracking accessible enough to study scaling laws rather than merely afford training runs.",
+      "tldr_zh": "SuperMimic 用一个从 simulator transition 学到的 differentiable world model，替代 brute-force model-free motion tracking。短程 imagined rollout 提供 analytic gradient through time，使 world model 与 tracking policy 可以联合训练。它在单卡 3 小时后超过使用 128 卡训练 7 天的 baseline，GPU-hours 降低超过 1000×，最终在 129,514 个 motion 上实现 zero failure。该结果把 humanoid motion tracking 的成本降到足以研究 scaling law，而不只是负担一次训练。",
+      "interest_tag": ""
+    },
+    {
+      "title": "Sage-A1.5: From Long-Horizon Execution to Scientific Exploration with Capability Composition",
+      "arxiv_id": "2610.28578",
+      "url": "https://arxiv.org/abs/2610.28578",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2610.28578",
+      "tldr": "Sage-A1.5 is a 35B mixture-of-experts agentic model designed to compose capabilities during long-horizon work rather than execute a fixed plan. It delegates tasks to isolated-context subagents, checks progress and evidence, and revises strategy when a search path fails. The report extends these mechanisms to open-ended scientific exploration with inspectable artifacts. Its significance is the explicit coupling of orchestration, verification, and discovery in one open agent model.",
+      "tldr_zh": "Sage-A1.5 是一个 35B Mixture-of-Experts agentic model，目标是在长程任务中动态组合 capability，而非执行固定计划。它把任务 delegation 给隔离 context 的 subagent，持续检查 progress 与 evidence，并在搜索路径失效时修订 strategy。报告进一步把这些机制扩展到带 inspectable artifact 的开放式 scientific exploration。其价值在于把 orchestration、verification 与 discovery 显式耦合进同一个开放 agent model。",
+      "interest_tag": "Agent Swarm"
+    },
+    {
+      "title": "Meta²: Precomputing Reusable Knowledge for Online Harness Evolution in Long-Horizon Agents",
+      "arxiv_id": "",
+      "url": "https://www.alphaxiv.org/abs/2610.meta2-online-harness-evolution",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2610.meta2-online-harness-evolution",
+      "tldr": "Meta² learns a reusable meta-skill for deciding when and how to modify an agent harness during a live task. Offline training contrasts runs without an evolver, with the current meta-skill, and with privileged verifier guidance; online, edits stay task-local and persist for the rest of the run without resetting progress. It reaches 81.00% on Terminal-Bench 2.1 and 44.44% on DeepSWE 1.1 with GPT-5.6-Terra. The method separates transferable knowledge about evolution from the concrete harness edits needed by one trajectory.",
+      "tldr_zh": "Meta² 学习一个 reusable meta-skill，用于决定在 live task 中何时、如何修改 agent harness。离线阶段对比无 evolver、使用当前 meta-skill、以及使用 privileged verifier guidance 的 rollout；在线阶段的 edit 保持 task-local，并在不重置进度的情况下作用于剩余轨迹。它配合 GPT-5.6-Terra 在 Terminal-Bench 2.1 和 DeepSWE 1.1 上分别达到 81.00% 与 44.44%。该方法把可迁移的 evolution knowledge 与单条 trajectory 所需的具体 harness edit 分离开。",
+      "interest_tag": ""
+    },
+    {
+      "title": "MemT-1.0: Towards Memory-Native Evolution",
+      "arxiv_id": "2610.26825",
+      "url": "https://arxiv.org/abs/2610.26825",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2610.26825",
+      "tldr": "MemT-1.0 makes memory part of model computation through stable token-level updates in Gated DeltaNet-2 and a Mixture-of-Storage design. The released Nano and Flash models are trained with a two-stage pipeline over 34B tokens and are evaluated on both memory and general capabilities. At 128K history, Nano reports 1.86× end-to-end speedup and 66× less persistent storage than retaining the full-context KV cache, while procedural experience improves agentic task success. It offers a model-native alternative to treating memory solely as external retrieval.",
+      "tldr_zh": "MemT-1.0 通过 Gated DeltaNet-2 中稳定的 token-level update 与 Mixture-of-Storage，把 memory 变成 model computation 的组成部分。发布的 Nano 和 Flash 模型用 34B token 的两阶段 pipeline 训练，并同时评估 memory 与 general capability。在 128K history 下，Nano 相比保留 full-context KV cache 报告 1.86× end-to-end speedup 与 66× persistent storage 降低，内化 procedural experience 还提升 agentic task success。它为把 memory 仅视作 external retrieval 提供了 model-native 替代方案。",
+      "interest_tag": "Memory"
+    },
+    {
+      "title": "Evolving Agent Interfaces",
+      "arxiv_id": "2610.28601",
+      "url": "https://arxiv.org/abs/2610.28601",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2610.28601",
+      "tldr": "Agent S4 treats interface design itself as a learnable computer-use capability. A meta-agent studies task trajectories without success labels, builds interface tools and usage knowledge, and evolves repositories through validation-based population selection. With Qwen3.8-27B, the evolved interfaces reach 21.3% binary score on OSWorld V2—3.8× the same model with fixed interfaces—and improve ScienceBoard from 41.4% to 58.6%. The work suggests that better action abstractions can be learned from experience independently of scaling the base model.",
+      "tldr_zh": "Agent S4 把 interface design 本身视为一种可学习的 computer-use capability。meta-agent 在没有 success label 的情况下分析 task trajectory，构建 interface tool 与 usage knowledge，再通过 validation-based population selection 演化 repository。配合 Qwen3.8-27B，evolved interface 在 OSWorld V2 达到 21.3% binary score，是固定 interface 的 3.8×，并把 ScienceBoard 从 41.4% 提升到 58.6%。这说明更好的 action abstraction 可以从经验中学习，而不必依赖扩大 base model。",
+      "interest_tag": "CUA"
+    }
+  ],
+  "github_repos": [
+    {
+      "name": "cranebeaker/coop-anything",
+      "url": "https://github.com/cranebeaker/coop-anything",
+      "tldr": "Co-op Anything gives a coding agent a playbook and MCP server for turning single-player PC games into multiplayer experiences. The agent researches the engine, reverse-engineers missing pieces, implements or repairs networking, tests with in-game bots, and packages the result for one-click installation. The repository already points to released and in-progress game-specific projects, making the claim demonstrable rather than purely aspirational. Its strength is a concrete outcome that combines reverse engineering, testing, and distribution in one agent workflow.",
+      "tldr_zh": "Co-op Anything 为 coding agent 提供 playbook 与 MCP server，用来把单机 PC 游戏改造成多人联机体验。agent 会研究 engine、逆向缺失部分、实现或修复网络同步、用游戏内 bot 测试，并打包成一键安装版本。仓库已链接已发布和开发中的具体游戏项目，因此不是纯概念展示。它的优势是把 reverse engineering、testing 与 distribution 收束成一个结果极易理解的 agent workflow。",
+      "stars": 806,
+      "language": "Python",
+      "interest_tag": ""
+    },
+    {
+      "name": "finereli/whatsapp-mcp",
+      "url": "https://github.com/finereli/whatsapp-mcp",
+      "tldr": "whatsapp-mcp is a read-only MCP server that lets an agent search and summarize a user's own WhatsApp history. It runs in the user's Cloudflare account, links like WhatsApp Web, and stores synchronized messages in SQLite inside a Durable Object. The inability to send messages sharply limits the blast radius while still supporting cross-chat retrieval and personal context. It is a useful pattern for private-data agents: self-host the state, narrow permissions, and expose only task-specific tools.",
+      "tldr_zh": "whatsapp-mcp 是一个 read-only MCP server，让 agent 搜索和总结用户自己的 WhatsApp 历史。它部署在用户的 Cloudflare account 中，像 WhatsApp Web 一样完成 linked-device 连接，并把同步消息存入 Durable Object 内的 SQLite。禁止发送消息显著降低 blast radius，同时仍支持跨聊天检索与 personal context。它展示了私人数据 agent 的实用模式：self-host state、收窄权限、只暴露 task-specific tool。",
+      "stars": 320,
+      "language": "TypeScript",
+      "interest_tag": ""
+    },
+    {
+      "name": "C4rohan/Lampline",
+      "url": "https://github.com/C4rohan/Lampline",
+      "tldr": "Lampline is an open-source, self-hosted stack for building and testing phone agents locally or on private servers. It can import Dialogflow CX and CX Agent Studio projects, supports multiple model providers, and includes an AI caller for exercising conversational changes before deployment. The project frames cost and testability together, claiming roughly $0.02–0.17 per call instead of a managed-platform price around $0.50. The important idea is treating voice-agent behavior as something that should be regression-tested on every change, not only demoed manually.",
+      "tldr_zh": "Lampline 是一个 open-source、self-hosted phone agent stack，可在本机或私有服务器上构建与测试。它支持导入 Dialogflow CX 和 CX Agent Studio 项目、接入多个 model provider，并用 AI caller 在部署前测试对话变更。项目把成本与 testability 绑定，宣称每通约 $0.02–0.17，而 managed platform 约为 $0.50。关键理念是把 voice-agent behavior 当成每次修改都应 regression test 的对象，而不只是人工 demo。",
+      "stars": 91,
+      "language": "Python",
+      "interest_tag": ""
+    },
+    {
+      "name": "RegeneratusLabs/physical-hermes",
+      "url": "https://github.com/RegeneratusLabs/physical-hermes",
+      "tldr": "Physical Hermes converts an inexpensive ESP32-S3 voice robot into a local voice endpoint for Hermes Agent. The workflow requires flashing provided firmware, configuring Wi-Fi, and connecting to an existing Hermes instance, with no vendor cloud or subscription in the loop. A button-to-talk interaction, battery operation, screen face, and commodity hardware make the demo tangible and replicable. It shows how an agent project can gain emotional and viral appeal through a small physical artifact without building a proprietary hardware stack.",
+      "tldr_zh": "Physical Hermes 把廉价 ESP32-S3 语音机器人改造成 Hermes Agent 的本地 voice endpoint。用户只需刷入提供的 firmware、配置 Wi-Fi，并连接已有 Hermes instance，全程不依赖 vendor cloud 或订阅。按键说话、电池供电、屏幕表情与通用硬件让 demo 既具象又可复现。它说明 agent 项目无需自建专有硬件栈，也能通过小型实体 artifact 获得情感吸引力与传播性。",
+      "stars": 79,
+      "language": "",
+      "interest_tag": ""
+    },
+    {
+      "name": "AI4AI-for-Anything/ResearchBoost-Agent",
+      "url": "https://github.com/AI4AI-for-Anything/ResearchBoost-Agent",
+      "tldr": "ResearchBoost-Agent autonomously profiles AI training code, proposes optimizations, and validates speedups against a frozen evaluation protocol. Its goal is not to generate a one-off patch but to preserve correctness while turning a fixed compute budget into more experiment capacity. The repository exposes the run protocol and explicitly separates optimization from evaluation, which makes claimed gains easier to audit. This is a concrete AI-for-AI loop where agent execution is judged by reproducible systems evidence.",
+      "tldr_zh": "ResearchBoost-Agent 自动 profile AI training code、提出优化，并在 frozen evaluation protocol 下验证 speedup。目标不是生成一次性 patch，而是在保持 correctness 的前提下，把固定 compute budget 转化为更多实验空间。仓库公开 run protocol，并显式分离 optimization 与 evaluation，使性能声明更容易审计。这是一个具体的 AI-for-AI loop，agent execution 由可复现的系统证据裁定。",
+      "stars": 76,
+      "language": "Python",
+      "interest_tag": ""
+    }
+  ],
+  "hackernews": [
+    {
+      "title": "DeepSeek banned from U.S. federal civilian agencies under new DHS order",
+      "url": "https://www.reuters.com/technology/us-banning-chinese-ai-deepseek-government-agency-it-systems-2026-10-19/",
+      "tldr": "The U.S. Department of Homeland Security ordered civilian federal agencies to remove DeepSeek products and third-party services built with its models, and barred future procurement. The order cites possible sensitive-data transfer to China and cybersecurity vulnerabilities, while allowing agencies to request justified exceptions. Its scope matters because it reaches downstream products that embed the models, not only direct use of DeepSeek's own applications. The story signals that model provenance and supply-chain disclosure are becoming deployment requirements in regulated environments.",
+      "tldr_zh": "美国 Department of Homeland Security 要求联邦民事机构移除 DeepSeek 产品及基于其模型构建的 third-party service，并禁止后续采购。命令援引敏感数据可能传往中国及 cybersecurity vulnerability，同时允许机构提交书面理由申请例外。其影响在于范围延伸到嵌入这些模型的下游产品，而不只是直接使用 DeepSeek 应用。该事件表明，在受监管环境中，model provenance 与 supply-chain disclosure 正变成部署要求。",
+      "points": 578,
+      "num_comments": 541,
+      "interest_tag": ""
+    },
+    {
+      "title": "Show HN: Sphinx – A hook that quizzes you on your AI's code before shipping",
+      "url": "https://sphinx-six-theta.vercel.app/",
+      "tldr": "Sphinx inserts an understanding check into Git pushes for agent-assisted code changes. A reviewer model that did not see the coding conversation reads the diff, asks a failure-oriented question, and blocks protected branches until the developer demonstrates understanding. The tool supports common coding agents and records bypasses while avoiding secrets such as .env files. Its popularity reflects a real pain point: review must restore human comprehension, not merely add another automated approval.",
+      "tldr_zh": "Sphinx 在 agent-assisted code change 的 Git push 流程中插入 understanding check。一个未看过 coding conversation 的 reviewer model 阅读 diff、提出面向 failure mode 的问题，并在开发者证明理解前阻止受保护分支继续 push。工具兼容常见 coding agent，会记录 bypass，同时避免读取 .env 等 secret。它走红反映了真实痛点：review 的目标应是恢复 human comprehension，而不只是增加一次 automated approval。",
+      "points": 252,
+      "num_comments": 89,
+      "interest_tag": ""
+    },
+    {
+      "title": "Websites are closing their doors to AI agents",
+      "url": "https://www.theverge.com/ai-artificial-intelligence/1013195/ai-agents-blocked-web",
+      "tldr": "Major services are blocking consumer agents from booking, shopping, or accessing accounts because of security, policy, licensing, and advertising concerns. Reported blockers include airlines, banks, review sites, and retailers, while legal disputes test whether an agent should be treated as the user's delegate or as an unauthorized third party. Even without explicit bans, anti-bot systems create fragile execution paths. The agent web therefore needs identity, consent, liability, and commercial protocols—not just stronger browser automation.",
+      "tldr_zh": "多类主流服务正因 security、policy、licensing 与广告利益，阻止 consumer agent 订票、购物或访问账户。报道涉及航空公司、银行、点评网站与零售商，相关诉讼则在争论 agent 应被视为用户委托人还是未经授权的第三方。即使没有明确封禁，anti-bot system 也会制造脆弱执行路径。因此 agent web 需要 identity、consent、liability 与商业协议，而不只是更强的 browser automation。",
+      "points": 158,
+      "num_comments": 149,
+      "interest_tag": ""
+    },
+    {
+      "title": "Using thousands of AI agents to uncover new leads in biological data",
+      "url": "https://openai.com/index/scaling-ai-research-for-complex-biological-data/",
+      "tldr": "OpenAI, PerturbAI, and Scripps Research assigned thousands of GPT-Rosalind agents to analyze gene perturbations across millions of mouse brain cells. Each agent linked one disruption to cellular responses and literature, after which reports were aggregated into a reasoning atlas in 32 minutes. The system reproduced known findings and proposed additional leads, but the output remains hypothesis generation that scientists must validate experimentally. The case is a strong swarm template because decomposition, evidence aggregation, novelty scoring, and human review are all explicit.",
+      "tldr_zh": "OpenAI、PerturbAI 与 Scripps Research 使用数千个 GPT-Rosalind agent，分析数百万小鼠脑细胞中的 gene perturbation。每个 agent 负责把一种 disruption 与 cellular response、文献证据关联，再把报告汇总成 reasoning atlas，整个分析耗时 32 分钟。系统复现了已知发现并提出额外线索，但这些输出仍是需要科学家实验验证的 hypothesis generation。该案例是很强的 swarm 模板，因为 decomposition、evidence aggregation、novelty scoring 与 human review 都被显式设计。",
+      "points": 142,
+      "num_comments": 91,
+      "interest_tag": "Agent Swarm"
+    },
+    {
+      "title": "AI agent fixed the bug, but what else did it change?",
+      "url": "https://blog.trailofbits.com/2026/10/21/your-ai-agent-fixed-the-bug-but-what-else-did-it-change/",
+      "tldr": "Trail of Bits released patching-bugs and regression-hunt workflows distilled from hundreds of merged security patches and thousands of Codex sessions. A review found 21 regressions among more than 130 merged PRs, motivating strict schemas, live proof-of-concept runs, fresh-context replay, and adjudication before a regression is reported. On 21 confirmed regressions, regression-hunt produced 25% fewer false positives than a baseline prompt, though stricter evidence left some cases borderline. The three-arm proof—original fails, patch passes, full revert fails again—is a particularly reusable standard for agent-generated fixes.",
+      "tldr_zh": "Trail of Bits 发布 patching-bugs 与 regression-hunt workflow，其设计来自数百个已合并 security patch 和数千次 Codex session。复核在 130 多个 merged PR 中确认 21 个 regression，因此流程要求 strict schema、live proof-of-concept、fresh-context replay 与 adjudication 后才报告问题。在这 21 个已知 regression 上，regression-hunt 比 baseline prompt 少 25% false positive，但严格证据门槛也让部分 case 保持 borderline。其 three-arm proof——原版失败、patch 通过、完整 revert 后再次失败——尤其适合作为 agent-generated fix 的通用标准。",
+      "points": 49,
+      "num_comments": 6,
+      "interest_tag": ""
+    }
+  ]
+}
