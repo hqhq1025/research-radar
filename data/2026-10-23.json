@@ -1,0 +1,226 @@
+{
+  "date": "2026-10-23",
+  "generated_at": "2026-10-23T16:04:36.871994+08:00",
+  "briefing_zh": "今天最清晰的主线，是 AI Agent 的竞争从模型回答质量下沉到真实执行系统。**OpenDS** 把深度搜索搬到开放网络，最佳前沿模型也只有 39.0% 准确率；**AgentVQA** 则证明 Agent 的主要失误更多来自 UI 定位、时序状态追踪与 3D grounding，而不是看不懂指令。这与 **OpenShell** 在 Hacker News 的压倒性热度相互印证：社区最关心的已不是 Agent 会不会调用工具，而是能否在长程、不确定且有权限风险的环境中可靠运行。\n\n第二条主线是 memory 研究开始主动反思复杂性。**Raw-RAG** 直接从未经改写的对话历史检索，在多数评测组合中反而超过复杂 agentic memory 管线，说明事实与关系链的保真度可能比精巧的摘要和结构化更关键；与此同时，**Deep Fusion Memory** 与 **AgentMemory** 分别从参数化记忆和工程化分层存储探索低成本长期保留。它们共同提出一个更严格的基线要求：任何新 memory 架构，都应该先证明自己稳定胜过简单、透明的原始历史 RAG。\n\n具身与 world model 方向也在从生成观感走向可执行预测。**Agentic World Action Models** 用代码式技能计划连接未来视频与机器人动作，**SuperMimic** 用共享可微动力学模型大幅降低人形控制训练成本，**Learning the 4D World through Point Trajectory Forecasting** 则以持续 3D 点轨迹约束多视角未来的一致性。关键变化是，world model 的价值越来越由动作闭环、几何一致性和任务完成度衡量，而不只是视频视觉质量。\n\n开源生态正在补齐 Agent 的生产化层次：**whatsapp-mcp** 以只读权限接入个人数据，**CATT** 把结果验证、证据封存与 replay 带入 CI，**Agent Skills** 则走向厂商中立治理。与此同时，**FrontierCS 2** 把 coding agent 放进真实研究仓库、隐藏 workload 和 held-out evaluator 中，说明评测也开始从静态题目迁移到接近真实研发的贡献重建。今天的共同信号是：下一阶段的杠杆点不只在更强 base model，而在 harness、权限、证据、memory baseline 与可复现评测。",
+  "briefing_en": "The clearest theme today is that competition in AI agents is moving downstream from answer quality into real execution systems. **OpenDS** places deep-research agents on the open Web, where the best frontier model reaches only 39.0% accuracy; **AgentVQA** finds that failures arise more often from UI localization, temporal state tracking, and 3D grounding than from instruction comprehension. The overwhelming Hacker News attention around **OpenShell** reinforces the same shift: the central question is no longer whether an agent can call tools, but whether it can operate reliably across long, uncertain workflows with meaningful permission risk.\n\nA second theme is a direct challenge to unnecessary complexity in memory systems. **Raw-RAG** retrieves from unmodified conversation history and outperforms elaborate agentic-memory pipelines in most evaluated settings, suggesting that preserving facts and dependency paths can matter more than sophisticated summarization or restructuring. In parallel, **Deep Fusion Memory** and **AgentMemory** explore low-cost retention through parametric memory and an engineered layered service. Together they set a tougher baseline: every new memory architecture should first show that it consistently beats simple, transparent retrieval over raw history.\n\nEmbodied AI and world models are also moving from visual plausibility toward executable prediction. **Agentic World Action Models** connects code-like skill plans to future video and robot actions, **SuperMimic** uses a shared differentiable dynamics model to cut humanoid-control training cost, and **Learning the 4D World through Point Trajectory Forecasting** constrains multi-view futures with persistent 3D trajectories. The value of a world model is increasingly judged by closed-loop action, geometric coherence, and task completion rather than video quality alone.\n\nThe open-source ecosystem is filling in the production stack around agents: **whatsapp-mcp** exposes personal data through read-only access, **CATT** brings outcome checks, sealed evidence, and replay into CI, and **Agent Skills** is moving toward vendor-neutral governance. Meanwhile, **FrontierCS 2** puts coding agents inside real research repositories with hidden workloads and held-out evaluators, shifting evaluation away from static exercises toward reconstructing genuine R&D contributions. The shared signal is that the next leverage points lie not only in stronger base models, but also in harnesses, permissions, evidence, honest memory baselines, and reproducible evaluation.",
+  "viral_analysis_zh": "今天最可能持续扩散的是 **OpenShell**：379 points 远超同批 HN 条目，因为它把 Agent 安全从抽象原则压缩成内核隔离、网络策略、凭据代理和形式化权限检查这组可部署能力。研究侧最可能引发争论的是 **Raw-RAG**，其传播钩子非常直接：复杂 memory 并不必然更好；这种反直觉结论既能迫使新方法补上强 baseline，也容易被工程团队快速复现。",
+  "viral_analysis_en": "**OpenShell** is the strongest viral candidate today: its 379 Hacker News points dwarf the rest because it turns abstract agent safety into deployable kernel isolation, network policy, credential brokering, and formally checked permission changes. On the research side, **Raw-RAG** has the sharpest debate hook—complex memory is not necessarily better—which both forces new systems to adopt a stronger baseline and gives engineering teams an easy claim to reproduce.",
+  "huggingface_papers": [
+    {
+      "title": "Deep Search in Real-World Web Environments",
+      "url": "https://arxiv.org/abs/2610.30181",
+      "tldr": "OpenDS evaluates end-to-end deep-search agents on the live Web, where evidence spans heterogeneous sources, modalities, file formats, and interactive access mechanisms. Its OpenDS-World benchmark contains 200 human-verified tasks requiring autonomous search, browser interaction, evidence integration, and a unique factual answer. Under one tool environment, the best of 12 frontier models reaches only 39.0% accuracy, while 1,000 independent human attempts average 21.1%. Tool traces expose persistent weaknesses in coordination, long-horizon search management, termination, and recovery from failed paths.",
+      "tldr_zh": "OpenDS 面向真实开放网络评测端到端深度搜索 Agent，其中证据分散在异构来源、不同模态、文件格式和交互式访问机制中。OpenDS-World 包含 200 个经人工验证的任务，要求自主搜索、操作浏览器、整合证据并给出唯一事实答案。在统一工具环境下，12 个前沿模型中的最佳者准确率仅为 39.0%，而 1,000 次独立人类尝试平均为 21.1%。轨迹分析显示，工具协调、长程搜索管理、终止判断与失败路径恢复仍是主要瓶颈。",
+      "upvotes": 110,
+      "authors": "Xiaomin Yu, Hongliang Chen, Zhe Huang, Shilin Yan, Shao-Rong Su, Xuqiao Ma, Feiyang Wang, Jiayu Chen, Jiwei Fang, Yu Yan, Yini Huang, Chen Chen, Ruoxi Cheng, Yuzhi He, Yuhui Zhang, Xiaoxing Hu, Chen Liu, Jianbo Lin, Yijiang Li, Xiaobin Hu, Menglong Li, Zhuoran Lu, Weishi Wang, Zhongqi Yue, Chengwei Qin",
+      "ai_keywords": [
+        "deep research agents",
+        "live web evaluation",
+        "browser interaction",
+        "tool coordination"
+      ],
+      "interest_tag": "Benchmark"
+    },
+    {
+      "title": "Making MLLM Latents Matter: Factor-Aware Predictive Learning for Cinematic Video Generation",
+      "url": "https://arxiv.org/abs/2610.30926",
+      "tldr": "Factor-Aware Predictive Learning makes multimodal-LLM representations operationally useful to a video diffusion transformer instead of letting native conditioning paths bypass them. It first grounds the generator on frozen MLLM latents, then uses paired videos and factor-span replacement to change one target factor while preserving characters, scenes, actions, or cameras. A final stage freezes the generator and trains the connector through it, teaching sparse observations to predict generation-compatible temporal representations. The method consistently improves sparse-to-video generation, factor-aware editing, and multi-shot generation over the evaluated baselines.",
+      "tldr_zh": "Factor-Aware Predictive Learning 让多模态大模型的 latent 真正参与视频扩散生成，而不是被生成器原有条件通路绕过。该方法先利用冻结的 MLLM 表示对齐生成器，再通过配对视频和因子片段替换，仅改变目标因子并保持角色、场景、动作或镜头等因素稳定。最后冻结生成器并经由生成器训练 connector，使稀疏观测能预测适合生成的时序表示。实验显示，该方法在稀疏条件视频生成、因子可控编辑和多镜头生成上均稳定优于基线。",
+      "upvotes": 102,
+      "authors": "Songlin Yang, Zhe Wang, Xiaotong Zhao, Xi Wang, Ran Zhang, Shuai Li, Taiyi Wu, Songlian Li, Eric Liu, Alan Zhao, Anyi Rao",
+      "ai_keywords": [
+        "cinematic video generation",
+        "multimodal latent representations",
+        "factor-aware control",
+        "video diffusion transformer"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "Deep Fusion Memory: A Chunk-Level Parametric Memory for Large Language Models",
+      "url": "https://arxiv.org/abs/2610.25100",
+      "tldr": "Deep Fusion Memory adds an external chunk-level parametric memory to a frozen language model, avoiding both continued-pretraining forgetting and explicit retrieval during inference. A causal predictor reconstructs retrieved chunk embeddings from preceding context, after which gated cross-attention injects the predicted memory into intermediate hidden states. Sharing one representation across a chunk reduces data construction to 32 times fewer retrieval queries and 2,048 times fewer retrieved items than token-level alternatives. DFM beats the strongest compared parametric-memory baseline by 12.71% on Mistral-7B and 11.19% on Qwen3-8B across six QA tasks.",
+      "tldr_zh": "Deep Fusion Memory 为冻结语言模型加入块级外部参数化记忆，同时规避持续预训练造成的遗忘和推理阶段显式检索的开销。其因果预测器根据前文重建检索到的文本块嵌入，再通过门控 cross-attention 把预测记忆注入中间隐藏状态。每个文本块共享一个记忆表示，使数据构建所需检索查询减少 32 倍、检索条目减少 2,048 倍。六个问答任务中，DFM 相对最强参数化记忆基线在 Mistral-7B 和 Qwen3-8B 上分别提升 12.71% 与 11.19%。",
+      "upvotes": 32,
+      "authors": "Rubin Wei, Siyuan Sun, Hao Sun, Yuliang Liu, Xiang Shi, Jiarui Wang, Junming Zhang, Zhouhan Lin",
+      "ai_keywords": [
+        "parametric memory",
+        "chunk-level memory",
+        "gated cross-attention",
+        "retrieval-free inference"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "Is Complex Agentic Memory Always Needed? Naive RAG Is Stronger Than We Thought",
+      "url": "https://arxiv.org/abs/2610.30755",
+      "tldr": "The paper tests Raw-RAG, a deliberately simple memory baseline that densely retrieves and reranks evidence directly from unmodified conversation history. Across LoCoMo, LongMemEval, MEME, and MemoryAgentBench, it ranks first in six of seven benchmark-model settings and beats the strongest agentic-memory competitor by 0.13–5.53 points. Its advantage comes from preserving both answer-bearing facts and the relations needed to derive an answer, even when the reader does not use every retrieved item efficiently. The result makes raw-history RAG a mandatory baseline for future agent-memory claims.",
+      "tldr_zh": "论文评测了 Raw-RAG：一个刻意保持简单的记忆基线，直接从未经改写的对话历史中进行稠密检索和重排序。在 LoCoMo、LongMemEval、MEME 与 MemoryAgentBench 上，它在七个基准—模型组合中的六个排名第一，并领先最强 agentic memory 系统 0.13–5.53 分。其优势来自对原始信息的完整保留，不仅覆盖答案事实，也保留推导答案所需的关系与依赖路径。结果表明，原始历史 RAG 应成为后续 Agent Memory 研究的必备基线。",
+      "upvotes": 10,
+      "authors": "Zhengye Bao, Shengtao Zhang, Haokai Zhang, Shiqi Lou, Muning Wen, Minnan Luo",
+      "ai_keywords": [
+        "agentic memory",
+        "raw-history RAG",
+        "long-term conversation",
+        "evidence retrieval"
+      ],
+      "interest_tag": "Memory"
+    },
+    {
+      "title": "AgentVQA: A Unified Benchmark for Agentic Visual Understanding",
+      "url": "https://arxiv.org/abs/2610.31494",
+      "tldr": "AgentVQA provides a scalable offline benchmark for visual understanding in realistic agent scenarios, complementing expensive online evaluation in simulators and physical environments. It adapts 1,000 challenging examples from 23 datasets across Web agents, robotics, egocentric video, games, and spatial planning while preserving rankings observed in corresponding online evaluations. The strongest of 22 models reaches only 58.5% accuracy. Most failures come from grounding and state representation—UI localization, motion interpretation, temporal tracking, and 3D reasoning—rather than instruction misunderstanding or downstream logic.",
+      "tldr_zh": "AgentVQA 为真实 Agent 场景中的视觉理解提供可扩展离线基准，用于补充模拟器和物理环境中成本高昂的在线评测。它从 23 个数据集中改编 1,000 个困难样例，覆盖 Web Agent、机器人、第一人称视频、游戏与空间规划，而且所得模型排名与对应在线评测保持一致。22 个受测模型中的最佳准确率仅为 58.5%。错误主要源于 UI 定位、运动理解、时序状态追踪及 3D 推断等 grounding 与状态表示缺陷，而非指令误解或后续逻辑失败。",
+      "upvotes": 7,
+      "authors": "Advait Gupta, Sachin Konan, Tom Yin, Gabriel Sarch, Zhuang Liu",
+      "ai_keywords": [
+        "agentic visual understanding",
+        "offline agent evaluation",
+        "visual grounding",
+        "state tracking"
+      ],
+      "interest_tag": "Benchmark"
+    }
+  ],
+  "alphaxiv_papers": [
+    {
+      "title": "Agentic World Action Models",
+      "arxiv_id": "2610.30136",
+      "url": "https://arxiv.org/abs/2610.30136",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2610.30136",
+      "tldr": "AW-0 combines code-based skill planning with joint future-video and robot-action prediction in one world-action model. Generated programs structure multi-step control and provide reusable routines, while visual and action experts ground those plans in predicted physical dynamics. Across eight bimanual manipulation tasks, AW-0 reports a 71.1% average rubric score versus 46.0% for DreamZero. The metric includes partial task progress rather than only complete successes, so it should not be read as a binary success rate.",
+      "tldr_zh": "AW-0 在同一个世界动作模型中联合生成代码式技能规划、未来视频和机器人动作。程序流负责组织多步控制并沉淀可复用技能，视觉与动作专家则用预测的物理动态为计划提供落地依据。在八项双臂操作任务上，其平均量表得分为 71.1%，高于 DreamZero 的 46.0%。该指标包含任务的部分完成度，不能直接理解为二元完整成功率。",
+      "interest_tag": ""
+    },
+    {
+      "title": "SuperMimic: Scaling Humanoid Whole-Body Control with One Differentiable World Model",
+      "arxiv_id": "2610.28480",
+      "url": "https://arxiv.org/abs/2610.28480",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2610.28480",
+      "tldr": "SuperMimic learns one differentiable dynamics model shared across a large humanoid motion library, then trains its tracking policy through short imagined rollouts. It surpasses the released SONIC checkpoint after three hours on one H100 and reduces failed motions from 179 to 25 on a 129,514-motion training benchmark. The reported compute reduction exceeds 1,000×. However, the comparison is not fully matched for hardware, data, or failure criteria, so the magnitude needs careful interpretation.",
+      "tldr_zh": "SuperMimic 为大规模人形机器人动作库学习一个共享的可微动力学模型，再通过短程想象轨迹训练跟踪策略。它在单张 H100 上训练三小时后超过已发布的 SONIC checkpoint，并在包含 129,514 个动作的训练基准上将失败数从 179 降至 25。论文报告超过 1,000 倍的计算量缩减。不过双方在硬件、数据和失败判据上并非完全同条件比较，因此该数量级仍需谨慎解读。",
+      "interest_tag": ""
+    },
+    {
+      "title": "FrontierCS 2: A Benchmark for Computer Science R&D",
+      "arxiv_id": "2610.29932",
+      "url": "https://arxiv.org/abs/2610.29932",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2610.29932",
+      "tldr": "FrontierCS 2 evaluates whether coding agents can reconstruct deleted research contributions inside real repositories rather than solve isolated programming prompts. Its 48 open-ended tasks span 13 computer-science domains, with development feedback available during execution but final evaluators, workloads, and reference implementations kept private. The strongest evaluated agent passes 58% of its runs. Sixteen tasks remain unsolved by every tested system, leaving a substantial frontier beyond ordinary coding benchmarks.",
+      "tldr_zh": "FrontierCS 2 不再让 coding agent 处理孤立题目，而是要求其在真实研究仓库中重建被删除的论文贡献。基准包含横跨 13 个计算机科学领域的 48 项开放任务，运行期间提供开发集反馈，但最终 evaluator、workload 和作者参考实现均保持隐藏。表现最强的 Agent 通过了 58% 的运行。仍有 16 项任务没有任何受测系统能够解决，显示它与普通代码基准之间存在明显难度差。",
+      "interest_tag": "Benchmark"
+    },
+    {
+      "title": "Learning the 4D World through Point Trajectory Forecasting",
+      "arxiv_id": "2610.28594",
+      "url": "https://arxiv.org/abs/2610.28594",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2610.28594",
+      "tldr": "The Video-Point Model jointly forecasts multi-view video and persistent 3D point trajectories, forcing different cameras to describe one coherent evolving scene. Point-trajectory supervision improves both visual fidelity and 3D-motion accuracy over an otherwise comparable video-only model, and the same representation can support robot-action generation. On the simulated Robot split of VP-WorldBench, it lowers FVD from 78.52 to 67.35. It also raises the reported 3D trajectory metric from 43.62 to 50.05.",
+      "tldr_zh": "Video-Point Model 联合预测多视角视频与持续存在的 3D 点轨迹，使不同摄像机的生成结果共同描述同一个连续演化场景。点轨迹监督相较同等规模的纯视频模型同时改善视觉质量和三维运动精度，并可进一步支持机器人动作生成。在 VP-WorldBench 的模拟 Robot 划分上，模型将 FVD 从 78.52 降至 67.35。论文报告的 3D 轨迹指标也从 43.62 提升至 50.05。",
+      "interest_tag": ""
+    },
+    {
+      "title": "Sage-A1.5: From Long-Horizon Execution to Scientific Exploration with Capability Composition",
+      "arxiv_id": "2610.28578",
+      "url": "https://arxiv.org/abs/2610.28578",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2610.28578",
+      "tldr": "Sage-A1.5 extends long-horizon agents with task delegation, parallel subagents in isolated contexts, evidence verification, and reflective strategy revision. Its orchestration layer decomposes complex work across collaborators while limiting context interference, and its verification loop redirects stalled searches or unsupported conclusions. The system frames capability composition as a route from execution toward collaborative scientific exploration. Evidence is centered on selected tasks and demonstrations rather than one controlled swarm benchmark, so generality remains to be established.",
+      "tldr_zh": "Sage-A1.5 为长程 Agent 加入任务委派、隔离上下文中的并行 subagent、证据验证和反思式策略修正。其编排层把复杂工作拆分给多个协作者并减少上下文相互干扰，验证循环则识别停滞搜索和缺乏依据的结论。系统将能力组合定位为从执行走向协作式科学探索的路径。当前证据主要来自选定任务和案例展示，而非统一受控的 swarm benchmark，因此泛化性仍待验证。",
+      "interest_tag": "Agent Swarm"
+    }
+  ],
+  "github_repos": [
+    {
+      "name": "finereli/whatsapp-mcp",
+      "url": "https://github.com/finereli/whatsapp-mcp",
+      "tldr": "A read-only MCP server that lets agents search and summarize a user's WhatsApp history without permission to send messages. It runs in the user's Cloudflare account as a linked WhatsApp device, synchronizing queued messages on demand and daily. The repository includes the Worker implementation, SQLite-backed storage, MCP tools, pairing UI, and tests. Its explicit read-only boundary is a practical response to the authorization risks now appearing in agent access to private accounts.",
+      "tldr_zh": "这是一个只读 WhatsApp MCP 服务，让 Agent 搜索和总结用户消息，但不能代发消息。它部署在用户自己的 Cloudflare 账户中，以 WhatsApp 关联设备运行，并按请求及每日同步排队消息。仓库包含 Worker 实现、SQLite 存储、MCP 工具、配对界面和测试。明确的只读边界，正面回应了 Agent 访问私人账户时日益突出的授权风险。",
+      "stars": 325,
+      "language": "TypeScript",
+      "interest_tag": ""
+    },
+    {
+      "name": "C4rohan/Lampline",
+      "url": "https://github.com/C4rohan/Lampline",
+      "tldr": "Lampline is a self-hosted environment for building, running, and testing production-style voice agents. It can import Dialogflow CX and CX Agent Studio projects, represents agents as versionable YAML and Markdown, and supports scripted pages, LLM steps, HTTP or MCP tools, knowledge search, and phone integrations. Its Python and TypeScript codebase includes a visual builder, CLI, test caller, grading workflows, and Docker deployment. A fully local model stack can run without API keys, making repeatable offline testing a first-class path.",
+      "tldr_zh": "Lampline 是一个用于构建、运行和测试生产级语音 Agent 的自托管环境。它可以导入 Dialogflow CX 与 CX Agent Studio 项目，以可纳入版本控制的 YAML 和 Markdown 表示 Agent，并支持脚本页面、LLM 步骤、HTTP 或 MCP 工具、知识检索及电话集成。其 Python 与 TypeScript 代码库包含可视化编辑器、CLI、测试来电者、评分流程和 Docker 部署。全本地模型栈无需 API Key，使可重复的离线测试成为一等路径。",
+      "stars": 164,
+      "language": "Python",
+      "interest_tag": ""
+    },
+    {
+      "name": "petergyang/video-short",
+      "url": "https://github.com/petergyang/video-short",
+      "tldr": "Video Short packages an agent-driven workflow that turns a raw recording into a short with B-roll, motion graphics, captions, and music. Its distinguishing feature is a browser review page where users attach feedback to exact frames and iterate with the agent instead of describing visual changes abstractly in chat. The repository includes an installable skill plus scripts for transcription, cutting, generation, rendering, capture, review, and QA. First-time setup is comparatively heavy at roughly 1 GB of dependencies.",
+      "tldr_zh": "Video Short 将一套 Agent 驱动的视频工作流封装成技能，可把原始录像加工为带 B-roll、动态图形、字幕和音乐的短视频。其核心差异是浏览器审阅页面，用户能对具体画面帧留下反馈，再让 Agent 迭代，而不必仅靠聊天描述视觉修改。仓库提供可安装 skill，以及转录、剪辑、生成、渲染、抓帧、审阅和 QA 的完整脚本。首次安装约需 1 GB 依赖，使用门槛并不算轻。",
+      "stars": 131,
+      "language": "Python",
+      "interest_tag": ""
+    },
+    {
+      "name": "Fazmin/cve-intel",
+      "url": "https://github.com/Fazmin/cve-intel",
+      "tldr": "CVE Intel is a local-first vulnerability intelligence application that aggregates 39 sources for evidence-based CVE triage. It can prioritize exploited vulnerabilities, inspect dependencies and installed software, scan saved container images, compare risks, and expose its capabilities through an MCP server with 38 tools. The repository is a substantive Rust workspace with a desktop app, core crates, host and image scanners, examples, and CI. Optional on-device language-model support keeps sensitive analysis local rather than turning the project into a thin remote-API wrapper.",
+      "tldr_zh": "CVE Intel 是一款本地优先的漏洞情报应用，聚合 39 个数据源进行有证据支撑的 CVE 分流。它可以优先标出已被利用的漏洞，检查依赖与本机软件、扫描离线容器镜像、比较风险，并通过包含 38 个工具的 MCP 服务向 Agent 开放能力。仓库是完整的 Rust workspace，包含桌面应用、核心 crates、主机与镜像扫描器、示例和 CI。可选的端侧语言模型让敏感分析留在本地，而不是把项目做成一层远程 API 薄封装。",
+      "stars": 91,
+      "language": "Rust",
+      "interest_tag": ""
+    },
+    {
+      "name": "hsuanshao/AgentMemory",
+      "url": "https://github.com/hsuanshao/AgentMemory",
+      "tldr": "AgentMemory is a self-hosted memory service for agents collaborating across users, teams, and machines. It implements layered L0–L3 processing, asynchronous LLM distillation, hybrid lexical and vector recall, and explicit user-team-agent isolation, with SQLite or PostgreSQL storage and optional Redis coordination. The repository contains a large Rust core, a TypeScript management panel, Docker deployment, migration tooling, and documented remote integrations. Its value is the engineering of memory lifecycle and access boundaries, not a new embedding algorithm alone.",
+      "tldr_zh": "AgentMemory 是面向跨用户、团队和机器协作 Agent 的自托管记忆服务。它实现 L0–L3 分层处理、异步 LLM 蒸馏、关键词与向量混合召回，以及明确的用户—团队—Agent 隔离，并支持 SQLite、PostgreSQL 和可选 Redis 协调。仓库包含规模完整的 Rust 核心、TypeScript 管理面板、Docker 部署、迁移工具和远程集成文档。它的价值重点是 memory 生命周期和访问边界的工程化，而不只是一个新的 embedding 算法。",
+      "stars": 32,
+      "language": "Rust",
+      "interest_tag": "Memory"
+    }
+  ],
+  "hackernews": [
+    {
+      "title": "OpenShell – A safe, private runtime for fleets of autonomous AI agents",
+      "url": "https://github.com/NVIDIA/OpenShell",
+      "tldr": "NVIDIA OpenShell is an Apache-2.0 runtime that isolates autonomous agents while granting policy-controlled access to files, system calls, networks, APIs, and credentials. It enforces restrictions at kernel and network layers, injects credentials only for approved endpoints, and formally checks proposed policy changes before applying them. With local gateways, Kubernetes deployment, multiple SDKs, and an extension surface, it addresses the operational problem of safely running agent fleets. The unusually high HN response shows that runtime governance has become a mainstream agent concern.",
+      "tldr_zh": "NVIDIA OpenShell 是采用 Apache 2.0 许可的 Agent runtime，在隔离自主 Agent 的同时，以策略控制其文件、系统调用、网络、API 与凭据访问。它在内核和网络层执行限制，仅向获准端点注入凭据，并在应用策略变更前通过形式化验证检查新增权限。项目还提供本地 gateway、Kubernetes 部署、多语言 SDK 和扩展机制，解决的是如何安全运行 Agent fleet。其远高于同批条目的 HN 热度，说明 runtime governance 已成为主流关注点。",
+      "points": 379,
+      "num_comments": 187,
+      "interest_tag": ""
+    },
+    {
+      "title": "US banks are blocking third-party AI agents access to customer accounts",
+      "url": "https://www.reuters.com/legal/government/us-banks-detect-unauthorized-ai-agents-customer-accounts-axios-reports-2026-10-22/",
+      "tldr": "Reuters relays an Axios report that major U.S. banks are restricting third-party agents that enter customer accounts using user-supplied credentials. Banks reportedly struggle to distinguish user-authorized automation from a compromised account or an independently acting agent, especially when purchases or transfers are possible. The episode exposes a missing infrastructure layer for delegated identity, scoped authority, auditable consent, and emergency revocation. Read-only access is emerging as the practical near-term compromise.",
+      "tldr_zh": "路透转述 Axios 报道称，美国多家大型银行正在限制使用客户所提供凭据进入账户的第三方 Agent。银行目前难以区分经用户授权的自动化、账户被攻陷，以及 Agent 偏离指令自主行动，涉及购买或转账时风险尤其突出。这暴露出委托身份、权限范围、可审计同意和紧急撤权等基础设施的缺口。短期内，只开放 read-only access 正在成为实际折中方案。",
+      "points": 11,
+      "num_comments": 4,
+      "interest_tag": ""
+    },
+    {
+      "title": "Show HN: CATT 0.2.1: Test agents/services against a Muse/Instinct-alike, in CI",
+      "url": "https://github.com/Coverage-Cat/consumer-agent-testing-tool",
+      "tldr": "CATT is an MIT-licensed harness for exercising scripted or model-driven agents against MCP servers, MCP apps, websites, and HTTP APIs. Service-side outcome checks, sealed evidence, replay, diff, JUnit output, and explicit blocked-versus-failed statuses make agent behavior testable in CI instead of relying on transcript inspection. The project labels which emulated host behaviors are documented, unofficial, assumed, or unknown. Passing its surrogate tests still does not certify compatibility with a hosted assistant, an important scope boundary.",
+      "tldr_zh": "CATT 是采用 MIT 许可的测试 harness，可让脚本或模型驱动的 Agent 操作 MCP server、MCP app、网站和 HTTP API。它通过服务端结果检查、密封证据、replay、diff、JUnit 输出，以及对 blocked 与 failed 的明确区分，把 Agent 行为纳入 CI，而不再依赖人工查看 transcript。项目还标注每项宿主模拟行为属于已记录、非官方、假设或未知。通过替身测试并不等同于获得托管助手的兼容性认证，这是重要的 scope 边界。",
+      "points": 7,
+      "num_comments": 2,
+      "interest_tag": "Benchmark"
+    },
+    {
+      "title": "Show HN: Halv – open-source agent coding software that reduces your usage",
+      "url": "https://halv.ai/",
+      "tldr": "Halv combines Claude Code, Codex, Kimi, and GLM in a desktop workspace with local code indexing, output filtering, context compression, sandboxing, and multi-agent task routing. Its interim SWE-rebench result reports the same 25 of 42 verifier passes as vanilla Codex while reducing recorded model cost from $337.50 to $144.67, although token usage was 3.49 times higher. The evidence covers only 14 tasks, solved-task sets differed, and four tasks became more expensive. It supports cost-aware orchestration as a promising technique, not a general savings guarantee.",
+      "tldr_zh": "Halv 将 Claude Code、Codex、Kimi 和 GLM 集成到桌面工作区，并提供本地代码索引、输出过滤、上下文压缩、沙箱及 multi-agent task routing。其阶段性 SWE-rebench 结果称，它与原生 Codex 同样通过 42 次运行中的 25 次，同时把记录的模型成本从 337.50 美元降至 144.67 美元，但 token 用量达到 3.49 倍。该结果只覆盖 14 个任务，两组通过的具体任务并不完全相同，且有四个任务成本反而上升。它证明成本感知编排值得探索，而不是提供普遍节省保证。",
+      "points": 6,
+      "num_comments": 2,
+      "interest_tag": "Agent Swarm"
+    },
+    {
+      "title": "Donating Agent Skills to the Agentic AI Foundation",
+      "url": "https://www.anthropic.com/news/donating-agent-skills-to-the-agentic-ai-foundation",
+      "tldr": "Anthropic is donating the Agent Skills specification, name, GitHub organization, logo, and domain to the Linux Foundation's Agentic AI Foundation. The format packages procedural knowledge in a SKILL.md file with optional scripts and references, and Anthropic says more than 70 agent platforms have integrated it. The proposed roadmap adds versioned releases, a formal proposal process, and installation security guidance. The move pushes reusable agent workflows toward vendor-neutral governance rather than platform-specific prompt libraries.",
+      "tldr_zh": "Anthropic 将 Agent Skills 规范、名称、GitHub 组织、标志和域名捐赠给 Linux Foundation 旗下的 Agentic AI Foundation。该格式通过 SKILL.md 及可选脚本与参考资料封装程序性知识；Anthropic 称目前已有超过 70 个 Agent 平台完成集成。后续路线图计划加入版本化发布、正式提案流程和安装安全指南。此举让可复用的 Agent workflow 从平台专属 prompt 库转向厂商中立治理。",
+      "points": 5,
+      "num_comments": 0,
+      "interest_tag": ""
+    }
+  ]
+}
