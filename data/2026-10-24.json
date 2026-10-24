@@ -1,0 +1,194 @@
+{
+  "date": "2026-10-24",
+  "generated_at": "2026-10-24T08:07:59.803048Z",
+  "briefing_zh": "今天最强的共同信号，是 agent 研究正在从「会调用工具」转向「能在真实环境里持续完成工作」。**Deep Search in Real-World Web Environments** 把搜索、浏览器操作和跨来源证据整合放进同一条链路，12 个前沿模型中的最好成绩也只有 39.0%；**FrontierCS 2** 则直接删除论文仓库中的核心贡献，让 coding agent 在真实研究代码库里重建它。两者共同说明，静态问答的高分还远没有转化成开放环境中的可靠执行。\n\n训练侧开始把 harness 本身视作需要泛化的变量。**Harness Scaling for Generalizable Agentic Reinforcement Learning** 不再让模型只适应一个固定的 prompts、tools 和 context 管线，而是在多种 execution configurations 上训练，以减少对单一 scaffold 的过拟合。与之呼应，GitHub 上的 **ResearchBoost-Agent** 把 profiling、代码修改、数值等价 judge 和轨迹记录组合成可审计闭环；这类系统的价值不在「再包一层 agent」，而在让优化结果可以被复核。\n\n基础模型与 world model 方向同样出现两条值得关注的路线。**Agentic World Action Models** 用统一架构联合生成技能代码、未来视频与机器人动作，使显式可复用程序获得物理预测的约束；**SuperMimic** 则用一个可微 world model 和短期 imagined rollout 大幅降低人形机器人全身控制训练成本。视觉侧的 **WeVisOne-VL** 进一步把点、框、mask 与 alpha matte 统一到结构化 next-token prediction 中，显示「统一接口 + 专用轻量 decoder」仍是扩展多任务能力的有效设计。\n\n今天最有反共识意味的结果来自 **Is Complex Agentic Memory Always Needed?**：直接在原始对话历史上检索和重排的 Raw-RAG，在七个设置中的六个超过复杂 agentic memory 系统。与此同时，**A Fix for Softmax and Cross-Entropy** 提醒社区，某些训练异常可能来自浮点实现而非高层机制。两项工作都指向同一方法论：在堆叠复杂架构之前，先把朴素 baseline 与数值基础做扎实。",
+  "briefing_en": "The strongest shared signal today is that agent research is moving from tool invocation toward sustained work in real environments. **Deep Search in Real-World Web Environments** combines search, browser interaction, and cross-source evidence synthesis, yet the best of 12 frontier models reaches only 39.0% accuracy. **FrontierCS 2** goes further by deleting the central contribution from research repositories and asking coding agents to reconstruct it, showing how far static benchmark success remains from reliable open-world execution.\n\nOn the training side, the harness itself is becoming a variable that must generalize. **Harness Scaling for Generalizable Agentic Reinforcement Learning** trains across multiple prompt, tool, and context configurations instead of letting a model specialize to one scaffold. The same accountability theme appears in **ResearchBoost-Agent**, which combines profiling, code edits, frozen numerical judges, and trajectory recording; its value is not another agent wrapper, but a loop whose optimization claims can be audited.\n\nFoundation and world-model research also splits into two notable paths. **Agentic World Action Models** jointly generates skill code, future video, and robot actions, grounding reusable programs in predictive physical dynamics. **SuperMimic** uses one differentiable world model and short imagined rollouts to reduce the cost of humanoid whole-body control, while **WeVisOne-VL** unifies points, boxes, masks, and alpha mattes through structured next-token prediction plus a lightweight decoder. Together they show that unified interfaces remain powerful when paired with the right specialized inductive bias.\n\nThe day's most counter-consensus result comes from **Is Complex Agentic Memory Always Needed?**: Raw-RAG over unmodified conversation history beats elaborate agentic-memory systems in six of seven settings. Meanwhile, **A Fix for Softmax and Cross-Entropy** argues that some apparent training phenomena may originate in floating-point implementations rather than high-level learning dynamics. Both reinforce the same discipline: strengthen simple baselines and numerical foundations before adding architectural complexity.",
+  "viral_analysis_zh": "**A Fix for Softmax and Cross-Entropy** 最可能形成爆款：标题直接挑战每个训练从业者每天使用的默认组件，问题普适且修复方案足够具体。它同时具备「基础设施竟然有 bug」的反直觉冲突和 grokking、蒸馏等可传播案例，但大规模训练收益尚未验证，讨论热度很可能高于证据成熟度。",
+  "viral_analysis_en": "**A Fix for Softmax and Cross-Entropy** is the strongest viral candidate because its title challenges a default component used by virtually every model trainer, while offering a concrete fix. The combination of an unexpected foundational bug and vivid grokking and distillation examples is highly shareable, although discussion may outpace the current evidence for large-scale training benefits.",
+  "huggingface_papers": [
+    {
+      "title": "WeVisOne-VL: Unified Visual Perception from Objects to Pixels",
+      "url": "https://arxiv.org/abs/2610.31329",
+      "tldr": "WeVisOne-VL unifies object-level and pixel-level perception within one vision-language model using structured next-token prediction. A special <OBJ> token connects the VLM to a lightweight pixel decoder, enabling outputs from points and boxes to masks and alpha mattes. After curriculum SFT and mixed-task RL, the authors report leading results across more than 30 benchmarks and robust rejection when the requested object is absent.",
+      "tldr_zh": "WeVisOne-VL 用结构化 next-token prediction 将目标级与像素级视觉感知统一到一个视觉语言模型中。特殊的 <OBJ> token 将 VLM 接入轻量像素解码器，使模型能够输出点、框、掩码和 alpha matte。经过课程式 SFT 与混合任务 RL 后，作者报告模型在 30 多个 benchmark 上达到领先水平，并能可靠拒答不存在目标的查询。",
+      "upvotes": 226,
+      "authors": "Tianming Liang, Junyi Pan, Yuxi Li, Canmiao Fu, Zhipeng Huang, Chong Sun, Chen Li, Jing Lyu",
+      "ai_keywords": [
+        "vision-language model",
+        "segmentation",
+        "visual perception"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "Making MLLM Latents Matter: Factor-Aware Predictive Learning for Cinematic Video Generation",
+      "url": "https://arxiv.org/abs/2610.30926",
+      "tldr": "FAPL addresses a key failure mode in cinematic video generation: a video DiT can ignore MLLM latents even when they are supplied as conditioning. The method first grounds generation in those latents, then learns factor-specific edits that preserve untargeted attributes, and finally teaches the MLLM to infer temporal evolution from sparse observations. The authors report consistent gains on sparse-to-video generation, factor-aware editing, and multi-shot generation.",
+      "tldr_zh": "FAPL 针对电影级视频生成中的一个关键问题：即使提供了 MLLM latent，视频 DiT 也可能绕过并忽略它们。该方法先强化生成器对 latent 的依赖，再学习只修改指定因素并保持其他属性，最后让 MLLM 从稀疏观测中推断时间演化。作者报告其在 sparse-to-video、因素可控编辑和多镜头生成三类任务上均稳定优于基线。",
+      "upvotes": 165,
+      "authors": "Songlin Yang, Zhe Wang, Xiaotong Zhao, Xi Wang, Ran Zhang, Shuai Li, Taiyi Wu, Songlian Li, Eric Liu, Alan Zhao, Anyi Rao",
+      "ai_keywords": [
+        "video generation",
+        "multimodal latent",
+        "controllable generation"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "Deep Search in Real-World Web Environments",
+      "url": "https://arxiv.org/abs/2610.30181",
+      "tldr": "OpenDS-World evaluates whether agents can conduct end-to-end research on the live Web rather than in static retrieval environments. Its 200 tasks require search, browser interaction, and evidence integration across independent sources, modalities, and file formats. The best of 12 frontier models reaches only 39.0% accuracy, exposing weaknesses in tool coordination, termination, search cost, and failure recovery.",
+      "tldr_zh": "OpenDS-World 评测 agent 能否在真实开放 Web 上完成端到端研究，而不是只处理静态检索数据。其 200 个任务要求模型结合搜索、浏览器交互与证据整合，处理独立来源、多种模态及异构文件格式。12 个前沿模型中的最佳准确率仅为 39.0%，工具协调、终止决策、搜索成本和失败恢复仍是主要瓶颈。",
+      "upvotes": 152,
+      "authors": "Xiaomin Yu, Hongliang Chen, Zhe Huang, Shilin Yan, Shao-Rong Su, Xuqiao Ma, Feiyang Wang, Jiayu Chen, Jiwei Fang, Yu Yan, Yini Huang, Chen Chen, Ruoxi Cheng, Yuzhi He, Yuhui Zhang, Xiaoxing Hu, Chen Liu, Jianbo Lin, Yijiang Li, Xiaobin Hu, Menglong Li, Zhuoran Lu, Weishi Wang, Zhongqi Yue, Chengwei Qin",
+      "ai_keywords": [
+        "web agent",
+        "deep research",
+        "agent evaluation"
+      ],
+      "interest_tag": "Benchmark"
+    },
+    {
+      "title": "FilmFlow: Agentic System for 3D Virtual Film Cinematography",
+      "url": "https://arxiv.org/abs/2610.30753",
+      "tldr": "FilmFlow turns natural-language directions or reference videos into executable camera trajectories for dynamic 3D scenes. A Director composes camera motions while Interpreter, Scout, and Critic agents recover intent, choose viewpoints, and refine plans from rendered feedback. On the accompanying CinemaBench, the system achieves the strongest reported results and highest user preference among the evaluated baselines.",
+      "tldr_zh": "FilmFlow 将自然语言指令或参考视频转化为动态 3D 场景中的可执行相机轨迹。Director 负责组合相机运动，Interpreter、Scout 和 Critic 分别提取意图、选择视角，并依据渲染反馈迭代修正计划。在配套的 CinemaBench 上，FilmFlow 在论文评测的基线中取得最佳结果和最高用户偏好。",
+      "upvotes": 26,
+      "authors": "Yiming Zhang, Jiarui Guo, Haojia Wei, Yifei Liu, Yifan Yang, Hongjie Zhang, Xue Yang, Zhihang Zhong",
+      "ai_keywords": [
+        "multi-agent system",
+        "3D cinematography",
+        "camera planning"
+      ],
+      "interest_tag": "Agent Swarm"
+    },
+    {
+      "title": "Is Complex Agentic Memory Always Needed? Naive RAG Is Stronger Than We Thought",
+      "url": "https://arxiv.org/abs/2610.30755",
+      "tldr": "This study tests whether elaborate agentic-memory transformations are necessary by comparing them with Raw-RAG over unmodified conversation history. Raw-RAG ranks first in six of seven benchmark-model settings and exceeds the strongest compared agentic-memory system by 0.13–5.53 points. The analysis suggests that transformed stores can discard answer values or relational paths, making raw-history retrieval an essential baseline for future memory research.",
+      "tldr_zh": "该研究以直接检索原始对话历史的 Raw-RAG 为基线，检验复杂 agentic memory 转换是否真的必要。Raw-RAG 在七个 benchmark-model 设置中的六个排名第一，并比被比较的最强 agentic memory 系统高出 0.13–5.53 分。分析表明，记忆转换可能丢失答案值或推导所需的关系路径，因此原始历史检索应成为后续记忆研究的必备基线。",
+      "upvotes": 15,
+      "authors": "Zhengye Bao, Shengtao Zhang, Haokai Zhang, Shiqi Lou, Muning Wen, Minnan Luo",
+      "ai_keywords": [
+        "agent memory",
+        "RAG",
+        "long-term conversation"
+      ],
+      "interest_tag": "Memory"
+    }
+  ],
+  "alphaxiv_papers": [
+    {
+      "title": "Agentic World Action Models",
+      "arxiv_id": "2610.30136",
+      "url": "https://arxiv.org/abs/2610.30136",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2610.30136",
+      "tldr": "AW-0 combines code-based skill planning with joint video and robot-action prediction in a unified world-action model. Its code expert generates reusable parameterized routines, while video and action experts predict future visual states and low-level controls. Across eight bimanual tasks, the feed reports an average score of 71.1% versus 46.0% for DreamZero, although these rubric scores include partial progress rather than only full success.",
+      "tldr_zh": "AW-0 将代码化技能规划、未来视频预测和机器人动作生成整合到同一个世界动作模型中。代码专家产生可复用的参数化技能程序，视频与动作专家则预测未来视觉状态和底层控制。feed 报告其在八项双臂任务上的平均得分为 71.1%，高于 DreamZero 的 46.0%，但该评分包含任务部分完成度，不能直接等同于完整成功率。",
+      "interest_tag": ""
+    },
+    {
+      "title": "SuperMimic: Scaling Humanoid Whole-Body Control with One Differentiable World Model",
+      "arxiv_id": "2610.28480",
+      "url": "https://arxiv.org/abs/2610.28480",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2610.28480",
+      "tldr": "SuperMimic learns shared humanoid dynamics with one differentiable world model and optimizes its tracking policy through short imagined rollouts. It surpasses a released SONIC checkpoint after three hours on one H100 and records 25 failures over 129,514 motions, reaching zero failures after 9.8 hours on two GPUs. The claimed reduction of more than 1,000× in GPU-hours is striking, but the comparison is not fully matched in hardware, data, or failure criteria.",
+      "tldr_zh": "SuperMimic 用一个可微 world model 学习大量人类动作共享的机器人动力学，并通过短期 imagined rollout 直接优化控制策略。它在单张 H100 上训练 3 小时便超过 SONIC 已发布检查点，在 129,514 个动作中仅失败 25 个，双卡训练 9.8 小时后实现零失败。超过 1,000 倍的 GPU-hours 降幅很醒目，但该比较在硬件、数据和失败判据上并非完全对齐。",
+      "interest_tag": ""
+    },
+    {
+      "title": "A Fix for Softmax and Cross-Entropy",
+      "arxiv_id": "2610.31642",
+      "url": "https://arxiv.org/abs/2610.31642",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2610.31642",
+      "tldr": "The paper identifies two numerical failure modes in standard softmax and cross-entropy: vanished target gradients at extreme confidence and cancellation errors when student and teacher logits nearly match. It replaces unstable probability subtraction with formulations based on margins, log-sum-exp, softplus, expm1, and log1p. The fixes remove reported grokking instabilities and student drift in controlled experiments, but the current evidence does not yet establish an impact on large-scale model training.",
+      "tldr_zh": "论文指出标准 softmax 与交叉熵存在两类数值问题：模型极度自信时目标梯度会被舍入为零，以及学生与教师 logits 接近时概率相减会产生消失或伪造的梯度。作者用 margin、log-sum-exp、softplus、expm1 和 log1p 等稳定计算替代直接的概率相减。修复在受控实验中消除了 grokking 波动和蒸馏学生漂移，但目前尚无充分证据证明它能改善大规模模型训练。",
+      "interest_tag": ""
+    },
+    {
+      "title": "FrontierCS 2: A Benchmark for Computer Science R&D",
+      "arxiv_id": "2610.29932",
+      "url": "https://arxiv.org/abs/2610.29932",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2610.29932",
+      "tldr": "FrontierCS 2 evaluates whether coding agents can reconstruct deleted research contributions inside working repositories rather than solve isolated programming prompts. Its 48 tasks span 13 domains and use private held-out workloads, with the original authors' code serving as the reference. Claude Opus 5.5 passes 58% of its runs, while no evaluated run passes 16 tasks; the results use one run per agent-task pair and include no human comparison.",
+      "tldr_zh": "FrontierCS 2 不再让智能体回答孤立编程题，而是要求它们在真实代码仓库中重建被删除的论文贡献。其 48 个任务覆盖 13 个计算机科学领域，并通过私有保留工作负载对照原作者代码进行评测。Claude Opus 5.5 的运行通过率为 58%，但有 16 个任务无人通过；结果基于每个 agent-task 组合一次运行，且没有人类基线。",
+      "interest_tag": "Benchmark"
+    },
+    {
+      "title": "Harness Scaling for Generalizable Agentic Reinforcement Learning",
+      "arxiv_id": "2610.29458",
+      "url": "https://arxiv.org/abs/2610.29458",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2610.29458",
+      "tldr": "Harness Scaling treats prompts, tools, context management, and other execution scaffolds as a new scaling axis for agentic reinforcement learning. Instead of training through one fixed harness, the method exposes the model to diverse execution configurations to reduce scaffold-specific overfitting and improve transfer. The work matters because modern agent performance increasingly depends on the surrounding harness, yet the claimed gains should be read within the evaluated harness families rather than as universal generalization.",
+      "tldr_zh": "Harness Scaling 将 prompts、tools、context management 等 execution scaffold 视为 agentic reinforcement learning 的新扩展维度。它不再只通过一个固定 harness 训练，而是让模型接触多种执行配置，以减少对单一 scaffold 的过拟合并改善迁移。由于现代 agent 的表现越来越依赖外围 harness，这一方向很关键；但其增益仍应限定在论文评测过的 harness 家族内，不能直接外推为普适泛化。",
+      "interest_tag": ""
+    }
+  ],
+  "github_repos": [
+    {
+      "name": "C4rohan/Lampline",
+      "url": "https://github.com/C4rohan/Lampline",
+      "tldr": "Lampline is a local-first platform for building and running self-hosted voice agents. It combines a runtime, visual flow builder, Dialogflow import, SIP connectivity, and an AI test caller. Extensive source code, tests, releases, and green CI make it closer to a deployable development stack than a voice-agent demo. It is the strongest combination of usefulness, completeness, and verifiability in this search set.",
+      "tldr_zh": "Lampline 是一套本地优先的开源语音 Agent 平台，可以导入 Dialogflow CX 项目，也可以从 YAML 或 Markdown 构建流程。它同时提供运行引擎、可视化编辑器、AI 测试呼叫方和 SIP/电话接入。完整源码、测试、持续集成和正式发布证明它不是 Demo 或营销壳。综合实用性、完成度和可验证性，它是本批候选中最强的一项。",
+      "stars": 171,
+      "language": "Python",
+      "interest_tag": ""
+    },
+    {
+      "name": "Fazmin/cve-intel",
+      "url": "https://github.com/Fazmin/cve-intel",
+      "tldr": "CVE Intel aggregates public vulnerability intelligence into a private-by-default Rust application. It supports CVE triage and asset scanning through a desktop UI, CLI, REST API, and MCP server. Cross-platform CI, dependency auditing, and numerous releases provide stronger evidence than its unusually compressed commit history. It is a practical security tool with a real agent-integration surface.",
+      "tldr_zh": "CVE Intel 将公开漏洞情报整合为默认本地运行的 Rust 应用，用于 CVE 检索、风险排序和资产扫描。桌面界面、CLI、REST API 与 MCP Server 让人工安全流程和 Agent 都能调用。跨平台 CI、依赖审计和连续发布证明当前实现具有实质性。其提交日期存在导入痕迹，因此应依据代码和构建结果，而非表面历史长度评价。",
+      "stars": 94,
+      "language": "Rust",
+      "interest_tag": ""
+    },
+    {
+      "name": "AI4AI-for-Anything/ResearchBoost-Agent",
+      "url": "https://github.com/AI4AI-for-Anything/ResearchBoost-Agent",
+      "tldr": "ResearchBoost-Agent lets a coding agent profile AI training workloads, optimize hotspots, and submit changes to frozen numerical judges. It contains equivalence checks, trajectory recording, and complete harnesses for four substantial training tasks rather than only prompts. Separate repositories expose the optimized implementations behind its reported results. Its public history is short, but the amount of auditable experimentation gives it unusually high research value.",
+      "tldr_zh": "ResearchBoost-Agent 让 coding agent 分析 AI 训练瓶颈、修改热点代码，再由冻结的数值 judge 判断优化是否可接受。仓库包含数值等价检查、轨迹记录和四类训练任务的完整实验框架，而非只有提示词。作者还为各项优化结果提供独立源码仓库，方便复核。项目公开历史较短，但技术密度和可审计性显著高于普通 Agent workflow。",
+      "stars": 80,
+      "language": "Python",
+      "interest_tag": ""
+    },
+    {
+      "name": "kukemc/bili-cli",
+      "url": "https://github.com/kukemc/bili-cli",
+      "tldr": "bili-cli gives agents a machine-readable CLI and MCP interface for Bilibili rather than merely wrapping search. It covers transcripts, comments, messages, posts, uploads, analytics, and local ASR. Guarded writes, broad tests, cross-platform CI, and eight releases make it directly usable. Its scope is platform-specific, but the implementation quality is stronger than many more broadly marketed candidates.",
+      "tldr_zh": "bili-cli 为 AI Agent 提供机器可读的 B 站 CLI 和 MCP 接口，而不只是封装视频搜索。它覆盖字幕、评论、私信、动态、投稿、创作数据和本地 ASR。写操作预览、限流、审计日志、跨平台测试和连续发布使其已经具备实际使用条件。虽然适用平台较窄，但工程完成度高于许多定位更宽泛的候选。",
+      "stars": 87,
+      "language": "Python",
+      "interest_tag": ""
+    },
+    {
+      "name": "hsuanshao/AgentMemory",
+      "url": "https://github.com/hsuanshao/AgentMemory",
+      "tldr": "AgentMemory is a self-hosted long-term memory service designed for teams of AI agents. It combines layered memory, hybrid lexical-vector retrieval, asynchronous distillation, and department, team, and member isolation. The repository includes real storage backends, integrations, an admin panel, and substantial end-to-end coverage. Its rapid release cadence and BSL 1.1 server license are the main deployment caveats.",
+      "tldr_zh": "AgentMemory 是面向多 Agent 团队的自托管长期记忆服务，而非简单的向量数据库封装。它实现分层记忆、关键词与向量混合召回、异步 LLM 蒸馏和部门、团队、成员隔离。数据库后端、客户端集成、管理面板和大型 E2E 测试均已公开。主要风险是版本增长过快，以及服务端采用 BSL 1.1 许可。",
+      "stars": 37,
+      "language": "Rust",
+      "interest_tag": "Memory"
+    }
+  ],
+  "hackernews": [
+    {
+      "title": "US banks are blocking third-party AI agents access to customer accounts",
+      "url": "https://www.reuters.com/legal/government/us-banks-detect-unauthorized-ai-agents-customer-accounts-axios-reports-2026-10-22/",
+      "tldr": "Major U.S. banks are blocking third-party AI agents from operating inside customer accounts or initiating transactions because they cannot reliably distinguish legitimate delegation from unauthorized access. Some customers reportedly supplied agents with their credentials, complicating authorization and liability when an agent deviates from instructions. JPMorgan and Charles Schwab described external agents as a risk they are actively restricting, while Morgan Stanley said it had not observed rogue-agent activity. The report identifies an emerging access-control problem rather than confirmed widespread autonomous account takeovers.",
+      "tldr_zh": "美国多家大型银行正在限制第三方 AI agent 进入客户账户或发起交易，因为银行难以可靠区分合法委托与未经授权的访问。部分客户据报主动向 agent 提供了登录凭据，使 agent 偏离指令后的授权认定和责任归属更加复杂。摩根大通和嘉信理财已明确限制外部 agent，摩根士丹利则表示尚未发现恶意 agent 活动。报道揭示的是正在形成的访问控制问题，而非已经确认的大规模账户自主接管。",
+      "points": 11,
+      "num_comments": 5,
+      "interest_tag": ""
+    },
+    {
+      "title": "Show HN: CATT 0.2.1: Test agents/services against a Muse/Instinct-alike, in CI",
+      "url": "https://github.com/Coverage-Cat/consumer-agent-testing-tool",
+      "tldr": "CATT is an open-source test harness for evaluating how consumer assistants interact with MCP servers, applications, websites, and HTTP APIs. It supplies surrogate Muse and Instinct environments with configurable state, approvals, routing, memory, and outcome checks. Tests can be deterministic or model-driven, and their interaction evidence can be inspected, replayed, and compared across builds in CI. Passing these surrogate tests does not certify compatibility with the proprietary assistants themselves.",
+      "tldr_zh": "CATT 是一个开源测试框架，用于评估消费级 AI 助手与 MCP 服务、应用、网站及 HTTP API 的交互。它提供 Muse 和 Instinct 的替身环境，可配置状态、审批、路由、记忆和结果检查。测试既可以使用确定性脚本，也可以由模型驱动，并能在 CI 中检查、回放和比较交互证据。项目明确说明，通过替身测试并不等同于获得真实专有助手的兼容性认证。",
+      "points": 9,
+      "num_comments": 2,
+      "interest_tag": ""
+    }
+  ]
+}
