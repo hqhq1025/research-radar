@@ -1,0 +1,215 @@
+{
+  "date": "2026-10-25",
+  "generated_at": "2026-10-25T08:03:15.199344Z",
+  "briefing_zh": "今天最值得注意的基础研究信号来自 **A Fix for Softmax and Cross-Entropy**：DeepMind 指出被视为标准组件的 softmax、log-softmax 与 cross-entropy 在高置信度和蒸馏场景中存在数值梯度缺陷，并给出几乎可直接替换的实现。它与 **WeVisOne-VL** 的统一像素级视觉接口共同说明，当前进展不只来自扩大模型规模，修正基础算子与输出表示同样能释放稳定性和泛化收益。\n\nAgent 方向今天明显向「真实环境、可验证执行」收敛。**Deep Search in Real-World Web Environments** 把评测从静态语料推进到开放 Web 的多步检索与证据整合；**FrontierCS 2** 则把 coding agent 放入真实研究仓库，以隐藏测试和人类参考实现衡量是否能补回论文贡献。与此同时，**IQuest-Q1** 试图用 320B MoE 基座、多 scaffold 后训练和 CLI 环境强化，把 agentic coding 从外层 harness 能力进一步压进模型本身。\n\nWorld model 与 action 的结合也在升温。**Agentic World Action Models** 将代码化技能计划、未来视频预测与机器人动作建模成耦合生成流；**Action Learning for Scientific Simulations** 则从完整轨迹恢复可优化的 action objective，强调不仅要生成未来，还要能对路径进行评分与控制。这比单纯追求视觉上逼真的 rollout 更接近可用于规划和闭环决策的 world model。\n\n开源侧的共同主题是把 agent 接到具体工作面并加上工程护栏：**Lampline** 提供本地 voice-agent 构建、真实电话 eval 与 SIP 部署，**bili-cli** 把 B 站操作封装为结构化 CLI/MCP 工具，**lessloc** 用 hooks 约束 coding agent 的代码膨胀。HN 对 **ARGUS** 和 enterprise browser 的讨论也显示，市场关注点正从「agent 能做什么」转向「它以什么权限行动、如何审批、审计和回滚」。",
+  "briefing_en": "The most important foundational signal today comes from **A Fix for Softmax and Cross-Entropy**. DeepMind identifies numerical gradient defects in standard softmax, log-softmax, and cross-entropy implementations under high confidence and distillation, then offers near-drop-in corrections. Together with **WeVisOne-VL** and its unified pixel-level output interface, the work shows that progress is not only about scaling models: repairing basic operators and representations can unlock stability and generalization gains.\n\nAgent research is converging on real environments and verifiable execution. **Deep Search in Real-World Web Environments** moves evaluation from static corpora to multi-step retrieval and evidence synthesis on the open Web, while **FrontierCS 2** places coding agents inside real research repositories and scores whether they can reconstruct a paper's removed contribution under hidden tests. **IQuest-Q1** complements this trend with a 320B MoE foundation model, multi-scaffold post-training, and CLI-oriented reinforcement learning, pushing more agentic coding capability into the model rather than leaving it entirely to the harness.\n\nWorld models are also becoming more tightly coupled to action. **Agentic World Action Models** jointly generates code-level skill plans, future video, and robot actions, while **Action Learning for Scientific Simulations** learns an objective over complete trajectories so paths can be evaluated and controlled rather than merely generated. Both point beyond visually plausible rollout toward world models that support planning and closed-loop decisions.\n\nOpen-source projects are attaching agents to concrete work surfaces with stronger operational guardrails. **Lampline** combines local voice-agent authoring, real phone-call evaluation, and SIP deployment; **bili-cli** exposes Bilibili workflows as structured CLI and MCP tools; and **lessloc** uses hooks to constrain coding-agent bloat. HN attention around **ARGUS** and enterprise browsers likewise suggests that the market is shifting from what agents can do to how their permissions, approvals, audits, and rollbacks are governed.",
+  "viral_analysis_zh": "今天最可能出圈的是 **A Fix for Softmax and Cross-Entropy**：它挑战了所有人默认正确的基础算子，问题具体、复现实验直观，而且修复成本低，天然适合形成「一个小改动消灭多年怪现象」的传播叙事。开源项目里 **bili-cli** 也有爆款结构——把抽象的 agent 能力包装成「AI 当 UP 主」的强场景故事，再用 80+ 命令、MCP 与安全护栏证明不是 demo。",
+  "viral_analysis_en": "**A Fix for Softmax and Cross-Entropy** is the strongest viral candidate because it challenges primitives everyone assumes are solved, demonstrates concrete failures, and offers a low-cost fix—a perfect “small patch explains years of strange behavior” story. Among open-source releases, **bili-cli** has a similarly strong launch frame: it turns generic agent tooling into the vivid idea of an “AI becoming a Bilibili creator,” then backs the hook with 80+ commands, MCP integration, and safety guardrails.",
+  "huggingface_papers": [
+    {
+      "title": "WeVisOne-VL: Unified Visual Perception from Objects to Pixels",
+      "url": "https://arxiv.org/abs/2610.31329",
+      "tldr": "WeVisOne-VL unifies object-level and pixel-level perception in one vision-language model through structured next-token prediction. A lightweight pixel decoder, activated through a special object token, produces points, boxes, masks, and alpha mattes while the language model handles detection, OCR, counting, and referring tasks. Its staged SFT-to-RL curriculum aims to make fine-grained localization reliable instead of bolting separate task heads onto a VLM. The work matters because it turns heterogeneous perception outputs into a common interface that agents and editing systems can consume.",
+      "tldr_zh": "WeVisOne-VL 通过结构化 next-token prediction，在单个视觉语言模型中统一对象级与像素级感知。它用特殊 object token 激活轻量 pixel decoder，同时输出点、框、mask 和 alpha matte，并覆盖检测、OCR、计数与指代表达等任务。模型采用从 SFT 到 RL 的分阶段课程训练，目标不是为每个任务外挂独立 head，而是让细粒度定位成为统一能力。其重要性在于，它为 agent 和编辑系统提供了可直接消费的通用视觉输出接口。",
+      "upvotes": 239,
+      "authors": "Tianming Liang, Junyi Pan, Yuxi Li, Canmiao Fu, Zhipeng Huang, Chong Sun, Chen Li, Jing Lyu",
+      "ai_keywords": [
+        "vision-language model",
+        "segmentation",
+        "visual grounding",
+        "OCR"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "Editing Images into Reusable Layers via Compositional Edit-Prior Distillation",
+      "url": "https://arxiv.org/abs/2610.24738",
+      "tldr": "LayerEditor couples instruction-guided image editing with decomposition into reusable ordered RGBA layers. Its in-context RGB-alpha tokenization represents the edited canvas and layer stack in one sequence, while compositional edit-prior distillation teaches localized changes without flattening the result. This makes later manipulation, reuse, and recomposition possible instead of producing a single irreversible image. The approach is important for agentic creative tools because editable structure is often more valuable than one-shot visual quality.",
+      "tldr_zh": "LayerEditor 将指令驱动的图像编辑与可复用、有顺序的 RGBA 图层分解统一起来。其 in-context RGB-alpha tokenization 用同一序列表示编辑后的画布和图层栈，并通过 compositional edit-prior distillation 学会局部修改而不把结果压平成一张图。输出因此可以继续移动、复用和重组，而不是一次性不可逆图像。对 agentic 创作工具而言，这很重要，因为可编辑结构往往比单次生成质量更有生产价值。",
+      "upvotes": 182,
+      "authors": "Wen Xue, Yong Liu, Xueheng Li, Si Wu, Yong Xu, Yipeng Sun, Yan Li, Simiu Gu",
+      "ai_keywords": [
+        "image editing",
+        "RGBA layers",
+        "multimodal generation"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "Making MLLM Latents Matter: Factor-Aware Predictive Learning for Cinematic Video Generation",
+      "url": "https://arxiv.org/abs/2610.30926",
+      "tldr": "FAPL makes multimodal-language-model latents operational for cinematic video generation rather than optional conditioning that a diffusion transformer can ignore. It predicts temporally useful representations from sparse guidance and factorizes control over character, scene, action, and camera. The training design aligns those representations with the denoiser so they carry both temporal inference and controllable semantics. This matters for long-form video systems where consistency and camera intent must survive beyond frame-level prompting.",
+      "tldr_zh": "FAPL 让 MLLM latent 真正参与电影级视频生成，而不是成为 Diffusion Transformer 可以绕开的可选条件。它从稀疏引导中预测具有时间信息的表示，并将角色、场景、动作和镜头控制进行因子化。训练目标把这些表示与 denoiser 对齐，使其同时承载时间推断和可控语义。对于长视频系统，这一点关键，因为角色一致性与镜头意图必须跨越单帧 prompt 持续生效。",
+      "upvotes": 172,
+      "authors": "Songlin Yang, Zhe Wang, Xiaotong Zhao, Xi Wang, Ran Zhang, Shuai Li, Taiyi Wu, Songlian Li, Eric Liu, Alan Zhao, Anyi Rao",
+      "ai_keywords": [
+        "video generation",
+        "multimodal latent",
+        "camera control"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "Deep Search in Real-World Web Environments",
+      "url": "https://arxiv.org/abs/2610.30181",
+      "tldr": "OpenDS evaluates deep-search agents on the live open Web, where evidence is distributed across sites, modalities, formats, and interaction patterns. Agents must discover sources, navigate access mechanisms, connect evidence, and produce an end-to-end answer rather than retrieve from a fixed corpus. This exposes failures hidden by static benchmarks, including brittle browsing and weak evidence integration. The benchmark is important because it measures the actual research loop users expect from autonomous search agents.",
+      "tldr_zh": "OpenDS 在真实开放 Web 上评测 deep-search agent，信息分散在不同站点、模态、格式和交互机制中。Agent 必须自主发现来源、完成访问与导航、串联证据并产出端到端答案，而不是只在固定语料库中检索。它能暴露静态 benchmark 掩盖的脆弱浏览与证据整合问题。其价值在于，评测对象终于接近用户真正期待的 autonomous research 闭环。",
+      "upvotes": 160,
+      "authors": "Xiaomin Yu, Hongliang Chen, Zhe Huang, Shilin Yan, Shao-Rong Su, Xuqiao Ma, Feiyang Wang, Jiayu Chen, Jiwei Fang, Yu Yan, Yini Huang, Chen Chen, Ruoxi Cheng, Yuzhi He, Yuhui Zhang, Xiaoxing Hu, Chen Liu, Jianbo Lin, Yijiang Li, Xiaobin Hu, Menglong Li, Zhuoran Lu, Weishi Wang, Zhongqi Yue, Chengwei Qin",
+      "ai_keywords": [
+        "deep search",
+        "web agent",
+        "evaluation",
+        "open web"
+      ],
+      "interest_tag": "Benchmark"
+    },
+    {
+      "title": "IQuest-Q1: Advancing Foundation Capabilities for Agentic CLI Systems",
+      "url": "https://arxiv.org/abs/2610.30949",
+      "tldr": "IQuest-Q1 is a 320B-parameter sparse MoE model with 15B active parameters, trained specifically for agentic CLI work. Its pipeline combines stability-oriented pretraining, fine-grained mid-training, and multi-scaffold, multi-version post-training with SFT and specialized reinforcement learning. The design treats shells and coding harnesses as varied execution environments rather than optimizing against one scaffold. It matters as an attempt to make terminal competence portable across agent runtimes instead of overfitting a single tool wrapper.",
+      "tldr_zh": "IQuest-Q1 是面向 agentic CLI 工作训练的 320B 稀疏 MoE 模型，每次激活 15B 参数。其流程结合稳定性导向的预训练、细粒度 mid-training，以及包含 SFT 与领域 RL 的 multi-scaffold、multi-version 后训练。它把 shell 与 coding harness 视为多种执行环境，而不是只对一个 scaffold 优化。其意义在于尝试让终端能力跨 agent runtime 迁移，减少对单一工具封装的过拟合。",
+      "upvotes": 92,
+      "authors": "A. Jian Yang, An Huang, Bo Dan, Chen Mu, Chengran Yang, Chuan Shi, Feng Chang, Hongxin Li, Hongyuan Tao, Jinxing Zhang, Jujie He, Kun Wang, Lin Jing, Ming Yang, Qicheng Hu, Renyuan Li, Shark Liu, Shawn Guo, Shi Qing, Shi Zhong, Tianyu Zheng, Wei Liu, Wei Zhang, Wenrui Cai, Wenxiao Chen, Xuxing Chen, Yan Xing, Yi Xing, Yifan Luo, Yiran Xing, Yizhi Li, Yongsheng Kang, Yucheng Ding, Yue Song, Yun Qing, Yunqi Liu, Zelong Huang, Zhengmao Ye, Zhentao Fan, Zhiteng Li, Ziling Huang, Bihong Tang, Bingli Wang, Ce Jun, Changhao Chen, Chen Hu, Chen Xiao, Chi Liu, Chunjiang Ge, Danyang Li, Deyang Kong, Dian Qi, Ding Tan, Evan Yang, Fanglin Xu, Fei Bai, Gang Liu, Guochang Li, Hao Tang, Haoran Feng, Haowen Wang, Huahao Hu, Huanjin Yao, Huatong Song, Jia Deng, Jiajun Wu, Jialiang Cheng, Jiayi Liang, Jiayi Wu, Jie Deng, Jiejun Tan, Jing Yang, Jingda Xu, Junhang Cheng, Junxiao Liu, Kai Lv, Kaixiang Pan, Kecheng Lu, Kun Zeng, Kun Zheng, Kunbo Ding, Liang Qiu, Lingyi Sun, Luan Zhang, Mengxiao Lv, Ning Dong, Pei Wang, Peng Zhang, Qingsong Cai, Qixiang Yin, Qiyao Wang, Renbiao Liu, Renfei Dang, Ruihang Li, Ruirui Huang, Shanhui Yin, Shen Jian, Shengjie Fang, Shikai Li, Shinan Zhang, Shiqi Chen, Shuai Liu, Shuangqi Li, Shuo Tang, Shuqing Deng, Sijin Hao, Siwei Wu, Siyue Wang, Tao Hai, Tao Ren, TingYang Chen, Wei Shao, Weicheng Gu, Weihan Peng, Wenlong Miao, Xavier Yu, Xiangyuan Ji, Xiaocheng Li, Xiaodong Huang, Xiaohan Ge, Xiaoxiang Shi, Xiaoyang Zhang, Xiaoyu Yang, Xidong Wang, Xin Li, Xinyu Tang, Xiyuan Yang, Xudong Ma, Ya Tong, Yachao Wang, Yang Tian, Yaxin Du, Yeli Ruan, Yi Wang, Yi Yu, Yibin Feng, Yibo Tan, Yihang Wang, Yiming Ju, Yinda Chen, Yinda Chen, Yingjie Du, Yiwei Liu, Yizhi Zhou, Yuan Wei, Yuli Chen, Yuqi Zhu, Yuwen Li, Yuxi Dong, Yuxuan Zhang, Yuyang Song, Zhange Zhang, Zhaohan Zhang, Zhaoyi Li, Zhen Zhang, Zhengbo Zhang, Zhihang Hu, Zhiwei Yu, Zhixin Xie, Zhiyu Chen, Zhizhao Luo, Zhongyuan Wu, Zhou Fang, Zhu Lin, Zhuocheng Gong, Zixi Zhao, Ziyang Zeng, Ziyi Wang, Ziyu Zhao, Ran Tao, Mingjie Tang, Chuan Hao, Peihao Wu, Jianzhou Wang, Nan Jiang, Yuan Zhi, Bryan Dai",
+      "ai_keywords": [
+        "agentic CLI",
+        "Mixture-of-Experts",
+        "coding agent",
+        "reinforcement learning"
+      ],
+      "interest_tag": ""
+    }
+  ],
+  "alphaxiv_papers": [
+    {
+      "title": "A Fix for Softmax and Cross-Entropy",
+      "arxiv_id": "2610.31642",
+      "url": "https://arxiv.org/abs/2610.31642",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2610.31642",
+      "tldr": "The paper shows that common softmax, log-softmax, and cross-entropy implementations suffer from two numerical gradient bugs: collapse at extreme target confidence and cancellation near teacher-student equality. Corrected formulations restore zero-sum gradients, remove spurious distillation updates, and eliminate previously observed training pathologies such as Slingshot. Because the fix targets ubiquitous primitives rather than a specialized model, its impact can propagate across classifiers, distillation, and large-scale training. The combination of a surprising diagnosis and a simple implementation makes this unusually actionable research.",
+      "tldr_zh": "论文指出常见 softmax、log-softmax 与 cross-entropy 实现存在两类数值梯度缺陷：目标置信度极高时的 gradient collapse，以及 teacher-student 接近相等时的 cancellation。修正版恢复梯度零和性质、消除蒸馏中的伪更新，并去掉 Slingshot 等训练异常。由于它修复的是无处不在的基础算子，而非某个专用模型，影响可扩散到分类、蒸馏和大规模训练。令人意外的根因加上简单实现，使这项工作非常可落地。",
+      "interest_tag": ""
+    },
+    {
+      "title": "Kimi K3.1 Pro Tech Blog: Advancing Open Intelligence",
+      "arxiv_id": "",
+      "url": "https://www.alphaxiv.org/abs/2610.kimi-k3-1-pro",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2610.kimi-k3-1-pro",
+      "tldr": "Kimi K3.1 Pro is Moonshot AI's 3T-class open-weight model with a one-million-token context and post-training aimed at coding, 3D creation, and finance. The release claims fourth place on Artificial Analysis's Intelligence Index and leadership on Terminal-Bench 4.0, while noting that cyber capability was deliberately reduced before release. Its importance lies in pairing frontier-scale agentic performance with planned open weights rather than API-only access. The claims still need independent replication once weights and evaluation details are fully available.",
+      "tldr_zh": "Kimi K3.1 Pro 是 Moonshot AI 的 3T 级 open-weight 模型，拥有 100 万 token context，并针对 coding、3D 创作与金融任务后训练。发布材料称其在 Artificial Analysis Intelligence Index 位列第四，并领先 Terminal-Bench 4.0，同时在发布前主动削弱了 cyber capability。其重要性在于把 frontier-scale agentic performance 与计划开放权重结合，而不是仅提供 API。待权重和评测细节完整发布后，这些成绩仍需要独立复现。",
+      "interest_tag": ""
+    },
+    {
+      "title": "Agentic World Action Models",
+      "arxiv_id": "2610.30136",
+      "url": "https://arxiv.org/abs/2610.30136",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2610.30136",
+      "tldr": "AW-0 combines code-based skill planning, future-video prediction, and robot-action generation as three coupled streams in one mixture-of-transformers architecture. A code expert emits parameterized reusable routines, while video and action experts ground those plans in predicted physical outcomes. This addresses a key split in robotics: symbolic agent planning often lacks dynamics, while world action models lack compositional skill reuse. The work matters because it treats foresight as a constraint on executable plans rather than as a standalone video-generation objective.",
+      "tldr_zh": "AW-0 在一个 mixture-of-transformers 架构中，将代码化技能规划、未来视频预测和机器人动作生成建模为三个耦合流。Code expert 生成可参数化、可复用的 routine，video 与 action expert 则用预测的物理结果约束这些计划。它针对机器人领域的一条关键裂缝：符号式 agent 规划常缺乏动力学 grounding，而 world action model 又缺少组合式技能复用。其意义在于把视觉 foresight 作为可执行计划的约束，而不是独立的视频生成目标。",
+      "interest_tag": ""
+    },
+    {
+      "title": "Is Complex Agentic Memory Always Needed? Naive RAG Is Stronger Than We Thought",
+      "arxiv_id": "2610.30755",
+      "url": "https://arxiv.org/abs/2610.30755",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2610.30755",
+      "tldr": "Raw-RAG tests whether complex agentic memory machinery is necessary for long-term conversation tasks. Dense retrieval and reranking over unmodified history ranks first in six of seven benchmark-model settings across LoCoMo, LongMemEval, MEME, and MemoryAgentBench, beating more elaborate memory systems by up to 5.53 points. The analysis attributes much of the gain to evidence coverage and avoiding lossy memory mutation. The result is important as a strong baseline warning: memory complexity must earn its cost against raw-history retrieval.",
+      "tldr_zh": "Raw-RAG 检验长期对话任务是否真的需要复杂 agentic memory 机制。它只对原始历史做 dense retrieval 与 reranking，却在 LoCoMo、LongMemEval、MEME 和 MemoryAgentBench 的七组 benchmark-model 设置中六次排名第一，最高领先复杂系统 5.53 分。分析认为优势主要来自更高的证据覆盖率，以及避免 memory mutation 带来的信息损失。这个结果是一条重要 baseline 警告：任何记忆复杂度都必须先证明自己优于原始历史检索。",
+      "interest_tag": "Memory"
+    },
+    {
+      "title": "FrontierCS 2: A Benchmark for Computer Science R&D",
+      "arxiv_id": "2610.29932",
+      "url": "https://arxiv.org/abs/2610.29932",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2610.29932",
+      "tldr": "FrontierCS 2 asks whether coding agents can make frontier computer-science R&D contributions rather than solve isolated programming exercises. Each task starts from a real paper repository with the paper's key contribution removed; agents iteratively patch the code using visible development feedback, while the final evaluator and human reference remain hidden. This setup tests research iteration, not just one-shot code generation, and reduces reward hacking against public tests. Its 48 open-ended tasks offer a more realistic bridge between coding-agent benchmarks and actual research engineering.",
+      "tldr_zh": "FrontierCS 2 追问 coding agent 能否完成前沿计算机科学 R&D，而不只是解决孤立编程题。每个任务从真实论文仓库出发，移除论文的关键贡献；agent 可以根据可见开发反馈反复提交 patch，但最终 evaluator 与人类参考实现保持隐藏。这样的设置评测研究迭代能力，而非一次性代码生成，也降低了针对公开测试 reward hacking 的空间。48 个开放任务为 coding-agent benchmark 与真实科研工程之间提供了更可信的桥梁。",
+      "interest_tag": "Benchmark"
+    }
+  ],
+  "github_repos": [
+    {
+      "name": "C4rohan/Lampline",
+      "url": "https://github.com/C4rohan/Lampline",
+      "tldr": "Lampline is a self-hosted voice-agent stack that imports Dialogflow CX or starts from YAML and Markdown agents-as-code. It combines a visual builder, local execution, real phone-call evaluation with an AI caller, SIP/Twilio/Telnyx connectivity, tools, records, and document search. The repository contains an engine, CLI, extension, Docker deployment, and extensive docs rather than a launch placeholder. Its strongest idea is making voice-agent changes testable before production while keeping infrastructure and model choice under the operator's control.",
+      "tldr_zh": "Lampline 是 self-hosted voice-agent 技术栈，可导入 Dialogflow CX，也可从 YAML/Markdown 的 agents-as-code 开始。它组合了可视化 builder、本地执行、AI caller 驱动的真实电话 eval、SIP/Twilio/Telnyx 连接、工具、records 和文档检索。仓库包含 engine、CLI、extension、Docker 部署与完整文档，并非发布占位页。它最有价值的设计，是让语音 agent 的每次改动在上线前都可测试，同时让操作者掌握基础设施与模型选择。",
+      "stars": 206,
+      "language": "Python",
+      "interest_tag": ""
+    },
+    {
+      "name": "kukemc/bili-cli",
+      "url": "https://github.com/kukemc/bili-cli",
+      "tldr": "bili-cli exposes Bilibili viewing, comments, messages, posting, upload, moderation, and analytics as more than 80 structured commands plus 17 MCP tools. JSON-first outputs make it usable by Claude Code, Codex, and other terminal agents, while QR login and default safety controls address the risky account-action boundary. It also packages installable skills for 18 agent environments and includes tests and documentation. The project is notable for turning a broad consumer website into an explicit action surface instead of relying on brittle browser automation.",
+      "tldr_zh": "bili-cli 将 B 站浏览、评论、私信、动态、投稿、审核与数据分析封装为 80 多条结构化命令和 17 个 MCP tools。JSON-first 输出让 Claude Code、Codex 等终端 agent 可直接调用，扫码登录和默认安全护栏则处理了账号动作的高风险边界。项目还为 18 种 agent 环境提供可安装 skills，并带有测试与文档。它的亮点是把复杂消费网站变成明确 action surface，而不是依赖脆弱的 browser automation。",
+      "stars": 197,
+      "language": "Python",
+      "interest_tag": ""
+    },
+    {
+      "name": "nschurmann/hola-ai",
+      "url": "https://github.com/nschurmann/hola-ai",
+      "tldr": "hola-ai packages an XP-inspired development loop into three small agent skills: backlog slicing, acceptance-criteria refinement, and test-first pairing. Each phase has explicit limits and human checkpoints, preventing the agent from inventing requirements, writing code too early, or committing without approval. The repository is deliberately small, but its workflow is coherent and directly installable. It is valuable as a counterpoint to autonomous coding hype: leverage comes from constrained handoffs and tiny verified steps.",
+      "tldr_zh": "hola-ai 把 XP 风格开发循环封装成三个小型 agent skills：backlog 切分、acceptance criteria 细化，以及 test-first pairing。每个阶段都有明确边界和人工 checkpoint，防止 agent 擅自发明需求、过早写代码或未经批准提交。仓库规模刻意保持很小，但工作流完整且可直接安装。它对全自动 coding hype 构成有价值的反例：杠杆来自受约束的交接和可验证的小步。",
+      "stars": 101,
+      "language": "",
+      "interest_tag": ""
+    },
+    {
+      "name": "rextail-ai/lessloc",
+      "url": "https://github.com/rextail-ai/lessloc",
+      "tldr": "lessloc uses hooks and rules to make coding agents reuse existing code, reject placeholders and backup files, and keep working when their own tests still fail. It supports major agent CLIs and claims up to 36% less code and 26% lower cost on its published evaluation. The repository includes adapters, benchmarks, tests, architecture notes, and removal instructions, making the intervention auditable. Its importance is the framing: agent quality is measured partly by how much unnecessary code it avoids, not only by whether it reaches a passing state.",
+      "tldr_zh": "lessloc 通过 hooks 与规则要求 coding agent 复用现有代码、拒绝 placeholder 和备份文件，并在自身测试失败时继续修复。它支持主流 agent CLI，并在公开评测中声称最多减少 36% 代码和 26% 成本。仓库包含多平台 adapter、benchmark、测试、架构说明与卸载步骤，干预过程可审计。其重要之处在于重新定义质量：不仅看最终是否通过，还看 agent 避免了多少不必要代码。",
+      "stars": 101,
+      "language": "JavaScript",
+      "interest_tag": ""
+    },
+    {
+      "name": "abcampbel/open-bots",
+      "url": "https://github.com/abcampbel/open-bots",
+      "tldr": "OpenBots is a local or hosted stack of four agents that can search the Web, read pages, run sandboxed code, call APIs, make approved payments, and create accounts. Its agents can delegate subtasks to one another and merge results, while the browser UI streams the execution trace. The repository includes a TypeScript application, server, tests, Docker setup, and architecture documentation, so the multi-agent claim is backed by runnable code. The project is ambitious because it combines tool use, delegation, and transactional actions, though its self-reported benchmark claims warrant independent checking.",
+      "tldr_zh": "OpenBots 是可本地或托管运行的四 agent 技术栈，能够搜索 Web、读取页面、运行 sandbox code、调用 API，并在批准后支付或注册账号。Agent 之间可以委派子任务并合并结果，浏览器 UI 会流式展示执行轨迹。仓库包含 TypeScript 应用、server、测试、Docker 与架构文档，multi-agent 叙事有可运行代码支撑。它把 tool use、协作和交易动作放在同一系统中，野心很大，但自报 benchmark 仍需独立核验。",
+      "stars": 90,
+      "language": "TypeScript",
+      "interest_tag": "Agent Swarm"
+    }
+  ],
+  "hackernews": [
+    {
+      "title": "New Open-Source Cybersecurity Platform Uses AI Agents to Hunt Threats",
+      "url": "https://medium.com/@ai_news/argus-might-be-one-of-the-most-impressive-open-source-cybersecurity-projects-released-this-year-118043bd0c8c",
+      "tldr": "ARGUS is presented as an MIT-licensed cybersecurity platform that coordinates seven specialized agents for threat hunting, investigation, penetration testing, and incident response. It integrates cloud, identity, source-control, and endpoint systems, then exposes 27 response actions including blocking and isolation. Crucially, autonomous response is disabled by default and actions pass through approvals, dry runs, limits, and rollback controls. The HN signal is modest, but the architecture captures the central enterprise-agent question: how to combine autonomy with enforceable operational policy.",
+      "tldr_zh": "ARGUS 被介绍为 MIT licensed 的网络安全平台，通过七个 specialized agents 执行 threat hunting、调查、渗透测试和 incident response。它连接 cloud、identity、source control 与 endpoint 系统，并提供包括阻断和隔离在内的 27 种响应动作。关键是 autonomous response 默认关闭，动作必须经过审批、dry run、限额与 rollback 控制。HN 热度不高，但其架构抓住了 enterprise agent 的核心问题：如何让自治与可执行的运营策略共存。",
+      "points": 16,
+      "num_comments": 2,
+      "interest_tag": ""
+    },
+    {
+      "title": "US-Israeli browser startup valued at $6.4B",
+      "url": "https://www.timesofisrael.com/us-israeli-browser-startup-valued-at-6-4-billion-as-ai-agents-reshape-workplace-risk/",
+      "tldr": "Enterprise-browser company Island raised $400 million at a $6.4 billion valuation, arguing that browsers are becoming the policy boundary for workplaces shared by humans and AI agents. Its controls observe who or what is acting, which data and applications are reachable, and whether each action should be allowed. The funding story is not a new technical release, but it is a strong market signal that agent identity, context, and governance are becoming browser-layer products. It also shows security buyers may fund control planes before fully autonomous workplace agents are mature.",
+      "tldr_zh": "Enterprise browser 公司 Island 以 64 亿美元估值融资 4 亿美元，核心论点是浏览器正在成为人类与 AI agents 共事时的策略边界。其控制能力关注是谁或什么在行动、能够访问哪些数据和应用，以及每个动作是否应被允许。这不是新的技术发布，却是强烈市场信号：agent identity、context 和 governance 正在产品化为 browser-layer 能力。它也说明，在全自动 workplace agent 成熟前，安全买家可能先为 control plane 付费。",
+      "points": 16,
+      "num_comments": 28,
+      "interest_tag": ""
+    },
+    {
+      "title": "Making My Blog Readable by AI Agents",
+      "url": "https://deallocatedobjects.com/posts/making-my-blog-readable-by-ai-agents",
+      "tldr": "Jake Marsh describes a practical recipe for making a static blog agent-readable: publish Markdown variants, negotiate them through the Accept header, and advertise them with llms.txt and Link headers. Correct cache and indexing behavior comes from Vary: Accept, canonical links, and noindex on duplicate Markdown pages. The approach is intentionally framework-free and fits into a small nginx configuration plus build-time files. It matters because agent accessibility is becoming a content-distribution concern, not merely an SEO afterthought.",
+      "tldr_zh": "Jake Marsh 给出让静态博客对 agent 友好的实用配方：发布 Markdown 版本，通过 Accept header 做 content negotiation，并用 llms.txt 与 Link header 主动暴露入口。正确的缓存和索引行为依赖 Vary: Accept、canonical link，以及对重复 Markdown 页面设置 noindex。整个方案不需要 framework，只需少量 nginx 配置和构建期文件。它说明 agent accessibility 正在成为内容分发问题，而不再只是 SEO 的附属项。",
+      "points": 13,
+      "num_comments": 1,
+      "interest_tag": ""
+    },
+    {
+      "title": "PSA: Do not use term \"vibe coding\"",
+      "url": "https://news.ycombinator.com/item?id=50220381",
+      "tldr": "This Ask HN post argues that “vibe coding” has become too vague to distinguish casual prompting from disciplined agentic engineering. The discussion contrasts surrendering control to generated code with workflows built around explicit plans, repositories, tests, and review. Its low score but relatively high comment count indicates terminology is contentious even when the underlying engineering distinction is real. The useful takeaway is to describe control and verification mechanisms directly rather than rely on a fashionable label.",
+      "tldr_zh": "这篇 Ask HN 认为「vibe coding」已经过于模糊，无法区分随意 prompting 与严谨的 agentic engineering。讨论将完全放弃代码控制，与基于明确计划、repository、tests 和 review 的工作流进行对照。它分数不高但评论相对多，说明术语有争议，而背后的工程差异确实存在。最有用的结论是：直接描述控制与验证机制，不要依赖流行标签。",
+      "points": 7,
+      "num_comments": 11,
+      "interest_tag": ""
+    }
+  ]
+}
