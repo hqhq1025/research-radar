@@ -1,0 +1,226 @@
+{
+  "date": "2026-10-26",
+  "generated_at": "2026-10-26T16:03:25.092621+08:00",
+  "briefing_zh": "今天最值得关注的主线，是 agent 研究开始把「能力增长」拆成可验证的组件。**UserArena** 用 64,729 条真实电商 session 和生产 A/B 结果校验用户模拟器，**Dual Exam** 则把 agent 的 action selection 与 world model 的 state evolution 分开控制；后者在一个 150-case 联合 pilot 中出现零次任务成功，直接说明单项分数不能替代闭环可靠性。**RSIHub** 进一步把 prompt、skill、tool 与 orchestration 的自演化放进统一 lineage 和固定 evaluator 中，并发现优化收益并不稳定迁移到 held-out tasks。\n\n具身方向正在从单一 policy 转向「理解—预测—执行」的共同底座。**RynnUnify** 把 video-language reasoning、visual planning 与 robot control 统一到 16B 模型；**Agentic World Action Models** 则把 code、future video 和 action 建模成耦合生成流，让可复用程序既组织长程预测，也驱动真实执行。与此同时，**HiSTEVE 1.0** 坚持只看屏幕、只用原生键鼠完成 Minecraft 长程任务，说明 GUI-native control 与 capability-aware harness 的结合正在成为 embodied agent 的关键工程边界。\n\n基础模型层面，今天最具传播力的结果反而来自底层数值细节。**A Fix for Softmax and Cross-Entropy** 指出标准实现中的 Softmax Collapse 与 Softmax Cancellation，并声称简单修复即可消除 Slingshot、稳定蒸馏和 grokking；**BeNice!** 则通过训练 looped model 的 KV-shareability，在低内存长上下文场景中提升最高 23.6% 吞吐并显著降低 p90 TTFT。**SuperMimic** 展示了另一种效率跃迁：用可微 world model 和 imagined rollouts，将 humanoid motion tracking 的训练算力压低超过三个数量级。\n\n开源与社区信号集中在 agent 的运行边界，而不只是更强的模型。HN 最高热度的 **OpenShell** 用 kernel-level isolation、network policy 与形式化验证保护 agent fleet；**Omnara** 把 durable state、stateless workers、remote machines 和权限控制做成可自托管 control plane；**LayerFS** 则把每次 tool call 变成可追溯 commit，为并行 agent 提供低成本 fork 与冲突检测。另一端，数千个 **GPT-Rosalind** agent 在 32 分钟内分析数百万脑细胞数据，说明 swarm 的真正价值不在角色扮演，而在可分解、可并行、可由专家复核的搜索空间覆盖。",
+  "briefing_en": "The clearest theme today is that agent research is decomposing capability gains into components that can be tested independently. **UserArena** grounds user simulation in 64,729 real shopping sessions and validates policies against production A/B outcomes, while **Dual Exam** controls agent action selection separately from world-model state evolution. Its 150-case coupled pilot recorded zero task successes, a sharp warning that component scores do not guarantee closed-loop reliability. **RSIHub** adds shared lineage, fixed evaluators, and reusable operators for self-evolving prompts, skills, tools, and orchestration, while showing that optimization gains do not reliably transfer to held-out tasks.\n\nEmbodied systems are moving from isolated policies toward shared foundations for understanding, prediction, and execution. **RynnUnify** unifies video-language reasoning, visual planning, and robot control in a 16B model, while **Agentic World Action Models** couple code, future video, and actions as generative streams so reusable programs can structure both prediction and execution. **HiSTEVE 1.0** takes the complementary systems route: it completes long-horizon Minecraft tasks through vision-only perception and native keyboard-and-mouse control, making GUI-native control and a capability-aware harness explicit parts of embodied intelligence.\n\nAt the foundation-model layer, the most viral result comes from numerical details rather than scale. **A Fix for Softmax and Cross-Entropy** identifies Softmax Collapse and Softmax Cancellation in standard implementations and reports that a small correction removes Slingshot behavior while stabilizing distillation and grokking. **BeNice!** trains looped models to share KV caches, raising throughput by as much as 23.6% and sharply reducing p90 time-to-first-token in simulated low-memory long-context inference. **SuperMimic** finds a different efficiency lever: a differentiable world model and imagined rollouts cut humanoid motion-tracking compute by more than three orders of magnitude.\n\nOpen-source attention is clustering around the operational boundary of agents, not merely stronger models. HN leader **OpenShell** combines kernel isolation, network policy, secret injection, and formally checked policy changes for agent fleets; **Omnara** packages durable state, stateless workers, remote machines, and permissions into a self-hostable control plane; and **LayerFS** turns tool calls into traceable commits with cheap forks and conflict detection for parallel agents. At the other extreme, thousands of **GPT-Rosalind** agents analyzed data from millions of brain cells in 32 minutes, suggesting that swarms matter most when work is decomposable, parallel, and reviewable by domain experts.",
+  "viral_analysis_zh": "今天最可能爆的是 **A Fix for Softmax and Cross-Entropy**：它用「大家每天都在调用的基础算子其实有两个 bug」制造极强反差，又把修复直接连接到 Slingshot、grokking 与 distillation，兼具可复现性和争议性。开源侧的 **OpenShell** 也具备持续传播力，因为它不是再造一个 agent，而是把安全、凭据和 policy enforcement 这些部署阻塞点压缩成一句清晰承诺。",
+  "viral_analysis_en": "**A Fix for Softmax and Cross-Entropy** is the strongest viral candidate: the claim that two ubiquitous primitives contain consequential bugs creates immediate surprise, while links to Slingshot, grokking, and distillation make the result easy to test and debate. On the open-source side, **OpenShell** has durable momentum because it does not pitch another agent; it compresses the deployment blockers of isolation, credentials, and policy enforcement into one legible promise.",
+  "huggingface_papers": [
+    {
+      "title": "UserArena: Benchmarking Interactive User Simulation for Long-Horizon Shopping Agents",
+      "url": "https://arxiv.org/abs/2610.30932",
+      "tldr": "UserArena benchmarks interactive user simulators with 64,729 e-commerce sessions from 11,010 users, covering 566,102 items and 13 action types. Its five-level protocol evaluates validity, local choices, sequential behavior, personalization, and final outcomes, then checks offline estimates against a controlled production A/B test. The proposed On-Policy Trajectory Distillation supplies trajectory-level intent targets on student rollouts and best reproduces the measured production policy effect. This matters because agentic recommendation needs simulators that preserve long-horizon human behavior, not merely plausible next clicks.",
+      "tldr_zh": "UserArena 基于 11,010 名用户的 64,729 条电商 session 构建交互式用户模拟 benchmark，覆盖 566,102 个商品和 13 类 action。它用五级协议评测输出有效性、局部决策、序列行为、个性化与最终 outcome，并用受控生产 A/B test 校验离线估计。论文提出的 On-Policy Trajectory Distillation 在 student rollout 上提供 trajectory-level intent target，最接近复现真实 policy effect。其重要性在于，agentic recommendation 需要保持长程用户行为的 simulator，而不只是生成看似合理的下一次点击。",
+      "upvotes": 34,
+      "authors": "Jujia Zhao, Jiakai Tang, Jing Yu, Wen Chen, Jian Wu, Han Zhu, Fei Sun, Suzan Verberne, Zhaochun Ren",
+      "ai_keywords": [
+        "user simulation",
+        "long-horizon agents",
+        "e-commerce",
+        "trajectory distillation"
+      ],
+      "interest_tag": "Benchmark"
+    },
+    {
+      "title": "HiSTEVE 1.0: Harnessing Human-Interface VLA Agents for Open-World Games",
+      "url": "https://arxiv.org/abs/2610.31162",
+      "tldr": "HiSTEVE combines a hierarchical VLA policy with a capability-aware harness for long-horizon Minecraft tasks. A VLM planner, structured progress memory, and policy-coupled completion detector orchestrate subtasks, while one vision-only VLA performs every action through native keyboard and mouse input. Regime-specific RMSNorm branches and separate mouse embeddings reduce interference between GUI and non-GUI interactions. The system reaches 85.0% on MineStudio Bench and 37.4% average success on OpenHA, showing that native-interface control can extend beyond atomic actions.",
+      "tldr_zh": "HiSTEVE 将 hierarchical VLA policy 与 capability-aware harness 结合，用于 Minecraft 长程任务。VLM planner、结构化进度 memory 和与 policy context 耦合的 completion detector 负责编排 subtask，而单一 vision-only VLA 通过原生键鼠执行全部动作。Regime-specific RMSNorm 分支与独立 mouse embedding 用来降低 GUI 与非 GUI interaction 的相互干扰。系统在 MineStudio Bench 达到 85.0%，在 OpenHA 达到 37.4% 平均成功率，说明 native-interface control 可以从原子动作扩展到长程自治。",
+      "upvotes": 28,
+      "authors": "Zecong Tang, Zian Guan, Yuncheng Guo, Zhanqiu Zhang, Yiwen Guo, Bo Dai",
+      "ai_keywords": [
+        "VLA",
+        "Minecraft",
+        "native interface",
+        "long-horizon autonomy"
+      ],
+      "interest_tag": "CUA"
+    },
+    {
+      "title": "RynnUnify: Towards Unified Embodied Brain",
+      "url": "https://arxiv.org/abs/2610.32965",
+      "tldr": "RynnUnify is a 16B embodied model that unifies spatial understanding, physical prediction, grounding, and long-horizon visual planning through interleaved video-language reasoning. An RL-trained agentic extension selectively invokes video predictions for hidden states and interaction outcomes, while a world-action extension converts the same foundation into robot control. It improves Rynn-VP by 9.75 points over Cosmos 3 Nano and reaches 51.5% success on selected composite RoboCasa365 tasks. The key contribution is a shared model substrate spanning understanding, anticipatory reasoning, and action rather than a pipeline of isolated modules.",
+      "tldr_zh": "RynnUnify 是一个 16B embodied model，通过交错 video-language reasoning 统一空间理解、物理预测、grounding 与长程 visual planning。经 RL 训练的 agentic extension 会选择性调用 video prediction 推理不可见状态和交互结果，world-action extension 则把同一底座转成 robot control。它相对 Cosmos 3 Nano 在 Rynn-VP 上提升 9.75 分，并在选定的复合 RoboCasa365 任务上达到 51.5% 成功率。核心价值是用共享模型底座贯通 understanding、anticipatory reasoning 与 action，而非拼接互相隔离的模块。",
+      "upvotes": 25,
+      "authors": "Minghao Zhu, Bohan Hou, Kun Xiang, Zixuan Wang, Yinzhou Tang, Yifei Yang, Zhikai Wang, Tianyi Zhang, Kehan Li, Haoyu Zhao, Siteng Huang, Leigang Qu, Sicong Leng, Dongchi Huang, Mingxiu Chen, Shijian Lu, Yue Wang, Xiaodan Liang, Zhenyu Zeng, Deli Zhao, Chengju Liu, Jianfei Yang, Xin Li",
+      "ai_keywords": [
+        "embodied AI",
+        "video-language reasoning",
+        "visual planning",
+        "robot control"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "RSIHub: A Composable Framework for Agent-Evolution Methods",
+      "url": "https://arxiv.org/abs/2610.32253",
+      "tldr": "RSIHub provides shared infrastructure for methods that evolve agent prompts, skills, tools, and orchestration from execution feedback. Recipes declare mutable resources and compose operators, while the framework keeps evaluation outside the mutable surface and records recovery and lineage. The authors reproduce AHE, Hyperagents, A-Evolve, and GEPA under fixed models and evaluators, observing gains up to 13.5 pass@1 points. Method rankings vary by setting and gains often fail to transfer, making the common protocol more valuable than any single winning recipe.",
+      "tldr_zh": "RSIHub 为利用 execution feedback 演化 prompt、skill、tool 与 orchestration 的方法提供共享基础设施。Recipe 声明 mutable resource 并组合 operator，而 framework 将 evaluation 保持在可变表面之外，同时记录 recovery 与 lineage。作者在固定 model 和 evaluator 下复现 AHE、Hyperagents、A-Evolve 与 GEPA，最高观察到 13.5 个 pass@1 百分点的提升。不同 setting 的方法排名会变化，优化收益也常无法迁移，因此统一协议本身比某个单独 recipe 的胜出更重要。",
+      "upvotes": 24,
+      "authors": "Zimu Wang, Xiaobo Wang, Siyu Ye, Jiaqi Li, Silin Chen, Yuling Shi, Ruobing Wang, Jingjing Zhang, Chaofan Wang, Kai Wu, Mengnan Qi, Kai Cai, Xiaodong Gu, Zilong Zheng",
+      "ai_keywords": [
+        "agent evolution",
+        "self-improvement",
+        "evaluation lineage",
+        "composable framework"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "Dual Exam: Controlled Evaluation of Multimodal Agents and World Models",
+      "url": "https://arxiv.org/abs/2610.31066",
+      "tldr": "Dual Exam evaluates multimodal agents under fixed environment responses and world models under fixed action interventions, separating action choice from state evolution. The agent track contains 1,088 items across 15 categories, and the world-model track has 400 cases across eight scenarios. A 150-case coupled pilot records zero successful tasks despite measurable component scores. The benchmark is important because it exposes the gap between isolated agent or simulator metrics and actual closed-loop competence.",
+      "tldr_zh": "Dual Exam 在固定 environment response 下评测 multimodal agent，并在固定 action intervention 下评测 world model，从而分离 action choice 与 state evolution。Agent track 包含 15 类 1,088 个 item，world-model track 则覆盖 8 个 scenario、400 个 case。尽管组件各自有可测分数，一个 150-case 的 coupled pilot 仍记录到零次任务成功。这个 benchmark 的意义在于直接暴露单独 agent 或 simulator 指标与真实闭环能力之间的断层。",
+      "upvotes": 13,
+      "authors": "Zhefan Rao, Meng Chu, Xuan Zhang, Jingfan Chen, Guohao Cai, Runyi Li, Shiyi Du, Ning Lu, Xu Huang, Zhixuan Chen, Feng Nie, Harold Haodong Chen, Hanwen Wang, Wen-Jie Shu, Yajing Bai, Xianfeng Wu, Xuanhua He, Shuhan Guo, Ziyue Ma, Ruichuan An, Long Bai, Miaosen Chai, Wenhao Chai, Jingye Chen, Qi Chen, Xuhang Chen, Wei Chow, Minghao Fu, Yunhao Gou, Haokun Gui, Dong Huang, Wei Huang, Zi Cheng Huang, Haibo Jin, Lingdong Kong, Leung Chun Ho, Tianqin Li, Yanheng Li, Jiayuan Liu, Jiyang Liu, Mingyu Liu, Shaoteng Liu, Xiaocheng Lu, Yawen Luo, Zeyu Qin, Tiancheng Shen, Yueqi Song, Zhaolong Su, Hengkai Tan, Tianhao Tang, Yiran Tao, Juncheng Wang, Qinghe Wang, Shangshang Wang, Yingying Wang, Fang Wu, Tiange Xiang, Qiushi Yang, Weicai Ye, Weichen Yu, Jiarui Zhang, Jize Zhang, Liuzhou Zhang, Renrui Zhang, Sheng Zhang, Wenhu Zhang, Junru Zhao, Lingting Zhu, Yuxin Zuo, Yutong Bai, Long Chen, Yang Deng, Ziqi Huang, Yeying Jin, Weijia Li, Kevin Qinghong Lin, Quande Liu, See-Kiong Ng, Hongliang Ren, Hongru Wang, Shujun Wang, Qifeng Chen, Haoxuan Che",
+      "ai_keywords": [
+        "multimodal agents",
+        "world models",
+        "controlled evaluation",
+        "closed-loop"
+      ],
+      "interest_tag": "Benchmark"
+    }
+  ],
+  "alphaxiv_papers": [
+    {
+      "title": "A Fix for Softmax and Cross-Entropy",
+      "arxiv_id": "2610.31642",
+      "url": "https://arxiv.org/abs/2610.31642",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2610.31642",
+      "tldr": "The paper identifies two numerical failures in standard softmax-family implementations: dominant target logits can lose their gradient, while near-identical teacher and student logits can produce spurious gradients. It proposes small replacement implementations that preserve the intended invariants. The authors report elimination of Slingshot behavior, faster grokking with weight decay, and stable distillation without student drift. If independently reproduced, this is unusually high leverage because the affected primitives sit beneath a vast fraction of modern model training.",
+      "tldr_zh": "论文指出标准 softmax 系列实现中的两类数值失效：目标 logit 占优时可能丢失梯度，而 teacher 与 student logit 几乎相同时可能产生虚假梯度。作者给出保持预期 invariant 的简洁替代实现，并报告其可消除 Slingshot、加速带 weight decay 的 grokking、避免 distillation 中 student 漂移。如果能被独立复现，这项工作杠杆极高，因为相关 primitive 位于大量现代模型训练的最底层。",
+      "interest_tag": ""
+    },
+    {
+      "title": "Agentic World Action Models",
+      "arxiv_id": "2610.30136",
+      "url": "https://arxiv.org/abs/2610.30136",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2610.30136",
+      "tldr": "AW-0 couples code, future video, and robot actions as three generative streams in one mixture-of-transformers architecture. A code expert emits parameterized skill routines, while video and action experts predict physical evolution and low-level controls. An automated curation pipeline aligns robot and human videos with programs and consolidates repeated routines into reusable libraries. The design matters because it grounds agentic planning in predicted dynamics while preserving compositional skill reuse.",
+      "tldr_zh": "AW-0 在统一 mixture-of-transformers 架构中，把 code、future video 与 robot action 建模为三个耦合生成流。Code expert 生成参数化 skill routine，video 与 action expert 则预测物理演化和低层控制。自动化 curation pipeline 将机器人与人类视频对齐到程序，并把重复 routine 汇总为可复用 skill library。其价值在于让 agentic planning 同时具备 predicted dynamics 的 grounding 和组合式 skill reuse。",
+      "interest_tag": ""
+    },
+    {
+      "title": "SuperMimic: Scaling Humanoid Whole-Body Control with One Differentiable World Model",
+      "arxiv_id": "2610.28480",
+      "url": "https://arxiv.org/abs/2610.28480",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2610.28480",
+      "tldr": "SuperMimic jointly trains one differentiable world model and a humanoid tracking policy, using short imagined rollouts and backpropagation through time for analytic policy gradients. In three hours on one GPU it surpasses a baseline trained for seven days on 128 GPUs, reducing compute by more than 1,000 times. It fails on only 25 of 129,514 motions and reaches zero failures after 9.8 hours on two GPUs, with transfer to a physical Unitree G1. The result suggests world-model amortization can replace brute-force per-motion reinforcement learning at scale.",
+      "tldr_zh": "SuperMimic 联合训练单一 differentiable world model 与 humanoid tracking policy，并通过短 imagined rollout 和 backpropagation through time 获得解析 policy gradient。它在单卡训练 3 小时后超过使用 128 张 GPU 训练 7 天的 baseline，将算力开销降低超过 1,000 倍。对 129,514 个 motion，它仅失败 25 个；双卡 9.8 小时后达到零失败，并迁移到真实 Unitree G1。结果表明，world-model amortization 有望替代大规模逐 motion 的暴力 RL。",
+      "interest_tag": ""
+    },
+    {
+      "title": "Action Learning for Scientific Simulations",
+      "arxiv_id": "2610.31585",
+      "url": "https://arxiv.org/abs/2610.31585",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2610.31585",
+      "tldr": "LEAP learns a stochastic action over complete trajectories rather than optimizing isolated transitions or relying on an implicit generator. It anchors the unknown action to a tractable reference process and learns a correction by contrasting observed and reference paths. The resulting differentiable path-space objective can be reused for ranking, inference, steering, constrained optimization, and sampling. Experiments across stochastic physics, orbital dynamics, and molecular simulation show that trajectory observations can become reusable objectives for scientific control.",
+      "tldr_zh": "LEAP 学习的是完整 trajectory 上的 stochastic action，而非只优化局部 transition 或依赖隐式 generator。它先把未知 action 锚定到可处理的 reference process，再通过对比 observed path 与 reference path 学习 correction。得到的可微 path-space objective 可复用于 ranking、inference、steering、constrained optimization 与 sampling。跨随机物理、多体轨道动力学和分子模拟的实验说明，trajectory observation 可以被转化为科学控制中的可复用目标。",
+      "interest_tag": ""
+    },
+    {
+      "title": "BeNice! Closing Looping's Inference-Memory Gap via KV-Sharing",
+      "arxiv_id": "2610.31633",
+      "url": "https://arxiv.org/abs/2610.31633",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2610.31633",
+      "tldr": "Looped models reuse parameters but normally allocate a separate KV cache for every recurrence, so inference memory still grows with depth. BeNice! first uses stochastic depth to make recurrence representations contract toward a common limit, then post-trains the first recurrence to accept the final recurrence's shared cache. It preserves unshared validation perplexity and composes with MLA-style mixers and low-precision cache quantization. In simulated memory-constrained long-context inference, KV sharing improves throughput by up to 23.6% and p90 time-to-first-token by up to 83.6%.",
+      "tldr_zh": "Looped model 虽复用参数，但通常为每次 recurrence 分配独立 KV cache，因此 inference memory 仍随深度增长。BeNice! 先用 stochastic depth 让各 recurrence 的 representation 收敛到共同极限，再通过 post-training 让第一次 recurrence 接受最后一次 recurrence 的共享 cache。它保持未共享状态下的 validation perplexity，并可与 MLA 类 mixer 和低精度 cache quantization 组合。在模拟的低内存长上下文推理中，KV sharing 最高提升 23.6% 吞吐，并将 p90 time-to-first-token 改善最高 83.6%。",
+      "interest_tag": ""
+    }
+  ],
+  "github_repos": [
+    {
+      "name": "DenisSergeevitch/ex-ussr-kinship-research",
+      "url": "https://github.com/DenisSergeevitch/ex-ussr-kinship-research",
+      "tldr": "This repository packages an evidence-first genealogy workflow as an agent skill for records across the former USSR, Soviet Union, and Russian Empire. It emphasizes traceable sources, explicit separation of records from interpretation, and careful handling of unindexed archival scans. The narrow domain and strong epistemic contract make it more than a generic research prompt. Its rapid 606-star launch shows the appeal of specialized skills that encode professional methodology rather than broad agent personas.",
+      "tldr_zh": "该仓库把前苏联、苏联及俄罗斯帝国历史记录的 evidence-first 家谱研究流程封装为 agent skill。它强调来源可追溯、记录与解释明确分离，并谨慎处理未建立索引的档案扫描件。狭窄领域加上严格的 epistemic contract，使它不只是通用 research prompt。首日快速获得 606 stars，也说明真正编码专业方法论的 specialized skill 比宽泛 agent persona 更有传播力。",
+      "stars": 606,
+      "language": "Python",
+      "interest_tag": ""
+    },
+    {
+      "name": "hevnsnt/CVEngine",
+      "url": "https://github.com/hevnsnt/CVEngine",
+      "tldr": "CVEngine is an AI-first external attack-surface assessment system that continuously discovers internet-facing assets and fingerprints services. It combines evidence-based vulnerability validation with safe read-only checks rather than merely listing possible CVEs. MCP integration exposes findings to developer agents, connecting security discovery with remediation workflows. The project is notable for treating evidence and reproducibility as product features in an agent-facing security tool.",
+      "tldr_zh": "CVEngine 是一个 AI-first 外部攻击面评估系统，可持续发现互联网暴露资产并识别服务指纹。它通过安全、只读的检查做 evidence-based vulnerability validation，而不是只罗列可能的 CVE。MCP integration 把发现结果暴露给 developer agent，连接安全发现与修复 workflow。值得关注的是，它把证据与可复现性直接做成 agent-facing security tool 的产品能力。",
+      "stars": 235,
+      "language": "Python",
+      "interest_tag": ""
+    },
+    {
+      "name": "andyhuo520/digital-human-koubo",
+      "url": "https://github.com/andyhuo520/digital-human-koubo",
+      "tldr": "Digital Human Koubo automates a talking-head production pipeline from one photo and a sentence. Its agent skill coordinates script generation, lip-synced presentation, voice cleanup, captions, five editing styles, and 48 packaging components through Renoise MCP. The value is not a new foundation model but an opinionated, end-to-end creator workflow with concrete deliverables. Strong visual output and a one-line transformation promise make it naturally demoable and shareable.",
+      "tldr_zh": "Digital Human Koubo 将「一张照片加一句话」自动转成完整 talking-head 视频。其 agent skill 通过 Renoise MCP 编排脚本生成、口型同步、声音清理、字幕、五种剪辑风格和 48 个包装组件。它的价值不在新 foundation model，而在有明确交付物、强约束的端到端 creator workflow。可视化结果加上一句话即可理解的 transformation promise，让项目天然适合 demo 与传播。",
+      "stars": 148,
+      "language": "TypeScript",
+      "interest_tag": ""
+    },
+    {
+      "name": "abcampbel/open-bots",
+      "url": "https://github.com/abcampbel/open-bots",
+      "tldr": "OpenBots ships four open-source agents that can search the web, execute code in sandboxes, analyze files, call APIs, make payments, and complete sign-ups. The stack can run in a hosted browser experience or fully locally and is built around the project's Agnes 2.5 Pro model. Its practical distinction is combining high-risk real-world actions with a self-hostable implementation rather than stopping at chat or retrieval. The README confirms a substantive TypeScript codebase rather than a placeholder launch.",
+      "tldr_zh": "OpenBots 提供四个开源 agent，可执行 web search、sandbox code execution、file analysis、API call、payment 与 sign-up。整套 stack 既能使用 hosted browser，也可完全本地运行，并围绕项目自有的 Agnes 2.5 Pro model 构建。它的实际差异在于把高风险真实世界 action 与 self-hostable implementation 结合，而不是停留在聊天或检索。README 与代码结构也确认这不是 placeholder 式发布。",
+      "stars": 90,
+      "language": "TypeScript",
+      "interest_tag": ""
+    },
+    {
+      "name": "karthikponna/tryboxi",
+      "url": "https://github.com/karthikponna/tryboxi",
+      "tldr": "tryboxi provides disposable Linux microVMs on a developer's own machine for running AI agents. The Go project targets a stronger isolation boundary than ordinary subprocesses or shared containers while keeping environments ephemeral. This is useful for coding-agent workflows that need package installation and shell access without granting the host unrestricted exposure. Its significance lies in making local sandboxing a small standalone primitive instead of requiring a full agent platform.",
+      "tldr_zh": "tryboxi 为 AI agent 在开发者自己的机器上提供 disposable Linux microVM。这个 Go 项目试图提供比普通 subprocess 或共享 container 更强的 isolation boundary，同时保持环境临时性。对于需要安装 package 和访问 shell、但又不应无限暴露 host 的 coding-agent workflow，这种 primitive 很实用。它的意义是把本地 sandboxing 做成小而独立的组件，而不是要求用户部署完整 agent platform。",
+      "stars": 60,
+      "language": "Go",
+      "interest_tag": ""
+    }
+  ],
+  "hackernews": [
+    {
+      "title": "OpenShell – A safe, private runtime for fleets of autonomous AI agents",
+      "url": "https://github.com/NVIDIA/OpenShell",
+      "tldr": "OpenShell runs autonomous agents inside isolated sandboxes and enforces policy on file access, system calls, and every outbound network connection. Credentials are injected only for approved destinations, so agents never directly see the underlying secrets. Proposed policy changes are formally checked for newly granted access before human approval. The combination of fleet management, kernel-level enforcement, and verified policy changes addresses a real deployment barrier rather than adding another reasoning loop.",
+      "tldr_zh": "OpenShell 将 autonomous agent 运行在隔离 sandbox 中，并对 file access、system call 和每个出站 network connection 执行 policy。Credential 只在请求发往获批 endpoint 时注入，因此 agent 本身看不到真实 secret。Policy change 在人工批准前还会通过 formal verification 检查新增权限。Fleet management、kernel-level enforcement 与 verified policy change 的组合解决了真实部署阻塞点，而不是再加一层 reasoning loop。",
+      "points": 502,
+      "num_comments": 218,
+      "interest_tag": ""
+    },
+    {
+      "title": "Using thousands of AI agents to uncover new leads in biological data",
+      "url": "https://openai.com/index/scaling-ai-research-for-complex-biological-data/",
+      "tldr": "Thousands of GPT-Rosalind agents analyzed perturbations across millions of mouse brain cells in 32 minutes, linking cellular responses to scientific literature. The distributed system cited more than 700 references at the largest workload, while a resource-matched single agent cited only 11. It recovered known findings and proposed testable leads involving TSC1/TSC2 and DCTN1-related cholesterol regulation that blinded experts judged promising. The work shows where agent swarms can be credible: massively parallel evidence gathering with structured aggregation and human scientific review.",
+      "tldr_zh": "数千个 GPT-Rosalind agent 在 32 分钟内分析了数百万个小鼠脑细胞的 perturbation，并把 cellular response 与科学文献连接起来。在最大 workload 下，distributed system 引用了 700 多篇文献，而资源匹配的单 agent 仅引用 11 篇。系统既复现了已知发现，也提出了与 TSC1/TSC2、DCTN1 相关 cholesterol regulation 有关的可检验线索，并得到 blinded expert 的积极评价。这项工作展示了 agent swarm 更可信的用法：大规模并行证据搜集、结构化汇总与人类科学审查。",
+      "points": 160,
+      "num_comments": 106,
+      "interest_tag": "Agent Swarm"
+    },
+    {
+      "title": "Show HN: Omnara – Open-source alternative to Claude Managed Agents",
+      "url": "https://github.com/omnara-ai/omnara",
+      "tldr": "Omnara is a self-hostable control plane for durable agents that can use any compatible model and execute tools on remote machines or sandboxes. Agent state is an append-only Postgres event log, while stateless workers process one model or tool iteration at a time, allowing crashes to be retried without pinning a process. Outbound machine daemons avoid inbound ports, and the platform includes streaming, permissions, RBAC, secrets, MCP, skills, and subagents. Its architectural contribution is separating durable agent state, control-plane scheduling, and execution machines into independently scalable pieces.",
+      "tldr_zh": "Omnara 是一个可 self-host 的 durable agent control plane，可使用任意兼容 model，并在 remote machine 或 sandbox 上执行 tool。Agent state 以 append-only Postgres event log 保存，stateless worker 每次只处理一个 model 或 tool iteration，因此无需长期占用进程，崩溃后也能重试。Outbound machine daemon 避免开放 inbound port，平台还集成 streaming、permission、RBAC、secret、MCP、skill 与 subagent。其架构价值是把 durable agent state、control-plane scheduling 和 execution machine 拆成可独立扩展的层。",
+      "points": 114,
+      "num_comments": 34,
+      "interest_tag": ""
+    },
+    {
+      "title": "LayerFS: A filesystem for AI coding agents",
+      "url": "https://layerfs.ai/",
+      "tldr": "LayerFS gives each coding agent an ephemeral writable workspace over shared committed history. Every file operation or shell call becomes an atomic commit, while metadata-only forks, content-addressed storage, deduplication, and explicit same-file conflicts support high parallelism. Ignored dependencies remain available across mounts, avoiding repeated environment installation. The project reframes multi-agent coordination as a versioned filesystem problem, which can simplify provenance, rollback, and branch isolation.",
+      "tldr_zh": "LayerFS 为每个 coding agent 提供建立在共享 committed history 之上的 ephemeral writable workspace。每次 file operation 或 shell call 都形成 atomic commit，而 metadata-only fork、content-addressed storage、deduplication 与明确的同文件冲突规则支持高并发。被忽略的 dependency 仍可跨 mount 保留，避免反复安装环境。该项目把 multi-agent coordination 重构为 versioned filesystem 问题，从而简化 provenance、rollback 与 branch isolation。",
+      "points": 76,
+      "num_comments": 47,
+      "interest_tag": ""
+    },
+    {
+      "title": "AI agent fixed the bug, but what else did it change?",
+      "url": "https://blog.trailofbits.com/2026/10/21/your-ai-agent-fixed-the-bug-but-what-else-did-it-change/",
+      "tldr": "Trail of Bits releases patching-bugs and regression-hunt, two agent plugins derived from hundreds of security patches and thousands of Codex sessions. Their workflow requires typed evidence, live proofs of concept, independent fresh-context replay, and a three-arm test where original fails, patched passes, and reverted code fails again. A review found 21 regressions among more than 130 merged PRs; regression-hunt reduced false-positive findings by 25% versus a generic review prompt, though some known regressions remained borderline. The key lesson is that reliable agent patching needs explicit invariants and executable evidence gates, not confidence-laden summaries.",
+      "tldr_zh": "Trail of Bits 发布 patching-bugs 与 regression-hunt 两个 agent plugin，其方法来自数百个安全 patch 和数千次 Codex session。Workflow 要求 typed evidence、live proof of concept、独立 fresh-context replay，以及 original fail、patched pass、revert fail 的三臂检验。对 130 多个 merged PR 的复查发现 21 个 regression；相较通用 review prompt，regression-hunt 将 false-positive finding 降低 25%，但仍有部分已知 regression 被判为 borderline。核心启示是，可靠的 agent patching 需要明确 invariant 和可执行 evidence gate，而不是充满自信的 summary。",
+      "points": 54,
+      "num_comments": 6,
+      "interest_tag": ""
+    }
+  ]
+}
