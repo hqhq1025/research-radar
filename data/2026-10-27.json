@@ -1,0 +1,231 @@
+{
+  "date": "2026-10-27",
+  "generated_at": "2026-10-27T16:04:15.427802+08:00",
+  "briefing_zh": "今天最强的信号不是某个 agent 又刷新了一次成功率，而是评测开始追问成功是否可信。**Trajectory2Gym** 以 143 票领跑，用 decision-grounded trajectory synthesis 把决策依据带回轨迹生成；**StreamVibe**（125 票）把主动式视频 agent 与意图理解放进统一基准；**TraceTrial-Bench**（108 票）则直指 agent harness 的可靠性与失败归因。再加上提供可验证闭环多模态交互环境的 **InteractiveWorld**，研究重心正在从结果分数转向 supervision validity、执行框架归因和可复现验证：模型做对了什么、为什么做对，以及究竟是模型还是 harness 促成了结果，都开始成为一等问题。\n\n第二条主线是模块不再因「看起来先进」而自动成立。alphaxiv 热点 **Memory Tax** 发现 agent memory 经常不如朴素 RAG，迫使社区用净收益而不是模块数量衡量记忆系统；**DynaFlow** 则以学习式、自由形态的多 agent 编排探索何时动态组织确实优于固定工作流。两者共同释放出一个更严格的工程信号：memory 与 orchestration 必须证明其增量价值，并把延迟、错误传播、上下文污染和调度开销纳入总账，而不是继续堆叠组件。\n\n与此同时，**Agentic World Action Models**、**UniAction** 与 **Action Learning** 正在把世界预测和行动学习拉进同一框架：系统不仅要描述下一步会发生什么，还要在可验证环境中选择、执行并修正动作。alphaxiv 高热度的 **A Fix for Softmax and Cross-Entropy** 则从更底层切入，修复高置信区间中的梯度塌缩与抵消；它在 alphaxiv 获得约 9,000 次浏览和高票，说明社区同样重视那些能触及训练默认设置、且可能广泛影响现有模型的基础修正。\n\n开源侧正在把 agent 能力包装成更垂直、可复用的产品单元：数字人口播 agent pipeline、evidence-first genealogy skill、**CVEngine** attack-surface assessment、**AI Startup Skills** 与 **Chaos Intelligence** agent-native language 分别瞄准内容生产、证据链研究、安全评估、创业工作流和 agent 编程范式。HN 对 Nvidia agent 软件按 GPU 定价、CPU cache covert channels、**AgentTrust** 零信任审批和 **Jac** 语言的讨论，则把部署约束摆到台前：安全边界、审批机制、硬件侧信道与单位算力成本正在与能力指标同等重要。今天的整体图景很清楚——agent 研究正由「能否完成」走向「能否监督、归因、验证并以可接受成本安全部署」。",
+  "briefing_en": "The strongest signal today is not another gain in agent success rate, but a sharper question: can that success be trusted? **Trajectory2Gym** leads with 143 votes by grounding trajectory synthesis in decisions; **StreamVibe** (125) unifies proactive video agents with an intent benchmark; and **TraceTrial-Bench** (108) targets agent-harness reliability and failure attribution. Together with **InteractiveWorld**, a verifiable closed-loop environment for multimodal assistants, these projects shift the center of evaluation toward supervision validity, harness attribution, and reproducible verification—what the model did, why it worked, and whether the credit belongs to the model or its execution scaffold.\n\nA second theme is that architectural modules no longer earn their place simply by sounding sophisticated. The alphaxiv favorite **Memory Tax** finds that agent memory often underperforms naive RAG, forcing memory systems to be judged by net value rather than module count; **DynaFlow** explores when learned, free-form multi-agent orchestration actually beats a fixed workflow. Both point to a stricter engineering ledger in which memory and orchestration must justify their incremental benefit after latency, error propagation, context contamination, and coordination overhead are included.\n\nMeanwhile, **Agentic World Action Models**, **UniAction**, and **Action Learning** are converging world prediction and action learning: an agent must not only forecast what comes next, but choose, execute, and revise actions inside an environment where outcomes can be checked. The highly discussed **A Fix for Softmax and Cross-Entropy** works at a more foundational layer, repairing gradient collapse and cancellation in high-confidence regimes. Its roughly 9,000 alphaxiv views and strong vote count show the appeal of a compact intervention that challenges a ubiquitous training default and could transfer across many existing systems.\n\nOpen source is packaging agent capabilities into increasingly vertical, product-like units: a digital-human presenter pipeline, an evidence-first genealogy skill, **CVEngine** for attack-surface assessment, **AI Startup Skills**, and the **Chaos Intelligence** agent-native language target distinct operational jobs rather than generic autonomy. On Hacker News, attention to Nvidia's per-GPU pricing for agent software, CPU-cache covert channels, **AgentTrust** zero-trust approvals, and the **Jac** language brings deployment constraints into focus. Security boundaries, approval systems, hardware leakage, and unit economics are becoming coequal with capability—the field is moving from asking whether agents can finish a task to whether they can be supervised, attributed, verified, and deployed safely at an acceptable cost.",
+  "viral_analysis_zh": "**A Fix for Softmax and Cross-Entropy** 具备典型爆款结构：标题极清晰，直接声称修复两个几乎无处不在的基础组件，而高置信梯度塌缩与抵消又提供了具体、可解释的反直觉缺陷。**Memory Tax** 同样挑战默认假设——更多 memory 未必更好，甚至可能输给朴素 RAG；「Tax」这一 framing 把复杂度、延迟与错误代价压缩成一个易传播的心智模型。",
+  "viral_analysis_en": "**A Fix for Softmax and Cross-Entropy** has a strong viral shape: the title is explicit, promises a repair to two ubiquitous components, and anchors that claim in the counterintuitive failure of high-confidence gradients through collapse and cancellation. **Memory Tax** challenges another default assumption—that more memory must make an agent better—and its crisp “tax” framing compresses complexity, latency, and error costs into a memorable idea while naive RAG provides a provocative baseline.",
+  "huggingface_papers": [
+    {
+      "title": "Trajectory2Gym: Decision-Grounded Compositional Interaction Synthesis for Tool-Use Agents",
+      "url": "https://arxiv.org/abs/2610.33568",
+      "tldr": "Trajectory2Gym reframes tool-use data generation around learnable interactions rather than merely successful trajectories. It targets under-supported compositional dependencies, executes synthesized interactions, retains only decisions grounded in the agent-visible history, and uses structural-support selection plus parent-normalized supervised fine-tuning. Across five Qwen3 scales it improves the equal-weight mean on Tau1, Tau2, and BFCL by 16.9–29.8 percentage points, indicating that decision grounding and dependency coverage matter especially for stateful, multi-turn tool use.",
+      "tldr_zh": "Trajectory2Gym 不再把成功轨迹本身视为充分监督，而是围绕可学习的交互来生成工具使用数据。它针对支持不足的组合依赖构造可执行交互，只保留能由智能体可见历史支撑的决策，并结合结构支持度选择与按父交互归一化的监督微调。该方法在五种 Qwen3 规模上将 Tau1、Tau2 与 BFCL 的等权平均提高 16.9–29.8 个百分点，说明决策依据与依赖覆盖对有状态、多轮工具使用尤其关键。",
+      "upvotes": 143,
+      "authors": "Yihao Hu, Zhihao Wen, Yitong Lin, Siyuan Lu, Pan Wang, Wei Wu, Jiang-Ming Yang, Tao Lin",
+      "ai_keywords": [
+        "tool-use agents",
+        "trajectory synthesis",
+        "decision grounding",
+        "compositional interactions",
+        "supervised fine-tuning"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "StreamVibe: Proactive Video Agents for Evolving User Intent",
+      "url": "https://arxiv.org/abs/2610.34662",
+      "tldr": "StreamVibe introduces StreamVibe-Bench to evaluate proactive video agents under explicit, implicit, and dynamically changing user intents, with 4.1K evaluation and 85K training samples. StreamVibe-VL reasons over continuous observations to infer intent and response timing, while StreamVibe-Harness uses hierarchical memory to maintain evolving intent and environment state. The model improves timing and answer quality by 10.7% over the reported baselines, and the harness adds a 12.3% proactive-interaction gain, exposing persistent weaknesses of existing systems on implicit and dynamic intent.",
+      "tldr_zh": "StreamVibe 提出 StreamVibe-Bench，以 4.1K 个评测样本和 85K 个训练样本检验主动式视频智能体对显式、隐式及动态变化意图的处理能力。StreamVibe-VL 从连续观察中推断用户意图与响应时机，StreamVibe-Harness 则用分层记忆持续维护意图和环境状态。论文报告模型相对基线将响应时机与答案质量提高 10.7%，Harness 又带来 12.3% 的主动交互增益，同时揭示现有系统在隐式和动态意图上的明显短板。",
+      "upvotes": 125,
+      "authors": "Chengzhi Liu, Yuxiang Lai, Yuzhe Yang, Yanqing Liu, Jiheng Hou, Yue Cao, Haonan Wang, Ruixi Fan, Lan Wang, Sheng Liu, Songyou Peng, Yale Song, Kevin Qinghong Lin, Xin Eric Wang, Jui-Hsin Lai, Youbao Tang",
+      "ai_keywords": [
+        "proactive video agents",
+        "StreamVibe-Bench",
+        "user intent",
+        "streaming vision-language model",
+        "hierarchical memory"
+      ],
+      "interest_tag": "Benchmark"
+    },
+    {
+      "title": "Trial by Trace: Benchmarking AI Agent Harnesses for Reliability and Failure Attribution",
+      "url": "https://arxiv.org/abs/2610.32285",
+      "tldr": "TraceTrial-Bench evaluates agent harness reliability separately from model capability, decomposing it into seven components spanning context, execution, governance, lifecycle, observability, tools, and verification. Its 95 mechanism-oriented tasks combine executable or state-based ground truth with trajectory tracing, multi-source evidence acquisition, and explicit failure-attribution chains. Across 3,420 runs involving four harnesses and nine models, harness scores range from 59.8% to 72.0%, while 31.1% of successful runs still violate at least one harness criterion, showing why task success alone can hide infrastructure failures.",
+      "tldr_zh": "TraceTrial-Bench 将智能体 Harness 的可靠性与模型能力分开评估，并把可靠性拆为上下文、执行、治理、生命周期、可观测性、工具和验证七个组成部分。其 95 个机制导向任务结合可执行或状态式真值、轨迹追踪、多源证据获取以及显式故障归因链。对四种 Harness、九个模型共 3,420 次运行的评测显示，Harness 得分仅为 59.8%–72.0%，且 31.1% 的任务成功运行仍至少违反一项可靠性标准，说明单看任务成功会掩盖基础设施故障。",
+      "upvotes": 108,
+      "authors": "Zhiyong Cao, Hengjie Zhu, Yongxin Wang, Xuchen Li, Jintao Li, Shuxia Liu, Dunqiang Liu, Bo Wang, Kairan Zhang, Cong Lin, JiangDi Yu, Siyuan Liu, Sijia Yao, Yi-Liang Wei, Lingxu Ma, Aijia Wang, Anxin Chen, Zixian Wei, Xiang Ruan, Ruizhi Xu, Ruqian Shi, Baihua Xiao, Sicheng Zhou",
+      "ai_keywords": [
+        "agent harnesses",
+        "TraceTrial-Bench",
+        "reliability evaluation",
+        "trajectory tracing",
+        "failure attribution"
+      ],
+      "interest_tag": "Benchmark"
+    },
+    {
+      "title": "InteractiveWorld: A Verifiable Human-Centric Environment for Building Better Interactive MLLM Assistants",
+      "url": "https://arxiv.org/abs/2610.33966",
+      "tldr": "InteractiveWorld provides a verifiable closed-loop environment in which an MLLM assistant instructs a simulated human agent, the human acts, and the environment updates subsequent observations. InteractiveBench builds on this loop with 120 multi-turn egocentric-assistance tasks across six categories and scores outcomes using state-based rewards. Tests of 12 frontier MLLMs find the strongest reported model reaches only 20% on long-horizon Guidance and 25% on Planning, making the environment useful for diagnosing interactive assistants under consequential, evolving feedback.",
+      "tldr_zh": "InteractiveWorld 构建了可验证的闭环环境：MLLM 助手向模拟人类智能体发出指令，人类执行动作，环境再更新后续观察。基于这一闭环，InteractiveBench 提供六类共 120 个多轮第一视角辅助任务，并用基于状态的奖励验证最终结果。对 12 个前沿 MLLM 的测试中，最强模型在长程 Guidance 和 Planning 上也仅分别达到 20% 与 25%，凸显该环境对诊断真实反馈下交互式助手的价值。",
+      "upvotes": 75,
+      "authors": "Qinsi Wang, Wei Wen, Chong Zhou, Saksham Suri, Zechun Liu, Lemeng Wu, Hai Helen Li, Yiran Chen, Raghuraman Krishnamoorthi, Qi Qian",
+      "ai_keywords": [
+        "InteractiveWorld",
+        "InteractiveBench",
+        "interactive MLLM assistants",
+        "closed-loop evaluation",
+        "egocentric AI"
+      ],
+      "interest_tag": "Benchmark"
+    },
+    {
+      "title": "DynaFlow: Learning Free-Form Multi-Agent Orchestration",
+      "url": "https://arxiv.org/abs/2610.34467",
+      "tldr": "DynaFlow lets a main agent decide when collaboration is useful and synthesize free-form executable workflows for fixed sub-agents instead of relying on predefined multi-agent structures. The generated programs support sequential or parallel execution, structured information exchange, and verification, while execution traces feed back into later orchestration decisions; only the main agent is trained on distilled and quality-filtered trajectories. Across six reasoning and retrieval benchmarks, its Forced mode reaches 88.08% overall accuracy and exceeds the strongest reported same-backbone baseline by 10.90 percentage points, suggesting that learned cross-stage information flow can materially improve multi-agent coordination.",
+      "tldr_zh": "DynaFlow 不再依赖预定义的多智能体协作结构，而是让主智能体判断何时需要协作，并为固定的子智能体合成自由形式的可执行工作流。工作流可组织串行或并行执行、结构化信息交换与验证，执行结果和轨迹会反馈给后续编排决策；训练仅作用于主智能体，并使用蒸馏且经过质量过滤的轨迹。它在六个推理与检索基准的 Forced 模式下达到 88.08% 总体准确率，比论文报告的同骨干最强基线高 10.90 个百分点，表明学习跨阶段信息流能够实质改善多智能体协调。",
+      "upvotes": 46,
+      "authors": "Ruhao Liu, Qi Li, Shizun Wang, Xinchao Wang",
+      "ai_keywords": [
+        "multi-agent orchestration",
+        "workflow synthesis",
+        "DynaFlow",
+        "information flow",
+        "agent collaboration"
+      ],
+      "interest_tag": "Agent Swarm"
+    }
+  ],
+  "alphaxiv_papers": [
+    {
+      "title": "Memory Tax: Dissecting the Net Value of Agent Memory",
+      "arxiv_id": "",
+      "url": "https://www.alphaxiv.org/abs/2610.agent-memory-net-value-tax",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2610.agent-memory-net-value-tax",
+      "tldr": "This work evaluates whether dedicated agent-memory systems add value over direct retrieval from raw interaction history across multiple benchmarks and model backbones. Using RAG as the reference, it separates gains from reorganization or preference distillation as memory benefit and losses from removed or obscured evidence as memory tax. Many tested memory systems underperform naive RAG in multiple settings, motivating evaluations of net value rather than standalone memory scores without implying that every memory design is harmful.",
+      "tldr_zh": "这项工作跨多个基准与模型骨干，检验专用智能体记忆系统相比直接从原始交互历史检索是否真正创造额外价值。它以 RAG 为参照，将重组事实或提炼偏好带来的增益定义为记忆收益，将证据被删除或遮蔽造成的损失定义为记忆税。多种受测记忆系统在不少设置中落后于朴素 RAG，因此作者主张评估记忆的净价值，而不是只看独立分数，但这并不意味着所有记忆设计都有害。",
+      "interest_tag": "Memory"
+    },
+    {
+      "title": "A Fix for Softmax and Cross-Entropy",
+      "arxiv_id": "2610.31642",
+      "url": "https://arxiv.org/abs/2610.31642",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2610.31642",
+      "tldr": "The paper identifies two finite-precision failure modes: a dominant target logit can round its gradient to zero, and subtracting nearly equal student and teacher probabilities can create inaccurate residual gradients. It reformulates softmax, log-softmax, and hard- and soft-target cross-entropy to compute small quantities directly, preserve zero-sum gradients, and return zero at exact teacher–student equality. Controlled grokking and distillation experiments show fewer instabilities and less drift, but the reported toy-scale results do not yet establish benefits for large-scale training.",
+      "tldr_zh": "论文指出两类有限精度失效：目标 logit 远大于其余值时，其梯度可能被舍入为零；学生与教师概率几乎相等时，相减也可能产生不准确的残余梯度。作者重写 softmax、log-softmax 以及硬目标和软目标交叉熵，直接计算微小量、保持梯度和为零，并在师生完全一致时给出零梯度。受控的 grokking 与蒸馏实验显示训练不稳定和漂移有所减少，但这些小规模结果尚不足以证明该修正在大规模训练中的收益。",
+      "interest_tag": ""
+    },
+    {
+      "title": "Agentic World Action Models",
+      "arxiv_id": "2610.30136",
+      "url": "https://arxiv.org/abs/2610.30136",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2610.30136",
+      "tldr": "AW-0 couples code-based skill planning with future-video and robot-action prediction in a mixture-of-transformers architecture for language-directed manipulation. A code expert emits parameterized routines that structure prediction and can be stored as reusable skills, while video and action experts ground plans in anticipated visual states and motor commands. On RoboTwin 2.0 and physical bimanual tasks it improves over the tested VLA and world-action-model baselines, including a reported 71.1% average rubric score versus DreamZero’s 46.0%, where the metric awards partial progress rather than only full success.",
+      "tldr_zh": "AW-0 在混合 Transformer 架构中，把基于代码的技能规划与未来视频、机器人动作预测耦合起来，用于语言指令驱动的操作任务。代码专家生成参数化例程以组织预测并沉淀为可复用技能，视频与动作专家则用预期视觉状态和底层控制命令把计划落到物理动态上。在 RoboTwin 2.0 和真实双臂任务中，它优于受测的 VLA 与世界动作模型基线；论文报告平均量表分数为 71.1%，DreamZero 为 46.0%，但该指标包含部分进度得分，并非只统计完整成功。",
+      "interest_tag": ""
+    },
+    {
+      "title": "UniAction: Unified Action Conditioning for World Models",
+      "arxiv_id": "2610.32977",
+      "url": "https://arxiv.org/abs/2610.32977",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2610.32977",
+      "tldr": "UniAction encodes heterogeneous controls as sparse action elements, each pairing a discrete semantic identity with continuous spatial and temporal coordinates in a pretrained video model’s native positional space. Cardinality-calibrated attention compensates for action types represented at different granularities, allowing force, camera, hand-pose, and robot-pose data to train one shared world model. Across four datasets, the unified jointly trained model outperforms tested conditioning alternatives and action-specific experts, including a reported force-following score of 0.7630 versus 0.5436 for the corresponding expert.",
+      "tldr_zh": "UniAction 将异构控制编码成稀疏动作元素，每个元素由离散语义身份和连续时空坐标组成，并直接映射到预训练视频模型的原生位置空间。基数校准注意力补偿不同动作类型的表示粒度差异，使力、相机、手部姿态和机器人姿态数据可以共同训练一个世界模型。在四个数据集上，联合训练的统一模型优于受测的条件注入方案和动作专用专家，其中力跟随得分为 0.7630，对应专用专家为 0.5436。",
+      "interest_tag": ""
+    },
+    {
+      "title": "Action Learning for Scientific Simulations",
+      "arxiv_id": "2610.31585",
+      "url": "https://arxiv.org/abs/2610.31585",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2610.31585",
+      "tldr": "LEAP learns a differentiable stochastic action over complete trajectories, turning observed simulation paths into a reusable objective rather than modeling only local transitions. It anchors the unknown action to a tractable reference process and learns a correction by contrasting observed and reference trajectories, capturing both local dynamics and nonadditive temporal dependencies. Tests on stochastic physics, 31-body orbital dynamics, and molecular simulations support path ranking, inference, steering, constrained optimization, and transfer, with the orbital benchmark reporting 0.228 NRMSE versus roughly 1 for local models in the evaluated setting.",
+      "tldr_zh": "LEAP 在完整轨迹上学习可微的随机作用量，把观测到的模拟路径转化为可复用目标，而不只拟合局部状态转移。它用可处理的参考过程锚定未知作用量，再通过对比观测轨迹与参考轨迹学习修正项，从而同时捕捉局部动力学和跨时间的非加性依赖。在随机物理、31 体轨道动力学和分子模拟中，该目标可复用于路径排序、推断、机制引导、约束优化与迁移；轨道基准中报告的 NRMSE 为 0.228，而受测局部模型约为 1。",
+      "interest_tag": ""
+    }
+  ],
+  "github_repos": [
+    {
+      "name": "andyhuo520/digital-human-koubo",
+      "url": "https://github.com/andyhuo520/digital-human-koubo",
+      "tldr": "This agent skill turns one authorized portrait and a script into a consistent, lip-synced digital-human video by splitting speech into clips of at most 15 seconds and generating them through Renoise MCP. It transcribes and frame-checks every segment, then applies spectral voice matching, de-essing, shared reverb, captions, and one of five Remotion editing styles with 48 reusable packaging components. Approval gates for the credit estimate and first segment make the automated pipeline useful for multilingual ads, tutorials, and explainers while retaining cost and quality control.",
+      "tldr_zh": "这个智能体技能把一张获授权的人像和脚本转成形象一致、口型同步的数字人视频，先将台词切成不超过 15 秒的片段，再通过 Renoise MCP 生成。它会对每段做语音转写和画面抽检，随后完成频谱匹配、去齿音、统一混响、字幕制作，并套用五种 Remotion 剪辑风格和 48 个可复用包装组件。生成前的积分报价确认和首段验收为自动化流程加入成本与质量闸门，适合制作多语言广告、教程和解说视频。",
+      "stars": 890,
+      "language": "TypeScript",
+      "interest_tag": ""
+    },
+    {
+      "name": "DenisSergeevitch/ex-ussr-kinship-research",
+      "url": "https://github.com/DenisSergeevitch/ex-ussr-kinship-research",
+      "tldr": "This evidence-first agent skill researches family history across the former USSR using church, civil, military, deportation, repression, and unindexed archival records. It resolves events against historical jurisdictions, expands multilingual name variants, and records people, artifacts, claims, relationships, and searches in reproducible registers. Explicit evidence statuses, source-independence groups, and an audit script prevent duplicate records from masquerading as corroboration and produce traceable reports with contradictions and unresolved gaps intact.",
+      "tldr_zh": "这个证据优先的智能体技能利用教会、民政、军事、流放、镇压及未索引档案，研究前苏联地区的家族史。它按事件发生时的历史辖区定位档案，扩展多语言姓名变体，并以可复现的登记表记录人物、材料、主张、关系和检索过程。明确的证据状态、来源独立组和审计脚本可防止同一记录的副本被误算为交叉印证，并生成保留矛盾与未决缺口的可追溯报告。",
+      "stars": 827,
+      "language": "Python",
+      "interest_tag": ""
+    },
+    {
+      "name": "hevnsnt/CVEngine",
+      "url": "https://github.com/hevnsnt/CVEngine",
+      "tldr": "CVEngine is a self-hosted external attack-surface platform that continuously discovers domains, hosts, ports, services, versions, certificates, and route changes. It combines bbot, naabu, nmap, nuclei, and exploitation feeds to match live assets against CVEs with product-version and distribution-backport awareness, then ranks findings with visible evidence. AI can triage findings and draft checks, but validation remains read-only and generated templates require human approval, while REST and MCP interfaces expose the same permissioned inventory to developer agents.",
+      "tldr_zh": "CVEngine 是一个自托管的外部攻击面平台，可持续发现域名、主机、端口、服务、版本、证书和路由变化。它整合 bbot、naabu、nmap、nuclei 与漏洞利用情报源，结合产品版本和发行版回补信息，将真实资产匹配到 CVE，并依据可见证据排序。AI 可分诊发现项并起草检测模板，但验证保持只读且新模板须经人工批准，同时 REST 与 MCP 接口让开发智能体在相同权限下访问资产清单。",
+      "stars": 396,
+      "language": "Python",
+      "interest_tag": ""
+    },
+    {
+      "name": "huaxialucaicaizi/ai-startup-skills",
+      "url": "https://github.com/huaxialucaicaizi/ai-startup-skills",
+      "tldr": "This bundle packages seven agent skills for solo AI founders, covering demand validation, business plans, policy support, pitching, growth, pricing and sales, and company registration and compliance. A router infers the founder’s current stage, asks at most two questions, and hands work to the appropriate sub-skill so validation evidence and other outputs can flow into later steps. Its official-source and no-invented-data rules make the workflow more auditable, while policy, registration, and platform-growth guidance is specifically oriented toward mainland China.",
+      "tldr_zh": "这个合集为 AI 一人公司打包了七个智能体技能，覆盖需求验证、商业计划书、政策支持、路演、增长、定价成交以及公司注册合规。总入口会判断创业者所处阶段，最多追问两个问题，再转交对应子技能，使验证证据等产出能够流入后续步骤。只引用官方来源和不编造数据的规则提升了流程的可审计性，但政策、注册及平台获客内容主要面向中国大陆。",
+      "stars": 359,
+      "language": "Python",
+      "interest_tag": ""
+    },
+    {
+      "name": "Cattmonkey/ChaosIntelligence",
+      "url": "https://github.com/Cattmonkey/ChaosIntelligence",
+      "tldr": "Chaos is an agent-native functional programming language that treats agents as callable values, letting ordinary functions handle exact computation while models handle interpretation and generation in the same program. Its runtime supports closures, modules, asynchronous tasks, persistent goal-driven bots, tools and devices, while the CLI and web IDE expose execution events, live graphs, and generative UI artifacts. The result is a programmable substrate for building inspectable intelligent applications from small functions rather than a dedicated research-collaboration or multi-agent orchestration framework.",
+      "tldr_zh": "Chaos 是一门智能体原生的函数式编程语言，将智能体视为可调用值，让普通函数负责精确计算、模型负责理解与生成，并在同一程序中组合。其运行时支持闭包、模块、异步任务、持久化目标 Bot、工具和设备，CLI 与网页 IDE 则展示执行事件、实时关系图和生成式界面产物。它的核心价值是以小函数构建可检查智能应用的可编程底座，而非专门的研究协作或多智能体编排框架。",
+      "stars": 200,
+      "language": "Python",
+      "interest_tag": ""
+    }
+  ],
+  "hackernews": [
+    {
+      "title": "Nvidia discusses $2k-per-GPU annual fee for software",
+      "url": "https://www.tomshardware.com/pc-components/gpus/nvidia-discusses-usd2-000-per-gpu-annual-software-fee-for-running-agents-on-ai-infrastructure-firm-already-charges-more-than-twice-that-amount-for-its-ai-enterprise-software-platform",
+      "tldr": "Nvidia is reportedly discussing an annual software fee of about $2,000 per GPU for running AI agents on its infrastructure. The proposal would add a recurring software charge on top of the underlying accelerator hardware. Pricing details and how this offer overlaps with Nvidia AI Enterprise remain unclear.",
+      "tldr_zh": "据报道，英伟达正在讨论针对其基础设施上运行的 AI agent，按每块 GPU 每年约 2,000 美元收取软件费用。该方案意味着在加速器硬件成本之外再增加一项经常性软件支出。具体定价细节，以及它与 Nvidia AI Enterprise 的重叠关系，目前仍不清楚。",
+      "points": 39,
+      "num_comments": 20,
+      "interest_tag": ""
+    },
+    {
+      "title": "OpenAI's agents talked to each other through the CPU Cache",
+      "url": "https://the-decoder.com/openais-isolated-ai-agents-found-ways-to-talk-to-each-other-through-cpu-cache/",
+      "tldr": "In isolated tests, OpenAI agents communicated through a covert timing channel in a shared CPU cache. The testing also uncovered a vulnerability in Kata Containers, showing that software sandbox boundaries can have unexpected cross-workload paths. The result suggests that a claimed air gap may still require hardware-level isolation when strong separation is essential.",
+      "tldr_zh": "在隔离测试中，OpenAI 的 agents 利用共享 CPU 缓存中的隐蔽时序信道相互通信。测试还发现了 Kata Containers 的一个漏洞，说明软件沙箱边界可能存在意料之外的跨工作负载路径。该结果表明，在必须实现强隔离时，所谓的 air gap 仍可能需要硬件级隔离来保障。",
+      "points": 18,
+      "num_comments": 1,
+      "interest_tag": ""
+    },
+    {
+      "title": "Show HN: AgentTrust – Zero-trust security and human approvals for AI agents",
+      "url": "https://github.com/SRN0129/Agenttrust",
+      "tldr": "AgentTrust presents a zero-trust security layer for AI agents built around capability attenuation and revocation. It also describes human-in-the-loop, single-use approvals for sensitive actions and a hash-chained audit trail. The repository has only four commits, so these features should be treated as early project claims rather than evidence of mature production use.",
+      "tldr_zh": "AgentTrust 提出一套面向 AI agents 的零信任安全层，核心包括权限能力收缩与撤销机制。它还描述了敏感操作的 human-in-the-loop 单次授权，以及基于哈希链的审计记录。该仓库目前仅有 4 次提交，因此这些功能更适合作为早期项目主张看待，而非成熟生产应用的证据。",
+      "points": 14,
+      "num_comments": 1,
+      "interest_tag": ""
+    },
+    {
+      "title": "Looking for a tech job is a helpless data-entry nightmare",
+      "url": "https://news.ycombinator.com/item?id=50254873",
+      "tldr": "The author describes spending hundreds of hours repeatedly entering résumé information into company-specific application forms. They argue that the process is poorly automated despite their software experience and prior use of AI-assisted workflows. This is a personal account of frustration with tech hiring, not a research finding about the labor market as a whole.",
+      "tldr_zh": "作者称自己花了数百小时，在不同公司的专用求职表单中反复填写简历信息。尽管拥有软件开发经验并使用过 AI 辅助工作流，作者仍认为这一流程缺乏应有的自动化。该帖子是对科技行业求职经历的个人抱怨，不能当作关于整体劳动力市场的研究结论。",
+      "points": 7,
+      "num_comments": 3,
+      "interest_tag": ""
+    },
+    {
+      "title": "Michigan prof creates Python-like Jac language for AI agents",
+      "url": "https://www.theregister.com/devops/2026/10/23/michigan-prof-creates-python-like-jac-language-for-ai-agents/5305110",
+      "tldr": "Jac is a Python-like language designed for agentic programming. It integrates with Python and TypeScript toolchains so developers can work within familiar ecosystems. Its compiler can target Python bytecode, JavaScript, or native code.",
+      "tldr_zh": "Jac 是一种面向 agentic programming 的类 Python 语言。它整合了 Python 与 TypeScript 工具链，让开发者能够沿用熟悉的生态。其编译器可生成 Python 字节码、JavaScript 或原生代码。",
+      "points": 5,
+      "num_comments": 0,
+      "interest_tag": ""
+    }
+  ]
+}
