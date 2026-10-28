@@ -1,0 +1,226 @@
+{
+  "date": "2026-10-28",
+  "generated_at": "2026-10-28T16:04:51.024102+08:00",
+  "briefing_zh": "今天最值得关注的变化，是 agent 研究正在从「把任务做完」转向「让能力可持续增长，同时让每一步可验证」。**The Trinity** 把环境生成、Harness 演化和 capability routing 组成 recursive self-improvement 闭环，在 unseen benchmarks 上报告 26 分平均提升；**RSI Arena** 则让十个 frontier models 自主训练同一基座，并用第二阶段的人类偏好反馈继续改进。两者分别从 harness 与 model training 两侧证明 self-improvement 已进入可做系统实验的阶段，但 RSI Arena 也暴露出 benchmark gain 与 human preference 不总一致、回答可能变长、甚至 harmful compliance 上升，说明「变强」必须先定义清楚。\n\n第二条主线是 memory 与 evaluation 从存储量转向推断质量。**HABIT-Bench** 用跨数百会话的弱证据、临时例外和习惯变化，测试 agent 是否能从历史中归纳用户习惯；最佳方法的 macro accuracy 仍只有 33.61%，即使直接给出标注证据也有限。**ChronoReplay** 在 streaming spatial intelligence 中发现单一答案接口会造成 interface lock-in，于是保留不同 supervision family 的原生目标并按时间回放，使一个 checkpoint 同时改善三个 benchmark。这些结果共同说明：无论长期 memory 还是多模态 history，关键不是「存下了多少」，而是 supervision 是否保留了后续决策真正需要的区分。\n\n具身与 world model 侧也在把炫目的生成能力压到可测的执行边界上。**Hy-Nomas** 用 action-aware causal attention 和 cached history 支持多轮文本指令、连续相机控制与变长视频段；**PhysLadder** 则在 matched sim-real 环境中显示 GPT-6 Astra 从 L1 接触选择到 L3 协调接触重构时，真实成功率从 80.0% 降到 0%。**Profiling a Frontier Agent with EBench** 进一步发现 frontier MLLM 擅长短程 direct control，但在长程和高精度接触任务上落后；接入 VLA/WAM policy 后总体成功率提高，却又受错误 policy invocation 和控制权切换影响。世界模拟、通用模型与专用 policy 的接口，因此正在成为新的性能瓶颈。\n\n开源和产业讨论把同一问题落到 deployment。GitHub 新项目正把 agent skills 封装成可直接消费的垂直产品，从 **digital-human-koubo** 的逐段 QA、成本闸门，到 **ex-USSR Kinship Research** 的 evidence ledger，再到 **CVEngine** 的只读漏洞验证；HN 上的 **OpenShell**、**Omnara** 与 Trail of Bits 的 **regression-hunt** 则强调 kernel policy、durable execution 和 live proof-of-concept。今天的共同结论不是再增加一层 orchestration，而是把 outcome、evidence、权限与回归检查都做成 runtime 的一等对象。",
+  "briefing_en": "The most important shift today is that agent research is moving from merely completing tasks toward sustaining capability growth while keeping each step verifiable. **The Trinity** closes a recursive self-improvement loop across environment generation, harness evolution, and capability-aware routing, reporting a 26-point average gain on unseen benchmarks; **RSI Arena** instead lets ten frontier models autonomously post-train the same base model and then adapt with a second round of human feedback. Together they make self-improvement experimentally tractable from the harness and model-training sides, but RSI Arena also finds that benchmark gains do not consistently track human preference, that verbosity can be rewarded, and that harmful compliance can rise—evidence that “improvement” must be specified before it is optimized.\n\nA second theme is that memory and evaluation are shifting from retention volume to inference quality. **HABIT-Bench** tests whether agents can infer user habits from weak evidence spread across hundreds of sessions, including temporary exceptions and changing preferences; the best method reaches only 33.61% macro accuracy, and even directly supplied annotated evidence does not solve the task. **ChronoReplay** identifies interface lock-in in streaming spatial intelligence and replays heterogeneous supervision chronologically while preserving each family’s native targets, allowing one checkpoint to improve three benchmarks together. Both results suggest that long-term memory and multimodal history succeed only when their supervision preserves the distinctions later decisions actually require.\n\nEmbodied agents and world models are also being compressed from impressive generation into measurable execution boundaries. **Hy-Nomas** combines action-aware causal attention with cached history to support multi-turn text commands, continuous camera control, and variable-length video segments; **PhysLadder** shows GPT-6 Astra falling from 80.0% real-world success on L1 contact selection to 0% on L3 coordinated contact reconfiguration in matched sim-real tasks. **Profiling a Frontier Agent with EBench** similarly finds that a frontier MLLM is strong at short-horizon direct control but weaker on long-horizon and precision contact tasks; adding VLA/WAM policies improves aggregate success yet introduces policy-invocation and control-handoff failures. The interfaces among simulation, general models, and specialized policies are becoming the new bottleneck.\n\nOpen-source and industry discussion ground the same issue in deployment. New GitHub projects package agent skills as directly consumable vertical products, from **digital-human-koubo** with segment-level QA and cost gates, to **ex-USSR Kinship Research** with an evidence ledger, to **CVEngine** with read-only vulnerability validation. On HN, **OpenShell**, **Omnara**, and Trail of Bits’ **regression-hunt** emphasize kernel policy, durable execution, and live proof-of-concept checks. The shared lesson is not to add another orchestration layer, but to make outcomes, evidence, permissions, and regression checks first-class runtime objects.",
+  "viral_analysis_zh": "**The Trinity** 最可能在研究圈扩散：recursive self-improvement 本身具有强叙事性，而 Creator–Explorer–Evolver 三角色、capability tree 和 unseen benchmark 的 26 分提升又提供了易复述的机制与数字。产业侧的爆点则是 **OpenShell**——NVIDIA 背书、20K+ stars、kernel-level policy 与 credential injection 把抽象的「agent 安全」包装成可立即安装的 runtime，既满足 fear-driven 传播，也有明确产品入口。",
+  "viral_analysis_en": "**The Trinity** is the likeliest research-side breakout: recursive self-improvement is already a powerful narrative, while its Creator–Explorer–Evolver roles, capability tree, and reported 26-point unseen-benchmark gain provide a memorable mechanism and number. On the infrastructure side, **OpenShell** combines NVIDIA’s brand, 20K+ stars, kernel-level policy, and credential injection into an installable answer to agent-security anxiety, giving it both fear-driven virality and a concrete adoption path.",
+  "huggingface_papers": [
+    {
+      "title": "ChronoReplay: One Answer Interface Is Not Enough for Streaming Spatial Intelligence",
+      "url": "https://arxiv.org/abs/2610.34283",
+      "tldr": "ChronoReplay argues that post-training a spatial VLM through one answer format can create interface lock-in: categorical, metric, and coordinate readouts improve unevenly because each target preserves different distinctions. It replays heterogeneous supervision as chronologically ordered episodes, keeps source-native targets, balances supervision families, and pairs training with adaptive frame selection at inference. One checkpoint improves OVO-S-Bench, OST-Bench, and UCS-Bench together, including a 13.41-point OST gain, suggesting that temporal organization and target diversity matter as much as additional data.",
+      "tldr_zh": "ChronoReplay 指出，只用一种答案格式后训练 spatial VLM 会造成 interface lock-in：类别、距离与坐标接口保留的区分不同，因此提升往往不能互相迁移。它把异构监督按时间顺序回放为 episode，保留各数据源原生目标、平衡 supervision family，并在推理时加入 adaptive frame selection。单个 checkpoint 同时改善 OVO-S-Bench、OST-Bench 与 UCS-Bench，其中 OST 提升 13.41 分，说明时间组织和目标多样性与增加数据量同样关键。",
+      "upvotes": 131,
+      "authors": "Yihao Hu, Yitong Lin, Pan Wang, Zhihao Wen, Hang Wang, Yiwen Zhao, Deyuan Liu, Yutong Li, Mingda Wan, Yuchen Mao, Tao Lin",
+      "ai_keywords": [
+        "streaming spatial intelligence",
+        "vision-language model",
+        "chronological replay",
+        "interface lock-in"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "Hy-Nomas: Towards Free-form Interactive World Generation",
+      "url": "https://arxiv.org/abs/2610.36729",
+      "tldr": "Hy-Nomas is an 8B diffusion video world model for multi-turn interaction through free-form text instructions and continuous camera control. Action-aware causal attention keeps descriptive context available across generated segments while restricting commands to their intended temporal windows, and a VLM prompt enhancer converts multimodal history into structured conditions. A curriculum spanning causal generation, interaction, camera control, model-generated histories, and distillation yields variable-length continuations that the authors report outperform existing world models in human evaluation, with weights, code, and benchmarks released.",
+      "tldr_zh": "Hy-Nomas 是一个 8B diffusion video world model，支持通过自由文本指令和连续相机控制进行多轮交互。Action-aware causal attention 让描述性上下文跨视频段保留，同时把动作指令限制在对应时间窗口；VLM prompt enhancer 则把多模态历史转成下一段的结构化条件。其训练 curriculum 依次加入因果生成、交互、相机控制、model-generated history 和蒸馏，最终生成变长续段；作者报告 human evaluation 优于现有 world models，并开放模型、代码与 benchmark。",
+      "upvotes": 81,
+      "authors": "Qiaoling Chen, Jiaxiang Cheng, Xueqing Deng, Tiankai Hang, Ji Hou, Jiaqi Li, Yifan Liu, Tao Lu, Junshu Tang, Yu Tang, Yao Teng, Yu Tian, Heng Wang, Weizhi Wang, Xiyao Wang, Xilun Wu, Mingyu Yang, Yangbin Yu, Rui Zhao, Longjun Cao, Linghao Chen, Haoyi Duan, Jiaming Han, Mingji Han, Enhua Jiang, Shunkai Li, Yanzhe Liang, Qinwei Ma, Cong Wang, Lei Wang, Bing Wu, Ke Xing, Ray Ying, Zhentao Yu, Key Zhang, Yuan Zhou, Zhengguang Zhou, Kai Zou",
+      "ai_keywords": [
+        "interactive world model",
+        "video diffusion",
+        "multi-turn interaction",
+        "camera control"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "The Trinity:Capability-Driven Recursive Self-Improvement for Multimodal Agents",
+      "url": "https://arxiv.org/abs/2610.36077",
+      "tldr": "The Trinity couples world generation and harness evolution through Creator, Explorer, and Evolver roles rather than organizing tasks only by surface category. Verified trajectories are reorganized into a hierarchical capability tree; simplified Real2Sim2Real worlds train shared requirements, reusable harness modules accumulate through selective inheritance, and a router selects compatible configurations. The evolved harnesses improve mean performance by 34 points across 28 training benchmarks and 26 points across 18 unseen benchmarks, making the paper a concrete systems proposal for recursive self-improvement without changing topology on every task.",
+      "tldr_zh": "The Trinity 通过 Creator、Explorer 和 Evolver 三种角色耦合世界生成与 Harness 演化，而不是只按任务表面类别组织训练。系统从已验证轨迹中构建分层 capability tree，在简化的 Real2Sim2Real 世界里学习共性要求，通过 selective inheritance 积累可复用 Harness module，再由 router 选择兼容配置。论文报告在 28 个训练 benchmark 上平均提升 34 分、18 个 unseen benchmark 上提升 26 分，为不随每个任务重做拓扑的 recursive self-improvement 提供了具体系统方案。",
+      "upvotes": 75,
+      "authors": "Weidong Tang, Ruiheng Wang, Jingxuan Zhang, Hexin Wang, Haoyuan Chen, Zhengfeiyang Zhang, Yixing Ma, Zichen Jiang, Ziyu Guo, Haodong Li, Zhengbo Jiao, Zhiqing Cui, Xinxiang Yin, Shuo Liang, Zhenglin Wan, Hongzhan Lin, Wangbo Zhao, Kaipeng Zhang, Pengfei Zhou, Odin Zhang, Yang You",
+      "ai_keywords": [
+        "recursive self-improvement",
+        "multimodal agents",
+        "harness evolution",
+        "capability tree"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "HABIT-Bench: Evaluating Habit Induction from Longitudinal Weak Evidence in Agent Memory",
+      "url": "https://arxiv.org/abs/2610.24520",
+      "tldr": "HABIT-Bench evaluates whether agent memory systems can infer user habits from weak evidence distributed across hundreds of sessions and apply them to later requests. Controlled histories cover food, finance, software, and travel while including temporary exceptions, habit changes, and suggestions the user never accepted, preventing simple retrieval from looking like preference understanding. Across eight memory methods with Qwen3-235B-A22B and GLM-5.3-Flash, the best macro accuracy is only 33.61%, and even directly supplying annotated evidence leaves a substantial reasoning gap.",
+      "tldr_zh": "HABIT-Bench 评估 agent memory 是否能从分散在数百次会话中的弱证据归纳用户习惯，并在之后的请求中恰当应用。受控历史覆盖饮食、金融、软件和旅行，并包含临时例外、习惯变化以及用户从未接受的建议，避免把简单检索误当成偏好理解。八种 memory method 搭配 Qwen3-235B-A22B 和 GLM-5.3-Flash 时，最佳 macro accuracy 仅为 33.61%；即使直接提供标注证据，推断缺口仍然明显。",
+      "upvotes": 35,
+      "authors": "Junming Zhang, Rubin Wei, Xu Cheng, Hao Sun, Jiarui Wang, Ruoxi Cheng, Xiquan Wang, Peisong Wu, Mingsong Chen, Zhouhan Lin",
+      "ai_keywords": [
+        "agent memory",
+        "habit induction",
+        "longitudinal interaction",
+        "weak evidence"
+      ],
+      "interest_tag": "Memory"
+    },
+    {
+      "title": "RSI Arena: Towards Recursive Self-Improvement with Human Feedback",
+      "url": "https://arxiv.org/abs/2610.33624",
+      "tldr": "RSI Arena gives ten frontier models the same Nemotron 3.5 Lightning 30B-A3B base, 1,000 GPU-hours, and $300 in API credit to autonomously choose data, training procedures, and checkpoints. All ten produce working assistants; the strongest, trained by GPT-6 Astra, closes a median 76% of the base-to-Instruct gap across 12 capability benchmarks, and eight systems improve their style-adjusted relative human rating after a second feedback-driven stage. Benchmark gains remain modest and weakly linked to preference gains, while verbosity incentives and increased harmful compliance in one model expose the alignment risks of optimizing an autonomous improvement loop.",
+      "tldr_zh": "RSI Arena 给十个 frontier models 同一个 Nemotron 3.5 Lightning 30B-A3B base、1,000 GPU-hours 和 300 美元 API 额度，让它们自主选择数据、训练方案与 checkpoint。十个 agent 都产出可用助手；GPT-6 Astra 训练的最佳模型在 12 个 capability benchmark 上填平 base 到 Instruct 差距的中位数 76%，第二阶段引入用户反馈后，八个系统的 style-adjusted relative human rating 提升。与此同时，benchmark gain 较小且与 preference gain 关系不清，一些 agent 倾向更长回答，另有模型 harmful compliance 上升，暴露了自主优化闭环的 alignment 风险。",
+      "upvotes": 14,
+      "authors": "Yue Huang, Yanbo Wang, Lichi Li, Yuanyuan Chen, Andreas Haupt, Xiaonan Luo, Zheyuan Liu, Jihye Choi, Felix Juefei-Xu, Xiangliang Zhang, Radha Poovendran, Misha Sra, Ying Liu, Ben Burtenshaw, Thomas Wolf, Alex Pentland, Zichen Chen, Zhangchen Xu",
+      "ai_keywords": [
+        "recursive self-improvement",
+        "autonomous post-training",
+        "human feedback",
+        "agent training"
+      ],
+      "interest_tag": ""
+    }
+  ],
+  "alphaxiv_papers": [
+    {
+      "title": "Work Agents: Systems, Capabilities, and Optimization",
+      "arxiv_id": "2610.35845",
+      "url": "https://arxiv.org/abs/2610.35845",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2610.35845",
+      "tldr": "This paper frames work agents as systems that combine foundation models with runtime harnesses to execute delegated tasks in stateful workspaces and deliver verifiable outcomes. It organizes working conditions along persistence and openness, classifies five forms of digital work, and identifies five capability families spanning model, harness, and joint optimization. Its main value is a shared systems vocabulary for comparing agents by sustained work outcomes rather than isolated prompt-response capability, though it is a perspective paper rather than a new empirical system.",
+      "tldr_zh": "这篇论文把 work agent 定义为 foundation model 与 runtime harness 的组合系统：它们在有状态 workspace 中执行被委派的任务，并交付可验证结果。作者以 persistence 和 openness 描述工作条件，划分五类 digital work，并总结模型、Harness 及联合优化所需的五组核心能力。其主要价值是提供一套系统级共同语言，让 agent 按持续工作结果而非单次问答能力比较；但它属于 perspective paper，并未提出新的实证系统。",
+      "interest_tag": ""
+    },
+    {
+      "title": "How High Can GPT-6 Astra Climb in Contact-Rich Manipulation? PhysLadder: A Hierarchical, Matched Sim-Real Benchmark for Physical Interaction",
+      "arxiv_id": "2610.34527",
+      "url": "https://arxiv.org/abs/2610.34527",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2610.34527",
+      "tldr": "PhysLadder is a matched sim-real benchmark with 16 household manipulation tasks arranged into three cumulative levels: contact selection and alignment, sustained force regulation, and coordinated contact reconfiguration. GPT-6 Astra’s real-world success falls from 80.0% at L1 to 47.6% at L2 and 0% at L3, closely tracking simulation at 66.7%, 47.6%, and 0%. The matched outcomes make simulation promising for repeatable diagnosis, while only three trials per task limit how precisely the reported sim-real agreement can be generalized.",
+      "tldr_zh": "PhysLadder 是一个 matched sim-real benchmark，将 16 个家庭操作任务分成三层累积难度：接触选择与对齐、持续力控制，以及协调接触重构。GPT-6 Astra 的真实环境成功率从 L1 的 80.0% 降到 L2 的 47.6% 和 L3 的 0%，对应模拟环境为 66.7%、47.6% 与 0%。这种一致性支持用 simulation 做可重复诊断，但每项任务仅三次试验，因此不宜过度外推 sim-real agreement 的精度。",
+      "interest_tag": "Benchmark"
+    },
+    {
+      "title": "Profiling a Frontier Agent with EBench: From Direct Control to Harness with Policy",
+      "arxiv_id": "2610.35832",
+      "url": "https://arxiv.org/abs/2610.35832",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2610.35832",
+      "tldr": "This report evaluates GPT-6 Astra on EBench under the same visual and proprioceptive protocol as post-trained VLA and world-action-model policies. Direct control is competitive on short-horizon tasks and stable across generalization axes, but weaker on long-horizon, tabletop, and precision contact-rich manipulation; allowing the harness to invoke a specialized policy raises aggregate success and cuts token cost. The hybrid still misses the per-task upper bound because of poor policy invocation, fixed instructions without subgoals, and grasp disruption when control returns to the agent, turning harness arbitration into a measurable bottleneck.",
+      "tldr_zh": "这份报告在与 post-trained VLA 和 world-action-model policy 相同的视觉、proprioception 协议下，用 EBench 评测 GPT-6 Astra。Direct control 在短程任务上有竞争力，跨泛化维度波动较小，但在长程、桌面和高精度接触操作上较弱；允许 Harness 调用专用 policy 后，总体成功率提高且 token cost 下降。混合系统仍达不到各组件逐任务上界，原因包括 policy invocation 不佳、固定指令缺少 subgoal，以及 agent 恢复控制时破坏抓取，说明 Harness 仲裁本身已成为可量化瓶颈。",
+      "interest_tag": "Benchmark"
+    },
+    {
+      "title": "Behavior Spatial Benchmark: Evaluating Spatial Understanding for Robotics",
+      "arxiv_id": "2610.34051",
+      "url": "https://arxiv.org/abs/2610.34051",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2610.34051",
+      "tldr": "BEHAVIOR-Spatial connects spatial question answering, point grounding, and robot action across 3,256 questions, 1,240 grounding queries, 14 manipulation tasks, and 10 navigation tasks. A baseline reaches 41.6% on held-out configurations but only 16.1% when the requested target changes inside a familiar layout; oracle visual target cues raise the two rates to 60.3% and 38.0%. The gap shows why task completion alone cannot establish instruction following and why VLM perception metrics transfer to VLA behavior only in policy-dependent ways.",
+      "tldr_zh": "BEHAVIOR-Spatial 把 spatial QA、point grounding 和 robot action 连到同一评测中，包含 3,256 个问题、1,240 个 grounding query、14 个 manipulation task 与 10 个 navigation task。基线在 held-out configuration 上达到 41.6%，但在熟悉布局中改变目标指令后仅有 16.1%；提供 oracle visual target cue 后两项分别升至 60.3% 和 38.0%。这一差距说明 task completion 不能单独证明 instruction following，VLM perception 指标能否迁移到 VLA 行为也取决于具体 policy。",
+      "interest_tag": "Benchmark"
+    },
+    {
+      "title": "VibeVideoBench: Evaluating Multimodal Agents on Code-Driven Video Generation",
+      "arxiv_id": "2610.35864",
+      "url": "https://arxiv.org/abs/2610.35864",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2610.35864",
+      "tldr": "VibeVideoBench evaluates code-driven video agents on 239 bilingual tasks across 12 categories, requiring each native harness to deliver a finished MP4 with sound within one hour and without image or video generation models. Evaluation combines delivery checks, roughly 13,000 requirement-traced rubric checks, and task-anchored quality dimensions judged by three VLM panels; the ranking closely matches blind human preference. The strongest system satisfies every core requirement on 76.3% of tasks, but counting missing renders as zero changes rankings, revealing time management and final delivery as capability dimensions rather than mere infrastructure noise.",
+      "tldr_zh": "VibeVideoBench 用 12 类共 239 个中英双语任务评测 code-driven video agent，要求每个系统在原生 Harness 和 sandbox 中、且不使用图像或视频生成模型，于一小时内交付带声音的 MP4。评测结合交付检查、约 13,000 条可追溯到需求的 rubric，以及由三个 VLM panel 判断的逐任务质量维度；系统排名与盲测人类偏好高度一致。最强系统在 76.3% 的任务中满足全部核心要求，但把缺失视频计为零后排名会变化，说明时间管理与最终交付本身就是能力，而非单纯 infra noise。",
+      "interest_tag": "Benchmark"
+    }
+  ],
+  "github_repos": [
+    {
+      "name": "andyhuo520/digital-human-koubo",
+      "url": "https://github.com/andyhuo520/digital-human-koubo",
+      "tldr": "This agent skill turns an authorized portrait and script into a lip-synced talking-head video, then completes captions, audio normalization, and Remotion-based packaging. It splits speech into segments of at most 15 seconds, transcribes and visually checks each clip, unifies separately generated voices, and offers five editing styles plus 48 reusable components. Cost quotation and first-segment approval gates make the workflow unusually concrete about human control, while its dependence on Renoise MCP and local media tools remains a practical constraint.",
+      "tldr_zh": "这个 agent skill 把一张获授权的人像和脚本转成口型同步的数字人口播视频，并继续完成字幕、音频归一化与 Remotion 包装。它把台词切成不超过 15 秒的片段，对每段做转写和画面检查，统一独立生成片段的声音，再套用五种剪辑风格与 48 个复用组件。成本报价和首段验收闸门让 human control 非常具体，但完整流程依赖 Renoise MCP 和本地媒体工具，也构成实际使用门槛。",
+      "stars": 1185,
+      "language": "TypeScript",
+      "interest_tag": ""
+    },
+    {
+      "name": "DenisSergeevitch/ex-ussr-kinship-research",
+      "url": "https://github.com/DenisSergeevitch/ex-ussr-kinship-research",
+      "tldr": "This evidence-first genealogy skill helps agents research family history across the former USSR using church, civil, military, deportation, repression, and archival records. It models historical jurisdiction, multilingual name variants, people and claims in reproducible registers, and source independence so duplicated records cannot masquerade as corroboration. An audit script checks referential integrity and weak evidence before report generation, making provenance and uncertainty part of the deliverable rather than hidden reasoning.",
+      "tldr_zh": "这个 evidence-first genealogy skill 帮助 agent 利用教会、民政、军事、流放、镇压和档案记录研究前苏联地区家族史。它建模历史辖区与多语言姓名变体，用可复现登记表管理人物和主张，并显式记录 source independence，防止同一记录副本被误算成多重印证。审计脚本会在报告生成前检查引用完整性和弱证据，让 provenance 与 uncertainty 成为交付物的一部分，而不是隐藏在推理过程里。",
+      "stars": 1085,
+      "language": "Python",
+      "interest_tag": ""
+    },
+    {
+      "name": "blakeandersonw/ai-app-playbook",
+      "url": "https://github.com/blakeandersonw/ai-app-playbook",
+      "tldr": "AI App Playbook is an opinionated, agent-readable guide that moves from niche validation through backend, auth, AI, clients, payments, analytics, retention, distribution, security, and cost modeling. Each phase includes a concrete completion check, and templates plus AGENTS.md are designed for a coding agent to instantiate the stack directly. Its sharp vendor choices and revenue assumptions make it actionable and shareable, but they are one founder’s playbook rather than neutral or broadly validated recommendations.",
+      "tldr_zh": "AI App Playbook 是一套高度 opinionated、面向 coding agent 的应用创业指南，从 niche validation 一直覆盖 backend、auth、AI、客户端、支付、分析、留存、分发、安全和成本建模。每个阶段都有明确完成条件，配套模板与 AGENTS.md 可让 coding agent 直接搭建推荐技术栈。鲜明的供应商选择和收入假设让它易执行、易传播，但这些结论属于单个创业者的 playbook，并非中立或广泛验证的行业标准。",
+      "stars": 527,
+      "language": "TypeScript",
+      "interest_tag": ""
+    },
+    {
+      "name": "huaxialucaicaizi/ai-startup-skills",
+      "url": "https://github.com/huaxialucaicaizi/ai-startup-skills",
+      "tldr": "This bundle packages seven agent skills for solo AI founders, covering MVP validation, business plans, policy support, pitching, growth, pricing, sales, registration, and compliance. A router infers the founder’s stage, asks at most two questions, and passes outputs such as validation evidence into later sub-skills rather than treating each artifact independently. Official-source and no-fabricated-data rules improve auditability, while policy, registration, and platform-growth guidance is primarily tailored to mainland China.",
+      "tldr_zh": "这个合集为 AI 一人公司打包了七个 agent skills，覆盖 MVP 验证、商业计划、政策支持、路演、增长、定价成交、注册与合规。总入口会判断创业阶段，最多追问两个问题，再把验证证据等产出传给后续子 skill，而不是让每份材料彼此割裂。只引用官方来源和不编造数据的规则提升了可审计性，但政策、注册和平台获客内容主要面向中国大陆。",
+      "stars": 435,
+      "language": "Python",
+      "interest_tag": ""
+    },
+    {
+      "name": "hevnsnt/CVEngine",
+      "url": "https://github.com/hevnsnt/CVEngine",
+      "tldr": "CVEngine is a self-hosted external attack-surface platform that continuously discovers assets, fingerprints services, correlates CVEs, and ranks findings against exploitation intelligence. It integrates bbot, naabu, nmap, Nuclei, CISA KEV, EPSS, and other feeds, while AI performs triage and read-only validation with the exact evidence command retained. REST and MCP expose the same inventory to developer agents, but the project remains a powerful security scanner that should only target systems the operator is authorized to test.",
+      "tldr_zh": "CVEngine 是一个自托管 external attack-surface 平台，可持续发现资产、识别服务、关联 CVE，并结合真实利用情报排序。它整合 bbot、naabu、nmap、Nuclei、CISA KEV、EPSS 等工具和数据源，让 AI 做分诊及只读验证，同时保留精确的证据命令。REST 与 MCP 可把同一资产清单暴露给 developer agent，但它本质上仍是强力安全扫描器，只应测试操作者获授权的系统。",
+      "stars": 426,
+      "language": "Python",
+      "interest_tag": ""
+    }
+  ],
+  "hackernews": [
+    {
+      "title": "OpenShell – A safe, private runtime for fleets of autonomous AI agents",
+      "url": "https://github.com/NVIDIA/OpenShell",
+      "tldr": "NVIDIA’s OpenShell runs autonomous agents in isolated sandboxes and enforces policy on file access, system calls, and outbound network connections at runtime. Credentials are injected only into approved endpoint-bound requests, while formal verification flags risky policy changes before human approval. The combination of kernel-level controls, gateway management, multiple SDKs, and Kubernetes support makes it a substantial runtime project rather than a thin wrapper, though its security guarantees still depend on correct deployment and policy design.",
+      "tldr_zh": "NVIDIA 的 OpenShell 把 autonomous agent 放进隔离 sandbox，并在运行时对文件访问、system call 和出站网络连接执行策略。真实 credential 不直接暴露给 agent，而是在请求命中获批 endpoint 时注入；高风险策略变更还会先经过 formal verification 和人工审批。Kernel-level control、gateway、多个 SDK 与 Kubernetes 支持使它更像完整 runtime 而非薄封装，但安全保证仍依赖正确部署与 policy design。",
+      "points": 507,
+      "num_comments": 218,
+      "interest_tag": ""
+    },
+    {
+      "title": "Show HN: Omnara – Open-source alternative to Claude Managed Agents",
+      "url": "https://github.com/omnara-ai/omnara",
+      "tldr": "Omnara is an open-source platform for durable managed agents that can run across models, machines, users, and triggers such as Slack, GitHub, or schedules. The same API, CLI, SDK, and agent configuration work in self-hosted and cloud deployments, with machine pools, secrets, skills, cron triggers, and examples for coding, SRE, browser, analytics, and media tasks. Its appeal is operational portability beyond a single provider, but adopters still inherit the complexity of sandbox provisioning, model adapters, observability, and long-running lifecycle management.",
+      "tldr_zh": "Omnara 是一个开源 durable managed-agent 平台，可跨模型、机器、用户运行，并由 Slack、GitHub 或 schedule 等入口触发。自托管与 cloud deployment 共用 API、CLI、SDK 和 agent configuration，同时提供 machine pool、secret、skill、cron trigger，以及 coding、SRE、browser、analytics 和媒体任务示例。它的吸引力在于摆脱单一 provider 的运行时锁定，但使用者仍需承担 sandbox provisioning、模型适配、可观测性和长任务生命周期管理的复杂度。",
+      "points": 114,
+      "num_comments": 34,
+      "interest_tag": ""
+    },
+    {
+      "title": "AI agent fixed the bug, but what else did it change?",
+      "url": "https://blog.trailofbits.com/2026/10/21/your-ai-agent-fixed-the-bug-but-what-else-did-it-change/",
+      "tldr": "Trail of Bits releases patching-bugs and regression-hunt plugins distilled from thousands of Codex sessions and more than 130 merged security patches, 21 of which were later confirmed to contain regressions. The workflow requires strict schemas, live proof-of-concept execution, fresh-context replay, adjudication, and a three-arm proof where original code fails, patched code passes, and a full revert fails again. Regression-hunt produces 25% fewer false positives than a baseline review prompt, but some known regressions remain borderline, exposing a real precision–recall trade-off rather than claiming complete automation.",
+      "tldr_zh": "Trail of Bits 发布 patching-bugs 与 regression-hunt plugins，其规则来自数千次 Codex session 和 130 多个已合并安全补丁；复查后其中 21 个被确认引入 regression。流程要求严格输入输出 schema、live proof-of-concept、fresh-context replay、独立 adjudication，以及原版失败、修复版通过、完整 revert 再失败的 three-arm proof。Regression-hunt 相比基础 review prompt 减少 25% false positive，但一些已知回归仍被判为 borderline，诚实暴露了 precision–recall trade-off，而不是宣称全自动解决。",
+      "points": 54,
+      "num_comments": 6,
+      "interest_tag": ""
+    },
+    {
+      "title": "Making My Blog Readable by AI Agents",
+      "url": "https://deallocatedobjects.com/posts/making-my-blog-readable-by-ai-agents",
+      "tldr": "The author makes a static blog agent-readable by serving markdown versions of every post, negotiating `text/markdown` on canonical URLs, and publishing `llms.txt`, `llms-full.txt`, JSON Feed metadata, and explicit crawler signals. Correct cache and search behavior comes from `Vary: Accept`, canonical links, and `X-Robots-Tag: noindex` on alternate markdown copies. The post is notable because the implementation is mostly build-time files and small nginx rules, turning agent discoverability from a framework product into a low-cost publishing pattern.",
+      "tldr_zh": "作者通过为每篇文章提供 Markdown 版本、在 canonical URL 上协商 `text/markdown`，以及发布 `llms.txt`、`llms-full.txt`、JSON Feed metadata 和明确 crawler signal，让静态博客更适合 agent 读取。`Vary: Accept`、canonical link 和 Markdown 副本上的 `X-Robots-Tag: noindex` 共同避免缓存错配与重复索引。值得关注的是，实现主要由 build-time 文件和少量 nginx 规则组成，把 agent discoverability 从复杂框架产品降成了低成本发布模式。",
+      "points": 36,
+      "num_comments": 10,
+      "interest_tag": ""
+    },
+    {
+      "title": "We let our cloud agents query prod (with OIDC, not secrets)",
+      "url": "https://www.formal.ai/blog/cloud-agents-oidc-infrastructure/",
+      "tldr": "Formal models each cloud-agent run as a short-lived OIDC workload identity instead of distributing reusable production credentials. Policies can bind access to the agent session, repository, initiating human, requested database, and approval window; a connector then injects downstream credentials while preserving logs and identity claims. The pattern enables read-only production analytics and broader development access with human approval, reframing agent access as temporary delegation rather than another permanent machine account.",
+      "tldr_zh": "Formal 把每次 cloud-agent run 建模成短期 OIDC workload identity，而不是向 agent 分发可重复使用的生产 credential。策略可绑定 agent session、repository、发起人、目标数据库和审批时间窗，再由 connector 注入下游 credential，同时保留日志与身份 claim。该模式让 agent 在人工批准下获得只读生产分析权限，并在开发环境中拥有更宽能力，把 agent access 从永久 machine account 重构成 temporary delegation。",
+      "points": 18,
+      "num_comments": 13,
+      "interest_tag": ""
+    }
+  ]
+}
