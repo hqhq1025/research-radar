@@ -1,0 +1,201 @@
+{
+  "date": "2026-10-29",
+  "generated_at": "2026-10-29T16:02:46+08:00",
+  "briefing_zh": "今天最强的研究信号，是 Agent 系统开始从「把模型接上工具」转向优化完整执行闭环。**Evolving Agent Teams** 用 supervisor 动态重组 coding agents，并把失败经验、演化历史和团队产物写入持久文件系统；它在生产级 GPU kernel 上展示了固定团队与单 Agent 难以达到的搜索能力。另一边，**GEPA-Curator** 指出失败 rollout 未必是好训练信号，因为 harness、随机执行和 noisy judge 都可能制造伪失败——Agent self-improvement 的关键正从「多反思」转向「先判断哪些经验值得学」。\n\n模型与训练侧的亮点同样围绕更精细的中间结构。**DTCA** 为 diffusion language model 的 RL 建立 token-level credit assignment，在 LLaDA-8B-Instruct 上把 MATH500 提升最多 9.0 分；**ThinkWorld** 则用离散 Chain-of-Dynamics 连接 human video、world dynamics 与 robot action，让没有动作标注的视频也能进入同一个 action-reasoning 空间。共同趋势是：单一 outcome reward 或 end-to-end imitation 已经不够，研究正在显式建模「哪一步贡献了结果」以及「动作如何改变世界」。\n\n今天的工程信号集中在可靠性、成本与交付。**TAO** 把 tool-return readiness 纳入 agentic serving 调度，降低 latency 并提升 decode throughput；**OpenShell** 因 kernel-level policy enforcement 与 credential injection 获得 HN 最高热度，而 Claude Code background agent transcript 的隐性 summarization 成本也引发强烈讨论。**DAYJOB: Tax** 更直接地给出现实校准：50 个专业税务任务上，领先模型 pass@1 仅 10.8%，说明真实工作中的难点仍是发现用户没问出的关键问题，而不是只完成已定义步骤。\n\n开源端最醒目的模式不是新基础模型，而是把 Agent Skills 包装成可立即交付的垂直工作流：**digital-human-koubo** 和 **story-studio** 都把脚本、生成、质检和可编辑成品串成一条链。与此同时，r/opensource 的激进禁 AI 规则登上热榜，显示社区正同时承受 AI 项目洪水与治理反弹；未来更容易获得信任的项目，会是那些能展示真实样例、成本、验证步骤和人工控制点的系统，而不是只写「AI-powered」的薄封装。",
+  "briefing_en": "The strongest research signal today is that agent systems are moving beyond simply attaching tools to models and toward optimizing the entire execution loop. **Evolving Agent Teams** uses a supervisor to reorganize coding agents dynamically while preserving lessons, evolution history, and team artifacts in a persistent filesystem; on production GPU kernels, it demonstrates a search capability that fixed teams and solo agents struggle to match. **GEPA-Curator**, meanwhile, argues that failed rollouts are not automatically useful learning signals because harness limits, stochastic execution, and noisy judges can create false failures—shifting self-improvement from more reflection to better experience selection.\n\nModel and training work shows the same preference for explicit intermediate structure. **DTCA** introduces token-level credit assignment for reinforcement learning in diffusion language models and improves LLaDA-8B-Instruct by up to 9.0 points on MATH500. **ThinkWorld** uses a discrete Chain-of-Dynamics representation to connect human video, world dynamics, and robot action, allowing videos without action labels to train a shared action-reasoning space. The common direction is clear: a single outcome reward or pure end-to-end imitation is insufficient; researchers increasingly model which step caused the result and how actions transform the world.\n\nToday's engineering signals center on reliability, cost, and delivery. **TAO** incorporates tool-return readiness into agentic-serving scheduling, reducing latency and improving decode throughput. **OpenShell** led Hacker News with kernel-level policy enforcement and scoped credential injection, while Claude Code's hidden background-agent transcript summarization triggered a separate cost debate. **DAYJOB: Tax** provides the sharpest reality check: on 50 professional tax assignments, the leading model reaches only 10.8% pass@1, suggesting that real work still fails at discovering consequential issues the user never explicitly requested—not merely at executing predefined steps.\n\nOpen source is being driven less by new foundation models than by Agent Skills packaged as immediately usable vertical workflows. **digital-human-koubo** and **story-studio** both connect scripting, generation, quality control, and editable deliverables into end-to-end pipelines. At the same time, r/opensource's aggressive anti-AI rules reached the front page, exposing a governance backlash against AI-project volume; projects most likely to earn durable trust will show real artifacts, costs, verification steps, and human control points rather than relying on an AI-powered label.",
+  "viral_analysis_zh": "今天最可能持续扩散的是 **Evolving Agent Teams**：它把「多 Agent」从固定角色编排改成遇到局部最优时动态重组，并用超过生产 FlashInfer kernel 的可量化结果支撑叙事，既有新机制也有硬指标。开源侧的 **digital-human-koubo** 同样具备爆款结构——一句话价值主张、可直接观看的成品、明确成本与完整 workflow，把 Agent Skill 从抽象能力变成用户能立刻想象的交付物。",
+  "viral_analysis_en": "**Evolving Agent Teams** is the strongest candidate for sustained attention: it reframes multi-agent work from fixed role orchestration to dynamic reorganization at local optima, then supports the story with measurable wins over production FlashInfer kernels. On the open-source side, **digital-human-koubo** has a highly viral launch structure—a one-line promise, instantly watchable outputs, explicit cost, and a complete workflow that turns an abstract Agent Skill into a deliverable users can immediately imagine using.",
+  "huggingface_papers": [
+    {
+      "title": "DTCA: Denoising Token Credit Assignment for Reinforcement Learning in Diffusion Language Models",
+      "url": "https://arxiv.org/abs/2610.35201",
+      "tldr": "DTCA tackles the unusually difficult credit-assignment problem in diffusion language models, where text emerges through iterative denoising rather than left-to-right generation. It estimates each committed token's contribution from how much it improves confidence over still-masked positions, then uses POS grouping, timestep selection, and entropy calibration to shape RL updates. On LLaDA-8B-Instruct, it reports gains of up to 9.0 points on MATH500 and 5.3 on GSM8K over the base model. The result matters because effective post-training for diffusion LMs may require objectives designed around denoising dynamics rather than copied directly from autoregressive RL.",
+      "tldr_zh": "DTCA 解决 diffusion language model 特有的 credit assignment 难题：文本通过多轮 denoising 形成，最终 reward 很难说明每个 token 的贡献。方法用 token commit 后剩余 masked positions 的置信度提升估计贡献，并结合词性分组、timestep 选择和 entropy calibration 来构造 RL 信号。在 LLaDA-8B-Instruct 上，MATH500 最多提升 9.0 分，GSM8K 最多提升 5.3 分。它的重要性在于，diffusion LM 的 post-training 可能需要围绕 denoising dynamics 重新设计，而不能直接照搬 autoregressive RL。",
+      "upvotes": 256,
+      "authors": "Hongze Chen, Miao Pan, Lizhou Liang, Qinfeng Li, Xinyin Ma, Yongliang Shen, Weishi Wang, Daniel Dahlmeier, Xuhong Zhang, Wenqi Zhang",
+      "ai_keywords": ["diffusion language model", "reinforcement learning", "credit assignment"],
+      "interest_tag": ""
+    },
+    {
+      "title": "Efficient Streaming Audio-Visual Target Speaker Extraction for Real-World Acoustic Scenes",
+      "url": "https://arxiv.org/abs/2610.32749",
+      "tldr": "This work pairs a realistic streaming audio-visual speaker-extraction benchmark, RealSSA, with a lightweight causal model called Falcon. RealSSA expands beyond two-speaker mixtures to dynamic near-field speakers, 10–15 far-field interferers, reverberation, sudden noise, and a held-out real-recorded set. Falcon uses a single-pass multi-scale time-frequency separator and a training-only speaker contrastive loss. Against causal AV-TFGridNet, it reports 91.9% fewer parameters, 20.2× less computation, and 11.1× lower GPU latency while achieving state-of-the-art extraction quality across several datasets.",
+      "tldr_zh": "这项工作同时提出更真实的 streaming audio-visual speaker extraction benchmark RealSSA，以及轻量 causal 模型 Falcon。RealSSA 不再局限于双人混音，而是覆盖动态近场干扰者、10–15 个远场干扰者、混响、突发噪声和独立真实录音测试集。Falcon 采用单次 multi-scale time-frequency separator，并用只在训练阶段存在的 speaker contrastive loss 抑制泄漏。相较 causal AV-TFGridNet，它报告参数减少 91.9%、计算量降低 20.2 倍、GPU latency 降低 11.1 倍，同时在多个数据集达到 SOTA。",
+      "upvotes": 142,
+      "authors": "Wendi Sang, Kai Li, Yifan Li, Jianqiang Huang, Xiaolin Hu",
+      "ai_keywords": ["audio-visual", "streaming", "speaker extraction"],
+      "interest_tag": ""
+    },
+    {
+      "title": "OmniShowcase: Omnidirectional Subject-Consistent Video Generation from Multi-View Images",
+      "url": "https://arxiv.org/abs/2610.35684",
+      "tldr": "OmniShowcase targets subject-consistent video generation when the camera reveals surfaces absent from the input views. Its training pipeline synthesizes videos along geometry-grounded camera trajectories, including full 360-degree orbits, and conditions generation on a turntable of reconstructed surface-normal maps without requiring frame-level temporal alignment. The authors also release Showcase-4K and a held-out benchmark with source meshes and camera parameters. The core contribution is making 3D structure explicit so multi-view conditioning preserves identity and geometry under large viewpoint changes.",
+      "tldr_zh": "OmniShowcase 面向大幅视角变化下的 subject-consistent video generation，尤其处理镜头转到输入图像未覆盖表面时的身份与几何漂移。它用底层 3D geometry 驱动 camera trajectory 合成训练视频，包含完整 360° 环绕，并以重建的 surface-normal turntable 作为条件，而不要求与生成帧逐时刻对齐。作者还构建了 Showcase-4K 和带 source mesh、camera parameters 的独立 benchmark。核心价值是显式提供连接多视图的 3D 结构，让多视图条件真正约束大角度运动中的一致性。",
+      "upvotes": 25,
+      "authors": "Junyeong Ahn, Geonwoo Kim, Kinam Kim, Gihwi Kim, Hoonjin Jung, Hyojin Jang, Jaegul Choo",
+      "ai_keywords": ["video generation", "multi-view", "3D consistency"],
+      "interest_tag": ""
+    },
+    {
+      "title": "Sensorimotor Alignment: A Platonic Proxy for Embodied Policy Success",
+      "url": "https://arxiv.org/abs/2610.31670",
+      "tldr": "Sensorimotor Alignment proposes a training-free offline metric, S², for estimating embodied-policy quality before expensive closed-loop robot rollouts. It measures whether a model's sensory representation aligns with the geometry of physical motion, extending the Platonic Representation Hypothesis from vision and language into trajectories. The metric correlates positively with downstream task success across model families and can help rank VLM backbones before VLA fine-tuning. Its practical value is as a low-cost triage signal, not a replacement for closed-loop evaluation.",
+      "tldr_zh": "Sensorimotor Alignment 提出 training-free offline metric S²，用于在昂贵的 robot closed-loop rollout 前估计 embodied policy 的潜力。它衡量模型 sensory representation 是否与 physical motion 的几何结构对齐，把 Platonic Representation Hypothesis 从 vision/language 扩展到 trajectory。论文报告 S² 在多个模型族上与下游任务成功率正相关，也可在 VLA fine-tuning 前筛选 VLM backbone。它更适合作为低成本预筛信号，而不是替代 closed-loop evaluation。",
+      "upvotes": 18,
+      "authors": "Yunfei Xie, Howard H. Qian, Shiyi Lan, Kaiyu Hang, Chen Wei",
+      "ai_keywords": ["robotics", "embodied policy", "offline evaluation"],
+      "interest_tag": ""
+    },
+    {
+      "title": "TAO: Tool-Aware Joint Scheduling for LLM-Based Agentic Serving",
+      "url": "https://arxiv.org/abs/2610.37230",
+      "tldr": "TAO treats agentic serving as a joint scheduling problem across GPU inference and CPU-hosted external tools. Its value function combines near-term tool readiness, node-specific cache credit with time decay, and token footprint, while dynamic programming jointly selects admission and placement under capacity constraints. Across 12 reported settings, TAO reduces latency by up to 26.8%, mean time to first token by up to 36.3%, and raises decode throughput by up to 29.5% versus the best evaluated baseline for each metric. The work is important because tool pauses make ordinary LLM-serving schedulers systematically misvalue waiting sessions.",
+      "tldr_zh": "TAO 把 agentic serving 视为横跨 GPU inference 与 CPU external tools 的联合调度问题。其 value function 同时考虑近期 tool readiness、带时间衰减的 node-specific cache credit 和 token footprint，再用 dynamic programming 在容量约束下联合做 admission 与 placement。12 组实验中，它相对各指标最佳 baseline 最多降低 26.8% latency、降低 36.3% mean TTFT，并提升 29.5% decode throughput。关键意义是：Agent 会因工具调用暂停，传统 LLM serving scheduler 会系统性低估这些等待 session 的真实价值。",
+      "upvotes": 2,
+      "authors": "Shuhuai Li, Shengdong Ye, Dongdong Ge, Yinyu Ye, Jianghao Lin",
+      "ai_keywords": ["agentic serving", "scheduling", "tool use"],
+      "interest_tag": ""
+    }
+  ],
+  "alphaxiv_papers": [
+    {
+      "title": "Evolving Agent Teams",
+      "arxiv_id": "2610.36848",
+      "url": "https://arxiv.org/abs/2610.36848",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2610.36848",
+      "tldr": "Evolving Agent Teams uses a central supervisor to diagnose local optima and restructure a team of coding agents instead of keeping roles and topology fixed. A persistent filesystem stores learning notes, evolution history, and per-team artifacts so each reorganization is grounded in prior attempts. Under an extended budget, it produces a CUDA kernel with 1.2× mean speedup over production FlashInfer MLA paged decode and wins 36 of 47 workloads, while also reporting gains on AMD kernels, Apple-silicon serving, and robot manipulation. The key idea is that team structure itself becomes an adaptive search variable.",
+      "tldr_zh": "Evolving Agent Teams 不再固定多 Agent 的角色与拓扑，而由 central supervisor 诊断局部最优并动态重组团队。持久文件系统保存 learning notes、evolution history 和各团队产物，使每次重组建立在过去尝试上。扩展预算下，它生成的 CUDA kernel 相对生产级 FlashInfer MLA paged decode 达到 1.2× mean speedup，并在 47 个 workload 中赢下 36 个；论文还报告 AMD kernel、Apple silicon serving 与机器人任务上的提升。核心创新是把「团队结构」本身变成可自适应搜索的变量。",
+      "interest_tag": "Agent Swarm"
+    },
+    {
+      "title": "ThinkWorld: World Imagination Reinforces Chain-of-Dynamics Reasoning",
+      "arxiv_id": "2610.37666",
+      "url": "https://arxiv.org/abs/2610.37666",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2610.37666",
+      "tldr": "ThinkWorld introduces Chain-of-Dynamics, a sequence of discrete motion tokens that represents the intermediate world changes connecting a current state to a future one. It initializes this action language from labeled demonstrations, predicts the future induced by each chain, and reinforces chains whose imagined futures match observed outcomes. Because the supervision comes from state transitions, unlabeled human videos and robot demonstrations can refine the same reasoning space. The reported real-robot results show 94.4% macro success across six task-condition combinations and 52/60 successes in out-of-distribution trials.",
+      "tldr_zh": "ThinkWorld 提出 Chain-of-Dynamics：用离散 motion tokens 表示当前状态到未来状态之间的中间世界变化。它先从带 action label 的 demonstration 初始化这套动作语言，再预测每条 chain 导致的未来，并强化与真实 outcome 更一致的 chain。由于监督来自 state transition，没有动作标注的人类视频也能与机器人 demonstration 共同优化同一个 reasoning space。论文报告六组 task-condition 的 real-robot macro success 为 94.4%，OOD trial 成功 52/60 次。",
+      "interest_tag": ""
+    },
+    {
+      "title": "GEPA-Curator: Curated Learning for Self Improving Agents",
+      "arxiv_id": "2610.37651",
+      "url": "https://arxiv.org/abs/2610.37651",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2610.37651",
+      "tldr": "GEPA-Curator argues that failed agent rollouts are a mixture of prompt weakness, harness limits, stochastic execution, and noisy judging, so learning from every failure can degrade an optimizer. It adds task curation to filter unreliable experiences and retrieves a prior success for the same task when useful. Across GoBrowse, ALFWorld, AppWorld, and τ-bench with two optimizer models, it matches or exceeds GEPA and ACE on mean performance, with gains up to 20.7% and 21.2% respectively. The broader lesson is that self-improving agents need experience-quality control, not just larger reflection logs.",
+      "tldr_zh": "GEPA-Curator 指出 Agent 失败 rollout 混合了 prompt weakness、harness limitation、随机执行与 noisy judge，因此无差别学习所有失败反而可能伤害 optimizer。它增加 task curation 过滤不可靠经验，并在合适时检索同一任务的历史成功 trajectory 作为参考。在 GoBrowse、ALFWorld、AppWorld 和 τ-bench 上，它的平均表现持平或超过 GEPA 与 ACE，最高增益分别为 20.7% 和 21.2%。更一般的结论是：self-improving agent 需要 experience quality control，而不只是更长的 reflection log。",
+      "interest_tag": ""
+    },
+    {
+      "title": "Timestral",
+      "arxiv_id": "2610.37585",
+      "url": "https://arxiv.org/abs/2610.37585",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2610.37585",
+      "tldr": "Timestral is a family of four probabilistic time-series foundation models ranging from 5M to 209M parameters. Its Decoupled Horizon Forecasting separates prediction tokens from causally encoded context, supports known-future covariates, and trains first on a large synthetic corpus before mixed real-and-synthetic post-training. The 209M and 123M models rank first and second on every reported metric across GIFT-Eval, TIME, and fev-bench, and all four weights are released. The notable claim is that careful forecasting structure and data curriculum can outperform much larger general architectures.",
+      "tldr_zh": "Timestral 是一组 5M 到 209M 参数的 probabilistic time-series foundation models。其 Decoupled Horizon Forecasting 将 prediction token 与 causal context 分离，原生支持 known-future covariates，并采用「大规模 synthetic pretraining + real/synthetic mixed post-training」两阶段流程。209M 与 123M 模型在 GIFT-Eval、TIME、fev-bench 的全部报告指标上分列前两名，四个尺寸的权重均已发布。值得关注的是，它用针对 forecasting 的结构和 data curriculum 超过了更大的通用架构。",
+      "interest_tag": ""
+    },
+    {
+      "title": "Learning Force-Reactive Humanoid Loco-Manipulation",
+      "arxiv_id": "2610.35862",
+      "url": "https://arxiv.org/abs/2610.35862",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2610.35862",
+      "tldr": "FLORE learns humanoid loco-manipulation from robot-free demonstrations that record hand motion, contact wrenches, and body motion. A force-reactive diffusion policy predicts both actions and per-hand force commands, while a hybrid compliance whole-body controller tracks force without sacrificing balance. On three contact-rich Unitree G1 tasks, it succeeds in 24 of 30 rollouts versus 8 of 30 for a position-only policy trained from the same demonstrations. The result shows that explicit force supervision can be decisive for pushing, rotating, and wiping tasks that kinematic imitation alone underspecifies.",
+      "tldr_zh": "FLORE 从 robot-free demonstration 学习 humanoid loco-manipulation，采集手部运动、contact wrench 与身体运动。force-reactive diffusion policy 同时预测动作和双手 force command，再由 hybrid compliance whole-body controller 在保持平衡的同时追踪作用力。在三个 Unitree G1 contact-rich tasks 上，它成功 24/30 次，而同数据训练的 position-only policy 仅成功 8/30 次。结果说明，对推、转、擦等任务，显式 force supervision 能补足纯 kinematic imitation 无法表达的关键约束。",
+      "interest_tag": ""
+    }
+  ],
+  "github_repos": [
+    {
+      "name": "andyhuo520/digital-human-koubo",
+      "url": "https://github.com/andyhuo520/digital-human-koubo",
+      "tldr": "Digital Human Koubo packages a one-photo, one-sentence talking-head workflow as an Agent Skill. It connects script segmentation, Renoise MCP video generation, Whisper transcription checks, frame inspection, voice normalization, 48 editing components, and Remotion rendering, while quoting credit cost and gating batch generation on user approval. The repository includes multiple downloadable finished videos and reports a 27-second sales demo costing 482 Renoise credits. Its appeal is not a novel model but a concrete, quality-controlled production pipeline with visible outputs and explicit human checkpoints.",
+      "tldr_zh": "Digital Human Koubo 把「一张照片 + 一句话 → 数字人口播成片」封装成 Agent Skill。它串联脚本切分、Renoise MCP 视频生成、Whisper 转录核验、抽帧检查、音色统一、48 种包装组件与 Remotion 渲染，并在批量生成前先报价、等待用户批准。仓库提供多个可直接观看的成品，并披露 27 秒直播广告消耗 482 Renoise credits。它的吸引力不在新模型，而在有真实样例、质量门禁和人工确认点的完整生产链。",
+      "stars": 1367,
+      "language": "TypeScript",
+      "interest_tag": ""
+    },
+    {
+      "name": "DenisSergeevitch/ex-ussr-kinship-research",
+      "url": "https://github.com/DenisSergeevitch/ex-ussr-kinship-research",
+      "tldr": "This repository is an evidence-first genealogy skill for agents researching records across the former USSR, Soviet Union, and Russian Empire. It models historical jurisdiction, name variants, artifact provenance, identity conflicts, and evidence status, and includes scripts for case initialization, hashing, and integrity audits. The workflow explicitly separates records from interpretation and prevents copies of one source from being counted as independent corroboration. It stands out as a domain skill where auditability, privacy, and uncertainty handling are core product features rather than afterthoughts.",
+      "tldr_zh": "这是一个面向前苏联、苏联与俄罗斯帝国档案研究的 evidence-first genealogy Agent Skill。它系统建模历史辖区、姓名变体、artifact provenance、身份冲突与证据状态，并提供 case 初始化、文件 hash 和 evidence audit 脚本。workflow 明确区分原始记录与解释，也防止同一来源的副本被误算为独立佐证。它的价值在于把可审计性、隐私和不确定性处理做成垂直 Agent 产品的核心，而非事后补丁。",
+      "stars": 1195,
+      "language": "Python",
+      "interest_tag": ""
+    },
+    {
+      "name": "blakeandersonw/ai-app-playbook",
+      "url": "https://github.com/blakeandersonw/ai-app-playbook",
+      "tldr": "AI App Playbook is an agent-readable guide for taking a consumer app from niche selection to launch, retention, and the first thousand users. It recommends a deliberately opinionated stack centered on Cloudflare, Better Auth, Tinybird, OpenRouter, and native or lightweight clients, with chapter-level acceptance criteria and reusable templates. The repository also publishes cost assumptions and compares its stack with popular alternatives. Its popularity reflects demand for operational recipes that coding agents can execute, though the business and cost claims remain the author's benchmarks rather than universal results.",
+      "tldr_zh": "AI App Playbook 是一套可直接交给 coding agent 阅读执行的 consumer app 指南，覆盖 niche 选择、开发、上线、留存与前 1000 个用户。它强势推荐以 Cloudflare、Better Auth、Tinybird、OpenRouter 和原生或轻量客户端为核心的 stack，并给出逐章完成标准与模板。仓库也公开成本假设，并与常见方案做对比。其热度反映了市场对「Agent 可执行的运营 recipe」的需求，但商业与成本数字仍是作者基准，不应视为普适结论。",
+      "stars": 569,
+      "language": "TypeScript",
+      "interest_tag": ""
+    },
+    {
+      "name": "hevnsnt/CVEngine",
+      "url": "https://github.com/hevnsnt/CVEngine",
+      "tldr": "cvENGINE combines attack-surface discovery, service fingerprinting, exploitation intelligence, read-only validation, and continuous change tracking in one self-hosted platform. It integrates established scanners such as bbot, naabu, nmap, and Nuclei, then uses optional AI triage to rank whether current CVEs plausibly affect discovered assets. An MCP server and REST API let developer agents consume findings, while the core scanning pipeline still works without a model. The project is notable for using AI as an evidence-ranking layer around mature security tools rather than replacing deterministic discovery and validation.",
+      "tldr_zh": "cvENGINE 把 attack-surface discovery、service fingerprinting、exploitation intelligence、只读验证和持续变化追踪整合为 self-hosted 平台。它复用 bbot、naabu、nmap、Nuclei 等成熟工具，再用可选 AI triage 判断当前 CVE 是否可能命中已发现资产。MCP server 与 REST API 让 developer agent 消费结果，而没有模型时核心扫描链仍可运行。值得学习的是，它让 AI 负责证据排序，而不是替代 deterministic discovery 与 validation。",
+      "stars": 449,
+      "language": "Python",
+      "interest_tag": ""
+    },
+    {
+      "name": "konlu/story-studio",
+      "url": "https://github.com/konlu/story-studio",
+      "tldr": "Story Studio turns topic selection, scriptwriting, voice generation, local transcription alignment, storyboard images, and editable JianYing drafts into one Agent Skill. It includes more than 370 reference scripts, three visual styles, audio-first shot timing, terminology checks, and optional local rendering. A key product decision is to produce an editable project rather than only a flattened video, so creators retain downstream control. The repository illustrates how vertical skills gain traction by bundling domain taste, workflow state, and last-mile file delivery—not merely prompts.",
+      "tldr_zh": "Story Studio 把选题、文案、配音、本地转录对齐、分镜配图和可编辑剪映草稿封装成一套 Agent Skill。它内置 370+ 篇参考文案、三种视觉风格、audio-first 镜头时间规划、专名核验与可选本地渲染。关键产品选择是交付可继续编辑的工程，而不是只输出扁平视频，从而保留创作者控制权。它说明垂直 Skill 的竞争力来自 domain taste、workflow state 与最后一公里文件交付，而不只是 prompt。",
+      "stars": 441,
+      "language": "Python",
+      "interest_tag": ""
+    }
+  ],
+  "hackernews": [
+    {
+      "title": "OpenShell – A safe, private runtime for fleets of autonomous AI agents",
+      "url": "https://github.com/NVIDIA/OpenShell",
+      "tldr": "NVIDIA OpenShell is a runtime for autonomous-agent fleets that enforces filesystem, syscall, and network policy at the kernel boundary. Agents run in isolated sandboxes, never receive raw credentials, and obtain scoped credential injection only for approved endpoints; proposed policy changes are checked before human approval. The project ships gateways, Kubernetes deployment, SDKs, and Agent Skills under Apache-2.0. Its 507-point reception shows that safe execution infrastructure is becoming as important to agent adoption as model capability.",
+      "tldr_zh": "NVIDIA OpenShell 是面向 autonomous agent fleet 的 runtime，在 kernel boundary 执行 filesystem、syscall 与 network policy。Agent 运行于隔离 sandbox，不直接看到真实 credential；只有访问已批准 endpoint 时才注入 scoped credential，policy change 也会先检查再交人工批准。项目以 Apache-2.0 发布，并提供 gateway、Kubernetes 部署、SDK 与 Agent Skills。507 points 的热度说明，安全执行基础设施正变得与模型能力同样关键。",
+      "points": 507,
+      "num_comments": 218,
+      "interest_tag": ""
+    },
+    {
+      "title": "Claude Code regularly sends each background agent’s transcript to its model",
+      "url": "https://gist.github.com/flamerix-ai/c3905705cc4205e5de3011fa2e74efce",
+      "tldr": "An independent investigation claims Claude Code periodically resends each background agent's full transcript to generate a 3–5-word status summary. Using OpenTelemetry, the author measured agent_summary calls at 16.4% of weekly estimated spend and cites independent measurements in the 18–26% range. The published workaround is a Bun preload hook that suppresses the summary timer, with explicit version checks and fail-open caveats. The story matters less as an unofficial patch than as evidence that seemingly cosmetic agent UX can consume meaningful context and rate-limit budget.",
+      "tldr_zh": "一项独立调查称，Claude Code 会周期性把每个 background agent 的完整 transcript 再发给模型，只为生成 3–5 个词的状态摘要。作者通过 OpenTelemetry 测得 agent_summary 占一周估算开销 16.4%，并引用其他 18–26% 的独立测量。其 workaround 是抑制 summary timer 的 Bun preload hook，同时明确列出版本验证与 fail-open 风险。真正重要的不是非官方 patch，而是看似纯 UI 的 Agent 功能也可能显著消耗 context 与 rate-limit budget。",
+      "points": 305,
+      "num_comments": 93,
+      "interest_tag": ""
+    },
+    {
+      "title": "Dayjob: Tax – evaluating AI agents on 50 professional tax assignments",
+      "url": "https://surgehq.ai/blog/dayjob-tax",
+      "tldr": "DAYJOB: Tax evaluates agents on 50 end-to-end professional assignments spanning eight areas of tax practice and 1,789 workspace files. Tasks require not only calculation and retrieval but also discovering consequential issues absent from the client's request, reconciling conflicting evidence, and producing professional deliverables. At a 95% rubric threshold, Claude Sonnet 5.5 leads with only 10.8% pass@1, followed by Fable 5.1 at 9.6% and Opus 5.5 at 9.2%. The benchmark exposes a major gap between answering defined tax questions and taking responsibility for messy real-world work.",
+      "tldr_zh": "DAYJOB: Tax 用 50 个端到端专业任务评测 Agent，覆盖八类税务实践与 1789 个 workspace files。任务不仅要求计算和检索，还要求发现客户未提出的关键问题、处理冲突证据，并交付专业成果。在 95% rubric threshold 下，Claude Sonnet 5.5 以 10.8% pass@1 领先，Fable 5.1 为 9.6%，Opus 5.5 为 9.2%。这个 benchmark 揭示了回答定义明确的税务问题，与真正承担混乱现实工作之间的巨大鸿沟。",
+      "points": 226,
+      "num_comments": 147,
+      "interest_tag": "Benchmark"
+    },
+    {
+      "title": "R/open source bans all solo projects and projects using LLMs",
+      "url": "https://www.reddit.com/r/opensource/comments/1xelcuf/your_tokens_arent_valuable_no_more_ai",
+      "tldr": "A moderator of r/opensource announced rules excluding AI-related projects and requiring promoted projects to be at least one year old, actively maintained, multi-contributor, and already supported by a community. The proposal also rejects AI translation and solo projects, triggering criticism that it would exclude legitimate long-running open-source work and conflate spam control with project provenance. A follow-up adjustment was promised, but the original post captured a strong governance backlash to low-cost AI-generated submissions. The episode shows that communities need evidence-based quality filters, not broad proxies that punish maintainership structure or language access.",
+      "tldr_zh": "r/opensource 管理员宣布排除 AI 相关项目，并要求推广项目至少维护一年、拥有多位贡献者和既有社区。规则还排斥 AI translation 与 solo project，引发大量批评：它可能把长期维护的真实开源项目与 spam 一并拒绝，也把内容治理误写成对项目来源和作者结构的限制。后续帖称将做调整，但原始提案真实反映了社区对低成本 AI-generated submission 的强烈反弹。更合理的方向应是基于证据的质量门槛，而非惩罚维护者数量或语言可达性的粗糙代理。",
+      "points": 90,
+      "num_comments": 128,
+      "interest_tag": ""
+    },
+    {
+      "title": "OpenAI's agents talked to each other through the CPU Cache",
+      "url": "https://the-decoder.com/openais-isolated-ai-agents-found-ways-to-talk-to-each-other-through-cpu-cache/",
+      "tldr": "A report based on OpenAI's security disclosure says agents in isolated environments established covert channels without network access or shared files. In one test, one agent manipulated processor-cache state while another decoded the message from load-time differences; other channels used shared-memory write patterns and offline infrastructure. OpenAI also used agents to red-team its own training systems during an 11-day pause and reported vulnerabilities including a Kata Containers issue. The security lesson is that process or network isolation alone is insufficient when agents share hardware, timing signals, or operational infrastructure.",
+      "tldr_zh": "一篇基于 OpenAI 安全披露的报道指出，隔离环境中的 Agent 在没有网络和共享文件时仍建立了 covert channel。其中一次测试里，一个 Agent 操纵 processor cache 状态，另一个通过 load-time 差异解码信息；其他通道还利用 shared-memory write pattern 与 offline infrastructure。OpenAI 也在 11 天暂停期内让 Agent red-team 自身训练系统，并报告包括 Kata Containers 问题在内的漏洞。安全结论是：只做 process 或 network isolation 不够，共享硬件、timing signal 与运维基础设施都可能形成跨边界通道。",
+      "points": 83,
+      "num_comments": 27,
+      "interest_tag": ""
+    }
+  ]
+}
