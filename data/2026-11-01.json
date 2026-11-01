@@ -1,0 +1,221 @@
+{
+  "date": "2026-11-01",
+  "generated_at": "2026-11-01T16:03:53.879294+08:00",
+  "briefing_zh": "今天最强的研究信号不是继续堆算力，而是让模型知道何时该看、该保留什么、不同模态该如何共享结构。**LOWN** 证明 diffusion VLM 并非每一步都需要重新处理图像，以约 35.3% 的 decoding FLOPs 保留 99.6% 的原始得分；**Youtu-Parsing-Omni** 则反向推进统一化，用同一 encoder 与 schema 把文档、图像、音频和视频转为可定位、可引用的结构化记录。**Platonic Representation Hypothesis with JEPAs** 更进一步把跨模态表示对齐从经验观察变成带条件的理论命题，显示好 positive views 比单纯 scale 更具数据效率。\n\n训练范式也在从互相割裂的 recipe 走向连续闭环。**Training Foundation Models with a Single Algorithm** 把 pretraining、SFT 与 RL 统一为对静态数据和 reward-selected generations 的 likelihood fitting；**A-RSI** 则将「何时刷新经验」交给训练动态，同时让新任务答案保持独立可验证。这两项工作共同说明 self-improvement 的关键不只是生成更多数据，而是控制经验的新鲜度、监督来源和能力遗忘。\n\n对 agent 与 world model，今天的结果更像一次现实校准。**Co-Design Bench** 中最强系统能满足 69.9% 的单项标准，却只有 26.4% 的任务完全成功，说明长程执行的瓶颈仍是 requirement interaction 与 completion reliability；**Probing Spatial State Representations** 也发现「看见当前场景」不等于能维持物体持久性、预测空间变化或指导行动。与此同时，**L3G-World** 用 latent 3D Gaussian memory 将记忆增长从时间长度改为场景范围，并实现 9 FPS，给长程交互式世界模型提供了更工程化的状态载体。\n\n开源与社区侧呈现出两种相反但互补的趋势：一边是 **Mika** 这类可直接安装、在 Android 后台操作 apps 与 web 的 on-device agent，快速获得数千 stars；另一边是 **Grim Prompter**、Pentagon 网络中的个人 agent 事件和 MecAgent 争议，把 least privilege、数据边界与 evidence-traced review 推到台前。真正可持续的 agent 产品不只需要更强 autonomy，还必须把唤醒机制、授权、diff、undo、playtest 与人工接管做成默认能力。",
+  "briefing_en": "Today’s strongest research signal is not simply more compute, but teaching models when to look, what state to preserve, and how modalities should share structure. **LOWN** shows that a diffusion VLM need not revisit the image at every denoising step, retaining 99.6% of the original score at roughly 35.3% of decoding FLOPs. **Youtu-Parsing-Omni** pushes in the opposite direction toward unification, using one encoder and schema to turn documents, images, audio, and video into grounded, citable records. **Proving and Improving the Platonic Representation Hypothesis with JEPAs** goes further by making cross-modal alignment a conditional theorem and showing that good positive views can be far more data-efficient than scale alone.\n\nTraining recipes are likewise moving from disconnected stages toward continuous loops. **Training Foundation Models with a Single Algorithm** casts pretraining, SFT, and RL as likelihood fitting over mixtures of static data and reward-selected generations. **A-RSI** lets training dynamics decide when experience has gone stale while keeping answers to newly generated tasks independently checkable. Together, they suggest that self-improvement depends less on generating ever more data than on controlling freshness, supervision provenance, and forgetting.\n\nFor agents and world models, today’s results are a reality check. On **Co-Design Bench**, the strongest system satisfies 69.9% of individual criteria but fully completes only 26.4% of tasks, exposing requirement interaction and completion reliability as the long-horizon bottleneck. **Probing Spatial State Representations** similarly finds that reading the visible scene does not imply object persistence, predictive spatial updates, or useful action guidance. Meanwhile, **L3G-World** makes memory grow with scene extent rather than stream length and reaches 9 FPS, offering a more practical state substrate for long-running interactive world models.\n\nOpen source and community discussion show two complementary forces. Installable products such as **Mika**, an on-device Android agent that operates apps and the web on a hidden background screen, can gather thousands of stars quickly. At the same time, **Grim Prompter**, the reported personal-agent incident on a Pentagon network, and the MecAgent controversy are pushing least privilege, data boundaries, and evidence-traced review into the foreground. Sustainable agent products need more than autonomy: wake-up semantics, authorization, diffs, undo, playtests, and human takeover must become defaults.",
+  "viral_analysis_zh": "今天最可能继续扩散的是 **Mika**：它把「手机 agent」压缩成可下载 APK、后台执行且不打断用户的直观承诺，3,087 stars 与 499 forks 说明传播已转化为真实试用。研究侧最具爆款潜力的是 **Platonic Representation Hypothesis with JEPAs**，因为「证明一个流行假说」加上 Yann LeCun、42× 数据效率和 72B 对比，兼具强叙事、权威背书与可复述数字。",
+  "viral_analysis_en": "**Mika** is the most likely project to keep spreading: it compresses the mobile-agent promise into a downloadable APK, background execution, and a clear non-interruption benefit, while 3,087 stars and 499 forks suggest attention is converting into trials. On the research side, **Proving and Improving the Platonic Representation Hypothesis with JEPAs** has the strongest viral package: a proof of a popular hypothesis, Yann LeCun’s name, a 42× data-efficiency claim, and comparisons against models up to 72B parameters.",
+  "huggingface_papers": [
+    {
+      "title": "Look Only When Needed: Certificate-Guided Visual Routing for Efficient Diffusion VLMs",
+      "url": "https://arxiv.org/abs/2610.36671",
+      "tldr": "LOWN uses agreement between image-free and the last image-conditioned prediction as a certificate for reusing visual information in diffusion VLM decoding. It finds that removing the image changes the token selected for unmasking in only 22.8% of steps on average, so most repeated visual processing is unnecessary. Without retraining or tuned thresholds, it retains 99.6% of LLaDA-V's score across ten benchmarks at 35.3% of the decoding FLOPs. The result matters because it turns adaptive visual routing into a measurable inference-time efficiency gain rather than a lossy fixed pruning schedule.",
+      "tldr_zh": "LOWN 把无图预测与最近一次图像条件预测的一致性当作证书，决定 diffusion VLM 解码时能否复用视觉信息。实验发现，移除图像平均只有 22.8% 的步骤会改变待 unmask token，说明大部分重复视觉计算并非必要。它无需重新训练或调 threshold，就以 35.3% 的 decoding FLOPs 保留 LLaDA-V 在十个 benchmark 上 99.6% 的得分。重要性在于，它把 adaptive visual routing 变成了可测量的推理效率收益，而不是有损的固定剪枝。",
+      "upvotes": 100,
+      "authors": "Donghyeon Cho, Joowon Kim, Seungho Shin, Eunho Yang",
+      "ai_keywords": [
+        "diffusion VLM",
+        "visual routing",
+        "inference efficiency"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "Youtu-Parsing-Omni: One Encoder, One Schema, All Modalities",
+      "url": "https://arxiv.org/abs/2610.39301",
+      "tldr": "Youtu-Parsing-Omni uses one shared encoder and one output schema to parse documents, images, audio, and video into records grounded in space and time. Its OSAD procedure trains the parser on its own rollouts against token-level targets from a refreshed reference-conditioned copy, allowing tasks to share one post-training objective. A single 5B checkpoint reaches 96.96 on OmniDocBench v1.6 and leads open-weight systems on OmniParsingBench, especially for audio and video. This is important as a general perception layer for agents that must locate and cite evidence across heterogeneous media.",
+      "tldr_zh": "Youtu-Parsing-Omni 用一个共享 encoder 和一种输出 schema，把文档、图像、音频与视频解析为带时空定位的结构化记录。它的 OSAD 让模型用自身 rollout 对齐由持续刷新 reference copy 生成的 token-level target，使多种任务共享同一 post-training objective。单个 5B checkpoint 在 OmniDocBench v1.6 达到 96.96，并在 OmniParsingBench 的 open-weight 模型中领先，优势尤其集中于音频和视频。这为需要跨异构媒体定位并引用证据的 agent 提供了通用 perception layer。",
+      "upvotes": 72,
+      "authors": "Yunhang Shen, Zhangquan Chen, Xiaotian Li, Zhongpeng Cai, Qing Zhou, Zekai Zhang, Kun Zhang, Zezhong Wu, Jian Hu, Haihan Gao, Heting Gao, Xin Li, Yinsong Liu, Deqian Jiang, Di Yin, Haoyu Cao, Xing Sun, Bing Liu, Yanqiu Qu, Yunfei Wu, Kun Yin, Zhixiang Wei, Yongxiang Hua, Qianyu Li, Xiaoxing Hu, Peiyuan Zhang, Lijiang Li, Dong Xu, Zhenchuan Yang, Yiliang Jiang",
+      "ai_keywords": [
+        "omni-modal parsing",
+        "structured perception",
+        "on-policy distillation"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "A-RSI: Adaptive Task Refresh for Zero-Data Multimodal Self-Improvement",
+      "url": "https://arxiv.org/abs/2610.38568",
+      "tldr": "A-RSI separates two questions in recursive self-improvement: training dynamics decide when the current task pool has gone stale, while newly generated answers remain independently checkable. It monitors reward variation and accuracy in training logs, refreshing tasks when the learning signal declines rather than consulting validation or test scores. A static library of model-authored programs produces multimodal questions and verifiable references without external training examples or human labels. With 800 fresh tasks, the average over eleven benchmarks rises from 57.77 to 61.05, highlighting experience freshness as a controllable part of self-improvement.",
+      "tldr_zh": "A-RSI 把 recursive self-improvement 中的两个问题拆开：训练动态决定当前 task pool 何时失效，而新生成任务的答案仍保持独立可验证。它监测训练日志中的 reward variation 与 accuracy，在学习信号衰减时刷新任务，不读取 validation 或 test score。由模型编写的静态程序库生成多模态问题和可核验 reference，不依赖外部训练样本或人工标签。仅引入 800 个新任务，十一项 benchmark 平均分就从 57.77 升至 61.05，说明经验新鲜度本身是 self-improvement 的关键控制量。",
+      "upvotes": 65,
+      "authors": "Yu Liu, Youxing Li, Yuedong Tan, Zhiwei Yang, Zihan Su, Hanqi Feng, Shaojie Zhang, Libin Liao, Zihao Wan, Chenxu Wu, Cong Cao, Fangfang Yuan, Yanbing Liu, Ziheng Chen, Pei Fu, Radu Timofte, Zongwei Wu, Nicu Sebe, Barnabas Poczos, Jian Luan",
+      "ai_keywords": [
+        "self-improvement",
+        "multimodal training",
+        "adaptive curriculum"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "Proving and Improving the Platonic Representation Hypothesis with JEPAs",
+      "url": "https://arxiv.org/abs/2610.39302",
+      "tldr": "The paper proves conditions under which separately trained JEPAs across modalities recover the same representation up to a rotation, turning the Platonic Representation Hypothesis into a constructive statement. It argues that next-token prediction uses poor views of the underlying scene, explaining why language models need scale to align with vision. Across data ranging from 145,000 captions to 940 million web images, good positive views require 42 times fewer samples to reach comparable alignment. A 109M text JEPA outperforms language models up to 72B at aligning with visual encoders, making data pairing quality—not scale alone—the central lever.",
+      "tldr_zh": "这项工作给出条件：不同模态上独立训练的 JEPA 可在一个 rotation 意义下恢复同一表示，从而把 Platonic Representation Hypothesis 变成可构造命题。论文认为 next-token prediction 使用的是底层场景的低质量 views，因此语言模型必须依赖规模才能与视觉对齐。实验从 14.5 万 captions 扩展到 9.4 亿 web images，显示优质 positive views 达到同等 alignment 所需样本少 42 倍。一个 109M text JEPA 与视觉 encoder 的对齐优于最高 72B 的语言模型，把数据配对质量而非单纯 scale 推到核心位置。",
+      "upvotes": 58,
+      "authors": "Randall Balestriero, Yann LeCun",
+      "ai_keywords": [
+        "JEPA",
+        "representation learning",
+        "multimodal alignment"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "Co-Design Bench: Multimodal Collaborative Coding Evaluation for Agentic Models",
+      "url": "https://arxiv.org/abs/2610.35138",
+      "tldr": "Co-Design Bench evaluates whether coding agents can turn real users' multimodal requests into working application revisions, using 273 tasks derived from more than 26,000 sessions. Its 2,331 hidden expert-written criteria are graded from source and browser evidence, then challenged by a separate refuter instead of relying on gold code or target screenshots. Under one shared harness, the strongest system satisfies 69.9% of criteria on average but fully completes only 26.4% of tasks. The benchmark matters because it exposes the gap between local progress and end-to-end requirement satisfaction in realistic collaborative coding.",
+      "tldr_zh": "Co-Design Bench 评测 coding agent 能否把真实用户的多模态请求转化为可运行的应用修改，273 个任务来自超过 2.6 万次真实 session。其 2,331 条隐藏专家标准通过 source 与 browser evidence 判分，再由独立 refuter 挑战正面结论，而不依赖 gold code 或 target screenshot。在统一 harness 下，最强系统平均满足 69.9% 的 criteria，却只有 26.4% 的任务完全完成。这个 benchmark 的价值在于直接揭示 realistic collaborative coding 中「局部有进展」与「端到端满足需求」之间的鸿沟。",
+      "upvotes": 21,
+      "authors": "Xilin Wei, Shengyuan Ding, Xinyu Fang, Tiancheng Gu, Yuchi Wang, Zhixun Li, Ziyu Liu, Yuhang Zang, Weixiang Yu, Cheng Lu, Chonggao Sun, Tong Zhou, Dahua Lin, Hang Zhang, Shuai Bai, Dayiheng Liu",
+      "ai_keywords": [
+        "coding agents",
+        "multimodal evaluation",
+        "requirement satisfaction"
+      ],
+      "interest_tag": "Benchmark"
+    }
+  ],
+  "alphaxiv_papers": [
+    {
+      "title": "Training Foundation Models with a Single Algorithm",
+      "arxiv_id": "2610.40564",
+      "url": "https://arxiv.org/abs/2610.40564",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2610.40564",
+      "tldr": "This work derives pretraining, supervised fine-tuning, and reinforcement learning as instances of one likelihood-based algorithm over different target distributions. Its trainer mixes static data with reward-selected model generations instead of switching objectives and infrastructure between stages. Experiments report a better accuracy-compute tradeoff, broader task coverage, and stronger retention of earlier capabilities. The key implication is that foundation-model development may be reframed as data scheduling and mixture design rather than a sequence of fundamentally different algorithms.",
+      "tldr_zh": "这项工作把 pretraining、supervised fine-tuning 和 reinforcement learning 推导为同一种 likelihood-based algorithm 在不同 target distribution 上的实例。它在一个 trainer 中混合静态数据与 reward-selected model generations，而不是在阶段之间切换 objective 和基础设施。实验显示 accuracy-compute trade-off、任务覆盖与旧能力保持均有改善。核心启示是，foundation model 训练生命周期或许可以重写为 data scheduling 与 mixture design，而不是一串本质不同的算法。",
+      "interest_tag": ""
+    },
+    {
+      "title": "Probing Spatial State Representations in Visual Foundation Models",
+      "arxiv_id": "2610.40636",
+      "url": "https://arxiv.org/abs/2610.40636",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2610.40636",
+      "tldr": "The paper probes ten frozen visual representations at four increasingly demanding levels: spatial structure, object persistence, predictive update, and actionability. Strong readout of the currently visible scene does not reliably imply memory for off-screen objects, transferable future features, or progress toward a goal. Controls separate genuine use of visual history and motion from easy decoding artifacts. The result is important for embodied agents because spatial state should be judged by maintenance and use, not merely by what a linear probe can recover from one frame.",
+      "tldr_zh": "论文在十种 frozen visual representation 上测试四个递进层级：spatial structure、object persistence、predictive update 与 actionability。对当前可见场景的强 readout，并不可靠地意味着模型能记住视野外物体、迁移预测出的 future feature，或朝目标持续推进。对照实验进一步区分了真正使用视觉历史和运动信息，与容易解码出的表面相关性。对 embodied agent 而言，这意味着空间状态必须按能否维护和使用来评估，而不能只看单帧 linear probe 能读出什么。",
+      "interest_tag": ""
+    },
+    {
+      "title": "Training language models in simulation for psychiatric intake",
+      "arxiv_id": "2610.40476",
+      "url": "https://arxiv.org/abs/2610.40476",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2610.40476",
+      "tldr": "Multi-turn reinforcement learning in simulated psychiatric interviews improves history-taking, differential diagnosis, management planning, and patient-centered communication over the identically prompted base model. In a randomized double-blind crossover study, 32 psychiatrists role-played patients and another 15 scored 120 de-identified encounters; the trained agent won 76.7% of matched pairs. Adversarial tests also show acute-risk under-triage falling from 30.5% to 12.9%. The remaining safety gaps still require safeguards and clinician oversight, making this a strong example of simulation-based training paired with domain-expert evaluation rather than a deployment claim.",
+      "tldr_zh": "在模拟精神科问诊中进行 multi-turn reinforcement learning，可提升病史采集、鉴别诊断、初始管理计划与 patient-centered communication，相比使用相同 prompt 的 base model 更强。随机双盲 crossover study 中，32 名精神科医生扮演患者、另 15 名医生评审 120 次去标识会话，训练后 agent 在 76.7% 的配对场景中胜出。对抗测试还显示急性风险 under-triage 从 30.5% 降至 12.9%。但剩余安全缺口仍要求 safeguards 与 clinician oversight，因此这更像「simulation training 加领域专家评估」的范例，而不是可直接部署的声明。",
+      "interest_tag": ""
+    },
+    {
+      "title": "Cross-Controller Transfer via In-Context Behavior Adaptation",
+      "arxiv_id": "2610.39280",
+      "url": "https://arxiv.org/abs/2610.39280",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2610.39280",
+      "tldr": "The method represents a robot controller through short interaction examples pairing commanded actions with the motions they actually produce. A transformer context encoder summarizes that behavior so one policy can adapt in context across six controller types, gain settings, compliance, and embodiments. It improves average success by 33 percentage points over naive pooling and reaches about 50% success on unseen controller modes and gains. This matters because cross-robot data becomes reusable even when identical action tokens have different physical meanings.",
+      "tldr_zh": "该方法用少量 interaction examples 表示 robot controller，把下发动作与实际产生的运动配对。Transformer context encoder 汇总这种行为，使单一 policy 能在六类 controller、不同 gain、compliance 与 embodiment 间进行 in-context adaptation。相比 naive pooling，平均成功率提升 33 个百分点，在未见 controller mode 与 gain 上约达到 50% 成功率。其价值在于，即使相同 action token 具有不同物理含义，跨机器人数据仍可能被安全复用。",
+      "interest_tag": ""
+    },
+    {
+      "title": "L3G-World: Real-Time Infinite World Generation with Latent 3D Gaussian Memory",
+      "arxiv_id": "2610.40614",
+      "url": "https://arxiv.org/abs/2610.40614",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2610.40614",
+      "tldr": "L3G-World stores VAE latent features in a compact 3D Gaussian memory, letting a video diffusion transformer condition directly in latent space without repeatedly rendering and re-encoding RGB. Its updater adds Gaussians only for newly observed regions and refines existing ones, so memory grows with scene extent rather than stream duration. Compared with prior 3D-memory baselines, it reports up to 38.6× fewer primitives, 3.2× faster updates, and 359× faster rendering. Reaching 9 FPS while improving long-horizon consistency makes it a concrete systems step toward interactive world generation rather than another offline video demo.",
+      "tldr_zh": "L3G-World 在紧凑的 3D Gaussian memory 中存储 VAE latent feature，让 video diffusion transformer 直接在 latent space 条件化，无需反复把 RGB render 后再编码。Updater 只在新观察区域增加 Gaussian 并持续精炼已有表示，因此 memory 随场景范围而非 stream 时长增长。相对已有 3D-memory baseline，它最多减少 38.6× primitives、加快 3.2× 更新并实现 359× 渲染加速。系统在提高长程一致性的同时达到 9 FPS，使其更接近 interactive world generation 的工程步骤，而非离线视频 demo。",
+      "interest_tag": ""
+    }
+  ],
+  "github_repos": [
+    {
+      "name": "wangzan101/Mika",
+      "url": "https://github.com/wangzan101/Mika",
+      "tldr": "Mika is an on-device Android agent that operates apps and the web on a hidden background screen, so users can keep using the phone while a task runs. Its downloadable APK and Android 11+ positioning make the promise immediately testable rather than a framework-only demo. Reaching 3,087 stars and 499 forks within the search window indicates unusually strong hands-on interest. The project is notable as a consumer-facing computer-use agent, though its broad app access makes permission design and local data handling central evaluation points.",
+      "tldr_zh": "Mika 是一款 on-device Android agent，可在隐藏的后台屏幕中操作 apps 与 web，因此任务执行时用户仍能继续使用手机。它提供可下载 APK 并面向 Android 11+，让承诺可以立刻试用，而不只是 framework demo。搜索窗口内达到 3,087 stars 与 499 forks，说明关注已经明显转化为动手使用。作为 consumer-facing computer-use agent，它值得关注，但广泛 app 权限也让 permission design 与本地数据处理成为核心评估点。",
+      "stars": 3087,
+      "language": "Kotlin",
+      "interest_tag": "CUA"
+    },
+    {
+      "name": "andyhuo520/digital-human-koubo",
+      "url": "https://github.com/andyhuo520/digital-human-koubo",
+      "tldr": "Digital Human Koubo packages one-photo talking-head production as an agent skill: script generation, lip-synced presentation, voice cleanup, captions, five editing styles, and 48 packaging components. It is designed to be invoked from coding-agent environments through Renoise MCP rather than operated as a traditional video editor. The strong 1,603-star and 366-fork response shows demand for narrow, end-to-end creator workflows with a concrete deliverable. Its lesson is that agent adoption accelerates when many fragile media steps are hidden behind one repeatable skill.",
+      "tldr_zh": "Digital Human Koubo 把单照片口播视频制作封装为 agent skill，覆盖脚本、lip-sync 主播、语音清理、字幕、五类剪辑风格与 48 个包装组件。它通过 Renoise MCP 从 coding-agent 环境调用，而不是要求用户操作传统视频编辑器。1,603 stars 与 366 forks 表明，能交付明确成品的窄而完整 creator workflow 很有需求。它说明 agent 的采用往往来自把多段脆弱媒体流程藏到一个可复用 skill 后面。",
+      "stars": 1603,
+      "language": "TypeScript",
+      "interest_tag": ""
+    },
+    {
+      "name": "blakeandersonw/ai-app-playbook",
+      "url": "https://github.com/blakeandersonw/ai-app-playbook",
+      "tldr": "AI App Playbook is a repository meant to be cloned into an empty project and read by a coding agent through AGENTS.md. Rather than shipping another runtime, it codifies product-selection and implementation guidance for building useful, commercially viable AI applications. Its 598 stars and 85 forks suggest that developers value executable operating manuals that can steer agents directly. The project matters as evidence that documentation designed for agent consumption is becoming a distribution format in its own right.",
+      "tldr_zh": "AI App Playbook 设计为克隆到空项目后，由 coding agent 通过 AGENTS.md 直接读取。它不再发布一个 runtime，而是把选择产品、实现和商业可行性的指导编码成 agent 可执行的 operating manual。598 stars 与 85 forks 表明，开发者开始重视能直接约束 agent 的工作说明。它的重要性在于：面向 agent 消费的文档正在成为独立的分发格式。",
+      "stars": 598,
+      "language": "TypeScript",
+      "interest_tag": ""
+    },
+    {
+      "name": "jmanico/grim-prompter",
+      "url": "https://github.com/jmanico/grim-prompter",
+      "tldr": "Grim Prompter provides structured threat modeling for AI coding agents, covering 36 architecture workflows and 29 analysis methods. The agent is expected to trace findings back to repository evidence instead of emitting a generic security checklist. That makes the output easier to review and ties security claims to concrete code and system boundaries. With 318 stars, the project reflects a growing need to make agent-generated changes auditable before expanding autonomy.",
+      "tldr_zh": "Grim Prompter 为 AI coding agent 提供结构化 threat modeling，覆盖 36 种 architecture workflow 与 29 种 analysis method。它要求 agent 把发现追溯到 repository evidence，而不是输出泛化的安全 checklist。这样既便于 review，也能把安全结论绑定到具体代码和系统边界。项目获得 318 stars，反映出在扩大 autonomy 之前让 agent 产出可审计证据的需求正在上升。",
+      "stars": 318,
+      "language": "Unknown",
+      "interest_tag": ""
+    },
+    {
+      "name": "FigureSultanLast/roblox-ai-studio-agent",
+      "url": "https://github.com/FigureSultanLast/roblox-ai-studio-agent",
+      "tldr": "This terminal agent builds Roblox Studio places across parts, models, UI, and Luau scripts, but wraps every change in a place diff for approval. It also runs playtests as evidence and offers one-step undo, separating proposal, verification, and reversible application. Those controls are more interesting than raw generation because they address how users can trust long sequences of edits in a stateful creative environment. The project shows a practical pattern for domain agents: expose native artifacts, prove behavior, and make rollback cheap.",
+      "tldr_zh": "这个 terminal agent 可在 Roblox Studio 中创建 parts、models、UI 与 Luau scripts，但每次修改都会先生成 place diff 供用户批准。它还用 playtest 作为证据并提供一步 undo，把 proposal、verification 与可逆应用分开。这些控制比单纯生成更值得关注，因为它们处理了用户如何信任 stateful creative environment 中长串修改的问题。项目展示了 domain agent 的实用模式：暴露 native artifact、证明行为，并让 rollback 足够便宜。",
+      "stars": 199,
+      "language": "Luau",
+      "interest_tag": ""
+    }
+  ],
+  "hackernews": [
+    {
+      "title": "Product Managers aren't safe either",
+      "url": "https://lucaskostka.com/posts/ai-challenges-more-than-devs",
+      "tldr": "This opinion piece argues that generative AI is compressing the traditional boundary between product management and software development. As coding gets cheaper, developers can spend more time on customer pain, trade-offs, and product reasoning, while generic execution skills lose scarcity. The author does not claim that architecture is automated; instead, security, compliance, budget, private context, and interpersonal coordination remain the defensible layer. Its 56 points and 77 comments show that role convergence is more discussion-provoking than another narrow tooling announcement.",
+      "tldr_zh": "这篇观点文章认为，generative AI 正在压缩 product management 与 software development 的传统边界。随着 coding 成本下降，开发者可以把更多时间投入 customer pain、trade-off 与产品推理，而通用执行能力的稀缺性下降。作者并未声称 architecture 已被自动化；security、compliance、budget、私有上下文和人际协调仍是较难替代的层。56 points 与 77 comments 表明，相比又一项窄工具发布，角色融合更能引发社区争论。",
+      "points": 56,
+      "num_comments": 77,
+      "interest_tag": ""
+    },
+    {
+      "title": "Show HN: Sketch Stadium – watch your agent play Pictionary",
+      "url": "https://sketch.wakeshift.ai/games/q5ucru",
+      "tldr": "Sketch Stadium lets external agents subscribe to game events, take turns drawing with a constrained SVG subset, and guess in a live Pictionary room. The game is deliberately a demonstration of Wakeshift, a cross-harness mechanism for waking dormant agents through push notifications instead of polling. The public scoreboard and visible failures make an infrastructure primitive understandable within seconds. Its value is less the game itself than a concrete demonstration of event-driven agent resumption across harnesses.",
+      "tldr_zh": "Sketch Stadium 允许外部 agent 订阅游戏事件，在实时 Pictionary 房间中轮流用受限 SVG 绘图和猜词。这个游戏实际上是 Wakeshift 的 demo：它试图用跨 harness 的 push notification 唤醒休眠 agent，而不是持续 polling。公开 scoreboard 和肉眼可见的失败，让一个基础设施 primitive 在几秒内就能被理解。其价值不只在游戏，而在于具体展示了跨 harness 的 event-driven agent resumption。",
+      "points": 35,
+      "num_comments": 11,
+      "interest_tag": ""
+    },
+    {
+      "title": "Defense Contractor Gave Their Personal AI Agent Access to Secure Pentagon System",
+      "url": "https://www.wired.com/story/a-defense-contractor-gave-their-personal-ai-agent-access-to-a-secure-pentagon-system/",
+      "tldr": "WIRED reports that an Accenture employee's personal Claude agent was connected to a Department of Defense network for roughly two months before detection and remediation. The available report frames the incident as an access-control and shadow-AI failure rather than a claim that the model itself exploited the system. It illustrates how personal agent credentials can collapse boundaries between consumer tooling and regulated infrastructure. For agent deployment, inventory, least privilege, outbound controls, and rapid revocation are product requirements—not optional governance paperwork.",
+      "tldr_zh": "WIRED 报道称，一名 Accenture 员工的个人 Claude agent 接入 Department of Defense 网络约两个月后才被发现并修补。现有报道把事件指向 access-control 与 shadow-AI failure，而不是声称模型主动攻破系统。它说明个人 agent credential 可能让 consumer tooling 与受监管基础设施之间的边界失效。对 agent 部署而言，资产清单、least privilege、outbound control 与快速撤权是产品要求，而不是可选的治理文档。",
+      "points": 16,
+      "num_comments": 2,
+      "interest_tag": ""
+    },
+    {
+      "title": "DeepSeek open-sources dsh-superagent, a coding agent largely built by agents",
+      "url": "https://github.com/deepseek-ai/dsh-superagent-prototype",
+      "tldr": "DeepSeek's dsh-superagent is a research prototype for one GitHub repository that listens to authorized requests from GitHub and optionally Feishu, opens isolated work items, and can return results such as pull requests. Its philosophy is to minimize human attention while surfacing a web panel when a person must act, and the repository explicitly warns that much of the engineering was agent-produced and not production-ready. The release includes source, prompts, skills, tests, setup guidance, and numbered architecture documents rather than only a conceptual article. That combination makes it useful as an inspectable reference for proactive coding-agent operations and human escalation boundaries.",
+      "tldr_zh": "DeepSeek 的 dsh-superagent 是面向单个 GitHub repository 的 research prototype：它监听 GitHub 及可选 Feishu 中的授权请求，创建隔离 work item，并可返回 pull request 等结果。其理念是尽量减少人类注意力，只在必须人工处理时通过 web panel 暴露事项；仓库也明确警告，大量工程由 agent 完成，尚非 production-ready。发布内容包含 source、prompts、skills、tests、setup 与编号架构文档，而不只是概念文章。这使它成为研究 proactive coding-agent operation 与人工升级边界的可检查参考。",
+      "points": 9,
+      "num_comments": 0,
+      "interest_tag": ""
+    },
+    {
+      "title": "MecAgent (AI agent for SolidWorks) scans drives for CAD files and uploads them",
+      "url": "https://news.ycombinator.com/item?id=50307597",
+      "tldr": "This HN submission relays a community warning that a SolidWorks-focused agent allegedly scans local drives for CAD files and uploads them. The linked Reddit page could not be independently extracted during this run, so the allegation should be treated as unverified rather than a confirmed incident. Even so, the concern identifies the correct review surface for desktop agents: filesystem scope, network destinations, consent, and deletion guarantees. Specialized productivity is not sufficient if data movement is invisible or broader than the task requires.",
+      "tldr_zh": "这条 HN submission 转述了一项社区警报：一款面向 SolidWorks 的 agent 据称会扫描本地 drives 中的 CAD 文件并上传。本次抓取无法独立提取链接的 Reddit 正文，因此该指控应视为未经核验，而不是已确认事件。即便如此，它指向了 desktop agent 正确的审查面：filesystem scope、network destination、consent 与删除保证。如果数据移动不可见或超出任务所需范围，垂直 productivity 再强也不足以建立信任。",
+      "points": 5,
+      "num_comments": 0,
+      "interest_tag": ""
+    }
+  ]
+}
