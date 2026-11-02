@@ -1,0 +1,212 @@
+{
+  "date": "2026-11-02",
+  "generated_at": "2026-11-02T17:04:11.591974+08:00",
+  "briefing_zh": "今天最强的研究信号不是继续盲目堆算力，而是重写「什么值得被执行」。**Does Scaling Toward AGI Depend on What System-1 Lets System-2 Execute?** 把轻量预测器放在昂贵推理与工具调用之前，用 predict–gate–execute–update 循环筛掉低效交互；**Training Foundation Models with a Single Algorithm** 则把 pretraining、midtraining、SFT 与部分 RL 统一为随数据混合变化的最大似然训练。两者共同指向更精细的 compute allocation：关键不只是模型更大，而是让训练与推理预算流向信息密度最高的样本和动作。\n\nAgent 研究正在从「单次能力展示」转向可持续的组织与环境闭环。**R^2Orch** 用 self-play、skill internalization 与 skill withdrawal 让 orchestrator 逐步摆脱外置技能；**Video Generation Meets Agent Harness** 则明确把 context、tool、state、feedback 与 budget 视为连接视频生成、交互式 world model 和 recursive self-improvement 的 runtime 层。与此同时，YC Labs 的 50-agent Minecraft 实验暴露了另一面：规模扩大后，通信与制度会自发出现，但 roster 顺序、错误共享状态和过度官僚化也会成为新的系统性失效源。\n\n视觉与 world model 方向开始更认真地区分「看见」和「保持、更新、行动」。**Probing Spatial State Representations in Visual Foundation Models** 显示，visible-scene probe 强并不代表模型能记住出视野物体、预测相机运动后的空间状态或可靠选动作；**L3G-World** 用可修订的 latent 3D Gaussian memory 提升长镜头中的 loop consistency。**Wizard** 与 **HiFOR** 分别把结构化 game state 和分层未来状态接入实时世界控制与机器人动作生成，说明显式 state substrate 仍是生成式 world model 迈向可控交互的关键。\n\n开源侧的爆点集中在「可见成果 + 明确工作流」。**Mika** 以 Android 后台独立屏幕展示跨 App 操作，短期内获得 4.6k stars；**AnyScene** 把 brief、3D asset 生成、Blender 布景、视觉 gate 与渲染串成可复现流水线。另一条线是严谨性基础设施：**Grim Prompter** 将 evidence-traced threat modeling 封装成 coding-agent skill，**Investor’s Last Exam** 则用 time-frozen 语料和专家 rubric 测试投资 agent，提醒我们「会写报告」与「预测真的对」是两种能力。",
+  "briefing_en": "Today’s strongest research signal is not simply to spend more compute, but to redesign what deserves execution. **Does Scaling Toward AGI Depend on What System-1 Lets System-2 Execute?** places a lightweight predictor before expensive reasoning and tool calls, using a predict–gate–execute–update loop to reject low-value interactions. **Training Foundation Models with a Single Algorithm** instead casts pretraining, midtraining, SFT, and suitable RL updates as maximum-likelihood learning under a changing data mixture. Together they point toward finer compute allocation: progress depends on routing budget toward the most informative samples and actions, not only on making models larger.\n\nAgent research is moving from one-off capability demos toward sustainable organizational and environmental loops. **R^2Orch** combines self-play, skill internalization, and skill withdrawal so an orchestrator can gradually absorb external skills. **Video Generation Meets Agent Harness** frames context, tools, state, feedback, and budgets as the runtime layer connecting video generation, interactive world models, and recursive self-improvement. YC Labs’ 50-agent Minecraft experiment exposes the downside: communication and institutions emerge at scale, but roster order, unchecked shared state, and bureaucracy can become systemic failure modes.\n\nVision and world-model research is drawing a sharper line between seeing, retaining, updating, and acting. **Probing Spatial State Representations in Visual Foundation Models** finds that strong visible-scene probes do not imply memory for out-of-view objects, correct spatial updates under camera motion, or reliable action selection. **L3G-World** uses a revisable latent 3D Gaussian memory to improve loop consistency over long camera paths. **Wizard** and **HiFOR** inject structured game state and hierarchical future state into real-time world control and robotic action generation, suggesting that an explicit state substrate remains crucial for controllable generative worlds.\n\nOpen-source attention is clustering around visible outcomes and concrete workflows. **Mika** demonstrates cross-app Android operation on a separate background display and quickly reached 4.6k stars; **AnyScene** turns a brief into a reproducible pipeline for asset generation, Blender staging, visual gates, and rendering. A parallel trend is rigor infrastructure: **Grim Prompter** packages evidence-traced threat modeling as a coding-agent skill, while **Investor’s Last Exam** tests investment agents against time-frozen evidence and expert rubrics, emphasizing that producing a convincing report and making a correct forecast are different capabilities.",
+  "viral_analysis_zh": "今天最可能继续扩散的是 **Mika**：它用微信、购物和网页任务的短视频，把抽象的 mobile CUA 能力变成一眼可懂的「手机替你干活」，同时以后台独立屏幕、local-first 和付款前停手回应了干扰与信任问题。研究侧最有传播力的是 Minecraft agent swarm 实验，因为「50 个 agent 建文明却陷入官僚主义」既有反常识叙事，也给多 agent 协调失败提供了可复述的具体数字与故事。**Investor’s Last Exam** 的时间冻结和「分析满分但预测归零」案例也具备强传播性，抓住了公众对 AI 投资能力的天然兴趣。",
+  "viral_analysis_en": "**Mika** is the likeliest project to keep spreading: short demos of WeChat, shopping, and web tasks turn mobile CUA into an instantly legible promise that the phone does the work, while a separate background display, local-first storage, and payment handoff address interference and trust. The Minecraft agent-swarm experiment has the strongest research narrative because “50 agents try to build civilization and invent paralyzing bureaucracy” combines surprise with memorable quantitative anecdotes about coordination failure. **Investor’s Last Exam** also has viral potential through its time-frozen setup and the striking case where models earned full analysis credit yet zero forecast-outcome credit.",
+  "huggingface_papers": [
+    {
+      "title": "Does Scaling Toward AGI Depend on What System-1 Lets System-2 Execute?",
+      "url": "https://huggingface.co/papers/2610.39497",
+      "tldr": "This position-and-theory paper proposes conditional interaction: a lightweight System-1 predicts the utility of candidate computations or actions, and costly System-2 executes only those admitted by an adaptive threshold. Under ideal screening, execution compute can fall by a factor approaching the inverse density of utility-relevant interactions, while the paper bounds selection regret using predictor error and utility margin. The important shift is from total compute to informative compute, although real gains depend on exploration, calibration, and robustness under distribution shift.",
+      "tldr_zh": "这篇理论与观点工作提出 conditional interaction：轻量 System-1 先预测候选计算或动作的效用，昂贵的 System-2 只执行超过自适应阈值的部分。理想筛选下，执行计算量可按「有效交互密度」的倒数级别下降，论文也用预测误差与效用间隔约束 selection regret。它把扩展目标从 total compute 改写为 informative compute，但实际收益仍取决于探索、校准与分布漂移下的稳定性。",
+      "upvotes": 46,
+      "authors": "Qi Wang, Yun Qu, Lizhou Cai, Heming Zou, Haoang Chi, Yiqin Lv, Xiang Li, Haiyan Feng, Mengyu Ge, Yize Geng, Yuhang Jiang, Yixiu Mao, Xiangyang Ji",
+      "ai_keywords": [
+        "System-1/System-2",
+        "compute allocation",
+        "tool use"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "R^2Orch: Recursive Self-Improvement for Agent Orchestration via Self-Play within a Skill-Internalization Loop",
+      "url": "https://huggingface.co/papers/2610.22740",
+      "tldr": "R^2Orch trains agent orchestration with an inner self-play loop that improves on self-chosen tasks and an outer loop that improves the learning process itself. Recursive Learnability favors tasks that retain outcome variance as skills are withdrawn, while failures become skills and then parameters until external skills can be removed. Results across twelve QA, math, code, and interactive datasets suggest a path from hand-built orchestration toward self-improving multi-agent coordination, though the abstract does not establish deployment reliability beyond those benchmarks.",
+      "tldr_zh": "R^2Orch 用内层 self-play 在自选任务上改进 orchestrator，再由外层循环优化「如何学习」本身。Recursive Learnability 偏好在逐步撤掉技能后仍保持结果差异的任务，失败先沉淀为 skill、再内化进参数，目标是最终减少外置技能依赖。十二个 QA、数学、代码与交互数据集上的结果显示多 agent orchestration 可从手工 curriculum 走向递归自改进，但摘要尚不能证明这种机制在开放部署中的可靠性。",
+      "upvotes": 37,
+      "authors": "Mingda Zhang, Yun Huang, Qiang Huang, Yanjin Li, Rui Qian, Qichao Zhao, Tiesunlong Shen, Na Zhao, Jian Wang, Xiaoying Tang",
+      "ai_keywords": [
+        "self-play",
+        "orchestration",
+        "skill internalization"
+      ],
+      "interest_tag": "Agent Swarm"
+    },
+    {
+      "title": "FrameForge: Harnessing Priors of Video Foundation Models for Unified Image Generation",
+      "url": "https://huggingface.co/papers/2610.36545",
+      "tldr": "FrameForge treats conditional image generation as an input-adaptive virtual temporal relation inside a pretrained video model rather than fixing condition and target at preset time positions. Its Mixture of Temporal Experts selects RoPE intervals, while Chain of Temporal Reasoning forces information through a latent intermediate state. Reported gains on DreamBench, COCO2017, and GEdit-Bench indicate that video priors can unify subject-driven generation, edge-conditioned synthesis, and editing without one rigid temporal mapping.",
+      "tldr_zh": "FrameForge 不再把条件图与目标图固定到视频模型的预设时间位置，而把 conditional image generation 建模为随输入变化的虚拟时间关系。Mixture of Temporal Experts 动态选择不同 RoPE 时间间隔，Chain of Temporal Reasoning 则通过 latent intermediate state 约束信息传播。DreamBench、COCO2017 与 GEdit-Bench 的结果说明，video prior 有机会统一主体生成、边缘条件生成和图像编辑，而不必依赖单一僵硬的时间映射。",
+      "upvotes": 22,
+      "authors": "Yijing Lin, Zhendong Mao, Mengqi Huang, Yuxin Wang, Yongdong Zhang",
+      "ai_keywords": [
+        "video foundation model",
+        "image generation",
+        "temporal reasoning"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "Wizard: Manipulate Any World in Real Time via Agentic Control",
+      "url": "https://huggingface.co/papers/2610.40339",
+      "tldr": "Wizard combines a video world model with explicit agent-maintained game state to control character motion in real time across unseen scenes, characters, and actions. It trains on 750 scenes and 178 characters, using skeleton and geometry proxies plus adaptive masking to align control signals with generated rollouts. The key contribution is architectural separation between mechanics/state and visual generation, but the abstract provides no comparative numbers for latency, consistency, or zero-shot generalization.",
+      "tldr_zh": "Wizard 将 video world model 与 agent 显式维护的 game state 结合，在未见场景、角色和动作上实现实时角色控制。它基于 750 个场景与 178 个角色训练，以骨骼和几何代理作为结构化条件，并用 adaptive masking 对齐控制信号与生成 rollout。核心价值是把 mechanics/state 与视觉生成分离，但摘要没有给出延迟、一致性或 zero-shot 泛化的对比数字。",
+      "upvotes": 21,
+      "authors": "Yuzhe Wu, Zijun Lin, Yeying Jin",
+      "ai_keywords": [
+        "world model",
+        "agentic control",
+        "game generation"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "HiFOR: Hierarchical Foresight with Action-Guided World Grounding for Vision-Language-Action Model",
+      "url": "https://huggingface.co/papers/2610.40373",
+      "tldr": "HiFOR predicts short-term evolution, semantic milestones, and final goals jointly, then organizes these futures across horizon, view, and spatial dimensions. During action denoising, action-guided retrieval selects only future latent information relevant to the current control decision instead of injecting every prediction indiscriminately. Experiments on two simulators and six real-world manipulation tasks support hierarchical foresight for VLA policies, although the abstract omits effect sizes and failure modes.",
+      "tldr_zh": "HiFOR 联合预测短期状态演化、语义 milestone 与最终目标，再按时间跨度、视角和空间维度组织未来 latent。动作去噪过程中，action-guided retrieval 只提取当前控制决策需要的未来信息，而不是无差别灌入全部预测。两个仿真 benchmark 与六个真实机器人操作任务支持这种分层 foresight，但摘要没有披露增益幅度与失败模式。",
+      "upvotes": 18,
+      "authors": "Rongxing Ding, Hongyu Qu, Kehong Wu, Xudong Wang, Fan Zhang, Xinguang Xiang, Xiangbo Shu",
+      "ai_keywords": [
+        "VLA",
+        "hierarchical foresight",
+        "robot manipulation"
+      ],
+      "interest_tag": ""
+    }
+  ],
+  "alphaxiv_papers": [
+    {
+      "title": "Proving and Improving the Platonic Representation Hypothesis with JEPAs",
+      "arxiv_id": "2610.39302",
+      "url": "https://arxiv.org/abs/2610.39302",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2610.39302",
+      "tldr": "The paper tests whether separately trained modalities converge toward aligned representations and argues that multiple descriptions of the same scene are a stronger positive signal than corruptions of one description. A 109M-parameter JEPA reaches 0.184 alignment against DINOv2 ViT-B on WIT-1024, above the reported 0.154 from Qwen2.5-72B. The result makes representation alignment look more data-efficient, but the accompanying theorem relies on idealized assumptions that limit how broadly the claim can be generalized.",
+      "tldr_zh": "论文检验不同模态独立训练后是否会趋向一致表征，并指出「同一场景的多个描述」比「单一描述的扰动版本」更适合作为正样本。109M 参数 JEPA 在 WIT-1024 上对 DINOv2 ViT-B 的 alignment 得分为 0.184，高于文中报告的 Qwen2.5-72B 的 0.154。结果显示跨模态表征对齐可能更 data-efficient，但其理论证明依赖理想化假设，不能直接外推为普遍规律。",
+      "interest_tag": ""
+    },
+    {
+      "title": "Training Foundation Models with a Single Algorithm",
+      "arxiv_id": "2610.40564",
+      "url": "https://arxiv.org/abs/2610.40564",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2610.40564",
+      "tldr": "This work expresses pretraining, midtraining, supervised fine-tuning, and suitable RL-style updates as maximum-likelihood learning over a changing mixture of static data and reward-selected model generations. Unified schedules improve reasoning accuracy and coverage at larger tested compute budgets, while staged training can still lead at intermediate scales. In coding experiments, a 0.76B model retaining 5% midtraining data reaches 58.47% pass@16 versus 52.12%, suggesting that continuous data mixing can reduce capability forgetting.",
+      "tldr_zh": "这项工作把 pretraining、midtraining、SFT 与适用的 RL 式更新统一写成：在静态数据和 reward-selected 模型生成组成的动态混合上做 maximum-likelihood learning。统一 schedule 在较大测试算力下提升 reasoning accuracy 与 coverage，但阶段式训练在中等预算时仍可能领先。代码实验中，0.76B 模型保留 5% midtraining 数据后 pass@16 从 52.12% 提升到 58.47%，说明持续混合旧数据可能缓解能力遗忘。",
+      "interest_tag": ""
+    },
+    {
+      "title": "Probing Spatial State Representations in Visual Foundation Models",
+      "arxiv_id": "2610.40636",
+      "url": "https://arxiv.org/abs/2610.40636",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2610.40636",
+      "tldr": "The authors probe ten frozen visual representations for visible geometry, memory of objects after they leave view, spatial updates under camera motion, and goal-directed action selection. VideoMAE records 36.45° out-of-view bearing error compared with DINOv2’s 65.38°, even though DINOv2 has stronger visible-scene readouts. The study is a useful diagnostic separation of perception from state tracking, but offline probes do not establish online memory or reliable embodied behavior.",
+      "tldr_zh": "作者对十种冻结视觉表征做 probe，分别测试可见几何、物体离开视野后的保持、相机运动下的空间更新以及目标导向动作选择。VideoMAE 的 out-of-view 方位误差为 36.45°，明显低于 DINOv2 的 65.38°，尽管后者在可见场景 readout 上更强。该工作有效拆开了 perception 与 state tracking，但离线 probe 不能等价为在线记忆或可靠的 embodied behavior。",
+      "interest_tag": ""
+    },
+    {
+      "title": "L3G-World: Real-Time Infinite World Generation with Latent 3D Gaussian Memory",
+      "arxiv_id": "2610.40614",
+      "url": "https://arxiv.org/abs/2610.40614",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2610.40614",
+      "tldr": "L3G-World stores video-VAE features in a revisable 3D Gaussian scene memory, renders that memory as conditioning for each video chunk, and then updates missing or newly visible content. On DL3DV loop-closure tests it reports 16.00 self-consistency PSNR versus 13.96 for Spatia, with additional LPIPS gains over Matrix-Game 3.0. The design directly targets long-horizon visual drift, although the current tests emphasize static scenes and therefore do not yet prove consistency under rich interactive dynamics.",
+      "tldr_zh": "L3G-World 将 video-VAE feature 存入可修订的 3D Gaussian scene memory，每个视频 chunk 先从该记忆渲染条件，再补充缺失内容并更新可见 Gaussian。DL3DV loop-closure 测试中 self-consistency PSNR 为 16.00，高于 Spatia 的 13.96，并在对 Matrix-Game 3.0 的比较中取得更低 LPIPS。它直接针对长时视觉漂移，但当前测试以静态场景为主，尚不能证明复杂交互动态下的一致性。",
+      "interest_tag": ""
+    },
+    {
+      "title": "Video Generation Meets Agent Harness: Agentic Video Generation, Agentic World Modeling and Recursive Self-Improvement",
+      "arxiv_id": "2610.40191",
+      "url": "https://arxiv.org/abs/2610.40191",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2610.40191",
+      "tldr": "This survey treats the agent harness as the runtime layer connecting video production, interactive world models, and model-development loops. It organizes prior work around context selection, tool scheduling, state maintenance, feedback routing, and budget enforcement, making evaluation requirements more explicit across those settings. Its value is conceptual synthesis rather than demonstrated performance: the surveyed evidence does not yet show that recursive development procedures reliably improve later generations of video models.",
+      "tldr_zh": "这篇综述把 agent harness 定义为连接视频生产、交互式 world model 与模型开发闭环的 runtime layer。它围绕 context selection、tool scheduling、state maintenance、feedback routing 与 budget enforcement 整理已有工作，也让不同场景的评测要求更明确。价值主要在概念统一而非性能突破：现有证据还不能证明 recursive development 流程会稳定改善后续视频模型。",
+      "interest_tag": ""
+    }
+  ],
+  "github_repos": [
+    {
+      "name": "wangzan101/Mika",
+      "url": "https://github.com/wangzan101/Mika",
+      "tldr": "Mika is an Android agent that operates apps and the web on a separate background display, letting the user keep using the foreground screen. It works visually without per-app APIs, stores conversations and encrypted memories locally, and hands off logins, verification codes, and payments to the user. The concrete demos and APK make this unusually tangible for mobile CUA, though wireless-debugging setup, model-provider exposure, and third-party app terms remain practical constraints.",
+      "tldr_zh": "Mika 是 Android agent，可在独立后台屏幕上操作 App 与网页，不占用用户当前前台界面。它通过视觉交互而非逐 App API 集成，conversation 与加密 memory 留在本机，并将登录、验证码和付款交回用户。现成 APK 与具体 demo 让 mobile CUA 非常直观，但 wireless debugging 配置、模型供应商数据边界和第三方 App 条款仍是实际约束。",
+      "stars": 4623,
+      "language": "Kotlin",
+      "interest_tag": "CUA"
+    },
+    {
+      "name": "wanghao-SunSky/cs329z-chinese",
+      "url": "https://github.com/wanghao-SunSky/cs329z-chinese",
+      "tldr": "This repository reorganizes Stanford CS329Z public material into a Chinese self-study path for Python developers. It includes 19 lessons, four hands-on exercises, code-reading guidance, searchable web output, and a single-file offline reader covering LLMs, RAG, tools, memory, multi-agent systems, evaluation, and safety. It is explicitly an independent study guide rather than an official Stanford translation, but its packaging lowers the activation energy for systematic agent engineering education.",
+      "tldr_zh": "该仓库把 Stanford CS329Z 公开材料整理为面向 Python 开发者的中文自学路径。内容包含 19 讲、4 个实战练习、代码导读、可搜索网页与单文件离线版，覆盖 LLM、RAG、工具、记忆、多 agent、评测和安全。它明确不是 Stanford 官方中文版，但完整的学习路径与离线交付显著降低了系统学习 agent engineering 的门槛。",
+      "stars": 416,
+      "language": "HTML",
+      "interest_tag": ""
+    },
+    {
+      "name": "jmanico/grim-prompter",
+      "url": "https://github.com/jmanico/grim-prompter",
+      "tldr": "Grim Prompter packages threat modeling as a skill for Claude Code, Codex, and other coding agents, with 36 architecture workflows and 29 analysis methods. Its runbook requires read-only inspection, file-and-line evidence, explicit authorization for execution, and JSON artifacts that support later change reviews. The strongest idea is not automated certification but an auditable handoff from system scope to threats, mitigations, and verification plans, with explicit warnings that human review remains necessary.",
+      "tldr_zh": "Grim Prompter 把 threat modeling 封装成 Claude Code、Codex 等 coding agent 可调用的 skill，覆盖 36 类架构 workflow 与 29 种分析方法。其 runbook 要求只读检查、文件与行号证据、执行前单独授权，并用 JSON artifact 支撑后续 change review。亮点不是宣称自动安全认证，而是把系统边界、威胁、缓解措施和验证计划做成可审计交付，同时明确保留 human review。",
+      "stars": 338,
+      "language": "",
+      "interest_tag": ""
+    },
+    {
+      "name": "apekshik/anyscene",
+      "url": "https://github.com/apekshik/anyscene",
+      "tldr": "AnyScene turns reference images or a brief into a dressed and lit Blender scene through an agent-controlled pipeline: concept, prop manifest, dual image-to-3D generation, same-light comparison, scripted layout, visual gates, and final renders. The repository includes code and rebuild metadata rather than tens of gigabytes of generated assets; a roughly 90-prop scene is estimated at about $150 in generation cost. Its reusable insight is the sequence of explicit visual gates and regenerate-from-code artifacts, not merely the final photorealistic screenshots.",
+      "tldr_zh": "AnyScene 把参考图或文字 brief 送入 agent-controlled pipeline，依次完成 concept、prop manifest、双 image-to-3D 生成、同光照比较、脚本化布景、视觉 gate 与最终渲染。仓库提供代码和可重建元数据，而不包含数十 GB 的生成资产；约 90 个 prop 的场景预计生成成本约 150 美元。真正可复用的模式是显式视觉 gate 与 code-to-artifact 可再生链路，而不只是最终的写实截图。",
+      "stars": 215,
+      "language": "Python",
+      "interest_tag": ""
+    },
+    {
+      "name": "Prophetlab/Investor-Last-Exam",
+      "url": "https://github.com/Prophetlab/Investor-Last-Exam",
+      "tldr": "Investor’s Last Exam evaluates investment-research agents on 86 assignments against a time-frozen corpus of 3.43 million document versions and expert-authored financial rubrics. It separates answer quality, realized forecasts, and simulated returns; one Tesla case gives several frontier systems full supporting-analysis credit but zero forecast-outcome credit. The framing is rigorous and highly legible, but the initial repository does not include the executable task suite, data service, private references, or evaluator, so independent reproduction is not yet possible.",
+      "tldr_zh": "Investor’s Last Exam 用 343 万份按时间版本化的文档与专家金融 rubric，评测 86 个投资研究任务。它把答案质量、真实预测结果和模拟收益分开；Tesla 案例中多个 frontier system 的 supporting analysis 得满分，但 forecast outcome 得零分。框架严谨且传播性强，但首版仓库未开放可执行任务集、数据服务、私有参考答案或 evaluator，目前还无法独立复现。",
+      "stars": 134,
+      "language": "Python",
+      "interest_tag": "Benchmark"
+    }
+  ],
+  "hackernews": [
+    {
+      "title": "Show HN: OmniDiff – Opensource, super fast, content aware Git difftool, in Rust",
+      "url": "https://github.com/ivankovic/omnidiff",
+      "tldr": "OmniDiff is a Rust content-aware diff tool that claims to handle 99.95% of code changes and route 98.8% through content-specific algorithms. The project targets sub-100ms interaction while recognizing moves and structured changes that line-oriented diffs often render noisily. It is not itself an AI system, but the HN response highlights demand for compact, reviewable change representations that can benefit both developers and coding-agent supervision.",
+      "tldr_zh": "OmniDiff 是 Rust 编写的 content-aware diff 工具，项目称可处理 99.95% 的代码变更，并让 98.8% 的变更走内容专用算法。它追求 100ms 内交互，同时识别 move 与结构化修改，减少传统逐行 diff 的噪声。它本身不是 AI 系统，但 HN 热度说明开发者需要更紧凑、可审查的变更表示，这同样有利于 coding agent 的人类监督。",
+      "points": 232,
+      "num_comments": 65,
+      "interest_tag": ""
+    },
+    {
+      "title": "AI agent swarms in Minecraft fail to build civilization, drown in bureaucracy",
+      "url": "https://www.tomshardware.com/tech-industry/artificial-intelligence/ai-agent-swarms-unleashed-in-minecraft-to-build-a-thriving-civilization-50-agent-teams-fail-after-falling-into-paralyzing-bureaucracy",
+      "tldr": "YC Labs and Olam Labs placed 50 GPT-6.1 Sol agents in Minecraft for three hours with the goal of building a thriving civilization. The colony exchanged roughly 5,900 messages, converged on an accidental leader after roster-order effects, and spent substantial effort on rationing, permissions, and inquiries while early deaths pushed it toward risk aversion. The experiment is more diagnostic than benchmark-grade, but it vividly shows that multi-agent scale introduces organizational pathologies that single-agent capability scores miss.",
+      "tldr_zh": "YC Labs 与 Olam Labs 让 50 个 GPT-6.1 Sol agent 在 Minecraft 中运行三小时，目标是「建立繁荣文明」。群体交换约 5,900 条消息，因 roster 顺序偶然形成领导者，并把大量精力投入配给、许可和调查；早期死亡又让组织迅速转向风险规避。它更像诊断实验而非严格 benchmark，却直观展示了多 agent 扩展会产生单 agent 能力分数看不到的组织病理。",
+      "points": 167,
+      "num_comments": 80,
+      "interest_tag": "Agent Swarm"
+    },
+    {
+      "title": "Muse AI agent is a commercial surveillance network disguised as an AI assistant",
+      "url": "https://paulfwalsh.substack.com/p/metas-muse-ai-agent-is-a-commercial",
+      "tldr": "This commentary argues that Meta’s Muse should be evaluated as a profiling and surveillance system rather than only as an assistant. Its central claim is that access to messages, email, finance, contacts, and relationship signals can create continuously updated profiles that also implicate people who never installed the product. The piece is advocacy rather than an independent technical audit, but its HN traction reflects a core agent-design issue: broader tool access turns privacy boundaries and bystander consent into first-class system requirements.",
+      "tldr_zh": "这篇评论主张，不应只把 Meta Muse 当助手，而要按 profiling 与 surveillance system 审视。作者的核心指控是：消息、邮件、财务、联系人和关系信号的访问能力，可形成持续更新的个人画像，并波及从未安装产品的旁观者。它属于观点文章而非独立技术审计，但 HN 热度揭示了 agent 设计的核心问题：tool access 越广，隐私边界与 bystander consent 越必须成为一等系统要求。",
+      "points": 51,
+      "num_comments": 6,
+      "interest_tag": ""
+    },
+    {
+      "title": "DeepSeek open-sources dsh-superagent, a coding agent largely built by agents",
+      "url": "https://github.com/deepseek-ai/dsh-superagent-prototype",
+      "tldr": "DeepSeek released a research prototype for a proactive coding agent that watches one GitHub repository, optionally listens to Feishu, opens isolated work items, and returns results such as pull requests to the original conversation. Its operating principle is to minimize human attention: act only on authorized requests or written rules and surface only decisions or outputs that need a person. The repository explicitly says this is reference research code, not an official product or a complete copy of the internal system, so the architecture is more important than production-readiness claims.",
+      "tldr_zh": "DeepSeek 开源了一个 proactive coding agent 研究原型：它监听单个 GitHub 仓库，可选接入飞书，为请求创建隔离 work item，并把 PR 等结果送回原会话。其原则是尽量少占用 human attention，只在授权请求或团队规则触发时行动，仅暴露需要人决策或可直接使用的结果。仓库明确声明它是参考研究代码，不是正式产品，也不是内部系统的完整复刻，因此当前更值得关注的是架构而非 production-readiness。",
+      "points": 11,
+      "num_comments": 0,
+      "interest_tag": ""
+    }
+  ]
+}
