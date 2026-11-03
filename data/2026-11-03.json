@@ -1,0 +1,201 @@
+{
+  "date": "2026-11-03",
+  "generated_at": "2026-11-03T17:03:17.790523+08:00",
+  "briefing_zh": "今天最明确的主线，是 agent 研究从「模型会不会做」转向「系统如何持续地产生、验证并复用经验」。**CoworkOS** 把策略决策与执行管理解耦，用持久工作区、语义记忆和异步 Subagents 支撑跨会话工作；**CUA-Master** 与 **NorthCUA** 则分别从开放世界数据飞轮、可回滚轨迹采集和统一 Harness 切入，把 Computer Use Agent 的进步绑定到可验证的完整任务结果，而不只是单步 grounding。与此同时，**DAYJOB: Tax** 说明真实专业任务的难点不是回答显式问题，而是主动发现用户没有问出的高后果约束。\n\n生成与 world model 方向也在系统化。**Wave Forcing** 将训练、生成和运行时联合设计，在 8 张 H200 上实现 134.8 end-to-end FPS；**Video Generation Meets Agent Harness** 则把视频生成重新定义成由规划、工具、状态和反馈驱动的可执行流程。**Hierarchical World Models with Implicit Dynamics** 用高层可达性采样和低层逆动力学解耦长程规划，提示 world model 的价值不只在预测下一帧，而在为 test-time planning 提供结构化的可达子目标。\n\n基础模型研究出现两条值得跟踪的路线。**Proving and Improving the Platonic Representation Hypothesis with JEPAs** 将跨模态表征趋同从经验观察推进到带条件的定理，并报告 good views 比 next-token prediction 少 42 倍样本即可达到同等对齐；**Hinted Scaling Laws** 则用可调难度提示让小模型摆脱零分区，从而把下游能力预测误差中位数从 21 个百分点降到 4.3。更激进的 **Weight-Space Programming** 展示 LLM 直接读取和改写神经网络权重的早期信号，若能扩展，可能形成区别于 gradient descent 的模型编辑接口。\n\n开源侧的热点集中在「让 agent 真正进入工作流」而非再造聊天界面。**Mika** 以 5.7k stars 领跑，卖点是 Android 后台屏幕操作、本地状态与支付前交还控制；**Shim** 把任意模型、MCP 和 Agent Skills 压进无依赖小型 CLI；**Grim Prompter** 与 **AnyScene** 分别证明结构化 skill 可以承载可审计 threat modeling 和带视觉 gate 的 Blender 生产流程。HN 对 Claude Code 后台 agent 摘要成本的讨论则提醒：可观测性、预算核算和隐藏的 orchestration 开销已经成为 agent 产品的一级问题。",
+  "briefing_en": "The clearest theme today is a shift from asking whether an agent can act to engineering systems that continuously produce, verify, and reuse experience. **CoworkOS** separates strategic decisions from execution management and uses persistent workspaces, semantic memory, and asynchronous subagents for work that spans sessions. **CUA-Master** and **NorthCUA** attack computer use from complementary directions—open-world data flywheels, rollback-based trajectory collection, and unified harnesses—tying progress to verified end-to-end outcomes rather than isolated grounding. **DAYJOB: Tax** adds the evaluation warning: professional competence means surfacing consequential constraints the user did not explicitly ask about.\n\nGeneration and world modeling are becoming systems problems as well. **Wave Forcing** co-designs training, generation, and runtime to reach 134.8 end-to-end FPS on eight H200s, while **Video Generation Meets Agent Harness** reframes video creation as an executable process of planning, tools, state, and feedback. **Hierarchical World Models with Implicit Dynamics** separates high-level reachability sampling from low-level inverse dynamics, suggesting that a useful world model is not merely a next-frame predictor but a structured substrate for test-time planning.\n\nTwo foundation-model directions stand out. **Proving and Improving the Platonic Representation Hypothesis with JEPAs** turns cross-modal convergence from an empirical pattern into a conditional theorem and reports that good views need 42 times fewer samples than next-token prediction for equivalent alignment. **Hinted Scaling Laws** creates easier benchmark continuums so small models escape the zero-score regime, cutting median downstream forecasting error from 21 to 4.3 percentage points. More speculatively, **Weight-Space Programming** shows early evidence that LLMs can inspect and edit raw neural weights directly, hinting at a model-programming interface beyond gradient descent.\n\nOpen source attention is clustering around agents that enter real workflows rather than another chat shell. **Mika** leads with 5.7k stars by operating Android apps on a background screen while preserving local state and handing payments back to the user; **Shim** compresses models, MCP, and Agent Skills into a dependency-free CLI; **Grim Prompter** and **AnyScene** show that structured skills can carry auditable threat modeling and gated Blender production. The HN debate over Claude Code's background-agent summaries is the counterpoint: observability, budget accounting, and hidden orchestration overhead are now first-class agent product concerns.",
+  "viral_analysis_zh": "最可能继续扩散的是 **Mika**：它把「手机 agent」浓缩成后台操作、不打断前台使用和支付前交还控制三个可立即演示的卖点，且 GIF demo 能让价值在数秒内被理解。研究侧 **Weight-Space Programming** 的标题和结论都具备反直觉传播力——「LLM 直接读写权重」天然跨越模型训练与程序合成两个社群。HN 上 Claude Code 的 transcript 成本调查则依靠具体的 15–20% 数字和可复现实验，把隐形开销变成了人人都能感知的产品缺陷。",
+  "viral_analysis_en": "**Mika** is the strongest viral candidate: background phone operation, uninterrupted foreground use, and payment handoff are three instantly demonstrable benefits, and its GIFs communicate the product in seconds. On the research side, **Weight-Space Programming** has an unusually shareable counterintuitive claim—LLMs directly reading and writing weights—that bridges model training and program synthesis. The Claude Code transcript investigation adds a concrete 15–20% cost figure and a reproducible mechanism, turning invisible orchestration overhead into a widely relatable product flaw.",
+  "huggingface_papers": [
+    {
+      "title": "Wave Forcing: Towards Speed-of-Light Streaming Video Generation",
+      "url": "https://huggingface.co/papers/2611.00859",
+      "tldr": "Wave Forcing co-designs training, denoising, cache refresh, and runtime execution for continuous long-video generation. Its staggered pipeline reaches one output chunk per concurrent forward round after fill, while WaveRT overlaps early K/V delivery with computation and decoding. On Wan2.1-T2V-1.3B, the method preserves quality while 4-step generation reaches 134.8 end-to-end FPS on eight H200s, a 7.07x throughput gain over one GPU. The work matters because real-time video is treated as an end-to-end systems problem rather than a model-only speedup.",
+      "tldr_zh": "Wave Forcing 联合设计训练、去噪、cache refresh 与运行时执行，用于连续长视频生成。其交错流水线在填满后每轮并发 forward 都能输出一个 chunk，WaveRT 还将早期 K/V 传输与计算、解码重叠。在 Wan2.1-T2V-1.3B 上，4-step 配置于 8 张 H200 达到 134.8 end-to-end FPS，相比单卡吞吐提升 7.07 倍且保持质量。重要性在于它把实时视频视为端到端系统问题，而非单纯压缩模型推理。",
+      "upvotes": 73,
+      "authors": "Yijie Jin, Yuxuan Liu, Jiajun Xu, Ye Huang, Chuzhi Wang, Jiayang Li, Ruiyang Chen, Chenling Hong, Xu Wang, Zhijie Deng",
+      "ai_keywords": [],
+      "interest_tag": ""
+    },
+    {
+      "title": "Video Generation Meets Agent Harness: Agentic Video Generation, Agentic World Modeling and Recursive Self-Improvement",
+      "url": "https://huggingface.co/papers/2610.40191",
+      "tldr": "This report frames an agent harness as the runtime around video models that assembles context, exposes tools, maintains state, routes feedback, and controls budgets. It connects agentic multi-shot production, action-conditioned world models, and recursive self-improvement in one systems taxonomy. The authors distinguish revisions to outputs, harness state, model parameters, evaluators, and the improvement procedure itself. That separation is useful because it makes claims of self-improvement auditable instead of collapsing every feedback loop into one label.",
+      "tldr_zh": "该报告把 agent harness 定义为视频模型外围的运行时：构建 context、暴露工具、维护状态、路由反馈并管理预算。它用统一系统框架连接多镜头 agentic production、action-conditioned world model 与 recursive self-improvement。作者进一步区分输出修订、harness 状态更新、模型参数更新、evaluator 更新和改进流程本身的变化。这个拆分让 self-improvement 的证据更可审计，避免把所有 feedback loop 混成一个概念。",
+      "upvotes": 55,
+      "authors": "Liaoyuan Fan, Yuhao Zheng, Dongxing Mao, Hangyu Ran, Siyuan Hu, Weijia Mao, Rui Zhao, Weijia Wu, Guian Fang, Yanzhe Chen, Zeyu Zhu, Yuxin Jiang, Yiren Song, Yuchao Gu, Junchao Yi, Qi Hu, Dan Kong, Alex Jinpeng Wang, Kevin Qinghong Lin, Mike Zheng Shou, Wei Liu",
+      "ai_keywords": [],
+      "interest_tag": ""
+    },
+    {
+      "title": "CoworkOS:Scaling Agent Coworkers for Real-world Automation",
+      "url": "https://huggingface.co/papers/2611.03178",
+      "tldr": "CoworkOS separates model-level strategy from runtime execution management for long-horizon productivity work. A three-layer architecture supports direct action or synchronous and asynchronous delegation, while shared applications let humans and agents edit the same evolving artifacts. Persistent semantic memory, hierarchical workspaces, and resumable job logs preserve continuity across sessions. Its reported five-round post-training case raises an eight-benchmark average from 33.19 to 42.95, making the harness itself part of the improvement loop.",
+      "tldr_zh": "CoworkOS 面向长程生产力任务，将模型层策略与运行时执行管理分离。三层架构支持直接执行以及同步、异步 delegation，共享应用层允许人和 agent 修改同一份持续演化的产物。持久语义记忆、分层 workspace 和可恢复 Job log 维持跨会话连续性。其五轮自动 post-training 案例把八项 benchmark 平均分从 33.19 提升到 42.95，使 harness 本身成为改进闭环的一部分。",
+      "upvotes": 51,
+      "authors": "Jiajie Jin, Guanting Dong, Chengjun Pan, Xin Deng, Zhuohui Sheng, Guoqiang Wang, Tao Gui, Yutao Zhu, Yujia Chen, Shihong Yi, Binze Hu, Zhixiong Yang, Zhichao Sun, Rui Wang, Han Han, Mingyu Ma, Junhao Huang, Xiaotao Wang, Huicheng Jiang, Yuyang Hu, Xinyu Yang, Wanghan Xu, Yajie Yang, Zhecan Wang, Honglin Guo, Xiaoyu Xing, Xiaoqian Zhang, Yulun Zhu, Xiaoxi Li, Jiahang Lin, Shaofan Liu, Shihan Dou, Zhiheng Xi, Qi Zhang, Yu-Gang Jiang, See-Kiong Ng, Yang Zhang, Tat-Seng Chua, Ji-Rong Wen, Zhicheng Dou",
+      "ai_keywords": [],
+      "interest_tag": "Agent Swarm"
+    },
+    {
+      "title": "CUA-Master: Scaling Computer-use Agents through Open-World Recursive Improvements",
+      "url": "https://huggingface.co/papers/2611.03126",
+      "tldr": "CUA-Master introduces nested recursive-improvement loops for computer-use agents. The outer loop uses open-world data and model weaknesses to steer each training iteration; the inner loop mines workflows from instructional video, reconstructs trajectories, and composes verifiable tasks from reusable primitives. Snapshot-and-rollback retries improve collection reliability in live environments. The 27B model reports 80.2 on OSWorld Verified and continued gains across iterations, making data controllability and verification the central contribution.",
+      "tldr_zh": "CUA-Master 为 Computer Use Agent 提出嵌套式 recursive-improvement 双循环。外循环用开放世界数据和模型弱点指导每轮训练，内循环从教学视频挖掘工作流、重建轨迹，并用可复用 primitive 合成可验证任务。snapshot-and-rollback 重试机制提升真实环境中的轨迹采集可靠性。27B 模型报告 OSWorld Verified 80.2，并在多轮迭代中持续增益，核心贡献是数据可控性与验证闭环。",
+      "upvotes": 39,
+      "authors": "Xinlei Yu, Gen Li, Ji Zhao, Zhangquan Chen, Congcong Wang, Shuai Dong, Zelin Peng, Yuqi Xu, Hongrui Wu, Kaiwen Tuo, Cheng Yang, Kaituo Feng, Yifan Wu, Jiayi Zhang, Dongming Wu, Wenqi Shao, Jiaqi Wang, Xiangyu Yue",
+      "ai_keywords": [],
+      "interest_tag": "CUA"
+    },
+    {
+      "title": "NorthCUA Technical Report: Turbocharging Computer-Use Agents through Experience at Scale",
+      "url": "https://huggingface.co/papers/2611.02102",
+      "tldr": "NorthCUA couples an experience flywheel, a long-horizon execution harness, and staged learning for computer use. The harness records decisions and verifies outcomes; failed tasks feed recursive skill evolution while preserving validated milestones for later attempts. Training then combines grounding, long-horizon supervision, and joint desktop-web reinforcement learning in the same environment. The result is a family spanning Nano, Mini, Pro, and a latency-oriented Ultrafast variant, emphasizing reusable verified experience rather than isolated demonstrations.",
+      "tldr_zh": "NorthCUA 将 experience flywheel、长程执行 harness 与 staged learning 组合成 Computer Use 训练系统。Harness 记录决策并验证结果；失败任务进入 recursive skill evolution，同时保留已验证 milestone 供后续尝试复用。训练在同一环境内结合 grounding、长程监督和 desktop-web joint RL。最终形成 Nano、Mini、Pro 与偏低延迟的 Ultrafast 系列，重点从孤立 demonstration 转向可复用的已验证经验。",
+      "upvotes": 23,
+      "authors": "Chaoyun Zhang, Bingxuan Li, Pinxue Guo, Yangfan Gao, Zikun Cai, Tianci Xie, Hui Li, Yuqi Huang, Yifei Cao, Bo Mao, Tian Tang, Qichang Zheng, Tongtong Liu, Xiaoxing Wang, Jinxiu Liu, Lizhi Lin, Zhou Shao, Maosen Zhou, Miao Zheng, Shuo Zhang, Yangji He, Kepeng Lei, Ning Zhao, Wei Shen, Zhenjiang Jin, Xinyue Zhang, Peng Sun, Zhenhua Han, Rui Zheng, Hang Yan",
+      "ai_keywords": [],
+      "interest_tag": "CUA"
+    }
+  ],
+  "alphaxiv_papers": [
+    {
+      "title": "Sparks of Weight-Space Programming: LLMs can natively read & write neural network weights",
+      "arxiv_id": "",
+      "url": "https://www.alphaxiv.org/abs/2611.weight-space-programming",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2611.weight-space-programming",
+      "tldr": "The work probes whether frontier LLMs can treat raw neural-network parameters as a manipulable language. The reported models infer what small networks do from weights alone and can synthesize or edit weights to change behavior without gradient descent. This is still an early spark rather than a scalable replacement for training. Its importance is conceptual: weights may become an editable program representation that general-purpose models can inspect and rewrite directly.",
+      "tldr_zh": "这项工作测试 frontier LLM 能否把原始神经网络参数当作可操作语言。报告中的模型仅凭权重判断小网络功能，并能直接生成或修改权重来改变行为，无需 gradient descent。它仍是早期信号，并非可扩展训练替代方案。其概念意义在于：权重可能成为通用模型可直接检查和重写的程序表示。",
+      "interest_tag": ""
+    },
+    {
+      "title": "Proving and Improving the Platonic Representation Hypothesis with JEPAs",
+      "arxiv_id": "2610.39302",
+      "url": "https://arxiv.org/abs/2610.39302",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2610.39302",
+      "tldr": "The paper proves that separately trained JEPAs converge to the same representation up to rotation when positive pairs are good views of one scene. It interprets next-token prediction as a JEPA with poor views, explaining why language–vision alignment emerges inefficiently with scale. Experiments report that good views require 42 times fewer samples for equivalent alignment, and a 109M text JEPA outperforms much larger language models on cross-modal alignment. The result turns a broad empirical hypothesis into both a theorem and a concrete data-design prescription.",
+      "tldr_zh": "论文证明：当正样本对是同一场景的 good views 时，独立训练的 JEPA 会在旋转变换意义下收敛到同一表示。它把 next-token prediction 解释为使用 poor views 的 JEPA，从而说明语言—视觉对齐为何只能低效地随规模出现。实验称 good views 达到同等对齐所需样本少 42 倍，109M text JEPA 甚至超过更大的语言模型。它把宽泛的经验假说同时变成定理和数据设计原则。",
+      "interest_tag": ""
+    },
+    {
+      "title": "Hierarchical World Models with Implicit Dynamics",
+      "arxiv_id": "2610.42146",
+      "url": "https://arxiv.org/abs/2610.42146",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2610.42146",
+      "tldr": "ID-WM separates high-level reachability from low-level control in world-model planning. A high-level model proposes feasible state transitions, and a low-level world model acts as an inverse-dynamics solver that grounds them into precise actions. This avoids rigid macro-actions and lets long plans be composed from short behavioral fragments. Across navigation and manipulation suites, the authors report a 38.5% gain over prior planners and a 135% gain over flat world-model MPC on difficult unseen settings.",
+      "tldr_zh": "ID-WM 在 world-model planning 中把高层可达性与低层控制解耦。高层模型提出可行状态转移，低层 world model 作为 inverse-dynamics solver 将其落到精确动作。这样无需刚性的 macro-action，也能从短行为片段组合长程计划。作者在导航与操作套件上报告比既有 planner 提升 38.5%，在困难未见配置上比扁平 world-model MPC 提升 135%。",
+      "interest_tag": ""
+    },
+    {
+      "title": "Hinted Scaling Laws",
+      "arxiv_id": "2611.02270",
+      "url": "https://arxiv.org/abs/2611.02270",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2611.02270",
+      "tldr": "Standard downstream scaling laws fail when small models all sit near zero accuracy. Hinted scaling laws create a continuum of easier task variants using privileged information, exposing a smooth trend below the original benchmark's noise floor. On GSM8K, AIME, and HLE, the method reduces median forecasting error from 21 to 4.3 percentage points. It also needs fewer rollouts to rank similar models, making it a practical tool for both scaling prediction and evaluation efficiency.",
+      "tldr_zh": "当小模型在下游 benchmark 上都接近零分时，标准 scaling law 无法外推。Hinted scaling laws 用 privileged information 构造连续的更易任务，在原 benchmark 的噪声地板下暴露平滑趋势。在 GSM8K、AIME 和 HLE 上，方法将预测误差中位数从 21 个百分点降到 4.3。它还能用更少 rollout 排序相近模型，因此同时改善 scaling 预测与评测效率。",
+      "interest_tag": ""
+    },
+    {
+      "title": "Mistral Large 4",
+      "arxiv_id": "",
+      "url": "https://www.alphaxiv.org/abs/2611.mistral-large-4",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2611.mistral-large-4",
+      "tldr": "Mistral Large 4 is a multimodal mixture-of-experts model with 52B active and 1T total parameters, aimed at reasoning and long-horizon agentic tasks. Its training pipeline uses agents to author and verify executable environments for software engineering, cybersecurity, and knowledge work. The report lists 41% on Terminal-Bench 4.0 and 50.9% on the Artificial Analysis Cyber Index. Sparse serving, prefill–decode disaggregation, speculative decoding, and calibrated NVFP4 shrink the checkpoint to 606 GB for four-GB300 deployment while preserving the FP8 evaluation profile.",
+      "tldr_zh": "Mistral Large 4 是 52B active、1T 总参数的 multimodal MoE，面向 reasoning 与长程 agentic task。其训练流水线由 agent 自动编写并验证软件工程、网络安全和知识工作环境。报告给出 Terminal-Bench 4.0 41% 与 Artificial Analysis Cyber Index 50.9%。稀疏 serving、prefill–decode 解耦、speculative decoding 和校准 NVFP4 将 checkpoint 压到 606 GB，可部署于 4 张 GB300 且保持 FP8 评测表现。",
+      "interest_tag": ""
+    }
+  ],
+  "github_repos": [
+    {
+      "name": "wangzan101/Mika",
+      "url": "https://github.com/wangzan101/Mika",
+      "tldr": "Mika is an open-source Android agent that operates apps and websites on a separate background screen, allowing the user to keep using the phone. It relies on visual interaction rather than per-app APIs, stores state locally, and hands logins, verification codes, and payments back to the user. Completed tasks can become reusable skills, and the project supports model APIs or account sign-in without a Mika server. The combination of a concrete mobile UX, safety handoffs, and polished demos explains its rapid 5.7k-star launch.",
+      "tldr_zh": "Mika 是开源 Android agent，在独立后台屏幕中操作 app 与网站，因此用户仍可正常使用手机。它依靠视觉交互而非逐 app API，状态保存在本地，并把登录、验证码和支付交还用户。已完成任务可沉淀为可复用 skill，项目支持模型 API 或账号登录且不依赖 Mika 服务端。清晰的移动端 UX、安全交接与高质量 demo 共同解释了其快速获得 5.7k stars。",
+      "stars": 5753,
+      "language": "Kotlin",
+      "interest_tag": "CUA"
+    },
+    {
+      "name": "wanghao-SunSky/cs329z-chinese",
+      "url": "https://github.com/wanghao-SunSky/cs329z-chinese",
+      "tldr": "This repository translates and organizes Stanford CS329Z, Engineering AI Agents, into a Chinese-first learning package. It covers 19 lectures and four projects spanning LLM foundations, RAG, tool use, memory, multi-agent systems, evaluation, and security, with Markdown plus online and offline HTML. Its value is breadth and accessibility rather than a new agent runtime. The strong early star count shows continued demand for coherent curricula that connect agent components into an engineering discipline.",
+      "tldr_zh": "该仓库将 Stanford CS329Z《Engineering AI Agents》整理为中文优先的学习包。内容包含 19 讲和 4 个项目，覆盖 LLM 基础、RAG、工具调用、记忆、多 agent、评测与安全，并提供 Markdown、在线及离线 HTML。它的价值在于系统性和可访问性，而非推出新 agent runtime。早期高 star 说明市场持续需要把零散 agent 组件串成工程学科的完整课程。",
+      "stars": 474,
+      "language": "HTML",
+      "interest_tag": ""
+    },
+    {
+      "name": "Balanov/shim",
+      "url": "https://github.com/Balanov/shim",
+      "tldr": "Shim is a local-first command-line harness packaged as one small Go binary with no runtime dependencies or telemetry. It supports OpenAI-compatible and Anthropic providers, MCP over stdio or HTTP, and lazy loading of Agent Skills from common directories. A local mini-model can route natural-language management requests into allowlisted commands, with confirmation required for mutation. The project is notable for treating interoperability and inspectable local state as the product, rather than adding another heavy agent UI.",
+      "tldr_zh": "Shim 是 local-first CLI harness，以单个小型 Go binary 交付，不需要运行时依赖，也不含 telemetry。它支持 OpenAI-compatible 与 Anthropic provider、stdio/HTTP MCP，并从常见目录 lazy-load Agent Skills。本地小模型可把自然语言管理请求路由到 allowlist 命令，状态变更仍需确认。项目值得关注之处，是把互操作性和可检查本地状态当作产品，而不是再增加一套重型 agent UI。",
+      "stars": 412,
+      "language": "Go",
+      "interest_tag": ""
+    },
+    {
+      "name": "jmanico/grim-prompter",
+      "url": "https://github.com/jmanico/grim-prompter",
+      "tldr": "Grim Prompter packages threat modeling as an agent skill with 36 architecture workflows and 29 analysis methods. It requires read-only evidence collection, file-and-line citations, explicit scope, and separate authorization for builds, tests, scripts, or network access. Outputs include a system-under-review document, reports, and JSON handoffs that support change reviews against a prior baseline. The design is valuable because it encodes security process and evidentiary limits, while explicitly refusing to treat an agent-generated model as certification.",
+      "tldr_zh": "Grim Prompter 把 threat modeling 封装成 agent skill，包含 36 类架构 workflow 与 29 种分析方法。它要求只读取证、文件与行号引用、明确 scope，并把 build、test、script 与网络访问设为单独授权。输出包含 system-under-review 文档、报告及可用于基线变更审查的 JSON handoff。其价值在于将安全流程和证据边界写入 skill，同时明确拒绝把 agent 生成的 threat model 当作安全认证。",
+      "stars": 349,
+      "language": "",
+      "interest_tag": ""
+    },
+    {
+      "name": "apekshik/anyscene",
+      "url": "https://github.com/apekshik/anyscene",
+      "tldr": "AnyScene turns a brief or reference images into a dressed and lit Blender scene through an agent-driven pipeline. It generates each prop as an image, converts it with two image-to-3D models, compares same-light renders, and proceeds through explicit visual gates for layout, lighting, shots, and review. Scene artifacts remain reproducible through scripts and manifests, while a hosted path can return Blender and GLB packages. The project matters as a concrete example of a skill carrying a costly multimodal production process with checkpoints rather than relying on one-shot generation.",
+      "tldr_zh": "AnyScene 通过 agent-driven pipeline 把文字 brief 或参考图变成完成布景与打光的 Blender 场景。它先生成每个 prop 的图像，再用两种 image-to-3D 模型转换，通过同光照 render 比较选择，并为 layout、lighting、shot 与 review 设置显式视觉 gate。场景可通过 script 与 manifest 重建，hosted 路径还能返回 Blender 与 GLB 包。它展示了 skill 如何承载昂贵的多模态生产流程和检查点，而不是依赖 one-shot generation。",
+      "stars": 264,
+      "language": "Python",
+      "interest_tag": ""
+    }
+  ],
+  "hackernews": [
+    {
+      "title": "Claude Code regularly sends each background agent’s transcript to its model",
+      "url": "https://gist.github.com/flamerix-ai/c3905705cc4205e5de3011fa2e74efce",
+      "tldr": "An OpenTelemetry investigation claims Claude Code periodically sends each background agent's full transcript back to its model to generate a three-to-five-word status summary. The author measured agent_summary traffic at roughly 15–20% of total Claude Code spend in the tested setup, sometimes exceeding the main conversation. The post provides a Bun preload hook that disables the behavior without modifying the binary. Beyond the specific workaround, the story exposes how invisible orchestration features can dominate both token cost and privacy surface area.",
+      "tldr_zh": "一项 OpenTelemetry 调查称，Claude Code 会周期性把每个后台 agent 的完整 transcript 发回其模型，只为生成 3–5 个词的状态摘要。作者在测试环境中测得 agent_summary 约占总 Claude Code 成本的 15–20%，有时甚至超过主对话。帖子提供了不修改 binary 的 Bun preload hook 来关闭该行为。比具体 workaround 更重要的是，它揭示隐形 orchestration 功能可能主导 token 成本与隐私暴露面。",
+      "points": 588,
+      "num_comments": 236,
+      "interest_tag": ""
+    },
+    {
+      "title": "We ran AI agent swarms in Minecraft and Mindustry",
+      "url": "https://labs.ycombinator.com/projects/games/index.html",
+      "tldr": "Y Combinator Labs and Olam Labs ran multi-agent experiments in Minecraft and Mindustry to observe coordination under open-ended pressure. The environments produced roles, hierarchies, communication patterns, and failure modes that are hard to capture in static benchmarks. The accompanying write-up includes Civ50, Bed Wars, and an open-source swarm setup rather than only curated success clips. Its value is empirical: collective capability and collective dysfunction can emerge from the same coordination substrate.",
+      "tldr_zh": "Y Combinator Labs 与 Olam Labs 在 Minecraft 和 Mindustry 中运行多 agent 实验，观察开放环境压力下的协作行为。环境中出现角色、层级、通信模式与静态 benchmark 难以覆盖的失败机制。文章包含 Civ50、Bed Wars 以及可运行的开源 swarm setup，而不只是筛选后的成功片段。其价值在于提供经验事实：集体能力与集体失灵可能从同一套协作基础设施中同时涌现。",
+      "points": 421,
+      "num_comments": 174,
+      "interest_tag": "Agent Swarm"
+    },
+    {
+      "title": "Show HN: OmniDiff – Opensource, super fast, content aware Git difftool, in Rust",
+      "url": "https://github.com/ivankovic/omnidiff",
+      "tldr": "OmniDiff is a Rust diff tool that selects content-specific algorithms for code, images, fonts, archives, PDFs, and other formats. The project reports that 98.8% of changes use specialized diffing and emphasizes sub-100 ms fast paths plus syntax-aware structural comparison. It integrates as a Git difftool but also offers prebuilt binaries and a browser showcase. The broader agent relevance is verification: richer diffs can make review evidence more legible than line-oriented text when agents modify heterogeneous repositories.",
+      "tldr_zh": "OmniDiff 是 Rust 编写的 diff 工具，会针对代码、图像、字体、压缩包、PDF 等格式选择专用算法。项目称 98.8% 的变更使用 content-specific diff，并强调低于 100 ms 的快速路径与 syntax-aware 结构比较。它既可作为 Git difftool，也提供预编译 binary 和浏览器展示。对 agent 更广泛的意义在验证：当 agent 修改异构仓库时，丰富 diff 比纯行文本更能呈现可审查证据。",
+      "points": 314,
+      "num_comments": 94,
+      "interest_tag": ""
+    },
+    {
+      "title": "Dayjob: Tax – evaluating AI agents on 50 professional tax assignments",
+      "url": "https://surgehq.ai/blog/dayjob-tax",
+      "tldr": "DAYJOB: Tax evaluates agents on 50 professional assignments across eight areas of tax practice. Tasks include client requests and source records, and outputs can be returns, workpapers, technical reviews, or advisory documents; the benchmark probes whether agents surface material issues absent from the prompt. In the highlighted condo case, Astra missed a consequential eligibility deadline in all five attempts while Opus found it every time. The benchmark is important because it tests professional judgment under incomplete specification, not merely retrieval or form filling.",
+      "tldr_zh": "DAYJOB: Tax 用 50 个专业任务评测 agent，覆盖八类税务实践。任务提供客户请求和原始记录，输出可能是报税表、workpaper、技术审查或咨询文档；重点是 agent 能否发现 prompt 未明确指出的重大问题。在房产案例中，Astra 五次都漏掉关键资格截止日，而 Opus 五次全部发现。该 benchmark 的意义在于测试不完整 specification 下的专业判断，而不只是检索或填表。",
+      "points": 266,
+      "num_comments": 174,
+      "interest_tag": "Benchmark"
+    },
+    {
+      "title": "Launch HN: Momentic (YC W24) – Agents that catch bugs by using your app",
+      "url": "https://momentic.ai/",
+      "tldr": "Momentic positions an agent as an end-to-end QA worker that turns prompts into application tests, runs critical flows, and reports reproducible bugs. Its current product claims more than 70 million test runs and 117,000 bugs caught, with self-healing steps, visual assertions, parallel execution, and triage tooling. The launch reflects a mature application of browser agents: repetitive interaction is paired with CI integration and failure diagnosis rather than presented as a general assistant. The open question is how much of the self-reported production scale translates into robust behavior on novel interfaces.",
+      "tldr_zh": "Momentic 将 agent 定位为端到端 QA 工程师：把 prompt 转成应用测试、执行关键流程并报告可复现 bug。产品页面称已运行超过 7000 万次测试、捕获 11.7 万个 bug，并提供 self-healing step、视觉断言、并行执行和 triage 工具。它代表较成熟的 browser agent 应用：把重复交互接入 CI 与故障诊断，而不是包装成通用助手。仍需追问的是，其自报生产规模能在多大程度上转化为对新界面的稳健泛化。",
+      "points": 143,
+      "num_comments": 95,
+      "interest_tag": ""
+    }
+  ]
+}
