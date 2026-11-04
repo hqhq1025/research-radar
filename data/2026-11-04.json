@@ -1,0 +1,201 @@
+{
+  "date": "2026-11-04",
+  "generated_at": "2026-11-04T17:04:47.821104+08:00",
+  "briefing_zh": "今天最清晰的主线是：agent 的性能边界越来越取决于路由、环境和 harness，而不只是单一模型。**Route Anything** 用覆盖 25 个 benchmark、452 个候选配置的轨迹矩阵研究质量—成本路由，learned router 在降低 policy time 的同时超过最佳固定候选；**ToolSpace** 则从真实 MCP 调用轨迹反推跨服务环境和可回放任务，说明 environment synthesis 的关键不是让 LLM 猜接口，而是保留执行依赖与 assertion。**Axion 1.0** 进一步表明，开放 agent foundation model 未必需要繁复 recipe：两阶段 SFT 加 RL，也能在可验证任务和长程 tool use 上形成竞争力。\n\nComputer Use 方向今天同时出现训练 recipe 与环境基础设施的推进。**Mage-VL-Cowork** 用五阶段 curriculum、evolved teacher harness 和 293,806 个 desktop/web 任务训练 4B hybrid CUA，在 OSWorld-Verified 报告 66.0%；**WebHarbor** 则把 153 个真实网站重建为 deterministic、dockerized 的可执行环境。两者共同指向一个更重要的判断：GUI agent 的下一轮增益不会只来自更强 VLM，而来自可扩展任务生成、稳定 replay、stage-specific supervision 与 end-to-end verification 的共同设计。\n\n基础模型与具身智能也在重新定义「模型之外」的系统边界。**Weight-Space Programming** 展示 frontier LLM 直接读取、生成和局部编辑神经网络权重的早期证据，概念上把 weights 变成一种可推理的程序表示；**Hinted Scaling Laws** 用分级提示把小模型从 benchmark 零分区拉出来，将下游预测误差中位数从 21 个百分点降到 4.3。机器人侧，**uni-robot-agent** 用统一 harness 让 open-weight model 在无 privileged simulator input 下参与 robot-use，**Pixel** 则联合设计硬件、示教接口、whole-body controller 和 learning stack，强调完整系统 co-design。\n\n开源和 HN 的信号高度一致：价值正在从「接一个最强模型」转向轻量 harness、验证与任务级模型配置。**Shim** 把 model、MCP 和 Agent Skills 压进无依赖 CLI，**Verdict** 尝试识别 exit code 背后的语义结果，**NamiAgent** 用可运行课程拆开 agent loop、权限、context、memory 与 subagent。HN 上 Gartner 的判断称 routine agent steps 可大量迁移到 open-weight model，而 Apify 的价格实验和 coding-agent harness playbook 又提醒：低成本路由只有与 live data、明确 failure status、可发现 validation 和有限 retry 结合，才会转化为可靠系统。",
+  "briefing_en": "The clearest theme today is that agent performance is increasingly bounded by routing, environments, and harnesses rather than by a single model. **Route Anything** studies quality–cost routing with a trajectory matrix spanning 25 benchmarks and 452 candidate configurations, showing that learned routers can beat the best fixed candidate while reducing policy time. **ToolSpace** works from real MCP traces to synthesize cross-service environments and replayable tasks, arguing that executable dependencies and assertions are more reliable than asking an LLM to invent interfaces. **Axion 1.0** adds a complementary result: a fully open agent foundation model can remain competitive with a compact recipe of two SFT stages followed by RL.\n\nComputer use advances today on both training and infrastructure. **Mage-VL-Cowork** combines a five-stage curriculum, evolved teacher harnesses, and 293,806 desktop and web tasks to train a 4B hybrid CUA that reports 66.0% on OSWorld-Verified. **WebHarbor** reconstructs 153 real websites as deterministic, dockerized, executable environments. Together they suggest that the next gains in GUI agents will come not only from stronger VLMs, but from jointly scaling task generation, stable replay, stage-specific supervision, and end-to-end verification.\n\nFoundation-model and embodied-intelligence work is also redefining what belongs outside the model. **Weight-Space Programming** presents early evidence that frontier LLMs can inspect, synthesize, and locally edit neural weights directly, treating weights as a program representation that can be reasoned over. **Hinted Scaling Laws** uses graded assistance to lift small models out of benchmark floor effects, reducing median downstream forecasting error from 21 to 4.3 percentage points. In robotics, **uni-robot-agent** makes open-weight robot-use research possible through a unified non-privileged harness, while **Pixel** co-designs hardware, demonstrations, whole-body control, and policy learning as one system.\n\nOpen-source and Hacker News signals converge on the same operational shift: value is moving from simply attaching the strongest model toward lightweight harnesses, semantic verification, and task-level model allocation. **Shim** compresses models, MCP, and Agent Skills into a dependency-free CLI; **Verdict** attempts to classify the meaning behind a process exit; and **NamiAgent** exposes agent loops, permissions, context, memory, and subagents as runnable lessons. Gartner's claim that routine agent steps can move to open-weight models is attractive, but the live-price grounding experiment and coding-agent harness playbook show the necessary caveat: cheap routing becomes reliable only when paired with current data, explicit failure states, discoverable validation, and bounded retries.",
+  "viral_analysis_zh": "今天最可能继续扩散的是 **Weight-Space Programming**：标题把「LLM 直接读写权重」压缩成一个反直觉、可演示且跨越 interpretability、optimization 与 program synthesis 的强主张，已有 11.7 万次 alphaXiv 访问。产品侧 **Shim** 的「一个 7.29 MiB binary、零依赖、任意 model/MCP/skill」是极易复述的 value proposition；而「open model 完成 90% routine steps」会凭 90% 与二十分之一成本这两个数字传播，但应同时保留 Gartner 自己给出的现实节省更接近 5–6 倍这一边界。",
+  "viral_analysis_en": "**Weight-Space Programming** is the strongest research-side viral candidate: the claim that an LLM can directly read and write weights is counterintuitive, demonstrable, and bridges interpretability, optimization, and program synthesis, with more than 117,000 alphaXiv visits already recorded. On the product side, **Shim** has an unusually repeatable proposition—one 7.29 MiB binary, zero dependencies, and support for any model, MCP server, or skill. The claim that open models can handle 90% of routine steps at one-twentieth the cost will also spread through its numbers, although Gartner's own practical estimate is a more modest five- to six-fold saving per task.",
+  "huggingface_papers": [
+    {
+      "title": "Route Anything: A Study of Model and Policy Routing for General-Purpose AI Systems",
+      "url": "https://huggingface.co/papers/2611.05275",
+      "tldr": "Route Anything formalizes quality–cost routing across heterogeneous models, tools, and policies, then builds an omni-modal matrix of 374,401 scored runs from 452 candidate configurations over 25 benchmarks. Per-input oracle routing beats the best fixed candidate by 5.4 points, while learned routers gain 0.3 points across 16 benchmarks and reduce policy time by 24% in robot manipulation. The work matters because it treats orchestration as a measurable systems problem and reports an average 8.82x efficiency gain over the reference model rather than assuming one frontier model should serve every input.",
+      "tldr_zh": "Route Anything 对异构模型、工具和 policy 的质量—成本路由进行统一建模，并构建覆盖 25 个 benchmark、452 个候选配置、374,401 次评分运行的 omni-modal matrix。per-input oracle 比最佳固定候选高 5.4 分，learned router 在 16 个 benchmark 上高 0.3 分，并在机器人操作中减少 24% policy time。重要性在于它把 orchestration 变成可测量的系统问题，并报告相对 reference model 平均 8.82 倍效率提升，而不是默认每个输入都应调用同一个 frontier model。",
+      "upvotes": 66,
+      "authors": "Pengfei Zhou, Yixing Ma, Hexin Wang, Weidong Tang, Zhenglin Wan, Wangbo Zhao, Yang You",
+      "ai_keywords": [],
+      "interest_tag": ""
+    },
+    {
+      "title": "Behind Video Generation: Observations and Insights on Multimodal Understanding from Kling",
+      "url": "https://huggingface.co/papers/2611.04916",
+      "tldr": "The Kling report argues that controllable video quality is the projection of multimodal understanding through data, captioning, conditioning, alignment, reward modeling, and evaluation. It describes reference-grounded captions, generator-in-the-loop prompt enhancement, perceptually trained text encoders, and separate general and decision reward models. The key contribution is a systems account of why better rendering alone is insufficient: semantic contracts and evaluation protocols must expose upstream failures before they reach the DiT.",
+      "tldr_zh": "Kling 报告认为，可控视频质量是 multimodal understanding 经过数据、caption、conditioning、alignment、reward model 与 evaluation 全链路投影的结果。它讨论 reference-grounded caption、generator-in-the-loop prompt enhancement、基于感知训练的 text encoder，以及分离的 general/decision reward model。核心价值是给出系统级解释：仅提高渲染能力不够，semantic contract 和评测协议必须在错误进入 DiT 前暴露上游问题。",
+      "upvotes": 44,
+      "authors": "Kling Team, Dong Chen, Jialu Chen, Xinlong Chen, Yifan Dai, Haotian Dong, Binzong Geng, Yushuo Guan, Minghui Guo, Guanlin He, Guanxiao He, Jingyun Hua, Yanwei Huang, Yiyan Ji, Xueping Jia, Yizhuo Jia, Bozhou Li, Jiaze Li, Min Li, Shihao Li, Shujie Li, Shengyi Liao, Weihong Lin, Shiyuan Liu, Xinyu Liu, Siyang Mao, Xiaoru Qu, Dianmo Sheng, Yang Shi, Jiafu Tang, Longxiang Tang, Yuqi Tang, Chengzhuo Tong, Kuo Wang, Qixun Wang, Rui Wang, Tianduo Wang, Yuran Wang, Zekun Wang, Zihao Wang, Boyang Xia, Yifan Xu, Liu Yang, Zhenlong Yuan, Bohan Zeng, Mujin Zhang, Yuanxing Zhang, Zhicheng Zhang, Zhuoran Zhang, Yuanhong Zheng, Kun Gai, Chengru Song, Pengfei Wan",
+      "ai_keywords": [],
+      "interest_tag": ""
+    },
+    {
+      "title": "Axion 1.0: Open Agent Foundation Models, Simplified",
+      "url": "https://huggingface.co/papers/2611.03233",
+      "tldr": "Axion 1.0 trains an open agent foundation model with only two lightweight SFT stages and reinforcement learning, omitting dedicated mid-training, DPO, and on-policy distillation. Model-aware synthesis first strengthens self-contained reasoning, then automatically verifiable real-world tasks add tool-dependent reasoning before RL extends long-horizon interaction. Releasing weights, data construction, filtering, verification, prompts, and training code makes the work valuable as a reproducible baseline rather than only another benchmark table.",
+      "tldr_zh": "Axion 1.0 仅用两个轻量 SFT 阶段加 reinforcement learning 训练开放 agent foundation model，不依赖专门 mid-training、DPO 或 on-policy distillation。第一阶段通过 model-aware synthesis 强化自包含 reasoning，第二阶段用基于真实数据且自动可验证的任务加入 tool-dependent reasoning，最后由 RL 延伸长程交互。它同时开放权重、数据构造、过滤、验证、prompt 与训练代码，因此更像可复现 baseline，而不只是另一张 benchmark 表。",
+      "upvotes": 33,
+      "authors": "Yuqi Jia, Yunjie Tian, Jiayu Zheng, Yijun Liang, Jingchen Sun, Mengyu Zhao, Di Fu",
+      "ai_keywords": [],
+      "interest_tag": ""
+    },
+    {
+      "title": "ToolSpace: Scaling Tool-Centric Environment Synthesis for Long-Horizon Agents",
+      "url": "https://huggingface.co/papers/2611.05036",
+      "tldr": "ToolSpace mines data, state, and retry dependencies from adjacent calls in real MCP traces, clusters the resulting tool graph into environments, and synthesizes replayable tasks with assertion-based checks. Its Pro variants make seven frontier models drop by as much as 38.2 points, while ToolSpace training raises Qwen3.6-35B-A3B from 23.0 to 41.0 across seven long-horizon benchmarks and to 43.2 with RL. The important design reversal is to derive data and tasks from execution-witnessed tool composition instead of inventing a database first and hoping the interfaces remain realistic.",
+      "tldr_zh": "ToolSpace 从真实 MCP trace 的相邻调用中挖掘 data、state 与 retry dependency，把 tool graph 聚类成环境，再通过 replay 和 assertion-based check 合成任务。其 Pro 版本让 7 个 frontier model 最多下降 38.2 分；ToolSpace 数据把 Qwen3.6-35B-A3B 在 7 个长程 benchmark 的平均分从 23.0 提升到 41.0，加入 RL 后为 43.2。关键反转是从 execution-witnessed tool composition 推导数据和任务，而不是先虚构数据库，再希望接口足够真实。",
+      "upvotes": 30,
+      "authors": "Guanting Dong, Zhichao Sun, Xinyu Yang, Rui Wang, Xin Deng, Jiajie Jin, Zhixiong Yang, Junhao Huang, Han Han, Mingyu Ma, Xiaotao Wang, Yuyang Hu, Xiaoshuai Song, Xiaoxi Li, Jiejun Tan, Zhecan Wang, Shihan Dou, Honglin Guo, Zhiheng Xi, Tao Gui, Tao Ji, Qi Zhang, Yutao Zhu, Ji-Rong Wen, Zhicheng Dou",
+      "ai_keywords": [],
+      "interest_tag": ""
+    },
+    {
+      "title": "Mage-VL-Cowork: A Full Training Recipe to Learn Hybrid Computer Use From Evolved Harnesses",
+      "url": "https://huggingface.co/papers/2610.40747",
+      "tldr": "Mage-VL-Cowork trains a 4B policy to combine visual GUI interaction with code and terminal execution through a progressive five-stage midtraining, SFT, and RL curriculum. Mage-CUA-Forge uses reusable skill-conditioned workflows and evolved teacher harnesses to synthesize 293,806 tasks across 6,915 skills while reducing recurring per-task expenditure by 82.6%. The final model reports 66.0% on OSWorld-Verified, making the contribution a full data–harness–training recipe for compact hybrid computer use rather than a single checkpoint result.",
+      "tldr_zh": "Mage-VL-Cowork 通过五阶段 midtraining、SFT 与 RL curriculum，训练 4B policy 统一视觉 GUI 操作、代码和 terminal execution。Mage-CUA-Forge 使用可复用的 skill-conditioned workflow 与 evolved teacher harness，在 6,915 个 skill 上合成 293,806 个任务，并将 recurring per-task expenditure 降低 82.6%。最终模型在 OSWorld-Verified 报告 66.0%，其贡献是面向紧凑 hybrid computer use 的完整 data–harness–training recipe，而非单一 checkpoint 数字。",
+      "upvotes": 8,
+      "authors": "Xiaoyi Zhang, Haoqing Wang, Xinjie Zhang, Xiang Ming, Xing Wang, Senqiao Yang, Kaichen Zhang, Zhaoyang Jia, Andong Tan, Xinjiang Wang, Jinghao Guo, Yifei Shen, Xiao Li, Peng Zhang, Xun Guo, Jiahao Li, Shicheng Zheng, Jinglu Wang, Zongyu Guo, Wenxuan Xie, Bin Li, Yan Lu",
+      "ai_keywords": [],
+      "interest_tag": "CUA"
+    }
+  ],
+  "alphaxiv_papers": [
+    {
+      "title": "Sparks of Weight-Space Programming: LLMs can natively read & write neural network weights",
+      "arxiv_id": "",
+      "url": "https://www.alphaxiv.org/abs/2611.weight-space-programming",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2611.weight-space-programming",
+      "tldr": "This work tests whether a general-purpose frontier LLM can treat raw neural parameters as readable and writable programs without gradients, search, or a separately trained weight model. Across small policies and language models, it reports identifying behavior from weights, repairing a Kinetix policy, writing game networks, and editing 0.016% of Qwen3.5-0.8B to reduce reasoning loops. The result is not yet a scalable replacement for training, but it opens a striking interface in which reasoning models inspect and patch another model's internal program directly.",
+      "tldr_zh": "这项工作测试通用 frontier LLM 能否把原始神经参数当作可读写程序，而不使用 gradient、search 或专门训练的 weight model。实验报告它能从权重识别行为、修复 Kinetix policy、直接编写游戏网络，并编辑 Qwen3.5-0.8B 的 0.016% 权重以减少 reasoning loop。它尚不是可扩展训练的替代方案，但打开了一个反直觉接口：reasoning model 可以直接检查并修补另一个模型的内部程序。",
+      "interest_tag": ""
+    },
+    {
+      "title": "Hinted Scaling Laws",
+      "arxiv_id": "2611.02270",
+      "url": "https://arxiv.org/abs/2611.02270",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2611.02270",
+      "tldr": "Hinted scaling laws create graded easier versions of a benchmark so weak models no longer collapse into an uninformative zero-accuracy floor. Fitting the relationship between hint level and scale predicts a 10^23-FLOP model's 25.9% GSM8K score within three points using models trained with at most 10^20 FLOPs, and cuts median forecasting error across GSM8K, AIME, and HLE from 21 to 4.3 points. The method matters because it turns privileged assistance into a measurement instrument for model development rather than merely a way to raise evaluation scores.",
+      "tldr_zh": "Hinted scaling laws 为 benchmark 构造分级的更易版本，使弱模型不再全部落入无信息的零分区。它利用 hint level 与 scale 的关系，仅用最多训练至 10^20 FLOPs 的模型，就把 10^23-FLOP 模型 25.9% 的 GSM8K 成绩预测到三个百分点以内，并将 GSM8K、AIME、HLE 的预测误差中位数从 21 降至 4.3 个百分点。重要性在于它把 privileged assistance 变成模型开发的测量工具，而不只是提高评测分数的手段。",
+      "interest_tag": ""
+    },
+    {
+      "title": "CoworkOS:Scaling Agent Coworkers for Real-world Automation",
+      "arxiv_id": "2611.03178",
+      "url": "https://arxiv.org/abs/2611.03178",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2611.03178",
+      "tldr": "CoworkOS separates model-level strategy from runtime execution management, allowing a main agent to act directly or delegate bounded work synchronously and asynchronously through a coordinator. Shared applications, hierarchical workspaces, semantic memory, and resumable job logs let humans and agents continue editing the same artifacts across interruptions. A five-round post-training case raises an eight-benchmark mean from 33.19 to 42.95, although that measurement does not isolate the causal contribution of the harness itself.",
+      "tldr_zh": "CoworkOS 将模型层策略与 runtime execution management 分离，让 main agent 可以直接行动，或经 coordinator 同步、异步委派边界明确的任务。共享应用、分层 workspace、semantic memory 与可恢复 job log，使人和 agent 能在中断后继续修改同一产物。其五轮 post-training 案例把八项 benchmark 平均分从 33.19 提升到 42.95，但这一测量并未单独归因 harness 本身的因果贡献。",
+      "interest_tag": "Agent Swarm"
+    },
+    {
+      "title": "Democratizing Robot-Use Agents: A Unified Harness with Open Models",
+      "arxiv_id": "2611.01560",
+      "url": "https://arxiv.org/abs/2611.01560",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2611.01560",
+      "tldr": "uni-robot-agent provides a shared interaction harness and adapters that translate common tools and execution feedback across open models, simulators, and physical robots without privileged state. An out-of-the-box Qwen3.8-Flash-Next reports a RoboDojo score of 31.39 and competitive behavior on 19 real-world tasks. The comparison with a published proprietary baseline is not episode-matched, but the larger contribution is a trainable open substrate for studying robot-use agents instead of treating frontier APIs as fixed black boxes.",
+      "tldr_zh": "uni-robot-agent 提供共享交互 harness 与 adapter，在不使用 privileged state 的前提下，把通用工具和执行反馈映射到不同 open model、simulator 与真实机器人。开箱即用的 Qwen3.8-Flash-Next 报告 RoboDojo 31.39，并在 19 个真实任务上表现出竞争力。它与已发布 proprietary baseline 的比较并非 episode-matched，但更重要的贡献是提供可训练的开放研究底座，而不是把 frontier API 当作固定黑箱。",
+      "interest_tag": ""
+    },
+    {
+      "title": "Pixel: A Co-Designed Full-Stack Robot System for Learning General-Purpose Mobile Manipulation",
+      "arxiv_id": "2611.03648",
+      "url": "https://arxiv.org/abs/2611.03648",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2611.03648",
+      "tldr": "Pixel co-designs a low-cost wheeled humanoid, human and robot demonstration interfaces, a unified whole-body controller, and a shared policy-learning stack. A ground-anchored action frame aligns head, hand, and base targets so policies can learn coordinated mobile manipulation from heterogeneous demonstrations. The system reports 82.0% average task progress from human demonstrations in one comparison, showing why hardware, data collection, control, and learning should be optimized together rather than as independent modules.",
+      "tldr_zh": "Pixel 联合设计低成本轮式 humanoid、人类与机器人 demonstration interface、统一 whole-body controller 和共享 policy-learning stack。ground-anchored action frame 对齐头部、手部与底盘目标，使 policy 能从异构示教中学习协调的 mobile manipulation。系统在一项对比中用 human demonstration 报告 82.0% 平均 task progress，说明硬件、数据采集、控制与学习应共同优化，而不是独立拼接。",
+      "interest_tag": ""
+    }
+  ],
+  "github_repos": [
+    {
+      "name": "Balanov/shim",
+      "url": "https://github.com/Balanov/shim",
+      "tldr": "Shim is a local-first terminal harness packaged as one static Go binary with no daemon, database, Docker, Node, or Python runtime. It supports OpenAI-compatible and Anthropic APIs, MCP over stdio or Streamable HTTP, lazy Agent Skill loading, JSONL sessions, and a local mini-model that routes management requests to allowlisted commands with confirmation for mutations. Its appeal is a sharply bounded product promise—7.29 MiB and 9.96 ms median startup in the maintainer's Windows measurement—rather than another full IDE-shaped agent shell.",
+      "tldr_zh": "Shim 是 local-first terminal harness，以单个静态 Go binary 交付，不需要 daemon、database、Docker、Node 或 Python runtime。它支持 OpenAI-compatible/Anthropic API、stdio 或 Streamable HTTP MCP、按需 Agent Skill、JSONL session，以及由本地小模型把管理请求路由到 allowlisted command，并对 mutation 要求确认。它的吸引力是边界极清楚的产品承诺：维护者在 Windows 上测得 7.29 MiB、median startup 9.96 ms，而不是再造一个 IDE 形态的 agent shell。",
+      "stars": 448,
+      "language": "Go",
+      "interest_tag": ""
+    },
+    {
+      "name": "aa1143/NamiAgent",
+      "url": "https://github.com/aa1143/NamiAgent",
+      "tldr": "NamiAgent is both a runnable local agent and an eleven-lesson Chinese tutorial that grows from a roughly 100-line loop into tools, permissions, context management, Skills, MCP, subagents, planning, and memory. Every lesson is a complete snapshot, the final stage has 49 fake-model tests, and a web UI exposes tool calls and the full context sent to the model. It is valuable because it teaches the harness as an inspectable mechanism rather than hiding behavior behind a large framework.",
+      "tldr_zh": "NamiAgent 同时是可运行的本地 agent 和十一课中文教程，从约 100 行 loop 逐步加入 tool、permission、context management、Skills、MCP、subagent、planning 与 memory。每课都是完整 snapshot，最终阶段有 49 个 fake-model test，网页端还能展示 tool call 和每次发送给模型的完整 context。它的价值在于把 harness 当作可检查机制来教学，而不是把行为藏在大型 framework 后面。",
+      "stars": 308,
+      "language": "Python",
+      "interest_tag": ""
+    },
+    {
+      "name": "apekshik/anyscene",
+      "url": "https://github.com/apekshik/anyscene",
+      "tldr": "AnyScene turns a brief or reference image into a dressed, lit Blender environment by orchestrating image generation, two image-to-3D candidates per prop, same-light comparison, scripted layout, camera work, and grading. Four showcased scenes retain rebuild manifests and gates, while a bakery example ran unattended on a hosted GPU worker in under two hours; the large finished assets are not stored in Git. The project is notable as a concrete production workflow with visual quality gates, not merely a prompt collection for generating isolated 3D objects.",
+      "tldr_zh": "AnyScene 把文字 brief 或 reference image 转成完整布景和灯光的 Blender 环境，流程编排 image generation、每个 prop 的两个 image-to-3D 候选、同光照比较、脚本布局、camera 与 grading。四个展示场景保留 rebuild manifest 和 gate，另一个 bakery 案例在 hosted GPU worker 上不到两小时无人值守完成；体积巨大的最终 asset 不存入 Git。它值得关注，因为这是带视觉质量门禁的具体生产 workflow，而不是只生成孤立 3D object 的 prompt 集合。",
+      "stars": 292,
+      "language": "Python",
+      "interest_tag": ""
+    },
+    {
+      "name": "Moh4696/open-3d-skills",
+      "url": "https://github.com/Moh4696/open-3d-skills",
+      "tldr": "Open 3D Skills packages eight reusable workflows for three.js scenes, scroll-scrubbed films, transparent video, cursor rigs, exploded views, motion assets, browser checks, and 60 fps recording. The repository emphasizes that each technique was first exercised on a real site or real footage, and it supports installation across Claude Code, Codex, Cursor, Gemini CLI, and other skill-compatible agents. The project shows a strong distribution pattern: ship narrow, executable capabilities with verification steps instead of a monolithic creative agent.",
+      "tldr_zh": "Open 3D Skills 封装八个可复用 workflow，覆盖 three.js scene、scroll-scrubbed film、透明视频、cursor rig、exploded view、motion asset、browser check 与 60 fps recording。仓库强调每项技术都先在真实网站或真实素材上跑过，并支持安装到 Claude Code、Codex、Cursor、Gemini CLI 等兼容 skill 的 agent。它展示了很强的分发模式：交付带验证步骤、范围窄且可执行的能力，而不是单体 creative agent。",
+      "stars": 237,
+      "language": "JavaScript",
+      "interest_tag": ""
+    },
+    {
+      "name": "Balanov/verdict",
+      "url": "https://github.com/Balanov/verdict",
+      "tldr": "Verdict is a 197 KB local classifier that reads a command plus stdout and stderr, then labels the outcome as success, failure, blocked, or unknown instead of trusting the exit code alone. On 192 synthetic examples from 48 held-out CLI families it reports 93.2% accuracy and macro-F1, versus 47.9% accuracy for an exit-code baseline, with 0.54 ms median inference in the stated Windows setup. Its README correctly limits the claim: this is an advisory semantic layer trained on English-biased synthetic data, not proof of external state change or a replacement for deterministic verification.",
+      "tldr_zh": "Verdict 是 197 KB 本地 classifier，读取 command、stdout 与 stderr，把结果标为 success、failure、blocked 或 unknown，而不是只相信 exit code。它在来自 48 个 held-out CLI family 的 192 个 synthetic example 上报告 93.2% accuracy 与 macro-F1，exit-code baseline 为 47.9%，并在所述 Windows 环境中达到 0.54 ms median inference。README 也正确限定了结论：这是基于英文偏置 synthetic data 的 advisory semantic layer，不是 external state 已变化的证明，也不能替代 deterministic verification。",
+      "stars": 231,
+      "language": "Python",
+      "interest_tag": ""
+    }
+  ],
+  "hackernews": [
+    {
+      "title": "Show HN: Kairos – Open-source risk and fraud decisioning platform",
+      "url": "https://github.com/finic-ai/kairos",
+      "tldr": "Kairos is an Apache-2.0 real-time fraud and risk decisioning stack for sign-ups, logins, orders, payments, and payouts, with decisions linked to their underlying signals. It combines workflows, case queues that produce labels, decision models intended for sparse-label settings, and an MCP interface through which coding agents can inspect decisions and build policies with actions recorded under their keys. The HN interest reflects a concrete agent role in a high-stakes operational loop, although the repository currently has modest adoption and still needs production evidence beyond its launch claims.",
+      "tldr_zh": "Kairos 是 Apache-2.0 的实时 fraud/risk decisioning stack，面向 signup、login、order、payment 与 payout，并将每次决策关联到其底层 signal。它组合 workflow、能够产生 label 的 case queue、面向 sparse-label 场景的 decision model，以及让 coding agent 检查决策并构建 policy、同时记录操作身份的 MCP interface。HN 热度来自 agent 在高风险 operational loop 中的具体角色，但仓库当前采用度仍有限，launch claim 之外还需要 production evidence。",
+      "points": 91,
+      "num_comments": 23,
+      "interest_tag": ""
+    },
+    {
+      "title": "Open models can do 90 percent of agentic work at a twentieth of the cost",
+      "url": "https://www.theregister.com/ai-and-ml/2026/11/03/open-models-can-do-90-percent-of-agentic-work-at-a-twentieth-of-the-cost-of-a-frontier-llm-gartner/5307132",
+      "tldr": "Gartner argues that routine steps such as classification, tool calling, validation, and reconciliation can move to open-weight models while frontier models handle the minority of difficult reasoning steps. The headline best case is one-twentieth the cost of using a frontier model everywhere, but the analysts say verbosity and retries make real per-task savings closer to five or six times. The durable takeaway is architectural rather than numerical: model routing, guardrails, workflow history, and control of the harness become the defensible layer as models commoditize.",
+      "tldr_zh": "Gartner 认为 classification、tool calling、validation 与 reconciliation 等 routine step 可以迁移到 open-weight model，只把少数困难 reasoning step 交给 frontier model。标题中的最佳情形是相对全程使用 frontier model 降到二十分之一成本，但分析师也说明考虑冗长输出和 retry 后，现实 per-task 节省更接近 5–6 倍。更持久的结论不是某个数字，而是架构变化：当 model commodity 化，routing、guardrail、workflow history 与 harness 控制权成为可防御价值。",
+      "points": 27,
+      "num_comments": 4,
+      "interest_tag": ""
+    },
+    {
+      "title": "AI agents hallucinate prices: LLM grounding with live data",
+      "url": "https://blog.apify.com/llm-grounding-with-live-data/",
+      "tldr": "In a 15-product test, GPT-6 Luna and Claude Opus 5.5 each recalled only two live prices exactly; built-in web search improved coverage but still returned wrong prices with apparently valid citations in every run. The proposed safeguard is structural: fetch current product data, return explicit error states, validate currency, seller, variant, and final URL, and let code—not the model—insert each price. The article matters beyond commerce because it demonstrates that citations and tool use do not equal grounding when normal-looking pages can still describe the wrong object or market.",
+      "tldr_zh": "在 15 个商品测试中，GPT-6 Luna 与 Claude Opus 5.5 都只凭记忆精确答对 2 个实时价格；内置 web search 提高覆盖率，但每轮仍会给出带着看似有效 citation 的错误价格。建议的防护是结构性的：抓取当前商品数据、返回明确 error state、校验 currency、seller、variant 和 final URL，并由代码而非模型写入价格。它的意义超出电商，因为实验说明 citation 和 tool use 不等于 grounding，外观正常的页面仍可能指向错误商品或市场。",
+      "points": 15,
+      "num_comments": 0,
+      "interest_tag": ""
+    },
+    {
+      "title": "Ten harness patterns that you can apply to a real repo",
+      "url": "https://deepsense.ai/blog/harness-engineering-for-coding-agents-9-patterns-for-more-reliable-ai-assisted-development/",
+      "tldr": "The playbook treats a repository as the agent's knowledge base, using a short AGENTS.md as a map and loading deeper files, history, tests, and decisions only when relevant. It recommends shared validation commands, bounded retry loops, targeted visual feedback, proportional planning, and promotion of recurring mistakes into tests, linters, or durable documentation. Its strongest idea is organizational: keep the workflow and verification contract stable even as models change, so reliability accumulates in the harness instead of being reset with every provider upgrade.",
+      "tldr_zh": "这份 playbook 把 repository 当作 agent knowledge base，用简短 AGENTS.md 充当地图，并只在相关时加载更深的文件、history、test 与 decision。它建议共享 validation command、有限 retry loop、针对性 visual feedback、与风险成比例的 planning，以及把反复错误升级为 test、linter 或持久文档。最重要的观点是组织性的：即使 model 不断更换，也保持 workflow 与 verification contract 稳定，让可靠性积累在 harness，而不是每次 provider 升级都重置。",
+      "points": 12,
+      "num_comments": 1,
+      "interest_tag": ""
+    },
+    {
+      "title": "Show HN: SIE Serverless – managed inference powered by self-hostable stack",
+      "url": "https://superlinked.com/",
+      "tldr": "SIE serves 129 task-specific open models behind a common API and also exposes the same engine for local or in-cloud self-hosting. Its catalog targets search, reranking, OCR, structured extraction, typed decisions, routing, guardrails, vision, and speech, with claims framed against task-level quality, latency, and cost rather than one general chat score. The project fits today's routing theme: everyday agent steps may be better served by specialized small models, provided users independently verify the vendor's benchmark and savings claims for their workloads.",
+      "tldr_zh": "SIE 通过统一 API 提供 129 个 task-specific open model，同时开放同一 engine 供本地或私有云 self-host。其目录覆盖 search、reranking、OCR、structured extraction、typed decision、routing、guardrail、vision 与 speech，并用任务级 quality、latency、cost 而非单一 chat 分数来包装价值。它契合今天的 routing 主线：agent 的日常步骤可能更适合 specialized small model，但用户仍需在自己的 workload 上独立核验厂商 benchmark 与节省幅度。",
+      "points": 9,
+      "num_comments": 1,
+      "interest_tag": ""
+    }
+  ]
+}
