@@ -1,0 +1,201 @@
+{
+  "date": "2026-11-05",
+  "generated_at": "2026-11-05T17:03:39.737424+08:00",
+  "briefing_zh": "今天最清晰的信号是：agent 研究正在把注意力从单次答对，转向长时程系统如何稳定地产生、保存和验证进展。**What Does Multi-Turn Reinforcement Learning Really Improve in LLM Agents?** 指出 multi-turn RL 的主要收益并非普遍提高单步决策，而是增强错误恢复与长程韧性；**Stabilizing On-Policy Targeted Guidance in Agentic Reinforcement Learning** 则把文本反馈只施加在具体失败回合，试图在教会新工具和风格的同时保住基础 coding 能力。两者共同说明，训练目标需要直接对准 trajectory 中的失败结构，而不只是扩大 rollout 数量。\n\n围绕长时程 agent 的系统层创新也在加速。**You don't need long context** 用频繁 compaction 与按需检索挑战无限扩展 context window 的惯性思路；**Meta²** 把离线经验提炼成可复用的 harness-evolution Meta-Skill，再在每个任务中做局部在线调整；**Adversarial Speculative Reasoning Improves Long Horizon Agents** 更进一步，把 speculative decoding 从纯加速器变成关键决策处的精度分配机制。它们指向同一个工程结论：性能提升越来越来自 context、harness、verification 和 inference policy 的联合设计，而不是仅换一个更大的 base model。\n\n评测与数据侧开始补齐真实科研和 embodied intelligence 的长链路。**FrontierPhysics** 要求 agent 完成文献调研、研究计划、实验和论文产出，并显示当前瓶颈主要是严谨推理与专家直觉；**GameVerse** 用 1,655 小时、最长两分钟的连续 gameplay 数据填补长时程 world model 训练缺口；**NEO-VLA** 发现 action-critical visual signals 常在视觉计算的中间层达到峰值，质疑固定 encoder endpoint 对控制任务是否足够。与此同时，**PyRUA-DataFarm** 让 coding agent 自动重建仿真任务、控制器和 success judge，展示了 agent 生成可部署机器人训练数据的可能性。\n\n开源和社区讨论进一步验证了从 demo 到可靠工作流的转向。**Verdict** 用仅 197 KB 的本地分类器提醒开发者 exit code 0 并不等于任务完成，**Axion 1.0** 则公开简化的 2-stage SFT + RL recipe、数据和 35B 模型。HN 上，Minecraft 的 50-agent 社会因协调成本陷入官僚化，而 Momentic 把 browser/mobile interaction、failure evidence 与 CI gate 连接起来；DoorDash 的第三方 agent 订单仍只有数百笔，则提醒行业：技术可接入不等于用户愿意委托。",
+  "briefing_en": "The clearest signal today is that agent research is shifting from one-shot correctness toward systems that can reliably create, preserve, and verify progress over long horizons. **What Does Multi-Turn Reinforcement Learning Really Improve in LLM Agents?** argues that multi-turn RL primarily improves recovery and long-horizon resilience rather than uniformly better single-step decisions. **Stabilizing On-Policy Targeted Guidance in Agentic Reinforcement Learning** applies textual feedback only at specific failed turns, aiming to teach new tools and styles without sacrificing baseline coding ability. Together, they suggest that training objectives should target the structure of trajectory failures, not merely scale rollout counts.\n\nSystem-level innovation around long-running agents is accelerating as well. **You don't need long context** challenges the reflex to expand context windows by showing that frequent compaction and selective retrieval can preserve task performance; **Meta²** distills offline experience into a reusable harness-evolution Meta-Skill and then makes task-local online adjustments; **Adversarial Speculative Reasoning Improves Long Horizon Agents** repurposes speculative decoding from a pure accelerator into a mechanism for allocating precision at critical decisions. The shared engineering lesson is that gains increasingly come from co-designing context, harnesses, verification, and inference policy rather than only swapping in a larger base model.\n\nEvaluation and data work are also expanding toward realistic research and embodied pipelines. **FrontierPhysics** asks agents to conduct literature review, planning, experimentation, and manuscript production, finding that rigor and expert intuition are larger bottlenecks than physics knowledge. **GameVerse** contributes 1,655 hours of minute-scale gameplay data for long-horizon world models, while **NEO-VLA** finds that action-critical visual signals often peak before the final visual representation, challenging fixed encoder endpoints. **PyRUA-DataFarm** shows a coding agent rebuilding simulation tasks, controllers, and success judges to generate robot-ready training data.\n\nOpen source and community discussion reinforce the move from demos to dependable workflows. **Verdict** uses a 197 KB local classifier to show why exit code zero is not task-level proof, while **Axion 1.0** releases a simplified two-stage SFT-plus-RL recipe, data, and a 35B model. On Hacker News, a 50-agent Minecraft society collapses into coordination bureaucracy, Momentic links browser and mobile interaction to failure evidence and CI gates, and DoorDash reports only hundreds of third-party agent orders. The contrast is useful: technical connectivity is advancing quickly, but delegation economics and user trust remain unresolved.",
+  "viral_analysis_zh": "今天最可能形成研究圈爆款的是 **You don't need long context**：标题直接反驳行业共识，且用最高 7× decoding throughput 的结果把复杂的 context-management 议题压缩成一个容易传播的反直觉结论。开源侧最容易扩散的是 **Verdict**，因为「Exit code 0 is not proof」既是所有 coding-agent 用户都经历过的痛点，又用 197 KB、0.54 ms 和可复现实验提供了极强的记忆点。",
+  "viral_analysis_en": "The most likely research breakout is **You don't need long context**: its title directly attacks an industry assumption, while the reported up-to-7× decoding-throughput result turns context management into a highly shareable counterintuitive claim. On the open-source side, **Verdict** has the strongest viral framing because “Exit code 0 is not proof” names a universal coding-agent pain point and anchors it with memorable 197 KB and 0.54 ms figures plus reproducible evidence.",
+  "huggingface_papers": [
+    {
+      "title": "GameVerse: A Minute-Scale Gameplay Dataset for Long-Horizon Interactive World Modeling",
+      "url": "https://arxiv.org/abs/2610.37257",
+      "tldr": "GameVerse assembles 69.7K gameplay clips covering 1,655 hours and 349.6 million frames, including 1,358 hours of continuous two-minute sequences for long-horizon interactive world modeling. Its pipeline adds scene-consistent segmentation, quality filtering, camera trajectories, and event-aligned captions that separate static context from dynamic events. Experiments report longer coherent rollouts after training on the dataset, addressing a data bottleneck rather than merely scaling model capacity. This is important for controllable world models whose current coherence often breaks around the one-minute mark.",
+      "tldr_zh": "GameVerse 汇集 69.7K 个 gameplay clips、1,655 小时视频与 3.496 亿帧，其中 1,358 小时是连续两分钟序列，专门服务于 long-horizon interactive world modeling。其 pipeline 包含 scene-consistent segmentation、quality filtering、camera trajectory，以及把静态场景与动态事件分开的 event-aligned captions。实验显示，在该数据上训练能延长 coherent rollout，说明问题不只在 model capacity，更在长时程数据供给。对当前常在一分钟左右失去一致性的可控 world model，这是一项关键基础设施。",
+      "upvotes": 33,
+      "authors": "Kang He, Wenshuo Peng, Chuanhao Li, Zihui Gao, Xiaojie Xu, Zhengyuan Lin, Yuzhe Ding, Donghong Ji, Kaipeng Zhang, Yongtao Ge",
+      "ai_keywords": [],
+      "interest_tag": ""
+    },
+    {
+      "title": "FrontierPhysics: Evaluating Agents for End-to-End Physics Research",
+      "url": "https://arxiv.org/abs/2611.06910",
+      "tldr": "FrontierPhysics evaluates end-to-end research rather than fixed physics questions or isolated subtasks. Its 56 expert-designed tasks span nine domains and require literature review, planning, experiments, structured artifacts, and a manuscript, scored with deterministic checks plus expert rubrics. Across 22 models and 26 configurations, no setup passes more than 46 of 168 rollouts. Trajectory review attributes the main failures to weak rigor and expert intuition rather than missing physics knowledge, making this a demanding benchmark of research agency.",
+      "tldr_zh": "FrontierPhysics 评测的是端到端科研，而非固定物理题或孤立子任务。56 个专家设计任务覆盖九个领域，要求完成文献调研、研究计划、实验、结构化产物和论文，并由 deterministic checks 与 expert rubrics 联合评分。在 22 个模型、26 种配置中，没有任何方案通过超过 168 次 rollout 中的 46 次。Trajectory review 认为主要瓶颈是严谨性和专家直觉，而不是物理知识缺失，因此它真正测到了 research agency。",
+      "upvotes": 24,
+      "authors": "Bingran You, Wenjun Ke, Ria Rosenauer, Bo Liu, Wenbo Chen, Min Chen, Shuqi Xu, Yue Ma, Jiechao Feng, Bo Chen, Xiangkai Sun, Jiarui Liu, Jinen Guo, Zeyu Zhou, Xu Huang, Zhuohan Li, Haoyu Li, Heguang Lin, Lijie Ding, Yadong Zeng, Kangqi Zhang, Xinge Liu, Hanwen Liu, Zhenghong Li, Alexander von Recum, Yuchen Zhu, Felix Schwarzfischer, Yizhou Zhao, Jicheng Wang, Binxu Li, Qian Yu, Chan Li, Cheng Dai, Di Wang, Haoyu Zhang, Jiankai Sun, Kaituo Feng, Mian Qin, Ruihong Yin, Yiqun Luo, Weiwei Wu, Shihong Pan, Tsung Yeh Hsieh, Xiao Huang, Yan Zhang, Sihan Li, Zirui Ren, Zengji Tu, Kyoung Whan Choe, Ke Sun, Vincenzo Galia, Vaisakhi Mishra, Jiashu He, Hongyang Wang, Zhiheng Yang, Shubham Gaur, Yifan Gu, Shuyi Wang, Zihao Zuo, Steven Dillmann, Yiyou Sun, Xinyang Han, Hanchung Lee, Molei Tao, Yue Zhao, Shilong Liu, Yuchen Wu, Xuandong Zhao, Xiangyi Li, Florian Brand, Gerbrand Ceder, Hartmut Haeffner",
+      "ai_keywords": [],
+      "interest_tag": "Benchmark"
+    },
+    {
+      "title": "From Pixels to Actions - Towards Native Vision-Language-Action Policies",
+      "url": "https://arxiv.org/abs/2611.06918",
+      "tldr": "NEO-VLA removes the conventional frozen visual encoder endpoint: lightweight patch tokens evolve jointly with language through the backbone, and the action expert can read instruction-conditioned representations from multiple depths. Controlled comparisons show native architectures outperform encoder-based counterparts, and full fine-tuning or extra scale does not fully close the gap. Layer probes reveal that action-critical geometry, boundaries, depth, and subtle state changes often peak before the final visual layer. The result argues that embodied control should access a hierarchy of visual computation rather than only a compressed endpoint.",
+      "tldr_zh": "NEO-VLA 移除了传统固定 visual encoder endpoint：轻量 patch tokens 与语言一起在 backbone 中演化，action expert 可以读取多个深度的 instruction-conditioned representations。受控比较显示 native architecture 优于 encoder-based counterpart，full fine-tuning 或单纯增加 scale 也无法完全弥合差距。Layer probe 发现，对 action 至关重要的 geometry、boundary、depth 和细微状态变化，往往在最终视觉层之前达到峰值。结果说明 embodied control 应访问分层视觉计算，而不是只依赖压缩后的 endpoint。",
+      "upvotes": 22,
+      "authors": "Weichen Fan, Haiwen Diao, Penghao Wu, Siyuan Hu, Ziqi Huang, Tianqi Liu, Mingze Sun, Ziyi Wang, Zhongang Cai, Hanming Deng, Quan Wang, Lei Yang, Lewei Lu, Fangzhou Hong, Zhaoxi Chen, Dahua Lin, Ziwei Liu",
+      "ai_keywords": [],
+      "interest_tag": ""
+    },
+    {
+      "title": "What Does Multi-Turn Reinforcement Learning Really Improve in LLM Agents?",
+      "url": "https://arxiv.org/abs/2611.06483",
+      "tldr": "This study decomposes multi-turn agent RL with Pass@(K,T), separating sampling breadth K from interaction depth T. Its central finding is that trajectory-level RL gains shrink under tight turn budgets and come mainly from error recovery and long-horizon resilience, not uniformly better single-step choices. BudgetMix RL varies interaction budgets during training and improves robustness across deployment constraints. The work matters because it turns a vague claim that agentic RL improves reasoning into a testable statement about when and where the gains appear.",
+      "tldr_zh": "这项研究用 Pass@(K,T) 分解 multi-turn agent RL，把 sampling breadth K 与 interaction depth T 区分开。核心发现是：当 turn budget 收紧时，trajectory-level RL 的增益明显缩小；其优势主要来自 error recovery 和 long-horizon resilience，而不是普遍更好的单步选择。BudgetMix RL 在训练中混合不同 interaction budgets，从而提升部署约束变化时的稳健性。它把 agentic RL 改善 reasoning 的笼统说法，变成了关于增益何时、出现在哪里的可检验命题。",
+      "upvotes": 21,
+      "authors": "Kejian Zhu, Zhuoran Jin, Shangqing Tu, Tianyi Men, Yupu Hao, Jiachun Li, Kang Liu, Jun Zhao",
+      "ai_keywords": [],
+      "interest_tag": ""
+    },
+    {
+      "title": "PyRUA-DataFarm: LLM Agent as a Cost-Efficient Teleoperator for Real-Ready Robot Data",
+      "url": "https://arxiv.org/abs/2611.05320",
+      "tldr": "PyRUA-DataFarm asks a coding agent to replace much of the robot teleoperator workflow. From one calibration episode, the agent writes a simulation scene, expert controller, and success judge; a video model then renders synchronized photorealistic multi-view trajectories labeled with exact actions. Policies trained only on this farm data achieve 93 successes in 100 trials versus 84 for teleoperation-trained policies, and retain 87 versus 46 under visual shifts. The result suggests agent-built simulation plus verification can lower robot-data cost while improving diversity, though the five-task scope still calls for broader validation.",
+      "tldr_zh": "PyRUA-DataFarm 让 coding agent 替代机器人数据采集中的大量 teleoperator 工作。根据一个 calibration episode，agent 自动编写 simulation scene、expert controller 和 success judge，再由 video model 渲染带精确 action label 的同步 photorealistic multi-view trajectories。仅用 farm data 训练的 policy 在 100 次 trial 中成功 93 次，而 teleoperation data 为 84 次；在视觉分布变化下则是 87 对 46。结果表明 agent-built simulation 加 verification 可能同时降低 robot-data 成本并增加多样性，但五个任务的规模仍需要更广泛验证。",
+      "upvotes": 18,
+      "authors": "Kewei Zhang, Juncheng Ma, Guodong Lv, Duomin Wang, Feixiang Ruan, Ruiyang Si, Chuanrui Zhang, Yuxuan Chen, Hao Chen, Yichen Liu, Yintianrun Zhang, Yufan Deng, Enze Xie, Daquan Zhou",
+      "ai_keywords": [],
+      "interest_tag": ""
+    }
+  ],
+  "alphaxiv_papers": [
+    {
+      "title": "Stabilizing On-Policy Targeted Guidance in Agentic Reinforcement Learning",
+      "arxiv_id": "2611.05266",
+      "url": "https://arxiv.org/abs/2611.05266",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2611.05266",
+      "tldr": "This work uses per-turn textual feedback as targeted on-policy self-distillation for multi-turn software-engineering RL. Guidance is applied only where the current policy fails and is combined with per-criterion rewards, reducing entropy oscillation while preserving baseline coding performance. In the reported setting, Markdown reward rises from 0.00 to 0.85 while coding pass rate remains 0.33, suggesting rich feedback can unlock behaviors that sparse reward cannot reach. The evidence is limited to one designed-feedback coding environment, but the stability recipe is practically important.",
+      "tldr_zh": "这项工作把逐回合文本反馈转化为 multi-turn software-engineering RL 中的定向 on-policy self-distillation。它只在当前策略明确失败的回合施加 guidance，并与按 criteria 分解的 reward 结合，从而减少 entropy oscillation，同时保住基础 coding 表现。在论文设置中，Markdown reward 从 0.00 提升到 0.85，而 coding pass rate 维持 0.33，说明 rich feedback 能解锁 sparse reward 难以覆盖的行为。证据仍局限于一个人工设计反馈的 coding 环境，但其稳定训练配方很有工程价值。",
+      "interest_tag": ""
+    },
+    {
+      "title": "Together Compiler: Continual Compilation for AI Inference",
+      "arxiv_id": "",
+      "url": "https://www.alphaxiv.org/abs/2611.together-compiler-continual-ai-inference",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2611.together-compiler-continual-ai-inference",
+      "tldr": "Together Compiler turns inference optimization into a continual agent hill-climbing loop instead of a one-off kernel-tuning job. Its persistent engine hot-reloads candidate forward passes, while a cost model chooses parallel configurations and tiered measurements balance throughput with fidelity. The system reports up to 2.6× higher throughput than open engines on frontier models and production service at trillion-token scale. The broader importance is that optimization agents can keep deployments aligned with changing models, hardware, and traffic rather than freezing a compiler result at launch.",
+      "tldr_zh": "Together Compiler 把 inference optimization 变成持续运行的 agent hill-climbing loop，而不是一次性的 kernel tuning。其 persistent engine 可热加载候选 forward pass，cost model 选择并行配置，tiered measurement 则在测量吞吐与真实性之间折中。系统报告在 frontier models 上相对开源引擎最高 2.6× throughput，并已用于 trillion-token 级生产服务。更重要的是，optimization agent 能随模型、硬件和流量变化持续改进部署，而不是在上线时冻结一个 compiler 结果。",
+      "interest_tag": ""
+    },
+    {
+      "title": "You don't need long context",
+      "arxiv_id": "2611.05306",
+      "url": "https://arxiv.org/abs/2611.05306",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2611.05306",
+      "tldr": "The paper tests whether long-running agents truly need their full history in active context. Frequent compact handoffs and tool-based selective retrieval preserve or improve accuracy across long-horizon and long-input tasks, even in an extreme one-action-per-context software-engineering setup. For Qwen 3 Coder Next, a 16K rather than 256K window yields 7× more decoded tokens per second, though that is a throughput result rather than end-to-end task latency. The work reframes context management as state compression and retrieval, not an automatic demand for ever-larger windows.",
+      "tldr_zh": "论文检验长时程 agent 是否真的需要把完整历史一直放在 active context 中。频繁的 compact handoff 与基于工具的 selective retrieval，在多种 long-horizon 和 long-input 任务上保持甚至提升准确率；即使 software-engineering agent 每个 context 最多只执行一步，表现也没有崩溃。对 Qwen 3 Coder Next，16K 而非 256K window 带来 7× decoded tokens per second，但这是吞吐指标，不等于端到端 task latency。它把 context management 重构为 state compression 与 retrieval 问题，而不是默认追求更大的窗口。",
+      "interest_tag": ""
+    },
+    {
+      "title": "Adversarial Speculative Reasoning Improves Long Horizon Agents",
+      "arxiv_id": "2611.05345",
+      "url": "https://arxiv.org/abs/2611.05345",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2611.05345",
+      "tldr": "This paper argues that speculative decoding changes long-horizon reasoning because numerical noise accumulates within verification windows. It trains the tiny draft model to be rejected at selected critical decisions, forcing the target model to resample those tokens at the least noisy position of a fresh block without altering the target distribution. On DeepSWE, GLM-5.3-NVFP4 rises from 60.6% to 67.6% pass rate while training only 0.06%–0.28% of hosted parameters. The idea is notable because it converts a systems accelerator into a precision-allocation mechanism for reasoning.",
+      "tldr_zh": "论文指出 speculative decoding 会因 verification window 内数值噪声累积而改变长时程推理。它训练很小的 draft model 在选定关键决策处更容易被拒绝，迫使 target model 在新 block 的最低噪声位置重新采样，同时不改变 target distribution。DeepSWE 上，GLM-5.3-NVFP4 的 pass rate 从 60.6% 提升到 67.6%，只需训练 hosted parameters 的 0.06%–0.28%。关键价值在于，它把系统加速器转化成 reasoning precision 的分配机制。",
+      "interest_tag": ""
+    },
+    {
+      "title": "Meta$^2$: Precomputing Reusable Knowledge for Online Harness Evolution in Long-Horizon Agents",
+      "arxiv_id": "2611.05139",
+      "url": "https://arxiv.org/abs/2611.05139",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2611.05139",
+      "tldr": "Meta² moves offline harness optimization up one level: it learns reusable guidance about when and how an online evolver should change a frozen model's prompts, tools, memory, or hooks. During deployment, the Meta-Skill combines with emerging trajectory evidence, while any harness edit stays local to the current run and requires no hidden verifier feedback. With GPT-5.6-Terra, it reports 81.00% on Terminal-Bench 2.1 and 44.44% on DeepSWE 1.1. The design matters because it transfers evolution strategy without forcing one shared harness onto every task.",
+      "tldr_zh": "Meta² 把 offline harness optimization 提升一层：它学习关于何时、如何修改 frozen model 的 prompts、tools、memory 或 hooks 的可复用 guidance。部署时，Meta-Skill 与当前 trajectory evidence 结合；实际 harness edit 只在本次 run 内生效，也不依赖隐藏 verifier feedback。使用 GPT-5.6-Terra 时，它在 Terminal-Bench 2.1 和 DeepSWE 1.1 上分别报告 81.00% 与 44.44%。其意义在于迁移的是 evolution strategy，而不是把一个共享 harness 强塞给所有任务。",
+      "interest_tag": ""
+    }
+  ],
+  "github_repos": [
+    {
+      "name": "andrew-babo/muse4ai",
+      "url": "https://github.com/andrew-babo/muse4ai",
+      "tldr": "Muse4AI is a local Windows bridge that exposes a signed-in Muse image/video session to agents through REST, MCP, and OAuth. It includes a job queue, persistent conversations, video extension, revocable scoped keys, and an OpenAPI contract, with data kept on the user's machine. The repository claims 740 tests and offers both an installer and source build, making it more substantial than a thin API wrapper. Its appeal is turning a consumer creative tool into an agent-operable local service without a hosted middleman, though users must accept web-automation and terms-of-service risk.",
+      "tldr_zh": "Muse4AI 是一个 Windows 本地 bridge，通过 REST、MCP 和 OAuth 把已登录的 Muse 图像/视频会话暴露给 agent。它提供 job queue、持久会话、视频延长、可撤销 scoped keys 和 OpenAPI contract，数据保留在用户机器上。仓库声称有 740 个测试，并同时提供 installer 与源码构建，因此不只是薄薄的 API wrapper。其吸引力在于无需云端中间商即可把消费级创作工具变成 agent-operable service，但用户仍需承担 web automation 与服务条款风险。",
+      "stars": 630,
+      "language": "TypeScript",
+      "interest_tag": ""
+    },
+    {
+      "name": "Balanov/shim",
+      "url": "https://github.com/Balanov/shim",
+      "tldr": "Shim is a local-first terminal agent harness distributed as one static Go binary with no runtime dependencies or telemetry. It aims to support arbitrary models, MCP servers, and Agent Skills through a deliberately minimal natural-language CLI rather than a full TUI. That small surface makes it attractive for users who want portable orchestration without adopting a large platform. The project is early, but its popularity reflects demand for simpler harnesses as model-native CLIs become more capable.",
+      "tldr_zh": "Shim 是一个 local-first terminal agent harness，以单个静态 Go binary 分发，不需要 runtime dependencies，也不发送 telemetry。它通过刻意简化的 natural-language CLI 支持不同模型、MCP servers 与 Agent Skills，而不是构建完整 TUI。较小的 surface 对希望获得可移植 orchestration、又不愿采用大型平台的用户很有吸引力。项目仍处早期，但其热度反映出 model-native CLI 变强后，市场开始重新偏好简单 harness。",
+      "stars": 456,
+      "language": "Go",
+      "interest_tag": ""
+    },
+    {
+      "name": "aa1143/NamiAgent",
+      "url": "https://github.com/aa1143/NamiAgent",
+      "tldr": "NamiAgent is both a runnable local agent and a beginner-oriented course that grows from a roughly 100-line loop into file tools, command execution, MCP, approvals, and long-term memory. Its web UI exposes each step and the complete context sent to the model, making normally hidden harness mechanics inspectable. This pedagogical structure is more valuable than another opaque demo because readers can connect each capability to a concrete implementation increment. The project also uses permission prompts before file writes and commands, introducing safety alongside functionality.",
+      "tldr_zh": "NamiAgent 既是可本地运行的 agent，也是面向初学者的课程：从约 100 行 agent loop 逐步增加文件工具、命令执行、MCP、审批和长期记忆。它的 Web UI 展示每一步以及发给模型的完整 context，让通常隐藏的 harness mechanics 可以被观察。相比另一个黑箱 demo，这种教学结构更有价值，因为读者能把每项能力与具体实现增量对应起来。项目还在写文件和执行命令前弹出 permission prompt，把安全边界与功能一起教学。",
+      "stars": 363,
+      "language": "Python",
+      "interest_tag": ""
+    },
+    {
+      "name": "Balanov/verdict",
+      "url": "https://github.com/Balanov/verdict",
+      "tldr": "Verdict is a 197 KB local semantic classifier that labels a tool call's observed outcome as success, failure, blocked, or unknown using command, exit code, stdout, and stderr. Its quantized character/word n-gram logistic model reports 93.2% accuracy and 0.54 ms median inference on a synthetic held-out benchmark, versus 47.9% for an exit-code baseline. Crucially, the README presents it as advisory rather than task-level proof and calls for deterministic verification to remain authoritative. The project makes a narrow but pervasive coding-agent failure mode cheap enough to detect inline.",
+      "tldr_zh": "Verdict 是一个 197 KB 的本地 semantic classifier，根据 command、exit code、stdout 和 stderr，把工具调用结果分成 success、failure、blocked 或 unknown。其量化 character/word n-gram logistic model 在 synthetic held-out benchmark 上报告 93.2% accuracy 与 0.54 ms median inference，而 exit-code baseline 只有 47.9%。重要的是，README 明确把它定位为 advisory layer，而非 task-level proof，并要求 deterministic verification 继续作为权威证据。它让 coding agent 中狭窄但普遍的误判问题可以以极低成本在线检测。",
+      "stars": 238,
+      "language": "Python",
+      "interest_tag": ""
+    },
+    {
+      "name": "bytedance/axion1_0",
+      "url": "https://github.com/bytedance/axion1_0",
+      "tldr": "Axion 1.0 releases an agent foundation-model recipe built around high-quality data, two supervised fine-tuning stages, and reinforcement learning, without mid-training, DPO, or OPD. The repository publishes the technical report, training data, and a reproducible 35B model under Apache 2.0. Its value is methodological economy: the claim is that strong agentic capabilities can emerge from disciplined task construction and verification rather than a long stack of post-training stages. Because the launch is new, independent reproduction of the reported benchmark profile remains the key next check.",
+      "tldr_zh": "Axion 1.0 公开了一套 agent foundation-model recipe：依靠高质量数据、两阶段 supervised fine-tuning 和 reinforcement learning，而不使用 mid-training、DPO 或 OPD。仓库在 Apache 2.0 下发布 technical report、training data 与可复现的 35B model。它的价值是方法上的节制：强 agentic capability 可能主要来自严格的 task construction 与 verification，而不需要堆叠漫长的 post-training stages。由于项目刚发布，下一步最关键的是独立复现其 benchmark profile。",
+      "stars": 50,
+      "language": "Python",
+      "interest_tag": ""
+    }
+  ],
+  "hackernews": [
+    {
+      "title": "Ask HN: What's your current AI agentic setup?",
+      "url": "https://news.ycombinator.com/item?id=50366117",
+      "tldr": "This high-volume HN thread captures a useful snapshot of real agent stacks: paid Claude/Codex subscriptions dominate, OpenRouter and local models fill privacy or refusal gaps, and many users have simplified rather than expanded their orchestration. Several respondents run multiple projects in parallel, but complex swarm frameworks remain uncommon; a strong default harness plus explicit completion criteria is often preferred. Personal agents are used for email, calendars, health tracking, research, and household logistics, yet setup friction remains a recurring complaint. The thread is anecdotal, but it exposes the gap between enthusiast workflows and broad product adoption.",
+      "tldr_zh": "这个高讨论量 HN 帖提供了一张真实 agent stack 快照：付费 Claude/Codex subscription 占主流，OpenRouter 与 local models 更多用于隐私需求或 refusal gaps，不少用户的 orchestration 反而在简化。多人会并行推进多个项目，但复杂 swarm framework 仍不常见；更受欢迎的是强默认 harness 加明确 completion criteria。Personal agent 已被用于邮件、日历、健康追踪、调研和家庭事务，但 setup friction 反复出现。讨论是 anecdotal evidence，却清楚暴露了 power-user workflow 与大众 adoption 之间的距离。",
+      "points": 306,
+      "num_comments": 328,
+      "interest_tag": ""
+    },
+    {
+      "title": "AI agent swarms in Minecraft fail to build civilization, drown in bureaucracy",
+      "url": "https://www.tomshardware.com/tech-industry/artificial-intelligence/ai-agent-swarms-unleashed-in-minecraft-to-build-a-thriving-civilization-50-agent-teams-fail-after-falling-into-paralyzing-bureaucracy",
+      "tldr": "Researchers placed 50 agents in Minecraft with a three-hour goal of building a thriving civilization, but the colony shifted from ambitious plans to risk-averse survival and coordination overhead. A memorable failure had four agents spending eleven minutes appointing one fertilizer operator for a single action. Competitive tests also showed model-specific organizational styles: GPT agents coordinated more like a hive and shared workarounds, while Claude agents used a leader-and-deliberation pattern and sometimes accepted tool limitations too quickly. The result is a vivid warning that adding agents can multiply communication cost faster than useful labor.",
+      "tldr_zh": "研究者让 50 个 agent 在 Minecraft 中用三小时建立繁荣文明，但群体很快从宏大计划滑向保守生存和高额协调成本。最具代表性的失败是四个 agent 花 11 分钟，为一次施肥动作任命唯一操作员。对抗实验还显示不同模型的组织风格：GPT agents 更像 hive，会共享 workaround；Claude agents 更偏 leader + deliberation，有时过早接受工具限制。它直观提醒我们，增加 agent 数量可能让 communication cost 比有效劳动增长得更快。",
+      "points": 180,
+      "num_comments": 91,
+      "interest_tag": "Agent Swarm"
+    },
+    {
+      "title": "Launch HN: Momentic (YC W24) – Agents that catch bugs by using your app",
+      "url": "https://momentic.ai/",
+      "tldr": "Momentic positions browser and mobile agents as an evidence-producing QA layer for fast-moving codebases. Teams describe flows in plain-English YAML, run them locally or in CI, inspect screenshots and traces, and review proposed self-healing edits when interfaces change. MCP lets coding agents author or execute tests, while failure classification separates application bugs, test flakiness, and environment issues. The important shift is from agents merely generating code to agents interacting with the shipped UI and returning merge-gating evidence.",
+      "tldr_zh": "Momentic 把 browser/mobile agent 定位为快速迭代代码库中的 evidence-producing QA layer。团队用 plain-English YAML 描述流程，在本地或 CI 执行，查看 screenshots 与 traces，并在界面变化时审查 self-healing 提议。MCP 允许 coding agent 编写或运行测试，failure classification 则区分 application bug、test flakiness 与 environment issue。关键转变是：agent 不再只生成代码，而是实际操作已运行的 UI，并返回可以 gate merge 的证据。",
+      "points": 165,
+      "num_comments": 130,
+      "interest_tag": "CUA"
+    },
+    {
+      "title": "Basically no one is using AI agents for their DoorDash orders",
+      "url": "https://arstechnica.com/ai/2026/10/doordash-says-outside-ai-agents-have-only-led-to-hundreds-of-orders-so-far/",
+      "tldr": "DoorDash says external AI agents have generated only several hundred orders, against nearly one billion platform orders in the third quarter. Its MCP connector is less than a month old and limited to early beta partners, so the number is not a mature-market verdict. Still, the CEO's distinction is revealing: agents may add more value to long-consideration purchases and proactive background work than to a simple food order users can complete directly. The story is a useful counterweight to connector hype because protocol availability does not automatically create delegation demand.",
+      "tldr_zh": "DoorDash 表示，外部 AI agent 累计只带来数百笔订单，而平台第三季度总订单接近十亿。其 MCP connector 上线不足一个月，且仅开放给少量 beta partners，因此这个数字还不能代表成熟市场。CEO 的区分仍很有启发：agent 可能更适合 long-consideration purchase 与后台主动工作，而不是用户自己很快就能完成的点餐。它为 connector hype 提供了必要反例：protocol availability 不会自动创造 delegation demand。",
+      "points": 132,
+      "num_comments": 242,
+      "interest_tag": ""
+    },
+    {
+      "title": "LongCat-2.5: Native Multimodality for Agentic Tasks",
+      "url": "https://longcat.ai/blog/longcat-2.5/",
+      "tldr": "LongCat-2.5 is a 1.6T-parameter MoE model with roughly 48B active parameters, trained for multimodal long-horizon agentic work. It tokenizes native-resolution visual signals into multi-level discrete representations and mixes long-horizon trajectories, verifiable environments, and failure-derived tasks in large-scale RL. The release emphasizes visual coding, full-project builds, 3D creation, office automation, and W4A4 deployment on domestic accelerators. The model weights were still marked coming soon on the launch page, so the broad benchmark claims require artifact release and independent evaluation.",
+      "tldr_zh": "LongCat-2.5 是一个总参数 1.6T、每 token 激活约 48B 的 MoE model，面向 multimodal long-horizon agentic work。它把 native-resolution visual signals 编码为多级离散表示，并在大规模 RL 中混合 long-horizon trajectories、verifiable environments 与由失败轨迹转化的训练任务。发布重点覆盖 visual coding、full-project build、3D creation、office automation，以及国产加速器上的 W4A4 部署。发布页仍把 model weights 标为 coming soon，因此其宽泛 benchmark claim 需要等待 artifact release 和独立评测。",
+      "points": 85,
+      "num_comments": 26,
+      "interest_tag": ""
+    }
+  ]
+}
