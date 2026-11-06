@@ -1,0 +1,226 @@
+{
+  "date": "2026-11-06",
+  "generated_at": "2026-11-06T17:03:35.161167+08:00",
+  "briefing_zh": "今天最明确的研究主线，是 agent 训练正在从「换一个更强 harness」转向「把 harness 提供的能力蒸馏回 policy」。**Harness-S** 用 sibling harness 定向救援 base harness 的失败轨迹，**Stabilizing On-Policy Targeted Guidance** 则只在 policy 明确失败的 turn 注入文本反馈，并用 per-criteria reward 控制训练稳定性。两者共同说明：harness 不再只是推理外壳，而正在成为可控的数据与 credit-assignment 接口。\n\n评测侧开始把 agent 从短题推向完整工作流。**FrontierPhysics** 要求从文献调研、研究设计到实验和论文产出，最好配置也只通过 168 次 rollout 中的 46 次；**VisSearch-Bench** 的最佳系统完整解题率仅 26.47%，暴露的不是单点视觉识别，而是跨图片、对象和检索步骤维护证据链的能力缺口。与此同时，**BestRand** 说明低成本评测未必需要复杂选择器，但必须处理随机子集误差的长尾风险。\n\n系统层的信号同样强。**Together Compiler** 把 inference optimization 变成持续运行的 agent hill-climbing loop，并报告相对开源 engine 最高 2.6× TPS；**You don't need long context** 则用频繁 compaction 挑战「长任务必须保留长上下文」的默认假设。开源侧的 **Verdict** 和 **WebsiteBench** 分别把注意力放在 semantic outcome verification 与可复现的全栈网站重建，说明 agent 工程的竞争点正从「会调用工具」迁移到「能证明结果、能在真实环境闭环」。\n\n社区讨论呈现出一组很现实的反差：HN 上 agent 工具链调查获得 520 分和 645 条评论，但 DoorDash 披露第三方 agent 仅带来数百笔订单；Minecraft 的 50-agent 实验又因协调官僚化而失败。真正有采用信号的方向更接近 **Momentic** 和 **Rivet**：前者把 GUI 操作变成可验证 QA，后者用轻量 actor、durable state 与分层存储承载长寿命 agent。市场并不缺 agent 叙事，缺的是高频任务、可靠验证与可承受的运行成本。",
+  "briefing_en": "The clearest research thread today is a shift from merely swapping in a stronger harness to transferring harness-elicited capabilities back into the policy. **Harness-S** uses sibling harnesses to rescue failures from a base harness, while **Stabilizing On-Policy Targeted Guidance** injects textual feedback only at turns where the policy fails and combines it with per-criterion rewards. Together they recast the harness as a controllable interface for data generation and credit assignment, not just an inference wrapper.\n\nEvaluation is also moving agents from short questions toward complete workflows. **FrontierPhysics** spans literature review, research planning, experiments, and manuscript production, yet the best configuration passes only 46 of 168 rollouts; **VisSearch-Bench** tops out at 26.47% full-task accuracy, exposing failures in maintaining visual evidence across images, objects, and search steps. In parallel, **BestRand** argues that cheap evaluation can remain surprisingly competitive with random subsets, provided the long tail of estimation error is explicitly controlled.\n\nThe systems signal is equally strong. **Together Compiler** turns inference optimization into a continual agent hill-climbing loop and reports up to 2.6× higher throughput than open-source engines, while **You don't need long context** challenges the assumption that long tasks require continuously long contexts. Open-source projects such as **Verdict** and **WebsiteBench** focus respectively on semantic outcome verification and reproducible full-stack reconstruction, showing that the frontier is shifting from tool invocation toward provable completion in realistic environments.\n\nCommunity discussion reveals a sharp adoption gap. An HN survey of agent stacks drew 520 points and 645 comments, yet DoorDash says external agents have produced only hundreds of orders, and a 50-agent Minecraft experiment collapsed into coordination bureaucracy. The stronger product signals come from **Momentic** and **Rivet**: the former turns GUI interaction into verifiable QA, while the latter supplies lightweight actors, durable state, and tiered storage for long-lived workloads. The market has no shortage of agent narratives; it still lacks frequent use cases, reliable verification, and affordable execution.",
+  "viral_analysis_zh": "**You don't need long context** 最可能在研究社区形成爆款：标题直接反驳行业共识，7× 后段 token 成本与「每个 context 只做一次 action 仍不崩」又提供了足够具体的争议点，天然适合复现与辩论。开源侧 **Poki** 的传播钩子也很强——「无需越狱，让 agent 操作真实 iPhone」一句话就能展示价值；而 HN 的 Minecraft swarm 故事用「50 个 agent 被官僚主义拖垮」把抽象协调失败变成了极易转述的画面。",
+  "viral_analysis_en": "**You don't need long context** is the strongest research-side viral candidate: its title directly attacks an industry assumption, while the 7× late-token cost gap and one-action-per-context result create concrete, reproducible controversy. On GitHub, **Poki** has an equally clean hook—agents operating a real iPhone without jailbreaks—while the Minecraft swarm story turns coordination failure into the highly repeatable image of 50 agents drowning in bureaucracy.",
+  "huggingface_papers": [
+    {
+      "title": "VFlash: Fast, Accurate Visual Planning via Flash Primitive Decoding",
+      "url": "https://arxiv.org/abs/2611.08449",
+      "tldr": "VFlash decodes an entire structured visual primitive—such as a point, box, or variable-length trajectory—in one lightweight forward pass instead of generating coordinates token by token. It trains against valid annotated structures rather than requiring exact autoregressive token agreement. The paper reports lower 2D and 3D trajectory error, about 25× faster single-rollout generation for 3D point motion forecasting, and 70.2% average success for a conditioned world-action model versus 62.6% for the baseline.",
+      "tldr_zh": "VFlash 不再逐 token 生成坐标，而是用轻量 drafter 一次预测完整的点、框或可变长轨迹等结构化视觉 primitive。训练时接受结构合法的预测，不要求复现 autoregressive 模型的精确 token 序列。论文报告 2D/3D 轨迹误差更低，3D 点运动预测单次 rollout 约快 25×，并让条件 world-action model 的平均成功率从 62.6% 提升到 70.2%。",
+      "upvotes": 54,
+      "authors": "Yu-Cheng Chou, Shihao Wang, Jin Huang, Chi-Pin Huang, Chiao-An Yang, Xianzhe Fan, Jing Wang, Zhiqi Li, Yuanguo Kuang, Ruijie Zheng, Johan Bjorck, Sifei Liu, Hang Su, Abhishek Badki, Lei Zhang, Alan Yuille, Linxi Fan, Jan Kautz, Zhiding Yu",
+      "ai_keywords": [
+        "visual planning",
+        "primitive decoding",
+        "robotics",
+        "world action model"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "Random Is Almost Enough? Stable and Low-Cost Benchmark Compression via BestRand",
+      "url": "https://arxiv.org/abs/2611.00883",
+      "tldr": "The paper derives an analytical approximation showing that random benchmark subsets usually estimate full scores well, but suffer from a small long tail of large errors. BestRand keeps the low construction cost of random sampling while selecting against that unstable tail. Across more than 70 text, multimodal, agent, and VLA benchmarks, it cuts high-error risk by 50.2%, average estimation error by 16.4%, and uses 51.3% of the construction cost of competing methods.",
+      "tldr_zh": "论文从理论上解释了为什么随机 benchmark 子集多数时候估计准确，却会被少量大误差形成的长尾拖累。BestRand 保留随机采样的低构建成本，同时专门压制不稳定的高误差尾部。在 70 多个文本、多模态、agent 与 VLA benchmark 上，它将高误差风险降低 50.2%、平均估计误差降低 16.4%，构建成本仅为竞争方法的 51.3%。",
+      "upvotes": 34,
+      "authors": "George Ling, Shanshan Zhong, Lijin Yang, Hao Yang, Nanxiang Li, Zhongzhan Huang",
+      "ai_keywords": [
+        "benchmark compression",
+        "evaluation",
+        "sampling",
+        "VLA"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "Harness-S: Learning from Sibling Harnesses for Generalizable Agent Training",
+      "url": "https://arxiv.org/abs/2611.04277",
+      "tldr": "Harness-S treats harness variants as specialized rescuers rather than searching for one universally best executor. When all attempts under the base harness fail, a router selects sibling harnesses, collects successful replacement trajectories, and trains the same policy with reinforcement learning. On AppWorld, SWE-Gym, and DBBench, the resulting policy retains the rescued behaviors after returning to the original harness, separating training-time scaffolding from deployment-time dependence.",
+      "tldr_zh": "Harness-S 不再寻找一个普适最优 executor，而是把不同 harness variant 当作专门修复不同失败的救援器。当 base harness 下的尝试全部失败时，router 选择 sibling harness 生成替代轨迹，再用这些轨迹训练同一个 policy。AppWorld、SWE-Gym 与 DBBench 的结果表明，policy 回到原始 harness 后仍保留被救援出的行为，从而把训练期 scaffold 与部署期依赖解耦。",
+      "upvotes": 32,
+      "authors": "Kangning Zhang, Wenxiang Jiao, Bowen Fang, Shuai Shao, Jiachen Zhu, Rong Shan, Shijian Wang, Hao Wang, Yuan Lu, Weiwen Liu, Weinan Zhang",
+      "ai_keywords": [
+        "agent training",
+        "harness",
+        "reinforcement learning",
+        "routing"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "VisSearch-Bench: Evaluating Long Horizon Visual Search in Multimodal Agents",
+      "url": "https://arxiv.org/abs/2611.04894",
+      "tldr": "VisSearch-Bench contains 204 human-written tasks that require agents to carry visual evidence across long search trajectories, rather than identify one image and switch to text retrieval. It spans five search patterns, 7 domains, and 25 subdomains, with traceable evidence and both full-task and process-level scoring. The best of 16 multimodal systems fully solves only 26.47%, indicating that visual context management—not basic recognition—is the main bottleneck.",
+      "tldr_zh": "VisSearch-Bench 包含 204 个人工编写任务，要求 agent 在长程检索中持续组织和关联视觉证据，而不是识别首张图片后转成纯文本搜索。它覆盖 5 类检索模式、7 个主领域和 25 个子领域，并提供可追溯证据、整题准确率与过程评分。16 个多模态系统中的最佳者完整解题率仅 26.47%，说明主要瓶颈是 visual context management，而非基础识别。",
+      "upvotes": 13,
+      "authors": "ZhengXian Wu, Qianhao Nie, Zhuohong Chen, Junjie Gao, Yuyao Zhang, Yunyao Yu, Hangrui Xu, Cheng Cheng, Guiyu Ma, Jin Zhang, Xingzhong Xu, Kai Yang, Haoqian Wang",
+      "ai_keywords": [
+        "multimodal agents",
+        "visual search",
+        "long horizon",
+        "evaluation"
+      ],
+      "interest_tag": "Benchmark"
+    },
+    {
+      "title": "EvoMemState: Evolving Memory State for Personal Agents",
+      "url": "https://arxiv.org/abs/2611.03743",
+      "tldr": "EvoMemState argues that personal-agent memory should model how facts remain valid, constrain one another, and apply to the current request, rather than storing independent fact snippets. It adds relational states for validity and scope plus a request-specific reasoning state learned through reinforcement learning. Experiments on long-term dialogue and memory-use benchmarks improve both retrieval completeness and memory-grounded response accuracy.",
+      "tldr_zh": "EvoMemState 认为个人 agent 的记忆不应只是互相独立的事实片段，还要表达事实如何保持有效、彼此约束，以及当前请求应如何使用它们。框架加入描述有效性与作用域的 relational states，并通过 RL 学习请求特定的 reasoning state。长期对话与记忆使用 benchmark 上，它同时提升了检索完整性和基于记忆回答的准确率。",
+      "upvotes": 11,
+      "authors": "Zhishang Xiang, Yunbo Tang, Zhongqiao Liu, Junkai Chen, Zerui Chen, Qingguo Hu, Yuxuan Zhang, William Grant, Qinggang Zhang, Jinsong Su",
+      "ai_keywords": [
+        "agent memory",
+        "personal agents",
+        "state evolution",
+        "reinforcement learning"
+      ],
+      "interest_tag": "Memory"
+    }
+  ],
+  "alphaxiv_papers": [
+    {
+      "title": "Stabilizing On-Policy Targeted Guidance in Agentic Reinforcement Learning",
+      "arxiv_id": "2611.05266",
+      "url": "https://arxiv.org/abs/2611.05266",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2611.05266",
+      "tldr": "This work converts per-turn textual judge feedback into an on-policy self-distillation signal for multi-turn software-engineering agents. The stable recipe combines targeted distillation with per-criterion rewards and applies feedback only at turns where the current policy fails. That design expands learning beyond the base model's initial coverage while avoiding entropy collapse and the oscillations seen with naive guidance.",
+      "tldr_zh": "该工作把逐 turn 的文本 judge feedback 转化为多轮软件工程 agent 的 on-policy self-distillation 信号。稳定配方将定向蒸馏与逐 criterion reward 结合，并只在当前 policy 明确失败的 turn 注入反馈。这样既能突破 base model 初始探索覆盖不足，又避免朴素 guidance 带来的 entropy collapse 和训练振荡。",
+      "interest_tag": ""
+    },
+    {
+      "title": "FrontierPhysics: Evaluating Agents for End-to-End Physics Research",
+      "arxiv_id": "2611.06910",
+      "url": "https://arxiv.org/abs/2611.06910",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2611.06910",
+      "tldr": "FrontierPhysics evaluates complete research workflows with 56 tasks authored by 42 physicists across nine theoretical, computational, and experimental domains. Agents must review literature, plan research, run experiments, and produce structured results and manuscripts, scored by deterministic checks and expert rubrics. No evaluated configuration passes more than 46 of 168 rollouts; trajectory review points to weak rigor and expert intuition rather than missing physics knowledge.",
+      "tldr_zh": "FrontierPhysics 由 42 位物理学家基于真实研究编写 56 个任务，覆盖 9 个理论、计算与实验领域，评测完整科研流程。agent 必须完成文献调研、研究计划、实验和结构化结果及论文产出，并接受 deterministic verifier 与专家 rubric 的联合评分。所有配置中最好者也只通过 168 次 rollout 的 46 次，轨迹审计显示主要短板是严谨推理和专家直觉，而不是物理知识缺失。",
+      "interest_tag": "Benchmark"
+    },
+    {
+      "title": "From Pixels to Actions - Towards Native Vision-Language-Action Policies",
+      "arxiv_id": "2611.06918",
+      "url": "https://arxiv.org/abs/2611.06918",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2611.06918",
+      "tldr": "NEO-VLA removes the fixed visual encoder endpoint and lets image patches evolve jointly with language through the backbone. A flow-matching action expert can read instruction-conditioned visual features from multiple depths, where probing shows action-critical signals often peak before the final layer. Controlled comparisons find stronger and more robust manipulation than encoder-based designs, and scaling or full fine-tuning does not erase the architectural gap.",
+      "tldr_zh": "NEO-VLA 去掉固定视觉 encoder 的终点表示，让 image patch 与语言在 backbone 内共同演化。flow-matching action expert 可以读取多个深度的指令条件视觉特征，而 probing 显示动作关键线索常在最终层之前达到峰值。受控实验中它比 encoder-based 架构表现更强、更稳健，单纯扩大规模或 full fine-tuning 也无法消除这一结构差距。",
+      "interest_tag": ""
+    },
+    {
+      "title": "Together Compiler: Continual Compilation for AI Inference",
+      "arxiv_id": "",
+      "url": "https://www.alphaxiv.org/abs/2611.together-compiler-continual-ai-inference",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2611.together-compiler-continual-ai-inference",
+      "tldr": "Together Compiler turns production inference optimization into a continual agent hill-climbing loop. Its tiered persistent engine separates launch overhead from forward-pass measurement, while a cost model chooses promising parallelism seeds, increasing candidate throughput without losing deployment fidelity. The report claims up to 1.7× over hand-written megakernels, up to 2.6× over open-source engines, and production service at trillion-token scale.",
+      "tldr_zh": "Together Compiler 把生产 inference optimization 变成持续运行的 agent hill-climbing loop。它用 tiered persistent engine 将启动开销与 forward-pass 测量解耦，再由 cost model 选择有希望的并行配置种子，在提高候选测试吞吐的同时保持部署 fidelity。报告称相对手写 megakernel 最高 1.7×、相对开源 engine 最高 2.6×，并已在生产中服务万亿级 token。",
+      "interest_tag": ""
+    },
+    {
+      "title": "You don't need long context",
+      "arxiv_id": "2611.05306",
+      "url": "https://arxiv.org/abs/2611.05306",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2611.05306",
+      "tldr": "The paper observes that late tokens can cost up to 7× more than early tokens on frontier open-weight models. Across long-input and long-horizon tasks, frequent compaction preserves nearly all accuracy, and software-engineering performance does not collapse even when each context permits only one action. The result motivates semantic state-space models and challenges the assumption that persistent long contexts are necessary for capable agents.",
+      "tldr_zh": "论文指出，在前沿 open-weight 模型上，序列后段 token 的生成成本可达到前段的 7×。在长输入和长程任务上，频繁 compaction 几乎不损失准确率；即使每个 context 最多只允许一次 action，软件工程表现也没有崩溃。该结果引出 semantic state-space model，并直接挑战「强 agent 必须持续保留长上下文」的假设。",
+      "interest_tag": ""
+    }
+  ],
+  "github_repos": [
+    {
+      "name": "andrew-babo/muse4ai",
+      "url": "https://github.com/andrew-babo/muse4ai",
+      "tldr": "Muse4AI is a local Windows bridge that exposes a user's signed-in Muse session to agents over REST, MCP, or OAuth. It keeps keys, history, queues, and generated assets on the local machine rather than relaying them through the maintainer's server. The repository advertises image and video generation, iterative conversations, clip extension, and a 740-test codebase, making it a concrete example of wrapping consumer AI products as agent tools.",
+      "tldr_zh": "Muse4AI 是一个本地 Windows bridge，通过 REST、MCP 或 OAuth 把用户已登录的 Muse session 暴露给 agent。密钥、历史、队列和生成资产均保留在本机，不经过维护者服务器中转。项目覆盖图像/视频生成、连续对话和视频延长，并标注 740 项测试，是把消费级 AI 产品封装为 agent tool 的具体案例。",
+      "stars": 881,
+      "language": "TypeScript",
+      "interest_tag": ""
+    },
+    {
+      "name": "Balanov/shim",
+      "url": "https://github.com/Balanov/shim",
+      "tldr": "Shim is a model-agnostic, local-first terminal harness shipped as a small static Go binary with no daemon, database, Docker, or UI framework. It supports OpenAI-compatible and Anthropic APIs, MCP over stdio or Streamable HTTP, lazy Agent Skill loading, JSONL sessions, and confirmation for mutating commands. Its appeal is architectural subtraction: one adapter for models and tools without turning the harness itself into a platform.",
+      "tldr_zh": "Shim 是 model-agnostic、local-first 的终端 harness，以小型静态 Go binary 交付，不依赖 daemon、数据库、Docker 或 UI framework。它支持 OpenAI-compatible/Anthropic API、stdio 与 Streamable HTTP MCP、按需加载 Agent Skill、JSONL session，并对变更性命令要求确认。它的价值在于架构减法：统一模型与工具，但不把 harness 本身膨胀成平台。",
+      "stars": 464,
+      "language": "Go",
+      "interest_tag": ""
+    },
+    {
+      "name": "JosssphZhou/poki",
+      "url": "https://github.com/JosssphZhou/poki",
+      "tldr": "Poki lets MCP-capable agents operate a real iPhone from macOS without jailbreaks or extra hardware. It combines a local MCP server, native device tooling, and an agent layer, while allowing users to bring their existing model subscription. The repository provides source and a prebuilt Apple Silicon package; the main trade-off is a heavy macOS/Xcode/Node/Python toolchain and broad device permissions.",
+      "tldr_zh": "Poki 让支持 MCP 的 agent 从 macOS 操作真实 iPhone，无需越狱或额外硬件。它组合本地 MCP server、原生设备工具与 agent layer，并允许用户沿用已有模型订阅。仓库同时提供源码和 Apple Silicon 预编译包；trade-off 是依赖完整 Xcode、Node、Python 等较重工具链，并需要较高的设备权限。",
+      "stars": 322,
+      "language": "JavaScript",
+      "interest_tag": "CUA"
+    },
+    {
+      "name": "Balanov/verdict",
+      "url": "https://github.com/Balanov/verdict",
+      "tldr": "Verdict is a 197 KB local classifier that reads a command plus stdout, stderr, and exit code, then labels the outcome as success, failure, blocked, or unknown. On 192 synthetic held-out examples from unseen CLI families it reports 93.2% accuracy and macro-F1, versus 47.9% accuracy for an exit-code baseline, with 0.54 ms median inference on the reported machine. The authors explicitly call it advisory and acknowledge synthetic, English-biased data, so it is a useful semantic gate—not authoritative verification.",
+      "tldr_zh": "Verdict 是一个 197 KB 的本地分类器，读取 command、stdout、stderr 与 exit code 后，将结果判断为 success、failure、blocked 或 unknown。它在 192 个来自未见 CLI family 的合成 held-out 样本上报告 93.2% accuracy 与 macro-F1，而 exit-code baseline 仅 47.9%，报告机器上的中位推理时间为 0.54 ms。作者明确将其定位为 advisory，并承认数据是合成且偏英语，因此它适合作为 semantic gate，不能替代权威验证。",
+      "stars": 242,
+      "language": "Python",
+      "interest_tag": ""
+    },
+    {
+      "name": "TIGER-AI-Lab/WebsiteBench",
+      "url": "https://github.com/TIGER-AI-Lab/WebsiteBench",
+      "tldr": "WebsiteBench asks agents to explore production websites through a browser and reconstruct full-stack versions that match both appearance and behavior. It publishes 70 tasks on Harbor and Hugging Face, isolates agents and verifiers in separate Docker environments, and documents substantial per-task compute and storage budgets. This is especially valuable because it evaluates long-horizon reverse engineering and visual fidelity together rather than reducing web agents to isolated clicks.",
+      "tldr_zh": "WebsiteBench 要求 agent 先通过浏览器探索生产级网站，再重建外观与行为都匹配的 full-stack 版本。它在 Harbor 与 Hugging Face 发布 70 个任务，将 agent 和 verifier 放在独立 Docker 环境中，并明确披露每题较高的计算与存储预算。它的价值在于联合评测长程 reverse engineering 与视觉 fidelity，而不是把 web agent 简化为孤立点击。",
+      "stars": 71,
+      "language": "Python",
+      "interest_tag": "Benchmark"
+    }
+  ],
+  "hackernews": [
+    {
+      "title": "Ask HN: What's your current AI agentic setup?",
+      "url": "https://news.ycombinator.com/item?id=50366117",
+      "tldr": "This unusually large HN thread is a live snapshot of subscriptions, models, coding harnesses, orchestrators, and personal-agent platforms in actual use. A recurring pattern is simplification toward first-party coding tools, with custom orchestration reserved for parallel work, privacy, or persistent automations. The 645 comments are anecdotal rather than a controlled survey, but the thread is valuable adoption evidence about where power users still feel plumbing and reliability friction.",
+      "tldr_zh": "这个超大 HN 讨论串记录了用户真实使用的订阅、模型、coding harness、orchestrator 与个人 agent 平台。反复出现的模式是回归更简单的一方 coding tool，只在并行工作、隐私或持久自动化中保留自定义 orchestration。645 条评论不是受控调查，但可作为 power user 采用情况的高密度证据，尤其能看出 plumbing 与可靠性仍是主要摩擦。",
+      "points": 520,
+      "num_comments": 645,
+      "interest_tag": ""
+    },
+    {
+      "title": "AI agent swarms in Minecraft fail to build civilization, drown in bureaucracy",
+      "url": "https://www.tomshardware.com/tech-industry/artificial-intelligence/ai-agent-swarms-unleashed-in-minecraft-to-build-a-thriving-civilization-50-agent-teams-fail-after-falling-into-paralyzing-bureaucracy",
+      "tldr": "A 50-agent Minecraft colony failed to build a thriving civilization in three hours, abandoning ambitious plans after early losses and drifting into coordination overhead. The most memorable example had four agents spend 11 minutes appointing one fertilizer operator for a single action. Separate competitive trials showed different model-dependent coordination styles, suggesting that swarm scale amplifies communication policy and recovery behavior rather than automatically producing collective competence.",
+      "tldr_zh": "一个 50-agent Minecraft 群体在三小时内未能建成繁荣文明，早期受挫后放弃宏大计划，并逐渐陷入协调开销。最具代表性的案例是四个 agent 花 11 分钟任命一名「唯一施肥员」，只为执行一次简单动作。其他对抗实验还显示不同模型具有不同协作风格，说明 swarm 扩容会放大通信策略和故障恢复特征，而不会自动产生集体能力。",
+      "points": 180,
+      "num_comments": 91,
+      "interest_tag": "Agent Swarm"
+    },
+    {
+      "title": "Basically no one is using AI agents for their DoorDash orders",
+      "url": "https://arstechnica.com/ai/2026/10/doordash-says-outside-ai-agents-have-only-led-to-hundreds-of-orders-so-far/",
+      "tldr": "DoorDash says external AI agents have generated only several hundred orders, compared with nearly one billion total orders in the third quarter of 2026. Its MCP connector is less than a month old, limited to early beta partners, and currently fits corporate lunch workflows better than routine consumer ordering. The result is a useful adoption check: agentic commerce may matter more for high-consideration or background tasks than for low-friction actions users already complete directly.",
+      "tldr_zh": "DoorDash 表示，外部 AI agent 累计只带来数百笔订单，而公司在 2026 年第三季度处理的总订单接近 10 亿笔。其 MCP connector 上线尚不足一个月，只对少量 beta partner 开放，目前更适合企业午餐等工作流，而非日常消费者点餐。这个数据提醒我们：agentic commerce 可能更适合高考虑成本或后台任务，对用户本来就能迅速完成的低摩擦操作未必有价值。",
+      "points": 174,
+      "num_comments": 327,
+      "interest_tag": ""
+    },
+    {
+      "title": "Launch HN: Momentic (YC W24) – Agents that catch bugs by using your app",
+      "url": "https://momentic.ai/",
+      "tldr": "Momentic's Mo explores web and mobile applications through browsers and devices, organizing parallel sub-agents in a DAG and coordinating them with resource leases. On the company's 1,396-bug QA benchmark, a 60-minute run found 269 bugs at 19.3% recall and 84% precision, versus 86 bugs for Codex, though Mo cost more per bug. The compelling idea is to move verification from generated test code to direct evidence from the running interface; the caveat is that the benchmark and product claims come from the vendor.",
+      "tldr_zh": "Momentic 的 Mo 通过浏览器和移动设备探索应用，把并行 sub-agent 组织成 DAG，并用 resource lease 协调共享 fixture。按公司自建的 1,396-bug QA benchmark，60 分钟内 Mo 找到 269 个 bug，recall 19.3%、precision 84%，Codex 找到 86 个，但 Mo 的单 bug 成本更高。其核心价值是把验证从生成测试代码转向运行界面的直接证据；需要注意 benchmark 与产品结论均由厂商提供。",
+      "points": 166,
+      "num_comments": 132,
+      "interest_tag": "CUA"
+    },
+    {
+      "title": "Launch HN: Rivet (YC W23) – Scale and Orchestrate Agents on S3",
+      "url": "https://github.com/rivet-dev/rivet",
+      "tldr": "Rivet applies the actor model to long-lived agent workloads, giving each agent an in-memory process, WebSocket endpoint, durable SQLite state, and idle hibernation. It tiers writes through SSD caches before batching to S3, targeting low latency while reducing the cost of large transcripts, artifacts, and filesystems; the launch post reports 72 KB actor baselines and 4.9 ms p99 starts. The open-source, self-hostable design is compelling for dense orchestration, though its published performance figures should be treated as vendor measurements.",
+      "tldr_zh": "Rivet 将 actor model 用于长寿命 agent workload，为每个 agent 提供内存进程、WebSocket endpoint、durable SQLite state 与空闲休眠。写入先经过 SSD cache，再批量落到 S3，以兼顾低延迟和大规模 transcript、artifact、filesystem 的成本；发布帖报告 actor baseline 为 72 KB、p99 启动 4.9 ms。其开源、自托管设计适合高密度 orchestration，但性能数字应视为厂商自测。",
+      "points": 96,
+      "num_comments": 50,
+      "interest_tag": "Agent Swarm"
+    }
+  ]
+}
