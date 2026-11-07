@@ -1,0 +1,201 @@
+{
+  "date": "2026-11-07",
+  "generated_at": "2026-11-07T17:02:38.595179+08:00",
+  "briefing_zh": "今天最强的共同信号，是 agent 研究正从「模型会不会做」转向「怎样让它稳定地做完」。**Harness-S** 不再寻找单一最优 harness，而是利用 sibling harness 的互补性训练可迁移策略；**Stabilizing On-Policy Targeted Guidance** 则把文本反馈变成 on-policy 学习信号，在不牺牲核心 coding 能力的情况下教会 agent 新工具与行为。两者都在说明：下一阶段的增益越来越来自训练分布、反馈接口和运行时结构，而不只是更大的 base model。\n\n具身方向今天尤其强。**SLA** 用 continual pre-training 把 2D 视觉表征对齐到 3D geometry，**VFlash** 通过并行解码视觉 primitives 加速空间规划；它们共同把「看懂」推进到「可执行的空间表征」。与此同时，**VisSearch-Bench** 和 **FrontierPhysics** 把 agent 放进长程、开放式任务，暴露出的主要短板不是知识缺口，而是严谨推理、检索路径控制和执行闭环。\n\n长期运行的另一条主线是压缩与状态管理。**EvoMemState** 把个人 agent 的记忆视为可演化状态，而 **You don't need long context** 通过频繁 compaction 与选择性读取显示，长任务不必等价于无限上下文。**Together Compiler** 又把同样的持续适应思想推到 serving 层，让优化 agent 在真实流量变化中不断搜索更好的 kernel 与部署配置。\n\n开源生态则在把 agent 接入真实工作表面：**Poki** 操作真实 iPhone，**Weave Office** 暴露统一的文档 CLI，**Kino AI** 让多个 agent 共同编辑同一视频 timeline。热度最高的讨论仍是「大家到底在用什么」——HN 的 agentic setup 线程远超单个产品发布，说明用户现在最缺的不是又一个 demo，而是可复用、可验证、成本可控的工作流答案。",
+  "briefing_en": "The strongest shared signal today is that agent research is moving from whether a model can perform a task to how it can finish reliably. **Harness-S** abandons the search for one universally best harness and instead learns from complementary sibling harnesses, while **Stabilizing On-Policy Targeted Guidance** turns textual feedback into an on-policy learning signal that teaches new tools and behaviors without erasing core coding ability. Both suggest that the next gains will come increasingly from training distributions, feedback interfaces, and runtime structure—not only larger base models.\n\nEmbodied intelligence is unusually prominent. **SLA** uses continual pre-training to align 2D visual features with 3D geometry, while **VFlash** accelerates spatial planning by decoding visual primitives in parallel; together they push perception toward executable spatial representations. In parallel, **VisSearch-Bench** and **FrontierPhysics** place agents in long-horizon, open-ended settings and expose weaknesses in rigorous reasoning, retrieval control, and execution loops rather than simple knowledge recall.\n\nA second theme is compression and state management for long-running systems. **EvoMemState** treats a personal agent’s memory as an evolving state, while **You don't need long context** shows that frequent compaction and selective source reading can preserve performance without unbounded context. **Together Compiler** extends the same continual-adaptation idea to serving, allowing optimization agents to keep searching for better kernels and deployment configurations as models and traffic change.\n\nOpen source is meanwhile connecting agents to real work surfaces: **Poki** operates a physical iPhone, **Weave Office** exposes a unified document CLI, and **Kino AI** lets multiple agents edit one shared video timeline. The day’s biggest discussion is still the question of what people actually use: HN’s agentic-setup thread dwarfed individual launches, showing that users want reusable, verifiable, cost-controlled workflows more than another isolated demo.",
+  "viral_analysis_zh": "今天最可能形成持续传播的是 **Poki**：一句「让 AI agent 操作真实 iPhone，无需越狱和额外硬件」同时具备强视觉 demo、低理解门槛和明确的新能力边界。研究侧最有爆款潜力的是 **You don’t need long context**，标题直接挑战行业默认假设，又把成本痛点转化为可执行的 compaction 方案，天然适合引发争论与复现。",
+  "viral_analysis_en": "**Poki** has the strongest viral potential today: “let an AI agent operate a real iPhone without jailbreaks or extra hardware” combines a visual demo, instant comprehension, and a clear new capability boundary. On the research side, **You don’t need long context** directly attacks an industry default assumption and converts the cost problem into an actionable compaction recipe, making it naturally debatable and reproducible.",
+  "huggingface_papers": [
+    {
+      "title": "SLA: Scaling Spatial-Language-Action Model via Continual Pre-training",
+      "url": "https://arxiv.org/abs/2611.08373",
+      "tldr": "SLA continually pre-trains a spatial-language-action model to align semantic visual features with explicit 3D geometry. The recipe improves manipulation across changing scenes and robot embodiments without adding an inference-time module. Its importance is architectural: spatial competence is learned into the backbone instead of patched on after perception.",
+      "tldr_zh": "SLA 通过 continual pre-training，让 spatial-language-action model 将语义视觉特征与显式 3D geometry 对齐。它在不增加 inference-time 模块的情况下，提升了跨场景、跨机器人形态的操作泛化。关键价值在于把空间能力学进 backbone，而不是在感知之后再打补丁。",
+      "upvotes": 150,
+      "authors": "Fuhao Li, Wenxuan Song, Qizhou Huang, Ziyang Zhou, Jingbo Wang, Junwu E, Pengwei Wang, Yan Wang, Shunbo Zhou, Haoang Li",
+      "ai_keywords": [],
+      "interest_tag": ""
+    },
+    {
+      "title": "VFlash: Fast, Accurate Visual Planning via Flash Primitive Decoding",
+      "url": "https://arxiv.org/abs/2611.08449",
+      "tldr": "VFlash represents physical plans as points, boxes, and trajectories, then decodes those visual primitives with fewer sequential steps. It improves 3D trajectory accuracy while cutting planning latency, challenging the assumption that physical reasoning must be expressed as language tokens. The work matters for robots and autonomous systems where both geometric precision and reaction time are binding constraints.",
+      "tldr_zh": "VFlash 用点、框和轨迹表示 physical plan，并以更少的串行步骤解码这些 visual primitives。它同时提高 3D trajectory 精度并降低规划延迟，挑战了 physical reasoning 必须写成语言 token 的默认假设。对机器人和自动系统而言，几何精度与反应速度都是硬约束，因此这种表示与解码方式很关键。",
+      "upvotes": 96,
+      "authors": "Yu-Cheng Chou, Shihao Wang, Jin Huang, Chi-Pin Huang, Chiao-An Yang, Xianzhe Fan, Jing Wang, Zhiqi Li, Yuanguo Kuang, Ruijie Zheng, Johan Bjorck, Sifei Liu, Hang Su, Abhishek Badki, Lei Zhang, Alan Yuille, Linxi &#34;Jim&#39;&#39; Fan, Jan Kautz, Zhiding Yu",
+      "ai_keywords": [],
+      "interest_tag": ""
+    },
+    {
+      "title": "Harness-S: Learning from Sibling Harnesses for Generalizable Agent Training",
+      "url": "https://arxiv.org/abs/2611.04277",
+      "tldr": "Harness-S trains agents across sibling harnesses that evolved from a common base, exploiting their local fixes and complementary failure coverage. The method models harness utility as nonstationary rather than assuming one interface is always best. This is important because robust agent policies should generalize across changing tool wrappers instead of overfitting to a single runtime.",
+      "tldr_zh": "Harness-S 在由同一基础演化出的 sibling harnesses 上训练 agent，利用各自的局部修复与互补 failure coverage。它把 harness 的效用视为 nonstationary，而不是假定存在永远最优的单一接口。其意义在于让 agent policy 泛化到变化中的 tool wrapper，而非过拟合某个 runtime。",
+      "upvotes": 57,
+      "authors": "Kangning Zhang, Wenxiang Jiao, Bowen Fang, Shuai Shao, Jiachen Zhu, Rong Shan, Shijian Wang, Hao Wang, Yuan Lu, Weiwen Liu, Weinan Zhang",
+      "ai_keywords": [],
+      "interest_tag": ""
+    },
+    {
+      "title": "EvoMemState: Evolving Memory State for Personal Agents",
+      "url": "https://arxiv.org/abs/2611.03743",
+      "tldr": "EvoMemState treats long-term personal-agent memory as a state that can be iteratively evolved rather than a static bag of extracted facts. The system updates representations as interactions accumulate, aiming to preserve continuity while limiting stale or redundant information. It matters because personalization quality depends as much on memory maintenance as on retrieval.",
+      "tldr_zh": "EvoMemState 将个人 agent 的长期记忆视为可迭代演化的 state，而不是静态的事实集合。随着交互累积，系统持续更新记忆表示，以保持连续性并减少过时或重复信息。它揭示了 personalization 的质量不仅取决于 retrieval，也取决于 memory maintenance。",
+      "upvotes": 21,
+      "authors": "Zhishang Xiang, Yunbo Tang, Zhongqiao Liu, Junkai Chen, Zerui Chen, Qingguo Hu, Yuxuan Zhang, William Grant, Qinggang Zhang, Jinsong Su",
+      "ai_keywords": [],
+      "interest_tag": "Memory"
+    },
+    {
+      "title": "VisSearch-Bench: Evaluating Long Horizon Visual Search in Multimodal Agents",
+      "url": "https://arxiv.org/abs/2611.04894",
+      "tldr": "VisSearch-Bench evaluates multimodal agents on long-horizon visual search where images remain central throughout the retrieval process. It distinguishes genuine visual investigation from tasks that use one image merely to identify an entity before switching to text search. The benchmark matters because it exposes planning and evidence-tracking failures hidden by short, text-dominated evaluations.",
+      "tldr_zh": "VisSearch-Bench 评测 multimodal agent 的长程 visual search，要求图像在整个检索过程中持续发挥作用。它区分真正的视觉调查，与「先用图识别实体、随后完全转为文本搜索」的伪视觉任务。该 benchmark 能暴露短程、文本主导评测中被掩盖的规划与证据追踪失败。",
+      "upvotes": 17,
+      "authors": "ZhengXian Wu, Qianhao Nie, Zhuohong Chen, Junjie Gao, Yuyao Zhang, Yunyao Yu, Hangrui Xu, Cheng Cheng, Guiyu Ma, Jin Zhang, Xingzhong Xu, Kai Yang, Haoqian Wang",
+      "ai_keywords": [],
+      "interest_tag": "Benchmark"
+    }
+  ],
+  "alphaxiv_papers": [
+    {
+      "title": "Understanding AI from the Inside: The State of Mechanistic Interpretability for AI Safety",
+      "arxiv_id": "2611.08438",
+      "url": "https://arxiv.org/abs/2611.08438",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2611.08438",
+      "tldr": "This survey maps the current state of mechanistic interpretability for AI safety and separates demonstrated insight from hoped-for safety benefits. It proposes shared evaluation criteria for claims about what internal mechanisms reveal. The paper matters because interpretability needs falsifiable standards before it can serve as dependable safety evidence.",
+      "tldr_zh": "这篇综述系统梳理 mechanistic interpretability 在 AI safety 中的现状，并区分已经证明的洞见与尚未兑现的安全收益。作者提出共同的评估标准，用来判断对模型内部机制的解释是否成立。它的重要性在于：interpretability 只有先具备可证伪标准，才能成为可信的安全证据。",
+      "interest_tag": ""
+    },
+    {
+      "title": "Together Compiler: Continual Compilation for AI Inference",
+      "arxiv_id": "",
+      "url": "https://www.alphaxiv.org/abs/2611.together-compiler-continual-ai-inference",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2611.together-compiler-continual-ai-inference",
+      "tldr": "Together Compiler reframes inference optimization as a continual process rather than a one-time compilation step. A persistent engine lets optimization agents test far more candidate kernels and adapt to changing models, hardware, and traffic. This matters because serving stacks now evolve too quickly for static hand-tuning to remain efficient.",
+      "tldr_zh": "Together Compiler 将 inference optimization 从一次性 compilation 重构为持续过程。持久化引擎让优化 agent 能测试更多 candidate kernels，并随模型、硬件和流量变化持续适配。其意义在于 serving stack 的变化速度已经超过静态人工调优能够跟上的范围。",
+      "interest_tag": ""
+    },
+    {
+      "title": "Stabilizing On-Policy Targeted Guidance in Agentic Reinforcement Learning",
+      "arxiv_id": "2611.05266",
+      "url": "https://arxiv.org/abs/2611.05266",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2611.05266",
+      "tldr": "The paper introduces targeted textual guidance for on-policy agentic reinforcement learning when the base policy cannot discover useful reward-bearing behavior on its own. It stabilizes learning of new tools and stylistic constraints while preserving performance on core coding tasks. The result is important because it offers a middle ground between sparse scalar rewards and expensive full demonstrations.",
+      "tldr_zh": "论文为 on-policy agentic reinforcement learning 引入 targeted textual guidance，解决 base policy 无法自行探索到有效 reward 行为的问题。它能稳定教会 agent 新工具与风格约束，同时保持核心 coding task 表现。该方法在稀疏标量 reward 与昂贵完整 demonstration 之间提供了一条中间路径。",
+      "interest_tag": ""
+    },
+    {
+      "title": "You don't need long context",
+      "arxiv_id": "2611.05306",
+      "url": "https://arxiv.org/abs/2611.05306",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2611.05306",
+      "tldr": "This work argues that many long-running tasks do not require continuously expanding context windows. Frequent history compaction and selective rereading of source documents preserve near-baseline accuracy while reducing the high cost of late-token generation. The result matters for production agents because bounded context can be treated as a systems design problem rather than only a model-scaling problem.",
+      "tldr_zh": "这项工作指出，许多长程任务并不需要不断扩张 context window。通过频繁压缩历史并选择性重读源文档，可以在接近 baseline 的准确率下显著降低后段 token 的高成本。它对 production agent 很重要，因为 bounded context 可以被视为系统设计问题，而不只是模型扩展问题。",
+      "interest_tag": ""
+    },
+    {
+      "title": "FrontierPhysics: Evaluating Agents for End-to-End Physics Research",
+      "arxiv_id": "2611.06910",
+      "url": "https://arxiv.org/abs/2611.06910",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2611.06910",
+      "tldr": "FrontierPhysics evaluates agents on end-to-end research projects derived from physicists’ own work rather than fixed exam questions. The results indicate that rigorous reasoning and expert intuition are larger bottlenecks than physics knowledge or isolated execution skills. This is a valuable benchmark because it measures whether agents can sustain a research process, not merely solve a supplied subproblem.",
+      "tldr_zh": "FrontierPhysics 使用物理学家真实项目构造端到端 research task，而不是固定考试题或孤立子任务。结果显示，agent 的主要瓶颈更常是严谨推理和专家直觉，而不是物理知识或单点执行能力。它的价值在于评测 agent 能否维持完整研究过程，而非只解一个给定子问题。",
+      "interest_tag": "Benchmark"
+    }
+  ],
+  "github_repos": [
+    {
+      "name": "sarpstar/cinecode",
+      "url": "https://github.com/sarpstar/cinecode",
+      "tldr": "Cinecode is a code-first filmmaking kit in which a coding agent writes scripts, builds frames, designs audio, and renders a finished MP4. It combines Three.js, headless browser rendering, FFmpeg, reusable styles, and review loops instead of hiding the process behind a hosted generator. The project is notable because the artifact remains inspectable and editable as code.",
+      "tldr_zh": "Cinecode 是 code-first 电影制作工具包，由 coding agent 编写脚本、构建画面、设计声音并渲染成 MP4。它组合 Three.js、headless browser、FFmpeg、可复用风格与审查循环，而不是把过程藏在托管生成器后面。其亮点是最终作品仍以代码形式可检查、可编辑。",
+      "stars": 508,
+      "language": "Python",
+      "interest_tag": ""
+    },
+    {
+      "name": "JosssphZhou/poki",
+      "url": "https://github.com/JosssphZhou/poki",
+      "tldr": "Poki exposes a real iPhone to AI agents through a local MCP server, without jailbreaks or dedicated hardware. The repository includes native device integration, an agent layer, tests, and explicit warnings around third-party terms and account actions. It is important for computer use because it moves mobile interaction from simulator demos to a user-owned physical device.",
+      "tldr_zh": "Poki 通过本地 MCP server 将真实 iPhone 暴露给 AI agent，无需越狱或专用硬件。仓库包含 native device integration、agent layer、测试，并明确提示第三方条款与账户操作风险。它对 Computer Use 很重要，因为 mobile interaction 从 simulator demo 走向了用户自己的实体设备。",
+      "stars": 448,
+      "language": "JavaScript",
+      "interest_tag": "CUA"
+    },
+    {
+      "name": "andrew-babo/muse4ai",
+      "url": "https://github.com/andrew-babo/muse4ai",
+      "tldr": "Muse4AI is a local Windows bridge that gives agents REST, MCP, and OAuth access to a signed-in Muse session for image and video generation. It keeps keys, history, and assets on the user’s machine and exposes job, chat, extension, cancellation, and health endpoints. The project shows a practical pattern for wrapping consumer creative software as an agent-native tool surface.",
+      "tldr_zh": "Muse4AI 是本地 Windows bridge，通过 REST、MCP 和 OAuth 让 agent 使用已登录的 Muse session 生成图片与视频。密钥、历史和资产保留在用户机器上，并提供 job、chat、extend、cancel 与 health 等接口。它展示了将消费级创意软件包装成 agent-native tool surface 的实用模式。",
+      "stars": 301,
+      "language": "TypeScript",
+      "interest_tag": ""
+    },
+    {
+      "name": "Jamailar/Weave-Office",
+      "url": "https://github.com/Jamailar/Weave-Office",
+      "tldr": "Weave Office is an open-source Rust desktop suite that handles documents, spreadsheets, slides, PDFs, Markdown, and code in one application. The same binary exposes a structured CLI with JSON responses so agents can address document elements directly. Its significance is the shared source of truth between human editing and deterministic agent operations.",
+      "tldr_zh": "Weave Office 是开源 Rust 桌面套件，在一个应用中处理文档、表格、幻灯片、PDF、Markdown 与代码。同一 binary 暴露结构化 CLI 和 JSON response，让 agent 可以直接定位并操作文档元素。它的价值是让人类编辑与 deterministic agent operation 共享同一份 source of truth。",
+      "stars": 151,
+      "language": "Rust",
+      "interest_tag": ""
+    },
+    {
+      "name": "TIGER-AI-Lab/WebsiteBench",
+      "url": "https://github.com/TIGER-AI-Lab/WebsiteBench",
+      "tldr": "WebsiteBench asks agents to explore a production website and reconstruct a full-stack version that matches its appearance and behavior. It ships runnable task bundles, Docker-based evaluation, trajectories, artifacts, and visual or functional checks. The benchmark matters because it joins browser exploration, reverse engineering, implementation, and verification into one agent task.",
+      "tldr_zh": "WebsiteBench 要求 agent 浏览 production website，并重建在外观和行为上匹配的 full-stack 版本。项目提供可运行 task bundle、Docker evaluation、trajectory、artifact 以及视觉/功能检查。该 benchmark 把 browser exploration、reverse engineering、implementation 与 verification 串成一个完整 agent task。",
+      "stars": 90,
+      "language": "Python",
+      "interest_tag": "Benchmark"
+    }
+  ],
+  "hackernews": [
+    {
+      "title": "Ask HN: What's your current AI agentic setup?",
+      "url": "https://news.ycombinator.com/item?id=50366117",
+      "tldr": "This high-volume Ask HN thread captures a practical snapshot of subscriptions, models, harnesses, orchestration tools, and personal-agent platforms in daily use. A recurring pattern is simplification: many experienced users prefer strong default coding agents, explicit completion criteria, and a few parallel sessions over elaborate orchestration stacks. The discussion is valuable as field evidence of what workflows survive contact with real users.",
+      "tldr_zh": "这个高热 Ask HN 线程集中记录了用户真实采用的订阅、模型、harness、orchestration tool 与 personal-agent platform。反复出现的模式是简化：不少资深用户更偏好强大的默认 coding agent、明确的完成标准和少量并行 session，而不是复杂编排栈。它的价值在于提供了哪些工作流真正经受住日常使用的现场证据。",
+      "points": 545,
+      "num_comments": 678,
+      "interest_tag": ""
+    },
+    {
+      "title": "Gitbook Breached",
+      "url": "https://news.ycombinator.com/item?id=50354336",
+      "tldr": "A user-posted GitBook incident notice says attackers used AI agents in a targeted intrusion that exposed infrastructure credentials and may have reached Git Sync, GitBook, and third-party API tokens. GitBook rotated credentials, revoked customer tokens, and asked MCP users to re-authenticate; the post says no content modification had been found at that stage. The incident is a concrete reminder that agent integrations expand the blast radius of stored credentials and delegated access.",
+      "tldr_zh": "用户贴出的 GitBook 事件通知称，攻击者使用 AI agents 发起定向入侵，获取 infrastructure credentials，并可能触及 Git Sync、GitBook 与第三方 API token。GitBook 已轮换凭据、撤销客户 token，并要求 MCP 用户重新认证；截至通知发布时尚未发现内容被修改。该事件具体说明了 agent integration 会扩大存储凭据与 delegated access 的 blast radius。",
+      "points": 164,
+      "num_comments": 45,
+      "interest_tag": ""
+    },
+    {
+      "title": "Launch HN: Rivet (YC W23) – Scale and Orchestrate Agents on S3",
+      "url": "https://github.com/rivet-dev/rivet",
+      "tldr": "Rivet presents Actors as a stateful primitive for durable AI-agent workloads, with scheduling, routing, persistence, and multi-region infrastructure behind a unified runtime. The open-source repository includes TypeScript, Rust, Python, and Swift SDKs plus a self-hostable control plane. Its relevance is operational: long-lived agents need durable identity and state rather than stateless request handlers.",
+      "tldr_zh": "Rivet 将 Actors 定义为 durable AI-agent workload 的 stateful primitive，在统一 runtime 下提供 scheduling、routing、persistence 与 multi-region infrastructure。开源仓库包含 TypeScript、Rust、Python、Swift SDK 和可 self-host 的 control plane。它解决的是运行层问题：长寿命 agent 需要 durable identity 与 state，而不是无状态 request handler。",
+      "points": 118,
+      "num_comments": 59,
+      "interest_tag": ""
+    },
+    {
+      "title": "Launch HN: Kino AI (YC S23) – AI media manager and video editor",
+      "url": "https://news.ycombinator.com/item?id=50368804",
+      "tldr": "Kino AI makes video editing code-first and collaborative, representing timelines, footage, comments, motion graphics, and even frames as addressable objects. Its launch describes humans and more than five agents editing the same project concurrently, backed by transcription, embeddings, face detection, proxy media, and professional codec support. The product matters because it gives agent swarms a shared, editable source of truth instead of exchanging screenshots and prose instructions.",
+      "tldr_zh": "Kino AI 将 video editing 变成 code-first collaborative workflow，把 timeline、footage、comment、motion graphics 乃至单帧都表示为可寻址对象。发布文中描述了人类与 5 个以上 agent 并发编辑同一项目，并由 transcript、embedding、face detection、proxy media 与专业 codec 支撑。它的重要性在于为 agent swarm 提供共享且可编辑的 source of truth，而不是靠截图和自然语言传递状态。",
+      "points": 111,
+      "num_comments": 36,
+      "interest_tag": "Agent Swarm"
+    },
+    {
+      "title": "YC's Garry Tan uses AI agents so much, he spends up to $200K a year on tokens",
+      "url": "https://techcrunch.com/2026/11/02/y-combinators-garry-tan-uses-ai-agents-so-much-he-spends-up-to-200k-a-year-on-tokens/",
+      "tldr": "Garry Tan says he spends roughly $100,000–$200,000 per year on tokens and uses agents across coding, research, email, notes, and organizational context. The story illustrates both the ceiling of deeply personalized agents and the severe cost, privacy, and governance trade-offs created by giving them broad access. It matters less as a reproducible recipe than as an extreme leading indicator of where personal and company agents may head.",
+      "tldr_zh": "Garry Tan 表示自己每年在 token 上花费约 10 万至 20 万美元，并把 agent 用于 coding、research、email、notes 与组织上下文。这个案例同时展示了深度 personalized agent 的能力上限，以及广泛授权带来的成本、隐私和治理 trade-off。它更像 personal/company agent 未来方向的极端领先指标，而不是可直接复制的 recipe。",
+      "points": 109,
+      "num_comments": 176,
+      "interest_tag": ""
+    }
+  ]
+}
