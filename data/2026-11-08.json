@@ -1,0 +1,201 @@
+{
+  "date": "2026-11-08",
+  "generated_at": "2026-11-08T17:03:05.654406+08:00",
+  "briefing_zh": "**VFlash** 与 **SLA** 把今天的主线拉回到具身智能中的空间表征：前者不再逐 token 生成轨迹坐标，而是并行解码完整视觉 primitive；后者则把 3D 对齐前移到 VLA 的 continual pre-training。两者共同说明，physical AI 的关键瓶颈正在从语言规划转向低延迟、可迁移的几何结构学习。\n\nAgent 研究的另一条主线是把系统经验内化为能力。**Harness-S** 用 sibling harness 定向挽救 base harness 的失败，再把成功轨迹蒸馏回同一策略；**Together Compiler** 则让优化 agent 在持续运行的推理引擎中高速试验候选实现。这里的共同趋势不是堆更大的模型，而是重构环境、反馈与执行循环，让 agent 能从更密集且更可信的信号中学习。\n\n长期任务也在重新审视「上下文越长越好」的假设。**You don't need long context** 显示 compact handoff state 与按需检索可在多类长程任务上维持甚至提升结果，**EvoMemState** 则强调个人 agent 需要维护事实之间的有效性、冲突和适用关系，而不只是累积独立记忆。前者优化 active context，后者建模 persistent memory；两者机制不同，却都把信息治理视为 agent 能力本身。\n\n开源侧的热点明显转向可直接接入真实工作流的工具：**Poki** 与 **Pinky** 把 agent 延伸到真实手机并强调 human-in-the-loop，**WebsiteBench** 则把浏览探索后的整站重建变成可验证任务。与此同时，HN 对 Perplexity Teammates 和 Delaware AI-run companies 的讨论提醒我们：当 agent 开始持续拥有项目或企业流程时，权限隔离、审计与责任边界将与模型能力同等重要。",
+  "briefing_en": "**VFlash** and **SLA** put spatial representation at the center of embodied AI today. VFlash decodes complete visual primitives in parallel instead of generating trajectory coordinates token by token, while SLA moves 3D alignment into continual pre-training for vision-language-action policies. Together, they suggest that physical AI is shifting from language-only planning toward low-latency, transferable geometric structure.\n\nA second thread is the internalization of system experience. **Harness-S** uses sibling harnesses to rescue failures from a base execution system and transfers the resulting trajectories back into one policy, while **Together Compiler** lets optimization agents test candidate implementations inside a persistent inference engine. The common strategy is not merely scaling the model; it is redesigning the environment, feedback, and execution loop so agents learn from denser and more trustworthy signals.\n\nLong-running agents are also challenging the assumption that more active context is always better. **You don't need long context** finds that compact handoff states and selective retrieval can preserve or improve performance on several long-horizon tasks, whereas **EvoMemState** models validity, conflict, and applicability among persistent user facts rather than storing isolated memories. These are different mechanisms—active-context control versus persistent-memory reasoning—but both treat information governance as a core agent capability.\n\nOpen source is moving toward tools that plug directly into real workflows: **Poki** and **Pinky** extend agents to physical phones with human oversight, while **WebsiteBench** turns website reconstruction after browser exploration into a verifiable task. HN discussion around Perplexity Teammates and Delaware's proposed AI-run companies adds the governance counterpoint: once agents continuously own projects or business processes, isolation, auditability, and liability boundaries become as important as model capability.",
+  "viral_analysis_zh": "今天最可能形成技术圈爆款的是 **You don't need long context**：标题直接反驳行业默认假设，又用 7× decode throughput 和多项长程任务结果提供可传播的数字锚点。开源侧 **Pinky** 的「真实手机 + 强制人工审批」同样具备演示传播力，因为它把 agent 能力、安全边界和可视化效果压缩进一个容易理解的场景。",
+  "viral_analysis_en": "**You don't need long context** is today's strongest viral candidate: its title directly challenges an industry default, while the 7× decode-throughput result gives the claim a memorable quantitative hook. On the open-source side, **Pinky** has strong demo potential because a real phone, enforced human approval, and visible agent actions compress capability and safety into one immediately understandable story.",
+  "huggingface_papers": [
+    {
+      "title": "VFlash: Fast, Accurate Visual Planning via Flash Primitive Decoding",
+      "url": "https://arxiv.org/abs/2611.08449",
+      "tldr": "VFlash replaces coordinate-by-coordinate autoregressive planning with a lightweight drafter that predicts an entire visual primitive in one pass. It supports variable-length 2D and 3D trajectories, reports roughly 25× faster single-rollout generation, and reduces trajectory error. When its plans condition a world action model, average MolmoSpaces success rises from 62.6% to 70.2%, making structured visual decoding relevant to real-time physical agents.",
+      "tldr_zh": "VFlash 用轻量 drafter 一次预测完整视觉 primitive，取代逐坐标的 autoregressive planning。它支持可变长度的 2D/3D 轨迹，单次 rollout 生成速度约提升 25×，同时降低轨迹误差。其规划用于条件化 world action model 后，MolmoSpaces 平均成功率从 62.6% 升至 70.2%，说明结构化视觉解码对实时 physical agent 很关键。",
+      "upvotes": 102,
+      "authors": "Yu-Cheng Chou, Shihao Wang, Jin Huang, Chi-Pin Huang, Chiao-An Yang, Xianzhe Fan, Jing Wang, Zhiqi Li, Yuanguo Kuang, Ruijie Zheng, Johan Bjorck, Sifei Liu, Hang Su, Abhishek Badki, Lei Zhang, Alan Yuille, Linxi \"Jim'' Fan, Jan Kautz, Zhiding Yu",
+      "ai_keywords": [],
+      "interest_tag": ""
+    },
+    {
+      "title": "From Autonomous Agents to Cognitive Symbionts: Toward AI-Augmented Human Intelligence",
+      "url": "https://arxiv.org/abs/2611.05376",
+      "tldr": "This position paper argues for cognitive symbionts: lifelong, private, proactive systems embedded in a person's daily perception and decision loop. It frames the goal as closing the gap between what a person could bring to a situation and what working memory can currently hold. The proposal matters because it treats sensing, memory, action, trust, and governance as one personal runtime rather than as disconnected assistant features.",
+      "tldr_zh": "这篇立场论文提出 cognitive symbiont：嵌入个人日常感知与决策循环、终身持续、私密且主动的系统。它把目标定义为缩小「个人本可调动的知识」与「当下工作记忆能承载的内容」之间的 cognitive gap。其意义在于把感知、记忆、行动、信任和治理统一为 personal runtime，而不是彼此割裂的助手功能。",
+      "upvotes": 87,
+      "authors": "Hao Fei",
+      "ai_keywords": [],
+      "interest_tag": ""
+    },
+    {
+      "title": "SLA: Scaling Spatial-Language-Action Model via Continual Pre-training",
+      "url": "https://arxiv.org/abs/2611.08373",
+      "tldr": "SLA moves spatial supervision from task-specific adaptation into continual pre-training of a vision-language-action policy. A frozen 3D teacher aligns intermediate visual features across heterogeneous robot datasets, while feature-dependent gates and state dropout improve transfer across embodiments and scenes. Because all auxiliary modules are training-only, the method adds geometric grounding without changing the original inference architecture.",
+      "tldr_zh": "SLA 把空间监督从 task-specific adaptation 前移到 vision-language-action policy 的 continual pre-training。它用冻结的 3D teacher 对齐异构机器人数据中的中间视觉特征，并通过 feature-dependent gate 与 state dropout 提升跨 embodiment、场景迁移。所有辅助模块仅在训练期使用，因此可增强几何 grounding 而不改变原始推理架构。",
+      "upvotes": 83,
+      "authors": "Fuhao Li, Wenxuan Song, Qizhou Huang, Ziyang Zhou, Jingbo Wang, Junwu E, Pengwei Wang, Yan Wang, Shunbo Zhou, Haoang Li",
+      "ai_keywords": [],
+      "interest_tag": ""
+    },
+    {
+      "title": "Harness-S: Learning from Sibling Harnesses for Generalizable Agent Training",
+      "url": "https://arxiv.org/abs/2611.04277",
+      "tldr": "Harness-S treats harness variants as specialized rescuers rather than searching for one universally best executor. When all base-harness attempts fail, a router selects sibling harnesses, uses their fresh trajectories for reinforcement learning, and periodically re-anchors its behavior profiles as the policy changes. Gains on AppWorld, SWE-Gym, and DBBench persist after returning to the original harness, suggesting that harness-elicited behaviors can be internalized by the policy.",
+      "tldr_zh": "Harness-S 不再寻找单一「最优」executor，而把不同 harness variant 视为针对特定失败的救援器。当 base harness 的尝试全部失败时，router 选择 sibling harness 生成新轨迹用于 RL，并随策略变化重新校准 behavior profile。在 AppWorld、SWE-Gym 和 DBBench 上，回到原始 harness 后增益仍然存在，说明 harness 激发出的行为可以被策略内化。",
+      "upvotes": 64,
+      "authors": "Kangning Zhang, Wenxiang Jiao, Bowen Fang, Shuai Shao, Jiachen Zhu, Rong Shan, Shijian Wang, Hao Wang, Yuan Lu, Weiwen Liu, Weinan Zhang",
+      "ai_keywords": [],
+      "interest_tag": ""
+    },
+    {
+      "title": "EvoMemState: Evolving Memory State for Personal Agents",
+      "url": "https://arxiv.org/abs/2611.03743",
+      "tldr": "EvoMemState augments persistent facts with relational states that track validity, scope, conflict, and evolution, plus a request-specific reasoning state. Ontology-guided induction organizes memory, while reinforcement learning trains the policy that decides how stored facts should apply to the current request. Improvements on long-term dialogue and memory-use benchmarks target a central weakness of personal agents: remembering facts is not enough if the system cannot reason about their changing relationships.",
+      "tldr_zh": "EvoMemState 在 persistent facts 之外加入 relational state，用于跟踪有效性、范围、冲突与演化，并生成面向当前请求的 reasoning state。Ontology-guided induction 负责组织记忆，RL 则训练策略判断历史事实此刻应如何被使用。它在长期对话与 memory-use benchmark 上的提升直指个人 agent 的核心缺陷：记住事实不等于能处理事实之间不断变化的关系。",
+      "upvotes": 32,
+      "authors": "Zhishang Xiang, Yunbo Tang, Zhongqiao Liu, Junkai Chen, Zerui Chen, Qingguo Hu, Yuxuan Zhang, William Grant, Qinggang Zhang, Jinsong Su",
+      "ai_keywords": [],
+      "interest_tag": "Memory"
+    }
+  ],
+  "alphaxiv_papers": [
+    {
+      "title": "Understanding AI from the Inside: The State of Mechanistic Interpretability for AI Safety",
+      "arxiv_id": "2611.08438",
+      "url": "https://arxiv.org/abs/2611.08438",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2611.08438",
+      "tldr": "This survey separates mechanistic-interpretability evidence into levels ranging from output tests and detectable signals to causal explanation and reliable control. A sleeper-agent case study shows that a linear probe can detect a known trigger with over 99% AUROC, but the authors explicitly warn that this does not establish general safety. Its main contribution is an evaluation framework that forces interpretability claims to state what was actually demonstrated and where safety benefits remain unproven.",
+      "tldr_zh": "这篇综述把 mechanistic interpretability 证据区分为输出测试、可检测信号、因果解释与可靠控制等层级。Sleeper-agent 案例中，linear probe 对已知 trigger 的检测超过 99% AUROC，但作者明确指出这并不能证明普遍安全性。其核心贡献是建立评估框架，迫使 interpretability claim 说清楚究竟证明了什么，以及安全收益在哪些环节仍无证据。",
+      "interest_tag": ""
+    },
+    {
+      "title": "Scientist World: Grow a Research World for AI-Scientists",
+      "arxiv_id": "2611.08478",
+      "url": "https://arxiv.org/abs/2611.08478",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2611.08478",
+      "tldr": "Scientist World converts empirical AI papers into executable environments in which an agent must reproduce a method, propose improvements, run experiments, and beat a held-out baseline. The release contains 1,000 verified environments and 6,400 hours of research traces; reported tests improved over reproduced methods in 84% of Improve runs and 74% of Innovate runs. This matters because it turns open-ended AI-scientist claims into scored, replayable research processes that can also produce training data.",
+      "tldr_zh": "Scientist World 把经验型 AI 论文转成可执行环境，让 agent 复现方法、提出改进、运行实验并击败 held-out baseline。项目发布 1,000 个验证环境和 6,400 小时研究轨迹；报告中 Improve 与 Innovate 两类运行分别有 84% 和 74% 超过复现方法。它的重要性在于把开放式 AI scientist 叙事变成可评分、可回放的研究流程，并能反过来生产训练数据。",
+      "interest_tag": ""
+    },
+    {
+      "title": "Together Compiler: Continual Compilation for AI Inference",
+      "arxiv_id": "",
+      "url": "https://www.alphaxiv.org/abs/2611.together-compiler-continual-ai-inference",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2611.together-compiler-continual-ai-inference",
+      "tldr": "Together Compiler builds a persistent inference engine in which optimization agents can hot-reload, screen, and benchmark candidate forward passes as workloads change. A tiered measurement loop explored 1,354 candidates versus 168 under a single slow tier and found a 7.2% faster solution in the reported B200 GLM 5.3 comparison. Production results claim up to 2.6× higher throughput over open-source engines on selected frontier workloads, showing how agentic search can become part of continuous systems optimization.",
+      "tldr_zh": "Together Compiler 构建持久化推理引擎，让优化 agent 能随 workload 变化热加载、筛选并测量候选 forward pass。报告的 B200 GLM 5.3 对比中，tiered loop 探索 1,354 个候选，而单一慢速层仅 168 个，并找到快 7.2% 的实现。生产结果在选定 frontier workload 上声称最高 2.6× 吞吐提升，说明 agentic search 可以成为持续系统优化的一部分。",
+      "interest_tag": ""
+    },
+    {
+      "title": "You don't need long context",
+      "arxiv_id": "2611.05306",
+      "url": "https://arxiv.org/abs/2611.05306",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2611.05306",
+      "tldr": "The paper tests compact handoff states and tool-based selective reading instead of keeping complete histories or documents in active context. Across several long-horizon tasks, accuracy changes are small or positive, while shrinking configured context from 256K to 16K yields up to 7× higher sustained decode throughput for Qwen 3 Coder Next. The result is not universal—some models degrade under tight limits—but it reframes context length as a systems choice rather than an automatic capability requirement.",
+      "tldr_zh": "论文用 compact handoff state 与 tool-based selective reading 替代把完整历史或文档长期放在 active context。多项长程任务中准确率变化很小或有所提升，而把配置上下文从 256K 缩至 16K 后，Qwen 3 Coder Next 的持续 decode throughput 最高提升 7×。结果并非普遍成立，一些模型在严苛限制下会退化，但它把 context length 重新定义为系统选择，而非能力的必然前提。",
+      "interest_tag": ""
+    },
+    {
+      "title": "SwarmEvolve: Latent Agent Swarms for Evolutionary Discovery and Optimization",
+      "arxiv_id": "2611.08483",
+      "url": "https://arxiv.org/abs/2611.08483",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2611.08483",
+      "tldr": "SwarmEvolve runs hundreds of small agents that reason in latent space, exchange KV caches, and use hidden-state distance to preserve idea diversity during evolutionary program search. On 21 scientific and mathematical problems, Qwen3 8B averaged 0.804 versus CodeEvolve's 0.700 in 60-minute runs, and reached OpenEvolve's 60-minute score in a median seven minutes. The key idea is that swarm communication need not be verbose text, potentially making multi-agent discovery both faster and cheaper.",
+      "tldr_zh": "SwarmEvolve 让数百个小型 agent 在 latent space 中推理、交换 KV cache，并用 hidden-state distance 保持进化式程序搜索中的想法多样性。在 21 个科学与数学问题上，Qwen3 8B 的 60 分钟平均得分为 0.804，高于 CodeEvolve 的 0.700；达到 OpenEvolve 60 分钟成绩的中位时间仅 7 分钟。关键洞见是 swarm communication 不必依赖冗长文本，从而可能让 multi-agent discovery 更快、更便宜。",
+      "interest_tag": "Agent Swarm"
+    }
+  ],
+  "github_repos": [
+    {
+      "name": "sarpstar/cinecode",
+      "url": "https://github.com/sarpstar/cinecode",
+      "tldr": "Cinecode is an agent-oriented filmmaking kit that turns a prompt into a scripted, code-rendered video with sound and a final MP4. It uses browser-rendered graphics, ffmpeg, reusable styles, tests, and approval checkpoints rather than hiding the workflow behind a hosted generator. The repo is notable for packaging creative direction, rendering, audio, and quality checks as an inspectable coding-agent process.",
+      "tldr_zh": "Cinecode 是面向 agent 的电影制作套件，可把 prompt 转成脚本、代码渲染画面、声音设计和最终 MP4。它使用浏览器图形渲染、ffmpeg、可复用风格、测试与审批检查点，而不是把流程藏在托管生成服务里。其价值在于把创意指导、渲染、音频和质量门禁封装成可检查的 coding-agent 工作流。",
+      "stars": 1130,
+      "language": "Python",
+      "interest_tag": ""
+    },
+    {
+      "name": "JosssphZhou/poki",
+      "url": "https://github.com/JosssphZhou/poki",
+      "tldr": "Poki exposes a real iPhone to AI agents through a local MCP server, without jailbreaking the device or requiring dedicated hardware. The repository includes native device control, an agent, tests, multilingual documentation, and explicit warnings about third-party app terms and account risk. It matters because phone operation becomes a composable local tool rather than a closed demo, although the project is still very early.",
+      "tldr_zh": "Poki 通过本地 MCP server 把真实 iPhone 暴露给 AI agent，无需 jailbreak 或额外专用硬件。仓库包含 native device control、agent、测试、多语言文档，并明确提示第三方应用条款与账户风险。它的重要性在于把手机操作变成可组合的本地工具而非封闭 demo，不过项目仍处于很早期。",
+      "stars": 543,
+      "language": "JavaScript",
+      "interest_tag": "CUA"
+    },
+    {
+      "name": "andrew-babo/muse4ai",
+      "url": "https://github.com/andrew-babo/muse4ai",
+      "tldr": "Muse4AI is a local Windows bridge that lets agents generate, extend, and edit images or video through REST, MCP, or OAuth using an existing Muse session. It keeps keys, tokens, history, and output on the user's machine and exposes a machine-readable OpenAPI contract plus agent skills. The 740-test claim and explicit job controls make it more operationally credible than a thin API wrapper, though it remains an unofficial integration that may break with upstream changes.",
+      "tldr_zh": "Muse4AI 是本地 Windows bridge，让 agent 通过 REST、MCP 或 OAuth 使用现有 Muse session 生成、延长和编辑图片或视频。它把 key、token、历史与输出保留在用户机器上，并提供 machine-readable OpenAPI contract 和 agent skill。项目声称有 740 个测试且具备明确 job control，比简单 API wrapper 更具工程可信度，但它仍是可能随上游变化失效的非官方集成。",
+      "stars": 377,
+      "language": "TypeScript",
+      "interest_tag": ""
+    },
+    {
+      "name": "DIYgod/pinky",
+      "url": "https://github.com/DIYgod/pinky",
+      "tldr": "Pinky lets MCP-capable agents operate real iPhone and Android devices while a desktop gateway enforces human approval for risky actions. Sensitive apps and password or one-time-code fields are blocked by default, and every run can be recorded with screenshots and an exportable audit report. The combination of cross-platform device control, policy enforcement outside the model, and takeover controls makes it a concrete safety architecture for computer-use agents, despite its pre-alpha status.",
+      "tldr_zh": "Pinky 让支持 MCP 的 agent 操作真实 iPhone 与 Android，同时由桌面 gateway 对高风险动作强制执行人工审批。敏感应用、密码和一次性验证码字段默认不可访问，每次运行还能记录截图并导出审计报告。跨平台设备控制、模型外策略强制与人工接管的组合，使其成为具体的 computer-use agent 安全架构，尽管当前仍是 pre-alpha。",
+      "stars": 278,
+      "language": "Go",
+      "interest_tag": "CUA"
+    },
+    {
+      "name": "TIGER-AI-Lab/WebsiteBench",
+      "url": "https://github.com/TIGER-AI-Lab/WebsiteBench",
+      "tldr": "WebsiteBench asks agents to explore a production website and rebuild a full-stack version that matches both appearance and behavior. The release includes task bundles, Docker-based evaluation, oracle checks, artifacts, and trajectories, making the result more reproducible than a screenshot-only challenge. It is important because it tests browser exploration, reverse engineering, implementation, and visual-functional verification as one long-horizon agent task.",
+      "tldr_zh": "WebsiteBench 要求 agent 浏览生产网站，并重建在外观和行为上都尽量一致的 full-stack 版本。发布物包含 task bundle、基于 Docker 的评测、oracle check、artifact 与 trajectory，比只看截图的挑战更可复现。它把浏览探索、逆向理解、实现和视觉—功能验证合并成一个长程 agent task，因此具有直接 benchmark 价值。",
+      "stars": 109,
+      "language": "Python",
+      "interest_tag": "Benchmark"
+    }
+  ],
+  "hackernews": [
+    {
+      "title": "Perplexity launches AI agents for work",
+      "url": "https://www.perplexity.ai/en-GB/hub/blog/teammates-are-agents-for-complex-ongoing-work",
+      "tldr": "Perplexity's Teammates are persistent work agents that coordinate Computer sessions and other teammates across projects, tools, files, and changing priorities. They retain goals and task history, can monitor for changes proactively, and run in isolated environments with scoped access and user takeover. The launch shows commercial agents moving from one-shot task completion toward ongoing project ownership, while making permission and review design central product features.",
+      "tldr_zh": "Perplexity Teammates 是持续工作的 agent，可跨项目、工具、文件与变化中的优先级协调 Computer session 和其他 teammate。它们保留目标与任务历史、主动监控变化，并在隔离环境中运行，支持 scoped access 与用户接管。该发布说明商业 agent 正从一次性任务完成走向长期项目 ownership，同时把权限和 review 设计提升为核心产品能力。",
+      "points": 64,
+      "num_comments": 54,
+      "interest_tag": "Agent Swarm"
+    },
+    {
+      "title": "Show HN: Agents infer Lego mechanisms from sources, then animate them",
+      "url": "https://github.com/anteloc/ldraw-mecha/tree/v0.5.0",
+      "tldr": "This Show HN project has agents inspect LDraw source and reference material, infer the mechanics of LEGO models, then generate Blender rigs and animations. The repository exposes the full pipeline, examples, tests, and known limitations such as flexible parts, missing physics, and failure on complex assemblies. Its appeal comes from a highly visual artifact that makes multi-step agent reasoning inspectable rather than merely claimed.",
+      "tldr_zh": "这个 Show HN 项目让 agent 检查 LDraw 源码与参考资料，推断 LEGO 模型的机械结构，再生成 Blender rig 和动画。仓库公开完整 pipeline、样例、测试与已知限制，例如柔性零件、缺少物理建模以及复杂装配上的失败。它的传播力来自高度可视化的产物，使多步 agent reasoning 可以被直接检查，而不只是口头宣称。",
+      "points": 31,
+      "num_comments": 2,
+      "interest_tag": ""
+    },
+    {
+      "title": "AI coding agent setups from 663 Hacker News comments",
+      "url": "https://theainewsreport.com/2026-11-06-hn-agentic-setups-counted.html",
+      "tldr": "The report manually coded all 663 comments in an Ask HN thread and counted tool usage across 424 respondents who named at least one AI tool. Claude Code leads at 180 users, Codex follows at 103, while 156 respondents use two or more coding agents and 148 mention open-weight or local models. More valuable than the ranking are the recurring operating patterns: isolated worktrees, fresh reviewers, model routing, containers or VMs, and explicit definitions of done.",
+      "tldr_zh": "这份报告人工编码 Ask HN 的全部 663 条评论，并统计 424 名明确提到 AI 工具的受访者。Claude Code 以 180 人领先，Codex 为 103 人；156 人使用两个或更多 coding agent，148 人提到 open-weight 或本地模型。比工具排名更有价值的是反复出现的操作模式：隔离 worktree、fresh reviewer、model routing、容器或 VM，以及明确的完成定义。",
+      "points": 29,
+      "num_comments": 4,
+      "interest_tag": "Agent Swarm"
+    },
+    {
+      "title": "Show HN: AegisKernel – Zero-trust POSIX runtime for AI agents in <0.016ms",
+      "url": "https://adikshatriyag-crypto.github.io/aegis-kernel/",
+      "tldr": "AegisKernel presents a deterministic wrapper around agent tools that enforces capability policies before execution rather than relying on probabilistic model guardrails. Its demo claims sub-0.05 ms interception and offers a small integration surface for common agent frameworks. The security direction is sound—policy must live outside the model—but the public page provides marketing-level claims, so independent benchmarks and threat-model details remain necessary.",
+      "tldr_zh": "AegisKernel 在 agent tool 外包一层 deterministic policy enforcement，在执行前检查 capability，而不是依赖概率式模型 guardrail。其 demo 声称拦截延迟低于 0.05 ms，并为常见 agent framework 提供很小的接入面。把策略放在模型外的安全方向是正确的，但公开页面仍主要是营销级 claim，需要独立 benchmark 与更完整 threat model 才能验证。",
+      "points": 13,
+      "num_comments": 3,
+      "interest_tag": ""
+    },
+    {
+      "title": "\"No human at the helm\": Delaware plan would let AI agents run businesses",
+      "url": "https://arstechnica.com/tech-policy/2026/10/no-human-at-the-helm-delaware-plan-would-let-ai-agents-run-entire-businesses/",
+      "tldr": "A proposed Delaware regulatory sandbox would allow AI agents to manage a new corporate entity for up to 30 months, including contracting and conducting business outside banking. Critics argue that the structure could shield the human funder from liability for reckless agent behavior, while proponents say a legal entity and mandatory logs would make autonomous systems more legible and accountable. The debate is significant because agent governance is moving from tool permissions into corporate law and liability allocation.",
+      "tldr_zh": "Delaware 拟议 regulatory sandbox 将允许 AI agent 在最长 30 个月内管理一种新公司实体，可签订合同并经营除银行外的业务。批评者认为该结构可能让出资人逃避 agent 鲁莽行为的责任，支持者则主张法律实体与强制日志能让自主系统更可见、可追责。这场争论的重要性在于，agent governance 正从 tool permission 上升到公司法和责任分配。",
+      "points": 7,
+      "num_comments": 0,
+      "interest_tag": ""
+    }
+  ]
+}
