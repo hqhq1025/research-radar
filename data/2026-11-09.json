@@ -1,0 +1,201 @@
+{
+  "date": "2026-11-09",
+  "generated_at": "2026-11-09T17:05:36.419098+08:00",
+  "briefing_zh": "**SplatAnything**、**LongBanana** 与 **Frontier3DBench** 共同把今天的研究焦点拉向「可验证的生成」。SplatAnything 用 Gaussian spacing normalization 解决跨场景尺度下 3DGS 监督漂移；LongBanana 则用约 32 张参考图、20 条约束和专家核验清单测试长上下文图像合成。Frontier3DBench 进一步显示，coding agent 生成看似合理的 3D 内容已不稀奇，真正困难的是忠实复刻指定几何、布局以及需要持久状态的完整交互活动。\n\nAgent 自我改进也从单一分数转向可靠性审计。**Beneath the Surface** 发现 16 个 evolved agent 都会在获得新能力的同时丢失已覆盖任务，而且最高分方案并不等于平均改进最大；**Benchmarks as Software** 则指出约 30% 的 Terminal-Bench 2.0 存在维护问题，修复后准确率可变化超过 10 个百分点。两项工作都在提醒：agent 能力不能只靠一次 leaderboard snapshot 判断，回归、资源预算和 verifier 本身都必须持续验证。\n\n另一条高信号路线是让 agent 的协作与环境更高效。**SwarmEvolve** 让数百个低成本 agent 在 latent space 中推理、交换 KV cache，并在多项科学程序搜索任务上用数分钟追平其他框架一小时的成绩；**Scientist World** 则把论文变成 1,000 个可执行研究环境，并积累 6,400 小时研究轨迹。前者压缩群体搜索的通信成本，后者补齐 AI scientist 缺失的可运行世界，两者都把「更多 agent」转化为可测量的学习与发现循环。\n\n开源热点正在快速落到真实工作流：**Cinecode** 把脚本、逐帧代码渲染、声音和质检串成可检查的电影生产流程，**Pinky** 用模型外 gateway、人工审批与审计记录把 agent 接到真实手机，**Tinker AI Skill** 则把个人 coding-agent 会话变成可本地运行的微调模型。HN 上关于跨客户保存 agent context 的讨论与邮件式 agent review 界面也指向同一需求：真正稀缺的不是再加一个聊天框，而是把记忆、权限、复盘和人工决策组织成长期可控的运行系统。",
+  "briefing_en": "**SplatAnything**, **LongBanana**, and **Frontier3DBench** place verifiable generation at the center of today's research. SplatAnything uses Gaussian spacing normalization to stabilize 3DGS supervision across scene scales, while LongBanana evaluates long-context image synthesis with roughly 32 references, 20 constraints, and expert-verified checklists per task. Frontier3DBench pushes the same question into agentic 3D creation: plausible output is increasingly attainable, but faithful geometry, layout reconstruction, and complete stateful activities remain hard.\n\nAgent self-improvement is also moving beyond a single headline score. **Beneath the Surface** finds that all 16 evolved agents gain new task coverage while losing tasks they previously solved, and that the highest-scoring candidate never produces the largest mean improvement in the four evaluated pools. **Benchmarks as Software** reaches a complementary conclusion from the evaluation side: about 30% of Terminal-Bench 2.0 required maintenance, and repairs changed accuracy by more than ten percentage points. Together they argue for continuous regression checks, explicit resource budgets, and validation of the verifier itself.\n\nA second high-signal direction is making agent collaboration and environments more efficient. **SwarmEvolve** lets hundreds of low-cost agents reason in latent space and exchange KV caches, reaching in minutes scores that competing evolutionary systems need an hour to attain. **Scientist World** converts papers into 1,000 executable research environments and records 6,400 hours of research traces. One compresses the communication cost of collective search; the other supplies AI scientists with a runnable world, but both turn scale into measurable learning and discovery loops.\n\nOpen source is rapidly connecting agents to concrete workflows. **Cinecode** joins scripting, code-rendered frames, sound, and quality gates into an inspectable filmmaking process; **Pinky** connects agents to real phones through an external policy gateway, human approvals, and audit records; **Tinker AI Skill** turns personal coding-agent sessions into a fine-tuned model that can run locally. HN discussions about preserving context across clients and reviewing agent work through an inbox point to the same product need: durable memory, scoped permissions, replay, and human decisions matter more than another chat surface.",
+  "viral_analysis_zh": "今天最具爆款结构的是 **Scientist World**：把「每篇论文变成可运行世界」压缩成一句强叙事，再用 1,000 个环境、6,400 小时轨迹和 74% 超越人类基线构成连续数字钩子。开源侧 **Pinky** 的真实手机 demo、模型外审批和敏感信息隔离同时满足视觉冲击与安全可信度。**Cinecode** 的传播优势则是结果天然可观看，先展示成片，再解释代码化 workflow，比功能列表更容易跨圈层扩散。",
+  "viral_analysis_en": "**Scientist World** has today's strongest viral framing: the line 'every paper becomes an executable world' is immediately legible, and the 1,000 environments, 6,400 research hours, and 74% result provide a ladder of memorable numbers. In open source, **Pinky** combines a real-phone demo with policy enforcement outside the model and sensitive-data isolation, pairing spectacle with a clear safety story. **Cinecode** benefits from an inherently watchable output, so showing the finished film before the code-driven workflow gives it broader reach than a feature list.",
+  "huggingface_papers": [
+    {
+      "title": "SplatAnything: Gaussian Spacing Normalization for Feed-forward 3DGS across Arbitrary Scenes",
+      "url": "https://arxiv.org/abs/2611.08264",
+      "tldr": "SplatAnything identifies a scale mismatch in feed-forward 3D Gaussian Splatting: global radial normalization does not stabilize the spacing between neighboring Gaussian centers. Its Gaussian Spacing Normalization uses a robust scene-level spacing statistic to provide a consistent target across scene scales and camera configurations. Across a benchmark spanning diverse datasets, sparse inputs, and extrapolated viewpoints, the method reports state-of-the-art results with its largest gains under major scale and viewpoint shifts.",
+      "tldr_zh": "SplatAnything 指出 feed-forward 3D Gaussian Splatting 存在尺度错配：全局径向归一化并不能稳定相邻 Gaussian center 的间距。它提出 Gaussian Spacing Normalization，以鲁棒的场景级间距统计为不同场景尺度和相机配置提供一致监督目标。在覆盖多数据集、稀疏输入与外推视角的 benchmark 上，该方法取得 SOTA，并在尺度与视角变化较大时提升最明显。",
+      "upvotes": 54,
+      "authors": "Hao Yu, Zhenwei Wang, Yongzhen Hu, Yuning Gong, Junta Wu, Xiaowei Zhou, Hujun Bao, Tengfei Wang, Chunchao Guo, Sida Peng",
+      "ai_keywords": [],
+      "interest_tag": ""
+    },
+    {
+      "title": "LongBanana: An Expert-Verified Benchmark for Long-Context Multi-Reference Image Synthesis",
+      "url": "https://arxiv.org/abs/2611.06856",
+      "tldr": "LongBanana evaluates whether image-generation agents can retrieve dispersed evidence, reject distractors, bind relations, and satisfy global constraints across many references. Its 90 expert-designed tasks average about 32 reference images and 20 constraints, producing 4,670 atomic evaluation items for content fidelity, relational binding, and global consistency. Experiments show that even minimal agent harnesses beat direct generation, while a ReAct-Plan-Exec-Reflect workflow adds gains through stronger evidence grounding and repair.",
+      "tldr_zh": "LongBanana 测试图像生成 agent 能否从大量参考图中检索分散证据、排除干扰项、绑定关系并满足全局约束。其 90 个专家设计任务平均包含约 32 张参考图和 20 条约束，共形成 4,670 个用于内容忠实度、关系绑定与全局一致性的原子评测项。实验显示，即使最简 agent harness 也优于直接生成，而 ReAct-Plan-Exec-Reflect workflow 可通过更强的证据 grounding 与修复进一步提升结果。",
+      "upvotes": 21,
+      "authors": "Haoxiang Cao, Yuxuan Zhang, Penghui Du, Bo Li, Jiajiong Cao, Yingying Fan, Zimeng Wu, Yifu Luo, Mingzhe Zheng, Junwen Miao, Huaisong Zhang, Yang Yao, Yu Wang, Dongfu Jiang, Ping Nie, Wenhu Chen, Chaoqun Wang, Changqian Yu, Kelsey R. Allen",
+      "ai_keywords": [],
+      "interest_tag": ""
+    },
+    {
+      "title": "Beneath the Surface: What We Overlook When We Talk About Agent Evolution",
+      "url": "https://arxiv.org/abs/2611.07624",
+      "tldr": "This study audits recursive self-improvement through agent-harness evolution rather than accepting higher benchmark scores at face value. Every one of the 16 evolved agents gains previously unsolved tasks while losing tasks it once solved, and most reliability gains also raise deployment cost. The authors propose preservation-aware evaluation and EvoAudit, which revises selection, mutation, analysis, and gating to produce the strongest reported performance.",
+      "tldr_zh": "这项研究审计基于 agent harness evolution 的递归自我改进，而不是把更高 benchmark 分数直接等同于进步。16 个 evolved agent 全部在解锁新任务的同时丢失曾经解决的任务，而且多数可靠性提升还伴随更高部署成本。作者据此提出 preservation-aware evaluation 与 EvoAudit，重构选择、变异、分析和准入流程，并取得报告中的最佳表现。",
+      "upvotes": 20,
+      "authors": "Xiaobo Wang, Zimu Wang, Siyu Ye, Jiaqi Li, Min Tang, Jun Bai, Yuling Shi, Ruobing Wang, Jingjing Zhang, Chaofan Wang, Kai Wu, Mengnan Qi, Kai Cai, Xiaodong Gu, Qi Liu, Zilong Zheng",
+      "ai_keywords": [],
+      "interest_tag": ""
+    },
+    {
+      "title": "Video-Coder: Reinforcing Agentic Coding for Video Generation",
+      "url": "https://arxiv.org/abs/2611.09894",
+      "tldr": "Video-Coder trains an agent to write and execute code that constructs a dynamic 3D draft video before a downstream generator produces the final result. Its harness combines code execution, scene rendering, and feedback, while training uses supervised fine-tuning followed by agentic reinforcement learning with execution and video rewards. The reported system improves Minimax-H3 by about seven points on PhyGenBench and 24 points on VBench-2.0, suggesting code can provide controllable structure and motion priors for video generation.",
+      "tldr_zh": "Video-Coder 训练 agent 编写并执行代码，先构建动态 3D draft video，再把结构和运动信号交给下游视频生成器。其 harness 整合代码执行、场景渲染与反馈，训练流程则由 SFT 和同时使用执行奖励、视频奖励的 agentic RL 组成。报告结果显示，Minimax-H3 在 PhyGenBench 上提升约 7 分、在 VBench-2.0 上提升 24 分，说明代码可为视频生成提供更可控的结构与运动先验。",
+      "upvotes": 8,
+      "authors": "Chaoyang Wang, Sicheng Gao, Junan Hu, Kunyang Li, Dongyang Chen, Yiyang Zhou, Huaxiu Yao, Yong Jae Lee, Radu Timofte, Yuzhang Shang",
+      "ai_keywords": [],
+      "interest_tag": ""
+    },
+    {
+      "title": "Frontier3DBench: Benchmarking Coding Agents for 3D Creation across Objects, Scenes, and Interactive Open Worlds",
+      "url": "https://arxiv.org/abs/2611.09017",
+      "tldr": "Frontier3DBench evaluates coding agents on 145 tasks across nine categories of object, scene, and interactive open-world creation. Eleven model-harness configurations show that agents perform better at plausible text-driven generation than at faithful reference reconstruction. Interactive worlds expose the sharpest weakness: local mechanisms average 83.08/100, but motion clearance scores 20.82 and stateful workflows 30.26, revealing difficulty coordinating complete activities over time.",
+      "tldr_zh": "Frontier3DBench 用 145 个任务、9 个类别评测 coding agent 在物体、场景和交互式开放世界三个层级的 3D 创建能力。11 种 model-harness 配置显示，agent 更擅长生成看似合理的文本驱动内容，而不擅长忠实复刻参考几何与布局。交互世界暴露的问题最突出：局部机制平均得分 83.08/100，但 motion clearance 仅 20.82、stateful workflow 仅 30.26，说明 agent 仍难以协调跨时间的完整活动。",
+      "upvotes": 6,
+      "authors": "Xinjie Lin, Qingle Liu, Wenyi Li, John Lam, Xiaoqiu Wang, Deyao Hong, Mingju Gao, Zheng Jiang, Yizhe Chi, Youjie Zheng, Calvin Xiao, Kaisen Yang, Huan-ang Gao",
+      "ai_keywords": [],
+      "interest_tag": "Benchmark"
+    }
+  ],
+  "alphaxiv_papers": [
+    {
+      "title": "Understanding AI from the Inside: The State of Mechanistic Interpretability for AI Safety",
+      "arxiv_id": "2611.08438",
+      "url": "https://arxiv.org/abs/2611.08438",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2611.08438",
+      "tldr": "This survey asks whether mechanistic understanding actually makes increasingly autonomous models safer. It organizes work on features, circuits, causal verification, natural-language explanations, learning dynamics, and data attribution within a unified framework for evaluating interpretability claims. Its central caution is that detecting or describing an internal signal is not the same as achieving reliable prediction, control, or safety, so mechanistic evidence must be paired with behavioral validation.",
+      "tldr_zh": "这篇综述追问 mechanistic understanding 是否真的能让日益自主的模型更安全。它把 feature、circuit、causal verification、自然语言解释、learning dynamics 与 data attribution 纳入统一的 interpretability claim 评估框架。核心警告是：检测或描述内部信号并不等于获得可靠预测、控制或安全，因此机制证据必须与行为验证结合。",
+      "interest_tag": ""
+    },
+    {
+      "title": "VFlash: Fast, Accurate Visual Planning via Flash Primitive Decoding",
+      "arxiv_id": "2611.08449",
+      "url": "https://arxiv.org/abs/2611.08449",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2611.08449",
+      "tldr": "VFlash replaces token-by-token coordinate generation with a lightweight drafter that predicts an entire visual primitive in one forward pass. It supports structured points, boxes, and variable-length 2D or 3D trajectories, while directly accepting geometrically valid predictions rather than demanding exact target-token agreement. Preliminary measurements report about 25× faster 3D motion forecasting, and a VFlash-conditioned world action model raises average MolmoSpaces success from 62.6% to 70.2%.",
+      "tldr_zh": "VFlash 用轻量 drafter 在一次 forward pass 中预测完整视觉 primitive，取代逐 token 生成坐标。它支持 point、box 和可变长度 2D/3D trajectory，并直接接受几何上有效的结果，而不要求与目标 token 序列完全一致。初步测量显示 3D motion forecasting 约快 25×，其规划条件化的 world action model 还把 MolmoSpaces 平均成功率从 62.6% 提升到 70.2%。",
+      "interest_tag": ""
+    },
+    {
+      "title": "Scientist World: Grow a Research World for AI-Scientists",
+      "arxiv_id": "2611.08478",
+      "url": "https://arxiv.org/abs/2611.08478",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2611.08478",
+      "tldr": "Scientist World converts papers into executable environments by extracting an open research question and reproducing the paper's method as a baseline. The first release contains 1,000 verified environments and 6,400 hours of traces covering ideas, experiments, failures, and successes. Frontier AI scientists reportedly beat the reproduced human baseline 74% of the time, while training on these traces improves a small model's research ideation by 158% to match frontier systems.",
+      "tldr_zh": "Scientist World 从论文中提取开放研究问题，并复现论文方法作为 baseline，从而把论文转换为可执行环境。首批发布包含 1,000 个验证环境和 6,400 小时研究轨迹，覆盖想法、实验、失败与成功。报告称 frontier AI scientist 有 74% 的运行超过复现的人类 baseline，而用这些轨迹训练后，小模型的研究构思能力提升 158%，达到 frontier system 水平。",
+      "interest_tag": ""
+    },
+    {
+      "title": "SwarmEvolve: Latent Agent Swarms for Evolutionary Discovery and Optimization",
+      "arxiv_id": "2611.08483",
+      "url": "https://arxiv.org/abs/2611.08483",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2611.08483",
+      "tldr": "SwarmEvolve runs hundreds of low-cost agents per round that reason in latent space and communicate by passing KV caches instead of verbose text. Hidden-state distances preserve novelty, while a summarizer receives the combined caches to perform crossover among swarm ideas. Across 21 mathematical and scientific-computing problems, it reaches in a median three to eight minutes the best scores competing frameworks need 60 minutes to attain, with Qwen3 8B sometimes surpassing AlphaEvolve solutions found by frontier models.",
+      "tldr_zh": "SwarmEvolve 每轮运行数百个低成本 agent，让它们在 latent space 中推理，并通过传递 KV cache 而非冗长文本进行通信。系统用 hidden-state distance 保持新颖性，再由 summarizer 接收合并 cache，完成 swarm idea 之间的 crossover。在 21 个数学与科学计算问题上，它用中位 3 至 8 分钟达到其他框架 60 分钟才能获得的最佳分数，Qwen3 8B 在部分问题上甚至超过 frontier model 找到的 AlphaEvolve 解。",
+      "interest_tag": "Agent Swarm"
+    },
+    {
+      "title": "Benchmarks as Software: Terminal-Bench and the Case for Continuous Benchmarks",
+      "arxiv_id": "2611.08417",
+      "url": "https://arxiv.org/abs/2611.08417",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2611.08417",
+      "tldr": "This paper treats agent benchmarks as maintained software rather than immutable datasets, because capable models can expose verifier defects and infrastructure changes can invalidate task assumptions. A continuous audit of Terminal-Bench 2.0 finds issues in roughly 30% of the benchmark; the repaired 2.1 release changes accuracy by more than ten percentage points and moves leaderboard positions by as many as three ranks. It also shows that wall-clock budgets can close or sharply shrink apparent harness gaps, making resource allocation part of the measurement specification.",
+      "tldr_zh": "这篇论文把 agent benchmark 视为需要持续维护的软件，而不是不可变数据集，因为更强模型会暴露 verifier 缺陷，基础设施变化也会破坏任务假设。对 Terminal-Bench 2.0 的持续审计发现约 30% 的 benchmark 存在问题；修复后的 2.1 使准确率变化超过 10 个百分点，排行榜名次最多移动 3 位。论文还显示 wall-clock budget 可消除或显著缩小表面上的 harness 差距，因此资源分配本身就是测量规范的一部分。",
+      "interest_tag": "Benchmark"
+    }
+  ],
+  "github_repos": [
+    {
+      "name": "sarpstar/cinecode",
+      "url": "https://github.com/sarpstar/cinecode",
+      "tldr": "Cinecode packages filmmaking as an inspectable coding-agent workflow: the agent writes a script, builds every frame in browser-rendered code, designs sound, and delivers an MP4. It supports short films, long-form explainers, ads, and music videos through approval checkpoints, deterministic rendering, audio mastering, and automated quality checks. The project's appeal is that creative direction and production remain editable artifacts rather than disappearing behind a hosted video-generation service.",
+      "tldr_zh": "Cinecode 把电影制作封装成可检查的 coding-agent workflow：agent 编写脚本、用浏览器代码构建每一帧、设计声音并交付 MP4。它通过审批检查点、deterministic rendering、音频 mastering 和自动质检支持短片、长篇 explainer、广告与音乐视频。项目的吸引力在于创意指导和生产过程都保留为可编辑 artifact，而不是消失在托管视频生成服务后面。",
+      "stars": 1733,
+      "language": "Python",
+      "interest_tag": ""
+    },
+    {
+      "name": "DIYgod/pinky",
+      "url": "https://github.com/DIYgod/pinky",
+      "tldr": "Pinky lets MCP-capable agents operate real iPhone and Android devices from macOS, Windows, or Linux while the user watches and can take over. Its gateway, rather than the model's prompt, enforces approval for risky actions, blocks sensitive apps and credential fields, and records runs for audit. The project is still pre-alpha, but its combination of cross-platform device control and external policy enforcement is a concrete architecture for safer computer-use agents.",
+      "tldr_zh": "Pinky 让支持 MCP 的 agent 从 macOS、Windows 或 Linux 操作真实 iPhone 与 Android，同时用户可观看并随时接管。高风险动作审批由 gateway 而非模型 prompt 强制执行，敏感应用和凭据字段默认受阻，运行过程还能被记录审计。项目仍处于 pre-alpha，但跨平台设备控制与模型外策略强制的组合，为更安全的 computer-use agent 提供了具体架构。",
+      "stars": 1178,
+      "language": "Go",
+      "interest_tag": "CUA"
+    },
+    {
+      "name": "drost-ai/tinker-ai-skill",
+      "url": "https://github.com/drost-ai/tinker-ai-skill",
+      "tldr": "Tinker AI Skill turns a user's coding-agent sessions into supervised data, trains a LoRA through Tinker, merges it, and exports a GGUF for local inference. The nine-step pipeline handles transcript collection, per-session anonymization, context-aware slicing, behavioral checkpoint evaluation, and training-matched serving. It is notable for documenting failure modes such as stripped reasoning, bad compaction, tokenizer drift, and privacy leakage instead of presenting fine-tuning as a generic one-command recipe.",
+      "tldr_zh": "Tinker AI Skill 把用户自己的 coding-agent session 转成监督数据，通过 Tinker 训练 LoRA，再合并并导出可本地推理的 GGUF。九步 pipeline 覆盖 transcript 收集、逐 session 匿名化、带上下文的切片、行为级 checkpoint 评估以及与训练匹配的 serving。它的价值在于明确记录 reasoning 被剥离、错误 compaction、tokenizer 漂移和隐私泄漏等失败模式，而不是把微调包装成通用的一键配方。",
+      "stars": 272,
+      "language": "Python",
+      "interest_tag": ""
+    },
+    {
+      "name": "TngSHoO/agentcase-lab",
+      "url": "https://github.com/TngSHoO/agentcase-lab",
+      "tldr": "AgentCase Lab is a Streamlit-based platform for replaying agent failures and analyzing root causes across prompts, retrieval, tools, context, memory, permissions, and hallucinations. Its dashboards compare success rate, latency, token usage, and cost before and after a proposed fix, while trace views expose individual execution steps. The repository is explicitly a portfolio MVP with 30 simulated examples, so it is best read as a product prototype for agent observability rather than a production evaluation system.",
+      "tldr_zh": "AgentCase Lab 是基于 Streamlit 的 agent 故障回放与根因分析平台，覆盖 prompt、检索、工具、上下文、记忆、权限和 hallucination 等问题。其 dashboard 对比修复前后的成功率、延迟、token 与成本，trajectory view 则展示每个执行步骤。仓库明确说明这是内置 30 个模拟案例的作品集 MVP，因此更适合作为 agent observability 产品原型，而非生产级评测系统。",
+      "stars": 200,
+      "language": "Python",
+      "interest_tag": ""
+    },
+    {
+      "name": "TIGER-AI-Lab/WebsiteBench",
+      "url": "https://github.com/TIGER-AI-Lab/WebsiteBench",
+      "tldr": "WebsiteBench asks agents to explore a production website and reconstruct a full-stack version that matches both appearance and behavior. It contains 70 websites and 46,916 hidden test cases, with each case requiring functional checks plus visual checkpoints at a normalized SSIM of 0.99. By combining browser exploration, reverse engineering, implementation, and strict visual-functional verification, it evaluates a realistic long-horizon web-agent workflow rather than isolated coding tasks.",
+      "tldr_zh": "WebsiteBench 要求 agent 浏览生产网站，并重建在外观和行为上都匹配的 full-stack 版本。它包含 70 个网站与 46,916 个隐藏测试，每个 case 不仅要通过功能检查，还要让视觉 checkpoint 达到 normalized SSIM 0.99。它把浏览探索、逆向理解、实现和严格的视觉—功能验证合并起来，评测的是现实长程 web-agent workflow，而非孤立 coding task。",
+      "stars": 145,
+      "language": "Python",
+      "interest_tag": "Benchmark"
+    }
+  ],
+  "hackernews": [
+    {
+      "title": "Silicon Valley Promises AI Will Cure Disease. Drugmaker CEOs Aren't Buying It",
+      "url": "https://www.wsj.com/tech/ai/silicon-valley-promises-ai-will-cure-disease-drugmaker-ceos-arent-buying-it-5218511c",
+      "tldr": "The article frames a widening gap between Silicon Valley's claims that AI will transform drug discovery and the skepticism of executives responsible for bringing medicines to market. The 120-comment HN discussion reflects tension between faster target or molecule generation and the slower realities of clinical validation, regulation, and biological uncertainty. Its value is less a verdict on AI for science than a reminder that upstream model gains do not automatically compress every downstream bottleneck.",
+      "tldr_zh": "这篇报道聚焦一种日益明显的落差：硅谷宣称 AI 将重塑药物研发，而真正负责把药物推向市场的高管仍然怀疑。HN 的 120 条评论折射出两类节奏的冲突，一边是更快的靶点或分子生成，另一边是临床验证、监管和生物不确定性的缓慢现实。它的价值不在于给 AI for science 下最终结论，而在于提醒我们：上游模型进步不会自动压缩所有下游瓶颈。",
+      "points": 95,
+      "num_comments": 120,
+      "interest_tag": ""
+    },
+    {
+      "title": "Ask HN: How do you manage your AI agents' context across clients and projects?",
+      "url": "https://news.ycombinator.com/item?id=50403153",
+      "tldr": "This Ask HN thread asks how practitioners preserve decisions, rules, and task history when switching sessions, agent products, and client environments. The pain point is operational rather than purely technical: repeatedly reconstructing context wastes time, while careless sharing risks mixing confidential client information. The discussion highlights demand for durable, scoped memory with provenance, portability, and explicit separation boundaries instead of larger undifferentiated prompts.",
+      "tldr_zh": "这条 Ask HN 讨论询问从业者在切换 session、agent 产品和客户环境时，如何保留历史决策、规则与任务上下文。痛点首先是运营问题：反复重建 context 浪费时间，而随意共享又可能混入其他客户的机密信息。讨论凸显的需求不是更大的无差别 prompt，而是带来源、可迁移、边界明确且按客户隔离的持久记忆。",
+      "points": 63,
+      "num_comments": 43,
+      "interest_tag": "Memory"
+    },
+    {
+      "title": "Apple CEO Presses Software Chief to Pursue More Ambitious AI Strategy",
+      "url": "https://www.bloomberg.com/news/newsletters/2026-11-08/apple-explores-turning-siri-ai-into-chatgpt-dots-like-agent-ios-28-shake-up",
+      "tldr": "The report says Apple's leadership is pushing for a more ambitious AI strategy, including exploration of a more agent-like Siri experience. HN's 61 comments show that expectations are now shaped by products that converse, plan, and act across tasks rather than by incremental assistant features. For Apple, the strategic challenge is not only model quality but integrating agency with privacy, platform control, and the reliability users expect from an operating system.",
+      "tldr_zh": "报道表示 Apple 管理层正在推动更激进的 AI 战略，包括探索更具 agent 特征的 Siri 体验。HN 的 61 条评论显示，用户预期已被能够跨任务对话、规划和行动的产品重塑，而不再满足于助手功能的小步更新。Apple 面临的战略难题不仅是模型质量，还包括如何把 agency 与隐私、平台控制和操作系统级可靠性结合起来。",
+      "points": 35,
+      "num_comments": 61,
+      "interest_tag": ""
+    },
+    {
+      "title": "Show HN: Email-like interface to review, decide, and annotate agent work",
+      "url": "https://plannotator.ai/inbox/",
+      "tldr": "Plannotator proposes an inbox-like sidecar where people review agent artifacts, compare variations, annotate outputs, and send structured feedback back to the agent. The premise is that full coding-session transcripts are a poor human interface once agents produce many parallel decisions and artifacts. An email-style queue is familiar and asynchronous, although the project itself notes that forum or chat metaphors may fit different review workflows.",
+      "tldr_zh": "Plannotator 提出 inbox 式 sidecar，让用户审阅 agent artifact、比较变体、标注输出，并把结构化反馈送回 agent。其核心判断是，当 agent 并行产生大量决策和 artifact 后，完整 coding-session transcript 已不再是合适的人机界面。邮件式队列熟悉且支持异步处理，不过项目也承认 forum 或 chat 等隐喻可能更适合其他 review workflow。",
+      "points": 7,
+      "num_comments": 1,
+      "interest_tag": ""
+    },
+    {
+      "title": "Tell HN: Hanzo AI Is Spamming From GitHub Contributions",
+      "url": "https://news.ycombinator.com/item?id=50406105",
+      "tldr": "The post alleges that Hanzo AI used old GitHub contribution data to send personalized beta invitations to open-source developers without a meaningful current relationship. The example is persuasive because it cites a contribution more than a decade old while presenting the outreach as recent familiarity. Beyond one company, the incident illustrates how AI-assisted personalization can turn public developer metadata into low-cost spam unless provenance, relevance, and consent are treated as product constraints.",
+      "tldr_zh": "这条帖子指称 Hanzo AI 利用旧 GitHub contribution 数据，向并无现实联系的开源开发者发送个性化 beta 邀请。案例之所以有说服力，是因为邮件把十多年前的贡献包装成近期了解与关注。它反映的不只是某家公司问题：如果不把来源、相关性和同意作为产品约束，AI-assisted personalization 很容易把公开开发者元数据变成低成本 spam。",
+      "points": 5,
+      "num_comments": 3,
+      "interest_tag": ""
+    }
+  ]
+}
