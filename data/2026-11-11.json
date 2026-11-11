@@ -1,0 +1,229 @@
+{
+  "date": "2026-11-11",
+  "generated_at": "2026-11-11T17:03:01+08:00",
+  "briefing_zh": "今天最明确的主线是：agent 研究正在从「模型会不会做」转向「系统能否低成本、可复现地做」。**Embodied First Exam** 把 coding agent 放进多机器人与现实感知约束中，**WorkflowArena** 则把多 agent 的 workflow orchestration 从 worker 模型能力中剥离出来单独测量；两者都在迫使评测从静态问答走向可执行环境。与此同时，**System Optimizations for Cost-Efficient Agent Harnesses** 与 **Evolving Infra** 分别从 harness 和 serving 两层优化成本、缓存与资源调度，说明 agent 系统的竞争点已经进入基础设施层。\n\n机器人方向出现了两种互补的「记忆」路线。**World In-Context Learning for Agentic Robot Manipulation** 让冻结模型在模拟器中 rehearsal，再把反馈写入 Task Memory，在 RoboTwin 2.0 的 50 个任务上以单次示范达到 83.4% 平均成功率；**Is Your Robot's Memory Just a Clock?** 则揭示很多 memory-augmented VLA 其实在依赖时间戳捷径，轻微暂停或无关动作就会破坏表现。一个在证明 context memory 能带来迁移，另一个在提醒 memory benchmark 必须控制 temporal shortcut。\n\n基础模型与多模态侧，**dNaViT** 用离散视觉 token 同时覆盖理解、生成和编辑，试图把视觉也纳入 next-token 的统一基础设施；**MMDM** 则用 5,448 道新构造题目测试大选项空间、长上下文和约束决策，显示 multi-select 与 option dependency 仍是明显短板。alphaXiv 上 13k views 的 **Understanding AI from the Inside** 表明 mechanistic interpretability 仍有强公共关注，但今天更具工程信号的是 agent harness、cache reuse 与可验证 workflow。\n\n开源与社区热点进一步验证了「把 agent 接进真实工作流」的趋势。**Pinky** 和 **Agent-VScreen** 把手机操作变成带审批或后台虚拟屏的可控接口，**OnlyRead** 用浏览器侧硬拒绝阻断写操作；HN 头条 **Modern Web Guidance** 则把 200 多份现代 Web 指南做成 token-efficient skill/RAG，并报告 coding agent 从 55% 提升到 92%。这批项目共同强调的不是更长 prompt，而是窄而可信的 capability layer、明确的权限边界和可运行 eval。",
+  "briefing_en": "The clearest theme today is a shift from asking whether agents can act to asking whether complete systems can act cheaply, reproducibly, and under realistic constraints. **Embodied First Exam** places coding agents across diverse robots with realistic sensing limits, while **WorkflowArena** isolates workflow orchestration quality from worker-model capability. In parallel, **System Optimizations for Cost-Efficient Agent Harnesses** and **Evolving Infra** attack cost, caching, and resource allocation at the harness and serving layers, showing that agent competition has moved into infrastructure.\n\nRobotics presents two complementary stories about memory. **World In-Context Learning for Agentic Robot Manipulation** lets a frozen model rehearse in simulation and store feedback as Task Memory, reaching 83.4% mean success across 50 RoboTwin 2.0 tasks from one demonstration. **Is Your Robot's Memory Just a Clock?**, however, shows that many memory-augmented VLA policies exploit temporal shortcuts: harmless pauses or wrist motions can break counting behavior. One paper demonstrates transferable contextual memory, while the other argues that memory evaluations must explicitly control for time-based leakage.\n\nOn the foundation-model side, **dNaViT** uses discrete visual tokens across understanding, generation, and editing, pushing vision toward shared next-token infrastructure. **MMDM** contributes 5,448 fresh decision problems with long contexts, up to 1,024 options, and coupled constraints, exposing persistent weaknesses in multi-select recovery and option logic. The 13k alphaXiv views for **Understanding AI from the Inside** show sustained public interest in mechanistic interpretability, but the strongest engineering signal today comes from agent harnesses, cache reuse, and executable workflow evaluation.\n\nOpen source and community activity reinforce the move toward agents embedded in real workflows. **Pinky** and **Agent-VScreen** expose phone interaction through approval-gated or background virtual-screen interfaces, while **OnlyRead** enforces browser read-only behavior below the prompt layer. HN's leading story, **Modern Web Guidance**, packages more than 200 modern-Web guides into a token-efficient skill and RAG CLI and reports coding-agent pass rates rising from 55% to 92%. These projects sell a narrow, trustworthy capability layer with explicit permissions and runnable evals—not merely a longer prompt.",
+  "viral_analysis_zh": "今天最可能形成持续传播的是 **Modern Web Guidance**：它同时具备 Google Chrome 团队背书、开发者普遍感知的「agent 总写旧式 JavaScript」痛点，以及 55%→92% 的可复述 eval 数字。研究圈里 **Embodied First Exam** 也有爆发潜力，因为「coding agent 直接控制多种机器人」的框架天然具备跨 coding 与 robotics 社区传播的叙事张力。",
+  "viral_analysis_en": "**Modern Web Guidance** is today's strongest viral candidate: it combines Chrome-team credibility, a universally recognizable complaint about agents producing outdated JavaScript, and a memorable 55%-to-92% eval result. In research circles, **Embodied First Exam** could spread widely because the framing of coding agents directly controlling diverse robots bridges the coding-agent and robotics communities.",
+  "huggingface_papers": [
+    {
+      "title": "dNaViT: Discrete Codes are General-Purpose Visual Representations",
+      "url": "https://arxiv.org/abs/2611.12426",
+      "upvotes": 28,
+      "authors": "Xiaotong Li, Zhengrong Yue, Xu Huang, Jialv Zou, Minhao Jing, Wenhao Yan, Haodong Li, Hai Huang, Bo Zhao, Yan Feng, Peng Pei, Xunliang Cai",
+      "ai_keywords": [
+        "discrete autoregressive modeling",
+        "next-token prediction",
+        "vision transformer",
+        "discrete visual primitives",
+        "language tokens",
+        "frozen pretrained encoder",
+        "residual modulation",
+        "dual-branch objective",
+        "reconstruction-aware cues",
+        "grouped product quantization",
+        "discrete capacity",
+        "spatial sequence lengths",
+        "balanced training recipe",
+        "discrete visual tokenizer",
+        "unified encoding",
+        "high-fidelity image decoding",
+        "native multimodal methodology"
+      ],
+      "tldr": "dNaViT turns native-resolution images into discrete visual primitives that can be processed like language tokens. A frozen encoder is adapted with lightweight residual modulation, a dual-branch reconstruction/semantic objective, and grouped product quantization that expands code capacity without lengthening the spatial sequence. The same tokenizer matches or exceeds specialized baselines across 12 understanding benchmarks, four generation benchmarks, and image editing. This matters because a genuinely reusable visual vocabulary could unify multimodal modeling and infrastructure around next-token prediction.",
+      "tldr_zh": "dNaViT 把原生分辨率图像编码成可像语言 token 一样处理的离散视觉原语。它在冻结 encoder 上加入轻量 residual modulation、兼顾重建与语义的双分支目标，并用 grouped product quantization 扩展码本容量而不拉长空间序列。在 12 个视觉理解、4 个生成和 1 个编辑 benchmark 上，它达到或超过专用 baseline。若这种视觉词表能稳定复用，多模态模型就可能真正共享 next-token prediction 的训练与推理基础设施。",
+      "interest_tag": ""
+    },
+    {
+      "title": "World In-Context Learning for Agentic Robot Manipulation",
+      "url": "https://arxiv.org/abs/2611.12885",
+      "upvotes": 27,
+      "authors": "Heng Fang, Zehui Guo, Yuehan Zhang, Mingyang Du, Dingkang Liang, Xiang Bai",
+      "ai_keywords": [],
+      "tldr": "WICL lets a frozen robot agent learn from one demonstration by rehearsing in a simulator and writing the resulting feedback into context rather than weights. RoboScript packages the learned experience as a Task Memory and transfers it to new scenes with deployment inputs restricted to signals available on a real robot. Across all 50 RoboTwin 2.0 tasks it reaches 83.4% mean success in clean and randomized settings, more than 20 points above the strongest trained action policy. The result suggests that world-grounded rehearsal can make in-context learning competitive with weight updates for manipulation.",
+      "tldr_zh": "WICL 让冻结的机器人 agent 从一次示范出发，在模拟器中 rehearsal，并把反馈写入 context 而不是权重。RoboScript 将经验冻结为 Task Memory，再迁移到新场景，同时保证部署输入都是实体机器人可获得的信号。在 RoboTwin 2.0 全部 50 个任务的干净与随机设置上，它达到 83.4% 平均成功率，比最强的已训练 action policy 高出 20 多个百分点。这说明加入 world-grounded rehearsal 后，in-context learning 在操作任务上可能与权重更新竞争。",
+      "interest_tag": "Memory"
+    },
+    {
+      "title": "MMDM: Measuring Massive Multitask Decision Making",
+      "url": "https://arxiv.org/abs/2611.14309",
+      "upvotes": 23,
+      "authors": "Junhao Shen, Qing Zong, Yue Guo, Zhanqiu Zhang, Yiwen Guo, Hong Cheng",
+      "ai_keywords": [],
+      "tldr": "MMDM evaluates one-pass System-1 decision models on 5,448 newly built or source-grounded questions spanning 16 task categories. Inputs reach 64,817 tokens and option sets range from 2 to 1,024, covering agent state tracking, tool selection, constraint planning, preference judgments, and rubric scoring. Evaluation of 28 models finds sharp drops on interdependent options, constrained decisions, and multi-select recovery; the best hard multi-select accuracy is only 36.81%. The benchmark isolates structured decision quality without rewarding verbose autoregressive reasoning traces.",
+      "tldr_zh": "MMDM 用 5,448 道新构造或 source-grounded 的题目评测单次前向的 System-1 decision model，覆盖 16 类任务。输入最长 64,817 tokens、选项数从 2 到 1,024，包含 agent 状态追踪、工具选择、约束规划、偏好判断和 rubric 评分。对 28 个模型的结果显示，选项相互依赖、约束决策和 multi-select recovery 仍明显薄弱，最佳 hard multi-select accuracy 仅 36.81%。它的价值在于不奖励冗长 reasoning trace，而是直接测结构化决策质量。",
+      "interest_tag": ""
+    },
+    {
+      "title": "Is Your Robot's Memory Just a Clock? Temporal Shortcuts in Memory-Augmented VLA Policies",
+      "url": "https://arxiv.org/abs/2611.14488",
+      "upvotes": 5,
+      "authors": "Chubin Zhang, Bo An",
+      "ai_keywords": [
+        "vision-language-action (VLA) policies",
+        "memory-augmented VLA",
+        "RoboMME",
+        "temporal shortcut",
+        "time encoding",
+        "time-sampled memory",
+        "event-indexed memory",
+        "phantom progress",
+        "null event"
+      ],
+      "tldr": "This paper stress-tests memory-augmented VLA policies on RoboMME by inserting null events such as brief pauses or irrelevant wrist motions. Although those interventions do not change the task state, policies that sample memory uniformly over time change their answers, indicating that timestamp progression is acting as a shortcut. The analysis separates actual event memory from elapsed-time cues and exposes a confound in current robot-memory evaluations. Robust embodied memory should index meaningful state changes, not merely where the episode clock happens to be.",
+      "tldr_zh": "这项工作在 RoboMME 中插入短暂停顿或无关手腕动作等 null event，压力测试 memory-augmented VLA policy。这些干预不改变任务状态，但按时间均匀采样 memory 的策略会改变答案，说明模型把时间推进当成了捷径。论文把真实事件记忆与 elapsed-time cue 分离，揭示当前机器人 memory 评测中的关键混淆因素。可靠的 embodied memory 应索引有意义的状态变化，而不是 episode clock 的位置。",
+      "interest_tag": ""
+    },
+    {
+      "title": "FINCOSMOS: An Open-World Evaluation Paradigm for Agents in Finance",
+      "url": "https://arxiv.org/abs/2611.07464",
+      "upvotes": 3,
+      "authors": "Yupeng Cao, Xueqing Peng, Lingfei Qian, Haohang Li, Yangyang Yu, Anke Xu, Wenbo Cao, Yan Wang, Yuechen Jiang, Yuyan Wang, Zhuohan Xie, Yankai Chen, Zehan Li, Jimin Huang, Xue Liu, Jian-Yun Nie, Sophia Ananiadou",
+      "ai_keywords": [],
+      "tldr": "FINCOSMOS proposes an open-world evaluation for finance agents where the task, web data, user strategy, and timeline remain realistically coupled. It targets silent failures such as inventing an unstated strategy, using unverified data, or leaking future information into a backtest—errors that can still produce persuasive reports. Unlike closed benchmarks, it preserves the temporal and provenance constraints that make financial work difficult. The framework is important because agent reliability in finance depends as much on evidence and chronology as on the final numerical answer.",
+      "tldr_zh": "FINCOSMOS 提出面向金融 agent 的 open-world evaluation，让任务、Web 数据、用户策略和时间线保持真实耦合。它重点捕捉静默失败：擅自发明用户未要求的策略、使用未核验数据，或在回测中泄露未来信息——这些错误仍可能生成看似可信的报告。与封闭 benchmark 不同，它保留了金融工作真正困难的时序与 provenance 约束。金融 agent 的可靠性不仅取决于最终数字，也取决于证据链和时间一致性。",
+      "interest_tag": "Benchmark"
+    }
+  ],
+  "alphaxiv_papers": [
+    {
+      "title": "Embodied First Exam",
+      "arxiv_id": "2611.12177",
+      "url": "https://arxiv.org/abs/2611.12177",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2611.12177",
+      "tldr": "Embodied First Exam is an agent-native benchmark for coding agents that control diverse simulated robots under realistic sensing and physical constraints. Agents may choose their own control strategy, making the test about end-to-end problem solving rather than a fixed visuomotor policy interface. The initial results show that even strong coding agents rarely succeed without privileged simulator access. It creates a useful bridge between coding-agent evaluation and robotics while making hidden environment advantages explicit.",
+      "tldr_zh": "Embodied First Exam 是一个 agent-native benchmark，用现实感知和物理约束下的多种模拟机器人评测 coding agent。agent 可以自行选择控制策略，因此它测的是端到端问题求解，而不是固定的 visuomotor policy 接口。初步结果显示，即使强 coding agent 在没有 privileged simulator access 时也很少成功。它把 coding-agent evaluation 与 robotics 接起来，同时显式暴露环境特权带来的优势。",
+      "interest_tag": "Benchmark"
+    },
+    {
+      "title": "Understanding AI from the Inside: The State of Mechanistic Interpretability for AI Safety",
+      "arxiv_id": "2611.08438",
+      "url": "https://arxiv.org/abs/2611.08438",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2611.08438",
+      "tldr": "This survey organizes mechanistic-interpretability methods around the kinds of safety evidence they can and cannot provide. It compares approaches, clarifies limitations, and proposes a shared framework for judging progress rather than treating every discovered circuit as equivalent evidence. Its unusually high alphaXiv attention reflects demand for a coherent map of a fragmented field. The practical value is methodological: safety claims should be tied to the intervention, causal evidence, and scope each technique actually supports.",
+      "tldr_zh": "这篇综述按照 mechanistic interpretability 方法能提供和不能提供的安全证据来组织领域。它比较不同路线、澄清局限，并提出共同框架评估进展，避免把每个被发现的 circuit 都当成同等级证据。其在 alphaXiv 上异常高的关注度，反映社区需要一张能整合碎片化工作的地图。实际价值在方法论：安全结论必须绑定具体干预、因果证据与技术适用范围。",
+      "interest_tag": ""
+    },
+    {
+      "title": "System Optimizations for Cost-Efficient Agent Harnesses",
+      "arxiv_id": "2611.12122",
+      "url": "https://arxiv.org/abs/2611.12122",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2611.12122",
+      "tldr": "The paper argues that harness differences often affect execution cost more than task accuracy when the underlying model is fixed. It adds a lightweight optimization layer over existing harnesses and reports up to 35% lower end-to-end cost while largely preserving accuracy. The key contribution is to treat prompts, tools, and execution policy as a systems optimization surface rather than only an agent-design choice. This matters for long-running agents, where small per-turn inefficiencies compound across many tool calls.",
+      "tldr_zh": "论文指出，在底层模型固定时，harness 差异对执行成本的影响往往大于对任务准确率的影响。它在现有 harness 上增加轻量优化层，在基本保持准确率的同时将端到端成本最多降低 35%。核心贡献是把 prompt、tools 与 execution policy 当成系统优化面，而不只是 agent 设计选择。对长程 agent 而言，每轮的小浪费会在大量工具调用中快速累积。",
+      "interest_tag": ""
+    },
+    {
+      "title": "WorkflowArena: Benchmarking Executable Workflow Orchestration in LLM-Based Multi-Agent Systems",
+      "arxiv_id": "2611.12856",
+      "url": "https://arxiv.org/abs/2611.12856",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2611.12856",
+      "tldr": "WorkflowArena evaluates whether an LLM can author executable workflows that delegate and coordinate work across multiple agents. Its design tries to separate orchestration quality from the raw capability of the worker agents, a distinction that end-to-end scores usually blur. The benchmark asks whether a generated workflow improves outcomes independently of simply selecting a stronger worker. This makes it useful for studying planning topology, delegation, and coordination as first-class agent capabilities.",
+      "tldr_zh": "WorkflowArena 评测 LLM 能否编写可执行 workflow，在多个 agent 之间委派并协调工作。它试图把 orchestration quality 与 worker agent 的原始能力分离，而传统端到端分数通常会混淆二者。benchmark 关注生成的 workflow 是否能独立于「换更强 worker」而改善结果。这使规划拓扑、委派和协调能够作为一等 agent 能力被研究。",
+      "interest_tag": "Benchmark"
+    },
+    {
+      "title": "MIRIX-2.0: Multi-Agent Memory System",
+      "arxiv_id": "2611.12068",
+      "url": "https://arxiv.org/abs/2611.12068",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2611.12068",
+      "tldr": "MIRIX-2.0 is a practical multi-agent memory architecture designed to balance accuracy, efficiency, personalization, and long-term retention. It distributes memory operations across specialized agents rather than relying on one monolithic store or irreversible consolidation process. The system reports leading results on four of five QA benchmarks, including 91.4% on LoCoMo and 72.6% on LongMemEval-S. Its importance lies in treating memory maintenance—what to store, retrieve, revise, or forget—as an explicit agent workflow.",
+      "tldr_zh": "MIRIX-2.0 是面向长期保留、个性化、准确率与效率平衡的 multi-agent memory architecture。它把 memory 操作分给专门 agent，而不是依赖单一存储或不可逆的 consolidation。在五个 QA benchmark 中它有四个领先，包括 LoCoMo 91.4% 和 LongMemEval-S 72.6%。其意义在于把「存什么、取什么、如何修订、何时遗忘」变成显式 agent workflow。",
+      "interest_tag": "Memory"
+    }
+  ],
+  "github_repos": [
+    {
+      "name": "DIYgod/pinky",
+      "url": "https://github.com/DIYgod/pinky",
+      "stars": 1785,
+      "language": "Go",
+      "tldr": "Pinky lets Claude Code, Codex, Cursor, or scripts operate a real iPhone or Android device through MCP while the user watches from a computer. Risky actions such as payments or messaging can require approval enforced by a gateway rather than by prompt instructions. It also supports takeover and review, making human control part of the execution path. The project is notable for treating phone automation as a permissioned runtime, not merely a remote-control demo.",
+      "tldr_zh": "Pinky 让 Claude Code、Codex、Cursor 或脚本通过 MCP 操作真实 iPhone 或 Android，用户可在电脑端实时观察。支付、发消息等高风险动作可由 gateway 强制审批，而不是只依赖 prompt 约束。它还支持人工接管和事后审查，把 human control 放进实际执行路径。项目的亮点是把手机自动化做成 permissioned runtime，而不只是遥控演示。",
+      "interest_tag": "CUA"
+    },
+    {
+      "name": "drost-ai/tinker-ai-skill",
+      "url": "https://github.com/drost-ai/tinker-ai-skill",
+      "stars": 310,
+      "language": "Python",
+      "tldr": "This agent skill converts a user's own coding-agent sessions into supervised fine-tuning data and trains a LoRA through Tinker. It packages extraction, dataset construction, training, and local model use into a workflow that can be run from Claude Code, Codex, or OpenCode. The appeal is that interaction traces already encode repository conventions and debugging style, avoiding the need to author a dataset from scratch. It turns personal agent history into a reproducible post-training asset.",
+      "tldr_zh": "这个 agent skill 把用户自己的 coding-agent session 转成 supervised fine-tuning 数据，并通过 Tinker 训练 LoRA。它将提取、数据集构建、训练和本地模型使用封装成可从 Claude Code、Codex 或 OpenCode 执行的 workflow。其吸引力在于历史交互已经包含仓库规范和调试风格，无需从零手写数据集。它把个人 agent 轨迹变成可复现的 post-training 资产。",
+      "interest_tag": ""
+    },
+    {
+      "name": "vzroslieigry/maxagent",
+      "url": "https://github.com/vzroslieigry/maxagent",
+      "stars": 229,
+      "language": "JavaScript",
+      "tldr": "Maxagent provides a shared experience layer for Claude Code, Codex, Antigravity, OpenClaw, and custom agents. It stores short checked recipes, tracks project stopping points, and uses hooks to surface relevant prior experience before commands or after errors. The goal is to stop agents from rediscovering the same fixes in every session. Its value is cross-agent operational memory rather than a model-specific chat history.",
+      "tldr_zh": "Maxagent 为 Claude Code、Codex、Antigravity、OpenClaw 和自定义 agent 提供共享 experience layer。它保存短小且已核验的 recipes、记录项目停点，并通过 hooks 在命令前或报错后召回相关经验。目标是阻止 agent 每个 session 都重新发现同一个修复方法。它的价值是跨 agent 的操作性长期记忆，而不是某个模型私有的聊天历史。",
+      "interest_tag": "Memory"
+    },
+    {
+      "name": "onlyreadai/onlyread",
+      "url": "https://github.com/onlyreadai/onlyread",
+      "stars": 55,
+      "language": "TypeScript",
+      "tldr": "OnlyRead is a Chrome extension that lets browser agents inspect real inboxes, calendars, and work tools while blocking send, edit, delete, post, and settings changes before they leave the browser. The enforcement happens at the browser boundary, so it does not depend on the agent obeying a read-only instruction. This enables safer observation and auditing on sensitive accounts. The project demonstrates that capability security should be implemented below the prompt layer.",
+      "tldr_zh": "OnlyRead 是一个 Chrome 扩展，允许 browser agent 查看真实邮箱、日历和工作工具，同时在请求离开浏览器前阻断发送、编辑、删除、发帖和设置变更。限制发生在浏览器边界，因此不依赖 agent 是否遵守 read-only 指令。它让敏感账户上的观察和审计更安全。项目说明 capability security 应实现在 prompt 层之下。",
+      "interest_tag": ""
+    },
+    {
+      "name": "kilolonion/agent-vscreen",
+      "url": "https://github.com/kilolonion/agent-vscreen",
+      "stars": 54,
+      "language": "Kotlin",
+      "tldr": "Agent-VScreen creates an invisible Android virtual display that an AI agent can operate while the user continues using the physical screen. It exposes CLI, MCP, and HTTP interfaces, works with Shizuku without root, and offers a floating window for monitoring, takeover, or stopping. This separates agent activity from the user's foreground session without requiring dedicated hardware. It is a pragmatic runtime primitive for concurrent mobile computer-use agents.",
+      "tldr_zh": "Agent-VScreen 创建不可见的 Android virtual display，让 AI agent 操作应用时用户仍可正常使用实体屏幕。它提供 CLI、MCP 和 HTTP 接口，通过 Shizuku 无需 root，并用浮窗支持监控、接管或停止。这种设计把 agent 活动与用户前台 session 分离，无需额外手机。它是并发 mobile computer-use agent 的实用 runtime primitive。",
+      "interest_tag": "CUA"
+    }
+  ],
+  "hackernews": [
+    {
+      "title": "Show HN: Get your coding agent off ~2019 JavaScript, onto modern web primitives",
+      "url": "https://github.com/GoogleChrome/modern-web-guidance",
+      "points": 358,
+      "num_comments": 106,
+      "tldr": "Modern Web Guidance packages more than 200 expert-written guides on current browser APIs into an agent skill and a compact RAG CLI. It targets a concrete failure mode: coding agents often know modern APIs exist but default to legacy div-plus-JavaScript patterns learned from older code. The team reports roughly 1,700 Playwright/AST assertions across about 200 tasks, with agent pass rates rising from 55% unguided to 92% guided. The combination of curated knowledge, token-efficient retrieval, and executable evals makes the result unusually credible and reusable.",
+      "tldr_zh": "Modern Web Guidance 将 200 多份现代浏览器 API 专家指南封装为 agent skill 和紧凑的 RAG CLI。它针对一个具体失败模式：coding agent 往往知道新 API 存在，却仍默认生成训练数据中常见的旧式 div 加 JavaScript 方案。团队在约 200 个任务上运行约 1,700 个 Playwright/AST assertions，报告 agent 通过率从无指导的 55% 提升到 92%。人工知识、token-efficient retrieval 与可执行 eval 的组合让结果兼具可信度和复用性。",
+      "interest_tag": ""
+    },
+    {
+      "title": "Show HN: Aircad – Professional drafting and 3D modeling in the browser",
+      "url": "https://aircad.com",
+      "points": 37,
+      "num_comments": 16,
+      "tldr": "Aircad is a browser-based professional CAD environment combining 2D drafting, NURBS solid modeling, DWG/DXF/STEP support, collaboration, and a deeply integrated AI agent. The agent operates through the same scripting API as built-in commands and stages changes for explicit apply-or-discard review. That transaction-like workflow makes complex geometric edits inspectable before they mutate the document. The product shows how domain agents become more trustworthy when actions are typed, previewable, and reversible.",
+      "tldr_zh": "Aircad 是运行在浏览器中的专业 CAD 环境，集成 2D drafting、NURBS solid modeling、DWG/DXF/STEP、协作与内置 AI agent。agent 使用与内置命令相同的 scripting API，并把修改先作为 draft 提交，等待用户 apply 或 discard。这种类似 transaction 的流程让复杂几何编辑在改变文档前可检查。它说明 domain agent 的动作若有类型、可预览且可逆，就更容易获得信任。",
+      "interest_tag": ""
+    },
+    {
+      "title": "How do you keep up quality when you vibe-code?",
+      "url": "https://news.ycombinator.com/item?id=50444380",
+      "points": 29,
+      "num_comments": 26,
+      "tldr": "This Ask HN thread describes a recurring failure mode of AI-heavy development: features become cheap to add, but local agent context cannot preserve a coherent global behavior model. The result is whack-a-mole debugging, missed edge cases, and UI regressions that are increasingly difficult to review. Its engagement signals that productivity gains are shifting the bottleneck from code production to specification, architecture, and verification. The practical lesson is that agents need explicit invariants and system-level tests, not merely more local context.",
+      "tldr_zh": "这条 Ask HN 描述了 AI-heavy development 的典型失败：功能变得很便宜，但 agent 的局部 context 无法维持统一的全局行为模型。结果是打地鼠式修 bug、边界条件遗漏，以及越来越难审查的 UI regression。讨论热度说明生产力提升正在把瓶颈从写代码转移到 specification、architecture 和 verification。实践结论是 agent 需要显式 invariants 与系统级测试，而不只是更多局部 context。",
+      "interest_tag": ""
+    },
+    {
+      "title": "My AI Agents Found an Unmapped Maya Site",
+      "url": "https://pietromiotti.com/latest/maya-site/",
+      "points": 10,
+      "num_comments": 0,
+      "tldr": "The author used public NASA lidar, image tiling, and 48 general-purpose agents to inspect roughly 1,200 square kilometers of jungle for geometric signs of Maya structures. A candidate site was checked against literature and raw point clouds, then reported to Mexico's INAH, which confirmed that no archaeological site was registered at the supplied location. The discovery is not yet archaeologically verified, but the workflow demonstrates scalable visual triage plus human institutional escalation. Its viral strength comes from a concrete real-world outcome rather than another coding demo.",
+      "tldr_zh": "作者使用公开 NASA lidar、图像切片和 48 个通用 agent，扫描约 1,200 平方公里丛林中的玛雅建筑几何迹象。候选地点经过文献与原始点云核验后上报墨西哥 INAH，后者确认该坐标没有已登记遗址。发现尚未得到考古学现场确认，但这个流程展示了大规模视觉初筛与人工机构升级的组合。它的传播力来自具体的现实结果，而不是又一个 coding demo。",
+      "interest_tag": ""
+    },
+    {
+      "title": "Show HN: Cosh – An open-source AI agent orchestrator",
+      "url": "https://github.com/DiegoZaluski/co-sh",
+      "points": 8,
+      "num_comments": 4,
+      "tldr": "Cosh is a Rust terminal agent that can coordinate external agents such as Codex and Goose in split panes, with separate sessions and optional worktrees. It also exposes computer tools through an accessibility-tree representation and falls back to screenshots when necessary. Independent crates provide tools, TUI components, SDK functionality, recall, and an optional ONNX decision engine. Its differentiator is combining multi-agent orchestration, coding tools, and GUI interaction in one local terminal runtime.",
+      "tldr_zh": "Cosh 是 Rust 编写的 terminal agent，可在 split panes 中协调 Codex、Goose 等外部 agent，并让每个 agent 保留独立 session 与可选 worktree。它还通过 accessibility tree 提供 computer tools，只在必要时回退到 screenshot。独立 crates 覆盖工具、TUI、SDK、recall 和可选 ONNX decision engine。其差异点是在一个本地 terminal runtime 中结合 multi-agent orchestration、coding tools 与 GUI interaction。",
+      "interest_tag": "Agent Swarm"
+    }
+  ]
+}
