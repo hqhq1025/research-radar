@@ -1,0 +1,231 @@
+{
+  "date": "2026-11-12",
+  "generated_at": "2026-11-12T17:05:17.828971+08:00",
+  "briefing_zh": "今天最清晰的主线，是 agent 系统开始从“模型能不能做”转向“基础设施能否稳定、便宜地让它做”。**Evolving Infra** 根据 agent 工作负载动态调整 prefill、decode 与 KV-cache 复用，在最多 256 张 GB300 上把平均请求延迟最多降低 4.1 倍；**System Optimizations for Cost-Efficient Agent Harnesses** 则不改模型，通过上下文压缩、清除过期历史和调用批处理，把平均成本压到基线的 77%，同时保留 97% 的准确率。**SteerDistill** 从另一端处理部署问题：让全精度教师根据量化 agent 的真实执行失败闭环修正，使 W4A16 agent 接近 BF16 表现。\n\n评测侧给出了更冷静的能力边界。**Embodied First Exam** 横跨 47 种机器人和 1,156 个任务，最强 agent 在 Standard 核心任务上仅完成 33.6%，而获得 simulator state 和 reset 等特权后可从 30% 跃升到 77%，说明“环境特权”仍会严重放大成绩。**GTAGym** 与 **Interactive Visual Gym** 分别把闭环交互扩展到 AAA 游戏和会随助手回应改变行为的模拟用户；后者最佳模型只完成 53.4%，提示真实交互的难点不只是视觉识别，而是持续状态、用户偏差和动作后果。\n\n记忆与群体协作也从概念走向证据门禁。**WikiTrace** 不只保存提炼后的经验，还把它链接到未改写的原始轨迹，将 agent 的记忆诱发退化率从 6.5% 降至 4.5%；核心启示是 memory 需要 provenance，而不只是更大的检索库。与此同时，**AWS Emulator** 声称由数千个 agent 分工生成保真测试、定位差异并修复代码，是少见的产品级 Agent Swarm 案例；但 48 个视觉 agent “发现”玛雅遗址后又被证实是重发现，也提醒我们：大规模并行搜索若缺乏完整文献核验，只会更快地产生高置信度的新颖性误判。\n\n开源和产品信号则集中在“可控的行动入口”。**Pinky** 把 MCP agent 接到真实 Android/iOS 设备，同时由独立网关强制审批高风险动作；**agentes.chat** 和 **MAS Office** 把多 agent 的预算、权限、复核与人工批准做成显式编排。另一面，美联航禁止未经授权的 agent 代订票，说明 agent commerce 的瓶颈正从页面操作能力转向 delegated identity、支付责任和平台授权；下一轮竞争不会只有更强模型，还会是更可信的 control plane。",
+  "briefing_en": "The clearest theme today is a shift from asking whether an agent can act to whether infrastructure can let it act reliably and economically. **Evolving Infra** adapts prefill, decode, and KV-cache reuse to agent workloads, reporting up to 4.1× lower mean request latency on deployments as large as 256 GB300 GPUs. **System Optimizations for Cost-Efficient Agent Harnesses** works above the model, using context compaction, stale-history removal, and call batching to average 77% of baseline cost at 97% of baseline accuracy. **SteerDistill** tackles the deployment problem from another direction: a full-precision teacher closes the loop on execution failures so W4A16 agents can approach BF16 behavior.\n\nEvaluation results draw a much colder capability boundary. **Embodied First Exam** spans 1,156 tasks and 47 robots; the strongest agent solves only 33.6% of core Standard tasks, while access to simulator state and resets raises success from 30% to 77% on paired tasks. **GTAGym** and **Interactive Visual Gym** extend closed-loop evaluation to AAA games and simulated users whose behavior changes after assistant responses. The latter tops out at 53.4%, showing that real interaction is not just visual recognition but sustained state tracking, user deviation, and action consequences.\n\nMemory and collective execution are also moving toward evidence gates. **WikiTrace** links distilled lessons back to unchanged source trajectories and cuts memory-induced regression from 6.5% to 4.5%; the key lesson is that memory needs provenance, not merely a larger retrieval store. Meanwhile, **AWS Emulator** is presented as the output of thousands of agents divided among fidelity testing, divergence detection, and repair, making it a rare product-scale Agent Swarm case. Yet the 48-agent Maya-site story ended as a rediscovery, demonstrating that parallel search without complete literature verification can scale confident novelty errors just as efficiently.\n\nOpen-source and product signals converge on controllable action surfaces. **Pinky** connects MCP agents to real Android and iOS devices while an independent gateway enforces approvals for risky actions; **agentes.chat** and **MAS Office** turn budgets, permissions, review rounds, and human approval into explicit orchestration. United Airlines' ban on unauthorized booking agents shows that the bottleneck in agentic commerce is shifting from page-operation ability to delegated identity, payment liability, and platform permission. The next competition will be about trusted control planes as much as stronger models.",
+  "viral_analysis_zh": "今天最可能形成跨圈传播的是 **AWS Emulator**：它把“数千个 agent 写完整产品”包装成可运行仓库、公开测试和问题记录，既有夸张数字，也有可验证 artifact，天然适合开发者复现和争论。**My AI agents found an unmapped Maya site?** 则靠悬念标题与“AI 做科学发现”的叙事获得最高热度；后续反转为重发现反而延长讨论周期，并把文献核验这个失败点变成第二个传播钩子。",
+  "viral_analysis_en": "**AWS Emulator** is today's strongest cross-community viral candidate: the claim that thousands of agents built a complete product is paired with a runnable repository, public tests, and an issue trail, combining a spectacular number with artifacts developers can inspect and debate. **My AI agents found an unmapped Maya site?** won attention through a suspenseful title and an AI-for-discovery narrative; the later revelation that it was a rediscovery extended the conversation and turned literature verification into a second hook.",
+  "huggingface_papers": [
+    {
+      "title": "Scaling Mathematical Proof Supervision from Structured Textbooks",
+      "url": "https://arxiv.org/abs/2610.40394",
+      "tldr": "TOME-Math converts 2,118 university-level mathematics textbooks into roughly 380,000 proof-supervision records while retaining chapter order, proposition-proof links, dependencies, and source provenance. The authors use these structural signals to study curriculum learning and scaling across supervision volume, source breadth, and multiple mathematical subjects. Full-scale fine-tuning improves the unweighted mean across held-out and public evaluations by 16.7 percentage points over the base model and outperforms all three tested public instruction-data baselines in aggregate.",
+      "tldr_zh": "TOME-Math 将 2,118 本大学数学教材转换为约 38 万条证明监督记录，同时保留章节顺序、命题与证明关联、依赖引用及来源信息。作者利用这些结构信号研究跨数学学科的课程学习，以及监督规模和来源广度带来的扩展规律。全量微调使模型在留出评测和公开基准上的非加权平均分较基础模型提高 16.7 个百分点，综合表现也超过三个公开指令数据基线。",
+      "upvotes": 26,
+      "authors": "Youqing Fang, Zhouqi Hua, Yinhao Tang, Yuzhe Gu, Lingkai Kong, Bin Liu, Weiming Zhang, Kai Chen, Yanan Sun, Wenwei Zhang",
+      "ai_keywords": [
+        "mathematical reasoning",
+        "proof supervision",
+        "structured textbooks",
+        "curriculum learning",
+        "training data"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "Incentivizing Self-Learning in Large Language Models via Reinforcement Learning",
+      "url": "https://arxiv.org/abs/2610.39671",
+      "tldr": "This work defines self-learning as autonomously retrieving, studying, and applying knowledge from long-form references, then tests it through textbook-based mathematical proof problems with reference solutions withheld. It introduces a BookNavigator interface and uses reinforcement learning with fine-grained rewards to teach models how to navigate exposition and apply relevant principles. The method raises Intern-S2-Preview-35B's proof accuracy from 51.5% to 79.5%, surpasses textbook-free and fixed-retrieval RL baselines, and also delivers smaller gains on BrowseComp-Plus and CL-bench.",
+      "tldr_zh": "该研究将自学习定义为模型自主检索、研读并应用长篇参考资料，并通过隐藏参考答案的教材数学证明任务进行检验。作者提出 BookNavigator 接口，并以细粒度奖励强化学习训练模型浏览教材论述、定位相关原理并完成证明。该方法将 Intern-S2-Preview-35B 的总体证明准确率从 51.5% 提升至 79.5%，超过无教材和固定检索的强化学习基线，同时在 BrowseComp-Plus 与 CL-bench 上取得较小但明确的提升。",
+      "upvotes": 15,
+      "authors": "Lingkai Kong, Yuzhe Gu, Haiteng Zhao, Zijian Wu, Youqing Fang, Zhouqi Hua, Yanan Sun, Kai Chen, Wenwei Zhang",
+      "ai_keywords": [
+        "self-learning",
+        "reinforcement learning",
+        "long-form retrieval",
+        "BookNavigator",
+        "mathematical reasoning"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "SteerDistill: Quantizing LLM Agents via Closed-Loop Teacher Steering",
+      "url": "https://arxiv.org/abs/2611.13410",
+      "tldr": "SteerDistill targets behavioral failures introduced by low-bit quantization, especially when an agent overlooks task requirements or environmental conditions. A full-precision teacher revises failed student responses and iteratively refines its guidance using feedback from actual student execution, producing locally verified corrections that are distilled back into the unguided student. Across five agentic benchmarks and three models, it beats the strongest W4A16 quantized baseline by 1.67–2.18 average-score points, remains within one point of BF16, and surpasses QeRL on τ²-Bench while using 67% fewer training GPU hours.",
+      "tldr_zh": "SteerDistill 针对低比特量化导致的智能体行为失效，尤其是忽略任务要求或环境条件的问题。全精度教师先修正学生模型的失败响应，再根据学生的实际执行反馈迭代调整指导，由此产生经过局部验证的纠正信号，并将其蒸馏回无需教师辅助的学生模型。该方法在五个智能体基准和三个模型上较最强 W4A16 量化基线平均提高 1.67–2.18 分，与 BF16 的差距保持在一分以内，并在 τ²-Bench 上以少 67% 的训练 GPU 时数超过 QeRL。",
+      "upvotes": 14,
+      "authors": "Genming Cui, Xiangyu Li, Zixu Hao, Xin Ding, Yunxin Liu, Ting Cao",
+      "ai_keywords": [
+        "LLM agents",
+        "quantization",
+        "knowledge distillation",
+        "closed-loop training",
+        "teacher steering"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "GTAGym: Real AAA Game Tasks Environment for Evaluation and Reinforcement Learning",
+      "url": "https://arxiv.org/abs/2611.13028",
+      "tldr": "GTAGym provides an evaluation and reinforcement-learning environment built from GTA V, exposing tasks through screenshots and keyboard-mouse actions while automatically verifying outcomes from engine state. GTAVBench contains 103 online tasks across nine families plus 47 image-based shooting and sniping tasks; its AGI branch shows instructions only in the first screenshot and compresses interaction history automatically. The best tested configuration reaches 70.9% overall accuracy, while aerial navigation, evasion, and interception remain difficult, and LoRA reinforcement learning improves native GTA V task performance from 15% to 23%.",
+      "tldr_zh": "GTAGym 基于 GTA V 构建评测与强化学习环境，智能体通过屏幕截图及键鼠动作执行任务，系统则利用游戏引擎状态自动判断结果。GTAVBench 包含九类共 103 个在线任务，以及 47 个基于图像的射击和狙击任务；其 AGI 分支只在首张截图中提供指令，并自动压缩交互历史。最佳配置取得 70.9% 的总体准确率，但空中导航、规避和拦截仍然困难，而 LoRA 强化学习将原生 GTA V 任务表现从 15% 提升至 23%。",
+      "upvotes": 10,
+      "authors": "Jiajun Chen, Shicheng Fang, Jiahao Lu, Yuxin Wang, Xipeng Qiu",
+      "ai_keywords": [
+        "computer-use agent",
+        "GTA V",
+        "keyboard-mouse control",
+        "visual agent evaluation",
+        "reinforcement learning"
+      ],
+      "interest_tag": "CUA"
+    },
+    {
+      "title": "Interactive Visual Gym: Evaluating Visual Interaction Models with Simulated Users in Interactive Worlds",
+      "url": "https://arxiv.org/abs/2611.08286",
+      "tldr": "Interactive Visual Gym evaluates visual interaction models in closed loop by jointly simulating executable environments and persona-conditioned users whose behavior can change after assistant responses. IVG-Bench comprises 315 scenarios across cooking, household manipulation, and mobile-interface domains, including controlled user errors and other departures from the intended plan. The best evaluated model completes only 53.4% of tasks within the time limit, while a human study reports 78.5% agreement with the benchmark's interaction-quality metric and a proof-of-concept GRPO run improves Qwen3.5-4B in the cooking environment.",
+      "tldr_zh": "Interactive Visual Gym 通过联合模拟可执行环境和带人物设定的用户，对视觉交互模型进行闭环评测，使助手回复能够真实影响用户后续行为和任务结果。IVG-Bench 覆盖烹饪、家务操作和移动界面三类场景，共含 315 个交互任务，并模拟受控执行错误及偏离原计划的行为。最佳受测模型在时限内仅完成 53.4% 的任务；人类研究显示参与者偏好与其交互质量指标的一致率为 78.5%，概念验证 GRPO 训练也提升了 Qwen3.5-4B 在烹饪环境中的表现。",
+      "upvotes": 1,
+      "authors": "Chenhao Zheng, Zixian Ma, Kai Li, Kanchana Ranasinghe, Jieyu Zhang, Artemis Panagopoulou, Weikai Huang, Jianxu Shangguan, Yuanyuan Tan, Silvio Savarese, Juan Carlos Niebles, Ranjay Krishna, Ran Xu, Honglu Zhou",
+      "ai_keywords": [
+        "agent benchmark",
+        "closed-loop evaluation",
+        "visual interaction",
+        "simulated users",
+        "multimodal agents"
+      ],
+      "interest_tag": "Benchmark"
+    }
+  ],
+  "alphaxiv_papers": [
+    {
+      "title": "UGG: Unified Generative Geometry Model",
+      "arxiv_id": "2611.14440",
+      "url": "https://arxiv.org/abs/2611.14440",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2611.14440",
+      "tldr": "UGG unifies RGB video generation with depth and camera-pose prediction by treating observed and missing scene components as a conditional-completion problem. A shared multimodal model processes aligned RGB, depth, and camera-ray representations and can learn from datasets with incomplete modality annotations. At inference time, it samples multiple scene hypotheses and ranks them using geometric evidence extracted from observed images. With only endpoint images on RealEstate10K, this search reduces translation-direction angular error from 8.260° to 3.475°, although the verifier does not always select the best candidate.",
+      "tldr_zh": "UGG 将 RGB 视频生成、深度估计和相机位姿预测统一为一个条件补全问题，根据已观测的场景成分推断缺失部分。其共享多模态模型联合处理对齐的 RGB、深度与相机射线表示，并可利用模态标注不完整的异构数据训练。推理时，系统会采样多个可能的场景假设，再依据观测图像中的几何证据进行排序。在仅提供 RealEstate10K 首尾帧时，该搜索将平移方向角误差从 8.260° 降至 3.475°，但验证器并非总能选中最佳候选。",
+      "interest_tag": ""
+    },
+    {
+      "title": "Embodied First Exam",
+      "arxiv_id": "2611.12177",
+      "url": "https://arxiv.org/abs/2611.12177",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2611.12177",
+      "tldr": "Embodied First Exam evaluates whether coding agents can control robots through direct actions, generated controllers, or trained policies. It contains 1,156 tasks across 35 suites and 47 robots, with Standard, Realtime, and Privileged settings that vary sensor access, resets, and simulator-state availability. The strongest evaluated agent, GPT-6 Astra in Codex, solves 33.6% of the 456 core tasks in the Standard setting. On 391 paired tasks, its success rises from 30% in Standard to 77% in Privileged, highlighting how strongly current results depend on privileged information and reset access.",
+      "tldr_zh": "Embodied First Exam 用于评估编码智能体能否通过直接操作、编写控制器或训练策略来控制机器人。基准包含 35 个套件、47 种机器人和 1,156 项任务，并通过 Standard、Realtime 与 Privileged 设置区分传感器信息、重置机会和模拟器状态访问。表现最强的 GPT-6 Astra in Codex 在 456 项核心任务的 Standard 设置中成功率为 33.6%。在 391 项配对任务上，其成功率从 Standard 的 30% 升至 Privileged 的 77%，说明当前成绩高度依赖特权信息与环境重置能力。",
+      "interest_tag": "Benchmark"
+    },
+    {
+      "title": "Evolving Infra: Agent-Adaptive LLM Serving at Scale",
+      "arxiv_id": "2611.12304",
+      "url": "https://arxiv.org/abs/2611.12304",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2611.12304",
+      "tldr": "Evolving Infra adapts LLM serving infrastructure to the changing prefill, decode, and context-reuse patterns of agent workloads. It decouples compute-role allocation from distributed KV-cache management, allowing nodes to switch roles without making reusable context inaccessible. An online planner adjusts the prefill-decode split, while an agent-aware manager uses context signals to guide cache routing, transfer, and eviction. Across coding, mathematics, and computer-use workloads on up to 256 GB300 GPUs, it reports reductions of up to 4.1× in mean request latency and 14× in P95 time to first token versus NVIDIA Dynamo, although Dynamo retains lower P95 TTFT in some decode-heavy Putnam settings.",
+      "tldr_zh": "Evolving Infra 针对智能体负载中不断变化的 prefill、decode 与上下文复用模式，动态调整大模型推理基础设施。它将计算角色分配与分布式 KV 缓存管理解耦，使节点切换 prefill 或 decode 角色时仍能访问可复用上下文。在线规划器负责调整两类节点的比例，智能体感知的缓存管理器则依据上下文信号决定路由、传输和淘汰。在最多 256 张 GB300 GPU 上的编码、数学和 computer-use 负载中，该系统相较 NVIDIA Dynamo 最多将平均请求延迟降低 4.1 倍、P95 首 token 延迟降低 14 倍，但在部分 decode 密集的 Putnam 设置中，Dynamo 的 P95 TTFT 仍然更低。",
+      "interest_tag": ""
+    },
+    {
+      "title": "System Optimizations for Cost-Efficient Agent Harnesses",
+      "arxiv_id": "2611.12122",
+      "url": "https://arxiv.org/abs/2611.12122",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2611.12122",
+      "tldr": "The paper introduces Agency, an interposition layer that applies cost optimizations to existing agent harnesses such as Claude Code and OpenAI Codex without changing the underlying model. Its techniques include context compaction, stale-history removal, metadata search, and batching of model calls. Across 200 tasks, four models, and three harnesses, the evaluated techniques average 77% of baseline cost and 97% of baseline accuracy, with individual cost reductions reaching 35%. The gains are not uniform: some tasks become more expensive, and accuracy declines on parts of OfficeQA.",
+      "tldr_zh": "论文提出 Agency，通过在模型、工具与现有智能体 harness 之间加入中间层，在不修改底层模型的情况下优化 Claude Code、OpenAI Codex 等系统的执行成本。其方法包括压缩上下文、移除失效历史、搜索元数据以及批量合并模型调用。在覆盖 200 项任务、4 个模型和 3 种 harness 的实验中，平均成本降至基线的 77%，平均准确率为基线的 97%，单项成本降幅最高达到 35%。收益并不完全稳定：部分任务的成本反而上升，OfficeQA 的部分测试也出现准确率下降。",
+      "interest_tag": ""
+    },
+    {
+      "title": "Don't Just Trust Your Memory: Evidence-Linked Memory Reduces Memory-Induced Degradation in LLM Agents",
+      "arxiv_id": "2611.14320",
+      "url": "https://arxiv.org/abs/2611.14320",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2611.14320",
+      "tldr": "WikiTrace addresses memory-induced degradation, in which an agent follows an incorrect, incomplete, or misapplied lesson from an earlier task. It stores each concise memory insight together with an interpretation of the source run and a link to the unchanged raw trajectory. When guidance is ambiguous, conflicting, or derived from failure, the agent can inspect this evidence before acting. Across eight benchmark suites in three-trial evaluations, WikiTrace averages 90.2 versus 87.0 for an insights-only baseline and reduces regression from 6.5% to 4.5%, although access to a source trajectory does not itself guarantee that an insight is correct.",
+      "tldr_zh": "WikiTrace 针对记忆诱发退化问题：智能体可能因沿用错误、不完整或被误用的历史经验，反而在原本能够完成的任务上失败。系统将每条精炼记忆与来源运行的解释以及未经修改的原始轨迹关联起来。当建议缺少细节、彼此冲突或来自失败任务时，智能体可以先检查相关证据再采取行动。在三轮评测覆盖的 8 个基准套件中，WikiTrace 的平均成绩为 90.2，高于仅提供 insights 的 87.0，并将退化率从 6.5% 降至 4.5%；不过，能够查看来源轨迹并不等于记忆结论已经得到验证。",
+      "interest_tag": "Memory"
+    }
+  ],
+  "github_repos": [
+    {
+      "name": "DIYgod/pinky",
+      "url": "https://github.com/DIYgod/pinky",
+      "tldr": "Pinky lets MCP-compatible agents operate real Android and iOS devices while the user watches, intervenes, and approves risky actions. Its gateway enforces approvals independently of model instructions, keeps unlock credentials hidden, and supports USB, Wi-Fi, recordings, file access, and remote connections. The repository contains native cross-platform clients, mobile components, acceptance tests, releases, and detailed setup documentation, although the project still labels itself pre-alpha.",
+      "tldr_zh": "Pinky 让兼容 MCP 的智能体操作真实 Android 与 iOS 设备，同时允许用户实时观看、接管并审批高风险动作。审批由网关强制执行而非依赖模型遵守提示词，解锁凭据不会暴露给智能体，并支持 USB、Wi-Fi、录屏、文件访问及远程连接。仓库包含跨平台原生客户端、移动端组件、验收测试、可下载版本和完整安装文档，但项目目前仍自称 pre-alpha。",
+      "stars": 1928,
+      "language": "Go",
+      "interest_tag": "CUA"
+    },
+    {
+      "name": "agentes-chat/agentes-chat",
+      "url": "https://github.com/agentes-chat/agentes-chat",
+      "tldr": "agentes.chat is a self-hosted team-chat system where humans and multiple AI agents share channels, DMs, tasks, files, and operational context. A router can select up to four agents for a message, while ownership, budgets, scoped MCP tools, approval cards, memory, routines, browsers, and dedicated computers constrain how they collaborate. The current repository includes the web, desktop, and phone applications, Docker deployment, Postgres backend, connectors, and documented production-oriented safety controls.",
+      "tldr_zh": "agentes.chat 是一个可自托管的团队聊天系统，让人类与多个 AI 智能体在频道、私信、任务、文件和工作上下文中协作。路由器可为一条消息选择最多四个智能体，并通过负责人、预算、限权 MCP 工具、审批卡片、记忆、定时任务、浏览器和独立计算机约束其协作方式。当前仓库已包含 Web、桌面与手机应用、Docker 部署、Postgres 后端、连接器及面向实际运行的安全控制。",
+      "stars": 649,
+      "language": "TypeScript",
+      "interest_tag": "Agent Swarm"
+    },
+    {
+      "name": "Dodaios/ste80-humanizer",
+      "url": "https://github.com/Dodaios/ste80-humanizer",
+      "tldr": "STE80 Humanizer is an agent skill that first removes common AI-writing tells and then restructures prose toward a softened ASD-STE100 technical-English style. It emphasizes short active sentences, one idea per sentence, controlled paragraph structure, and preservation of the original meaning rather than evasion of AI detectors. The repository supplies the skill, reference rules, worked examples, evaluation material, scripts, and plugin packaging for several coding-agent environments.",
+      "tldr_zh": "STE80 Humanizer 是一项智能体技能：先清除常见 AI 写作痕迹，再按较宽松的 ASD-STE100 技术英语规范重构文本。它强调短句、主动语态、一句一个观点和受控段落结构，目标是保持原意并提升可读性，而不是规避 AI 检测。仓库提供完整 Skill、规则参考、改写样例、评测材料、辅助脚本，以及适配多种编程智能体的插件封装。",
+      "stars": 426,
+      "language": "Python",
+      "interest_tag": ""
+    },
+    {
+      "name": "drost-ai/tinker-ai-skill",
+      "url": "https://github.com/drost-ai/tinker-ai-skill",
+      "tldr": "This skill turns a user's Claude Code sessions into a supervised fine-tuning dataset, trains a LoRA through Tinker, and exports a merged or GGUF model for local inference. Its nine-stage workflow covers collection, credential-aware anonymization, context-safe slicing, compaction simulation, session-level train/test splits, cost-gated training, checkpoint comparison, merging, and quantization. The repository includes eleven scripts, six technical references, and a synthetic transcript generator for an offline no-cost dry run, and states that the same process produced the released Tess-4 model family.",
+      "tldr_zh": "该技能把用户自己的 Claude Code 会话转换为监督微调数据，通过 Tinker 训练 LoRA，并导出可本地运行的合并模型或 GGUF。九阶段流程覆盖会话收集、凭据感知匿名化、上下文安全切片、压缩模拟、按完整会话划分训练集与测试集、成本确认、检查点对比、合并和量化。仓库包含 11 个脚本、6 份技术参考及可零成本离线演练的合成会话生成器，并说明同一流程已用于发布 Tess-4 系列模型。",
+      "stars": 316,
+      "language": "Python",
+      "interest_tag": ""
+    },
+    {
+      "name": "weixijia/mas-office",
+      "url": "https://github.com/weixijia/mas-office",
+      "tldr": "MAS Office runs explicitly designed teams of real Claude Code and Codex sessions, with role-specific tools, dependencies, review rounds, gates, budgets, and human approval rules. Users can watch and steer the team through an animated office and a unified inbox, while a clean-context checker verifies claims, citations, and link health before the lead produces the result. Version 0.3.0 already includes a runnable orchestration runtime, JavaScript and Python protocol SDKs, a no-code team kit, locking of team definitions, and a working multi-agent research example.",
+      "tldr_zh": "MAS Office 用真实的 Claude Code 与 Codex 会话运行显式设计的智能体团队，并为各角色配置工具权限、依赖关系、复核轮次、阶段关卡、预算和人工审批规则。用户可通过动态办公室和统一收件箱观察、干预团队；独立上下文中的检查角色会在负责人汇总前核验论断、引用和链接有效性。0.3.0 版本已提供可运行的编排运行时、JavaScript/Python 协议 SDK、无代码团队工具包、团队定义锁定机制及可执行的多智能体研究示例。",
+      "stars": 56,
+      "language": "JavaScript",
+      "interest_tag": "Agent Swarm"
+    }
+  ],
+  "hackernews": [
+    {
+      "title": "My AI agents found an unmapped Maya site?",
+      "url": "https://pietromiotti.com/latest/maya-site",
+      "tldr": "Forty-eight vision-capable agents inspected public NASA lidar imagery and flagged structures resembling a Maya civic center. Mexico's archaeological authority confirmed that the location was absent from its official register, but the author later learned that archaeologists had already mapped it in a 2025 paper—making this a rediscovery rather than a new discovery. The experiment is nevertheless a strong signal that coordinated general-purpose agents can conduct inexpensive, large-scale screening of scientific data, while also showing how incomplete literature review can undermine their conclusions.",
+      "tldr_zh": "作者让 48 个具备视觉能力的智能体检查 NASA 公开激光雷达图像，并标出了疑似玛雅城市中心的建筑结构。墨西哥考古主管机构确认该地点不在官方登记册中，但作者后来发现考古学家已在 2025 年的论文中绘制过该遗址，因此这是重新发现而非首次发现。这个实验仍说明通用智能体可以低成本、规模化地筛查科学数据，同时也暴露出文献检索不完整会如何削弱其结论。",
+      "points": 983,
+      "num_comments": 358,
+      "interest_tag": ""
+    },
+    {
+      "title": "AWS emulator",
+      "url": "https://github.com/aws/aws-emulator",
+      "tldr": "AWS Emulator provides a local implementation of AWS APIs for development and testing without an AWS account. Amazon says thousands of autonomous agents wrote the entire codebase, organized into separate teams that generate fidelity tests, identify divergences from real AWS, and fix issues behind automated merge gates. The public repository, evaluation suite, and recorded backlog make this an unusually concrete product-scale example of agent-swarm engineering rather than a small coding demonstration.",
+      "tldr_zh": "AWS Emulator 在本地实现 AWS API，使开发者无需 AWS 账户即可构建和测试应用。亚马逊称整个代码库由数千个自主智能体编写，它们被划分为生成保真测试、查找与真实 AWS 差异、修复问题的不同团队，并通过自动化合并门禁协作。公开的代码仓库、评测套件和问题记录，使其成为少见的产品级智能体集群工程案例，而不只是小型编程演示。",
+      "points": 830,
+      "num_comments": 233,
+      "interest_tag": "Agent Swarm"
+    },
+    {
+      "title": "United Airlines bans AI agents from booking flights on behalf of travelers",
+      "url": "https://www.cbsnews.com/news/united-airlines-bans-ai-agents-booking-flights/",
+      "tldr": "United Airlines is restricting unauthorized third-party AI agents from booking flights or operating customer accounts. It cites exposure of credentials and payment data, unintended purchases or mileage use, and regulatory requirements that may demand direct traveler confirmation. The decision is an important product signal that agentic commerce will depend not only on model capability but also on delegated identity, liability, compliance, and whether platforms choose to permit automated intermediaries.",
+      "tldr_zh": "美联航正在限制未经授权的第三方 AI 智能体代订机票或操作客户账户。其理由包括账户凭证和支付数据泄露、意外购买或里程使用，以及部分流程可能要求旅客本人确认的监管规定。这一决定释放出重要产品信号：智能体商业化不仅取决于模型能力，还取决于委托身份、责任归属、合规机制，以及平台是否愿意接纳自动化中介。",
+      "points": 543,
+      "num_comments": 530,
+      "interest_tag": ""
+    },
+    {
+      "title": "Show HN: Get your coding agent off ~2019 JavaScript, onto modern web primitives",
+      "url": "https://github.com/GoogleChrome/modern-web-guidance",
+      "tldr": "Google Chrome's Modern Web Guidance packages current platform expertise, compatibility data, and best practices as installable skills for coding agents. Its goal is to stop agents from reproducing legacy JavaScript patterns when native browser primitives now provide simpler and more accessible solutions. Support for several agent ecosystems indicates a growing product layer in which vendors distribute maintained knowledge modules that compensate for stale model training data.",
+      "tldr_zh": "Google Chrome 的 Modern Web Guidance 把最新 Web 平台知识、兼容性数据和最佳实践封装为可安装的编程智能体技能。它旨在避免智能体继续生成陈旧的 JavaScript 模式，转而使用更简单、通常也更易访问的浏览器原生能力。项目同时支持多个智能体生态，反映出一个正在形成的产品层：平台厂商通过持续维护的知识模块弥补模型训练数据过时的问题。",
+      "points": 429,
+      "num_comments": 142,
+      "interest_tag": ""
+    },
+    {
+      "title": "Ask HN: How do you manage your AI agents' context across clients and projects?",
+      "url": "https://news.ycombinator.com/item?id=50403153",
+      "tldr": "The discussion centers on repeatedly reconstructing project decisions, client rules, and task history when switching sessions, tools, or agent providers. Practitioners describe approaches such as per-project AGENTS.md or CLAUDE.md indexes, shared state stores, selective retrieval of detailed notes, and periodic compaction into archives. Its engagement is a strong demand signal for portable, isolated, and token-efficient agent memory, although the thread offers practitioner patterns rather than a controlled benchmark.",
+      "tldr_zh": "讨论聚焦于切换会话、工具或智能体提供商时，用户不得不反复重建项目决策、客户规则和任务历史的问题。实践者分享了按项目维护 AGENTS.md 或 CLAUDE.md 索引、使用共享状态库、按需读取详细笔记，以及定期压缩归档等方法。较高的讨论度表明市场迫切需要可迁移、相互隔离且节省 token 的智能体记忆方案，但这些内容属于实践经验，并非受控评测结果。",
+      "points": 98,
+      "num_comments": 60,
+      "interest_tag": "Memory"
+    }
+  ]
+}
