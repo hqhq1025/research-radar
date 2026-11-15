@@ -1,0 +1,221 @@
+{
+  "date": "2026-11-15",
+  "generated_at": "2026-11-15T17:04:23.930108+08:00",
+  "briefing_zh": "今天最清晰的主线，是 AI 系统正在从单点模型能力转向可验证的闭环系统。**SO-Arena** 不只测准确率，还把能力谱、交互执行、决策稳定性和无答案识别放进同一套评测；结果显示最强模型的可靠性只排第七。**Actor, Judge, or Teacher?** 则从训练侧补上另一半：一个不擅长在线行动的 decision model，仍可能在看到完整轨迹后成为有效教师。这两项工作共同提示，actor 表现、judge 质量与系统可靠性不能再被一个 aggregate score 混为一谈。\n\n第二条主线是 world model 正在分化为更明确的工程角色。**BirdDreams** 用 perspective 与 BEV 双流联合生成，把周围车辆运动和 ego control 放进可解释的几何接口；**PhysLoop** 用 simulator 与 LLM 组成选择、修复和再训练闭环；**Back to Pixels** 则让视频模型逐帧响应控制，显著压低交互延迟。它们都在弱化「只追求视觉逼真」的目标，转向 controllability、causal consistency 和可用于 agent/robot rollout 的反馈速度。\n\n基础模型研究也出现了两种降低成本的路径。**Unbundling Multimodal Vision Encoding** 的受控实验表明，视觉先验并非必要，但 dedicated vision capacity 仍然重要，而且可以放到 backbone 早期做 in-fusion；**Latent Feedback Is a Compute and Data Amplifier** 则报告，在重复数据训练中，latent feedback 最多节省约 48% compute 和 47% unique data。前者重新拆解 multimodal architecture 的必要组件，后者重新分配有限数据下的计算预算，重点都不是单纯扩大参数量。\n\n开源与产业信号同样集中在 agent infrastructure。**agentes.chat**、**AgentRun** 和 **Linger** 分别把多人协作、durable execution/learning、local inference 与长期记忆产品化；但 Hacker News 上 **United Airlines bans AI agents** 的高讨论度说明，agent adoption 的瓶颈已经从「能不能操作」推进到 credential ownership、审批、合规和平台准入。今天最值得追踪的不是又一个 agent demo，而是评测、运行时、权限和真实世界接入能否形成闭环。",
+  "briefing_en": "The clearest theme today is a shift from isolated model capability toward verifiable closed-loop systems. **SO-Arena** evaluates not only accuracy but also capability breadth, interactive execution, decision stability, and recognition that no valid answer exists; its strongest model ranks only seventh on reliability. **Actor, Judge, or Teacher?** supplies the training-side counterpart: a decision model that acts poorly online can still become an effective teacher after seeing complete trajectories. Together, these works argue that actor performance, judge quality, and system reliability should not be collapsed into one aggregate score.\n\nA second theme is the decomposition of world models into more explicit engineering roles. **BirdDreams** jointly generates perspective and BEV video, turning surrounding traffic motion and ego control into a geometric interface; **PhysLoop** closes a generation-selection-repair loop with LLMs and simulators; **Back to Pixels** responds to controls frame by frame and sharply reduces interaction latency. All three move beyond visual plausibility alone toward controllability, causal consistency, and feedback rates useful for agent or robot rollouts.\n\nFoundation-model research also offers two different routes to lower cost. Controlled experiments in **Unbundling Multimodal Vision Encoding** suggest that a pretrained visual prior is optional, while dedicated visual capacity remains important and can be placed early inside the backbone. **Latent Feedback Is a Compute and Data Amplifier** reports that latent feedback can save up to roughly 48% of compute and 47% of unique data under repeated-data training. One decomposes which multimodal components are actually necessary; the other reallocates compute when fresh data is scarce.\n\nOpen-source and industry signals converge on agent infrastructure. **agentes.chat**, **AgentRun**, and **Linger** productize team collaboration, durable execution and learning, local inference, and persistent memory. Yet the intense Hacker News discussion around **United Airlines bans AI agents** shows that adoption has moved from whether agents can operate to who owns credentials, grants approval, bears liability, and controls platform access. The important story is no longer another agent demo, but whether evaluation, runtime, permissions, and real-world access can form a trustworthy loop.",
+  "viral_analysis_zh": "今天最可能持续发酵的是 **My AI Agents (Re)discovered a Maya Site in 72 Hours**：标题同时具备 AI agent、考古发现和 72 小时挑战的叙事张力，而且作者主动更正为「重新发现」，反而强化了可信度与讨论空间。研究圈内更可能形成长尾影响的是 **SO-Arena**，因为「最高能力不等于最高可靠性」是一个可被广泛引用、也容易转化为产品评测框架的结论。",
+  "viral_analysis_en": "The strongest viral candidate is **My AI Agents (Re)discovered a Maya Site in 72 Hours**: it combines AI agents, archaeology, and a 72-hour challenge, while the author's explicit correction from discovery to rediscovery adds credibility rather than weakening the story. Within research, **SO-Arena** is more likely to have lasting impact because its finding that top capability does not imply top reliability is both highly quotable and readily transferable into product evaluation practice.",
+  "huggingface_papers": [
+    {
+      "title": "SO-Arena: Benchmarking the Capability Spectrum and Reliability of System One Models",
+      "url": "https://arxiv.org/abs/2611.15777",
+      "tldr": "SO-Arena evaluates System One models across 11 domains and five capability families, combining evidence-grounded labels, difficulty tiers, sandbox interaction, and comparisons with slower reasoning systems. It separately measures decision stability under option changes and recognition of cases with no valid answer. Across 21 models, scaling and extra reasoning help unevenly by domain, while the best overall model ranks only seventh in reliability. The result matters because it exposes a blind spot hidden by aggregate accuracy: capable fast decision systems may still be operationally unstable.",
+      "tldr_zh": "SO-Arena 覆盖 11 个领域和五类能力，把可靠来源校验、难度分层、sandbox 交互执行以及 System One/Two 对比放进同一评测。它还独立测量选项变化下的决策稳定性，以及模型能否识别「没有有效答案」。对 21 个模型的结果显示，scale 与额外 reasoning 的收益高度依赖领域，综合表现最好的模型在可靠性上却只排第七。它的重要性在于揭示 aggregate accuracy 遮住的盲区：快速而强的决策模型仍可能在真实操作中不稳定。",
+      "upvotes": 136,
+      "authors": "Lichen Li, Ziping Dong, Sicheng Feng, Qi Li, Xinchao Wang",
+      "ai_keywords": [
+        "System One models",
+        "decision reliability",
+        "interactive evaluation"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "BirdDreams: Joint Perspective and BEV Video Generation for a Plausible, Reactive Driving World Model",
+      "url": "https://arxiv.org/abs/2611.14815",
+      "tldr": "BirdDreams couples two video diffusion transformers to generate perspective video and a schematic bird's-eye-view stream from one camera image. The BEV stream makes vehicle positions and motion explicit, while joint attention lets geometric layout and visual details constrain each other. Ego trajectories are injected by transforming the latest BEV frame, avoiding a required HD map or future vehicle tracks at inference. The approach is important because it turns a driving world model into a more controllable simulator rather than a visually plausible but weakly grounded video predictor.",
+      "tldr_zh": "BirdDreams 将两个 video diffusion transformer 耦合起来，从单张相机图像联合生成 perspective video 与示意性的 BEV video。BEV 显式表达车辆位置和运动，joint attention 则让几何布局与视觉细节互相约束。系统通过变换最新 BEV frame 注入 ego trajectory，推理时不需要 HD map 或周围车辆的未来轨迹。它的重要性在于把 driving world model 推向可控 simulator，而不只是视觉逼真但几何约束较弱的视频预测器。",
+      "upvotes": 50,
+      "authors": "Junyoung Seo, Jaewoo Seo, Seungryong Kim, Laura Leal-Taixé, Xiuming Zhang, Seung Wook Kim",
+      "ai_keywords": [
+        "world model",
+        "BEV generation",
+        "autonomous driving"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "PhysLoop: Harnessing LLMs' Physics Awareness for Self-Improving Video Generation Models",
+      "url": "https://arxiv.org/abs/2611.16748",
+      "tldr": "PhysLoop is a harness that constrains LLMs during video generation, selection, and correction so their physical knowledge becomes usable supervision. It supports both controllable construction of training data and localized repair at inference time. The release includes 100K videos plus PhysLoop-Gen and PhysLoop-Repair evaluations, with additional testing on Physics-IQ Verified. Its significance is the closed loop: simulator-checked failures can become correction pairs and new training signal instead of remaining qualitative video-model errors.",
+      "tldr_zh": "PhysLoop 是一套约束 LLM 参与视频生成、筛选和修复的 harness，把语言模型中的物理知识转化为可用监督。它既支持可控构造训练数据，也支持推理时的局部视频修复。作者发布 10 万段视频、PhysLoop-Gen 与 PhysLoop-Repair 两套评测，并在 Physics-IQ Verified 上做外部验证。其价值在于形成闭环：经 simulator 检出的失败可以变成 correction pair 和后续训练信号，而不再只是定性展示中的错误。",
+      "upvotes": 46,
+      "authors": "Yuxuan Chen, Xiaojie Li, Hao Chen, Juncheng Ma, Kewei Zhang, Zhongjing Du, Guoqiang Wei, Fangfang Wang, Zhen Dong, Zhiyang Dou, Liming Zhao, Yan Zeng, Jianwei Zhang, Daquan Zhou",
+      "ai_keywords": [
+        "video generation",
+        "self-improvement",
+        "physical consistency"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "Open Vision Banana: A Fully Open Recipe for Generative Visual Perception",
+      "url": "https://arxiv.org/abs/2611.15844",
+      "tldr": "Open Vision Banana turns open image generators into unified perception systems through conditional image editing and releases the full data, code, checkpoints, and ablations. Its controlled studies show that color encoding, prompts, parameter adaptation, and task balancing interact rather than contributing independently. A legend-ensembling test-time method varies class-color mappings and majority-votes the outputs, improving mIoU by up to 8.7 points on Cityscapes and 15.0 on COCO-Object. The work matters because it makes a previously closed recipe reproducible while exposing a concrete route to test-time scaling for generative perception.",
+      "tldr_zh": "Open Vision Banana 通过 conditional image editing，把开放图像生成模型改造成统一视觉感知系统，并公开数据、代码、checkpoint 与 ablation。受控实验显示，color encoding、prompt、parameter adaptation 和 task balancing 彼此耦合，不能把单项增益简单叠加。其 legend ensembling 在测试时切换类别—颜色映射并做多数投票，在 Cityscapes 上最高提升 8.7 mIoU，在 COCO-Object 上最高提升 15.0。该工作的价值是把此前封闭的 recipe 变成可复现基线，同时给 generative perception 提供了清晰的 test-time scaling 路径。",
+      "upvotes": 35,
+      "authors": "Arpit Jadon, Valentinos Pariza, Jona Ruthardt, Ryousuke Yamada, A. Sophia Koepke, Andrei Bursuc, Yuki M. Asano",
+      "ai_keywords": [
+        "generative perception",
+        "image editing",
+        "test-time scaling"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "Actor, Judge, or Teacher? Understanding Decision Models in Long-Horizon Agents",
+      "url": "https://arxiv.org/abs/2611.17167",
+      "tldr": "This work tests the same decision models as actors, hindsight judges, and reinforcement-learning teachers in long-horizon environments. Models that are distracted by easy subgoals while acting can still recognize useful earlier actions after seeing the full trajectory. Using JEV's hindsight progress scores, a Qwen2.5-1.5B policy rises from 72.8% to 82.9% success on ALFWorld and from 56.8% to 71.4% on WebShop. The key implication is that model selection for agent training should evaluate teaching and judging ability separately from online acting skill.",
+      "tldr_zh": "这项工作在长程环境中，把同一批 decision model 分别当作 actor、hindsight judge 和 reinforcement-learning teacher 测试。模型在线行动时会被更容易的子目标带偏，但看到完整 trajectory 后，仍能识别早期哪些动作真正推动了任务。使用 JEV 的 hindsight progress score 后，Qwen2.5-1.5B policy 在 ALFWorld 上从 72.8% 提升到 82.9%，在 WebShop 上从 56.8% 提升到 71.4%。关键启示是，训练 agent 时不能只按在线 acting 能力选择 teacher 或 judge。",
+      "upvotes": 34,
+      "authors": "Haochen Liu, Qianhao Zhu, Zixuan Wang, Dingming Li, Tongbo Chen, Peng Qiu, Yingqi Qu, Weiming Lu, Jun Xiao, Yongliang Shen",
+      "ai_keywords": [
+        "long-horizon agents",
+        "hindsight judging",
+        "reinforcement learning"
+      ],
+      "interest_tag": ""
+    }
+  ],
+  "alphaxiv_papers": [
+    {
+      "title": "Unbundling Multimodal Vision Encoding",
+      "arxiv_id": "2611.17334",
+      "url": "https://arxiv.org/abs/2611.17334",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2611.17334",
+      "tldr": "This paper separates three choices usually bundled inside a vision encoder: upstream visual pretraining, dedicated visual capacity, and whether that capacity sits before multimodal fusion. Under matched data and lifetime compute, a jointly trained scratch encoder matches a pretrained encoder, while removing dedicated vision capacity hurts visual understanding. Moving vision-only modules into early backbone layers preserves performance and can reduce time to first token. The controlled design matters because it challenges the assumption that separate vision pretraining is essential without claiming that generic language capacity alone is sufficient.",
+      "tldr_zh": "这篇论文把 vision encoder 中常被捆绑讨论的三件事拆开：上游视觉预训练、dedicated vision capacity，以及这部分容量是否位于 multimodal fusion 之前。在数据与 lifetime compute 对齐时，从零联合训练的 encoder 可匹配 pretrained encoder，但完全移除专用视觉容量会损害视觉理解。把 vision-only module 放进 backbone 早期层，性能仍接近 pre-fusion encoder，并可能降低 time to first token。受控设计的意义在于：它否定「独立视觉预训练必不可少」，但并没有误导性地声称通用语言容量就足够。",
+      "interest_tag": ""
+    },
+    {
+      "title": "Latent Feedback Is a Compute and Data Amplifier: Scaling Law for Latent Feedback Transformers on Repeated Data",
+      "arxiv_id": "",
+      "url": "https://www.alphaxiv.org/abs/2611.latent-feedback-transformers-scaling-law",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2611.latent-feedback-transformers-scaling-law",
+      "tldr": "Latent feedback feeds each token's top-layer state into the next token input, offering another way to spend compute when fresh high-quality text is limited. Across tuned model sizes, data amounts, and repeated epochs, it reaches matched loss with less compute or less unique data except in data-starved regimes far from today's typical scaling. Reported savings reach 48% of compute and 47% of unique data, and a joint scaling law predicts held-out 778M-model losses within 0.3%. The result is important because it compares against a compute-matched repeated-data baseline rather than treating extra recurrence-like computation as free.",
+      "tldr_zh": "Latent feedback 将每个 token 的顶层 hidden state 反馈到下一个 token 的输入中，为高质量新文本稀缺时提供另一种使用 compute 的方式。在多组 model size、unique data 与重复 epoch 上调参后，它通常能用更少 compute 或更少 unique data 达到相同 loss，例外是相对模型规模极度缺数据的区域。论文报告最高节省 48% compute 和 47% unique data，联合 scaling law 对 held-out 778M 模型的 loss 预测误差低于 0.3%。它的重要性在于使用 compute-matched 的重复数据 baseline，而不是把额外的循环式计算当作免费增益。",
+      "interest_tag": ""
+    },
+    {
+      "title": "An Energy-Based Perspective on Machine Learning",
+      "arxiv_id": "2611.14383",
+      "url": "https://arxiv.org/abs/2611.14383",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2611.14383",
+      "tldr": "This tutorial treats energy-based modeling as a common language for discriminative models, diffusion, autoregressive models, representation learning, reinforcement learning, world models, planning, and verifier-guided inference. It organizes each method by its energy, inference procedure, and learning rule, revealing a shared contrastive structure across apparently different objectives. Energy composition then provides a principled way to combine independently learned requirements at inference time. Its value is conceptual rather than a new state-of-the-art result: it offers a reusable map for reasoning about model composition and inference-time optimization.",
+      "tldr_zh": "这篇教程把 energy-based modeling 当作统一语言，用来理解 discriminative model、diffusion、autoregressive model、representation learning、RL、world model、planning 和 verifier-guided inference。它按 energy representation、inference procedure 与 learning rule 组织各类方法，揭示看似不同目标背后的共同 contrastive structure。通过 energy composition，还可以在推理时组合独立学习的约束。它的价值主要是概念框架而非新 SOTA：提供了一张可复用的地图，帮助分析模型组合与 inference-time optimization。",
+      "interest_tag": ""
+    },
+    {
+      "title": "Singularity-Bench: Can Agents Build Agents?",
+      "arxiv_id": "2611.16591",
+      "url": "https://arxiv.org/abs/2611.16591",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2611.16591",
+      "tldr": "Singularity-Bench evaluates autonomous AI development through six end-to-end tasks spanning pre-training, mid-training, post-training, inference, agent harnesses, and cluster orchestration. Agent-built systems are compared with mature human-engineered references on identical hardware, while Breakwater hardens the Harbor evaluator against reward-hacking attacks found through OWASP-oriented red teaming. Among 11 agent configurations, Opus 5.5 with Claude Code scores 1.252 on the benchmark's equal-weight index and matches or exceeds references on all six tasks, while the rest average 0.58. This is not proof of recursive self-improvement, but it is a concrete benchmark for how much of the AI stack agents can autonomously reconstruct.",
+      "tldr_zh": "Singularity-Bench 用六个端到端任务评测 autonomous AI development，覆盖 pre-training、mid-training、post-training、inference、agent harness 和 cluster orchestration。Agent 构建的系统在相同硬件上与成熟的人类工程 baseline 对比；作者还通过面向 OWASP 的 red teaming 找到 Harbor 的 reward-hacking 漏洞，并提出 Breakwater 加固 evaluator。在 11 种 agent 配置中，Opus 5.5 + Claude Code 的等权指数为 1.252，六项均达到或超过 reference，其余配置平均仅 0.58。它不能证明 recursive self-improvement，但为 agent 能自主重建多少 AI stack 提供了具体可复现实验。",
+      "interest_tag": "Benchmark"
+    },
+    {
+      "title": "Goal Encoding in LLMs",
+      "arxiv_id": "2611.17297",
+      "url": "https://arxiv.org/abs/2611.17297",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2611.17297",
+      "tldr": "The authors identify a sparse set of attention heads whose outputs encode the next subgoal in multi-step coding tasks. Those activations can be decoded into natural-language descriptions of future actions, and transplanting them across prompts can redirect the model toward the corresponding operation, even in another programming language. The paper proposes a non-recurrent account in which the model repeatedly rereads the task goal and compares it with visible progress in context. The result offers causal evidence for flexible subgoal representations, while remaining limited to prompted coding settings rather than broad claims about persistent autonomous goals.",
+      "tldr_zh": "作者在多步 coding task 中定位到一小组 attention head，其输出编码模型即将执行的 subgoal。这些 activation 可以被解码成未来动作的自然语言描述；把它们移植到另一段 prompt 中，还能把模型重定向到对应操作，甚至跨 programming language 生效。论文提出 non-recurrent 解释：模型不断从任务描述中重读目标，再与 context 中可见进展比较。结果为灵活的 subgoal representation 提供了 causal evidence，但证据仍局限于 prompted coding setting，不能直接外推到持久 autonomous goal。",
+      "interest_tag": ""
+    }
+  ],
+  "github_repos": [
+    {
+      "name": "agentes-chat/agentes-chat",
+      "url": "https://github.com/agentes-chat/agentes-chat",
+      "tldr": "agentes.chat is a self-hosted team workspace where humans and agents share channels, DMs, threads, tasks, approvals, and budgets. Agents can use multiple model providers, scoped MCP connectors, scheduled or event-driven routines, persistent memory, and their own computer or browser. Sensitive actions such as merges and deployments wait for human approval, and self-hosting uses Postgres plus an AGPL-licensed stack. Its rapid traction reflects demand for a visible, multi-user control surface around agents rather than another isolated chat window.",
+      "tldr_zh": "agentes.chat 是一个可 self-host 的团队工作区，让人类与 agent 共享 channel、DM、thread、task、approval 和 budget。Agent 可接入多家模型、按 scope 授权的 MCP connector、定时或事件触发 routine、persistent memory，以及独立 computer/browser。merge、deploy 等敏感动作必须等待人工 approval，自托管版本以 Postgres 为核心并采用 AGPL。它的快速增长说明市场需要的是多人可见的 agent control surface，而不只是另一个单人聊天窗口。",
+      "stars": 1430,
+      "language": "TypeScript",
+      "interest_tag": ""
+    },
+    {
+      "name": "Dodaios/ste80-humanizer",
+      "url": "https://github.com/Dodaios/ste80-humanizer",
+      "tldr": "STE80 Humanizer is an agent skill that first removes 26 common AI-writing tells and then rewrites prose toward an 80%-relaxed version of ASD-STE100 Simplified Technical English. The second pass emphasizes one idea per sentence, active voice, short structure, and preserved factual modality rather than merely deleting clichés. It supports light, default, and strict modes and documents every rule with before-and-after examples. The project is notable because it turns a vague request to make text sound human into an auditable editing procedure.",
+      "tldr_zh": "STE80 Humanizer 是一个 agent skill：先移除 26 类常见 AI writing tell，再把文本重写到约 80% 强度的 ASD-STE100 Simplified Technical English。第二阶段强调一句一意、主动语态、短结构和事实模态保持，而不只是删掉套话。项目提供 light、default、strict 三种模式，并用 before/after 示例记录每条规则。它值得关注，因为它把模糊的「写得像人」转化成可审计的编辑流程。",
+      "stars": 639,
+      "language": "Python",
+      "interest_tag": ""
+    },
+    {
+      "name": "berkantay/gpucanvas",
+      "url": "https://github.com/berkantay/gpucanvas",
+      "tldr": "gpucanvas renders thousands of live React or DOM nodes on an infinite canvas through one WebGPU instanced pass while preserving events, typing, state, and accessibility. It adds editing, snapshots, pixel diffs, shader effects, transitions, and an agent view that exposes a compact JSON tree plus region images. The demo reports 5,000 live screens, with a DOM fallback when HTML-in-Canvas is unavailable. The interesting design is the shared substrate: the same interface remains human-editable, GPU-scalable, and machine-addressable by agents.",
+      "tldr_zh": "gpucanvas 通过一次 WebGPU instanced pass 在无限画布上渲染数千个 live React/DOM node，同时保留 event、typing、state 与 accessibility。它提供编辑、snapshot、pixel diff、shader、transition，以及面向 agent 的紧凑 JSON tree 和区域图像接口。演示规模达到 5,000 个 live screen；不支持 HTML-in-Canvas 时则退回 DOM。其关键设计是共享 substrate：同一界面既可由人编辑，也能 GPU 扩展并被 agent 精确寻址。",
+      "stars": 453,
+      "language": "TypeScript",
+      "interest_tag": ""
+    },
+    {
+      "name": "op7418/guizang-game-skill",
+      "url": "https://github.com/op7418/guizang-game-skill",
+      "tldr": "Guizang Game Skill packages a tested workflow for coding agents to build a playable browser-based 3D action game with generated assets. It covers requirement clarification, asset pipelines, combat feel, automated screenshots and diagnostics, packaging, and a detailed failure catalog. The included demo has a complete encounter and boss fight and can ship as a single roughly 33 MB HTML file, though the author clearly notes that the full workflow has been validated on only one project. That honesty, combined with a tangible playable artifact, makes the repository more useful than a generic game-generation prompt collection.",
+      "tldr_zh": "歸藏 Game Skill 把 coding agent 制作浏览器 3D 动作游戏的实测流程打包成 skill，覆盖需求澄清、素材 pipeline、战斗手感、自动截图与诊断、打包以及详细踩坑清单。附带演示包含完整遭遇战与 Boss 战，并可打包成约 33 MB 的单文件 HTML。作者也明确说明完整流程目前只在一个项目上走通，没有把单次成功夸成通用能力。可试玩 artifact 加上边界披露，使它比泛化的游戏生成 prompt 集合更有参考价值。",
+      "stars": 347,
+      "language": "JavaScript",
+      "interest_tag": ""
+    },
+    {
+      "name": "simplexai-labs/linger",
+      "url": "https://github.com/simplexai-labs/linger",
+      "tldr": "Linger is an open-source personal-agent stack that combines local MoE inference, persistent wiki-style memory, proactive routines, browser and desktop use, and background agent teams. Its PolyStrata path keeps frequently used experts on GPU while spilling others to RAM or SSD, claiming a 125B model can run on a 12 GB GPU with sufficient system memory. Nightly processing turns mail, chats, meetings, and user feedback into shared memory and updated decision rules. The ambitious integration is compelling, but its vendor-reported quality and speed comparisons should be treated as claims to reproduce rather than settled benchmarks.",
+      "tldr_zh": "Linger 是一个开源 personal-agent stack，整合 local MoE inference、wiki 式长期记忆、主动 routine、browser/desktop 操作和后台 agent team。其 PolyStrata 路径把常用 expert 留在 GPU，其余放到 RAM 或 SSD，并声称在系统内存足够时可用 12 GB GPU 运行 125B 模型。夜间流程会把邮件、聊天、会议与用户反馈整理为共享 memory 和更新后的决策规则。整体集成很有吸引力，但 README 中的质量与速度对比仍应视为待复现的 vendor claim，而非已确立 benchmark。",
+      "stars": 309,
+      "language": "TypeScript",
+      "interest_tag": ""
+    }
+  ],
+  "hackernews": [
+    {
+      "title": "My AI agents found an unmapped Maya site?",
+      "url": "https://pietromiotti.com/latest/maya-site",
+      "tldr": "The author used 48 agents to inspect public lidar imagery covering roughly 1,200 square kilometers and flag terrain resembling Maya structures. The workflow moved from an informal idea to government contact in under 72 hours, but later literature review showed archaeologists had already mapped the site, making it a rediscovery rather than a discovery. That correction is the most important technical lesson: parallel visual search can expand coverage quickly, while provenance and literature retrieval remain critical failure points. The story went viral because it pairs a concrete scientific artifact with an unusually compressed agent-driven timeline.",
+      "tldr_zh": "作者让 48 个 agent 检查约 1,200 平方公里的公开 lidar 图像，寻找类似玛雅建筑的地形结构。从临时想法到联系政府部门不到 72 小时，但后续文献核验发现考古学家已经绘制过该遗址，因此这是重新发现而非首次发现。这个更正恰好揭示最重要的技术结论：并行视觉搜索能迅速扩大覆盖面，但 provenance 与 literature retrieval 仍是关键失败点。故事之所以爆火，是因为它把可见的科学 artifact 与极度压缩的 agent-driven timeline 结合在一起。",
+      "points": 1035,
+      "num_comments": 392,
+      "interest_tag": ""
+    },
+    {
+      "title": "AWS emulator",
+      "url": "https://github.com/aws/aws-emulator",
+      "tldr": "AWS Emulator is an official local endpoint that reproduces selected AWS APIs for development and CI without an AWS account or production calls. It supports server mode for the CLI and SDKs, plus an embedded Rust mode that creates isolated instances inside tests. AWS also ships an agent skill so coding agents can configure the emulator, while per-service fidelity scores and known gaps are documented with releases. The project matters because it can make cloud-oriented agent work cheaper, more deterministic, and safer to verify before deployment.",
+      "tldr_zh": "AWS Emulator 是官方本地 endpoint，在无需 AWS account、也不调用生产服务的情况下复现部分 AWS API，面向开发与 CI。它支持供 CLI/SDK 使用的 server mode，也支持在测试进程中创建隔离实例的 embedded Rust mode。AWS 还提供 agent skill 供 coding agent 自动配置，并随 release 公布各服务 fidelity score 与已知缺口。它的重要性在于让面向云的 agent 开发更便宜、更确定，也更容易在部署前安全验证。",
+      "points": 988,
+      "num_comments": 266,
+      "interest_tag": ""
+    },
+    {
+      "title": "United Airlines bans AI agents from booking flights on behalf of travelers",
+      "url": "https://www.cbsnews.com/news/united-airlines-bans-ai-agents-booking-flights/",
+      "tldr": "United Airlines says it will restrict unauthorized third-party AI agents from booking or changing travel on customers' behalf. The airline cites exposure of account and payment credentials, unintended purchases or mileage use, and in-person regulatory attestations such as baggage declarations. The policy also protects control over search traffic and distribution economics, while other airlines are experimenting with agent-facing inventory. The episode is important because it shows that agent deployment is becoming a negotiation over identity, liability, and platform access rather than only a technical capability race.",
+      "tldr_zh": "United Airlines 表示将限制未经授权的第三方 AI agent 代替旅客订票或修改行程。其理由包括账号与支付 credential 暴露、意外购买或里程使用，以及行李申报等需要本人完成的监管确认。该政策也维护航空公司对搜索流量与分销经济的控制，而其他航空公司正在尝试向 agent 开放库存。这个案例的重要性在于，agent 落地已经从单纯的技术能力竞赛，转向 identity、liability 和 platform access 的博弈。",
+      "points": 680,
+      "num_comments": 707,
+      "interest_tag": ""
+    },
+    {
+      "title": "Show HN: Get your coding agent off ~2019 JavaScript, onto modern web primitives",
+      "url": "https://github.com/GoogleChrome/modern-web-guidance",
+      "tldr": "Modern Web Guidance packages current browser-platform practices into token-efficient skills for coding agents. The CLI can retrieve targeted guides, scan a codebase for legacy patterns, and steer agents toward native APIs, accessibility, performance, and responsible fallbacks. The project is stewarded across Chrome, Edge, Firefox, MDN, and the web community rather than representing one framework's preferences. Its popularity reflects a practical problem in coding agents: pretrained knowledge often defaults to older patterns even when the browser platform has moved on.",
+      "tldr_zh": "Modern Web Guidance 把当前浏览器平台实践整理成面向 coding agent 的 token-efficient skill。CLI 可以检索针对性指南、扫描代码库中的 legacy pattern，并引导 agent 使用 native API、accessibility、performance 与合理 fallback。项目由 Chrome、Edge、Firefox、MDN 和 Web 社区共同维护，不只是某个 framework 的偏好。它的高热度对应一个现实问题：coding agent 的预训练知识常停留在旧模式，而浏览器平台已经继续演进。",
+      "points": 444,
+      "num_comments": 146,
+      "interest_tag": ""
+    },
+    {
+      "title": "Show HN: AgentRun – open-source, Self-improving Managed Agents",
+      "url": "https://github.com/Parcha-ai/agentrun/blob/main/README.md",
+      "tldr": "AgentRun adds durable execution, approvals, spend controls, and post-run learning around existing harnesses such as Claude Code, Codex, OpenCode, and pi. Completed runs may propose notes, skills, or workflows; checks and a grader decide what enters the agent's versioned learning folder for future work. The platform reports case studies where a learned cheaper model reduced review or classification costs, although those project-reported results need independent reproduction. The core idea is valuable because it treats repeated agent work as an accumulating operational asset instead of paying to rediscover the same procedure every run.",
+      "tldr_zh": "AgentRun 在 Claude Code、Codex、OpenCode、pi 等既有 harness 外增加 durable execution、approval、spend control 和 run 后学习。完成的 run 可以提出 note、skill 或 workflow，再由检查器与 grader 决定哪些内容进入有版本记录的 learning folder，供后续任务复用。项目展示了用学习后的廉价模型降低 code review 或分类成本的案例，但这些自报结果仍需独立复现。其核心价值是把重复 agent 工作视为可积累的 operational asset，而不是每次重新付费探索同一流程。",
+      "points": 137,
+      "num_comments": 40,
+      "interest_tag": ""
+    }
+  ]
+}
