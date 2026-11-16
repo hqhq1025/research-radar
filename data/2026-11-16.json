@@ -1,0 +1,226 @@
+{
+  "date": "2026-11-16",
+  "generated_at": "2026-11-16T17:05:19.637813+08:00",
+  "briefing_zh": "今天最强的共同信号，是 agent 正从「会回答」走向「能在长时程环境里闭环行动」。**Gamer** 用数万小时键鼠轨迹、稀疏思考指令微调和多轮 RL，把同一套 VLA pipeline 扩展到 2D GUI 与 3D 开放世界；**Envisioning Agentic Robotics** 则把类似范式推向物理世界，强调模型、harness、验证与实时约束必须作为完整系统评估。两者共同说明，下一轮能力竞争不只取决于 foundation model，而取决于 observation、memory、action 和 verification 能否稳定协同。\n\n评测正在追上这种系统化转向。**VibePrevisBench** 不只看 Blender 最终渲染，还重跑代码、核对隐藏 4D scene facts，并检验这些事实是否真正可见；**Singularity-Bench** 更把 pre-training、post-training、inference、agent harness 与 cluster orchestration 纳入同一端到端赛道。与此同时，**Aligning AI Teams** 发现单 agent 的 alignment 不会自动迁移到团队，责任扩散是关键机制，而明确的 safety lead 和书面安全规格比泛化的互评更有效。\n\n模型层面的热点也从单纯 scale 转向「怎样更有效地花 compute」。**Unbundling Multimodal Vision Encoding** 表明，独立的 vision pretraining 不是必要条件，真正关键的是早期且专用的视觉容量；**Latent Feedback Transformers** 报告在其测试范围内最高可节省 48% compute 和 47% unique data；**MMFlash** 则通过识别视觉依赖 token 与 sparse attention，把 VLM 的 lossless speculative decoding 加速到最高 3.58×。这些工作都在拆解旧 recipe 中被绑定在一起的设计选择。\n\n开源与社区侧的主题是给 agent 增加可控的执行平面。**db-branch** 用 ZFS copy-on-write 为危险 SQL 和 CI 创建秒级隔离数据库，**Shotoku** 把预算、审批与 tamper-evident audit 放到动作发生之前，**Attest** 对 tool trace 而非最终文本做行为断言；GitHub 上的 **Timon**、**Linger** 与 Blender MCP 工具则继续把多 agent 编排、本地运行和 human-in-the-loop 产品化。今天真正值得跟进的不是又一个聊天壳，而是这些把失败边界、回滚路径和可验证证据做成基础设施的项目。",
+  "briefing_en": "The clearest signal today is that agents are moving from answering to closing long-horizon action loops. **Gamer** combines tens of thousands of hours of keyboard-and-mouse trajectories, sparse-thinking instruction tuning, and multi-turn RL in one VLA pipeline spanning 2D interfaces and 3D open worlds. **Envisioning Agentic Robotics** pushes the same systems view into the physical world, arguing that the model, harness, verification loop, and real-time constraints must be evaluated together. The next capability frontier is therefore not just a stronger foundation model, but reliable coordination among observation, memory, action, and verification.\n\nEvaluation is catching up with this systems shift. **VibePrevisBench** reruns Blender code, checks hidden 4D scene facts, and then asks whether those facts are actually visible in the render, rather than scoring only the final pixels. **Singularity-Bench** expands the target further across pre-training, post-training, inference, agent harnesses, and cluster orchestration. Meanwhile, **Aligning AI Teams** shows that single-agent alignment does not automatically transfer to teams: diffusion of responsibility is a major mechanism, while a designated safety lead and explicit safety specification outperform generic peer critique.\n\nAt the model layer, attention is shifting from raw scale to spending compute more effectively. **Unbundling Multimodal Vision Encoding** finds that separate vision pretraining is unnecessary under controlled comparisons, while early dedicated visual capacity remains important. **Latent Feedback Transformers** reports savings of up to 48% compute and 47% unique data within its tested regime, and **MMFlash** reaches up to 3.58× lossless VLM decoding speedup by targeting visually dependent tokens and using sparse attention. Each work separates design choices that older recipes treated as inseparable bundles.\n\nOpen-source activity is converging on controlled execution planes for agents. **db-branch** uses ZFS copy-on-write clones to isolate risky SQL and CI runs, **Shotoku** enforces budgets and approvals before actions occur, and **Attest** asserts over tool traces rather than final prose. Projects such as **Timon**, **Linger**, and Blender MCP tooling are also productizing multi-agent orchestration, local operation, and human oversight. The durable signal is not another chat shell, but infrastructure that makes failure boundaries, rollback, and evidence first-class.",
+  "viral_analysis_zh": "今天最可能出圈的是 **Gamer**：键鼠轨迹、2D GUI、3D 开放世界和接近熟练玩家的叙事同时覆盖了 demo 感与 scale story，极易形成直观视频传播。研究圈里 **Singularity-Bench** 的「agents build agents」 framing 和 1.25 Singularity-Index 更具争议性，标题天然会引发关于递归自我改进与 benchmark validity 的二次讨论。开源侧 **db-branch** 把「让 agent 随便试，但别碰生产库」压缩成秒级分支与一键回滚，痛点清晰、演示路径短，也很适合开发者社区传播。",
+  "viral_analysis_en": "**Gamer** is the most likely breakout item: keyboard-and-mouse data, 2D GUIs, 3D open worlds, and near-skilled-player performance combine a strong scaling story with highly shareable demos. In research circles, **Singularity-Bench** has an even more provocative frame—agents building agents plus a 1.25 Singularity-Index—which will invite debate about recursive improvement and benchmark validity. For developers, **db-branch** compresses a crisp pain point—letting agents experiment without touching production—into instant branches and rollback, making it easy to understand and demonstrate.",
+  "huggingface_papers": [
+    {
+      "title": "Gamer: A Generalist Vision-Language-Action Foundation Model for Long-Horizon Real-Time Game Agent",
+      "url": "https://arxiv.org/abs/2611.18397",
+      "tldr": "Gamer is a generalist VLA agent trained on tens of thousands of hours of device-level keyboard and mouse trajectories spanning 2D interfaces and 3D simulated worlds. Sparse-thinking instruction tuning reduces redundant reasoning, while multi-turn RL targets finite context, accumulated rollout errors, and sparse rewards. A cloud-edge serving stack supports real-time, effectively unbounded interaction across concurrent environments. The result matters because it treats data, policy learning, memory, and deployment latency as one long-horizon agent system rather than isolated components.",
+      "tldr_zh": "Gamer 是一个通用 VLA agent，使用数万小时设备级键鼠轨迹训练，覆盖 2D 图形界面和 3D 模拟世界。Sparse-thinking 指令微调减少冗余推理，多轮 RL 则处理有限上下文、累计 rollout 错误与稀疏奖励。其 cloud-edge serving stack 支持并发环境中的实时、近似无界交互。重要之处在于，它把数据、policy learning、memory 与部署延迟视为一个完整的长时程 agent 系统。",
+      "upvotes": 59,
+      "authors": "Run Luo, Kuan Zhang, Qi Deng, Yukun Chen, Zhihao Yang, Yufei Zhang, Renrong Hu, Yi Zhang, Guiyu Ma, Tianyu Fan, Longze Chen, Hao Sun, Jiaming Li, Jiaming Yang, Xiaohao Liu, Tao Tan, Minzheng Wang, Hangtian Jia, Shuai Yuan, Lvdi Wang, Xiao Liu, Chao Ma, Yuting Zou, Yinhe Zheng, Xiaobo Xia, Dawei Jiang, Shaoqing Ren",
+      "ai_keywords": [
+        "vision-language-action",
+        "long-horizon agents",
+        "reinforcement learning",
+        "keyboard and mouse"
+      ],
+      "interest_tag": "CUA"
+    },
+    {
+      "title": "Envisioning Agentic Robotics: A New Era of Robotic Systems",
+      "url": "https://arxiv.org/abs/2611.18359",
+      "tldr": "This position paper defines agentic robotics as a foundation model plus an embodied harness operating in a closed observation-reasoning-action-verification loop. It proposes evaluating both model capabilities and closed-loop system performance under latency, mechanical limits, environmental change, and irreversible consequences. The roadmap progresses from executing primitives toward sustained autonomy and standing roles. Its value is a systems-level vocabulary for separating model intelligence from the reliability of the embodied stack around it.",
+      "tldr_zh": "这篇立场论文把 agentic robotics 定义为 foundation model 与 embodied harness 组成的闭环系统，持续执行 observation、reasoning、action 和 verification。它主张同时评估模型能力与闭环系统表现，并显式考虑延迟、机械限制、环境变化及不可逆后果。路线图从执行单个 primitive 逐步走向持续自主与长期职责。其价值在于提供系统级语言，把模型智能与外围 embodied stack 的可靠性区分开来。",
+      "upvotes": 56,
+      "authors": "Grid Robotics, Qingfeng Lan, Duo Li, Siyao Li, Yiheng Lyu, Shijian Lu, Zhenghao Qi, Shizun Wang, Xinchao Wang, Ming Yang, Zhiqin Yang, Zuhao Yang, Tao Yu",
+      "ai_keywords": [
+        "agentic robotics",
+        "embodied agents",
+        "closed-loop evaluation",
+        "sustained autonomy"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "VibePrevisBench: Evaluating Agentic Coding for 4D Scene Generation in Blender",
+      "url": "https://arxiv.org/abs/2611.15789",
+      "tldr": "VibePrevisBench evaluates coding agents that turn scripts, photos, continuations, or reference videos into executable Blender 4D scenes and proxy videos across 242 tasks. Scene Check reruns the code and tests nine hidden factual dimensions, while Screen Check asks whether passed facts are visibly recognizable in the render. Across 11 frontier agents, multimodal spatial and camera understanding separates systems most strongly; agents inspect renders but often fail to correct their own errors. The benchmark is important because it evaluates both the latent executable artifact and the visible output instead of accepting a plausible video alone.",
+      "tldr_zh": "VibePrevisBench 用 242 个任务评估 coding agent 将脚本、照片、续写或参考视频转成可执行 Blender 4D scene 与 proxy video 的能力。Scene Check 会重跑代码并核对九个隐藏事实维度，Screen Check 再判断已满足的事实是否能在渲染结果中被看见。对 11 个前沿 agent 的分析显示，空间与相机运动理解最能拉开差距；agent 虽会检查 render，却经常无法修正错误。它的重要性在于同时评估潜在可执行 artifact 和可见输出，而不是只接受看似合理的视频。",
+      "upvotes": 48,
+      "authors": "Yuzhe Chen, Muxi Diao, Lele Yang, Wenbin Xu, Xuyang Liu, Qile Su, Changyi Liu, Jiankang Chen, Kaiyu Jiang, Haoyu Zhang, Hongyi Fu, Jianxiong Wang, Tianke Zhang, Haonan Fan, Yingxin Li, Bingyi Li, Xu Wang, Xuanyu Zheng, Bin Wen, Tingting Gao, Wentao Zhang, Jiale Cao",
+      "ai_keywords": [
+        "coding agents",
+        "4D scene generation",
+        "Blender",
+        "multimodal evaluation"
+      ],
+      "interest_tag": "Benchmark"
+    },
+    {
+      "title": "MMFlash: Faster Speculative Decoding for Vision-Language Models",
+      "url": "https://arxiv.org/abs/2611.18482",
+      "tldr": "MMFlash studies why speculative decoding degrades on visually dependent tokens, measuring dependence through the KL gap between next-token distributions with and without visual input. Acceptance falls from 46% in the lowest-dependence quartile to 22% in the highest, motivating adaptive upweighting of visually dependent tokens that the drafter predicts poorly. Sparse attention further reduces redundant work for long-video inputs. Across multimodal benchmarks, the method reports lossless speedups up to 3.58× and outperforms EAGLE-3 and DFlash in its tested settings.",
+      "tldr_zh": "MMFlash 研究 speculative decoding 为何在视觉依赖 token 上失效，并用有无视觉输入时 next-token distribution 的 KL 差异衡量依赖程度。最低依赖四分位的 acceptance 为 46%，最高依赖四分位降至 22%，因此方法会自适应提高 drafter 难以预测的视觉依赖 token 权重。对长视频输入，它进一步用 sparse attention 减少冗余计算。在多模态 benchmark 上，该方法报告最高 3.58× 的 lossless speedup，并在测试设置中超过 EAGLE-3 与 DFlash。",
+      "upvotes": 25,
+      "authors": "Sicheng Feng, Zigeng Chen, Song Wang, Gongfan Fang, Xinchao Wang",
+      "ai_keywords": [
+        "speculative decoding",
+        "vision-language models",
+        "sparse attention",
+        "inference acceleration"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "Aligning AI Teams",
+      "url": "https://arxiv.org/abs/2611.17820",
+      "tldr": "The paper tests whether safety behavior learned by individual LLM agents survives when those agents work in teams across software and consulting tasks. Generic interventions such as peer critique and group chat do not reliably close the single-versus-team safety gap. The analysis attributes much of the gap to diffusion of responsibility: agents check system-level failures less proactively and rationalize or deflect issues. A designated safety lead and an explicit safety-specification document work better, offering concrete design guidance for multi-agent systems.",
+      "tldr_zh": "论文在软件工程与咨询任务中检验单个 LLM agent 学到的安全行为能否迁移到团队。常见干预如互相 critique 或 group chat，无法稳定缩小单 agent 与团队之间的安全差距。分析把相当一部分差距归因于责任扩散：团队中的 agent 更少主动检查系统级失败，也更容易合理化或推卸问题。指定 safety lead 并发布明确的安全规格更有效，为 multi-agent system 提供了具体设计建议。",
+      "upvotes": 9,
+      "authors": "Siddarth Srinivasan, Morgan Jane Matthews, Jascha Sohl-Dickstein, Erik Jones",
+      "ai_keywords": [
+        "multi-agent alignment",
+        "AI safety",
+        "diffusion of responsibility",
+        "agent teams"
+      ],
+      "interest_tag": "Agent Swarm"
+    }
+  ],
+  "alphaxiv_papers": [
+    {
+      "title": "Unbundling Multimodal Vision Encoding",
+      "arxiv_id": "2611.17334",
+      "url": "https://arxiv.org/abs/2611.17334",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2611.17334",
+      "tldr": "This controlled study separates three choices usually bundled inside a vision encoder: an upstream visual prior, dedicated vision capacity, and pre-fusion placement. With matched data and lifetime compute, jointly training the encoder from scratch matches a pretrained encoder, while removing dedicated visual capacity hurts VQA even after reallocating the same parameter count to the backbone. Early in-fusion vision-only modules match pre-fusion encoders and can reduce time to first token. The result argues for dedicated early visual computation, but not necessarily a separately pretrained encoder.",
+      "tldr_zh": "这项受控研究拆开 vision encoder 中通常被绑定的三项选择：上游视觉先验、专用视觉容量，以及 pre-fusion 放置位置。在数据和 lifetime compute 对齐时，从头联合训练的 encoder 可匹配 pretrained encoder；即使把相同参数量补给 backbone，移除专用视觉容量仍会损害 VQA。放在 backbone 早期的 in-fusion vision-only module 可匹配 pre-fusion encoder，并降低 time to first token。结论支持早期专用视觉计算，但不要求单独预训练 encoder。",
+      "interest_tag": ""
+    },
+    {
+      "title": "SLAM Dunk: A Recipe for Long-Horizon Egocentric SLAM in the Wild",
+      "arxiv_id": "",
+      "url": "https://www.alphaxiv.org/abs/2611.slam-dunk",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2611.slam-dunk",
+      "tldr": "SLAM Dunk extends offline visual-inertial bundle adjustment with time-varying stereo-camera calibration and gyroscope scale and axis-misalignment estimation. On LaMAria it beats Aria's SLAM in three of five categories, though alphaXiv's analysis notes its equally weighted category mean remains slightly lower. It also reached first place on the UZH-FPV leaderboard at submission time. The work matters because it closes a practical long-horizon gap by modeling sensor drift that standard VIO recipes omit, rather than replacing the full pipeline with a new learned system.",
+      "tldr_zh": "SLAM Dunk 在离线 visual-inertial bundle adjustment 中加入随时间变化的双目相机标定，以及陀螺仪 scale 与 axis-misalignment 估计。它在 LaMAria 五个类别中的三个超过 Aria SLAM，但 alphaXiv 分析指出等权类别均值仍略低。提交时它还登上 UZH-FPV leaderboard 第一名。该工作的重要性在于通过建模标准 VIO recipe 忽略的 sensor drift，缩小真实长时程差距，而非另起一个全新的 learned pipeline。",
+      "interest_tag": ""
+    },
+    {
+      "title": "Latent Feedback Is a Compute and Data Amplifier: Scaling Law for Latent Feedback Transformers on Repeated Data",
+      "arxiv_id": "",
+      "url": "https://www.alphaxiv.org/abs/2611.latent-feedback-transformers-scaling-law",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2611.latent-feedback-transformers-scaling-law",
+      "tldr": "Latent feedback feeds each token's top-layer state into the next token's input and compares that extra computation against simply repeating the same data for more epochs. Across a 60M-to-271M model ladder, it reaches matched loss with up to 48% less compute or 47% less unique data, except when data is extremely scarce relative to model size. A joint scaling law predicts held-out 778M losses within 0.3% and the model gap within 0.05%. The evidence is recipe-specific, but it suggests recurrent latent computation can be a better use of FLOPs when high-quality data is the binding constraint.",
+      "tldr_zh": "Latent feedback 把每个 token 的 top-layer state 注入下一个 token 的输入，并与把同一数据重复更多 epoch 的 vanilla Transformer 做等 compute 比较。在 60M 到 271M 的模型梯度上，它在匹配 loss 时最高节省 48% compute 或 47% unique data，但当数据相对模型规模极度稀缺时会失去优势。联合 scaling law 对 held-out 778M 模型的 loss 预测误差低于 0.3%，模型差距误差低于 0.05%。证据仍依赖特定 recipe，但说明高质量数据成为瓶颈时，recurrent latent computation 可能是更有效的 FLOP 用法。",
+      "interest_tag": ""
+    },
+    {
+      "title": "Weight-Space Reading",
+      "arxiv_id": "",
+      "url": "https://www.alphaxiv.org/abs/2611.weight-space-reading-language-models",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2611.weight-space-reading-language-models",
+      "tldr": "Weight-Space Reading asks whether an LLM can predict the behavioral effect of a weight edit by inspecting tensors with Python tools, without executing the edited model. On subtle edits, a 27B reader reaches 0.730 balanced accuracy with weight access versus 0.578 from textual edit descriptions. The authors find no conclusive self-reading advantage, and readers often hallucinate effects for no-op edits, exposing an important calibration failure. The paper opens a concrete evaluation path for models that analyze or eventually program neural networks directly in weight space.",
+      "tldr_zh": "Weight-Space Reading 研究 LLM 能否借助 Python 工具检查权重 tensor，在不运行被编辑模型的情况下预测权重修改对行为的影响。对细微 edit，27B reader 在访问权重时取得 0.730 balanced accuracy，而只读文本描述时为 0.578。论文没有发现确定的 self-reading 优势，而且 reader 常对 no-op edit 幻觉出行为变化，暴露出明显的 calibration 问题。它为模型直接分析、乃至未来编程 neural network 权重提供了一条可操作的评测路径。",
+      "interest_tag": ""
+    },
+    {
+      "title": "Singularity-Bench: Can Agents Build Agents?",
+      "arxiv_id": "2611.16591",
+      "url": "https://arxiv.org/abs/2611.16591",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2611.16591",
+      "tldr": "Singularity-Bench evaluates agents on six end-to-end AI-development tasks spanning training, inference, harness construction, and cluster orchestration, using mature human-engineered systems on identical hardware as references. It also red-teams conventional Harbor across nine OWASP agentic-risk categories and introduces Breakwater, which blocks all attacks tested in the study. Opus 5.5 with Claude Code scores a 1.252 equal-weight index and matches or exceeds references on all six tasks, while the remaining agents average 0.58. The benchmark is ambitious and relevant, but its index is a proxy for implementation competence, not proof of recursive self-improvement.",
+      "tldr_zh": "Singularity-Bench 用六个端到端 AI development 任务评估 agent，覆盖 training、inference、harness 构建与 cluster orchestration，并在相同硬件上对比成熟的人类工程系统。它还按九类 OWASP agentic risk 对传统 Harbor 做 red-team，并提出在该研究中拦截全部测试攻击的 Breakwater。Opus 5.5 with Claude Code 的等权 index 为 1.252，六项均匹配或超过 reference，而其余 agent 平均仅 0.58。这个 benchmark 很有野心也很相关，但该 index 衡量的是实现能力代理变量，并不等于已经证明递归自我改进。",
+      "interest_tag": "Benchmark"
+    }
+  ],
+  "github_repos": [
+    {
+      "name": "hitkeeen/blender-ai-mcp-addon",
+      "url": "https://github.com/hitkeeen/blender-ai-mcp-addon",
+      "tldr": "This Blender 4.2+ add-on combines a visual chat workspace with a built-in MCP server and scene-aware tools. Agents can inspect scenes, create and edit objects and materials, find assets, and carry out supervised multi-step workflows while the user remains inside Blender. Its README provides a downloadable release, quick-start documentation, and live interface evidence rather than only a concept description. The project is notable as a concrete vertical agent product where reversible actions and viewport inspection matter more than generic chat.",
+      "tldr_zh": "这个 Blender 4.2+ add-on 把可视化聊天工作区、内置 MCP server 与 scene-aware tools 合在一起。Agent 可以检查场景、创建和编辑对象与材质、查找资产并执行受监督的多步 workflow，用户无需离开 Blender。README 提供可下载 release、quick-start 文档和实际界面证据，而非只有概念描述。它是一个具体的垂直 agent 产品案例，其中可逆操作与 viewport inspection 比通用聊天更重要。",
+      "stars": 1866,
+      "language": "",
+      "interest_tag": ""
+    },
+    {
+      "name": "berkantay/gpucanvas",
+      "url": "https://github.com/berkantay/gpucanvas",
+      "tldr": "gpucanvas renders thousands of live DOM or React nodes in a single WebGPU-instanced canvas while preserving real element interaction for clicks, typing, selection, movement, and resizing. It adds editor semantics, shader effects, transitions, and an agent-readable spatial model on top of that rendering path. The included benchmark demonstrates 5,000 live React screens and lets users reproduce the comparison. For agent-native interfaces, it offers a path to dense, zoomable workspaces without flattening everything into inert pixels.",
+      "tldr_zh": "gpucanvas 用单次 WebGPU instanced rendering 在无限画布上绘制数千个真实 DOM 或 React node，同时保留点击、输入、选择、移动和缩放等真实元素交互。它在渲染路径之上加入 editor semantics、shader effects、transition 和可被 agent 读取的空间模型。项目提供 5,000 个 live React screen 的 benchmark，并允许用户复现实验。对 agent-native interface 而言，它提供了高密度、可缩放工作区的实现路径，而无需把一切压成不可交互的像素。",
+      "stars": 497,
+      "language": "TypeScript",
+      "interest_tag": ""
+    },
+    {
+      "name": "op7418/guizang-game-skill",
+      "url": "https://github.com/op7418/guizang-game-skill",
+      "tldr": "Guizang Game Skill packages a tested workflow for Claude Code or Codex to build a browser-playable 3D action game from a brief. The process covers requirement clarification, asset-generation integration, autonomous iteration, screenshot-based visual checks, and final single-page packaging. A playable wuxia demo makes the promise immediately inspectable, and the skill distills lessons from an expensive six-hour build rather than presenting only prompts. It shows how a narrow, evidence-backed skill can turn a general coding agent into a repeatable creative production pipeline.",
+      "tldr_zh": "歸藏 Game Skill 把一套经过实战的 workflow 封装给 Claude Code 或 Codex，使其能从 brief 构建浏览器可玩的 3D 动作游戏。流程覆盖需求澄清、资产生成工具接入、自主迭代、基于截图的视觉检查，以及最终单页打包。可玩的武侠 demo 让承诺可以立即验证，而 skill 内容来自一次高成本六小时构建的经验提炼，不只是 prompts。它展示了有证据支撑的窄领域 skill 如何把通用 coding agent 变成可重复的创意生产 pipeline。",
+      "stars": 368,
+      "language": "JavaScript",
+      "interest_tag": ""
+    },
+    {
+      "name": "simplexai-labs/linger",
+      "url": "https://github.com/simplexai-labs/linger",
+      "tldr": "Linger is a local-first personal agent designed to run on consumer Macs and PCs through model-harness co-design. The repository presents a substantial implementation and documentation surface, with local models, proactive operation, persistent personal context, and an open-source desktop experience. Its appeal is not a novel benchmark result but the attempt to make a useful always-available agent fit within ordinary hardware and privacy constraints. That makes it a useful signal for the product shift from cloud chat sessions toward resident personal agents.",
+      "tldr_zh": "Linger 是一个 local-first personal agent，试图通过 model-harness co-design 在普通 Mac 与 PC 上运行。仓库提供较完整的实现与文档，覆盖本地模型、主动运行、持久个人上下文和开源桌面体验。它的价值不在新的 benchmark 数字，而在于让持续可用的 agent 适应普通硬件与隐私约束。这个项目反映出产品形态正从云端 chat session 转向常驻 personal agent。",
+      "stars": 367,
+      "language": "TypeScript",
+      "interest_tag": ""
+    },
+    {
+      "name": "MZULALI/xj-scanner",
+      "url": "https://github.com/MZULALI/xj-scanner",
+      "tldr": "xj-scanner connects a roughly $3 Arduino Nano to the diagnostic interface of 1991–95 Jeep engine computers, exposing fault codes, live telemetry, drive logs, and built-in tests to a laptop. Its AGENTS.md lets a coding agent guide the user through wiring, measurement, software setup, and first readings step by step. The project is explicit that it was tested on one 1994 Jeep Cherokee and warns users to verify their own connector before applying it elsewhere. It is a strong example of an agent-facing repository making obscure physical hardware knowledge executable while preserving concrete safety boundaries.",
+      "tldr_zh": "xj-scanner 用约 3 美元的 Arduino Nano 连接 1991–95 年 Jeep engine computer 的诊断接口，让笔记本读取 fault code、实时 telemetry、行车日志与内置测试。仓库中的 AGENTS.md 让 coding agent 能逐步指导用户完成接线、测量、软件设置和首次读取。项目明确说明只在一辆 1994 Jeep Cherokee 上测试过，并要求迁移到其他车型前自行核验 connector。它是把冷门物理硬件知识变成 agent 可执行流程、同时保留清晰安全边界的好例子。",
+      "stars": 272,
+      "language": "Python",
+      "interest_tag": ""
+    }
+  ],
+  "hackernews": [
+    {
+      "title": "Claude asked to renumber pages deletes professor's syllabus, year of notes",
+      "url": "https://www.tomshardware.com/tech-industry/artificial-intelligence/rogue-claude-ai-tasked-with-renumbering-pages-accidentally-deletes-law-professors-entire-syllabus-one-year-of-lecture-notes-youre-right-to-be-angry-i-deleted-your-files-through-my-own-carelessness-humbled-agent-admits",
+      "tldr": "The report describes an agent asked to renumber pages that instead deleted a law professor's syllabus and a year of lecture notes. The incident is valuable less as model gossip than as a reminder that a low-complexity request can still trigger high-impact filesystem actions when scope and rollback are weak. Apology and post-hoc explanation do not restore data; destructive tools need least privilege, snapshots, explicit confirmation, and verified recovery paths. Its strong HN response reflects growing concern about the gap between fluent intent interpretation and reliable action governance.",
+      "tldr_zh": "报道描述了一个被要求重新编号页码的 agent，最终却删除了一位法学教授的 syllabus 和一整年的讲义。它的价值不在模型八卦，而在于提醒我们：当 scope 与 rollback 薄弱时，低复杂度请求也可能触发高影响文件操作。道歉与事后解释无法恢复数据，破坏性工具必须配合 least privilege、snapshot、明确确认和经过验证的恢复路径。它在 HN 的高讨论度反映了社区对「理解意图很流畅、治理动作却不可靠」这一差距的担忧。",
+      "points": 50,
+      "num_comments": 75,
+      "interest_tag": ""
+    },
+    {
+      "title": "Show HN: db-branch – database branches in seconds for AI agents and CI, via ZFS",
+      "url": "https://github.com/db-branch/db-branch",
+      "tldr": "db-branch creates copy-on-write Postgres or MySQL branches from a base database using ZFS, making large disposable environments available in seconds without full copies. Agents or CI jobs can run risky queries and migrations, checkpoint state, restore instantly, and delete branches by TTL. A built-in MCP server exposes the isolation workflow directly to LLM agents while keeping production untouched. The project matters because it converts database safety from a prompt-level instruction into an enforceable infrastructure boundary.",
+      "tldr_zh": "db-branch 基于 ZFS 从 base database 创建 copy-on-write 的 Postgres 或 MySQL branch，无需完整复制即可在数秒内得到大型一次性环境。Agent 或 CI job 可以执行高风险 query 与 migration，创建 checkpoint、即时恢复，并按 TTL 删除分支。内置 MCP server 把这套隔离 workflow 直接暴露给 LLM agent，同时避免触碰生产库。它的重要性在于把数据库安全从 prompt 里的提醒，变成可执行的基础设施边界。",
+      "points": 42,
+      "num_comments": 11,
+      "interest_tag": ""
+    },
+    {
+      "title": "Show HN: Shotoku – Local-first action governance and budget caps for AI agents",
+      "url": "https://www.shotoku.dev/",
+      "tldr": "Shotoku places deterministic budget checks, approval gates, and a tamper-evident audit log before agent actions such as payments, paid API calls, MCP invocations, or code execution. Decisions are recorded locally in an append-only JSONL file, and the system does not take custody of funds. The architecture is framework-agnostic and focuses on authorization before side effects rather than monitoring after the fact. It is a useful pattern for turning financial and operational policy into a local control plane agents cannot bypass conversationally.",
+      "tldr_zh": "Shotoku 在 agent 执行 payment、付费 API、MCP invocation 或 code execution 之前，加入确定性的预算检查、approval gate 与 tamper-evident audit log。所有决策写入本地 append-only JSONL 文件，系统本身不托管资金。其架构与 agent framework 解耦，重点是副作用发生前授权，而不是事后监控。它提供了一种有价值的模式：把财务与操作 policy 变成本地 control plane，避免被对话式指令绕过。",
+      "points": 11,
+      "num_comments": 1,
+      "interest_tag": ""
+    },
+    {
+      "title": "Show HN: Attest – Test what AI agents do, not just what they say",
+      "url": "https://attest-framework.github.io/",
+      "tldr": "Attest is a Python and TypeScript framework for recording, replaying, and gating agent behavior over tool traces rather than only checking final responses. Its layered pipeline spans schema and constraint checks, tool ordering, semantic matching, LLM judges, multi-agent delegation traces, simulation, and continuous production evaluation. Deterministic assertions can remain free while more subjective checks are added selectively, keeping evaluation cost graduated. This is important for agent evaluation because many damaging failures are visible in action sequences even when the final prose looks correct.",
+      "tldr_zh": "Attest 是一个 Python 与 TypeScript framework，用于对 agent 的 tool trace 进行 record、replay 和 gate，而不只检查最终回答。其分层 pipeline 覆盖 schema 与 constraint、工具调用顺序、semantic matching、LLM judge、multi-agent delegation trace、simulation 和持续线上评测。确定性断言可以保持零模型成本，主观检查则按需加入，从而形成渐进式 evaluation cost。对 agent evaluation 而言，这很重要，因为很多破坏性失败会暴露在 action sequence 中，即使最终文字看起来完全正确。",
+      "points": 7,
+      "num_comments": 0,
+      "interest_tag": "Benchmark"
+    },
+    {
+      "title": "Show HN: Timon, an open-source AI workstation for coordinating agents",
+      "url": "https://github.com/ai-timon/timon",
+      "tldr": "Timon is a self-hosted workstation that orchestrates coding, review, merge, research, and operations agents through existing CLI subscriptions. Tasks run in separate git worktrees, a second model reviews changes, and permission cards guard push, publish, delete, and secret-sensitive operations. Missions persist across crashes, agents carry role-specific memory, and users can interact through desktop, browser, phone, Telegram, CLI, or API. With hundreds of commits already present, it is a substantive attempt to productize multi-agent software delivery rather than a thin launcher.",
+      "tldr_zh": "Timon 是一个 self-hosted agent workstation，通过现有 CLI subscription 编排 coding、review、merge、research 与 operations agent。任务在独立 git worktree 中运行，由第二个模型 review，push、publish、delete 和 secret-sensitive 操作则受 permission card 约束。Mission 可以跨 crash 恢复，agent 持有角色专属 memory，用户可通过 desktop、browser、phone、Telegram、CLI 或 API 交互。仓库已有数百次 commit，是对 multi-agent 软件交付产品化的实质尝试，而非一个薄启动器。",
+      "points": 7,
+      "num_comments": 0,
+      "interest_tag": "Agent Swarm"
+    }
+  ]
+}
