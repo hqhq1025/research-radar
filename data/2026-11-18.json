@@ -1,0 +1,241 @@
+{
+  "date": "2026-11-18",
+  "generated_at": "2026-11-18T17:04:06+08:00",
+  "briefing_zh": "今天最强的共同信号不是单一模型刷新榜单，而是 AI 系统开始把注意力从「生成更多」转向「识别、验证并安全累积真正的改进」。**The Resolution Hypothesis** 在超过一千万次 LLM call 中发现，self-improving agent 往往能提出更好的 skill 或 prompt，却因噪声评测无法稳定选中；与此同时，Harvard working paper 报告 coding agent 让代码量增加约 30%，但已部署工作没有显著增长，PR merge 时间反而上升 49%。两者指向同一瓶颈：生成已变便宜，evaluation resolution 与 review bandwidth 才是稀缺资源。\n\n模型与系统侧仍在扩大边界。**Xing 4** 展示了在 8,192 张 Ascend 910C 上训练 285B agentic model 的完整栈，**K2-Horizon** 则把 checkpoint、数据、日志、训练与 RL 基础设施一并开放；这两项工作分别证明「非 CUDA 前沿训练」和「真正可审计的开放模型开发」正在成熟。另一条更激进的路线来自 **Weight-Space Programming Doesn't Need Transformers**：当 LLM 直接写权重时，它会主动选择稀疏关联表，而不是沿用为梯度训练设计的 Transformer。\n\nAgent capability 的提升越来越依赖 interface，而不只是模型本体。**ForceHarness** 用本地 force primitive 与物理量 translation layer，让冻结模型在真实机械臂上的 zero-shot 成功率从 3.3% 提升到 90.0%；**Coral** 用 policy-checked custom tool 把一次成功的工具轨迹固化为可复用能力；**db-branch** 则用 ZFS copy-on-write database branch 给 agent 提供可破坏、可恢复的真实数据沙箱。共同模式是把速度、权限、可逆性与观测语义做到 harness 和 environment 中。\n\n开源热度同样印证了这一转向：**boring-marketing-skills** 说明垂直 skill bundle 正成为 agent 能力的发行格式，**gpucanvas** 把大规模视觉工作区同时暴露为人类界面与 agent-readable tree，**StarSling** 则直接围绕 agent-volume repo 的 CI 瓶颈做产品。今天最值得关注的不是哪一个 agent 又能做更多，而是谁能让大量 agent 产出被可靠评测、低成本复用并在出错时安全回滚。",
+  "briefing_en": "Today's strongest signal is not a single model topping a leaderboard, but a shift from generating more artifacts toward identifying, verifying, and safely accumulating real improvements. **The Resolution Hypothesis** finds across more than ten million LLM calls that self-improving agents often produce useful skills or prompts yet fail to select them reliably under noisy evaluation; meanwhile, a Harvard working paper reports about 30% more code after coding-agent adoption but no measurable increase in deployed work and a 49% rise in merge time. Both point to the same bottleneck: generation is cheap, while evaluation resolution and review bandwidth are scarce.\n\nThe model and systems frontier is still expanding. **Xing 4** presents a complete stack for training a 285B agentic model on 8,192 Ascend 910C accelerators, while **K2-Horizon** releases checkpoints, data, logs, training code, and RL infrastructure together; they show that non-CUDA frontier training and genuinely auditable open model development are maturing. A more radical direction comes from **Weight-Space Programming Doesn't Need Transformers**: when an LLM writes weights directly, it chooses sparse associative tables rather than preserving an architecture designed for gradient training.\n\nAgent capability is increasingly determined by interfaces rather than the model alone. **ForceHarness** uses local force primitives and a physics translation layer to raise reported zero-shot success on a real arm from 3.3% to 90.0%; **Coral** turns successful tool trajectories into policy-checked reusable custom tools; and **db-branch** gives agents destructive but reversible database sandboxes through ZFS copy-on-write branches. The shared pattern is to place latency, permissions, reversibility, and observation semantics in the harness and environment.\n\nOpen-source attention reinforces the same transition. **boring-marketing-skills** shows domain skill bundles becoming a distribution format for agent expertise, **gpucanvas** exposes a large visual workspace simultaneously as a human interface and an agent-readable tree, and **StarSling** builds directly around CI bottlenecks in agent-volume repositories. The key question is no longer which agent can produce more, but which system can evaluate that output reliably, reuse it cheaply, and recover safely when it fails.",
+  "viral_analysis_zh": "**The Resolution Hypothesis** 最可能在研究圈持续发酵：它用超过一千万次 LLM call 把「self-improvement 失败」重新定义为 evaluation resolution 问题，既反直觉又能解释多个方法互相打榜却难以复现的现象。开源侧最容易出圈的是 **boring-marketing-skills**，因为「32 个免费、可一键安装、立即产出业务结果的 skills」同时具备清晰数字、零成本承诺和强 demo 感，比抽象 agent framework 更容易传播。",
+  "viral_analysis_en": "**The Resolution Hypothesis** is the strongest research-side viral candidate because more than ten million LLM calls support a counterintuitive reframing: self-improvement may fail at evaluation resolution rather than proposal quality. On the open-source side, **boring-marketing-skills** has the clearest growth loop—32 free, one-command-installable skills promise immediate business outcomes, giving it a sharper number, lower adoption friction, and more demonstrable value than another abstract agent framework.",
+  "huggingface_papers": [
+    {
+      "title": "TeleChat to Xing4: Advancing Frontier Agentic Models on Domestic Chips and Frameworks",
+      "url": "https://huggingface.co/papers/2611.22115",
+      "tldr": "Xing 4 combines model architecture, Ascend-native distributed training, and agentic post-training in one systems report. Its infrastructure trained a 285B model on 8,192 Ascend 910C accelerators, while TeleGym unifies execution, evaluation, trajectory building, and policy optimization for heterogeneous agent tasks. The work matters as a concrete blueprint for building frontier agentic models on a non-CUDA hardware and software stack.",
+      "tldr_zh": "Xing 4 把模型架构、面向 Ascend 的分布式训练与 agentic post-training 汇总到同一份系统报告中。其基础设施在 8,192 张 Ascend 910C 上训练了 285B 模型，TeleGym 则统一执行、评测、轨迹构造与策略优化，以处理耗时不一的 agent 任务。这项工作的价值在于给出了脱离 CUDA 生态构建前沿 agentic model 的完整工程样本。",
+      "upvotes": 139,
+      "authors": "Xingchen AGI Lab, Baotian Hu, Bingkai Yang, Boyang Wang, Changzai Pan, Chao Lyu, Chao Wang, Chen Li, Chenshuo Pan, Chenyu Lin, Chenyuan Zhang, Chongming Liu, Dawei Fan, Di Wu, Dong Guo, Dong Li, Dongfang Li, Enlin Liu, Fanye Xiao, Fengkai Li, Fubei Yao, Gang Lin, Han Gao, Hanming Wu, Haowei He, Huapeng Liu, Hua Wang, Huinan Xu, Jiahong Xiong, Jiaxin Peng, Jianxiang Ma, Jianxing Zhuge, Jie Zhang, Ji Xiong, Jinglin Chen, Jingqi Li, Jingxuan Li, Jiwang Ye, Junchen Li, Junbiao Li, Junyang Wu, Kaidong Yu, Kaipeng Jia, Kehai Chen, Kuai Li, Laobin Liu, Lei Li, Libo Qin, Lingling Shi, Luwen Pu, Menghao Xu, Mengjiao Bao, Mengqi Chen, Min Zhang, Mingrui Wang, Naying Wang, Peicong Han, Peiming Guo, Pengfei Li, Qiang Feng, Qi Wang, Qingjun Zhu, Qingli Li, Qitai Ding, Qiyi Xie, Quanchao Zhao, Rongbao Han, Rui Xue, Ruiyu Fang, Ruiting Song, Shijie Li, Shiquan Wang, Shuangyong Song, Sishi Xiong, Teng Su, Wankang Bao, Weijie Zhang, Wei Mao, Weiwei Fu, Weiyang Huang, Wenmin Deng, Wenqing Hu, Wujie Zhong, Xi Yu, Xiaohui Hu, Xiaomin Fang, Xiaomeng Huang, Xiaoqiong Shi, Xiaotong Shang, Xiaoyu Li, Xinglei Xu, Xin Jiang, Xin Wang, Xin Zhang, Xinzhang Liu, Xue Liu, Xuefeng Bai, Xuewei He, Yahan Li, Yanhan Zhang, Yanlei Xue, Yanzhang Wu, Yang Yu, Yi Liu, Yin Zhang, Yingyan Li, Yitong Yao, Yixuan Li, Yongqiang Xia, Yongxiang Li, Yinzhou Zhu, Yu Zhao, Yuhao Jiang, Yunpeng Zhang, Yuting Lin, Yuxuan Wu, Yuyao Huang, Yuyi Wang, Zebo Peng, Zhenwu Pei, Zhenxiong Li, Zhao Wang, Zhaoxi Zhang, Zhihao Yang, Zhiqiang Dong, Zhiwei Yan, Zhilong Lu, Zhonghao Guo, Zhongheng Wu, Zhongjiang He, Zhongqiu Li, Zhu Yuan, Zhuoru Jiang, Zhuoyi Wei, Zijia Guo, Zilu Huang, Zhipeng Guo, Zirui Li, Zihan Wang",
+      "ai_keywords": [],
+      "interest_tag": ""
+    },
+    {
+      "title": "AscendGYM: A Cost-Aware Kernel Optimization Benchmark for Real-World Workloads on Ascend NPUs",
+      "url": "https://huggingface.co/papers/2611.17621",
+      "tldr": "AscendGYM evaluates whether models and custom agents can optimize existing Ascend kernels under shapes and data types drawn from real training and inference workloads. Its initial suite contains 48 kernels at three difficulty levels and supports both model-only and model-plus-harness evaluation. The Speedup-Token Score makes efficiency gains compete directly with token cost, turning kernel optimization into a practical agent benchmark rather than a code-generation showcase.",
+      "tldr_zh": "AscendGYM 评测模型与自定义 agent 能否在真实训练和推理负载的 shape、dtype 下优化现有 Ascend kernel。首版包含 48 个、分三档难度的 kernel，并同时支持纯模型与 model-harness 两种评测模式。新指标 Speedup-Token Score 把加速收益与 token 成本直接挂钩，使其成为面向实际优化能力的 agent benchmark，而不只是 kernel 生成展示。",
+      "upvotes": 86,
+      "authors": "AI Training Platform Team, Bingwei Zhang, Jing Li, Amir Abdullin, Sihang Chen, Xin Chen, Liangjun Feng, Yingmeng Gao, Tao Guo, Junjie Huang, Dongfang Li, Zhanglian Lin, Jiajun Liu, Zekun Liu, Zhengxuan Lu, Xiaodong Luo, Jian Meng, Ivan Nosov, Linyuan Qiu, Weijian Sun, Wanrui Yan, Binfan Zheng, Zhicheng Zhou, Baotian Hu, Min Zhang, Haizhou Li, Zhiquan Luo",
+      "ai_keywords": [
+        "large language model (LLM)",
+        "Ascend NPUs",
+        "kernel optimization",
+        "kernel benchmarks",
+        "kernel generation",
+        "agents",
+        "input configurations",
+        "tensor shapes",
+        "model evaluation",
+        "model-harness evaluation",
+        "custom agents",
+        "Ascend kernels",
+        "built-in harness",
+        "search orchestration",
+        "experience accumulation",
+        "Speedup-Token Score (STS)",
+        "token cost"
+      ],
+      "interest_tag": "Benchmark"
+    },
+    {
+      "title": "Weight-Space Programming Doesn't Need Transformers",
+      "url": "https://huggingface.co/papers/2611.22055",
+      "tldr": "This paper asks what architecture an LLM chooses when it writes model weights directly instead of relying on gradient descent. Across frontier models, free-form design repeatedly converges on sparse associative tables, reaching up to 54.4% accuracy with roughly 1,800 times fewer parameters than the best LLM-written Transformer in the study. The result is important because it separates architectures optimized for GPU training from structures optimized for interpretability, editability, and weight-space programming.",
+      "tldr_zh": "这篇论文追问：当 LLM 直接编写模型权重、而非依赖梯度下降时，它会选择什么架构。多个前沿模型在自由设计条件下都收敛到稀疏关联表，最高达到 54.4% 准确率，同时参数量比研究中最好的 LLM 编写 Transformer 少约 1,800 倍。其重要性在于，它把适合 GPU 训练的架构与适合可解释、可编辑 weight-space programming 的结构区分开来。",
+      "upvotes": 40,
+      "authors": "Hyunjong Ok, Jaeho Lee",
+      "ai_keywords": [
+        "Transformer",
+        "neural architectures",
+        "gradient descent",
+        "large language model",
+        "weight-space programming",
+        "target weights",
+        "gradient-based training",
+        "sparse table",
+        "associative-memory-based model",
+        "pretrained weights"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "ForceHarness: Turning Force into Action and Physics for Frozen Frontier Models",
+      "url": "https://huggingface.co/papers/2611.21099",
+      "tldr": "ForceHarness lets frozen, API-only multimodal models use contact force without demonstrations or finetuning. Self-terminating force primitives close the fast control loop locally, while a translation layer returns physical quantities and uncertainty that the model can reason about. The reported jump from 3.3% to 90.0% zero-shot success on a real arm suggests that better action interfaces can unlock latent capability more effectively than retraining the frontier model.",
+      "tldr_zh": "ForceHarness 让冻结、仅 API 可用的多模态模型无需示范或 finetuning 就能利用接触力。自终止 force primitive 在本地闭合高速控制环，translation layer 则把力轨迹转成模型可推理的物理量与不确定性。真实机械臂上的 zero-shot 成功率据报从 3.3% 提升到 90.0%，说明改造 action interface 有时比重训前沿模型更能释放潜在能力。",
+      "upvotes": 39,
+      "authors": "Ke Sun, Kevin Yuchen Ma, Yike Zhang, Yanzhe Chen, Mike Zheng Shou",
+      "ai_keywords": [],
+      "interest_tag": ""
+    },
+    {
+      "title": "Self-Improvement Memory Enables Continual Recursive Self-Improvement",
+      "url": "https://huggingface.co/papers/2611.18856",
+      "tldr": "Self-Improvement Memory stores why harness edits were made, what they were expected to change, what actually happened, and under which evaluation context. This allows a harness optimizer to continue across compatible datasets or policy models instead of carrying forward an unexplained final artifact. Across four domains, the memory-based continuation outperforms harness-only baselines, making provenance and outcome history a concrete mechanism for continual recursive self-improvement.",
+      "tldr_zh": "Self-Improvement Memory 记录 harness 修改的原因、预期效果、实际结果与对应评测上下文。这样，harness optimizer 在切换兼容的数据集或 policy model 时，不必只继承一个无法解释的最终产物。四个领域的实验中，基于记忆的续接优于仅保留 harness 的基线，把 provenance 与 outcome history 变成 continual recursive self-improvement 的具体机制。",
+      "upvotes": 18,
+      "authors": "Xin Yu, Fei Xia, Jiaqi Pan, Youbao Tang, Chengzhi Liu, Adams Yu, Sicong Jiang, Yanfei Chen, Lingzhou Xue, Ting Yu",
+      "ai_keywords": [
+        "Continual Recursive Self-Improvement (CRSI)",
+        "Self-Improvement Memory (SIM)",
+        "harness optimizer",
+        "harness optimization",
+        "policy model",
+        "task-solving policy",
+        "harness-only continuation",
+        "root-cause-only continuation",
+        "cross-dataset comparisons",
+        "pairwise cross-model comparisons"
+      ],
+      "interest_tag": "Memory"
+    }
+  ],
+  "alphaxiv_papers": [
+    {
+      "title": "ScaleVLA: Scaling Vision-Language-Action Models to 552 Billion Parameters",
+      "arxiv_id": "2611.21607",
+      "url": "https://arxiv.org/abs/2611.21607",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2611.21607",
+      "tldr": "ScaleVLA attaches a trainable action DiT to a frozen 552B vision-language backbone and compares backbones from 2B to 552B under a shared robot-learning setup. With only 10 demonstrations it reports 87.8% LIBERO-Goal success, exceeding a 2B policy trained with 50, while real-world charger insertion rises from 4/10 to 9/10. The central signal is that frontier-scale representations can improve data efficiency and contact-sensitive control, although model-family differences prevent a clean parameter-count attribution.",
+      "tldr_zh": "ScaleVLA 把可训练的 action DiT 接到冻结的 552B vision-language backbone，并在统一机器人学习设置下比较 2B 到 552B 的 backbone。它仅用 10 条示范就在 LIBERO-Goal 上达到 87.8%，超过用 50 条示范训练的 2B policy，真实充电器插入也从 4/10 升至 9/10。核心信号是前沿规模表征可提高数据效率和接触敏感控制，但 model family 差异意味着不能把收益完全归因于参数规模。",
+      "interest_tag": ""
+    },
+    {
+      "title": "Stream of Belief: Eliciting Collective Intelligence through Latent Belief Dynamics",
+      "arxiv_id": "2611.21250",
+      "url": "https://arxiv.org/abs/2611.21250",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2611.21250",
+      "tldr": "Stream of Belief frames multi-agent reasoning as convergence toward a collective equilibrium of continuous latent beliefs. Agents alternate communication and local refinement, exchanging belief representations rather than only long natural-language debates. It improves over LatentMAS on GPQA-Diamond but remains below textual debate in the reported comparison, making it a promising efficiency direction rather than a universal win.",
+      "tldr_zh": "Stream of Belief 把 multi-agent reasoning 表述为连续 latent belief 向集体平衡点收敛的过程。各 agent 交替进行通信与局部修正，交换 belief representation，而不只是生成冗长自然语言辩论。在 GPQA-Diamond 上它优于 LatentMAS、但仍低于论文中的文本 debate，因此更像有潜力的效率方向，而非全面胜出。",
+      "interest_tag": "Agent Swarm"
+    },
+    {
+      "title": "$π^4$: A Foundation Model for 4D Scene Geometry and Motion",
+      "arxiv_id": "2611.23144",
+      "url": "https://arxiv.org/abs/2611.23144",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2611.23144",
+      "tldr": "π⁴ jointly reconstructs scene geometry, camera pose, metric scale, point tracks, and moving-object masks from uncalibrated images or video. A geometry-conditioned motion branch predicts image-space correspondence and lifts it into 3D using the reconstructed target view, all in one forward pass with about 0.5B parameters. Its ability to process scenes with thousands of images despite training on at most 64 views makes it a notable compact foundation for 4D perception.",
+      "tldr_zh": "π⁴ 从未标定图片或视频中联合恢复场景几何、相机位姿、metric scale、point track 与运动物体 mask。其 geometry-conditioned motion branch 先预测图像空间对应关系，再借助重建目标视角把它提升到 3D，约 0.5B 参数即可一次前向完成。模型训练时最多只见 64 个视角，却能处理包含数千张图像的场景，使其成为紧凑 4D perception foundation 的重要候选。",
+      "interest_tag": ""
+    },
+    {
+      "title": "K2-Horizon: A Frontier Fleet of Open Source Language Models",
+      "arxiv_id": "2611.21003",
+      "url": "https://arxiv.org/abs/2611.21003",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2611.21003",
+      "tldr": "K2-Horizon releases six fully open models from 0.9B dense to 375B-A23B MoE, together with intermediate checkpoints, data, logs, training code, and evaluation infrastructure. Its Mixture-of-Value Attention applies expert routing to attention value projections, while Uno adds lossless diffusion adapters for up to 2.2× faster decoding without a separate draft model. The unusually complete development trail is as important as the benchmark scores because it enables controlled studies of scale, sparsity, synthetic data, and RL.",
+      "tldr_zh": "K2-Horizon 发布六个从 0.9B dense 到 375B-A23B MoE 的全开放模型，并附带中间 checkpoint、数据、日志、训练代码与评测基础设施。Mixture-of-Value Attention 把 expert routing 用到 attention value projection，Uno 则通过 lossless diffusion adapter 在无需独立 draft model 的情况下把解码提速最高 2.2 倍。其完整开发轨迹与榜单分数同样重要，因为它让 scale、sparsity、synthetic data 与 RL 的受控研究成为可能。",
+      "interest_tag": ""
+    },
+    {
+      "title": "The Resolution Hypothesis: Agent Evolution's Key Is Identifying Improvements",
+      "arxiv_id": "2611.23068",
+      "url": "https://arxiv.org/abs/2611.23068",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2611.23068",
+      "tldr": "The Resolution Hypothesis argues that agent evolution often stalls because noisy evaluation cannot reliably identify helpful artifacts, not because proposers fail to generate them. Across seven methods, six models, and more than 10 million LLM calls, candidate selection is often indistinguishable from chance and method-level score gaps are smaller than run-to-run variance. This shifts the self-improvement agenda from inventing more mutation strategies toward higher-resolution evaluation that can detect and accumulate genuine gains.",
+      "tldr_zh": "Resolution Hypothesis 认为，agent evolution 停滞往往不是 proposer 生成不出好 artifact，而是噪声评测无法可靠识别它们。论文覆盖 7 种方法、6 个模型和超过一千万次 LLM call，发现 candidate selection 经常与随机无显著差异，method 间分差也小于重复运行方差。这把 self-improvement 的重点从设计更多 mutation strategy，转向能识别并累积真实增益的高分辨率评测。",
+      "interest_tag": ""
+    }
+  ],
+  "github_repos": [
+    {
+      "name": "boringmarketer/boring-marketing-skills",
+      "url": "https://github.com/boringmarketer/boring-marketing-skills",
+      "tldr": "This repository packages 32 marketing workflows as reusable agent skills spanning research, positioning, SEO, landing pages, ads, email, and local-business operations. A start-here skill builds shared brand context and routes the agent to later skills, reducing one-off prompting and keeping outputs consistent. Its rapid adoption shows that domain-specific, installable skill bundles are becoming a practical distribution format for agent expertise.",
+      "tldr_zh": "该仓库把研究、定位、SEO、落地页、广告、邮件和本地商业运营封装成 32 个可复用 agent skill。`start-here` skill 先建立共享品牌上下文，再把 agent 路由到后续 skill，从而减少一次性 prompt 并维持输出一致性。其快速传播说明，面向垂直领域、可直接安装的 skill bundle 正成为分发 agent 专业能力的实用形式。",
+      "stars": 594,
+      "language": "Python",
+      "interest_tag": ""
+    },
+    {
+      "name": "berkantay/gpucanvas",
+      "url": "https://github.com/berkantay/gpucanvas",
+      "tldr": "gpucanvas renders thousands of live DOM or React nodes on a WebGPU infinite canvas while preserving normal interaction with the underlying elements. It exposes a compact JSON tree and regional snapshots so an agent can inspect, point at, and annotate the same workspace a human sees. The project is significant for agent-native interfaces because it combines scalable visual rendering with a structured action surface instead of forcing agents to parse a giant raw DOM.",
+      "tldr_zh": "gpucanvas 在 WebGPU 无限画布上渲染数千个实时 DOM 或 React node，同时保留对底层元素的正常交互。它向 agent 暴露紧凑 JSON tree 与区域 snapshot，让 agent 能检查、指向并标注人类看到的同一工作区。其价值在于把可扩展视觉渲染与结构化 action surface 结合起来，而不是迫使 agent 解析巨大的 raw DOM。",
+      "stars": 518,
+      "language": "TypeScript",
+      "interest_tag": ""
+    },
+    {
+      "name": "vaibhav-space/my-ai-coding-workflow",
+      "url": "https://github.com/vaibhav-space/my-ai-coding-workflow",
+      "tldr": "This repository codifies an agent-agnostic engineering workflow built around planning, independent plan criticism, implementation, and final diff verification. It explicitly treats conversational summaries as untrusted and requires executable evidence, scoped changes, and blast-radius gates for risky operations. The project is useful less as a novel agent architecture than as a field-tested operating manual for controlling coding-agent failure modes.",
+      "tldr_zh": "该仓库把一套 agent-agnostic 工程流程固化为 planning、独立 plan critique、实现与最终 diff verification 四个环节。它明确不信任对话式总结，并要求可执行证据、范围受控的修改以及高风险操作的 blast-radius gate。其价值不在新型 agent 架构，而在于提供了一份经过实践打磨、用于约束 coding agent 常见失败模式的操作手册。",
+      "stars": 242,
+      "language": "",
+      "interest_tag": ""
+    },
+    {
+      "name": "jackson-cmd/risk-aware-trading-agents",
+      "url": "https://github.com/jackson-cmd/risk-aware-trading-agents",
+      "tldr": "This project combines risk-aware trading agents with rta-bench-1, a public benchmark that replays news at publication time across frozen 2020, 2022, and 2026 markets. Orders fill only at the next open and each run performs a look-ahead check, addressing the temporal leakage that invalidates many news backtests. The benchmark, MCP interface, reproducible records, and public leaderboard make it a substantive evaluation stack rather than another opaque trading bot.",
+      "tldr_zh": "该项目把风险感知交易 agent 与公开 benchmark `rta-bench-1` 结合，在冻结的 2020、2022、2026 市场中按真实发布时间回放新闻。订单只能在下一次开盘成交，且每次运行都检查 look-ahead bias，直接处理许多新闻回测中的时间泄漏问题。Benchmark、MCP 接口、可复现实验记录与公开 leaderboard 共同构成了实质评测栈，而非又一个不透明交易机器人。",
+      "stars": 235,
+      "language": "Python",
+      "interest_tag": "Benchmark"
+    },
+    {
+      "name": "nickvasilescu/parallax",
+      "url": "https://github.com/nickvasilescu/parallax",
+      "tldr": "Parallax is a self-hostable image, video, voice, and music studio with an agent chat that can run through a user's own Hermes agent over MCP. It includes a zero-key demo path, explicit per-generation pricing, a daily spending cap, and approval cards before paid media calls. The design is notable for separating agent reasoning from credentialed generation services, although the README says live Hermes integration has not yet been exercised end to end.",
+      "tldr_zh": "Parallax 是可自托管的图片、视频、语音与音乐工作室，其 agent chat 可通过 MCP 接入用户自己的 Hermes agent。它提供无需 key 的 demo path、逐次生成价格、每日预算上限，并在付费媒体调用前展示 approval card。其设计亮点是分离 agent reasoning 与持有凭据的生成服务，但 README 也明确说明真实 Hermes 集成尚未完成端到端实测。",
+      "stars": 204,
+      "language": "TypeScript",
+      "interest_tag": ""
+    }
+  ],
+  "hackernews": [
+    {
+      "title": "Harvard researchers find AI coding agents shifted the bottleneck to code review",
+      "url": "https://complexdiscovery.com/harvard-researchers-find-ai-coding-agents-shifted-the-bottleneck-to-code-review/",
+      "tldr": "A Harvard working paper covering 718 firms reports roughly 30% more code after coding-agent adoption but no statistically detectable increase in deployed Jira issues. Pull-request merge time rose 49%, formal change requests nearly doubled, and review comments increased, suggesting verification capacity became the constraint. Because the study is not yet peer reviewed and uses observational adoption timing, the causal estimate needs caution, but the operational lesson is clear: measure approved output and reviewer time, not generated code volume.",
+      "tldr_zh": "一篇覆盖 718 家公司的 Harvard working paper 报告称，引入 coding agent 后代码量约增 30%，但已部署 Jira issue 没有统计显著增长。PR merge 时间增加 49%，正式 change request 近乎翻倍，review comment 也上升，说明验证能力成为新瓶颈。由于研究尚未 peer review，且基于观察性采用时点，因果结论需谨慎；但运营启示很明确：应衡量获批产出与 reviewer 时间，而非生成代码量。",
+      "points": 171,
+      "num_comments": 232,
+      "interest_tag": ""
+    },
+    {
+      "title": "Launch HN: StarSling (YC P25) – Self-improving CI for agent-volume repos",
+      "url": "https://starsling.dev",
+      "tldr": "StarSling positions CI as infrastructure that must scale with agent-generated pull-request volume, combining drop-in GitHub Actions runners with agents that propose workflow optimizations. The company reports examples such as a sixfold faster test suite and offers open skills for speed, security, and CI scoring. Its importance is the product framing: as code generation accelerates, verification latency and queueing become first-class agent-platform costs.",
+      "tldr_zh": "StarSling 把 CI 定位为必须随 agent 生成 PR 数量一起扩展的基础设施，将可直接替换的 GitHub Actions runner 与自动提出 workflow 优化的 agent 结合。其案例包括测试套件提速 6 倍，并开放 speed、security 与 CI scoring skill。真正重要的是产品 framing：当代码生成加速后，验证延迟与队列开始成为 agent platform 的一等成本。",
+      "points": 66,
+      "num_comments": 37,
+      "interest_tag": ""
+    },
+    {
+      "title": "Show HN: Coral – Open-source gateway where agents write their own tools",
+      "url": "https://github.com/withcoral/coral",
+      "tldr": "Coral is a self-hosted gateway that lets agents write short TypeScript programs over provider tools and save successful programs as reusable custom tools. Every underlying call is checked against Allow, Ask, or Block policy before credentials are attached, enabling narrower permissions than exposing a broad MCP tool. The combination of policy enforcement, reusable execution traces, and claimed token savings addresses both enterprise safety and repeated tool-discovery overhead.",
+      "tldr_zh": "Coral 是自托管 gateway，允许 agent 基于 provider tool 编写短 TypeScript 程序，并把成功程序保存为可复用 custom tool。每个底层调用都在注入凭据前经过 Allow、Ask 或 Block policy 检查，比直接暴露宽权限 MCP tool 更细粒度。Policy enforcement、可复用执行轨迹与 token 节省共同回应了企业安全和重复 tool discovery 的成本。",
+      "points": 52,
+      "num_comments": 24,
+      "interest_tag": ""
+    },
+    {
+      "title": "Claude asked to renumber pages deletes professor's syllabus, year of notes",
+      "url": "https://www.tomshardware.com/tech-industry/artificial-intelligence/rogue-claude-ai-tasked-with-renumbering-pages-accidentally-deletes-law-professors-entire-syllabus-one-year-of-lecture-notes-youre-right-to-be-angry-i-deleted-your-files-through-my-own-carelessness-humbled-agent-admits",
+      "tldr": "A reported Claude incident turned a page-renumbering request into deletion of a professor's syllabus and a year of lecture notes. The episode is anecdotal rather than a controlled evaluation, but it demonstrates why benign intent does not make filesystem actions safe. Agent products need backups, least privilege, previewable diffs, and explicit confirmation at destructive boundaries instead of relying on the model to recognize risk reliably.",
+      "tldr_zh": "一则 Claude 事故报道称，一个页码重排请求最终删除了教授的课程大纲和一年讲义。它只是个案而非受控评测，但清楚说明了良性任务意图并不会让文件系统操作自动安全。Agent 产品需要 backup、least privilege、可预览 diff 与破坏性边界的明确确认，而不能依赖模型稳定识别风险。",
+      "points": 51,
+      "num_comments": 75,
+      "interest_tag": ""
+    },
+    {
+      "title": "Show HN: db-branch – database branches in seconds for AI agents and CI, via ZFS",
+      "url": "https://github.com/db-branch/db-branch",
+      "tldr": "db-branch creates copy-on-write MySQL or PostgreSQL branches on ZFS so agents and CI jobs can test migrations against realistic data without touching the base database. Branches can be created in seconds, reset, checkpointed, upgraded independently, and expired automatically, with access through CLI, REST, web console, or MCP. This is a strong example of moving agent safety into reversible infrastructure rather than trying to make every generated query harmless.",
+      "tldr_zh": "db-branch 基于 ZFS 为 MySQL 或 PostgreSQL 创建 copy-on-write 分支，让 agent 与 CI 能在接近真实的数据上测试 migration，而不接触 base database。分支可在数秒内创建，并支持 reset、checkpoint、独立升级和自动过期，同时通过 CLI、REST、web console 或 MCP 访问。这是把 agent 安全下沉到可逆基础设施的典型做法，而不是试图让每条生成查询都天然无害。",
+      "points": 45,
+      "num_comments": 17,
+      "interest_tag": ""
+    }
+  ]
+}
