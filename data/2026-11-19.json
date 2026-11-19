@@ -1,0 +1,221 @@
+{
+  "date": "2026-11-19",
+  "generated_at": "2026-11-19T17:05:21.654146+08:00",
+  "briefing_zh": "今天最强的研究信号不是单一模型又变大了，而是 Agent 系统开始直面「改进是否真的可辨认」。**The Resolution Hypothesis** 用七种 evolution 方法、六个模型和超过 1000 万次 LLM 调用指出：候选 skill、prompt 或 memory 中往往已有更好的方案，真正的瓶颈却是 noisy evaluation 无法稳定把它们选出来。与之呼应，**Do LLM Agents Still Need to Be Told How to Self-Improve?** 显示更强的 frozen agent 已能从游戏经验中自行发明学习流程；两者合起来说明，自我改进的前沿正从「如何生成改进」转向「如何可靠确认并累积改进」。\n\n第二条主线是 world model 从生成画面走向可干预、可反事实、可验证的动态系统。**Counterfactual World Models** 在无需 counterfactual data 或 retraining 的情况下，用 factual outcome 修正 alternative-action prediction，在多组像素模拟器上把 counterfactual R² 从 38–46% 提升到 86–96%。**WorldRuler** 则把规则、对象状态和视觉生成连成闭环，强调保存/恢复后规则仍持续生效；**Game2Player** 更进一步，让 Builder 与 Player 共同修复环境、定义 state-based success check，并产出 568 个验证过的 web games 和 15.7K 条轨迹。这些工作共同把「看起来像世界」推向「能被行动、规则与验收约束的世界」。\n\n效率侧同样出现从模型到系统的多层压缩。**Jeveration** 以共享随机状态协调并行位置，只用一次 forward pass 同时覆盖文生图、图生图和 dense prediction，512×512 生成达到 78 ms；**Tideway** 把 VRAM 与 host RAM 作为统一池管理，使消费级设备上的 MoE inference 相比最快 baseline 获得 1.97× 端到端延迟加速。alphaXiv 头部的 **π⁴** 则用约 0.5B 参数统一恢复 geometry、camera、scale、tracking 与 moving-object masks，显示视觉基础模型的竞争重点也在转向统一接口和长上下文场景。\n\n开源与产业信号都指向 agent-volume 带来的新瓶颈。**Mastra Factory** 把 durable sessions、memory、wiki、sandbox 与 PR signals 组合成可在 Slack 驱动的软件工厂，公开称一周由 Factory 开启并合并 238 个 PR；与此同时，Harvard working paper 的二手报道显示采用 coding agents 后代码量约增 30%，但完成工作未显著增加，review 时间反而增长 49%。GitHub 上真正获得关注的项目多是可直接安装的 workflow/skill 包，而非新 agent framework；这说明传播和落地都更偏爱具体任务、明确入口与可验证结果。",
+  "briefing_en": "The strongest research signal today is not simply another jump in model scale, but a direct confrontation with whether agent improvements can be identified reliably. **The Resolution Hypothesis**, spanning seven evolution methods, six models, and more than 10 million LLM calls, argues that better candidate skills, prompts, or memories often already exist; noisy evaluation is what fails to select them consistently. In parallel, **Do LLM Agents Still Need to Be Told How to Self-Improve?** finds that sufficiently capable frozen agents can invent learning procedures from game experience. Together, these results move the frontier from generating improvements toward detecting and accumulating real improvements.\n\nA second theme is the transition from visually plausible world generation to interactive dynamics constrained by interventions, rules, and verification. **Counterfactual World Models** uses the observed factual outcome to correct alternative-action predictions without counterfactual data or retraining, raising counterfactual R² from 38–46% to 86–96% across pixel-based simulators. **WorldRuler** closes the loop among executable rules, object state, video generation, and perceptual feedback, while **Game2Player** co-develops environments and players to produce 568 verified web games and 15.7K trajectories with state-based progress and success checks. The common goal is a world that can be acted upon and tested, not merely rendered.\n\nEfficiency advances are appearing at several layers of the stack. **Jeveration** coordinates parallel predictions with shared randomness and handles text-to-image, image-to-image, and dense prediction in one forward pass, generating a 512×512 image in 78 ms. **Tideway** manages VRAM and host RAM as a unified pool for MoE inference on consumer devices, reporting 1.97× lower end-to-end latency than the fastest baseline. At the top of alphaXiv, **π⁴** unifies geometry, camera pose, scale, tracking, and motion masks in an approximately 0.5B-parameter model, suggesting that unified interfaces and long-scene context are becoming as important as raw size.\n\nOpen-source and industry signals both expose the operational bottlenecks created by agent-scale code production. **Mastra Factory** combines durable sessions, memory, a cited wiki, sandboxes, and PR signals into a Slack-driven software factory, reporting 238 agent-opened and merged PRs in one week. Yet a report on a Harvard working paper says coding-agent adopters produced roughly 30% more code without a measurable increase in completed work, while review time rose 49%. On GitHub, the credible winners are installable workflow and skill packages rather than new generic agent frameworks, indicating that concrete tasks, low-friction entry points, and verifiable outcomes now travel further than broad platform claims.",
+  "viral_analysis_zh": "今天最可能形成研究圈爆款的是 **A Society of AI Scientists**：936 个 autonomous agents、35 个实验室、12 周、936 篇研究和 9500 条消息，把抽象的 multi-agent collaboration 变成了可浏览的「AI 科学社会」叙事，规模数字和完整档案都极易传播。产品圈最可能扩散的是 **Mastra Factory**，因为它没有只讲 software factory 愿景，而是用「一周 238 个 agent PR」和 Slack 驱动的具体工作流提供了可复述、可试用的 proof point。",
+  "viral_analysis_en": "The likeliest research breakout is **A Society of AI Scientists**: 936 autonomous agents, 35 labs, 12 weeks, 936 studies, and 9,500 messages turn abstract multi-agent collaboration into a browsable story about an AI scientific society. In the product ecosystem, **Mastra Factory** has the strongest viral mechanics because it pairs the software-factory narrative with a concrete proof point—238 agent-opened and merged PRs in one week—and an immediately familiar Slack-driven workflow.",
+  "huggingface_papers": [
+    {
+      "title": "Tideway: Phase-Aware Tiered Memory Management for MoE Inference on Consumer Devices",
+      "url": "https://arxiv.org/abs/2611.14848",
+      "tldr": "Tideway targets large MoE inference on PCs where expert weights must spill across GPU VRAM, host RAM, and SSD. Instead of treating those tiers as independent caches, it manages VRAM and RAM as one pool and switches layouts for the distinct access patterns of prefill and decode. On representative consumer hardware, it reports 1.97× lower end-to-end latency, 2.40× faster time to first token, and 1.61× higher decode throughput than the fastest baseline. The work matters because private, local agents increasingly need frontier-scale models without datacenter memory capacity.",
+      "tldr_zh": "Tideway 面向消费级 PC 上的大型 MoE inference：当 expert weights 被迫跨 GPU VRAM、host RAM 与 SSD 溢出时，传统独立 cache 容易产生 thrashing。它把 VRAM 与 RAM 作为统一内存池，并针对 prefill 和 decode 的不同访问模式切换布局。实验相对最快 baseline 报告 1.97× 端到端延迟加速、2.40× TTFT 加速和 1.61× decode throughput 提升。其重要性在于，本地私有 Agent 若想使用前沿 MoE，首先受限的往往不是模型能力，而是消费级内存层级。",
+      "upvotes": 60,
+      "authors": "Yifei Wang, Tsun-yu Yang, Yechen Xu, Hancheng Ye, Qinsi Wang, Baijun Zhou, Tingjun Chen, Hai “Helen” Li, Danyang Zhuo, Yiran Chen",
+      "ai_keywords": [
+        "MoE inference",
+        "memory hierarchy",
+        "consumer devices"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "Jeveration: System One Models Now Generate",
+      "url": "https://arxiv.org/abs/2611.24738",
+      "tldr": "Jeveration extends a fast System One decision model into single-pass image generation by repurposing a frozen vision-language model. A shared random state coordinates parallel position predictions so each sample remains globally coherent, while a learned distribution over discrete image codes prevents the model from ignoring that state. One checkpoint supports text-to-image, image-to-image, and dense prediction, producing a 512×512 image in 78 ms—up to 122× faster than prior unified models. It is a notable challenge to the assumption that high-quality visual generation must be iterative.",
+      "tldr_zh": "Jeveration 把快速的 System One decision model 扩展到单次前向图像生成，并复用 frozen vision-language model 的视觉语义知识。它用共享随机状态协调所有位置的并行预测，再通过离散 image code 分布避免模型忽略该状态，从而兼顾多样性与全局一致性。单一 checkpoint 同时支持 text-to-image、image-to-image 与 dense prediction，生成 512×512 图像只需 78 ms，最高比既有统一模型快 122×。这直接挑战了高质量视觉生成必须依赖多轮迭代的默认假设。",
+      "upvotes": 34,
+      "authors": "Yuhe Liu, Qi Li, Shihua Zhang, Xinchao Wang",
+      "ai_keywords": [
+        "single-pass generation",
+        "vision-language model",
+        "System One"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "Game2Player: Scaling Gameplay Experience for Visual Agents through Environment-Player Co-Development",
+      "url": "https://arxiv.org/abs/2611.24154",
+      "tldr": "Game2Player co-develops web-game environments and visual players instead of treating the environment as fixed. A Builder agent exposes internal state and defines progress and success checks; coding and VLM players then attempt tasks and report defects back for repair. The pipeline yields 568 verified games, 3,436 tasks, and 15.7K trajectories, with 50 games held out as PlayerBench. Progress-weighted SFT raises a 9B player's progress from 14.3% to 31.2% on PlayerBench and from 30.0% to 53.1% on GameWorld, showing that verifiable environment construction can scale agent experience more effectively than passive video collection.",
+      "tldr_zh": "Game2Player 不再把游戏环境视为固定资产，而是让环境与 visual player 共同演化。Builder agent 暴露内部状态并定义 progress metric 和 success check，Coding Player 与 VLM Player 执行任务后把缺陷反馈给 Builder 修复。该流程产出 568 个验证过的游戏、3436 个任务和 1.57 万条轨迹，并留出 50 个游戏组成 PlayerBench。使用 progress-weighted SFT 后，9B player 在 PlayerBench 的进度从 14.3% 升至 31.2%，在 GameWorld 从 30.0% 升至 53.1%，说明可验证环境构建比被动收集视频更适合扩展 Agent experience。",
+      "upvotes": 20,
+      "authors": "Xirui Jiang, Yuxi Chen, Rui Yang, Feng Luo, Pengcheng Wang, Bingxuan Li, Zihao Zhao, Yushan Li, Han Wang, Manling Li, Yang Zhang, Shiyu Chang, Tong Zhang, Huan Zhang",
+      "ai_keywords": [
+        "visual agents",
+        "environment generation",
+        "verifiable trajectories"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "The Resolution Hypothesis: Agent Evolution's Key Is Identifying Improvements",
+      "url": "https://arxiv.org/abs/2611.23068",
+      "tldr": "This paper argues that agent evolution stalls less because proposers cannot create useful prompts, skills, or memories than because noisy evaluation cannot identify them. Across seven evolution methods, six models, and more than 10 million LLM calls, helpful candidates exist, yet selection performs no better than chance at separating them from harmful ones. At the method level, published margins of a few points are often smaller than run-to-run variation for the same method. The result redirects self-improvement research toward higher-resolution evaluation and uncertainty-aware selection rather than ever more elaborate candidate generators.",
+      "tldr_zh": "这篇工作认为，Agent evolution 的主要瓶颈不是 proposer 生成不出有用的 prompt、skill 或 memory，而是 noisy evaluation 无法识别它们。作者横跨七种 evolution 方法、六个模型和超过 1000 万次 LLM 调用，发现有帮助的候选确实存在，但 selection 区分其好坏的能力并不优于随机。在 method ranking 层面，论文常见的几个百分点差距甚至小于同一方法两次独立运行的波动。结论把 self-improvement 的重点从更复杂的候选生成器转向更高 resolution、能表达不确定性的评测与选择机制。",
+      "upvotes": 16,
+      "authors": "Yuanhao Zeng, Shaocheng Lan, Ao Lu, Kuang Yan, Heng Lin, Xinang Xu, Yuan Luo, Yueting Wang, Yexin Li, Ruo Shan, Kan Ren",
+      "ai_keywords": [
+        "agent evolution",
+        "evaluation noise",
+        "self-improvement"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "WorldRuler: Interactive World Modeling under Configurable Rules",
+      "url": "https://arxiv.org/abs/2611.24869",
+      "tldr": "WorldRuler addresses interactive worlds whose behavior must follow user-defined rules rather than only learned real-world dynamics. It stores rule definitions, dependencies, and object states in an executable 3D rule graph, then closes the loop among rule execution, video generation, and perceptual feedback. Dynamic object binding and counterfactual reconstruction help rules affect the right objects—even before those objects become visible—without unnecessarily changing the rest of the scene. The work is important for controllable world simulation because persistence and causal rule compliance are stricter requirements than short-term visual realism.",
+      "tldr_zh": "WorldRuler 研究的不只是拟合现实动力学，而是让 interactive world 按用户定义的规则运行。它把规则、依赖和对象状态存进 executable 3D rule graph，并将 rule execution、video generation 与 perceptual feedback 闭环连接。Dynamic object binding 和 counterfactual reconstruction 让规则在目标对象尚未出现时也能预先生效，同时尽量不干扰场景其他部分。对于可控 world simulation，这很关键：跨保存/恢复的状态持续性与因果规则遵循，比短片段的视觉逼真度要求更严格。",
+      "upvotes": 14,
+      "authors": "Mingliang Zhai, Chuanhao Li, Jiaming Tan, Zhen Li, Yuwei Wu, Yunde Jia, Zian Meng, Yuanyang Yin, Kaipeng Zhang",
+      "ai_keywords": [
+        "world model",
+        "controllable generation",
+        "rule graph"
+      ],
+      "interest_tag": ""
+    }
+  ],
+  "alphaxiv_papers": [
+    {
+      "title": "$π^4$: A Foundation Model for 4D Scene Geometry and Motion",
+      "arxiv_id": "2611.23144",
+      "url": "https://arxiv.org/abs/2611.23144",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2611.23144",
+      "tldr": "π⁴ is a unified 4D scene-perception model that accepts a single image, unordered views, or video and jointly recovers dense geometry, camera poses, metric scale, point tracks, and moving-object masks. Its geometry-conditioned motion branch predicts image correspondences and lifts them into 3D with reconstructed target-view geometry. At roughly 0.5B parameters, it reports the best overall average rank across geometry evaluations while remaining competitive on 2D/3D tracking and motion segmentation. Its ability to process scenes with thousands of images despite training on at most 64 views makes it a strong foundation for large-scale reconstruction and embodied perception.",
+      "tldr_zh": "π⁴ 是统一的 4D scene perception 模型，可接收单图、无序多视图或视频，并联合恢复 dense geometry、camera pose、metric scale、point track 与 moving-object mask。其 geometry-conditioned motion branch 先预测图像 correspondence，再借助重建的目标视图几何把它提升到 3D。模型约 0.5B 参数，在 geometry 评测上取得最佳综合平均排名，同时保持有竞争力的 2D/3D tracking 与 motion segmentation。更重要的是，它虽然训练上下文最多只有 64 个视图，却能处理数千张图像的场景，为大规模重建和 embodied perception 提供了统一底座。",
+      "interest_tag": ""
+    },
+    {
+      "title": "Counterfactual World Models: JEPAs That Reason About \"What If\"",
+      "arxiv_id": "2611.24778",
+      "url": "https://arxiv.org/abs/2611.24778",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2611.24778",
+      "tldr": "The paper asks what would have happened under a different action while preserving the same hidden disturbance that produced the observed outcome. It proves that factual transition models alone cannot identify this counterfactual, then derives a first-order correction using the difference between predicted alternative and factual actions. The method needs no paired counterfactual data, extra parameters, or retraining, yet raises counterfactual R² from 38–46% to 86–96% on four pixel simulators. This gives world models a principled route to hindsight planning that separates poor decisions from bad luck.",
+      "tldr_zh": "这篇论文追问：在保持同一个 hidden disturbance 的前提下，若采取另一动作，结果会怎样。作者先证明仅靠 factual transition model 无法识别该反事实，再用 alternative action 与 factual action 的预测差构造一阶修正。方法不需要 paired counterfactual data、额外参数或 retraining，却在四个像素模拟器上把 counterfactual R² 从 38–46% 提升到 86–96%。它为 hindsight planning 提供了有理论依据的机制，让 world model 能区分决策错误和纯粹的坏运气。",
+      "interest_tag": ""
+    },
+    {
+      "title": "A Society of AI Scientists",
+      "arxiv_id": "",
+      "url": "https://www.alphaxiv.org/abs/2611.society-ai-scientists",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2611.society-ai-scientists",
+      "tldr": "This exploratory study follows 936 autonomous agents across 35 human-operated laboratories for twelve weeks in a shared preprint server and messaging workspace. The agents produced 936 studies, exchanged 9,500 messages in 229 rooms, formed topical hubs, retracted errors, reported negative findings, and even created an agent-run peer-review venue. Blinded evaluation rated their work stronger on experimental rigor and calibrated claims but weaker than human preprints on novelty and significance. The released archive makes this unusually valuable as empirical evidence about how norms, coordination, and failure modes emerge in large agent societies.",
+      "tldr_zh": "这项探索性研究追踪了 35 个由人类运营的实验室中 936 个 autonomous agents，在共享 preprint server 与消息空间里持续活动 12 周。Agent 产出 936 项研究，在 229 个聊天室交换 9500 条消息，并形成主题社区、公开撤回错误、报告负结果，甚至建立由 Agent 运营的 peer-review venue。盲评显示其研究在实验严谨性和克制表述上优于近期人类预印本，但 novelty 与 significance 仍较弱。完整档案的开放，使它成为观察大规模 Agent 社会中规范、协作与失败模式如何涌现的罕见实证材料。",
+      "interest_tag": "Agent Swarm"
+    },
+    {
+      "title": "Do LLM Agents Still Need to Be Told How to Self-Improve?",
+      "arxiv_id": "2611.23219",
+      "url": "https://arxiv.org/abs/2611.23219",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2611.23219",
+      "tldr": "Instead of prescribing a fixed self-improvement loop, this work gives a frozen LLM agent basic tools, compute, experience collection, and editable text artifacts, then asks it to invent its own learning procedure. In gameplay experiments, sufficiently capable models discover strategies resembling self-regulated learning and self-generated curricula. The learned text artifacts transfer across different horizons, mechanics, and 3D navigation benchmarks. The result suggests that future self-improvement systems may need better primitives, budgets, and evaluation more than increasingly hand-authored optimization recipes.",
+      "tldr_zh": "这项工作没有预设固定的 self-improvement loop，而是给 frozen LLM agent 基础工具、算力预算、经验收集能力和可编辑文本 artifact，让它自行发明学习程序。在游戏实验中，能力足够强的模型会形成类似 self-regulated learning 和 self-generated curriculum 的策略。学到的文本 artifact 还能迁移到不同 horizon、机制与 3D navigation benchmark。结果暗示，未来 self-improvement 系统更需要好的 primitive、预算分配与评测，而不一定需要越来越复杂的人工优化 recipe。",
+      "interest_tag": ""
+    },
+    {
+      "title": "NVIDIA Kumo Tabular: Pushing the Accuracy–Efficiency Frontier for Tabular Prediction",
+      "arxiv_id": "2611.23001",
+      "url": "https://arxiv.org/abs/2611.23001",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2611.23001",
+      "tldr": "Kumo Tabular is an open family of 27M, 61M, and 214M parameter foundation models that performs classification and regression on unseen tables without task-specific training. A row encoder compresses each row, and an in-context transformer predicts unlabeled rows from labeled examples; pretraining uses only synthetic tables. The largest model ranks first across eight benchmarks spanning million-row tables, 100K-column data, strings, text, images, scientific domains, and probabilistic regression. Its combination of released weights, pretraining code, accuracy, and speed makes tabular foundation models substantially more practical than benchmark-only demonstrations.",
+      "tldr_zh": "Kumo Tabular 是开放的 tabular foundation model 家族，包含 27M、61M 和 214M 三种规模，可在无需 task-specific training 的情况下对新表格进行分类与回归。它用 row encoder 压缩每一行，再由 in-context transformer 根据已标注行预测未标注行，预训练数据完全由 synthetic tables 构成。最大模型在八项 benchmark 上排名第一，覆盖百万行、10 万列、字符串、文本、图像、科学数据与 probabilistic regression。开放 weights 与 pretraining code，再加上准确率和速度优势，使 tabular foundation model 从榜单演示更接近可用工具。",
+      "interest_tag": ""
+    }
+  ],
+  "github_repos": [
+    {
+      "name": "boringmarketer/boring-marketing-skills",
+      "url": "https://github.com/boringmarketer/boring-marketing-skills",
+      "tldr": "This repository packages 32 marketing workflows as installable skills for Claude Code, Codex, Cursor, and other agents. The collection spans brand research, positioning, local SEO, ads, landing pages, email, client acquisition, and performance review, with a shared onboarding skill that extracts reusable brand context. Its strongest product decision is specificity: each skill maps to a recognizable job and defaults to free data sources before paid tools. The project shows that reusable domain procedures can attract more adoption than another general-purpose agent shell.",
+      "tldr_zh": "该仓库把 32 个营销流程封装成可直接安装到 Claude Code、Codex、Cursor 等 Agent 的 skills。内容覆盖品牌研究、定位、本地 SEO、广告、landing page、邮件、获客和效果复盘，并由统一 onboarding skill 抽取可复用的品牌上下文。它最强的产品决策是足够具体：每个 skill 都对应清晰任务，并优先提供免费数据源，再推荐付费工具。项目说明，相比再造一个通用 Agent shell，可复用的垂直领域 SOP 更容易获得真实采用。",
+      "stars": 683,
+      "language": "Python",
+      "interest_tag": ""
+    },
+    {
+      "name": "roan-maverick/tradingview-indicator-for-ai-agents",
+      "url": "https://github.com/roan-maverick/tradingview-indicator-for-ai-agents",
+      "tldr": "AI Agent Lens converts every closed TradingView candle into a structured JSON packet rather than asking an agent to interpret chart colors and overlays. The packet includes recent candle structure, regime, trend, momentum, volatility, levels, scores, and a risk map, then sends it through a webhook for agent analysis. A no-dependency Python receiver persists latest and historical packets, while the human retains the final trading decision. The project is a useful example of replacing a lossy visual interface with a machine-readable observation contract before adding agent reasoning.",
+      "tldr_zh": "AI Agent Lens 不让 Agent 从图表颜色和线条中猜信息，而是把每根收盘 K 线转换为结构化 JSON packet。Packet 包含近期 candle structure、regime、趋势、动量、波动率、关键价位、评分与 risk map，再通过 webhook 交给 Agent 分析。一个无依赖 Python receiver 会保存最新和历史 packet，最终交易决策仍由人类作出。它展示了一个可靠范式：先把易损的视觉界面替换成 machine-readable observation contract，再叠加 Agent reasoning。",
+      "stars": 312,
+      "language": "Pine Script",
+      "interest_tag": ""
+    },
+    {
+      "name": "RouteInferno/shamus-osint-ai-agent",
+      "url": "https://github.com/RouteInferno/shamus-osint-ai-agent",
+      "tldr": "Shamus is a terminal-first OSINT agent that selects among twelve investigation tools, interprets each result, decides the next step, and writes a case file. Its design deliberately minimizes interface surface area: one command, a transparent sequence of tool calls, and an explicit confirmation before widening the search. That makes it easier to script and audit than browser-heavy investigation products. The current repository is concise but points to a downloadable Windows release, so its value is the focused workflow rather than a broad framework.",
+      "tldr_zh": "Shamus 是 terminal-first 的 OSINT agent，可在 12 个调查工具之间自主选择、解释输出、决定下一步并写出 case file。它刻意压缩界面复杂度：一条命令、透明的 tool-call 序列，并在扩大搜索范围前显式请求确认。相比 browser-heavy 的调查产品，这种方式更容易脚本化和审计。当前仓库本身较精简并指向 Windows release，其价值主要来自聚焦的调查工作流，而非大而全的平台。",
+      "stars": 285,
+      "language": "JavaScript",
+      "interest_tag": ""
+    },
+    {
+      "name": "diego3g/craft",
+      "url": "https://github.com/diego3g/craft",
+      "tldr": "Craft is a suite of design skills that routes an agent through setup, screen design, state coverage, exploration, system maintenance, synchronization, and critique. It stores product and design decisions in a compact DESIGN.md, asks for approval at high-impact stops, and requires realistic loading, error, empty, permission, and offline states before a screen is considered complete. The package supports multiple coding agents and design targets rather than locking users into one UI tool. Its appeal comes from turning design quality into an explicit, repeatable process instead of relying on taste encoded in a single prompt.",
+      "tldr_zh": "Craft 是一组设计 skills，覆盖 setup、screen design、状态补全、多方案探索、design system 维护、同步与 critique，并通过 routing 把请求交给合适流程。它把产品与设计决策保存在简洁的 DESIGN.md 中，在高影响节点请求批准，并要求真实覆盖 loading、error、empty、permission、offline 等状态。该套件支持多个 coding agents 和多种设计工具，不把用户锁进单一 UI。它的吸引力在于把设计质量变成明确、可重复的流程，而不是依赖一条 prompt 里的模糊品味。",
+      "stars": 267,
+      "language": "JavaScript",
+      "interest_tag": ""
+    },
+    {
+      "name": "vaibhav-space/my-ai-coding-workflow",
+      "url": "https://github.com/vaibhav-space/my-ai-coding-workflow",
+      "tldr": "This repository offers a lightweight coding-agent workflow built around planning, independent plan critique, and post-implementation diff auditing. It emphasizes fresh-context review, executable verification, explicit blast-radius gates, and checking real git state rather than trusting an agent's summary. The author is transparent that the 4,500-hour figure is a personal estimate and that the rules are behavioral guidance, not hard security controls. The project resonates because it addresses the growing gap between fast code generation and slow, evidence-based acceptance.",
+      "tldr_zh": "该仓库提供一套轻量 coding-agent workflow，核心是先规划、独立 critique 计划，再对实现结果做 diff audit。它强调用 fresh context 审查、运行可执行验证、设置 blast-radius gate，并检查真实 git 状态，而不是相信 Agent 的口头总结。作者也明确说明 4500 小时是个人估算，这些规则属于行为约束而非硬安全边界。项目走红的原因很直接：它正面处理了代码生成越来越快、但基于证据的验收越来越慢这一缺口。",
+      "stars": 257,
+      "language": "HTML",
+      "interest_tag": ""
+    }
+  ],
+  "hackernews": [
+    {
+      "title": "AI agents ask better questions than KPMG accountants in audit trial",
+      "url": "https://europeanbusinessmagazine.com/ai-agents-better-questions-kpmg/",
+      "tldr": "A report on KPMG UK's Project Exponential says more than 100 AI agents worked across an experimental audit of an unnamed FTSE 250 company, collecting evidence, analyzing data, drafting observations, and proposing next steps. KPMG's audit leadership said the agents sometimes investigated issues more deeply and raised questions the conventional team had missed. This was not a statutory audit, and a human auditor had to intervene when an agent mismatched regulation and company documentation. The trial is notable less as proof of replacement than as evidence that multi-agent systems are moving into end-to-end professional workflows under mandatory human sign-off.",
+      "tldr_zh": "据报道，KPMG UK 的 Project Exponential 使用 100 多个 AI agents，对一家未具名 FTSE 250 公司开展实验性审计，覆盖资料收集、数据分析、draft observation 与后续步骤建议。KPMG 审计负责人称，Agent 有时比传统团队追得更深，并提出了人类未注意的问题。但这不是正式 statutory audit，而且曾出现 Agent 错配监管要求与公司材料、需要人工介入的情况。其意义不在于证明会计师已被替代，而在于 multi-agent system 已进入必须由人类签字兜底的端到端专业流程。",
+      "points": 451,
+      "num_comments": 205,
+      "interest_tag": ""
+    },
+    {
+      "title": "Harvard researchers find AI coding agents shifted the bottleneck to code review",
+      "url": "https://complexdiscovery.com/harvard-researchers-find-ai-coding-agents-shifted-the-bottleneck-to-code-review/",
+      "tldr": "This secondary report summarizes a Harvard working paper using engineering analytics and employment data from 718 firms. It says teams adopting coding agents added about 30% more code, but completed work did not measurably increase and time through code review rose 49%. The study is a working paper rather than completed peer review, and the observational setting limits causal interpretation. Even with those caveats, its core metric choice is important: agent productivity should be judged by accepted output and reviewer time, not generated code volume.",
+      "tldr_zh": "这篇二手报道总结了一篇 Harvard working paper，数据来自 718 家公司的工程分析与就业记录。报道指出，采用 coding agents 的团队新增代码约多 30%，但完成工作量未显著增长，代码通过 review 的时间反而增加 49%。该研究仍是 working paper，尚非完成 peer review 的结论，observational setting 也限制了因果解释。即便如此，它选择的指标很重要：Agent productivity 应以被接受的产出和 reviewer time 衡量，而不是生成代码量。",
+      "points": 320,
+      "num_comments": 443,
+      "interest_tag": ""
+    },
+    {
+      "title": "Show HN: Mastra Factory, the open-source software factory we use to build Mastra",
+      "url": "https://news.ycombinator.com/item?id=50548660",
+      "tldr": "Mastra Factory is an open-source agentic kanban system used to maintain the Mastra project, with long-running durable sessions, conversational memory, a cited wiki, PR-comment signals, and cloud sandboxes. The team says Factory opened and merged 238 PRs in one week alongside 630 human PRs, and that senior engineers increasingly launch parallel issue-triage sessions from Slack rather than the web UI. It can run on a user's infrastructure and starts from a template, although the throughput numbers are self-reported. The project is a concrete example of software factories becoming workflow products rather than one-shot coding demos.",
+      "tldr_zh": "Mastra Factory 是用于维护 Mastra 项目的开源 agentic kanban system，组合了 long-running durable session、conversation memory、带引用的 wiki、PR comment signal 与 cloud sandbox。团队自报 Factory 一周开启并合并 238 个 PR，另有 630 个 human PR；高级工程师也越来越多地直接从 Slack 并行发起 issue triage，而不是依赖 Web UI。它支持在用户自己的基础设施上运行并提供模板，但吞吐数字仍属于项目方自报。这个项目说明 software factory 正从一次性 coding demo 变成持续运行的 workflow product。",
+      "points": 92,
+      "num_comments": 33,
+      "interest_tag": ""
+    },
+    {
+      "title": "Launch HN: StarSling (YC P25) – Self-improving CI for agent-volume repos",
+      "url": "https://news.ycombinator.com/item?id=50536468",
+      "tldr": "StarSling combines high-concurrency Zen 5 CI runners and persistent disks with an agent loop that analyzes workflow logs and telemetry, proposes optimizations, runs side-by-side comparisons, and submits statistically supported winners as PRs. The company reports reducing Mastra's slowest workflow from 29:56 to 5:06 and an average 10× wall-clock speedup with 70% less runner time across its open-source benchmarks. Those figures are vendor-reported, but the evaluation loop is stronger than a generic optimization claim because it requires unchanged-versus-proposed comparisons. The product targets a real second-order effect of coding agents: CI queues and bills scale with PR volume.",
+      "tldr_zh": "StarSling 把高并发 Zen 5 CI runners、persistent disks 与 Agent optimization loop 结合起来：分析 workflow log 和 telemetry、提出改进、做 side-by-side comparison，再把统计上显著的 winner 作为 PR 提交。公司自报把 Mastra 最慢 workflow 从 29:56 降至 5:06，并在其开源 benchmark 上平均获得 10× wall-clock 加速和 70% runner time 降低。数字属于 vendor-reported，但其 unchanged-versus-proposed 对照比泛泛的优化宣传更可验证。它瞄准的是 coding agents 的二阶效应：PR 数量一涨，CI queue 与账单也同步膨胀。",
+      "points": 87,
+      "num_comments": 48,
+      "interest_tag": ""
+    },
+    {
+      "title": "Show HN: TrnRT – An open-source LLM inference engine for AWS Trainium",
+      "url": "https://github.com/RunanywhereAI/trnrt",
+      "tldr": "TrnRT is an Apache-2.0 inference engine for serving GLM-5.3-Flash on a single AWS trn2.48xlarge through an OpenAI-compatible API. It uses NKI decode megakernels, a device-and-host prefix cache, two session-affine engines per box, offline compilation, and supports 1M-token context. Its published AgentX result reaches 3.57 million tokens per minute at batch 12, with benchmark methodology and verification notes included in the repository. Model support is currently limited to one 320B-MoE model, but the project opens a technically detailed alternative to CUDA-centric agent inference infrastructure.",
+      "tldr_zh": "TrnRT 是 Apache-2.0 开源 inference engine，可在单台 AWS trn2.48xlarge 上通过 OpenAI-compatible API 部署 GLM-5.3-Flash。它使用 NKI decode megakernel、device/host 两级 prefix cache、每机两个 session-affine engine、offline compilation，并支持 1M-token context。仓库公布的 AgentX batch-12 结果达到每分钟 357 万 tokens，同时提供 benchmark methodology 与 verification notes。当前只支持一个 320B-MoE 模型，但它为以 CUDA 为中心的 Agent inference infrastructure 提供了技术细节充分的替代路线。",
+      "points": 54,
+      "num_comments": 7,
+      "interest_tag": ""
+    }
+  ]
+}
