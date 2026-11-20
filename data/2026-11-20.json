@@ -1,0 +1,221 @@
+{
+  "date": "2026-11-20",
+  "generated_at": "2026-11-20T17:04:27.950861+08:00",
+  "briefing_zh": "今天最清晰的主线，是 agent 研究开始把「能力强不强」拆成可诊断、可执行、可治理的闭环。**Mind2Act World** 将记忆推理、物理执行和反馈组合分开测量，组合任务成功率显著低于孤立能力；**TuringSpace** 则把空间理解放进真实的点击、拖拽与纠错循环。两者共同说明：静态问答或单步动作上的高分，并不能外推为可靠的 embodied/GUI 行为。\n\n第二条主线是 world model 从视觉逼真转向因果可用。**Counterfactual World Models** 尝试复用已观察事件中的隐藏扰动，估计同一情境下替代动作的结果；**WM^MLLM** 把可编辑世界状态移到生成器之外，避免每次重生成造成漂移。与 **Coda-DaVinci** 的可执行 3D proxy 相呼应，今天的工作都在强调持久状态、动作后果和可控结构，而不只是生成一段看起来合理的视频。\n\nAgent 自我改进也在从口号转向 selection 与 verification。**Do LLM Agents Still Need to Be Told How to Self-Improve?** 表明强模型能从自生成经验设计学习流程，但 **The Resolution Hypothesis** 指出噪声评估会让有用技能无法累积；**A Society of AI Scientists** 更把 executable review 放进数百 agent 的科研协作中。关键瓶颈越来越不像「能否生成候选方案」，而是「能否可靠识别真正的改进」。\n\n开源侧的信号更务实：**Project Chaperone** 用运行前审计和运行时标签执行 agent policy，**Agent Crop** 用 trace 式证据闭环复盘 coding agent，**robotics-antigravity-plugin** 把 agent 生成的控制器接到 MuJoCo 与真实机械臂。与此同时，GitHub 热榜被大量复制仓与异常 star 污染，今天的筛选再次说明 popularity 只能作为候选入口，不能替代内容核验。",
+  "briefing_en": "The clearest theme today is that agent research is decomposing broad capability claims into diagnosable, executable, and governable loops. **Mind2Act World** separates memory-based reasoning, physical execution, and feedback-driven composition, with composed tasks performing far below isolated skills; **TuringSpace** places spatial understanding inside click, drag, and correction loops. Together they show why high scores on static QA or single-step actions do not imply reliable embodied or GUI behavior.\n\nA second theme is the shift from visually plausible world models to causally useful ones. **Counterfactual World Models** reuses the hidden disturbance in an observed event to estimate outcomes under alternative actions, while **WM^MLLM** stores editable world state outside the generator to reduce drift on revisits. Alongside **Coda-DaVinci** and its executable 3D proxies, these works prioritize persistent state, action consequences, and controllable structure over merely generating a convincing clip.\n\nAgent self-improvement is also moving from slogans toward selection and verification. **Do LLM Agents Still Need to Be Told How to Self-Improve?** suggests capable models can invent learning procedures from self-generated experience, but **The Resolution Hypothesis** argues that noisy evaluation prevents useful skills from accumulating; **A Society of AI Scientists** brings executable review into collaboration among hundreds of agents. The bottleneck increasingly looks less like generating candidate improvements and more like reliably identifying which ones are real.\n\nOpen source is converging on practical control surfaces: **Project Chaperone** combines pre-run audits with runtime policy enforcement, **Agent Crop** applies trace-style evidence loops to coding-agent retrospectives, and **robotics-antigravity-plugin** connects agent-written controllers to MuJoCo and physical arms. GitHub search was also saturated with duplicated repositories and suspicious star patterns today, reinforcing that popularity is only a discovery signal, never a substitute for content verification.",
+  "viral_analysis_zh": "今天最可能形成研究圈传播的是 **A Society of AI Scientists**：936 个 agent、可执行 peer review，以及 49.4% 的 headline conclusion 被复核推翻，数字、叙事和争议性都足够强。开源侧最可能快速扩散的是 **boring-marketing-skills**，因为它把抽象的 agent 能力包装成 32 个可直接安装、无需付费工具的垂直技能，价值主张极易理解和复用。",
+  "viral_analysis_en": "**A Society of AI Scientists** is today's strongest research-viral candidate: 936 agents, executable peer review, and 49.4% of headline conclusions overturned provide a memorable scale, mechanism, and controversy. In open source, **boring-marketing-skills** has the clearest growth loop because it packages an abstract agent promise into 32 installable, tool-free vertical skills with an immediately legible value proposition.",
+  "huggingface_papers": [
+    {
+      "title": "Mind2Act World: A Diagnostic Benchmark for Embodied Mind, Physical Action, and Mind-Action Composition in Robotic Manipulation",
+      "url": "https://arxiv.org/abs/2611.26444",
+      "tldr": "Mind2Act World separates embodied performance into history-based reasoning, physical execution, and tasks that compose both through feedback. Reported success falls from 52.7% on Mind and 39.0% on Act to 12.0% on Mind2Act for GPT-6 Astra, exposing a sharp composition gap. The benchmark matters because it diagnoses where an embodied agent fails instead of hiding reasoning and control inside one aggregate score.",
+      "tldr_zh": "Mind2Act World 将具身能力拆成基于历史的推理、物理执行，以及通过环境反馈组合两者的任务。论文报告 GPT-6 Astra 在 Mind 和 Act 上分别达到 52.7% 与 39.0%，但在 Mind2Act 上仅有 12.0%，暴露出明显的组合鸿沟。它的重要性在于能定位 agent 究竟败在推理、执行还是二者衔接，而不是用单一总分掩盖问题。",
+      "upvotes": 33,
+      "authors": "Yuzhi Huang, Jie Wu, Fanding Huang, Junchao Lin, Weichen Zhang, Ziyi Xiong, Yang Li, Zhengwei Xie, Zhimin Wang, Zhen Liu, Jiazhen Huang, Yuzheng Zhang, Yuche Liu, Hongyi Yang, Chen Tang, Shixiang Tang, Hakan Aktas, Adam Wu, Duo Wu, Kangye Ji, Shuzhao Xie, Huanan Liu, Weijue Bu, Chenxin Li, Xinyuan Wang, Tianyi Bai, Yinan Mao, Jiawei Wang, Minglei Li, Heng Yu, Ehsan Adeli, Minchen Li, Yong-Lu Li, Cengiz Öztireli, Huazhe Xu, Chao Yu, Jing Zhang, Shanghang Zhang, Weitao Zhou, Wenwu Zhu, Cheng Chi, Jingyan Jiang, Zhi Wang",
+      "ai_keywords": [
+        "embodied agents",
+        "robot manipulation",
+        "diagnostic evaluation"
+      ],
+      "interest_tag": "Benchmark"
+    },
+    {
+      "title": "WeMM-Video: Pushing the Frontiers of Open-Source Omni-Modal Video Understanding",
+      "url": "https://arxiv.org/abs/2611.26409",
+      "tldr": "WeMM-Video introduces bilingual open models from 2B to a 35B-A3B mixture variant for joint text, image, audio, and video understanding. It supports both fast non-thinking responses and explicit reasoning within one omni-modal stack. The release is important because open video models still rarely unify synchronized audio-visual evidence, bilingual interaction, and multiple inference modes at this scale.",
+      "tldr_zh": "WeMM-Video 发布从 2B 到 35B-A3B MoE 的中英双语开源模型，统一处理文本、图像、音频与视频。它在同一 omni-modal 架构中同时支持快速的 non-thinking 模式和显式推理模式。其价值在于，开源视频模型很少能在这一规模上同时覆盖同步视听证据、双语交互与多种推理方式。",
+      "upvotes": 32,
+      "authors": "Changli Tang, Jie Yang, Tianyi Wang, Lei Li, Daoze Zhang, Zijie Xin, Zhan Liu, Li Li, Jinchang Xu, Fengyun Rao, Chao Zhang, Jing Lyu",
+      "ai_keywords": [
+        "video understanding",
+        "omni-modal",
+        "open source"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "WeVisForensics: Self-Evolving Agent for Omni AI-Generated Video Detection",
+      "url": "https://arxiv.org/abs/2611.21373",
+      "tldr": "WeVisForensics replaces a fixed forensic pipeline with an investigator agent that chooses inspections and expands a library of specialist capabilities. This targets brief, localized generation artifacts that single-pass chain-of-thought detectors often miss. The broader contribution is a self-evolving investigation policy where both routing and the available forensic tools can improve rather than freezing expert modules in advance.",
+      "tldr_zh": "WeVisForensics 不再采用固定取证流水线，而是让 investigator agent 自主选择检查路径，并持续扩展专家能力库。它针对的是单次 chain-of-thought 检测容易漏掉的短暂、局部生成伪影。更重要的贡献是让调查路由和可用取证工具都能演化，而不是预先冻结一组专家模块。",
+      "upvotes": 28,
+      "authors": "Yipeng Du, Yuxi Li, Ying Zhang, Chong Sun, Chen Li, Jing Lyu, Ying Tai",
+      "ai_keywords": [
+        "AI-generated video",
+        "forensics",
+        "self-evolving agent"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "Coda-DaVinci: Reimagining Video Generation with Code2Video",
+      "url": "https://arxiv.org/abs/2611.26595",
+      "tldr": "Coda-DaVinci studies how agent-authored 3D proxies should guide video generation instead of treating Code2Video as a single recipe. Controlled experiments reveal that coarse proxies preserve natural motion, medium detail improves consistency, and physics or proxy-aligned prompts help selectively. The work matters because it turns executable scene structure into an explicit control interface while documenting when additional structure begins to constrain realism.",
+      "tldr_zh": "Coda-DaVinci 系统研究 agent 编写的 3D proxy 应如何引导视频生成，而不是把 Code2Video 当成单一固定配方。受控实验显示，粗粒度 proxy 更利于自然运动，中等粒度更利于一致性，物理模拟与 proxy-aligned prompt 则在特定任务上有效。其意义是把可执行场景结构变成显式控制接口，同时说明结构加得过多何时会损害自然度。",
+      "upvotes": 25,
+      "authors": "Yiyan Ji, Qixun Wang, Yang Shi, Zhuoran Zhang, Yifan Xu, Tengfei Liu, Yuqi Tang, Xiaohan Zhang, Shujie Li, Jiafu Tang, Xuanyu Zhu, Xinyu Liu, Yan He, Yushuo Guan, Zihao Wang, Xianghua Ying, Shixuan Liu, Haotian Wang, Wenjing Yang, Zhaoxiang Zhang, Yuanxing Zhang, Pengfei Wan, Jiaheng Liu",
+      "ai_keywords": [
+        "video generation",
+        "3D proxy",
+        "controllable generation"
+      ],
+      "interest_tag": ""
+    },
+    {
+      "title": "TuringSpace: Grounding Spatial Intelligence in Action with Interactive CAPTCHAs",
+      "url": "https://arxiv.org/abs/2611.25387",
+      "tldr": "TuringSpace evaluates spatial intelligence through 125 synthetic interactive CAPTCHAs spanning click, drag, state prediction, and correction. Unlike static spatial tests, success requires a model to act on a screen, observe the result, and revise its behavior. This makes it a useful computer-use diagnostic for whether visual reasoning survives the transition from describing geometry to controlling an interface.",
+      "tldr_zh": "TuringSpace 用 125 个合成交互式 CAPTCHA 测试空间智能，覆盖点击、拖拽、状态预测与纠错。它不同于静态空间题：模型必须在屏幕上行动、观察结果并调整后续行为。因而它能直接诊断视觉推理能否从「描述几何关系」迁移到「实际控制界面」。",
+      "upvotes": 20,
+      "authors": "Xuwei Ding, Skylar Zhai, Linxin Song, Jiarui Feng, Dongqi Fu, Huajun Xi, Junnan Li, Jingcheng Liang, Jieyu Zhao, Yinglong Xia, Hong Li, Jian Kang",
+      "ai_keywords": [
+        "computer use",
+        "spatial reasoning",
+        "interactive environment"
+      ],
+      "interest_tag": "CUA"
+    }
+  ],
+  "alphaxiv_papers": [
+    {
+      "title": "A Society of AI Scientists",
+      "arxiv_id": "",
+      "url": "https://www.alphaxiv.org/abs/2611.society-ai-scientists",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2611.society-ai-scientists",
+      "tldr": "This twelve-week archive follows 936 agents across 35 human-operated laboratories as they share studies, critique methods, and create research institutions. Executable review overturned headline conclusions in 77 of 156 reviewed cases, showing that running objections against deposited data can reveal failures missed by prose review. The study is valuable as an unusually large observation of emergent multi-agent scientific norms, while its own authors caution that review success does not validate the entire archive.",
+      "tldr_zh": "这项十二周档案研究追踪了 35 个由人类运营的实验室中的 936 个 agent，观察它们共享研究、批评方法并形成科研制度。可执行复核在 156 个案例中推翻了 77 个 headline conclusion，说明直接对存档数据运行反驳能够发现文字审稿遗漏的问题。它是罕见的大规模多-agent 科研社会观察，但复核有效并不等于整个研究档案都可靠。",
+      "interest_tag": "Agent Swarm"
+    },
+    {
+      "title": "Counterfactual World Models: JEPAs That Reason About \"What If\"",
+      "arxiv_id": "2611.24778",
+      "url": "https://arxiv.org/abs/2611.24778",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2611.24778",
+      "tldr": "The method estimates an alternative action's outcome by adding a factual model's predicted action difference to the observed result from the same event. This reuses event-specific hidden disturbance without paired counterfactual data or retraining, raising physical counterfactual R-squared from 38.1% to 85.6% in the reported HandReach setting after correction. It matters because planning needs action-sensitive causal predictions, not merely plausible future frames, although the gain depends on structural assumptions.",
+      "tldr_zh": "该方法把 factual model 预测的动作差异叠加到同一事件的观测结果上，从而估计替代动作会产生什么后果。它无需成对 counterfactual 数据或重新训练，就能复用事件特有的隐藏扰动；在论文的 HandReach 设置中，校正后的物理 counterfactual R² 从 38.1% 升至 85.6%。这对规划很重要，因为 agent 需要对动作敏感的因果预测，而不只是看似合理的未来画面，但效果依赖特定结构假设。",
+      "interest_tag": ""
+    },
+    {
+      "title": "On Evaluating User Simulators for Interactive Agents",
+      "arxiv_id": "2611.24892",
+      "url": "https://arxiv.org/abs/2611.24892",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2611.24892",
+      "tldr": "This work tests user-simulator metrics by asking whether they detect deliberately corrupted interaction replays. Its suite checks agent ranking stability, population behavior, and fidelity to each user's goals and constraints, detecting all ten designed perturbations versus five or six for prior suites. The key contribution is methodological: simulator evaluation should be validated against known defects before synthetic users are trusted to rank interactive agents.",
+      "tldr_zh": "这项工作通过故意破坏交互 replay，检验 user simulator 的评测指标能否识别已知缺陷。新评测同时检查 agent 排名、群体行为，以及对单个用户目标与约束的忠实度，在十种设计扰动上全部检出，而既有套件只能检出五到六种。核心方法论是：在让合成用户替我们给 interactive agent 排名之前，必须先用可控错误验证评测本身。",
+      "interest_tag": "Benchmark"
+    },
+    {
+      "title": "Language Model Harnesses Can Be Compositional Generalizers",
+      "arxiv_id": "",
+      "url": "https://www.alphaxiv.org/abs/2611.harness-cg",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2611.harness-cg",
+      "tldr": "The paper trains a recursive language-model harness that keeps long context outside the prompt, inspects it with code, and delegates smaller computations to model calls. RLM-27B averages 58.5 across eight held-out long-context benchmarks versus 46.1 for Qwen3.8-27B in the same harness. The result suggests that harness structure itself can generalize compositionally, though the reported score gain does not establish lower latency or compute cost.",
+      "tldr_zh": "论文训练了一个 recursive language-model harness：把长上下文留在 prompt 之外，用代码检查内容，并把较小计算委派给模型调用。RLM-27B 在八个 held-out 长上下文 benchmark 上平均得分 58.5，而同一 harness 中的 Qwen3.8-27B 为 46.1。结果表明 harness 结构本身可能具备组合泛化能力，但分数提升并不能证明延迟或算力成本更低。",
+      "interest_tag": ""
+    },
+    {
+      "title": "Do LLM Agents Still Need to Be Told How to Self-Improve?",
+      "arxiv_id": "2611.23219",
+      "url": "https://arxiv.org/abs/2611.23219",
+      "alphaxiv_url": "https://www.alphaxiv.org/abs/2611.23219",
+      "tldr": "A frozen teacher model creates games, observes a player, and revises textual context so the agent can invent its own learning procedure. Newer models improve on held-out PuzzleScript tasks, with Claude Opus 5 gaining 20%, and learned context transfers to longer puzzles, ARC-AGI-3, and MazeBench. The finding supports self-organized learning at inference time, but evidence remains concentrated in puzzle environments rather than open-ended real-world work.",
+      "tldr_zh": "一个冻结的 teacher model 负责生成游戏、观察 player，并修改文本上下文，让 agent 自己发明学习流程。较新的模型在 held-out PuzzleScript 任务上持续改进，其中 Claude Opus 5 提升 20%，学习到的上下文还能迁移到更长 puzzle、ARC-AGI-3 与 MazeBench。它支持 inference-time 自组织学习的可行性，但证据仍主要来自 puzzle 环境，尚不能外推到开放世界工作。",
+      "interest_tag": ""
+    }
+  ],
+  "github_repos": [
+    {
+      "name": "boringmarketer/boring-marketing-skills",
+      "url": "https://github.com/boringmarketer/boring-marketing-skills",
+      "tldr": "This repository packages 32 marketing skills for research, positioning, copy, SEO, ads, email, and local-business workflows. The skills target Claude Code, Codex, Cursor, and other agents, require no paid tools, and are MIT licensed. Its rapid adoption shows the appeal of narrow, installable capability packs that translate agent infrastructure into an immediately useful business outcome.",
+      "tldr_zh": "该仓库把 research、positioning、copy、SEO、广告、邮件和本地商家工作流封装成 32 个 marketing skill。它兼容 Claude Code、Codex、Cursor 等 agent，不依赖付费工具，并采用 MIT License。快速增长说明，能把通用 agent 基础设施转化为明确业务结果的垂直、可安装能力包很容易传播。",
+      "stars": 726,
+      "language": "Python",
+      "interest_tag": ""
+    },
+    {
+      "name": "vaibhav-space/my-ai-coding-workflow",
+      "url": "https://github.com/vaibhav-space/my-ai-coding-workflow",
+      "tldr": "The repository shares a production-oriented coding-agent setup built around one global rules file and a three-stage plan, critique, and diff-audit loop. It explicitly frames instructions as guidance rather than hard enforcement and admits that no public example project validates the workflow yet. Its value is a compact, agent-agnostic template for separating implementation from independent review instead of relying on a single confident run.",
+      "tldr_zh": "该仓库分享一套面向生产的 coding-agent 工作流：一个全局规则文件，加上 plan、批判计划和 diff audit 三阶段复核。作者明确承认这些规则只是指令而非硬约束，且目前还没有公开示例项目验证效果。它的价值在于用紧凑、agent-agnostic 的模板把实现与独立审查分开，避免相信一次看似自信的执行。",
+      "stars": 289,
+      "language": "HTML",
+      "interest_tag": ""
+    },
+    {
+      "name": "diego3g/craft",
+      "url": "https://github.com/diego3g/craft",
+      "tldr": "Craft provides design skills that first write a brief, enumerate UI states, reuse an existing design system, and review the result before presentation. It supports Paper, pen.dev, Figma, or plain HTML across several coding agents. The project is notable for treating design quality as a repeatable process with explicit approval points and persistent decisions rather than as one-shot visual generation.",
+      "tldr_zh": "Craft 提供一组设计 skill：先写 design brief，枚举界面状态，复用现有 design system，再在展示前自审。它可在多种 coding agent 中配合 Paper、pen.dev、Figma 或纯 HTML 使用。项目的亮点是把设计质量变成带明确确认点和持久决策的可重复流程，而不是一次性的视觉生成。",
+      "stars": 280,
+      "language": "JavaScript",
+      "interest_tag": ""
+    },
+    {
+      "name": "google-deepmind/robotics-antigravity-plugin",
+      "url": "https://github.com/google-deepmind/robotics-antigravity-plugin",
+      "tldr": "Google DeepMind's plugin lets an agent write robot controllers, test them in MuJoCo, and run the same code on supported physical arms. It combines spatial reasoning, multimodal perception, code generation, and a simulation-to-hardware workflow while remaining usable without robot hardware. The release lowers the integration cost of closed-loop robotics experiments and makes generated control code easier to validate before real-world execution.",
+      "tldr_zh": "Google DeepMind 的插件让 agent 编写机器人控制器，在 MuJoCo 中测试，并将同一份代码运行到支持的真实机械臂上。它把空间推理、多模态感知、代码生成和 sim-to-real 流程结合起来，同时允许仅用模拟器体验。该项目降低了闭环机器人实验的集成成本，也让生成的控制代码能在真实执行前获得验证。",
+      "stars": 156,
+      "language": "Python",
+      "interest_tag": ""
+    },
+    {
+      "name": "oriliz/agent-crop",
+      "url": "https://github.com/oriliz/agent-crop",
+      "tldr": "Agent Crop records local timing and behavior events for coding-agent sessions, then turns retrospectives into changes to instructions, skills, or tools. Its loop mirrors performance tracing: measure, attribute, optimize, and verify, with an auditable ledger rather than vague self-reflection. The project is useful because it grounds agent self-improvement in observable work patterns while keeping data local.",
+      "tldr_zh": "Agent Crop 在本地记录 coding-agent session 的时间与行为事件，再把复盘结果落成对指令、skill 或工具的具体修改。它复用了性能 tracing 的闭环：测量、归因、优化、验证，并用可审计 ledger 代替空泛的自我反思。其价值是让 agent 自我改进建立在可观察工作模式上，同时保持数据本地化。",
+      "stars": 140,
+      "language": "Python",
+      "interest_tag": ""
+    }
+  ],
+  "hackernews": [
+    {
+      "title": "Show HN: Foolscap – a writing app that reads your book and never writes for you",
+      "url": "https://foolscap.works/",
+      "tldr": "Foolscap reads an evolving manuscript, surfaces characters, ideas, connections, and unresolved threads, but deliberately refuses to write prose for the author. Private books can be kept entirely away from AI, and other writing is not used for model training. Its 106-point discussion reflects a timely product thesis: AI assistance may be more trusted when it strengthens human attention without replacing authorship.",
+      "tldr_zh": "Foolscap 读取持续演进的书稿，提取人物、想法、关联和未收束线索，但刻意不替作者写正文。私密书稿可以完全不接触 AI，其他文本也不会用于模型训练。它获得 106 points，反映出一个及时的产品命题：当 AI 增强人的注意力而不是替代作者身份时，用户可能更愿意信任它。",
+      "points": 106,
+      "num_comments": 85,
+      "interest_tag": ""
+    },
+    {
+      "title": "An FBI agent called a Claude user about his chats",
+      "url": "https://austinpatrick.substack.com/p/when-should-ai-labs-alert-police",
+      "tldr": "The article recounts a Claude user's contact with law enforcement after conversations were apparently escalated as a safety concern. It raises unresolved questions about thresholds, context, false positives, transparency, and due process when AI labs report users to police. The discussion matters because safety monitoring is becoming an external governance system with real-world consequences, not merely an in-product refusal policy.",
+      "tldr_zh": "文章叙述一名 Claude 用户在对话疑似被作为安全风险上报后，受到执法部门联系的经历。它暴露出 AI lab 报警时的阈值、上下文理解、误报、透明度与正当程序问题。其重要性在于，安全监控已不只是产品内的 refusal policy，而是在现实世界产生后果的外部治理系统。",
+      "points": 29,
+      "num_comments": 24,
+      "interest_tag": ""
+    },
+    {
+      "title": "Show HN: AgentMall – Let your AI agent buy groceries",
+      "url": "https://getagentmall.com",
+      "tldr": "AgentMall exposes merchant discovery, basket construction, checkout, and fulfilment through REST or MCP for personal agents. It binds approval to an exact basket and spending ceiling, keeps credentials in a vault, and reconciles uncertain submissions instead of blindly retrying. The product is important because it treats commerce execution as a transaction-safety problem rather than asking a general browser agent to improvise every click.",
+      "tldr_zh": "AgentMall 通过 REST 或 MCP 向个人 agent 提供商品发现、组篮、结账与履约能力。它把授权绑定到精确购物篮和 spending ceiling，把凭据留在 vault 中，并对不确定提交做 reconciliation，而不是盲目重试。其意义在于把商业执行视为 transaction-safety 问题，而不是让通用 browser agent 临场猜每一次点击。",
+      "points": 18,
+      "num_comments": 5,
+      "interest_tag": ""
+    },
+    {
+      "title": "AI Agentic harness with explicit risk analysis",
+      "url": "https://github.com/AppliedIngenuity-ai/project-chaperone",
+      "tldr": "Project Chaperone statically audits every workflow route against high-level rules before execution and records human-approved exceptions. At runtime, data labels such as personal or untrusted propagate through calls, while tool properties determine whether an action is blocked. This combines flexible agent routing with enforceable policy, addressing the gap between prompt-only rules and rigid hard-coded workflows.",
+      "tldr_zh": "Project Chaperone 在执行前静态审计 workflow 的所有路径，并记录人类批准的规则例外。运行时，personal、untrusted 等数据标签会随调用传播，工具属性则决定某项动作是否被阻止。它把灵活的 agent routing 与可执行 policy 结合起来，弥补 prompt-only 规则和刚性硬编码 workflow 之间的空白。",
+      "points": 7,
+      "num_comments": 1,
+      "interest_tag": ""
+    },
+    {
+      "title": "Show HN: Openspot – macOS launcher for disposable tools",
+      "url": "https://github.com/celishq/openspot",
+      "tldr": "Openspot turns small executables that print structured text into native macOS panels with cards, lists, buttons, search, and keyboard navigation. Coding agents can generate these disposable tools without creating a separate signed app or repeatedly requesting permissions, while advanced spots can supply SwiftUI views. The project offers a practical agent-native client pattern: stable privileged shell, lightweight generated tools, and hot reload.",
+      "tldr_zh": "Openspot 把输出结构化文本的小型 executable 转成原生 macOS 面板，自动提供 card、list、button、search 与键盘导航。Coding agent 可以生成这些一次性工具，而无需每次创建独立签名 app 或重新申请权限；复杂 spot 也能自带 SwiftUI view。它展示了一种实用的 Agent-Native 客户端模式：稳定的高权限 shell、轻量生成工具和 hot reload。",
+      "points": 6,
+      "num_comments": 2,
+      "interest_tag": ""
+    }
+  ]
+}
